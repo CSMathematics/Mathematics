@@ -1,0 +1,136 @@
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\usepackage{gensymb,mathimatika,longtable}
+
+
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Εκθετική και Λογαριθμική Συνάρτηση}{Λογαριθμική Συνάρτηση}
+\orismoi
+\Orismos{Λογαριθμική συνάρτηση}
+Λογαριθμική ονομάζεται κάθε συνάρτηση $ f $ της οποίας η τιμή της $ f(x) $ δίνεται με τη βοήθεια ενός λογαρίθμου, για κάθε στοιχείο του πεδίου ορισμού $ x\in D_f $. Θα είναι :
+\[ f(x)=\log_ax\;\;,\;\;0<a\neq1 \]
+Αν η βάση $ a $ του λογαρίθμου γίνει ίση με τον αριθμό $ 10 $ ή $ e $ τότε αποκτάμε τη συνάρτηση $ f(x)=\log{x} $ ή $ f(x)=\ln{x} $ αντίστοιχα.
+\thewrhmata
+\Thewrhma{Ιδιότητεσ λογαριθμικών συναρτήσεων}
+Για κάθε λογαριθμική συνάρτηση της μορφής $ f(x)=\log_{a}{x} $ ισχύουν οι ακόλουθες ιδιότητες.
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ (0,+\infty) $ των θετικών πραγματικών αριθμών.
+\item Το σύνολο τιμών της είναι το σύνολο $ \mathbb{R} $ των πραγματικών αριθμών.
+\item Η συνάρτηση δεν έχει μέγιστη και ελάχιστη τιμή.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm]
+\item \textbf{Για {\boldmath$ a>1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=\log_{a}x $ είναι γνησίως αυξουσα στο $ (0,+\infty) $.
+\item Η συνάρτηση έχει ρίζα τον αριθμό $ x=1 $.
+\item Η γραφική παράστασή της έχει κατακόρυφη ασύμπτωτη τον άξονα $ y'y $ στη μεριά του $ -\infty $ ενώ τέμνει τον οριζόντιο άξονα $ x'x $ στο σημείο $ A(1,0) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει \begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow \log_{a}{x_1}<\log_{a}{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow \log_{a}{x_1}=\log_{a}{x_2}
+\end{gather*}
+\item Για $ x>1 $ ισχύει $ \log_{a}x>0 $ ενώ για $ 0<x<1 $ έχουμε $ \log_{a}x<0 $.
+\end{itemize}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{p{6cm}p{6.2cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,0.7) {\footnotesize$a>1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[below right](A){$ (0,1) $}
+\node at (.8,.4) {\footnotesize$C_f$};
+\end{tikzpicture}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,3.3) {\footnotesize$0<a<1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above right](A){$ (0,1) $}
+\node at (.8,4) {\footnotesize$C_g$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm,start=2]
+\item \textbf{Για {\boldmath$ 0<a<1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=\log_{a}x $ είναι γνησίως φθίνουσα στο $ (0,+\infty) $.
+\item Η συνάρτηση έχει ρίζα τον αριθμό $ x=1 $.
+\item Η γραφική παράστασή της έχει κατακόρυφη ασύμπτωτη τον άξονα $ y'y $ στη μεριά του $ +\infty $ ενώ τέμνει τον οριζόντιο άξονα $ x'x $ στο σημείο $ A(1,0) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow \log_{a}{x_1}>\log_{a}{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow \log_{a}{x_1}=\log_{a}{x_2}
+\end{gather*}
+\item Για $ x>1 $ ισχύει $ \log_{a}x<0 $ ενώ για $ 0<x<1 $ έχουμε $ \log_{a}x>0 $.
+\end{itemize}
+\end{enumerate}
+\item Οι γραφικές παραστάσεις των λογαριθμικών συναρτήσεων με αντίστροφες βάσεις $ f(x)=\log_a{x} $ και $ g(x)=\log_{\frac{1}{a}}{x}  $, με $ 0<a\neq1 $, είναι συμμετρικές ως προς τον άξονα $ x'x $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDrawPoint[fill=black](1.05,2.1)
+\node at (.8,.4) {\footnotesize$C_f$};
+\node at (.8,4) {\footnotesize$C_g$};
+\node at (3.2,2.9) {\footnotesize$f(x)=\log_{a}x$};
+\node at (3.2,1.3) {\footnotesize$g(x)=\log_{\frac{1}{a}}x$};
+\end{tikzpicture}
+\end{center}
+\end{document}

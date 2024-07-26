@@ -1,0 +1,173 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,gensymb,tkz-euclide}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+\usepackage{multicol}
+\usepackage{mathimatika,longtable,hhline}
+
+
+
+
+
+\begin{document}
+\titlos{Άλγεβρα Α΄ Λυκείου}{Πραγματικοί Αριθμοί}{Πράξεις με πραγματικούς αριθμούς}
+\Orismos{Άξονασ των πραγματικών αριθμών}
+Ο άξονας των πραγματικών αριθμών είναι μια αριθμημένη ευθεία στην οποία μπορούν να τοποθετηθούν όλοι οι πραγματικοί αριθμοί σε αύξουσα σειρά από τα αριστερά προς τα δεξιά. \textbf{Αρχή} του άξονα είναι το σημείο $ O $ στο οποίο βρίσκεται ο αριθμός $ 0 $.
+\begin{center}
+\begin{tikzpicture}
+\tkzInit[xmin=-4,xmax=4]
+\draw[-latex] (-5,0) -- coordinate (x axis mid) (5.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\foreach \x in {-5,-4,-3,...,5}
+\draw (\x,.5mm) -- (\x,-.5mm) node[anchor=north,fill=white] {{\scriptsize \x}};
+\draw[latex-|] (-5,0.7) --  (-0.02,0.7);
+\draw[|-latex] (0.02,0.7) --  (5,0.7);
+\tkzText(-2,0.85){Αρνητικοί Αριθμοί}
+\tkzText(2,0.85){Θετικοί Αριθμοί}
+\tkzDefPoint(3,0){A}
+\tkzDefPoint(1.4142,0){B}
+\tkzDefPoint(-1.5,0){C}
+\tkzDefPoint(-2.7,0){D}
+\tkzDrawPoints[size=7,fill=white](A,B,C,D)
+\tkzLabelPoint[above](A){{\scriptsize $ A(3) $}}
+\tkzLabelPoint[above](B){{\scriptsize $ B\left(\!\! \sqrt{2}\right)  $}}
+\tkzLabelPoint[above](C){{\scriptsize $ \varGamma\left(-\frac{3}{2} \right)  $}}
+\tkzLabelPoint[above](D){{\scriptsize $ \varDelta(-2{,}7) $}}
+\end{tikzpicture}
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Η θέση ενός αριθμού πάνω στην ευθεία σχεδιάζεται με ένα σημείο.
+\item Ο αριθμός που βρίσκεται στη θέση αυτή ονομάζεται \textbf{τετμημένη} του σημείου.
+\end{itemize}
+\Orismos{Δύναμη πραγματικου αριθμου}
+Δύναμη ενός πραγματικού αριθμού $ a $ ονομάζεται το γινόμενο $ \nu $ ίσων παραγόντων του αριθμού αυτού. Συμβολίζεται με $ a^\nu $ όπου $ \nu\in\mathbb{N} $ είναι το πλήθος των ίσων παραγόντων. 
+\[ \undercbrace{a\cdot a\cdot\ldots a}_{\nu\textrm{ παράγοντες }}=a^\nu \]
+Ο αριθμός $ a $ ονομάζεται \textbf{βάση} και ο αριθμός $ \nu $ \textbf{εκθέτης} της δύναμης.\\\\
+\Orismos{ΤΑΥΤΌΤΗΤΑ}
+Ταυτότητα ονομάζεται κάθε ισότητα που περιέχει μεταβλητές και επαληθεύεται για κάθε τιμή των μεταβλητών. Παρακάτω βλέπουμε τις βασικές ταυτότητες.
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \parbox[t]{7cm}{\textbf{Άθροισμα στο τετράγωνο}\\$ (a+\beta)^2=a^2+2a\beta+\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά στο τετράγωνο}\\$ (a-\beta)^2=a^2-2a\beta+\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Άθροισμα στον κύβο}\\$ (a+\beta)^3=a^3+3a^2\beta+3a\beta^2+\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά στον κύβο}\\$ (a-\beta)^3=a^3-3a^2\beta+3a\beta^2-\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Γινόμενο αθροίσματος επί διαφορά}\\$ (a+\beta)(a-\beta)=a^2-\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Άθροισμα κύβων}\\$ (a+\beta)\left(a^2-a\beta+\beta^2 \right)=a^3+\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά κύβων}\\$ (a-\beta)\left(a^2+a\beta+\beta^2 \right)=a^3-\beta^3 $}
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\newpage
+\noindent
+\Orismos{Παραγοντοποίηση αλγεβρικών παραστάσεων}
+Παραγοντοποίηση ονομάζεται η διαδικασία με την οποία μια αλγεβρική παράσταση μετατρέπεται από άθροισμα σε γινόμενο πρώτων παραγόντων. Πρώτος ονομάζεται κάθε παράγοντας που δεν παραγοντοποιείται περαιτέρω.\\\\
+\Orismos{Μέθοδοι απόδειξησ}
+\vspace{-5mm}
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Ευθεία απόδειξη}\\
+Με την ευθεία απόδειξη αποδεικνύουμε προτάσεις ξεκινώντας από την υπόθεση και καταλήγοντας στο συμπέρασμα.
+\item \textbf{Απαγωγή σε άτοπο}\\
+Με τη μέθοδο της απαγωγής σε άτοπο αποδεικνύουμε προτάσεις ξεκινώντας από το αντίθετο του συμπεράσματος και καταλλάγουμε σε μια πρόταση που έρχεται σε αντίφαση με την υπόθεση.
+\end{enumerate}
+\Thewrhma{Ιδιότητεσ των Πράξεων}
+Στον παρακάτω πίνακα βλέπουμε τις βασικές ιδιότητες της πρόσθεσης και του πολλαπλασιασμού στο σύνολο των πραγματικών αριθμών.
+\begin{center}
+\begin{tabular}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Πρόσθεση} & \textbf{Πολλαπλασιασμός} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Αντιμεταθετική} & $ a+\beta=\beta+a $ & $ a\cdot\beta=\beta\cdot a $ \\
+\rule[-2ex]{0pt}{5ex} \textbf{Προσεταιριστική} & $ a+\left( \beta+\gamma\right) =\left( a+\beta\right) +\gamma $ & $ a\cdot\left( \beta\cdot\gamma\right) =\left( a\cdot\beta\right)\cdot\gamma $\\
+\rule[-2ex]{0pt}{5ex} \textbf{Ουδέτερο στοιχείο} & $ a+0=a $ & $ a\cdot1= a $\\
+\rule[-2ex]{0pt}{5ex} \textbf{Αντίθετοι / Αντίστροφοι} & $ a+(-a)=0 $ & $ a\cdot\frac{1}{a}= 1 $\\
+\rule[-2ex]{0pt}{5ex} \textbf{Επιμεριστική} & \multicolumn{2}{c}{$ a\cdot\left( \beta\pm\gamma\right)=a\cdot\beta\pm a\cdot\gamma  $}\\
+\hline
+\end{tabular}
+\end{center}
+Ισχύουν επίσης :
+\begin{itemize}[itemsep=0mm]
+\item Για κάθε πραγματικό αριθμό $ a $ ισχύει $ a\cdot0=0 $
+\item Δύο αριθμοί που έχουν άθροισμα 0 λέγονται \textbf{αντίθετοι}.
+\item Το 0 λέγεται \textbf{ουδέτερο στοιχείο της πρόσθεσης}.
+\item Δύο αριθμοί που έχουν γινόμενο 1 λέγονται \textbf{αντίστροφοι}.
+\item Το 1 λέγεται \textbf{ουδέτερο στοιχείο του πολλαπλασιασμού}.
+\item Το 0 δεν έχει αντίστροφο.
+\end{itemize}
+\Thewrhma{Ιδιότητεσ ισοτήτων}
+Για κάθε ισότητα της μορφής $ a=\beta $ με $ a,\beta $ πραγματικούς αριθμούς ισχύουν οι παρακάτω ιδιότητες.
+\begin{rlist}
+\item Τοποθετούμε τον ίδιο αριθμό και στα δύο μέλη της με πρόσθεση, αφαίρεση, πολλαπλασιασμό ή διαίρεση.
+\[ a=\beta\Rightarrow
+\begin{cases}
+a+\gamma=\beta+\gamma\\a-\gamma=\beta-\gamma
+\end{cases}\ \ \textrm{ και }\ \ \begin{aligned}
+&a\cdot\gamma=\beta\cdot\gamma\\&\dfrac{a}{\gamma}=\dfrac{\beta}{\gamma}\;\;,\;\;\gamma\neq0
+\end{aligned} \]
+\item Εαν δύο πραγματικοί αριθμοί $ a,\beta\in\mathbb{R} $ είναι ίσοι τότε και οι ν-οστές δυνάμεις τους, $ \nu\in\mathbb{N} $, θα είναι ίσες. Το αντίστροφο δεν ισχύει πάντα.
+\begin{gather*}
+a=\beta\Rightarrow a^\nu=\beta^\nu
+\end{gather*}
+\item Εαν δύο θετικοί πραγματικοί αριθμοί $ a,\beta>0 $ είναι ίσοι τότε και οι ν-οστές ρίζες τους, $ \nu\in\mathbb{N} $, θα είναι με ίσες και αντίστροφα.
+\begin{gather*}
+a=\beta\Leftrightarrow\sqrt[\nu]{a}=\!\sqrt[\nu]{\beta}
+\end{gather*}
+\end{rlist}
+\Thewrhma{Πράξεισ μεταξύ ισοτήτων}
+Προσθέτοντας κατά μέλη κάθε ζεύγος ισοτήτων $ a=\beta $ και $ \gamma=\delta $ προκύπτει ισότητα, με 1\textsuperscript{ο} μέλος το άθροισμα των 1\textsuperscript{ων} μελών τους και 2\textsuperscript{ο} μέλος το άθροισμα των 2\textsuperscript{ων} μελών τους. Η ιδιότητα αυτή ισχύει και για αφαίρεση, πολλαπλασιασμό και διάιρεση κατά μέλη.
+\[ a=\beta\;\;\textrm{και}\;\;\gamma=\delta\Rightarrow
+\ccases{
+\textrm{\textbf{{1. Πρόσθεση κατά μέλη }}}& a+\gamma=\beta+\delta\\\textrm{\textbf{{2. Αφαίρεση κατά μέλη }}}& a-\gamma=\beta-\delta\\\textrm{\textbf{{3. Πολλαπλασιασμός κατά μέλη }}}& a\cdot\gamma=\beta\cdot\delta\\\textrm{\textbf{{4. Διαίρεση κατά μέλη }}}& \dfrac{a}{\gamma}=\dfrac{\beta}{\delta}\;\;,\;\;\gamma\cdot\delta\neq0} \]
+Ο κανόνας αυτός επεκτείνεται και για πράξεις κατά μέλη σε περισσότερες από δύο ισότητες, στις πράξεις της πρόσθεσης και του πολλαπλασιασμού.\\\\
+\Thewrhma{Νόμοσ διαγραφησ προσθεσησ \& πολλαπλασιασμου}
+Για οποιουσδήποτε πραγματικούς αριθμούς $ a,x,y\in\mathbb{R} $ ισχύουν οι παρακάτω σχέσεις.
+\[ a+x=a+y\Rightarrow x=y\;\;\textrm{ και }\;\;a\cdot x=a\cdot y\Rightarrow x=y \]
+Διαγράφουμε κι απ τα δύο μέλη μιας ισότητας τον ίδιο προσθετέο ή τον ίδιο \textbf{μη μηδενικό} παράγοντα.\\\\
+\Thewrhma{μηδενικό γινόμενο}
+Εαν το γινόμενο δύο πραγματικών αριθμών $ a,\beta\in\mathbb{R} $ είναι μηδενικό τότε τουλάχιστον ένας απ' αυτούς είναι ίσος με το $ 0 $.
+\[ a\cdot\beta=0\Leftrightarrow a=0\textrm{ \textbf{ή} }\beta=0 \]
+Το συμπέρασμα αυτό μπορεί να γενικευτεί και για γινόμενο περισσοτέρων των δύο παραγόντων. Για $ \nu $ πραγματικούς αριθμούς $ a_1,a_2,\ldots,a_\nu\in\mathbb{R} $ έχουμε
+\[ a_1\cdot a_2\cdot\ldots\cdot a_\nu=0\Leftrightarrow a_1=0\textrm{ ή }a_2=0\textrm{ ή }\ldots\textrm{ ή }a_\nu=0 \]
+\Thewrhma{μη μηδενικο γινόμενο}
+Εαν το γινόμενο δύο πραγματικών αριθμών $ a,\beta\in\mathbb{R} $ είναι διάφορο του μηδενός τότε κανένας απ' αυτούς δεν είναι ίσος με το $ 0 $.
+\[ a\cdot\beta\neq0\Leftrightarrow a\neq0\textrm{ \textbf{και} }\beta\neq0 \]
+Το ίδιο θα ισχύει και για το γινόμενο περισσότερων από δύο παραγόντων. Για $ \nu $ πραγματικούς αριθμούς $ a_1,a_2,\ldots,a_\nu\in\mathbb{R} $ θα ισχύει
+\[ a_1\cdot a_2\cdot\ldots\cdot a_\nu\neq0\Leftrightarrow a_1\neq0\textrm{ και }a_2\neq0\textrm{ και }\ldots\textrm{ και }a_\nu\neq0 \]
+\Thewrhma{Ιδιότητεσ δυνάμεων}
+Για κάθε δυναμη με βάση έναν πραγματικό αριθμό $ a\in\mathbb{R} $ ορίζουμε
+\[ a^1=a\;\;,\;\;a^0=1\;,\;\textrm{όπου }a\neq0\;\;,\;\;a^{-\nu}=\dfrac{1}{a^\nu}\;,\;\textrm{όπου }a\neq0 \]
+Επίσης για δυνάμεις με βάσεις οποιουσδήποτε πραγματικούς αριθμούς $ a,\beta\in\mathbb{R} $ και φυσικούς εκθέτες $ \nu,\mu\in\mathbb{N} $ εφόσον ορίζονται, ισχύουν οι παρακάτω ιδιότητες :
+\begin{center}
+\begin{longtable}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex} & \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\
+\hhline{===}\rule[-2ex]{0pt}{5.5ex} \textbf{1} & Γινόμενο δυνάμεων με κοινή βάση & $ a^\nu\cdot a^\mu=a^{\nu+\mu} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{2} & Πηλίκο δυνάμεων με κοινή βάση & $ a^\nu: a^\mu=a^{\nu-\mu} $\\
+\rule[-2ex]{0pt}{5.5ex} \textbf{3} & Γινόμενο δυνάμεων με κοινό εκθέτη & $ \left(a\cdot\beta\right)^\nu=a^\nu\cdot\beta^\nu $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{4} & Πηλίκο δυνάμεων με κοινό εκθέτη & $ \left(\dfrac{a}{\beta}\right)^\nu=\dfrac{a^\nu}{\beta^\nu}\;\;,\;\;\beta\neq0 $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{5} & Δύναμη υψωμένη σε δύναμη & $ \left( a^\nu\right)^\mu=a^{\nu\cdot\mu} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{6} & Κλάσμα με αρνητικό εκθέτη & $ \left( \dfrac{a}{\beta}\right)^{-\nu}=\left(\dfrac{\beta}{a}\right)^\nu\;\;,\;\;a,\beta\neq0 $ \vspace{2mm}\\
+\hline
+\end{longtable}
+\end{center}
+\vspace{-10mm}
+Οι ιδιότητες 1 και 3 ισχύουν και για γινόμενο περισσότερων των δύο παραγόντων.
+\begin{gather*}
+a^{\nu_1}\cdot a^{\nu_2}\cdot\ldots\cdot a^{\nu_\kappa}=a^{\nu_1+\nu_2+\ldots+\nu_\kappa}\ \ \textrm{και}\ \ 
+\left( a_1\cdot a_2\cdot\ldots\cdot a_\kappa\right)^\nu=a_1^\nu\cdot a_2^\nu\cdot\ldots\cdot a_\kappa^\nu
+\end{gather*}
+Για τις δυνάμεις με ρητό εκθέτη της μορφής $ a^{\frac{\mu}{\nu}} $, όπου $ \mu\in\mathbb{Z} $ και $ \nu\in\mathbb{N} $ ισχύουν οι ιδιότητες 1 - 6 με την προϋπόθεση οι βάσεις να είναι θετικοί αριθμοί δηλαδή $ a,\beta>0 $.\\\\
+\end{document}
+

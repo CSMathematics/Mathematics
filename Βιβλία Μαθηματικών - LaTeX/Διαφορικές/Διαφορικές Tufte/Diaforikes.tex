@@ -1,0 +1,1080 @@
+\documentclass[a4paper,twoside,symmetric]{tufte-book}
+\usepackage[amsbb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.1,BoldFont={Minion Pro Bold}]{Minion Pro}
+\defaultfontfeatures{Ligatures=TeX}
+\font\kefalaio="Minion Pro Bold" at 36pt
+\font\ArKef="Minion Pro Bold Italic" at 60pt
+\font\OnKef="KerkisSmallCaps" at 16pt
+\font\OnPar="Minion Pro Bold" at 14pt
+\newfontfamily\tnr{Times New Roman}
+\def\chpcolor{cyan!70!black}
+\def\chpcolortxt{cyan!70!black}
+\setcounter{secnumdepth}{2}
+\makeatletter
+%Section:
+\def\@sectionstrut{\vrule\@width\z@\@height12.5\p@}
+\def\@makesectionhead#1{%
+{\par\vspace{10pt}%
+\parindent 0pt\raggedleft\bf\OnPar 
+\parbox[t]{23pt}{\color{cyan!70!black}\@sectionstrut\@depth5.5\p@\hfill
+\ifnum\c@secnumdepth>\z@\thesection\fi}%
+\begin{minipage}[t]{\dimexpr\textwidth-0pt-2\fboxsep\relax}
+\color{\chpcolortxt}\@sectionstrut\hspace{5pt}#1
+\end{minipage}\par
+\vspace{10pt}%
+}
+}
+\def\section{\@afterindentfalse\secdef\@section\@ssection}
+\def\@section[#1]#2{%
+\ifnum\c@secnumdepth>\m@ne
+\refstepcounter{section}%
+\addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+\else
+\phantomsection
+\addcontentsline{toc}{section}{#1}%
+\fi
+\sectionmark{#1}%
+\if@twocolumn
+\@topnewpage[\@makesectionhead{#2}]%
+\else
+\@makesectionhead{#2}\@afterheading
+\fi
+}
+\def\@ssection#1{%
+\if@twocolumn
+\@topnewpage[\@makesectionhead{#1}]%
+\else
+\@makesectionhead{#1}\@afterheading
+\fi
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage[amsbb]{mtpro2}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+
+%------ ΕΙΚΟΝΑ ΓΥΡΩ ΑΠΟ ΚΕΙΜΕΝΟ ------------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{backgrounds}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}}   
+
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}\textcolor{black}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}\textcolor{cyan}{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos}}\hspace{1mm} \MakeUppercase{\textbf{#1}}\\}{}
+\usepackage{venndiagram}
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{10pt}{10pt}
+}
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+\newcommand{\eqq}[2]{\xlongequal[#2]{#1}}
+\DeclareMathOperator*{\Eq}{=}
+%------------------------------------------
+\newcommand{\dgr}{\\\leavevmode\\}
+\titlespacing*{\section}
+{0pt}{10pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\newcounter{askhsh}[chapter]
+\renewcommand{\theaskhsh}{ΑΣΚΗΣΗ A.\arabic{askhsh}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}\textcolor{cyan}{\textbf{\theaskhsh}\\}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill\;\normalsize\ Σελίδα}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{textcomp}
+
+
+\newcommand{\orismoi}{\begin{center}
+\large \textbf{ΟΡΙΣΜΟΙ}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textbf{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\usepackage{microtype}
+\usepackage{float}
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+\usepackage{caption}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={cyan,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={axis line style={-latex}}}
+%-----------------------------------------
+%----- ΧΡΗΣΙΜΟΙ ΟΡΙΣΜΟΙ ---------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=7,fill=white]
+
+\geometry{left=2.00cm,top=3.00cm, bottom=2.00cm,paperwidth=21cm,
+textwidth=120mm, % main text block
+marginparsep=3mm, % gutter between main text block and margin notes
+marginparwidth=47mm % width of margin notes
+}
+\makeatletter
+\def\closedcycley{%
+-| (perpendicular cs: 
+horizontal line through={(current plot begin)}, 
+vertical line through={(\pgfplots@ZERO@x,\pgfplots@ZERO@y)})
+-- cycle
+}%
+\makeatother
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\textsuperscript{\MakeLowercase{#1}}}
+
+
+\makeatletter
+\titleformat{\chapter}%
+[display]% shape
+{\relax\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\begin{fullwidth}}{}}% format applied to label+text
+{\kefalaio\chaptertitlename~\hspace{5cm}{\ArKef\thechapter}}% label
+{0pt}% horizontal separation between label and title body
+{\vspace{2mm}\OnKef}% before the title body
+[\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\end{fullwidth}}{}]% after the title body
+\makeatother
+\setcounter{secnumdepth}{3}
+
+\makeatletter
+\patchcmd{\@caption}{\csname fnum@#1\endcsname:
+	\ignorespaces#3}{\Centering
+	\csname fnum@#1\endcsname\ifblank{#3}{}{: \ignorespaces#3}}{}{}
+\makeatother 
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+\usepackage[parfill]{parskip}
+
+\makeatletter
+% Paragraph indentation and separation for normal text
+\renewcommand{\@tufte@reset@par}{%
+  \setlength{\RaggedRightParindent}{0.0pc}%
+  \setlength{\JustifyingParindent}{0.0pc}%
+  \setlength{\parindent}{0pc}%
+  \setlength{\parskip}{\baselineskip}%
+}
+\@tufte@reset@par
+
+% Paragraph indentation and separation for marginal text
+\renewcommand{\@tufte@margin@par}{%
+  \setlength{\RaggedRightParindent}{0.0pc}%
+  \setlength{\JustifyingParindent}{0.0pc}%
+  \setlength{\parindent}{0.0pc}%
+  \setlength{\parskip}{10pt}%
+}
+\makeatother
+\titlespacing*{\chapter}{0pt}{10pt}{10pt}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\setlist[itemize]{itemsep=-3mm}
+
+
+
+\begin{document}
+\pagestyle{empty}
+\frontmatter
+\tableofcontents
+\mainmatter
+\pagestyle{fancy}
+\chapter{ΒΑΣΙΚΗ ΘΕΩΡΙΑ}
+\Orismos{Διαφορική Εξίσωση}
+Διαφορική εξίσωση ονομάζεται κάθε εξίσωση που περιέχει τουλάχιστον μια άγνωστη συνάρτηση και μια τουλάχιστον παράγωγό της οποιασδήποτε τάξης.
+\begin{itemize}[itemsep=-4mm]
+\item Αν η άγνωστη συνάρτηση περιέχει μια μεταβλητή η εξίσωση ονομάζεται \textbf{συνήθης διαφορική εξίσωση}.
+\item Αν η άγνωστη συνάρτηση περιέχει δύο ή περισσότερες μεταβλητές ονομάζεται \textbf{μερική διαφορική εξίσωση}.
+\item Η μεγαλύτερη τάξη παραγώγου σε μια διαφορική εξίσωση ονομάζεται \textbf{τάξη της εξίσωσης}.
+\item Η \textbf{πεπλεγμένη} ή γενική μορφή μιας διαφορικής εξίσωσης είναι :
+\[ F\left( x,y,y',\ldots,y^{(n)}\right) =0 \]
+όπου $ y $ είναι η άγνωστη συνάρτηση μεταβλητής $ x $ και $ F $ μια αλγεβρική παράσταση που περιέχει την άγνωστη συνάρτηση και τις παραγώγους της έως τάξης $ n $.
+Η \textbf{λυμένη} ή κανονική μορφή μιας διαφορικής εξίσωσης είναι :
+\[ y^{(n)}=f\left(x,y,y',\ldots,y^{(n-1)} \right)  \]
+\end{itemize}
+\Orismos{Πρόβλημα αρχικών τιμών}
+Έστω μια συνάρτηση $ f:[a,\beta]\times\mathbb{R}^n\rightarrow\mathbb{R} $ και $ y_0\in\mathbb{R} $. Πρόβλημα αρχικών τιμών ονομάζεται η αναζήτηση μιας συνάρτησης $ y:[a,b]\rightarrow\mathbb{R} $ η οποία ικανοποιεί τις ακόλουθες συνθήκες :
+\[ \ccases{y^{(n)}=f\left( x,y,y',\ldots,y^{(n-1)}\right) \\y(a)=y_0,\ y'(a)=y_1,\ldots,\ y^{(n-1)}(a)=y_{n-1}} \]
+Η ζητούμενη συνάρτηση $ y $ είναι η λύση της διαφορικής εξίσωσης $ n- $οστού βαθμού για την οποία γνωρίζουμε την τιμή της και τις τιμές όλων των παραγώγων της, έως τάξης $ n-1 $, στο κάτω άκρο του διαστήματος.\dgr
+\Orismos{Διαφορική εξίσωση 1{\tssL{ης}} τάξης}
+Διαφορική εξίσωση 1\tss{ης} τάξης ονομάζεται κάθε διαφορική εξίσωση της οποίας η τάξη είναι ίση με 1. Θα είναι της μορφής :
+\[ F\left(x,y,y'\right)=0\ \textrm{ ή }\ y'=f(x,y)  \]
+\Orismos{Γραμμική διαφορική εξίσωση}
+\Orismos{Γραμμική διαφορική εξίσωση 1\tss{ης} τάξης}
+Γραμμική διαφορική εξίσωση 1\tss{ης} τάξης ονομάζεται κάθε εξίσωση της μορφής
+\[ y'+p(x)y=q(x) \]
+όπου $ p,q $ είναι συνεχής συναρτήσεις της ανρξάρτητης μεταβλητής. Οι λύσεις της εξίσωσης αυτής δίνονται από τον τύπο :
+\[ y(x)=e^{-\int{p(x)dx}}\left[c+\int{q(x)\cdot e^{\int{p(x)dx}}dx}\right] \]
+Αν $ y(x_0)=y_0 $, με $ x_0\in D_y $, είναι μια αρχική συνθήκη για την εξίσωση τότε η λύση του προβλήματος αρχικών τιμών θα δίνεται από τη σχέση :
+\[ y(x)=e^{-\int_{a}^{x}{p(t)dt}}\left[y_0+\int_{a}^{x}{q(t)\cdot e^{\int_{a}^{t}{p(s)ds}}dt}\right] \]
+\Orismos{Εξίσωση Bernoulli}
+Κάθε διαφορική εξίσωση 1\tss{ης} τάξης της μορφής :
+\[ y'+p(x)y=q(x)y^r \] όπου $ p,q $ είναι συνεχείς συναρτήσεις, ονομάζεται διαφορική εξίσωση Bernoulli. Η αντικατάσταση $ z=y^{1-r}\Rightarrow z'=(1-r)y^{-r}y' $ μετατρέπει τη διαφορική εξίσωση Bernoulli σε \textbf{γραμμική διαφορική εξίσωση 1\tss{ης} τάξης} της μορφής :
+\[ z'+(1-r)p(x)z=(1-r)q(x) \]
+\begin{itemize}
+\item Για μια εξίσωση Bernoulli θα πρέπει να ισχύει $ r\neq0 $ και $ r\neq1 $.
+\item Αν $ r=0 $ ή $ r=1 $ η εξίσωση αποτελεί μια γραμμική διαφορική εξίσωση 1\tss{ης} τάξης.
+\end{itemize}
+\Orismos{Εξίσωση Ricatti}
+Διαφορική εξίσωση Ricatti ονομάζεται κάθε διαφορική εξίσωση 1\tss{ης} τάξης της μορφής :
+\[ y'+p(x)y+q(x)y^2+a(x)=0 \]
+όπου $ p,q,a $ είναι συνεχείς συναρτήσεις και $ a(x)\neq0 $. Ο μετασχηματισμός $ z=\frac{1}{y-y_0}\Rightarrow z'=-\frac{y'}{(y-y_0)^2} $ όπου $ y_0 $ είναι μια μερική λύση της εξίσωσης, μετατρέπει την εξίσωση Ricatti στη γραμμική διαφορική εξίσωση 1\tss{ης} τάξης :
+\[ z'+\left[p(x)+2y_0q(x) \right]z=a(x)  \]
+\Orismos{Εξισώσεις χωριζομένων μεταβλητών}
+Διαφορική εξίσωση χωριζομένων μεταβλητών ονομάζεται κάθε διαφορική εξίσωση της μορφής \[ y'=\frac{A(x)}{B(y)} \] όπου $ A $ είναι μια συνεχής συνάρτηση του $ x $ και $ B $ μια συνεχής συνάρτηση του $ y $. Οι λύσεις της εξίσωσης θα δίνονται από τον τύπο
+\[ \int{A(x)dx}=\int{B(x)dx}+c \]
+όπου $ c $ είναι μια αυθαίρετη σταθερά.\dgr
+\Orismos{Εξίσωση χωριζομένων μεταβλητών}
+Κάθε διαφορική εξίσωση 1\tss{ης} τάξης της μορφής \[ y'=\frac{f(x,y)}{g(x,y)} \] ονομάζεται ομογενής διαφορική εξίσωση αν και μόνο αν οι συναρτήσεις $ f,g $ είναι ομογενείς συναρτήσεις.
+\begin{itemize}
+\item Οι συναρτήσεις $ f,g $ είναι \textbf{ομογενείς} με βαθμό ομογένειας $ n $ αν και μόνο αν ισχύει γι αυτές $ f(\lambda x,\lambda y)=\lambda^n f(x,y) $ και $ g(\mu x,\mu y)=\mu^n g(x,y) $ για οποιουσδήποτε πραγματικούς αριθμούς $ \lambda,\mu\in\mathbb{R} $.
+\item Η ομογενής διαφορική εξίσωση έχει βαθμό ομογένειας $ n $ αν οι συναρτήσεις $ f,g $ είναι ομογενείς του ίδιου βαθμού $ n $.
+\item Θέτοντας $ y=zx\Rightarrow y'=z'x+z $ η ομογενής εξίσωση μετατρέπεται σε διαφορική εξίσωση χωριζομένων μεταβλητών.
+\end{itemize}
+\Orismos{Αμέσως ολοκληρώσιμες εξισώσεις}
+Μια διαφορική εξίσωση 1\tss{ης} τάξης της μορφής
+\begin{equation}\label{or:amol}
+ M(x,y)dx+N(x,y)dy=0
+\end{equation} θα ονομάζεται αμέσως ολοκληρώσιμή ή πλήρης με $ M,N $ συνεχείς συναρτήσεις, αν και μόνο αν υπάρχει μια συνάρτηση $ f(x,y) $ ώστε να ισχύει 
+\[ df(x,y)=M(x,y)dx+N(x,y)dy \]
+\begin{itemize}
+\item Για κάθε αμέσως ολοκληρώσιμη διαφορική εξίσωση θα ισχύει $ \frac{\partial f}{\partial x}=M(x,y) $ και $ \frac{\partial f}{\partial y}=N(x,y) $.
+\item Όλες οι λύσεις της εξίσωσης δίνονται από τη σχέση $ f(x,y)=c $.
+\item Μια εξίσωση της μορφής \eqref{or:amol} θα είναι αμέσως ολοκληρώσιμη αν και μόνο αν ισχέι η σχέση :
+\[ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} \]
+\end{itemize}
+Στην περίπτωση όπου μια εξίσωση της μορφής \eqref{or:amol} δεν είναι αμέσως ολοκληρώσιμη τότε η μη μηδενική συνάρτηση $ \rho(x,y) $ με την οποία 
+\chapter{ΑΣΚΗΣΕΙΣ ΦΥΛΛΑΔΙΟΥ}
+\section{Α - ΔΙΑΦΟΡΙΚΕΣ ΕΞΙΣΩΣΕΙΣ ΠΡΩΤΗΣ ΤΑΞΗΣ}
+\Askhsh
+\textbf{Με τη βοήθεια του μετασχηματισμού {\boldmath{$z=\tan y$}}, να αποδειχθεί ότι η λύση του προβλήματος αρχικών τιμών
+{\boldmath{\[ \frac{1}{{\cos }^{2}y}\frac{dy}{dx}+x\tan y+x{\tan }^{3}y=0\quad,\quad y\left( 0 \right)=\frac{\pi }{4} \]}}
+έχει την ιδιότητα 
+{\boldmath{\[\underset{x\to \infty }{\mathop{\lim }}\,y\left( x \right)=0 \]}} }
+\textbf{ΛΥΣΗ}\mbox{}\\
+\noindent
+Η εξίσωση έχει λύση την $ y=0 $ η οποία όμως δεν πληροί την αρχική συνθήκη του προβλήματος $ y(0)=\frac{\pi}{4} $. Εκτελώντας το μετασχηματισμό $z=\tan y$ θα έχουμε \[ \dfrac{dz}{dx}={{\left( \tan y \right)}^{\prime }}=\dfrac{1}{{{\cos }^{2}}y}\dfrac{dy}{dx} \]
+Αντικαθιστώντας τις σχέσεις αυτές στην αρχική εξίσωση θα προκύψει
+\begin{equation}
+z'+xz+xz^{3}=0
+\end{equation} Η εξίσωση (1) είναι μια εξίσωση \textbf{Bernoulli}. Επίσης σύμφωνα με το μετασχηματισμό αυτό η αρχική συνθήκη θα έχει ως εξής.
+\[ \textrm{Για }x=0\ :\ y(0)=\frac{\pi}{4}\Rightarrow z(0)=\tan{\frac{\pi}{4}}=1  \]
+Θα χρησιμοποιήσουμε το μετασχηματισμό $u={{z}^{1-r}}$ με $r=3$ δηλαδή $u=\dfrac{1}{{{z}^{2}}}$ ο οποίος μας δίνει ${u}'=-\dfrac{2{z}'}{{{z}^{2}}}$.
+Ο μετασχηματισμός αυτός θα μετατρέψει την εξίσωση (1.1) σε μια \textbf{γραμμική εξίσωση 1ης τάξης} :
+\begin{equation}
+{u}'-2xu-2x=0
+\end{equation}
+
+\noindent
+Η γενική λύση αυτής είναι η $$u\left( x \right)={{e}^{\int{2xdx}}}\left[ c+\int{2x{{e}^{-\int{2xdx}}}}dx \right]={{e}^{{{x}^{2}}}}\left[ c-{{e}^{-{{x}^{2}}}} \right]=c{{e}^{{{x}^{2}}}}-1$$
+Αντικαθιστώντας θα έχουμε 
+\[ z=\dfrac{1}{\sqrt{c{{e}^{{{x}^{2}}}}-1}}=\tan y\Rightarrow y=\arctan  \dfrac{1}{\sqrt{c{{e}^{{{x}^{2}}}}-1}} \]
+Για $y\left( 0 \right)=\dfrac{\pi }{4}$ θα γίνει
+\[\arctan \dfrac{1}{\sqrt{c-1}}=\dfrac{\pi }{4}\Rightarrow \dfrac{1}{\sqrt{c-1}}=1\Rightarrow c=2\]
+\noindent
+Επομένως η λύση του προβλήματος θα είναι
+\[ y\left( x \right)=\arctan \dfrac{1}{\sqrt{2{{e}^{{{x}^{2}}}}-1}} \]
+Επιπλέον όταν $x\to \infty \Rightarrow \dfrac{1}{\sqrt{2{{e}^{{{x}^{2}}}}-1}}\to 0$ άρα θα ισχύει $\underset{x\to \infty }{\mathop{\lim }}\,y\left( x \right)=0$.\\
+\vspace{5mm}
+\noindent
+\Askhsh
+\noindent
+Να επιλυθεί το πρόβλημα αρχικών τιμών
+\[ q(x)y'=q'(x)y-y^2\ ,\ y(0)=1 \]
+όπου $ q $ είναι μια θετική συνάρτηση με συνεχή παράγωγο στο $ \mathbb{R} $ και $ q(0)=1 $.\\
+\textbf{ΛΥΣΗ}\\
+Διαιρώντας και τα δύο μέλη της αρχικής εξίσωσης $ q(x)y'=q'(x)y-y^2 $ με τη θετική συνάρτηση $ q(x)>0 $ προκύπτει
+\begin{equation}\label{eq:a2}
+y'=\frac{q'(x)}{q(x)}y-\frac{y^2}{q(x)}
+\end{equation}
+η οποία είναι μια εξίσωση \textbf{Bernoulli} με $ r=2 $.
+Παρατηρούμε ότι η $ y=0 $ είναι λύση της εξίσωσης που όμως δεν ικανοποιεί την αρχική συνθήκη $ y(0)=1 $ άρα την απορρίπτουμε. Με την αντικατάσταση $ z=\frac{1}{y} $ η οποία δίνει $ z'=-\frac{y'}{y^2} $ η \eqref{eq:a2} μετασχηματίζεται στην γραμμική εξίσωση πρώτης τάξης :
+\begin{equation}
+z'-\frac{q'(x)}{q(x)}z=\frac{1}{q(x)}
+\end{equation}
+Η γενική λύση της παραπάνω εξίσωσης είναι:
+\begin{gather}
+z(x)=e^{-\int{\frac{q'(x)dx}{q(x)}}}\left[ c+\int{\frac{e^{-\int{\frac{q'(x)dx}{q(x)}\ }}}{q(x)}}dx\right]\eq{q>0}\\e^{-\log{q(x)}}\left(c+\int\frac{e^{\log{q(x)}}}{q(x)}{dx}\right)=\frac{1}{q(x)}\left(c+\int{dx}\right)=\frac{x+c}{q(x)}
+\end{gather}
+Επιπλέον, μετά το μετασχηματισμό, η αρχική συνθήκη θα γίνει :
+\[ y(0)=1\Rightarrow \frac{1}{z(0)}=1\Rightarrow z(0)=1 \]
+Σύμφωνα μ' αυτήν θα έχουμε
+\[ z(0)=1\Rightarrow \frac{0+c}{q(0)}=1\Rightarrow c=1  \]
+Η τελευταία σχέση μας δίνει τη λύση του προβλήματος η οποία θα είναι :  \[ z=\frac{x+1}{q(x)}\Rightarrow y=\dfrac{q(x)}{x+1} \]
+\newpage
+\noindent
+\Askhsh
+\noindent
+Να επιλυθεί η διαφορική εξίσωση
+\[ (y-x)e^{y/x}\frac{dy}{dx}+y\left( 1+e^{y/x}\right) =0 \]
+Ισχύει ότι $ \displaystyle\int{\frac{z-1}{ze^{-1/z}+z^2}dz}=\log{\left|1+ze^{1/z} \right|+c } $.\\
+\vspace{5mm}
+\noindent
+\textbf{ΛΥΣΗ}\\
+\textbf{1\tss{ος} Τρόπος}\\
+\noindent
+Η εξίσωση γράφεται στη μορφή \[ \frac{dy}{dx}=\frac{y\left( 1+e^{y/x}\right) }{(y-x)e^{x/y}} \] η οποία είναι μια ομογενής εξίσωση με βαθμό ομογένειας $ 1 $. Χρησιμοποιούμε το μετασχηματισμό $ y=xz $ και τότε θα έχουμε $ y'=xz'+z $ 
+\begin{gather}
+xz'+z=-\dfrac{xz\left( 1+e^{1/z}\right) }{\left( xz-x\right) e^{1/z}}\Rightarrow 
+xz'+z=-\dfrac{xz\left( 1+e^{1/z}\right) }{x(z-1)e^{1/z}}\Rightarrow\\
+xz'=-\dfrac{z+z^2e^{1/z}}{(z-1)e^{1/z}}\Rightarrow z'=\dfrac{1}{x}\cdot\dfrac{z e^{-1/z}+z^2}{z-1}
+\end{gather}
+η οποία είναι μια εξίσωση χωριζομένων μεταβλητών άρα μπορεί να πάρει τη μορφή 
+\[ \frac{z-1}{ze^{-1/z}+z^2}dz=-\frac{1}{x}dx \]
+Οι λύσεις θα δίνονται από τον τύπο
+\begin{gather*} \int\frac{z-1}{ze^{-1/z}+z^2}dz=-\int\frac{1}{x}dx+c'\Rightarrow\\
+\log{\left|1+ze^{1/z} \right|}=-\log{|x|}+c'\Rightarrow\\
+\log{\left|1+ze^{1/z} \right|}+\log{|x|}=c'\Rightarrow
+\left|x\left( 1+ze^{1/z}\right) \right|=e^{c'}\Rightarrow\\
+x\left( 1+ze^{1/z}\right)=\pm e^{c'}
+\end{gather*}
+όπου $ c' $ είναι μια αυθαίρετη σταθερά. Θέτοντας $ \pm e^{c'}=c $ και κάνοντας αναδρομική αντικατάσταση παίρνουμε οτι όλες οι λύσεις της αρχικής εξίσωσης θα δίνονται από τον τύπο
+\[ x\left( 1+\frac{y}{x}e^{x/y}\right)=c\Rightarrow x+ye^{x/y}=c \]
+\textbf{2\tss{ος} Τρόπος}\\
+Η αρχική διαφορική εξίσωση γράφεται και στη μορφή
+\begin{equation}\label{eq:a3}
+\undercbrace{y\left(1+e^{x/y} \right)}_{M}dx+\undercbrace{(y-x)e^{x/y}}_{N}dy=0 
+\end{equation}
+Εξετάζουμε αν πρόκειται για μια εξίσωση αμέσως ολοκληρώσιμη. Θα έχουμε :
+\begin{gather*} \dfrac{\partial M}{\partial y}=\dfrac{\partial}{\partial y}\left[y\left(1+e^{x/y} \right) \right]=1+e^{x/y}-\frac{x}{y}e^{x/y}\ \textrm{ και }\\
+ \dfrac{\partial N}{\partial x}=\dfrac{\partial}{\partial x}\left[(y-x)e^{x/y} \right]=-\frac{x}{y}e^{x/y} 
+\end{gather*}
+Διαπιστώνουμε οτι δεν πρόκειται για μια εξίσωση αμέσως ολοκληρώσιμη αφού $ \frac{\partial M}{\partial y}\neq\frac{\partial N}{\partial x} $
+Θα αναζητήσουμε έναν ολοκληρωτικό παράγοντα.
+\begin{align*}
+ \frac{\frac{\partial N}{\partial x}-\frac{\partial M}{\partial y}}{M}&=\dfrac{\frac{\partial}{\partial x}\left[(y-x)e^{x/y} \right]-\frac{\partial}{\partial y}\left[y\left(1+e^{x/y} \right) \right]}{y\left(1+e^{x/y} \right)} =\\
+&=\dfrac{-\frac{x}{y}e^{x/y}-1-e^{x/y}+\frac{x}{y}e^{x/y}}{y\left(1+e^{x/y} \right)}=\dfrac{-\left(1+e^{x/y} \right)}{y\left(1+e^{x/y} \right)}=-\frac{1}{y}
+\end{align*}
+Η τελευταία είναι μια παράσταση μόνο του $ y $ οπότε η συνάστηση $ \rho(y)=e^{-\int\frac{1}{y}dy}=e^{-\log{|y|}dy}=\frac{1}{y} $ είναι ο ζητούμενος ολοκληρωτικός παράγοντας. Πολλαπλασιάζοντας μ' αυτόν την εξίσωση \eqref{eq:a3} θα προκύψει :
+\begin{gather}\label{eq:a32}
+\frac{1}{y}y\left(1+e^{x/y} \right)dx+\frac{1}{y}(y-x)e^{x/y}dy=0\Rightarrow\\\undercbrace{\left(1+e^{x/y} \right)}_{M}dx+\undercbrace{\left( 1-\frac{x}{y}\right) e^{x/y}}_{N}dy=0
+\end{gather}
+Εύκολα διαπιστώνουμε οτι η εξίσωση \eqref{eq:a32} είναι μια αμέσως ολοκληρώσιμη εξίσωση αφού $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} $. Αυτό σημαίνει οτι θα υπάρχει μια συνάρτηση $ f(x,y) $ τέτοια ώστε η \eqref{eq:a32} να γίνεται $ df(x,y)=Mdx+Ndy=0 $. Οι λύσεις θα δίνονται από τον τύπο $ f(x,y)=c $. Θα έχουμε :
+\begin{equation}\label{eq:a31}
+\frac{\partial f}{\partial x}=1+e^{x/y}\ \textrm{και }\ \frac{\partial f}{\partial y}=\left( 1-\frac{x}{y}\right) e^{x/y} 
+\end{equation}
+Από την πρώτη σχέση προκύπτει :
+\[ f(x,y)=\int{\left( 1+e^{x/y}\right) dx}+g(y)=x+ye^{x/y}+g(y) \] για κάποια συνάρτηση $ g(y) $. Παραγωγίζοντας την τελευταία σχέση ως προς $ y $ θα έχουμε
+\begin{equation}\label{eq:a33}
+ \frac{\partial f}{\partial y}=e^{x/y}-\frac{x}{y}e^{x/y}+g'(y) 
+\end{equation}
+Από τις σχέσεις \eqref{eq:a31} και \eqref{eq:a33} έχουμε $ \left( 1-\frac{x}{y}\right) e^{x/y}=e^{x/y}-\frac{x}{y}e^{x/y}+g'(y) $ άρα $ g'(y)=0 $. Αυτή μας δίνει $ g(y)=c' $ και επιλέγοντας $ c'=0 $ δηλαδή $ g(y)=0 $ προκύπτει οτι η συνάρτηση $ f(x,y) $ θα δίνεται απο τη σχέση
+\[ f(x,y)=x+ye^{x/y} \]
+Όλες οι λύσεις λοιπόν της αρχικής εξίσωσης θα δίνονται από τον τύπο \[ f(x,y)=c\Rightarrow x+ye^{x/y}=c \]
+\\
+\Askhsh
+Να επιλυθεί η εξίσωση
+\[ \dfrac{dy}{dx}=-\dfrac{y(x+y+1)}{x(x+3y+2)} \]
+\textbf{ΛΥΣΗ}\\
+Παρατηρούμε οτι μια λύση της εξίσωσης είναι η $ y=0 $. Γράφουμε τώρα την εξίσωση στη μορφή
+\[ \undercbrace{y(x+y+1)}_{M}dx+\undercbrace{x(x+3y+2)}_{N}dy=0 \] η οποία είναι ισοδύμανη με την αρχική εξίσωση. Παρατηρούμε οτι
+\begin{gather*} 
+\dfrac{\partial M}{\partial y}=\dfrac{\partial}{\partial y}\left[y(x+y+1)\right]=x+2y+1\\
+\dfrac{\partial N}{\partial x}=\dfrac{\partial}{\partial y}\left[x(x+3y+2)\right]=2x+3y+2
+\end{gather*}
+Συμπερένουμε οτι δεν είναι αμέσως ολοκληρώσιμη άρα θα εξετάσουμε την ύπαρξη ενός ολοκληρωτικού παράγοντα. Θα έχουμε
+\begin{align*} \dfrac{\frac{\partial N}{\partial x}-\frac{\partial M}{\partial y}}{M}&=\dfrac{\frac{\partial}{\partial y}\left[x(x+3y+2)\right]-\frac{\partial}{\partial y}\left[y(x+y+1)\right]}{y(x+y+1)}=\\
+&=\dfrac{2x+3y+2-x-2y-1}{y(x+y+1)}=\dfrac{x+y+1}{y(x+y+1)}=\dfrac{1}{y}
+\end{align*}
+Η τελευταία παράσταση αποτελέι μαι συνάρτηση με μόνη μεταβλητή το $ y $ οπότε ένας ολοκληρωτικός παράγοντας είναι η συνάρτηση $ \rho(y)=e^{\int{\frac{1}{y}dy}}=e^{\log|y|}=y $.  
+Πολλαπλασιάζοντας την αρχική εξίσωση με $ y $ προκύπτει :
+\begin{equation}\label{eq:a4}
+ \undercbrace{y^2(x+y+1)}_{M}dx+\undercbrace{xy(x+3y+2)}_{N}dy=0
+\end{equation} 
+η οποία είναι αμέσως ολοκληρώσιμη αφού $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}=2xy+3y^2+2y $. Επομένως $ \exists f(x,y) $ συνάρτηση τέτοια ώστε η εξίσωση \eqref{eq:a4} να γίνει $ df(x,y)=0 $. Οι λύσεις της θα δίνονται από τον τύπο $ f(x,y)=c $.
+Σύμφωνα μ' αυτά θα ισχύει
+\begin{equation}\label{eq:a41}
+\frac{\partial f}{\partial x}=y^2(x+y+1)\ \textrm{ και }\ \frac{\partial f}{\partial y}=xy(x+3y+2)
+\end{equation}
+Ολοκληρώνοντας την πρώτη σχέση της \eqref{eq:a41} ως προς $ x $ αποκτάμε τη σχέση
+\begin{gather*} 
+f(x,y)=\int{y^2(x+y+1)\ dx}+g(y)=y^2\left(\frac{x^2}{2}+xy+x \right)+g(y)=\\
+\frac{y^2x^2}{2}+xy^3+xy^2+g(y) 
+\end{gather*}
+για κάποια συνάρτηση $ g(y) $. Παραγωγίζοντας την παραπάνω σχέση ως προς $ y $ έχουμε :
+\[ \frac{\partial f}{\partial y}=2yx^2+3xy^2+2xy+g'(y) \]
+Θα πρέπει όμως να ισχύει $ \frac{\partial f}{\partial y}=N $, σχέση η οποία μας δίνει
+\[ 2yx^2+3xy^2+2xy+g'(y)=xy(x+3y+2)\Rightarrow g'(y)=0 \]
+Επιλέγοντας $ g(y)=0 $ θα έχουμε τον τύπο 
+\[ f(x,y)=c\Rightarrow\frac{y^2x^2}{2}+xy^3+xy^2=c \]
+όπου $ c $ είναι μια αυθαίρετη σταθερά. Όλες οι λύσεις της αρχικής εξίσωσης θα δίνονται από τις σχέσεις
+$ y=0\ \textrm{ και }\ \frac{y^2x^2}{2}+xy^3+xy^2=c $ οι οποίες συμπτύσονται στον γενικό τύπο
+\[ \frac{y^2x^2}{2}+xy^3+xy^2=c \]
+\newpage
+\Askhsh
+Να επιλυθεί η διαφορική εξίσωση
+\[ \left( x^2+xy^2\right) y'-3xy+2y^3=0 \]
+αφού βρεθεί ένας ολοκληρωτικός παράγοντας της μορφής $ \rho(x,y)=x^n\varphi(y) $.\\
+\textbf{ΛΥΣΗ}\\
+Η αρχική διαφορική εξίσωση έχει προφανή λύση την $ y=0 $. Επίσης γράφεται ισοδύναμα
+\begin{equation}\label{a50}
+\left( 2y^3-3xy\right) dx+\left( x^2+xy^2\right) dy=0 
+\end{equation} 
+Πολλαπλασιάζοντας και τα δύο μέλη με τον ολοκληρωτικό παράγοντα $ \rho(x,y) $ παίρνουμε
+\begin{gather*}
+x^n\varphi(y)\left( 2y^3-3xy\right) dx+x^n\varphi(y)\left( x^2+xy^2\right) dy=0\Rightarrow\\
+\undercbrace{\varphi(y)\left( 2y^3x^n-3x^{n+1}y\right) }_{M}dx+\undercbrace{\varphi(y)\left( x^{n+2}+x^{n+1}y^2\right) }_{N}dy=0
+\end{gather*} 
+Η παραπάνω θα είναι μια εξίσωση αμέσως ολοκληρώσιμη αν και μόνο αν ισχύει $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} $. Θα έχουμε λοιπόν
+\begin{align*}
+\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}&\Rightarrow \frac{\partial }{\partial y}\left[\varphi(y)\left( 2y^3x^n-3x^{n+1}y\right)  \right] =\frac{\partial }{\partial x}\left[\varphi(y)\left( x^{n+2}+x^{n+1}y^2\right)  \right]\Rightarrow\\
+&\varphi'(y)\left(2x^ny^3-3x^{n+1}y \right)+\varphi(y)\left(6x^ny^2-3x^{n+1} \right)=\\&=\varphi(y)\left[(n+2)x^{n+1}+(n+1)y^2x^n \right]\Rightarrow\\&\varphi'(y)2x^ny^3-\varphi'(y)3x^{n+1}y+\varphi(y)\cdot 6x^ny^2-\varphi(y)\cdot 3x^{n+1}=\\&=\varphi(y)\cdot(n+2)x^{n+1}+\varphi(y)\cdot(n+1)y^2x^n\Rightarrow\\&x^{n+1}\left[-3y\varphi'(y)-3\varphi(y) \right]+x^n\left[ 2y^3\varphi'(y)+6y^2\varphi(y)\right]=\\&=(n+2)\varphi(y)x^{n+1}+(n+1)y^2\varphi(y)x^n  
+\end{align*}
+Εξισώνοντας τους ομοβάθμιους όρους παίρνουμε τις εξισώσεις :\begin{equation}\label{a5}\begin{gathered}
+-3y\varphi'(y)-3\varphi(y)=(n+2)\varphi(y)\Rightarrow\\-3y\varphi'(y)=3\varphi(y)+(n+2)\varphi(y)\Rightarrow\\-3y\varphi'(y)=(n+5)\varphi(y)\Rightarrow \frac{\varphi'(y)}{\varphi(y)}=-\dfrac{n+5}{3y}\ \textrm{ και }
+\end{gathered}
+\end{equation}
+\begin{equation}\label{a51}
+\begin{gathered}
+2y^3\varphi'(y)+6y^2\varphi(y)=(n+1)y^2\varphi(y)\Rightarrow\\
+2y^3\varphi'(y)=-6y^2\varphi(y)+(n+1)y^2\varphi(y)\Rightarrow\\
+2y^3\varphi'(y)=\left(-6y^2+(n+1)y^2\right) \varphi(y)\Rightarrow\frac{\varphi'(y)}{\varphi(y)}=-\dfrac{n-5}{2y}
+\end{gathered}
+\end{equation}
+Επομένως από τις σχέσεις \eqref{a5} και \eqref{a51} έχουμε
+\[ -\dfrac{n+5}{3y}=\dfrac{n-5}{2y}\Rightarrow 2n+10=-3n+15\Rightarrow n=1 \]
+Με αντικατάσταση στη σχέση \eqref{a5} παίρνουμε την εξίσωση 
+\begin{equation}\label{a52}
+\varphi'(y)+\frac{2}{y}\varphi(y)=0
+\end{equation}
+η οποία είναι μαι γραμμική φιαφορική εξίσωση πρώτης τάξης. Η γενική λύσης της \eqref{a52} θα δίνεται από τον τύπο :
+\[ \varphi(y)=c'e^{-\int{\frac{2}{y}dy}}=c'e^{-\log\left(y^2 \right) }=\frac{c'}{y^2} \]
+όπου $ c' $ είναι μια αυθαίρετη σταθερά. Επιλέγουμε χωρίς βλάβη της γενικότητας $ \varphi(y)=\frac{c'}{y^2} $ η οποία μας δίνει τον ζητούμενο ολοκληρωτικό παράγοντα $ \rho(x,y)=x^n\varphi(y)=\frac{x}{y^2} $.
+Πολλαπλασιάζοντας τώρα την αρχική εξίσωση \eqref{a50} με τον ολοκληρωτικό παράγοντα που μόλις υπολογίσαμε παίρνουμε την αμέσως ολοκληρώσιμη εξίσωση :
+\begin{gather}\label{a53}
+\dfrac{x}{y^2}\left(2y^3-3xy\right) dx+\dfrac{x}{y^2}\left( x^2+xy^2\right) dy=0\Rightarrow\\
+\undercbrace{\left(2xy-\frac{3x^2}{y}\right)}_{M}dx+\undercbrace{\left(\frac{x^3}{y^2}+x^2\right)}_{N} dy=0
+\end{gather} 
+Εύκολα επαλυθεύουμε οτι ισχύει $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} $ άρα θα υπάρχει μια συνάρτηση $ f(x,y) $ ώστε να ισχύει $ df(x,y)=Mdx+Ndy=0 $. Τότε οι λύσεις της εξίσωσης θα δίνονται από τον τύπο $ f(x,y)=c $. Έχουμε λοιπόν οτι
+\begin{equation}\label{a54}
+\frac{\partial f}{\partial x}=2xy-\frac{3x^2}{y}\ \textrm{ και }\ \frac{\partial f}{\partial y}=\frac{x^3}{y^2}+x^2
+\end{equation}
+Προκύπτει οτι
+\[ f(x,y)=\int{\left(2xy-\frac{3x^2}{y} \right)dx+g(y) }=x^2y-\frac{x^3}{y}+g(y) \]
+για κάποια συνάρτηση $ g(y) $. Παραγωγίζοντας την παραπάνω σχέση ως προς $ y $ έχουμε :
+\[ \frac{\partial f}{\partial y}=x^2-\frac{x^3}{y^2}+g'(y) \]
+Από τη δεύτερη σχέση της \eqref{a54} παίρνουμε οτι 
+\[ x^2-\frac{x^3}{y^2}+g'(y)=\frac{x^3}{y^2}+x^2\Rightarrow g'(y)=0\Rightarrow g(y)=c \]
+Επιλέγοντας $ g(y)=c $ αποκτάμε τη συνάρτηση $ f(x,y)=x^2y-\frac{x^3}{y} $ οπότε όλες οι λύσεις της εξίσωσης δίνονται από τους τύπους
+\[ y=0\ \textrm{ και }\ x^2y-\frac{x^3}{y}=c \]
+\Askhsh
+Να επιλυθούν τα προβλήματα αρχικών τιμών.
+ \begin{alignat*}{4}
+\textrm{i.} &\ \  \dfrac{dy}{dx}-\dfrac{1}{x}y\log{y}=-\dfrac{y}{2\log{y}} & ,\ y(-1)=e^2\\\textrm{ii.} &\ \  \dfrac{dy}{dx}=-\dfrac{(1+y)^2}{x-x^2+xy} & ,\ y(1)=1
+\end{alignat*} 
+\textbf{ΛΥΣΗ}\\
+\begin{rlist}
+\item Η αρχική διαφορική εξίσωση γράφεται στη μορφή
+\[ \dfrac{y'}{y}-\dfrac{1}{x}\log{y}=-\dfrac{1}{2\log{y}} \] και θέτοντας $ z=\log{y}\Rightarrow z'=\frac{y'}{y} $ παίρνουμε την
+\begin{equation}\label{a6}
+z'-\frac{1}{x}z=-\frac{z^{-1}}{2}
+\end{equation}
+η οποία είναι μια διαφορική εξίσωση Bernoulli με $ r=-1 $. Εκτελούμε λοιπόν το μετασχηματισμό $ u=z^{1-(-1)}=z^2 $ που δίνει $ u'=2zz' $, με τον οποίο μετατρέπουμε την \eqref{a6} σε μια γραμμική διαφορική εξίσωση 1ης τάξης :
+\begin{equation}
+\frac{1}{2}u'-\frac{1}{x}u=-\frac{1}{2}\Rightarrow u'-\frac{2}{x}u=-1
+\end{equation}
+Η γενική λύση αυτής θα είναι :
+\begin{align*}
+u(x)&=e^{-\int{\left(-\frac{2}{x}\right) dx}}\left[c+\int{(-1)\cdot e^{\int{\left( -\frac{2}{x}\right) dx}}dx} \right]=\\
+&=e^{\log{x^2}}\left[c-\int{e^{\log{\frac{1}{x^2}}}dx}\right]=x^2\left( c-\int{\dfrac{dx}{x^2}}\right)=\\&=x^2\left(c+\frac{1}{x} \right)=cx^2+x
+\end{align*}
+όπου $ c $ είναι μια αυθαίρετη σταθερά. Με αναδρομική αντικατάσταση όλες οι λύσεις $ y $ θα δίνονται από τον τύπο
+\begin{gather}
+u(x)=cx^2+x\Rightarrow z^2(x)=cx^2+x\Rightarrow z(x)=\pm\sqrt{cx^2+x}\Rightarrow\\
+ \log{y}=\pm\sqrt{cx^2+x}\Rightarrow y(x)=e^{\pm\sqrt{cx^2+x}}
+\end{gather}
+Σύμφωνα τώρα με την αρχική συνθήκη $ y(-1)=e^2 $ θα προκύψει :
+\[ y(-1)=e^2\Rightarrow e^2=e^{\sqrt{c(-1)^2-1}}\Rightarrow c-1=4\Rightarrow c=5 \]
+Η τιμή αυτή μας δίνει τη λύση του προβλήματος αρχικών τιμών η οποία θα είναι 
+\[ y(x)=e^{\sqrt{5x^2+x}} \]
+\item Η αρχική διαφορική εξίσωση έχει λύση την $ y=-1 $  η οποία όμως δεν ικανοποιεί την αρχική συνθήκη $ y(1)=1 $. Θέτοντας τώρα $ z=1+y\Rightarrow z'=y' $ η εξίσωση παίρνει τη μορφή 
+\begin{equation}\label{a61}
+ z'=-\dfrac{z^2}{z-x^2}
+\end{equation}  και πρόκειται για μια ομογενή εξίσωση με βαθμό ομογένιας $ 2 $. Η τελευταία έχει λύση την $ z=0\Rightarrow y=-1 $ την οποία όμως έχουμε απορρίψει προηγουμένως. Με το μετασχηματισμό $ z=xu $ ο οποίος δίνει $ z'=xu'+u $ η \eqref{a61} παίρνει τη μορφή
+ \begin{align}\label{a2}
+z'=-\dfrac{z^2}{z-x^2}&\Rightarrow xu'+u=-\frac{x^2u^2}{x^2u-x^2}\Rightarrow xu'+u=\dfrac{u^2}{1-u}\Rightarrow\\
+&\Rightarrow xu'=\dfrac{2u^2-u}{1-u}\Rightarrow \dfrac{1-u}{2u^2-u}du=\dfrac{dx}{x}
+\end{align}
+Φτάσαμε σε μια διαφοριική εξίσωση χωριζομένων μεταβλητών οπότε με άμεση ολοκλήρωση και στα δύο μέλη της \eqref{a2} θα έχουμε
+\begin{align*} &\int\dfrac{1-u}{2u^2-u}du=\int\dfrac{dx}{x}+c'\Rightarrow -\int\dfrac{1}{u}du+\int\dfrac{1}{2u-1}du=\int\dfrac{dx}{x}+c'\Rightarrow\\
+&-\log|u|+\frac{1}{2}\log|2u-1|=\log|x|+c'\Rightarrow \log{\left| \dfrac{2u-1}{x^2u^2}\right|}=2c'\Rightarrow\\
+&\dfrac{2u-1}{x^2u^2}=\pm e^{2c'}\ \textrm{ και θέτοντας }\pm e^{2c'}=c\ \textrm{ παίρνουμε }\dfrac{2u-1}{x^2u^2}=c
+\end{align*}
+Οι λύσεις της διαφορικής εξίσωσης θα δίνονται από τον τύπο
+\[ \dfrac{2u-1}{x^2u^2}=c\xRightarrow{u=\frac{z}{x}}\dfrac{2\frac{z}{x}-1}{x^2\left(
+\frac{z}{x}\right)^2}=c\xRightarrow{z=y+1}\dfrac{2\frac{y+1}{x}-1}{(y+1)^2}=c \]
+Από την παραπάνω σχέση οι λύσεις της εξίσωσης θα δίνονται από τον τύπο :
+\begin{gather}
+2\frac{y+1}{x}-1=c(y+1)^2\Rightarrow cx(y+1)^2-2(y+1)+x=0\Rightarrow\\\label{a62}
+y=\dfrac{1-cx\pm\sqrt{1-cx^2}}{cx}
+\end{gather}
+Από την αρχική συνθήκη του προβλήματος $ y(1)=1 $ υπολογίζουμε την τιμή της σταθεράς $ c $ :
+\[ c1(1+1)^2-2(1+1)+1=0\Rightarrow 4c-3=0\Rightarrow c=\frac{3}{4} \]
+η οποία συμφωνεί με την αρχική συνθήκη μόνο τη λύση για τη θετική ρίζα $ (+) $ της \eqref{a62} οπότε και αποκτάμε τον τύπο που μας δίνει τη λύση του προβλήματος αρχικών τιμών :
+\[ y=\dfrac{4-3x+\sqrt{4-3x^2}}{3x} \]
+\end{rlist}
+\Askhsh
+Να επιλυθεί η διαφορική εξίσωση \[ (x+2y-3)y'+x-y+3=0 \]
+με τη βοήθεια ενός μετασχηματισμού της μορφής $ t=x+a $, $ z=y+\beta $ (όπου $ a $ και $ \beta $ είναι σταθερέςπου πρέπει να προσδιοριστούν).\\
+\textbf{ΛΥΣΗ}\\
+Η διαφορική εξίσωση μπορεί να γραφτεί στην ακόλουθη μορφή \[ \frac{dy}{dx}=\dfrac{-x+y-3}{x+2y-3} \]
+Θέτουμε $ t=x+a\Rightarrow x=t-a $ και $ z=y+\beta\Rightarrow y=z-\beta $. Επιπλέον θα ισχύει οτι  \[\frac{dy}{dx}=\frac{dy}{dz}\cdot\frac{dz}{dt}\cdot\frac{dt}{dx}=1\cdot\frac{dz}{dt}\cdot1=\frac{dz}{dt} \]
+Σύμφωνα με τα παραπάνω η εξίσωση γίνεται
+\begin{gather}
+\frac{dz}{dt}=\dfrac{-(t-a)+(z-\beta)-3}{(t-a)+2(z-\beta)-3}\Rightarrow \frac{dz}{dt}=\dfrac{-t+a+z-\beta-3}{t-a+2z-2\beta-3}\Rightarrow\\\label{a7}
+\frac{dz}{dt}=\dfrac{-t+z+(a-\beta-3)}{t+2z+(-a-2\beta-3)}
+\end{gather}
+Μπορούμε να επιλέξουμε κατάλληλες τιμές για τα $ a $ και $ \beta $ ώστε η \eqref{a7} να γίνει ομογενής διαφορική εξίσωση με βαθμό ομογένειας $ 1 $. Λύνουμε λοιπόν το σύστημα
+\[ \systeme[a\beta]{a-\beta-3=0,-a-2\beta-3=0}\xRightarrow{(+)}-3\beta-6=0\Rightarrow \beta=-2\Rightarrow a=1 \]
+Οι τιμές αυτές των σταθερών $ a $ και $ \beta $ μας δίνουν τους μετασχηματισμούς $ x=t-1 $ και $ y=z+2 $ και καταλήγουμε στην ομογενή εξίσωση :
+\begin{equation}\label{a71}
+\frac{dz}{dt}=\dfrac{-t+z}{t+2z}
+\end{equation}
+Θέτουμε λοιπόν σ' αυτήν $ z=tu\Rightarrow z'=tu'+u $ και παίρνουμε :
+\begin{align}
+tu'+u=\dfrac{-t+tu}{t+2tu}&\Rightarrow tu'=\dfrac{t(-1+u)}{t(1+2u)}-u\Rightarrow\\
+&\Rightarrow tu'=-\dfrac{2u^2+1}{1+2u}\Rightarrow \dfrac{1+2u}{2u^2+1}du=-\frac{dt}{t}
+\end{align}
+Φτάσαμε σε μια εξίσωση χωριζομένων μεταβλητών. Οι λύσεις της θα δίνονται από τον τύπο \[ \int\dfrac{1+2u}{2u^2+1}du=-\int\frac{dt}{t}+c' \]
+όπου $ c' $ είναι μια αυθαίρετη σταθερά. Έτσι έχουμε :
+\begin{gather}
+\int\dfrac{1+2u}{2u^2+1}du=-\int\frac{dt}{t}+c' \Rightarrow\\ \int\dfrac{1}{2u^2+1}du+\int\dfrac{2u}{2u^2+1}du=-\int\frac{dt}{t}+c'\Rightarrow\\
+\frac{\sqrt{2}}{2}\arctan{\left( \sqrt{2}u\right) }+\frac{1}{2}\log\left|2u^2+1 \right|=-\log|t|+c'\Rightarrow \\
+\sqrt{2}\arctan{\left( \sqrt{2}u\right) }+\log\left|t^2\left( 2u^2+1\right)  \right|=2c'
+\end{gather}
+Αντικαθιστώντας $ u=\frac{z}{t},\ z=y-2 $ και $ t=x+1 $ και θέτοντας $ c=2c' $ οι λύσεις της εξίσωσης θα δίνονται από τον τύπο
+\[ \sqrt{2}\arctan{\left( \sqrt{2}\frac{y-2}{x+1}\right) }+\log\left[(x+1)^2+(y-2)^2  \right]=c \]
+όπου $ c $ είναι μια αυαθαίρετη σταθερά.\\
+\Askhsh
+Να επιλυθεί το πρόβλημα αρχικών τιμών
+\[ y'+x+y+1=(x+y)^2e^{2x}\ ,\ y(0)=1 \]
+\textbf{ΛΥΣΗ}\\
+Η διαφορική εξίσωση αυτή έχει λύση την $ y=-x $ η οποία όμως δεν πληροί την αρχική συνθήκη του προβλήματος αφού $ y(0)=1\Rightarrow 0=1 $. Για να βρούμε τις υπόλοιπες λύσεις χρησιμοποιούμε το μετασχηματισμό $ z=x+y $ από τον οποίο παίρνουμε $ z'=y'+1 $. Έτσι η εξίσωση θα πάρει τη μορφή
+\begin{equation}\label{a8}
+z'+z=z^2e^{2x}
+\end{equation}
+η οποία είναι μια διαφορική εξίσωση Bernoulli με $ r=2 $. Η \eqref{a8} έχει λύση την $ z=0 $ η οποία ισοδυναμεί με την $ y=-x $ την οποία έχουμε απορρίψει διότι δεν πληροί την αρχική συνθήκη. Η τελευταία εξίσωση όμως γράφεται στη μορφή 
+\[ z^{-2}\cdot z'+z\cdot z^{-2}=z^{-2}\cdot z^2e^{2x}\Rightarrow z^{-2}\cdot z'+ z^{-1}=e^{2x} \]
+Σ' αυτήν θέτουμε $ u=z^{1-2}=z^{-1}\Rightarrow u'=-z^{-2}z' $ και παίρνουμε τη γραμμική εξίσωση 1ης τάξης :
+
+\begin{equation}
+u'-u=-e^{2x}
+\end{equation}
+Η γενική λυση αυτής θα δίνεται από τον τύπο 
+\begin{align}
+u(x)&=e^{-\int{(-1)dx}}\left[ c+\int{-e^{2x}\cdot e^{\int{(-1)dx}}dx}\right]=\\
+&=e^{x}\left(c+\int{-e^{2x}\cdot e^{-x}dx} \right)=\\
+&= e^{x}\left(c-\int{e^{x}dx} \right)=e^{x}\left(c-e^{x}dx \right)=ce^x-e^{2x}
+\end{align}
+όπου $ c $ είναι μια αυθαίρετη σταθερά. Αντικαθιστώντας ξανά $ u=z^{-1} $ και $ z=x+y $ στην προηγούμενη σχέση παίρνουμε τους τύπους που μας δίνουν όλες τις λύσεις της εξίσωσης :
+
+\[ y=-x\ \textrm{ και }\ y=-x+\frac{1}{ce^x-e^{2x}} \]
+Όπως αναφέραμε και προηγουμένως η λύση $ y=-x $ δεν πληροί την αρχική συνθήκη του προβλήματος, ενώ από τον τύπο $ y=-x+\frac{1}{ce^x-e^{2x}} $ παίρνουμε :
+\[ y(0)=1\Rightarrow \frac{1}{ce^0-e^{2\cdot0}}=1\Rightarrow c=2 \]
+Έτσι η λύση του προβλήματος αρχικών τιμών θα είναι η 
+\[ y=-x+\frac{1}{2e^x-e^{2x}} \]
+\Askhsh
+Με τη βοήθεια του μετασχηματισμού $ z=x+y $ να επιλυθεί η διαφορική εξίσωση
+\[ y'=(x+y)\left( x^4+2x^3y+x^2y^2-1\right)-1  \]
+\textbf{ΛΥΣΗ}\\
+Η εξίσωση αυτή έχει λύση την $ y=-x $. Για τις υπόλοιπες λύσεις γράφεται ισοδύναμα 
+\begin{gather}
+y'=(x+y)\left( x^4+2x^3y+x^2y^2-1\right)-1\Rightarrow\\
+y'=(x+y)\left[x^2\left(x^2+2xy+y^2\right) -1\right]-1\Rightarrow\\\label{a9}
+y'+1=(x+y)\left[x^2\left(x+y\right)^2-1\right]
+\end{gather}
+Ο μετασχηματισμός $ z=x+y\Rightarrow z'=y'+1 $ φέρνει την \eqref{a9} στη μορφή
+\begin{equation}\label{a91}
+z'=xz(x^2z^2-1)\Rightarrow z'+xz=z^3x^3
+\end{equation}
+Η τελευταία είναι μια διαφορική εξίσωση Bernoulli με $ r=3 $. Μια λύση αυτής είναι η $ z=0 $ η οποία αντιστοιχεί στην $ y=-x $ που είδαμε προηγουμένως. Επιπλέον θέτοντας $ u=z^{1-3}=z^{-2} $ παίρνουμε $ u'=-2z^{-3}z' $ οπότε η \eqref{a91} μετατρέπεται σε μια γραμμική διαφορική εξίσωση 1ης τάξης :
+\begin{equation}
+z'+xz=z^3x^3\Rightarrow z^{-3}z'+xz^{-2}=x^3\Rightarrow u'-2xu=-2x^3
+\end{equation}
+Η γενική λύση αυτή θα δίνεται από τον τύπο
+\begin{align*}
+ u(x)&=e^{-\int{-2x}dx}\left[c+\int{-2x^3\cdot e^{\int{-2x}dx}dx}\right]=\\
+&=e^{x^2}\left[c+\int{x^2\cdot (-2x)\cdot e^{-x^2}dx}\right]=\\
+&=e^{x^2}\left[c+\int{x^2\cdot d\left(e^{-x^2}\right) }\right]=\\
+&=e^{x^2}\left(c+x^2\cdot e^{-x^2}-\int{2x\cdot e^{-x^2}dx }\right)=e^{x^2}\left(c+x^2\cdot e^{-x^2}-e^{-x^2}\right)
+\end{align*}
+όπου $ c $ είναι μια αυαθαίρετη σταθερά. Αντικαθιστώντας αναδρομικά στην τελευταία σχέση τους μετασχηματισμούς που χρησιμοποιήσμε έχουμε :
+\[ u(x)=e^{x^2}\left(c+x^2\cdot e^{-x^2}-e^{-x^2}\right)\xRightarrow{u=z^{-2}\ ,\ z=y+x}y=-x\pm\dfrac{1}{\sqrt{ce^{x^2}+x^2+1}} \]
+Όλες οι λύσεις της αρχικής διαφορικής εξίσωσης θα δίνονται από τους παρακάτω τύπους :
+\[ y=-x\ \textrm{ και }\ y=-x\pm\dfrac{1}{\sqrt{ce^{x^2}+x^2+1}} \]
+\Askhsh
+Να επιλυθεί η διαφορική εξίσωση
+\[ \left( y-xy+y^3\cos{y}\right)y'+xy^3+y^2=0  \]
+\textbf{ΛΥΣΗ}\\
+Η εξίσωση αυτή έχει προφανή λύση την $ y=0 $. Για να βρούμε τις υπόλοιπες λύσεις την γράφουμε ισοδύναμα στη μορφή :
+ \begin{equation}\label{a10}
+\undercbrace{\left( xy^3+y^2\right)}_{M}dx+\undercbrace{\left(y-xy+y^3\cos{y}\right)}_{N}dy=0
+\end{equation} 
+Οι συναρτήσεις $ M(x,y)=xy^3+y^2 $ και $ N(x,y)=y-xy+y^3\cos{y} $ είναι συνεχείς και έχουν συνεχείς μερικές παραγώγους. Εξετάζουμε στη συνέχεια αν η \eqref{a10} αποτελεί μια αμέσως ολοκληρώσιμη εξίσωση. Παρατηρούμε ότι :
+\[ \frac{\partial M}{\partial y}=3xy^2+2y\neq -y=\frac{\partial N}{\partial x} \] κάτι που σημαίνει ότι η εξίσωση δεν είναι αμέσως ολοκληρώσιμη άρα θα εξετάσουμε την ύπαρξη ενός ολοκληρωτικού παράγοντα. Έχουμε :
+\[ \dfrac{\frac{\partial N}{\partial x}-\frac{\partial M}{\partial y}}{M}=\dfrac{-y-3xy^2-2y}{xy^3+y^2}=\dfrac{-3\left(xy^2+y \right) }{y\left( xy^2+y\right) }=-\frac{3}{y} \]
+η οποία είναι μια συνάρτηση με μοναδική μεταβλητή το $ y $ οπότε ένας ολοκληρωτικός παράγοντας θα είναι ο $ \rho(y)=e^{\int{-\frac{3}{y}dy}}=\frac{1}{y^3} $. Πολλαπλασιάζοντας μ' αυτόν την \eqref{a10} θα προκύψει η αμέσως ολοκληρώσιμη εξίσωση 
+\begin{equation}\label{a101}
+\left( x+\frac{1}{y}\right)dx+\left(\frac{1}{y^2}-\frac{x}{y^2}+\cos{y}\right)dy=0
+\end{equation}
+Θα υπάρχει λοιπόν μια συνάρτηση $ f(x,y) $ ώστε η παραπάνω εξίσωση να γραφτεί στη μορφή $ df(x,y)=Mdx+Ndy=0 $. Οι λύσεις της θα δίνονται από τον τύπο $ f(x,y)=c $. Θα έχουμε
+\[ \frac{\partial f}{\partial x}=x+\frac{1}{y}\ \textrm{ και }\ \frac{\partial f}{\partial y}=\frac{1}{y^2}-\frac{x}{y^2}+\cos{y} \]
+Έτσι προκύπτει
+\[ f(x,y)=\int{\left( x+\frac{1}{y}\right) dx}+g(y)=\frac{x^2}{2}+\frac{x}{y}+g(y) \]
+για κάποια συνάρτηση $ g(y) $. Τότε
+\begin{gather*}
+\frac{\partial f}{\partial y}=-\frac{x}{y^2}+g'(y)\eq{\eqref{a101}}\frac{1}{y^2}-\frac{x}{y^2}+\cos{y}\Rightarrow\\
+g'(y)=\frac{1}{y^2}+\cos{y}\Rightarrow g(y)=-\frac{1}{y}+\sin{y}+c'
+\end{gather*} και επιλέγουμε δίχως βλάβη της γενικότητας $ g(y)=-\frac{1}{y}+\sin{y} $.Συνεπώς η συνάρτηση $ f $ θα είναι $ f(x,y)=\frac{x^2}{2}+\frac{x}{y}-\frac{1}{y}+\sin{y} $ άρα οι λύσεις της εξίσωσης θα δίνονται από τον τύπο 
+\[ \frac{x^2}{2}+\frac{x}{y}-\frac{1}{y}+\sin{y}=c \]
+όπου $ c $ είναι μια αυθαίρετη σταθερά.\\\leavevmode\\
+\Askhsh
+Να επιλυθεί η διαφορική εξίσωση
+\[ \left(2x^2+x^3y+y\right)dx+\left(x+4xy^4+8y^3\right)dy=0\quad,\ x>0,\ y>0   \]
+αφού βρεθεί ένας ολοκληρωτικός παράγοντας της μορφής $ \rho(x,y)=\varphi(xy) $ (όπου $ \varphi $ είναι μια συνάρτηση που πρέπει να προσδιοριστεί).\dgr
+\textbf{ΛΥΣΗ}\\
+Η συνάρτηση $ \rho(x,y)=\varphi(xy) $ είναι ένας ολοκληρωτικός παράγοντας αν και μόνο αν ισχύει $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} $. Πολλαπλασιάζοντας την αρχική εξίσωση με τη συνάρτηση $ \rho(x,y) $ προκύπτει
+\begin{equation}\label{a11}
+\undercbrace{\varphi(xy)\left(2x^2+x^3y+y\right)}_{M}dx+\undercbrace{\varphi(xy)\left(x+4xy^4+8y^3\right)}_{N}dy=0
+\end{equation}
+Υπολογίζοντας τις παταγώγους $ \frac{\partial M}{\partial y},\ \frac{\partial N}{\partial x} $ θα έχουμε :
+\begin{align}
+&\frac{\partial M}{\partial y}=x\varphi'(xy)\left(2x^2+x^3y+y\right)+\varphi(xy)\left(x^3+1\right)\ \textrm{ και }\\
+&\frac{\partial N}{\partial x}=y\varphi'(xy)\left(x+4xy^4+8y^3\right)+\varphi(xy)\left(1+4y^4\right)
+\end{align}
+οπότε απαιτώντας να ισχύει $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} $ παίρνουμε :
+\begin{align*}
+\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}
+&\Rightarrow x\varphi'(xy)\left(2x^2+x^3y+y\right)+\varphi(xy)\left(x^3+1\right)=\\
+&=y\varphi'(xy)\left(x+4xy^4+8y^3 \right)+\varphi(xy)\left(1+4y^4\right)\Rightarrow\\
+&\Rightarrow \varphi'(xy)\left(2x^3+x^4y+xy\right)-\varphi'(xy)\left(xy+4xy^5+8y^4\right)=\\
+&=\varphi(xy)\left(1+4y^4\right)-\varphi(xy)\left(x^3+1\right)\Rightarrow\\
+&\Rightarrow \varphi'(xy)\left(2x^3+x^4y-4xy^5-8y^4\right)=\varphi(xy)\left(4y^4-x^3\right)\Rightarrow\\
+&\varphi'(xy)\left(x^3(2+xy)-4y^4(xy+2)\right)=\varphi(xy)\left(4y^4-x^3\right)\Rightarrow\\
+& \varphi'(xy)(xy+2)\left(x^3-4y^4\right)-\varphi(xy)\left(4y^4-x^3\right)=0
+\end{align*}
+Διαρώντας και τα δύο μέλη της τελευταίας σχέσης με την παράσταση $ x^3-4y^4 $ παίρνουμε την ομογενή γραμμική εξίσωση 1ης τάξης :
+\begin{equation}
+\varphi'(xy)(xy+2)+\varphi(xy)=0\Rightarrow \varphi'(xy)+\frac{1}{xy+2}\cdot\varphi(xy)=0
+\end{equation}
+Θέτοντας $ xy=z $ γενική λύση αυτής θα δίνεται από τον τύπο
+\begin{gather*}
+\varphi(z)=ce^{-\int{\frac{1}{z+2}dz}}=ce^{-\log{z+2}}=\frac{c}{z+2}
+\end{gather*}
+Επομένως ο ζητούμενος ολοκληρωτιοκός παράγοντας τα είναι ο $ \rho(x,y)=\varphi(xy)=\frac{c}{xy+2} $. Μπορούμε χωρίς βάβη της γενικότητας να επιλέξουμε $ c=1 $ και να έχουμε $ \rho(x,y)=\frac{1}{xy+2} $. Έτσι η εξίσωση \eqref{a11} θα πάρει τη μορφή 
+\begin{gather}
+\frac{1}{xy+2}\left(2x^2+x^3y+y\right)dx+\frac{1}{xy+2}\left(x+4xy^4+8y^3\right)dy=0\Rightarrow\nonumber\\ \undercbrace{\left(x^2+\frac{y}{xy+2}\right)}_{M}dx+\undercbrace{\left(\frac{x}{xy+2}+4y^3\right)}_{N}dy=0\label{a111}
+\end{gather}
+Εύκολα διαπιστώνουμε οτι η \eqref{a111} είναι μια αμέσως ολοκληρώσιμη εξίσωση αφού
+\[ \dfrac{\partial M}{\partial y}=\dfrac{\partial N}{\partial x}=\frac{2}{(xy+2)^2} \]
+Θα υπάρχει λοιπόν μια συνάρτηση $ f(x,y) $ ώστε η \eqref{a111} να ισχύει $ df(x,y)=Mdx+Ndy=0 $. Οι λύσεις της εξίσωσης θα δίνονται από τον τύπο $ f(x,y)=c $.
+Σύμφωνα με τα παραπάνω θα ισχύει 
+\[ \frac{\partial f}{\partial x}=M=x^2+\frac{y}{xy+2}\ \textrm{ και }\ \frac{\partial f}{\partial y}=N=\frac{x}{xy+2}+4y^3 \]
+Ολοκληρώνοντας την πρώτη σχέση ως προς $ x $ προκύπτει
+\begin{gather*}
+f(x,y)=\int{\left(x^2+\frac{y}{xy+2}\right)dx}+g(y)=\frac{x^3}{3}+\log(xy+2)+g(y)
+\end{gather*}
+Παραγωγίζουμε την τελευταία σχέση ως προς τη μεταβλητή $ y $ και εξισώνουμε την παράσταση που θα προκύψει με τη συνάρτηση $ N(x,y) $. Έχουμε λοιπόν :
+\begin{gather*}
+\frac{\partial f}{\partial y}=\frac{x}{xy+2}+g'(y)=\frac{x}{xy+2}+4y^3\Rightarrow\\
+g'(y)=4y^3\Rightarrow g(y)=y^4+c'
+\end{gather*}
+όπου $ c' $ είναι μια αυθαίρετη σταθερά. Επιλέγοντας $ c'=0 $ αποκτάμε τη ζητούμενη συνάρτηση 
+\[ f(x,y)=\frac{x^3}{3}+\log(xy+2)+y^4 \]
+οπότε όλες οι λύσεις της εξίσωσης θα δίνονται από τον τύπο 
+\[ \frac{x^3}{3}+\log(xy+2)+y^4=c \]
+όπου $ c $ είναι μια αυθαίρετη σταθερά.\dgr
+\Askhsh
+Ας είναι $ a,\beta,\gamma,a_1,\beta_1,\gamma_1 $ σταθερές με $ a\beta_1-a_1\beta\neq0 $ και ας θεωρήσουμε τη λύση $ (x_0,y_0) $ του συστήματος 
+\[ \ccases{ax_0+\beta y_0+\gamma=0\\a_1x_0+\beta_1 y_0+\gamma_1=0} \]
+Με τη βοήθεια της αντικατάστασης $ X=x-x_0,\ Y=y-y_0 $ να επιλυθεί η διαφορική εξίσωση 
+\[ \frac{dy}{dx}=\frac{ax+\beta y+\gamma}{a_1x+\beta_1y+\gamma_1} \]
+\textit{Εφαρμογή} : Να επιλυθεί η διαφορική εξίσωση
+\[ \frac{dy}{dx}=\frac{-x+y-3}{x+2y-3} \]
+\textbf{ΛΥΣΗ}\dgr
+Για την επίλυση της εξίσωσης $ \frac{dy}{dx}=\frac{ax+\beta y+\gamma}{a_1x+\beta_1y+\gamma_1} $ διακρίνουμε τις εξής περιπτώσεις.
+\begin{rlist}
+\item Εαν $ (\gamma,\gamma_1)=(0,0) $ τότε πρόκειται για μια ομογενή διαφορική εξίσωση με βαθμό ομογένειας 1 δηλαδή την 
+ \begin{equation}\label{a12}
+\frac{dy}{dx}=
+\frac{ax+\beta y}{a_1x+\beta_1 y}
+\end{equation} 
+\item Στην περίπτωση όπου $ (\gamma,\gamma_1)\neq(0,0) $ τότε αναπτύσουμε την εξής μέθοδο για την επίλυσή της. Έχουμε :
+\[ \frac{dy}{dx}=\frac{dy}{dY}\cdot\frac{dY}{dX}\cdot\frac{dX}{dx}=1\cdot\frac{dY}{dX}\cdot1=\frac{dY}{dX} \]
+Σύμφωνα μ' αυτό και με τη βοήθεια της αντικατάστασης $ X=x-x_0,\ Y=y-y_0 $ η αρχική εξίσωση θα πάρει τη μορφή :
+\[ \frac{dY}{dX}=\frac{a\left(X+x_0\right) +\beta \left(Y+y_0\right)+\gamma}{a_1\left(X+x_0\right)+\beta_1\left(Y+y_0\right)+\gamma_1}=
+\frac{aX+\beta Y+(ax_0+\beta y_0+\gamma)}{a_1X+\beta_1 Y+(a_1x_0+\beta_1 y_0+\gamma_1)} \]
+Από την υπόθεση έχουμε γνωστό ότι $ ax_0+\beta y_0+\gamma=0 $ και $ a_1x_0+\beta_1 y_0+\gamma_1=0 $ και αυτό μας μετατρέπει την εξίσωση στην ακόλουθη ομογενή διαφορική εξίσωση 
+\begin{equation}\label{a121}
+\frac{dY}{dX}=
+\frac{aX+\beta Y}{a_1X+\beta_1 Y}
+\end{equation}
+με βαθμό ομογένειας 1. Παρατηρούμε οτι η τελευταία είναι της ίδιας μορφής με την \eqref{a12} στην περίπτωση i.\dgr
+\textit{\textbf{Εφαρμογή : }}\\
+Η διαφορική εξίσωση $ \frac{dy}{dx}=\frac{-x+y-3}{x+2y-3} $ είναι της ίδιας μορφής με την αρχική από την οποία παίρνουμε τους συντελεστές : $ a=-1, \beta=1, \gamma=-3 $ και $ a_1=1, \beta_1=2, \gamma_1=-3 $. Με τους συντελεστές αυτούς αποκτάμε το σύστημα
+\[ \systeme{-x_0+y_0-3=0,x_0+2y_0-3=0} \]
+της οποίας η λύση θα είναι η $ (x_0,y_0)=(-1,2) $. Ακολυθώντας την ίδια διαδικασία επίλυσης με προηγουμένως χρησιμοποιώντας τις αντικαταστάσεις $ x=X-1 $ και $ y=Y+2 $ θα καταλήξουμε στην ομογενή εξίσωση 
+\begin{equation}\label{a122}
+\frac{dY}{dX}=
+\frac{-X+Y}{X+2Y}
+\end{equation}
+Έτσι λοιπόν θέτουμε $ Y=XZ $ και παίρνουμε $ Y'=XZ'+Z $. Αντικαθιστώντας τις σχέσεις αυτές στην \eqref{a122} προκύπτει :
+\begin{align*}
+XZ'+Z=\frac{-X+XZ}{X+2XZ}&\Rightarrow XZ'+Z=\frac{-1+Z}{1+2Z}\Rightarrow\\
+&\Rightarrow XZ'=\frac{-1-2Z^2}{1+2Z}\Rightarrow\\
+ &\Rightarrow\frac{dZ}{dX}\cdot\frac{1+2Z}{-1-2Z^2}=\frac{1}{X}\Rightarrow \frac{1+2Z}{1+2Z^2}dZ=-\frac{dX}{X}
+\end{align*}
+Οι λύσεις της εξίσωσης θα δίνονται από τον τύπο :
+\begin{gather*}
+\int\frac{1+2Z}{1+2Z^2}dZ=\int-\frac{dX}{X}+c'
+\Rightarrow\\
+\int\frac{1}{1+2Z^2}dZ+\int\frac{2Z}{1+2Z^2}dZ=-\int\frac{dX}{X}+c'\Rightarrow\\
+\frac{\sqrt{2}}{2}\arctan{\left(\sqrt{2}Z \right)}+\frac{1}{2}\log{\left| 1+Z^2\right|}=-\log{|X|+c'}\Rightarrow\\
+\sqrt{2}\arctan{\left(\sqrt{2}Z \right)}+\log{\left| \left( 1+Z^2\right) X^2\right|}=2c'
+\end{gather*}
+\end{rlist}
+όπου $ c' $ είναι μια αυθαίρετη σταθερά. Θέτοντας στην τελευταία σχέση $ Z=Y/X $ και $ X=x+1,Y=y-2 $ τότε παίρνουμε τον τύπο από τον οποίο θα δίνονται όλες οι λύσεις της εξίσωσης :
+\[ \sqrt{2}\arctan{\left(\sqrt{2}\frac{y-2}{x-1} \right)}+\log{\left[(x+1)^2+(y-2)^2\right]}=c \] όπου $ c $ είναι μια αυθαίρετη σταθερά με $ c=2c' $.\dgr
+\Askhsh
+Με τη βοήθεια ενός μετασχηματισμού της μορφής $ X=x-a $, $ Y=y-\beta $ (όπου $ a $ και $ \beta $ κατάλληλοι αριθμοί που θα πρέπει να προσδιοριστούν), να επιλυθεί η διαφορική εξίσωση :
+\[ \dfrac{dy}{dx}=\dfrac{x+y+1}{x+2}-e^{\frac{x+y+1}{x+2}} \]
+\textbf{ΛΥΣΗ}\\
+Θέτοντας $ X=x-a\Rightarrow x=X+a $ και $ Y=y-\beta\Rightarrow y=Y+\beta $ θα ισχύει
+\[ \dfrac{dy}{dx}=\dfrac{dy}{dY}\cdot\dfrac{dY}{dX}\cdot\dfrac{dX}{dx}=1\cdot\dfrac{dY}{dX}\cdot1=\dfrac{dY}{dX} \]
+Σύμφωνα με τις παραπάνω σχέσεις λοιπόν η εξίσωση θα πάρει τη μορφή
+\begin{equation}\label{a13}
+ \dfrac{dY}{dX}=\dfrac{X+Y+(a+\beta+1)}{X+(a+2)}-e^{\frac{X+Y+(a+\beta+1)}{X+(a+2)}}
+\end{equation} 
+Με κατάλληλες τιμές για τους αριθμούς $ a $ και $ \beta $ μπορούμε να μετατρέψουμε την \eqref{a13} σε μια ομογενή διαφορική εξίσωση με βαθμό ομογένειας $ 1 $. Γι αυτό θα πρέπει να ισχύει :
+\[ \systeme[a\beta]{a+\beta+1=0,a+2=0} \]
+Το σύστημα μας δίνει τη λύση $ (a,\beta)=(-2,1) $. Έτσι οι μετασχηματισμοί $ x=X-2 $ και $ y=Y+1 $ μας δίνουν την ομογενή εξίσωση :
+\begin{equation}\label{a131}
+ \dfrac{dY}{dX}=\dfrac{X+Y}{X}-e^{\frac{X+Y}{X}}
+\end{equation}
+Στην \eqref{a131} θέτοντας $ Y=XZ\Rightarrow Y'=XZ'+Z $ οδηγούμεστε σε μια διαφορική εξίσωση \textbf{χωριζομένων μεταβλητών} :
+\begin{align*}
+\dfrac{dY}{dX}=\dfrac{X+Y}{X}-e^{\frac{X+Y}{X}}&\Rightarrow XZ'+Z=\dfrac{X+XZ}{X}-e^{\frac{X+XZ}{X}}\Rightarrow\\
+&\Rightarrow XZ'+Z=1+Z-e^{1+Z}\Rightarrow XZ'=1-e^{1+Z}
+\end{align*}
+Η τελευταία έχει λύση την $ Z=1 $ η οποία μας δίνει τη λύση της αρχικής εξίσωσης : $ y=-x-1 $. Για τις υπόλοιπες λύσεις θα έχουμε :
+\begin{gather*}
+\dfrac{dZ}{1-e^{1+Z}}=\dfrac{dX}{X}\Rightarrow \int\dfrac{dZ}{1-e^{1+Z}}=\int\dfrac{dX}{X}+c'\Rightarrow\\ \int\dfrac{1+e^{1+Z}-e^{1+Z}}{1-e^{1+Z}}dZ=\int\dfrac{dX}{X}+c'\Rightarrow\\
+Z-\log\left| 1-e^{1+Z}\right|=\log|X|+c'\Rightarrow \log\left|\left( 1-e^{1+Z}\right)X\right|=Z+c'\Rightarrow\\
+\left( 1-e^{1+Z}\right)X=\pm e^Z\cdot e^{c'}
+\end{gather*}
+όπου $ c' $ είναι μια αυθαίρετη σταθερά. Θέτοντας $ \pm e^{c'}=c'' $ και αντικαθιστώντας ξανά $ Y=XZ $ και $ X=x+2 $, $ Y=y-1 $ αποκτάμε τον τύπο από τον οποίο δίνεται η γενική λύση της αρχικής διαφορικής εξίσωσης :
+\begin{gather*}
+\left( 1-e^{1+\frac{y-1}{x+2}}\right)(x+2)=c'' e^{\frac{y-1}{x+2}}\Rightarrow
+x+2-(x+2)e^{1+\frac{y-1}{x+2}}=c'' e^{\frac{y-1}{x+2}}\Rightarrow \\
+x+2-(x+2)\cdot e\cdot e^{\frac{y-1}{x+2}}=c'' e^{\frac{y-1}{x+2}}\Rightarrow\\
+x+2=\left[ (x+2)\cdot e +c''\right]  e^{\frac{y-1}{x+2}}\Rightarrow e^{\frac{y-1}{x+2}}=\dfrac{x+2}{x\cdot e+2e+c''}\Rightarrow\\
+\frac{y-1}{x+2}=\log{\left(\dfrac{x+2}{x\cdot e+2e+c''} \right) }
+\end{gather*}
+όπου $ c'' $ είναι μια αυθαίρετη σταθερά. Θέτοντας $ c''+2e=c $ έχουμε τους τύπους οι οποίοι μας δίνουν όλες τις λύσεις της αρχικής διαφορικής εξίσωσης
+\[ y=-x-1\ \textrm{ και }\ y=(x+2)\log{\left(\dfrac{x+2}{ex+c} \right)}+1 \]
+\Askhsh
+Με την αντικατάσταση $ x=e^t $ να επιλυθεί η διαφορική εξίσωση 
+\[ xy\dfrac{d^2y}{dx^2}+x\left( \frac{dy}{dx}\right)^2-y\frac{dy}{dx}=0\ ,\ x>0 \]
+\textbf{ΛΥΣΗ}\\
+Παρατηρούμε οτι η διαφορική εξίσωση αυτή ικανοποιείται από τη σχέση $ \frac{dy}{dx}=0 $ η οποία μας δίνει τις λύσεις της μορφής $ y=c' $ όπου $ c' $ είναι μια αυθαίρετη σταθερά. Επίσης έχει και τις λύσεις $ y=\pm x $. Για τις υπόλοιπες λύσεις θέτουμε $ x=e^t\Rightarrow t=\log(x) $ και προκύπτει 
+\begin{align*}
+ \frac{dy}{dx}=\frac{dy}{dt}\cdot\frac{dt}{dx}&=\frac{1}{x}\frac{dy}{dt}\ \textrm{ και}\\
+\frac{d^2y}{dx^2}=\frac{d}{dx}\left( \frac{dy}{dx}\right)&=\frac{d}{dx}\left( \frac{1}{x}\frac{dy}{dt}\right)=-\frac{1}{x^2}\frac{dy}{dt}+\frac{1}{x}\frac{d}{dx}\left(\frac{dy}{dt}\right) \\
+&=-\frac{1}{x^2}\frac{dy}{dt}+\frac{1}{x}\frac{d}{dt}\left(\frac{dy}{dx}\right)=-\frac{1}{x^2}\frac{dy}{dt}+\frac{1}{x}\frac{d}{dt}\left(\frac{dy}{dx}\right)\\
+&=\frac{1}{x^2}\frac{d^2y}{dt^2}-\frac{1}{x^2}\frac{dy}{dt}=\frac{1}{x^2}\left( \frac{d^2y}{dt^2}-\frac{dy}{dt}\right) 
+\end{align*}
+Οι μετασχηματισμοί αυτοί μετατρέπουν την αρχική εξίσωση στη μορφή :
+\begin{gather*}
+e^ty\frac{1}{e^{2t}}\left( \frac{d^2y}{dt^2}-\frac{dy}{dt}\right)+e^t\left( \frac{1}{e^t}\frac{dy}{dt}\right)^2-y\frac{1}{e^t}\frac{dy}{dt}=0\Rightarrow\\
+y\frac{d^2y}{dt^2}-2y\frac{dy}{dt}+\left( \frac{dy}{dt}\right)^2=0
+\end{gather*}
+η οποία είναι μια διαφορική εξίσωση 2\tss{ης} τάξης μη περιέχουσα την ανεξάρτητη μεταβλητή $ t $. Έτσι θέτουμε $ \frac{dy}{dt}=z $ και $ \frac{d^2y}{dt^2}=z\frac{dy}{dz} $. Τότε η εξίσωση θα γίνει :
+\begin{equation}\label{a14}
+yz\frac{dy}{dz}-2yz+z^2=0
+\end{equation}
+Η \eqref{a14} έχει λύση την $ z=0 $ η οποία αντιστοιχεί στην $ y=c' $ που συναντήσαμε προηγουμένως. Για τις υπόλοιπες μη μηδενικές λύσεις θα έχουμε
+\[ yz\frac{dy}{dz}-2yz+z^2=0\Rightarrow \frac{dy}{dz}=\frac{2yz-z^2}{yz} \]
+Η τελευταία εξίσωση είναι μια ομογενής εξίσωση με βαθμό ομογένειας 2. Ο μετασχηματισμός $ z=uy\Rightarrow z'=u'y+u $ θα την ανάγει σε μια εξίσωση χωριζομένων μεταβλητών :
+\begin{align*}
+u'y+u=\frac{2yuy-(uy)^2}{yuy}&\Rightarrow u'y+u=\frac{2y^2u-u^2y^2}{y^2u}\Rightarrow\\
+&\Rightarrow u'y=\frac{2u-u^2}{u}-u\Rightarrow u'y=\frac{2u-2u^2}{u}\Rightarrow\\
+&\Rightarrow u'y=2-2u\Rightarrow \dfrac{u}{2-2u}=\frac{1}{y}
+\end{align*}
+Όλες οι λύσεις της θα δίνονται από τον τύπο
+\begin{gather*}
+\int\dfrac{du}{2-2u}=\int\frac{dy}{y}+a\Rightarrow -\dfrac{1}{2}\log|1-u|=\log|y|+a\Rightarrow\\
+\log|y|+\dfrac{1}{2}\log|1-u|=-a\Rightarrow \log\left|y^2(1-u) \right|=-2a \Rightarrow\\
+y^2(1-u)=\beta
+\end{gather*}
+έχοντας θέσει $ \beta=\pm e^{-2a} $ όπου $ a,\beta $ είναι αυθαίρετες σταθερές. Αντικαθιστώντας ξανά $ u=\frac{z}{y} $ και $ z=y' $ παίρνουμε την 
+\begin{gather*} y^2(1-u)=\beta\Rightarrow y^2\left( 1-\frac{z}{y}\right) =\beta\Rightarrow\\ z=\frac{y^2-\beta}{y}\Rightarrow y'=\frac{y^2-\beta}{y}\\
+\frac{y}{y^2-\beta}y'=1
+\end{gather*}
+Η εξίσωση αυτή είναι χωριζομένων μεταβλητών οπότε οι λύσεις της θα δίνονται από τον τύπο
+\begin{gather*}
+\int\frac{y}{y^2-\beta}dy=\int{dt}+\gamma\Rightarrow \frac{1}{2}\log\left| y^2-\beta\right|=t+\gamma\Rightarrow\\
+\log\left| y^2-\beta\right|=2t+2\gamma\Rightarrow y^2-\beta=\pm e^{2t+2\gamma}\xRightarrow{t=\log{(x)}}\\
+y=\pm\sqrt{c_1x^2+c_2}\ ,\ x>0
+\end{gather*}
+όπου έχουμε θέσει $ c_1=\pm e^{2\gamma} $ και $ c_2=\beta $ με $ c_1\neq0,c_2\neq0,\gamma $ είναι αυθαίρετες σταθερές. Οι λύσεις της αρχικής διαφορικής εξίσωσης θα δίνονται από τους τύπους
+\[ y=a\ ,\ y=\pm x\ \textrm{ και }\ y=\pm\sqrt{c_1x^2+c_2}\ ,\ x>0 \] όπου συμπτίσσοντας αυτές έχουμε \[ y=a\ \textrm{ και }\ y=\pm\sqrt{c_1x^2+c_2}\ ,\ x>0 \]
+\Askhsh
+Να επιλυθεί η διαφορική εξίσωση
+\[ \left(2y^3-3xy\right)dx+\left(x^2+xy^2 \right)dy=0 \]
+με τη βοήθεια ολοκληρωτικού παράγοντα της μορφής $ \rho(x,y)=\frac{1}{y}\varPhi\left( \frac{1}{y}\right) $, όπου $ \varPhi $ είναι κατάλληλη συνάρτηση (που θα πρέπει να βρεθεί).\dgr
+Η συνάρτηση $ \rho(x,y)=\frac{1}{y}\varPhi\left( \frac{x}{y}\right) $ αποτελεί ολοκληρωτικό παράγοντα αν και μόνο αν πολλαπλασιάζοντας και τα δύο μέλη της εξίσωσης μ' αυτήν η εξίσωση που θα προκύψει είναι αμέσως ολοκληρώσιμη. Θα έχουμε λοιπόν :
+\begin{gather}
+\frac{1}{y}\varPhi\left( \frac{x}{y}\right)\left(2y^3-3xy\right)dx+\frac{1}{y}\varPhi\left( \frac{x}{y}\right)\left(x^2+xy^2 \right)dy=0\nonumber\\\label{a15}
+\undercbrace{\varPhi\left( \frac{x}{y}\right)\left(2y^2-3x\right)}_{M}dx+\undercbrace{\varPhi\left( \frac{x}{y}\right)\left(\frac{x^2}{y}+xy \right)}_{N}dy=0
+\end{gather}
+Απαιτούμε λοιπόν να ισχύει η ισότητα $ \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x} $. Έχουμε λοιπόν :
+\begin{align*}
+\frac{\partial M}{\partial y}&=\frac{\partial}{\partial y}\left[\varPhi\left( \frac{x}{y}\right)\left(2y^2-3x\right)\right]=\\
+&=\varPhi'\left( \frac{x}{y}\right)\cdot\left( -\frac{x}{y^2}\right) \left(2y^2-3x\right)+\varPhi\left( \frac{x}{y}\right)\cdot 4y=\\
+&=\varPhi'\left( \frac{x}{y}\right)\left(\frac{3x^2}{y^2}-2x\right)+\varPhi\left( \frac{x}{y}\right)\cdot 4y\quad\textrm{και}\\
+\frac{\partial N}{\partial x}&=\frac{\partial}{\partial x}\left[\varPhi\left( \frac{x}{y}\right)\left(\frac{x^2}{y}+xy \right)\right]=\\
+&=\varPhi'\left( \frac{x}{y}\right)\cdot \frac{1}{y} \left(\frac{x^2}{y}+xy\right)+\varPhi\left( \frac{x}{y}\right)\cdot\left(\frac{2x}{y}+y \right) =\\
+&=\varPhi'\left( \frac{x}{y}\right) \left(\frac{x^2}{y^2}+x\right)+\varPhi\left( \frac{x}{y}\right)\cdot\left(\frac{2x}{y}+y \right)
+\end{align*}
+Σύμφωνα με τα παραπάνω λοιπόν θα ισχύει : 
+\begin{multline*}
+\varPhi'\left( \frac{x}{y}\right)\left(\frac{3x^2}{y^2}-2x\right)+\varPhi\left( \frac{x}{y}\right)\cdot 4y=\\\varPhi'\left( \frac{x}{y}\right) \left(\frac{x^2}{y^2}+x\right)+\varPhi\left( \frac{x}{y}\right)\cdot\left(\frac{2x}{y}+y \right)\Rightarrow
+\end{multline*}
+\vspace{-5mm}
+\begin{gather*}
+\varPhi'\left( \frac{x}{y}\right)\left(\frac{2x^2}{y^2}-3x\right)+\varPhi\left( \frac{x}{y}\right)\cdot \left(3y-\frac{2x}{y} \right)=0\Rightarrow\\
+\varPhi'\left( \frac{x}{y}\right)\left[\frac{x}{y} \left(\frac{2x}{y}-3x\right)\right]-\varPhi\left( \frac{x}{y}\right)\cdot\left(\frac{2x}{y}-3x\right)=0\Rightarrow\\
+\varPhi'\left( \frac{x}{y}\right)\cdot\frac{x}{y} -\varPhi\left( \frac{x}{y}\right)=0
+\end{gather*}
+Θέτοντας στην τελευταία εξίσωση $ z=\frac{x}{x} $ αποκτάμε τη γραμμική διαφορική εξίσωση 1\tss{ου} βαθμού :
+\[ \varPhi'\left(z\right)\cdot z -\varPhi\left(z\right)=0\Rightarrow \varPhi'\left(z\right) -\frac{1}{z}\varPhi\left(z\right)=0\]
+Η γενική λύση αυτής θα δίνεται από τον παρακάτω τύπο :
+\[ \varPhi(z)=ce^{-\int{-\frac{1}{z}}dz}=ce^{\log{z}}=cz \]
+όπου $ c $ είναι μια αυθαίρετη σταθερά. Χωρίς βλάβη της γενικοτητας επιλέγουμε $ c=1 $ και παίρνουμε τον ολοκληρωτικό παράγοντα $ \rho(x,y)=\frac{x}{y^2} $. Ο παράγοντας αυτός φέρνει την εξίσωση \eqref{a15} στη μορφή
+\begin{gather*}
+\frac{x}{y^2}\left(2y^3-3xy\right)dx+\frac{x}{y^2}\left(x^2+xy^2 \right)dy=0\Rightarrow\\
+\undercbrace{\left(2xy-\frac{3x^2}{y}\right)}_{M}dx+\undercbrace{\left(\frac{x^3}{y^2}+x^2 \right)}_{N}dy=0
+\end{gather*}
+Εύκολα διαπιστώνουμε οτι η παραπάνω εξίσωση είναι αμέσως ολοκληρώσιμη αφού $  $
+\section{Β - Γραμμικές διαφορικές εξισώσεις}
+\section{C - Δυναμοσειρές λύσεις γραμμικών διαφορικών εξισώσεων δεύτερης τάξης}
+\chapter{Ασκήσεις βιβλίου}
+\chapter{Θέματα εξετάσεων}
+\end{document}

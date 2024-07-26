@@ -1,0 +1,590 @@
+\begin{filecontents*}{mystyle.ist}
+headings_flag 1
+heading_prefix "\\textit{"
+heading_suffix "}\\nopagebreak\n"
+delim_0 " \\dotfill "
+delim_1 " \\dotfill "
+delim_2 " \\dotfill "
+\end{filecontents*}
+\documentclass[twoside,10pt]{book}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,mtphrb]{mtpro2}
+
+\usepackage[inner=2.00cm, outer=1.50cm, top=3.00cm, bottom=2.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\DeclareRobustCommand{\Algebra}[1]{\index{{\LARGE\bf Άλγεβρα\\}!#1}}
+\DeclareRobustCommand{\Gewmetria}[1]{\index{{\LARGE\bf\vspace*{5mm}Γεωμετρία\\}!#1}}
+\DeclareRobustCommand{\Analysh}[1]{\index{{\LARGE\bf\vspace*{5mm}Ανάλυση\\}!#1}}
+\DeclareRobustCommand{\Statistikh}[1]{\index{{\LARGE\bf\vspace*{5mm}Στατιστική\\}!#1}}
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usetikzlibrary{backgrounds}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}}   
+
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}\textcolor{black}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{methodologia}[chapter]
+\renewcommand{\themethodologia}{\thechapter.\arabic{methodologia}}\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{black}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}\textcolor{black}{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+\usepackage{venndiagram}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.12\paperwidth,yshift=.17\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.11\paperwidth,yshift=.11\paperheight,rectangle] {\fontsize{27}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.74\paperwidth,yshift=.14\paperheight,rectangle]
+{{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{white}{\contour{black}{\thechapter}}}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{gray}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill\;\normalsize\ Σελίδα}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textbf{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-5cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+\usepackage{wrapfig}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%--------- ΑΝΙΣΩΣΕΙΣ -------
+\tikzset{
+thickest/.style={line width=1mm},
+a/.style={decoration={markings,
+mark=at position #1 with {\fill[white,draw=black,thin] circle (3pt);}},postaction={decorate}},
+k/.style={decoration={markings,
+mark=at position #1 with {\fill[black] circle (3pt);}},postaction={decorate}},
+}
+%--------- ΔΙΑΣΤΗΜΑ ------------
+\newcommand{\diasthma}[7]{
+\foreach \x in {#3,#4}
+\draw (\x,#7+.2) -- (\x,#7-.2);
+\node[anchor=north,fill=white] at (#3,#7)[below=1mm] {$ #1 $};
+\node[anchor=north,fill=white] at (#4,#7)[below=1mm] {$ #2 $};
+\draw [#5=0,#6=1,thickest] (#3,#7)--(#4,#7);
+}
+%--------- ΑΞΟΝΑΣ ------------------
+\newcommand{\axonas}[3]{
+\draw[-latex] (#1,#3) -- (#2,#3)node[below]{$x$};
+}
+%--------- ΚΑΤΩ ΑΚΡΟ ------------------
+\newcommand{\Xapeiro}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3-.3,#5);
+}
+%--------- ΠΑΝΩ ΑΚΡΟ ------------------
+\newcommand{\apeiroX}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3+.3,#5);
+}
+%----- ΔΙΑΚΕΚΟΜΜΕΝΕΣ ΓΡΑΜΜΕΣ ------
+\newcommand{\oria}[3]{\draw [dashed] (#1,#2)--(#1,#3);}
+%--------------------------------------
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\usepackage{microtype}
+\usepackage{float}
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+\usepackage{caption}
+%------ ΕΙΚΟΝΑ ΓΥΡΩ ΑΠΟ ΚΕΙΜΕΝΟ ------------
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newcolumntype{C}{>{\centering\arraybackslash} X}
+\setlist[itemize]{itemsep=0mm}
+
+
+
+\begin{document}
+\mainmatter
+\pagestyle{fancy}
+
+\chapter{Πιθανότητες - Στατιστική}
+\section{Σύνολα - Δειγματικός Χώρος - Ενδεχόμενα}\mbox{}\\
+\orismoi
+\Orismos{Σύνολο} Σύνολο ονομάζεται μια συλλογή όμοιων αντικειμένων, τα οποία είναι καλά ορισμένα και διακριτά μεταξύ τους.
+\begin{itemize}[itemsep=0mm]
+\item Τα αντικείμενα ενός συνόλου ονομάζονται \textbf{στοιχεία}.
+\item Τα σύνολα τα συμβολίζουμε με ένα κεφαλαίο γράμμα.
+\end{itemize}
+\textbf{Βασικά σύνολα αριθμών}
+\vspace{-2mm}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Φυσικοί Αριθμοί} : $ \mathbb{N}=\{0,1,2,\ldots\}$
+\item \textbf{Ακέραιοι Αριθμοί} : $ \mathbb{Z}=\{\ldots,-1,-1,0,1,2,\ldots\} $
+\item \textbf{Ρητοί Αριθμοί} : $ \mathbb{Q}=\LEFTRIGHT\{\}{\left.\frac{a}{\beta}\right| a,\beta\in\mathbb{Z},\beta\neq0\;} $
+\item \textbf{Πραγματικοί Αριθμοί} : $ \mathbb{R}=\left\lbrace \textrm{όλοι οι αριθμοί} \right\rbrace  $
+\end{enumerate}
+\Orismos{Ίσα σύνολα} Ίσα ονομάζονται δύο σύνολα $ Α,Β $ τα οποία έχουν ακριβώς τα ίδια στοιχεία. Ισοδύναμα, τα σύνολα $ Α,Β $ λέγονται ίσα εαν ισχύουν οι σχέσεις :
+\begin{enumerate}
+\item Κάθε στοιχείο του $ Α $ είναι και στοιχείο του $ Β $
+\item Κάθε στοιχείο του $ Β $ είναι και στοιχείο του $ Α $.
+\end{enumerate}
+\Orismos{Υποσύνολο} Ένα σύνολο $ A $ λέγεται υποσύνολο ενός συνόλου $ B $ όταν κάθε στοιχείο του $ A $ είναι και στοιχείο του $ B $.
+\[ A\subseteq B \]
+\Orismos{Κενό σύνολο} Κενό ονομάζεται το σύνολο που δεν έχει κανένα στοιχείο. Συμβολίζεται με $ \varnothing $ ή $ \left\lbrace \right\rbrace  $.\\\\
+\Orismos{Βασικό σύνολο} Βασικό ονομάζεται το σύνολο το οποίο περιέχει όλα τα στοιχεία που μπορούμε να επιλέξουμε, από τα οποία φτιάχνουμε άλλα σύνολα. Συμβολίζεται με $ \varOmega $.\\
+\newpage
+\noindent
+\Orismos{Πράξεισ μεταξύ συνόλων}
+\vspace{-4mm}
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Ένωση}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7,samples=100},shade=black!10,labelNotAB={$ \varOmega $}]
+\fillA \fillB
+\end{venndiagram2sets}\captionof{figure}{Ένωση}
+\end{WrapText1}
+Ένωση δύο υποσυνόλων $ A,B $ ενός βασικού συνόλου $ \varOmega $ ονομάζεται το σύνολο των στοιχείων του $ \varOmega $ τα οποία ανήκουν σε τουλάχιστον ένα από τα σύνολα $ A $ και $ B $. Συμβολίζεται με $ A\cup B $.  \[ A\cup B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ ή } x\in B\right.\right\rbrace \]
+Η ένωση των συνόλων $ A $ και $ B $ περιέχει τα κοινά και μή κοινά στοιχεία των δύο συνόλων. Τα κοινά στοιχεία αναγράφονται μια φορά.\end{minipage}
+\item \textbf{Τομή}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{7}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7},shade=black!10,labelNotAB={$ \varOmega $}]
+\fillACapB
+\end{venndiagram2sets}\captionof{figure}{Τομή}
+\end{WrapText1}
+Τομή δύο υποσυνόλων $ A,B $ ενός βασικού συνόλου $ \varOmega $ ονομάζεται το σύνολο των στοιχείων του $ \varOmega $ τα οποία ανήκουν και στα δύο σύνολα $ A $ και $ B $. Συμβολίζεται με $ A\cap B $. \[ A\cap B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ και } x\in B\right.\right\rbrace \]
+Η τομή των συνόλων $ A $ και $ B $ περιέχει μόνο τα κοινά στοιχεία των δύο συνόλων.\end{minipage}
+\item \textbf{Συμπλήρωμα}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{tikzpicture}[scale=.77]
+\filldraw[fill=black!10] (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[white] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){$ \varOmega $}
+\tkzText(-.45,.3){$ A $}
+\end{tikzpicture}\captionof{figure}{Συμπλήρωμα}
+\end{WrapText1}
+Συμπλήρωμα ενός συνόλου $ A $ ονομάζεται το σύνολο των στοιχείων του βασικού συνόλου $ \varOmega $ τα οποία \textbf{δεν} ανήκουν στο σύνολο $ A $. Συμβολίζεται με $ A' $. \[ A'=\left\lbrace x\in\varOmega\left| x\notin A\right.\right\rbrace \] Ονομάζεται συμπλήρωμα του $ Α $ γιατί η ένωσή του με το σύνολο αυτό μας δίνει το βασικό σύνολο $ \varOmega $.\end{minipage}
+\item \textbf{Διαφορά}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7},shade=black!10,labelNotAB={$ \varOmega $}]
+\fillANotB
+\end{venndiagram2sets}\captionof{figure}{Διαφορά συνόλων}
+\end{WrapText1}
+Διαφορά ενός συνόλου $ B $ από ένα σύνολο $ A $ ονομάζεται το σύνολο των στοιχείων του βασικού συνόλου $ \varOmega $ τα οποία ανήκουν μόνο στο σύνολο $ Α $, το πρώτο σύνολο της διαφοράς. Συμβολίζεται με $ Α-Β $. \[ Α-Β=\left\lbrace x\in\varOmega\left| x\in A\textrm{ και }x\notin B\right. \right\rbrace  \]
+\end{minipage}
+\end{enumerate}\mbox{}\\\\
+\Orismos{Πείραμα τύχησ} Πείραμα τύχης ονομάζεται κάθε πείραμα του οποίου το αποτέλεσμα δεν μπορεί να προβλευθεί με απόλυτη βεβαιότητα όσες φορές κι αν αυτό επαναληφθεί, κάτω από τις ίδιες συνθήκες.\\\\
+\Orismos{Δειγματικόσ Χώροσ} Δειγματικός χώρος ονομάζεται το σύνολο το οποίο περιέχει όλα τα πιθανά αποτελέσματα ενός πειράματος τύχης. Ο δειγματικός αποτελέι βασικό σύνολο. \[ \varOmega=\left\lbrace \omega_1,\omega_2,\ldots,\omega_\nu \right\rbrace \]
+\Orismos{Ενδεχόμενο} Ενδεχόμενο ονομάζεται το σύνολο το οποίο περιέχει ένα ή περισσότερα στοιχεία του δειγματικού χώρου ενός πειράματος.
+\begin{itemize}[itemsep=0mm]
+\item Κάθε ενδεχόμενο είναι υποσύνολο του δειγματικού του χώρου.
+\item Συμβολίζεται με κεφαλαίο γράμμα π.χ. : $ A,B,\ldots $
+\item Τα ενδεχόμενα που έχουν ένα στοιχείο ονομάζονται \textbf{απλά} ενδεχόμενα, ενώ αν περιέχουν περισσότερα στοιχεία ονομάζονται \textbf{σύνθετα}.
+\item Εαν το αποτέλεσμα ενός πειράματος είναι στοιχείο ενός ενδεχομένου τότε το ενδεχόμενο \textbf{πραγματοποιείται}.
+\item Τα στοιχεία ενός ενδεχομένου ονομάζονται ευνοϊκές περιπτώσεις.
+\item Ο δειγματικός χώρος $ \varOmega $ ονομάζεται \textbf{βέβαιο} ενδεχόμενο, ενώ το κενό σύνολο ονομάζεται \textbf{αδύνατο} ενδεχόμενο.
+\item Εαν δύο ενδεχόμενα $ A,B $ δεν έχουν κοινά στοιχεία τότε ονομάζονται \textbf{ασυμβίβαστα} ή ξένα μεταξύ τους δηλαδή : \[ A,B \textrm{ ασυμβίβαστα }\Leftrightarrow A\cap B=\varnothing \]
+\end{itemize}\mbox{}\\
+\Orismos{πράξεισ με ενδεχόμενα}
+Οι πράξεις μεταξύ ενδεχομένων ορίζονται ακριβώς όπως και οι πράξεις μεταξύ συνόλων. Κάθε ορισμός προσαρμόζεται ώστε να περιγράψει την ισχύ του ενδεχομένου σε κάθε περίπτωση.
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Ένωση}\\
+Ένωση δύο ενδεχομένων $ A,B $ ονομάζεται το ενδεχόμενο το οποίο περιέχει τα κοινά και μη κοινά στοιχεία των δύο ενδεχομένων. Η ένωση πραγματοποιείται όταν πραγματοποιείται τουλάχιστον ένα από τα ενδεχόμενα $ A $ ή $ B $. \[ x\in A\cup B\Leftrightarrow x\in A \textrm{ ή }x\in B \]
+\item \textbf{Τομή}\\
+Τομή δύο ενδεχομένων $ A,B $ ονομάζεται το ενδεχόμενο το οποίο περιέχει τα κοινά στοιχεία των δύο ενδεχομένων. Η τομή πραγματοποιείται όταν πραγματοποιούνται συγχρόνως και τα δύο ενδεχόμενα $ A $ και $ B $. \[ x\in A\cap B\Leftrightarrow x\in A \textrm{ και }x\in B \]
+\item \textbf{Συμπλήρωμα}\\Συμπλήρωμα ενός ενδεχομένου $ A $ ονομάζεται το ενδεχόμενο το οποίο περιέχει τα στοιχεία εκείνα τα οποία \textbf{δεν} ανήκουν στο σύνολο $ A $. Το συμπλήρωμα πραγματοποιείται όταν δεν πραγματοποιείται το $ A $. \[ x\in A'\Leftrightarrow x\notin A\]
+\item \textbf{Διαφορά}\\
+Διαφορά ενός ενδεχομένου $ A $ από ένα ενδεχόμενο $ B $ ονομάζεται το ενδεχόμενο που περιέχει τα στοιχεία που ανήκουν μόνο στο ενδεχόμενο $ A $. Η διαφορά πραγματοποιείται όταν πραγματοποιείται μόνο το ενδεχόμενο $ A $. \[ x\in A-B\Leftrightarrow x\in A \textrm{ και }x\notin B \]
+\end{enumerate}
+Στον παρακάτω πίνακα φαίνονται τα ενδεχόμενα, οι πράξεις μεταξύ δύο ενδεχομένων $ A,B $, οι συμβολισμοί τους, λεκτική περιγραφή καθώς και διάγραμμα για κάθε περίπτωση.
+\begin{center}
+\begin{longtable}{c>{\centering}m{2.3cm}>{\centering}m{3.4cm} c}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Συμβολισμός} & \textbf{Ενδεχόμενο} & \textbf{Περιγραφή} & \textbf{Διάγραμμα} \\ 
+\hhline{====} \rule[-2ex]{0pt}{8.5ex} $ x\in A $ & Ενδεχόμενο Α & Το ενδεχόμενο $ Α $ πραγματοποιείται. & \parbox[c]{22mm}{\mbox{}\\\begin{tikzpicture}[scale=.438]
+\draw (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[black!50] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){{\scriptsize $ \varOmega $}}
+\tkzText(-.45,.1){{\scriptsize $ A $}}
+\end{tikzpicture}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A' $ & Συμπλήρωμα του $ A $ & Το ενδεχόμενο $ A $ \textbf{δεν} πραγματοποιείται. & \parbox[c]{22mm}{\mbox{}\\\begin{tikzpicture}[scale=.438]
+\filldraw[fill=black!50] (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[white] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){{\scriptsize $ \varOmega $}}
+\tkzText(-.45,.1){{\scriptsize $ A $}}
+\end{tikzpicture}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A\cup B $ & Ένωση του $ A $ με το $ B $ & Πραγματοποιείται ένα \textbf{τουλάχιστον} από τα ενδεχόμενα $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillA \fillB
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A\cap B $ & Τομή του $ A $ με το $ B $ & Πραγματοποιούνται \textbf{συγχρόνως} τα ενδ. $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillACapB
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A-B $ & Διαφορά του $ B $ απ' το $ A $ & Πραγματοποιείται \textbf{μόνο} το ενδεχόμενο $ A $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillANotB
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in B-A $ & Διαφορά του $ A $ απ' το $ B $ & Πραγματοποιείται \textbf{μόνο} το ενδεχόμενο $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillBNotA
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left(A-B\right)\cup\left(B-A\right) $ & Ένωση διαφορών & Πραγματοποιείται \textbf{μόνο} ένα από τα δύο σύνολα (ή μόνο το $ A $ ή μόνο το $ B $). & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillANotB \fillBNotA
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} \begin{minipage}{2.5cm}
+\begin{center}
+$ A\subseteq B $\\
+$ x\in A\Rightarrow x\in B $
+\end{center}
+\end{minipage} & $ A $ υποσύνολο του $ Β $ & Η πραγματοποίηση του $ A $ συνεπάγεται πραγμ/ση του $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{tikzpicture}[scale=.438]
+\draw (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\filldraw[fill=black!50] (-.45,-.5) circle (1.1);
+\draw[fill=black!50] (-.5,-.5) circle (.7);
+\endscope
+\tkzText(-1.6,-1.6){{\scriptsize $ \varOmega $}}
+\tkzText(.9,.1){{\scriptsize $ B $}}
+\tkzText(-.45,-.2){{\scriptsize $ A $}}
+\end{tikzpicture}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left(A\cap B\right)' $ & Συμπλήρωμα τομής & \textbf{Δεν} πραγματοποιούνται \textbf{συγχρονως} τα ενδ. $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorNotB
+\end{venndiagram2sets}}\\
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left(A\cup B\right)' $ & Συμπλήρωμα ένωσης & Δεν πραγματοποιείται \textbf{κανένα} από τα ενδ. $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB
+\end{venndiagram2sets}}\\
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left( A-B\right)'  $ & Συμπλήρωμα διαφοράς & \textbf{Δεν} πραγματοποιείται μόνο το ενδεχόμενο $ A $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB \fillB
+\end{venndiagram2sets}} \\
+\rule[-2ex]{0pt}{8.5ex} $ x\in \left(B-A\right)'  $ & Συμπλήρωμα διαφοράς & \textbf{Δεν} πραγματοποιείται μόνο το ενδεχόμενο $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB \fillA
+\end{venndiagram2sets}} \\
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left( \left(A-B\right)\cup\left(B-A\right)\right)'  $ & Συμπλήρωμα ένωσης διαφορών & \textbf{Δεν} πραγματοποιείται μόνο ένα από τα δύο σύνολα (ή κανένα από τα δύο ή και τα δύο). & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=black!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB \fillACapB
+\end{venndiagram2sets}} \\
+\rule[-1ex]{0pt}{0ex} &&&\\
+\hline
+\end{longtable}\captionof{table}{Πράξεις ενδεχομένων}
+\end{center}
+\section{Πιθανότητες}\mbox{}\\
+\Orismos{Πιθανότητα - Κλασσικόσ Ορισμόσ}
+\Orismos{Πιθανότητα - Αξιωματικόσ Ορισμόσ}
+\Orismos{Δεσμευμένη πιθανότητα}
+\section{Στατιστική}\mbox{}\\
+\Orismos{Πληθυσμόσ}
+\Orismos{Δείγμα}
+\Orismos{Δειγματοληψία}
+\section{Κατανομές}\mbox{}\\
+\orismoi
+\Orismos{Κανονική κατανομή}
+\pgfmathdeclarefunction{gauss}{2}{%
+\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
+
+\begin{tikzpicture}
+\draw [help lines, xstep=1cm,ystep=.7cm,black!30] (0,0) grid (8,2.8);
+\begin{axis}[
+no markers, domain=-4:4, samples=100,
+axis lines*=left,y=7cm, x=1cm,xlabel=$x$,extra y ticks={.1,.3}, ylabel=$y$,ymax=.5,xmax=4.5,
+every axis y label/.style={at=(current axis.north west),anchor=south},every ticks style/.style={{\tiny }},
+every axis x label/.style={at=(current axis.right of origin),anchor=west},
+height=5cm, width=12cm,
+enlargelimits=false, clip=false, axis on top,,axis line style={-latex}]
+\addplot [very thick] {gauss(0,1)};
+\end{axis}
+\end{tikzpicture}\mbox{}\\\\
+\Orismos{Κατανομή \eng{Student-t}}
+\Orismos{Κατανομή {$ \mathbold{X_\nu^2} $}}
+\Orismos{Κατανομή \eng{Bernoulli}}
+\Orismos{Διωνυμική Κατανομή}
+\Orismos{Γεωμετρική Κατανομή}
+\Orismos{Κατανομή \eng{Poisson}}
+\Orismos{Υπεργεωμετρική Κατανομή}
+\end{document}

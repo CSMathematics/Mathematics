@@ -1,0 +1,221 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+
+\newcommand{\pinakasdyo}[8]{
+	\begin{tikzpicture}
+	\foreach \x in {#6,#7}{
+		\draw (-3,0) -- (#8,0);
+		\draw (\x,-.5)--(\x,.0);
+		\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+	\draw (-.5,0.5) -- (-.5,-0.5);
+	\node at (-.15,0.25) {$-\infty$};
+	\node at (#8-.3,0.25) {$+\infty$};
+	\node at (-1.75,0.25) {$x$};
+	\node at (-1.75,-0.3) {$#1$};
+	\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+	\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+	\node at (0.5*#6-0.25,-0.3) {$#4$};
+	\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+	\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+	\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+	\begin{tikzpicture}
+	\draw (-3,0) -- (#5,0);
+	\draw (#4,-.5)--(#4,.0);
+	\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+	\draw (-.5,0.5) -- (-.5,-0.5);
+	\node at (-.15,0.25) {$-\infty$};
+	\node at (#5-0.3,0.25) {$+\infty$};
+	\node at (-1.75,0.25) {$x$};
+	\node at (-1.75,-0.3) {$#1$};
+	\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+	\node at (0.5*#4-0.25,-.3) {$#3$};
+	\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+	\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+	\begin{tikzpicture}
+	\draw (-3,0) -- (5,0);
+	\draw (-.5,0.5) -- (-.5,-0.5);
+	\node at (-.15,0.25) {$-\infty$};
+	\node at (4.7,0.25) {$+\infty$};
+	\node at (-1.75,0.25) {$x$};
+	\node at (-1.75,-0.3) {$#1$};
+	\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+	\end{tikzpicture}}
+
+
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=2cm}
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Γραμμικά Συστήματα}{Η έννοια του γραμμικού συστήματος}
+\orismoi
+\Orismos{Γραμμικό σύστημα}
+Γραμμικό σύστημα δύο εξισώσεων με δύο άγνωστους ονομάζεται ο συνδυασμός - σύζευξη δύο γραμμικών εξισώσεων. Είναι της μορφής :
+\[ \ccases{{a}x+{\beta} y={\gamma}\\{a'}x+{\beta'} y={\gamma'} } \]
+\begin{itemize}[itemsep=0mm]
+\item Οι συντελεστές του συστήματος $ a,a',\beta,\beta' $ και οι σταθεροί όροι $ \gamma,\gamma' $ είναι πραγματικοί αριθμοί.
+\item Κάθε διατεταγμένο ζεύγος αριθμών $ \left(x_0,y_0\right)  $ το οποίο επαληθεύει και τις δύο εξισώσεις ονομάζεται \textbf{λύση} του γραμμικού συστήματος.
+\item Τα συστήματα τα οποία έχουν ακριβώς τις ίδιες λύσεις ονομάζονται \textbf{ισοδύναμα}.
+\item Ένα σύστημα που έχει λύση λέγεται \textbf{συμβιβαστό}. Εαν δεν έχει λύση ονομάζεται \textbf{αδύνατο} ενώ αν έχει άπειρες λύσεις \textbf{αόριστο}.
+\end{itemize}
+\Orismos{Επαλήθευση Λύσης Συστήματοσ}
+Επαλήθευση ενός συστήματος εξισώσεων ονομάζεται η διαδικασία με την οποία εξετάζουμε εαν ένα ζεύγος αριθμών $ \left(x_0,y_0\right)  $ είναι λύση του, αντικαθιστώντας τους αριθμούς στη θέση των μεταβλητών.
+\end{document}

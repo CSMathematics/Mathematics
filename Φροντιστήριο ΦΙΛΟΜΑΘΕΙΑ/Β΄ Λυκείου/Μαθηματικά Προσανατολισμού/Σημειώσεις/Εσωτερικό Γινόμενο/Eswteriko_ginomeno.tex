@@ -1,0 +1,86 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,gensymb,tkz-euclide}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+\usepackage{multicol}
+\usepackage{mathimatika,longtable}
+\setlist[itemize]{itemsep=0mm}
+
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Κατεύθυνσης Β' Λυκείου}{Διανύσματα}{Εσωτερικό γινόμενο διανυσμάτων}
+\orismoi
+\Orismos{Εσωτερικό γινόμενο διανυσμάτων}
+Εσωτερικό γινόμενο δύο διανυσμάτων $ \vec{a} $ και $ \vec{\beta} $ ονομάζεται ο πραγματικός αριθμός $ \vec{a}\cdot\vec{\beta} $ ο οποίος ισούται με το γινόμενο των μέτρων των διανυσμάτων $ \vec{a} $ και $ \vec{\beta} $ επί το συνημίτονο της γωνίας που σχηματίζουν.
+\[ \vec{a}\cdot\vec{\beta}=|\vec{a}||\vec{\beta}|\syn{\varphi} \]
+\begin{itemize}
+\item Η γωνία $ \varphi $ που σχηματίζουν τα διανύσματα $ \vec{a} $ και $ \vec{\beta} $ συμβολίζεται $ ( \widehat{\vec{a}, \vec{\beta}})  $.
+\item Αν $ \vec{a}=\vec{0} $ ή $ \vec{\beta}=\vec{0} $ τότε $ \vec{a}\cdot\vec{\beta}=0 $
+\end{itemize}
+\Orismos{Προβολή διανύσματος σε διάνυσμα}
+Προβολή ενός διανύσματος $ \vec{\nu} $ πάνω σε ένα διάνυσμα $ \vec{a} $ ονομάζεται το διάνυσμα το οποίο είναι ομόρροπο με το $ \vec{a} $ και έχει μέτρο ίσο με την προβολή του ευθύγραμμου τμήματος $ |\vec{\nu}| $ πάνω στο φορέα του $ \vec{a} $. Συμβολίζεται με $ \textrm{προβ}_{\vec{a}}{\vec{\nu}} $.
+\begin{center}
+\begin{tikzpicture}
+\dianysma{0,0}{3,0}{A}{B}
+\dianysma{0,0}{2,1.5}{A}{C}
+\dianysma{0,0}{2,0}{A}{D}
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\draw[dashed] (C) -- (D);
+\tkzMarkAngle[scale=.7](D,A,C)
+\tkzLabelAngle[pos=.75](D,A,C){$ \varphi $}
+\node at (5,1){$\overrightarrow{A\varDelta}=\textrm{προβ}_{\vec{a}}{\vec{\nu}}$};
+\node at (2.7,-.3) {$\vec{a}$};
+\node at (1,1) {$\vec{\nu}$};
+\end{tikzpicture}
+\end{center}
+\thewrhmata
+\Thewrhma{Ιδιότητες εσωτερικού γινομένου}
+Για οποιαδήποτε διανύσματα $ \vec{a},\vec{\beta} $ και $ \vec{\gamma} $ και πραγματικό αριθμό $ \mu\in\mathbb{R} $ ισχύουν οι ακόλουθες ιδιότητες για την πράξη του εσωτερικού γινομένου.
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\ 
+\hhline{==}  \rule[-2ex]{0pt}{5.5ex} Κάθετα διανύσματα & Αν $ \vec{a}\bot\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=0 $ και $ \lambda_{\vec{a}}\cdot\lambda_{\vec{\beta}}=-1 $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Ομόρροπα διανύσματα & Αν $ \vec{a}\upuparrows\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=|\vec{a}|\cdot|\vec{\beta}| $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Αντίρροπα διανύσματα & Αν $ \vec{a}\updownarrows\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=-|\vec{a}|\cdot|\vec{\beta}| $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Τετράγωνο διανύσματος & $ \vec{a}^2=|\vec{a}|^2 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Αντιμεταθετική & $ \vec{a}\cdot\vec{\beta}=\vec{\beta}\cdot\vec{a} $ \\
+ \rule[-2ex]{0pt}{5.5ex} Προσεταιριστική & $ \mu(\vec{a}\cdot\vec{\beta})=(\mu\vec{\beta})\cdot\vec{a} $ \\
+\rule[-2ex]{0pt}{5.5ex} Επιμεριστική & $ \vec{a}\cdot\left( \vec{\beta}+\vec{\gamma}\right) =\vec{a}\cdot\vec{\beta}+\vec{a}\cdot\vec{\gamma} $ \\
+\hline 
+\end{longtable} 
+\end{center}
+\Thewrhma{Αναλυτική έκφραση εσωτερικού γινομένου διανυσμάτων}
+Το εσωτερικό γινόμενο δύο διανυσμάτων $ \vec{a}=(x_1,y_1) $ και $ \vec{\beta}=(x_2,y_2) $ ισούται με το άθροισμα του γινομένου των τετμημένων με το γινόμενο των τεταγμένων των διανυσμάτων.
+\[ \vec{a}\cdot\vec{\beta}=x_1x_2+y_1y_2 \]
+\Thewrhma{Συνημίτονο γωνίας διανυσμάτων}
+Το συνημίτονο της γωνίας που σχηματίζουν δύο διανύσματα $ \vec{a}=(x_1,y_1) $ και $ \vec{\beta}=(x_2,y_2) $ ισούται με το πηλίκο του εσωτερικού γινομένου των διανυσμάτων προς το γινόμενο των μέτρων τους.
+\[ \syn{(\widehat{\vec{a},\vec{\beta}})}=\frac{\vec{a}\cdot\vec{\beta}}{|\vec{a}|\cdot|\vec{\beta}|}=\frac{x_1x_2+y_1y_2}{\sqrt{x_1^2+y_1^2}\cdot\sqrt{x_2^2+y_2^2}} \]
+\Thewrhma{Προβολή διανύσματος}
+Το εσωτερικό γινόμενο δύο διανυσμάτων $ \vec{a} $ και $ \vec{\beta} $ ισούται με το εσωτερικό γινόμενο του ενός διανύσματος επί την προβολή του δεύτερου διανύσματος πάνω στο πρώτο.
+\[ \vec{a}\cdot\vec{\beta}=\vec{a}\cdot\textrm{προβ}_{\vec{a}}{\vec{\beta}}\quad\textrm{ή}\quad\vec{a}\cdot\vec{\beta}=\vec{\beta}\cdot\textrm{προβ}_{\vec{\beta}}{\vec{a}} \]
+\end{document}
+

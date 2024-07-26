@@ -1,0 +1,301 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,enumitem}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\setlist[itemize]{itemsep=0mm}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{rotating}
+\usepackage{hhline}
+\usepackage{multicol,multirow,gensymb,mathimatika}
+\usepackage{wrap-rl}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Εγγεγραμμένα σχήματα}{Εγγεγραμμένη γωνία}
+\orismoi
+\Orismos{Εγγεγραμμένη γωνία}
+\wrapr{-4mm}{7}{2.9cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint[label=below right:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.45](B,A,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture}}{
+Εγγεγραμμένη γωνία σε έναν κύκλο ονομάζεται η γωνία η οποία έχει κορυφή ένα σημείο του κύκλου, ενώ οι πλευρές της τέμνουν τον κύκλο.
+\begin{itemize}
+\item Το τόξο με άκρα τα σημεία τομής της γωνίας και του κύκλου, που βρίσκεται στο εσωτερικό της γωνίας ονομάζεται \textbf{αντίστοιχο τόξο} της γωνίας.
+\item Μια εγγεγραμμένη γωνία θα λέμε ότι \textbf{βαίνει} στο αντίστοιχο τόξο της.
+\end{itemize}}\mbox{}\\\\\\
+\Orismos{Επίκεντρη γωνία}
+Εγγεγραμμένη γωνία σε έναν κύκλο ονομάζεται η γωνία η οποία έχει κορυφή στο κέντρο του κύκλου.\\\\
+\Orismos{Γωνία χορδής και εφαπτομένης}
+Γωνία χορδής και εφαπτομένης ονομάζεται η γωνία που σχηματίζεται από μια χορδή ενός κύκλου και την εφαπτομένη του κύκλου σε ένα άκρο της χορδής. Η κορυφή της γωνίας είναι σημείο του κύκλου.
+\begin{center}
+\begin{tabular}{cc}
+\begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.3](B,O,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](B)--(O)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above left:$O$](0,0){O}
+\tkzDefPoint[label=above:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](250:1.25){B}
+\tkzTangent[at=A](O)\tkzGetPoint{C}
+\tkzMarkAngle[fill=\xrwma,size=.4](C,A,B)
+\draw[pl] (O) circle (1.25);
+\tkzDrawLine[add=1 and 1,color=\xrwma](A,C)
+\draw[pl,\xrwma](A)--(B);
+\tkzDrawPoints(A,B,O)
+\node at (-0.9,0.5) {\footnotesize$\varphi$};
+\node at (-2.2,0) {\footnotesize$x$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Orismos{Γωνία δύο τεμνουσών}
+Γωνία δύο τεμνουσών ενός κύκλου ονομάζεται η γωνία που σχηματίζεται από δύο τέμνουσες ευθείες του κύκλου και έχει κορυφή το σημείο τομής τους.
+\begin{center}
+\begin{tabular}{cc}
+\begin{tikzpicture}
+\tkzDefPoint[label=below left:$O$](0,0){O}
+\tkzDefPoint[label=above:$A$](30:1.25){A}
+\tkzDefPoint(190:1.25){B}
+\tkzDefPoint[label=above:$\varGamma$](150:1.25){C}
+\tkzDefPoint[label=below:$\varDelta$](340:1.25){D}
+\tkzInterLL(A,B)(C,D)\tkzGetPoint{a}
+\tkzMarkAngle[fill=\xrwma,size=.4](C,a,B)
+\draw[pl] (O) circle (1.25);
+\tkzDrawLine[color=\xrwma](D,C)
+\tkzDrawLine[color=\xrwma](A,B)
+\draw[pl,\xrwma](O) ++(C) arc(150:190:1.25);
+\draw[pl,\xrwma](O) ++(D) arc(340:390:1.25);
+\tkzDrawPoints(A,B,O,a,C,D)
+\node at (-0.7,0.2) {\footnotesize$\varphi$};
+\node at (-1.7,0.7) {\footnotesize$x$};
+\node at (1.7,-0.8) {\footnotesize$x'$};
+\node at (1.7,0.7) {\footnotesize$y$};
+\node at (-1.8,-0.6) {\footnotesize$y'$};
+\tkzLabelPoint[left,yshift=-2.5mm,xshift=1.3mm](B){$B$}
+\tkzLabelPoint[above](a){$P$}
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=below left:$O$](0,0){O}
+\tkzDefPoint[label=above:$A$](50:1.25){A}
+\tkzDefPoint(160:1.25){B}
+\tkzDefPoint[label=below right:$\varGamma$](260:1.25){C}
+\tkzDefPoint[label=right:$\varDelta$](20:1.25){D}
+\tkzInterLL(A,B)(C,D)\tkzGetPoint{a}
+\tkzDrawLine[add=0 and .1](a,B)
+\tkzDrawLine[add=0 and .1](a,C)
+\tkzMarkAngle[fill=\xrwma,size=.4](B,a,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](O) ++(D) arc(20:50:1.25);
+\draw[pl,\xrwma](O) ++(B) arc(160:260:1.25);
+\tkzDrawPoints(A,B,O,a,C,D)
+\node at (1.3,0.9) {\footnotesize$\varphi$};
+\node at (-1.6,0.3) {\footnotesize$x$};
+\node at (-0.6,-1.6) {\footnotesize$y$};
+\tkzLabelPoint[left,yshift=2.5mm,xshift=1.3mm](B){$B$}
+\tkzLabelPoint[above right](a){$P$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Orismos{Γωνία δύο κύκλων}
+Γωνία δύο τεμνόμενων κύκλων ονομάζεται η γωνία που σχηματίζεται από τις δύο εφαπτόμενες ευθείες του κύκλου σε καθένα από τα σημεία τομής τους. Αν η γωνία των δύο κύκλων είναι ορθή τότε οι κύκλοι ονομάζονται \textbf{ορθογώνιοι}.
+\begin{center}
+\begin{tabular}{cc} 
+\begin{tikzpicture}
+\tkzDefPoint[label=left:$O$](0,0){O}
+\tkzDefPoint[label=right:$K$](1.8,0){K}
+\tkzDefPoint(120:1.25){A}
+\tkzDefPoint[shift={(1.8,0)}](120:1){B}
+\draw[pl] (O) circle (1.25);
+\draw[pl] (K) circle (1);
+\tkzInterCC(O,A)(K,B)  \tkzGetPoints{a}{b}
+\tkzTangent[at=a](O) \tkzGetPoint{c}
+\tkzTangent[at=b](O) \tkzGetPoint{d}
+\tkzTangent[at=a](K) \tkzGetPoint{e}
+\tkzTangent[at=b](K) \tkzGetPoint{f}
+\tkzDefPointBy[symmetry= center b](d)
+\tkzGetPoint{D}
+\tkzDefPointBy[symmetry= center a](e)
+\tkzGetPoint{E}
+\tkzMarkAngle[fill=\xrwma,size=.3](E,a,c)
+\tkzMarkAngle[fill=\xrwma,size=.3](D,b,f)
+\draw (a)--(E);
+\draw (a)--(c);
+\draw (b)--(D);
+\draw (b)--(f);
+\tkzDrawPoints(O,K,a,b)
+\node at (1.1,1.1) {\footnotesize$\varphi$};
+\node at (1.1,-1.1) {\footnotesize$\varphi$};
+\tkzLabelPoint[left](a){$A$}
+\tkzLabelPoint[left](b){$B$}
+\end{tikzpicture} & 
+\begin{tikzpicture}
+\tkzDefPoint[label=left:$O$](0,0){O}
+\tkzDefPoint[label=right:$K$](1.8,0){K}
+\tkzDefPoint(2,1.5){B}
+\tkzDefPointBy[projection=onto O--B](K) \tkzGetPoint{P}
+\tkzDefPointBy[symmetry= center P](O)\tkzGetPoint{D}
+\tkzDefPointBy[symmetry= center P](K)\tkzGetPoint{E}
+\tkzMarkRightAngle[fill=\xrwma](D,P,E)
+\draw[pl] (O) circle (1.43);
+\draw[pl] (K) circle (1.07);
+\tkzDrawLine[add=0 and 1](O,P)
+\tkzDrawLine[add=0 and 1](K,P)
+\tkzDrawPoints(P,O,K)
+\tkzLabelPoint[left,xshift=-1mm](P){$A$}
+\end{tikzpicture} \\ 
+\end{tabular}
+\end{center}
+\thewrhmata
+\Thewrhma{επίκεντρη - εγγεγραμμένη γωνία και αντίστοιχο τόξο}
+Μεταξύ των εγγεγραμμένων των επίκεντρων γωνιών και των αντίστοιχων τόξων τους ισχύουν οι ακόλουθες προτάσεις :
+\begin{rlist}
+\item Αν μια εγγεγραμμένη και μια επίκεντρη γωνία βαίνουν στο ίδιο τόξο ή σε ίσα τόξα ίσων κύκλων τότε η εγγεγραμμένη ισούται με το μισό της επίκεντρης : $ \hat{A}=\dfrac{\hat{O}}{2} $.
+\item Κάθε εγγεγραμμένη γωνία ισούται με το μισό του μέτρου του αντίστοιχου τόξου της : $ \hat{A}=\dfrac{\widearc{B\varGamma}}{2} $.
+\item Κάθε επίκεντρη γωνία ισούται με το μέτρο του αντίστοιχου τόξου της : $ \hat{A}=\hat{O} $.
+\item Αν δύο εγγεγραμμένες γωνίες βαίνουν στο ίδιο τόξο ή σε ίσα τόξα ίσων κύκλων τότε έιναι ίσες. $ \hat{A}=\hat{\varDelta} $.
+\end{rlist}
+\begin{center}
+\begin{tabular}{cccc}
+\begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.3](B,O,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B)--(O)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.3](B,O,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](B)--(O)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above left:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=above right:$\varDelta$](70:1.25){D}
+\tkzDefPoint[label=below:$B$](240:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](320:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.4](B,D,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B)--(D)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (240:320:1.25);
+\tkzDrawPoints(A,B,C,O,D)
+\end{tikzpicture} \\ 
+\end{tabular}
+\end{center}
+\Thewrhma{Γωνία χορδής και εφαπτομένης}
+Η γωνία που σχηματίζεται από χορδή και εφαπτομένη σε ένα σημείο του κύκλου είναι ίση με το αντίστοιχο τόξο της χορδής.\\\\
+\Thewrhma{Γωνία δύο τεμνουσών}
+Έστω $ P $ το σημείο τομής δύο τεμνουσών $ x'x $ και $ y'y $ ενός κύκλου και $ x\hat{A}y $ η γωνία που σχηματίζουν. Για τη γωνία αυτή ισχύουν οι εξής προτάσεις :
+\begin{rlist}
+\item Αν το σημείο $ P $ είναι εσωτερικό σημείο του κύκλου τότε η γωνία των δύο τεμνουσών ισούται με το ημιάθροισμα των τόξων που ορίζουν οι τέμνουσες.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint[label=above:$A$](30:1.25){A}
+\tkzDefPoint(190:1.25){B}
+\tkzDefPoint[label=above:$\varGamma$](150:1.25){C}
+\tkzDefPoint[label=below:$\varDelta$](340:1.25){D}
+\tkzInterLL(A,B)(C,D)\tkzGetPoint{a}
+\tkzMarkAngle[fill=\xrwma,size=.4](C,a,B)
+\tkzMarkAngle[fill=\xrwma,size=.53](C,A,B)
+\tkzMarkAngle[fill=\xrwma,size=.47](D,C,A)
+\draw[pl] (O) circle (1.25);
+\tkzDrawLine[color=\xrwma](D,C)
+\tkzDrawLine[color=\xrwma](A,B)
+\draw (A)--(C);
+\draw (B)--(D);
+\draw[plm,\xrwma](O) ++(C) arc(150:190:1.25);
+\draw[plm,\xrwma](O) ++(D) arc(340:390:1.25);
+\tkzDrawPoints(A,B,O,a,C,D)
+\node at (-0.7,0.2) {\footnotesize$\varphi$};
+\node at (-1.7,0.7) {\footnotesize$x$};
+\node at (1.7,-0.8) {\footnotesize$x'$};
+\node at (1.7,0.7) {\footnotesize$y$};
+\node at (-1.8,-0.6) {\footnotesize$y'$};
+\tkzLabelPoint[left,yshift=-2.5mm,xshift=1.3mm](B){$B$}
+\tkzLabelPoint[left,yshift=-.7mm](O){$O$}
+\tkzLabelPoint[above](a){$P$}
+\node at (6,0) {$x\hat{A}y=\dfrac{\widearc{B\varGamma}+\widearc{A\varDelta}}{2}\quad,\quad x\hat{A}y=B\hat{A}\varGamma+\varDelta\hat{\varGamma}A$};
+\end{tikzpicture}
+\end{center}
+Η γωνία $ \varphi $ ισούται επίσης με το άθροισμα των εγγεγραμμένων γωνιών που βαίνουν στα τόξα που ορίζουν οι τέμνουσες.
+\item Αν το σημείο $ P $ είναι εξωτερικό σημείο του κύκλου τότε η γωνία των δύο τεμνουσών ισούται με την ημιδιαφορά των τόξων που ορίζουν οι τέμνουσες.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint[label=below left:$O$](0,0){O}
+\tkzDefPoint[label=above:$A$](50:1.25){A}
+\tkzDefPoint(160:1.25){B}
+\tkzDefPoint[label=below right:$\varGamma$](260:1.25){C}
+\tkzDefPoint[label=right:$\varDelta$](20:1.25){D}
+\tkzInterLL(A,B)(C,D)\tkzGetPoint{a}
+\tkzDrawLine[add=0 and .1](a,B)
+\tkzDrawLine[add=0 and .1](a,C)
+\tkzMarkAngle[fill=\xrwma,size=.4](B,a,C)
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.7](D,C,A)
+\draw[pl] (O) circle (1.25);
+\draw (A)--(C);
+\draw[plm,\xrwma](O) ++(D) arc(20:50:1.25);
+\draw[plm,\xrwma](O) ++(B) arc(160:260:1.25);
+\tkzDrawPoints(A,B,O,a,C,D)
+\node at (1.3,0.9) {\footnotesize$\varphi$};
+\node at (-1.6,0.3) {\footnotesize$x$};
+\node at (-0.6,-1.6) {\footnotesize$y$};
+\tkzLabelPoint[left,yshift=2.5mm,xshift=1.3mm](B){$B$}
+\tkzLabelPoint[above right](a){$P$}
+\node at (6,0) {$x\hat{A}y=\dfrac{\widearc{B\varGamma}-\widearc{A\varDelta}}{2}\quad,\quad x\hat{A}y=B\hat{A}\varGamma-\varDelta\hat{\varGamma}A$};
+\end{tikzpicture}
+\end{center}
+\vspace{-5mm}
+Η γωνία $ \varphi $ ισούται επίσης με το άθροισμα των εγγεγραμμένων γωνιών που βαίνουν στα τόξα που ορίζουν οι τέμνουσες.
+\end{rlist}
+\Thewrhma{Γωνία δύο κύκλων}
+Οι γωνίες που σχηματίζουν δύο τεμνόμενοι κύκλοι στα σημεία τομής τους είναι ίσες.
+\end{document}

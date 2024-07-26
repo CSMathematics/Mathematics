@@ -1,0 +1,140 @@
+\documentclass[twoside,nofonts,internet,fil,maria]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{Νεοελληνική γλώσσα Γ΄ Γυμνασίου}{Διαγωνισμός Υποτροφίας}{2018 - 2019}
+\textcolor{\xrwma}{\textbf{Α΄ ΚΕΙΜΕΝΟ}}\\
+
+Ας καταλάβουμε ότι δεν υπάρχουν όρια. Τα σύνορα δεν έγιναν από το Θεό. Τα κράτη τα χάραξαν.
+Εάν δεν πιστεύουμε στη δυνατότητα μιας μόνιμης ειρήνης, αυτό ισοδυναμεί με το να αμφιβάλλουμε για το θεϊκό χαρακτήρα της ανθρώπινης φύσης. Οι μέθοδοι που ίσαμε σήμερα ακολουθήθηκαν απέτυχαν, γιατί, παρ’ όλες τις πολυάριθμες προσπάθειες που έκαναν όσοι ανάλαβαν αυτό το φορτίο, διατήρησαν κάποια αμφιβολία στα πιο μύχια μέρη της ψυχής τους. Κι αυτό ίσως να έγινε με άγνοιά τους. Όπως δεν μπορούμε να φτιάξουμε ένα χημικό μείγμα εάν δεν υποταγούμε στις απαιτήσεις μιας τέτοιας εργασίας, έτσι και δεν μπορούμε να στεριώσουμε την ειρήνη εφόσον όλοι οι όροι που ‘ναι απαραίτητοι για την εδραίωση της δεν ικανοποιηθούν πέρα για πέρα. Δε θα μπορέσουμε να έχουμε μόνιμη ειρήνη παρά μόνο τη μέρα που όλοι οι υπεύθυνοι, χωρίς καμία επιφύλαξη και ξέροντας καλά τι κάνουν, θα σταματήσουν να χρησιμοποιούν όσες μηχανές καταστροφής έχουν κάτω απ’ τον έλεγχό τους.
+
+Είναι αυτονόητο ότι δε θα μπορέσουμε να φτάσουμε στο σημείο αυτό παρά μόνο εάν οι Μεγάλες Δυνάμεις αναστείλουν τις ιμπεριαλιστικές τους βλέψεις. Για να επιτευχθεί αυτό, θα έπρεπε τα μεγάλα έθνη να μη δίνουν πια καμιά αξία στο μεταξύ τους ανταγωνισμό, που υποσκάπτει τα θεμέλια όλων μας, και να σταματήσουν να θέλουν να πολλαπλασιάζουν τις ανάγκες τους, κάτι που πρώτα – πρώτα προϋποθέτει να μη θέλουν να αυξάνουν τις υλικές τους κτήσεις (…).
+
+Ένα πράγμα είναι βέβαιο: Εάν αυτός ο τρελός ανταγωνισμός στους εξοπλισμούς συνεχιστεί, θα καταλήξει αναπόφευκτα σε μια σφαγή που δε θα έχει το προηγούμενό της στην ιστορία. Εάν απ’ αυτή τη σφαγή κάποιο έθνος βγει νικηφόρο, η ίδια του η νίκη θα του επιτρέψει να δει ζωντανό τον ίδιο του τον θάνατο. Το μόνο μέσο για να ξεφύγουμε απ’ αυτήν τη «δαμόκλεια σπάθη» είναι να δεχτούμε με τόλμη και χωρίς επιφυλάξεις τη μέθοδο της μη – βίας μαζί με όλο το μεγαλείο της.
+
+Εάν δεν υπήρχε η απληστία, δε θα υπήρχε και το πρόσχημα για εξοπλισμούς. Η ίδια η αρχή της μη – βίας απαιτεί να σταματήσει κάθε μορφή εκμετάλλευσης. Μόλις εξαφανιστεί αυτή η νοοτροπία εκμετάλλευσης, το βάρος κάθε είδους όπλου που πιέζει τους ώμους μας θα μας φανεί φορτίο ιδιαίτερα ασήκωτο. Δεν μπορεί να υπάρξει αληθινός αφοπλισμός εφόσον τα διάφορα έθνη της γης συνεχίζουν να εκμεταλλεύονται τα μεν τα δε.
+
+Δε θα ήθελα να ζω σ’ αυτόν τον κόσμο εάν δεν είχε για προορισμό του την ενοποίησή τους.\\
+\begin{flushright}
+\begin{minipage}{5.5cm}
+\begin{flushleft}
+\textit{Μαχάτμα Γκάντι\\
+Μετάφρ. Ντίνος Απ. Κατσόγιαννος\\
+Ευθύνη, τ. 79, 1978}
+\end{flushleft}
+\end{minipage}
+\end{flushright}
+\textcolor{\xrwma}{\textbf{B΄ ΠΑΡΑΤΗΡΗΣΕΙΣ}}
+\begin{enumerate}
+\item Πότε πιστεύει ο συγγραφέας ότι θα έχουμε μόνιμη ειρήνη;\monades{2}
+\item Πού πιστεύει ο συγγραφέας ότι θα καταλήξει ο ανταγωνισμός των εξοπλισμών;\monades{2}
+\item Να βρείτε έναν πλαγιότιτλο για τη 2η παράγραφο του κειμένου.\monades{1}
+\item Να γράψετε από ένα συνώνυμο για καθεμιά από τις παρακάτω λέξεις του κειμένου.
+\begin{center}
+μέθοδοι, φορτίο, αμφιβολία, απαραίτητοι.
+\end{center}\monades{2}
+\item Να εντοπίσετε και να χαρακτηρίσετε τις παρακάτω δευτερεύουσες προτάσεις:
+\begin{itemize}
+\item Μάθαινε γερμανικά, για να πάει να σπουδάσει στη Γερμανία.
+\item Δεν τον καταλάβαινα, γιατί μιλούσε πολύ σιγά.
+\item Η διάρκεια της μέρας ήταν μικρή, γιατί ήταν Δεκέμβρης.
+\item Προσπαθούσαν να συνεννοηθούν μαζί του με χειρονομίες, αφού ήταν ξένος και δεν ήξερε ελληνικά.
+\item Δεν είναι σωστό να φυτεύονται στα κράσπεδα της εθνικής οδού πεύκα.
+\end{itemize}\monades{5}
+\item Να γράψετε στη σχολική σας εφημερίδα ένα άρθρο 4 παραγράφων στο οποίο θα αναφέρετε τις συμφορές που προκαλεί ο πόλεμος στη ζωή των ανθρώπων και να προτείνετε τρόπους για τη διασφάλιση της παγκόσμιας ειρήνης.
+\end{enumerate}\monades{8}
+
+\end{document}

@@ -1,0 +1,166 @@
+\documentclass[twoside,nofonts,math,spyros,ektypwsh]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Μέθοδοι}{Διαφορικός λογισμός}
+\section{Η έννοια της παραγώγου}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Παράγωγος σε σημείο
+\item Παράγωγος και συνέχεια
+\item Εύρεση ορίου από παράγωγο
+\item Συναρτησιακές σχέσεις
+\item Παράγωγος σε τυχαίο σημείο
+\item Θεώρημα Μ.Ε.Τ. - Πρόσημο παραγώγου
+\end{enumerate}
+\end{multicols}
+\section{Παράγωγος συνάρτηση}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Κανόνες παραγώγισης
+\item Παράγωγος σύνθετης συνάρτησης
+\item Παράγωγοι ανώτερης τάξης
+\item Συναρτησιακές σχέσεις
+\item Παράγωγος αντίστροφης συνάρτησης
+\end{enumerate}
+\end{multicols}
+\section{Εφαπτόμενη ευθεία}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Εφαπτομένη σε γνωστό σημείο
+\item Εφαπτομένη με γνωστή κλίση
+\item Εφαπτομένη από γνωστό σημείο
+\item Γνωστή ευθεία εφάπτεται στη $ C_f $
+\item Κοινή εφαπτομένη σε κοινό σημείο
+\item Κοινή εφαπτομένη σε διαφορετικά σημεία
+\item Ύπαρξη σημείου επαφής
+\item Εφαπτομένη αντίστροφης συνάρτησης
+\end{enumerate}
+\end{multicols}
+\section{Ρυθμός μεταβολής}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Ρυθμός μεταβολής
+\item Κίνηση σημείου σε καμπύλη
+\item Προβλήματα
+\end{enumerate}
+\end{multicols}
+\section{Θεώρημα Rolle}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Απλή εφαρμογή θεωρήματος
+\item Ύπαρξη ρίζας παραγώγου
+\item Εύρεση συνάρτησης για εφαρμογή του Θ.Rolle
+\item Γεωμετρική ερμηνεία για εφαπτομένη
+\item Πλήθος ριζών $ f $ και $ f' $
+\item Χρήση Θ. Bolzano και Θ. Rolle για μοναδική ρίζα της $ f $
+\item Μοναδική ρίζα $ f' $
+\item Παραμετρικές ασκήσεις
+\end{enumerate}
+\end{multicols}
+\section{Θεώρημα Μέσης Τιμής}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Απλή εφαρμογή θεωρήματος
+\item Ύπαρξη ρίζας $ f'' $ - Πρόσημο τιμής $ f,f' $
+\item Ανισότητες
+\item Θ.Μ.Τ. και μονοτονία - Ανισότητες
+\item 
+\end{enumerate}
+\end{multicols}
+\end{document}

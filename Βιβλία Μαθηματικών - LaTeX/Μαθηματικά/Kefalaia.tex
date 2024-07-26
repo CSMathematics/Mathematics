@@ -1,0 +1,234 @@
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\ekthetesdeiktes
+\setlist[enumerate]{itemsep=0mm}
+
+
+\begin{document}
+\twocolumn
+\paragraph{Θεμέλια των μαθηματικών}
+\begin{enumerate}
+\item Αριθμοί
+\begin{enumerate}
+\item Ακέραιοι - Ρητοί - Άρρητοι - Πραγματικοί
+\item Πράξεις - Ιδιότητες
+\item Ισότητες
+\item Διάταξη
+\item Συστήματα αρίθμησης
+\item Ρίζες
+\item Απόλυτες τιμές
+\end{enumerate}
+\item Λογική – Προτασιακός λογισμός
+\item Σύνολα
+\item Συστήματα συντεταγμένων
+\begin{enumerate}
+\item Καρτεσιανό 2-δ
+\item Πολικές συντετ.
+\item Καρτεσιανό 3-δ
+\item Κυλινδρικές συντ.
+\item Σφαιρικές συντεταγμένες
+\item Άλλες συντ.
+\end{enumerate}
+\end{enumerate}
+\paragraph{Βασική Άλγεβρα}
+\begin{enumerate}[resume]
+\item Αλγεβρικές παραστάσεις
+\begin{enumerate}
+\item Γενικές
+\item Πολυώνυμα
+\item Ταυτότητες - Παραγοντοποίηση
+\item Ρητές
+\item Άρρητες
+\item Εκθετικές
+\item Λογάριθμοι
+\end{enumerate}
+\item Τριγωνομετρία
+\begin{enumerate}
+\item Τριγωνομετρικοί αριθμοί
+\item Ταυτότητες
+\item Αναγωγή στο 1ο τετ.
+\item Νόμος ημιτόνων, συνημιτόνων, εφαπτομένων - Επίλυση τριγώνου
+\end{enumerate}
+\item Εξισώσεις – Ανισώσεις
+\begin{enumerate}
+\item Πρώτου βαθμού
+\item Δευτέρου βαθμού
+\item Τρίτου βαθμού
+\item Τετάρτου βαθμού
+\item Πολυωνυμικές
+\item Ρητές
+\item Άρρητες
+\item Τριγωνομετρικές
+\item Εκθετικές
+\item Λογαριθμικές
+\end{enumerate}
+\end{enumerate}
+\paragraph{Ανάλυση}
+\begin{enumerate}[resume]
+\item Συναρτήσεις
+\begin{enumerate}
+\item Βασικές έννοιες
+\item Βασικά είδη συναρτήσεων
+\item Ιδιότητες συναρτήσεων
+\item Όρια
+\item Συνέχεια
+\end{enumerate}
+\end{enumerate}
+\paragraph{Διαφορικός - Ολοκληρωτικός Λογισμός}
+\begin{enumerate}[resume]
+\item Παράγωγος – Μεικτές παράγωγοι
+\item Ολοκλήρωμα
+\item Απειροστικός λογισμός πολλών μεταβλητών
+\item Διανυσματικός λογισμός
+\item Πολλαπλά Ολοκληρώματα
+\item Επικαμπύλια – Επιφανειακά ολοκληρώματα
+\item Ολοκληρωτικά θεωρήματα
+\item Ακολουθίες
+\item Σειρές
+\item Γινόμενα
+\end{enumerate}
+\paragraph{Μιγαδική Ανάλυση}
+\begin{enumerate}[resume]
+\item Μιγαδικοί αριθμοί
+\item Κουατέρνια
+\end{enumerate}
+\paragraph{Γεωμετρία}
+\begin{enumerate}[resume]
+\item Βασικά σχήματα
+\item Ευθείες
+\item Τρίγωνα
+\item Βασικά τετράπλευρα
+\item Κύκλος
+\item Κανονικά πολύγωνα
+\item Στερεομετρία
+\item Κωνικές τομές
+\item Διανύσματα
+\item Αναλυτική Γεωμετρία
+\end{enumerate}
+\paragraph{Γραμμική Άλγεβρα}
+\begin{enumerate}[resume]
+\item Πίνακες – Συστήματα
+\item Διανυσματικοί χώροι
+\item Ορίζουσες
+\end{enumerate}
+\paragraph{Διαφορικές Εξισώσεις}
+\begin{enumerate}[resume]
+\item Συνήθεις Διαφορικές εξισώσεις
+\item Μερικές Διαφορικές Εξισώσεις
+\item Ολοκληρωτικές εξισώσεις
+\item Στοχαστικές Διαφορικές Εξισώσεις
+\item Συναρτησιακές Διαφορικές Εξισώσεις
+\item Αλγεβρικές διαφορικές εξισώσεις
+\item Υστερημένες Διαφορικές Εξισώσεις
+\end{enumerate}
+\paragraph{Πιθανότητες - Στατιστική}
+\begin{enumerate}[resume]
+\item Πιθανότητες – Στατιστική
+\item Τοπολογία
+\item Συναρτησιακή ανάλυση
+\item Ειδικές συναρτήσεις
+\item Θεωρία μέτρου
+\item Θεωρία ομάδων
+\item Θεωρία δακτυλίων – σωμάτων
+\item Θεωρία αριθμών
+\item Διαφορική Γεωμετρία
+\item Θεωρία συνόλων
+\item Ιστορία μαθηματικών
+\item Ανάλυση Fourier
+\item Αριθμητική ανάλυση
+\item Μοντέρνα άλγεβρα
+\item Μοντέρνα Γεωμετρία - μη ευκλείδειες
+\item Συνδυαστική
+\end{enumerate}
+\end{document}

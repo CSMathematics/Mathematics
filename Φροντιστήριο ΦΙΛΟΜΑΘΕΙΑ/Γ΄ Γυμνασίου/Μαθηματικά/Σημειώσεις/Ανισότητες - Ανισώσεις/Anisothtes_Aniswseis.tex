@@ -1,0 +1,151 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Εξισώσεις - Ανισώσεις}{Ανισότητες - Ανισώσεις}
+\orismoi
+\Orismos{Διάταξη}
+Διάταξη ονομάζεται η ιδιότητα του συνόλου των πραγματικών αριθμών κατά την οποία μπορούμε να τους συγκρίνουμε και να τους τοποθετήσουμε σε αύξουσα ή φθίνουσα σειρά. Οι σχέσεις διάταξης που χρησιμοποιούμε είναι
+\begin{center}
+$ < $ : μικρότερο  \;,\;  $ > $ : μεγαλύτερο  \;,\; $ \leq $  μικρότερο ίσο \;,\; $ \geq $  μεγαλύτερο ισο  
+\end{center}
+Δύο ή περισσότεροι αριθμοί που είναι τοποθετημένοι πάνω στην ευθεία των πραγμωτικών αριθμών ονομάζονται \textbf{διατεταγμένοι}.\mbox{}\\\\
+\Orismos{Μεγαλύτεροσ - Μικρότεροσ}
+Ένας αριθμός $ a $ είναι \textbf{μεγαλύτερος} απο έναν αριθμό $ \beta $, και γράφουμε $a>\beta$, όταν η διαφορά $ a-\beta$ είναι θετικός αριθμός.
+\[ a>\beta\Leftrightarrow a-\beta>0 \]
+Ένας αριθμός $ a $ είναι \textbf{μικρότερος} απο έναν αριθμό $ \beta $, και γράφουμε $a<\beta$, όταν η διαφορά $a-\beta$ είναι αρνητικός αριθμός.
+\[ a<\beta\Leftrightarrow a-\beta<0 \]
+\Orismos{Ανίσωση}
+Ανίσωση ονομάζεται κάθε ανισότητα η οποία περιέχει τουλάχιστον μια μεταβλητή, κάθε σχέση της μορφής :
+\[ P(x,y,\ldots,z)>0\;\;,\;\;P(x,y,\ldots,z)<0 \]
+όπου $ P(x,y,\ldots,z) $ είναι μια αλγεβρική παράσταση πολλών μεταβλητών.
+\begin{itemize}[itemsep=0mm]
+\item Ανισώσεις αποτελούν και οι σχέσεις με σύμβολα ανισοϊσότητας $ \leq,\geq $.
+\item Κάθε αριθμός που επαληθεύει μια ανίσωση ονομάζεται \textbf{λύση} της. Κάθε ανίσωση έχει λύσεις ένα \textbf{σύνολο αριθμών}.
+\item Αν μια ανίσωση έχει λύσεις όλους τους αριθμούς ονομάζεται \textbf{αόριστη}.
+\item Αν μια ανίσωση δεν έχει καθόλου λύσεις ονομάζεται \textbf{αδύνατη}.
+\item Σχέσεις τις μορφής $ Q(x)\leq P(x)\leq R(x) $ λέγονται \textbf{διπλές ανισώσεις} όπου $ P(x),Q(x),R(x) $ αλγεβρικές παρατάσεις. Αποτελείται από δύο ανισώσεις, με κοινό μέλος την παράσταση $ P(x) $, οι οποίες συναληθεύουν.
+\item \textbf{Κοινές λύσεις} μιας διπλής ανίσωσης ή δύο ή περισσότερων ανισώσεων ονομάζονται οι αριθμοί που επαληθεύουν όλες τις ανισώσεις συγχρόνως.
+\end{itemize}
+\Orismos{ανισωση 1\textsuperscript{\MakeLowercase{ου}} βαθμου}
+Ανίσωση 1\textsuperscript{ου} βαθμού με έναν άγνωστο ονομάζεται κάθε πολυωνυμική ανίσωση της οποίας η αλγεβρική παράσταση είναι πολυώνυμο 1\textsuperscript{ου} βαθμού. Είναι της μορφής :
+\[ ax+\beta>0\;\;,\;\;ax+\beta<0 \] με πραγματικούς συντελεστές $ a,\beta $.\\\\
+\thewrhmata
+\Thewrhma{Ιδιότητες Διάταξης}
+\vspace{-5mm}
+\begin{enumerate}
+\item Εαν σε μια ανισότητα προσθέσουμε ή αφαιρέσουμε τον ίδιο αριθμό και απ' τα δύο μέλη της, προκύπτει ξανά ανισότητα με την ίδια φορά της αρχικής.
+\[ a>\beta\Leftrightarrow\ccases{a+\gamma>\beta+\gamma\\α-\gamma>\beta-\gamma} \]
+\item Για να πολλαπλασιάσουμε ή να διαιρέσουμε και τα δύο μέλη μιας ανισότητας με τον ίδιο αριθμό διακρίνουμε τις εξής περπτώσεις :
+\begin{rlist}
+\item Εαν πολλαπλασιάσουμε ή διαιρέσουμε και τα δύο μέλη μιας ανισότητας με τον ίδιο \textbf{θετικό} αριθμό, τότε προκύπτει ανισότητα με την \textbf{ίδια} φορά της αρχικής.
+\item Εαν πολλαπλασιάσουμε ή διαιρέσουμε και τα δύο μέλη μιας ανισότητας με τον ίδιο \textbf{αρνητικό} αριθμό, τότε προκύπτει ανισότητα με φορά \textbf{αντίθετη} της αρχικής.
+\end{rlist}
+\begin{gather*}
+\textrm{Αν }\gamma>0\textrm{ τότε }a>\beta\Leftrightarrow a\cdot\gamma>\beta\cdot\gamma\textrm{ και }\dfrac{a}{\gamma}>\dfrac{\beta}{\gamma}\\
+\textrm{Αν }\gamma<0\textrm{ τότε }a>\beta\Leftrightarrow a\cdot\gamma<\beta\cdot\gamma\textrm{ και }\dfrac{a}{\gamma}<\dfrac{\beta}{\gamma}
+\end{gather*}
+\end{enumerate}
+Ανάλογα συμπεράσματα ισχύουν και για τις ανισότητες $ a<\beta,a\geq\beta $ και $ a\leq\beta $.\\\\
+\Thewrhma{Πράξεισ κατά μέλη ανισοτήτων}
+Μπορούμε να προσθέτουμε κατά μέλη κάθε ζεύγος ανισοτήτων με ίδια φορά και να πολλαπλασιάσουμε κατά μέλη δύο ανισότητες ίδιας φοράς αρκεί όλοι οι όροι τους να είναι θετικοί.
+\[ a>\beta\;\;\textrm{και}\;\;\gamma>\delta\Rightarrow\begin{cases}
+\textrm{\textbf{{1. Πρόσθεση κατά μέλη }}}& a+\gamma>\beta+\delta\\\textrm{\textbf{{2. Πολλαπλασιασμός κατά μέλη }}}& a\cdot\gamma>\beta\cdot\delta\;\;,\;\;\textrm{με }a,\beta,\gamma,\delta>0
+\end{cases} \]
+\textbf{Δεν} μπορούμε να αφαιρέσουμε ή να διαιρέσουμε ανισότητες κατά μέλη.\\\\
+\Thewrhma{Δύναμη με άρτιο εκθέτη}
+Το τετράγωνο κάθε πραγματικού αριθμού $ a $ είναι μη αρνητικός αριθμός :
+\[ a^2\geq0\;\;,\;\;\kappa\ \textrm{ακέραιος} \]
+Αν για δύο πραγματικούς αριθμούς $ a,\beta $ ισχύει $ a^2+\beta^2=0 $ τότε $ a=0 $ και $ \beta=0 $.
+\end{document}

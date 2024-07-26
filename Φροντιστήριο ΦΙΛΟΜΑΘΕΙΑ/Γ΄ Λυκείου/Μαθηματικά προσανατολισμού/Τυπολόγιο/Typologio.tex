@@ -1,0 +1,807 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,mtphrb,mtpcal,subscriptcorrection]{mtpro2}
+\usepackage{epstopdf}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=figures/]
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usepackage{hhline}
+\usepackage{mathtools}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{extarrows}
+\usepackage{longtable}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+\usepackage{picture}
+\begin{document}
+\section*{\LARGE ΜΑΘΗΜΑΤΙΚΑ ΚΑΤΕΥΘΥΝΣΗΣ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΜΙΓΑΔΙΚΟΙ}
+\end{center}
+\begin{enumerate}[itemsep=0mm]
+\item Μιγαδικός αριθμός : $ z=a+\beta i $ όπου $ a,\beta\in\mathbb{R} $\quad $ a=Re(z)\;,\;\beta=Im(z) $.
+\item Μιγαδικό σύνολο : $ \mathbb{C}=\{z|z=a+\beta i\} $.
+\item Φανταστικός αριθμός : $ z=\beta i $.
+\item Φανταστικό σύνολο : $ \mathbb{Ι}=\{\beta i|\beta\in\mathbb{R}\} $.
+\item Πράξεις μιγαδικών
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item Πρόσθεση : $ z+w=a+\beta i+\gamma+\delta i=(a+\gamma)+(\beta+\delta)i $.
+\item Αφαίρεση : $ z-w=a+\beta i-(\gamma+\delta i)=(a-\gamma)+(\beta-\delta)i $.
+\item Πολλαπλασιασμός : $ z\cdot w=(a+\beta i)(\gamma+\delta i)=(a\gamma-\beta\delta)+(\beta\gamma+a\delta)i $.
+\item Διαίρεση : $ \dfrac{z}{w}=\dfrac{a+\beta i}{\gamma+\delta i}=\dfrac{a\gamma+\beta\delta}{\gamma^2+\delta^2}+i\dfrac{\beta\gamma-a\delta}{\gamma^2+\delta^2} $
+\end{enumerate}
+\item Αντίστροφος : $ \dfrac{1}{z}=\dfrac{1}{a+\beta i}=\dfrac{a-\beta i}{a^2+\beta^2} $
+\item Ισότητα μιγαδικών : $ z=w\Leftrightarrow Re(z)=Re(w)\;,\;Im(z)=Im(w) $.
+\item Δυνάμεις μιγαδικών
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ z^2=(a+\beta i)^2=a^2+2a\beta i-\beta^2=(a^2-\beta^2)+2a\beta i $.
+\item $ z^3=(a+\beta i)^3=a^3+3a^2\beta i-3a\beta^2-\beta^3 i=(a^3-3a\beta^2)+i(-\beta^3-3a^2\beta) $
+\end{enumerate}
+\item Δυνάμεις του $ i $.
+\begin{multicols}{4}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ i^0=1 $
+\item $ i^1=i $
+\item $ i^2=-1 $
+\item $ i^3=-i $
+\end{enumerate}
+\end{multicols}
+Γενικά  $ i^\nu=\ccases{1 & \nu=4\kappa\\i & \nu=4\kappa+1\\-1 & \nu=4\kappa+2\\-i & \nu=4\kappa+3\\} $
+\item Ιδιότητες συζυγών
+\begin{multicols}{3}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ z+\overline{z}=2Re(z) $
+\item $ z-\overline{z}=2Im(z) $
+\item $ z\cdot\overline{z}=Re^2(z)+Im^2(z) $
+\item $ \overline{(\overline{z})} =z$
+\item $ \overline{z\pm w}=\overline{z}\pm\overline{w} $
+\item $ \overline{z\cdot w}=\overline{z}\cdot\overline{w} $
+\item $\overline{\left( \dfrac{z}{w}\right) }=\dfrac{\overline{z}}{\overline{w}} $
+\item $ \overline{(z^\nu)}=\overline{z}^\nu $
+\end{enumerate}
+\end{multicols}
+\item Λύσεις εξίσωσης 2ου βαθμού $ az^2+\beta z+\gamma=0\;,\;a\neq0\;,\;a,\beta,\gamma\in\mathbb{R} $
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ \varDelta>0\Rightarrow z_{1,2}=\dfrac{-\beta\pm\!\sqrt{\varDelta}}{2a} $
+\item Αν $ \varDelta=0\Rightarrow z_{1,2}=-\dfrac{\beta}{2a} $
+\item Αν $ \varDelta<0\Rightarrow z_{1,2}=\dfrac{-\beta\pm\!i\sqrt{|\varDelta|}}{2a} $
+\end{enumerate}
+\item Μιγαδικό επίπεδο\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText1}{7}{7cm} 
+\begin{tikzpicture}[scale=1,x=.8cm]
+\tikzset{Style Tan/.style={solid}}
+\tikzset{xcoord style/.append style={below=4pt}}
+\tikzset{ycoord style/.append style={left=4pt}}
+\tkzInit[xmin=-3.5,xmax=3.5,ymin=-2,ymax=2]
+\tkzDrawX[noticks,label={}] \tkzDrawY[noticks,label={}]
+\tkzDefPoint(2.5,1.5){M}
+\tkzDefPoint(-2.5,1.5){M2}
+\tkzDefPoint(-2.5,-1.5){M3}
+\tkzDefPoint(2.5,-1.5){M4}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(0,1.5){B}
+\tkzDefPoint(2.5,0){A}
+\tkzDefPoint(0,-1.5){B'}
+\tkzDefPoint(-2.5,0){A'}
+\tkzDefPoint(4,0){R}
+\tkzDefPoint(0,2.5){I}
+\tkzDrawSegments[dashed](A,M M,B M2,A' M2,B M3,A' M3,B' M4,A M4,B')
+\tkzDrawPoints[fill=white](M,M2,M3,M4)
+\tkzLabelPoint[black,right](M){M($ z $)}
+\tkzLabelPoint[left](M2){M($ -\overline{z} $)}
+\tkzLabelPoint[left](M3){M($ -z $)}
+\tkzLabelPoint[black,right](M4){M($ \overline{z} $)}
+\tkzLabelPoint[black,above left](B){{\footnotesize $ \beta $}}
+\tkzLabelPoint[black,below right](A){{\footnotesize $ a $}}
+\tkzLabelPoint[black,below left](B'){{\footnotesize $ -\beta $}}
+\tkzLabelPoint[black,below left](A'){{\footnotesize $ -a $}}
+\tkzLabelPoint[black,below left](O){$ O $}
+\tkzLabelPoint[black,left](I){{\footnotesize $ Im(z) $}}
+\tkzLabelPoint[black,below](R){{\footnotesize $ Re(z) $}}
+\tkzDrawSegment[semithick,->,shorten >=1pt,>=stealth',draw=black](O,M)
+\tkzDrawSegment[semithick,->,shorten >=1pt,>=stealth'](O,M2)
+\tkzDrawSegment[semithick,->,shorten >=1pt,>=stealth'](O,M3)
+\tkzDrawSegment[semithick,->,shorten >=1pt,>=stealth',draw=black](O,M4)
+\end{tikzpicture}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item $ x'x $ άξονας των πραγματικών.
+\item $ y'y $ άξονας των φανταστικών.
+\item $ Μ(z) $ εικόνα του μιγαδικού $ z $.
+\item $ \overrightarrow{OM} $ διανυσματική ακτίνα του μιγαδικού $ z $.
+\item $ M(\overline{z}) $ η εικόνα του συζυγή του μιγαδικού $ z $ συμμετρική ως προς τον άξονα $ x'x $.
+\item $ M(-z) $ η εικόνα του αντίθετου του μιγαδικού $ z $ συμμετρική ως προς την αρχή των αξόνων.
+\end{itemize}
+
+\vspace{-5mm}
+\begin{itemize}[itemsep=0mm]
+\item $ M(-\overline{z}) $ η εικόνα του αντίθετου του συζυγή του $ z $ συμμετρική ως προς τον άξονα $ y'y $.
+\end{itemize}
+\end{minipage}
+\item Μέτρο μιγαδικού : $ |z|=\!\sqrt{Re(z)^2+Im(z)^2} $.
+\item Ιδιότητες μέτρου
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ |z|=|-z|=|\overline{z}|=|-\overline{z}| $
+\item $ |z|^2=z\cdot\overline{z} $
+\item $ |z\cdot w|=|z|\cdot|w| $
+\item $ \left| \dfrac{z}{w}\right|=\dfrac{|z|}{|w|}  $
+\item $ |z^\nu|=|z|^\nu $
+\end{enumerate}
+\end{multicols}
+\item Συνθήκες για πραγματικό και φανταστικό αριθμό.\\
+Αν $ z=a+\beta i $ ένας μιγαδικός αριθμός τότε $ z\in\mathbb{R} $ αν και μόνο αν
+\begin{multicols}{3}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \beta=0 $
+\item $ \overline{z}=z $
+\item $ |z|^2=z^2 $
+\end{enumerate}
+\end{multicols}
+Αν $ z=a+\beta i $ ένας μιγαδικός αριθμός τότε $ z\in\mathbb{I} $ αν και μόνο αν
+\begin{multicols}{3}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ a=0 $
+\item $ \overline{z}=-z $
+\item $ |z|^2=-z^2 $
+\end{enumerate}
+\end{multicols}
+\item Απόσταση εικόνων δύο μιγαδικών : $ d(z,w)=|z-w| $.
+\item Κριτήριο παραλληλογράμου : $ |z+w|^2+|z-w|^2=2|z|^2+2|w|^2 $.
+\item Γεωμετρικοί τόποι εικόνων μιγαδικού:\\
+Θέτουμε $ z=x+yi $ και χρησιμοποιώντας τα δεδομένα προσπαθούμε να καταλλήξουμε σε μια εξίσωση που να περιέχει τους άγνωστους $ x,y $ ώστε να προκύψει το ζητούμενο σχήμα (γεωμετρικος τόπος).
+\item Βασικοί γεωμετρικοί τόποι :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Κύκλος $ |z-z_0|=\rho\;\;, $ $ M(z_0) $ κέντρο του κύκλου και $ \rho $ η ακτίνα του.
+\item Κύκλικός δίσκος $ |z-z_0|\leq\rho\;\;, $ $ M(z_0) $ κέντρο του κύκλου και $ \rho $ η ακτίνα του.
+\item Έλλειψη $ |z-z_1|+|z-z_2|=2a $ όταν $ 2a>|z_1-z_2| $ όπου $ Μ_1(z_1),M_2(z_2) $ οι εστίες της.
+\item Ευθύγραμμο τμήμα $ |z-z_1|+|z-z_2|=2a $ όταν $ 2a=|z_1-z_2| $ όπου $ Μ_1(z_1),M_2(z_2) $ τα άκρα του.
+\item Υπερβολή $\left|  |z-z_1|-|z-z_2|\right| =2a $ όταν $ 2a<|z_1-z_2| $ όπου $ Μ_1(z_1),M_2(z_2) $ οι εστίες της.
+\item Κλάδος υπερβολής $|z-z_1|-|z-z_2|=2a $ όταν $ 2a<|z_1-z_2| $ όπου $ Μ_1(z_1),M_2(z_2) $ οι εστίες της.
+\item Δύο ημιευθείες $\left| |z-z_1|-|z-z_2|\right| =2a $ όταν $ 2a=|z_1-z_2| $.
+\item Ημιευθεία $|z-z_1|-|z-z_2|=2a $ όταν $ 2a=|z_1-z_2| $.
+\item Μεσοκάθετος ευθύγραμμου τμήματος $ |z-z_1|=|z-z_2| $ όπου $ M_1(z_1),M_2(z_2) $ τα άκρα του.
+\item Ημιεπίπεδο $ |z-z_1|\leq|z-z_2| $ ή $ |z-z_1|\geq|z-z_2| $.
+\end{enumerate}
+\item Μέγιστη και ελάχιστη τιμή μέτρου μιγαδικού, μέτρου διαφοράς μιγαδικών.\\
+Αν $ Μ $ είναι η εικόνα ενός μιγαδικού $ z $ τότε για την ελάχιστη και μέγιστη τιμή του $ |z| $ ισχύει :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν η εικόνα του $ z $ κινείται σε ευθεία $ \varepsilon $ τότε : $ \min{|z|}=d(M,\varepsilon) $.
+\item Αν η εικόνα του $ z $ κινείται πάνω σε κύκλο $ |z-z_0|=\rho $ με κέντρο $ M_0(z_0) $ τότε : \[ \min|z|=OM_0-\rho\;\;\textrm{ και }\;\;\max{|z|}=OM_0+\rho \] όπου $ O $ η αρχή των αξόνων.
+\item Αν η εικόνα του $ z $ κινείται πάνω στην έλλειψη $ \dfrac{x^2}{a^2}+\dfrac{y^2}{\beta^2}=1 $ τότε : \[ \min{|z|}=\beta\;\;\textrm{ και }\;\;\max{|z|}=a \] όπου $ 2a,2\beta $ τα μήκη του μεγάλου και του μικρού άξονα της έλλειψης αντίστοιχα.
+\item Αν η εικόνα του $ z $ κινείται πάνω στην υπερβολή $ \dfrac{x^2}{a^2}-\dfrac{y^2}{\beta^2}=1 $ τότε : \[ \min{|z|}=a \]
+\end{enumerate}
+Αν $ Μ_1,M_2 $ είναι οι εικόνες μιγαδικών $ z_1,z_2 $ τότε για την ελάχιστη και μέγιστη τιμή του μέτρου της διαφοράς τους $ |z_1-z_2| $ ισχύει :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν η εικόνες των $ z_1,z_2 $ κινoύνται σε παράλληλες ευθείες $ \varepsilon_1,\varepsilon_2 $ τότε : $ \min{|z_1-z_2|=d(\varepsilon_1,\varepsilon_2)} $.
+\item Αν η εικόνες των $ z_1,z_2 $ κινoύνται σε κύκλο $ (Μ_0,\rho) $ τότε : $ \max{|z_1-z_2|=2\rho} $.
+\item Αν η εικόνα του $ z_1 $ κινείται σε ευθεία $ \varepsilon $ και η εικόνα του $ z_2 $ σε κύκλο $ (Μ_0,\rho) $ τότε : \[ \min{|z_1-z_2|=d(M_0,\varepsilon)-\rho}\;\;\textrm{ και }\;\;\max{|z_1-z_2|=d(M_0,\varepsilon)+\rho} \]
+\item Αν οι εικόνες των $ z_1,z_2 $ κινούνται σε κύκλους $ C_1 : (K_1,\rho_1) $ και $ C_2 : (K_2,\rho_2) $ αντίστοιχα τότε :
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\item Αν οι κύκλοι δεν έχουν κοινά σημεία και βρίσκεται εξωτερικά ο ένας του άλλου δηλαδή $ K_1K_2>\rho_1+\rho_2 $ τότε : \[ \min{|z_1-z_2|=K_1K_2-\rho_1-\rho_2}\;\;\textrm{ και }\;\;\max{|z_1-z_2|=K_1K_2+\rho_1+\rho_2} \] 
+\item Αν οι κύκλοι εφάπτονται εξωτερικά δηλαδή $ K_1K_2=\rho_1+\rho_2 $ τότε : $ \max{|z_1-z_2|}=2\rho_1+2\rho_2 $
+\item Αν οι κύκλοι εφάπτονται εσωτερικά δηλαδή $ Κ_1Κ_2=\rho_1-\rho_2 $ τότε : $ \max{|z_1-z_2|}=2\rho_1 $ όπου $ \rho_1 $ η ακτίνα του μεγαλύτερου κύκλου.
+\end{enumerate}
+\item Αν οι εικόνες των μιγαδικών $ z_1,z_2 $ κινούνται στην έλλειψη $ \dfrac{x^2}{a^2}+\dfrac{y^2}{\beta^2}=1 $ τότε : \[ \max{|z_1-z_2|}=2a\;\;\textrm{ και }\;\;\min{|z_1-z_2|}=2\beta\;\textrm{ αν οι εικόνες των }z_1,z_2\textrm{ είναι αντιδιαμετρικές} \]
+\end{enumerate}
+\end{enumerate}
+\newpage
+\noindent
+\begin{center}
+\textbf{{\large ΟΡΙΑ - ΣΥΝΕΧΕΙΑ}}
+\end{center}
+\begin{enumerate}[itemsep=0mm]
+\item Πραγματική συνάρτηση : $ f:A\rightarrow\mathbb{R} $ ονομάζεται η διαδικασία με την οποία κάθε τιμή μιας πραγματικής μεταβλητής $ x\in A $ αντιστοιχεί μόνο μια τιμή $ y\in f(A) $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ A=D_f $ : πεδίο ορισμού.
+\item $ f(D_f) $ : σύνολο τιμών : $ f(D_f)=\left\lbrace y\in\mathbb{R}|y=f(x)\;,\;x\in D_f\right\rbrace  $
+\item $ y=f(x) $ : τιμή της $ f $ στο $ x $.
+\item Οι ρίζες της εξίσωσης $ f(x)=0 $ ονομάζονται και ρίζες της συνάρτησης $ f $.
+\item Αν $ \kappa\in f(D_f)$ τότε υπάρχει $ x_0\in D_f $ ώστε $ f(x_0)=\kappa $.
+\end{enumerate}
+\item Είδη συναρτήσεων
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Πολυωνυμική : $ f(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $.
+\item Ρητή : $ f(x)=\dfrac{g(x)}{h(x)} $ με $ h(x)\neq0 $.
+\item Άρρητη : $ f(x)=\!\sqrt{g(x)} $ με $ g(x)\geq0 $.
+\item Λογαριθμική : $ f(x)=\ln{g(x)} $ με $ g(x)>0 $.
+\item Εκθετική : $ f(x)=g(x)^{h(x)} $ με $ g(x)>0 $.
+\item Τριγωνομετρική : $ f(x)=\hm{g(x)}\;\textrm{ ή }\;\syn{g(x)}\;\textrm{ ή }\;\ef{g(x)}\;\textrm{ ή }\;\syf{g(x)} $.
+\item Σταθερή : $ f(x)=c $ με $ c\in\mathbb{R} $.
+\item Μηδενική : $ f(x)=0 $.
+\item Ταυτοτική : $ f(x)=x $ για κάθε $ x\in\mathbb{R} $.
+\end{enumerate}
+\item Γραφική παράσταση συνάρτησης : Σύνολο σημείων $ Μ\left( x,f(x)\right)\;,\;C_f=\{M\left( x,y\right)/y=f(x)\}$. Ισχύει \[ Μ(x_0,y_0)\in C_f\Leftrightarrow y_0=f(x_0) \]
+\item Άρτια - Περιττή συνάρτηση :\\
+Αν $ \forall x\in D_f\Rightarrow -x\in D_f $ και
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ f(-x)=f(x) $ η $ f $ είναι άρτια. Είναι συμμετρική ως προς $ y'y $.
+\item $ f(-x)=-f(x) $ η $ f $ είναι περιττή. Είναι συμμετρική ως προς το $ O $.
+\end{enumerate}
+\item Ίσες συναρτήσεις. $ f,g $ ίσες όταν
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ D_f=D_g $ και 
+\item $ \forall x\in D_f  \Rightarrow f(x)=g(x)$.
+\end{enumerate}
+\item Πράξεις με συναρτήσεις : Αν $ f:D_f\rightarrow\mathbb{R} $ και $ g:D_g\rightarrow \mathbb{R} $ τότε :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ (f+g)(x)=f(x)+g(x)\;\;,\;\;D_{f+g}=D_f\cap D_g $.
+\item $ (f-g)(x)=f(x)-g(x)\;\;,\;\;D_{f-g}=D_f\cap D_g $.
+\item $ (f\cdot g)(x)=f(x)\cdot g(x)\;\;,\;\;D_{f+g}=D_f\cap D_g $.
+\item $ \left( \dfrac{f}{g}\right) (x)=\dfrac{f(x)}{g(x)}\;\;,\;\;D_{f/g}=\{x\in D_f\cap D_g/g(x)\neq0\} $.
+\end{enumerate}
+\item Σύνθεση συναρτήσεων : Αν $ f:D_f\rightarrow\mathbb{R} $ και $ g:D_g\rightarrow \mathbb{R} $ τότε :\\
+Η σύνθεση $ f\circ g $ είναι :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ D_{f\circ g}=\{x\in D_g/g(x)\in D_f\} $
+\item $ (f\circ g)(x)=f\left( g(x)\right)  $
+\end{enumerate}
+Η σύνθεση $g\circ f $ είναι :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ D_{g\circ f}=\{x\in D_f/f(x)\in D_g\} $
+\item $ (g\circ f)(x)=g\left( f(x)\right)  $
+\end{enumerate}
+Ισχύει επίσης $ (f\circ g)\circ h=f\circ (g\circ h) $.
+\item Μονοτονία συνάρτησης
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ f:\varDelta\rightarrow\mathbb{R} $ ($ \varDelta $ διάστημα) αύξουσα αν $ \forall x_1,x_2\in\varDelta $ ισχύει $ x_1<x_2\Rightarrow f(x_1)<f(x_2) $.
+\item $ f:\varDelta\rightarrow\mathbb{R} $ ($ \varDelta $ διάστημα) φθίνουσα αν $ \forall x_1,x_2\in\varDelta $ ισχύει $ x_1<x_2\Rightarrow f(x_1)>f(x_2) $.
+\end{enumerate}
+\item Μονοτονία - Λύση εξισώσεων, ανισώσεων.\\
+Αν $ f:\varDelta\rightarrow\mathbb{R} $ μια γνησίως μονότονη συνάρτηση τότε :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f\uparrow\mathbb{\varDelta} $ τότε $ f(x)<f(x_0)\Leftrightarrow x<x_0 $.
+\item Αν $ f\downarrow\mathbb{\varDelta} $ τότε $ f(x)<f(x_0)\Leftrightarrow x>x_0 $.
+\item Η εξίσωση $ f(x)=0 $ έχει μια το πολύ λύση στο διάστημα $ \varDelta $.
+\item Αν $ 0\in f(\varDelta) $ τότε η εξίσωση $ f(x)=0 $ έχει μια ακριβώς ρίζα στο $ \varDelta $.
+\item Αν $ \eta\in f(\varDelta) $ τότε η εξίσωση $ f(x)=\eta $ έχει μια ακριβώς ρίζα στο $ \varDelta $.
+\end{enumerate}
+\item Ακρότατα συνάρτησης - Μέγιστο, ελάχιστο.\\
+Για μια συνάρτηση $ f:\varDelta\rightarrow\mathbb{R} $ έχουμε :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ f(x_0) $ μέγιστο όταν $ f(x)\leq f(x_0)\;,\;\forall x\in\varDelta$.
+\item $ f(x_0) $ ελάχιστο όταν $ f(x)\geq f(x_0)\;,\;\forall x\in\varDelta$.
+\end{enumerate}
+Αν $ m\leq f(x)\leq M $ και $ m,M\in f(\varDelta) $ τότε $ m $ ελάχιστο και $ M $ μέγιστο.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f\uparrow \varDelta=[a,\beta] \Rightarrow \min f=f(a) $ και $ \max f=f(\beta) $.
+\item Αν $ f\downarrow \varDelta=[a,\beta] \Rightarrow \min f=f(\beta) $ και $ \max f=f(a) $.
+\item Αν $ f $ μονότονη στο $ \varDelta=(a,\beta) $ δεν έχει ακρότατα.
+\end{enumerate}
+\item Συνάρτηση $ 1-1 $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ f:D_f\rightarrow\mathbb{R} \;\; 1-1$ όταν $ \forall x_1,x_2\in D_f $ ισχύει $ x_1\neq x_2\Rightarrow f(x_1)\neq f(x_2) $.
+\item $ f:D_f\rightarrow\mathbb{R} \;\; 1-1$ όταν $ \forall x_1,x_2\in D_f $ ισχύει $ f(x_1)=f(x_2)\Rightarrow x_1=x_2 $.
+\end{enumerate}
+Αν $ f $ μονότονη τότε είναι και $ 1-1 $.
+\item Αντίστροφη συνάρτηση : Αν  $ f:D_f\rightarrow\mathbb{R} $ μια συνάρτηση $ 1-1 $ τότε $ f^{-1}:f(D_f)\rightarrow\mathbb{R} $ είναι η αντίστροφή της. 
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Η $ f^{-1} $ έχει πεδίο ορισμού το σύνολο τιμών της $ f $ και σύνολο τιμών, το πεδίο ορισμού της $ f $.
+\item $ \left( f^{-1}\circ f\right)(x)=x\;\;,\;\;\forall x\in D_f $. 
+\item $ \left( f\circ f^{-1}\right)(y)=y\;\;,\;\;\forall y\in f(D_f) $.
+\end{enumerate}
+\item Όριο συνάρτησης σε σημείο $ x_0 $ : $ \displaystyle{\lim_{x\rightarrow x_0}f(x)=\ccases{\mathcal{l}\in\mathbb{R}\\\pm\infty\\\textrm{δεν υπάρχει}}} $\\
+Πλευρικά όρια : $ \displaystyle{\lim_{x\rightarrow x_0^{-}}f(x)}\;\;,\;\; \displaystyle{\lim_{x\rightarrow x_0^{+}}f(x)} $\\
+Το όριο της $ f $ υπάρχει στο $ x_0 $ αν και μόνο αν $ \displaystyle{\lim_{x\rightarrow x_0^{-}}f(x)}= \displaystyle{\lim_{x\rightarrow x_0^{+}}f(x)} $
+\item Ιδιότητες ορίων
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}>0 $ τότε $ f(x_0)>0 $ κοντά στο $ x_0 $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}<0 $ τότε $ f(x_0)<0 $ κοντά στο $ x_0 $.
+\item Αν $ f(x)>0 $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\geq0 $.
+\item Αν $ f(x)<0 $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\leq0 $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}>\displaystyle{\lim_{x\rightarrow x_0}g(x)} $ τότε $ f(x)>g(x) $ κοντά στο $ x_0 $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}<\displaystyle{\lim_{x\rightarrow x_0}g(x)} $ τότε $ f(x)<g(x) $ κοντά στο $ x_0 $.
+\item Αν $ f(x)>g(x) $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\geq\displaystyle{\lim_{x\rightarrow x_0}g(x)} $.
+\item Αν $ f(x)<g(x) $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\leq\displaystyle{\lim_{x\rightarrow x_0}g(x)} $.
+\end{enumerate}
+\item Πράξεις με όρια\\
+Αν υπάρχουν στο $ \mathbb{R} $ τα όρια των $ f,g $ στο $ x_0 $ τότε :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\pm g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\pm\displaystyle{\lim_{x\rightarrow x_0}g(x)}} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left( k\cdot f(x)\right) }=k\cdot\displaystyle{\lim_{x\rightarrow x_0}f(x)}\;\;,\;\;\forall k\in\mathbb{R} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\cdot g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\cdot\displaystyle{\lim_{x\rightarrow x_0}g(x)}} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left(\dfrac{ f(x)} {g(x)}\right)=\dfrac{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}{\displaystyle{\lim_{x\rightarrow x_0}g(x)}}} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=\left| \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right|  $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\sqrt[\kappa]{f(x)}}=\sqrt[\kappa]{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}\;\;,\;\;f(x)\geq0 $ κοντά στο $ x_0 $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f^\nu(x)}=\left( \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right)^\nu  $.
+\end{enumerate}
+ΔΕΝ ισχύουν : $ \displaystyle{\lim_{x\rightarrow x_0}f^2(x)=\mathcal{l}\Rightarrow \lim_{x\rightarrow x_0}f(x)=\mathcal{\!\sqrt{l}}} $ και $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|=\mathcal{l}\Rightarrow \lim_{x\rightarrow x_0}f(x)=\pm\mathcal{l}} $ \\διότι δεν γνωρίζουμε αν υπάρχει πάντα το $ \displaystyle{\lim_{x\rightarrow x_0}f(x)} $
+\item Κριτήριο παρεμβολής : Έστω συναρτήσεις $ f,g,h $. Αν
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ h(x)\leq f(x)\leq g(x) $ κοντά στο $ x_0 $ και
+\item $ \displaystyle{\lim_{x\rightarrow x_0}h(x)}=\displaystyle{\lim_{x\rightarrow x_0}g(x)}=\mathcal{l}\in\mathbb{R} $
+\end{enumerate}
+τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=\mathcal{l} $.
+\item Βασική τριγωνομετρική ανισότητα : $ |\textrm{ημ}x|\leq x\;,\;\forall x\in\mathbb{R} $.
+Βασικά τριγωνομετρικά όρια
+\begin{multicols}{3}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow0}\frac{\textrm{ημ}x}{x}}=1$
+\item $ \displaystyle{\lim_{x\rightarrow0}\frac{\textrm{συν}x-1}{x}}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow0}x\textrm{ημ}\frac{1}{x}}=0 $
+\end{enumerate}
+\end{multicols}
+\item Όριο σύνθετης συνάρτησης : $ \displaystyle{\lim_{x\rightarrow0}f\left( g(x)\right) =\lim_{u\rightarrow u_0}f(u)} $ όπου $ u=g(x) $ και $ u_0=\displaystyle{\lim_{x\rightarrow x_0}g(x)} $.
+\item Μη πεπερασμένο όριο στο $ x_0\in\mathbb{R} $ : $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=\pm\infty $.\\\\
+\item Ιδιότητες
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=\pm\infty\Rightarrow f(x)>0 (<0) $ αντίστοιχα κοντά στο $ x_0 $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=\pm\infty\Rightarrow  \displaystyle{\lim_{x\rightarrow x_0}\left( -f(x)\right) }=\mp\infty $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=\pm\infty\Rightarrow \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{f(x)}=0} $.
+\item $ \ccases{\displaystyle{\lim_{x\rightarrow x_0}f(x)}=0\\f(x)>0 (<0)\textrm{ κοντά στο }x_0}\Rightarrow \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{f(x)}=+\infty(-\infty)} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)\pm\infty}\Rightarrow\displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=+\infty $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=+\infty\Rightarrow\displaystyle{\lim_{x\rightarrow x_0}\!\sqrt[\kappa]{f(x)}=+\infty} $.
+\begin{multicols}{2}
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{(x-x_0)^{2\nu}}=+\infty} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{|x-x_0|}=+\infty} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0^-}\frac{1}{(x-x_0)^{2\nu+1}}=-\infty} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0^+}\frac{1}{(x-x_0)^{2\nu+1}}=+\infty} $.
+\end{multicols}
+\item $ \nexists\displaystyle{\lim_{x\rightarrow x_0}\frac{1}{(x-x_0)^{2\nu+1}}} $.
+\end{enumerate}
+\item Πρόταση : Αν $ f(x)\leq g(x) $ κοντά στο $ x_0 $ τότε
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=+\infty\Rightarrow \displaystyle{\lim_{x\rightarrow x_0}g(x)}=+\infty $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}g(x)}=-\infty\Rightarrow \displaystyle{\lim_{x\rightarrow x_0}f(x)}=-\infty $.
+\end{enumerate}
+(Τις παραπάνω τις αποδεικνύουμε)
+\item Όριο αθροίσματος\\\\
+\begin{tabular}{c|cccccc}
+\hline  Όριο συνάρτησης & \multicolumn{6}{c}{Τιμή ορίου} \rule[-2ex]{0pt}{5.5ex}\\
+\hhline{=======} \rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}f(x)} $ & $ a\in\mathbb{R} $ & $ a\in\mathbb{R} $ & $ +\infty $ & $ +\infty $ & $ -\infty $ & $ -\infty $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}g(x)} $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ \\ 
+\hhline{~------}\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}(f+g)(x)} $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & Απροσδιόριστη & Απροσδιόριστη & $ -\infty $ \\ 
+\hline 
+\end{tabular}\mbox{}\\\\
+\item Όριο γινομένου\\\\
+\begin{tabular}{c|cccccccccc}
+\hline  Όριο συνάρτησης & \multicolumn{10}{c}{Τιμή ορίου} \rule[-2ex]{0pt}{5.5ex}\\
+\hhline{===========} \rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}f(x)} $ & $ a>0 $ & $ a>0 $ & $ a<0 $ & $ a<0 $ & $ +\infty $ & $ +\infty $ & $ -\infty $ & $ -\infty $ & 0 & 0 \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}g(x)} $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ \\ 
+\hhline{~----------}\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}(f\cdot g)(x)} $ & $ +\infty $ & $ -\infty $ & $ -\infty $ & $ +\infty $ & $ +\infty $ & $ -\infty $ & $ -\infty $ & $ +\infty $ & Απρ. & Απρ. \\ 
+\hline 
+\end{tabular}
+\newpage
+\noindent
+\item Όριο στο άπειρο : $ \displaystyle{\lim_{x\rightarrow\pm\infty}f(x)=\ccases{\mathcal{l}\in\mathbb{R}\\\pm\infty}} $
+\item Βασικά όρια
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}x^\nu=\ccases{+\infty & \textrm{αν }\nu\textrm{ άρτιος}\\+\infty & \textrm{αν }\nu\textrm{ περιττός}}}  $
+\item Αν $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ τότε $ \displaystyle{\lim_{x\rightarrow\pm\infty}P(x)=\lim_{x\rightarrow\pm\infty}a_\nu x^\nu} $
+\item Αν $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ και $ Q(x)=\beta_\kappa x^\kappa+\beta_{\kappa-1}x^{\kappa-1}+\ldots+\beta_1x+\beta_0 $ τότε $ \displaystyle{\lim_{x\rightarrow\pm\infty}\frac{P(x)}{Q(x)}=\lim_{x\rightarrow\pm\infty}\frac{a_\nu x^\nu}{\beta_\kappa x^\kappa}} $.
+\item Όριο εκθετικής - λογαριθμικής για $ a>1 $.
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}a^x}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow-\infty}a^x}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow0}\log_ax}=-\infty $
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}\log_ax}=+\infty $
+\end{enumerate}
+\end{multicols}
+\item Όριο εκθετικής - λογαριθμικής για $ 0<a<1 $.
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}a^x}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow-\infty}a^x}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow0}\log_ax}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}\log_ax}=-\infty $
+\end{enumerate}
+\end{multicols}
+\item Βασικά όρια
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\begin{multicols}{2}
+\item $ \displaystyle{\lim_{x\rightarrow0^+}e^{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow+\infty}e^{y}}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow0^-}e^{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow-\infty}e^{y}}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{ημ}{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow0}\textrm{ημ}{y}}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{συν}{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow0}\textrm{συν}{y}}=1 $
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}x\textrm{ημ}{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow0}\frac{\textrm{ημ}{y}}{y}}=1 $
+\end{multicols}
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}\frac{\textrm{ημ}x}{x}}=\displaystyle{\lim_{x\rightarrow\pm\infty}\frac{1}{x}{\textrm{ημ}x}}=0 $\quad Μηδενική επί φραγμένη (αποδεικνείεται με κριτήριο παρεμβολής)
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}(x+\textrm{ημ}x)}= \displaystyle{\lim_{x\rightarrow\pm\infty}x\left( 1+\frac{\textrm{ημ}x}{x}\right) }=\pm\infty $\\\\
+Τα παρακάτω όρια ΔΕΝ υπάρχουν
+\begin{multicols}{2}
+\item $  \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{ημ}x} $
+\item $  \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{συν}x} $
+\end{multicols}
+\end{enumerate}
+\end{enumerate}
+\item Συνέχεια συνάρτησης σε σημείο $ x_0\in D_f $\\
+Μια συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν \[  \displaystyle{\lim_{x\rightarrow x_0}f(x)}=f(x_0) \]
+\item Συνέχεια συνάρτησης σε διάστημα
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Μια συνάρτηση $ f $ είναι συνεχής σε ένα ανοιχτό διάστημα $ (a,\beta) $ αν είναι συνεχής σε κάθε σημείο του διαστήματος.
+\item Μια συνάρτηση $ f $ είναι συνεχής σε ένα ανοιχτό διάστημα $ [a,\beta] $ αν είναι συνεχής σε κάθε σημείο του ανοιχτού διαστήματος $ (a,\beta) $ και ισχύει \[ \displaystyle{\lim_{x\rightarrow a^+}f(x)}=f(a)\;\;\textrm{και}\;\;\displaystyle{\lim_{x\rightarrow \beta^+}f(x)}=f(\beta) \]
+\end{enumerate}
+Μια συνάρτηση που είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της λέγεται απλά συνεχής.
+\item Συνεχείς συναρτήσεις
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Πολυωνυμικές $ f(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ για κάθε $ x\in\mathbb{R} $.
+\item Ρητές $ f(x)=\dfrac{g(x)}{h(x)} $ για κάθε $ x\in D_f=\{x\in\mathbb{R}|h(x)\neq0\} $.
+\item Τριγωνομετρικές $ f(x)=\textrm{ημ}x $ και $ g(x)=\textrm{συν}x $ για κάθε $ x\in\mathbb{R} $.
+\item Εκθετικές και λογαριθμικές $ f(x)=a^x $ και $ g(x)=\log_ax $ με $ 0<a\neq1 $.
+\end{enumerate}
+\item Πράξεις με συνεχείς συναρτήσεις\\
+Αν $ f,g $ δύο συνεχείς συναρτήσεις σε ένα κοινό σημείο $ x_0 $ των πεδίων ορισμού τους τότε οι συναρτήσεις \[ f\pm g\;\;,\;\;cf\;\;,\;\;f\cdot g\;\;,\;\;\frac{f}{g}\;\;,\;\;|f|\;\;,\;\;f^\nu\;\;,\;\;\sqrt[\kappa]{f} \]
+είναι συνεχείς στο $ x_0 $ εφόσον ορίζονται σε ένα διάστημα που περιέχει το σημείο αυτό.
+\item Συνέχεια σύνθεσης\\
+Έστω $ f,g $ δύο συναρτήσεις και $ x_0\in D_f $. Αν $f$ συνεχής στο $x_0$ και $g$ είναι συνεχής στο $f(x_0)$ τότε $g\circ f$ συνεχής στο $x_0$.
+\item Θεώρημα \eng{Bolzano}\\
+Αν για μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$ ισχύει:
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $f$ συνεχής στο διάστημα $[a,\beta]$ και 
+\item $f(a)\cdot f(\beta)<0$
+\end{enumerate}
+τότε θα υπάρχει τουλάχιστον ένας αριθμός $ x_0\in(a,\beta) $ έτσι ώστε \[ f(x_0)=0 \]
+\begin{itemize}
+\item Αν ισχύει $ f(a)\cdot f(\beta)\leq0 $ τότε θα υπάρχει $ x_0\in[a,\beta] $ ώστε $ f(x_0)=0 $.
+\item Το αντίστροφο του \eng{Bolzano} δε ισχύει πάντα.
+\end{itemize}
+\item Γεωμετρική ερμηνεία \eng{Bolzano}\\
+\begin{tabular}{b{10cm}c}
+Για μια συνεχή συνάρτηση $f$ στο διάστημα $ [a,\beta] $ η συνθήκη $ f(a)\cdot f(\beta)<0 $ σημαίνει οτι οι τιμές αυτές θα είναι ετερόσημες οπότε τα σημεία $ A(a,f(a)) $ και $ B(\beta,f(\beta)) $ θα βρίσκονται εκατέρωθεν του άξονα $ x'x $. Αυτό σημαίνει οτι ηγαφική παράσταση $C_f$ θα τέμνει τον άξονα σε τουλάχιστον ένα σημείο με τετμημένη $x_0\in(a,\beta)$\vspace{1.1cm}.& \begin{tikzpicture}[scale=.7,domain=-.6:3.32,y=.7cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-4.5,ymax=1.2,ystep=1]
+\draw[-latex] (-2,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\small $ x $}};
+\draw[-latex] (-1,-2.7) -- (-1,4.4) node[above,fill=white] {{\small $ y $}};
+\draw (-.25,.5mm) -- (-.25,-.5mm) node[anchor=north west,fill=white] {{\small $ x_1 $}};
+\draw (1.45,.5mm) -- (1.45,-.5mm) node[anchor=north east,fill=white] {{\small $ x_2 $}};
+\draw (2.8,.5mm) -- (2.8,-.5mm) node[anchor=north west,fill=white] {{\small $ x_3 $}};
+\clip (-.7,-3) rectangle (5,4);
+\draw[samples=100,line width=.5mm] plot function{x**3-4*x**2+3*x+1};
+\tkzDefPoint(-.6,-2.5){A}
+\tkzDrawPoint[size=7,fill=black](A)
+\tkzDefPoint(3.32,3.5){A}
+\tkzDrawPoint[size=7,fill=black](A)
+\tkzText(2.2,3.4){{\footnotesize $ f(\beta)>0 $}}
+\tkzText(0.5,-2.4){{\footnotesize $ f(a)<0 $}}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\item Πρόσημο συνάρτησης\\
+Αν για μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ισχύει $ f(x)\neq0\;,\;\forall x\in\varDelta $ τότε η $ f $ διατηρεί το πρόσημό της στο $ \varDelta $ δηλαδή :
+\[ f(x)>0\textrm{ ή }f(x)<0\;,\;\forall x\in\varDelta \]
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν υπάρχει $ a\in\varDelta $ ώστε $ f(a)>0 $ τότε $ f(x)>0 $. Αντίστοιχα αν υπάρχει $ a\in\varDelta $ ώστε $ f(a)<0 $ τότε $ f(x)<0 $.\\
+\item Αν $ \rho_1,\rho_2 $ είναι δύο διαδοχικές ρίζες της $ f $ τότε η συνάρτηση διατηρεί το πρόσημό της στο διάστημα $ (\rho_1,\rho_2) $ μεταξύ των ριζών.
+\end{enumerate}
+\item Θεώρημα ενδιάμεσων τιμών\\
+Αν μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $ είναι 
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο $ [a,\beta] $ και ισχύει
+\item $ f(a)\neq f(\beta) $
+\end{enumerate}
+τότε για κάθε τιμή $ \eta $ μεταξύ των $ f(a) $ και $ f(\beta) $ υπάρχει ένας τουλάχιστον αριθμός $ x_0\in(a,\beta) $ ώστε $ f(x_0)=\eta $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Η εικόνα $ f(\varDelta) $ ενός διαστήματος $ \varDelta $ μέσω μιας συνεχούς και μη σταθερής συνάρτησης $ f $ είναι διάστημα.
+\item Αν μια $ 1-1 $ συνάρτηση $ f $ είναι συνεχής σε ένα διάστημα $ \varDelta $ τότε είναι γνησίως μονότονη.
+\end{enumerate}
+\item Θεώρημα μέγιστης και ελάχιστης τιμής.\\
+Αν μια συνάρτηση $ f $ είναι συνεχής σε ένα διάστημα $ [a,\beta] $ τότε παίνει στο διάστημα αυτό μια μέγιστη τιμή $ M $ και μια ελάχιστη τιμή $ m $. 
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ m=M $ τότε η συνάρτηση είναι σταθερή.
+\item Αν $ m\leq f(\eta)\leq M $ τότε $ \eta\in f(\varDelta) $ και υπάρχει $ x_0\in[a,\beta] $ ώστε $ f(x_0)=\eta $.
+\item Αν $ m\leq f(\eta)\leq M $ και η $ f $ είναι γνησίως μονότονη στο $ [a,\beta] $ τότε η εξίσωση $ f(x)=\eta $ έχει ακριβώς μια λύση.
+\end{enumerate}
+\item Σύνολο τιμών - Εικόνα κλειστού - ανοιχτού διαστήματος.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ \varDelta=[a,\beta] $ τότε
+\begin{itemize}
+\item Αν $ f\uparrow\varDelta $ τότε $ f(\varDelta)=\left[ f(a),f(\beta)\right] $.
+\item Αν $ f\downarrow\varDelta $ τότε $ f(\varDelta)=\left[ f(\beta),f(a)\right]  $.
+\end{itemize}
+\item Αν $ \varDelta=(a,\beta) $ τότε
+\begin{itemize}
+\item Αν $ f\uparrow\varDelta $ τότε $ f(\varDelta)=\displaystyle{\left( \lim_{x\rightarrow a^+}f(x),\lim_{x\rightarrow \beta^-}f(x)\right)} $.
+\item Αν $ f\downarrow\varDelta $ τότε $ f(\varDelta)=\displaystyle{\left( \lim_{x\rightarrow \beta^-}f(x),\lim_{x\rightarrow a^+}f(x)\right)} $.
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\newpage
+\noindent
+\begin{center}
+\textbf{{\large ΔΙΑΦΟΡΙΚΟΣ ΛΟΓΙΣΜΟΣ}}
+\end{center}
+\begin{enumerate}
+\item Παράγωγος σε σημείο\\
+$ f'(x_0)=\displaystyle{\lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0}} $.\\
+Η $ f $ είναι \textbf{παραγωγίσιμη} στο $ x_0 $ αν το όριο της παραγώγου υπάρχει και είναι πραγματικός αριθμός.
+\begin{itemize}
+\item Το κλάσμα $ \dfrac{f(x)-f(x_0)}{x-x_0} $ ονομάζεται \textbf{λόγος μεταβολής} της $ f $.
+\item Αν $ h=x-x_0 $ η παράγωγος της $ f $ στο σημείο $ x_0 $ μετασχηματίζεται ως εξής \[ f'(x_0)=\lim_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h} \]
+\end{itemize}
+\item Αν μια συνάρτηση $ f $ είναι παραγωγίσιμη σε ένα σημείο $ x_0 $ τότε είναι και συνεχής στο σημείο αυτό. Το αντίστροφο δεν ισχύει.
+\item Παράγωγίσιμη συνάρτηση σε σύνολο
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ f $ παραγωγίσιμη σε ένα σύνολο $ A $ αν είναι παραγωγίσιμη σε κάθε σημείο του διαστήματος.
+\item $ f $ παραγωγίσιμη σε ένα ανοιχτό διάστημα $ (a,\beta) $ αν είναι παραγωγίσιμη $ \forall x\in(a,\beta) $.
+\item $ f $ παραγωγίσιμη σε ένα κλειστό διάστημα $ (a,\beta) $ αν είναι παραγωγίσιμη  $ \forall x\in(a,\beta) $ και επιπλέον \[ \lim_{x\rightarrow a^+}\frac{f(x)-f(a)}{x-a}\in\mathbb{R}\;\textrm{ και }\;\lim_{x\rightarrow \beta^-}\frac{f(x)-f(\beta)}{x-\beta}\in\mathbb{R} \]
+\end{enumerate}
+\item Παραγωγος συνάρτηση : $ f':A\rightarrow\mathbb{R} $ παράγωγος της $ f $ : $ f'(x)=\displaystyle{\lim_{h\rightarrow0}\dfrac{f(x+h)-f(x)}{h}} $.
+\item Κανόνες παραγώγισης
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ (f\pm g)'(x)=f'(x)+g'(x) $.
+\item $ \left( c\cdot f\right)'(x)=c\cdot f'(x) $.
+\item $ (f\cdot g)'(x)=f'(x)g(x)+f(x)g'(x) $.
+\item $ \left( \dfrac{f}{g}\right)'(x)=\dfrac{f'(x)g(x)-f(x)g'(x)}{g^2(x)} $.
+\item $ \left( \dfrac{1}{f}\right)'(x)=-\dfrac{f'(x)}{f^2(x)}  $
+\item $ \left(f\circ g\right)'(x)=f'(g(x))\cdot g'(x) $.
+\end{enumerate}
+\end{multicols}
+\item Παράγωγοι συναρτήσεων
+\begin{center}
+\begin{longtable}{cc|cc}
+\hline \rule[-2ex]{0pt}{5.5ex} Συνάρτηση $ f $& Παράγωγος $ f' $ & Συνάρτηση $ f $ & Παράγωγος $ f' $ \\ 
+\hhline{====} \rule[-2ex]{0pt}{5.5ex} $ c $ & $ 0 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x $ & $ 1 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x^\nu $ & $ \nu x^{\nu-1} $ & $ \left[ f(x)\right]^\nu $ & $ \nu \left[f(x)\right]^{\nu-1}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \dfrac{1}{x} $ & $ -\dfrac{1}{x^2} $ & $ \dfrac{1}{f(x)} $ & $ -\dfrac{f'(x)}{f^2(x)} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \sqrt{x} $ & $ \dfrac{1}{2\!\sqrt{x}} $ & $ \sqrt{f(x)} $ & $ \dfrac{f'(x)}{2\!\sqrt{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \hm{x} $ & $ \syn{x} $ & $ \hm{f(x)} $ & $ \syn{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \syn{x} $ & $ -\hm{x} $ & $ \syn{f(x)} $ & $ -\hm{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \ef{x} $ & $ \dfrac{1}{\syn^2{x}} $ & $ \ef{f(x)} $ & $ \dfrac{f'(x)}{\syn^2{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \syf{x} $ & $ -\dfrac{1}{\hm^2{x}} $ & $ \syf{f(x)} $ & $ -\dfrac{f'(x)}{\hm^2{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ a^x $ & $ a^x\ln{a} $ & $ a^{f(x)} $ & $ a^{f(x)}\ln{a}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ e^x $ & $ e^x $ & $ e^{f(x)} $ & $ e^{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \ln{|x|} $ & $ \dfrac{1}{x} $ & $ \ln{|f(x)|} $ & $ \dfrac{f'(x)}{f(x)} $ \\ 
+\hline 
+\end{longtable} 
+\end{center}
+\item Συντελεστής διεύθυνσης εφαπτόμενης ευθείας σε σημείο $x_0$ : $ \lambda=f'(x_0)=\displaystyle{\lim_{x\rightarrow x_0}\dfrac{f(x)-f(x_0)}{x-x_0}} $.
+\item Εξίσωση εφαπτόμενης ευθείας στο $ x_0 $ : $ y-f(x_0)=f'(x_0)(x-x_0) $.
+\item Ρυθμός μεταβολής. Αν $y=f(x)$ τότε ο ρυθμός μεταβολής του ποσού $y$ ως προς το ποσό $ x $ σε ένα σημείο $x_0$ είναι : $ f'(x_0) $. 
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f'(x_0)>0 $ ο ρυθμός είναι θετικός άρα το ποσό αυξάνεται.
+\item Αν $ f'(x_0)<0 $ ο ρυθμός είναι αρνητικός άρα το ποσό μειώνεται.
+\end{enumerate}
+\item Θεώρημα \eng{Rolle}\\
+Αν μια συνάρτηση $ f:[a,\beta]\rightarrow \mathbb{R} $ είναι
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο $ [a,\beta] $.
+\item παραγωγίσιμη στο $ (a,\beta) $ και
+\item $ f(a)=f(\beta) $
+\end{enumerate}
+τότε υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώστε $ f'(\xi)=0 $.
+\item Γεωμετρική ερμηνεία του Θ.\eng{Rolle}.\\
+Αν εφαρμόζεται το θεώρημα \eng{Rolle} στο $ [a,\beta] $ τότε υπάρχει τουλάχιστον ένας αριθμός $ \xi\in(a,\beta) $ ώστε η εφαπτόμενη ευθεία στο $ Α\left( \xi,f(\xi)\right) $ να είναι παράλληλη με τον άξονα $ x'x $.
+\item Συνέπειες του θεωρήματος \eng{Rolle}.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f'(x)\neq0\;,\;\forall x\in\mathbb{R} $ τότε $ f:1-1 $.
+\item Αν $ \rho_1,\rho_2 $ είναι δύο διαδοχικές ρίζες της $ f $ τότε θα υπάρχει τουλάχιστον ένα $ \xi\in(\rho_1,\rho_2) $ ώστε $ f'(\xi)=0 $.
+\end{enumerate}
+\item Θεώρημα Μέσης Τιμής\\
+Αν μια συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ είναι
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο $ [a,\beta] $
+\item παραγωγίσιμη στο $ (a,\beta) $
+\end{enumerate}
+τότε υπάρχει ένα τουλάχιστον $ \xi\in(a,\beta) $ ώστε $ f'(\xi)=\dfrac{f(\beta)-f(a)}{\beta-a} $
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Το θεώρημα \eng{Rolle} είναι μια ειδική περίπτωση του Θ.Μ.Τ.
+\item $ f(\beta)-f(a)=f'(\xi)(\beta-a) $.
+\end{enumerate}
+\item Συνέπειες του Θ.Μ.Τ.
+\begin{enumerate}[itemsep=0mm,label=\arabic*.]
+\item Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $. Αν
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item η $f$ είναι συνεχής στο $ \varDelta $ και
+\item $ f'(x)=0 $ σε κάθε εσωτερικό σημείο του $ \varDelta $
+\end{enumerate}
+τότε η $ f $ είναι σταθερή στο $ \varDelta $.
+\item Έστω δύο συναρτησεις $ f,g $ ορισμένες σε ένα διάστημα $ \varDelta $. Αν
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item οι $f,γ$ είναι συνεχείς στο $ \varDelta $ και	\item $ f'(x)=g'(x) $ σε κάθε εσωτερικό σημείο του $ \varDelta $
+\end{enumerate}
+τότε υπάρχει σταθερά $ c $ τέτοια ώστε για κάθε $ x\in\varDelta $ να ισχύει $ f(x)=g(x)+c $.
+\end{enumerate}
+\item Μονοτονία\\Έστω $ f $ συνεχής σε \textbf{διάστημα} $\varDelta $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f'(x)>0\;,\forall x$ εσωτερικό του $ \varDelta $ τότε $ f\uparrow\varDelta $.
+\item Αν $ f'(x)<0\;,\forall x$ εσωτερικό του $ \varDelta $ τότε $ f\downarrow\varDelta $.
+\end{enumerate}
+Το αντίστροφο δεν ισχύει. Ισχύει όμως το εξής:
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f\uparrow\varDelta$ τότε $ f'(x)\geq0\;,\forall x$ εσωτερικό του $ \varDelta $.
+\item Αν $ f\downarrow\varDelta$ τότε $ f'(x)\leq0\;,\forall x$ εσωτερικό του $ \varDelta $.
+\end{enumerate}
+Αν μια συνάρτηση είναι συνεχής σε ένα διάστημα $ (a,\beta) $ και παραγωγίσιμη στο $ (a,x_0)\cup(x_0,\beta) $, με $ x_0\in(a,\beta) $ τότε είναι γνησίως μονότονη στο $ (a,\beta) $.\\
+Γενικά αν η παράγωγος μιας συνάρτησης $ f $ μηδενίζεται ή δεν ορίζεται σε μεμονομένα σημεία του $ \varDelta $ τότε η $ f $ είναι γνησίως μονότονη στο $ \varDelta $.
+\item Τοπικά ακρότατα
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Η $ f $ παρουσιάζει τοπικό μέγιστο στο $ x_0 $ αν $$ \exists\delta>0\;\textrm{ ώστε }\;f(x_0)\geq f(x)\;,\;\forall x\in(x_0-\delta,x_0+\delta)\cap D_f $$
+\item Η $ f $ παρουσιάζει τοπικό ελάχιστο στο $ x_0 $ αν $$ \exists\delta>0\;\textrm{ ώστε }\;f(x_0)\leq f(x)\;,\;\forall x\in(x_0-\delta,x_0+\delta)\cap D_f $$
+\end{enumerate}
+Το $ x_0 $ είναι η θέση του τοπικού ακρότατου. Το $ f(x_0) $ είναι το τοπικό ακρότατο.
+\item Θεώρημα \eng{Fermat}\\
+Έστω $ f:\varDelta\rightarrow\mathbb{R} $ και $ x_0\in \varDelta $
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ x_0 $ εσωτερικό του διαστήματος $ \varDelta $
+\item $ f $ παραγωγίσιμη στο $ x_0 $ και
+\item $ f $ παρουσιάζει ακρότατο στο $ x_0 $
+\end{enumerate}
+τότε $ f'(x_0)=0 $
+\item Πιθανές θέσεις ακρότατων
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Τα εσωτερικά σημεία του διαστήματος $ \varDelta $ όπου $ f'(x_0)=0 $.
+\item Τα εσωτερικά σημεία του διαστήματος $ \varDelta $ όπου δεν ορίζεται η $ f' $.\makebox(0,0){\put(0,2.2\normalbaselineskip){%
+$\left.\rule{0pt}{1.1\normalbaselineskip}\right\}$ Κρίσιμα σημεία}}
+\item Τα άκρα του $ \varDelta $.
+\end{enumerate}
+\item Κριτήριο τοπικών ακρότατων\\
+Έστω $ f:(a,\beta)\rightarrow\mathbb{R} $ και παραγωγίσιμη στο $ (a,\beta) $ με εξαίρεση ίσως ένα σημείο $ x_0 $ συνεχής όμως σ αυτό.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f'(x)>0 $ στο $ (a,x_0) $ και $ f'(x)>0 $ στο $ (x_0,\beta) $ τότε $ f(x_0) $ τοπικό μέγιστο.
+\item Αν $ f'(x)<0 $ στο $ (a,x_0) $ και $ f'(x)>0 $ στο $ (x_0,\beta) $ τότε $ f(x_0) $ τοπικό ελάχιστο.
+\item Αν $ f'(x) $ διατηρεί πρόσημο στο $ (a,x_0)\cup(x_0,\beta) $ και $ f'(x)>0 $ τότε $ f(x_0) $ δεν είναι τοπικό ακρότατο.
+\end{enumerate}
+\item Βασική ανισότητα : $ \ln{x}\leq x-1\;,\;x>0 $.\\
+Οι ανισότητες
+\begin{multicols}{4}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \ln{x}<x $
+\item $ e^x\geq x+1 $
+\item $ e^x>x $
+\item $ e^x>\hm{x} $
+\end{enumerate}
+\end{multicols}
+θα αποδεικνύονται με τη βοήθεια της πρώτης.
+\item Κυρτή - Κοίλη\\
+Έστω $ f $ συνεχής στο διάστημα $ \varDelta $ και παραγωγίσιμη στο εσωτερικό του $ \varDelta $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Η $ f $ είναι κυρτή (στρέφει τα κοίλα προς τα \textbf{πάνω}) αν $ f'\uparrow $ στο εσωτερικό του $ \varDelta $.
+\item Η $ f $ είναι κοίλη (στρέφει τα κοίλα προς τα \textbf{κάτω}) αν $ f'\downarrow $ στο εσωτερικό του $ \varDelta $.
+\end{enumerate}
+\item Κυρτότητα\\
+Έστω $ f $ συνεχής στο διάστημα $ \varDelta $ και παραγωγίσιμη δύο φορές στο εσωτερικό του $ \varDelta $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ f''(x)>0\;,\forall x $ στο εσωτερικό του $ \varDelta $ τότε $ f\undercurvearrowright\varDelta $.
+\item Αν $ f''(x)<0\;,\forall x $ στο εσωτερικό του $ \varDelta $ τότε $ f\curvearrowright\varDelta $.
+\end{enumerate}
+\item Κριτήριο σημείων καμπής\\
+Έστω $ f:(a,\beta)\rightarrow\mathbb{R} $ και $ x_0\in(a,\beta) $. Αν
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item η $ f $ αλλάζει πρόσημο εκατέρωθεν του $x_0$ και 
+\item ορίζεται η εφαπτόμενη ευθεία στο $ A\left(x_0,f(x_0) \right) $
+\end{enumerate}
+τοτε το σημείο $ A\left(x_0,f(x_0) \right) $ είναι σημείο καμπής. (Εκεί αλλάζει η κυρτότητα)
+\item Ασύμπτωτες
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ \LEFTRIGHT.\}{
+\begin{aligned}
+&\displaystyle{\lim_{x\rightarrow x_0^{+}}f(x)}\textrm{ ή}\\	
+&\displaystyle{\lim_{x\rightarrow x_0^{-}}f(x)}
+\end{aligned}}=\pm\infty\Rightarrow x=x_0 $ κατακόρυφη ασύμπτωτη.
+\item Αν $ \displaystyle{\lim_{x\rightarrow +\infty}f(x)}=\mathcal{l}\Rightarrow y=\mathcal{l}$ οριζόντια ασύμπτωτη στο $ +\infty $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow -\infty}f(x)}=\mathcal{l}\Rightarrow y=\mathcal{l}$ οριζόντια ασύμπτωτη στο $ -\infty $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow +\infty}\left[ f(x)-(\lambda x+\beta)\right] }=0\Rightarrow y=\lambda x+\beta$ πλάγια ασύμπτωτη στο $ +\infty $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow -\infty}\left[ f(x)-(\lambda x+\beta)\right] }=0\Rightarrow y=\lambda x+\beta$ πλάγια ασύμπτωτη στο $ -\infty $.
+\end{enumerate}
+\item H $ y=\lambda x+\beta $ είναι ασύμπτωτη της $ C_f $ στο $ \pm\infty\Leftrightarrow $ \[ \lim_{x\rightarrow\pm\infty}{\frac{f(x)}{x}}=\lambda\;\;\textrm{ και }\;\;\lim_{x\rightarrow\pm\infty}{\left[ f(x)-\lambda x\right] }=\beta \]
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Η $ C_f $ με μια πλάγια ασύμπτωτη μπορεί να έχουν κοινά σημεία.
+\item Αν η $ C_f $ έχει οριζόντια ασύμπτωτη τότε δεν έχει πλάγια.
+\end{enumerate}
+\item Κανόνες \eng{De L' Hospital}\\
+Αν $ \displaystyle{\lim_{x\rightarrow x_0}{f(x)}=\lim_{x\rightarrow x_0}{g(x)}=0\;\textrm{ ή }\;\pm\infty} $ τότε $ \displaystyle{=\lim_{x\rightarrow x_0}\dfrac{f'(x)}{g'(x)}} $ με $ x_0\in\mathbb{R}\cup\{-\infty,+\infty\} $.
+\item Βασική ανισότητα : Κοντά στο $ +\infty $ ισχύει $ e^x>x^\nu>\ln{x} $.
+\end{enumerate}
+\newpage
+\noindent
+\begin{center}
+\textbf{{\large ΟΛΟΚΛΗΡΩΤΙΚΟΣ ΛΟΓΙΣΜΟΣ}}
+\end{center}
+\begin{enumerate}
+\item Αρχική συνάρτηση : $ F : $ αρχική της $ f $ στο $ \varDelta $ τότε $ F'(x)=f(x) $. Η αρχική μιας συνάρτησης ορίζεται σε διάστημα και όχι ένωση διαστημάτων.
+\item Αν $ F $ μια αρχική της $ f:\varDelta\rightarrow\mathbb{R} $ τότε
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item όλες οι συναρτήσεις της μορφής $ G(x)=F(x)+c $ είναι αρχικές της $ f $.
+\item κάθε άλλη αρχική της $ f $ είναι της μορφής $ G(x)=F(x)+c $.
+\end{enumerate}
+\item Αρχικές συναρτήσεις
+\begin{center}
+\begin{longtable}{cc|cc}
+\hline \rule[-2ex]{0pt}{5.5ex} Συνάρτηση $ f $& Αρχική $ F $ & Συνάρτηση $ f $ & Αρχική $ F $ \\ 
+\hhline{====} \rule[-2ex]{0pt}{5.5ex} $ 0 $ & $ c $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ 1 $ & $ x+c $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x^\nu $ & $ \dfrac{x^{\nu+1}}{\nu+1}+c $ & $ \left[ f(x)\right]^\nu\cdot f'(x) $ & $ \dfrac{\left[f(x)\right]^{\nu+1}}{\nu+1} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ -\dfrac{1}{x^2} $ & $ \dfrac{1}{x}+c $ & $ -\dfrac{f'(x)}{f^2(x)} $ & $ \dfrac{1}{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \dfrac{1}{2\!\sqrt{x}} $ & $ \sqrt{x}+c $ & $ \dfrac{f'(x)}{2\!\sqrt{f(x)}} $ & $ \sqrt{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \syn{x} $ & $ \hm{x}+c $ & $ \syn{f(x)}\cdot f'(x) $ & $ \hm{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ -\hm{x} $ & $ \syn{x}+c $ & $ -\hm{f(x)}\cdot f'(x) $ & $ \syn{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \dfrac{1}{\syn^2{x}} $ & $ \ef{x}+c $ & $ \dfrac{f'(x)}{\syn^2{f(x)}} $ & $ \ef{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{7ex} $ -\dfrac{1}{\hm^2{x}} $ & $ \syf{x}+c $ & $ -\dfrac{f'(x)}{\hm^2{f(x)}} $ & $ \syf{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ a^x $ & $ \dfrac{a^x}{\ln{a}}+c $ & $ a^{f(x)}\cdot f'(x) $ & $ \dfrac{a^{f(x)}}{\ln{a}}+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ e^x $ & $ e^x $ & $ e^{f(x)}\cdot f'(x) $ & $ e^{f(x)}+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \dfrac{1}{x} $ & $ \ln{|x|}+c $ & $ \dfrac{f'(x)}{f(x)} $ & $ \ln{|f(x)|}+c $ \\ 
+\hline 
+\end{longtable} 
+\end{center}
+\item Κανόνες αρχικών συναρτήσεων
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} Συνάρτηση $ f $& Αρχική $ F $ \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} $ 0 $ & $ c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ f'(x)\pm g'(x) $ & $ f(x)\pm g(x)+c $ \\ 
+\rule[-2ex]{0pt}{5ex} $ f'(x)\cdot g(x)+f(x)\cdot g'(x) $ & $ f(x)\cdot g(x)+c $ \\
+\rule[-2ex]{0pt}{5ex} $ \dfrac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g^2(x)} $ & $ \dfrac{f(x)}{g(x)}+c $ \\
+\rule[-2ex]{0pt}{5ex} $ g'(f(x))\cdot f'(x) $ & $ g(f(x))+c $ \\
+\hline 
+\end{longtable} 
+\end{center}
+\item Ορισμένο ολοκλήρωμα : $ \displaystyle{\int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}} $ με $ f $ συνεχή στο $ [a,\beta] $.
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\int_{a}^{a}{\!\!\!f(x)\mathrm{d}x}=0} $
+\item $ \displaystyle{\int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}}=-\displaystyle{\int_{\beta}^{a}{\!\!\!f(x)\mathrm{d}x}} $
+\item $ \displaystyle{\int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}}=\displaystyle{\int_{a}^{\gamma}{\!\!\!f(x)\mathrm{d}x}}+\displaystyle{\int_{\gamma}^{\beta}{\!\!\!f(x)\mathrm{d}x}} $
+\end{enumerate}
+\end{multicols}
+\item Εμβαδόν χωρίου : Αν για την $ f:[a,\beta]\rightarrow\mathbb{R} $ ισχύει $ f(x)\geq0 $ τότε $ \displaystyle{Ε(\varOmega)=\int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}} $.
+\item Έστω $ f $ συνεχής στο $ [a,\beta] $ με $ f(x)\geq0 $ για κάθε $ x\in[a,\beta] $. Αν η $ f $ δε μηδενίζεται παντού τότε \[ \displaystyle{\int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}}>0 \]
+\item Αν $ f:\varDelta\rightarrow\mathbb{R} $ συνεχής στο $ \varDelta $ και $ a $ ένα σημείο του $ \varDelta $ τότε η συνάρτηση \[ F(x)=\displaystyle{\int_{a}^{x}{\!\!\!f(t)\mathrm{d}t}} \] είναι μια αρχική της $ f $ στο $ \varDelta $.
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\left( \int_{a}^{x}{\!\!\!f(x)\mathrm{d}x}\right)'=f(x)} $
+\item $  \displaystyle{\left( \int_{a}^{g(x)}{\!\!\!f(x)\mathrm{d}x}\right)'=f(g(x))\cdot g'(x)} $
+\end{enumerate}
+\end{multicols}
+\item Θεμελιώδες θεώρημα ολοκληρωτικού λογισμού\\
+Έστω $ f:[a,\beta]\rightarrow\mathbb{R} $ μια συνεχής συνάρτηση στο $ [a,\beta] $. Αν $ G $ είναι μια αρχική της $ f $ στο $ [a,\beta] $ τότε \[ \int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}=G(\beta)-G(a) \]
+Ισχύει οτι $ \displaystyle{\int_{a}^{x}{\!\!\!f'(x)\mathrm{d}x}=[f(x)]_{a}^{x}\Rightarrow f(x)=\int_{a}^{x}{\!\!\!f'(x)\mathrm{d}x}+f(a)} $.
+\item Αν μια συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ είναι συνεχής στο $ [a,\beta] $ τότε υπάρχει $ \xi\in(a,\beta) $ ώστε \[ \int_{a}^{\beta}{\!\!\!f(x)\mathrm{d}x}=(\beta-a)f(\xi) \]
+\item Μέθοδοι ολοκλήρωσης
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Παραγοντική ολοκλήρωση : $ \displaystyle{\int_{a}^{\beta}{\!\!\!f'(x)\cdot g(x)\mathrm{d}x}=[f(x)\cdot g(x)]_{a}^{\beta}}-\displaystyle{\int_{a}^{\beta}{\!\!\!f(x)\cdot g(x)\mathrm{d}x}} $
+\item Με αντικατάσταση : $ \displaystyle{\int_{a}^{\beta}{\!\!\!f(g(x))\cdot g'(x)\mathrm{d}x}=\int_{u_1}^{u_2}{\!\!\!f(u)\cdot \mathrm{d}u}} $ όπου $ u=g(x)\;,\;\mathrm{d}u=g'(x)\mathrm{d}x $ και $ u_1=g(a)\;,\;u_2=g(\beta) $.
+\end{enumerate}
+\newpage
+\item Η συνάρτηση $ F(x)=\displaystyle{\int_{a}^{x}{\!\!\!f(t)\mathrm{d}t}} $\\
+Αν $ f:\varDelta\rightarrow\mathbb{R} $ συνεχής στο $ \varDelta $ και $ a $ ένα σημείο του $ \varDelta $ τότε η συνάρτηση \[ F(x)=\displaystyle{\int_{a}^{x}{\!\!\!f(t)\mathrm{d}t}} \] είναι μια αρχική της $ f $ στο $ \varDelta $. Για να ορίζεται η $ F $ πρέπει $ a,x\in\varDelta $.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\left( \int_{a}^{x}{\!\!\!f(t)\mathrm{d}t}\right)'=f(x)} $
+\item Αν $ G(x)=\displaystyle{ \int_{a}^{g(x)}{\!\!\!f(t)\mathrm{d}t}} $ τότε $$  \displaystyle{\left( \int_{a}^{g(x)}{\!\!\!f(t)\mathrm{d}t}\right)'=f(g(x))\cdot g'(x)}$$ με $D_G=\{x\in D_g\textrm{ και }g(x)\in\varDelta\} $.
+\item Αν $ Η(x)=\displaystyle{ \int_{g_1(x)}^{g_2(x)}{\!\!\!f(t)\mathrm{d}t}} $ τότε $$  \displaystyle{\left( \int_{g_1(x)}^{g_2(x)}{\!\!\!f(t)\mathrm{d}t}\right)'=f(g_2(x))\cdot g'_2(x)-f(g_1(x))\cdot g'_1(x)}$$ με $D_Η=\{x\in D_{g_{1}}\cap D_{g_2}\textrm{ και }g_1(x),g_2(x)\in\varDelta\} $.
+\end{enumerate}
+\item Εμβαδόν χωρίου
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Εμβαδόν μεταξύ $ C_f $ και $ x'x $ :
+$\displaystyle{Ε(\varOmega)=\int_{a}^{\beta}{\!\!\!|f(x)|\mathrm{d}x}} $.
+\item Εμβαδόν μεταξύ $ C_f $ και $ C_g $ :
+$\displaystyle{Ε(\varOmega)=\int_{a}^{\beta}{\!\!\!|f(x)-g(x)|\mathrm{d}x}} $.
+\end{enumerate}
+\end{enumerate}
+\end{document}

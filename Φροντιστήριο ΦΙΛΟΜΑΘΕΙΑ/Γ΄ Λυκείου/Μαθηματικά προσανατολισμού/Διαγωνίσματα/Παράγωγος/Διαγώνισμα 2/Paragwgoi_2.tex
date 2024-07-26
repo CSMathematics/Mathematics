@@ -1,0 +1,121 @@
+\documentclass[ektypwsh]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+
+\begin{document}
+\titlos{Μαθηματικά προσανατολισμού Γ΄ Λυκείου}{Παράγωγοι}{B}
+\begin{thema}
+\item\mbox{}\\
+\vspace{-7mm}
+\begin{erwthma}
+\item Να αποδείξετε ότι αν μια συνάρτηση $ f $ είναι παραγωγίσιμη σε ένα σημείο $ x_0 $ του πεδίου ορισμού της, τότε είναι και συνεχής στο σημείο αυτό.\monades{5}
+\item Να δώσετε τον ορισμό της παραγωγίσιμης συνάρτησης σε ένα σημείο του πεδίου ορισμού της.\\\monades{5}
+\item Να δείξετε ότι $ (\sqrt{x})'=\frac{1}{2\sqrt{x}} $.\monades{5}
+\item \swstolathospan
+\begin{alist}
+\item Αν μια συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της τότε είναι και παραγωγίσιμη σ' αυτό.
+\item Αν μια συνάρτηση $ f $ δεν είναι συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της τότε δεν είναι παραγωγίσιμη σ' αυτό.
+\item Το πεδίο ορισμού της παραγώγου μιας συνάρτησης $ f $ είναι υποσύνολο του πεδίου ορισμού της $ f $.
+\item Η παράγωγος του γινομένου δύο συναρτήσεων $ f,g $ ισούται με $ (f(x)\cdot g(x))'=f'(x)\cdot g'(x) $.
+\item Ισχύει ότι $ \left(x^x\right)'=x\cdot x^{x-1} $.
+\end{alist}
+\end{erwthma}\monades{10}
+\item\mbox{}\\
+Να υπολογίσετε τις παραγώγους των παρακάτω συναρτήσεων.
+\begin{multicols}{2}
+\begin{erwthma}
+\item $ f(x)=x^2\cdot\hm{x} $
+\item $ f(x)=\dfrac{e^x}{\syn{x}} $
+\item $ f(x)=\ln{(\syn{x})},\ x\in\left(0,\frac{\pi}{2} \right)  $
+\item $ f(x)=3^x\cdot\ln{x} $
+\item $ f(x)=(x^2-1)^x $
+\item $ f(x)=\sqrt[3]{x^5} $
+\item $ f(x)=\sqrt[3]{(2-x)^4}  $
+\item $ f(x)=|x-3|+2x $
+\end{erwthma}
+\end{multicols}\monades{25}
+\item\mbox{}\\
+Δίνεται η συνάρτηση $ f:(0,+\infty)\to\mathbb{R} $ με τύπο
+\[ f(x)=\frac{\ln{x}+1}{x} \]
+\begin{erwthma}
+\item Να βρεθεί η παράγωγος της $ f $.\monades{8}
+\item Να βρεθεί η εξίσωση της εφαπτομένης της γραφικής παράστασης της $f$ η οποία έχει κλίση $\lambda=0$.\\\monades{9}
+\item Να βρεθεί η εξίσωση της εφαπτομένης της γραφικής παράστασης της $f$ στο σημείο $A(e,f(e))$.\\\monades{8}
+\end{erwthma} 
+\item\mbox{}\\
+Δίνεται οι συναρτήσεις $f(x)=a\syn{x}$ και $g(x)=\beta x^3-x$, με $a,\beta\in\mathbb{R}$, για τις οποίες ισχύει $f'\left(\frac{\pi}{6}\right)$ και $g''(2)=24$.
+\begin{erwthma}
+\item Να δείξετε ότι $a=4$ και $\beta=2$.\monades{8}
+\item Να υπολογίσετε το όριο 
+\[\lim_{x\to 0}{\frac{f'(x)}{g(x)}} \]\monades{8}
+\item Να δείξετε ότι η εφαπτομένη της γραφικής παράστασης της $g$ στο σημείο $A(1,g(1))$ σχηματίζει με τους άξονες τρίγωνο $OAB$ το οποίο έχει εμβαδόν $(OAB)=1.6$.\monades{9}
+\end{erwthma}
+\end{thema}
+\end{document}

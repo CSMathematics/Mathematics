@@ -1,0 +1,164 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,methodoi]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Β΄ Γυμνασίου}{Εξισώσεις - Ανισώσεις}{Εξισώσεις}
+\begin{Methodos}[Επίλυση εξισώσεων]
+Για την επίλυση κάθε εξίσωση με έναν άγνωστο, οποιασδήποτε μορφής, ακολουθούμε τα εξής βήματα:
+\begin{bhma}
+\item \textbf{Απαλοιφή παρονομαστών}\\
+Αν η εξίσωση περιέχει κλάσματα, τότε υπολογίζουμε το Ε.Κ.Π. των παρονομαστών τους, ώστε να πολλαπλασιάσουμε κάθε όρο της μ' αυτο. Στη συνέχεια διαιρούμε κάθε παρονομαστή με το Ε.Κ.Π.
+\item \textbf{Απαλοιφή παρενθέσεων}\\
+Αν η εξίσωση περιέχει παρενθέσεις τότε εξετάζουμε το λόγο ύπαρξης της κάθε παρένθεσης. Εξετάζουμε δηλαδή αν η παρένθεση υπάρχει λόγω πολλαπλασιασμού, πρόσθεσης ή αφαίρεσης.
+\item \textbf{Διαχωρισμός όρων}\\
+Χωρίζουμε στα μέλη της εξίσωσης τους γνωστούς από τους άγνωστους όρους αλλάζοντας τα πρόσημά τους. Στη συνέχεια κάνουμε αναγωγή ομοίων όρων και στα δύο μέλη.
+\item \textbf{Διαίρεση - Λύση εξίσωσης}\\
+Τέλος διαιρούμε κάθε μέλος της εξίσωσης με το συντελεστή του αγνώστου, οπότε και προκύπτει η λύση της εξίσωσης.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Επίλυση απλής εξίσωσης}
+\bmath{Να λυθεί η εξίσωση : $ 4x-5+x=2x+7 $.}\\\\
+\lysh\\
+Στην εξίσωση αυτή μπορούμε άμεσα να χωρίσουμε στα δύο μέλη τηςτους γνωστούς από τους άγνωστους όρους της. Οπότε θα έχουμε:
+\begin{align*}
+4x-5+x&=2x+7\Rightarrow\\
+4x+x-2x&=7+5
+\end{align*}
+Προσθέτοντας τους όμοιους όρους σε κάθε μέλος θα προκύψει:
+\[ 3x=12 \]
+Τέλος, διαιρούμε κάθε μέλος της εξίσωσης με τον αριθμό $ 3 $ και παίρνουμε:
+\[ \frac{3x}{3}=\frac{12}{3}\Rightarrow x=4 \]
+\Paradeigma{Εξίσωση με παρενθέσεις}
+\bmath{Να λυθεί η παρακάτω εξίσωση:
+\[ 3(x-2)+4=(3+2x)-5-(3x-2) \]}
+\lysh\\
+Βλέπουμε αρχικά ότι η εξίσωση περιέχει τρεις παρενθέσεις και αν παρατηρήσουμε καλύτερα θα δούμε ότι καθεμία έχει διαφορετικό λόγο ύπαρξης. Η πρώτη έχει απ΄έξω πολλαπλασιασμό, η δεύτερη το πρόσημο $ + $, το οποίο έχουμε παραλείψει και η τρίτη το πρόσημο $ - $. Έτσι θα έχουμε:
+\begin{align*}
+3(x-2)+4&=(3+2x)-5-(3x-2)\Rightarrow\\
+3x-6+4&=3+2x-5-3x+2
+\end{align*}
+Μετά το βήμα αυτό συνεχίζουμε τα υπόλοιπα βήματα όπως και στο προηγούμενο παράδειγμα οπότε:
+\begin{align*}
+3x-6+4&=3+2x-5-3x+2\Rightarrow\\
+3x-2x+3x&=3-5+2+6-4\Rightarrow\\
+4x&=2\Rightarrow\\
+\frac{4x}{4}&=\frac{2}{4}\Rightarrow x=\frac{1}{2}
+\end{align*}
+\Paradeigma{Εξίσωση με κλάσματα}
+\bmath{Να λυθεί η παρακάτω εξίσωση
+\[ \frac{x-1}{3}-\frac{x}{4}=1 \]}
+\lysh\\
+Ξεκινάμε υπολογίζοντας το Ε.Κ.Π. των παρονομαστών των κλασμάτων, ώστε να πολλαπλασιάσουμε όλους τους όρους της εξίσωσης. Έχουμε λοιπόν
+\begin{gather*}
+\textrm{Ε.Κ.Π.}(3,4)=12\ \textrm{ άρα}\\
+12\cdot\frac{x-1}{3}-12\cdot\frac{x}{4}=12\cdot 1\Rightarrow 4(x-1)-3x=12
+\end{gather*}
+Η εξίσωση που προέκυψε περιέχει παρενθέσεις άρα συνεχίζουμε όπως και στο προηγούμενο παράδειγμα. Έτσι
+\begin{align*}
+4(x-1)-3x&=12\Rightarrow\\4x-4-3x&=12\Rightarrow\\
+4x-3x&=12+4\Rightarrow\\ x&=16
+\end{align*}
+\Paradeigma{Εξίσωση με κλάσματα}
+\bmath{Να λυθεί η εξίσωση: $ \frac{2x-1}{3}=\frac{4-x}{2} $.}\\\\
+\lysh\\
+Ένας εναλλακτικός και σύντομος τρόπος να γίνει απαλοιφή παρονομαστών, που εφαρμόζεται στις εξισώσεις με δύο όρους, είναι να πολλαπλασιάσουμε χιαστί τους όρους των κλασμάτων. Δηλαδή θα έχουμε
+\begin{gather*}
+\frac{2x-1}{3}=\frac{4-x}{2}\Rightarrow 2(2x-1)=3(4-x)\Rightarrow 4x-2=12-3x\Rightarrow\\ 4x+3x=12+2\Rightarrow 7x=14\Rightarrow x=2
+\end{gather*}
+\end{document}
+

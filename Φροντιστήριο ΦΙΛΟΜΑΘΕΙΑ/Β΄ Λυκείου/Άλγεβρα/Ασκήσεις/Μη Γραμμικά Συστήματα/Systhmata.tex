@@ -1,0 +1,209 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{multicol}
+\usepackage{hhline}
+\usepackage{pgfplots}
+\xroma{cyan!50!green}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usepackage{wrap-rl}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{royalblue}{RGB}{0,0,0}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usepackage{eurosym}
+
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\begin{document}
+\titlos{ΑΛΓΕΒΡΑ Β΄ ΛΥΚΕΙΟΥ}{Συστήματα}{ΜΗ ΓΡΑΜΜΙΚΑ ΣΥΣΤΗΜΑΤΑ}
+\newpage
+\noindent
+\askhseis
+\begin{enumerate}[label=\bf\textcolor{\xrwma}{{\large \arabic*.}},
+itemsep=5mm]
+\item \textbf{Μη γραμμικά συστήματα}\\
+Να λυθούν τα παρακάτω μη γραμμικά συστήματα συστήματα
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=1mm]
+\item $\ccases{
+\;x^2+y^2=1\\
+\;x+y=0}$
+\item $\ccases{
+\;x^2-y^2=1\\
+\;2x-y=0}$
+\item $\ccases{
+\;x^2+y^2=4\\
+\;xy=1}$
+\item $\ccases{
+\;x^2-y^2=16\\
+\;\dfrac{1}{x}+\dfrac{1}{y}=1}$
+\item $\ccases{
+\;x^2+2y=4\\
+\;x-y=-5}$
+\item $\ccases{
+\;x+y^2=2y-1\\
+\;x^2+y=1}$
+\end{enumerate}\end{multicols}
+\item \textbf{Μη γραμμικά συστήματα}\\
+Να λυθούν τα παρακάτω μη γραμμικά συστήματα συστήματα
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=1mm]
+\item $\ccases{
+\;x^3+y^3=1\\
+\;x+y=1}$
+\item $\ccases{
+\;(x-y)^2+(x+y)^2=13\\
+\;(x-y)-2(x+y)=-4}$
+\item $\ccases{
+\;2x-3y=2\\
+\;|x-y|=1}$
+\item $\ccases{
+\;2\sqrt{x}+\sqrt{y}=5\\
+\;x+4y=6}$
+\item $\ccases{
+\;\dfrac{1}{x-y^2}+\dfrac{1}{y-x^2}=2\\
+\;x^2+y^2-x-y=4}$
+\item $\ccases{
+\;\eta\mu^2x-2\sigma\upsilon\nu^2y=-\dfrac{1}{2}\\
+\;2\eta\mu x\cdot\sigma\upsilon\nu y=1}$
+\end{enumerate}\end{multicols}
+\item \textbf{Μη γραμμικά συστήματα}\\
+Να λυθούν τα παρακάτω μη γραμμικά συστήματα συστήματα
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=3mm]
+\item $\ccases{
+\;x^2+y^2+z^2=1\\
+\;x+y+z=0\\
+\;x-y+z=0}$
+\item $\ccases{
+\;x^2-y^2+z^2=1\\
+\;2x-y+z=1\\
+\;y+z=1}$
+\item $\ccases{
+\;\dfrac{1}{x}+\dfrac{1}{y}=1\\
+\;\dfrac{1}{y}+\dfrac{1}{z}=1\\
+\;\dfrac{1}{x}+\dfrac{1}{z}=1}$
+\item $\ccases{
+\;xyz=4\\
+\;x-y=1\\
+\;xy-z=0}$
+\item $\ccases{
+\;x+y+z+\dfrac{1}{x+y+z}=2\\
+\;x-y+z=1\\
+\;x+y=2}$
+\item $\ccases{
+\;\dfrac{1}{x}+\dfrac{1}{y}+\dfrac{1}{z}=1\\
+\;x+y+z=1\\
+\;y-z=1}$
+\end{enumerate}\end{multicols}
+\item \textbf{Μη γραμμικά συστήματα}\\
+Να λυθούν τα παρακάτω μη γραμμικά συστήματα συστήματα
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=3mm]
+\item $\ccases{
+\;x^3+y^3=3z^3\\
+\;x^2y-xy^2=2z^3\\
+\;x+2y+z=1}$
+\item $\ccases{
+\;x^2-y^2+z^2=1\\
+\;\sqrt{x}+\sqrt{y}+\sqrt{z}=0\\
+\;x+2y+z=1}$
+\item $\ccases{
+\;y(x^2-y^2)=z\\
+\;-y(x^2+y^2)=z\\
+\;(1-x)^2+(y-z-1)^2=0}$
+\item $\ccases{
+\;xy=2\\
+\;yz=3\\
+\;xz=8}$
+\item $\ccases{
+\;x^3+y^3=4\\
+\;y^3+z^3=2\\
+\;x^3+z^3=4}$
+\item $\ccases{
+\;x+y^2=2y-1\\
+\;x^2+y=1}$
+\end{enumerate}\end{multicols}
+\newpage
+\noindent
+\begin{center}
+\textcolor{royalblue}{\textbf{ΠΡΟΒΛΗΜΑΤΑ ΜΗ ΓΡΑΜΜΙΚΩΝ ΣΥΣΤΗΜΑΤΩΝ}}
+\end{center}
+\item Ένα ορθογώνιο παραλληλόγραμμο έχει περίμετρο 24 μέτρα και εμβαδόν 32 τ.μέτρα. Να βρεθει το μήκος και το πλάτος του ορθογωνίου.
+\item Να βρεθούν τα κοινά σημεία
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item του κύκλου $ x^2+y^2=1 $ και της ευθείας $ 2x+3y=1 $
+\item του κύκλου $ x^2+y^2=4 $ και της παραβολής $ 3x-y^2=0 $
+\item της υπερβολής $ xy=4 $ και της ευθείας $ 3x-y=-1 $
+\item των κύκλων $ x^2+y^2=12 $ και $ x^2+y^2=9 $
+\end{enumerate}
+\wrapr{-15mm}{7}{4cm}{0mm}{\begin{tikzpicture}
+   \tkzDefPoint(3,0){B}
+   \tkzDefPoint(0,0){A}
+   \tkzDefPoint(0,1){C}
+   \tkzDefPoint(0.33,.9){D}
+   \tkzMarkRightAngle(B,A,C)
+   \tkzMarkRightAngle[size=.2](A,D,B)
+   \tkzDrawPolygon(A,B,C)
+   \tkzDrawSegment(A,D)
+   \tkzLabelPoint[left](A){{\scriptsize A}}
+   \tkzLabelPoint[right](B){{\scriptsize B}}
+   \tkzLabelPoint[above](C){{\scriptsize $ \varGamma $}}
+   \tkzLabelPoint[above right](D){{\scriptsize $ \varDelta $}}
+   \tkzText(-.2,.5){{\scriptsize $ 15 $}}
+   \tkzText(1.5,-.2){{\scriptsize $ 20 $}}
+   \end{tikzpicture}}{\item 
+Αν $ A\varDelta=12 $ είναι το ύψος του ορθογωνίου τριγώνου στην υποτεινουσα και $ B\varDelta=x, \varGamma\varDelta=y $ να βρεθούν οι θετικοί πραγματικοί οι αριθμοί $ x, y\in\mathbb{R^+} $ ώστε να ισχύει $ A\varDelta^2=B\varDelta\cdot\varGamma\varDelta $.
+}
+\item Δύο τετράγωνα με πλευρές $ x-2 $ και $ 2y+3 $ αντίστοιχα έχουν συνολικό εμβαδόν 90τ.μέτρα. Αν ξέρουμε οτι η περίμετρος του $ 2\textsuperscript{ου} $ είναι 3πλάσια από την περίμετρο του $ 1\textsuperscript{ου} $ τότε να βρεθούν οι αριθμοί $ x, y\in\mathbb{R} $.
+\item Δύο αυτοκίνητα Α και Β κινούνται με μέση συνολική ταχύτητα $ 150km/h $. Αν γνωρίζουμε οτι κάθε αυτοκίνητο διένυσε απόσταση $ 56km/h $ και ταξίδευαν συνολικά για 1μιση ώρα τότε να βρεθεί ο χρόνος που ταξίδευε το κάθε αμάξι.
+\item Η διαγώνιος μιας τηλεόρασης είναι $ 42'' $ και γνώρίζουμε επίσης ότι οι πλευρές έχουν αναλογία 16:9 (HD Video Standard). Να βρεθούν οι διαστάσεις της τηλεόρασης.\\
+{\footnotesize \textit{Υπόδειξη} : Το μέγεθος μιας τηλεόρασης δίνεται από το μήκος της διαγωνίου της οθόνης δοσμένο σε ίντες.\\Μια ίντσα $ 1''=2{,}54cm $}
+\end{enumerate}
+\end{document}

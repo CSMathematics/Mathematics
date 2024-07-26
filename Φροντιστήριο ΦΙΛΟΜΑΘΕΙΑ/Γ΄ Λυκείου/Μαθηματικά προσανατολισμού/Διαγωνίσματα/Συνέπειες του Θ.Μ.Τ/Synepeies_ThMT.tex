@@ -1,0 +1,109 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usepackage{adjustbox}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{royalblue}{cmyk}{0,0,0,1}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\newcommand{\monades}[2]{\begin{minipage}[t]{#2\textwidth}
+\begin{flushright}
+\textcolor{royalblue}{\textbf{\textit{Μονάδες #1}}}
+\end{flushright}
+\end{minipage}}
+
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{systeme}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\section*{\textcolor{royalblue}{{\LARGE ΔΙΑΓΩΝΙΣΜΑ - ΣΥΝΕΠΕΙΕΣ Θ.Μ.Τ.}}}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\end{center}
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large ΘΕΜΑ \Alph*.}},
+itemsep=5mm,leftmargin=2cm]
+\item\mbox{}\\\vspace{-5mm} \begin{enumerate}[label=\bf\textcolor{royalblue}{{\large A.\arabic*}},
+itemsep=5mm,leftmargin=-.5cm]
+\item Έστω $ f:\varDelta\rightarrow\mathbb{R} $ μια συνάρτηση για την οποία ισχύει
+\begin{enumerate}[label=\roman*.]
+	\item Είναι συνεχής για κάθε $ x\in\varDelta $
+	\item και $ f'(x)=0 $ για κάθε εσωτερικό σημείο του $ \varDelta $
+\end{enumerate}
+Να αποδειχθεί οτι η συνάρτηση $ f $ είναι σταθερή σε όλο το $ \varDelta $.\\\monades{10}{.91}
+\item Να διατυπωθεί το πόρισμα του παραπάνω θεωρήματος της συν'επειας του Θ.Μ.Τ., για δύο συναρτήσεις $ f,g $.\\\monades{5}{.91}
+\item Να χαρακτηριστούν οι παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large \alph*.}}]
+\item 
+\end{enumerate}\monades{10}{.91}
+\end{enumerate}
+\item\mbox{}\\\vspace{-5mm}
+ \begin{enumerate}[label=\bf\textcolor{royalblue}{{\large B.\arabic*}},
+itemsep=3mm,leftmargin=-.5cm]
+\item Δίνεται η συνεχής και παραγωγίσιμη συνάρτηση $ f:(0,+\infty)\rightarrow\mathbb{R} $ με $ f(e)=\frac{e^2}{2} $ για την οποία ισχύει η σχέση : \[ f(x)+x\ln{x}f'(x)=x^2 \]
+\begin{enumerate}[label=\roman*.]
+	\item Να βρεθεί ο τύπος της συνάρτησης $ f $.
+	\item 
+\end{enumerate}\monades{13}{.91}
+\end{enumerate}
+\item\mbox{}\\\vspace{-5mm}
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large Γ.\arabic*}},
+itemsep=5mm,leftmargin=-.5cm]
+\item 
+\end{enumerate}
+\item\mbox{}\\\vspace{-5mm}
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large Δ.\arabic*}},
+itemsep=5mm,leftmargin=-.5cm]
+\item 
+\end{enumerate}
+\end{enumerate}
+\mbox{}\\
+\hspace*{0.75\textwidth}
+\textit{{\scriptsize Σπύρος Φρόνιμος}}
+\end{document}

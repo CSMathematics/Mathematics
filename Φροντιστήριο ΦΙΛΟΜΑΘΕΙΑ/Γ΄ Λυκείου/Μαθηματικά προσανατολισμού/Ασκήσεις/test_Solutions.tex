@@ -1,0 +1,155 @@
+%# Στοιχεία εγγράφου test--------
+%@ Κωδικός : test
+%@ Διαδρομή εγγράφου : /home/spyros/Μαθηματικά/Φροντιστήριο ΦΙΛΟΜΑΘΕΙΑ/Γ΄ Λυκείου/Μαθηματικά προσανατολισμού/Ασκήσεις/test.tex
+%@ Είδος εγγράφου : Ασκήσεις
+%#--------------------------------------------------
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[english,greek]{babel}
+\usepackage{amsmath} 
+\let\myBbbk\Bbbk 
+\let\Bbbk\relax 
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---- 
+\usepackage{tikz,pgfplots,tkz-tab} 
+\usepackage{tkz-euclide} 
+\usepackage[framemethod=TikZ]{mdframed} 
+\usetikzlibrary{decorations.pathreplacing} 
+\tkzSetUpPoint[size=2.9,fill=white]
+%----------------------- 
+\usepackage{calc,tcolorbox} 
+\tcbuselibrary{skins,theorems,breakable} 
+\usepackage{hhline} 
+\usepackage[explicit]{titlesec} 
+\usepackage{graphicx} 
+\usepackage{multicol} 
+\usepackage{multirow} 
+\usepackage{tabularx} 
+\usetikzlibrary{backgrounds} 
+\usepackage{sectsty} 
+\sectionfont{\centering} 
+\usepackage{enumitem} 
+\usepackage{adjustbox} 
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl} 
+\usepackage{systeme,regexpatch} 
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ --------- 
+\usepackage{mathtools} 
+%---------------------- 
+%-------- ΠΙΝΑΚΕΣ --------- 
+\usepackage{booktabs} 
+%---------------------- 
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ---------- 
+\usepackage{calculator} 
+%---------------------------- 
+%------------------------------------------ 
+\newcommand{\tss}[1]{\textsuperscript{#1}} 
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}} 
+\tikzstyle{pl}=[line width=0.3mm] 
+\tikzstyle{plm}=[line width=0.4mm] 
+\usepackage{etoolbox} 
+\makeatletter 
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse} 
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false 
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse} 
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false 
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi} 
+\makeatother
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\makeatletter
+\xpatchcmd{\tkzTabLine}
+{\node at (Z\thetkz@cnt@impair\thetkz@cnt@lg){$0$};} % search
+{\node[fill=white,inner sep=.5mm] at (Z\thetkz@cnt@impair\thetkz@cnt@lg){$0$};} % replace
+{}{}
+\makeatother
+\newcommand{\en}[1]{\selectlanguage{english}{#1}\selectlanguage{greek}}
+\newcommand{\roloi}[4][]{
+\draw[line width=.5mm,#1] (0,0) circle(2);
+\foreach \n in {1,2,...,12}{
+\tkzDefPoint(30*\n-90:2){A_\n}
+%\tkzDrawPoint(A_\n)
+\node at (-30*\n+90:1.65){\n};}
+\draw[plm,,#1] (0,0)--(90-30*#2-0.5*#3:1);
+\draw[pl,#1] (0,0)--(90-6*#3-0.1*#4:1.5);
+\draw[#1](0,0)--(90-6*#4:1.2);
+\tkzDrawPoint[fill=#1,color=#1](0,0)
+\foreach \s in {1,2,...,12}{
+\draw[#1](90-30*\s:1.85)--(90-30*\s:2);}
+\foreach \t in {1,2,...,60}{
+\draw[#1](90-6*\t:1.93)--(90-6*\t:2);}}
+
+\begin{document}
+%# Database File : Ana-ThBolzano-RizaExis-SolSE1----
+Μεταφέροντας όλους τους όρους της εξίσωσης στο πρώτο μέλος, αυτή θα πάρει τη μορφή:
+\[ x^2-\syn{(x\pi)}-e^x=0 \]
+Ορίζουμε τη συνάρτηση $ f(x)=x^2-\syn{(x\pi)}-e^x $ με πεδίο ορισμού το $ \mathbb{R} $. Γι αυτήν θα έχουμε ότι
+\begin{rlist}
+\item είναι συνεχής στο κλειστό διάστημα $ [-2,0] $ και
+\item \begin{itemize}
+\item $ f(-2)=(-2)^2-\syn{(-2\pi)}-e^{-2}=4-1-e^{-2}=3-\frac{1}{e^2}>0 $
+\item $ f(0)=0^2-\syn{0}-e^0=-1-1=-2<0 $
+\end{itemize}
+οπότε παίρνουμε $ f(-2)\cdot f(0)=-2\left(3-\frac{1}{e^2} \right)<0 $.
+\end{rlist}
+Έτσι σύμφωνα με το θεώρημα του Bolzano η συνάρτηση $ f $ θα έχει μια τουλάχιστον ρίζα $ x_0\in(-2,0) $, ή ισοδύναμα η αρχική εξίσωση θα έχει μια τουλάχιστον λύση $ x_0 $ στο ανοικτό διάστημα $ (-2,0) $.
+%# End of file Ana-ThBolzano-RizaExis-SolSE1
+%# Database File : Ana-ThBolzano-RizaExis-SolSE2----
+Θα σχηματίσουμε από τη ζητούμενη ισότητα την αντίστοιχη εξίσωση θέτοντας όπου $ x_0 $ τη μεταβλητή $ x $. Προκύπτει λοιπόν η εξίσωση
+\[ e^{x}=\hm{(\pi x)}-2x\Rightarrow e^{x}-\hm{(\pi x)}+2x=0 \]
+Θεωρούμε τη συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με τύπο $ f(x)=e^{x}-\hm{(\pi x)}+2x $. Θα ισχύει ότι
+\begin{rlist}
+\item η $ f $ είναι συνεχής στο διάστημα $ [-1,0] $ και
+\item \begin{itemize}
+\item $ f(-1)=e^{-1}-\hm{(-\pi)}+2(-1)=\frac{1}{e}-2<0 $
+\item $ f(0)=e^0-\hm{0}+2\cdot 0=1>0 $
+\end{itemize}
+οπότε προκύπτει $ f(-1)\cdot f(0)=\frac{1}{e}-2<0 $
+\end{rlist}
+Σύμφωνα λοιπόν με το θεώρημα Bolzano η $ f $ θα έχει μια τουλάχιστον ρίζα $ x_0\in(-1,0) $, ή ισοδύναμα η εξίσωση θα έχει μια τουλάχιστον λύση $ x_0 $ στο $ (-1,0) $ άρα τελικά υπάρχει $ x_0\in(-1,0) $ τέτοιο ώστε
+\[ e^{x_0}=\hm{(\pi x_0)}-2x_0 \]
+%# End of file Ana-ThBolzano-RizaExis-SolSE2
+%# Database File : Ana-ThBolzano-RizaExis-SolSE3----
+\wrapr{-5mm}{7}{5cm}{-5mm}{\parat
+\begin{tcolorbox}[title=\Parathrhsh,hbox,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white}]
+\begin{varwidth}{4cm}
+{\small Οι δύο εξισώσεις είναι ισοδύναμες στο $ (0,1) $ γιατί στο διάστημα αυτό δεν ανήκει το $ x=1 $ του περιορισμού.}
+\end{varwidth}
+\end{tcolorbox}}{
+Για την αρχική εξίσωση απαιτούμε να ισχύει $ x-1\neq0\Rightarrow x\neq1 $. Όμως για κάθε $ x\in(0,1) $ η αρχική μετατρέπεται στην ισοδύναμη εξίσωση:
+\begin{equation}\label{par:ex}
+e^x=(x-1)\left( x^2-3\right)
+\end{equation}
+Στη συνέχεια, η τελευταία θα γραφτεί:
+\[ e^x-(x-1)\left( x^2-3\right)=0 \]
+Ορίζουμε έτσι τη συνάρτηση $ f(x)=e^x-(x-1)\left( x^2-3\right) $ με πεδίο ορισμού το $ \mathbb{R} $. Το θεώρημα Bolzano εφαρμόζεται στο διάστημα $ [0,1] $ και έτσι έχουμε ότι}
+\begin{rlist}
+\item Η $ f $ είναι συνεχής στο διάστημα $ [0,1] $ και επιπλέον
+\item \begin{itemize}
+\item $ f(0)=e^0-(0-1)\left( 0^2-3\right)=-2<0 $
+\item $ f(1)=e^1-(1-1)\left( 1^2-3\right)=e>0 $
+\end{itemize}
+οπότε παίρνουμε $ f(0)\cdot f(1)=-2e<0 $.
+\end{rlist}
+Έτσι σύμφωνα με το θεώρημα Bolzano η εξίσωση \eqref{par:ex} και κατά συνέπεια η αρχική εξίσωση θα έχει μια τουλάχιστον λύση $ x_0 $ στο ανοικτό διάστημα $ (0,1) $.
+%# End of file Ana-ThBolzano-RizaExis-SolSE3
+
+Η άσκηση \selectlanguage{english}{Alg-Anis1ou-AnisApT-SectEx3}\selectlanguage{greek} δεν είναι λυμένη
+
+Η άσκηση \selectlanguage{english}{Alg-Anis1ou-AnisApT-SectEx4}\selectlanguage{greek} δεν είναι λυμένη
+
+Η άσκηση \selectlanguage{english}{Alg-Anis2ou-EpilAnis-SectEx4}\selectlanguage{greek} δεν είναι λυμένη
+
+\end{document}

@@ -1,0 +1,192 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+
+\begin{document}
+\titlos{Α΄ Γυμνασίου}{Κλάσματα}{Σύγκριση κλασμάτων}
+\twocolkentro{\thewria}
+\begin{enumerate}
+\item 
+\end{enumerate}
+\twocolkentro{\askhseis}
+\begin{enumerate}
+\item \textbf{Σύγκριση κλασμάτων}\\
+Να συγκρίνετε τα παρακάτω κλάσματα μεταξύ τους βάζοντας το σωστό σύμβολο διάταξης ανάμεσά τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ \dfrac{4}{3}\ldots \dfrac{7}{3} $
+\item $ \dfrac{9}{7}\ldots \dfrac{10}{7} $
+\item $ \dfrac{15}{12}\ldots \dfrac{13}{12} $
+\item $ \dfrac{4}{5}\ldots \dfrac{4}{5} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση κλασμάτων}\\
+Να συγκρίνετε τα παρακάτω κλάσματα μεταξύ τους βάζοντας το σωστό σύμβολο διάταξης ανάμεσά τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ \dfrac{4}{5}\ldots \dfrac{4}{3} $
+\item $ \dfrac{9}{7}\ldots \dfrac{9}{11} $
+\item $ \dfrac{7}{13}\ldots \dfrac{12}{13} $
+\item $ \dfrac{5}{21}\ldots \dfrac{21}{21} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση κλασμάτων}\\
+Να συγκρίνετε τα παρακάτω κλάσματα μεταξύ τους βάζοντας το σωστό σύμβολο διάταξης ανάμεσά τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ \dfrac{3}{2}\ldots \dfrac{4}{3} $
+\item $ \dfrac{7}{4}\ldots \dfrac{9}{6} $
+\item $ \dfrac{15}{16}\ldots \dfrac{12}{11} $
+\item $ \dfrac{8}{5}\ldots \dfrac{16}{10} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση κλασμάτων με τη μονάδα}\\
+Να συγκρίνετε τα παρακάτω κλάσματα με τη μονάδα βάζοντας το σωστό σύμβολο διάταξης μεταξύ τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{4}
+\begin{rlist}[leftmargin=5mm]
+\item $ \dfrac{3}{4} $
+\item $ \dfrac{5}{3} $
+\item $ \dfrac{7}{8} $
+\item $ \dfrac{11}{9} $
+\item $ \dfrac{17}{17} $
+\item $ \dfrac{35}{35} $
+\item $ \dfrac{89}{88} $
+\item $ \dfrac{1001}{1010} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση κλασμάτων με φυσικό αριθμό}\\
+Να συγκρίνετε τους παρακάτω αριθμούς μεταξύ τους βάζοντας το σωστό σύμβολο διάταξης ανάμεσά τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ \dfrac{4}{3}\ldots 2 $
+\item $ 4\ldots \dfrac{10}{3} $
+\item $ \dfrac{15}{3}\ldots 5 $
+\item $ 3\dfrac{4}{5}\ldots 1 $
+\item $ \dfrac{19}{4}\ldots 5 $
+\item $ 7\ldots \dfrac{123}{24} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση κλασμάτων με μεικτό αριθμό}\\
+Να συγκρίνετε τους παρακάτω αριθμούς μεταξύ τους βάζοντας το σωστό σύμβολο διάταξης ανάμεσά τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ \dfrac{3}{2}\ldots 1\dfrac{3}{4} $
+\item $ 4\dfrac{1}{2}\ldots \dfrac{13}{3} $
+\item $ \dfrac{17}{3}\ldots 5\dfrac{2}{3} $
+\item $ 3\dfrac{4}{5}\ldots \dfrac{21}{4} $
+\item $ \dfrac{19}{4}\ldots 5\dfrac{1}{12} $
+\item $ 2\dfrac{12}{13}\ldots \dfrac{37}{18} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση μεικτών αριθμών}\\
+Να συγκρίνετε τους παρακάτω αριθμούς μεταξύ τους βάζοντας το σωστό σύμβολο διάταξης ανάμεσά τους $ (<,\ =\ \ \textrm{ή}\ >) $.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ 2\dfrac{3}{4}\ldots 2\dfrac{5}{7} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διάταξη κλασμάτων}\\
+Να τοποθετήσετε τα παρακάτω κλάσματα στη σειρά από το μικρότερο στο μεγαλύτερο.
+\[ \frac{3}{8}\ ,\ \frac{9}{8}\ ,\ \frac{4}{8}\ ,\ \frac{5}{8}\ ,\ \dfrac{11}{8} \]
+\item \textbf{Διάταξη κλασμάτων}\\
+Να τοποθετήσετε τα παρακάτω κλάσματα στη σειρά από το μικρότερο στο μεγαλύτερο.
+\[ \frac{7}{4}\ ,\ \frac{7}{8}\ ,\ \frac{7}{5}\ ,\ \frac{7}{2}\ ,\ \dfrac{7}{12} \]
+\item \textbf{Διάταξη κλασμάτων}\\
+Να τοποθετήσετε τα παρακάτω κλάσματα στη σειρά από το μικρότερο στο μεγαλύτερο.
+\[ \frac{4}{3}\ ,\ \frac{5}{9}\ ,\ \frac{14}{16}\ ,\ \frac{7}{9}\ ,\ \dfrac{11}{12} \]
+\item \textbf{Διάταξη κλασμάτων}\\
+Να τοποθετήσετε τους παρακάτω αριθμούς στη σειρά από το μικρότερο στο μεγαλύτερο.
+\[ 3\frac{5}{8}\ ,\ \frac{23}{6}\ ,\ 2\frac{7}{12}\ ,\ \frac{89}{24}\ ,\ \dfrac{27}{8} \]
+\end{enumerate}
+\end{document}
+

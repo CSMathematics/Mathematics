@@ -1,0 +1,601 @@
+\documentclass[twoside,10pt]{book}
+\usepackage[amsbb,mtpfrak,zswash,mtpcal]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\defaultfontfeatures{Ligatures=TeX}
+\font\kefalaio="Minion Pro Bold" at 36pt
+\font\ArKef="Minion Pro Bold Italic" at 72pt
+\font\OnKef="Times New Roman" at 20pt
+\font\OnPar="Minion Pro Bold" at 18pt
+\newfontfamily\scfont{GFS Artemisia}
+\usepackage[inner=2.00cm, outer=1.50cm, top=3.00cm, bottom=2.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{amsmath}
+\usepackage[amsbb,mtpfrak,zswash,mtpcal]{mtpro2}
+\usepackage{makeidx}
+\usepackage{longtable,xcolor,varwidth}
+\usepackage{float}
+\usepackage{subfig}
+\def\xrwma{cyan!70!black}
+\def\xrwmath{cyan}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usetikzlibrary{fadings}
+\usepackage{wrap-rl}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[framemethod=TikZ]{mdframed}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scfont\scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\theorismos\;}:\;}}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\usepackage{venndiagram,mathimatika}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.1\paperwidth,yshift=.14\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.09\paperwidth,yshift=.08\paperheight,rectangle] {\fontsize{24}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.74\paperwidth,yshift=.11\paperheight,rectangle]
+{{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{white}{\contour{black}{\thechapter}}}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\itshape{\LARGE{\thesection~#1}}\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{30pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{\textcolor{\xrwma}{ΟΡΙΣΜΟΙ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=cyan!80!black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=cyan!80!black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textbf{\textcolor{\xrwmath}{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwmath,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwmath, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\usepackage{microtype}
+\usepackage{float}
+
+\usepackage{caption}
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[section]
+\renewcommand{\theparadeigma}{\bf\thechapter.\arabic{paradeigma}}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{cyan}{\textbf{{\large Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%-----------------------------------
+
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{{\textbf{ΛΥΣΗ}}}
+%------------------------------------
+
+%------ ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ ΤΙΤΛΟΣ ---------
+\newcommand{\Lymena}{\begin{center}
+\begin{tikzpicture}
+\path[left color=cyan!70!black,right color=cyan!80!black,middle color=cyan!80!white] (-7cm,-.6cm) rectangle (6.5cm,.6cm);
+\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}}};  
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------
+
+%--------- ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ ΤΙΤΛΟΣ ----------
+\newcommand{\Alyta}{\begin{center}
+\begin{tikzpicture}
+\path[left color=cyan!70!black,right color=cyan!80!black,middle color=cyan!80!white] (-7cm,-.6cm) rectangle (6.5cm,.6cm);
+\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΑΣΚΗΣΕΙΣ - ΠΡΟΒΛΗΜΑΤΑ}}};  
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------------
+\usetikzlibrary{shadows,calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+%---------- ΜΕΘΟΔΟΣ --------------
+\newcounter{Methodos}[chapter]
+\renewcommand{\theMethodos}{\thechapter.\arabic{Methodos}}
+\newenvironment{Methodos}[2][\linewidth]
+{\refstepcounter{Methodos}
+\begin{tcolorbox}[breakable,
+enhanced standard,
+boxrule=0.7pt,titlerule=-.2pt,drop fuzzy shadow southeast=black!50,
+width=\linewidth,
+title style={color=white},
+overlay unbroken and first={
+\path[left color=cyan!70!black,right color=cyan,draw=black]
+([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+},
+fonttitle=\bfseries,
+before=\par\medskip\noindent,
+after=\par\medskip,
+toptitle=3pt,
+top=11pt,topsep at break=-5pt,
+colback=white,title={\large Μέθοδος \theMethodos} : {\textcolor{black}{\MakeUppercase{#1}}}]}
+{\end{tcolorbox}}
+%------------------------------------------
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.5cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+
+
+%----ΣΤΥΛ ΑΣΚΗΣΗΣ ----------
+\newcounter{askhsh}[chapter]
+\renewcommand{\theaskhsh}{\bf{{\large{\thechapter}}.\arabic{askhsh}}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}\textcolor{\xrwma}{{\theaskhsh}\hspace{1mm}}}{}
+%---------------------------
+
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%------------------------------------------
+\setlength{\parindent}{0pt}
+\setlist[itemize]{itemsep=0mm}
+\tkzSetUpPoint[size=7,fill=white]
+\newcommand{\twocolkentro}[1]{
+\twocolumn[
+\begin{@twocolumnfalse}
+#1
+\end{@twocolumnfalse}]}
+\newcommand{\bcc}[1]{
+\begin{center}
+{\color{\xrwma}{\hrulefill}\raisebox{-2.5mm}{\rule{.4pt}{5mm}}}\hspace{1em}\raisebox{-.65ex}{\begin{varwidth}{\dimexpr0.7\textwidth-2em\relax}\centering{\textbf{\textcolor{\xrwma}{#1}}}\end{varwidth}}\hspace*{1em}{\color{\xrwma}{\raisebox{-2.5mm}{\rule{.4pt}{5mm}}\hrulefill}}
+\end{center}}
+
+
+
+\begin{document}
+\mainmatter
+\pagestyle{fancy}
+\chapter{Εκθετική - Λογαριθμική συνάρτηση}
+\section{Εκθετική συνάρτηση}
+\orismoi
+\Orismos{Εκθετική συνάρτηση}
+Εκθετική ονομάζεται κάθε συνάρτηση $ f $ της οποίας ο τύπος αποτελεί δύναμη με θετική βάση, διάφορη της μονάδας και εκθέτη που περιέχει την ανεξάρτητη μετβλητή. Η απλή εκθετική συνάρτηση θα είναι της μορφής :
+\[ f(x)=a^x\;\;,\;\;0<a\neq1 \]
+\thewrhmata
+\Thewrhma{Ιδιότητεσ εκθετικών συναρτήσεων}
+Οι ιδιότητες των εκθετικών συναρτήσεων της μορφής $ f(x)=a^x $, με $ 0<a\neq1 $, είναι οι εξής. Σε ορισμένες ιδιότητες διακρίνουμε δύο περιπτώσεις για τη βάση $ a $ της συνάρτησης.
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ \mathbb{R} $.
+\item Το σύνολο τιμών της είναι το σύνολο $ (0,+\infty) $ των θετικών πραγματικών αριθμών.
+\item Η συνάρτηση δεν έχει ακρότατες τιμές.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm]
+\item[\textbf{A.}] \textbf{Για {\boldmath$ a>1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ της εκθετικής συνάρτησης είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=a^x $ είναι γνησίως αυξουσα στο $ \mathbb{R} $.
+\item Η συνάρτηση δεν έχει ρίζες στο $ \mathbb{R} $.
+\item Η γραφική παράστασή της έχει οριζόντια ασύμπτωτη τον άξονα $ x'x $ στη μεριά του $ -\infty $ ενώ τέμνει τον κατακόρυφο άξονα $ y'y $ στο σημείο $ A(0,1) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow a^{x_1}<a^{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow a^{x_1}=a^{x_2}
+\end{gather*}
+\end{itemize}
+\begin{tabular}{p{6cm}p{6cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{1.8^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above left,yshift=-1mm](A){$ (0,1) $}
+\node at (3,0.7) {\footnotesize$a>1$};
+\node at (3,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Εκθετική συνάρτηση με $ a>1 $}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.8,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above right,yshift=-1mm](A){$ (0,1) $}
+\node at (1.2,0.7) {\footnotesize$0<a<1$};
+\node at (1.2,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Εκθετική συνάρτηση με $ 0<a<1 $} \\ 
+\end{tabular} 
+\end{enumerate}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm,start=2]
+\item[\textbf{B.}] \textbf{Για {\boldmath$ 0<a<1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ της εκθετικής συνάρτησης είναι μικρότερη της μονάδας τότε η συνάρτηση $ f(x)=a^x $ είναι γνησίως φθίνουσα στο $ \mathbb{R} $.
+\item Η συνάρτηση δεν έχει ρίζες στο $ \mathbb{R} $.
+\item Η γραφική παράστασή της έχει οριζόντια ασύμπτωτη τον άξονα $ x'x $ στη μεριά του $ +\infty $ ενώ τέμνει τον κατακόρυφο άξονα $ y'y $ στο σημείο $ A(0,1) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow a^{x_1}>a^{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow a^{x_1}=a^{x_2}
+\end{gather*}
+\end{itemize}
+\end{enumerate}
+\item Οι γραφικές παραστάσεις των εκθετικών συναρτήσεων με αντίστροφες βάσεις $ f(x)=a^x $ και $ g(x)=\left(\frac{1}{a}\right)^x  $, με $ 0<a\neq1 $, είναι συμμετρικές ως προς τον άξονα $ y'y $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{1.8^x};
+\addplot[grafikh parastash,domain=-2.7:2.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDrawPoint[fill=black](2.1,1.05)
+\node at (3,2.5) {\footnotesize$C_f$};
+\node at (1.2,2.5) {\footnotesize$C_g$};
+\node at (.8,.9) {\footnotesize$f(x)=a^x$};
+\node at (3.7,.9) {\footnotesize$g(x)=\left(\frac{1}{a}\right)^x$};
+\end{tikzpicture}\captionof{figure}{Εκθετικές συναρτήσεις με αντίστροφες βάσεις}
+\end{center}
+\section{Λογάριθμος}
+\orismoi
+\Orismos{Λογάριθμοσ}
+Λογάριθμος με βάση ένα θετικό αριθμό $ a\neq1 $ ενός θετικού αριθμού $ \beta $ ονομάζεται ο εκθέτης στον οποίο θα υψωθεί ο αριθμός $ a $ ώστε να δώσει τον αριθμό $ \beta $. Συμβολίζεται :
+\[ \log_{a}{\beta} \]
+με $ 0<a\neq1\;\textrm{και}\; \beta>0 $.
+\begin{itemize}
+\item Ο αριθμός $ a $ ονομάζεται \textbf{βάση του λογαρίθμου}.
+\item Ο αριθμός $ \beta $ έχει το ρόλο του αποτελέσματος της δύναμης με βάση $ a $, ενώ ολόκληρος ο λογάριθμος, το ρόλο του εκθέτη.
+\item Αν ο λογάριθμος (εκθέτης) με βάση $ a $ του $ \beta $ είναι ίσος με $ x $ τότε θα ισχύει :
+\[ \log_{a}{\beta}=x\Leftrightarrow a^x=\beta \]
+\item Εαν η βάση ενός λογαρίθμου είναι ο αριθμός $ 10 $ τότε ο λογάριθμος ονομάζεται \textbf{δεκαδικός λογάριθμος} και συμβολίζεται : $ \log{x} $.
+\item Εαν η βάση του λογαρίθμου είναι ο αριθμός $ e $ τότε ο λογάριθμος ονομάζεται \textbf{φυσικός λογάριθμος} και συμβολίζεται : $ \ln{x} $.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Ιδιότητεσ Λογαρίθμων}
+Για οπουσδήποτε θετικούς πραγματικούς αριθμούς $ x,y\in\mathbb{R}^+ $ έχουμε τις ακόλουθες ιδιότητες που αφορούν το λογάριθμο τους με βάση έναν θετικό πραγματικό αριθμό $ a $.
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\
+\hhline{==}\rule[-2ex]{0pt}{5.5ex} Λογάριθμος γινομένου & $ \log_{a}(x\cdot y)=\log_{a}x+\log_{a}y $ \\
+\rule[-2ex]{0pt}{5.5ex}  Λογάριθμος πηλίκου & $ \log_{a}\left( \dfrac{x}{y}\right) =\log_{a}x-\log_{a}y $ \\
+\rule[-2ex]{0pt}{5.5ex}  Λογάριθμος δύναμης & $ \log_{a}x^\kappa=\kappa\cdot\log_{a}x\;\;,\;\;\kappa\in\mathbb{Z} $ \\
+\rule[-2ex]{0pt}{5.5ex}  Λογάριθμος ρίζας & $ \log_{a}\!\sqrt[\nu]{x}=\dfrac{1}{\nu}\log_{a}x\;\;,\;\;\nu\in\mathbb{N} $ \\
+\rule[-2ex]{0pt}{5.5ex}  Λογάριθμος ως εκθέτης & $ a^{\log_{a}x}=x $ \\
+\rule[-2ex]{0pt}{5.5ex}  Λογάριθμος δύναμης με κοινή βάση & $ \log_{a}a^x=x $ \\
+\rule[-2ex]{0pt}{5.5ex}  Αλλαγή βάσης & $ \log_{a}x=\dfrac{\log_{\beta}{x}}{\log_{\beta}{a}} $ \\
+\hline
+\end{longtable}\captionof{table}{Ιδιότητες λογαρίθμων}
+\end{center}
+Επίσης για κάθε λογάριθμο με οποιαδήποτε βάση $ a\in\mathbb{R}^+ $ και $ a\neq1 $ έχουμε :
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{a}1=0 $
+\item $ \log_{a}a=1 $
+\end{rlist}
+\end{multicols}
+\section{Λογαριθμική συνάρτηση}
+\orismoi
+\Orismos{Λογαριθμική συνάρτηση}
+Λογαριθμική ονομάζεται κάθε συνάρτηση $ f $ της οποίας η τιμή της $ f(x) $ δίνεται με τη βοήθεια ενός λογαρίθμου, για κάθε στοιχείο του πεδίου ορισμού $ x\in D_f $. Θα είναι :
+\[ f(x)=\log_ax\;\;,\;\;0<a\neq1 \]
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου γίνει ίση με τον αριθμό $ 10 $ ή $ e $ τότε αποκτάμε τη συνάρτηση $ f(x)=\log{x} $ ή $ f(x)=\ln{x} $ αντίστοιχα.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Ιδιότητεσ λογαριθμικών συναρτήσεων}
+Για κάθε λογαριθμική συνάρτηση της μορφής $ f(x)=\log_{a}{x} $ ισχύουν οι ακόλουθες ιδιότητες.
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ (0,+\infty) $ των θετικών πραγματικών αριθμών.
+\item Το σύνολο τιμών της είναι το σύνολο $ \mathbb{R} $ των πραγματικών αριθμών.
+\item Η συνάρτηση δεν έχει μέγιστη και ελάχιστη τιμή.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm]
+\item \textbf{Για {\boldmath$ a>1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=\log_{a}x $ είναι γνησίως αυξουσα στο $ (0,+\infty) $.
+\item Η συνάρτηση έχει ρίζα τον αριθμό $ x=1 $.
+\item Η γραφική παράστασή της έχει κατακόρυφη ασύμπτωτη τον άξονα $ y'y $ στη μεριά του $ -\infty $ ενώ τέμνει τον οριζόντιο άξονα $ x'x $ στο σημείο $ A(1,0) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει \begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow \log_{a}{x_1}<\log_{a}{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow \log_{a}{x_1}=\log_{a}{x_2}
+\end{gather*}
+\item Για $ x>1 $ ισχύει $ \log_{a}x>0 $ ενώ για $ 0<x<1 $ έχουμε $ \log_{a}x<0 $.
+\end{itemize}
+\end{enumerate}
+\begin{tabular}{p{6cm}p{6.2cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,0.7) {\footnotesize$a>1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=\xrwma](A)
+\tkzLabelPoint[below right](A){$ A(0,1) $}
+\node at (.8,.4) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Λογαριθμική συνάρτηση με $ a>1 $}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,3.3) {\footnotesize$0<a<1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=\xrwma](A)
+\tkzLabelPoint[above right](A){$ A(0,1) $}
+\node at (.8,4) {\footnotesize$C_g$};
+\end{tikzpicture}\captionof{figure}{Λογαριθμική συνάρτηση με $ 0<a<1 $} \\ 
+\end{tabular} 
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm,start=2]
+\item \textbf{Για {\boldmath$ 0<a<1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=\log_{a}x $ είναι γνησίως φθίνουσα στο $ (0,+\infty) $.
+\item Η συνάρτηση έχει ρίζα τον αριθμό $ x=1 $.
+\item Η γραφική παράστασή της έχει κατακόρυφη ασύμπτωτη τον άξονα $ y'y $ στη μεριά του $ +\infty $ ενώ τέμνει τον οριζόντιο άξονα $ x'x $ στο σημείο $ A(1,0) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow \log_{a}{x_1}>\log_{a}{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow \log_{a}{x_1}=\log_{a}{x_2}
+\end{gather*}
+\item Για $ x>1 $ ισχύει $ \log_{a}x<0 $ ενώ για $ 0<x<1 $ έχουμε $ \log_{a}x>0 $.
+\end{itemize}
+\end{enumerate}
+\item Οι γραφικές παραστάσεις των λογαριθμικών συναρτήσεων με αντίστροφες βάσεις $ f(x)=\log_a{x} $ και $ g(x)=\log_{\frac{1}{a}}{x}  $, με $ 0<a\neq1 $, είναι συμμετρικές ως προς τον άξονα $ x'x $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDrawPoint[fill=black](1.05,2.1)
+\node at (.8,.4) {\footnotesize$C_f$};
+\node at (.8,4) {\footnotesize$C_g$};
+\node at (3.2,2.9) {\footnotesize$f(x)=\log_{a}x$};
+\node at (3.2,1.3) {\footnotesize$g(x)=\log_{\frac{1}{a}}x$};
+\end{tikzpicture}\captionof{figure}{Λογαριθμικές συναρτήσεις με αντίστροφες βάσεις}
+\end{center}
+\end{document}
+
+
+
+
+
+
+

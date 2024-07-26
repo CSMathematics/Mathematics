@@ -1,0 +1,103 @@
+\documentclass[internet]{diag-pan-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{mtpro2}
+\usepackage{amsmath}
+\xroma{cyan}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{adjustbox}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+
+\begin{document}
+\titlos{Μαθηματικά Κατεύθυνσης Γ΄ Λυκείου}{ΕΠΑΝΑΛΗΠΤΙΚΟ}
+\begin{thema}
+\item\mbox{}\\\vspace{-5mm} 
+\begin{erwthma}
+\item Έστω μια συνάρτηση $ f $ ορισμένη σ' ένα διάστημα $ \varDelta $ και $ x_0 $ εσωτερικό σημείο του $ \varDelta $. Αν η $ f $ παρουσιάζει τοπικό ακρότατο στο $ x_0 $ και είναι παραγωγίσιμη σ αυτό το σημείο τότε να δείξεις οτι $ f'(x_0)=0 $.\\
+\monades{10}
+\item Να δώσεις τη γεωμερτρική ερμηνεία του θεωρήματος Rolle.\monades{5}
+\item Να χαρακτηρίσεις τις παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{enumerate}[label=\bf\textcolor{black}{{\large \alph*.}}]
+\item Αν $ z\in\mathbb{C}^*$, τότε οι εικόνες των $ z,-iz,\dfrac{z}{i^2} $ ανήκουν στον ίδιο κύκλο με κέντρο $ O(0,0) $.
+\item $ \displaystyle{\lim_{x\rightarrow-\infty}{\int_{0}^{x}{e^t\mathrm{d}t}}=1} $
+\item Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ είναι 1-1 όταν για οποιαδήποτε $ x_1,x_2\in A $ ισχύει η συνεπαγωγή \[ x_1=x_2\Rightarrow f(x_1)=f(x_2) \]
+\item Αν οι συναρτήσεις $ f,g $ έχουν όριο στο $ x_0 $ και ισχύει $ f(x)<g(x) $ κοντά στο $ x_0 $ τότε \[ \lim_{x\rightarrow x_0}f(x)<\lim_{x\rightarrow x_0}g(x) \]
+\item Αν $ f,g $ συναρτήσεις ορισμένες στο $ \mathbb{R}^* $ με $ f'(x)=g'(x) $ για $ x\in\mathbb{R} $ τότε υπάρχει σταθερά $ c $ τέτοια ώστε \[ f(x)=g(x)+c \]
+\monades{10}
+\end{enumerate}
+\end{erwthma}
+\item\mbox{}\\
+\hspace{-2cm}Αν για τους μιγαδικούς $ z=a+i $ και $ u=\dfrac{\beta-i}{\beta+i} $, με $ a,\beta\in\mathbb{R} $, ισχύει \[ z+2u-\overline{z}=0 \textrm{ και } z+\overline{z}=2ui \]
+τότε να αποδείξεις ότι : \begin{erwthma}
+\item $ a=\beta=1 $ και $ z+u=1 $ \monades{7}
+\item Η εικόνα του $ u $ κινείται στον μοναδιαίο κύκλο.\monades{4}
+\item Η εικόνα του $ w=\PARENS{\dfrac{z}{u}}^3 $ ανήκει στη διχοτόμο της γωνίας του 1ου και 3ου τεταρτημορίου στο μιγαδικό επίπεδο.\monades{7}
+\item $ \left|\dfrac{w^3}{z-w-2u}\right|=16 $\monades{7}
+\end{erwthma}
+\item\mbox{}\\
+Έστω η παραγωγίσιμη συνάρτηση $ f:\mathbb{R}\rightarrow\mathbb{R} $ για την οποία ισχύει : \[ f^3(x)+f(x)=2e^x -2x\]
+Να δείξεις ότι :
+\begin{erwthma}
+\item $ f(x)\geq1 $ για κάθε $ x\in\mathbb{R} $.\monades{9}
+\item Η εξίσωση $ x+1-xe^{f(x)}=0 $ έχει μια τουλάχιστον ρίζα $ x_0 $ στο διάστημα $ (0,1) $.\monades{7}
+\item Η συνάρτηση $ g(x)=\LEFTRIGHT\{.{\begin{aligned}
+&\dfrac{f(x)-1}{x^2} & x\neq0\\
+&\;\;\;\;\;\;\dfrac{1}{4} & x=0
+\end{aligned}} \;\;\;$ είναι συνεχής.\monades{9}
+\end{erwthma}
+\item\mbox{}\\Δίνεται η συνάρτηση $ f:\mathbb{R}\rightarrow\mathbb{R} $ για την οποία ισχύουν :
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Είναι δύο φορές παραγωγίσιμη στο $ \mathbb{R} $.\\
+\item $ f(x)>0 $ για κάθε $ x\in\mathbb{R} $.\\
+\item $ \displaystyle{\int_{0}^{a}f(t)\mathrm{d}t=4} $\\
+\item  $ g(x)=\displaystyle{\int_{0}^{x}f(t)\mathrm{d}t\cdot\int_{x}^{a}f(t)\mathrm{d}t\;,\;x\in\mathbb{R}} $.
+\end{enumerate}
+\end{multicols}
+Να δείξεις οτι :
+\begin{erwthma}
+\item $ g(x)=-\PARENS{\int_{0}^{x}f(t)\mathrm{d}t-2}^2\;,\;x\in\mathbb{R}. $\monades{7}
+\item Υπάρχει ένα τουλάχιστον $ \xi\in(0,a) $ , ώστε $ \displaystyle\int_{0}^{\xi}f(t)\mathrm{d}t=2 $ και $ \displaystyle\int_{a}^{\xi}f(t)\mathrm{d}t=-2 $\monades{8}
+\item Η συνάρτηση $ g $ παρουσιάζει μέγιστο στο σημείο $ \xi $.\monades{5}
+\item $ \displaystyle\lim_{x\rightarrow\xi}\dfrac{4-g(x)}{\left(x-\xi\right)^2}=f^2\left(\xi\right) $\monades{5}
+\end{erwthma}
+\end{thema}
+\end{document}

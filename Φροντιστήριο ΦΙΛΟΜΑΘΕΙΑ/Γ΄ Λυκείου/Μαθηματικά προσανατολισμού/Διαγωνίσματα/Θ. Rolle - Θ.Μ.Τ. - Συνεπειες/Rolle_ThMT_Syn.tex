@@ -1,0 +1,110 @@
+\documentclass[ektypwsh]{diag-pan-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{mtpro2}
+\usepackage{amsmath}
+\xroma{cyan}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{adjustbox}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+%---------------------------------
+\makeatletter
+\renewcommand*{\@alph}[1]{%
+  \ifcase#1\or α\or β\or γ\or
+    δ\or ε\or ζ\or η\or θ\or ι\or κ\or
+    λ\or μ\or ν\or ξ\or ο\or π\or ρ\or σ\or
+    τ\or υ\or φ\or χ\or ψ\or
+    ω\else\@ctrerr\fi
+}
+\renewcommand*{\@Alph}[1]{%
+  \ifcase#1\or Α\or Β\or Γ\or
+    Δ\or Ε\or Ζ\or Η\or Θ\or Ι\or Κ\or
+    Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or Ρ\or Σ\or
+    Τ\or Υ\or Φ\or Χ\or Ψ\or
+    Ω\else\@ctrerr\fi
+}
+\makeatother
+%--------------------------------
+
+\begin{document}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ ΚΑΤΕΥΘΥΝΣΗΣ Γ΄ ΛΥΚΕΙΟΥ}{Θ. ROLLE - Θ.Μ.Τ. - ΣΥΝΕΠΕΙΕΣ}
+\begin{thema}
+\item\mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Να αποδειχθεί οτι αν για μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ ισχύει $ f'(x)\neq0 $ για κάθε $ x\in A $ τότε η αυτή είναι $ 1-1 $.
+\monades{10}
+\item Να διατυπώσετε τη γεωμετρική ερμηνεία του Θ.Μ.Τ. για μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $.\monades{5}
+\item Να χαρακτηρίσετε τις παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{rlist}
+\item Αν για μια παραγωγίσιμη συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ έχουμε οτι $ f(a)=f(\beta) $ τότε θα υπάρχει $ x_0\in(a,\beta) $ ώστε $ f'(x_0)=0 $.
+\item Έστω μια συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ συνεχής και παραγωγίσιμη σ' αυτό. Τότε θα υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώστε να ισχύει $ f(\beta)-f(a)=f'(\xi)(\beta-a) $.
+\item Δίνεται η παραγωγίσιμη συνάρτηση $ f[0,+\infty)\rightarrow\mathbb{R} $ με γνησίως φθίνουσα παράγωγο. Αν $ f(0)=0 $ τότε θα ισχύει $ f(x)>xf'(x) $ για κάθε $ x>0 $.
+\item Αν $ f,g $ είναι δύο παραγωγίσιμες συναρτήσεις με $ f'(x)=g'(x) $ τότε θα ισχύει $ f'(x)=g'(x) $.
+\item Μεταξύ δύο διαδοχικών ριζών μιας παραγωγίσιμης συνάρτησης $ f:A\rightarrow\mathbb{R} $ υπάρχει τουλάχιστον ένα σημείο στο οποίο η εφαπτόμενη ευθεία να είναι παράλληλη με τον οριζόντιο άξονα.\\\monades{10}
+\end{rlist}
+\end{erwthma}
+\item\mbox{}\\
+Δίνεται η συνάρτηση $ f(x)=\ln\left( \frac{1}{x}\right)  $ και $ a,\beta $ δύο αριθμοί του πεδίου ορισμού της με $ 1<a<\beta $. Να δειχθεί οτι:
+\begin{erwthma}
+\item H παράγωγος της συνάρτησης $ f $ είναι γνησίως αύξουσα στο διάστημα $ [a,\beta] $.\monades{10}
+\item Ισχύει η παρακάτω σχέση :
+\[ \frac{1}{\beta}<\frac{\ln\left(\frac{a}{\beta}\right) }{a-\beta}<\frac{1}{a} \]\monades{15}
+\end{erwthma}
+\item \mbox{}\\
+\vspace{-5mm}
+\begin{erwthma}
+\item Δίνεται η δύο φορές παραγωγίσιμη συνάρτηση $ f:(0,+\infty)\rightarrow\mathbb{R} $ με $ f(1)=0 $ και $ f'(1)=1 $ για την οποία ισχύει η σχέση \[ x^2f''(x)+=6x-2f(x)+4xf'(x) \]
+Να βρεθεί ο τύπος της συνάρτησης $ f $.\monades{8}
+\item Δίνεται η παραγωγίσιμη συνάρτηση $ f:(0,+\infty)\rightarrow\mathbb{R} $ και $ a,\beta $ δύο σημεία του πεδίου ορισμού της με $ a<b $. Αν η $ f $ έχει ρίζα το $ \beta $ να δειχθεί οτι υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώστε να ισχύει : \[ (x-a)f'(\xi)=f(x) \]\monades{8}
+\item Έστω μια συνάρτηση $ f:\mathbb{R}\rightarrow\mathbb{R} $ παραγωγίσιμη για την οποία ισχύει \monades{9}
+\end{erwthma}
+\item \mbox{}\\
+Δίνεται μια συνάρτηση $ f:(0,+\infty) $ συνεχής και παραγωγίσιμη στο πεδίο ορισμού της για την οποία ισχύουν οι σχέσεις $ f(\sqrt{2})=0 $, $ f'(\sqrt{2})=-\sqrt{2} $ και $ f''(x)=e^{f(x)} $ για κάθε $ x>0 $.
+\begin{erwthma}
+\item Να δειχθεί οτι  $ \left[ f'(x)\right]^2=2f''(x)  $\monades{8}
+\item Να δειχθεί οτι $ f'(x)\neq0 $ για κάθε $ x\in\mathbb{R} $.\monades{8}
+\item Να δειχθεί οτι $ f(x)=\ln{\left( \dfrac{2}{x^2}\right) } $ για κάθε $ x>0 $.\monades{9}
+\end{erwthma}
+\end{thema}
+
+\end{document}

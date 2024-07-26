@@ -1,0 +1,132 @@
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\usepackage{gensymb,mathimatika}
+
+
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Εκθετική και Λογαριθμική Συνάρτηση}{Εκθετική Συνάρτηση}
+\orismoi
+\Orismos{Εκθετική συνάρτηση}
+Εκθετική ονομάζεται κάθε συνάρτηση $ f $ της οποίας ο τύπος αποτελεί δύναμη με θετική βάση, διάφορη της μονάδας και εκθέτη που περιέχει την ανεξάρτητη μετβλητή. Η απλή εκθετική συνάρτηση θα είναι της μορφής :
+\[ f(x)=a^x\;\;,\;\;0<a\neq1 \]
+\thewrhmata
+\Thewrhma{Ιδιότητεσ εκθετικών συναρτήσεων}
+Οι ιδιότητες των εκθετικών συναρτήσεων της μορφής $ f(x)=a^x $, με $ 0<a\neq1 $, είναι οι εξής. Σε ορισμένες ιδιότητες διακρίνουμε δύο περιπτώσεις για τη βάση $ a $ της συνάρτησης.
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ \mathbb{R} $.
+\item Το σύνολο τιμών της είναι το σύνολο $ (0,+\infty) $ των θετικών πραγματικών αριθμών.
+\item Η συνάρτηση δεν έχει ακρότατες τιμές.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm]
+\item[\textbf{A.}] \textbf{Για {\boldmath$ a>1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ της εκθετικής συνάρτησης είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=a^x $ είναι γνησίως αυξουσα στο $ \mathbb{R} $.
+\item Η συνάρτηση δεν έχει ρίζες στο $ \mathbb{R} $.
+\item Η γραφική παράστασή της έχει οριζόντια ασύμπτωτη τον άξονα $ x'x $ στη μεριά του $ -\infty $ ενώ τέμνει τον κατακόρυφο άξονα $ y'y $ στο σημείο $ A(0,1) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow a^{x_1}<a^{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow a^{x_1}=a^{x_2}
+\end{gather*}
+\end{itemize}
+\begin{tabular}{p{6cm}p{6cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{1.8^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above left,yshift=-1mm](A){$ (0,1) $}
+\node at (3,0.7) {\footnotesize$a>1$};
+\node at (3,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.8,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above right,yshift=-1mm](A){$ (0,1) $}
+\node at (1.2,0.7) {\footnotesize$0<a<1$};
+\node at (1.2,2.5) {\footnotesize$C_f$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{enumerate}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm,start=2]
+\item[\textbf{B.}] \textbf{Για {\boldmath$ 0<a<1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ της εκθετικής συνάρτησης είναι μικρότερη της μονάδας τότε η συνάρτηση $ f(x)=a^x $ είναι γνησίως φθίνουσα στο $ \mathbb{R} $.
+\item Η συνάρτηση δεν έχει ρίζες στο $ \mathbb{R} $.
+\item Η γραφική παράστασή της έχει οριζόντια ασύμπτωτη τον άξονα $ x'x $ στη μεριά του $ +\infty $ ενώ τέμνει τον κατακόρυφο άξονα $ y'y $ στο σημείο $ A(0,1) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow a^{x_1}>a^{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow a^{x_1}=a^{x_2}
+\end{gather*}
+\end{itemize}
+\end{enumerate}
+\item Οι γραφικές παραστάσεις των εκθετικών συναρτήσεων με αντίστροφες βάσεις $ f(x)=a^x $ και $ g(x)=\left(\frac{1}{a}\right)^x  $, με $ 0<a\neq1 $, είναι συμμετρικές ως προς τον άξονα $ y'y $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{1.8^x};
+\addplot[grafikh parastash,domain=-2.7:2.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDrawPoint[fill=black](2.1,1.05)
+\node at (3,2.5) {\footnotesize$C_f$};
+\node at (1.2,2.5) {\footnotesize$C_g$};
+\node at (.8,.9) {\footnotesize$f(x)=a^x$};
+\node at (3.7,.9) {\footnotesize$g(x)=\left(\frac{1}{a}\right)^x$};
+\end{tikzpicture}
+\end{center}
+\end{document}

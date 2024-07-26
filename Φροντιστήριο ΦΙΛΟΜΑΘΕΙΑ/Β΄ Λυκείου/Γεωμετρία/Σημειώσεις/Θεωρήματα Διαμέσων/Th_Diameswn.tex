@@ -1,0 +1,81 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\usepackage{multicol,mathimatika,gensymb}
+\usepackage{wrap-rl}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Μετρικές Σχέσεις}{Θεωρήματα διαμέσων}
+\thewrhmata
+\Thewrhma{1\tssL{o} Θεώρημα διαμέσων}
+\wrapr{-5mm}{7}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(.5,1){c}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(2,1){b}
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(a);
+\draw(C)--(c);
+\draw(B)--(b);
+\tkzDrawPoints(A,B,C,a,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[right](b){$E$}
+\end{tikzpicture}}{
+Το άθροισμα των τετραγώνων δύο πλευρών ενός τριγώνου ισούται με το διπλάσιο τετράγωνο της περιεχόμενης διαμέσου συν το μισό τετράγωνο της τρίτης πλευράς.
+\[ a^2+\beta^2=2\mu_\gamma^2+\frac{\gamma^2}{2}\ \ ,\ \ a^2+\gamma^2=2\mu_\beta^2+\frac{\beta^2}{2}\ \ ,\ \ \beta^2+\gamma^2=2\mu_a^2+\frac{a^2}{2} \]}\mbox{}\\\\\\
+Από τους παραπάνω τύπους μπορούμε να εκφράσουμε τις διαμέσους του τριγώνου με τη βοήθεια των πλευρών του ως εξής :
+\[ \mu_a^2=\frac{2\beta^2+2\gamma^2-a^2}{4}\ \ ,\ \ \mu_\beta^2=\frac{2a^2+2\gamma^2-\beta^2}{4}\ \ ,\ \ \mu_\gamma^2=\frac{2a^2+2\beta^2-\gamma^2}{4} \]
+\Thewrhma{2\tssL{ο} Θεώρημα Διαμέσων}
+\wrapr{-5mm}{7}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(.5,1){c}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(2,1){b}
+\tkzDefPoint(1,0){D}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{e}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{d}
+\tkzMarkRightAngle[size=.2](C,D,A)
+\tkzMarkRightAngle[size=.2](B,d,C)
+\tkzMarkRightAngle[size=.2](C,e,A)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(D)--(A)--(a);
+\draw(e)--(C)--(c);
+\draw(d)--(B)--(b);
+\draw[pl,\xrwma](D)--(a);
+\draw[pl,\xrwma](b)--(d);
+\draw[pl,\xrwma](e)--(c);
+\tkzDrawPoints(A,B,C,a,b,c,D,d,e)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[above right](b){$E$}
+\tkzLabelPoint[below](D){$M$}
+\tkzLabelPoint[above right](d){$K$}
+\tkzLabelPoint[above left,xshift=1mm](e){$\varLambda$}
+\end{tikzpicture}}{
+Η διαφορά των τετραγώνων δύο πλευρών ισούται με το διπλάσιο γινόμενο της τρίτης πλευράς επί την προβολή της περιεχόμενης διαμέσου στην τρίτη πλευρά.
+\[ a^2-\beta^2=2\gamma\cdot\varLambda Z\ \ ,\ \ a^2-\gamma^2=2\beta\cdot KE\ \ ,\ \ \beta^2-\gamma^2=2a\cdot M\varDelta \]}
+\end{document}

@@ -1,0 +1,528 @@
+\documentclass[twoside,10pt]{book}
+\usepackage[amsbb,mtpfrak,zswash,mtpcal]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\defaultfontfeatures{Ligatures=TeX}
+\font\kefalaio="Minion Pro Bold" at 36pt
+\font\ArKef="Minion Pro Bold Italic" at 72pt
+\font\OnKef="Times New Roman" at 20pt
+\font\OnPar="Minion Pro Bold" at 18pt
+\newfontfamily\scfont{GFS Artemisia}
+\usepackage[inner=2.00cm, outer=1.50cm, top=3.00cm, bottom=2.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{amsmath}
+\usepackage[amsbb,mtpfrak,zswash,mtpcal]{mtpro2}
+\usepackage{makeidx}
+\usepackage{longtable,xcolor,varwidth}
+\usepackage{float}
+\usepackage{subfig}
+\def\xrwma{cyan!70!black}
+\def\xrwmath{cyan}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usetikzlibrary{fadings}
+\usepackage{wrap-rl}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[framemethod=TikZ]{mdframed}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scfont\scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\theorismos\;}:\;}}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\usepackage{venndiagram,mathimatika}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.1\paperwidth,yshift=.14\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.09\paperwidth,yshift=.08\paperheight,rectangle] {\fontsize{24}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.74\paperwidth,yshift=.11\paperheight,rectangle]
+{{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{white}{\contour{black}{\thechapter}}}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\itshape{\LARGE{\thesection~#1}}\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{30pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{\textcolor{\xrwma}{ΟΡΙΣΜΟΙ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=cyan!80!black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=cyan!80!black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textbf{\textcolor{\xrwmath}{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwmath,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwmath, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\usepackage{microtype}
+\usepackage{float}
+
+\usepackage{caption}
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[section]
+\renewcommand{\theparadeigma}{\bf\thechapter.\arabic{paradeigma}}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{cyan}{\textbf{{\large Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%-----------------------------------
+
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{{\textbf{ΛΥΣΗ}}}
+%------------------------------------
+
+%------ ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ ΤΙΤΛΟΣ ---------
+\newcommand{\Lymena}{\begin{center}
+\begin{tikzpicture}
+\path[left color=cyan!70!black,right color=cyan!80!black,middle color=cyan!80!white] (-7cm,-.6cm) rectangle (6.5cm,.6cm);
+\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}}};  
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------
+
+%--------- ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ ΤΙΤΛΟΣ ----------
+\newcommand{\Alyta}{\begin{center}
+\begin{tikzpicture}
+\path[left color=cyan!70!black,right color=cyan!80!black,middle color=cyan!80!white] (-7cm,-.6cm) rectangle (6.5cm,.6cm);
+\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΑΣΚΗΣΕΙΣ - ΠΡΟΒΛΗΜΑΤΑ}}};  
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------------
+\usetikzlibrary{shadows,calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+%---------- ΜΕΘΟΔΟΣ --------------
+\newcounter{Methodos}[chapter]
+\renewcommand{\theMethodos}{\thechapter.\arabic{Methodos}}
+\newenvironment{Methodos}[2][\linewidth]
+{\refstepcounter{Methodos}
+\begin{tcolorbox}[breakable,
+enhanced standard,
+boxrule=0.7pt,titlerule=-.2pt,drop fuzzy shadow southeast=black!50,
+width=\linewidth,
+title style={color=white},
+overlay unbroken and first={
+\path[left color=cyan!70!black,right color=cyan,draw=black]
+([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+},
+fonttitle=\bfseries,
+before=\par\medskip\noindent,
+after=\par\medskip,
+toptitle=3pt,
+top=11pt,topsep at break=-5pt,
+colback=white,title={\large Μέθοδος \theMethodos} : {\textcolor{black}{\MakeUppercase{#1}}}]}
+{\end{tcolorbox}}
+%------------------------------------------
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.5cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+
+
+%----ΣΤΥΛ ΑΣΚΗΣΗΣ ----------
+\newcounter{askhsh}[chapter]
+\renewcommand{\theaskhsh}{\bf{{\large{\thechapter}}.\arabic{askhsh}}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}\textcolor{\xrwma}{{\theaskhsh}\hspace{1mm}}}{}
+%---------------------------
+
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%------------------------------------------
+\setlength{\parindent}{0pt}
+\setlist[itemize]{itemsep=0mm}
+\tkzSetUpPoint[size=7,fill=white]
+\newcommand{\twocolkentro}[1]{
+\twocolumn[
+\begin{@twocolumnfalse}
+#1
+\end{@twocolumnfalse}]}
+\newcommand{\bcc}[1]{
+\begin{center}
+{\color{\xrwma}{\hrulefill}\raisebox{-2.5mm}{\rule{.4pt}{5mm}}}\hspace{1em}\raisebox{-.65ex}{\begin{varwidth}{\dimexpr0.7\textwidth-2em\relax}\centering{\textbf{\textcolor{\xrwma}{#1}}}\end{varwidth}}\hspace*{1em}{\color{\xrwma}{\raisebox{-2.5mm}{\rule{.4pt}{5mm}}\hrulefill}}
+\end{center}}
+
+
+
+\begin{document}
+\mainmatter
+\pagestyle{fancy}
+\chapter{Ιδιότητες Συναρτήσεων}
+\section{Μονοτονία - Ακρότατα}
+\orismoi
+\Orismos{Μονοτονία}
+Μια συνάρτηση αύξουσα ή φθίνουσα, χαρακτηρίζεται ως \textbf{μονότονη}, ενώ μια γνησίως αύξουσα ή γνησίως φθίνουσα συνάρτηση ως \textbf{γνησίως μονότονη}. Οι χαρακτηρισμοί αυτοί αφορούν τη \textbf{μονοτονία} μιας συνάρτησης, μια ιδιότητα των συναρτήσεων η οποία δείχνει την αύξηση ή τη μείωση των τιμών μιας συνάρτησης σε ένα διάστημα του πεδίου ορισμού.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Γνησίως αύξουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως αύξουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)<f(x_2) \]
+\item \textbf{Γνησίως φθίνουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως φθίνουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)>f(x_2) \]
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\draw[dashed] (3.3,1.4) node[anchor=north]{\scriptsize $x_2$} -- 
+(3.3,2.58)--(1,2.58) node[left]{\scriptsize $f(x_2)$};
+\draw[dashed] (2,1.4) node[anchor=north]{\scriptsize $x_1$}-- 
+(2,2.08)--(1,2.08)node[left]{\scriptsize $f(x_1)$};
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-1,xmax=3,
+ymin=-1.4,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,\xrwma,domain=-.8:3]{ln(x+1)};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](2,2.09)
+\tkzDrawPoint[size=7,fill=black](3.3,2.59)
+\node[fill=white,inner sep=.1mm] at (2.7,0.6) {\scriptsize $ x_1<x_2\Rightarrow f(x_1)<f(x_2)$};
+\end{tikzpicture}\captionof{figure}{Γνησίως αύξουσα}	& \begin{tikzpicture}
+\draw[dashed] (2.6,1.4) node[anchor=north]{\scriptsize $x_2$} -- 
+(2.6,2.02)--(1,2.02) node[left]{\scriptsize $f(x_2)$};
+\draw[dashed] (1.5,1.4) node[anchor=north]{\scriptsize $x_1$}-- 
+(1.5,2.7)--(1,2.7)node[left]{\scriptsize $f(x_1)$};
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-1,xmax=3,
+ymin=-1.4,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,\xrwma,domain=-.6:3]{-0.2*(x+.5)^2+1.5};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](2.6,2.02)
+\tkzDrawPoint[size=7,fill=black](1.5,2.7)
+\node[fill=white,inner sep=.1mm] at (1.95,0.6) {\scriptsize $ x_1<x_2\Rightarrow f(x_1)>f(x_2)$};
+\end{tikzpicture}\captionof{figure}{Γνησίως φθίνουσα} \\ 
+\end{tabular} 
+\end{center}
+\end{enumerate}
+\Orismos{Ολικά Ακρότατα}
+Ακρότατα ονομάζονται οι μέγιστες ή ελάχιστες τιμές μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ τις οποίες παίρνει σε ένα διάστημα ή σε ολόκληρο το πεδίο ορισμού της.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Ολικό μέγιστο}\\
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ παρουσιάζει ολικό μέγιστο σε ένα σημείο $ x_0\in D_f $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μεγαλύτερη από κάθε άλλη $ f(x) $ για κάθε σημείο $ x_0 $ του πεδίου ορισμού. \[ f(x)\leq f(x_0)\;\;,\;\;\textrm{για κάθε } x\in D_f \]
+\item \textbf{Ολικό ελάχιστο}\\
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ παρουσιάζει ολικό ελάχιστο σε ένα σημείο $ x_0\in D_f $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μικρότερη από κάθε άλλη $ f(x) $ για κάθε σημείο $ x_0 $ του πεδίου ορισμού. \[ f(x)\geq f(x_0)\;\;,\;\;\textrm{για κάθε } x\in D_f \]
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3.2,
+ymin=-1,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.3:2.3]{-x^2+2*x};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](1.7,2)
+\node at (1.95,0.4) {\scriptsize $ f(x)\leq f(x_0)$};
+\draw[dashed] (1.7,1) node[anchor=north]{\scriptsize $x_0$} -- 
+(1.7,2)--(0.7,2) node[left]{\scriptsize $f(x_0)$};
+\node at (0.5,0.8) {\footnotesize $ O $};
+\end{tikzpicture}\captionof{figure}{Ολικό μέγιστο}	& \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3,
+ymin=-.7,ymax=2.3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.3:2.3]{x^2-2*x+1.5};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](1.7,1.2)
+\node at (2.1,0.2) {\scriptsize $ f(x)\leq f(x_0)$};
+\draw[dashed] (1.7,0.7) node[anchor=north]{\scriptsize $x_0$} -- 
+(1.7,1.2)--(0.7,1.2) node[left]{\scriptsize $f(x_0)$};
+\node[fill=white,inner sep=.5pt] at (0.5,0.5) {\footnotesize $ O $};
+\end{tikzpicture}\captionof{figure}{Ολικό ελάχιστο} \\ 
+\end{tabular} 
+\end{center}
+\end{enumerate}
+\Orismos{Άρτια - Περιττή συνάρτηση}
+\vspace{-5mm}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Άρτια συνάρτηση}\\ Άρτια ονομάζεται μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ για την οποία ισχύουν οι παρακάτω συνθήκες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \forall x\in D_f\Rightarrow -x\in D_f $
+\item $ f(-x)=f(x)\;,\;\forall x\in D_f$
+\end{enumerate}
+\item \textbf{Περιττή συνάρτηση}\\ Περιττή ονομάζεται μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ για την οποία ισχύουν οι παρακάτω συνθήκες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \forall x\in D_f\Rightarrow -x\in D_f $
+\item $ f(-x)=-f(x)\;,\;\forall x\in D_f$
+\end{enumerate}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{p{4.5cm}p{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=2cm,y=3cm,aks_on,xmin=-1,xmax=1,ymin=-.1,ymax=0.9,ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.85:.85]{(x^2)};
+\draw[dashed](axis cs:.7,0)node[below]{{\footnotesize $ x $}}--(axis cs:.7,.49)--(axis cs:-.7,.49)--(axis cs:-.7,0)node[below]{{\footnotesize $ -x $}};
+\end{axis}
+\node[fill=white,inner sep=.1mm] at (2,2.5){\scriptsize $f(-x)=f(x)$};
+\end{tikzpicture}\captionof{figure}{Άρτια συνάρτηση}	& \begin{tikzpicture}
+\node at (3.4,0) {\scriptsize $f(-x)=-f(x)$};
+\begin{axis}[x=2cm,y=1.8cm,aks_on,xmin=-1,xmax=1,ymin=-.9,ymax=.9,ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.9:.9]{(x^3)};
+\draw[dashed](axis cs:.7,0)node[below]{{\footnotesize $ x $}}--(axis cs:.7,.343)--(axis cs:0,.343)node[left]{{\footnotesize $ f(x) $}};
+\draw[dashed](axis cs:-.7,0)node[above]{{\footnotesize $ -x $}}--(axis cs:-.7,-.343)--(axis cs:0,-.343)node[right]{{\footnotesize $ f(-x) $}};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Περιττή συνάρτηση} \\ 
+\end{tabular} 
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Η γραφική παράσταση μιας άρτιας συνάρτησης είναι συμμετρική ως προς τον κατακόρυφο άξονα.
+\item H γραφική παράσταση μιας περιττής συνάρτησης είναι συμμετρική ως προς την αρχή των αξόνων.
+\item Η αρχή των αξόνων για μια περιττή συνάρτηση ονομάζεται \textbf{κέντρο συμμετρίας} της.
+\end{itemize}
+\section{Μετατόπιση γραφικής παράστασης}
+\thewrhmata
+\Thewrhma{Κατακόρυφη μετατόπιση}
+Η γραφική παράσταση $ C_f $ μιας συνάρτησης $ f $ μετατοπίζεται κατακόρυφα κατά $ c $ μονάδες προς τα πάνω ή προς τα κάτω, εαν αυξήσουμε ή μειώσουμε αντίστοιχα τις τεταγμένες $ f(x) $ των σημείων της κατά $ c $ μονάδες.
+\[ g(x)=f(x)\pm c\;\;,\;\;c>0 \]
+Η γραφική παράσταση $ C_g $ της νέας συνάρτησης $ g(x) $ προκύπτει από κατακόρυφη μετατόπιση της $ C_f $ κατά $ c $ μονάδες.
+\begin{center}
+\begin{tabular}{p{5cm}cp{5cm}}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$}
+,xmin=-2,xmax=2.,ymin=-1,ymax=3,x=1cm,y=1cm]
+\addplot[clip=false,domain=-1.8:1.8,grafikh parastash]{x^2-.7};
+\addplot[domain=-1.8:1.8,pl,samples=200]{x^2};
+\addplot[domain=-1.5:1.5,grafikh parastash]{x^2+.7};
+\draw[pl,-latex] (axis cs:.5,.25) -- (axis cs:.5,.95);
+\draw[pl,-latex] (axis cs:.5,.25) -- (axis cs:.5,-.45);
+\draw[pl,-latex] (axis cs:-.5,.25) -- (axis cs:-.5,-.45);
+\draw[pl,-latex] (axis cs:-.5,.25) -- (axis cs:-.5,.95);
+\node at (axis cs:-.25,.5) {\footnotesize$+c$};
+\node at (axis cs:-.25,-.25) {\footnotesize$-c$};
+\node at (axis cs:.25,.5) {\footnotesize$+c$};
+\node at (axis cs:.25,-.25) {\footnotesize$-c$};
+\end{axis}
+\end{tikzpicture} & & \begin{tikzpicture}
+\begin{axis}[clip=false,aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$}
+,xmin=-2,xmax=4.2,ymin=-1,ymax=3,x=1cm,y=1cm]
+\addplot[domain=-1.8:1.8,grafikh parastash]{x^2-.7};
+\addplot[domain=-.8:2.8,pl,samples=200]{(x-1)^2-.7};
+\addplot[domain=.2:3.8,grafikh parastash]{(x-2)^2-.7};
+\draw[pl,-latex] (axis cs:2,.3) -- (axis cs:3,.3);
+\draw[pl,-latex] (axis cs:2.5,1.55) -- (axis cs:3.5,1.55);
+\draw[pl,-latex] (axis cs:0,.3) -- (axis cs:-1,.3);
+\draw[pl,-latex] (axis cs:-.5,1.55) -- (axis cs:-1.5,1.55);
+\node at (axis cs:-.5,.5) {\footnotesize$+c$};
+\node at (axis cs:3,1.7) {\footnotesize$-c$};
+\node at (axis cs:2.5,.5) {\footnotesize$-c$};
+\node at (axis cs:-1,1.7) {\footnotesize$+c$};
+\end{axis}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Thewrhma{Οριζόντια μετατόπιση}
+Η γραφική παράσταση $ C_f $ μιας συνάρτησης $ f $ μετατοπίζεται οριζόντια κατά $ c $ μονάδες προς τα αριστερά ή προς τα δεξιά, εαν αυξήσουμε ή μειώσουμε αντίστοιχα τις τετμημένες $ x $ των σημείων της κατά $ c $ μονάδες.
+\[ g(x)=f(x\pm c)\;\;,\;\;c>0  \]
+Η γραφική παράσταση $ C_g $ της νέας συνάρτησης $ g(x) $ προκύπτει από οριζόντια μετατόπιση της $ C_f $ κατά $ c $ μονάδες.
+\end{document}
+
+
+
+
+
+
+

@@ -1,0 +1,199 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Μέτρηση κύκλου}{Κανονικά πολύγωνα}
+\orismoi
+\Orismos{Κανονικό πολύγωνο (\MakeLowercase{$ \mathbold\nu $}-γωνο)}
+\wrapr{-4mm}{9}{3.5cm}{-4mm}{\begin{tikzpicture}
+\draw(15:1.2) arc (15:-290:1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (90:1.2);
+\coordinate (B) at (135:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (225:1.2);
+\coordinate (E) at (270:1.2);
+\coordinate (F) at (315:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzMarkSegments[mark=|,size=.7mm](A,B B,C C,D D,E E,F F,G);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[below right](F){$Z$}
+\tkzLabelPoint[right](G){$H$}
+\tkzLabelPoint[above](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F,G)
+\end{tikzpicture}}{
+Κανονικό ονομάζεται κάθε πολύγωνο το οποίο έχει όλες τις πλευρές του ίσες και όλες τις γωνίες του ίσες μεταξύ τους.
+\begin{itemize}
+\item Ένα κανονικό πολύγωνο συμβολίζεται $ \nu $-γωνο, όπου $ \nu $ είναι ο φυσικός αριθμός που καθορίζει το πλήθος των πλευρών του πολυγώνου με $ \nu\geq3 $.
+\item Κάθε κανονικό πολύγωνο εγγράφεται σε έναν κύκλο και ο κύκλος αυτός ονομάζεται \textbf{κύκλος του πολυγώνου}.
+\item Το κέντρο του περιγεγραμμένου κύκλου ονομάζεται \textbf{κέντρο του πολυγώνου}
+\end{itemize}}\mbox{}\\\\\\
+\Orismos{Στοιχεία πολυγώνου}
+\wrapr{-5mm}{7}{4cm}{-8mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.5);
+\draw (0,0) circle (1.299);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (120:1.5);
+\coordinate (B) at (60:1.5);
+\coordinate (C) at (0:1.5);
+\coordinate (D) at (-60:1.5);
+\coordinate (E) at (-120:1.5);
+\coordinate (F) at (180:1.5);
+\coordinate (G) at (30:1.299);
+\tkzMarkAngle[size=.3](B,O,A)
+\tkzMarkAngle[size=.25,fill=white,draw=black](E,F,A)
+\tkzMarkRightAngle[size=.2](O,G,C)
+\draw[pl,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--cycle;
+\draw (B)--(O)--(A);
+\draw (O)--(G);
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below right](D){$\varDelta$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[left](F){$Z$}
+\tkzLabelPoint[below](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F,G)
+\node at (0,0.4979) {\footnotesize$\omega_\nu$};
+\node at (-1,0) {\footnotesize$\varphi_\nu$};
+\node at (0.6928,0.1444) {\footnotesize$a_\nu$};
+\node at (0,-1.1) {\footnotesize$\lambda_\nu$};
+\node at (-0.6547,0.783) {\footnotesize$R$};
+\end{tikzpicture}}{
+Τα στοιχεία ενός κανονικού $ \nu- $γωνου είναι τα εξής:
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Κεντρική γωνία}\\
+Η κεντρική γωνία είναι η γωνία που σχηματίζουν δύο ακτίνες του κύκλου του πολυγώνου που ενώνουν το κέντρο με δύο διαδοχικές κορυφές του. Συμβολίζεται με $ \omega_\nu $.
+\end{enumerate}}\mbox{}\\
+\vspace{-3mm}
+\begin{enumerate}[label=\bf\arabic*.,start=2,itemsep=0mm]
+\item \textbf{Γωνία πολυγώνου}\\
+Η γωνία του πολυγώνου είναι η γωνία που σχηματίζουν δύο διαδοχικές πλευρές του. Συμβολίζεται $ \varphi_\nu $.
+\item \textbf{Πλευρά πολυγώνου}\\
+Η πλευρά ενός κανονικού πολυγώνου συμβολίζεται με $ \lambda_\nu $.
+\item \textbf{Απόστημα πολυγώνου}\\
+Το απόστημα ενός πολυγώνου είναι η ακτίνα του εγγεγραμμένου κύκλου του. Συμβολίζεται με $ a_\nu $.
+\item \textbf{Κέντρο πολυγώνου}\\
+Το κέντρο ενός κανονικού πολυγώνου είναι το κέντρο του περιγεγραμμένου κύκλου.
+\item \textbf{Ακτίνα πολυγώνου}\\
+Ακτίνα ενός κανονικού πολυγώνου ονομάζεται η ακτίνα του περιγεγραμμένου κύκλου. Συμβολίζεται $ R $.
+\item \textbf{Περίμετρος - Εμβαδόν πολυγώνου}\\
+Η περίμετρος ενός καονικού πολυγώνου συμβολίζεται με $ P_\nu $ ενώ το εμβαδόν του με $ E_\nu $.
+\end{enumerate}
+\thewrhmata
+\Thewrhma{Σχέσεις στοιχείων πολυγώνου}
+Για τα στοιχεία ενός κανονικού $ \nu- $γωνου ισχύουν οι παρακάτω σχέσεις:
+\begin{multicols}{4}
+\begin{rlist}
+\item $ \omega_\nu=\dfrac{360\degree}{\nu} $
+\item $ \varphi_\nu=180\degree-\omega_\nu $
+\item $ a_\nu^2+\dfrac{\lambda_\nu^2}{4}=R^2 $
+\item $ a_\nu=R\cdot\syn{\left( \frac{\omega_\nu}{2}\right) } $
+\item $ \lambda_\nu=2R\cdot\hm{\left( \frac{\omega_\nu}{2}\right) } $
+\item $ \lambda_\nu=2a_\nu\cdot\ef{\left( \frac{\omega_\nu}{2}\right)} $
+\item $ P_\nu=\nu\cdot\lambda_\nu $
+\item $ E_\nu=\dfrac{1}{2}P_\nu\cdot a_\nu $
+\end{rlist}
+\end{multicols}
+\Thewrhma{Λόγος στοιχείων κανονικού πολυγώνου}
+Ο λόγος των πλευρών, ο λόγος των ακτίνων και ο λόγος των αποστημάτων δύο κανονικών $ \nu- $γωνων ισούνται με το λόγο ομοιότητας τους.
+\[ \frac{\lambda_\nu}{\lambda_\nu'}=\frac{R}{R'}=\frac{a_\nu}{a_\nu'} \]
+\end{document}

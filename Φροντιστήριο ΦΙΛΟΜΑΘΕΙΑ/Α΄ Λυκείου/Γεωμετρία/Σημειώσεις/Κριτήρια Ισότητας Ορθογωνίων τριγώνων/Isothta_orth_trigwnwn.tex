@@ -1,0 +1,233 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb,hhline}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Τρίγωνα}{ΙΣΟΤΗΤΑ ΟΡΘΟΓΩΝΙΩΝ ΤΡΙΓΩΝΩΝ}
+\thewrhmata
+\Thewrhma{Μοναδικότητα καθέτου}
+Από ένα σημείο που βρίσκεται εκτός μιας ευθείας διέρχεται μοναδική κάθετη προς την ευθεία.\\\\
+\Thewrhma{1\tssL{ο} Κριτήριο ισότητας ορθογωνίων τριγώνων}
+Δύο ορθογώνια τρίγωνα είναι ίσα αν έχουν τις κάθετες πλευρές τους ίσες μια προς μια.\\\\
+\Thewrhma{2\tssL{ο} Κριτήριο ισότητας ορθογωνίων τριγώνων}
+Δύο ορθογώνια τρίγωνα είναι ίσα αν έχουν μια κάθετη πλευρά ίση και μια προσκείμενη γωνία ίση.\\\\
+\Thewrhma{3\tssL{ο} Κριτήριο ισότητας ορθογωνίων τριγώνων}
+Δύο ορθογώνια τρίγωνα είναι ίσα αν έχουν ίσες υποτείνουσες και μια προσκείμενη οξεία γωνία ίση\\\\
+\Thewrhma{4\tssL{ο} Κριτήριο ισότητας ορθογωνίων τριγώνων}
+Δύο ορθογώνια τρίγωνα είναι ίσα αν έχουν μια κάθετη πλευρά ίση και ίσες υποτείνουσες.\\\\
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{7cm}|>{\centering\arraybackslash}m{7cm}}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{1ο Κριτήριο} & \textbf{2ο Κριτήριο} \\
+\hhline{==} \rule[-2ex]{0pt}{15ex}\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.5){C}
+\tkzDefPoint(3.5,0){D}
+\tkzDefPoint(6,0){E}
+\tkzDefPoint(3.5,1.5){Z}
+\tkzMarkRightAngle[size=.25,fill=\xrwma](B,A,C)
+\tkzMarkRightAngle[size=.25,fill=\xrwma](E,D,Z)
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[pl](D)--(E)--(Z)--cycle;
+\tkzMarkSegments[mark=|,size=3pt,color=\xrwma](A,B D,E)
+\tkzMarkSegments[mark=||,size=3pt,color=\xrwma](A,C D,Z)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+\tkzDrawPoints(A,B,C,D,E,Z)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.5){C}
+\tkzDefPoint(3.5,0){D}
+\tkzDefPoint(6,0){E}
+\tkzDefPoint(3.5,1.5){Z}
+\tkzMarkRightAngle[size=.25,fill=\xrwma](B,A,C)
+\tkzMarkRightAngle[size=.25,fill=\xrwma](E,D,Z)
+\tkzMarkAngle[size=.5,mark=|,fill=\xrwma](C,B,A)
+\tkzMarkAngle[size=.5,mark=|,fill=\xrwma](Z,E,D)
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[pl](D)--(E)--(Z)--cycle;
+\tkzMarkSegments[mark=|,size=3pt,color=\xrwma](A,B D,E)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+\tkzDrawPoints(A,B,C,D,E,Z)
+\end{tikzpicture}\\
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{3ο Κριτήριο} & \textbf{4ο Κριτήριο} \\
+\hline \rule[-2ex]{0pt}{15ex}\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.5){C}
+\tkzDefPoint(3.5,0){D}
+\tkzDefPoint(6,0){E}
+\tkzDefPoint(3.5,1.5){Z}
+\tkzMarkRightAngle[size=.25](B,A,C)
+\tkzMarkRightAngle[size=.25](E,D,Z)
+\tkzMarkAngle[size=.5,mark=|,fill=\xrwma](C,B,A)
+\tkzMarkAngle[size=.5,mark=|,fill=\xrwma](Z,E,D)
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[pl](D)--(E)--(Z)--cycle;
+\tkzMarkSegments[mark=|,size=3pt,color=\xrwma](B,C E,Z)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+\tkzDrawPoints(A,B,C,D,E,Z)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.5){C}
+\tkzDefPoint(3.5,0){D}
+\tkzDefPoint(6,0){E}
+\tkzDefPoint(3.5,1.5){Z}
+\tkzMarkRightAngle[size=.25](B,A,C)
+\tkzMarkRightAngle[size=.25](E,D,Z)
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[pl](D)--(E)--(Z)--cycle;
+\tkzMarkSegments[mark=|,size=3pt,color=\xrwma](A,B D,E)
+\tkzMarkSegments[mark=||,size=3pt,color=\xrwma](B,C E,Z)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+\tkzDrawPoints(A,B,C,D,E,Z)
+\end{tikzpicture}\\
+\hline
+\end{tabular} 
+\end{center}
+\Thewrhma{Συγκετρωτικά κριτήρια ισότητας ορθογωνίων τριγώνων}
+Τα παραπάνω τέσσερα κριτήρια συνοψίζονται στα δύο παρακάτω γενικά κριτήρια. Δύο ορθογώνια τρίγωνα είναι ίσα αν έχουν
+\begin{rlist}
+\item δύο πλευρές ίσες μια προς μια.
+\item μια πλευρά και μια προσκείμενη οξεία γωνία ίσες μια προς μια.
+\end{rlist}
+\Thewrhma{Πόρισμα Ισοσκελές τρίγωνο}
+Σε κάθε ισοσκελές τρίγωνο, το ύψος από την κορυφή προς τη βάση είναι και διάμεσος και διχοτόμος.\\\\
+\Thewrhma{Πόρισμα για τη χορδή και το τόξο κύκλου}
+Η κάθετη από το κέντρο ενός κύκλου προς μια χορδή του, διχοτομεί τη χορδή και το αντίστοιχο τόξο της.\\\\
+\Thewrhma{Διχοτόμος γωνίας}
+Τα σημεία της διχοτόμου μιας γωνίας ισαπέχουν από τις πλευρές της. Αντίστροφα, κάθε σημείο που ισαπέχει από τις πλευρές μιας γωνίας θα ανήκει στη διχοτόμο της.
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\clip (-.5,-.5) rectangle (5.2,2.2);
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(2.5,1.7){C}
+\draw (B) -- (A) -- (C);
+\tkzDrawBisector[draw=\xrwma](B,A,C)\tkzGetPoint{a}
+\tkzDefPointWith[linear,K=0.8](A,a) \tkzGetPoint{D}
+\tkzDefPointBy[projection=onto A--C](D)
+\tkzGetPoint{h}
+\tkzDrawSegment(D,h)
+\tkzMarkRightAngle[fill=\xrwma](A,h,D)
+\tkzDefPointBy[projection=onto A--B](D)
+\tkzGetPoint{f}
+\tkzDrawSegment(D,f)
+\tkzMarkRightAngle[fill=\xrwma](A,f,D)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[above,xshift=2mm](D){$M$}
+\tkzLabelPoint[above](h){$B$}
+\tkzLabelPoint[below](f){$\varGamma$}
+\tkzLabelPoint[above](C){$y$}
+\tkzLabelPoint[right](B){$x$}
+\tkzDrawPoints(A,h,f,D)
+\node at (4,.8){$ MB=M\varGamma $};
+\end{tikzpicture}
+\end{center}
+Προκύπτει λοιπόν ότι η διχοτόμος μιας γωνίας είναι ο γεωμετρικός τόπος των σημείων του επιπέδου που ισαπέχουν από τις πλευρές της γωνίας.\\\\
+\Thewrhma{Χορδή και απόστημα κύκλου}
+Δύο χορδές ενός κύκλου είναι ίσες αν και μόνο αν τα αποστήματά τους είναι ίσα.
+\begin{center}
+\begin{tikzpicture}[scale=.9]
+\tkzDefPoint[label=left:$O$](0,0){O}
+\draw[pl]  (0,0) circle (2);
+\coordinate [label=above right:$A$] (A) at (30:2);
+\coordinate [label=above left:$B$] (B) at (120:2);
+\coordinate [label=below right:$\varGamma$] (C) at (330:2);
+\coordinate [label=below left:$\varDelta$] (D) at (240:2);
+\tkzDefPointBy[projection=onto A--B](O)\tkzGetPoint{M}
+\tkzDefPointBy[projection=onto C--D](O)\tkzGetPoint{N}
+\tkzMarkRightAngle[fill=\xrwma](O,M,A)
+\tkzMarkRightAngle[fill=\xrwma](C,N,O)
+\tkzMarkSegments[mark=|,color=\xrwma](O,M O,N)
+\tkzMarkSegments[mark=||,color=\xrwma,pos=.55](A,B C,D)
+\draw[pl](A)--(B);
+\draw[pl](C)--(D);
+\draw[pl](O)--(M);
+\draw[pl](O)--(N);
+\tkzDrawPoints(O,A,B,C,D,M,N)
+\end{tikzpicture}
+\end{center}
+\end{document}

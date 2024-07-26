@@ -1,0 +1,480 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Εκθετική - Λογαριθμική Συνάρτηση}{Η έννοια του λογαρίθμου}
+\thewria
+\begin{enumerate}
+\item 
+\end{enumerate}
+\twocolkentro{\askhseis}
+\begin{enumerate}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{4}
+\begin{rlist}[leftmargin=2mm]
+\item $ \log_{2}{4} $
+\item $ \log_{3}{9} $
+\item $ \log_{5}{125} $
+\item $ \log_{2}{16} $
+\item $ \log_{3}{27} $
+\item $ \log_{4}{16} $
+\item $ \log_{2}{32} $
+\item $ \log_{2}{64} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=5mm]
+\item $ \log{100} $
+\item $ \log{10000} $
+\item $ \log{10^7} $
+\item $ \log{10^{-19}} $
+\item $ \ln{e^2} $
+\item $ \ln{e^{-23}} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ \log_{2}{\frac{1}{4}} $
+\item $ \log_{2}{\frac{1}{32}} $
+\item $ \log_{3}{\frac{1}{9}} $
+\item $ \log_{3}{\frac{1}{81}} $
+\item $ \log_{4}{\frac{1}{64}} $
+\item $ \log_{8}{\frac{1}{512}} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ \log{\frac{1}{10}} $
+\item $ \log{\frac{1}{1000}} $
+\item $ \log{\frac{1}{10^{-3}}} $
+\item $ \ln{\frac{1}{e}} $
+\item $ \ln{\frac{1}{e^5}} $
+\item $ \ln{\frac{1}{e^{-4}}} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=2mm]
+\item $ \log_{2}{0{,}25} $
+\item $ \log_{2}{0{,}125} $
+\item $ \log_{5}{0{,}04} $
+\item $ \log_{8}{0{,}125} $
+\item $ \log{0{,}0001} $
+\item $ \log_{100}{0{,}01} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=2mm]
+\item $ \log_{0{,}1}{0{,}01} $
+\item $ \log_{0{,}2}{0{,}008} $
+\item $ \log_{0{,}3}{0{,}0081} $
+\item $ \log_{1{,}5}{2{,}25} $
+\item $ \log_{0{,}4}{6{,}25} $
+\item $ \log_{0{,}5}{8} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=2mm]
+\item $ \log_{\frac{3}{2}}{\frac{9}{4}} $
+\item $ \log_{\frac{1}{4}}{\frac{1}{64}} $
+\item $ \log_{\frac{5}{7}}{\frac{125}{343}} $
+\item $ \log_{\frac{1}{10}}{\frac{1}{10000}} $
+\item $ \log_{\frac{4}{e}}{\frac{16}{e^2}} $
+\item $ \log_{\frac{e}{10}}{\frac{e^3}{1000}} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=2mm]
+\item $ \log_{\frac{4}{3}}{\frac{9}{16}} $
+\item $ \log_{\frac{8}{5}}{\frac{125}{512}} $
+\item $ \log_{\frac{1}{10}}{1000} $
+\item $ \log_{\frac{1}{2}}{16} $
+\item $ \log_{\frac{1}{5}}{625} $
+\item $ \log_{\frac{1}{4}}{256} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε την τιμή των παρακάτω λογαρίθμων.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=3mm]
+\item $ \log_{\sqrt{2}}{4} $
+\item $ \log_{\sqrt{3}}{3} $
+\item $ \log_{\sqrt{5}}{25} $
+\item $ \log_{\sqrt{e}}{e^3} $
+\item $ \log_{\sqrt{2}}{4\sqrt{2}} $
+\item $ \log_{\sqrt[3]{4}}{2} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{2}{x}=3 $
+\item $ \log_{3}{x}=2 $
+\item $ \log_{3}{x}=4 $
+\item $ \log_{5}{x}=3 $
+\item $ \log_{4}{x}=-3 $
+\item $ \log_{2}{x}=-5 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log{x}=3 $
+\item $ \log{x}=-2 $
+\item $ \ln{x}=4 $
+\item $ \ln{x}=-3 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{0{,}1}{x}=2 $
+\item $ \log_{0{,}2}{x}=4 $
+\item $ \log_{0{,}5}{x}=3 $
+\item $ \log_{0{,}2}{x}=-2 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{\frac{3}{4}}{x}=2 $
+\item $ \log_{\frac{2}{5}}{x}=3 $
+\item $ \log_{\frac{1}{3}}{x}=4 $
+\item $ \log_{\frac{1}{10}}{x}=-2 $
+\item $ \log_{\frac{1}{8}}{x}=-3 $
+\item $ \log_{\frac{1}{e}}{x}=-4 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{\sqrt{2}}{x}=3 $
+\item $ \log_{\sqrt{3}}{x}=2 $
+\item $ \log_{\sqrt[3]{2}}{x}=6 $
+\item $ \log_{\sqrt[5]{4}}{x}=15 $
+\item $ \log_{\sqrt{5}}{x}=-3 $
+\item $ \log_{\sqrt{3}}{x}=-4 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=5mm]
+\item $ \log_{2}{(x-1)}=3 $
+\item $ \log_{3}{(2x-3)}=2 $
+\item $ \log_{4}{(4-x)}=2 $
+\item $ \log{\left( x^2-24\right) }=3 $
+\item $ \ln{ex}=2 $
+\item $ \log{x^3}=9 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=1mm]
+\item $ \log_{2}{|x-3|}=2 $
+\item $ \log_{3}{\sqrt{x-2}}=2 $
+\item $ \log_{5}{\left(10x-x^2\right) }=2 $
+\item $ \log{\frac{1}{x}}=2 $
+\item $ \log_{9}{\sqrt[3]{3x-1}}=\frac{1}{2} $
+\item $ \log{\frac{x-2}{x+3}}=1 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0$ με $ x\neq 1 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x}{8}=3 $
+\item $ \log_{x}{4}=2 $
+\item $ \log_{x}{27}=3 $
+\item $ \log_{x}{64}=3 $
+\item $ \log_{x}{625}=4 $
+\item $ \log_{x}{343}=3 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0$ με $ x\neq 1 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x}{100}=2 $
+\item $ \log_{x}{10^8}=8 $
+\item $ \log_{x}{e^3}=3 $
+\item $ \log_{x}{e}=1 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0$ με $ x\neq 1 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x}{4}=-2 $
+\item $ \log_{x}{25}=-2 $
+\item $ \log_{x}{\frac{1}{64}}=-3 $
+\item $ \log_{x}{\frac{1}{49}}=-2 $
+\item $ \log_{x}{\frac{1}{100}}=-2 $
+\item $ \log_{x}{e^2}=-2 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0$ με $ x\neq 1 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x}{\frac{4}{25}}=2 $
+\item $ \log_{x}{\frac{125}{64}}=3 $
+\item $ \log_{x}{\frac{81}{16}}=-4 $
+\item $ \log_{x}{1000}=-3 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0$ με $ x\neq 1 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x}{0{,}04}=2 $
+\item $ \log_{x}{0{,}125}=3 $
+\item $ \log_{x}{0{,}0001}=4 $
+\item $ \log_{x}{1000}=-3 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x>0 $ με $ x\neq 1 $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x}{2}=2 $
+\item $ \log_{x}{3}=3 $
+\item $ \log_{x}{10}=2 $
+\item $ \log_{x}{e}=2 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{x-1}{4}=2 $
+\item $ \log_{2x-1}{27}=3 $
+\item $ \log_{3-x}{16}=2 $
+\item $ \log_{x^2}{81}=2 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \log_{\sqrt{x}}{5}=2 $
+\item $ \log_{\sqrt[3]{2-x}}{7}=3 $
+\item $ \log_{\sqrt[4]{3x-4}}{16}=8 $
+\item $ \log_{\sqrt{x^2-3}}{13}=2 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τον πραγματικό αριθμό $ x $ στις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=5mm]
+\item $ \log_{|x-2|}{25}=2 $
+\item $ \log_{x^2-3x+4}{2}=2 $
+\item $ \log_{x^3-1}{7}=1 $
+\item $ \log_{\sqrt[3]{x^2-2x}}{9}=6 $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \log_{4}{8}+\log_{4}{2} $
+\item $ \log_{8}{32}+\log_{8}{16} $
+\item $ \log_{6}{12}+\log_{6}{3} $
+\item $ \log{20}+\log{50} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{rlist}
+\item $ \log_{8}{16}+\log_{8}{32} $
+\item $ \log_{9}{27}+\log_{9}{3} $
+\item $ \log_{12}{36}+\log_{12}{48} $
+\item $ \log{250}+\log{4000} $
+\end{rlist}
+
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \log_{2}{8}-\log_{2}{2} $
+\item $ \log_{3}{54}-\log_{3}{2} $
+\item $ \log_{5}{500}-\log_{5}{20} $
+\item $ \log{300}-\log{3} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \ln{e^4}-\ln{e^2} $
+\item $ \log{10^7}-\log{1000} $
+\item $ \log{7500}-\log{75} $
+\item $ \ln{4e^5}-\ln{4} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{rlist}
+\item $ \log_{2}{24}+\log_{2}{20}-\log_{2}{15} $
+\item $ \log_{4}{12}+\log_{4}{48}-\log_{4}{9} $
+\item $ \log_{3}{90}-\log_{3}{2}-\log_{3}{5} $
+\item $ \log_{4}{12}+\log_{4}{48}-\log_{4}{9} $
+\end{rlist}
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{rlist}
+\item $ \log_{3}{36}-2\log_{3}{2} $
+\item $ 3\log_{4}{8}+\log_{4}{32} $
+\item $ 5\log{2}+2\log{25}+\log{5} $
+\item $ 4\log_{5}{10}+3\log_{5}{20}-5\log_{5}{4} $
+\end{rlist}
+\item Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{rlist}
+\item $ \log_{4}{\sqrt{8}}+\frac{1}{2}\log_{4}{2} $
+\item $ \frac{1}{3}\log_{2}{64}-
+\frac{1}{2}\log_{2}{8} $
+\item $ \log_{8}{\sqrt[3]{16}}+\frac{2}{3}\log_{8}{4} $
+\item $ \log{\sqrt{10}}+\frac{3}{2}\log{1000} $
+\end{rlist}
+\item Να υπολογίσετε τις παρακάτω αριθμητκές παραστάσεις.
+\begin{rlist}[leftmargin=4mm]
+\item $ \log_{2}{\left(2+\sqrt{3}\right) }+\log_{2}{\left(2-\sqrt{3}\right)} $
+\item $ \log_{3}{\left(1+\sqrt{10}\right) }+\log_{3}{\left(\sqrt{10}-1\right)} $
+\item $ \log_{3}{\left(1+\sqrt[3]{2}\right) }+\log_{3}{\left(1-\sqrt[3]{2}+\sqrt[3]{4}\right)} $
+\item $ \log{\left(5-\sqrt[3]{25}\right) }+\log{\left(25-5\sqrt[3]{25}+\sqrt[3]{25}^2\right)} $
+\end{rlist}
+\item Να υπολογίσετε τις παρακάτω αριθμητκές παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ 2^{\log_{2}{12}-\log_{2}{3}} $
+\item $ 5^{\log_{5}{25}+\log_{5}{4}} $
+\item $ 10^{3\log{5}+\log{8}} $
+\item $ e^{\ln{9e^5}-3\ln{3e}} $
+\item $ 10^{2\log{\sqrt{1000}}-\log{10}} $
+\item $ e^{2\ln{\sqrt{3e}}-\ln{3}} $
+\end{rlist}
+\end{multicols}
+\item Να υπολογίσετε τις παρακάτω αριθμητκές παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \sqrt{\log_4{64}} $
+\item $ \sqrt{\log_2{512}} $
+\item $ \sqrt{\log{10^25}} $
+\item $ \sqrt{\ln{e^9}} $
+\item $ \sqrt[\log{1000}]{8} $
+\item $ \sqrt[\ln{e^4}]{64} $
+\item $ \sqrt[\log{10^5}]{4\log_2{256}} $
+\item $ \sqrt[\ln{e^3}]{9\log_5{125}} $
+\end{rlist}
+\end{multicols}
+\item Να απλοποιήσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \log{x^2}+\log{x} $
+\item $ \log{x^3}+\log{x^4} $
+\item $ \log{4x^2}+\log{25x^3} $
+\item $ \log{8x}+\log{\frac{125}{x}} $
+\end{rlist}
+\end{multicols}
+\item Να απλοποιήσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \log{x^2y}-\log{xy^2} $
+\item $ \log{x^3}-\log{x^4} $
+\item $ 3\log{xy}-\log{x^3} $
+\item $ 2\log{2y}-2\log{\frac{5}{y}} $
+\end{rlist}
+\end{multicols}
+\item Να απλοποιήσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ \ln{\sqrt{x}}+\ln{x^2} $
+\item $ 3\ln{\sqrt[3]{y}}+\ln{y} $
+\item $ 2\ln{e\sqrt{x}}-\ln{\frac{x}{e^2}} $
+\item $ \ln{\frac{4x}{e}}-2\ln{\frac{2x}{e}} $
+\end{rlist}
+\end{multicols}
+\item Να απλοποιήσετε τις παρακάτω παραστάσεις.
+\begin{rlist}[leftmargin=4mm]
+\item $ \log{(x+y)}+\log{(x-y)} $
+\item $ \ln{(2-x)}+\ln{(x+2)} $
+\item $ \log{\left( a^3-\beta^3\right) }-\log{(a-\beta)} $
+\item $ \ln{(ex-e^2)}+\ln{(x+e)} $
+\end{rlist}
+\item Να απλοποιήσετε τις παρακάτω παραστάσεις.
+\begin{rlist}
+\item $ \dfrac{\log{\sqrt{4\cdot25}}}{\log{10}}\ldots $
+\end{rlist}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,354 @@
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetikzlibrary{intersections,calc}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\begin{center}
+\textbf{ΤΥΠΟΛΟΓΙΟ ΓΕΩΜΕΤΡΙΑΣ}
+\end{center}
+\begin{enumerate}
+\item Θεωρήματα ορθογωνίων τριγώνων.\\
+\wrapr{-12mm}{5}{3.5cm}{-5mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.2](A,D,B)
+\draw[pl] (B)--(A)--(C);
+\draw[pl] (A)--(D);
+\draw[pl] (B)--(C);
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\tkzLabelPoint[right,yshift=1mm](D){$\varDelta$}
+\end{tikzpicture}}{
+\begin{align*}
+\textrm{Θεώρημα προβολής }\ &AB^2=B\varGamma\cdot B\varDelta\ \ ,\ \ A\varGamma^2=B\varGamma\cdot \varGamma\varDelta\\
+\textrm{Πυθαγόρειο θεώρημα }\ &\hat{A}=90\degree\Rightarrow AB^2+A\varGamma^2=B\varGamma^2\\
+\textrm{Αντίστροφο Πυθαγορείου }\ &AB^2+A\varGamma^2=B\varGamma^2\Rightarrow\hat{A}=90\degree\\
+\textrm{Θεώρημα ύψους }\ &A\varDelta^2=B\varDelta\cdot\varGamma\varDelta
+\end{align*}}
+\item Γενικευμένο Πυθαγόρειο για οξεία γωνία
+\begin{align*}
+\hat{A}<90\degree \Rightarrow a^2=\beta^2+\gamma^2-2\beta\cdot AE \quad\textrm{και }\ \ \  & a^2=\beta^2+\gamma^2-2\gamma\cdot AZ\\
+\hat{B}<90\degree \Rightarrow\beta^2=a^2+\gamma^2-2a\cdot B\varDelta \quad\textrm{και }\ \ \  & \beta^2=a^2+\gamma^2-2\gamma\cdot BZ\\
+\hat{\varGamma}<90\degree \Rightarrow\gamma^2=a^2+\beta^2-2a\cdot \varGamma\varDelta \quad\textrm{και }\ \ \  & \gamma^2=a^2+\beta^2-2\beta\cdot \varGamma E
+\end{align*}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+ \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(1,0){D}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{c}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{b}
+\tkzMarkRightAngle[size=.2](C,D,A)
+\tkzMarkRightAngle[size=.2](B,c,C)
+\tkzMarkRightAngle[size=.2](B,b,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(D);
+\draw(C)--(c);
+\draw(B)--(b);
+\tkzDrawPoints(A,B,C,D,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[right,yshift=1mm](b){$E$}
+\end{tikzpicture} & \begin{tikzpicture}
+\clip (-1.2,-1.5) rectangle (3.5,2.5);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(-1,2){A}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{c}
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{a}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{b}
+\tkzMarkRightAngle[size=.2](C,a,A)
+\tkzMarkRightAngle[size=.2](B,c,C)
+\tkzMarkRightAngle[size=.2](B,b,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(a);
+\draw(C)--(c);
+\draw(B)--(b);
+\draw[dashed](B)--(a);
+\draw[dashed](B)--(c);
+\tkzDrawPoints(A,B,C,a,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[above right](b){$E$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\item Γενικευμένο Πυθαγόρειο για αμβλεία γωνία
+\begin{align*}
+\hat{A}<90\degree \Rightarrow a^2=\beta^2+\gamma^2-2\beta\cdot AE \quad\textrm{και }\ \ \  & a^2=\beta^2+\gamma^2-2\gamma\cdot AZ\\
+\hat{B}>90\degree \Rightarrow\beta^2=a^2+\gamma^2+2a\cdot B\varDelta \quad\textrm{και }\ \ \  & \beta^2=a^2+\gamma^2+2\gamma\cdot BZ\\
+\hat{\varGamma}<90\degree \Rightarrow\gamma^2=a^2+\beta^2-2a\cdot \varGamma\varDelta \quad\textrm{και }\ \ \  & \gamma^2=a^2+\beta^2-2\beta\cdot \varGamma E
+\end{align*}
+\item Είδος τριγώνου ως προς τις γωνίες:
+\begin{gather*}
+a^2>\beta^2+\gamma^2\Rightarrow \hat{A}>90\degree\\
+a^2=\beta^2+\gamma^2\Rightarrow \hat{A}=90\degree\\
+a^2<\beta^2+\gamma^2\Rightarrow \hat{A}<90\degree
+\end{gather*}
+\begin{multicols}{2}
+\item Νόμος συνημίτονων:\\
+ \begin{tikzpicture}
+\node at (5.8,1.5) {$a^2=\beta^2+\gamma^2-2\beta\gamma\syn{\hat{A}}$};
+\node at (5.8,1) {$\beta^2=a^2+\gamma^2-2a\gamma\syn{\hat{B}}$};
+\node at (5.8,.5) {$\gamma^2=a^2+\beta^2-2a\beta\syn{\hat{\varGamma}}$};
+\end{tikzpicture}
+\item Νόμος ημίτονων:\\
+$ \dfrac{a}{\hm{\hat{A}}}=\dfrac{\beta}{\hm{\hat{B}}}=\dfrac{\gamma}{\hm{\hat{\varGamma}}}=2R $.
+\end{multicols}
+\item 1ο Θεώρημα διαμέσων:\\
+\wrapr{-12mm}{7}{4cm}{0mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(.5,1){c}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(2,1){b}
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(a);
+\draw(C)--(c);
+\draw(B)--(b);
+\tkzDrawPoints(A,B,C,a,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[right](b){$E$}
+\end{tikzpicture}}{
+\begin{gather*}
+a^2+\beta^2=2\mu_\gamma^2+\frac{\gamma^2}{2}\ \ ,\ \ a^2+\gamma^2=2\mu_\beta^2+\frac{\beta^2}{2}\ \ ,\ \ \beta^2+\gamma^2=2\mu_a^2+\frac{a^2}{2}\\
+\mu_a^2=\frac{2\beta^2+2\gamma^2-a^2}{4}\ \ ,\ \ \mu_\beta^2=\frac{2a^2+2\gamma^2-\beta^2}{4}\ \ ,\ \ \mu_\gamma^2=\frac{2a^2+2\beta^2-\gamma^2}{4}
+\end{gather*}}\mbox{}\\\\\\
+\item 2ο Θεώρημα Διαμέσων\\
+\wrapr{-5mm}{7}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(.5,1){c}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(2,1){b}
+\tkzDefPoint(1,0){D}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{e}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{d}
+\tkzMarkRightAngle[size=.2](C,D,A)
+\tkzMarkRightAngle[size=.2](B,d,C)
+\tkzMarkRightAngle[size=.2](C,e,A)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(D)--(A)--(a);
+\draw(e)--(C)--(c);
+\draw(d)--(B)--(b);
+\draw[pl,\xrwma](D)--(a);
+\draw[pl,\xrwma](b)--(d);
+\draw[pl,\xrwma](e)--(c);
+\tkzDrawPoints(A,B,C,a,b,c,D,d,e)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[above right](b){$E$}
+\tkzLabelPoint[below](D){$M$}
+\tkzLabelPoint[above right](d){$K$}
+\tkzLabelPoint[above left,xshift=1mm](e){$\varLambda$}
+\end{tikzpicture}}{
+\begin{align*}
+&a^2-\beta^2=2\gamma\cdot\varLambda Z\\ &a^2-\gamma^2=2\beta\cdot KE\\ &\beta^2-\gamma^2=2a\cdot M\varDelta
+\end{align*}}\mbox{}\\\\
+\item Λόγος εμβαδών με ίσες βάσεις - ίσα ύψη:\\
+\[ \textrm{Ίσες βάσεις }\Rightarrow \frac{E}{E'}=\frac{\upsilon}{\upsilon'}\qquad\textrm{Ίσα ύψη }\Rightarrow \frac{E}{E'}=\frac{\beta}{\beta'} \]
+\item Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων:\\
+\[ AB\varGamma\approx A'B'\varGamma'\Rightarrow\frac{(AB\varGamma)}{(A'B'\varGamma')}=\lambda^2\ \ (\lambda=\textrm{λόγος ομοιότητας}) \]
+\item Λόγος εμβαδών τριγώνων με ίσες - παραπληρωματικές γωνίες:\\
+\[ \textrm{Αν }\hat{A}=\hat{A'}\ \textrm{ ή }\ \hat{A}+\hat{A'}=180\degree\Rightarrow \frac{(AB\varGamma)}{(A'B'\varGamma')}=\frac{\beta\gamma}{\beta'\gamma'} \]
+\end{enumerate}
+\begin{center}
+\textbf{ΕΜΒΑΔΑ ΒΑΣΙΚΩΝ ΣΧΗΜΑΤΩΝ}
+\end{center}
+\vspace{-4mm}
+\hrulefill
+\begin{enumerate}[resume]
+\begin{multicols}{2}
+\item Εμβαδόν τετραγώνου: $ E=a^2 $.
+\item Εμβαδόν ορθογωνίου: $ E=a\cdot\beta $.
+\item Εμβαδόν παραλληλογράμμου: \\$ E=a\cdot\upsilon_a=\beta\cdot\upsilon_\beta $.
+\item Εμβαδόν τραπεζίου: $ E=\dfrac{(B+\beta)\cdot\upsilon}{2}=\delta\cdot\upsilon $.
+\item Εμβαδόν ισόπλευρου τριγώνου: $ E=\dfrac{a^2\sqrt{3}}{4} $.
+\item Εμβαδόν ρόμβου: $ E=\dfrac{1}{2}\delta_1\cdot\delta_2 $.
+\end{multicols}
+\item Εμβαδόν τριγώνου: 
+\begin{multicols}{2}
+\begin{rlist}
+\item $ E=\dfrac{1}{2}a\cdot\upsilon_a=\dfrac{1}{2}\beta\cdot\upsilon_\beta=\dfrac{1}{2}\gamma\cdot\upsilon_\gamma $.
+\item $ E=\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)} $.
+\item $ E=\tau\cdot\rho $.
+\item $ E=\dfrac{a\beta\gamma}{4R} $.
+\item $ E=\dfrac{1}{2}a\cdot\beta\cdot\hm{\varGamma}=\dfrac{1}{2}\beta\cdot\gamma\cdot\hm{A}=\dfrac{1}{2}a\cdot\gamma\cdot\hm{B} $.
+\end{rlist}
+\end{multicols}
+$ \left( \tau=\dfrac{a+\beta+\gamma}{2}\right)  $\end{enumerate}
+\hrulefill
+\begin{enumerate}[resume]
+\item Στοιχεία κανονικού πολυγώνου:
+\begin{multicols}{2}
+\begin{rlist}
+\item Κεντρική γωνία: $ \omega_\nu=\dfrac{360\degree}{\nu} $
+\item Γωνία: $ \varphi_\nu=180\degree-\omega_\nu $
+\item $ a_\nu^2+\dfrac{\lambda_\nu^2}{4}=R^2 $
+\item $ a_\nu=R\cdot\syn{\left( \dfrac{\omega_\nu}{2}\right) } $
+\item $ \lambda_\nu=2R\cdot\hm{\left( \dfrac{\omega_\nu}{2}\right) } $
+\item $ \lambda_\nu=2a_\nu\cdot\ef{\left( \dfrac{\omega_\nu}{2}\right)} $
+\item Περίμετρος: $ P_\nu=\nu\cdot\lambda_\nu $
+\item Εμβαδόν: $ E_\nu=\dfrac{1}{2}P_\nu\cdot a_\nu $
+\end{rlist}
+\end{multicols}
+\item Λόγος στοιχείων κανονικού πολυγώνου
+\[ \nu-\textrm{γωνο}\approx\nu-\textrm{γωνο}\Rightarrow\frac{\lambda_\nu}{\lambda_\nu'}=\frac{R}{R'}=\frac{a_\nu}{a_\nu'} \]
+\item Εγγραφή κανονικών πολυγώνων σε κύκλο:
+\begin{center}\begin{tabular}{c|c|c|c}
+\hline \rule[-2ex]{0pt}{5ex}
+ & \textbf{Ισόπλευρο τρίγωνο} & \textbf{Τετράγωνο} & \textbf{Κανονικό εξάγωνο} \\ 
+ & {\boldmath$ \nu=3 $} & {\boldmath$ \nu=4 $} & {\boldmath$ \nu=6 $} \\
+\hhline{====} \rule[-2ex]{0pt}{5ex}
+Πλευρά $ \lambda_\nu $ & $ R\sqrt{3} $ & $ R\sqrt{2} $ & $ R $ \\ 
+\rule[-2ex]{0pt}{5ex}
+Απόστημα $ a_\nu $ & $ \dfrac{R}{2} $ & $ \dfrac{R\sqrt{2}}{2} $ & $ \dfrac{R\sqrt{3}}{2} $ \\ 
+\hline 
+\end{tabular} 
+\end{center} 
+\wrapr{-5mm}{5}{7.5cm}{0mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (240:1.2);
+\coordinate (B)  at (300:1.2);
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](O){$O$}
+\draw[fill=black!30,pl,draw=black] (A)--(O)--(B) arc[start angle=300, end angle=240, radius=1.2] (A);
+\tkzMarkAngle[size=.35](A,O,B)
+\tkzDrawPoints(A,B,O)
+\node at (0,-0.5) {\footnotesize$ \mu $};
+\end{tikzpicture}\qquad\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (240:1.2);
+\coordinate (B)  at (300:1.2);
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](O){$O$}
+\draw (A)--(O)--(B);
+\draw[fill=black!30,pl,draw=black] (A)--(B) arc[start angle=300, end angle=240, radius=1.2cm] (A);
+\tkzMarkAngle[size=.35](A,O,B)
+\tkzDrawPoints(A,B,O)
+\node at (0,-0.5) {\footnotesize$ \mu $};
+\end{tikzpicture}}{
+\item Μήκος Κύκλου: $ L=2\pi R $.
+\item Μήκος τόξου: $ \mathcal{l}=\dfrac{\pi R \mu}{180\degree
+}=a R $.
+\item Εμβαδόν κυκλικού δίσκου: $ E=\pi R^2 $.
+\item Εμβαδόν κυκλικού τομέα: $ E=\dfrac{\pi R^2 \mu}{360\degree}=\dfrac{1}{2}aR^2 $.
+\item Εμβαδόν κυκλικού τμήματος: \[ \varepsilon=(\textrm{τομέα})-(\textrm{τριγώνου})=\undercbrace{\dfrac{\pi R^2\mu}{360\degree}-\dfrac{R^2\hm{\mu}}{2}}_{\textrm{με μοίρες}}=\undercbrace{\dfrac{R^2}{2}(a-\hm{a})}_{\textrm{με ακτίνια}} \]}
+\end{enumerate}
+
+\end{document}

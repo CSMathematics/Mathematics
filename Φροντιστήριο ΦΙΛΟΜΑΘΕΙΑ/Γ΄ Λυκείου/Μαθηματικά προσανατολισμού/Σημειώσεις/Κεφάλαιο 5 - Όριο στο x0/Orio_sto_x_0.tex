@@ -1,0 +1,205 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol,longtable}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά προσανατολισμού}{Όρια - Συνέχεια}{Όριο συνάρτησης στο \MakeLowercase{\bmath{$ x_0 $}}}
+\orismoi
+\Orismos{Όριο συνάρτησησ}
+Όριο μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0\in D_f $ ονομάζεται η προσέγγιση των τιμών της μεταβλητής $ f(x) $ σε μια τιμή $ L $ καθώς το $ x $ πλησιάζει την τιμή $ x_0 $. Συμβολίζεται με \[ \lim_{x\rightarrow x_0}{f(x)}=L \]
+\Orismos{Πλευρικά όρια}
+Έστω μια συνάρτηση $ f:D_f\to \mathbb{R} $ και $ x_0\in D_f $ ένα σημείο του πεδίου ορισμού της. Αν η συνάρτηση ορίζεται σε ένα διάστημα της μορφής $ (a,x_0)\cup(x_0,\beta) $ τότε τα πλευρικά όρια της $ f $ στο $ x_0 $ ορίζονται ως εξής:
+\begin{enumerate}
+\item \textbf{Αριστερό όριο:}\\Όταν το $ x $ τείνει στο $ x_0 $ με $ x\in(a,x_0) $ τότε το όριο από αριστερά του $ x_0 $ συμβολίζεται:$ {\displaystyle\lim_{x\to x_0^-}{f(x)}} $.
+\item \textbf{Δεξί όριο:}\\Όταν το $ x $ τείνει στο $ x_0 $ με $ x\in(x_0,\beta) $ τότε το όριο από δεξιά του $ x_0 $ συμβολίζεται:$ {\displaystyle\lim_{x\to x_0^+}{f(x)}} $.
+\end{enumerate}
+
+\thewrhmata
+\Thewrhma{Συνέπειες του ορισμού}
+Έστω μια συνάρτηση $ f:D_f\to\mathbb{R} $ και $ x_0\in D_f $. Αν το όριο της $ f $ όταν $ x\to x_0 $ είναι $ L $ τότε από τον ορισμό του ορίου προκύπτουν οι παρακάτω προτάσεις:
+\begin{rlist}
+\item $ \lim_{x\to x_0}{f(x)}=L\Leftrightarrow \lim_{x\to x_0}{(f(x)-L)}=0 $
+\item $ \lim_{x\to x_0}{f(x)}=L\Leftrightarrow \lim_{h\to 0}{f(x_0+h)}=L $
+\end{rlist}
+\Thewrhma{Πλευρικά όρια}
+Έστω μια συνάρτηση $ f:D_f\to \mathbb{R} $ και $ x_0\in D_f $ ένα σημείο του πεδίου ορισμού της. Αν η συνάρτηση ορίζεται σε μια περιοχή του $ x_0 $ της μορφής $ (a,x_0)\cup(x_0,\beta) $ τότε θα ισχύει:
+\[ \lim_{x\to x_0}{f(x)}=L\Leftrightarrow \lim_{x\to x_0^-}{f(x)}=\lim_{x\to x_0^+}{f(x)}=L \]
+\begin{rlist}
+\item Αν η $ f $ ορίζεται μόνο στο διάστημα $ (a,x_0) $ τότε: $ \lim_{x\to x_0}{f(x)}=\lim_{x\to x_0^-}{f(x)} $.
+\item Αν η $ f $ ορίζεται μόνο στο διάστημα $ (x_0,\beta) $ τότε: $ \lim_{x\to x_0}{f(x)}=\lim_{x\to x_0^+}{f(x)} $.
+\end{rlist}
+\Thewrhma{υπολογισμός ορίου}
+Για τα όρια των βασικών συναρτήσεων σε ένα σημείο $ x_0 $ του πεδίου ορισμού τους ισχύουν οι παρακάτω σχέσεις.
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Πολυωνυμικές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού. Θα ισχύει
+\[ \lim_{x\rightarrow x_0}{P(x)}=a_\nu x^\nu_0+a_{\nu-1}x^{\nu-1}_0+\ldots+a_1x_0+a_0=P(x_0) \]
+\item \textbf{Ρητές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού και $ Q(x)=\beta_\mu x^\mu+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0 $ με $ \beta_\mu\neq0 $ ένα πολυώνυμο $ \mu- $οστού βαθμού. Θα ισχύει
+\[ \lim_{x\rightarrow x_0}{\frac{P(x)}{Q(x)}}=\frac{a_\nu x^\nu_0+a_{\nu-1}x^{\nu-1}_0+\ldots+a_1x_0+a_0}{\beta_\nu x^\nu_0+\beta_{\mu-1}x^{\mu-1}_0+\ldots+\beta_1x_0+\beta_0}=\frac{P(x_0)}{Q(x_0)} \]
+\item \textbf{Άρρητες}\\
+Έστω $ f(x)=\sqrt{A(x)} $ με $ A(x)\geq0 $ μια άρρητη συνάρτηση και $ x_0 $ ένα σημείο του πεδίου ορισμού της. Το όριο της $ f $ όταν $ x\to x_0 $ θα είναι :
+\[ \lim_{x\to x_0}{f(x)}=\lim_{x\to x_0}{\sqrt{A(x)}}=\sqrt{A(x_0)} \]
+\item \textbf{Τριγωνομετρικές}\\
+Για τα όρια των βασικών τριγωνομετρικών συναρτήσεων ισχύουν οι παρακάτω σχέσεις :
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\hm{x}}=\hm{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syn{x}}=\syn{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\ef{x}}=\ef{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syf{x}}=\syf{x_0}} $
+\end{enumerate}
+\end{multicols}
+\item \textbf{Λογαριθμικές και εκθετικές}\\
+Έστω $ f(x)=\log_{a}{x} $ και $ g(x)=a^x $ μια λογαριθμική και εκθετική συνάρτηση αντίστοιχα με $ 0<a\neq 1 $ και $ x_0 $ ένα σημείο του πεδίου ορισμού τους. Θα ισχύει:
+\[ \lim_{x\to x_0}{\log{x}}=\log{x_0}\ \textrm{ και }\ \lim_{x\to x_0}{a^x}=a^{x_0} \]
+\item \textbf{Ταυτοτική και σταθερές}\\
+Για την ταυτοτική συνάρτηση $ f(x)=x $ και τις σταθερές συναρτήσεις $ f(x)=c $ όπου $ c\in\mathbb{R} $ ισχύει αντίστοιχα ότι:
+\[ \lim_{x\to x_0}{x}=x_0\ \textrm{ και }\ \lim_{x\to x_0}{c}=c \]
+\end{enumerate}
+\Thewrhma{Όριο και διάταξη 1}
+Έστω μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ και $ x_0 $ ένα σημείο τέτοιο ώστε να ορίζεται η $ f $ σε μια περιοχή του. Το πρόσημο του ορίου της $ f $ στο $ x_0 $ ισούται με το πρόσημο των τιμών της κοντά στο $ x_0 $:
+\begin{rlist}
+\item Αν $ {\displaystyle{\lim_{x\to x_0}{f(x)}}>0} $ τότε $ f(x)>0 $ σε μια περιοχή του $ x_0 $.
+\item Αν $ {\displaystyle{\lim_{x\to x_0}{f(x)}}<0} $ τότε $ f(x)<0 $ σε μια περιοχή του $ x_0 $.
+\end{rlist}
+\Thewrhma{Όριο και διάταξη 2}
+Έστω συναρτήσεις $ f,g $ με πεδία ορισμού τα σύνολα $ A,B $ αντίστοιχα και $ x_0 $ ένα σημείο τέτοιο ώστε να ορίζονται οι $ f,g $ σε μια περιοχή του στο σύνολο $\in A\cap B $. Θα ισχύει ότι:
+\begin{rlist}
+\item Αν $ {\displaystyle{\lim_{x\to x_0}{f(x)}}>\lim_{x\to x_0}{g(x)}} $ τότε $ f(x)>g(x) $ σε μια περιοχή του $ x_0 $.
+\item Αν $ {\displaystyle{\lim_{x\to x_0}{f(x)}}<\lim_{x\to x_0}{g(x)}} $ τότε $ f(x)<g(x) $ σε μια περιοχή του $ x_0 $.
+\end{rlist}
+\Thewrhma{Όριο και διάταξη 3}
+Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ και $ x_0\in A $ ένα σημείο του πεδίου ορισμού της. Ισχύει ότι:
+\begin{rlist}
+\item Αν $ f(x)>0 $ σε μια περιοχή του $ x_0 $ τότε $ {\displaystyle{\lim_{x\to x_0}{f(x)}}\geq0} $.
+\item Αν $ f(x)<0 $ σε μια περιοχή του $ x_0 $ τότε $ {\displaystyle{\lim_{x\to x_0}{f(x)}}\leq0} $.
+\end{rlist}
+\Thewrhma{Όριο και διάταξη 4}
+Έστω συναρτήσεις $ f,g $ με πεδία ορισμού τα σύνολα $ A,B $ αντίστοιχα και $ x_0 $ ένα σημείο τέτοιο ώστε να ορίζονται οι $ f,g $ σε μια περιοχή του στο σύνολο $\in A\cap B $. Θα ισχύει ότι:
+\begin{rlist}
+\item Αν $ f(x)>g(x) $ σε μια περιοχή του $ x_0 $ τότε $ {\displaystyle{\lim_{x\to x_0}{f(x)}}\geq\lim_{x\to x_0}{g(x)}} $.
+\item Αν $ f(x)<g(x) $ σε μια περιοχή του $ x_0 $ τότε $ {\displaystyle{\lim_{x\to x_0}{f(x)}}\leq\lim_{x\to x_0}{g(x)}} $.
+\end{rlist}
+\Thewrhma{Πράξεισ με όρια}
+Θεωρούμε δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ D_f,D_g $ αντίστοιχα και $ x_0\in D_f\cap D_g $ ένα κοινό στοιχείο των δύο πεδίων ορισμού. Αν τα όρια των δύο συναρτήσεων στο $ x_0 $ υπάρχουν με $ \lim_{x\rightarrow x_0}{f(x)}=l_1 $ και $ \lim_{x\rightarrow x_0}{g(x)}=l_2 $ τότε οι πράξεις μεταξύ των ορίων ακολουθούν τους παρακάτω κανόνες :
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Όριο} & \textbf{Κανόνας} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} \textbf{Αθροίσματος} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\pm g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\pm\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\pm l_2 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Πολλαπλάσιου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( k\cdot f(x)\right) }=k\cdot\displaystyle{\lim_{x\rightarrow x_0}f(x)}=k\cdot l_1\;\;,\;\; k\in\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Γινομένου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\cdot g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\cdot\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\cdot l_2 $ \\ 
+\rule[-2ex]{0pt}{7ex} \textbf{Πηλίκου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left(\dfrac{ f(x)} {g(x)}\right)=\dfrac{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}{\displaystyle{\lim_{x\rightarrow x_0}g(x)}}}=\frac{l_1}{l_2}\;\;,\;\;l_2\neq0 $ \\ 
+\rule[-2ex]{0pt}{6.5ex} \textbf{Απόλυτης τιμής} & $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=\left| \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right|=|l_1|  $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζας} & $ \displaystyle{\lim_{x\rightarrow x_0}\!\!\sqrt[\kappa]{f(x)}}=\!\sqrt[\kappa]{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}\;\;=\!\!\sqrt[\kappa]{l_1}\;\;,\;\;l_1\geq0 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Δύναμης} & $ \displaystyle{\lim_{x\rightarrow x_0}f^\nu(x)}=\left( \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right)^\nu=l_1^\nu  $\vspace{2mm} \\ 
+\hline 
+\end{longtable}
+\end{center}
+\vspace{-7mm}
+\textbf{ΔΕΝ ισχύουν}:\\
+$ \displaystyle{\lim_{x\rightarrow x_0}f^2(x)=\mathcal{l}\Rightarrow \lim_{x\rightarrow x_0}f(x)=\mathcal{\!\sqrt{l}}} $ και $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|=\mathcal{l}\Rightarrow \lim_{x\rightarrow x_0}f(x)=\pm\mathcal{l}} $ διότι δεν γνωρίζουμε αν υπάρχει πάντα το $ \displaystyle{\lim_{x\rightarrow x_0}f(x)} $.\\
+\Thewrhma{Κριτήριο παρεμβολής}
+Θεωρούμε τις συναρτήσεις $ f,g,h $ με πεδία ορισμού $ D_f,D_g,D_h $ αντίστοιχα και $ x_0 $ ένα σημείο τέτοιο ώστε να ορίζονται οι $ f,g,h $ σε μια περιοχή του στο σύνολο $\in D_f\cap D_g\cap D_h $. Αν ισχύουν οι σχέσεις
+\begin{enumerate}
+\item $ g(x)\leq f(x)\leq h(x) $ κοντά στο $ x_0 $ και
+\item $ \lim_{x\to x_0}{g(x)}=\lim_{x\to x_0}{h(x)}=L $
+\end{enumerate}
+τότε $ \lim_{x\to x_0}{f(x)}=L $.
+\begin{center}
+\begin{tcolorbox}[title=ΒΑΣΙΚΗ ΑΝΙΣΟΤΗΤΑ,hbox,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white},enhanced,
+colback=black!5!white,
+boxrule=0.1pt,
+colframe=\xrwma,
+fonttitle=\bfseries,center title,toptitle=3pt,bottomtitle=3pt]
+\begin{minipage}{4.5cm}
+\[ |\hm{x}|\leq|x| \]
+Η ισότητα ισχύει για $ x=0 $.
+\end{minipage}
+\end{tcolorbox}
+\end{center}
+\Thewrhma{Βασικά Τριγονομετρικά όρια}
+Τα παρακάτω αποτελούν βασικά τριγωνομετρικά όρια. Αποδεικνύεται ότι:
+\[ \lim_{x\to x_0}{\frac{\hm{x}}{x}}=1\ \ \textrm{και}\ \ \lim_{x\to x_0}{\frac{\syn{x}-1}{x}}=0 \]
+\end{document}
+
+
+

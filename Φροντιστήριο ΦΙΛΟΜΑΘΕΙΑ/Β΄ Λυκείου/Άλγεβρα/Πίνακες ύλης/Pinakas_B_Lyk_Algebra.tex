@@ -1,0 +1,894 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\OnPar="Century Gothic Bold" at 10pt
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[most]{tcolorbox}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.7cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\let\Bbbk\relax
+\usepackage{enumitem,amssymb}
+\usepackage{lipsum}
+\let\Bbbk\relax
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=\Large$\square$}
+
+
+\newtcolorbox{mybox}[2][]{colback=white,
+colframe=red!75!black,fonttitle=\Large\bfseries,
+colbacktitle=red!20!white,coltitle=black,enhanced,breakable,sharp corners,boxrule=0.3mm,center title,boxsep=3mm,top=1mm,subtitle style={fonttitle=\normalsize\bfseries},
+title=#2,#1}
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.2pt}
+\tcbset{mysubtitle/.style={subtitle style={fontupper={\OnPar\color{black}},top=0pt,colback={white},boxrule=1pt},top=0pt}}
+
+\newtcolorbox{myleftbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-3mm,left=5mm,left skip=0mm,colbacktitle=white,colback=white,#1,sharp corners,grow to left by=0.68cm,titlerule=0.2mm,fonttitle=\OnPar}
+
+\newtcolorbox{myrightbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-2mm,left skip=6mm,colbacktitle=white,colback=white,#1,leftrule=0.2mm,sharp corners,right skip=0mm,titlerule=0.2mm,fonttitle=\OnPar}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{
+  \color{lightgray}{}
+  }
+\fancyhead[R]{
+ \color{gray} Άλγεβρα Β΄ Λυκείου\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage
+  }
+\fancyhead[L]{
+ \color{gray}\leftmark
+  }
+\renewcommand{\headrulewidth}{0.2mm}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\leftmark\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage}%
+  }
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\myitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faExclamationTriangle}\ \Large$\square$]}
+
+\newlist{arithmisi}{enumerate}{2}
+\setlist[arithmisi]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\textit{{\Large{\thesection}}.\arabic*}}}}
+
+
+
+\begin{document}
+\section{Γραμμικά Συστήματα}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Γραμμική Εξίσωση
+\item Γραμμικό σύστημα $ 2\times 2 $ και $ 3\times 3 $
+\item Ορίζουσα
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Σημείο σε ευθεία
+\item Είδη ευθειών
+\item Κανόνας οριζουσών
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item Γρ. εξίσωση - Λύση - Σημείο σε ευθεία
+\item Ευθεία - Χάραξη
+\item Σημεία τομής με άξονες
+\myitem Μέθοδος αντικατάστασης
+\myitem Μέθοδος αντίθετων συντελεστών
+\myitem Μέθοδος οριζουσών
+\item Γραφική επίλυση
+\item Προβλήματα
+\item Σύνθετα συστήματα
+\item Συστήματα $ 3\times 3 $
+\item Παραμετρικά συστήματα
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Ευθεία : $ ax+\beta y=\gamma,\ a\neq0\textrm{ ή }\beta\neq0 $
+\item Οριζόντια ευθεία : $ y=k $
+\item Κατακόρυφη ευθεία : $ x=k $
+\item Συντελεστής διεύθυνσης : $ \lambda=-\frac{a}{\beta} $
+\item Γραμμικό σύστημα $ 2\times 2 $
+\[ \ccases{ax+\beta y=\gamma\\a'x+\beta'y=\gamma'} \]
+\item Λύση συστήματος : $ (x,y)=\left(\frac{D_x}{D},\frac{D_y}{D}\right) $
+\item Ορίζουσα συντελεστών : $ D=\begin{vmatrix}
+a & \beta\\a' & \beta'
+\end{vmatrix}$
+\item Ορίζουσες μεταβλητών :\\$ D_x=\begin{vmatrix}
+\gamma & \beta\\\gamma' & \beta'
+\end{vmatrix},D_y=\begin{vmatrix}
+a & \gamma\\a' & \gamma'
+\end{vmatrix} $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\orismoi
+\begin{arithmisi}
+\item\textbf{Γραμμική εξίσωση}\\
+Γραμμική εξίσωση...
+\item\textbf{Γραμμικό σύστημα $ 2\times 2 $}
+\end{arithmisi}
+\thewrhmata
+\begin{arithmisi}
+\item \textbf{Ευθεία}\\
+Μια γραμμική εξίσωση της μορφής $ ax+\beta y=\gamma $ παριστάνει ευθεία γραμμή αν και μόνο αν $ a\neq 0 $ ή $ \beta\neq 0 $. Συγκεκριμένα
+\begin{rlist}
+\item για $ a\neq 0 $ και $ \beta\neq 0 $ είναι πλάγια ευθεία.
+\item για $ a\neq 0 $ και $ \beta=0 $ είναι κατακόρυφη ευθεία.
+\item για $ a=0 $ και $ \beta\neq 0 $ είναι οριζόντια ευθεία.
+\end{rlist}
+\item\textbf{Σημείο σε ευθεία}\\
+Ένα σημείο $ A(x_0,y_0) $ ανήκει σε μια ευθεία $ \varepsilon $ αν και μόνο αν οι συντεταγμένες του σημείου επαληθεύουν την εξίσωσή της.
+\[ A(x_0,y_0)\in\varepsilon\Leftrightarrow ax_0+\beta y_0=\gamma \]
+\item\textbf{Λύση συστήματος με κανόνα οριζουσών}
+\vspace{-2mm}
+\begin{rlist}
+\item Αν $ D\neq 0 $ το σύστημα έχει μοναδική λύση την $ (x,y)=\left(\frac{D_x}{D},\frac{D_y}{D}\right) $.
+\item Αν $ D=0 $ τότε το σύστημα είναι είτε αδύνατο είτε αόριστο. Συγκεκριμένα
+\begin{alist}
+\item αν $ D_x=D_y=0 $ είναι αόριστο.
+\item αν $ D_x\neq 0 $ ή $ D_y\neq 0 $ είναι αδύνατο.
+\end{alist}
+\end{rlist}
+\end{arithmisi}
+\methodologia
+\begin{arithmisi}
+\item\textbf{Μέθοδος αντικατάστασης}
+\begin{bhma}
+\item \textbf{Επιλογή εξίσωσης}\\
+Λύνουμε μια εξίσωση ως προς έναν άγνωστο.
+\item \textbf{Αντικατάσταση}\\
+Τη μεταβλητή αυτή την αντικαθιστούμε στην άλλη εξίσωση οπότε προκύπτει μια νέα εξίσωση με έναν άγνωστο την οποία και λύνουμε.
+\item \textbf{Υπολογισμός 2\tss{ου} αγνώστου}\\
+Αντικαθιστούμε στην ισότητα του 1ου βήματος τη λύση που βρήκαμε στο προηγούμενο βήμα, ώστε να βρεθεί και η άλλη μεταβλητή του συστήματος.
+\item \textbf{Λύση συστήματος}\\
+Όταν βρεθούν οι τιμές $ x_0,y_0 $ και των δύο αγνώστων, σχηματίζουμε το διατεταγμένο ζεύγος $ (x,y)=(x_0,y_0) $ το οποίο είναι η λύση του συστήματος.
+\end{bhma}
+\item\textbf{Μέθοδος αντίθετων συντελεστών}
+\begin{bhma}
+\item \textbf{Επιλογή μεταβλητής - Πολλαπλασιασμός εξισώσεων}\\
+Επιλέγουμε ποια από τις δύο μεταβλητές θα απαλείψουμε οπότε τοποθετούμε τους συντελεστές της "χιαστί" δίπλα από κάθε εξίσωση, αλλάζοντας το πρόσημο του ενός από τους δύο. Πολλαπλασιάζουμε κάθε εξίσωση με τον αριθμό που προκύπτει.
+\item \textbf{Πρόσθεση κατά μέλη}\\
+Προσθέτουμε κατά μέλη τις νέες εξισώσεις οπότε προκύπτει μια εξίσωση με έναν άγνωστο τον οποίο και υπολογίζουμε λύνοντας την.
+\item \textbf{Εύρεση 2\tss{ης} μεταβλητής}\\
+Αντικαθιστούμε το αποτέλεσμα σε οποιαδήποτε εξίσωση του αρχικού συστήματος ώστε να υπολογίσουμε και τη δεύτερη μεταβλητή.
+\item \textbf{Λύση συστήματος}\\
+Όταν βρεθούν οι τιμές $ x_0,y_0 $ και των δύο αγνώστων, σχηματίζουμε το διατεταγμένο ζεύγος $ (x,y)=(x_0,y_0) $ το οποίο είναι η λύση του συστήματος.
+\end{bhma}
+\item\textbf{Μέθοδος οριζουσών}
+\begin{bhma}
+\item \textbf{Υπολογισμός οριζουσών}\\
+Υπολογίζουμε την ορίζουσα $ D $ των συντελεστών του συστήματος καθώς και τις ορίζουσες των μεταβλητών $ D_x $ και $ D_y $.
+\item \textbf{Διερεύνηση - Εύρεση λύσεων}\\
+Διακρίνουμε τις εξής περιπτώσεις
+\begin{itemize}
+\item Αν $ D\neq0 $ τότε υπολογίζουμε τις τιμές των μεταβλητών σύμφωνα με το \textbf{Θεώρημα 1.3} οπότε η μοναδική λύση θα είναι $ (x,y)=\left(\frac{D_x}{D},\frac{D_y}{D} \right) $.
+\item Αν $ D=0 $ τότε εξετάζουμε ποια από τις παρακάτω προτάσεις ισχύει:
+\begin{itemize}
+\item Αν $ D_x\neq 0 $ ή $ D_y\neq 0 $ τότε το σύστημα είναι αδύνατο.
+\item Αν $ D_x=D_y=0 $ τότε το σύστημα είναι αόριστο.
+\end{itemize}
+\end{itemize}
+\end{bhma}
+\end{arithmisi}
+\newpage
+\section{Μη Γραμμικά Συστήματα}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Μη γραμμική εξίσωση
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Σημείο σε ευθεία
+\item Είδη ευθειών
+\item Κανόνας οριζουσών
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Μέθοδος αντικατάστασης
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Μονοτονία - Ακρότατα συνάρτησης}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Γνησίως αύξουσα συνάρτηση
+\item Γνησίως φθίνουσα συνάρτηση
+\item Μέγιστο συνάρτησης
+\item Ελάχιστο συνάρτησης
+\item Άρτια - Περιττή συνάρτηση
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Ιδιότητες διάταξης
+\item 
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση μονοτονίας συνάρτησης
+\item Επίλυση εξίσωσης
+\item Επίλυση ανίσωσης
+\item Εύρεση ακρότατου συνάρτησης
+\item 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Γν. αύξουσα $ f\Auxousa\varDelta $
+\item Γν. φθίνουσα $ f\Fthinousa\varDelta $
+\item Μέγιστο $ f(x)\leq f(x_0) $
+\item Ελάχιστο $ f(x)\geq f(x_0) $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Μετατόπιση γραφικής παράστασης}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\item 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Η έννοια του τριγωνομετρικού αριθμού}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Τριγωνομετρικοί αριθμοί οξείας γωνίας ορθογωνίου τριγώνου
+\item Τριγωνομετρικοί αριθμοί σε σύστημα συντεταγμένων
+\item Ακτίνιο
+\item Τριγωνομετρικός κύκλος
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Μετατροπή Μοίρες $ \leftrightarrow $ Ακτίνια
+\item Τρ. αριθμοί βασικών γωνιών
+\item Πρόσημα τριγωνομετρικών αριθμών
+\item Τρ. αριθμοί γωνιών που ξεπερνούν τον κύκλο
+\item Βασικές ανισότητες για ημίτονο και συνημίτονο
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Υπολογισμός τριγωνομετρικών αριθμών σε τρίγωνο
+\item Υπολογισμός τριγωνομετρικών αριθμών από σημείο $ xOy $
+\item Μετατροπή μοιρών σε ακτίνια και αντίστροφα
+\myitem Τριγωνομετρικοί αριθμοί βασικών γωνιών
+\item Τριγωνομετρικός κύκλος
+\myitem Πρόσημα τρ. Αριθμών σε κάθε τεταρτημόριο
+\item Γωνίες μεγαλύτερες του κύκλου
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{p{6.5cm}p{6.5cm}}
+\multicolumn{2}{c}{{\Large \textbf{Τριγωνομετρικός Κύκλος}}}\\
+\begin{tikzpicture}[>=latex,scale=2]
+\fill[fill=\xrwma!50] (0,0) -- (.2,0) arc (0:60:.2) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- coordinate (x axis mid) (1.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\foreach \x in {-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1}
+\draw (\x,.5pt) -- (\x,-.5pt)
+node[anchor=north] {{\tiny \x}};
+\foreach \y in {-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1}
+\draw (.5pt,\y) -- (-.5pt,\y)
+node[anchor=east] {{\tiny \y}};
+\draw[->] (0,-1.2) -- (0,1.5) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[-] (1,-1.2) -- (1,1.8);
+\draw[-] (-1.2,1) -- (1.2,1);
+\draw[-,thick] (0,1) -- (1.732/3,1);
+\draw[-,thick] (1,0) -- (1,1.732);
+\draw[-,dashed] (-.7,-1.732*0.7) -- (1,1.732);
+\draw circle (1);
+\coordinate (A) at (60:1);
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(pi/3),0){B}
+\tkzDefPoint(0,sin(pi/3)){C}
+\tkzDefPoint(1,tan(pi/3)){D}
+\tkzDefPoint(cot(pi/3),1){E}
+\tkzDefPoint(1,0){F}
+\tkzDefPoint(0,1){G}
+\tkzDrawSegment(O,A)
+\tkzDrawSegments[thin,dashed](A,B A,C)
+\tkzText(0,1.75){{\scriptsize Άξονας Ημιτόνων}}
+\tkzText(1.6,-.12){{\scriptsize Άξονας}}
+\tkzText(1.6,-.23){{\scriptsize Συνημιτόνων}}
+\tkzText(-1,1.22){{\scriptsize Άξονας}}
+\tkzText(-.75,1.1){{\scriptsize Συνεφαπτομένων}}
+\tkzText(1.23,-.87){{\scriptsize Άξονας}}
+\tkzText(1.42,-1){{\scriptsize Εφαπτομένων}}
+\tkzText(-.5,-1.1){{\scriptsize $ \delta $}}
+\tkzDrawSegment[thick](O,B)
+\tkzDrawSegment[thick](O,C)
+\tkzDrawPoints[size=7,fill=white](O,A,B,C,D,E,F,G)
+\tkzText(-.4,.43){{{\scriptsize \textrm{ημ}$ \omega $}}$\LEFTRIGHT\{.{ \rule{0pt}{18mm} } $}
+\tkzText(.25,-.25){$ \undercbrace{\rule{9mm}{0mm}}_{{\scriptsize \textrm{συν}\omega}} $}
+\tkzText(1.2,.87){$\LEFTRIGHT.\}{ \rule{0pt}{33mm} } ${{\scriptsize \textrm{εφ}$ \omega $}}}
+\tkzText(.3,1.12){$ \overcbrace{\rule{10mm}{0mm}}^{{\scriptsize \textrm{σφ}\omega}} $}
+\tkzText(.25,.15){$ \omega $}
+\tkzLabelPoint[below left,xshift=.5mm,yshift=.5mm](O){{\tiny $ O $}}
+\tkzLabelPoint[above=1mm,right](A){{\tiny $ M $}}
+\tkzLabelPoint[above right](B){{\tiny $ M_1 $}}
+\tkzLabelPoint[above=1mm, left](C){{\tiny $ M_2 $}}
+\tkzLabelPoint[left](D){{\tiny $ K $}}
+\tkzLabelPoint[above](E){{\tiny $ \varLambda $}}
+\tkzLabelPoint[below right](F){{\tiny $ A $}}
+\tkzLabelPoint[above left](G){{\tiny $ B $}}
+\draw [->] (.984*.9,.173*.9) arc (10:45:.9);
+\draw [->] (.984*.9,-.173*.9) arc (-10:-45:.9);
+\tkzText(.72,.35){$ + $}
+\tkzText(.72,-.35){$ - $}
+\tkzText(.35,.45){$ \rho $}
+\tkzText(-1,.9){{\scriptsize $ \varepsilon_2 $}}
+\tkzText(.9,-1){{\scriptsize $ \varepsilon_1 $}}
+\end{tikzpicture} & \begin{tikzpicture}[>=latex,scale=2]
+\fill[fill=\xrwma!50] (0,0) -- (.2,0) arc (0:45:.2) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.5) node[above,fill=white] {{\footnotesize $ y $}};
+
+\foreach \gwnia/\xtext in {
+30/\frac{\pi}{6},
+45/\frac{\pi}{4},
+60/\frac{\pi}{3},
+90/\frac{\pi}{2},
+120/\frac{2\pi}{3},
+135/\frac{3\pi}{4},
+150/\frac{5\pi}{6},
+180/\pi,
+210/\frac{7\pi}{6},
+240/\frac{4\pi}{3},
+270/\frac{3\pi}{2},
+300/\frac{5\pi}{3},
+330/\frac{11\pi}{6},
+360/2\pi}
+\draw (\gwnia:0.85cm) node {{\scriptsize $\xtext$}};
+\foreach \gwnia/\xtext in {
+90/\frac{\pi}{2},
+180/\pi,
+270/\frac{3\pi}{2},
+360/2\pi}
+\draw (\gwnia:0.85cm) node[fill=white] {{\scriptsize $\xtext$}};
+\tkzDefPoint(0,0){O}
+\coordinate (A) at (45:1);
+\tkzDrawSegment(O,A)
+\draw circle (1);
+\foreach \gwnia in {0,30,45,60,90,120,135,150,180,210,240,270,300,330}{
+\coordinate (P) at (\gwnia:1);
+\draw (\gwnia:1.22cm) node[fill=white,inner sep=0.1mm] {{\scriptsize $\gwnia^\circ$}};
+\draw[draw=black,fill=white] (P) circle (.7pt);};
+\tkzText(.25,.1){$ \omega $}
+\end{tikzpicture}
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{c||>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}|>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}}
+\hline \multicolumn{9}{c}{\textbf{\MakeUppercase{Βασικές Γωνίες}}} \rule[-2ex]{0pt}{5ex}  \\ 
+\hhline{=========} \textbf{Θέση} \rule[-2ex]{0pt}{6ex} & \textbf{Σημείο άξονα} & \multicolumn{3}{c|}{\textbf{1\tss{ο} Τεταρτημόριο}} & \multicolumn{4}{c}{\textbf{Σημείο άξονα}}\\
+\hhline{=========} \rule[-2ex]{0pt}{5ex} \textbf{Μοίρες} & $ 0\degree $ & $ 30\degree $ & $ 45\degree $ & $ 60\degree $ & $ 90\degree $ & $ 180\degree $ & $ 270\degree $ & $ 360\degree $ \\
+\rule[-2ex]{0pt}{4ex} \textbf{Ακτίνια} & $ 0 $ & $ \frac{\pi}{6} $ & $ \frac{\pi}{4} $ & $ \frac{\pi}{3} $ & $ \frac{\pi}{2} $ & $ \pi $ & $ \frac{3\pi}{2} $ & $ 2\pi $ \\ 
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Σχήμα} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:0:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\coordinate (A) at (0:.3);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:30:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\coordinate (A) at (30:.3);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:45:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\coordinate (A) at (45:.3);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:60:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\coordinate (A) at (60:.3);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:90:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\coordinate (A) at (90:.3);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:180:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:270:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=\xrwma!50] (0,0) -- (.3,0) arc (0:360:.3) -- cycle;
+\draw (-.35,0) -- (.35,0);
+\draw (0,-.35) -- (0,.35);
+\draw (0,0) circle (.3);
+\end{tikzpicture} \\ 
+\hline \rule[-2ex]{0pt}{5ex} $ \hm{\omega} $ & $ 0 $ & $ \frac{1}{2} $ & $ \frac{\sqrt{2}}{2} $ & $ \frac{\sqrt{3}}{2} $ & $ 1 $ & $ 0 $ & $ -1 $ & $ 0 $  \\ 
+\rule[-2ex]{0pt}{4ex} $ \syn{\omega} $ & $ 1 $ & $ \frac{\sqrt{3}}{2} $ & $ \frac{\sqrt{2}}{2} $ & $ \frac{1}{2} $ & $ 0 $ & $ -1 $ & $ 0 $ & $ 1 $  \\ 
+\rule[-2ex]{0pt}{4ex} $ \ef{\omega} $ & $ 0 $ & $ \frac{\sqrt{3}}{3} $ & $ 1 $ & $ \sqrt{3} $ & \begin{minipage}{.8cm}
+\begin{center}
+{\scriptsize Δεν\\\vspace{-1mm}ορίζεται}
+\end{center}
+\end{minipage} & $ 0 $ & 
+\begin{minipage}{.8cm}
+\begin{center}
+{\scriptsize Δεν\\\vspace{-1mm}ορίζεται}
+\end{center}
+\end{minipage} & $ 0 $ \\
+\rule[-2ex]{0pt}{4ex} $ \syf{\omega} $ & \begin{minipage}{.8cm}
+\begin{center}
+{\scriptsize Δεν\\\vspace{-1mm}ορίζεται}
+\end{center}
+\end{minipage} & $ \sqrt{3} $ & $ 1 $ & $ \frac{\sqrt{3}}{3} $ & $ 0 $ & \begin{minipage}{.8cm}
+\begin{center}
+{\scriptsize Δεν\\\vspace{-1mm}ορίζεται}
+\end{center}
+\end{minipage} & $ 0 $ & \begin{minipage}{.8cm}
+\begin{center}
+{\scriptsize Δεν\\\vspace{-1mm}ορίζεται}
+\end{center}
+\end{minipage} \\ 
+\hline 
+\end{tabular}
+\end{center}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\setlength{\columnsep}{0.2cm}
+\begin{multicols}{3}
+\begin{enumerate}[itemsep=0mm]
+\item Ημίτονο : $ \hm{\omega} $
+\item Συνημίτονο : $ \syn{\omega} $
+\item Εφαπτομένη : $ \ef{\omega} $
+\item Συνεφαπτομένη : $ \syf{\omega} $
+\item $ \hm{\omega}=\frac{y}{\rho} $
+\item $ \syn{\omega}=\frac{x}{\rho} $
+\item $ \ef{\omega}=\frac{y}{x},\ x\neq 0 $
+\item $ \syf{\omega}=\frac{x}{y},\ y\neq 0 $
+\item $ \rho=\sqrt{x^2+y^2} $
+\item $ \frac{\mu}{180\degree}=\frac{a}{\pi} $
+\item $ \hm{\left( 360\degree \kappa+\omega\right) }=\hm{\omega} $
+\item $ \syn{\left( 360\degree \kappa+\omega\right) }=\syn{\omega} $
+\item $ \ef{\left( 360\degree \kappa+\omega\right) }=\ef{\omega} $
+\item $ \syf{\left( 360\degree \kappa+\omega\right) }=\syf{\omega} $
+\item $ -1\leq\hm{\omega}\leq 1 $
+\item $ -1\leq\syn{\omega}\leq 1 $
+\end{enumerate}
+\end{multicols}
+\setlength{\columnsep}{1cm}
+\end{mybox}
+\newpage
+\section{Τριγωνομετρικές ταυτότητες}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Τριγωνομετρική ταυτότητα
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Βασικές τριγωνομετρικές ταυτότητες
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item Έλεγχος ύπαρξης γωνίας
+\myitem Υπολογισμός τριγωνομετρικών αριθμών με χρήση ταυτοτήτων
+\myitem Απόδειξη τριγωνομετρικών ταυτοτήτων
+\item Απόδειξη ανισοτήτων
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item $ \hm^2{x}+\syn^2{x}=1 $
+\item $ \ef{x}=\frac{\hm{x}}{\syn{x}} $
+\item $ \syf{x}=\frac{\syn{x}}{\hm{x}} $
+\item $ \ef{x}\cdot\syf{x}=1 $
+\item $ \syn^2{x}=\frac{1}{1+\ef^2{x}} $
+\item $ \hm^2{x}=\frac{\ef^2{x}}{1+\ef^2{x}} $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Αναγωγή στο 1\tss{ο} τεταρτημόριο}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Αναγωγή από 2\tss{ο} σε 1\tss{ο}
+\item Αναγωγή από 3\tss{ο} σε 1\tss{ο}
+\item Αναγωγή από 4\tss{ο} σε 1\tss{ο}
+\item Σχέσεις συμπληρωματικών γωνιών
+\item Γωνίες με διαφορά $ 90\degree $
+\item Γωνίες με άθροισμα $ 270\degree $
+\item Γωνίες με διαφορά $ 270\degree $
+\end{enumerate}
+\end{multicols}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Υπολογισμός τριγωνομετρικών αριθμών γωνιών που καταλήγουν σε 2ο, 3ο, 4ο.
+\item Συμπληρωματικές γωνίες
+\item Υπολογισμός παράστασης
+\item Γωνίες μεγαλύτερες του κύκλου
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Τριγωνομετρικές Συναρτήσεις}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Τριγωνομετρική συνάρτηση
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Τριγωνομετρικές Εξισώσεις}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Τριγωνομετρική εξίσωση
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Σύνολα λύσεων βασικών τριγωνομετρικών εξισώσεων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Λύση απλής τριγωνομετρικής εξίσωσης
+\item Λύση απλής τριγωνομετρικής εξίσωσης με αρνητικό αριθμό
+\item Λύση εξίσωσης σε διάστημα
+\item Σύνθετες τριγωνομετρικές εξισώσεις
+\item Επίλυση με αναγωγή στο 1\tss{ο} τεταρτ.
+\item Επίλυση με τριγωνομετρικές ταυτότητες
+\item Τριγωνομετρικές εξισώσεις πολυωνυμικής μορφής
+\item Συστήματα
+\item Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item $ \hm{x}=a\Rightarrow x=\ccases{2\kappa\pi+\theta\\2\kappa\pi+(\pi-\theta)} $
+\item $ \syn{x}=a\Rightarrow x=\ccases{2\kappa\pi+\theta\\2\kappa\pi-\theta} $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Τριγωνομετρικοί αριθμοί αθροίσματος}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item $ \hm{\left( \varphi+\omega\right) }=\hm{\varphi}\cdot\syn{\omega}+\syn{\varphi}\cdot\hm{\omega} $
+\item $ \syn {\left( \varphi+\omega\right) }=\syn{\varphi}\cdot\syn{\omega}-\hm{\varphi}\cdot\hm{\omega} $
+\item $ \ef{\left( \varphi+\omega\right) }=\dfrac{\ef{\varphi}+\ef{\omega}}{1-\ef{\varphi}\cdot\ef{\omega}} $
+\item $ \syf{\left( \varphi+\omega\right) }=\dfrac{\syf{\varphi}\syf{\omega}-1}{\syf{\varphi}+\syf{\omega}} $
+\item $ \hm{\left( \varphi-\omega\right) }=\hm{\varphi}\cdot\syn{\omega}-\syn{\varphi}\cdot\hm{\omega} $
+\item $ \syn{\left( \varphi-\omega\right) }=\syn{\varphi}\cdot\syn{\omega}+\hm{\varphi}\cdot\hm{\omega} $
+\item $ \ef{\left( \varphi-\omega\right) }=\dfrac{\ef{\varphi}-\ef{\omega}}{1+\ef{\varphi}\cdot\ef{\omega}} $
+\item $ \syf{\left( \varphi-\omega\right) }=\dfrac{\syf{\varphi}\syf{\omega}+1}{\syf{\varphi}-\syf{\omega}} $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+
+\newpage
+\section{Τριγωνομετρικοί αριθμοί διπλάσιας γωνίας}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item $ \hm{2\varphi}=2\hm{\varphi}\cdot\syn{\varphi} $
+\item $ \syn{2\varphi}=\ccases{\syn^2{\varphi}-\hm^2{\varphi}\\1-2\hm^2{\varphi}\\2\syn^2{\varphi}-1} $
+\item $ \ef{2\varphi}=\dfrac{2\ef{\varphi}}{1-\ef^2{\varphi}}$
+\item $ \syf{2\varphi}=\dfrac{\syf^2{\varphi}-1}{2\syf{\varphi}} $
+\item $ \hm^2{\varphi}=\dfrac{1-\syn{2\varphi}}{2} $
+\item $ \syn^2{\varphi}=\dfrac{1+\syn{2\varphi}}{2} $
+\item $ \ef^2{\varphi}=\dfrac{1-\syn{2\varphi}}{1+\syn{2\varphi}} $
+\item $ \syf^2{\varphi}=\dfrac{1+\syn{2\varphi}}{1-\syn{2\varphi}} $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Πολυώνυμα}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Μονώνυμο
+\item Πολυώνυμο
+\item Όροι πολυωνύμου
+\item Τιμή πολυωνύμου
+\item Βαθμός πολυωνύμου
+\item Ρίζα πολυωνύμου
+\item Μηδενικό - Σταθερό πολυώνυμο
+\item Ίσα πολυώνυμα
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Βαθμός πολυωνύμου
+\item Ισότητα πολυωνύμων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=3mm]
+\item $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $
+\item $  $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+
+\newpage
+\section{Διαίρεση πολυωνύμων}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Ευκλείδεια διαίρεση πολυωνύμων
+\item Ταυτότητα ευκλείδειας διαίρεσης
+\item Τέλεια διαίρεση
+\item Παράγοντες - διαιρέτες
+\item Σχήμα Horner
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Υπόλοιπο διαίρεσης
+\item Ρίζα πολυωνύμου
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Διαίρεση με διαιρέτη $x-\rho$
+\item Παραγοντοποίηση πολυωνύμου με τη χρήση σχήματος Horner
+\item Υπολογισμός υπολοίπου διαίρεσης.
+\item 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=3mm]
+\item $ \varDelta(x)=\delta(x)\cdot\pi(x)+\upsilon(x) $
+\item $ \varDelta(x)=\delta(x)\cdot\pi(x) $
+\item $\upsilon=P(\rho)$
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+
+\end{document}
+
+
+

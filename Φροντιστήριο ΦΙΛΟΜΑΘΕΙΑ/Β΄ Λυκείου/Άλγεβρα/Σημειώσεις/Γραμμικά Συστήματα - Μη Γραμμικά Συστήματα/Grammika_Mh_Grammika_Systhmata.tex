@@ -1,0 +1,319 @@
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+
+
+\newcommand{\pinakasdyo}[8]{
+\begin{tikzpicture}
+\foreach \x in {#6,#7}{
+\draw (-3,0) -- (#8,0);
+\draw (\x,-.5)--(\x,.0);
+\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#8-.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+\node at (0.5*#6-0.25,-0.3) {$#4$};
+\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+\begin{tikzpicture}
+\draw (-3,0) -- (#5,0);
+\draw (#4,-.5)--(#4,.0);
+\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#5-0.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+\node at (0.5*#4-0.25,-.3) {$#3$};
+\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+\begin{tikzpicture}
+\draw (-3,0) -- (5,0);
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (4.7,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+\end{tikzpicture}}
+
+
+
+\newenvironment{meth}[1][]{%
+\refstepcounter{meth}
+\begin{mdframed}[%
+frametitle={m \themeth\quad\ \MakeUppercase{#1}},
+skipabove=\baselineskip plus 2pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=0pt,
+frametitlerule=false,
+linecolor=black,
+outerlinewidth=0pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlebackgroundcolor=black!40,
+frametitlerulewidth=0pt,
+innertopmargin=\baselineskip,
+innerbottommargin=\baselineskip,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=black!10,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}}
+%-------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=2cm}
+
+\ekthetesdeiktes
+
+
+
+\begin{document}
+\titlos{Αλγεβρα Β΄ Λυκείου}{Συστήματα}{Γραμμικά Συστήματα}
+\orismoi
+\Orismos{Γραμμική Εξίσωση}
+\wrapr{-4mm}{10}{4.5cm}{-4mm}{
+\begin{tikzpicture}[domain=-.2:4,y=1cm,scale=.8]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (4.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,3.5) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[domain=-.2:3.4,samples=100,line width=.4mm,\xrwma] plot function{-0.8*x+2.5};
+\tkzText(2.5,2.7){$ ax+\beta y=\gamma $}
+\tkzText(2.5,2.2){{\footnotesize $ a,\beta,\gamma\in\mathbb{R} $}}
+\tkzText(2.5,1.7){{\footnotesize $ a\neq0 $ ή $ \beta\neq0 $}}
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\end{tikzpicture}}{
+Γραμμική εξίσωση δύο μεταβλητών, ονομάζεται κάθε πολυωνυμική εξίσωση στην οποία κάθε όρος της είναι μονώνυμο 1\textsuperscript{ου} βαθμού μιας μεταβλητής. Έχει τη μορφή \[ ax+\beta y=\gamma \]
+όπου οι συντελεστές και ο σταθερός όρος είναι πραγματικοί αριθμοί $ a,\beta,\gamma\in\mathbb{R} $.
+Η καμπύλη της εξίσωσης είναι ευθεία γραμμή αν οι συντελεστές $ a,\beta $ των μεταβλητών $ x,y $ αντίστοιχα, δεν μηδενίζονται συγχρόνως δηλ. $ a\neq0 $ ή $ \beta\neq0 $.}
+\begin{itemize}[itemsep=0mm]
+\item Οι ευθείες της μορφής $ x=\kappa $ ονομάζονται \textbf{κατακόρυφες} ευθείες ενώ οι ευθείες της μορφής $ y=\kappa $ οριζόντιες ευθείες.
+\item Ο πραγματικός αριθμός $ \lambda=-\frac{a}{\beta} $ ονομάζεται \textbf{συντελεστής διεύθυνσης} της ευθείας $ ax+\beta y=\gamma $.
+\end{itemize}
+\Orismos{Λύση γραμμικήσ εξίσωσησ}
+Λύση μιας γραμμικής εξίσωσης της μορφής \[ ax+\beta y=\gamma \] ονομάζεται κάθε διατεταγμένο ζεύγος αριθμών $ \left( x_0,y_0\right)  $ το οποίο επαληθεύει την εξίσωση.\\\\
+\Orismos{Γραμμικό σύστημα $ \mathbold{2\times2} $}
+Γραμμικό σύστημα δύο εξισώσεων με δύο άγνωστους ονομάζεται ο συνδυασμός - σύζευξη δύο γραμμικών εξισώσεων. Είναι της μορφής :
+\[ \ccases{{a}x+{\beta} y={\gamma}\\{a'}x+{\beta'} y={\gamma'} } \]
+\begin{itemize}[itemsep=0mm]
+\item Οι συντελεστές του συστήματος $ a,a',\beta,\beta' $ και οι σταθεροί όροι $ \gamma,\gamma' $ είναι πραγματικοί αριθμοί.
+\item Κάθε διατεταγμένο ζεύγος αριθμών $ \left(x_0,y_0\right)  $ το οποίο επαληθεύει και τις δύο εξισώσεις ονομάζεται \textbf{λύση} του γραμμικού συστήματος.
+\item Τα συστήματα τα οποία έχουν ακριβώς τις ίδιες λύσεις ονομάζονται \textbf{ισοδύναμα}.
+\item Ένα σύστημα που έχει λύση λέγεται \textbf{συμβιβαστό}. Εαν δεν έχει λύση ονομάζεται \textbf{αδύνατο} ενώ αν έχει άπειρες λύσεις \textbf{αόριστο}.
+\end{itemize}
+\Orismos{Επαλήθευση Συστήματοσ}
+Επαλήθευση ενός συστήματος εξισώσεων ονομάζεται η διαδικασία με την οποία εξετάζουμε εαν ένα ζεύγος αριθμών $ \left(x_0,y_0\right)  $ είναι λύση του, αντικαθιστώντας τους αριθμούς στη θέση των μεταβλητών.\\\\
+\Orismos{Ορίζουσα Συστήματοσ {$ \mathbold{2\mathbold{\times}2} $}}
+Ορίζουσα των συντελεστών ενός συστήματος $ 2\times2 $ ονομάζεται ο αριθμός $ a\beta'-a'\beta $ η οποία συμβολίζεται
+\[ D=\left|\begin{array}{cc}
+a & \beta \\ 
+a' & \beta'
+\end{array}  \right|  \]
+$ D_x,D_y $ είναι οι ορίζουσες των μεταβλητών που προκύπτουν αν αντικαταστίσουμε στην ορίζουσα $ D $ τη στήλη των συντελεστών των μεταβλητών $ x,y $ αντίστοιχα με τους σταθερούς όρους $ \gamma,\gamma' $.
+\[ D_x=\left|\begin{array}{cc}
+\gamma & \beta \\ 
+\gamma' & \beta'
+\end{array}  \right|\quad,\quad D_y=\left|\begin{array}{cc}
+a & \gamma \\ 
+a' & \gamma'
+\end{array}  \right| \]
+\Orismos{Γραμμικό Σύστημα Εξισώσεων $ \mathbold{3\times3} $}
+Γραμμικό σύστημα τριών εξισώσεων με τρεις άγνωστους ονομάζεται ένας συνδυασμός από τρεις γραμμικές εξισώσεις της μορφής
+\[ \ccases{{a_1}x+{\beta_1} y+{\gamma_1} z=\delta_1\\{a_2}x+{\beta_2} y+{\gamma_2} z=\delta_2\\{a_3}x+{\beta_3} y+{\gamma_3} z=\delta_3} \]
+με $ a_i,\beta_i,\gamma_i,\delta_i\in\mathbb{R}\;,\;i=1,2,3 $. Κάθε διατεταγμένη τριάδα αριθμών $ \left( x_0,y_0,z_0\right)  $ η οποία επαληθεύει και τις τρεις εξισώσεις ονομάζεται \textbf{λύση} του γραμμικού συστήματος $ 3\times3 $.\\\\
+\Orismos{Παραμετρικό σύστημα}
+Παραμετρικό ονομάζεται το γραμμικό σύστημα του οποίου οι συντελεστές ή και οι σταθεροί όροι δίνονται με τη βοήθεια μιας ή περισσότερων παραμέτρων. Η διαδικασία επίλυσης ενός παραμετρικού συστήματος ονομάζεται \textbf{διερεύνηση}.
+\\\\
+\Orismos{Μη γραμμικό σύστημα}
+Ένα σύστημα εξισώσεων θα ονομάζεται μη γραμμικό όταν τουλάχιστον μια εξίσωσή του δεν αποτελεί γραμμική εξίσωση.\\\\
+\thewrhmata
+\Thewrhma{Είδος ευθείασ}
+Η γραμμική εξίσωση $ ax+\beta y=\gamma $ παριστάνει
+\begin{rlist}
+\item πλάγια ευθεία αν $ a\neq0 $ ή $ \beta\neq0 $.
+\item οριζόντια ευθεία αν $ a=0 $ και $ \beta\neq0 $.
+\item κατακόρυφη ευθεία αν $ a\neq0 $ και $ \beta=0 $.
+\end{rlist}
+ενώ αν μηδενίζονται συγχρόνως οι συντελεστές $ a $ και $ \beta $ τότε δεν παριστάνει ευθεία γραμμή.\\\\
+\Thewrhma{Σημείο σε ευθεία}
+Ένα σημείο $ A(x_0,y_0) $ ανήκει σε μια ευθεία με εξίσωση $ ax+\beta y=\gamma $ αν και μόνο αν οι συντεταγμένες του επαληθεύουν την εξίσωση της.\\\\
+\Thewrhma{Λύση συστήματοσ {$ \mathbold{2\mathbold{\times}2} $} με χρήση οριζουσων}
+Έστω το γραμμικό σύστημα 
+\[ \ccases{{a}x+{\beta} y={\gamma}\\{a'}x+{\beta'} y={\gamma'} } \]
+με πραγματικούς συντελεστές και ορίζουσα συντελεστών $ D $.
+\begin{rlist}
+\item Αν η ορίζουσα των συντελεστών του συστήματος είναι διάφορη του μηδενος δηλαδή $ D\neq0 $ τότε το σύστημα έχει μοναδική λύση. Οι τιμές των μεταβλητών δίνονται από τις σχέσεις
+\[ x=\frac{D_x}{D}\;\;,\;\;y=\frac{D_y}{D} \]
+ενώ η λύση του συστήματος θα είναι $ (x,y)=\left(\frac{D_x}{D},\frac{D_y}{D} \right)  $.
+\item Αν η ορίζουσα των συντελεστών του συστήματος είναι μηδενική δηλαδή $ D=0 $ τότε το σύστημα είναι είτε αόριστο είτε αδύνατο.
+\end{rlist}
+\end{document}

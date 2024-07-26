@@ -1,0 +1,2063 @@
+\begin{filecontents*}{mystyle.ist}
+headings_flag 1
+heading_prefix "\\textit{"
+heading_suffix "}\\nopagebreak\n"
+delim_0 " \\dotfill "
+delim_1 " \\dotfill "
+delim_2 " \\dotfill "
+\end{filecontents*}
+\documentclass[twoside,10pt]{book}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,mtphrb,mtpcal]{mtpro2}
+\usepackage[inner=2.00cm, outer=1.50cm, top=3.00cm, bottom=2.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\DeclareRobustCommand{\Algebra}[1]{\index{{\LARGE\bf Άλγεβρα\\}!#1}}
+\DeclareRobustCommand{\Gewmetria}[1]{\index{{\LARGE\bf\vspace*{5mm}Γεωμετρία\\}!#1}}
+\DeclareRobustCommand{\Analysh}[1]{\index{{\LARGE\bf\vspace*{5mm}Ανάλυση\\}!#1}}
+\DeclareRobustCommand{\Statistikh}[1]{\index{{\LARGE\bf\vspace*{5mm}Στατιστική\\}!#1}}
+%------ ΕΙΚΟΝΑ ΓΥΡΩ ΑΠΟ ΚΕΙΜΕΝΟ ------------
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usetikzlibrary{backgrounds}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}}   
+
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}\textcolor{black}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{methodologia}[chapter]
+\renewcommand{\themethodologia}{\thechapter.\arabic{methodologia}}\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{black}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}\textcolor{black}{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+\usepackage{venndiagram}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.12\paperwidth,yshift=.17\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.11\paperwidth,yshift=.11\paperheight,rectangle] {\fontsize{27}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.74\paperwidth,yshift=.14\paperheight,rectangle]
+{{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{white}{\contour{black}{\thechapter}}}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{gray}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill\;\normalsize\ Σελίδα}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textbf{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-5cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+\usepackage{wrapfig}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%--------- ΑΝΙΣΩΣΕΙΣ -------
+\tikzset{
+thickest/.style={line width=1mm},
+a/.style={decoration={markings,
+mark=at position #1 with {\fill[white,draw=black,thin] circle (3pt);}},postaction={decorate}},
+k/.style={decoration={markings,
+mark=at position #1 with {\fill[black] circle (3pt);}},postaction={decorate}},
+}
+%--------- ΔΙΑΣΤΗΜΑ ------------
+\newcommand{\diasthma}[7]{
+\foreach \x in {#3,#4}
+\draw (\x,#7+.2) -- (\x,#7-.2);
+\node[anchor=north,fill=white] at (#3,#7)[below=1mm] {$ #1 $};
+\node[anchor=north,fill=white] at (#4,#7)[below=1mm] {$ #2 $};
+\draw [#5=0,#6=1,thickest] (#3,#7)--(#4,#7);
+}
+%--------- ΑΞΟΝΑΣ ------------------
+\newcommand{\axonas}[3]{
+\draw[-latex] (#1,#3) -- (#2,#3)node[below]{$x$};
+}
+%--------- ΚΑΤΩ ΑΚΡΟ ------------------
+\newcommand{\Xapeiro}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3-.3,#5);
+}
+%--------- ΠΑΝΩ ΑΚΡΟ ------------------
+\newcommand{\apeiroX}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3+.3,#5);
+}
+%----- ΔΙΑΚΕΚΟΜΜΕΝΕΣ ΓΡΑΜΜΕΣ ------
+\newcommand{\oria}[3]{\draw [dashed] (#1,#2)--(#1,#3);}
+%--------------------------------------
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\usepackage{microtype}
+\usepackage{float}
+
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+
+\usepackage{caption}
+
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%------------------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\makeatletter
+\def\closedcycley{%
+-| (perpendicular cs: 
+horizontal line through={(current plot begin)}, 
+vertical line through={(\pgfplots@ZERO@x,\pgfplots@ZERO@y)})
+-- cycle
+}%
+\makeatother
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newcolumntype{C}{>{\centering\arraybackslash} X}
+\setlist[itemize]{itemsep=0mm}
+\newcommand{\eis}[1]{\textquotedblleft#1\textquotedblright\;}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase\textsuperscript{#1}}
+
+
+\begin{document}
+\mainmatter
+\pagestyle{fancy}
+\chapter{Ανάλυση}
+\section{Συναρτήσεις}\mbox{}\\
+\orismoi
+\Orismos{Συνάρτηση}
+Συνάρτηση ονομάζεται η διαδικασία (αντιστοίχηση) με την οποία κάθε στοιχείο ενός συνόλου $ Α $ αντιστοιχεί σε \textbf{ένα μόνο} στοιχείο ενός συνόλου $ Β $.\\Συμβολίζεται με οποιοδήποτε γράμμα του λατινικού ή και του ελληνικού αλφαβήτου $ f, g, h, t,\\s, \sigma\ldots $ και γράφουμε : \[ f:A\rightarrow B \]
+Είναι η σχέση που συνδέει δύο μεταβλητές $ x,y $ όπου κάθε τιμή της πρώτης $ (x\in A) $, του πρώτου συνόλου, αντιστοιχεί σε μόνο μια τιμή της δεύτερης $ (y\in B) $, του δεύτερου συνόλου.\vspace{-3mm}
+\begin{center}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\draw[fill=black!10] (4.1,0) ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.6);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4,.2){B}
+\tkzDrawPoints[size=7,fill=black](A,B)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[right](B){{\footnotesize $ y $}}
+\tkzText(0,1.8){$ A $}
+\tkzText(4,1.8){$ B $}
+\tkzText(2,1.45){$ f $}
+\draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( D_f\right)  $};
+\end{tikzpicture}
+\caption{Συνάρτηση}
+\end{figure}
+\end{center}
+\vspace{-1.1cm}
+\begin{itemize}[itemsep=0mm]
+\item Η μεταβλητή $ x $ του συνόλου $ Α $ ονομάζεται \textbf{ανεξάρτητη} ενώ η $ y $ \textbf{εξαρτημένη}.
+\item Η τιμή της $ y $ ονομάζεται \textbf{τιμή} της $ f $ στο $ x $ και συμβολίζεται $ y=f(x) $. Η τιμή $ f(x) $ ονομάζεται επίσης και \textbf{εικόνα} του $ x $ μέσω της $ f $.
+\item Το σύνολο $ Α $ λέγεται \textbf{πεδίο ορισμού} της συνάρτησης $ f $ και συμβολίζεται $ D_f $. Είναι το σύνολο των δυνατών τιμών την ανεξάρτητης μεταβλητής της συνάρτησης.
+\item Το σύνολο με στοιχεία όλες τις δυνατές τιμές $ f(x) $ της εξαρτημένης μεταβλητής για κάθε $ x\in D_f $ λέγεται \textbf{σύνολο τιμών} της $ f $, συμβολίζεται $ f\left(D_f\right) $ και ισχύει $ f\left(D_f\right)\subseteq B $.
+\[ f\left(D_f\right)=\{y\in B|y=f(x)\textrm{ για κάθε } x\in D_f\} \]
+\item Μια συνάρτηση συμβολίζεται επίσης με τους εξής τρόπους : \[ x\overset{f}{\mapsto}f(x)\;\;,\;\;D_f\overset{f}{\rightarrow}f\left(D_f\right) \]
+\item Για το συμβολισμό της ανεξάρτητης μεταβλητής ή της συνάρτησης μπορούμε να χρησιμοποιήσουμε οποιοδήποτε συμβολισμό στη θέση της μεταβλητής $ x $ ή του ονόματος $ f $ της συνάρτησης αντίστοιχα. \[ f(x)\;\;,\;\;g(t)\;\;,\;\;h(s)\ldots \]
+\vspace{-3mm}
+\item Για να ορίσουμε μια συνάρτηση θα πρέπει να γνωρίζουμε
+\vspace{-3mm}
+\begin{enumerate}[itemsep=0mm]
+\item To πεδίο ορισμού $ D_f $.
+\item Το σύνολο $ Β $.
+\item Τον τύπο $ f(x) $ της συνάρτησης, για κάθε $ x\in D_f $.
+\end{enumerate}
+\item Εαν τα σύνολα $ A,B $ είναι υποσύνολα του συνόλου των πραγματικών αριθμών τότε μιλάμε για \textbf{πραγματική συνάρτηση πραγματικής μεταβλητής}.
+\end{itemize}
+\Orismos{Είδη συναρτήσεων}
+Στον ορισμό αυτό θα κατονομάσουμε και θα ορίσουμε πλήρως καθένα από τα βασικά είδη των συναρτήσεων που θα συναντήσουμε.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Πολυωνυμική συνάρτηση}\\
+Μια συνάρτηση $ f $ με πεδίο ορισμού $ D_f $ θα ονομάζεται πολυωνυμική αν για κάθε $ x\in D_f $, η τιμή της $ f(x) $ δίνεται από ένα πολυώνυμο $ \nu- $οστού βαθμού. Θα είναι της μορφής :
+\[ f(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 \]
+\begin{itemize}[itemsep=0mm]
+\item Οι αριθμοί $ a_i\;,\;i=0,1,2,\ldots,\nu $ ονομάζονται \textbf{συντελεστές} της συνάρτησης και είναι πραγματικοί αριθμοί.
+\item Το πεδίο ορισμού κάθε πολυωνυμικής συνάρτησης είναι το σύνολο $ \mathbb{R} $.
+\end{itemize}
+\begin{rlist}[leftmargin=3mm,label=\bf\roman*.]
+\item \textbf{Η συνάρτηση \textbf{\boldmath{$ f(x)=ax+\beta $}}}\\
+\vspace{-5mm}
+\wrapr{-4mm}{10}{4.3cm}{-4mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-.4,xmax=3.2,
+ymin=-.4,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.2:2.7]{-.7*x+1.7};
+\end{axis}
+\node at (0.2,0.2) {\footnotesize$O$};
+\node at (2.4,2) {\footnotesize$f(x)=ax+\beta$};
+\end{tikzpicture}\captionof{figure}{Συνάρτηση 1\tss{ου} βαθμού}}{
+Οι πολυωνυμικές συναρτήσεις των οποίων οι τιμές δίνονται από ένα πολυώνυμο 1\tss{ου} βαθμού της μορφής $ f(x)=ax+\beta $, με $ a,\beta\in\mathbb{R} $ πραγματικούς συντελεστές και $ a\neq0 $, ονομάζονται \textbf{1\tss{ου} βαθμού}.
+\begin{itemize}[leftmargin=4mm]
+\item Η γραφική παράσταση μιας πολυωνυμικής συνάρτησης 1\tss{ου} βαθμού είναι ευθεία γραμμή.
+\item Ο συντελεστής $ a $ του πολυωνύμου ονομάζεται \textbf{κλίση} ή \textbf{συντελεστής διεύθυνσης} της ευθείας.
+\end{itemize}}\mbox{}\\\\
+\item \textbf{Η συνάρτηση \textbf{\boldmath{$ f(x)=ax^2+\beta x+\gamma $}}}\\
+\vspace{-5mm}
+\wrapr{-4mm}{8}{4.3cm}{-4mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1,xmax=2.4,
+ymin=-.4,ymax=3,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:2]{x^2-x+.7};
+\end{axis}
+\node at (0.8,0.2) {\footnotesize$O$};
+\node at (1.6,4) {\footnotesize$f(x)=ax^2+\beta x+\gamma$};
+\tkzDefPoint(1.5,.85){A}
+\draw[dashed](1.5,.4)--(A)--(1,.85);
+\draw[dashed](1.5,.2)--(1.5,3.3);
+\tkzLabelPoint[below right,yshift=2.5mm,xshift=1mm](A){\footnotesize$K\left(-\frac{\beta}{2a},
+-\frac{\varDelta}{4a}\right)$}
+\tkzDrawPoint[fill=black](A)
+\node at (2.2,3.3) {\footnotesize$x=-\frac{\beta}{2a}$};
+\end{tikzpicture}\captionof{figure}{Συνάρτηση 2\tss{ου} βαθμού}}{
+Οι πολυωνυμικές συναρτήσεις των οποίων οι τιμές δίνονται από ένα πολυώνυμο 2\tss{ου} βαθμού της μορφής $ f(x)=ax^2+\beta x+\gamma$, με $ a,\beta,\gamma\in\mathbb{R} $ πραγματικούς συντελεστές και $ a\neq0 $, ονομάζονται \textbf{2\tss{ου} βαθμού}.
+\begin{itemize}[leftmargin=4mm]
+\item Η γραφική παράσταση μιας πολυωνυμικής συνάρτησης 2\tss{ου} βαθμού ονομάζεται \textbf{παραβολή}.
+\item Το σημείο με συντεταγμένες $ K\left(-\frac{\beta}{2a},-\frac{\varDelta}{4a}\right)  $ ονομάζεται \textbf{κορυφή} της παραβολής.
+\item Η κατακόρυφη ευθεία $ x=-\frac{\beta}{2a} $ είναι ο \textbf{άξονας συμμετρίας} της παραβολής.
+\end{itemize}}
+\end{rlist}\mbox{}\\\\
+\item \textbf{Ρητή συνάρτηση}\\
+Μια συνάρτηση $ f $ με πεδίο ορισμού $ D_f $ θα ονομάζεται ρητή αν η τιμή της $ f(x) $ δίνεται από μια ρητή αλγεβρική παράσταση, για κάθε $ x\in D_f $. Θα είναι της μορφής :
+\[ f(x)=\frac{P(x)}{Q(x)} \]
+\begin{itemize}[itemsep=0mm]
+\item Οι παραστάσεις $ P(x),Q(x) $ είναι πολυώνυμα της ίδιας μεταβλητής.
+\item Για να ορίζεται μια ρητή συνάρτηση πρέπει ο παρονομαστής της να είναι διάφορος του μηδενός : $ Q(x)\neq0 $.
+\item Το πεδίο ορισμού κάθε ρητής συνάρτησης προκύπτει αν από το σύνολο των πραγματικών αριθμών, εξαιρέσουμε τις τιμές της μεταβλητής $ x $ οι οποίες μηδενίζουν τον παρονομαστή $ Q(x) $.
+\[ D_f=\{x\in\mathbb{R}|Q(x)\neq0\} \]
+\end{itemize}
+\item \textbf{Άρρητη συνάρτηση}\\
+Άρρητη θα ονομάζεται μια συνάρτηση $ f $ εαν ο τύπος της $ f(x) $ είναι μια άρρητη αλγεβρική παράσταση. Μια άρρητη συνάρτηση θα είναι της μορφής :
+\[ f(x)=\SQRT{A(x)} \]
+\begin{itemize}[itemsep=0mm]
+\item Η παράσταση $ A(x) $ ονομάζεται \textbf{υπόριζη ποσότητα} και παριστάνει μια οποιαδήποτε αλγεβρική παράσταση.
+\item Το πεδίο ορισμού μιας άρρητης συνάρτησης αποτελείται από όλες εκείνες τις τιμές της ανεξάρτητης μεταβλητής $ x $ για τις οποίες η παράσταση $ A(x) $ παίρνει μη αρνητικές τιμές.
+\[ D_f=\{x\in\mathbb{R}|A(x)\geq0\} \]
+\end{itemize}
+\item \textbf{Τριγωνομετρική συνάρτηση}\\
+Τριγωνομετρική ονομάζεται κάθε συνάρτηση $ f $ της οποίας η τιμή της $ f(x) $ δίνεται με τη βοήθεια ενός τριγωνομετρικού αριθμού, για κάθε στοιχείο του πεδίου ορισμού $ x\in D_f $. Τα είδη των τριγωνομετρικών συναρτήσεων είναι τα εξής.
+\[ f(x)=\hm{x}\;\;,\;\;f(x)=\syn{x}\;\;,\;\;f(x)=\ef{x}\;\;,\;\;f(x)=\syf{x} \]
+\begin{itemize}
+\item Οι τριγωνομετρικές συναρτήσεις $ f(x)=\hm{x}\;\textrm{και}\;f(x)=\syn{x} $ έχουν πεδίο ορισμού το σύνολο όλων των πραγματικών αριθμών : $ D_f=\mathbb{R} $ και σύνολο τιμών το κλειστό διάστημα $ [-1,1] $ σύμφωνα με το \textbf{Θεώρημα ...}.
+\item Οι τριγωνομετρική συνάρτηση $ f(x)=\ef{x} $ έχει πεδίο ορισμού το σύνολο : $ D_f=\left\lbrace x\in\mathbb{R}|x\neq k\pi+\frac{\pi}{2}\;,\;k\in\mathbb{N}\right\rbrace  $ και σύνολο τιμών το $ \mathbb{R} $.
+\item Οι τριγωνομετρική συνάρτηση $ f(x)=\syf{x} $ έχει πεδίο ορισμού το σύνολο : $ D_f=\left\lbrace x\in\mathbb{R}|x\neq k\pi\;,\;k\in\mathbb{N}\right\rbrace  $ και σύνολο τιμών το $ \mathbb{R} $.
+\item Η γραφική παράσταση της συνάρτησης $ f(x)=\hm{x} $ καθώς και της $ f(x)=\syn{x} $ ονομάζεται \textbf{ημιτονοειδής καμπύλη}.
+\end{itemize}
+\item \textbf{Εκθετική συνάρτηση}\\
+Εκθετική ονομάζεται κάθε συνάρτηση $ f $ της οποίας ο τύπος αποτελεί δύναμη με θετική βάση, διάφορη της μονάδας και εκθέτη που περιέχει την ανεξάρτητη μετβλητή. Η απλή εκθετική συνάρτηση θα είναι της μορφής :
+\[ f(x)=a^x\;\;,\;\;0<a\neq1 \]
+\begin{itemize}
+\item Το πεδίο ορισμού της εκθετικής συνάρτησης $ f $ είναι το σύνολο των πραγματικών αριθμών : $ D_f=\mathbb{R} $.
+\item Το σύνολο τιμών της εκθετικής συνάρτησης $ f $ είναι το σύνολο των θετικών πραγματικών αριθμών : $ f\left( D_f\right) =(0,+\infty) $.
+\item Αν η βάση $ a $ γίνει ίση με τη μονάδα τότε αποκτάμε τη σταθερή συνάρτηση $ f(x)=1 $ η οποία δεν είναι εκθετική.
+\item Αν η βάση $ a $ γίνει ίση με τον αριθμό $ e $ τότε αποκτάμε τη συνάρτηση $ f(x)=e^x $.
+\end{itemize}
+\item \textbf{Λογαριθμική συνάρτηση}\\
+Λογαριθμική ονομάζεται κάθε συνάρτηση $ f $ της οποίας η τιμή της $ f(x) $ δίνεται με τη βοήθεια ενός λογαρίθμου, για κάθε στοιχείο του πεδίου ορισμού $ x\in D_f $. Θα είναι :
+\[ f(x)=\log_ax\;\;,\;\;0<a\neq1 \]
+\begin{itemize}
+\item Το πεδίο ορισμού της λογαριθμικής συνάρτησης $ f $ είναι το σύνολο των θετικών πραγματικών αριθμών : $ D_f=(0,+\infty) $.
+\item Το σύνολο τιμών της εκθετικής συνάρτησης $ f $ είναι το σύνολο όλων των πραγματικών αριθμών : $ f\left( D_f\right) =\mathbb{R} $.
+\item Αν η βάση $ a $ του λογαρίθμου γίνει ίση με τον αριθμό $ 10 $ ή $ e $ τότε αποκτάμε τη συνάρτηση $ f(x)=\log{x} $ ή $ f(x)=\ln{x} $ αντίστοιχα.
+\end{itemize}
+\end{enumerate}
+Στον παρακάτω πίνακα βλέπουμε τα βασικά είδη συναρτήσεων τον τύπο τους καθώς και το πεδίο ορισμού τους.
+
+\begin{center}
+\begin{longtable}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Είδος} & \textbf{Τύπος} & \textbf{Πεδίο Ορισμού} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Πολυωνυμική} & $ f(x)=a_\nu x^\nu\ldots+a_0 $ & $ D_f=\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρητή} & $ f(x)=\dfrac{P(x)}{Q(x)} $ & $ D_f=\left\lbrace\left.  x\in\mathbb{R}\right| Q(x)\neq0\right\rbrace $  \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Άρρητη} & $ f(x)=\sqrt{A(x)} $ & $ D_f=\left\lbrace\left. x\in\mathbb{R}\right| A(x)\geq0\right\rbrace $ \\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{5}{*}{\textbf{Τριγωνομετρική}} & $ f(x)=\hm{x}\;\;,\;\;\syn{x} $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\ef{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi+\frac{\pi}{2}\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\syf{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \textbf{Εκθετική} & $ f(x)=a^x\;\;,\;\;0<a\neq1 $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Λογαριθμική} & $ f(x)=\log{x}\;\;,\;\;\ln{x} $ & $ D_f=(0,+\infty) $ \\ 
+\hline 
+\end{longtable}\captionof{table}{Είδη συναρτήσεων}
+\end{center}
+Επιπλέον, ειδικές περιπτώσεις πολυωνιμικών συναρτήσεων αποτελούν οι παρακάτω συναρτήσεις :
+\begin{center}
+\begin{minipage}{2.5cm}
+\textbf{Ταυτοτική}\\$ f(x)=x $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Σταθερή}\\$ f(x)=c $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Μηδενική}\\$ f(x)=0 $
+\end{minipage}
+\end{center}
+\vspace{2mm}
+\Orismos{Ορθογώνιο - Ορθοκανονικό Σύστημα Συντεταγμένων}
+Ορθογώνιο σύστημα συντεταγμένων ονομάζεται το σύστημα αξόνων προσδιορισμού της θέσης ενός σημείου. Στο επίπεδο αποτελείται από δύο κάθετα τοποθετημένους μεταξύ τους άξονες αρίθμησης πάνω στους οποίους παίρνουν τιμές δύο μεταβλητές.
+\begin{itemize}[itemsep=0mm]
+\item Το σημείο τομής των δύο αξόνων ονομάζεται \textbf{αρχή των αξόνων}.
+\item Σε κάθε άξονα του συστήματος, επιλέγουμε αυθαίρετα ένα μήκος το οποίο ορίζουμε ως μονάδα μέτρησης.
+\item Εαν σε κάθε άξονα θέσουμε την ίδια μονάδα μέτρησης το σύστημα ονομάζεται \textbf{ορθοκανονικό}.
+\item Ο οριζόντιος άξονας ονομάζεται \textbf{άξονας τετμημένων} και συμβολίζεται με $ x'x $.
+\end{itemize}
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1.2cm}
+\begin{WrapText1}{14}{5cm}
+\begin{tikzpicture}[scale=.48,y=1cm]
+\tkzInit[xmin=-4,xmax=4.4,ymin=-4,ymax=4.4,ystep=1]
+\draw[-latex]  (-4,0) node[left,fill=white] {{\footnotesize $ x' $}} -- coordinate (x axis mid) (4.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) node[below,fill=white] {{\footnotesize $ y' $}} -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw (1,.15) -- (1,-.15) node[anchor=north] {\scriptsize 1};
+\draw (.15,1) -- (-.15,1) node[anchor=east] {\scriptsize 1};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(2,1.8){M}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzLabelPoint[right](M){{\footnotesize $ Μ(x,y) $}}
+\draw[dashed] (0,1.8) node[left]{{\scriptsize $ y $}}--(2,1.8)--(2,0) node[below]{{\scriptsize $ x $}};
+\tkzDrawPoint[size=7,fill=white](M)
+\tkzText(2.2,3.3){{\scriptsize 1\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(-2.2,3.3){{\scriptsize 2\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(-2.2,-2){{\scriptsize 3\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(2.2,-2){{\scriptsize 4\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(2.2,2.7){{\scriptsize $ (+,+) $}}
+\tkzText(-2.2,2.7){{\scriptsize $ (-,+) $}}
+\tkzText(-2.2,-1.4){{\scriptsize $ (-,-) $}}
+\tkzText(2.2,-1.4){{\scriptsize $ (+,-) $}}
+\end{tikzpicture}\captionof{figure}{Ορθοκανονικό Σύστημα Συντεταγμένων}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item Ο κατακόρυφος άξονας ονομάζεται \textbf{άξονας τεταγμένων} και συμβολίζεται με $ y'y $.
+\item Κάθε σημείο του επιπέδου του συστήματος συντεταγμένων αντιστοιχεί σε ένα ζευγάρι αριθμών της μορφής $(x,y)$. Aντίστροφα, κάθε ζευγάρι αριθμών $(x,y)$ αντιστοιχεί σε ένα σημείο του επιπέδου.
+\item Το ζεύγος αριθμών $(x,y)$ ονομάζεται \textbf{διατεταγμένο ζεύγος αριθμών} διότι έχει σημασία η διάταξη δηλαδή η σειρά με την οποία εμφανίζονται οι αριθμοί.
+\item Οι αριθμοί $x,y$ ονομάζονται \textbf{συντεταγμένες} του σημείου στο οποίο αντιστοιχούν. Ο αριθμός $x$ ονομάζεται \textbf{τετμημένη} του σημείου ενώ ο $y$ \textbf{τεταγμένη}.
+\end{itemize}\end{minipage}\mbox{}\\
+\vspace{-2mm}
+\begin{itemize}
+\item Στον οριζόντιο άξονα $ x'x $, δεξιά της αρχής των αξόνων, βρίσκονται οι θετικές τιμές της μεταβλητής $x$ ενώ αριστερά, οι αρνητικές.
+\item Αντίστοιχα στον κατακόρυφο άξονα $ y'y $, πάνω από την αρχή των αξόνων βρίσκονται οι θετικές τιμές της μεταβλητής $y$, ενώ κάτω οι αρνητικές τιμές.
+\item Οι άξονες χωρίζουν το επίπεδο σε τέσσερα μέρη τα οποία ονομάζονται \textbf{τεταρτημόρια}. Ως 1\textsuperscript{ο} τεταρτημόριο ορίζουμε το μέρος εκείνο στο οποίο ανήκουν οι θετικοί ημιάξονες $ Ox $ και $ Oy $.
+\end{itemize}
+\Orismos{Γραφική Παράσταση συνάρτησησ}
+Γραφική παράσταση μιας συνάρτησης $ f:A\rightarrow\mathbb{R} $ ονομάζεται το σύνολο των σημείων του επιπέδου με συντεταγμένες $ M(x,y) $ όπου \[ x\in A\;\;,\;\;y=f(x) \]
+Το σύνολο των σημείων της γραφικής παράστασης είναι 
+\[ C_f=\{M(x,y)|y=f(x)\textrm{ για κάθε }x\in A\} \]
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1.2cm}
+\begin{WrapText1}{8}{5cm}
+\vspace{0mm}
+\begin{tikzpicture}[scale=.7,domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[,domain=.3:3.7,samples=200,line width=.4mm] plot function{(x-2)**3-2*x+6};
+\tkzDefPoint(1.5,2.875){A}
+\tkzDrawPoint[size=7,fill=black](A)
+\draw[dashed] (0,2.875) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (1.5,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzLabelPoint[above=1mm](A){{\footnotesize $ M\left( x,f(x)\right)  $}}
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDefPoint(3,1){B}
+\draw[dashed] (3,-.5) -- (3,3.7);
+\tkzDrawPoint[size=7,fill=black](B)
+\end{tikzpicture}
+\captionof{figure}{Γραφική παράσταση}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item Συμβολίζεται με $ C_f $ και το σύνολο των σημείων της παριστάνει σχήμα.
+\item Τα σημεία της γραφικής παράσταστασης είναι της μορφής $Μ\left(x,f(x)\right) $.
+\item Η εξίσωση $ y=f(x) $ είναι η εξίσωση της γραφικής παραστασης την οποία επαληθεύουν οι συντεταγμένες των σημείων της.
+\item Κάθε κατακόρυφη ευθεία $ \varepsilon\parallel y'y $ της μορφής $ x=\kappa $ τέμνει τη $ C_f $ \textbf{σε ένα το πολύ} σημείο.
+\end{itemize}\end{minipage}
+\vspace{.5cm}
+\begin{center}
+\textbf{ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ΒΑΣΙΚΩΝ ΣΥΝΑΡΤΗΣΕΩΝ}
+\end{center}
+Στα παρακάτω σχήματα φαίνονται οι γραφικές παραστάσεις μερικών βασικών συναρτήσεων καθώς και το έιδος τους.
+\begin{center}
+\begin{longtable}{c>{\centering\arraybackslash}m{3cm}c>{\centering\arraybackslash}m{3cm}}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Συνάρτηση} & \textbf{Γρ. Παράσταση} & \textbf{Συνάρτηση} & \textbf{Γρ. Παράσταση} \\ 
+\hhline{====} \rule[-2ex]{0pt}{15.5ex} \begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Πολυωνυμική}\\$ f(x)=ax+\beta $\\$ a,\beta\in\mathbb{R} $
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.4,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-2.1,0) -- coordinate (x axis mid) (4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-1.2) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[,domain=-2:3,samples=100,line width=.4mm] plot function{x+1};
+\tkzText(4.1,3){{\footnotesize $ C_f $}} 
+\end{tikzpicture} & \begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Πολυωνυμική}\\$ f(x)=ax^2 $\\$ a>0 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}\\$ a<0 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[dashed,line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.4,domain=-2:2,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-3,0) -- coordinate (x axis mid) (3,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[samples=100,line width=.4mm] plot function{x**2};
+\draw[dashed,samples=100,line width=.4mm] plot function{-x**2};
+\tkzText(3,3){{\footnotesize $ C_f $}}
+\tkzText(3,-3){{\footnotesize $ C_f $}}
+\end{tikzpicture} \\
+\begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Πολυωνυμική}\\$ f(x)=ax^3 $\\$ a>0 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}\\$ a<0 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[dashed,line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.5,domain=-1.5:1.5,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-2.5,0) -- coordinate (x axis mid) (2.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-3.5) -- (0,4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[samples=100,line width=.4mm] plot function{x**3};
+\draw[dashed,samples=100,line width=.4mm] plot function{-x**3};
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture} & \begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Ρητή}\\$ f(x)=\dfrac{a}{x} $\\$ a>0 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}\\$ a<0 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[dashed,line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.35,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-4,0) -- coordinate (x axis mid) (4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-4,-4) rectangle (4.5,4);
+\draw[domain=.2:3.3,line width=.4mm] plot [samples=100] (\x,{1/\x});
+\draw[domain=.2:3.3,line width=.4mm,dashed] plot [samples=100] (\x,{-1/\x});
+\draw[domain=-3.3:-.2,line width=.4mm] plot [samples=100] (\x,{1/\x});
+\draw[domain=-3.3:-.2,line width=.4mm,dashed] plot [samples=100] (\x,{-1/\x});
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture}\\
+\begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Τριγωνομετρική}\\$ f(x)=\hm{x} $
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.35,y=1.5cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-.4,0) -- coordinate (x axis mid) (6.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-1.1) -- (0,1.4) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-.4,-1.7) rectangle (6.5,1.4);
+\draw[domain=0:6.28,line width=.4mm] plot [samples=100] function{sin(x)};
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture} & \begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Τριγωνομετρική}\\$ f(x)=\syn{x} $
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.35,y=1.5cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-.4,0) -- coordinate (x axis mid) (6.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-1.1) -- (0,1.4) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-.4,-1.7) rectangle (6.5,1.4);
+\draw[domain=0:6.28,line width=.4mm] plot [samples=100] function{cos(x)};
+\end{tikzpicture}\\
+\begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Τριγωνομετρική}\\$ f(x)=\ef{x} $
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.35,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-4,0) -- coordinate (x axis mid) (4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-4,-4) rectangle (4.5,4);
+\draw[domain=-3.3:-1.65,line width=.4mm] plot [samples=100] function{tan(x)};
+\draw[domain=-1.45:1.45,line width=.4mm] plot [samples=100] function{tan(x)};
+\draw[domain=1.65:3.3,line width=.4mm] plot [samples=100] function{tan(x)};
+
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture} & \begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Λογαριθμική}\\$ f(x)=\log_a{x} $\\$ a>1 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}\\$ 0<a<1 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[dashed,line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.35,domain=0:5,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-.4,0) -- coordinate (x axis mid) (5.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-.4,-4) rectangle (5.4,4.4);
+\draw[samples=100,line width=.4mm] plot function{log(x)};
+\draw[samples=100,line width=.4mm,dashed] plot function{log(x)/log(.368)};
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture}\\
+\begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Εκθετική}\\$ f(x)=a^x $\\$ a>1 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}\\$ 0<a<1 $ \begin{tikzpicture}
+\clip (-.1,-.14) rectangle (.5,.14);
+\draw[dashed,line width=.3mm] (0,0) -- (.5,0);
+\end{tikzpicture}
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.35,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-4,0) -- coordinate (x axis mid) (4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.4) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-4,-.4) rectangle (4.5,4);
+\draw[domain=-3.3:3.3,line width=.4mm] plot [samples=100] function{2**x};
+\draw[domain=-3.3:3.3,line width=.4mm,dashed] plot [samples=100] function{.5**x};
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture} & \begin{minipage}{2.5cm}
+\begin{center}
+\textbf{Άρρητη}\\$ f(x)=\sqrt{x} $
+\end{center}
+\end{minipage} & \begin{tikzpicture}[scale=.5,domain=0:5,y=1cm]
+\tkzInit[ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,3.2) node[above,fill=white] {{\footnotesize $ y $}};
+\clip (-.5,-.4) rectangle (5.1,4);
+\draw[samples=100,line width=.4mm] plot function{sqrt(x)};
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\end{tikzpicture}\\
+\hline
+\end{longtable}\captionof{table}{Γραφικές παραστάσεις βασικών συναρτήσεων}
+\end{center}
+\Orismos{Άρτια - Περιττή συνάρτηση}
+\vspace{-5mm}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Άρτια συνάρτηση}\\ Άρτια ονομάζεται μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ για την οποία ισχύουν οι παρακάτω συνθήκες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \forall x\in D_f\Rightarrow -x\in D_f $
+\item $ f(-x)=f(x)\;,\;\forall x\in D_f$
+\end{enumerate}
+\item \textbf{Περιττή συνάρτηση}\\ Περιττή ονομάζεται μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ για την οποία ισχύουν οι παρακάτω συνθήκες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \forall x\in D_f\Rightarrow -x\in D_f $
+\item $ f(-x)=-f(x)\;,\;\forall x\in D_f$
+\end{enumerate}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\draw[dashed] (0.44,.4) node[anchor=north]{\scriptsize $-x$} -- (0.44,2.96);
+\draw[dashed] (3.96,.4) node[anchor=north]{\scriptsize $x$}-- (3.96,2.96);
+\draw[dashed] (0.44,2.96) -- (3.96,2.96);
+\begin{axis}[x=2.2cm,y=4cm,aks_on,xmin=-1,xmax=1,ymin=-.1,ymax=0.9,ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.85:.85]{(x^2)};
+\end{axis}
+\node[fill=white,inner sep=.1mm] at (2.2,3.2){\scriptsize $f(-x)=f(x)$};
+\end{tikzpicture}\captionof{figure}{Άρτια συνάρτηση}	& \begin{tikzpicture}
+\draw[dashed] (0.44,1.98) node[anchor=south]{\scriptsize $-x$} -- (0.44,0.84);
+\draw[dashed] (3.96,2) node[anchor=north]{\scriptsize $x$}-- (3.96,3.1);
+\draw[dashed] (2.2,3.1) -- (3.96,3.1);
+\draw[dashed] (0.44,0.84) -- (2.2,0.84);
+\node at (3.4,4) {\scriptsize $f(-x)=-f(x)$};
+\node at (1.85,3.1){\scriptsize $f(x)$};
+\node at (2.7,.84){\scriptsize $f(-x)$};
+\begin{axis}[x=2.2cm,y=2.2cm,aks_on,xmin=-1,xmax=1,ymin=-.9,ymax=.9,ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.9:.9]{(x^3)};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Περιττή συνάρτηση} \\ 
+\end{tabular} 
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Η γραφική παράσταση μιας άρτιας συνάρτησης είναι συμμετρική ως προς τον κατακόρυφο άξονα $ y'y $.
+\item H γραφική παράσταση μιας περιττής συνάρτησης είναι συμμετρική ως προς την αρχή των αξόνων.
+\item Η αρχή των αξόνων για μια περιττή συνάρτηση ονομάζεται \textbf{κέντρο συμμετρίας} της.
+\end{itemize}
+\Orismos{Περιοδική Συνάρτηση}
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ ονομάζεται περιοδική εαν υπάρχει ένας θετικός αριθμός $ T $ ώστε οι τιμές της να επαναλαμβάνονται σε κάθε διάστημα πλάτους $ T $ του πεδίου ορισμού της. Δηλαδή θα ισχύει :
+\begin{rlist}
+\item Για κάθε $ x\in D_f $ έχουμε $ x+T\in D_f $ και $ x-T\in D_f $.
+\item $ f(x)=f(x+T)=f(x-T) $ για κάθε $ x\in D_f $.
+\end{rlist}
+\Orismos{Ίσεσ συναρτήσεισ}
+Δύο συναρτήσεις $ f,g $ ονομάζονται ίσες εαν
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item έχουν το ίδιο πεδίο ορισμού δηλαδή $ D_f=D_g $ και ισχύει
+\item $ f(x)=g(x)\;,\;\forall x\in D_f,D_g $.	
+\end{enumerate}
+\Orismos{Πράξεισ συναρτήσεων}
+Αν $ f,g $ δύο συναρτήσεις με πεδία ορισμού $ D_f,D_g $ αντίστοιχα τότε οι πράξεις μεταξύ των δύο συναρτήσεων ορίζονται ως εξής.
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Τύπος} & \textbf{Πεδίο ορισμού} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} $ (f+g)(x)=f(x)+g(x) $ & $ D_{f+g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f-g)(x)=f(x)-g(x) $ & $ D_{f-g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f\cdot g)(x)=f(x)\cdot g(x) $ & $ D_{f\cdot g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \left(\dfrac{f}{g} \right) (x)=\dfrac{f(x)}{g(x)} $ & $ D_{\frac{f}{g}}=\{x\in\mathbb{R}|x\in D_f\cap D_g\textrm{ και }g(x)\neq0\} $ \\
+\rule[0ex]{0pt}{-.5ex} & \\
+\hline
+\end{tabular}\captionof{table}{Πράξεις συναρτήσεων}
+\end{center}
+\Orismos{Σύνθεση συναρτήσεων}
+Έστω $ f,g $ δύο συναρτήσεις με πεδία ορισμού $ D_f,D_g $ αντίστοιχα. Σύνθεση της $ f $ με την $ g $ ονομάζεται η συνάρτηση $ g\circ f $ με τύπο \[ (g\circ f)(x)=g\left( f(x)\right)  \] 
+και πεδίο ορισμού το σύνολο των στοιχείων του πεδίου ορισμού $ D_f $ της συνάρτησης $ f $ των οποίων οι τιμές ανήκουν στο πεδίο ορισμού $ D_g $ της συνάρτησης $ g $.
+\[ D_{g\circ f}=\{x\in\mathbb{R}|x\in D_f\textrm{ και }f(x)\in D_g\} \]
+Με τη σύνθεση $ g\circ f $, κάθε τιμή της μεταβλητής $ x $ αντιστοιχεί σε μια μόνο τιμή της $ f(x) $ η οποία με τη σειρά της αντιστοιχεί σε μια μόνο τιμή της $ g(f(x)) $.
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{scope}
+\clip (-3,6) ellipse (1.5 and 1);
+\fill[black!10] (-2,6) ellipse (1.5 and 1);
+\end{scope}
+\draw  (-6,4) ellipse (1 and 1.5);
+\draw  (1,4) ellipse (1 and 1.5);
+\draw  (-3,6) ellipse (1.5 and 1);
+\draw  (-2,6) ellipse (1.5 and 1);
+\draw[fill=black!10]  (-5.8,4) ellipse (0.64 and 1);
+\node at (-6.7,4) {{\scriptsize $D_{\!\!f}$}};
+\node at (-5.8,3.6) {{\scriptsize $D_{g\circ f}$}};
+\draw[-latex] (-5.8541,4.0267) arc (144.0001:104:6);
+\draw[-latex] (-2.44,6.32) arc (81.0446:29.6202:4.8524);
+\node at (-6,4.2) {{\scriptsize $x$}};
+\node at (-2.6,5.9) {{\scriptsize $f(x)$}};
+\node at (1.1,3.7) {{\scriptsize $g(f(x))$}};
+\node at (-5,5.4) {{\scriptsize $f$}};
+\node at (0.1,5.4) {{\scriptsize $g$}};
+\draw[-latex] (-5.8541,4.0267) ..controls +(1,0.6) and +(-1,0.6).. (1,4);
+\node at (-2.6,4.7) {{\scriptsize $g\circ f$}};
+\node at (-1.7,7.3) {{\scriptsize $D_g$}};
+\node at (-3.3,7.3) {{\scriptsize $f\left( D_f\right) $}};
+\end{tikzpicture}\captionof{figure}{Σύνθεση συναρτήσεων}
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Η σύνθεση $ g\circ f $ ορίζεται αν $ f\left(D_f \right)\cap D_g\neq\varnothing  $.
+\item Η σύνθεση της $ g $ με την $ f $ συμβολίζεται αντίστοιχα με $ f\circ g $, έχει τύπο $ (f\circ g)(x)=f(g(x)) $ και πεδίο ορισμού $ D_{f\circ g}=\{x\in\mathbb{R}|x\in D_g\textrm{ και }g(x)\in D_f\} $.
+\end{itemize}
+\Orismos{Μονοτονη - Γνησίωσ μονότονη συνάρτηση}
+Μια συνάρτηση αύξουσα ή φθίνουσα, χαρακτηρίζεται ως \textbf{μονότονη}, ενώ μια γνησίως αύξουσα ή γνησίως φθίνουσα συνάρτηση ως \textbf{γνησίως μονότονη}. Οι χαρακτηρισμοί αυτοί αφορούν τη \textbf{μονοτονία} μιας συνάρτησης, μια ιδιότητα των συναρτήσεων η οποία δείχνει την αύξηση ή τη μείωση των τιμών μιας συνάρτησης σε ένα διάστημα του πεδίου ορισμού.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Αύξουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως αύξουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)\leq f(x_2) \]
+\item \textbf{Φθίνουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως φθίνουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)\geq f(x_2) \]
+\item \textbf{Γνησίως αύξουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως αύξουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)<f(x_2) \]
+\item \textbf{Γνησίως φθίνουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως φθίνουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)>f(x_2) \]
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\draw[dashed] (3.3,1.4) node[anchor=north]{\scriptsize $x_2$} -- 
+(3.3,2.58)--(1,2.58) node[left]{\scriptsize $f(x_2)$};
+\draw[dashed] (2,1.4) node[anchor=north]{\scriptsize $x_1$}-- 
+(2,2.08)--(1,2.08)node[left]{\scriptsize $f(x_1)$};
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-1,xmax=3,
+ymin=-1.4,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.8:3]{ln(x+1)};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](2,2.09)
+\tkzDrawPoint[size=7,fill=black](3.3,2.59)
+\node at (2.7,0.6) {\scriptsize $ x_1<x_2\Rightarrow f(x_1)<f(x_2)$};
+\end{tikzpicture}\captionof{figure}{Γνησίως αύξουσα}	& \begin{tikzpicture}
+\draw[dashed] (2.6,1.4) node[anchor=north]{\scriptsize $x_2$} -- 
+(2.6,2.02)--(1,2.02) node[left]{\scriptsize $f(x_2)$};
+\draw[dashed] (1.5,1.4) node[anchor=north]{\scriptsize $x_1$}-- 
+(1.5,2.7)--(1,2.7)node[left]{\scriptsize $f(x_1)$};
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-1,xmax=3,
+ymin=-1.4,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.6:3]{-0.2*(x+.5)^2+1.5};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](2.6,2.02)
+\tkzDrawPoint[size=7,fill=black](1.5,2.7)
+\node[fill=white,inner sep=.1mm] at (1.95,0.6) {\scriptsize $ x_1<x_2\Rightarrow f(x_1)>f(x_2)$};
+\end{tikzpicture}\captionof{figure}{Γνησίως φθίνουσα} \\ 
+\end{tabular} 
+\end{center}
+\end{enumerate}
+\Orismos{Τοπικά - Ολικά Ακρότατα}
+Ακρότατα, τοπικά ή ολικά ονομάζονται οι μέγιστες ή ελάχιστες τιμές μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ τις οποίες παίρνει σε ένα διάστημα ή σε ολόκληρο το πεδίο ορισμού της.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Τοπικό μέγιστο}\\
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ παρουσιάζει τοπικό μέγιστο σε ένα σημείο $ x_0\in D_f $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μεγαλύτερη από κάθε άλλη $ f(x) $ σε μια περιοχή του $ x_0 $. \[ f(x)\leq f(x_0)\;\;,\;\;\forall x\in D_f\cap\left(x_0-\delta,x_0+\delta\right)\;\textrm{ με }\;\delta>0 \]
+\item \textbf{Τοπικό ελάχιστο}\\
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ παρουσιάζει τοπικό ελάχιστο σε ένα σημείο $ x_0\in D_f $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μικρότερη από κάθε άλλη $ f(x) $ σε μια περιοχή του $ x_0 $. \[ f(x)\geq f(x_0)\;\;,\;\;\forall x\in D_f\cap\left(x_0-\delta,x_0+\delta\right)\;\textrm{ με }\;\delta>0 \]
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3.2,
+ymin=-1,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[fill=black!10,domain=.52:1.12]{(x-1.5)^3-1.4*x+2.5} \closedcycle;
+\addplot[grafikh parastash,domain=0:2.9]{(x-1.5)^3-1.4*x+2.5};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](1.52,2.03)
+\node at (1.95,0.4) {\scriptsize $ f(x)\leq f(x_0)$};
+\draw[dashed] (1.52,1) node[anchor=north]{\scriptsize $x_0$} -- 
+(1.52,2.03)--(0.7,2.03) node[left]{\scriptsize $f(x_0)$};
+\orag{1.52,1.15}{5}{}
+\draw[-latex] (1.52,1.2) -- (2.2,2.4) node[above]{\scriptsize$(x_0-\delta,x_0+\delta)$};
+\node at (0.5,0.8) {\footnotesize $ O $};
+\end{tikzpicture}\captionof{figure}{Τοπικό μέγιστο}	& \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3,
+ymin=-.7,ymax=2.3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[fill=black!10,domain=1.47:2.07]{(x-1.2)^3-x+2.2} \closedcycle;
+\addplot[grafikh parastash,domain=-.21:2.5]{(x-1.2)^3-x+2.2};
+\end{axis}
+\tkzDrawPoint[size=7,fill=black](2.47,1.32)
+\node at (2.1,0.2) {\scriptsize $ f(x)\leq f(x_0)$};
+\draw[dashed] (2.47,0.7) node[anchor=north]{\scriptsize $x_0$} -- 
+(2.47,1.32)--(0.7,1.32) node[left]{\scriptsize $f(x_0)$};
+\orag{2.47,.85}{5}{}
+\draw[-latex] (2.47,0.9) -- (1.9,2.3) node[above]{\scriptsize$(x_0-\delta,x_0+\delta)$};
+\node[fill=white,inner sep=.5pt] at (0.5,0.5) {\footnotesize $ O $};
+\end{tikzpicture}\captionof{figure}{Τοπικό ελάχιστο} \\ 
+\end{tabular} 
+\end{center}
+\end{enumerate}
+\Orismos{Συνάρτηση {$ \mathbold{1-1} $} - (Αμφιμονοσύμαντη)}
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ ονομάζεται $ 1-1 $ εαν κάθε στοιχείο $ x\in D_f $ του πεδίου ορισμού αντιστοιχεί μέσω της συνάρτησης, σε μοναδική τιμή $ f(x) $ του συνόλου τιμών της. Για κάθε ζεύγος αριθμών $ x_1,x_2\in D_f $ του πεδίου ορισμού της $ f $ θα ισχύει \[ x_1\neq x_2\Rightarrow f(x_1)\neq f(x_2) \]
+Μια συνάρτηση $ 1-1 $ ονομάζεται και \textbf{αμφιμονοσήμαντη} συνάρτηση ενώ ο συμβολισμός $ 1-1 $ τον οποίο χρησιμοποιούμε διαβάζεται : \textquotedblleft ένα προς ένα \textquotedblright.\\\\
+\Orismos{Αντίστροφη συνάρτηση}
+Αντίστροφη συνάρτηση μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ ονομάζεται η συνάρτηση $ f^{-1} $ με την οποία κάθε στοιχείο $ y $ του συνόλου τιμών της $ f $ αντιστοιχεί σε ένα μοναδικό στοιχείο $ x $ του πεδίου ορισμού της $ f $. Η συνάρτηση $ f^{-1} $ έχει :
+\begin{rlist}
+\item πεδίο ορισμού, το σύνολο τιμών της $ f $
+\item σύνολο τιμών, το πεδίο ορισμού της $ f $ και επιπλέον ισχύει
+\item $ y=f(x)\Rightarrow f^{-1}(y)=x $.
+\end{rlist}
+Το $ -1 $ στο συμβολισμό $ f^{-1} $ δεν αποτελεί εκθέτη της $ f $ ενώ ο όρος \eis{αντίστροφη} αφορά την πράξη της σύνθεσης και όχι του πολλαπλασιασμού.
+\thewrhmata
+\Thewrhma{Ιδιότητεσ πολυωνυμικών συναρτήσεων}
+Θα μελετήσουμε τις ιδιότητες των πολυωνυμικών συναρτήσεων 1\tss{ου} και 2\tss{ου} βαθμού.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Η συνάρτηση {\boldmath{$ f(x)=ax+\beta $}}}\\
+Για κάθε πολυωνυμική συνάρτηση 1\tss{ου} βαθμού της μορφής $ f(x)=ax+\beta $ με πραγματικούς συντελεστές $ a,\beta\in\mathbb{R} $ ισχλυουν οι παρακάτω ιδιότητες.
+\begin{rlist}
+\wrapr{-11mm}{12}{4cm}{2mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-.4,xmax=3.2,
+ymin=-.5,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.2:2.7]{.7*x-.3};
+\end{axis}
+\node at (0.2,0.3) {\footnotesize$O$};
+\node at (2,2.5) {\footnotesize$f(x)=ax+\beta$};
+\node at (1.6,2.1) {\footnotesize$a=\ef{\theta}$};
+\tkzDefPoint(2,.5){A}
+\tkzDefPoint(.828,.5){B}
+\tkzDefPoint(2,1.32){C}
+\tkzMarkAngle[size=.4](A,B,C)
+\node at (1.4,0.7) {\footnotesize$\theta$};
+\tkzLabelPoint[below right](B){\footnotesize$\left(-\frac{\beta}{a},0\right)$}
+\tkzDrawPoint[fill=black](B)
+\end{tikzpicture}\captionof{figure}{Κλίση - Ρίζα συνάρτησης 1\tss{ου} βαθμού}}{
+\item Το πεδίο ορισμού της $ f $ έιναι το σύνολο $ \mathbb{R} $.
+\item Ο συντελεστής $ a $ ισούται με την εφαπτομένη της γωνίας την οποία σχηματίζει η ευθεία με τον οριζόντιο άξονα $ x'x $.
+\[ a=\ef{\theta}\;\;,\;\;0\leq\theta\leq180\degree \]
+\item Αν $ a\neq0 $ τότε το σύνολο τιμών της $ f $ είναι το σύνολο $ \mathbb{R} $, ενώ αν $ a=0 $ η συνάρτηση έιναι σταθερή $ f(x)=\beta $ οπότε έχει σύνολο τιμών το μονοσύνολο $ f\left(D_f\right)=\{\beta\} $.
+\item Αν $ a\neq0 $ η γραφική παράσταση της συνάρτησης είναι ευθεία παράλληλη με τον άξονα $ x'x $, ενώ αν $ a=0 $ η ευθεία ταυτίζεται με τον άξονα.
+\item Αν $ \beta=0 $ τότε η συνάρτηση είναι της μορφής $ f(x)=ax $ με την ευθεία της να διέρχεται από την αρχή των αξόνων.
+\item Αν $ a\neq0 $ και $ \beta\neq0 $ η συνάρτηση έχει μοναδική ρίζα την $ x=-\frac{\beta}{a} $, αν $ a=0 $ και $ \beta\neq0 $ δεν έχει ρίζες, ενώ αν $ a=0 $ και $ \beta=0 $ έχει άπειρες ρίζες.
+\item Ισοδύναμα με την προηγούμενη ιδιότητα η $ C_f $ τέμνει τον οριζόντιο άξονα $ x'x $ σε ένα, κανένα ή άπειρα σημεία αντίστοιχα.
+\item Αν $ a>0 $ τότε η συνάρτηση είναι γνησίως αύξουσα στο $ \mathbb{R} $, ενώ αν $ a<0 $ η συνάρτηση είναι γνησίως φθίνουσα.}
+\begin{center}
+\begin{tabular}{p{5cm}p{5.5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-.4,xmax=3.2,
+ymin=-.5,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.2:2.7]{.7*x-.3};
+\end{axis}
+\node at (0.2,0.3) {\footnotesize$O$};
+\node at (2,2.5) {\footnotesize$f(x)=ax+\beta$};
+\node at (1.4,2.1) {\footnotesize$a>0$};
+\node at (-.5,0) {};
+\end{tikzpicture}\captionof{figure}{Γνησίως αύξουσα 1\tss{ου} βαθμού}	& \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-.4,xmax=3.2,
+ymin=-.5,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.2:2.7]{-.7*x+1.7};
+\end{axis}
+\node at (0.2,0.3) {\footnotesize$O$};
+\node at (2,2.5) {\footnotesize$f(x)=ax+\beta$};
+\node at (1.4,2.1) {\footnotesize$a<0$};
+\node at (-.7,0) {};
+\end{tikzpicture}\captionof{figure}{Γνησίως φθίνουσα 1\tss{ου} βαθμού} \\ 
+\end{tabular} 
+\end{center}
+\end{rlist}
+\item \textbf{Η συνάρτηση {\boldmath{$ f(x)=ax^2+\beta x+\gamma $}}}\\
+Για κάθε πολυωνυμική συνάρτηση 2\tss{ου} βαθμού της μορφής $ f(x)=ax^2+\beta x+\gamma $, με πραγματικούς συντελεστές $ a,\beta,\gamma\in\mathbb{R} $ και $ a\neq0 $, ισχύουν οι παρακάτω ιδιότητες. Ο αριθμός $ \varDelta $ είναι η διακρίνουσα του τριωνύμου.
+\begin{rlist}
+\item Η $ f $ έχει πεδίο ορισμού το σύνολο $ \mathbb{R} $.
+\item Η γραφική παράσταση της συνάρτησης έχει άξονα συμμετρίας την κατακόρυφη ευθεία $ x=-\frac{\beta}{2a} $.
+\begin{enumerate}[itemsep=0mm,leftmargin=0cm]
+\item[\textbf{A.}] \textbf{Αν {\boldmath{$ a>0 $}}}
+\begin{itemize}
+\item Tο σύνολο τιμών της συνάρτησης είναι το διάστημα $ \left[-\frac{\varDelta}{4a},+\infty\right) $.
+\item H $ f $ είναι γνησίως φθίνουσα στο διάστημα $ \left(-\infty,-\frac{\beta}{2a}\right] $ ενώ είναι γνησίως αύξουσα στο διάστημα $ \left[-\frac{\beta}{2a},+\infty\right) $.
+\item Η τιμή $ -\frac{\varDelta}{4a} $ αποτελεί το ελάχιστο της συνάρτησης στη θέση $ x=-\frac{\beta}{2a} $.
+\end{itemize}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1,xmax=2.4,
+ymin=-.4,ymax=3,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:2]{x^2-x+.7};
+\end{axis}
+\node at (0.8,0.2) {\footnotesize$O$};
+\node at (1.6,4) {\footnotesize$f(x)=ax^2+\beta x+\gamma$};
+\tkzDefPoint(1.5,.85){A}
+\draw[dashed](1.5,.4)--(A)--(1,.85);
+\draw[dashed](1.5,.2)--(1.5,3.3);
+\tkzLabelPoint[below right,yshift=2.5mm,xshift=1mm](A){\footnotesize$K\left(-\frac{\beta}{2a},
+	-\frac{\varDelta}{4a}\right)$}
+\tkzDrawPoint[fill=black](A)
+\node at (2.2,3.3) {\footnotesize$x=-\frac{\beta}{2a}$};
+\node at (3,1.5) {\footnotesize$a>0$};
+\node at (-.7,0) {};
+\end{tikzpicture}\captionof{figure}{Παραβολή με {$ a>0 $}}	& \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1,xmax=2.4,
+ymin=-.4,ymax=3,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:2]{-x^2+x+2.2};
+\end{axis}
+\node at (0.8,0.2) {\footnotesize$O$};
+\node at (1.6,4) {\footnotesize$f(x)=ax^2+\beta x+\gamma$};
+\tkzDefPoint(1.5,2.85){A}
+\draw[dashed](1.5,.4)--(A)--(1,2.85);
+\draw[dashed](1.5,.2)--(1.5,3.3);
+\tkzLabelPoint[right,yshift=1.5mm,xshift=.5mm](A){\footnotesize$K\left(-\frac{\beta}{2a},
+	-\frac{\varDelta}{4a}\right)$}
+\tkzDrawPoint[fill=black](A)
+\node at (2.2,0.7) {\footnotesize$x=-\frac{\beta}{2a}$};
+\node at (3,2) {\footnotesize$a<0$};
+\node at (-.7,0) {};
+\end{tikzpicture}\captionof{figure}{Παραβολή με {$ a<0 $}} \\ 
+\end{tabular} 
+\end{center}
+\item[\textbf{B.}] \textbf{Αν {\boldmath{$ a<0 $}}}
+\begin{itemize}
+\item Tο σύνολο τιμών της συνάρτησης είναι το διάστημα $ \left(-\infty,-\frac{\varDelta}{4a}\right] $.
+\item H $ f $ είναι γνησίως αύξουσα στο διάστημα $ \left(-\infty,-\frac{\beta}{2a}\right] $ ενώ είναι γνησίως φθίνουσα στο διάστημα $ \left[-\frac{\beta}{2a},+\infty\right) $.
+\item Η τιμή $ -\frac{\varDelta}{4a} $ αποτελεί το μέγιστο της συνάρτησης στη θέση $ x=-\frac{\beta}{2a} $.
+\end{itemize}
+\end{enumerate}
+\item Αν $ \varDelta>0 $ η $ f $ έχει δύο ρίζες, αν $ \varDelta=0 $ έχει μια ρίζα ενώ αν $ \varDelta<0 $ τότε δεν έχει καμία ρίζα στο $ \mathbb{R} $.
+\item Ισοδύναμα με την προηγούμενη ιδιότητα η $ C_f $ τέμνει τον οριζόντιο άξονα $ x'x $ σε δύο, ένα ή κανένα σημείο αντίστοιχα.
+\item Αν $ \beta=0 $ και $ \gamma=0 $ τότε η συνάρτηση είναι της μορφής $ f(x)=ax^2 $ και έχει κορυφή την αρχή των αξόνων.
+\begin{itemize}
+\item Αν $ a>0 $ τότε η καμπύλη βρίσκεται πάνω από τον οριζόντιο άξονα ενώ το $ 0 $ είναι ελάχιστη τιμή στη θέση $ x=0 $.
+\item Αν $ a<0 $ τότε η καμπύλη βρίσκεται κάτω από τον οριζόντιο άξονα ενώ το $ 0 $ είναι μέγιστη τιμή στη θέση $ x=0 $.
+\item Οι γραφικές παραστάσεις των συναρτήσεων $ f(x)=ax^2 $ και $ g(x)=-ax^2 $ είναι συμμετρικές ως προς τον οριζόντιο άξονα $ x'x $.
+\end{itemize}
+\end{rlist}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{m{2.9cm}m{2.9cm}m{2.9cm}m{2.9cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1,xmax=1.7,
+ymin=-.4,ymax=2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:1.5]{x^2-.5*x-.15};
+\end{axis}
+\node at (0.7,0.2) {\footnotesize$O$};
+\tkzDefPoint(0.79,.4){A}
+\tkzDefPoint(1.71,.4){B}
+\tkzDrawPoints[fill=black](A,B)
+\node at (1.5,1.6) {\footnotesize$\varDelta>0$};
+\node at (2.4,2) {\footnotesize$C_f$};
+\end{tikzpicture}	& \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1,xmax=1.7,
+ymin=-.4,ymax=2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:1.5]{x^2-.5*x+.0625};
+\end{axis}
+\node at (0.7,0.2) {\footnotesize$O$};
+\tkzDefPoint(1.25,.4){A}
+\tkzDrawPoints[fill=black](A)
+\node at (1.5,1.6) {\footnotesize$\varDelta=0$};
+\node at (2.2,2) {\footnotesize$C_f$};
+\end{tikzpicture} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1,xmax=1.7,
+ymin=-.4,ymax=2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:1.5]{x^2-.5*x+.3};
+\end{axis}
+\node at (0.8,0.2) {\footnotesize$O$};
+\node at (1.5,1.6) {\footnotesize$\varDelta<0$};
+\node at (2.5,1.5) {\footnotesize$C_f$};
+\end{tikzpicture} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,ticks=none,aks_on,xmin=-1.3,xmax=1.3,
+ymin=-1.5,ymax=1.5,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1:1]{1.2*x^2};
+\addplot[grafikh parastash,domain=-1:1]{-1.2*x^2};
+\end{axis}
+\node at (1,1) {\footnotesize$O$};
+\node at (2.4,2.9) {\footnotesize$f(x)=ax^2$};
+\node at (2.4,0.1) {\footnotesize$g(x)=-ax^2$};
+\end{tikzpicture} \\ 
+\end{tabular}\captionof{figure}{Ρίζες παραβολής - Συμμετρικές παραβολές}
+\end{center}
+\Thewrhma{Ιδιότητεσ ρητών συναρτήσεων - η συνάρτηση \MakeLowercase{{$ \mathbold{f(x)=\frac{a}{x}} $}}}
+Η
+\Thewrhma{Ιδιότητεσ τριγωνομετρικών συναρτήσεων}
+Εδώ θα αναφέρουμε τις ιδιότητες των βασικών τριγωνομετρικών συναρτήσεων που αφορούν μονοτονία, ακρότατα, περιοδικότητα και άλλα βασικά στοιχέια τους.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Η συνάρτηση {\boldmath$ f(x)=\hm{x} $}}\\
+Για την απλή τριγωνομετρική συνάρτηση $ f(x)=\hm{x} $ του ημιτόνου ισχύουν τα εξής :
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο των πραγματικών αριθμών $ \mathbb{R} $.
+\item Το σύνολο τιμών της $ f $ είναι το κλειστό διάστημα $ [-1,1] $.
+\item Aποτελεί περιοδική συνάρτηση με περίοδο $ T=2\pi $.
+\item Μελετώντας τη συνάρτηση στο διάστημα $ [0,2\pi] $ πλάτους μιας περιόδου έχουμε οτι είναι γνησίως αύξουσα στα διαστήματα $ \left[ 0,\frac{\pi}{2}\right] ,\left[ \frac{3\pi}{2},2\pi\right]  $ ενώ είναι γνησίως φθήνουσα στο διάστημα $ \left[ \frac{\pi}{2},\frac{3\pi}{2}\right]  $.
+\item Παρουσιάζει μέγιστο στη θέση $ x=\frac{\pi}{2} $ την τιμή $ 1 $ και ελάχιστη τιμή $ -1 $ στη θέση $ x=\frac{3\pi}{2} $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\draw[shift={(2.8mm,3.5mm)},style=help lines, xstep=0.5497cm,ystep=0.297cm,black!10] (0,0) grid (8.796,2.38);
+\begin{axis}[x=.7cm,y=.7cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854,9.424,10.995,12.564},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$,$3\pi$,$\frac{7\pi}{2}$,$4\pi$
+},ytick={-1.7,-.85,0.85,1.7},yticklabels={$-1$,$-0.5$,$0.5$,$1$},aks_on,xmin=-.4,xmax=13.2,
+ymin=-2.2,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0:2*pi]{1.7*sin(deg(x))};
+\addplot[grafikh parastash,domain=2*pi:4*pi,dashed]{1.7*sin(deg(x))};
+\end{axis}
+\node at (0.0951,1.344) {\footnotesize$O$};
+\node at (13.5,0){};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση ημιτόνου}
+\end{center}
+\begin{rlist}[start=6]
+\item Ως περιοδική συνάρτηση, οι τιμές, η μονοτονία τα ακρότατα και κάθε άλλο χαρακτηριστικό επαναλαμβάνονται σε κάθε διάστημα πλάτους μιας περιόδου $ 2\pi $. Τα διαστήματα αυτά θα είναι της μορφής $ [2\kappa\pi,2\left( \kappa+1\right)\pi] $ με $ \kappa\in\mathbb{Z} $.
+\item Κατά συνέπεια η $ f $ είναι γνησίως αύξουσα στα διαστήματα $ \left[2\kappa\pi,2\kappa\pi+\frac{\pi}{2}\right]$ και $\left[2\kappa\pi+\frac{3\pi}{2},2(\kappa+1)\pi \right]  $ ενώ είναι γνησίως φθήνουσα στα διαστήματα $ \left[2\kappa\pi+\frac{\pi}{2},\right. $  $\left. 2\kappa\pi+\frac{3\pi}{2} \right]  $ με $ \kappa\in\mathbb{Z} $.
+\item Παρουσιάζει μέγιστο στις θέσεις $ x=2\kappa\pi+\frac{\pi}{2} $ την τιμή $ 1 $ και ελάχιστο στις θέσεις $ x=2\kappa\pi+\frac{3\pi}{2} $ την τιμή $ -1 $.
+\item Η γραφική της παράσταση τέμνει τον οριζόντιο άξονα $ x'x $ στα σημεία με τετμημένες $ x=\kappa\pi $ με $ \kappa\in\mathbb{Z} $.
+\end{rlist}
+\begin{center}
+\textbf{ΓΕΝΙΚΕΥΣΗ}
+\end{center}
+Η γενική μορφή της παραπάνω συνάρτησης είναι \[ f(x)=\rho\cdot\hm{\left( \omega x+a\right)+\beta } \]
+με $ \rho,a,\beta\in\mathbb{R} $ και $ \omega>0 $. Οι ιδιότητες της γενικής συνάρτησης σύμφωνα και με τα παραπάνω συνοψίζονται στον ακόλουθο πίνακα.
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη}   \\ 
+\hhline{==}\rule[-2ex]{0pt}{5.5ex} {\boldmath{$ D_f|f\left(D_f \right)  $}} & $ \mathbb{R}|[-\rho+\beta,\rho+\beta] $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Περίοδος} & $ T=\dfrac{2\pi}{\omega} $   \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζες} & $ x=\kappa T+\frac{\theta-a}{\omega} $ και  $ x=\kappa T+\frac{\pi-\theta-a}{\omega} $  \\
+\hhline{~-} \multirow{3}{*}{\textbf{Μονοτονία}} &  $ f\nearrow\left[ \kappa T-a,\kappa T+\frac{T}{4}-a\right] $ και $ \left[ \kappa T+\frac{3T}{4}-a,(\kappa+1) T-a\right] $ \rule[-2ex]{0pt}{5.5ex}\\
+\rule[-2ex]{0pt}{5.5ex}  & $ f\searrow\left[ \kappa T+\frac{T}{4}-a,\kappa T+\frac{3T}{4}-a\right] $ \\
+\hhline{~-} \multirow{3}{*}{\textbf{Ακρότατα}} & Μέγιστο την τιμή $ \rho+\beta $ στις θέσεις $ x=\kappa T+\frac{T}{4}-a $ \rule[-2ex]{0pt}{5.5ex}\\
+\rule[-2ex]{0pt}{5.5ex}  & Ελάχιστο την τιμή $ -\rho+\beta $ στις θέσεις $ x=\kappa T+\frac{3T}{4}-a $\\ 
+\hline 
+\end{longtable}\captionof{table}{Ιδιότητες γενικευμένης συνάρτησης ημιτόνου}
+με $ \kappa\in\mathbb{Z} $ και $ \theta $ να είναι η γωνία για την οποία $ \hm{\theta}=-\frac{\beta}{\rho} $ αρκεί να ισχύει $ -\frac{\beta}{\rho}\in[-1,1] $.
+\end{center}
+\item \textbf{Η συνάρτηση {\boldmath$ f(x)=\syn{x} $}}\\
+Για την απλή τριγωνομετρική συνάρτηση $ f(x)=\hm{x} $ του ημιτόνου ισχύουν τα εξής :
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο των πραγματικών αριθμών $ \mathbb{R} $.
+\item Το σύνολο τιμών της $ f $ είναι το κλειστό διάστημα $ [-1,1] $.
+\item Aποτελεί περιοδική συνάρτηση με περίοδο $ T=2\pi $.
+\item Αν μελετήσουμε τη συνάρτηση στο διάστημα $ [0,2\pi] $ πλάτους μιας περιόδου βλέπουμε οτι είναι γνησίως αύξουσα στο διάστημα $ \left[ \pi,2\pi\right] $ ενώ είναι γνησίως φθήνουσα στο διάστημα $ \left[ 0,\pi\right]  $.
+\item Παρουσιάζει μέγιστο στις θέση $ x=0 $ και $ x=2\pi $ την τιμή $ 1 $ και ελάχιστη τιμή $ -1 $ στη θέση $ x=\pi $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\draw[shift={(2.8mm,3.5mm)},style=help lines, xstep=0.5497cm,ystep=0.297cm,black!10] (0,0) grid (8.796,2.38);
+\begin{axis}[x=.7cm,y=.7cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854,9.424,10.995,12.564},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$,$3\pi$,$\frac{7\pi}{2}$,$4\pi$
+},ytick={-1.7,-.85,0.85,1.7},yticklabels={$-1$,$-0.5$,$0.5$,$1$},aks_on,xmin=-.4,xmax=13.2,
+ymin=-2.2,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0:2*pi]{1.7*cos(deg(x))};
+\addplot[grafikh parastash,domain=2*pi:4*pi,dashed]{1.7*cos(deg(x))};
+\end{axis}
+\node at (13.5,0){};
+\node at (0.0951,1.344) {\footnotesize$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση συνημιτόνου}
+\end{center}
+\begin{rlist}[start=6]
+\item Ως περιοδική συνάρτηση, οι ιδιότητες και τα χαρακτηριστικά επαναλαμβάνονται σε κάθε διάστημα πλάτους μιας περιόδου $ 2\pi $. Τα διαστήματα αυτά θα είναι της μορφής $ [2\kappa\pi,2\left( \kappa+1\right)\pi] $ με $ \kappa\in\mathbb{Z} $.
+\item Η $ f $ λοιπόν είναι γνησίως αύξουσα στα διαστήματα $ \left[2\kappa\pi+\pi,2(\kappa+1)\pi\right]$ ενώ είναι γνησίως φθήνουσα στα διαστήματα $ \left[2\kappa\pi, 2\kappa\pi+\pi \right]  $ με $ \kappa\in\mathbb{Z} $.
+\item Παρουσιάζει μέγιστο στις θέσεις $ x=2\kappa\pi $ και $ x=2(\kappa+1)\pi $ την τιμή $ 1 $ και ελάχιστο στις θέσεις $ x=2\kappa\pi+\pi $ την τιμή $ -1 $.
+\item Η γραφική της παράσταση τέμνει τον οριζόντιο άξονα $ x'x $ στα σημεία με τετμημένες $ x=\kappa\pi+\frac{\pi}{2} $ με $ \kappa\in\mathbb{Z} $.
+\end{rlist}
+\begin{center}
+\textbf{ΓΕΝΙΚΕΥΣΗ}
+\end{center}
+Η γενική μορφή της παραπάνω συνάρτησης είναι \[ f(x)=\rho\cdot\syn{\left( \omega x+a\right)+\beta } \]
+με $ \rho,a,\beta\in\mathbb{R} $ και $ \omega>0 $. Οι ιδιότητες της γενικής συνάρτησης σύμφωνα και με τα παραπάνω συνοψίζονται στον ακόλουθο πίνακα.
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη}   \\ 
+\hhline{==}\rule[-2ex]{0pt}{5.5ex} {\boldmath{$ D_f|f\left(D_f \right)  $}} & $ \mathbb{R}|[-\rho+\beta,\rho+\beta] $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Περίοδος} & $ T=\dfrac{2\pi}{\omega} $   \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζες} & $ x=\kappa T+\frac{\pm\theta-a}{\omega} $  \\
+\hhline{~-}\multirow{3}{*}{\textbf{Μονοτονία}} &  $ f\nearrow\left[ \kappa T+\frac{T}{2}-a,(\kappa+1) T-a\right] $ \rule[-2ex]{0pt}{5.5ex}\\
+\rule[-2ex]{0pt}{5.5ex}  & $ f\searrow\left[ \kappa T-a,\kappa T+\frac{T}{2}-a\right] $ \\
+\hhline{~-}\multirow{3}{*}{\textbf{Ακρότατα}} & Μέγιστο την τιμή $ \rho+\beta $ στις θέσεις $ x=\kappa T-a, (\kappa+1) T-a $ \rule[-2ex]{0pt}{5.5ex}\\
+\rule[-2ex]{0pt}{5.5ex}  & Ελάχιστο την τιμή $ -\rho+\beta $ στις θέσεις $ x=\kappa T+\frac{T}{2}-a $\\
+\hline 
+\end{longtable}\captionof{table}{Ιδιότητες γενικευμένης συνάρτησης συνημιτόνου} 
+\end{center}
+με $ \kappa\in\mathbb{Z} $ και $ \theta $ να είναι η γωνία για την οποία $ \syn{\theta}=-\frac{\beta}{\rho} $ αρκεί να ισχύει $ -\frac{\beta}{\rho}\in[-1,1] $.
+\item \textbf{Η συνάρτηση {\boldmath$ f(x)=\ef{x} $}}\\
+Οι ιδιότητες της συνάρτησης της εφαπτομένης είναι οι εξής :
+\begin{rlist}
+\item Το πεδίο ορισμού της συνάρτησης $ f $ είναι το σύνολο $ D_f=\left\lbrace x\in\mathbb{R}|x\neq \kappa\pi+\frac{\pi}{2}\right\rbrace  $.
+\item Το σύνολο τιμών της συνάρτησης είναι το σύνολο $ \mathbb{R} $ όλων των πραγματικών αριθμών.
+\item Είναι περιοδική συνάρτηση με περίοδο $ T=\pi $
+\item Αν μελετήσουμε τη συνάρτηση στο διάστημα $ \left[-\frac{\pi}{2},\frac{\pi}{2} \right]  $ τότε παρατηρούμε οτι είναι γνησίως αύξουσα σε όλο το διάστημα.
+\item Δεν παίρνει ούτε μέγιστη ούτε ελάχιστη τιμή.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\draw[shift={(1.175mm,0mm)},style=help lines, xstep=0.589cm,ystep=0.25cm,black!10] (0,0.25) grid (7.07,3.75);
+\begin{axis}[x=.75cm,y=.5cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854,9.424,10.995,12.564},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$,$3\pi$,$\frac{7\pi}{2}$,$4\pi$
+},ytick={-3,-2,-1,1,2,3},aks_on,xmin=-3.3,xmax=6.7,
+ymin=-4,ymax=4,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\begin{scope}
+\clip (axis cs:-3.14,-4) rectangle (axis cs:2*pi,4);
+\addplot[grafikh parastash,domain=-0.5*pi:0.5*pi]{tan(deg(x))};
+\addplot[grafikh parastash,domain=0.5*pi:1.5*pi,dashed]{tan(deg(x))};
+\addplot[grafikh parastash,domain=-1.5*pi:-.5*pi,dashed]{tan(deg(x))};
+\addplot[grafikh parastash,domain=1.5*pi:2*pi,dashed]{tan(deg(x))};
+\draw[dashed] (axis cs:-0.5*pi,-4)--(axis cs:-0.5*pi,4);
+\draw[dashed] (axis cs:0.5*pi,-4)--(axis cs:0.5*pi,4);
+\draw[dashed] (axis cs:1.5*pi,-4)--(axis cs:1.5*pi,4);
+\end{scope}
+\node[fill=white,inner sep=.2mm] at (axis cs:-.3,-.4) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση εφαπτομένης}
+\end{center}
+\begin{rlist}[start=6]
+\item Οι ιδιότητες οι τιμές και τα χαρακτηριστικά της περιοδικής συνάρτησης $ f(x)=\ef{x} $ επαναλαμβάνονται σε κάθε διάστημα της μορφής $ \left[ \frac{(2\kappa-1)\pi}{2},\frac{(2\kappa+1)\pi}{2}\right]  $ πλάτους μιας περιόδου, με $ \kappa\in\mathbb{Z} $.
+\item Είναι γνησίως αύξουσα σε κάθε διάστημα $ \left[ \frac{(2\kappa-1)\pi}{2},\frac{(2\kappa+1)\pi}{2}\right]  $ του πεδίου ορισμού της, με $ \kappa\in\mathbb{Z} $.
+\item Η γραφική της παράσταση προσεγγίζει τις κατακόρυφες ευθείες $ x=\frac{(2\kappa+1)\pi}{2} $ με $ \kappa\in\mathbb{Z} $ οι οποίες ονομάζονται \textbf{ασύμπτωτες}.
+\item Η γραφική της παράσταση τέμνει τον οριζόντιο άξονα $ x'x $ στα σημεία με τετμημένες $ x=\kappa\pi $ με $ \kappa\in\mathbb{Z} $.
+\end{rlist}
+\begin{center}
+\textbf{ΓΕΝΙΚΕΥΣΗ}
+\end{center}
+Η γενική μορφή της συνάρτησης είναι \[ f(x)=\rho\cdot\ef{\left( \omega x+a\right)+\beta } \]
+με $ \rho,a,\beta\in\mathbb{R} $ και $ \omega>0 $. Οι ιδιότητες της γενικής συνάρτησης συνοψίζονται στον παρακάτω πίνακα.
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη}   \\ 
+\hhline{==}\rule[-2ex]{0pt}{5.5ex} {\boldmath{$ D_f|f\left(D_f \right)  $}} & $ \left\lbrace x\in\mathbb{R}|x\neq \kappa\pi+\frac{\pi}{2}\right\rbrace|\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Περίοδος} & $ T=\dfrac{\pi}{\omega} $   \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζες} & $ x=\kappa T+\frac{\theta-a}{\omega} $  \\
+\textbf{Μονοτονία} &  $ f\nearrow\left[ \frac{(2\kappa-1)T}{2}-a,\frac{(2\kappa+1)T}{2}-a\right] $ \rule[-2ex]{0pt}{5.5ex}\\
+\hline 
+\end{tabular}\captionof{table}{Ιδιότητες γενικευμένης συνάρτησης εφαπτομένης} 
+\end{center}
+με $ \kappa\in\mathbb{Z} $ και $ \theta $ να είναι η γωνία για την οποία $ \ef{\theta}=-\frac{\beta}{\rho} $ με $ \theta\neq\kappa\pi+\frac{\pi}{2} $.
+\item \textbf{Η συνάρτηση {\boldmath$ f(x)=\syf{x} $}}\\
+Οι ιδιότητες της συνάρτησης της συνεφαπτομένης είναι οι ακόλουθες :
+\begin{rlist}
+\item Το πεδίο ορισμού της $ f $ είναι το σύνολο $ D_f=\left\lbrace x\in\mathbb{R}|x\neq \kappa\pi\right\rbrace  $.
+\item Το σύνολο τιμών της συνάρτησης είναι το σύνολο $ \mathbb{R} $ όλων των πραγματικών αριθμών.
+\item Είναι περιοδική συνάρτηση με περίοδο $ T=\pi $
+\item Αν γίνει μελέτη της συνάρτησης στο διάστημα $ \left[0,\pi \right]  $ τότε έχουμε οτι είναι γνησίως φθίνουσα σε όλο το διάστημα.
+\item Δεν έχει ακρότατα δηλαδή δεν παίρνει ούτε μέγιστη ούτε ελάχιστη τιμή.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\draw[shift={(1.175mm,0mm)},style=help lines, xstep=0.589cm,ystep=0.25cm,black!10] (0,0.25) grid (7.07,3.75);
+\begin{axis}[x=.75cm,y=.5cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854,9.424,10.995,12.564},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$,$3\pi$,$\frac{7\pi}{2}$,$4\pi$
+},ytick={-3,-2,-1,1,2,3},aks_on,xmin=-3.3,xmax=6.7,
+ymin=-4,ymax=4,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\begin{scope}
+\clip (axis cs:-3.14,-4) rectangle (axis cs:2*pi,4);
+\addplot[grafikh parastash,domain=0:pi]{cot(deg(x))};
+\addplot[grafikh parastash,domain=pi:2*pi,dashed]{cot(deg(x))};
+\addplot[grafikh parastash,domain=-pi:0,dashed]{cot(deg(x))};
+\draw[dashed] (axis cs:-pi,-4)--(axis cs:-pi,4);
+\draw[dashed] (axis cs:pi,-4)--(axis cs:pi,4);
+\draw[dashed] (axis cs:2*pi,-4)--(axis cs:2*pi,4);
+\end{scope}
+\node[fill=white,inner sep=.2mm] at (axis cs:-.3,-.4) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση συνεφαπτομένης}
+\end{center}
+\begin{rlist}[start=6]
+\item Αφού η συνάρτηση $ f(x)=\syf{x} $ είναι περιοδική, οι ιδιότητες οι τιμές και τα χαρακτηριστικά της επαναλαμβάνονται σε κάθε διάστημα της μορφής $ \left[ \kappa\pi,(\kappa+1)\pi\right]  $ πλάτους μιας περιόδου, με $ \kappa\in\mathbb{Z} $.
+\item Είναι γνησίως φθίνουσα σε κάθε διάστημα $ \left[ \kappa\pi,(\kappa+1)\pi\right] $ του πεδίου ορισμού της, με $ \kappa\in\mathbb{Z} $.
+\item Οι ασύμπτωτες της γραφικής παράστασης είναι οι κατακόρυφες ευθείες $ x=\kappa\pi $ με $ \kappa\in\mathbb{Z} $.
+\item Η γραφική της παράσταση τέμνει τον οριζόντιο άξονα $ x'x $ στα σημεία με τετμημένες $ x=\kappa\pi+\frac{\pi}{2} $ με $ \kappa\in\mathbb{Z} $.
+\end{rlist}
+\begin{center}
+\textbf{ΓΕΝΙΚΕΥΣΗ}
+\end{center}
+Η γενική μορφή της συνάρτησης είναι \[ f(x)=\rho\cdot\ef{\left( \omega x+a\right)+\beta } \]
+με $ \rho,a,\beta\in\mathbb{R} $ και $ \omega>0 $. Οι ιδιότητες της γενικής συνάρτησης συνοψίζονται στον παρακάτω πίνακα.
+\end{enumerate}
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη}   \\ 
+\hhline{==}\rule[-2ex]{0pt}{5.5ex} {\boldmath{$ D_f|f\left(D_f \right)  $}} & $ \left\lbrace x\in\mathbb{R}|x\neq \kappa\pi\right\rbrace|\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Περίοδος} & $ T=\dfrac{\pi}{\omega} $   \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζες} & $ x=\kappa T+\frac{\theta-a}{\omega} $  \\
+\textbf{Μονοτονία} &  $ f\searrow\left[ \kappa T-a,(\kappa+1) T-a\right] $ \rule[-2ex]{0pt}{5.5ex}\\
+\hline 
+\end{tabular}\captionof{table}{Ιδιότητες γενικευμένης συνάρτησης εφαπτομένης} 
+\end{center}
+με $ \kappa\in\mathbb{Z} $ και $ \theta $ να είναι η γωνία για την οποία $ \syf{\theta}=-\frac{\beta}{\rho} $ με $ \theta\neq\kappa\pi $.\\\\
+\Thewrhma{Ιδιότητεσ εκθετικών συναρτήσεων}
+Οι ιδιότητες των εκθετικών συναρτήσεων της μορφής $ f(x)=a^x $, με $ 0<a\neq1 $, είναι οι εξής. Σε ορισμένες ιδιότητες διακρίνουμε δύο περιπτώσεις για τη βάση $ a $ της συνάρτησης.
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ \mathbb{R} $.
+\item Το σύνολο τιμών της είναι το σύνολο $ (0,+\infty) $ των θετικών πραγματικών αριθμών.
+\item Η συνάρτηση δεν έχει ακρότατες τιμές.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm]
+\item[\textbf{A.}] \textbf{Για {\boldmath$ a>1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ της εκθετικής συνάρτησης είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=a^x $ είναι γνησίως αυξουσα στο $ \mathbb{R} $.
+\item Η συνάρτηση δεν έχει ρίζες στο $ \mathbb{R} $.
+\item Η γραφική παράστασή της έχει οριζόντια ασύμπτωτη τον άξονα $ x'x $ στη μεριά του $ -\infty $ ενώ τέμνει τον κατακόρυφο άξονα $ y'y $ στο σημείο $ A(0,1) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow a^{x_1}<a^{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow a^{x_1}=a^{x_2}
+\end{gather*}
+\end{itemize}
+\begin{tabular}{p{6cm}p{6cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{1.8^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above left,yshift=-1mm](A){$ (0,1) $}
+\node at (3,0.7) {\footnotesize$a>1$};
+\node at (3,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Εκθετική συνάρτηση με $ a>1 $}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.8,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above right,yshift=-1mm](A){$ (0,1) $}
+\node at (1.2,0.7) {\footnotesize$0<a<1$};
+\node at (1.2,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Εκθετική συνάρτηση με $ 0<a<1 $} \\ 
+\end{tabular} 
+\end{enumerate}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm,start=2]
+\item[\textbf{B.}] \textbf{Για {\boldmath$ 0<a<1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ της εκθετικής συνάρτησης είναι μικρότερη της μονάδας τότε η συνάρτηση $ f(x)=a^x $ είναι γνησίως φθίνουσα στο $ \mathbb{R} $.
+\item Η συνάρτηση δεν έχει ρίζες στο $ \mathbb{R} $.
+\item Η γραφική παράστασή της έχει οριζόντια ασύμπτωτη τον άξονα $ x'x $ στη μεριά του $ +\infty $ ενώ τέμνει τον κατακόρυφο άξονα $ y'y $ στο σημείο $ A(0,1) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow a^{x_1}>a^{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow a^{x_1}=a^{x_2}
+\end{gather*}
+\end{itemize}
+\end{enumerate}
+\item Οι γραφικές παραστάσεις των εκθετικών συναρτήσεων με αντίστροφες βάσεις $ f(x)=a^x $ και $ g(x)=\left(\frac{1}{a}\right)^x  $, με $ 0<a\neq1 $, είναι συμμετρικές ως προς τον άξονα $ y'y $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-2.7:2.7]{1.8^x};
+\addplot[grafikh parastash,domain=-2.7:2.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDrawPoint[fill=black](2.1,1.05)
+\node at (3,2.5) {\footnotesize$C_f$};
+\node at (1.2,2.5) {\footnotesize$C_g$};
+\node at (.8,.9) {\footnotesize$f(x)=a^x$};
+\node at (3.7,.9) {\footnotesize$g(x)=\left(\frac{1}{a}\right)^x$};
+\end{tikzpicture}\captionof{figure}{Εκθετικές συναρτήσεις με αντίστροφες βάσεις}
+\end{center}
+\Thewrhma{Ιδιότητεσ λογαριθμικών συναρτήσεων}
+Για κάθε λογαριθμική συνάρτηση της μορφής $ f(x)=\log_{a}{x} $ ισχύουν οι ακόλουθες ιδιότητες.
+\begin{rlist}
+\item Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ (0,+\infty) $ των θετικών πραγματικών αριθμών.
+\item Το σύνολο τιμών της είναι το σύνολο $ \mathbb{R} $ των πραγματικών αριθμών.
+\item Η συνάρτηση δεν έχει μέγιστη και ελάχιστη τιμή.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm]
+\item \textbf{Για {\boldmath$ a>1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=\log_{a}x $ είναι γνησίως αυξουσα στο $ (0,+\infty) $.
+\item Η συνάρτηση έχει ρίζα τον αριθμό $ x=1 $.
+\item Η γραφική παράστασή της έχει κατακόρυφη ασύμπτωτη τον άξονα $ y'y $ στη μεριά του $ -\infty $ ενώ τέμνει τον οριζόντιο άξονα $ x'x $ στο σημείο $ A(1,0) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει \begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow \log_{a}{x_1}<\log_{a}{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow \log_{a}{x_1}=\log_{a}{x_2}
+\end{gather*}
+\item Για $ x>1 $ ισχύει $ \log_{a}x>0 $ ενώ για $ 0<x<1 $ έχουμε $ \log_{a}x<0 $.
+\end{itemize}
+\end{enumerate}
+\begin{tabular}{p{6cm}p{6.2cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,0.7) {\footnotesize$a>1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[below right](A){$ (0,1) $}
+\node at (.8,.4) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Λογαριθμική συνάρτηση με $ a>1 $}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,3.3) {\footnotesize$0<a<1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above right](A){$ (0,1) $}
+\node at (.8,4) {\footnotesize$C_g$};
+\end{tikzpicture}\captionof{figure}{Λογαριθμική συνάρτηση με $ 0<a<1 $} \\ 
+\end{tabular} 
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.,leftmargin=0cm,start=2]
+\item \textbf{Για {\boldmath$ 0<a<1 $}}
+\begin{itemize}
+\item Αν η βάση $ a $ του λογαρίθμου είναι μεγαλύτερη της μονάδας τότε η συνάρτηση $ f(x)=\log_{a}x $ είναι γνησίως φθίνουσα στο $ (0,+\infty) $.
+\item Η συνάρτηση έχει ρίζα τον αριθμό $ x=1 $.
+\item Η γραφική παράστασή της έχει κατακόρυφη ασύμπτωτη τον άξονα $ y'y $ στη μεριά του $ +\infty $ ενώ τέμνει τον οριζόντιο άξονα $ x'x $ στο σημείο $ A(1,0) $.
+\item Για κάθε ζεύγος αριθμών $ x_1,x_2\in\mathbb{R} $ ισχύει 
+\begin{gather*}
+\textrm{Αν }x_1<x_2\Leftrightarrow \log_{a}{x_1}>\log_{a}{x_2} \\
+\textrm{Αν }x_1=x_2\Leftrightarrow \log_{a}{x_1}=\log_{a}{x_2}
+\end{gather*}
+\item Για $ x>1 $ ισχύει $ \log_{a}x<0 $ ενώ για $ 0<x<1 $ έχουμε $ \log_{a}x>0 $.
+\end{itemize}
+\end{enumerate}
+\item Οι γραφικές παραστάσεις των εκθετικών συναρτήσεων με αντίστροφες βάσεις $ f(x)=a^x $ και $ g(x)=\left(\frac{1}{a}\right)^x  $, με $ 0<a\neq1 $, είναι συμμετρικές ως προς τον άξονα $ y'y $.
+\end{rlist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDrawPoint[fill=black](1.05,2.1)
+\node at (.8,.4) {\footnotesize$C_f$};
+\node at (.8,4) {\footnotesize$C_g$};
+\node at (3.2,2.9) {\footnotesize$f(x)=\log_{a}x$};
+\node at (3.2,1.3) {\footnotesize$g(x)=\log_{\frac{1}{a}}x$};
+\end{tikzpicture}\captionof{figure}{Λογαριθμικές συναρτήσεις με αντίστροφες βάσεις}
+\end{center}
+\Thewrhma{Συνάρτηση {$ \mathbold{1-1} $} - (Αμφιμονοσύμαντη)}
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ είναι μια συνάρτηση $ 1-1 $ αν και μόνο αν για κάθε ζεύγος αριθμών $ x_1,x_2\in D_f $ του πεδίου ορισμού της, η ισότητα των εικόνων τους συναπάγεται την ισότητα μεταξύ τους. Δηλαδή θα ισχύει η παρακάτω σχέση \[ f(x_1)=f(x_2)\Rightarrow x_1= x_2 \]
+\Thewrhma{Ιδιότητεσ συνάρτησησ 1-1}
+Εαν μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ είναι συνάρτηση $ 1-1 $ τότε γι αυτήν ισχύουν οι παρακάτων ιδιότητες :\\
+\wrapr{-11mm}{10}{3.7cm}{0mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.4,xmax=3,
+ymin=-.4,ymax=3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=.1:2.7]{2*ln(x+1)};
+\end{axis}
+\draw[dashed](0,1)--(3.5,1);
+\draw[dashed](0,2)--(3.5,2);
+\draw[dashed](0,2.5)--(3.5,2.5);
+\draw[dashed](0,1.5)--(3.5,1.5);
+\tkzDrawPoint[fill=black](1.117,2*ln(2.117))
+\node at (0.2,0.2) {\footnotesize$O$};
+\node at (1.65,0.7) {\footnotesize$y=\kappa$};
+\node at (2.3,3) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Συνάρτηση $ 1-1 $}}{
+\begin{rlist}
+\item Για κάθε $ x_1,x_2\in D_f $ ισχύει $ x_1=x_2\Leftrightarrow f(x_1)=f(x_2) $.
+\item Κάθε οριζόντια ευθεία της μορφής $ y=\kappa $ με $ \kappa\in\mathbb{R} $ θα έχει το πολύ ένα κοινό σημείο με τη γραφική παράσταση της συνάρτησης $ f $.
+\item Εαν η συνάρτηση είναι γνησίως μονότονη τότε θα είναι και $ 1-1 $. Το αντίστροφο δεν ισχύει πάντα.
+\item Η εξίσωση $ f(x)=0 $ έχει το πολύ μια λύση στο πεδίο ορισμού της $ f $. Εαν $ 0\in f(D_f) $ τότε η εξίσωση έχει μια λύση ακριβώς.
+\end{rlist}}
+\section{Όρια - Συνέχεια}\mbox{}\\
+\orismoi
+\Orismos{Όριο συνάρτησησ}
+Όριο μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0 $ ονομάζεται η προσέγγιση των τιμών της μεταβλητής $ f(x) $ σε μια τιμή $ L $ καθώς το $ x $ πλησιάζει την τιμή $ x_0 $. Συμβολίζεται με \[ \lim_{x\rightarrow x_0}{f(x)}=L \]
+\wrapr{-4mm}{9}{4.2cm}{-7mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3,
+ymin=-.7,ymax=2.3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[fill=black!10,domain=.9:1.5,dashed]{0.7*ln(x)+1.2} \closedcycle;
+\addplot[fill=black!10,domain=.9:1.5,dashed]{0.7*ln(x)+1.2} \closedcycley;
+\addplot[grafikh parastash,domain=0.07:2.5]{0.7*ln(x)+1.2};
+\end{axis}
+\node at (1.2,0.3) {\tiny $ x_0-\delta$};
+\node at (2.5,0.3) {\tiny {$ x_0-\delta$}};
+\draw[dashed] (1.9,0.7) node[anchor=north]{\scriptsize $x_0$} -- 
+(1.9,2.02)--(0.7,2.02) node[left]{\scriptsize $f(x_0)$};
+\draw[-latex] (1.6,0.7)  -- (1.2,0.4);
+\draw[-latex] (2.2,0.7) -- (2.5,0.4);
+\node[below left] at (0.7,1.83) {\tiny $L-\varepsilon$};
+\node[above left] at (0.7,2.18){\tiny $L-\varepsilon$};
+\tkzDrawPoint[size=7,fill=white](1.9,2.02)
+\node at (0.5,0.5) {\footnotesize $ O $};
+\draw(0.7,1.83)--(0.7,2.18);
+\draw(1.6,0.7)--(2.2,0.7);
+\node at (2,2.6) {\footnotesize $ \displaystyle{\lim_{x\rightarrow x_0}{f(x)=L}}$};
+\end{tikzpicture}\captionof{figure}{Όριο συνάρτησης}}{Το όριο $ L $ μιας συνάρτησης, αν υπάρχει, μπορεί να είναι πραγματικός αριθμός ή $ \pm\infty $.
+Ο αυστηρός ορισμός του ορίου έχει ως εξής :\vspace{2mm}\\
+Μια συνάρτηση $ f $ ορισμένη σε ένα σύνολο $ A $ έχει όριο $ L $ σε ένα σημείο $ x_0 $ όταν για κάθε θετικό αριθμό $ \varepsilon>0 $ υπάρχει θετικός αριθμός $ \delta>0 $ έτσι ώστε για κάθε $ x\in A $ το αποίο βρίσκεται σε μια περιοχή του $ x_0 $ ισχύει $ |f(x)-L|<\varepsilon $.
+\[ \forall\varepsilon>0,\exists\delta>0 : \forall x\in A\;\textrm{ με }\;|x-x_0|<\delta\Rightarrow|f(x)-L|<\varepsilon \]}\mbox{}\\\\\\
+\Orismos{Πλευρικά Ορια}
+\vspace{-5mm}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Όριο από αριστερά}\\ Όριο από αριστερά μιας συνάρτησης $ f $ στο $ x_0 $ ονομάζεται το όριο της καθώς η μεταβλητή $ x $ πλησιάζει την τιμή $ x_0 $ από τιμές μικρότερες αυτής. Συμβoλίζεται \[ \lim_{x\rightarrow x_0^-}{f(x)} \]
+\item \textbf{Όριο από δεξιά}\\ Όριο από δεξιά μιας συνάρτησης $ f $ στο $ x_0 $ ονομάζεται το όριο της καθώς η μεταβλητή $ x $ πλησιάζει την τιμή $ x_0 $ από τιμές μεγαλύτερες αυτής. Συμβoλίζεται \[ \lim_{x\rightarrow x_0^+}{f(x)} \]
+\end{enumerate}
+\Orismos{Συνέχεια σε σημείο}\label{or:synshm}
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν το όριο της στο $ x_0 $ είναι ίσο με την τιμή της στο σημείο αυτό. Δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+\Orismos{Συνέχεια σε διάστημα - Σύνολο}
+Με τη βοήθεια του \textbf{Ορισμού \ref{or:synshm}} για τη συνέχεια μια συνάρτησης σε σημείο, ορίζουμε τη συνέχεια μιας συνάστησης σε διάστημα και γενικότερα σε σύνολο ως εξής :
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Συνέχεια σε ανοιχτό διάστημα}\\ Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα ανοιχτό διάστημα $ (a,\beta) $ εαν είναι συνεχής σε κάθε σημείο του διαστήματος.
+\item \textbf{Συνέχεια σε κλειστό διάστημα}\\ Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα κλειστό διάστημα $ [a,\beta] $ εαν είναι συνεχής σε κάθε σημείο του ανοιχτού διαστήματος $ (a,\beta) $ και επιπλέον ισχύει \[ \lim_{x\rightarrow a^+}{f(x)}=f(a)\;\;\textrm{και}\;\;\lim_{x\rightarrow\beta^-}{f(x)}=f(\beta) \]
+\item \textbf{Συνέχεια σε σύνολο}\\ Μια συνάρτηση $ f $ θα λέμε οτι είναι συνεχής εαν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.
+\end{enumerate}
+\thewrhmata
+\Thewrhma{Πλευρικά όρια}
+Το όριο μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0 $ υπάρχει και είναι πραγματικός αριθμός $ \mathcal{l}\in\mathbb{R} $ αν και μόνο αν τα πλευρικά όρια της $ f $ στο $ x_0 $ είναι ίσα με $ \mathcal{l} $. \[ \adjustlimits\lim_{x\rightarrow x_0}f(x)=\mathcal{l}\Leftrightarrow \lim_{x\rightarrow x_0^+}f(x)=\adjustlimits\lim_{x\rightarrow x_0^-}f(x)=\mathcal{l} \]
+\Thewrhma{Ιδιότητεσ ορίων 1}
+Έστω $ f,g $ δύο δυναρτήσεις με πεδία ορισμού $ D_f,D_g $ αντίστοιχα και $ x_0\in D_f\cap D_g $ ένα κοινό στοιχείο των δύο συνόλων. Αν τα όρια των δύο συναρτήσεων στο σημείο $ x_0 $ υπάρχουν τότε ισχύουν γι αυτά οι παρακάτω ιδιότητες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}>0 $ τότε $ f(x)>0 $ κοντά στο $ x_0 $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}<0 $ τότε $ f(x)<0 $ κοντά στο $ x_0 $.
+\item Αν $ f(x)>0 $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\geq0 $.
+\item Αν $ f(x)<0 $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\leq0 $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}>\displaystyle{\lim_{x\rightarrow x_0}g(x)} $ τότε $ f(x)>g(x) $ κοντά στο $ x_0 $.
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}<\displaystyle{\lim_{x\rightarrow x_0}g(x)} $ τότε $ f(x)<g(x) $ κοντά στο $ x_0 $.
+\item Αν $ f(x)>g(x) $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\geq\displaystyle{\lim_{x\rightarrow x_0}g(x)} $.
+\item Αν $ f(x)<g(x) $ κοντά στο $ x_0 $ τότε $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}\leq\displaystyle{\lim_{x\rightarrow x_0}g(x)} $.
+\end{enumerate}
+\Thewrhma{Ιδιότητεσ ορίων 2}
+Έστω $ f,g $ δύο δυναρτήσεις με πεδία ορισμού $ D_f,D_g $ αντίστοιχα και $ x_0\in D_f\cap D_g $ ένα κοινό στοιχείο των δύο συνόλων. Οι παρακάτω ιδιότητες αφορούν μη πεπερασμένα όρια των συναρτήσεων στο σημείο $ x_0 $.
+\begin{rlist}
+\item Αν $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=\pm\infty $ τότε $ \displaystyle\lim_{x\rightarrow x_0}{\frac{1}{f(x)}}=0 $.
+\item Αν $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=0 $ και $ \ccases{f(x)>0 \Rightarrow \displaystyle\lim_{x\rightarrow x_0}{f(x)}=+\infty\\
+f(x)<0 \Rightarrow \displaystyle\lim_{x\rightarrow x_0}{f(x)}=-\infty} $
+\item Αν $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=\pm\infty $ τότε $ \displaystyle\lim_{x\rightarrow x_0}{|f(x)|}=+\infty $.
+\item Αν $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=\pm\infty $ τότε $ \displaystyle\lim_{x\rightarrow x_0}{\left( -f(x)\right) }=\mp\infty $.
+\item Αν $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=+\infty $ τότε $ \displaystyle\lim_{x\rightarrow x_0}{\!\!\sqrt[\kappa]{f(x)}}=+\infty $.
+\item Αν $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=\pm\infty \Leftrightarrow \displaystyle\lim_{x\rightarrow x_0^+}{f(x)}=\lim_{x\rightarrow x_0^-}{f(x)}=\pm\infty $.
+\end{rlist}
+\Thewrhma{Ιδιότητεσ Ορίων 3}
+Έστω $ f,g $ δύο δυναρτήσεις με πεδία ορισμού $ D_f,D_g $ αντίστοιχα και $ x_0\in D_f\cap D_g $ ένα κοινό στοιχείο των δύο συνόλων. Οι παρακάτω ιδιότητες αφορούν τα όρια των συναρτήσεων στο άπειρο $ \pm\infty $.
+\begin{rlist}
+\item 
+\end{rlist}
+\Thewrhma{Ορια βασικών συναρτήσεων}
+Στις παρακάτω ιδιότητες μελετούμε τον υπολογισμό των ορίων των βασικών συναρτήσεων κάθε είδους σε ένα σημείο $ x_0 $ του πεδίου ορισμού τους καθώς και στο άπειρο.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Όριο σε σημείο}\\
+Για τα όρια των βασικών συναρτήσεων σε ένα σημείο $ x_0 $ του πεδίου ορισμού τους ισχύουν οι παρακάτω σχέσεις.
+\begin{rlist}[label=\bf\roman*.]
+\item \textbf{Πολυωνυμικές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού. Θα ισχύει
+\[ \lim_{x\rightarrow x_0}{P(x)}=P(x_0) \]
+\item \textbf{Ρητές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού και $ Q(x)=\beta_\nu x^\nu+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0 $ με $ \beta_\mu\neq0 $ ένα πολυώνυμο $ \mu- $οστού βαθμού. Θα ισχύει
+\[ \lim_{x\rightarrow x_0}{\frac{P(x)}{Q(x)}}=\frac{P(x_0)}{Q(x_0)} \]
+\item \textbf{Άρρητες}\\
+\item \textbf{Τριγωνομετρικές}\\
+Για τα όρια των βασικών τριγωνομετρικών συναρτήσεων ισχύουν οι παρακάτω σχέσεις :
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\hm{x}}=\hm{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syn{x}}=\syn{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\ef{x}}=\ef{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syf{x}}=\syf{x_0}} $
+\end{rlist}
+\end{multicols}
+\begin{center}
+\textbf{ΒΑΣΙΚΑ ΤΡΙΓΩΝΟΜΕΤΡΙΚΑ ΟΡΙΑ}
+\end{center}
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \displaystyle{\lim_{x\rightarrow 0}{\frac{\hm{x}}{x}}=1} $
+\item $ \displaystyle{\lim_{x\rightarrow 0}{\frac{\syn{x}-1}{x}}=0} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εκθετικές - Λογαριθμικές}
+
+\end{rlist}
+\item \textbf{Όριο στο άπειρο}
+\begin{rlist}[label=\bf\roman*.]
+\item \textbf{Πολυωνυμικές}\\
+Αν $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού τότε θα έχουμε
+\[ \lim_{x\rightarrow \pm\infty}{P(x)}=\lim_{x\rightarrow \pm\infty}a_\nu x^\nu \]
+\item \textbf{Ρητές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ και $ Q(x)=\beta_\nu x^\nu+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0 $ με $ \beta_\mu\neq0 $ ένα πολυώνυμο $ \nu- $οστού και $ \mu- $οστού βαθμού αντίστοιχα. Θα ισχύει
+\[ \lim_{x\rightarrow \pm\infty}{\frac{P(x)}{Q(x)}}=\lim_{x\rightarrow \pm\infty}\frac{a_\nu x^\nu}{\beta_\mu x^\mu}=\ccases{\frac{a_\nu}{\beta_\mu} & \textrm{αν } \nu=\mu\\
+0 & \textrm{αν } \nu<\mu\\\pm\infty & \textrm{αν } \nu>\mu} \]
+\end{rlist}
+\end{enumerate}
+\Thewrhma{Πράξεισ με όρια}
+Θεωρούμε δύο δυναρτήσεις $ f,g $ με πεδία ορισμού $ D_f,D_g $ αντίστοιχα και $ x_0\in D_f\cap D_g $ ένα κοινό στοιχείο των δύο πεδίων ορισμού. Αν τα όρια των δύο συναρτήσεων στο $ x_0 $ υπάρχουν με $ \lim_{x\rightarrow x_0}{f(x)}=l_1 $ και $ \lim_{x\rightarrow x_0}{g(x)}=l_2 $ τότε οι πράξεις μεταξύ των ορίων ακολουθούν τους παρακάτω κανόνες :
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Όριο} & \textbf{Κανόνας} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} \textbf{Αθροίσματος} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\pm g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\pm\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\pm l_2 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Πολλαπλάσιου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( k\cdot f(x)\right) }=k\cdot\displaystyle{\lim_{x\rightarrow x_0}f(x)}=k\cdot l_1\;\;,\;\;\forall k\in\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Γινομένου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\cdot g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\cdot\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\cdot l_2 $ \\ 
+\rule[-2ex]{0pt}{7ex} \textbf{Πηλίκου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left(\dfrac{ f(x)} {g(x)}\right)=\dfrac{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}{\displaystyle{\lim_{x\rightarrow x_0}g(x)}}}=\frac{l_1}{l_2}\;\;,\;\;l_2\neq0 $ \\ 
+\rule[-2ex]{0pt}{6.5ex} \textbf{Απολύτου} & $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=\left| \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right|=|l_1|  $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζας} & $ \displaystyle{\lim_{x\rightarrow x_0}\!\!\sqrt[\kappa]{f(x)}}=\!\SQRT[\kappa]{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}\;\;=\!\!\sqrt[\kappa]{l_1}\;\;,\;\;l_1\geq0 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Δύναμης} & $ \displaystyle{\lim_{x\rightarrow x_0}f^\nu(x)}=\left( \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right)^\nu=l_1^\nu  $\vspace{2mm} \\ 
+\hline 
+\end{longtable}\captionof{table}{Πράξεις με όρια}
+\end{center}
+\Thewrhma{Συνέχεια Πράξεων συναρτήσεων}
+Εαν οι συναρτήσεις $ f,g $ είναι συνεχείς σε ένα κοινό σημείο $ x_0 $ των πεδίων ορισμού τους τότε και οι συναρτήσεις \[ f+g\;,\;f-g\;,\;c\cdot f\;,\;f\cdot g\;,\;\frac{f}{g}\;,\;|f|\;,\;f^\nu\textrm{ και }\sqrt[\nu]{f} \]
+είναι συνεχείς στο σημείο $ x_0 $ εφόσον ορίζονται στο σημείο αυτό.\\\\
+\Thewrhma{Συνέχεια Σύνθεσησ συναρτήσεων}
+Εαν η συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ και η συνάρτηση $ g $ είναι σηνεχής στο σημείο $ f(x_0) $ η σύνθεση τους $ g\circ f $ είναι συνεχείς στο σημείο $ x_0 $.\\\\
+\Thewrhma{Θεώρημα \eng{Bolzano}}
+Αν μια συνάρτηση $ f $ , ορισμένη σε ένα κλειστό διάστημα $ [a, \beta] $ είναι :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο $ [a, \beta] $ και, επιπλέον, ισχύει
+\item $ f(a)\cdot f(\beta)<0 $ .
+\end{enumerate}
+τότε υπάρχει ένας τουλάχιστον πραγματικός αριθμός $ x_0\in(a,\beta) $ τέτοιο, ώστε 
+\[ f(x_0)=0 \]
+\Thewrhma{Συνέπειεσ \eng{Bolzano}}
+Έστω μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ και $ \varDelta $ ένα διάστημα του πεδίου ορισμού της.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν η συνάρτηση $ f $ δεν μηδενίζεται πουθενά στο $ \varDelta $ για κάθε $ x\in\varDelta $ τότε αυτή θα διατηρεί το προσημό της στο διάστημα αυτό.
+\[ \textrm{Αν }f(x)\neq0\;,\;\forall x\in\varDelta\Rightarrow\ccases{f(x)>0 & \forall x\in\varDelta\\
+f(x)<0 & \forall x\in\varDelta} \]
+Επιπλέον, αν υπάρχει πραγματικός αριθμός $ a\in\varDelta $ ώστε $ f(a)>0 $ ή $ f(a)<0 $ τότε $ f(x)>0\;,\;\forall x\in\varDelta $ ή $ f(x)<0\;,\;\forall x\in\varDelta $ αντίστοιχα.
+\[ \textrm{Αν }f(x)\neq0\;,\;\forall x\in\varDelta\textrm{ και }\exists a\in\varDelta\textrm{ ώστε } \ccases{f(a)>0 \Rightarrow f(x)>0\;\;,\;\;\forall x\in\varDelta\\
+f(a)<0 \Rightarrow f(x)<0\;\;,\;\;\forall x\in\varDelta} \]
+\item Αν $ \rho_1,\rho_2 $ είναι δύο διαδοχικές ρίζες μιας συνάρτησης $ f $ τότε αυτή διατηρεί το πρόσημό της στο διάστημα μεταξύ των ριζών.
+\end{enumerate}
+\Thewrhma{Γεωμετρική ερμηνεία θεωρήματοσ \eng{Bolzano}}
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-4mm}
+\begin{WrapText1}{8}{4cm}
+\vspace{-5mm}
+\begin{tikzpicture}[scale=.7,domain=-.6:3.32,y=.59cm,x=0.8cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-4.5,ymax=1.2,ystep=1]
+\draw[-latex] (-1.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (-1,-3) -- (-1,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw (-.25,.5mm) -- (-.25,-.5mm) node[anchor=north west,fill=white] {{\scriptsize $ x_1 $}};
+\draw (1.45,.5mm) -- (1.45,-.5mm) node[anchor=north east,fill=white] {{\scriptsize $ x_2 $}};
+\draw (2.8,.5mm) -- (2.8,-.5mm) node[anchor=south east] {{\scriptsize $ x_3 $}};
+\clip (-.7,-3) rectangle (5,4);
+\draw[samples=100,line width=.5mm] plot function{x**3-4*x**2+3*x+1};
+\draw[dashed] (-.6,-2.5) -- (-.6,0) node[anchor=south]{{\scriptsize $ a $}};
+\draw[dashed] (3.32,3.5) -- (3.32,0) node[anchor=north]{{\scriptsize $ \beta $}};
+\tkzDefPoint(-.6,-2.5){A}
+\tkzDrawPoint[size=7,fill=black](A)
+\tkzDefPoint(3.32,3.5){B}
+\tkzDrawPoint[size=7,fill=black](B)
+\tkzText(2,3.4){{\footnotesize $ f(\beta)>0 $}}
+\tkzText(0.6,-2.4){{\footnotesize $ f(a)<0 $}}
+\end{tikzpicture}
+\captionof{figure}{Θεώρημα \eng{Bolzano}}
+\end{WrapText1}
+Αν μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $ είναι
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο $ [a, \beta] $ και, επιπλέον, ισχύει
+\item $ f(a)\cdot f(\beta)<0 $ .
+\end{enumerate}
+τότε η γραφική παράσταση της συνάρτησης $ f $ τέμνει τον οριζόντιο άξονα $ x'x $ σε ένα τουλάχιστον σημείο με τετμημένη $ x_0\in(a,\beta) $.
+\end{minipage}\mbox{}\\\\\\
+\Thewrhma{Θεώρημα Ενδιάμεσων Τιμών}
+Εστω μια συνάρτηση $ f $, η οποία είναι ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $. Αν :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item η $ f $ είναι συνεχής στο $ (a,\beta) $ και
+\item $ f(a)\neq f(\beta) $
+\end{enumerate}
+τότε, για κάθε αριθμό $ \eta $ μεταξύ των $ f(a) $ και $ f(\beta) $ υπάρχει ένας, τουλάχιστον $ x_0\in(a,\beta) $ τέτοιος ώστε
+\[ f(x_0)=\eta \]
+Το Θεώρημα ενδιάμεσων τιμών αποτελεί γενίκευση του Θεωρήματος \eng{Bolzano}.
+\begin{center}
+\begin{tikzpicture}[scale=.9,domain=-.35:2.85,x=1cm,y=.8cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-4.5,ymax=1.2,ystep=1]
+\draw[-latex] (-1.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (-1,-.5) -- (-1,5) node[above,fill=white] {{\footnotesize $ y $}};
+\draw (4,2.5) -- (-1.5,2.5) node[anchor=south west] {{\footnotesize $ \eta $}};
+\draw[samples=100,line width=.5mm] plot function{x**3-3.7*x**2+3*x+2.5};
+\tkzDefPoint(-.35,.95){A}
+\tkzDrawPoint[size=7,fill=black](A)
+\tkzDefPoint(2.85,4.2){A}
+\tkzDrawPoint[size=7,fill=black](A)
+\tkzText(3.9,4){{\footnotesize $ Β\left(\beta,f(\beta)\right) $}}
+\draw[dashed] (.05,2.5) -- (.05,0) node[anchor=north] {{\footnotesize $ x_1 $}};
+\draw[dashed] (1.17,2.5) -- (1.17,0) node[anchor=north] {{\footnotesize $ x_2 $}};
+\draw[dashed] (2.5,2.5) -- (2.5,0) node[anchor=north] {{\footnotesize $ x_3 $}};
+\draw[dashed] (2.85,4.2) -- (2.85,0) node[anchor=north] {{\footnotesize $ \beta $}};
+\draw[dashed] (-.35,.95) -- (-.35,0) node[anchor=north] {{\footnotesize $ a $}};
+\draw[dashed] (-.35,.95) -- (-1,.95) node[anchor=east] {{\footnotesize $ f(a) $}};
+\draw[dashed] (2.85,4.2) -- (-1,4.2) node[anchor=east] {{\footnotesize $ f(\beta) $}};
+\tkzText[fill=white](.8,.9){{\footnotesize $ A\left(a,f(a)\right) $}}
+\end{tikzpicture}\captionof{figure}{Θεώρημα ενδιάμεσων τιμών}
+\end{center}
+\Thewrhma{Θεώρημα Μέγιστησ και Ελάχιστησ Τιμήσ}
+Αν μια συνάρτηση $ f $ είναι συνεχής σε ένα κλειστό διάστημα $ [a,\beta] $, τότε παίρνει στο διάστημα αυτό μια \textbf{μέγιστη} τιμή $ Μ $ και μια \textbf{ελάχιστη} τιμή $ m $.\\
+Υπάρχουν δηλαδή τουλάχιστον δύο πραγματικοί αριθμοί $ x_1,x_2\in[a,\beta] $ έτσι ώστε αν $ f(x_1)=m $ και $ f(x_2)=M $ να ισχύει : \[ m\leq f(x)\leq M\quad\textrm{για κάθε }x\in[a,\beta] \]
+\section{Διαφορικός Λογισμός}\mbox{}\\
+\orismoi
+\Orismos{Παράγωγοσ σε σημείο}
+Παράγωγος μιας συνάρτησης $ f $ στο σημείο $ x_0\in D_f $ του πεδίου ορισμού της, ονομάζεται το όριο \[ \lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0} \]
+Συμβολίζεται με $ f'(x_0) $ και θα λέμε οτι η $ f $ είναι \textbf{παραγωγίσιμη} στο $ x_0 $ αν το όριο της παραγώγου υπάρχει και είναι πραγματικός αριθμός.\\
+Έχουμε δηλαδή \[ f'(x_0)=\lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0} \]
+\begin{itemize}
+\item Το κλάσμα $ \dfrac{f(x)-f(x_0)}{x-x_0} $ ονομάζεται \textbf{λόγος μεταβολής} της $ f $.
+\item Θέτοντας $ h=x-x_0 $ η παράγωγος της $ f $ στο σημείο $ x_0 $ μετασχηματίζεται ως εξής \[ f'(x_0)=\lim_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h} \]
+\end{itemize}
+\Orismos{Γεωμετρική Ερμηνεία Παραγώγου}
+Η παράγωγος μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0\in D_f $ παριστάνει το \textbf{συντελεστή διεύθυνσης} της εφαπτόμενης ευθείας στο σημείο επαφής $ Μ_0(x_0,f(x_0)) $.
+\[ \lambda=f'(x_0)=\lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0}=\ef{\varphi} \]
+Είναι ίση με την εφαπτομένη της γωνίας $ \varphi $ που σχηματίζει η εφαπτόμενη ευθεία $ \varepsilon $ με τον οριζόντιο άξονα $ x'x $.
+\vspace{-3mm}
+\begin{center}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[fill=black!10] (.5,1.3) -- (.8,1.3) arc (0:60:3mm) -- cycle;
+\draw[samples=200,line width=.4mm] plot function{log(x)+2};
+\tkzDefPoint(4,3.38){A}
+\draw[dashed] (0,3.38) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (4,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzDefPoint(.5,1.3){B}
+\draw[dashed] (0,1.3) node[anchor=east]{{\scriptsize $ f(x_0) $}}  -- (B) -- (.5,0) node[anchor=north] {{\scriptsize $ x_0 $}};
+\tkzLabelPoint[above](A){{\footnotesize $ M $}}
+\tkzLabelPoint[below right](B){{\footnotesize $ M_0 $}}
+\tkzText(2.3,.5){$ \lambda=f'(x_0)=\textrm{εφ}\varphi $}
+\tkzDrawLine(A,B)
+\draw[domain=0:2,samples=100] plot function{2*x+.3};
+\draw[dashed] (-.1,1.3) -- (5,1.3);
+\tkzText[fill=white](1.1,1.53){{\footnotesize $ \varphi $}}
+\tkzText(2,4){{\footnotesize $ \varepsilon $}}
+\draw[-latex,opacity=.5,line width=.4mm] (4,0) -- (3,0);
+\draw[-latex,opacity=.5,line width=.4mm] (0,3.38) -- (0,2.5);
+\draw[-latex] (.5,1.3) ++(30.7:1.4) arc (30.7:63.43:1.4);
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDrawPoints[size=7,fill=black](A,B)
+\end{tikzpicture}
+\caption{Παράγωγος σε σημείο}
+\end{figure}
+\end{center}
+\vspace{-.7cm}
+Όσο πλησιάζει το $ x $ στο $ x_0 $ τόσο αλλάζει η θέση του τυχαίου σημείου $ Μ $ ώστε να τείνει να ταυτιστεί με το $ M_0 $. Τότε η ευθεία $ MM_0 $ τείνει να γίνει εφαπτόμενη στο σημείο $ Μ_0(x_0,f(x_0)) $.\\\\
+\thewrhmata
+\Thewrhma{Παράγωγοι συναρτήσεων}
+Στον πίνακα που ακολουθεί βλέπουμε τύπους για την παραγώγιση των βασικών συναρτήσεων καθώς και κανόνες παραγώγισης σύνθετων συναρτήσεων. Η απλή συνάρτηση και η σύνθεση συναρτήσεων που βρίσκονται στην ίδια γραμμή έχουν την ίδια μορφή ως προς τον τύπο τους.
+\begin{center}
+\begin{longtable}{cc|cc}
+\hline \rule[-2ex]{0pt}{5.5ex} Συνάρτηση $ f $& Παράγωγος $ f' $ & Συνάρτηση $ g\circ f $ & Παράγωγος $ \left( g\circ f \right)' $ \\ 
+\hhline{====} \rule[-2ex]{0pt}{5.5ex} $ c $ & $ 0 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x $ & $ 1 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x^\nu $ & $ \nu x^{\nu-1} $ & $ f^\nu(x) $ & $ \nu f^{\nu-1}(x)\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \dfrac{1}{x} $ & $ -\dfrac{1}{x^2} $ & $ \dfrac{1}{f(x)} $ & $ -\dfrac{f'(x)}{f^2(x)} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \sqrt{x} $ & $ \dfrac{1}{2\!\sqrt{x}} $ & $ \sqrt{f(x)} $ & $ \dfrac{f'(x)}{2\!\sqrt{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \hm{x} $ & $ \syn{x} $ & $ \hm{f(x)} $ & $ \syn{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \syn{x} $ & $ -\hm{x} $ & $ \syn{f(x)} $ & $ -\hm{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \ef{x} $ & $ \dfrac{1}{\syn^2{x}} $ & $ \ef{f(x)} $ & $ \dfrac{f'(x)}{\syn^2{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \syf{x} $ & $ -\dfrac{1}{\hm^2{x}} $ & $ \syf{f(x)} $ & $ -\dfrac{f'(x)}{\hm^2{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ a^x $ & $ a^x\ln{a} $ & $ a^{f(x)} $ & $ a^{f(x)}\ln{a}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ e^x $ & $ e^x $ & $ e^{f(x)} $ & $ e^{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \ln{|x|} $ & $ \dfrac{1}{x} $ & $ \ln{|f(x)|} $ & $ \dfrac{f'(x)}{f(x)} $ \\
+\hline 
+\end{longtable}\captionof{table}{Παράγωγοι βασικών συναρτήσεων}
+\end{center}
+\Thewrhma{Θεώρημα \eng{Rolle}}
+Έστω μια συνάρτηση $ f:Α\rightarrow\mathbb{R} $ και ένα κλειστό διάστημα $ [a,\beta] $ του πεδίου ορισμού της. Αν η $ f $ είναι :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο κλειστό διάστημα $ [a,\beta] $
+\item παραγωγίσιμη στο ανοιχτό διάστημα $ (a,\beta) $ και επιπλέον ισχύει
+\item $ f(a)=f(\beta) $
+\end{enumerate}
+τότε υπάρχει τουλάχιστον ένας πραγματικός αριθμός $ \xi\in(a,\beta) $ ώστε \[ f'(\xi)=0 \]
+\Thewrhma{Γεωμετρική ερμηνεία θεωρηματοσ \eng{Rolle}}
+\wrapr{-4mm}{9}{5.3cm}{-5mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.9,xmax=3,
+ymin=-.4,ymax=2.3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0.16:2.67]{.7*sin(deg(2.5*x-.4))+1};
+\coordinate (A) at (axis cs:.16,1);
+\coordinate (B) at (axis cs:2.67,1);
+\coordinate (C) at (axis cs:.78,1.7);
+\coordinate (D) at (axis cs:2.04,.3);
+\draw (axis cs:.38,1.7)--(axis cs:1.18,1.7);
+\draw (axis cs:1.64,.3)--(axis cs:2.44,.3);
+\draw[dashed] (B)--(axis cs:0,1) node[left]{\scriptsize$f'(a)=f(\beta)$};
+\draw[dashed] (C)--(axis cs:.78,0) node[below]{\scriptsize$\xi_1$};
+\draw[dashed] (D)--(axis cs:2.04,0) node[below]{\scriptsize$\xi_2$};
+\node[fill=white,inner sep=.5pt] at (axis cs:-0.2,-0.2) {\footnotesize $ O $};
+\tkzLabelPoint[below,xshift=5mm](A){\scriptsize$A(a,f(a))$}
+\tkzLabelPoint[above,xshift=-3mm](B){\scriptsize$B(\beta,f(\beta))$}
+\tkzLabelPoint[above](C){\scriptsize$f'(\xi_1)=0$}
+\end{axis}
+\tkzDrawPoints[fill=black](A,B,C,D)
+\end{tikzpicture}\captionof{figure}{Γεωμετρική ερμηνεία θεωρήματος \eng{Rolle}}}{
+Αν για μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ εφαρμόζεται το θεώρημα \eng{Rolle} σ' ένα κλειστό διάστημα $ [a,\beta] $ του πεδίου ορισμού της τότε υπάρχει τουλάχιστον ένας πραγματικός αριθμός $ \xi\in(a,\beta) $ ώστε η εφαπτόμενη ευθεία $ \varepsilon $ στο σημείο $ M\left( \xi,f(\xi)\right) $ της γραφικής παράστασης της $ f $, να είναι παράλληλη με τον οριζόντιο άξονα $ x'x $. \[ f'(\xi)=0\Rightarrow \varepsilon\parallel x'x \]}\mbox{}\\\\\\
+\Thewrhma{Θεώρημα Μέσησ Τιμήσ}
+Έστω μια συνάρτηση $ f:Α\rightarrow\mathbb{R} $ και ένα κλειστό διάστημα $ [a,\beta] $ του πεδίου ορισμού της. Αν η $ f $ είναι :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item συνεχής στο κλειστό διάστημα $ [a,\beta] $ και
+\item παραγωγίσιμη στο ανοιχτό διάστημα $ (a,\beta) $
+\end{enumerate}
+τότε υπάρχει τουλάχιστον ένας πραγματικός αριθμός $ \xi\in(a,\beta) $ ώστε \[ f'(\xi)=\frac{f(\beta)-f(a)}{\beta-a} \]
+\Thewrhma{Γεωμετρική ερμηνεία Θ.Μ.Τ.}
+\wrapr{-4mm}{11}{3.7cm}{-4mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.4,xmax=3,
+ymin=-.4,ymax=2.3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=.17:2.6]{(x-1.4)^3-.7*x+2.2};
+\addplot[domain=.2:1.2]{.77*(x-.7)+1.367};
+\addplot[domain=1.6:2.6]{.77*(x-2.1)+1.07};
+\coordinate (B) at (axis cs:2.6,2.1);
+\coordinate (A) at (axis cs:.17,.22);
+\coordinate (C) at (axis cs:.7,1.367);
+\coordinate (D) at (axis cs:2.1,1.07);
+\draw (A)--(B);
+\draw[dashed] (C)--(axis cs:.7,0) node[below]{\scriptsize$\xi_1$};
+\draw[dashed] (D)--(axis cs:2.1,0) node[below]{\scriptsize$\xi_2$};
+\node[fill=white,inner sep=.5pt] at (axis cs:-0.2,-0.2) {\footnotesize $ O $};
+\tkzLabelPoint[right,fill=white,inner sep=.1mm,xshift=1.9mm](A){\scriptsize$A(a,f(a))$}
+\tkzLabelPoint[left](B){\scriptsize$B(\beta,f(\beta))$}
+\tkzLabelPoint[above left,xshift=2mm](C){\scriptsize$f'(\xi_1)$}
+\tkzLabelPoint[right](D){\scriptsize$f'(\xi_2)$}
+\end{axis}
+\tkzDrawPoints[fill=black](A,B,C,D)
+\end{tikzpicture}\captionof{figure}{Γεωμετρική ερμηνεία Θ.Μ.Τ.}}{
+Εαν για μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ εφαρμόζεται το Θ.Μ.Τ. σε ένα κλειστό διάστημα $ [a,\beta] $ του πεδίου ορισμού της τότε αυτό γεωμετρικά σημαίνει οτι θα υπάρχει τουλάχιστον ένας πραγματικός αριθμός $ \xi\in(a,\beta) $ ώστε η εφαπτόμενη ευθεία στη $ C_f $ στο σημείο $ M(\xi,f(\xi)) $ να είναι παράλληλη με το ευθύγραμμο τμήμα $ AB $ που ενώνει τα σημεία στα άκρα του διαστήματος. \[ \lambda_{\varepsilon\varphi}=\lambda_{AB} \]
+\begin{itemize}[itemsep=0mm]
+\item Ο συντελεστής διεύθυνσης της εφαπτόμενης ευθείας είναι ίσος με το συντελεστή της ευθείας $ AB $.
+\item Το κλάσμα $ \frac{f(\beta)-f(a)}{\beta-a} $ λέγεται \textbf{λόγος μεταβολής}.
+\end{itemize}}
+
+\section{Ολοκληρωτικός Λογισμός}\mbox{}\\
+\orismoi
+\Orismos{Αρχική ή παράγουσα συνάρτηση}
+Αρχική συνάρτηση ή παράγουσα συνάρτηση μιας συνάρτησης $ f $ ορισμένης σε ένα διάστημα $ \varDelta $, ονομάζεται κάθε παραγωγίσιμη συνάρτηση $ F $ για την οποία ισχύει \[ F'(x)=f(x)\;\;,\;\;\textrm{για κάθε }x\in\varDelta \]
+\Orismos{Αοριστο ολοκληρωμα}
+Αόριστο ολοκλήρωμα μιας συνάρτησης $ f $ ονομάζεται το σύνολο όλων των αρχικών συναρτήσεων της $ f $ σε ένα διάστημα $ \varDelta $. Συμβολίζεται \( \int f(x)\mathrm{d}x \) και ισχύει \[ \int f(x)\mathrm{d}x=F(x)+c \] όπου $ F $ είναι μια παράγουσα της $ f $ και $ c\in\mathbb{R} $.\\\\
+\Orismos{Ορισμένο ολοκλήρωμα}
+Ορισμένο ολοκλήρωμα, μιας συνεχούς συνάρτησης $ f $ από το $ a $ ως το $ \beta $ ονομάζεται το όριο \[ \lim_{\nu\rightarrow\infty}\PARENS{\sum_{\kappa=1}^{\nu}f(\xi_\kappa)\varDelta x} \] το οποίο συμβολίζεται με $ \int_{a}^{\beta}f(x)\mathrm{d}x $ και για το οποίο έχουμε οτι :
+\begin{itemize}[itemsep=0mm]
+\item $ \varDelta x $ είναι το μήκος καθενός από τα ισομήκη $ \nu $ υποδιαστήματα, στα οποία χωρίσαμε το διάστημα $ [a,\beta] $ και ισχύει $ \varDelta x=\frac{\beta-a}{\nu} $.
+\item Τα $ \nu $ σημεία στα οποία χωρίστηκε το διάστημα $ [a,\beta] $ είναι $ a=x_0, x_1,x_2,\ldots,\\x_{\nu-1}, x_\nu=\beta $.
+\item $ f(\xi_\kappa) $ είναι η τιμή ενός τυχαία επιλεγμένου σημείου $ \xi_\kappa $ σε καθένα από τα διαστήματα $ \left[x_\kappa,x_{\kappa+1} \right] $ με $ \kappa=1,2,\ldots,\nu $.
+\item Το γινόμενο $ f(\xi_\kappa)\varDelta x $ εκφράζει το εμβαδόν καθενός ορθογωνίου με διαστάσεις $ \varDelta x $ και $ f(\xi_\kappa) $.
+\begin{center}
+\begin{tikzpicture}[domain=0:9,x=1cm,y=2cm]
+\tkzInit[xmin=-1,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-1.5,0) -- coordinate (x axis mid) (10,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (-.8,-.2) -- (-.8,2.1) node[above,fill=white] {{\footnotesize $ y $}};
+
+\foreach \x/\y in {.5/0,1.6/1,2.7/2,3.4/3,4.6/4,5.5/5,6.4/6,7.7/7,8.5/8}{
+\foreach \t in \y{
+\draw[fill=black!10] (\y,0) rectangle (\y+1,{\x*sin(\x r)/5+.5});
+\draw[dashed] (\x,0)--(\x,{\x*sin(\x r)/5+.5});}}
+\foreach \x/\y in {0.5/1,1.6/2,2.7/3,8.5/\nu}{
+\node at (\x,-.2) {\scriptsize $ \xi_\y $};}
+\node at (4.6,.2) {\scriptsize $\xi_\kappa $};
+\node at (5.5,.2) {\scriptsize $\xi_{\kappa+1} $};
+\node at (-.2,-.15) {\scriptsize $ a=x_0 $};
+\node at (1,-.15) {\scriptsize $ x_1 $};
+\node at (2,-.15) {\scriptsize $ x_2 $};
+\node at (9.3,-.15) {\scriptsize $ \beta=x_\nu $};
+\node at (8,-.15) {\scriptsize $ x_{\nu-1} $};
+\node at (5.8,1) {$  y=f(x) $};
+\node at (2.8,1.5) {$  \displaystyle{\int_{a}^{\beta}f(x)\mathrm{d}x=\lim_{\nu\rightarrow\infty}\PARENS{\sum_{\kappa=1}^{\nu}f(\xi_\kappa)\varDelta x} }$};
+\draw[samples=200,line width=.4mm] plot function{x*sin(x)/5+.5};
+\tkzText(6.5,-.15){$ \undercbrace{\rule{9mm}{0mm}}_{\varDelta x} $}
+\end{tikzpicture}\captionof{figure}{Ορισμένο Ολοκλήρωμα}
+\end{center}
+\item Αθροίζοντας τα εμβαδά των ορθογωνίων και υπολογίζοντας το όριο του αθροίσματος για $ \nu\rightarrow\infty $ προκύπτει το ορισμένο ολοκλήρωμα της $ f $ από το $ a $ στο $ \beta $.
+\begin{gather*}
+S_\nu=\sum_{\kappa=1}^{\nu}f(\xi_\kappa)\varDelta x\;\;,\;\;
+\lim_{\nu\rightarrow\infty}S_\nu=\int_{a}^{\beta}f(x)\mathrm{d}x
+\end{gather*}
+Κατά συνέπεια, το ορισμένο ολοκλήρωμα δηλώνει άθροισμα απείρων εμβαδών. Το άθροισμα $ S_\nu $ ονομάζεται άθροισμα \eng{Riemann}.
+\item Οι αριθμοί $ a $ και $ \beta $ ονομάζονται \textbf{άκρα ολοκλήρωσης}.
+\item Στον τύπο $ \int_{a}^{\beta}f(x)\mathrm{d}x $ του ολοκληρώματος, η μεταβλητή $ x $ ονομάζεται \textbf{βουβή μεταβλητή}, έννοια η οποία δηλώνει οτι μπορεί να αντικατασταθεί με οποιαδήποτε άλλη μεταβλητή, χωρίς να αλλοιωθεί το ολοκλήρωμα.
+\item Η έκφραση $ \mathrm{d}x $ μας δείχνει τη μεταβλητή ολοκλήρωσης.
+\end{itemize}
+\Orismos{Εμβαδόν χωρίου}
+Έστω $ f:[a,\beta]\rightarrow\mathbb{R} $ μια συνεχής συνάρτηση. Αν $ f(x)\geq0 $ για κάθε $ x\in[a,\beta] $, το εμβαδόν του χωρίου $ \varOmega $, που περικλείεται μεταξύ της γραφικής παράστασης συνάρτησης $ f $, του άξονα $ x'x $ και των κατακόρυφων ευθειών $ x=a, x=\beta $ ορίζεται να είναι το ορισμένο ολοκλήρωμα της $ f $ από το $ a $ στο $ \beta $.
+\[ Ε(\varOmega)=\int_{a}^{\beta}f(x)\mathrm{d}x \]
+\begin{center}
+\begin{tikzpicture}[domain=0:9,x=.8cm,y=2cm,scale=.8]
+\fill [fill=black!10] (0,0) -- plot[domain=0:9] (\x,{\x/15+sin(\x r)/5+1.5}) -- ({9},0) -- cycle;
+\draw[-latex] (-1.5,0) -- coordinate (x axis mid) (10,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (-1,-.2) -- (-1,2.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[dashed] (0,0)--(0,1.5);
+\draw[dashed] (9,0)--(9,{9/15+sin(9)/5+1.5});
+\node at (4.7,2) {$ y=f(x) $};
+\node at (0,-.15) {\footnotesize $ a $};
+\node at (9,-.15) {\footnotesize $ \beta $};
+\draw[samples=200,line width=.4mm] plot function{x/15+sin(x)/5+1.5};
+\node at (4.5,1) {\textrm{\boldmath {\Large $ \varOmega $}}};
+\end{tikzpicture}\captionof{figure}{Εμβαδόν χωρίου}
+\end{center}
+\thewrhmata
+\Thewrhma{Αρχική συνάρτηση}
+Αν $ f:\varDelta\rightarrow\mathbb{R} $ μια συνεχής συνάρτηση και $ a\in\varDelta $ ένα τυχαίο σημείο του πεδίου ορισμού, τότε η συνάρτηση \[ F(x)=\int_{a}^{x}f(u)\mathrm{d}u\;\;,\;\;x\in\varDelta \] είναι μια αρχική συνάρτηση της $ f $ στο $ \varDelta $.
+\begin{itemize}[itemsep=0mm]
+\item Το άνω άκρο του ολοκληρώματος μας δίνει τη μεταβλητή $ x $ της συνάρτησης, η οποία είναι και μεταβλητή παραγώγισης.
+\item Η μεταβλητή $ u $ είναι η μεταβλητή ολοκλήρωσης. Ως βουβή μεταβλητή του ολοκληρώματος, μπορεί να αντικατασταθεί από οποιαδήποτε άλλη, εκτός της $ x $ η οποία είναι μεταβλητή της συνάρτησης $ F $.
+\end{itemize}
+\Thewrhma{Ιδιότητεσ Ορισμένου Ολοκληρώματοσ}
+Για οποιεσδήποτε συνεχείς συναρτήσεις $ f,g $ ορισμένες σε ένα κλειστό διάστημα $ [a,\beta] $ και για κάθε πραγματικό αριθμό $ \lambda\in\mathbb{R} $ ισχύουν οι ακόλουθες ιδιότητες για το ορισμένο ολοκλήρωμα.
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\ 
+\hhline{==} \rule[-2ex]{0pt}{7.5ex} Ολοκλήρωμα αθροίσματος & $ \displaystyle{\int_{a}^{\beta}\!\!{\left( f(x)+g(x)\right) \mathrm{d}x}=\int_{a}^{\beta}{\!\!f(x)\mathrm{d}x}+\int_{a}^{\beta}\!\!{g(x)\mathrm{d}x}} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Αντιστροφή άκρων & $ \displaystyle{\int_{a}^{\beta}\!\!{ f(x) \mathrm{d}x}=-\int_{\beta}^{a}{\!\!f(x)\mathrm{d}x}} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Πολλαπλάσιο συνάρτησης & $ \displaystyle{\int_{a}^{\beta}\!\!{cf(x) \mathrm{d}x}=c\int_{a}^{\beta}{\!\!f(x)\mathrm{d}x}}\;\;,\;\;c\in\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Διάσπαση ολοκληρώματος & $ \displaystyle{\int_{a}^{\beta}\!\!{f(x) \mathrm{d}x}=\int_{a}^{\gamma}{\!\!f(x)\mathrm{d}x}+\int_{\gamma}^{\beta}{\!\!f(x)\mathrm{d}x}}\;\;,\;\;\gamma\in\mathbb{R} $\vspace{2mm} \\ 
+\hline 
+\end{tabular}\captionof{table}{Ιδιότητες ορισμένου ολοκληρώματος}
+\end{center}
+\Thewrhma{θεμελιωδεσ θεωρημα ολοκληρωτικου λογισμου}
+Έστω $ f $ μια συνεχής συνάρτηση στο διάστημα $ [a,\beta] $. Αν $ G $ είναι μια παράγουσα της $ f $ στο $ [a,\beta] $ τότε ισχύει \[ \int_{a}^{\beta}f(x)\mathrm{d}x=G(\beta)-G(a) \] 
+\Thewrhma{Θ.Μ.Τ. ολοκληρωτικού λογισμου}
+Αν μια συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ είναι συνεχής στο διάστημα $ [a,\beta] $ τότε υπάρχει ένα τουλάχιστον $ \xi\in(a,\beta) $ έτσι ώστε \[ \int_{a}^{\beta}f(x)\mathrm{d}x=f(\xi)(\beta-a) \]
+\end{document}

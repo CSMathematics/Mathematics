@@ -1,0 +1,146 @@
+\documentclass[ektypwsh]{diag-pan-xelatex}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{cyan}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\DeclareMathSizes{10.95}{10.95}{7}{5}
+
+
+\begin{document}
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt 
+\titlos{ΜΑΘΗΜΑΤΙΚΑ ΓΕΝΙΚΗΣ Γ΄ ΛΥΚΕΙΟΥ}{ΟΡΙΟ - ΣΥΝΕΧΕΙΑ}
+\begin{thema}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Έστω μια συνάρτηση $ f $ ορισμένη σε ένα σύνολο $ A $ και $ x_0 $ ένα σημείο του πεδίου ορισμού της. Να διατυπώσετε τον ορισμό της συνέχειας της συνάρτησης $ f $ στο σημείο $ x_0 $ καθώς και σε όλο το πεδίο ορισμού. \monades{10}
+\item Να γράψετε τον ορισμό της γραφικής παράστασης μιας συνάρτησης $ f $ με πεδίο ορισμού ένα σύνολο $ A $.\monades{5}
+\item \swstolathos
+\begin{alist}
+\item Αν {$ \displaystyle\lim_{x\to x_0}{f(x)}=\mathcal{l}_1 $ και $ \displaystyle\lim_{x\to x_0}{g(x)}=\mathcal{l}_2 $} τότε {$ \displaystyle\lim_{x\to x_0}{(f(x)+g(x))}=\mathcal{l}_1+\mathcal{l}_2 $}.
+\item Το σημείο $ A(2,-1) $ ανήκει στη γραφική παράσταση της συνάρτησης $ f(x)=2x^2-7 $.
+\item Η γραφική παράσταση της συνάρτησης $ f(x)=x^2+1 $ βρίσκεται ολόκληρη πάνω από τον οριζόντιο άξονα $ x'x $.
+\item Αν {$ \displaystyle\lim_{x\to x_0}{f(x)}=\mathcal{l}_1 $} τότε {$ \displaystyle\lim_{x\to x_0}{\sqrt{f(x)}}=\sqrt{\mathcal{l}_1} $} για κάθε $ x\in D_f $.
+\item Οι ρητές συναρτήσεις είναι συνεχείς στο πεδίο ορισμού τους.
+\end{alist}\monades{10}
+\end{erwthma}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Έστω η συνάρτηση $ f $ με πεδίο ορισμού το σύνολο $ \mathbb{R} $ η οποία δίνεται από τον τύπο :
+\[ f(x)=\ccases{\dfrac{\sqrt{x^2+3}-2}{x^2-x}&\ ,\  x\neq1\\
+\qquad\ \ 2&\ ,\  x=1} \]
+Να εξετάσετε αν η συνάρτηση είναι συνεχής στο $ x_0=1 $.\monades{10}
+\item Έστω η συνάρτηση $ f $ με πεδίο ορισμού το σύνολο $ \mathbb{R}^* $ η οποία δίνεται από τον τύπο :
+\[ f(x)=\ccases{\dfrac{x^2-3x+2}{x^2-2x}&\ ,\  x\neq2\\
+\quad\ 3\lambda-2&\ ,\  x=2} \]
+Να βρεθεί η τιμή της παραμέτρου $ \lambda $ ώστε η συνάρτηση να είναι συνεχής στο $ x_0=2 $.\monades{15}
+\end{erwthma}
+\item Δίνεται η συνεχής συνάρτηση $ f:A\to\mathbb{R} $ η οποία ικανοποιεί τη σχέση
+\[ xf(x)+4=\sqrt{x^2+15}+f(x) \]
+\begin{erwthma}
+\item Να βρεθεί ο τύπος της συνάρτησης $ f $.\monades{10}
+\item Να υπολογιστεί το όριο $ {\displaystyle\lim_{x\to 3}{\frac{f(x)-f(3)}{x-3}}} $.\monades{8}
+\item Να βρεθούν οι τιμές του $ x $ για τις οποίες η γραφική παράσταση της συνάρτησης $ f $, τέμνει τον άξονα $ x'x $.\\\monades{7}
+\end{erwthma}
+\newpage
+\item \mbox{}\\
+Έστω μια συνεχής συνάρτηση $ f:A\to\mathbb{R} $ της οποίας η γραφική παράσταση διέρχεται από τα σημεία $ A(2,a+2\beta) $ και $ B(\beta,4) $. Επίσης δίνεται ότι 
+\[ \lim_{x\to 2}{\frac{f(x)+2x}{2x-1}}=3 \ \ \textrm{και}\ \ xf(x)+9=x^2+3f(x) \]
+\begin{erwthma}
+\item Να βρεθούν οι τιμές των παραμέτρων $ a,\beta $.\monades{15}
+\item Αφού βρεθεί ο τύπος της συνάρτησης $ f $ να υπολογίσετε το όριο $ {\displaystyle{\lim_{x\to 1}{\frac{\sqrt{f(x)}-2}{x^2-x}}}} $.\monades{10}
+\end{erwthma}
+\end{thema}
+\end{document}
+

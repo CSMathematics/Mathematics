@@ -1,0 +1,137 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά προσανατολισμού}{Όρια - Συνέχεια}{Συνέχεια συνάρτησης}
+\orismoi
+\Orismos{Συνέχεια}
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν το όριο της στο $ x_0 $ είναι ίσο με την τιμή της στο σημείο αυτό. Δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+Μια συνάρτηση $ f $ θα λέμε ότι είναι \textbf{συνεχής} εάν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.\\\\
+\thewrhmata
+\Thewrhma{Συνέχεια βασικών συναρτήσεων}
+Τα βασικά είδη συναρτήσεων είναι συνεχείς συναρτήσεις στο πεδίο ορισμού τους. Αναλυτικότερα για κάθε είδος ισχύουν τα παρακάτω:
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Πολυωνυμικές}\\
+Κάθε πολυωνυμική συνάρτηση $ P(x) $ είναι συνεχής στο πεδίο ορισμού της διότι για κάθε $ x\in\mathbb{R} $ ισχύει \[ \lim_{x\rightarrow x_0}{P(x)}=P(x_0) \]
+\item \textbf{Ρητές}\\
+Κάθε ρητή συνάρτηση $ f(x)=\dfrac{P(x)}{Q(x)} $ είναι συνεχής στο πεδίο ορισμού της $ A $ διότι για κάθε $ x\in A $ ισχύει \[ \lim_{x\rightarrow x_0}{f(x)}=\lim_{x\rightarrow x_0}{\dfrac{P(x)}{Q(x)}}=\dfrac{P(x_0)}{Q(x_0)}=f(x_0) \]
+\item \textbf{Άρρητες}\\
+Κάθε άρρητη συνάρτηση $ f(x)=\sqrt{A(x)} $ είναι συνεχής στο πεδίο ορισμού της $ A $. Για κάθε $ x\in A $ ισχύει:
+\[ \lim_{x\rightarrow x_0}{\sqrt{A(x)}}=\sqrt{A(x_0)} \] 
+\item \textbf{Τριγωνομετρικές}\\
+Οι βασικές τριγωνομετρικές συναρτήσεις είναι όλες συνεχείς στο πεδίο ορισμού τους. Για κάθε $ x_0 $ ισχύει:
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\hm{x}}=\hm{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syn{x}}=\syn{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\ef{x}}=\ef{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syf{x}}=\syf{x_0}} $
+\end{enumerate}
+\end{multicols}
+\item \textbf{Εκθετικές}\\
+Κάθε εκθετική συνάρτηση $ f(x)=a^x $ είναι συνεχής στο πεδίου ορισμού της αφού ισχύει:
+\[ \lim_{x\to x_0}{a^x}=a^{x_0} \]
+\item \textbf{Λογαριθμικές}\\
+Κάθε λογαριθμική συνάρτηση $ f(x)=\log_{a}{x} $ είναι συνεχής στο πεδίου ορισμού της αφού ισχύει:
+\[ \lim_{x\to x_0}{\log_{a}{x}}=\log_{a}{x_0} \]
+\end{enumerate}
+\Thewrhma{Συνέχεια Πράξεων συναρτήσεων}
+Εάν οι συναρτήσεις $ f,g $ είναι συνεχείς σε ένα κοινό σημείο $ x_0 $ των πεδίων ορισμού τους τότε και οι συναρτήσεις \[ f+g\;,\;f-g\;,\;c\cdot f\;,\;f\cdot g\;,\;\frac{f}{g}\;,\;|f|\;,\;f^\nu\textrm{ και }\sqrt[\mu]{f} \]
+με $ \nu\in\mathbb{Z}\ ,\ \mu\in\mathbb{N} $, είναι συνεχείς στο σημείο $ x_0 $ εφόσον ορίζονται στο σημείο αυτό.\\\\
+\Thewrhma{Συνέχεια σύνθεσης συναρτήσεων}
+Εάν η συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ και η συνάρτηση $ g $ είναι συνεχής στο σημείο $ f(x_0) $ η σύνθεση τους $ g\circ f $ είναι συνεχής στο σημείο $ x_0 $.\\\\
+\end{document}
+
+
+

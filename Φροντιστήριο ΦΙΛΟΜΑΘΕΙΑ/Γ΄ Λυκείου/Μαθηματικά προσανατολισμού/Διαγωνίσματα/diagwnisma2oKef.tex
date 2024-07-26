@@ -1,0 +1,119 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,wrap-rl}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\lysh}{\textcolor{black}{\textbf{\faCheck\ \ ΛΥΣΗ}}}
+\renewcommand{\textstigma}{\textsigma\texttau}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textcolor{black}{\kerkissans{Ορισμός\hspace{2mm}\theorismos}}\;:\;}{}}}
+
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos {\textcolor{black}{\kerkissans{#1}}},breakable,bottomtitle=-1.5mm,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{black},leftrule=2mm,sharp corners,coltitle=black]}
+{\end{tcolorbox}}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\begin{document}
+\begin{thema}
+\item\mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Πότε μια συνάρτηση $f$ με πεδίο ορισμού $A$ παρουσιάζει στο $x_0\in A$, τοπικό ελάχιστο?
+\item Πότε η ευθεία $y=\lambda x+\beta$ λέγεται ασύμπτωτη της γραφικής παράστασης μιας συνάρτησης $f$, στο $+\infty$?
+\item Αν οι συναρτήσεις $f,g$ είναι παραγωγίσιμες στο $x_0$, να αποδείξετε ότι και η $f+g$ είναι παραγωγίσιμη στο $x_0$ και ισχύει
+\[ (f+g)'(x_0)=f'(x_0)+g'(x_0) \]
+\item Να χαρακτηρίσετε καθεμία από τις παρακάτω προτάσεις ως \textbf{Σωστή} ή \textbf{Λανθασμένη}.
+\begin{alist}
+\item Αν μια παραγωγίσιμη συνάρτηση $f$ είναι γνησίως αύξουσα σε ένα διάστημα $\varDelta$, τότε ισχύει $f'(x)>0$ για κάθε $x\in\varDelta$.
+\item Κρίσιμα σημεία μιας συνάρτησης $f$ ονομάζονται τα σημεία στα οποία μηδενίζεται η παράγωγος της $f$, ή τα σημεία στα οποία η $f$ δεν είναι παραγωγίσιμη.
+\item Η συνάρτηση $f(x)=x^4$ είναι κυρτή στο $\mathbb{R}$.
+\item Αν για μια παραγωγίσιμη συνάρτηση $f$, ισχύει $f'(x_0)$ σε κάποιο σημείο $x_0\in(a,\beta)$, τότε η $f$ έχει τοπικό ακρότατο στο σημείο αυτό.
+\item Ισχύει ότι $\left(\sqrt{x}\right)'=\frac{2}{\sqrt{x}}$.
+\end{alist}
+\end{erwthma}
+\item Δίνεται η συνάρτηση $f(x)=\ln{\left(x^2+1\right)}$.
+\begin{erwthma}
+\item Να μελετήσετε τη συνάρτηση $f$ ως προς τη μονοτονία και τα ακρότατα.
+\item Να μελετήσετε την $f$ ως προς την κυρτότητα και τα σημεία καμπής.
+\item Να βρεθεί η εξίσωση της εφαπτομένης της $C_{f'}$ στο σημείο της $M(2,f'(2))$.
+\item Να υπολογίσετε το όριο
+\[ \lim_{x\to+\infty}{\frac{f(x)}{x^2}} \]
+\end{erwthma}
+\item Δίνεται η συνάρτηση $f:\mathbb{R}\to\mathbb{R}$ με τύπο
+\[ f(x)=\begin{cdcases}
+xe^x & ,x\geq 0\\x^2+ax & ,x<0
+\end{cdcases} \]
+της οποίας η γραφική παράσταση διέρχεται από το σημείο $M(-2,2)$.
+\begin{erwthma}
+\item Να αποδείξετε ότι $a=1$.
+\item Να αποδείξετε ότι η $f$ είναι κυρτή στο $\mathbb{R}$.
+\item Να βρεθεί η εξίσωση της εφαπτομένης της $C_f$ στο σημείο της $M(1,f(1))$.
+\item Να αποδείξετε ότι ισχύει 
+\[ x\left(e^{x-1}-2\right)\geq-1 \]
+για κάθε $x\geq 0$.
+\end{erwthma}
+\item (Τράπεζα Θεμάτων - 29644)\mbox{}\\
+\wrapr{-5mm}{12}{6cm}{-5mm}{
+\begin{tikzpicture}
+\draw[line width=.1mm,xshift=5mm,yshift=2.5mm,opacity=0.3] (0,0) grid (5,5);
+\draw[line width=.05mm,xshift=5mm,yshift=2.5mm,opacity=0.1,xstep=0.2,ystep=0.25] (0,0) grid (5,5);
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize $ x $},xtick={-3,-2,-1,0,1,2},ytick={-6,-5,...,4},
+ylabel={\footnotesize $ y $},xmin=-3.5,xmax=2.5,ymin=-6.5,ymax=4,x=1cm,y=.5cm]
+\addplot[domain=-1:2,draw=black,line width=.3mm] {-x^2+3};
+\addplot[domain=-3:-1,draw=black,line width=.3mm] {(x+1)^3+2};
+\node at (axis cs:-.2,-.52){$O$};
+\node at (axis cs:1.3,2.2){$C_f$};
+\node at(axis cs:-2.5,.4){\footnotesize$A$};
+\node at(axis cs:2,.4){\footnotesize$B$};
+\fill (axis cs:-2.26,0) circle (.7mm);
+\fill (axis cs:1.732,0) circle (.7mm);
+\end{axis}
+\end{tikzpicture}
+}{
+Στο διπλανό σχήμα δίνεται η γραφική παράσταση μιας συνεχούς συνάρτησης $f$ στο  διάστημα $[-3,2]$ η οποία παρουσιάζει μέγιστο στο $0$ το $3$ και τέμνει τον άξονα $x'x$ στα σημεία $A$ και $B$. Έστω  η συνάρτηση $g$ με $g(x)=f(x)+x$, $x\in[-3,2]$.
+\begin{erwthma}
+\item Να αποδείξετε ότι: 
+\begin{alist}
+\item Η συνάρτηση $g$ είναι συνεχής στο $[-3,2]$.
+\item Η εξίσωση $g(x)=0$ έχει μία τουλάχιστον ρίζα.	
+\end{alist}
+\item Αν η συνάρτηση $f$ είναι παραγωγίσιμη στο $(-1,2)$, να αποδείξετε ότι η εφαπτομένη ευθεία της γραφικής παράστασης της συνάρτησης $g$, στο σημείο που η $f$ παρουσιάζει μέγιστο, έχει εξίσωση $y=x+3$.
+\end{erwthma}}
+\end{thema}
+\end{document}

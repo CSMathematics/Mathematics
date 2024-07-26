@@ -1,0 +1,95 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,enumitem}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{rotating}
+\usepackage{hhline}
+\usepackage{multicol,multirow,gensymb,mathimatika}
+\usepackage{wrap-rl}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Παραλληλόγραμμα}{Βαρύκετρο - Ορθόκεντρο}
+\orismoi
+\Orismos{Βαρύκεντρο Τριγώνου}
+Βαρύκεντρο ή κέντρο βάρους ενός τριγώνου ονομάζεται το σημείο τομής των τριών διαμέσων του τριγώνου.\\\\
+\Orismos{Ορθόκεντρο Τριγώνου}
+Ορθόκεντρο ενός τριγώνου ονομάζεται το σημείο τομής των τριών υψών ή των φορέων των υψών του τριγώνου.
+\begin{center}
+\begin{tabular}{p{4.2cm}cp{4.2cm}}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.3,2.1){A}
+\tkzDefPoint(.65,1.05){M}
+\tkzDefPoint(2.4,1.05){L}
+\tkzDefPoint(1.75,0){K}
+\tkzDefPoint(1.6,.7){G}
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (A)--(K);
+\draw[pl,\xrwma] (B)--(L);
+\draw[pl,\xrwma] (C)--(M);
+\tkzDrawPoints(A,B,C,K,L,M,G)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](K){$K$}
+\tkzLabelPoint[right](L){$\varLambda$}
+\tkzLabelPoint[left](M){$M$}
+\tkzLabelPoint[above,yshift=.5mm,xshift=-2.5mm](G){$\varTheta$}
+\end{tikzpicture} &  & \begin{tikzpicture}
+\clip (-.5,-.52) rectangle (4,2.5);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.3,2.1){A}
+\tkzDefPoint(.96,1.55){M}
+\tkzDefPoint(1.67,1.74){L}
+\tkzDefPoint(1.3,0){K}
+\tkzInterLL(A,K)(B,L)\tkzGetPoint{H}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawAltitude[draw=\xrwma](A,B)(C)
+\tkzDrawAltitude[draw=\xrwma](A,C)(B)
+\tkzDrawAltitude[draw=\xrwma](B,C)(A)
+\tkzDrawPoints(A,B,C,K,L,M,H)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](K){$K$}
+\tkzLabelPoint[right,yshift=1mm](L){$\varLambda$}
+\tkzLabelPoint[left](M){$M$}
+\tkzLabelPoint[right,xshift=.5mm](H){$H$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Orismos{Ορθοκεντρική τετράδα}
+Ορθοκεντρική τετράδα ονομάζεται ένα σύνολο τεσσάρων σημείων για τα οποία κάθε τρίγωνο με κορυφές τρια απ' αυτά τα σημεία έχει ορθόκεντρο το τέταρτο σημείο. 
+\thewrhmata
+\Thewrhma{Βαρύκεντρο τριγώνου}
+Οι τρεις διάμεσοι ενός τριγώνου διέρχονται από το ίδιο σημείο, το βαρύκεντρο του. Το βαρύκεντρο ισαπέχει από τις κορυφές του τριγώνου και κάθε απόσταση είναι ίση με τα $ \frac{2}{3} $ της αντίστοιχης διαμέσου.\\\\
+\Thewrhma{Τρίγωνο παράλληλων ευθειών}
+Οι ευθείες που διέρχονται από τις κορυφές ενός τριγώνου και είναι παράλληλες προς τις απέναντι πλευρές του, ορίζουν τρίγωνο του οποίου τα μέσα των πλευρών είναι οι κορυφές του αρχικού τριγώνου.\\\\
+\Thewrhma{Ορθόκεντρο τριγώνου}
+Σε κάθε τρίγωνο ισχύουν οι εξής προτάσεις :
+\begin{rlist}
+\item Οι φορείς των υψών ενός τριγώνου τέμνονται στο ίδιο σημείο, το ορθόκεντρο του τριγώνου.
+\item Οι κορυφές του τριγώνου μαζί με το ορθόκεντρο αποτελούν ορθοκεντρική τετράδα.
+\end{rlist}
+\end{document}

@@ -1,0 +1,180 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+%%--------- BOLD Μαθηματικά
+%\newcommand{\bmath}[1]{\textbf{\boldmath{#1}}}
+%
+%%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+%\newcommand{\hm}[1]{\textrm{ημ}#1}
+%\newcommand{\syn}[1]{\textrm{συν}#1}
+%\newcommand{\ef}[1]{\textrm{εφ}#1}
+%\newcommand{\syf}[1]{\textrm{σφ}#1}
+%%--------------------------------------------
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=red9,fg=black,ht=8mm},
+ row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\twocolumn[{
+\centering
+\kerkissans{{\huge Απόσταση σημείου από ευθεία - Εμβαδόν τριγώνου}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
+\paragraph{Απόσταση σημείου από ευθεία}
+\askhsh Να βρεθεί η απόσταση του σημείου $A(1,-3)$ από τις ακόλουθες ευθείες.
+\begin{multicols}{2}
+\begin{alist}
+\item $2x+y-1=0$
+\item $3x-4y+7=0$
+\item $y=5x+4$
+\item $4x+y-1=0$
+\item $x=4$
+\item $y=-2$
+\end{alist}
+\end{multicols}
+\askhsh Να βρείτε την απόσταση του καθενός από τα παρακάτω σημεία, από την ευθεία $5x+12y+7=0$.
+\begin{multicols}{3}
+\begin{alist}
+\item $A(-1,2)$
+\item $B(5,-2)$
+\item $\varGamma(3,4)$
+\item $\varDelta(0,-7)$
+\item $E(6,0)$
+\item $Z(1,-1)$
+\end{alist}
+\end{multicols}
+\askhsh Δίνεται τρίγωνο $AB\varGamma$ με κορυφές $A(2,1), B(-1,4)$ και $\varGamma(5,-2)$. Να βρεθεί
+\begin{alist}
+\item η εξίσωση της ευθείας $AB$.
+\item το μήκος του ύψους $\varGamma Z$.
+\item το μήκος του ύψους $BE$.
+\end{alist}
+\askhsh Δίνονται οι ευθείες $\varepsilon_1:3x+4y-2=0$ και $\varepsilon_2:5x-12y+10=0$.
+\begin{alist}
+\item Να υπολογίσετε τις εξισώσεις των διχοτόμων των γωνιών που σχηματίζουν οι δύο ευθείες.
+\item Ποια από τις παραπάνω είναι η διχοτόμος της οξείας γωνίας που σχηματίζουν οι $\varepsilon_1,\varepsilon_2$?
+\end{alist}
+\paragraph{Απόσταση μεταξύ παράλληλων}
+\askhsh Σε καθένα από τα παρακάτω ερωτήματα, να υπολογίσετε την απόσταση μεταξύ των παράλληλων ευθειών $\varepsilon_1,\varepsilon_2$.
+\begin{alist}
+\item $\varepsilon_1:y=3x-1$ και $\varepsilon_2:y=3x+5$
+\item $\varepsilon_1:3x-4y+12=0$ και $\varepsilon_2:3x-4y-7=0$
+\item $\varepsilon_1:x-2y+1=0$ και $\varepsilon_2:-x+2y-4=0$
+\item $\varepsilon_1:y=3$ και $\varepsilon_2:y=-4$
+\item $\varepsilon_1:x=-2$ και $\varepsilon_2:x=5$
+\end{alist}
+\askhsh Δίνονται οι ευθείες $\varepsilon_1:\lambda x-(\lambda-2)y+4=0$ και $\varepsilon_2:(\lambda+2)+3y-(2\lambda-1)=0$ με $\lambda\in\mathbb{R}$.
+\begin{alist}
+\item Να βρεθούν οι τιμές του $\lambda$ ώστε οι ευθείες να είναι παράλληλες.
+\item Για αυτές τις τιμές του $\lambda$, να υπολογίσετε την απόσταση μεταξύ των δύο ευθειών.
+\item Για $\lambda=1$, να βρεθεί η εξίσωση της μεσοπαράλληλης $\varepsilon$ των ευθειών $\varepsilon_1,\varepsilon_2$.
+\end{alist}
+\askhsh Έστω παραλληλόγραμμο $AB\varGamma\varDelta$ με κορυφές $A(2,3),B(7,1),\varGamma(8,-3)$.
+\begin{alist}
+\item Να βρεθούν οι συντεταγμένες της κορυφής $\varDelta$.
+\item Να υπολογίσετε το μήκος της πλευράς $AB$ καθώς και την εξίσωση της ευθείας $AB$.
+\item Υπολογίστε το μήκος του ύψους $\varGamma K$, καθώς και το εμβαδόν του παραλληλογράμμου.
+\end{alist}
+\paragraph{Εμβαδόν τριγώνου}
+\askhsh Να βρεθεί το εμβαδόν του τριγώνου $AB\varGamma$ με κορυφές:
+\begin{alist}
+\item $A(1,3),B(-2,-1)$ και $\varGamma(4,4)$.
+\item $A(0,2),B(5,1)$ και $\varGamma(-3,4)$.
+\item $A(-4,7),B(2,-3)$ και $\varGamma(3,5)$.
+\item $A(-4,0),B(8,5)$ και $\varGamma(7,3)$.
+\end{alist}
+\askhsh Δίνεται τρίγωνο $AB\varGamma$ με κορυφές $A(3,-1), B(4,-2)$ και $\varGamma(1,7)$. Να βρεθεί
+\begin{alist}
+\item η εξίσωση της ευθείας $B\varGamma$.
+\item το μήκος του ύψους $A\varDelta$.
+\item το μήκος της πλευράς $B\varGamma$.
+\item το εμβαδόν του τριγώνου, κάνοντας χρήση του αντίστοιχου τύπου. Επαληθεύστε το αποτέλεσμα χρησιμοποιώντας τον κλασσικό γεωμετρικό τύπο του εμβαδού τριγώνου.
+\end{alist}
+\askhsh Δίνεται κύκλος με κέντρο το σημείο $K(2,-1)$ και ακτίνα $\rho=5$. Να εξετάσετε ποιες από τις ακόλουθες ευθείες εφάπτονται στον κύκλο.
+\begin{multicols}{2}
+\begin{alist}
+\item $3x+4y-27=0$
+\item $y=\dfrac{4}{3}x+\dfrac{14}{3}$
+\item $4x+3y-10=0$
+\item $x=-3$
+\end{alist}
+\end{multicols}
+\askhsh Δίνεται κύκλος $(K,4)$ με κέντρο $K(3,2)$. Εξετάστε τη σχετική θέση του κύκλου με καθεμία από τις παρακάτω ευθείες.
+\begin{multicols}{2}
+\begin{alist}
+\item $2x+y-5=0$
+\item $x-4y-13=0$
+\item $x=-1$
+\item $y=4$
+\end{alist}
+\end{multicols}
+\askhsh Ένα παραλληλόγραμμο $AB\varGamma\varDelta$ έχει κορυφές $A(2,-1),B(3,4)$ και $\varGamma(-4,2)$. Να υπολογίσετε το εμβαδόν του παραλληλογράμμου.\\\\
+\askhsh
+\end{document}

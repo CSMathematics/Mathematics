@@ -1,0 +1,162 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,enumitem}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\setlist[itemize]{itemsep=0mm}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{rotating}
+\usepackage{hhline}
+\usepackage{multicol,multirow,gensymb,mathimatika}
+\usepackage{wrap-rl}
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Εγγεγραμμένα σχήματα}{Εγγεγραμμένα - Περιγεγραμμένα τετράπλευρα}
+\orismoi
+\Orismos{Εγγεγραμμένο τετράπλευρο}
+\wrapr{-4mm}{7}{3.3cm}{-14mm}{\begin{tikzpicture}
+\tkzDefPoint[label=above left:$O$](0,0){O}
+\tkzDefPoint(120:1.25){A}
+\tkzDefPoint(50:1.25){B}
+\tkzDefPoint(340:1.25){C}
+\tkzDefPoint(210:1.25){D}
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D,O)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\end{tikzpicture}}{
+Εγγεγραμμένο ονομάζεται ένα τετράπλευρο του οποίου οι κορυφές είναι σημεία ενός κύκλου. Ο κύκλος αυτός ονομάζεται \textbf{περιγεγραμμένος}.}\mbox{}\\\\\\
+\Orismos{Εγγράψιμο τετράπλευρο}
+Εγγράψιμο ονομάζεται ένα τετράπλευρο όταν υπάρχει κύκλος που να διέρχεται από όλες τις κορυφές του.\\\\
+\Orismos{Περιγεγραμμένο τετράπλευρο}
+\wrapr{-4mm}{5}{4cm}{-14mm}{\begin{tikzpicture}
+\tkzDefPoint[label=right:$O$](0,0){O}
+\tkzDefPoint(160:1){E}
+\tkzDefPoint(80:1){Z}
+\tkzDefPoint(20:1){H}
+\tkzDefPoint(270:1){J}
+\tkzTangent[at=E](O)\tkzGetPoint{e}
+\tkzTangent[at=Z](O)\tkzGetPoint{z}
+\tkzTangent[at=H](O)\tkzGetPoint{h}
+\tkzTangent[at=J](O)\tkzGetPoint{j}
+\tkzInterLL(E,e)(Z,z)\tkzGetPoint{A}
+\tkzInterLL(H,h)(Z,z)\tkzGetPoint{B}
+\tkzInterLL(H,h)(J,j)\tkzGetPoint{C}
+\tkzInterLL(J,j)(E,e)\tkzGetPoint{D}
+\draw[pl] (O) circle (1);
+\draw[pl,\xrwma](A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(E,Z,H,J,O,A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\end{tikzpicture}}{
+Περιγεγραμμένο τετράπλευρο ονομάζεται το τετράπλευρο του οποίου οι πλευρές είναι εφαπτόμενες στον ίδιο κύκλο. Ο κύκλος αυτός ονομάζεται \textbf{εγγεγραμμένος}.}\mbox{}\\\\\\
+\Orismos{Περιγράψιμο τετράπλευρο}
+Περιγράψιμο ονομάζεται το τετράπλευρο εκείνο για το οποίο υπάρχει κύκλος που να εφάπτεται σε όλες τις πλευρές του.\\\\
+\thewrhmata
+\Thewrhma{Ιδιότητες εγγεγραμμένου τετραπλεύρου}
+\wrapr{-4mm}{5}{3.6cm}{-4mm}{\begin{tikzpicture}
+\clip (-2,-1.3) rectangle (1.7,1.5);
+\tkzDefPoint[label=right:$O$](0,0){O}
+\tkzDefPoint(120:1.25){A}
+\tkzDefPoint(50:1.25){B}
+\tkzDefPoint(340:1.25){C}
+\tkzDefPoint(210:1.25){D}
+\tkzDefPointBy[symmetry= center D](C)\tkzGetPoint{a}
+\tkzMarkAngle[fill=\xrwma,size=.3](D,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.3](D,B,C)
+\tkzMarkAngle[fill=\xrwma,size=.3](A,D,a)
+\draw (B)--(D);
+\draw (A)--(C);
+\tkzDrawLine[add=-.3 and 0](a,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D,O)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\end{tikzpicture}}{
+Για κάθε εγγεγραμμένο τετράπλευρο $ AB\varGamma\varDelta $ ισχύουν οι ακόλουθες ιδιότητες :
+\begin{rlist}
+\item Οι απέναντι γωνίες του είναι παραπληρωματικές :  \[ \hat{A}+\hat{\varGamma}=180\degree\ \textrm{ και }\  \hat{B}+\hat{\varDelta}=180\degree \]
+\item Κάθε πλευρά του φαίνεται από τις απέναντι κορυφές υπό ίσες εγγεγραμμένες γωνίες.
+\end{rlist}}\mbox{}\\
+\vspace{-3mm}
+\begin{rlist}[start=3]
+\item Κάθε εξωτερική γωνία ισούται με την απέναντι εσωτερική :
+$ \hat{A}_{\textrm{εξ}}=\hat{\varGamma}\ ,\ \hat{B}_{\textrm{εξ}}=\hat{\varDelta}\ ,\ \hat{\varGamma}_{\textrm{εξ}}=\hat{A}\ ,\ \hat{\varDelta}_{\textrm{εξ}}=\hat{B} $.
+\end{rlist}
+\Thewrhma{Κριτήρια εγγράψιμου τετραπλεύρου}
+Ένα τετράπλευρο είναι εγγράψιμο σε έναν κύκλο αν ισχύει μια από τις παρακάτω προτάσεις :
+\begin{rlist}
+\item Δύο απέναντι γωνίες είναι παραπληρωματικές.
+\item Μια πλευρά φαίνεται από τις απέναντι κορυφές υπό ίσες εγγεγραμμένες γωνίες.
+\item Μια εξωτερική γωνία να ισούται με την απέναντι εσωτερική.
+\end{rlist}
+\Thewrhma{Ιδιότητες περιγεγραμμένου τετραπλεύρου}
+\wrapr{-4mm}{7}{3.9cm}{-9mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(160:1){E}
+\tkzDefPoint(80:1){Z}
+\tkzDefPoint(20:1){H}
+\tkzDefPoint(270:1){J}
+\tkzTangent[at=E](O)\tkzGetPoint{e}
+\tkzTangent[at=Z](O)\tkzGetPoint{z}
+\tkzTangent[at=H](O)\tkzGetPoint{h}
+\tkzTangent[at=J](O)\tkzGetPoint{j}
+\tkzInterLL(E,e)(Z,z)\tkzGetPoint{A}
+\tkzInterLL(H,h)(Z,z)\tkzGetPoint{B}
+\tkzInterLL(H,h)(J,j)\tkzGetPoint{C}
+\tkzInterLL(J,j)(E,e)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.17](O,E,A)
+\tkzMarkRightAngle[size=.17](O,Z,B)
+\tkzMarkRightAngle[size=.17](O,H,C)
+\tkzMarkRightAngle[size=.17](O,J,D)
+\draw[pl] (O) circle (1);
+\draw[pl,\xrwma](A)--(B)--(C)--(D)--cycle;
+\draw (O)--(E);\draw (O)--(Z);\draw (O)--(H);\draw (O)--(J);
+\tkzDrawPoints(E,Z,H,J,O,A,B,C,D)
+\tkzLabelPoint[above left,xshift=1mm](O){$O$}
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[left](E){$E$}
+\tkzLabelPoint[above](Z){$Z$}
+\tkzLabelPoint[right](H){$H$}
+\tkzLabelPoint[below](J){$\varTheta$}
+\end{tikzpicture}}{
+Σε κάθε περιγεγραμμένο τετράπλευρο $ AB\varGamma\varDelta $ ισχύουν οι παρακάτω ιδιότητες :
+\begin{rlist}
+\item Οι διχοτόμοι των γωνιών του διέρχονται από το ίδιο σημείο. Το σημείο αυτό είναι κέντρο του εγγεγραμμένου κύκλου.
+\item Τα αθροίσματα των απέναντι πλευρών είναι ίσα :
+\[ AB+\varGamma\varDelta=A\varDelta+B\varGamma \]
+\end{rlist}}\mbox{}\\\\\\
+\Thewrhma{Κριτήρια περιγράψιμου τετραπλεύρου}
+Ένα τετράπλευρο $ AB\varGamma\varDelta $ είναι περιγράψιμο σε κύκλο αν ισχύει μια από τις παρακάτω προτάσεις :
+\begin{rlist}
+\item Οι διχοτόμοι των γωνιών του διέρχονται από το ίδιο σημείο.
+\item Τα αθροίσματα των απέναντι πλευρών είναι ίσα.
+\end{rlist}
+\end{document}

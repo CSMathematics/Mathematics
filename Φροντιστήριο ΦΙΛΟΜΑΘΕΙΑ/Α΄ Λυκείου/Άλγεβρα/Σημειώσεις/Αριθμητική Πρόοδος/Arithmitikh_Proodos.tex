@@ -1,0 +1,89 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+
+
+\begin{document}
+\titlos{ΑΛΓΕΒΡΑ Α΄ ΛΥΚΕΙΟΥ}{Ακολουθίες - Πρόοδοι}{Αριθμητική Πρόοδος}
+\orismoi
+\Orismos{Αριθμητική πρόοδοσ}
+Αριθμητική πρόοδος ονομάζεται κάθε ακολουθία $ (a_\nu),\nu\in\mathbb{N}^* $ πραγματικών αριθμών στην οποία κάθε όρος της προκύπτει από τον προηγούμενο, προσθέτοντας κάθε φορά τον ίδιο σταθερό αριθμό. Ισχύει δηλαδή
+\[ a_{\nu+1}=a_\nu+\omega \]
+Ο αριθμός $ \omega=a_{\nu+1}-a_\nu $ ονομάζεται \textbf{διαφορά} της αριθμητικής προόδου και είναι σταθερός.\\\\
+\Orismos{Αριθμητικόσ μέσοσ}
+Αριθμητικός μέσος τριών διαδοχικών όρων $ a,\beta,\gamma $ μιας αριθμητικής προόδου $ (a_\nu) $ ονομάζεται ο μεσαίος όρος $ \beta $ για τον οποίο ισχύει \[ 2\beta=a+\gamma\;\;\textrm{ ή }\;\;\beta=\frac{a+\gamma}{2} \]
+Γενικότερα, αριθμητικός μέσος $ \nu $ διαδοχικών όρων $ a_1,a_2,\ldots,a_\nu $ μιας αριθμητικής προόδου ονομάζεται ο πραγματικός αριθμός \[ \mu=\frac{a_1+a_2+\ldots+a_\nu}{\nu} \] 
+\Orismos{Παρεμβολή αριθμητικών ενδιάμεσων}
+Αριθμητικοί ενδιάμεσοι δύο αριθμών $ a $ και $ \beta $, ονομάζονται $ \nu $ σε πλήθος πραγματικοί αριθμοί $ x_1,x_2,\ldots,x_\nu $ όταν αυτοί μπορούν να παρεμβληθούν μεταξύ των $ a $ και $ \beta $ ώστε οι πραγματικοί αριθμοί \[ a,x_1,x_2,\ldots x_\nu,\beta \] να αποτελούν, $ \nu+2 $ σε πλήθος, διαδοχικούς όρους αριθμητικής προόδου.\\\\ 
+\thewrhmata
+\Thewrhma{Γενικόσ όροσ αριθμητικήσ προόδου}
+Εαν $ (a_\nu) $ μια αριθμητική πρόοδος με διαφορά $ \omega $ τότε ο γενικός όρος της $ a_\nu $ θα δίνεται από τον τύπο \[ a_\nu=a_1+(\nu-1)\omega \]
+\Thewrhma{Αθροισμα όρων αριθμητικήσ προόδου}
+Εαν $ (a_\nu) $ μια αριθμητική πρόοδος με διαφορά $ \omega\neq0 $, τότε το άθροισμα των $ \nu $ πρώτων όρων της δίνεται από τους παρακάτω τύπους :
+\[ S_\nu=\frac{\nu}{2}(a_1+a_\nu)\;\;,\;\;S_\nu=\frac{\nu}{2}\left[2a_1+(\nu-1)\omega\right]  \]
+\Thewrhma{Αριθμητικόσ μέσοσ}
+Τρεις πραγματικοί αριθμοί $ a,\beta,\gamma $ αποτελούν διαδοχικούς όρους αριθμητικής προόδου αν και μόνο αν ισχύει \[ 2\beta=a+\gamma\;\;\textrm{ ή ισοδύναμα }\;\;\beta=\frac{a+\gamma}{2} \]
+Γενικά έχουμε οτι μια ακολουθία πραγματικών αριθμών $ (a_\nu) $ αποτελεί αριθμητική πρόοδο αν και μόνο αν γιια κάθε $ \nu\in\mathbb{N}^* $ ισχύει \[ 2a_\nu=a_{\nu+1}+a_{\nu-1} \]
+\Thewrhma{Διαφορά αριθμητικήσ παρεμβολήσ}
+Εαν οι πραγματικοί αριθμοί $ x_1,x_2,\ldots,x_\nu $ είναι αριθμητικοί ενδιάμεσοι δύο αριθμών $ a $ και $ \beta $ τότε η διαφορά της αριθμητικής προόδου στην οποία ανήκουν θα είναι \[ \omega=\frac{\beta-a}{\nu+1} \]
+\Thewrhma{Παράσταση όρων αριθμητικήσ προόδου}
+Εαν $ (a_\nu) $ είναι μια αριθμητική πρόοδος με διαφορά $ \omega $ τότε ισχύουν οι παρακάτω ιδιότητες για τους όρους της :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Εαν $ a_1,a_2,\ldots,a_\nu $ είναι $ \nu $ διαδοχικοί όροι αριθμητικής προόδου τότε ο $ \mu -$οστός όρος από το τέλος βρίσκεται στη θέση $ \nu-\mu+1 $ και δίνεται από τον τύπο \[ a_{\nu-\mu+1}=a_\nu-(\mu-1)\omega \]
+\item Το άθροισμα $ S $ των $ \mu $ τελευταίων όρων μιας αριθμητικής προόδου $ (a_\nu) $ είναι \[ S=S_\nu-S_{\nu-\mu} \]
+\end{enumerate}
+\end{document}

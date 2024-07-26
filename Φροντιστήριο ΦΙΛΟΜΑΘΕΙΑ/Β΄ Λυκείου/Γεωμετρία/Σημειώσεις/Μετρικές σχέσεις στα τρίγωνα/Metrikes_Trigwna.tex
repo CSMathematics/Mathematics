@@ -1,0 +1,332 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=7,fill=white]
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools,gensymb}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+
+
+\newcommand{\pinakasdyo}[8]{
+\begin{tikzpicture}
+\foreach \x in {#6,#7}{
+\draw (-3,0) -- (#8,0);
+\draw (\x,-.5)--(\x,.0);
+\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#8-.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+\node at (0.5*#6-0.25,-0.3) {$#4$};
+\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+\begin{tikzpicture}
+\draw (-3,0) -- (#5,0);
+\draw (#4,-.5)--(#4,.0);
+\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#5-0.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+\node at (0.5*#4-0.25,-.3) {$#3$};
+\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+\begin{tikzpicture}
+\draw (-3,0) -- (5,0);
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (4.7,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+\end{tikzpicture}}
+
+
+
+\newenvironment{meth}[1][]{%
+\refstepcounter{meth}
+\begin{mdframed}[%
+frametitle={m \themeth\quad\ \MakeUppercase{#1}},
+skipabove=\baselineskip plus 2pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=0pt,
+frametitlerule=false,
+linecolor=black,
+outerlinewidth=0pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlebackgroundcolor=black!40,
+frametitlerulewidth=0pt,
+innertopmargin=\baselineskip,
+innerbottommargin=\baselineskip,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=black!10,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}}
+%-------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=2cm}
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Μετρικές Σχέσεις}{Μετρικές σχέσεις στα τρίγωνα}
+\orismoi
+\Orismos{Προβολή σημείου - ευθύγραμμου τμήματος}
+\wrapr{-5mm}{5}{3.2cm}{-4mm}{\begin{tikzpicture}
+\tkzDefPoint(.5,1){A}
+\tkzDefPoint(1,0){B}
+\tkzDefPoint(1.5,.8){C}
+\tkzDefPoint(2.7,.6){D}
+\tkzDefPoint(.5,0){A'}
+\tkzDefPoint(1,0){B'}
+\tkzDefPoint(1.5,0){C'}
+\tkzDefPoint(2.7,0){D'}
+\draw (0,0) -- (3,0);
+\draw[dashed](A)--(.5,0);
+\draw (C)--(D);
+\draw[dashed](C)--(1.5,0);
+\draw[dashed](D)--(2.7,0);
+\draw[pl,\xrwma](C')--(D');
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[above](D){$\varDelta$}
+\tkzLabelPoint[below](A'){$A'$}
+\tkzLabelPoint[below](B'){$B'$}
+\tkzLabelPoint[below](C'){$\varGamma'$}
+\tkzLabelPoint[below](D'){$\varDelta'$}
+\tkzDrawPoints(A,B,C,D,A',B',C',D')
+\node at (0,0.25) {\footnotesize$\varepsilon$};
+\end{tikzpicture}}{
+Προβολή ενός σημείου $ Α $ πάνω σε μια ευθεία $ \varepsilon $ ονομάζεται το ίχνος της καθέτου από το σημείο προς την ευθεία.
+\begin{itemize}[itemsep=0mm]
+\item Αν το σημείο ανήκει στην ευθεία τότε η προβολή του ταυτίζεται με το σημείο αυτό.
+\item Το ευθύγραμμο τμήμα $ \varGamma'\varDelta' $ με άκρα, τις προβολές των άκρων ενός τμήματος $ \varGamma\varDelta $, ονομάζεται \textbf{προβολή του ευθυγράμμου τμήματος} πάνω στην ευθεία.
+\end{itemize}}
+\thewrhmata
+\Thewrhma{Θεώρημα προβολής}
+\wrapr{-5mm}{5}{3.5cm}{-12mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.2](A,D,B)
+\draw[pl] (B)--(A)--(C);
+\draw[pl] (A)--(D);
+\draw[pl,\xrwma] (B)--(C);
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\tkzLabelPoint[right,yshift=1mm](D){$\varDelta$}
+\end{tikzpicture}}{
+Το τετράγωνο μιας κάθετης πλευράς ενός ορθογωνίου τριγώνου ισούται με το γινόμενο της υποτείνουσας επί την προβολή της κάθετης πλευράς αυτής στην υποτείνουσα.
+\[ AB^2=B\varGamma\cdot B\varDelta\ \ ,\ \ A\varGamma^2=B\varGamma\cdot \varGamma\varDelta \]}\mbox{}\\\\\\
+\Thewrhma{Λόγος προβολών}
+Ο λόγος των τετραγώνων των κάθετων πλευρών ενός ορθογωνίου τριγώνου ισούται με το λόγο των πλορολών τους στην υποτείνουσα.
+\[ \frac{AB^2}{A\varGamma^2}=\frac{B\varDelta}{\varGamma\varDelta} \]
+\Thewrhma{Πυθαγόρειο θεώρημα}
+\wrapr{-5mm}{5}{3.5cm}{-10mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\end{tikzpicture}}{
+Σε κάθε ορθογώνιο τρίγωνο το άθροισμα των τερταγώνων των κάθετων πλευρών ισούται με το τετράγωνο της υποτείνουσας.
+\[ \hat{A}=90\degree\Rightarrow AB^2+A\varGamma^2=B\varGamma^2 \]}\mbox{}\\\\\\
+\Thewrhma{Αντίστροφο του πυθαγορείου}
+Αν σε ένα τρίγωνο το τετράγωνο της μεγαλύτερης πλευράς ισούται με το άθροισμα τω τερταγώνων των άλλων δύο πλευρών τότε το τρίγωνο αυτό είναι οριθογώνιο με την ορθή γωνία να βρίσκεται απέναντι από τη μεγαλύτερη πλευρά.
+\[ AB^2+A\varGamma^2=B\varGamma^2\Rightarrow\hat{A}=90\degree \]
+\Thewrhma{Ύψος προς την υποτείνουσα}
+\wrapr{-5mm}{5}{3.5cm}{-12mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.2](A,D,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (A)--(D);
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\tkzLabelPoint[right,yshift=1mm](D){$\varDelta$}
+\end{tikzpicture}}{
+Σε κάθε ορθογώνιο τρίγωνο το τετράγωνο του ύψους που αντιστοιχεί στην υποτείνουσα ισούται με το γινόμενο των προβολών των κάθετων πλευρών στην υποτείνουσα.
+\[ A\varDelta^2=B\varDelta\cdot\varGamma\varDelta \]}\mbox{}\\\\\\
+\Thewrhma{Σχέσεις κάθετων πλευρών και ύψους}
+Σε κάθε ορθογώνιο τρίγωνο το άθροισμα των αντίστροφων τετραγώνων των κάθετων πλευρων ισούται με το αντίστροφο τετράγωνο του ύψους που αντιστοιχεί στην υποτείνουσα.
+\[ \frac{1}{\beta^2}+\frac{1}{\gamma^2}=\frac{1}{\upsilon_a^2} \]
+\end{document}

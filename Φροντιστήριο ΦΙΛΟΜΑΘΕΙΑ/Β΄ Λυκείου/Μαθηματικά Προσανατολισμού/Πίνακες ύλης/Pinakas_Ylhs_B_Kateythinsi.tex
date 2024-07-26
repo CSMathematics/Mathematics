@@ -1,0 +1,457 @@
+\documentclass[internet]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Tinos Bold}]{Tinos}
+\newfontfamily\scfont{GFS Artemisia}
+\font\OnPar="Century Gothic Bold" at 10pt
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[most]{tcolorbox}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem,longtable}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\let\Bbbk\relax
+\usepackage{enumitem}
+\usepackage{lipsum}
+\let\Bbbk\relax
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=\Large$\square$}
+
+\tikzset{>=latex}
+\newtcolorbox{mybox}[2][]{colback=white,
+colframe=red!75!black,fonttitle=\Large\bfseries,
+colbacktitle=red!20!white,coltitle=black,enhanced,breakable,sharp corners,boxrule=0.3mm,center title,boxsep=3mm,top=1mm,subtitle style={fonttitle=\normalsize\bfseries},
+title=#2,#1}
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.2pt}
+\tcbset{mysubtitle/.style={subtitle style={fontupper={\OnPar\color{black}},top=0pt,colback={white},boxrule=1pt},top=0pt}}
+
+\newtcolorbox{myleftbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-3mm,left=5mm,left skip=0mm,colbacktitle=white,colback=white,#1,sharp corners,grow to left by=0.68cm,titlerule=0.2mm,fonttitle=\OnPar}
+
+\newtcolorbox{myrightbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-2mm,left skip=6mm,colbacktitle=white,colback=white,#1,leftrule=0.2mm,sharp corners,right skip=0mm,titlerule=0.2mm,fonttitle=\OnPar}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{
+  \color{lightgray}{}
+  }
+\fancyhead[R]{
+ \color{gray} Μάθημα - Τάξη\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage
+  }
+\fancyhead[L]{
+ \color{gray}\leftmark
+  }
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\leftmark\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage}%
+  }
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\myitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faExclamationTriangle}\ \Large$\square$]}
+
+\newlist{arithmisi}{enumerate}{2}
+\setlist[arithmisi]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\textit{{\Large{\thesection}}.\arabic*}}}}
+
+
+
+\ekthetesdeiktes
+
+\begin{document}
+\section{Η έννοια του διανύσματος}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Διάνυσμα
+\item Αρχή και πέρας
+\item Στοιχεία διανύσματος: Μέτρο - διεύθυνση - φορά
+\item Φορέας διανύσματος
+\item Μηδενικό  - Μοναδιαίο διάνυσμα
+\item Παράλληλα διανύσματα
+\item Ομόρροπα διανύσματα
+\item Αντίρροπα διανύσματα
+\item Ίσα διανύσματα
+\item Αντίθετα διανύσματα
+\end{enumerate}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item Εύρεση παράλληλων διανυσμάτων
+\item Εύρεση ομόρροπων και αντίρροπων διανυσμάτων
+\item Εύρεση ίσων και αντίθετων διανυσμάτων
+\item Υπολογισμός γωνίας διανυσμάτων
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Διάνυσμα $\vec{a}$ ή $\DianysmaBelos{AB}$
+\item Μέτρο διανύσματος $|\vec{a}|, |\DianysmaBelos{AB}|$
+\item Μηδενικό διάνυσμα : $\vec{a}=\vec{0}$
+\item Μοναδιαίο διάνυσμα : $|\vec{a}|=1$
+\item Ομόρροπα διανύσματα : $\DianysmaBelos{a}\upuparrows \DianysmaBelos{\beta}$
+\item Αντίρροπα διανύσματα : $\DianysmaBelos{a}\updownarrows \DianysmaBelos{\beta}$
+\item Γωνία διανυσμάτων :\\
+$\theta=\GwniaDianysmatwn{a}{\beta},\ \theta\in[0,\pi]$
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\section{Πρόσθεση διανυσμάτων}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Πρόσθεση διαδοχικών διανυσμάτων
+\item Κανόνας παραλληλογράμμου
+\item Αφαίρεση διανυσμάτων
+\item Διάνυσμα θέσης
+\item Σημείο αναφοράς
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Ιδιότητες πρόσθεσης
+\item Διαφορά διανυσματικών ακτίνων
+\item Μέτρο αθροίσματος - Τριγωνική ανισότητα
+\item Κριτήριο ομόρροπων και αντίρροπων διανυσμάτων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Πρόσθεση και αφαίρεση διαδοχικών διανυσμάτων
+\myitem Πρόσθεση και αφαίρεση διανυσμάτων με κανόνα παραλληλογράμμου
+\myitem Απόδειξη διανυσματικής ισότητας
+\item Απόδειξη ότι δύο σημεία ταυτίζονται
+\item Μέσο ευθύγραμμου τμήματος
+\myitem Απόδειξη ότι ένα τετράπλευρο είναι παραλληλόγραμμο
+\item Προσδιορισμός σημείου
+\item Τριγωνική ανισότητα
+\item Κριτήριο ομόρροπων και αντίρροπων διανυσμάτων
+\item Γεωμετρικοί τόποι
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Πρόσθεση διανυσμάτων $\vec{a}+\vec{\beta}$
+\item Αφαίρεση διανυσμάτων : $\vec{a}-\vec{\beta}$
+\item Διάνυσμα θέσης σημείου $ M $: $ \DianysmaBelos{OM} $
+όπου $O$ σημείο αναφοράς.
+\item Τριγωνική ανισότητα:\\$\left||\vec{a}|-|\vec{\beta}|\right|\leq\left|\vec{a}+\vec{\beta}\right|\leq |\vec{a}|+|\vec{\beta}|$
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Σχήματα}
+\begin{center}
+\begin{tikzpicture}
+\Dianysma[color=black]{0,0}{2.7,.5}{E}{Z}
+\Dianysma{0,0}{1.5,1}{A}{B}
+\Dianysma{1.5,1}{2.7,.5}{C}{D}
+\tkzLabelPoint[above](A){$O$}
+\tkzLabelPoint[above](B){$A$}
+\tkzLabelPoint[right](D){$B$}
+\node at (.7,.77){$\vec{a}$};
+\node at (2.2,1.04){$\vec{\beta}$};
+\node at (1.4,-.05){$\vec{a}+\vec{\beta}$};
+\node at (1,1.8){$\vec{a}+\vec{\beta}=\overrightarrow{OA}+\overrightarrow{AB}=\overrightarrow{OB}$};
+\node at (1,2.3){\textbf{Κανόνας διαδοχικών διανυσμάτων}};
+\end{tikzpicture}\qquad
+\begin{tikzpicture}
+\Dianysma[color=black]{0,0}{3.4,1.5}{E}{Z}
+\Dianysma{0,0}{1,1.5}{A}{B}
+\Dianysma{0,0}{2.4,0}{C}{D}
+\draw[dashed] (2.4,0)--(3.4,1.5);
+\draw[dashed] (1,1.5)--(3.4,1.5);
+\tkzLabelPoint[left](A){$O$}
+\tkzLabelPoint[above](B){$A$}
+\tkzLabelPoint[right](D){$B$}
+\tkzLabelPoint[right,yshift=1mm](Z){$M$}
+\node at (.2,.77){$\vec{a}$};
+\node at (1.2,-.33){$\vec{\beta}$};
+\node[rotate=23.8] at (1.4,.9){$\vec{a}+\vec{\beta}$};
+\node at (1.9,2.1){$\vec{a}+\vec{\beta}=\overrightarrow{OA}+\overrightarrow{OB}=\overrightarrow{OM}$};
+  \node at (1.9,2.6){\textbf{Κανόνας παραλληλογράμμου}};
+\end{tikzpicture}\end{center}
+\begin{center}
+\begin{tikzpicture}
+\Dianysma[color=black]{0,0}{2.7,.5}{E}{Z}
+\Dianysma{0,0}{1.5,1}{A}{B}
+\Dianysma{1.5,1}{2.7,.5}{C}{D}
+\tkzLabelPoint[above](A){$O$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[right](D){$A$}
+\node at (.7,.77){$\vec{a}$};
+\node at (2.2,1.04){$-\vec{\beta}$};
+\node at (1.4,-.05){$\vec{a}-\vec{\beta}$};
+\node at (4,-1){$\vec{a}-\vec{\beta}=\vec{a}+\left( -\vec{\beta}\right)$};
+\Dianysma[color=black]{7.4,0}{6,1.5}{O}{P}
+\Dianysma{5,0}{6,1.5}{K}{L}
+\Dianysma{5,0}{7.4,0}{M}{N}
+\draw[dashed] (7.4,0)--(8.4,1.5);
+\draw[dashed] (6,1.5)--(8.4,1.5)node[xshift=2mm,yshift=2mm](S){$M$};
+\tkzLabelPoint[left](K){$O$}
+\tkzLabelPoint[above](L){$A$}
+\tkzLabelPoint[right](N){$B$}
+\node at (5.2,.77){$\vec{a}$};
+\node at (6.2,-.33){$\vec{\beta}$};
+\node[rotate=-49] at (7.1,.77){$\vec{a}-\vec{\beta}$};
+\node at (7,2.4){\textbf{Κανόνας παραλληλογράμμου}};
+\node at (1.7,1.9){\textbf{Κανόνας διαδοχικών διανυσμάτων}};
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\textbf{Ιδιότητες πρόσθεσης διανυσμάτων}\\
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη}  \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} Αντιμεταθετική & $ \vec{a}+\vec{\beta}=\vec{\beta}+\vec{a} $  \\ 
+ \rule[-2ex]{0pt}{5.5ex} Προσεταιριστική & $ \vec{a}+\left( \vec{\beta}+\vec{\gamma}\right) =\left( \vec{a}+\vec{\beta}\right) +\vec{\gamma} $  \\ 
+ \rule[-2ex]{0pt}{5.5ex} Ουδέτερο στοιχείο & $ \vec{a}+\vec{0}=\vec{a} $  \\ 
+  \rule[-2ex]{0pt}{5.5ex} Αντίθετα διανύσματα & $ \vec{a}+(-\vec{a})=\vec{0} $  \\
+\hline 
+\end{tabular}\end{center}
+\end{mybox}
+\newpage
+\section{Γινόμενο αριθμού με διάνυσμα}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Γινόμενο αριθμού με διάνυσμα
+\item Γραμμικός συνδυασμός διανυσμάτων
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Ιδιότητες γινομένου
+\item Συνθήκη παραλληλίας
+\item Διανυσματική ακτίνα μέσου
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Απόδειξη - Έλεγχος παραλληλίας διανυσμάτων
+\item Απόδειξη διανυσματικής ισότητας
+\item 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Γινόμενο αριθμού με διάνυσμα: $\lambda\cdot \vec{a}$
+\item Συνθήκη παραλληλίας:\\$\vec{a}\parallel\vec{\beta}\Leftrightarrow \vec{a}=\lambda\cdot\vec{\beta}$
+\item $\vec{a}\upuparrows\vec{\beta}\Leftrightarrow \vec{a}=\lambda\vec{\beta}\ \ \textrm{και}\ \ \lambda>0$
+\item $\vec{a}\updownarrows\vec{\beta}\Leftrightarrow \vec{a}=\lambda\vec{\beta}\ \ \textrm{και}\ \ \lambda<0$
+\item Διανυσματική ακτίνα μέσου:\\$\DianysmaBelos{OM}=\frac{\DianysmaBelos{OA}+\DianysmaBelos{OB}}{2}$
+\item Γραμμικός συνδυασμός: $\vec{\gamma}=\lambda\vec{a}+\mu\vec{\beta}$
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Διαγράμματα}
+\begin{center}
+\textbf{Ιδιότητες γινομένου αριθμού με διάνυσμα}\\
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} Επιμεριστική (ως προς αριθμό) & $ \lambda\left( \vec{a}\pm\vec{\beta}\right)=\lambda\cdot\vec{a}\pm\lambda\cdot\vec{\beta} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Επιμεριστική (ως προς διάνυσμα) & $ \left( \lambda\pm\mu\right)\cdot\vec{a}=\lambda\cdot\vec{a}\pm\mu\cdot\vec{a} $ \\
+\rule[-2ex]{0pt}{5.5ex} Προσεταιριστική & $ \lambda\left( \mu\vec{a}\right)=\left( \lambda\cdot\mu\right)\cdot\vec{a} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Μηδενικό γινόμενο & $ \lambda\cdot\vec{a}=\vec{0}\Leftrightarrow \lambda=0 \ \textrm{ή}\ \vec{a}=\vec{0} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Πρόσημο γινομένου & $ \left( -\lambda\cdot\vec{a}\right)=(-\lambda)\cdot\vec{a}=-\left( \lambda\cdot\vec{a}\right)  $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Νόμος διαγραφής (ως προς διάνυσμα) & Αν $ \lambda\cdot\vec{a}=\mu\cdot\vec{a} $ και $ \vec{a}\neq0 $ τότε $ \lambda=\mu $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Νόμος διαγραφής (ως προς αριθμό) & Αν $ \lambda\cdot\vec{a}=\lambda\cdot\vec{\beta} $ και $ \lambda\neq0 $ τότε $ \vec{a}=\vec{\beta} $\\ 
+\hline 
+\end{longtable}
+\end{center} 
+\end{mybox}
+\newpage
+\section{Συντεταγμένες διανύσματος}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Συντεταγμένες διανύσματος
+\item Συντελεστής διεύθυνσης διανύσματος
+\item Ορίζουσα διανυσμάτων
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Ίσα διανύσματα
+\item Οριζόντια - Κατακόρυφα διανύσματα
+\item Συντεταγμένες γραμμικού συνδυασμού
+\item Συντεταγμένες μέσου τμήματος
+\item Συντεταγμένες διανύσματος με γνωστά άκρα
+\item Συνθήκες παραλληλίας διανυσμάτων
+\item Μέτρο διανύσματος
+\item Απόσταση σημείων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Συντεταγμένες διανύσματος: $\vec{a}=(x,y)$
+\item $\lambda=\frac{y}{x}$
+\item $\vec{a}=\vec{\beta}\Rightarrow x_1=x_2\ \ \textrm{και}\ \ y_1=y_2$
+\item $\det(\vec{a},\vec{\beta})=\begin{vmatrix}
+ x_1 & y_1 \\
+x_2 & y_2
+\end{vmatrix}=x_1y_2-x_2y_1$
+\item $x_M=\frac{x_A+x_B}{2}$ και $y_M=\frac{y_A+y_B}{2}$
+\item $\DianysmaBelos{AB}=(x_B-x_A,y_B-y_A)$
+\item $\vec{a}\parallel\vec{\beta}\Leftrightarrow \lambda_{\vec{a}}=\lambda_{\vec{\beta}}$
+\item $\vec{a}\parallel\vec{\beta}\Leftrightarrow \det(\vec{a},\vec{\beta})=0$
+\item $|\vec{a}|\sqrt{x^2+y^2}$
+\item $AB=|\DianysmaBelos{AB}|=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Διαγράμματα}
+\begin{center}
+\textbf{Συντεταγμένες γραμμικού συνδυασμού}\\
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Πράξη} & \textbf{Συντεταγμένες} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} Άθροισμα & $ \vec{a}+\vec{\beta}=(x_1,y_1)+(x_2,y_2)=(x_1+x_2,y_1+y_2) $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Πολλαπλασιασμός & $ \lambda\cdot\vec{a}=\lambda(x_1,y_1)=(\lambda x_1,\lambda y_1) $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Γραμμικός συνδυασμός & $ \lambda\vec{a}+\mu\vec{\beta}=\lambda(x_1,y_1)+\mu(x_2,y_2)=(\lambda x_1+\mu x_2,\lambda y_1+\mu y_2) $ \\ 
+\hline 
+\end{tabular}
+\end{center} 
+\end{mybox}
+\newpage
+\section{Εσωτερικό γινόμενο}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Εσωτερικό γινόμενο διανυσμάτων
+\item Εσωτερικό γινόμενο - Αναλυτικός τύπος
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Ιδιότητες εσωτερικού γινομένου
+\item Συνθήκη καθετότητας διανυσμάτων
+\item Συνημίτονο γωνίας διανυσμάτων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem 
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Εσωτερικό γινόμενο: \\$\vec{a}\cdot\vec{\beta}=|\vec{a}||\vec{\beta}|\syn{\GwniaDianysmatwn{a}{\beta}}$
+\item Αναλυτικός τύπος γινομένου:\\$\vec{a}\cdot\vec{\beta}=x_1x_2+y_1y_2$
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Διαγράμματα}
+\begin{center}
+\textbf{Ιδιότητες εσωτερικού γινομένου}\\
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\ 
+\hhline{==}  \rule[-2ex]{0pt}{5.5ex} \textbf{Κάθετα διανύσματα} & Αν $ \vec{a}\bot\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=0 $ και $ \lambda_{\vec{a}}\cdot\lambda_{\vec{\beta}}=-1 $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} \textbf{Ομόρροπα διανύσματα} & Αν $ \vec{a}\upuparrows\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=|\vec{a}|\cdot|\vec{\beta}| $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} \textbf{Αντίρροπα διανύσματα} & Αν $ \vec{a}\updownarrows\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=-|\vec{a}|\cdot|\vec{\beta}| $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} \textbf{Τετράγωνο διανύσματος} & $ \vec{a}^2=|\vec{a}|^2 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Αντιμεταθετική} & $ \vec{a}\cdot\vec{\beta}=\vec{\beta}\cdot\vec{a} $ \\
+ \rule[-2ex]{0pt}{5.5ex} \textbf{Προσεταιριστική} & $ \mu(\vec{a}\cdot\vec{\beta})=(\mu\vec{\beta})\cdot\vec{a} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Επιμεριστική} & $ \vec{a}\cdot\left( \vec{\beta}+\vec{\gamma}\right) =\vec{a}\cdot\vec{\beta}+\vec{a}\cdot\vec{\gamma} $ \\
+\hline 
+\end{longtable} 
+\end{center} 
+\end{mybox}
+\end{document}

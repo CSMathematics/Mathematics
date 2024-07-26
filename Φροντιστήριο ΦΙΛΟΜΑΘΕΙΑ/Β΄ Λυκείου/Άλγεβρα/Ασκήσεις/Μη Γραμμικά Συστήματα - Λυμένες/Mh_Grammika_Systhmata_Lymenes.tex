@@ -1,0 +1,318 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+\newcommand{\eqq}[2]{\xlongequal[#2]{#1}}
+\DeclareMathOperator*{\Eq}{=}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[section]
+\renewcommand{\theparadeigma}{\bf\arabic{paradeigma}\;:\;}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{black}{\textbf{ΠΑΡΑΔΕΙΓΜΑ\hspace{2mm}\theparadeigma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%-----------------------------------
+
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{\textbf{ΛΥΣΗ}}
+%------------------------------------
+%---------- ΜΕΘΟΔΟΣ --------------
+\newcounter{Methodos}[section]
+\renewcommand{\theMethodos}{\arabic{Methodos}} 
+\newenvironment{Methodos}[1][]{%
+\refstepcounter{Methodos}
+\begin{mdframed}[%
+frametitle={\vspace{-1.5mm}\begin{center}
+{\Large ΜΕΘΟΔΟΣ \;\;\theMethodos\;:\quad\ \MakeUppercase{#1}}
+\end{center}\vspace{.5mm}},
+skipabove=\baselineskip plus 0pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=1pt,
+frametitlerule=true,
+linecolor=black,
+outerlinewidth=.5pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlerulewidth=.3pt,
+innertopmargin=\baselineskip,
+innerbottommargin=0mm,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=white,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}}
+%------------------------------------------
+%--------- ΑΝΙΣΩΣΕΙΣ -------
+\tikzset{
+thickest/.style={line width=1mm,steelblue},
+a/.style={decoration={markings,
+mark=at position #1 with {\fill[white,draw=black,thin] circle (3pt);}},postaction={decorate}},
+k/.style={decoration={markings,
+mark=at position #1 with {\fill[black] circle (3pt);}},postaction={decorate}},
+}
+%--------- ΔΙΑΣΤΗΜΑ ------------
+\newcommand{\diasthma}[7]{
+\foreach \x in {#3,#4}
+\draw (\x,#7+.2) -- (\x,#7-.2);
+\node[anchor=north,fill=white] at (#3,#7)[below=1mm] {$ #1 $};
+\node[anchor=north,fill=white] at (#4,#7)[below=1mm] {$ #2 $};
+\draw [#5=0,#6=1,thickest] (#3,#7)--(#4,#7);
+}
+%--------- ΑΞΟΝΑΣ ------------------
+\newcommand{\axonas}[3]{
+\draw[-latex] (#1,#3) -- (#2,#3)node[below]{$x$};
+}
+%--------- ΚΑΤΩ ΑΚΡΟ ------------------
+\newcommand{\Xapeiro}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3-.3,#5);
+}
+%--------- ΠΑΝΩ ΑΚΡΟ ------------------
+\newcommand{\apeiroX}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3+.3,#5);
+}
+%----- ΔΙΑΚΕΚΟΜΜΕΝΕΣ ΓΡΑΜΜΕΣ ------
+\newcommand{\oria}[3]{\draw [dashed] (#1,#2)--(#1,#3);}
+%--------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+
+
+\begin{document}
+\section*{\LARGE ΣΥΣΤΗΜΑΤΑ - ΛΥΜΕΝΕΣ ΑΣΚΗΣΕΙΣ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΜΗ ΓΡΑΜΜΙΚΑ ΣΥΣΤΗΜΑΤΑ}
+\end{center}
+\begin{Methodos}[Αντικατάσταση]
+Μια γενική μέθοδος επίλυσης μη γραμμικών συστημάτων είναι η μέθοδος της αντικατάστασης που συναντήσαμε και στα γραμμικά συστήματα. Έχει ως εξής
+\begin{bhma}
+\item \textbf{Επιλογή εξίσωσης}\\
+Επιλέγουμε εκείνη την εξίσωση του συστήματος η οποία είναι στην πιο απλή μορφή και είναι εύκολο να λυθεί ως προς κάποιον άγνωστο. Λύνουμε ως προς αυτόν τον άγνωστο.
+\item \textbf{Αντικατάσταση}\\
+Τον άγνωστο αυτό τον αντικαθιστούμε στην άλλη εξίσωση του συστήματος και υπολογίζουμε και τη δεύτερη μεταβλητή. Αν οι εξισώσεις του συστήματος είναι περισσότερες από δύο τότε αντικαθιστούμε τον άγνωστο στις υπόλοιπες εξισώσεις του συστήματος και καταλήγουμε σε ένα σύστημα μιας τάξης μικρότερης. Επαναλαμβάνουμε τη διαδικασία όσες φορές χρειαστεί.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λύση μη γραμμικού συστήματοσ}
+\textbf{Να λυθεί το παρακάτω μη γραμμικό σύστημα}
+{\boldmath\[ \systeme[xy]{x^2+y^2=1,2x-y=1} \]}
+\lysh\\
+Παρατηρούμε η 2\tss{η} εξίσωση του συστήματος είναι γραμμική και κατά συνέπεια είναι εύκολο να λυθεί ως προς τη μεταβλητή $ y $. Προκύπτει
+\begin{equation}
+\systeme[xy]{x^2+y^2=1,2x-y=1}\Rightarrow y=2x-1
+\end{equation}
+Με αντικατάσταση της σχέσης (1) στην πρώτη εξίσωση παίρνουμε
+\begin{gather*} x^2+y^2=1\Rightarrow x^2+\left(2x-1\right)^2=1\Rightarrow x^2+4x^2-4x+1=1\Rightarrow 5x^2-4x=0\\
+\Rightarrow x(5x-4)=0\Rightarrow\ccases{x=0\\5x-4=0\Rightarrow x=\frac{4}{5}}
+\end{gather*}
+Η παραπάνω εξίσωση μας έδωσε δύο λύσεις ως τιμές της μεταβλητής $ x $. Οπότε για κάθε τιμή αυτή θα βρεθεί και η αντίστοιχη τιμή της μεταβλητής $ y $ και κατά συνέπεια θα προκύψουν δύο λύσεις του συστήματος. Αντικαθιστώντας στη σχέση (1) έχουμε
+\begin{rlist}
+\item Για $ x=0 $ έχουμε $ y=2x-1=2\cdot0-1=-1 $.
+\item Για $ x=\frac{4}{5} $ έχουμε $ y=2x-1=2\cdot\frac{4}{5}-1=\frac{3}{5} $.
+\end{rlist}
+Οι λύσεις λοιπόν του συστήματος θα είναι $ (x,y)=(0,-1) $ και $ (x,y)=\left(\frac{4}{5},\frac{3}{5}\right)  $.
+\begin{Methodos}[Ανάθεση]
+Σε ορισμένα μη γραμμικά συστήματα οι μεταβλητές των εξισώσεων βρίσκονται στην ίδια μορφή ή και μέσα σε ίδιες αλγεβρικές παραστάσεις. Σ' αυτές τις περιπτώσεις το μη γραμμικό σύστημα μπορεί να μετατραπεί σε γραμμικό ως εξής :
+\begin{bhma}
+\item \textbf{Ανάθεση}\\
+Αναγνωρίζουμε την κοινή σύνθετη αλγεβρική παράσταση στην οποία βρίσκεται μέσα κάθε μεταβλητή σε όλες τις εξισώσεις και την θέτουμε ίση με μια νέα μεταβλητή.
+\item \textbf{Αντικατάσταση}\\
+Αντικαθιστούμε σε όλες τις εξισώσεις τις παραστάσεις αυτές με τις νέες μεταβλητές που ορίσαμε οπότε και καταλλήγουμε σε ένα γραμμικό σύστημα με νέους άγνωστους.
+\item \textbf{Λύση γραμμικού συστήματος}\\
+Λύνουμε το γραμμικό σύστημα με οποιαδήποτε μέθοδο προτιμάμε.
+\item \textbf{Αρχικοί άγνωστοι}\\
+Αφού λυθεί το γραμμικό σύστημα και βρεθούν οι νέες μεταβλητές, αντικαθιστούμε τις τιμές στις σχέσεις του \textbf{1\tss{ου} Βήματος} οπότε προκύπτουν εξισώσεις με τις αρχικές μεταβλητές του συστήματος, τις οποίες είτε λύνουμε αν περιέχουν μόνο μια μεταβλητή είτε συνδιάζουμε αν περιέχουν περισσότερες για να προκύψει σύστημα, γραμμικό ή μη γραμμικό. Στην περίπτωση συστήματος εργαζόμαστε χρησιμοποιώντας τις προηγούμενες μεθόδους.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λύση συστήματοσ με ανάθεση}
+\textbf{Να λυθεί το παρακάτω σύστημα}
+{\boldmath\[ \systeme{\dfrac{3}{x}+\dfrac{4}{y}=-1,\dfrac{2}{x}-\dfrac{5}{y}=7} \]}
+\lysh\\
+Παρατηρούμε οτι και στις δύο εξισώσεις οι μεταβλητές βρίσκονται μέσα στις ίδιες αλγεβρικές παραστάσεις. Αυτές είναι οι $ \frac{1}{x} $ και $ \frac{1}{y} $. Θέτουμε λοιπόν
+\begin{equation}
+\lambda=\frac{1}{x}\;\textrm{ και }\,\kappa=\frac{1}{y}
+\end{equation}
+Το αρχικό σύστημα μετατρέπεται σε γραμμικό ως εξής
+\[ \systeme{\dfrac{3}{x}+\dfrac{4}{y}=-1,\dfrac{2}{x}-\dfrac{5}{y}=7}\Rightarrow \systeme{3\dfrac{1}{x}+4\dfrac{1}{y}=-1,2\dfrac{1}{x}-5\dfrac{1}{y}=7}\Rightarrow\systeme[\lambda\kappa]{3\lambda+4\kappa=1,2\lambda-5\kappa=7} \]
+Με τις γνωστές μεθόδους υπολογίζουμε τη λύση του γραμμικού συστήματος η οποία είναι $ (\lambda,\kappa)=(1,-1) $. Με τις τιμές αυτές των νέων μεταβλητών θα υπολογίσουμε τις τιμές των αρχικών μεταβλητών από τη σχέση (2). Έχουμε λοιπόν :
+\begin{gather*}
+\lambda=\frac{1}{x}\Rightarrow 1=\frac{1}{x}\Rightarrow x=1\;\;\textrm{και}\;\;
+\kappa=\frac{1}{y}\Rightarrow -1=\frac{1}{y}\Rightarrow y=-1
+\end{gather*}
+Η λύση λοιπόν του αρχικού συστήματος θα είναι $ (x,y)=(1,-1) $.
+\newpage
+\noindent
+\Paradeigma{Λύση συστήματοσ με ανάθεση}
+\textbf{Να λυθεί το παρακάτω σύστημα}
+{\boldmath\[ \ccases{\dfrac{2}{x-3y}-\dfrac{3}{2x+y}=-2\\[3mm]-\dfrac{4}{x-3y}+\dfrac{9}{2x+y}=5} \]}
+Παρατηρούμε οτι οι παραστάσεις $ \frac{1}{x-3y} $ και $ \frac{1}{2x+y} $ εμφανίζονται και στις δύο εξισώσεις. ¶ρα θέτουμε
+\begin{equation}
+z=\frac{1}{x-3y}\;\textrm{ και }\;t=\frac{1}{2x+y}
+\end{equation}
+Το αρχικό σύστημα θα μετατραπείο ως εξής
+\[ \ccases{\dfrac{2}{x-3y}-\dfrac{3}{2x+y}=-2\\[3mm]-\dfrac{4}{x-3y}+\dfrac{9}{2x+y}=5}\Rightarrow\systeme[zt]{2z-3t=-2,-4z+9t=5} \]
+Λύνοντας το γραμμικό σύστημα που προέκυψε προκύπτει η λύση για τις μεταβλητές $ z,t $ η οποία θα είναι $ (z,t)=\left(-\frac{1}{2},\frac{1}{3} \right)  $. Με αντικατάσταση των τιμών αυτών στις σχέσεις (3) οι σχέσεις αυτές μας δίνουν ένα νέο γραμμικό σύστημα με τις αρχικές μεταβλητές.
+\[ \ccases{z=\frac{1}{x-3y}\\t=\frac{1}{2x+y}}\Rightarrow \ccases{\frac{1}{x-3y}=-\frac{1}{2}\\\frac{1}{2x+y}=\frac{1}{3}}\Rightarrow \systeme{x-3y=-2,2x+y=3} \]
+Με τις γνωστές μεθόδους επίλυσης γραμμικών συστημάτων προκύπτει η λύση του παραπάνω συστήματος η οποία είναι και λύση του αρχικού συστήματος $ (x,y)=(1,1) $.
+\end{document}

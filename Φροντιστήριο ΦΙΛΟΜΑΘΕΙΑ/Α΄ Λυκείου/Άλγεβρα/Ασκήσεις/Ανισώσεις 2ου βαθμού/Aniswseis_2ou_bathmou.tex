@@ -1,0 +1,221 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+%---------------------------------
+\makeatletter
+\renewcommand*{\@alph}[1]{%
+  \ifcase#1\or α\or β\or γ\or
+    δ\or ε\or ζ\or η\or θ\or ι\or κ\or
+    λ\or μ\or ν\or ξ\or ο\or π\or ρ\or σ\or
+    τ\or υ\or φ\or χ\or ψ\or
+    ω\else\@ctrerr\fi
+}
+\renewcommand*{\@Alph}[1]{%
+  \ifcase#1\or Α\or Β\or Γ\or
+    Δ\or Ε\or Ζ\or Η\or Θ\or Ι\or Κ\or
+    Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or Ρ\or Σ\or
+    Τ\or Υ\or Φ\or Χ\or Ψ\or
+    Ω\else\@ctrerr\fi
+}
+\makeatother
+%--------------------------------
+
+
+
+\begin{document}
+\titlos{Άλγεβρα Α΄ Λυκείου}{Ανισώσεις}{Ανισώσεις 2\tssL{ου} Βαθμού}
+\thewria
+\begin{enumerate}
+\item 
+\end{enumerate}
+\askhseis
+\begin{enumerate}[itemsep=2mm]
+\item Να παραγοντοποιηθούν τα παρακάτω τριώνυμα
+\begin{multicols}{3}
+\begin{rlist}
+	\item $ x^2-5x+6 $
+	\item $ x^2-3x+2 $
+	\item $ x^2+4x+4 $
+	\item $ 25x^2-10x+1 $
+	\item $ 2x^2-5x+3 $
+	\item $ x^2+x+2 $
+\end{rlist}
+\end{multicols}
+\item Να απλοποιηθούν οι παρακάτω ρητές παραστάσεις.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ \dfrac{x^2-3x+2}{x^2-5x+6} $
+\item $ \dfrac{x^2-2x+1}{x^2-1} $
+\item $ \dfrac{2x^2-5x+3}{4x^2-4x+1} $
+\end{rlist}
+\end{multicols}
+\item Να βρεθούν τα πρόσημα των παρακάτω τριωνύμων.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ x^2-3x+2 $
+\item $ -x^2+8x-7 $
+\item $ 3x^2-7x+2 $
+\item $ x^2+6x+9 $
+\item $ -x^2+10x-25 $
+\item $ x^2+x+1 $
+\end{rlist}
+\end{multicols}
+\item Να λυθούν οι παρακάτω ανισώσεις.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ x^2-4x+3>0 $
+\item $ 4x^2-5x+1<0 $
+\item $ -2x^2-7x-6\leq0 $
+\item $ -x^2+9x-10\geq0 $
+\item $ 9x^2-6x+1>0 $
+\item $ x^2+10x+25<0 $
+\item $ -4x^2+4x-1<0 $
+\item $ x^2+3x+5\geq0 $
+\item $ -x^2-x+4>0 $
+\end{rlist}
+\end{multicols}
+\item Να λυθούν οι παρακάτω ανισώσεις
+\begin{multicols}{2}
+\begin{rlist}
+\item $ x^2-8x\leq -7 $
+\item $ 4-x^2\geq 3x $
+\item $ (x-2)^2>2x-5 $
+\item $ 2(3-x)<(1-x)^2+4 $
+\end{rlist}
+\end{multicols}
+\item Να βρεθούν οι κοινές λύσεις των παρακάτω ανισώσεων.
+\begin{rlist}
+\item $ x^2-7x+6<0 \;$ και $\; -x^2+5x-6>0 $
+\item $ x^2-6x+9\geq0 \;$ και $\; x^2+4x-3>0 $
+\item $ 3-(x-1)^2<2x-5 \;$ και $\; (x+2)^2\geq(2x+3)^2 $
+\end{rlist}
+\item Να δειχθεί ότι η εξίσωση $ (\lambda+1)x^2-2\lambda x+\lambda-1=0 $ με $ \lambda\neq-1 $ έχει δύο πραγματικές λύσεις για κάθε $ \lambda\in\mathbb{R} $.
+\item Δίνεται η εξίσωση $ (1-\lambda)x^2+2\lambda x-4=0 $ με $ \lambda\neq1 $.
+\begin{rlist}
+\item Να γραφτεί η διακρίνουσα της παραπάνω εξίσωσης σαν συνάρτηση του $ \lambda $.
+\item Να υπολογιστούν οι τιμές της παραμέτρου $ \lambda $ για τις οποίες η εξίσωση
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item έχει δύο ρίζες άνισες.
+\item έχει μια ρίζα.
+\item είναι αδύνατη.
+\end{enumerate}
+\end{multicols}
+\end{rlist}
+\item Δίνεται η εξίσωση $ x^2-(\lambda-3)x+4=0 $.
+\begin{rlist}
+\item Να βρεθούν οι τιμές της παραμέτρου $ \lambda $ ώστε η εξίσωση να έχει δύο πραγματικές και άνισες λύσεις.
+\item Αν $ x_1, x_2 $ είναι οι λύσεις της εξίσωσης τότε να υπολογιστούν το άθροισμα τους $ S $ και το γινόμενό τους $ P $.
+\item Να λυθεί η ανίσωση $ -(x_1+x_2)^2+6x_1x_2+1\geq0 $
+\end{rlist}
+\item Δίνεται η εξίσωση $ (\lambda-2) x^2-2\lambda x-1=0 $ με $ 1<\lambda\neq2 $.
+\begin{rlist}
+\item Να δειχθεί οτι η εξίσωση έχει πάντα πραγματικές λύσεις για κάθε τιμή του $ \lambda\in(1,+\infty)-\{2\} $.
+\item Αν $ x_1, x_2 $ είναι οι λύσεις της εξίσωσης να εκφραστούν το άθροισμα $ S $ και το γινόμενο $ P $ των λύσεων με τη βοήθεια του $ \lambda $.
+\item Να βρεθούν οι τιμές του $ \lambda $ για τις οποίες ισχύει $ x_1+x_2+\dfrac{18x_1x_2}{\lambda}=0 $
+\end{rlist}
+\item Να βρεθούν οι τιμές της παραμέτρου $ \lambda\in\mathbb{R} $ ώστε η εξίσωση 
+\[ x^2+\left( \lambda^2-3\lambda+2\right) x+1=0 \]
+\begin{rlist}
+\item να έχει δύο λύσεις άνισες.
+\item οι λύσεις της εξίσωσης να είναι θετικές για κάθε τιμή της παραμέτρου $ \lambda $.
+\end{rlist}
+\item Να βρεθούν οι τιμές της παραμέτρου $ \lambda\in(4,+\infty) $ ώστε οι λύσεις της εξίσωσης  \[ x^2-\left( \lambda^2-5\lambda+6\right) x+\lambda-3=0 \] να είναι θετικές για κάθε τιμή της παραμέτρου $ \lambda $. Η διακρίνουσα του τριωνύμου είναι θετική.
+\item Δίνεται η εξίσωση $ x^2-\left(\lambda^2-4\lambda+3\right)x+4-3\lambda-\lambda^2=0  $. Να βρεθούν οι τιμές της παραμέτρου $ \lambda $ ώστε
+\begin{rlist}
+\item η εξίσωση να έχει δύο λύσεις άνισες.
+\item η εξίσωση να έχει μια διπλή λύση.
+\item οι ρίζες τις εξίσωσης να είναι
+\begin{multicols}{4}
+\begin{alist}
+\item ομόσημες
+\item ετερόσημες
+\item θετικές
+\item αρνητικές
+\end{alist}
+\end{multicols}
+\end{rlist}
+\end{enumerate}
+\end{document}
+

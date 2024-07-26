@@ -1,0 +1,124 @@
+\documentclass[ektypwsh]{diag-xelatex}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!80!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\begin{document}
+\titlos{Άλγεβρα Α΄ Λυκείου}{ΕΠΑΝΑΛΗΠΤΙΚΟ}
+\begin{thema}
+\item \mbox{}\\
+Α. Να αποδείξετε ότι το άθροισμα των λύσεων $ x_1,x_2 $ μιας εξίσωσης δευτέρου βαθμού $ ax^2+\beta x+\gamma=0\ ,\ a\neq0 $ δίνονται από τον τύπο $ S=-\frac{\beta}{a} $.\monades{3}\\\\
+Β. \swstolathos
+\begin{rlist}
+\item Για οποιουσδήποτε αριθμούς $ a,\beta\in\mathbb{R} $ ισχύει $ |a+ \beta|=|a|+|\beta| $.
+\item Η πιθανότητα οποιουδήποτε ενδεχομένου $ A $ είναι θετικός αριθμός.
+\item Μια εξίσωση δευτέρου βαθμού έχει πάντα δύο λύσεις.
+\item Ισχύει $ |x-x_0|<\rho\Rightarrow x_0-\rho<x<x_0+\rho $.
+\item Αν για μια εξίσωση δευτέρου βαθμού ισχύει $ P<0 $ τότε οι λύσεις της είναι ετερόσημες.\monades{2}
+\end{rlist}
+\item \mbox{}\\
+Να λυθούν οι παρακάτω ανισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ |3x-5|<7 $
+\item $ |2-4x|>3 $\monades{2{,}5+2{,}5}
+\end{rlist}
+\end{multicols}
+\item \mbox{}\\
+Για δύο ενδεχόμενα $ A $ και $ B $ έχουμε ότι $ P(A)=0{,}3,P(B')=0{,}6 $ και $ P(A\cup B)=0{,}5 $.
+\begin{rlist}
+\item Να βρεθεί η πιθανότητα $ P(A\cap B) $.\monades{3}
+\item Να βρεθούν οι πιθανότητες $ P(A-B) $ και $ P(B-A) $.\monades{2}
+\end{rlist}
+\item Δίνεται η εξίσωση $ x^2+(2\lambda+1)x+\lambda^2-4=0 $ με $ \lambda\in\mathbb{R} $.
+\begin{rlist}
+\item Να βρεθεί η διακρίνουσα του τριωνύμου, το άθροισμα $ S $ και το γινόμενο $ P $ των λύσεων της εξίσωσης.\monades{2}
+\item Να βρεθεί η τιμή της παραμέτρου $ \lambda $ ώστε η εξίσωση να έχει μια λύση.\monades{1}
+\item Να βρεθεί η τιμή της παραμέτρου $ \lambda $ ώστε η εξίσωση να έχει δύο λύσεις ετερόσημες.\monades{2}
+\end{rlist}
+\end{thema}
+\end{document}
+

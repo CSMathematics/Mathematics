@@ -1,0 +1,125 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,methodoi]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+\newcommand{\eqq}[2]{\xlongequal[#2]{#1}}
+\DeclareMathOperator*{\Eq}{=}
+%------------------------------------------
+
+
+
+\begin{document}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ Γ ' ΓΥΜΝΑΣΙΟΥ}{Αλγεβρικές Παραστάσεις}{ΜΟΝΩΝΥΜΑ}
+\begin{Methodos}[Εύρεση τιμήσ μονωνύμου]
+Εαν δώσουμε μια τιμή για κάθε μεταβλητή ενός μονωνύμου τότε μπορούμε να υπολογίσουμε την τιμή του πολυωνύμου ως εξής :
+\begin{bhma}
+\item \textbf{Αντικατάσταση}\\
+Αντικαθιστούμε τις τιμές που μας δίνονται στη θέση των μεταβλητών του μονωνύμου.
+\item \textbf{Πράξεις}\\
+Εκτελούμε τις πράξεις τηρώντας τη σειρά των πράξεων που γνωρίζουμε από την προηγούμενη παράγραφο.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Εύρεση τιμήσ μονωνύμου}
+\textbf{Να υπολογιστεί η τιμή της παράστασης {\boldmath $ 3x^2y^3 $} για {\boldmath $ x=-2 $} και {\boldmath $ y=3 $}.}\\\\
+\lysh\\
+Σε πρώτη φάση αντικαθιστούμε τις μεταβλητές του μονωνύμου με τις τιμές που μας δίνει η άσκηση και ύστερα εκτελούμε τις πράξεις. Θα έχουμε :
+\[ 3x^2y^3\eqq{x=-2}{y=3}3(-2)^2\cdot3^3=3\cdot4\cdot27=324 \]
+\begin{Methodos}[Πρόσθεση μονωνύμων]
+Η πρόσθεση μεταξύ όμοιων μονωνύμων μέσα σε μια αλγεβρική παράσταση γίνεται ως εξής :
+\begin{bhma}
+\item \textbf{Όμοιοι όροι}\\
+Εντοπίζουμε μέσα στην παράσταση τους όμοιους όρους δηλαδή τα όμοια μεταξύ τους μονώνυμα καθώς και τους σταθερούς όρους.
+\item \textbf{Αναγωγή ομοίων όρων}\\
+Προσθέτουμε τα όμοια μονώνυμα κάνοντας πράξεις μόνο μεταξύ των συντελεστών τους κρατώντας το ίδιο κύριο μέρος για το αποτέλεσμα της πρόσθεσης. Προσθέτουμε επίσης με τις γνωστές μεθόδους και τους σταθερούς όρους μεταξύ τους.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Πρόσθεση μονωνύμων}
+\textbf{Να υπολογιστεί το άθροισμα των παρακάτω όμοιων μονωνύμων}
+{\boldmath \[ 2xy^3-7xy^3 \]}
+\lysh\\
+Οι συντελεστές των όμοιων μονωνύμων του αθροίσματος είναι $ 2 $ και $ -7 $. Θα έχουμε λοιπόν
+\[ 2xy^3-7xy^3=(2-7)xy^3=-5xy^3 \]
+\Paradeigma{Απλοποίηση παράστασησ}
+\textbf{Να απλοποιηθεί η παρακάτω αλγεβρική παράσταση}
+{\boldmath \[ 4x^2y-3xy+2-xy-3x^2y+7 \]}
+\lysh\\
+Παρατηρούμε οτι η αλγεβρική παράσταση περιέχει όμοια μονώνυμα με κύριο μέρος το $ x^2y $ καθώς και όμοια μεταξύ τους μονώνυμα με κύριο μέρος το $ xy $. Έχουμε λοιπόν
+\begin{gather*}
+4x^2y-3xy+2-xy-3x^2y+7=(4-3)x^2y+(-3-1)xy+2+7=x^2y-4xy+9
+\end{gather*}
+Η τελευταία αλγεβρική παράσταση δεν απλοποιείται επιπλέον καθώς δεν περιέχει όμοια μονώνυμα.
+\begin{Methodos}[Πολλαπλασιασμόσ μονωνύμων]
+Για το γινόμενο μεταξύ μονωνύμων δεν είναι αναγκαίο να είναι οι παράγοντες μεταξύ τους όμοιοι. Για να υπολογιστεί το γινόμενο δύο ή περισσότερων μονωνύμων υπολογίζουμε τα επιμέρους γινόμενα σταδιακά δηλαδή
+\begin{bhma}
+\item \textbf{Πρόσημο αποτελέσματος}\\
+Υπολογίζουμε το πρόσημο του γινομένου εξετάζοντας το πρόσημο κάθε παράγοντα.
+\item \textbf{Αποτέλεσμα}\\
+Υπολογίζουμε το γινόμενο μεταξύ των συντελεστών καθώς και μεταξύ των όμοιων μεταβλητών χρησιμοποιώντας τις ιδιότητες των δυνάμεων.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Γινόμενο μονωνύμων}
+\textbf{Να υπολογιστεί το παρακάτων γινόμενο}
+{\boldmath\[ \left( -3x^2z^3\right) \cdot4x^3yz^2 \]}
+\lysh\\
+Οι συντελεστές $ -3 $ και $ 4 $ των δύο μονωνύμων είναι ετερόσημοι οπότε το γινόμενο τους θα είναι αρνητικό. Θα έχουμε λοιπόν
+\[ \left( -3x^2z^3\right) \cdot4x^3yz^2=-3\cdot4\cdot x^2\cdot x^3\cdot y\cdot z^3\cdot z^2=-12\cdot x^{2+3}\cdot y\cdot z^{3+2}=-12x^5yz^5 \]
+\begin{Methodos}[Προβλήματα - Κατασκευή μονωνύμων]
+
+\end{Methodos}
+\end{document}
+

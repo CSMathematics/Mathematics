@@ -1,0 +1,183 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Τρίγωνα}{Ευθεία και κύκλος}
+\orismoi
+\Orismos{Σχετικές θέσεις ευθείας και κύκλου}
+Οι τρεις σχετικές θέσεις μεταξύ μιας ευθείας $ \varepsilon $ και ενός κύκλου $ \left( O,\rho\right)  $ είναι οι ακόλουθες :
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Εξωτερική ευθεία}\\
+Εξωτερική ευθεία ενός κύκλου λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι μεγαλύτερη από την ακτίνα του.
+\[ OA>OB\Leftrightarrow \delta>\rho \]
+\item \textbf{Εφαπτόμενη ευθεία}\\
+Εφαπτόμενη ευθεία ενός κύκλου λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι ίση από την ακτίνα του.
+Το κοινό σημείο της ευθείας και του κύκλου λέγεται \textbf{σημείο επαφής}.
+\[ OA=OB\Leftrightarrow \delta=\rho \]
+\item \textbf{Τέμνουσα ευθεία}\\
+Τέμνουσα ευθεία ενός κύκλου λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι μικρότερη από την ακτίνα του.
+\[ OA<OB\Leftrightarrow \delta<\rho \]
+\end{enumerate}
+\begin{center}
+\begin{tabular}{ccc}
+\begin{tikzpicture}
+\draw[pl] (0,0) circle (1);
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=below left:$A$](270:1.4){A}
+\tkzDefPoint[label=below right:$B$](315:1){B}
+\draw(-1.4,-1.4)--(1.4,-1.4);
+\draw[pl](O)--(A);
+\draw[pl](O)--(B);
+\tkzDrawPoints(A,B,O)
+\node at (0.5,-0.2) {\footnotesize$\rho$};
+\node at (-0.2,-0.6) {\footnotesize$\delta$};
+\node at (1.8,-1.4) {\footnotesize$\varepsilon$};
+\end{tikzpicture} & \begin{tikzpicture}
+\draw[pl] (0,0) circle (1);
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=below left:$A$](270:1){A}
+\tkzDefPoint(270:1.4){E}
+\tkzDefPoint[label=right:$B$](315:1){B}
+\draw(-1.4,-1)--(1.4,-1);
+\draw[pl](O)--(A);
+\draw[pl](O)--(B);
+\tkzDrawPoints(A,B,O)
+\node at (0.5,-0.2) {\footnotesize$\rho$};
+\node at (-0.2,-0.5) {\footnotesize$\delta$};
+\node at (1.8,-1) {\footnotesize$\varepsilon$};
+\end{tikzpicture} & \begin{tikzpicture}
+\draw[pl] (0,0) circle (1);
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint(270:.8){A}
+\tkzDefPoint(270:1.4){E}
+\tkzDefPoint(315:1){B}
+\tkzLabelPoint[below left,fill=white,inner sep=.1mm,yshift=-1mm](A){$A$}
+\tkzLabelPoint[right,fill=white,inner sep=.1mm,yshift=1mm,xshift=2mm](B){$B$}
+\draw(-1.4,-.8)--(1.4,-.8);
+\draw[pl](O)--(A);
+\draw[pl](O)--(B);
+\tkzDrawPoints(A,B,O)
+\node at (0.5,-0.2) {\footnotesize$\rho$};
+\node at (-0.2,-.4) {\footnotesize$\delta$};
+\node at (1.8,-.8) {\footnotesize$\varepsilon$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Orismos{Εφαπτόμενα τμήματα}
+\wrapr{-4mm}{5}{3.8cm}{-12mm}{\begin{tikzpicture}
+\draw[pl] (0,0) circle (1);
+\tkzDefPoint[label=right:$O$](0,0){O}
+\tkzDefPoint[label=above:$P$](-2.6,0){P}
+\tkzDefPoint[label=above:$A$](113:1){A}
+\tkzDefPoint[label=below:$B$](247:1){B}
+\draw[pl](O)--(A);
+\draw[pl](O)--(B);
+\draw[pl,\xrwma](P)--(A);
+\draw[pl,\xrwma](P)--(B);
+\draw[pl,\xrwma](O)--(P);
+\tkzDrawPoints(A,B,O,P)
+\node at (0,0.6) {\footnotesize$\rho$};
+\node at (0,-0.6) {\footnotesize$\rho$};
+\node at (-1.2,0.2) {\footnotesize$\delta$};
+\end{tikzpicture}}{
+Εφαπτόμενα τμήματα ενός κύκλου ονομάζονται τα ευθύγραμμα τμήματα που άγονται από σημείο εκτός του κύκλου και εφάπτονται εκατέρωθεν του. Η ευθεία που διέρχεται από το εξωτερικό σημείο και το κέντρο του κύκλου ονομάζεται \textbf{διακεντρική ευθεία}.}
+\thewrhmata
+\Thewrhma{Κοινά σημεία κύκλου - ευθείας}
+Ένας κύκλος έχει το πολύ δύο κοινά σημεία με μια ευθεία.\\\\
+\Thewrhma{Εφαπτόμενη ευθεία}
+Η εφαπτόμενη ευθεία σε ένα σημείο του κύκλου είναι μοναδική. Επιπλέον η ακτίνα στο σημείο επαφής είναι κάθετη με την εφαπτομένη.\\\\
+\Thewrhma{Εφαπτόμενα τμήματα}
+\wrapr{-4mm}{8}{3.7cm}{-4mm}{\begin{tikzpicture}
+\draw[pl] (0,0) circle (1);
+\tkzDefPoint[label=right:$O$](0,0){O}
+\tkzDefPoint[label=above:$P$](-2.6,0){P}
+\tkzDefPoint[label=above:$A$](113:1){A}
+\tkzDefPoint[label=below:$B$](247:1){B}
+\tkzMarkAngle[size=.5,mark=|,fill=\xrwma](O,P,A)
+\tkzMarkAngle[size=.5,mark=|,fill=\xrwma](B,P,O)
+\tkzMarkAngle[size=.4,mark=||,fill=\xrwma](A,O,P)
+\tkzMarkAngle[size=.4,mark=||,fill=\xrwma](P,O,B)
+\tkzMarkRightAngle[size=.2,mark=||](P,A,O)
+\tkzMarkRightAngle[size=.2,mark=||](O,B,P)
+\draw[pl](O)--(A);
+\draw[pl](O)--(B);
+\draw[pl,\xrwma](P)--(A);
+\draw[pl,\xrwma](P)--(B);
+\draw[pl](O)--(P);
+\tkzDrawPoints(A,B,O,P)
+\node at (0,0.6) {\footnotesize$\rho$};
+\node at (0,-0.6) {\footnotesize$\rho$};
+\node at (-1.2,0.2) {\footnotesize$\delta$};
+\end{tikzpicture}}{
+Αν $ P $ είναι ένα εξωτερικό σημείο ενός κύκλου $ (O,\rho) $ τότε ισχύουν οι παρακάτω προτάσεις.
+\begin{rlist}
+\item Τα εφαπτόμενα τμήματα που άγονται από ένα σημείο εκτός ενός κύκλου είναι μεταξύ τους ίσα.
+\item Η διακεντρική ευθεία διχοτομεί τη γωνία των εφαπτόμενων τμημάτων και τη γωνία των ακτίνων στα σημεία επαφής.
+\end{rlist}}\mbox{}\\
+\vspace{-3mm}
+\begin{rlist}[start=3]
+\item Η διακεντρική ευθεία είναι μεσοκάθετος της χορδής που ενώνει τα σημεία επαφής.
+\end{rlist}
+\end{document}

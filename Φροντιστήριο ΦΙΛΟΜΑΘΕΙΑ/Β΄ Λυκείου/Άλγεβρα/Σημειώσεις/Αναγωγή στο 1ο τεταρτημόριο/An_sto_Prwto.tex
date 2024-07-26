@@ -1,0 +1,427 @@
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\usepackage{gensymb}
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Τριγωνομετρία}{Αναγωγή στο 1\tssL{ο} Τεταρτημόριο}
+\thewrhmata
+\Thewrhma{αναγωγη στο 1\textsuperscript{\MakeLowercase{o}} τεταρτημοριο}\label{th:an_tet}
+Οι τριγωνομετρικοί αριθμοί γωνιών που καταλήγουν στο 2\tss{ο}, 3\tss{ο} ή 4\tss{ο} ανάγωνται σε τριγωνομετρικούς αριθμούς γωνιών του 1\textsuperscript{ου} τεταρτημορίου σύμφωνα με τους παρακάτω τύπους.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Παραπληρωματικές γωνίες (2\textsuperscript{ο} τεταρτημόριο)}\\
+Γωνίες που καταλήγουν στο 2\tss{ο} τεταρτημόριο μπορούν να γραφτούν ως παραπληρωματικές γωνιών του 1\tss{ου} τεταρτημορίου. Εαν $ \omega $ είναι μια γωνία του 1\textsuperscript{ου} τεταρτημορίου τότε η παραπληρωματική της θα είναι της μορφής $ 180\degree-\omega $. Οι σχέσεις μεταξύ των τριγωνομετρικών τους αριθμών φαίνονται παρακάτω :\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText1}{7}{6cm}
+\begin{tikzpicture}[>=latex,scale=2]
+\clip (-1.5,-.3) rectangle (1.4,1.4);
+\draw[fill=\xrwma!10] (0,0) -- (.2,0) arc (0:40:.2) -- cycle;
+\draw[fill=\xrwma!30] (0,0) -- (.15,0) arc (0:140:.15) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(2*pi/9),0){D}
+\tkzDefPoint(-cos(2*pi/9),0){E}
+\tkzDefPoint(0,sin(2*pi/9)){F}
+\coordinate (A) at (40:1);
+\coordinate (B) at (140:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.3,.1){{\footnotesize $ \omega $}}
+
+\tkzText(0,.3){{\footnotesize $ 180^{\mathrm{o}}-\omega $}}
+\draw[dashed] (A) -- (D) node[anchor=north]{{\footnotesize $ x $}};
+\draw[dashed] (B) -- (E)node[anchor=north]{{\footnotesize $ -x $}};
+\draw[dashed] (A) -- (B);
+\tkzDrawPoints[size=7,fill=white](A,B,D,E,F)
+\tkzLabelPoint[above left](F){{\footnotesize $ y $}}
+\tkzLabelPoint[above right](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[above left](B){{\footnotesize $ N(-x,y) $}}
+\tkzLabelPoint[below left](O){$ O $}
+\end{tikzpicture}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( 180\degree-\omega\right) }=\hm{\omega} $
+\item $ \syn{\left( 180\degree-\omega\right) }=-\syn{\omega} $
+\item $ \ef{\left( 180\degree-\omega\right) }=-\ef{\omega} $
+\item $ \syf{\left( 180\degree-\omega\right) }=-\syf{\omega} $
+\end{itemize}
+Οι παραπληρωματικές γωνίες έχουν ίσα ημίτονα και αντίθετους όλους τους υπόλοιπους τριγωνομετρικούς αριθμούς. Τα σημεία $ M,N $ του τριγωνομετρικού κύκλου, των γωνιών $ \omega $ και $ 180\degree-\omega $ αντίστοιχα, είναι συμμετρικα ως προς άξονα $ y'y $ και κατά συνέπεια έχουν αντίθετες τετμημένες.
+\end{minipage}
+\item \textbf{Γωνίες με διαφορά $ \mathbold{180\degree} $ (3\tss{ο} Τεταρτημόριο)}\\
+Γωνίες που καταλήγουν στο 3\tss{ο} τεταρτημόριο μπορούν να γραφτούν ως γωνίες με διαφορά $ 180\degree $ γωνιών του 1\tss{ου} τεταρτημορίου. Εαν $ \omega $ είναι μια γωνία του 1\textsuperscript{ου} τεταρτημορίου, η γωνία η οποία διαφέρει από την $ \omega $ κατά $ 180\degree $ θα είναι της μορφής $ 180\degree-\omega $. Οι σχέσεις που συνδέουν τους τριγωνομετρικούς αριθμούς των δύο γωνιών θα είναι :\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText2}{10}{5cm}
+\begin{tikzpicture}[>=latex,scale=1.5]
+\draw[fill=\xrwma!10] (0,0) -- (.2,0) arc (0:40:.2) -- cycle;
+\draw[fill=\xrwma!30] (0,0) -- (.15,0) arc (0:220:.15) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(2*pi/9),0){D}
+\tkzDefPoint(-cos(2*pi/9),0){E}
+\tkzDefPoint(0,-sin(2*pi/9)){F}
+\tkzDefPoint(0,sin(2*pi/9)){C}
+\coordinate (A) at (40:1);
+\coordinate (B) at (220:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.3,.1){{\footnotesize $ \omega $}}
+
+\tkzText(-.2,.27){{\footnotesize $ 180^{\mathrm{o}}+\omega $}}
+\draw[dashed] (A) -- (D) node[anchor=north]{{\footnotesize $ x $}};
+\draw[dashed] (B) -- (E)node[anchor=south]{{\footnotesize $ -x $}};
+\draw[dashed] (A) -- (C);
+\draw[dashed] (B) -- (F);
+\tkzDrawPoints[size=7,fill=white](A,B,C,D,E,F)
+\tkzLabelPoint[left](C){{\footnotesize $ y $}}
+\tkzLabelPoint[right](F){{\footnotesize $ -y $}}
+\tkzLabelPoint[above right](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[below left](B){{\footnotesize $ N(-x,-y) $}}
+\tkzLabelPoint[below right](O){$ O $}
+\end{tikzpicture}
+\end{WrapText2}
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( 180\degree+\omega\right) }=-\hm{\omega} $
+\item $ \syn{\left( 180\degree+\omega\right) }=-\syn{\omega} $
+\item $ \ef{\left( 180\degree+\omega\right) }=\ef{\omega} $
+\item $ \syf{\left( 180\degree+\omega\right) }=\syf{\omega} $
+\end{itemize}
+\end{multicols}
+Οι γωνίες με διαφορά $ 180\degree $ έχουν αντίθετα ημίτονα και συνημίτονα ενώ έχουν ίσες εφαπτομένες και συνεφαπτομένες. Τα σημεία $ M,N $ του τριγωνομετρικού κύκλου, των γωνιών $ \omega $ και $ 180\degree+\omega $ αντίστοιχα, είναι συμμετρικα ως προς την αρχή των αξόνων και κατά συνέπεια έχουν αντίθετες συντεταγμένες.
+\end{minipage}
+\item \textbf{Αντίθετες γωνίες - Γωνίες με άθροισμα {\boldmath{$ 360\degree $}} (4\textsuperscript{ο} Τεταρτημόριο)}\\
+Γωνίες που καταλήγουν στο 4\tss{ο} τεταρτημόριο μπορούν να γραφτούν ως αντίθετες γωνιών του 1\tss{ου} τεταρτημορίου. Η αντίθετη γωνία, μιας γωνίας $ \omega $ του 1\textsuperscript{ου} τεταρτημορίου, ορίζεται να είναι η γωνία η οποία έχει ίσο μέτρο με τη γωνία $ \omega $, με φορά αντίθετη απ' αυτήν και θα έχει τη μορφή $ -\omega $. Επιπλέον η γωνία η οποία έχει με τη γωνία $ \omega $, άθροισμα $ 360\degree $ καταλήγει στο ίδιο σημείο και θα είναι $ 360\degree-\omega $.\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText1}{8}{4.3cm}
+\begin{tikzpicture}[>=latex,scale=1.5]
+\draw[fill=\xrwma!10] (0,0) -- (.2,0) arc (0:40:.2) -- cycle;
+\draw[fill=\xrwma!30] (0,0) -- (.15,0) arc (0:320:.15) -- cycle;
+\draw[fill=\xrwma!50] (0,0) -- (.25,0) arc (0:-40:.25) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(2*pi/9),0){D}
+\tkzDefPoint(0,-sin(2*pi/9)){F}
+\tkzDefPoint(0,sin(2*pi/9)){C}
+\coordinate (A) at (40:1);
+\coordinate (B) at (320:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.3,.1){{\footnotesize $ \omega $}}
+\tkzText(.35,-.1){{\footnotesize $ -\omega $}}
+\tkzText(-.2,.27){{\footnotesize $ 360^{\mathrm{o}}-\omega $}}
+\draw[dashed] (A) -- (B);
+\draw[dashed] (B) -- (F);
+\draw[dashed] (A) -- (C);
+\tkzDrawPoints[size=7,fill=white](A,B,C,D,F)
+\tkzLabelPoint[left](C){{\footnotesize $ y $}}
+\tkzLabelPoint[left](F){{\footnotesize $ -y $}}
+\tkzLabelPoint[above right](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[below right](B){{\footnotesize $ N(x,-y) $}}
+\tkzLabelPoint[below left](O){$ O $}
+\end{tikzpicture}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( -\omega\right) }=\hm{\left( 360\degree-\omega\right) }=-\hm{\omega} $
+\item $ \syn{\left( -\omega\right) }=\syn{\left( 360\degree-\omega\right) }=-\syn{\omega} $
+\item $ \ef{\left( -\omega\right) }=\ef{\left( 360\degree-\omega\right) }=\ef{\omega} $
+\item $ \syf{\left( -\omega\right) }=\syf{\left( 360\degree-\omega\right) }=\syf{\omega} $
+\end{itemize}
+Οι γωνίες με άθροισμα $ 360\degree $ καθώς και οι αντίθετες έχουν ίσα συνημίτονα και αντίθετους όλους τους υπόλοιπους τριγωνομετρικούς αριθμούς. Τα σημεία $ M,N $ του τριγωνομετρικού κύκλου, των γωνιών $ \omega $ και $ 360\degree-\omega $ αντίστοιχα, είναι συμμετρικα ως προς τον άξονα $ x'x $ και κατά συνέπεια έχουν αντίθετες τεταγμένες. Τα σημεία του κύκλου των γωνιών $ 360\degree-\omega $ και $ -\omega $ καθώς και οι ακτίνες τους ταυτίζονται.
+\end{minipage}
+\item \textbf{Συμπληρωματικές γωνίες}\\
+Η συμπληρωματική γωνία μιας οξείας γωνίας $ \omega $ θα είναι της μορφής $ 90\degree-\omega $ η οποία ανήκει και αυτή στο 1\textsuperscript{ο} τεταρτημόριο. Οι τριγωνομετρικοί αριθμοί τους συνδέονται από τις παρακάτω σχέσεις :\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText2}{13}{5cm}
+\begin{tikzpicture}[>=latex,scale=2.5]
+\clip (-.35,-.3) rectangle (1.4,1.4);
+\draw[fill=\xrwma!10] (0,0) -- (.2,0) arc (0:30:.2) -- cycle;
+\draw[fill=\xrwma!30] (0,0) -- (.15,0) arc (0:60:.15) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(pi/6),0){D}
+\tkzDefPoint(0,sin(pi/6)){C}
+\tkzDefPoint(cos(pi/3),0){E}
+\tkzDefPoint(0,sin(pi/3)){F}
+\coordinate (A) at (30:1);
+\coordinate (B) at (60:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.3,.07){{\footnotesize $ \omega $}}
+\tkzText(-.1,.27){{\footnotesize $ 90^{\mathrm{o}}-\omega $}}
+\draw[dashed] (A) -- (B);
+\draw[dashed] (B) -- (F);
+\draw[dashed] (B) -- (E);
+\draw[dashed] (A) -- (C);
+\draw[dashed] (A) -- (D);
+\draw (-.3,-.3) -- (.8,.8);
+\draw[-latex] (-.1,.23) -- (0.12,0.02);
+\tkzDrawPoints[size=7,fill=white](A,B,C,D,E,F)
+\tkzLabelPoint[left](C){{\footnotesize $ y_{\!_M} $}}
+\tkzLabelPoint[below](D){{\footnotesize $ x_{\!_M} $}}
+\tkzLabelPoint[left](F){{\footnotesize $ y_{\!_N} $}}
+\tkzLabelPoint[below](E){{\footnotesize $ x_{\!_N} $}}
+\tkzLabelPoint[above right](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[above right](B){{\footnotesize $ N(y,x) $}}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzText(1,.75){{\footnotesize $ y=x $}}
+\end{tikzpicture}
+\end{WrapText2}
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( 90\degree-\omega\right) }=\syn{\omega} $
+\item $ \syn{\left( 90\degree-\omega\right) }=\hm{\omega} $
+\item $ \ef{\left( 90\degree-\omega\right) }=\syf{\omega} $
+\item $ \syf{\left( 90\degree-\omega\right) }=\ef{\omega} $
+\end{itemize}
+\end{multicols}
+Για δύο συμπληρωματικές γωνίες έχουμε οτι το ημίτονο της μιας είναι ίσο με το συνημίτονο της άλλης και η εφαπτομένη της μιας είναι ίση με τη συνεφαπτομένη της άλλης. Τα σημεία $ M,N $ του τριγωνομετρικού κύκλου, των γωνιών $ \omega $ και $ 90\degree-\omega $ αντίστοιχα, είναι συμμετρικα ως προς την ευθεία $ y=x $ οπότε έχουν συμμετρικές συντεταγμένες.
+\end{minipage}
+\item \textbf{Γωνίες με διαφορά $ \mathbold{90\degree} $}\\
+Γωνίες οι οποίες διαφέρουν κατά $ 90\degree $ έχουν τη μορφή $ \omega $ και $ 90\degree+\omega $. Οι τριγωνομετρικοί αριθμοί της γωνίας $ 90\degree+\omega $ δίνονται από τις παρακάτω σχέσεις :\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText1}{9}{5.8cm}
+\begin{tikzpicture}[>=latex,scale=2.1]
+\clip (-1.25,-.3) rectangle (1.5,1.4);
+\draw[fill=\xrwma!30] (0,0) -- (.2,0) arc (0:30:.2) -- cycle;
+\draw[fill=\xrwma!50] (0,0) -- (.15,0) arc (0:120:.15) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(pi/6),0){D}
+\tkzDefPoint(0,sin(pi/6)){C}
+\tkzDefPoint(cos(2*pi/3),0){E}
+\tkzDefPoint(0,sin(2*pi/3)){F}
+\coordinate (A) at (30:1);
+\coordinate (B) at (120:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.3,.07){{\footnotesize $ \omega $}}
+\tkzText(0.3,-.17){{\footnotesize $ 90^{\mathrm{o}}+\omega $}}
+\draw[dashed] (B) -- (F);
+\draw[dashed] (B) -- (E);
+\draw[dashed] (A) -- (C);
+\draw[dashed] (A) -- (D);
+\draw[->] (0.3,-0.09) -- (0.07,0.09);
+\tkzDrawPoints[size=7,fill=white](A,B,C,D,E,F)
+\tkzLabelPoint[left](C){{\footnotesize $ y_{\!_M} $}}
+\tkzLabelPoint[below](D){{\footnotesize $ x_{\!_M} $}}
+\tkzLabelPoint[right](F){{\footnotesize $ y_{\!_N} $}}
+\tkzLabelPoint[below](E){{\footnotesize $ x_{\!_N} $}}
+\tkzLabelPoint[above right,xshift=-1mm](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[above left](B){{\footnotesize $ N(y,-x) $}}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzMarkRightAngle[size=.08](A,O,B)
+\end{tikzpicture}
+\end{WrapText1}
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( 90\degree+\omega\right) }=\syn{\omega} $
+\item $ \syn{\left( 90\degree+\omega\right) }=-\hm{\omega} $
+\item $ \ef{\left( 90\degree+\omega\right) }=-\syf{\omega} $
+\item $ \syf{\left( 90\degree+\omega\right) }=-\ef{\omega} $
+\end{itemize}
+\end{multicols}
+Για δύο γωνίες με διαφορά $ 90\degree $ ισχύει οτι το ημίτονο της μιας είναι ίσο με το συνημίτονο της άλλης, ενώ συνημίτονο, εφαπτομένη και συνεφαπτομένη της πρώτης γωνίας είναι αντίθετα με τα ημίτονο, συνεφαπτομένη και εφαπτομένη αντίστοιχα, της δεύτερης.
+\end{minipage}
+\item \textbf{Γωνίες με διαφορά {\boldmath{$ 270\degree $}}}\\
+Η γωνία η οποία διαφέρει κατά $ 270\degree $ από μια γωνία $ \omega $ θα είναι της μορφής $ 270\degree+\omega $. Για τον υπολογισμό των τριγωνομετρικών αριθμών της χρησιμοποιούμε τους παρακάτω μετασχηματισμούς :\\
+\wrapr{-10mm}{9}{4.3cm}{-1mm}{\begin{tikzpicture}[>=latex,scale=1.5]
+\draw[fill=\xrwma!10] (0,0) -- (.2,0) arc (0:30:.2) -- cycle;
+\draw[fill=\xrwma!30] (0,0) -- (.15,0) arc (0:300:.15) -- cycle;
+%axis
+\draw[-latex] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(pi/6),0){D}
+\tkzDefPoint(cos(10*pi/6),0){E}
+\tkzDefPoint(0,sin(10*pi/6)){F}
+\tkzDefPoint(0,sin(pi/6)){C}
+\coordinate (A) at (30:1);
+\coordinate (B) at (300:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.33,.1){{\footnotesize $ \omega $}}
+
+\tkzText(-.22,.27){{\footnotesize $ 270^{\mathrm{o}}+\omega $}}
+\draw[dashed] (A) -- (D) node[anchor=north]{{\footnotesize $ x_{_{\!M}} $}};
+\draw[dashed] (B) -- (E) node[yshift=-2.4mm,xshift=-1mm]{{\footnotesize $ x_{_{\!N}} $}};
+\draw[dashed] (A) -- (C);
+\draw[dashed] (B) -- (F);
+\tkzDrawPoints[size=7,fill=white](A,B,C,D,E,F)
+\tkzLabelPoint[left](C){{\footnotesize $ y_{_{\!M}} $}}
+\tkzLabelPoint[left](F){{\footnotesize $ y_{_{\!N}} $}}
+\tkzLabelPoint[above right](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[below right](B){{\footnotesize $ N(y,-x) $}}
+\tkzLabelPoint[below left,xshift=-.3mm](O){$ O $}
+\end{tikzpicture}}{
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( 270\degree+\omega\right) }=-\syn{\omega} $
+\item $ \syn{\left( 270\degree+\omega\right) }=\hm{\omega} $
+\item $ \ef{\left( 270\degree+\omega\right) }=-\syf{\omega} $
+\item $ \syf{\left( 270\degree+\omega\right) }=-\ef{\omega} $
+\end{itemize}
+\end{multicols}
+Για δύο γωνίες με διαφορά $ 270\degree $ ισχύει οτι το συνημίτονο της μιας είναι ίσο με το ημίτονο της άλλης, ενώ το ημίτονο, η εφαπτομένη και η συνεφαπτομένη της πρώτης είναι αντίθετα με το συνημίτονο, τη συνεφαπτομένη και την εφαπτομένη της δεύτερης αντίστοιχα.}
+\item \textbf{Γωνίες με άθροισμα {\boldmath{$ 270\degree $}}}\\
+Η γωνία η οποία έχει άθροισμα $ 270\degree $ με μια γωνία $ \omega $ θα γράφεται ως $ 270\degree-\omega $. Οι τριγωνομετρικοί αριθμοί αυτής δίνονται από τους παρακάτω τύπους :\\
+\wrapr{-10mm}{9}{4.3cm}{-7mm}{\begin{tikzpicture}[>=latex,scale=1.5]
+\draw[fill=\xrwma!50] (0,0) -- (.2,0) arc (0:30:.2) -- cycle;
+\draw[fill=\xrwma!30] (0,0) -- (.15,0) arc (0:240:.15) -- cycle;
+%axis
+\draw[-latex] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(pi/6),0){D}
+\tkzDefPoint(cos(8*pi/6),0){E}
+\tkzDefPoint(0,sin(8*pi/6)){F}
+\tkzDefPoint(0,sin(pi/6)){C}
+\coordinate (A) at (30:1);
+\coordinate (B) at (240:1);
+\tkzDrawSegments(O,A O,B)
+\draw circle (1);
+\tkzText(.33,.1){{\footnotesize $ \omega $}}
+
+\tkzText(-.22,.27){{\footnotesize $ 270^{\mathrm{o}}-\omega $}}
+\draw[dashed] (A) -- (D) node[anchor=north]{{\footnotesize $ x_{_{\!M}} $}};
+\draw[dashed] (B) -- (E) node[yshift=-2.4mm,xshift=-2mm]{{\footnotesize $ x_{_{\!N}} $}};
+\draw[dashed] (A) -- (C);
+\draw[dashed] (B) -- (F);
+\tkzDrawPoints[size=7,fill=white](A,B,C,D,E,F)
+\tkzLabelPoint[left](C){{\footnotesize $ y_{_{\!M}} $}}
+\tkzLabelPoint[right](F){{\footnotesize $ y_{_{\!N}} $}}
+\tkzLabelPoint[above right](A){{\footnotesize $ M(x,y) $}}
+\tkzLabelPoint[below,xshift=-3mm](B){{\footnotesize $ N(-y,-x) $}}
+\tkzLabelPoint[below right,xshift=-.5mm](O){$ O $}
+\end{tikzpicture}}{
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ \hm{\left( 270\degree-\omega\right) }=-\syn{\omega} $
+\item $ \syn{\left( 270\degree-\omega\right) }=-\hm{\omega} $
+\item $ \ef{\left( 270\degree-\omega\right) }=\syf{\omega} $
+\item $ \syf{\left( 270\degree-\omega\right) }=\ef{\omega} $
+\end{itemize}
+\end{multicols}
+Για δύο γωνίες με άθροισμα $ 270\degree $ ισχύει οτι το ημίτονο και συνημίτονο της μιας είναι αντίθετα με το συνημίτονο και ημίτονο της άλλης αντοίστοιχα, ενώ η εφαπτομένη και η συνεφαπτομένη της πρώτης είναι ίση με τη συνεφαπτομένη και την εφαπτομένη της δεύτερης αντίστοιχα.}
+\item \textbf{Γωνίες με διαφορά $ \mathbold{\kappa\cdot360\degree} $}\\
+Εαν στρέψουμε μια γωνία $ \omega $ κατά γωνία της μορφής $ \kappa\cdot360\degree $ με $ \kappa\in\mathbb{Z} $ δηλαδή ακέραια πολλαπλάσια ενός κύκλου προκύπτει γωνία του τύπου $ \kappa\cdot360\degree+\omega $. Γωνίες αυτής της μορφής διαφέρουν κατά πολλαπλάσια ενός κύκλου. Οι τριγωνομετρικοί αριθμοί των δύο γωνιών συνδέονται με τις παρακάτω σχέσεις :\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1cm}
+\begin{WrapText2}{9}{4.7cm}
+\newcommand\bigangle[2][]{% 
+\draw[->,domain=0:#2,variable=\t,samples=200,>=latex,#1]
+plot ({(\t+#2)*cos(\t)/(#2*10)},
+{(\t+#2)*sin(\t)/(#2*10)})	;}
+\begin{tikzpicture}[>=latex,scale=1.5]
+\draw[fill=\xrwma!30] (0,0) -- (.2,0) arc (0:40:.2) -- cycle;
+%axis
+\draw[->] (-1.2,0) -- (1.2,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[->] (0,-1.2) -- (0,1.2) node[above,fill=white] {{\footnotesize $ y $}};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(2*pi/9),0){D}
+\tkzDefPoint(0,sin(2*pi/9)){F}
+\coordinate (A) at (40:1);
+\coordinate (B) at (400:1);
+\tkzDrawSegment(O,A)
+\draw circle (1);
+\tkzText(.3,.1){\footnotesize$ \omega $}
+\tkzText(-.25,.27){{\footnotesize $ 360^{\mathrm{o}}+\omega $}}
+\draw[dashed] (A) -- (D) node[anchor=north]{{\footnotesize $ x $}};
+\draw[dashed] (A) -- (F);
+\tkzDrawPoints[size=7,fill=white](A,D,F)
+\tkzLabelPoint[left](F){{\footnotesize $ y $}}
+\tkzLabelPoint[above right](A){\footnotesize$ M(x,y) $}
+\tkzLabelPoint[below left](O){$ O $}
+\bigangle{400}
+\end{tikzpicture}
+\end{WrapText2}
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm,leftmargin=4mm]
+\item $ \hm{\left( \kappa\cdot360\degree+\omega\right)}=\syn{\omega} $
+\item $ \syn{\left(
+\kappa\cdot360\degree+\omega\right)}=-\hm{\omega}$
+\item $ \ef{\left( \kappa\cdot360\degree+\omega\right) }=-\syf{\omega} $
+\item $ \syf{\left( \kappa\cdot360\degree+\omega\right) }=-\ef{\omega} $
+\end{itemize}
+\end{multicols}
+Οι γωνίες με διαφορά $ \kappa\cdot360\degree $ έχουν ίσους όλους τους τριγωνομετρικούς τους αριθμούς καθώς ταυτίζονται τα σημεία των γωνιών πάνω στον τριγωνομετρικό κύκλο και οι ακτίνες των γωνιών.
+\end{minipage}
+\end{enumerate}
+\end{document}

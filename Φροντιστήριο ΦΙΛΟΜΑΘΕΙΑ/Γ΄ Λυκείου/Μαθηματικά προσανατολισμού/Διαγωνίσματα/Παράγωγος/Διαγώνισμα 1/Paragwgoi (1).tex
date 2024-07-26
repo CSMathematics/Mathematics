@@ -1,0 +1,139 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{Μαθηματικά προσανατολισμού Γ΄ Λυκείου}{Διαγώνισμα}{Παράγωγοι}
+\begin{thema}
+\item\mbox{}\\
+\vspace{-7mm}
+\begin{erwthma}
+\item Να αποδείξετε ότι αν μια συνάρτηση $ f $ είναι παραγωγίσιμη σε ένα σημείο $ x_0 $ του πεδίου ορισμού της, τότε είναι και συνεχής στο σημείο αυτό.\monades{10}
+\item Να δώσετε τον ορισμό της παραγωγίσιμης συνάρτησης σε ένα σημείο του πεδίου ορισμού της.\\\monades{5}
+\item \swstolathospan
+\begin{alist}
+\item Αν μια συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της τότε είναι και παραγωγίσιμη σ' αυτό.
+\item Αν μια συνάρτηση $ f $ δεν είναι συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της τότε δεν είναι παραγωγίσιμη σ' αυτό.
+\item Το πεδίο ορισμού της παραγώγου μιας συνάρτησης $ f $ είναι υποσύνολο του πεδίου ορισμού της $ f $.
+\item Η παράγωγος του γινομένου δύο συναρτήσεων $ f,g $ ισούται με $ (f(x)\cdot g(x))'=f'(x)\cdot g'(x) $.
+\item Ισχύει ότι $ \left(x^x\right)'=x\cdot x^{x-1} $.
+\end{alist}
+\end{erwthma}\monades{10}
+\item\mbox{}\\
+Να υπολογίσετε τις παραγώγους των παρακάτω συναρτήσεων.
+\begin{multicols}{2}
+\begin{erwthma}
+\item $ f(x)=x^2\cdot\hm{x} $
+\item $ f(x)=\dfrac{e^x\cdot x}{\syn{x}} $
+\item $ f(x)=\ln{(\syn{x})},\ x\in\left(0,\frac{\pi}{2} \right)  $
+\item $ f(x)=3^x\cdot\ln{x} $
+\item $ f(x)=(x^2-1)^x $
+\item $ f(x)=e^x\cdot x^3\cdot\ln{x} $
+\item $ f(x)=\sqrt[3]{x^5} $
+\item $ f(x)=\sqrt[3]{(2-x)^4}  $
+\item $ f(x)=|x-3|+2x $
+\item $ f(x)=\hm^3{(x^2-x)} $
+\end{erwthma}
+\end{multicols}\monades{25}
+\item\mbox{}\\
+Δίνεται η συνάρτηση $ f:(0,+\infty)\to\mathbb{R} $ με τύπο
+\[ f(x)=\frac{\ln{x}+1}{x} \]
+\begin{erwthma}
+\item Να βρεθεί η παράγωγος της $ f $.\monades{8}
+\item Να λυθεί η ανίσωση $ f'(x)<0 $.\monades{7}
+\item Να δειχθεί ότι η γραφική παράσταση της $ f'' $ τέμνει τον οριζόντιο άξονα σε ένα σημείο ακριβώς.\\\monades{10}
+\end{erwthma} 
+\end{thema}
+\end{document}

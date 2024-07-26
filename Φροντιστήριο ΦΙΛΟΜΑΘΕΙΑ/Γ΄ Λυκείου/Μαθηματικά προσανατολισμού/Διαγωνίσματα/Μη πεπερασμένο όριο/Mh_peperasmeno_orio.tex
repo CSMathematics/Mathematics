@@ -1,0 +1,117 @@
+\documentclass[ektypwsh]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{cyan!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Μη πεπερασμένο όριο}{Β}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Δίνονται οι συναρτήσεις $ f,g $ για τις οποίες ισχύει $ f(x)\leq g(x) $ κοντά στο $ x_0 $ και $ \lim\limits_{x\to x_0}{g(x)}=-\infty $. Να δείξετε ότι $ \lim\limits_{x\to x_0}{f(x)}=-\infty $.\monades{10}
+\item Να δείξετε ότι το όριο $ \lim\limits_{x\to 0}{\frac{1}{x^{2\nu+1}}} $ δεν υπάρχει.\monades{5}
+\item \swstolathospan
+\begin{alist}
+\item Αν $ \lim\limits_{x\to x_0}{|f(x)|}=+\infty $ τότε είναι $ \lim\limits_{x\to x_0}{f(x)}=\pm\infty $.
+\item Αν $ \lim\limits_{x\to x_0}{f(x)}=0 $ τότε $ \lim\limits_{x\to x_0}{\frac{1}{f(x)}}=+\infty $.
+\item Αν $ f:\mathbb{R}\to\mathbb{R} $ συνάρτηση με $ \lim\limits_{x\to 0}{f(x)}=+\infty $ τότε το όριο $ \lim\limits_{x\to 0}{\frac{f(x)}{x}} $ δεν υπάρχει.
+\item Αν $ \lim\limits_{x\to x_0^+}{f(x)}=+\infty $ και $ \lim\limits_{x\to x_0^-}{f(x)}=-\infty $ τότε το όριο $ \lim\limits_{x\to x_0}{\frac{1}{f(x)}} $ δεν υπάρχει.
+\item Αν $ \lim\limits_{x\to x_0}{f(x)}=0 $ και $ f(x)<0 $ κοντά στο $ x_0 $ τότε $ \lim\limits_{x\to x_0}\frac{1}{f(x)}=+\infty $.
+\end{alist}
+\end{erwthma}\monades{10}
+\item Να υπολογίσετε τα παρακάτω όρια.
+\begin{multicols}{2}
+\begin{erwthma}
+\item $ \lim\limits_{x\to 1}{\frac{x^2-3x}{x^2-2x+1}} $
+\item $ \lim\limits_{x\to -2}{\frac{3-2x}{x^2-x-6}} $
+\item $ \lim\limits_{x\to 3}{\frac{\sqrt{4+\hm{x}}-2}{x^3}} $
+\end{erwthma}\monades{8+8+9=25}
+\end{multicols}
+\item Δίνεται συνάρτηση $ f $ με τύπο \[ f(x)=\frac{x\sqrt{x}-4\sqrt{x}+ax+\beta}{x^2-4x} \]
+με $ a,\beta\in\mathbb{R} $, για την οποία ισχύει $ \lim\limits_{x\to 4}{f(x)}=\frac{1}{4} $.
+\begin{erwthma}
+\item Να βρεθεί το πεδίο ορισμού της $ f $.\monades{5}
+\item Να δείξετε ότι $ a=-1 $ και $ \beta=4 $.\monades{8}
+\item Να αποδείξετε ότι $ f(x)=\frac{\sqrt{x}-1}{x} $.\monades{5}
+\item Να βρείτε το όριο $ \lim\limits_{x\to 0}{f(x)} $.\monades{7}
+\end{erwthma}
+\item Δίνεται συνάρτηση $ f:\mathbb{R}\to \mathbb{R} $ για την οποία ισχύει
+\[ \lim_{x\to 0}{\left( f(x)\cdot\frac{1-\syn{2x}}{x^3-3x^2}\right)} =+\infty \]
+\begin{erwthma}
+\item Να δείξετε ότι $ \lim\limits_{x\to 0}{f(x)}=-\infty $.\monades{10}
+\item Να υπολογίσετε το όριο $ \lim\limits_{x\to 0}{\frac{\sqrt{f^2(x)-13f(x)+7}}{f(x)-21}} $.\monades{10}
+\item Αν $ g:\mathbb{R}\to\mathbb{R} $ είναι μια τυχαία συνάρτηση, να βρείτε το όριο $ \lim\limits_{x\to 0}{\left(f^2(x)+g^2(x)\right)} $.\monades{5}
+\end{erwthma}
+\end{thema}
+\kaliepityxia
+\diarkeia{3}
+\end{document}
+
+
+

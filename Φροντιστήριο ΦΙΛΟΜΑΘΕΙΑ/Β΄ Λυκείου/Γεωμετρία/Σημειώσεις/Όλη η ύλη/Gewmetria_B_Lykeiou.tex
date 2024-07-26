@@ -1,0 +1,1722 @@
+\documentclass[twoside,11pt,a4paper,openany]{book}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\def\xrwma{red!70!black}
+\def\xrwmath{red!90!black}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0]{Minion Pro}
+\newfontfamily\mpro{Minion Pro}
+\usepackage{amsmath}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\DeclareRobustCommand{\Algebra}[1]{\index{{\LARGE\bf Άλγεβρα\\}!#1}}
+\DeclareRobustCommand{\Gewmetria}[1]{\index{{\LARGE\bf\vspace*{5mm}Γεωμετρία\\}!#1}}
+\DeclareRobustCommand{\Analysh}[1]{\index{{\LARGE\bf\vspace*{5mm}Ανάλυση\\}!#1}}
+\DeclareRobustCommand{\Statistikh}[1]{\index{{\LARGE\bf\vspace*{5mm}Στατιστική\\}!#1}}
+%------ ΕΙΚΟΝΑ ΓΥΡΩ ΑΠΟ ΚΕΙΜΕΝΟ ------------
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usetikzlibrary{intersections}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usetikzlibrary{backgrounds}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{mathimatika,tkz-tab,gensymb}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{methodologia}[chapter]
+\renewcommand{\themethodologia}{\thechapter.\arabic{methodologia}}\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{black}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\thechapter.\theorismos\;}:\;}}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\usepackage{venndiagram}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.08\paperwidth,yshift=.1\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.07\paperwidth,yshift=.05\paperheight,rectangle] {\fontsize{27}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.77\paperwidth,yshift=.077\paperheight,rectangle]
+{\fontsize{80}{20}\textbf{\textit{\contour{black}{\thechapter}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{gray}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill\;\normalsize\ Σελίδα}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\large \textcolor{\xrwma}{\textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwma] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwma, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textcolor{\xrwmath}{\textbf{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwmath,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwmath, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+\usepackage{wrapfig}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{caption}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=7,fill=white]
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\setlist[itemize]{itemsep=0mm}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\makeatletter
+\usetikzlibrary{patterns}
+\tikzstyle{chart}=[
+legend label/.style={font={\scriptsize},anchor=west,align=left},
+legend box/.style={rectangle, draw, minimum size=5pt},
+axis/.style={black,semithick,->},
+axis label/.style={anchor=east,font={\tiny}},
+]
+
+\tikzstyle{bar chart}=[
+chart,
+bar width/.code={
+\pgfmathparse{##1/2}
+\global\let\bar@w\pgfmathresult
+},
+bar/.style={very thick, draw=white},
+bar label/.style={font={\bf\small},anchor=north},
+bar value/.style={font={\footnotesize}},
+bar width=.75,
+]
+
+\tikzstyle{pie chart}=[
+chart,
+slice/.style={line cap=round, line join=round,thick,draw=white},
+pie title/.style={font={\bf}},
+slice type/.style 2 args={
+##1/.style={fill=##2},
+values of ##1/.style={}
+}
+]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\newcommand{\pie}[3][]{
+\begin{scope}[#1]
+\pgfmathsetmacro{\curA}{90}
+\pgfmathsetmacro{\r}{1}
+\def\c{(0,0)}
+\node[pie title] at (90:1.3) {#2};
+\foreach \v/\s/\l in{#3}{
+\pgfmathsetmacro{\deltaA}{\v/100*360}
+\pgfmathsetmacro{\nextA}{\curA + \deltaA}
+\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+
+\path[slice,\s] \c
+-- +(\curA:\r)
+arc (\curA:\nextA:\r)
+-- cycle;
+\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+
+\begin{pgfonlayer}{foreground}
+\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
+\end{pgfonlayer}
+
+\global\let\curA\nextA
+}
+\end{scope}
+}
+
+\newcommand{\legend}[2][]{
+\begin{scope}[#1]
+\path
+\foreach \n/\s in {#2}
+{
+++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
+}
+;
+\end{scope}
+}
+\definecolor{a}{cmyk}{0,1,1,0.05}
+\definecolor{b}{cmyk}{0,.8,.8,.15}
+\definecolor{c}{cmyk}{0,.8,.8,.0}
+\definecolor{d}{cmyk}{0,.7,.7,0}
+\definecolor{e}{cmyk}{0,.5,.5,0}
+
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\newcommand{\shmeio}[2]{
+\foreach \a in {1,...,#2}{
+\node[dot] at (#1+.5,\a/2-.2){};}}
+
+
+\newcommand{\miniskos}[7][]{
+ \coordinate (#6) at (#2);
+  \coordinate (#7) at (#3);
+  \begin{scope}[overlay]
+  \path [name path=#6] (#6) circle [radius=#4];
+  \path [name path=#7] (#7) circle [radius=#5];
+  \path [name intersections={of=#6 and #7, by={p1,p2}}];
+  \end{scope}
+  \filldraw [#1] let
+    \p1=(#6),\p2=(#7),\p3=(p1),\p4=(p2),
+    \n1={veclen(\x3-\x1,\y3-\y1)},
+    \n2={atan2(\y3-\y1,\x3-\x1)}, \n3={atan2(\y4-\y1,\x4-\x1)},
+    \n4={veclen(\x3-\x2,\y3-\y2)},
+    \n5={atan2(\y3-\y2,\x3-\x2)}, \n6={atan2(\y4-\y2,\x4-\x2)} in
+    ($(#6)+(\n2:\n1)$) arc (\n2:\n3:\n1) arc(\n6:\n5:\n4) -- cycle;
+}
+
+
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\font\icons = "IcoMoon-Free"
+\font\myfont = "Wingdings"
+\font\mymath = "MyMathSymbols" at 16pt
+\newcommand{\titlos}[3]{
+\begin{center}
+{\large {\textcolor{\xrwma}{\scfont\textsc{Σπύρος}}\,\,\textcolor{\xrwma}{\scfont\textsc{Φρόνιμος}}} - {\scfont\textsc{Μαθηματικός}}}
+\\{\myfont\XeTeXglyph13} : spyrosfronimos@gmail.com\,\,|\,\,{\icons\XeTeXglyph188} : 6932327283 - 6974532090\\
+\rule{12.7cm}{.1mm}\\
+\vspace{2mm}
+ΣΗΜΕΙΩΣΕΙΣ ΘΕΩΡΙΑΣ - ΟΡΙΣΜΟΙ ΚΑΙ ΘΕΩΡΗΜΑΤΑ\\
+\vspace{1mm}
+{\bf\today}
+\end{center}
+\vspace{.5cm}
+\begin{center}
+{\Large\bf\MakeUppercase{#1}}
+\end{center}
+\begin{center}
+\textbf{{\Huge \textcolor{\xrwma}{#2}}}
+\end{center}
+\vspace{-5mm}
+\begin{center}
+{\Large\bf{\MakeUppercase{#3}}}
+\end{center}
+\vspace{1cm}}
+
+
+
+\begin{document}
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+\clearpage
+\backmatter
+\pagestyle{empty}
+\titlos{B΄ ΛΥΚΕΙΟΥ}{Γεωμετρία}{Ορισμοί και θεωρήματα}
+\vspace{1cm}
+\begin{center}
+\begin{tikzpicture}[scale=2]
+\draw (0,0) circle (1.5);
+\draw (0,0) circle (1.299);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (120:1.5);
+\coordinate (B) at (60:1.5);
+\coordinate (C) at (0:1.5);
+\coordinate (D) at (-60:1.5);
+\coordinate (E) at (-120:1.5);
+\coordinate (F) at (180:1.5);
+\coordinate (G) at (30:1.299);
+\tkzMarkAngle[size=.3](B,O,A)
+\tkzMarkAngle[size=.25,fill=white,draw=black](E,F,A)
+\tkzMarkRightAngle[size=.2](O,G,C)
+\draw[plm,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--cycle;
+\draw (B)--(O)--(A);
+\draw (O)--(G);
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below right](D){$\varDelta$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[left](F){$Z$}
+\tkzLabelPoint[below](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F,G)
+\node at (0,0.4) {\footnotesize$\omega_\nu$};
+\node at (-1.1,0) {\footnotesize$\varphi_\nu$};
+\node at (0.6,0.2) {\footnotesize$a_\nu$};
+\node at (0,-1.2) {\footnotesize$\lambda_\nu$};
+\node at (-0.5,0.6) {\footnotesize$R$};
+\end{tikzpicture}\mbox{}\\
+\vspace{3cm}
+\begin{minipage}{7cm}
+\begin{center}
+ΑΝΑΛΥΤΙΚΟ ΤΥΠΟΛΟΓΙΟ ΓΙΑ ΤΗ ΘΕΩΡΙΑ ΤΗΣ ΓΕΩΜΕΤΡΙΑΣ Β΄ ΛΥΚΕΙΟΥ
+\end{center}
+\end{minipage}
+\end{center}
+\vspace*{\fill{\begin{center}
+\end{center}}}
+\pagenumbering{arabic}
+\mainmatter
+\pagestyle{fancy}
+\chapter{Αναλογίες}
+\section{Διαίρεση - Γινόμενο - Λόγος ευθυγράμμων τμημάτων}\mbox{}\\
+\orismoi
+\Orismos{Μέγεθοσ}
+Μέγεθος ονομάζεται οποιαδήποτε μετρήσιμη μαθηματική έννοια η οποία μπορεί να αυξηθεί ή να μειωθεί. Τα μεγέθη τα οποία μελετώνται στη Γεωμετρία θα ονομάζονται \textbf{γεωμετρικά μεγέθη}.\\\\
+\Orismos{Διαίρεση ευθύγραμμου τμήματοσ}
+Διαίρεση ενός ευθύγραμμου τμήματος ονομάζεται η διαδικασία με την οποία χωρίζουμε ένα ευθύγραμμο τμήμα σε $\nu$ ίσα μέρη, όπου $ \nu\in\mathbb{N}\,,\,\nu\geq2 $. Αν ένα ευθύγραμμο τμήμα $ AB $ διαιρεθεί σε $ \nu $ ίσα μέρη και έστω $ \varGamma\varDelta $ ένα από αυτά τα ίσα τμήματα τότε το ευθύγραμμο τμήμα $ \varGamma\varDelta $ θα ονομάζεται \textbf{υποδιαίρεση} του $ AB $ και θα ισχύει
+\[ \varGamma\varDelta=\frac{1}{\nu}AB \]
+\Orismos{Γινόμενο τμήματοσ με αριθμό}
+Γινόμενο ενός ευθύγραμμου τμήματος $ AB $ με έναν θετικό πραγματικό αριθμό $ \lambda\in\mathbb{R}^+ $ ονομάζεται ένα ευθύγραμμο τμήμα έστω $ \varGamma\varDelta $ το οποίο αποτελεί άθροισμα $ \lambda $ σε πλήθος ευθυγράμμων τμημάτων ίσων με το $ AB $.
+\[ \varGamma\varDelta=\lambda\cdot AB \]
+\Orismos{Σύμμετρα τμήματα}
+Σύμμετρα ονομάζονται δύο ευθύγραμμα τμήματα $ AB $ και $ \varGamma\varDelta $ τα οποία αποτελούν γινόμενο του ίδιου ευθύγραμμου τμήματος έστω $ EZ $ με θετικούς πραγματικούς αριθμούς $ \kappa,\lambda\in\mathbb{R}^+ $ αντίστοιχα. 
+\[ AB=\kappa\cdot EZ\;,\;\varGamma\varDelta=\lambda\cdot EZ \]
+\begin{itemize}
+\item Το ευθύγραμμο τμήμα $ EZ $ ονομάζεται \textbf{κοινό μέτρο} των $ AB $ και $ \varGamma\varDelta $.
+\item Τα ευθύγραμμα τμήματα που δεν είναι σύμμετρα ονομάζονται \textbf{ασύμμετρα}.
+\end{itemize}
+\Orismos{Λόγοσ ευθυγράμμων τμημάτων}
+Λόγος δύο ευθυγράμμων τμημάτων $ AB $ και $ \varGamma\varDelta $ ονομάζεται ο θετικός ρητός αριθμός $ \lambda\in\mathbb{Q}^+ $ ο οποίος είναι ίσος με το πηλίκο τους ή ισοδύναμα το πηλίκο των μέτρων τους.
+\[ \lambda=\frac{AB}{\varGamma\varDelta} \]
+Ο λόγος δύο ασύμμετρων ευθυγράμμων τμημάτων έιναι άρρητος αριθμός.
+\section{Ανάλογα τμήματα - Αναλογίες}\mbox{}\\
+\orismoi
+\Orismos{Αναλογία}
+Αναλογία ευθυγράμμων τμημάτων ονομάζεται η ισότητα δύο ή περισσότερων λόγων ευθυγράμμων τμημάτων. Αν $ a,\beta,\gamma,\delta $ είναι ευθύγραμμα τμήματα τότε η αναλογία έχει ως εξής
+\[ \frac{a}{\beta}=\frac{\gamma}{\delta}=\lambda \]
+\begin{itemize}[itemsep=0mm]
+\item Τα ευθύγραμμα τμήματα $ a,\beta,\gamma,\delta $ ονομάζονται \textbf{όροι} της αναλογίας.
+\item Οι αριθμητές της αναλογίας είναι ανάλογοι προς τους παρονομαστές της δηλαδή τα ευθύγραμμα τμήματα $ a,\gamma $ είναι ανάλογα προς τα $ \beta,\delta $.
+\item Τα ευθύγραμμα τμήματα $ a $ και $ \delta $ ονομάζονται \textbf{άκροι όροι} ενώ τα $ \beta,\gamma $ \textbf{μέσοι όροι} της αναλογίας.
+\item Το ευύγραμμο τμήμα $ \delta $ ονομάζεται \textbf{τέταρτη ανάλογος} των $ a,\beta,\gamma $.
+\item Τα ευθύγραμμα τμήματα που βρίσκονται μέσα στον ίδιο λόγο (κλάσμα) ονομάζονται \textbf{ομόλογα} ή \textbf{αντίστοιχα}.
+\item Αν σε μια αναλογία οι μέσοι όροι είναι μεταξύ τους ίσοι τότε η αναλογία ονομάζεται \textbf{συνεχής}.
+\[  \frac{a}{\beta}=\frac{\beta}{\gamma} \]
+Ο μέσος όρος $ \beta $ ονομάζεται \textbf{μέση ανάλογος} ή \textbf{γεωμετρικός μέσος} των $ a,\gamma $.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Ιδιότητεσ των αναλογιών}
+Για κάθε αναλογία με όρους τα ευθύγραμμα τμήματα $ a,\beta,\gamma,\delta $ θα ισχύουν οι παρακάτω ιδιότητες :
+\begin{center}
+\begin{tabular}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex} & \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\
+\hhline{===}\rule[-2ex]{0pt}{5.5ex} \textbf{1} & Χιαστί γινόμενα & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}\Leftrightarrow a\cdot\delta=\beta\cdot\gamma $ \\
+\rule[-2ex]{0pt}{7ex} \textbf{2} & Εναλλαγή μέσων και άκρων όρων & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}\Leftrightarrow \dfrac{a}{\gamma}=\dfrac{\beta}{\delta}\;\;\textrm{ και }\;\;\dfrac{\delta}{\beta}=\dfrac{\gamma}{a} $\\
+\rule[-2ex]{0pt}{7ex} \textbf{3} & Άθροισμα - Διαφορά στους αριθμητές & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}\Leftrightarrow \dfrac{a\pm\beta}{\beta}=\dfrac{\gamma\pm\delta}{\delta} $\\
+\rule[-2ex]{0pt}{7ex} \textbf{4} & Άθροισμα - Διαφορά στους παρονομαστές & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}\Leftrightarrow \dfrac{a}{a\pm\beta}=\dfrac{\gamma}{\gamma\pm\delta} $\\
+\rule[-2ex]{0pt}{7ex} \textbf{5} & Άθροισμα - Διαφορά αριθμ. και παρονομ. & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}=\dfrac{a\pm\beta}{\gamma\pm\delta} $\\
+\hline
+\end{tabular}
+\end{center}
+\section{Μέτρο τμήματος - Διαίρεση τμήματος}\mbox{}\\
+\orismoi
+\Orismos{Μονάδα μέτρησησ}
+Ένα ευθύγραμμο τμήμα $ AB $ θα ονομάζεται μονάδα μέτρησης όταν αυτό χρησιμοποιείται για τη μέτρηση και σύγκριση όλων των ευθυγράμμων τμημάτων.\\\\
+\Orismos{Μέτρο ευθύγραμμου τμήματοσ}
+Μέτρο ή μήκος ενός ευθύγραμμου τμήματος $ AB $ ονομάζεται ο αριθμός με τον οποίο θα πολλαπλασιάσουμε τη μονάδα μέτρησης ώστε να πάρουμε ως αποτέλεσμα το τμήμα αυτό.
+\[ \varGamma\varDelta : \textrm{ μονάδα μέτρησης }\;\;AB=\lambda\cdot\varGamma\varDelta\Leftrightarrow\dfrac{AB}{\varGamma\varDelta}=\lambda \]
+Ισοδύναμα, μέτρο του ευθύγραμμου τμήματος $ AB $ ονομάζεται ο λόγος του προς τη μονάδα μέτρησης.\\\\
+\thewrhmata
+\Thewrhma{Διαίρεση τμήματος εσωτερικά}
+\wrapr{-5mm}{3}{3.4cm}{-5mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(2,0){C}
+\draw[pl] (A)--(B);
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[above](C){$M$}
+\end{tikzpicture}}{
+Έστω ένα ευθύγραμμο τμήμα $ AB $ και ένα εσωτερικό σημείο $ M $ του τμήματος. Το σημείο διαιρεί το τμήμα εσωτερικά σε λόγο $ \lambda $ αν και μόνο αν ισχύει:
+\[ \frac{MA}{MB}=\lambda \]
+Τα ευθύγραμμα τμήματα $ MA $ και $ MB $ δίνονται ως συνάρτηση του λόγου $ \lambda $ από τους παρακάτω τύπους:
+\[ MA=\frac{\lambda}{\lambda+1}AB\ \ ,\ \ MB=\frac{1}{\lambda+1}AB \]}\mbox{}\\\\\\
+\Thewrhma{Διαίρεση τμήματος εξωτερικά}
+Έστω ένα ευθύγραμμο τμήμα $ AB $ και ένα εξωτερικό σημείο $ M $ του τμήματος. Το σημείο διαιρεί το τμήμα εσωτερικά σε λόγο $ \lambda $ αν και μόνο αν ισχύει:
+\[ \frac{MA}{MB}=\lambda \]
+Διακρίνουμε τις εξής περιπτώσεις:
+\begin{rlist}
+\wrapr{-14mm}{3}{3.4cm}{4mm}{\begin{tikzpicture}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){C}
+\draw[pl] (A)--(B);
+\draw[pl,dashed] (A)--(C);
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[above](C){$M$}
+\end{tikzpicture}}{
+\item Tο σημείο βρίσκεται στο μέρος του άκρου $ A $:
+Τα ευθύγραμμα τμήματα $ MA $ και $ MB $ δίνονται ως συνάρτηση του λόγου $ \lambda $ από τους παρακάτω τύπους:
+\[ MA=\frac{\lambda}{\lambda-1}AB\ \ ,\ \ MB=\frac{1}{\lambda-1}AB \]}\mbox{}\\
+\wrapr{-7mm}{3}{3.4cm}{0mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(3,0){C}
+\draw[pl] (A)--(B);
+\draw[pl,dashed] (B)--(C);
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[above](C){$M$}
+\end{tikzpicture}}{
+\item Tο σημείο βρίσκεται στο μέρος του άκρου $ B $:
+Τα ευθύγραμμα τμήματα $ MA $ και $ MB $ δίνονται ως συνάρτηση του λόγου $ \lambda $ από τους παρακάτω τύπους:
+\[ MA=\frac{\lambda}{1-\lambda}AB\ \ ,\ \ MB=\frac{1}{1-\lambda}AB \]}
+\end{rlist}
+\section{Θεώρημα Θαλή}\mbox{}\\
+\thewrhmata
+\Thewrhma{Θεώρημα Θαλή}
+\wrapr{-4mm}{5}{4.3cm}{-11mm}{\begin{tikzpicture}[scale=1.3]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,.5){C}
+\tkzDefPoint(3,0.5){D}
+\tkzDefPoint(0,1.5){E}
+\tkzDefPoint(3,1.5){Z}
+\tkzDefPoint(.7,1.7){H}
+\tkzDefPoint(.4,-.3){I}
+\tkzDefPoint(1.7,1.7){K}
+\tkzDefPoint(2.7,-.3){L}
+\draw[pl] (A)--(B);
+\draw[pl] (C)--(D);
+\draw[pl] (E)--(Z);
+\draw[pl,\xrwma] (H)--(I);
+\draw[pl,\xrwma] (K)--(L);
+\tkzInterLL(E,Z)(H,I)\tkzGetPoint{S}
+\tkzInterLL(C,D)(H,I)\tkzGetPoint{T}
+\tkzInterLL(A,B)(H,I)\tkzGetPoint{Y}
+\tkzInterLL(E,Z)(K,L)\tkzGetPoint{O}
+\tkzInterLL(C,D)(K,L)\tkzGetPoint{P}
+\tkzInterLL(A,B)(K,L)\tkzGetPoint{Q}
+\tkzDrawPoints(S,T,Y,O,P,Q)
+\tkzLabelPoint[above left](S){$A$}
+\tkzLabelPoint[above left](T){$B$}
+\tkzLabelPoint[above left](Y){$\varGamma$}
+\tkzLabelPoint[above right](O){$\varDelta$}
+\tkzLabelPoint[above right](P){$E$}
+\tkzLabelPoint[above right](Q){$Z$}
+\node at (3.2,1.5) {\footnotesize$\varepsilon_1$};
+\node at (3.2,0.5) {\footnotesize$\varepsilon_2$};
+\node at (3.2,0) {\footnotesize$\varepsilon_3$};
+\node at (0.6,-0.2) {\footnotesize$\varepsilon$};
+\node at (2.4,-0.2) {\footnotesize$\zeta$};
+\end{tikzpicture}}{
+Αν τρεις ή περισσότερες παράλληλες ευθείες τέμνουν δύο άλλες ευθείες, τότε τα τμήματα που ορίζονται σ' αυτές είναι ανάλογα. Τα τμήματα της πρώτης ευθείας είναι ανάλογα προς τα τμήματα της δεύτερης.
+\[ \textrm{Αν }\ \varepsilon_1\parallel\varepsilon_2\parallel\varepsilon_3\Rightarrow \dfrac{AB}{\varDelta E}=\dfrac{B\varGamma}{EZ}=\dfrac{A\varGamma}{\varDelta Z} \]}\mbox{}\\\\\\
+\Thewrhma{Αντίστροφο του Θεωρήματος Θαλή}
+\wrapr{-4mm}{5}{4.3cm}{-11mm}{\begin{tikzpicture}[scale=1.3]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,.5){C}
+\tkzDefPoint(3,0.5){D}
+\tkzDefPoint(0,1.5){E}
+\tkzDefPoint(3,1.5){Z}
+\tkzDefPoint(.7,1.7){H}
+\tkzDefPoint(.4,-.3){I}
+\tkzDefPoint(1.7,1.7){K}
+\tkzDefPoint(2.7,-.3){L}
+\draw[pl] (A)--(B);
+\draw[pl] (C)--(D);
+\draw[pl] (E)--(Z);
+\draw[pl,\xrwma] (H)--(I);
+\draw[pl,\xrwma] (K)--(L);
+\tkzInterLL(E,Z)(H,I)\tkzGetPoint{S}
+\tkzInterLL(C,D)(H,I)\tkzGetPoint{T}
+\tkzInterLL(A,B)(H,I)\tkzGetPoint{Y}
+\tkzInterLL(E,Z)(K,L)\tkzGetPoint{O}
+\tkzInterLL(C,D)(K,L)\tkzGetPoint{P}
+\tkzInterLL(A,B)(K,L)\tkzGetPoint{Q}
+\tkzDrawPoints(S,T,Y,O,P,Q)
+\tkzLabelPoint[above left](S){$A$}
+\tkzLabelPoint[above left](T){$B$}
+\tkzLabelPoint[above left](Y){$\varGamma$}
+\tkzLabelPoint[above right](O){$\varDelta$}
+\tkzLabelPoint[above right](P){$E$}
+\tkzLabelPoint[above right](Q){$Z$}
+\node at (3.2,1.5) {\footnotesize$\varepsilon_1$};
+\node at (3.2,0.5) {\footnotesize$\varepsilon_2$};
+\node at (3.2,0) {\footnotesize$\varepsilon_3$};
+\node at (0.6,-0.2) {\footnotesize$\varepsilon$};
+\node at (2.4,-0.2) {\footnotesize$\zeta$};
+\end{tikzpicture}}{
+Έστω δύο παράλληλες ευθείες $ \varepsilon_1,\varepsilon_2 $ οι οποίες τέμνουν δύο ευθείες $ \varepsilon,\zeta $ στα σημεία $ A,\varDelta $ και $ B,E $ αντίστοιχα. Αν μια τρίτη ευθεία $ \varepsilon_3 $ τέμνει τις $ \varepsilon,\zeta $ στα σημεία $ \varGamma,Z $ έτσι ώστε να ισχύει 
+\[ \dfrac{AB}{\varDelta E}=\dfrac{B\varGamma}{EZ}=\dfrac{A\varGamma}{\varDelta Z} \]
+τότε η ευθεία αυτή είναι παράλληλη με τις $ \varepsilon_1,\varepsilon_2 $.
+\[ \textrm{Αν }\ \dfrac{AB}{\varDelta E}=\dfrac{B\varGamma}{EZ}=\dfrac{A\varGamma}{\varDelta Z}\Rightarrow\varepsilon_1\parallel\varepsilon_2\parallel\varepsilon_3 \]}\mbox{}\\\\\\
+\Thewrhma{Πόρισμα θεωρήματος θαλή στα τρίγωνα}
+Μια ευθεία είναι παράλληλη με μια πλευρά ενός τριγώνου αν και μόνο αν χωρίζει τις άλλες δύο πλευρές ή τις προεκτάσεις τους, σε τμήματα ανάλογα.\\\\
+\Thewrhma{Ανάλογες πλευρές τριγώνων}
+\wrapr{-5mm}{7}{4cm}{-5mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(0.375,.75){D}
+\tkzDefPoint(2.25,.75){E}
+\draw[pl](A)--(B)--(C)--cycle;
+\draw (-0.25,0.75) -- (3,0.75);
+\tkzDrawPoints(A,B,C,D,E)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[above left](D){$\varDelta$}
+\tkzLabelPoint[above right](E){$E$}
+\node at (-0.5,0.75) {\footnotesize$\varepsilon$};
+\end{tikzpicture}}{
+Αν μια ευθεία είναι παράλληλη με μια πλευρά τριγώνου και τέμνει τις άλλες δύο πλευρές ή τις προεκτάσεις τους, τότε το τρίγωνο που σχηματίζεται έχει πλευρές ανάλογες προς το αρχικό.
+\[ \varepsilon\parallel B\varGamma\Rightarrow \dfrac{A\varDelta}{AB }=\dfrac{AE}{A\varGamma}=\dfrac{\varDelta E}{B\varGamma} \]}\mbox{}\\\\
+\section{Θεωρήματα Διχοτόμων}\mbox{}\\
+\thewrhmata
+\Thewrhma{Θεώρημα εσωτερικής διχοτόμου}
+\wrapr{-5mm}{7}{4cm}{-5mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefLine[bisector](B,A,C) \tkzGetPoint{a}
+\tkzInterLL(A,a)(B,C) \tkzGetPoint{D}
+\tkzMarkAngle[size=.3,mark=|](B,A,D)
+\tkzMarkAngle[size=.37,mark=|](D,A,C)
+\draw (A)--(D);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\end{tikzpicture}}{
+Η διχοτόμος μιας γωνίας ενός τριγώνου διαρεί εσωτερικά την απέναντι πλευρά σε λόγο ίσο με το λόγο των προσκείμενων πλευρών. Τα τμήματα που προκύπτουν γράφονται ως συνάρτηση των πλευρών του τριγώνου ως εξής:
+\[ B\varDelta=\dfrac{a\gamma}{\beta+\gamma}\ \ ,\ \ \varGamma\varDelta=\dfrac{a\beta}{\beta+\gamma} \]}\mbox{}\\\\\\
+\newpage
+\noindent
+\Thewrhma{Θεώρημα εξωτερικής διχοτόμου}
+\wrapr{-5mm}{7}{7.1cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(-.5,2){A}
+\tkzDefPoint(-1.5,2.571){E}
+\tkzDefLine[bisector out](B,A,C) \tkzGetPoint{a}
+\tkzInterLL(A,a)(B,C) \tkzGetPoint{D}
+\tkzMarkAngle[size=.25,mark=|](E,A,D)
+\tkzMarkAngle[size=.32,mark=|](D,A,B)
+\draw (E)--(A)--(D)--(B);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\end{tikzpicture}}{
+Η διχοτόμος μιας εξωτερικής γωνίας ενός τριγώνου διαρεί εξωτερικά την απέναντι πλευρά σε λόγο ίσο με το λόγο των προσκείμενων πλευρών. Τα τμήματα που προκύπτουν γράφονται ως συνάρτηση των πλευρών του τριγώνου ως εξής:
+\[ B\varDelta=\dfrac{a\gamma}{\beta-\gamma}\ \ ,\ \ \varGamma\varDelta=\dfrac{a\beta}{\beta-\gamma} \]}
+\chapter{Ομοιότητα}
+\section{Όμοια ευθύγραμμα σχήματα}\mbox{}\\
+\orismoi
+\Orismos{Όμοια ευθύγραμμα σχήματα}
+Όμοια ονομάζονται τα ευθύγραμμα σχήματα τα οποία έχουν τις πλευρές τους ανάλογες και τις αντίστοιχες γωνίες μια προς μια ίσες.
+\begin{itemize}
+\item Οι πλευρές που βρίσκονται απέναντι από ίσες γωνίες ονομάζονται \textbf{ομόλογες}.
+\item Ο λόγος δύο ομόλογων πλευρών δύο όμοιων σχημάτων ονομάζεται \textbf{λόγος ομοιότητας}. Συμβολίζεται $ \lambda $.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Λόγος περιμέτρων}
+Ο λόγος των περιμέτρων δύο όμοιων σχημάτων ισούται με το λόγο ομοιότητας.
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (70:1.2);
+\coordinate (B) at (145:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (235:1.2);
+\coordinate (E) at (280:1.2);
+\coordinate (F) at (335:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[below right](F){$Z$}
+\tkzLabelPoint[right](G){$H$}
+\tkzDrawPoints(A,B,C,D,E,F,G)
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.8]
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (70:1.2);
+\coordinate (B) at (145:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (235:1.2);
+\coordinate (E) at (280:1.2);
+\coordinate (F) at (335:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzLabelPoint[above](A){$A'$}
+\tkzLabelPoint[above left](B){$B'$}
+\tkzLabelPoint[left](C){$\varGamma'$}
+\tkzLabelPoint[below left](D){$\varDelta'$}
+\tkzLabelPoint[below](E){$E'$}
+\tkzLabelPoint[below right](F){$Z'$}
+\tkzLabelPoint[right](G){$H'$}
+\tkzDrawPoints(A,B,C,D,E,F,G)
+\node at (5.7,0) {$ \dfrac{AB}{A'B'}=\dfrac{B\varGamma}{B'\varGamma'}=\ldots=\lambda $};
+\end{tikzpicture}
+\end{center}
+\section{Κριτήρια ομοιότητας}\mbox{}\\
+\thewrhmata
+\Thewrhma{1\tssL{ο} Κριτήριο ομοιότητας τριγώνων}
+Δύο τρίγωνα $ AB\varGamma $ και $ A'B'\varGamma' $ είναι όμοια αν έχουν δύο γωνίες ίσες μια προς μια.
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (110:1.4);
+\coordinate (B) at (0:1.2);
+\coordinate (C) at (180:1.2);
+\tkzMarkAngle[fill=\xrwma!30,size=.25,mark=|](B,C,A)
+\tkzMarkAngle[fill=\xrwma!30,size=.42,mark=||](A,B,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[right](B){$\varGamma$}
+\tkzLabelPoint[left](C){$B$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.8]
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (110:1.4);
+\coordinate (B) at (0:1.2);
+\coordinate (C) at (180:1.2);
+\tkzMarkAngle[fill=\xrwma!30,size=.25,mark=|](B,C,A)
+\tkzMarkAngle[fill=\xrwma!30,size=.42,mark=||](A,B,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[above](A){$A'$}
+\tkzLabelPoint[right](B){$\varGamma'$}
+\tkzLabelPoint[left](C){$B'$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}
+\end{center}
+\newpage
+\noindent
+\Thewrhma{Πορίσματα ομοιότητας τριγώνων}
+\vspace{-5mm}
+\begin{rlist}
+\item Δύο ορθογώνια τρίγωνα είναι όμοια αν έχουν μια αντίστοιχη οξεία γωνία ίση.
+\item Όλα τα ισόπλευρα τρίγωνα είναι μεταξύ τους όμοια.
+\item Αν δύο ισοσκελή τρίγωνα έχουν μια αντίστοιχη γωνία ίση τότε είναι όμοια.
+\end{rlist}
+\Thewrhma{2\tssL{ο} Κριτήριο ομοιότητας τριγώνων}
+Δύο τρίγωνα που έχουν δύο πλευρές ανάλογες μια προς μια και τις περιεχόμενες γωνίες ίσες είναι όμοια.
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (110:1.4);
+\coordinate (B) at (0:1.2);
+\coordinate (C) at (180:1.2);
+\tkzMarkAngle[fill=\xrwma!30,size=.25,mark=|](C,A,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[right](B){$\varGamma$}
+\tkzLabelPoint[left](C){$B$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.8]
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (110:1.4);
+\coordinate (B) at (0:1.2);
+\coordinate (C) at (180:1.2);
+\tkzMarkAngle[fill=\xrwma!30,size=.25,mark=|](C,A,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[above](A){$A'$}
+\tkzLabelPoint[right](B){$\varGamma'$}
+\tkzLabelPoint[left](C){$B'$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}
+\end{center}
+\Thewrhma{3\tssL{ο} Κριτήριο ομοιότητας τριγώνων}
+Δύο τρίγωνα που έχουν τις πλευρές τους ανάλογες μια προς μια είναι όμοια.\\\\
+\Thewrhma{Λόγος δευτερευόντων στοιχείων τριγώνων}
+Ο λόγος ομοιότητας δύο όμοιων τριγώνων ισούται με το λόγο 
+\begin{multicols}{3}
+\begin{rlist}
+\item δύο ομόλογων υψών
+\item δύο ομόλογων διχοτόμων και
+\item δύο ομόλογων διαμέσων.
+\end{rlist}
+\end{multicols}
+\Thewrhma{Πόρισμα για το ορθογώνιο τρίγωνο}
+Σε κάθε ορθογώνιο τρίγωνο το γινόμενο των κάθετων πλευρών ισούται με το γινόμενο της υποτείνουσας επί το αντίστοιχο ύψος της.
+\chapter{Μετρικές Σχέσεις}
+\section{Μετρικές σχέσεις στα τρίγωνα}\mbox{}\\
+\orismoi
+\Orismos{Προβολή σημείου - ευθύγραμμου τμήματος}
+\wrapr{-5mm}{5}{3.2cm}{-4mm}{\begin{tikzpicture}
+\tkzDefPoint(.5,1){A}
+\tkzDefPoint(1,0){B}
+\tkzDefPoint(1.5,.8){C}
+\tkzDefPoint(2.7,.6){D}
+\tkzDefPoint(.5,0){A'}
+\tkzDefPoint(1,0){B'}
+\tkzDefPoint(1.5,0){C'}
+\tkzDefPoint(2.7,0){D'}
+\draw (0,0) -- (3,0);
+\draw[dashed](A)--(.5,0);
+\draw (C)--(D);
+\draw[dashed](C)--(1.5,0);
+\draw[dashed](D)--(2.7,0);
+\draw[pl,\xrwma](C')--(D');
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[above](D){$\varDelta$}
+\tkzLabelPoint[below](A'){$A'$}
+\tkzLabelPoint[below](B'){$B'$}
+\tkzLabelPoint[below](C'){$\varGamma'$}
+\tkzLabelPoint[below](D'){$\varDelta'$}
+\tkzDrawPoints(A,B,C,D,A',B',C',D')
+\node at (0,0.25) {\footnotesize$\varepsilon$};
+\end{tikzpicture}}{
+Προβολή ενός σημείου $ Α $ πάνω σε μια ευθεία $ \varepsilon $ ονομάζεται το ίχνος της καθέτου από το σημείο προς την ευθεία.
+\begin{itemize}[itemsep=0mm]
+\item Αν το σημείο ανήκει στην ευθεία τότε η προβολή του ταυτίζεται με το σημείο αυτό.
+\item Το ευθύγραμμο τμήμα $ \varGamma'\varDelta' $ με άκρα, τις προβολές των άκρων ενός τμήματος $ \varGamma\varDelta $, ονομάζεται \textbf{προβολή του ευθυγράμμου τμήματος} πάνω στην ευθεία.
+\end{itemize}}\mbox{}\\\\\\
+\thewrhmata
+\Thewrhma{Θεώρημα προβολής}
+\wrapr{-5mm}{5}{3.5cm}{-12mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.2](A,D,B)
+\draw[pl] (B)--(A)--(C);
+\draw[pl] (A)--(D);
+\draw[pl,\xrwma] (B)--(C);
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\tkzLabelPoint[right,yshift=1mm](D){$\varDelta$}
+\end{tikzpicture}}{
+Το τετράγωνο μιας κάθετης πλευράς ενός ορθογωνίου τριγώνου ισούται με το γινόμενο της υποτείνουσας επί την προβολή της κάθετης πλευράς αυτής στην υποτείνουσα.
+\[ AB^2=B\varGamma\cdot B\varDelta\ \ ,\ \ A\varGamma^2=B\varGamma\cdot \varGamma\varDelta \]}\mbox{}\\\\\\
+\Thewrhma{Λόγος προβολών}
+Ο λόγος των τετραγώνων των κάθετων πλευρών ενός ορθογωνίου τριγώνου ισούται με το λόγο των προβολών τους στην υποτείνουσα.
+\[ \frac{AB^2}{A\varGamma^2}=\frac{B\varDelta}{\varGamma\varDelta} \]
+\Thewrhma{Πυθαγόρειο θεώρημα}
+\wrapr{-5mm}{5}{3.5cm}{-10mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\end{tikzpicture}}{
+Σε κάθε ορθογώνιο τρίγωνο το άθροισμα των τερταγώνων των κάθετων πλευρών ισούται με το τετράγωνο της υποτείνουσας.
+\[ \hat{A}=90\degree\Rightarrow AB^2+A\varGamma^2=B\varGamma^2 \]}\mbox{}\\\\\\
+\Thewrhma{Αντίστροφο του πυθαγορείου}
+Αν σε ένα τρίγωνο το τετράγωνο της μεγαλύτερης πλευράς ισούται με το άθροισμα τω τετραγώνων των άλλων δύο πλευρών τότε το τρίγωνο αυτό είναι ορθογώνιο με την ορθή γωνία να βρίσκεται απέναντι από τη μεγαλύτερη πλευρά.
+\[ AB^2+A\varGamma^2=B\varGamma^2\Rightarrow\hat{A}=90\degree \]
+\Thewrhma{Ύψος προς την υποτείνουσα}
+\wrapr{-5mm}{5}{3.5cm}{-12mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,1.7){C}
+\tkzMarkRightAngle[size=.2](B,A,C)
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.2](A,D,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (A)--(D);
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above left](C){$\varGamma$}
+\tkzLabelPoint[right,yshift=1mm](D){$\varDelta$}
+\end{tikzpicture}}{
+Σε κάθε ορθογώνιο τρίγωνο το τετράγωνο του ύψους που αντιστοιχεί στην υποτείνουσα ισούται με το γινόμενο των προβολών των κάθετων πλευρών στην υποτείνουσα.
+\[ A\varDelta^2=B\varDelta\cdot\varGamma\varDelta \]}\mbox{}\\\\\\
+\Thewrhma{Σχέσεις κάθετων πλευρών και ύψους}
+Σε κάθε ορθογώνιο τρίγωνο το άθροισμα των αντίστροφων τετραγώνων των κάθετων πλευρών ισούται με το αντίστροφο τετράγωνο του ύψους που αντιστοιχεί στην υποτείνουσα.
+\[ \frac{1}{\beta^2}+\frac{1}{\gamma^2}=\frac{1}{\upsilon_a^2} \]
+\section{Γενικευμένο Πυθαγόρειο Θεώρημα}\mbox{}\\
+\thewrhmata
+\Thewrhma{Γενικευμένο Πυθαγόρειο για οξεία γωνία}
+Το τετράγωνο μιας πλευράς ενός τριγώνου που βρίσκεται απέναντι από οξεία γωνία ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών μειωμένο κατά το διπλάσιο γινόμενο της μιας πλευράς επί την προβολή της άλλης πάνω στην πρώτη.
+\begin{align*}
+\hat{A}<90\degree \Rightarrow a^2=\beta^2+\gamma^2-2\beta\cdot AE \quad\textrm{και }\ \ \  & a^2=\beta^2+\gamma^2-2\gamma\cdot AZ\\
+\hat{B}<90\degree \Rightarrow\beta^2=a^2+\gamma^2-2a\cdot B\varDelta \quad\textrm{και }\ \ \  & \beta^2=a^2+\gamma^2-2\gamma\cdot BZ\\
+\hat{\varGamma}<90\degree \Rightarrow\gamma^2=a^2+\beta^2-2a\cdot \varGamma\varDelta \quad\textrm{και }\ \ \  & \gamma^2=a^2+\beta^2-2\beta\cdot \varGamma E
+\end{align*}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+ \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(1,0){D}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{c}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{b}
+\tkzMarkRightAngle[size=.2](C,D,A)
+\tkzMarkRightAngle[size=.2](B,c,C)
+\tkzMarkRightAngle[size=.2](B,b,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(D);
+\draw(C)--(c);
+\draw(B)--(b);
+\tkzDrawPoints(A,B,C,D,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[right,yshift=1mm](b){$E$}
+\end{tikzpicture} & \begin{tikzpicture}
+\clip (-1.2,-1.5) rectangle (3.5,2.5);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(-1,2){A}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{c}
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{a}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{b}
+\tkzMarkRightAngle[size=.2](C,a,A)
+\tkzMarkRightAngle[size=.2](B,c,C)
+\tkzMarkRightAngle[size=.2](B,b,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(a);
+\draw(C)--(c);
+\draw(B)--(b);
+\draw[dashed](B)--(a);
+\draw[dashed](B)--(c);
+\tkzDrawPoints(A,B,C,a,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[above right](b){$E$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Thewrhma{Γενικευμένο Πυθαγόρειο για αμβλεία γωνία}
+Το τετράγωνο μιας πλευράς ενός τριγώνου που βρίσκεται απέναντι από αμβλεία γωνία ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών αυξημένο κατά το διπλάσιο γινόμενο της μιας πλευράς επί την προβολή της άλλης πάνω στην πρώτη.
+\begin{align*}
+\hat{A}<90\degree \Rightarrow a^2=\beta^2+\gamma^2-2\beta\cdot AE \quad\textrm{και }\ \ \  & a^2=\beta^2+\gamma^2-2\gamma\cdot AZ\\
+\hat{B}>90\degree \Rightarrow\beta^2=a^2+\gamma^2+2a\cdot B\varDelta \quad\textrm{και }\ \ \  & \beta^2=a^2+\gamma^2+2\gamma\cdot BZ\\
+\hat{\varGamma}<90\degree \Rightarrow\gamma^2=a^2+\beta^2-2a\cdot \varGamma\varDelta \quad\textrm{και }\ \ \  & \gamma^2=a^2+\beta^2-2\beta\cdot \varGamma E
+\end{align*}
+\Thewrhma{Είδος γωνίας τριγώνου}
+Εάν το τετράγωνο μιας πλευράς τριγώνου είναι μεγαλύτερο, ίσο ή μικρότερο από το άθροισμα των τετραγώνων των άλλων δύο πλευρών τότε η απέναντι γωνία της πλευράς αυτής είναι αντίστοιχα αμβλεία, ορθή ή οξεία.
+\begin{gather*}
+a^2>\beta^2+\gamma^2\Rightarrow \hat{A}>90\degree\\
+a^2=\beta^2+\gamma^2\Rightarrow \hat{A}=90\degree\\
+a^2<\beta^2+\gamma^2\Rightarrow \hat{A}<90\degree
+\end{gather*}
+\Thewrhma{Είδος τριγώνου ως προς γωνία}
+Αν το τετράγωνο της μεγαλύτερης πλευράς ενός τριγώνου είναι μεγαλύτερο, ίσο ή μικρότερο από το άθροισμα των τετραγώνων των άλλων δύο πλευρών τότε το τρίγωνο θα είναι αντίστοιχα αμβλυγώνιο, ορθογώνιο ή οξυγώνιο.\\\\
+\Thewrhma{Υψος τριγώνου}
+Σε κάθε τρίγωνο τα ύψη εκφράζονται ως συνάρτηση των πλευρών του τριγώνου με τους παρακάτω τύπους :
+\[ \upsilon_a=\frac{2}{a}\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)}\ \ ,\ \ \upsilon_\beta=\frac{2}{\beta}\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)}\ \ ,\ \ \upsilon_\gamma=\frac{2}{\gamma}\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)} \]
+\Thewrhma{Νόμος συνημιτόνων}
+Το τετράγωνο μιας πλευράς ενός τριγώνου ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών ελαττωμένο κατά το διπλάσιο γινόμενό τους επί το συνημίτονο της περιεχόμενης γωνίας.
+\begin{center}
+ \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzMarkAngle[size=.3](C,B,A)
+\tkzMarkAngle[size=.3](B,A,C)
+\tkzMarkAngle[size=.35](A,C,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (5.8,1.5) {$a^2=\beta^2+\gamma^2-2\beta\gamma\syn{\hat{A}}$};
+\node at (5.8,1) {$\beta^2=a^2+\gamma^2-2a\gamma\syn{\hat{B}}$};
+\node at (5.8,.5) {$\gamma^2=a^2+\beta^2-2a\beta\syn{\hat{\varGamma}}$};
+\node at (2.35,1) {\footnotesize$\beta$};
+\node at (0.3,1) {\footnotesize$\gamma$};
+\node at (1.5,-0.25) {\footnotesize$a$};
+\end{tikzpicture}
+\end{center}
+\section{Θεωρήματα διαμέσων}\mbox{}\\
+\thewrhmata
+\Thewrhma{1\tssL{o} Θεώρημα διαμέσων}
+\wrapr{-5mm}{7}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(.5,1){c}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(2,1){b}
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(a);
+\draw(C)--(c);
+\draw(B)--(b);
+\tkzDrawPoints(A,B,C,a,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[right](b){$E$}
+\end{tikzpicture}}{
+Το άθροισμα των τετραγώνων δύο πλευρών ενός τριγώνου ισούται με το διπλάσιο τετράγωνο της περιεχόμενης διαμέσου συν το μισό τετράγωνο της τρίτης πλευράς.
+\[ a^2+\beta^2=2\mu_\gamma^2+\frac{\gamma^2}{2}\ \ ,\ \ a^2+\gamma^2=2\mu_\beta^2+\frac{\beta^2}{2}\ \ ,\ \ \beta^2+\gamma^2=2\mu_a^2+\frac{a^2}{2} \]}\mbox{}\\\\\\
+Από τους παραπάνω τύπους μπορούμε να εκφράσουμε τις διαμέσους του τριγώνου με τη βοήθεια των πλευρών του ως εξής :
+\[ \mu_a^2=\frac{2\beta^2+2\gamma^2-a^2}{4}\ \ ,\ \ \mu_\beta^2=\frac{2a^2+2\gamma^2-\beta^2}{4}\ \ ,\ \ \mu_\gamma^2=\frac{2a^2+2\beta^2-\gamma^2}{4} \]
+\Thewrhma{2\tssL{ο} Θεώρημα Διαμέσων}
+\wrapr{-5mm}{7}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(.5,1){c}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(2,1){b}
+\tkzDefPoint(1,0){D}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{e}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{d}
+\tkzMarkRightAngle[size=.2](C,D,A)
+\tkzMarkRightAngle[size=.2](B,d,C)
+\tkzMarkRightAngle[size=.2](C,e,A)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(D)--(A)--(a);
+\draw(e)--(C)--(c);
+\draw(d)--(B)--(b);
+\draw[pl,\xrwma](D)--(a);
+\draw[pl,\xrwma](b)--(d);
+\draw[pl,\xrwma](e)--(c);
+\tkzDrawPoints(A,B,C,a,b,c,D,d,e)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[above right](b){$E$}
+\tkzLabelPoint[below](D){$M$}
+\tkzLabelPoint[above right](d){$K$}
+\tkzLabelPoint[above left,xshift=1mm](e){$\varLambda$}
+\end{tikzpicture}}{
+Η διαφορά των τετραγώνων δύο πλευρών ισούται με το διπλάσιο γινόμενο της τρίτης πλευράς επί την προβολή της περιεχόμενης διαμέσου στην τρίτη πλευρά.
+\[ a^2-\beta^2=2\gamma\cdot\varLambda Z\ \ ,\ \ a^2-\gamma^2=2\beta\cdot KE\ \ ,\ \ \beta^2-\gamma^2=2a\cdot M\varDelta \]}\mbox{}\\\\
+\section{Μετρικές σχέσεις στον κύκλο}\mbox{}\\
+\orismoi
+\Orismos{Δύναμη σημείου ως προς κύκλο}
+Δύναμη ενός σημείου $ M $ ως προς ένα κύκλο $ (O,R) $ ονομάζεται η διαφορά
+\[ \Delta_{_{(O,R)}}^{^{M}}=\delta^2-R^2 \]
+όπου $ \delta $ είναι η απόσταση του σημείου $ M $ από το κέντρο του κύκλου : $ OM=\delta $. Συμβολίζεται με $ \Delta_{_{(O,R)}}^{^{M}} $.
+\thewrhmata
+\Thewrhma{Τέμνουσες κύκλου}
+Έστω $ AB $ και $ \varGamma\varDelta $ δύο χορδές ενός κύκλου $ (O,\rho) $. Αν $ M $ είναι το σημείο τομής αυτών ή των προεκτάσεων τους τότε τα γινόμενα των τμημάτων που ορίζει το σημείο τομής με τα άκρα κάθε χορδής είναι μεταξύ τους ίσα.
+\[ MA\cdot MB=M\varGamma\cdot M\varDelta \]
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(30:1.25){A}
+\tkzDefPoint(160:1.25){B}
+\tkzDefPoint(110:1.25){C}
+\tkzDefPoint(290:1.25){D}
+\tkzInterLL(A,B)(C,D)\tkzGetPoint{M}
+\draw[pl]  (O) circle (1.25);
+\draw[pl,\xrwma](A)--(B);
+\draw[pl,\xrwma](C)--(D);
+\tkzDrawPoints(A,B,C,D,M)
+\tkzLabelPoint[above right](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[above right](M){$M$}
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(30:1.25){A}
+\tkzDefPoint(150:1.25){B}
+\tkzDefPoint(110:1.25){C}
+\tkzDefPoint(290:1.25){D}
+\tkzInterLL(A,C)(B,D)\tkzGetPoint{M}
+\draw[pl]  (O) circle (1.25);
+\draw[pl,\xrwma](A)--(M);
+\draw[pl,\xrwma](D)--(M);
+\tkzDrawPoints(A,B,C,D,M)
+\tkzLabelPoint[above right](A){$A$}
+\tkzLabelPoint[left,yshift=-1mm](B){$\varGamma$}
+\tkzLabelPoint[above](C){$B$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[above right](M){$M$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Thewrhma{Ακρα εγγράψιμου τετραπλεύρου}
+Έστω δύο ευθύγραμμα τμήματα $ AB $ και $ \varGamma\varDelta $ και $ M $ το σημείο τομής αυτών ή των προεκτάσεων τους. Αν τα γινόμενα των τμημάτων που ορίζει το σημείο τομής με τα άκρα κάθε τμήματος να είναι ίσα τότε το τετράπλευρο $ AB\varGamma\varDelta $ είναι εγγράψιμο.
+\[ MA\cdot MB=M\varGamma\cdot M\varDelta\Rightarrow AB\varGamma\varDelta\ \ \textrm{εγγράψιμο} \]
+\Thewrhma{Τέμνουσα και εφαπτόμενη}
+\wrapr{-5mm}{5}{4cm}{-12mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(-50:1.25){A}
+\tkzDefPoint(170:1.25){B}
+\tkzDefPoint(110:1.25){C}
+\tkzTangent[at=C](O)
+\tkzGetPoint{h}
+\tkzInterLL(C,h)(A,B)\tkzGetPoint{M}
+\draw[pl,\xrwma](A)--(M)--(C);
+\draw[pl]  (O) circle (1.25);
+\tkzDrawPoints(A,B,C,M)
+\tkzLabelPoint[below right](A){$A$}
+\tkzLabelPoint[left,yshift=-1mm](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[left](M){$M$}
+\end{tikzpicture}}{
+Έστω $ AB $ μια χορδή ενός κύκλου $ (O,\rho) $ και $ \varGamma $ ένα σημείο του κύκλου. Αν $ M $ είναι ένα εξωτερικό σημείο του κύκλου τότε το γινόμενο των τμημάτων που ορίζει το σημείο τομής με τα άκρα της χορδής είναι ίσο με το τετράγωνο του εφαπτόμενου τμήματος.
+\[ M\varGamma^2=MA\cdot MB \]}\mbox{}\\\\\\
+\Thewrhma{Δύναμη σημείου ως προς κύκλο}
+Έστω ένας κύκλος $ (O,R) $ και $ M $ ένα σημείο του επιπέδου του κύκλου.
+\begin{rlist}
+\item Η δύναμη $ \Delta_{_{(O,R)}}^{^{M}} $ του σημείου $ M $ ως προς τον κύκλο είναι θετική αν και μόνο αν το σημείο είναι εξωτερικό του κύκλου.
+\[ \Delta_{_{(O,R)}}^{^{M}}>0\Leftrightarrow \delta>R \]
+\item Η δύναμη $ \Delta_{_{(O,R)}}^{^{M}} $ του σημείου $ M $ ως προς τον κύκλο είναι μηδενική αν και μόνο αν το σημείο είναι πάνω στον κύκλο.
+\[ \Delta_{_{(O,R)}}^{^{M}}=0\Leftrightarrow \delta=R \]
+\item Η δύναμη $ \Delta_{_{(O,R)}}^{^{M}} $ του σημείου $ M $ ως προς τον κύκλο είναι αρνητική αν και μόνο αν το σημείο είναι εσωτερικό του κύκλου.
+\[ \Delta_{_{(O,R)}}^{^{M}}<0\Leftrightarrow \delta<R \]
+\end{rlist}
+\chapter{Εμβαδά}
+\section{Εμβαδά βασικών σχημάτων}\mbox{}\\
+\orismoi
+\Orismos{Πολυγωνικό χωρίο}
+Πολυγωνικό χωρίο ονομάζεται το σύνολο των σημείων ενός πολυγώνου μαζί με τα εσωτερικά του σημεία.
+\begin{itemize}[itemsep=0mm]
+\item Κάθε πολυγωνικό χωρίο παίρνει το όνομά του από το όνομα του αντίστοιχου πολυγώνου : τριγωνικό, τετραπλευρικό, πενταγωνικό και γενικά ν-γωνικό χωρίο.
+\item Η επιφάνεια που αποτελείται από πεπερασμένο πλήθος πολυγωνικών χωρίων με κοινές πλευρές χωρίς κοινά εσωτερικά σημεία ονομάζεται \textbf{πολυγωνική επιφάνεια}.
+\end{itemize}
+\Orismos{Μονάδα μέτρησης επιφάνειας}
+Μονάδα μέτρησης επιφάνειας ονομάζεται το μέγεθος ενός πολυγωνικού χωρίου το οποίο χρησιμοποιείται για τη μέτρηση και σύγκριση όλων των πολυγωνικών χωρίων.\\\\
+\Orismos{Εμβαδόν}
+Εμβαδόν ενός πολυγωνικού χωρίου ονομάζεται ο θετικός αριθμός με τον οποίο πολλαπλασιάζουμε τη μονάδα μέτρησης επιφάνειας ώστε να καλύψουμε το χωρίο αυτό.\\\\
+\Orismos{Ισοδύναμα χωρία}
+Ισοδύναμα ή ισεμβαδικά ονομάζονται τα χωρία τα οποία έχουν ίσα εμβαδά.
+\thewrhmata
+\Thewrhma{Αξιώματα πολυγωνικών χωρίων}
+Δεχόμαστε τις εξής προτάσεις που αφορούν τα πολυγωνικά χωρία και τις πολυγωνικές επιφάνειες.
+\begin{rlist}
+\item Ίσα πολυγωνικά χωρία έχουν ίσα εμβαδά.
+\item Αν ένα πολυγωνικό χωρίο ή πολυγωνική επιφάνεια χωριστεί σε πεπερασμένο πλήθος χωρίων χωρίς εσωτερικά σημεία, το εμβαδόν του ισούται με το άθροισμα των εμβαδών των επιμέρους χωρίων.
+\item Το εμβαδόν τετραγώνου πλευράς 1 ισούται με 1.
+\item Αν ένα χωρίο $ P $ βρίσκεται στο εσωτερικό ενός χωρίου $ Q $ τότε το εμβαδόν του $ P $ είναι μικρότερο από το εμβαδόν του $ Q $.
+\end{rlist}
+\Thewrhma{Εμβαδά βασικών σχημάτων}
+Τα βασικά πολυγωνικά χωρία που συναντάμε είναι το τετράγωνο, το ορθογώνιο, το παραλληλόγραμμο, το τρίγωνο, το τραπέζιο και ο ρόμβος. Τα εμβαδά τους είναι τα εξής :
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Τετράγωνο}\\
+Το εμβαδόν ενός τετραγώνου πλευράς $ a $ ισούται με το τετράγωνο της πλευράς του: $ E=a^2 $.
+\item \textbf{Ορθογώνιο}\\
+Το εμβαδόν ενός ορθογωνίου με διαστάσεις $ a,\beta $ ισούται με το γινόμενο του μήκους επί του πλάτους του.
+\[ E=a\cdot \beta \]
+\item \textbf{Παραλληλόγραμμο}\\
+Το εμβαδόν ενός παραλληλογράμμου ισούται με το γινόμενο μιας πλευράς επί το αντίστοιχο ύψος της
+\[ E=a\cdot\upsilon_a=\beta\cdot\upsilon_\beta \]
+\begin{center}
+\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(3,3){B}
+\tkzDefPoint(0,3){A}
+\draw[pl] (A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[below right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\node at (1.5,1.5) {$E=a^2$};
+\node at (1.5,-0.25) {$a$};
+\node at (3.25,1.5) {$a$};
+\node at (1.5,3.25) {$a$};
+\node at (-0.25,1.5) {$a$};
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(4,3){B}
+\tkzDefPoint(0,3){A}
+\draw[pl] (A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[below right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\node at (2,1.5) {$E=a\cdot\beta$};
+\node at (2,-0.5) {$\beta$};
+\node at (4.25,1.5) {$a$};
+\node at (2,3.25) {$\beta$};
+\node at (-0.25,1.5) {$a$};
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(5,3){B}
+\tkzDefPoint(1,3){A}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(1.5,3){b}
+\tkzDefPoint(4.5,1.5){c}
+\tkzDefPoint(.9,2.7){d}
+\tkzMarkRightAngle(C,a,b)
+\tkzMarkRightAngle(D,d,c)
+\draw[pl] (A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[below right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\node at (3,1.5) {$E=a\cdot\upsilon_a$};
+\node at (3,1) {$E=\beta\cdot\upsilon_\beta$};
+\node at (2,-0.5) {$\beta$};
+\node at (5,1.5) {$a$};
+\node at (3,3.25) {$\beta$};
+\node at (0,1.5) {$a$};
+\draw (a) -- (b);
+\draw (c) -- (d);
+\node at (2.5,2.35) {\footnotesize$\upsilon_a$};
+\node at (1.25,0.5) {\footnotesize$\upsilon_\beta$};
+\end{tikzpicture}
+\end{center}
+\item \textbf{Τρίγωνο}\\
+\wrapr{-7mm}{5}{4.4cm}{-11mm}{\begin{tikzpicture}
+\clip (-.5,-.52) rectangle (4,2.5);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.,2.1){A}
+\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{M}
+\tkzDefPointBy[projection = onto A--C](B) \tkzGetPoint{L}
+\tkzDefPoint(1,0){K}
+\tkzInterLL(A,K)(B,L)\tkzGetPoint{H}
+\tkzMarkRightAngle[size=.2](C,K,A)
+\tkzMarkRightAngle[size=.2](C,M,A)
+\tkzMarkRightAngle[size=.2](B,L,A)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawAltitude[draw=\xrwma](A,B)(C)
+\tkzDrawAltitude[draw=\xrwma](A,C)(B)
+\tkzDrawAltitude[draw=\xrwma](B,C)(A)
+\tkzDrawPoints(A,B,C,K,L,M)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](K){$K$}
+\tkzLabelPoint[right,yshift=1mm](L){$\varLambda$}
+\tkzLabelPoint[left](M){$M$}
+\node at (1.25,0.5) {\footnotesize$\upsilon_a$};
+\node at (1.35,1.25) {\footnotesize$\upsilon_\beta$};
+\node at (2,0.5) {\footnotesize$\upsilon_\gamma$};
+\end{tikzpicture}}{
+Το εμβαδόν ενός τριγώνου ισούται με το μισό του γινομένου μιας πλευράς επί το αντίστοιχο ύψος της.
+\[ E=\frac{1}{2}a\cdot\upsilon_a=\frac{1}{2}\beta\cdot\upsilon_\beta=\frac{1}{2}\gamma\cdot\upsilon_\gamma \]
+\begin{itemize}[itemsep=0mm]
+\item Το εμβαδόν ενός ορθογωνίου τριγώνου ισούται με το ημιγινόμενο των κάθετων πλευρών του.
+\item Το εμβαδόν ενός ισόπλευρου τριγώνου πλευράς $ a $ ισούται με $ E=\frac{a^2\sqrt{3}}{4} $.
+\end{itemize}}
+\item \textbf{Τραπέζιο}\\
+\wrapr{-7mm}{5}{4.1cm}{-4mm}{\begin{tikzpicture}
+\tkzDefPoint(0,-1.5){D}
+\tkzDefPoint(0.5,.5){A}
+\tkzDefPoint(2.5,.5){B}
+\tkzDefPoint(3.5,-1.5){C}
+\tkzDefPoint(.25,-.5){M}
+\tkzDefPoint(3,-.5){N}
+\tkzDefPoint(0.9,0.5){E}
+\tkzDefPoint(0.9,-1.5){Z}
+\tkzMarkRightAngle(C,Z,E)
+\draw (0.9,0.5) -- (0.9,-1.5);
+\draw[pl] (0,-1.5) -- (0.5,0.5) -- (2.5,0.5) -- (3.5,-1.5) -- cycle;
+\draw[plm,\xrwma](M)--(N);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[left](M){$M$}
+\tkzLabelPoint[right](N){$N$}
+\tkzDrawPoints(A,B,C,D,M,N)
+\node at (1.5,0.7) {\footnotesize$\beta$};
+\node at (1.7,-1.8) {\footnotesize$B$};
+\node at (.7,-.2) {\footnotesize$ \upsilon $};
+\node at (1.75,-.35) {\footnotesize$ \delta $};
+\end{tikzpicture}}{
+Το εμβαδόν ενός τραπεζίου ισούται με το γινόμενο του αθροίσματος των βάσεων επί το μισό του ύψους του.
+\[ E=\frac{(\beta+B)\cdot\upsilon}{2}=\delta\cdot\upsilon \]
+Ισούται επίσης με το γινόμενο της διαμέσου επί το ύψος του.}
+\item \textbf{Ρόμβος}\\
+\wrapr{-7mm}{7}{5.2cm}{-9mm}{\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,1.5){D}
+\tkzDefPoint(3,3){A}
+\tkzDefPoint(6,1.5){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(3,1.5){O}
+\tkzMarkRightAngle[size=.4](B,O,A)
+\draw[pl] (A)--(B)--(C)--(D) -- cycle;
+\draw[pl] (A)--(C);
+\draw[pl] (B)--(D);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[above left](O){$O$}
+\tkzDrawPoints(A,B,C,D,O)
+\node at (2,1.8) {\footnotesize$\delta_1$};
+\node at (3.4,.8) {\footnotesize$\delta_2$};
+\end{tikzpicture}}{
+Το εμβαδόν ενός ρόμβου ισούται με το ημιγινόμενο των διαγωνίων του.
+\[ E=\frac{\delta_1\cdot\delta_2}{2} \]
+Γενικότερα το εμβαδόν οποιουδήποτε τετραπλεύρου με κάθετες διαγώνιους ισούται με το ημιγινόμενο των διαγωνίων του.}
+\end{enumerate}
+\Thewrhma{Διάμεσος - Ισεμβαδικά τρίγωνα}
+\wrapr{-5mm}{4}{4.1cm}{-15mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1.5,0){M}
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (A)--(M);
+\tkzDrawPoints(A,B,C,M)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](M){$M$}
+\end{tikzpicture}}{
+Σε κάθε τρίγωνο, οποιαδήποτε διάμεσος χωρίζει το τρίγωνο σε ισεμβαδικά μέρη.
+\[ (AMB)=(AM\varGamma) \]}\mbox{}\\\\\\
+\newpage
+\noindent
+\section{Άλλοι τύποι για το εμβαδόν τριγώνου}\mbox{}\\
+\thewrhmata
+\Thewrhma{Τύποι για το εμβαδόν τριγώνου}
+Επιπλέον τύποι από τους οποίους δίνεται το εμβαδόν ενός τριγώνου $ AB\varGamma $ με πλευρές $ a,\beta,\gamma $ είναι οι παρακάτω:
+\begin{rlist}
+\item $ E=\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)} $ όπου $ \tau $ είναι η ημιπερίμετρος του τριγώνου.
+\item $ E=\tau\cdot\rho $ όπου $ \rho $ είναι η ακτίνα του εγγεγραμμένου κύκλου.
+\item $ E=\dfrac{a\beta\gamma}{4R} $ όπου $ R $ είναι η ακτίνα του περιγεγραμμένου κύκλου.
+\item $ E=\dfrac{1}{2}\beta\gamma\cdot\hm{\hat{A}}=\dfrac{1}{2}a\gamma\cdot\hm{\hat{B}}=\dfrac{1}{2}a\beta\cdot\hm{\hat{\varGamma}} $
+\end{rlist}
+\Thewrhma{Νόμος Ημιτόνων}
+Σε κάθε τρίγωνο $ AB\varGamma $ οι πλευρές του τριγώνου είναι ανάλογες προς τα ημίτονα των απέναντι γωνιών. Κάθε λόγος ισούται με τη διάμετρο του περιγεγραμμένου κύκλου.
+\[ \frac{a}{\hm{\hat{A}}}=\frac{\beta}{\hm{\hat{B}}}=\frac{\gamma}{\hm{\hat{\varGamma}}}=2R \]
+\section{Λόγος Εμβαδών όμοιων σχημάτων}\mbox{}\\
+\thewrhmata
+\Thewrhma{Λόγος εμβαδών τριγώνων με ίσα στοιχεία}
+Δίνονται δύο τρίγωνα $ AB\varGamma $ και $ A'B'\Gamma' $.
+\begin{rlist}
+\item Αν οι βάσεις τους είναι ίσες, τότε ο λόγος των εμβαδών τους ισούται με το λόγο των αντίστοιχων υψών.
+\item Αν τα ύψη τους είναι ίσα, τότε ο λόγος των εμβαδών τους ισούται με το λόγο των αντίστοιχων βάσεων.
+\end{rlist}
+\[ \textrm{Αν }a=a'\Rightarrow \frac{E}{E'}=\frac{\upsilon_{a}}{\upsilon_{a'}}\qquad\textrm{Αν }\upsilon_a=\upsilon_{a'}\Rightarrow \frac{E}{E'}=\frac{a}{a'} \]
+\Thewrhma{Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων}
+Ο λόγος των εμβαδών δύο όμοιων τριγώνων $ AB\varGamma $ και $ A'B'\Gamma' $ ισούται με το τετράγωνο του λόγου ομοιότητας.
+\[ \frac{(AB\varGamma)}{(A'B'\varGamma')}=\lambda^2 \]
+Το συμπέρασμα αυτό ισχύει και για το λόγων των εμβαδών δύο όμοιων πολυγώνων.\\\\
+\Thewrhma{Λόγος εμβαδών τριγώνων με ίσες - παραπληρωματικές γωνίες}
+Αν δύο τρίγωνα $ AB\varGamma $ και $ A'B'\Gamma' $ έχουν δύο γωνίες ίσες μια προς μια ή δύο γωνίες παραπληρωματικές, τότε ο λόγος των εμβαδών τους ισούται με το λόγο των γινομένων των πλευρών που περιέχουν τις γωνίες.
+\[ \textrm{Αν }\hat{A}=\hat{A'}\ \textrm{ ή }\ \hat{A}+\hat{A'}=180\degree\Rightarrow \frac{(AB\varGamma)}{(A'B'\varGamma')}=\frac{\beta\gamma}{\beta'\gamma'} \]
+\chapter{Μέτρηση κύκλου}
+\section{Κανονικά πολύγωνα}\mbox{}\\
+\orismoi
+\Orismos{Κανονικό πολύγωνο (\MakeLowercase{$ \mathbold\nu $}-γωνο)}
+\wrapr{-4mm}{9}{3.5cm}{-4mm}{\begin{tikzpicture}
+\draw(15:1.2) arc (15:-290:1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (90:1.2);
+\coordinate (B) at (135:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (225:1.2);
+\coordinate (E) at (270:1.2);
+\coordinate (F) at (315:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzMarkSegments[mark=|,size=.7mm](A,B B,C C,D D,E E,F F,G);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[below right](F){$Z$}
+\tkzLabelPoint[right](G){$H$}
+\tkzLabelPoint[above](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F,G)
+\end{tikzpicture}}{
+Κανονικό ονομάζεται κάθε πολύγωνο το οποίο έχει όλες τις πλευρές του ίσες και όλες τις γωνίες του ίσες μεταξύ τους.
+\begin{itemize}
+\item Ένα κανονικό πολύγωνο συμβολίζεται $ \nu $-γωνο, όπου $ \nu $ είναι ο φυσικός αριθμός που καθορίζει το πλήθος των πλευρών του πολυγώνου με $ \nu\geq3 $.
+\item Κάθε κανονικό πολύγωνο εγγράφεται σε έναν κύκλο και ο κύκλος αυτός ονομάζεται \textbf{κύκλος του πολυγώνου}.
+\item Το κέντρο του περιγεγραμμένου κύκλου ονομάζεται \textbf{κέντρο του πολυγώνου}
+\end{itemize}}\mbox{}\\\\\\
+\Orismos{Στοιχεία πολυγώνου}
+\wrapr{-5mm}{7}{4cm}{-8mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.5);
+\draw (0,0) circle (1.299);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (120:1.5);
+\coordinate (B) at (60:1.5);
+\coordinate (C) at (0:1.5);
+\coordinate (D) at (-60:1.5);
+\coordinate (E) at (-120:1.5);
+\coordinate (F) at (180:1.5);
+\coordinate (G) at (30:1.299);
+\tkzMarkAngle[size=.3](B,O,A)
+\tkzMarkAngle[size=.25,fill=white,draw=black](E,F,A)
+\tkzMarkRightAngle[size=.2](O,G,C)
+\draw[pl,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--cycle;
+\draw (B)--(O)--(A);
+\draw (O)--(G);
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below right](D){$\varDelta$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[left](F){$Z$}
+\tkzLabelPoint[below](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F,G)
+\node at (0,0.4979) {\footnotesize$\omega_\nu$};
+\node at (-1,0) {\footnotesize$\varphi_\nu$};
+\node at (0.6928,0.1444) {\footnotesize$a_\nu$};
+\node at (0,-1.1) {\footnotesize$\lambda_\nu$};
+\node at (-0.6547,0.783) {\footnotesize$R$};
+\end{tikzpicture}}{
+Τα στοιχεία ενός κανονικού $ \nu- $γωνου είναι τα εξής:
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Κεντρική γωνία}\\
+Η κεντρική γωνία είναι η γωνία που σχηματίζουν δύο ακτίνες του κύκλου του πολυγώνου που ενώνουν το κέντρο με δύο διαδοχικές κορυφές του. Συμβολίζεται με $ \omega_\nu $.
+\end{enumerate}}\mbox{}\\
+\vspace{-3mm}
+\begin{enumerate}[label=\bf\arabic*.,start=2,itemsep=0mm]
+\item \textbf{Γωνία πολυγώνου}\\
+Η γωνία του πολυγώνου είναι η γωνία που σχηματίζουν δύο διαδοχικές πλευρές του. Συμβολίζεται $ \varphi_\nu $.
+\item \textbf{Πλευρά πολυγώνου}\\
+Η πλευρά ενός κανονικού πολυγώνου συμβολίζεται με $ \lambda_\nu $.
+\item \textbf{Απόστημα πολυγώνου}\\
+Το απόστημα ενός πολυγώνου είναι η ακτίνα του εγγεγραμμένου κύκλου του. Συμβολίζεται με $ a_\nu $.
+\item \textbf{Κέντρο πολυγώνου}\\
+Το κέντρο ενός κανονικού πολυγώνου είναι το κέντρο του περιγεγραμμένου κύκλου.
+\item \textbf{Ακτίνα πολυγώνου}\\
+Ακτίνα ενός κανονικού πολυγώνου ονομάζεται η ακτίνα του περιγεγραμμένου κύκλου. Συμβολίζεται $ R $.
+\item \textbf{Περίμετρος - Εμβαδόν πολυγώνου}\\
+Η περίμετρος ενός κανονικού πολυγώνου συμβολίζεται με $ P_\nu $ ενώ το εμβαδόν του με $ E_\nu $.
+\end{enumerate}
+\thewrhmata
+\Thewrhma{Σχέσεις στοιχείων πολυγώνου}
+Για τα στοιχεία ενός κανονικού $ \nu- $γωνου ισχύουν οι παρακάτω σχέσεις:
+\begin{multicols}{4}
+\begin{rlist}
+\item $ \omega_\nu=\dfrac{360\degree}{\nu} $
+\item $ \varphi_\nu=180\degree-\omega_\nu $
+\item $ a_\nu^2+\dfrac{\lambda_\nu^2}{4}=R^2 $
+\item $ a_\nu=R\cdot\syn{\left( \frac{\omega_\nu}{2}\right) } $
+\item $ \lambda_\nu=2R\cdot\hm{\left( \frac{\omega_\nu}{2}\right) } $
+\item $ \lambda_\nu=2a_\nu\cdot\ef{\left( \frac{\omega_\nu}{2}\right)} $
+\item $ P_\nu=\nu\cdot\lambda_\nu $
+\item $ E_\nu=\dfrac{1}{2}P_\nu\cdot a_\nu $
+\end{rlist}
+\end{multicols}
+\Thewrhma{Λόγος στοιχείων κανονικού πολυγώνου}
+Ο λόγος των πλευρών, ο λόγος των ακτίνων και ο λόγος των αποστημάτων δύο κανονικών $ \nu- $γωνων ισούνται με το λόγο ομοιότητας τους.
+\[ \frac{\lambda_\nu}{\lambda_\nu'}=\frac{R}{R'}=\frac{a_\nu}{a_\nu'} \]
+\section{Εγγραφή κανονικών πολυγώνων σε κύκλο}\mbox{}\\
+\thewrhmata
+\Thewrhma{Εγγραφή κανονικού {\MakeLowercase{$\mathbold \nu- $γωνου}} για {$ \mathbold{\nu=3,4,6} $}}
+Τα στοιχεία ενός ισόπλευρου τριγώνου, ενός τετραγώνου και ενός κανονικού εξαγώνου που έχουν εγγραφεί σε κύκλο δίνονται στον παρακάτω πίνακα ως συνάρτηση της ακτίνας $ R $.
+\begin{center}\begin{tabular}{c|c|c|c}
+\hline \rule[-2ex]{0pt}{5ex}
+ & \textbf{Ισόπλευρο τρίγωνο} & \textbf{Τετράγωνο} & \textbf{Κανονικό εξάγωνο} \\ 
+ & {\boldmath$ \nu=3 $} & {\boldmath$ \nu=4 $} & {\boldmath$ \nu=6 $} \\
+\hhline{====} \rule[-2ex]{0pt}{5ex}
+Πλευρά $ \lambda_\nu $ & $ R\sqrt{3} $ & $ R\sqrt{2} $ & $ R $ \\ 
+\rule[-2ex]{0pt}{5ex}
+Απόστημα $ a_\nu $ & $ \dfrac{R}{2} $ & $ \dfrac{R\sqrt{2}}{2} $ & $ \dfrac{R\sqrt{3}}{2} $ \\ 
+\hline 
+\end{tabular} 
+\end{center} 
+\Thewrhma{Τύπος διπλασιασμού του Αρχιμήδη}
+Δοθέντος ενός κανονικού $ \nu- $γώνου εγγεγραμμένου σε κύκλο ακτίνας $ R $, η πλευρά $ \lambda_{2\nu} $ και το απόστημα $ a_{2\nu} $ ενός κανονικού $ 2\nu- $γώνου, δηλαδή ενός κανονικού πολυγώνου με διπλάσιες πλευρές εγγεγραμμένο στον ίδιο κύκλο, δίνονται από τους τύπους:
+\[ \lambda_{2\nu}^2=2R(R-a_\nu)\qquad a_{2\nu}^2=
+\frac{R}{2}(R+a_\nu) \]
+\section{Μήκος κύκλου - Μήκος τόξου}\mbox{}\\
+\orismoi
+\Orismos{Μήκος κύκλου}
+Μήκος ενός κύκλου $ (O,R) $ ονομάζεται ο θετικός αριθμός $ L $ ο οποίος είναι το όριο των ακολουθιών των περιμέτρων $ (P_\nu) $ των εγγεγραμμένων και $ (P_{\nu}') $ των περιγεγραμμένων κανονικών $ \nu- $γωνων καθώς το πλήθος $ \nu $ των πλευρών αυξάνεται. Ισούται με 
+\[ L=2\pi R \]\mbox{}\\
+\newpage
+\noindent
+\Orismos{Εγγεγραμμένη - Περιγεγραμμένη τεθλασμένη γραμμή}
+\vspace{-5mm}
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Εγγεγραμμένη τεθλασμένη γραμμή}\\
+\wrapr{-5mm}{7}{3cm}{-15mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (A)  at (140:1.2);
+\coordinate (B) at (90:1.2);
+\coordinate (C) at (50:1.2);
+\coordinate (D) at (-10:1.2);
+\coordinate (E) at (-80:1.2);
+\coordinate (F) at (180:1.2);
+\draw[pl,\xrwma] (A)--(B)--(C)--(D);
+\draw[dashed,\xrwma,pl] (D)--(E);
+\draw[dashed,\xrwma,pl] (A)--(F);
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above ](B){$B$}
+\tkzLabelPoint[above right](C){$\varGamma$}
+\tkzLabelPoint[right](D){$\varDelta$}
+\tkzDrawPoints(A,B,C,D)
+\end{tikzpicture}}{
+Εγγεγραμμένη σε έναν κύκλο $ (O,R) $ ονομάζεται μια τεθλασμένη γραμμή η οποία αποτελείται από χορδές του κύκλου.}
+\wrapl{-5mm}{7}{3cm}{-5mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.1);
+\tkzDefPoint(0,0){O};
+\coordinate (A)  at (150:1.1);
+\tkzTangent[at=A](O)\tkzGetPoint{a}
+\coordinate (B)  at (95:1.1);
+\tkzTangent[at=B](O)\tkzGetPoint{b}
+\coordinate (C)  at (50:1.1);
+\tkzTangent[at=C](O)\tkzGetPoint{c}
+\coordinate (D)  at (-10:1.1);
+\tkzTangent[at=D](O)\tkzGetPoint{d}
+\tkzInterLL(A,a)(B,b)\tkzGetPoint{k}
+\tkzInterLL(C,c)(B,b)\tkzGetPoint{m}
+\tkzInterLL(C,c)(D,d)\tkzGetPoint{l}
+\draw[pl,\xrwma] (a)--(k)--(m)--(l);
+\tkzDrawLine[add=0 and .8,color=\xrwma](l,D)
+\tkzLabelPoint[above left](k){$A$}
+\tkzLabelPoint[above ](m){$B$}
+\tkzLabelPoint[right](l){$\varGamma$}
+\tkzDrawPoints(k,m,l)
+\end{tikzpicture}}{\item \textbf{Περιγεγραμμένη τεθλασμένη γραμμή}\\
+Περιγεγραμμένη σε έναν κύκλο $ (O,R) $ ονομάζεται μια τεθλασμένη γραμμή η οποία αποτελείται από εφαμτόμενα τμήματα του κύκλου.}
+\end{enumerate}\mbox{}\\\\\\
+\Orismos{Μήκος τόξου}
+Μήκος ενός τόξου $ \widearc{AB} $ ονομάζεται ο θετικός αριθμός $ \mathcal{l} $ ο οποίος είναι το όριο των ακολουθιών των μηκών $ (P_\nu) $ των εγγεγραμμένων και $ (P_{\nu}') $ των περιγεγραμμένων τεθλασμένων γραμμών του τόξου καθώς αυξάνεται το πλήθος των τμημάτων τους. Ισούται με \[ \mathcal{l}=\pi R\cdot\frac{\mu}{180}=aR \]
+όπου $ \mu $ είναι το μέτρο του τόξου σε μοίρες και $ a $ το μέτρο του σε ακτίνια.\\\\
+\thewrhmata
+\Thewrhma{Μετατροπή μοιρών σε ακτίνια}
+Αν $ \mu $ είναι το μέτρο μιας γωνίας σε μοίρες και $ a $ το μέτρο της ίδιας γωνίας σε ακτίνια, η σχέση που τα συνδέει και με την οποία μπορούμε να μετατρέψουμε το μέτρο μιας γωνίας από μοίρες σε ακτίνια και αντίστροφα είναι :
+\[ \frac{\mu}{180\degree}=\frac{a}{\pi} \]
+\section{Εμβαδόν κύκλου - Κυκλικού τομέα - Κυκλικού τμήματος}\mbox{}\\
+\orismoi
+\Orismos{Εμβαδόν κύκλου}
+Εμβαδόν ενός κύκλου $ (O,R) $ ονομάζεται ο θετικός αριθμός $ E $ ο οποίος είναι το όριο των ακολουθιών $ (E_\nu) $ των εγγεγραμμένων και $ (E_\nu') $ των περιγεγραμμένων κανονικών πολυγώνων, καθώς το πλήθος $ \nu $ των πλευρών αυξάνεται.\\\\
+\Orismos{Κυκλικός τομέας}
+\wrapr{-5mm}{5}{2.4cm}{-17mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (240:1.2);
+\coordinate (B)  at (300:1.2);
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](O){$O$}
+\draw[fill=\xrwma!30,pl,draw=\xrwma] (A)--(O)--(B) arc[start angle=300, end angle=240, radius=1.2] (A);
+\tkzMarkAngle[size=.35](A,O,B)
+\tkzDrawPoints(A,B,O)
+\node at (0,-0.5) {\footnotesize$ \mu $};
+\end{tikzpicture}}{
+Κυκλικός τομέας κέντρου $ O $ και ακτίνας $ R $ ενός κύκλου $ (O,R) $ ονομάζεται το σύνολο των σημείων που περικλείει μια επίκεντρη $ \hat{O} $ γωνία και το αντίστοιχο τόξο της $ \widearc{AB} $. Συμβολίζεται με $ O\widearc{AB} $.}\mbox{}\\\\\\
+\Orismos{Κυκλικό τμήμα}
+\wrapr{-5mm}{5}{2.4cm}{-17mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (240:1.2);
+\coordinate (B)  at (300:1.2);
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](O){$O$}
+\draw (A)--(O)--(B);
+\draw[fill=\xrwma!30,pl,draw=\xrwma] (A)--(B) arc[start angle=300, end angle=240, radius=1.2cm] (A);
+\tkzMarkAngle[size=.35](A,O,B)
+\tkzDrawPoints(A,B,O)
+\node at (0,-0.5) {\footnotesize$ \mu $};
+\end{tikzpicture}}{
+Κυκλικό τμήμα ονομάζεται το σύνολο των σημείων που περικλείονται μεταξύ ενός τόξου και της αντίστοιχης χορδής του, σε έναν κύκλο $ (O,R) $.}\mbox{}\\
+\Orismos{Μηνισκος}
+\wrapr{-5mm}{5}{2.8cm}{-5mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\draw (.55,.55) circle (.7);
+\miniskos[\xrwma!30,draw=\xrwma,line width=.3mm]{0,0}{.55,.55}{1.2}{.7}{A}{B}
+\draw (p1)--(p2);
+\tkzLabelPoint[left](A){$ K $}
+\tkzLabelPoint[left](B){$ \varLambda $}
+\tkzLabelPoint[above left](p1){$ A $}
+\tkzLabelPoint[right](p2){$ B $}
+\tkzDrawPoints(p1,p2,A,B)
+\end{tikzpicture}}{
+Μηνίσκος ονομάζεται το σύνολο των σημείων του επιπέδου που βρίσκονται μεταξύ δύο τόξων με κοινή χορδή. Τα τόξα αυτά βρίσκονται προς το ίδιο μέρος της χορδής.}\mbox{}\\\\
+\thewrhmata
+\Thewrhma{Εμβαδόν κύκλου}
+Το εμβαδόν $ E $ ενός κύκλου ακτίνας $ R $ ισούται με $ E=\pi R^2 $.\\\\
+\Thewrhma{Εμβαδόν κυκλικού τομέα}\label{th2}
+Το εμβαδόν ενός κυκλικού τομέα $ O\widearc{AB} $ κέντρου $ O $ και ακτίνας $ R $ ισούται με \[ ( O\widearc{AB} )=\pi R^2\cdot\frac{\mu}{360\degree}=\frac{1}{2}aR^2 \]
+όπου $ \mu $ είναι το μέτρο του τομέα σε μοίρες και $ a $ το μέτρο του σε ακτίνια.\\\\\\
+\Thewrhma{Εμβαδόν κυκλικού τμήματος}\label{th3}
+Το εμβαδόν ενός κυκλικού τμήματος $ \varepsilon $ που βρίσκεται μεταξύ ενός τόξου $ AB $ και της αντίστοιχης χορδής του δίνεται από τον τύπο:
+\[ \varepsilon=(O\widearc{AB})-(OAB)=\frac{\pi R^2\mu}{360\degree}-\frac{R^2\hm{\mu}}{2}=\frac{R^2}{2}(a-\hm{a}) \]
+\Thewrhma{Εμβαδόν μηνισκου}
+\wrapr{-5mm}{7}{3.1cm}{-10mm}{\begin{tikzpicture}[scale=1.59]
+\clip (-.5,-.5) rectangle (1.6,1.6);
+\draw[dashed] (0,0) circle (1.2);
+\draw[dashed] (.55,.55) circle (.7);
+\miniskos[\xrwma!30,draw=\xrwma,line width=.3mm]{0,0}{.55,.55}{1.2}{.7}{A}{B}
+\tkzMarkAngle[size=.15](p2,B,p1)
+\tkzMarkAngle[size=.19](p2,A,p1)
+\draw (p1)--(A)--(p2)--(B)--cycle;
+\draw (p1)--(p2);
+\tkzLabelPoint[left](A){$ K $}
+\tkzLabelPoint[left](B){$ \varLambda $}
+\tkzLabelPoint[above left](p1){$ A $}
+\tkzLabelPoint[right](p2){$ B $}
+\tkzDrawPoints(p1,p2,A,B)
+\node at (.23,.23){\footnotesize$ \theta $};
+\node[fill=white,inner sep=.2mm] at (.74,.74){\footnotesize$ \varphi $};
+\node at (.94,.94){\footnotesize$ \mu $};
+\node at (.57,0.01){\footnotesize$ R $};
+\node at (.75,0.33){\footnotesize$ \rho $};
+\end{tikzpicture}}{Το εμβαδόν ενός μηνίσκου $ \mu $ που ορίζεται από δύο κυκλικά τόξα κοινής χορδής $ AB $ ισούται με τη διαφορά των εμβαδών των δύο κυκλικών τμημάτων που ορίζει η χορδή στους δύο κύκλους. 
+\[ \mu=(K\widearc{AB})-(\varLambda\widearc{AB})+(K AB)-(\varLambda AB) \]
+Με τη βοήθεια των \textbf{Θεωρημάτων \ref{th2} και \ref{th3}} προκύπτουν επιπλέον τύποι για τον υπολογισμό του εμβαδού του μηνίσκου:
+\[ \mu=\frac{\pi R^2(\theta-\varphi)}{360\degree}+\frac{R^2(\hm{\theta}-\hm{\varphi})}{2}=\frac{R^2}{2}(a-\beta+\hm{a}-\hm{\beta}) \]
+όπου $ a $ και $ \beta $ είναι τα μέτρα των γωνιών $ \theta $ και $ \varphi $ αντίστοιχα, δοσμένα σε ακτίνια.}\mbox{}\\\\
+\end{document}

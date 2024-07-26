@@ -1,0 +1,183 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,mathtools}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+
+\titlos{Γεωμετρία Α΄ Λυκείου}{Παράλληλες Ευθείες}{Άθροισμα γωνιών τριγώνου /\MakeLowercase{\boldmath{$ \nu- $}}γωνου - Γωνίες με πλευρές κάθετες}
+\thewrhmata
+\Thewrhma{Άθροισμα γωνιών τριγώνου}
+Σε κάθε τρίγωνο το άθροισμα των γωνιών ισούται με $ 180\degree $.\\\\
+\Thewrhma{Πορίσματα για τις γωνίες τριγώνου}
+Για τις γωνίες ενός τριγώνου ισχύουν οι ακόλουθες προτάσεις :
+\begin{rlist}
+\item Κάθε εξωτερική γωνία σε ένα τρίγωνο είναι ίση με το άθροισμα των δύο απέναντι εσωτερικών.
+\item Αν σε δύο τρίγωνα δύο γωνίες είναι μεταξύ τους ίσες μια προς μια, τότε θα είναι και οι τρίτες γωνίες ίσες.
+\item Σε κάθε ορθογώνιο τρίγωνο οι οξείες γωνίες είναι συμπληρωματικές.
+\item Οι γωνίες ενός ισόπλευρου τριγώνου ισούνται με $ 60\degree $.
+\end{rlist}
+\Thewrhma{Γωνίες με κάθετες πλευρές}
+\wrapr{-4mm}{7}{5.5cm}{-8mm}{\begin{tikzpicture}
+\tkzDefPoint(-1,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPoint(-1,-.5){C}
+\tkzDefPoint(2.2,1.2){D}
+\tkzDefPoint(3.5,0){E}
+\tkzDefPoint(3.5,-2.5){F}
+\tkzDefPoint(3.5,-2){G}
+\tkzDefPointBy[projection=onto C--D](G) \tkzGetPoint{H}
+\tkzInterLL(A,B)(C,D) \tkzGetPoint{K}
+\tkzInterLL(A,B)(G,H) \tkzGetPoint{M}
+\tkzLabelPoint[above](K){$O$}
+\tkzLabelPoint[right](D){$ x $}
+\tkzLabelPoint[right](B){$ y $}
+\tkzLabelPoint[above right](M){$B$}
+\tkzLabelPoint[above](E){$\varGamma$}
+\tkzLabelPoint[right](G){$O'$}
+\tkzLabelPoint[above left](H){$A$}
+\tkzMarkAngle[fill=\xrwma!70,size=4mm](B,K,D)
+\tkzMarkAngle[fill=\xrwma!70,size=5mm](E,G,M)
+\tkzMarkAngle[fill=\xrwma!90,size=3mm](M,G,F)
+\tkzMarkAngle[fill=\xrwma!50,size=3mm](H,M,A)
+\tkzMarkAngle[fill=\xrwma!50,size=3mm](G,M,B)
+\tkzMarkAngle[fill=\xrwma!90,size=3mm](C,K,B)
+\tkzMarkRightAngle[fill=\xrwma](K,H,M)
+\tkzMarkRightAngle[fill=\xrwma](A,E,G)
+\tkzDrawSegments(A,B C,D E,F G,H)
+\tkzLabelAngle[pos=.6](B,K,D){$ \omega $}
+\tkzLabelAngle[pos=.7](E,G,M){$ \varphi $}
+\tkzLabelAngle[pos=.5](H,M,A){\footnotesize$1$}
+\tkzLabelAngle[pos=.5](G,M,B){\footnotesize$2$}
+\tkzLabelAngle[pos=-.5](M,G,F){$ \theta' $}
+\tkzLabelAngle[pos=.5](C,K,B){$ \theta $}
+\tkzText(2.7,-1){$ y' $}
+\tkzText(3.7,-1){$ x' $}
+\end{tikzpicture}}{
+Εαν δύο γωνίες $ x\hat{O}y,\ x'\hat{O'}y' $ έχουν τις πλευρές τους κάθετες τότε
+\begin{rlist}
+\item αν είναι και οι δύο οξείες ή και οι δύο αμβλείες είναι ίσες.
+\item αν είναι μια οξεία και μια αμβλεία τότε είναι παραπληρωματικές.
+\end{rlist}}\mbox{}\\\\\\
+\Thewrhma{Άθροισμα γωνιών {\MakeLowercase{$ \mathbold{\nu}- $}} γωνου}
+Σε κάθε κυρτό $ \nu- $γωνο $ A_1A_2\ldots A_\nu $ ισχύει ότι :
+\begin{rlist}
+\item Το άθροισμα των εσωτερικών γωνιών ενός κυρτού $ \nu- $γωνου ισούται με $ (2\nu-4)\cdot 90\degree $.
+\item Το άθροισμα των εξωτερικών γωνιών ενός κυρτού $ \nu- $γωνου ισούται με $ 360\degree $.
+\end{rlist}
+\begin{center}
+\begin{tabular}{ccc}
+\begin{tikzpicture}[scale=1.5]
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.5){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1,-1){D}
+\tkzDefPoint(2,-.7){E}
+\tkzDefPoint(1.7,.7){H}
+\tkzDefPoint(.2,.7){K}
+\tkzDefPoint(-.35,-.05){L}
+\tkzDefPoint(0,-.9){M}
+\tkzDefPoint(1,.7){N}
+\tkzMarkAngle[fill=\xrwma!70,size=.2](B,A,H)
+\tkzMarkAngle[fill=\xrwma!70,size=.25](C,B,A)
+\tkzMarkAngle[fill=\xrwma!70,size=.25](D,C,B)
+\tkzMarkAngle[fill=\xrwma!70,size=.25](E,D,C)
+\tkzDrawSegments(A,B B,C C,D H,A)
+\tkzDrawSegment[dashed](D,E)
+\tkzLabelPoint[above](A){$ A_{1} $}
+\tkzLabelPoint[above left](B){$ A_{2} $}
+\tkzLabelPoint[left](C){$ A_{3} $}
+\tkzLabelPoint[below](D){$ A_{4} $}
+\tkzLabelPoint[below](E){$ A_{5} $}
+\tkzLabelPoint[above](H){$ A_{\nu} $}
+\node at (1,-1.5) {$\hat{A}_{1}+\hat{A}_{2}+\ldots+ \hat{A}_{\nu}=(2\nu-4)\cdot 90\degree$};
+\end{tikzpicture} & & \begin{tikzpicture}[scale=1.5]
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.5){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1,-1){D}
+\tkzDefPoint(2,-.7){E}
+\tkzDefPoint(1.7,.7){H}
+\tkzDefPoint(.2,.7){K}
+\tkzDefPoint(-.35,-.05){L}
+\tkzDefPoint(0,-.9){M}
+\tkzDefPoint(1,.7){N}
+\tkzMarkAngle[fill=\xrwma!70,%
+size=.25](K,A,B)
+\tkzMarkAngle[fill=\xrwma!70,%
+size=.25](M,C,D)
+\tkzMarkAngle[fill=\xrwma!70,%
+size=.25](L,B,C)
+\tkzDrawSegments(H,K A,L B,M C,D H,A)
+\tkzDrawSegment[dashed](D,E)
+\tkzLabelPoint[above](A){$ A_{1} $}
+\tkzLabelPoint[above left](B){$ A_{2} $}
+\tkzLabelPoint[left](C){$ A_{3} $}
+\tkzLabelPoint[below](D){$ A_{4} $}
+\tkzLabelPoint[below](E){$ A_{5} $}
+\tkzLabelPoint[above](H){$ A_{\nu} $}
+\node at (1,-1.5) {$\hat{A}_{1\varepsilon\xi}+\hat{A}_{2\varepsilon\xi}+\ldots+ \hat{A}_{\nu\varepsilon\xi}=360\degree$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\end{document}

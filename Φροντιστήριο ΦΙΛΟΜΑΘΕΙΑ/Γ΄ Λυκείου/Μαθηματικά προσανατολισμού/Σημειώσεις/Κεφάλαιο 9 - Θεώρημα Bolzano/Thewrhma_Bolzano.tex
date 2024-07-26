@@ -1,0 +1,384 @@
+\documentclass[twoside,nofonts,ektypwsh]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{itemsep=0mm,label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\ekthetesdeiktes
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Όρια - Συνέχεια}{Θεώρημα Bolzano}
+\thewrhmata
+\Thewrhma{Θεώρημα Bolzano}
+Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
+\begin{rlist}
+\item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
+\item $f(a)\cdot f(\beta)<0$
+\end{rlist}
+τότε θα υπάρχει τουλάχιστον ένας αριθμός $ x_0\in(a,\beta) $ έτσι ώστε να ισχύει $ f(x_0)=0 $.
+\begin{itemize}[itemsep=0mm]
+\item Αν ισχύει $ f(a)\cdot f(\beta)\leq0 $ τότε θα υπάρχει $ x_0\in[a,\beta] $ ώστε $ f(x_0)=0 $.
+\item Το αντίστροφο του θεωρήματος Bolzano δεν ισχύει πάντα.
+\end{itemize}
+\Thewrhma{Γεωμετρική ερμυνεία θεωρήματος Bolzano}
+\wrapr{-5mm}{7}{5cm}{-10mm}{\begin{tikzpicture}[scale=.7,domain=-.6:3.32,y=.5cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-4.5,ymax=1.2,ystep=1]
+\draw[-latex] (-2,0) -- coordinate (x axis mid) (4.5,0) node[right,fill=white] {{\small $ x $}};
+\draw[-latex] (-1,-2.7) -- (-1,4.4) node[above,fill=white] {{\small $ y $}};
+\draw (-.25,.5mm) -- (-.25,-.5mm) node[anchor=north west,fill=white] {{\small $ x_1 $}};
+\draw (1.45,.5mm) -- (1.45,-.5mm) node[anchor=north east,fill=white] {{\small $ x_2 $}};
+\draw (2.8,.5mm) -- (2.8,-.5mm) node[anchor=north west,fill=white] {{\small $ x_3 $}};
+\clip (-.7,-3) rectangle (5,4);
+\draw[samples=100,line width=.5mm,draw=\xrwma] plot function{x**3-4*x**2+3*x+1};
+\tkzDefPoint(-.6,-2.5){A}
+\tkzDrawPoint[size=7,fill=\xrwma](A)
+\tkzDefPoint(3.32,3.5){B}
+\tkzDrawPoint[size=7,fill=\xrwma](B)
+\tkzText(2.2,3.4){{\footnotesize $ f(\beta)>0 $}}
+\tkzText(0.5,-2.4){{\footnotesize $ f(a)<0 $}}
+\end{tikzpicture}}{
+Για μια συνεχή συνάρτηση $f$ στο διάστημα $ [a,\beta] $ η συνθήκη $ f(a)\cdot f(\beta)<0 $ σημαίνει ότι οι τιμές αυτές θα είναι ετερόσημες οπότε τα σημεία $ A(a,f(a)) $ και $ B(\beta,f(\beta)) $ θα βρίσκονται εκατέρωθεν του άξονα $ x'x $. Αυτό σημαίνει ότι η γραφική παράσταση $C_f$, λόγω της συνέχειας, θα τέμνει τον άξονα σε τουλάχιστον ένα σημείο με τετμημένη $x_0\in(a,\beta)$.}\\\\\\
+\Thewrhma{Πρόσημο συνάρτησης}
+Έστω μια συνεχής συνάρτηση $ f $ ορισμένη σ' ένα διάστημα $ \varDelta $.
+\begin{rlist}
+\item Αν η $ f $ δεν μηδενίζεται σε κανένα σημείο του $ \varDelta $ τότε έχει σταθερό πρόσημο στο διάστημα αυτό.
+\[ \textrm{Αν }f(x)\neq0\ ,\ \textrm{για κάθε }x\in\varDelta\Rightarrow f(x)>0\textrm{ ή }f(x)<0\ ,\ \textrm{για κάθε }x\in\varDelta \]
+\item Αν $ \rho_1,\rho_2,\ldots,\rho_k $ είναι ρίζες της συνάρτησης $ f $ τότε αυτή διατηρεί το πρόσημό της σε καθένα από τα διαστήματα $ [\rho_i,\rho_{i+1}] $ δύο διαδοχικών ριζών.
+\end{rlist}
+\newpage
+\noindent
+\methodologia
+\begin{Methodos}[Θεώρημα Bolzano - Απλή εφαρμογή]{5cm}\label{meth_bol}
+Η απλή εφαρμογή του θεωρήματος Bolzano γίνεται σε περιπτώσεις όπου μας ζητείται η ύπαρξη μιας τουλάχιστον ρίζας για μια δοσμένη συνάρτηση σε ένα ανοικτό διάστημα $ (a,\beta) $.
+\begin{bhma}
+\item Εξετάζουμε τη συνέχεια της συνάρτησης στο κλειστό διάστημα $ [a,\beta] $.
+\item Υπολογίζουμε τις τιμές $ f(a),f(\beta) $ στα άκρα του διαστήματος. Αν είναι ετερόσημες τότε παίρνουμε $ f(a)\cdot f(\beta)<0 $. 
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Θεώρημα Bolzano}
+\bmath{Δίνεται η συνάρτηση $ f $ με $ f(x)=x^3-2x^2-3x+5 $. Να δειχθεί ότι η $ f $ έχει τουλάχιστον μια ρίζα στο διάστημα $ (2,3) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+Το πεδίο ορισμού της συνάρτησης είναι το $ \mathbb{R} $. Η $ f $ είναι μια συνεχής συνάρτηση σε όλο το $ \mathbb{R} $, ως πολυωνυμική, επομένως
+\begin{rlist}
+\item είναι συνεχής στο διάστημα $ [2,3] $ και επίσης
+\item $ f(2)=2^3-2\cdot 2^2-3\cdot2+5=-1<0 $ \\
+$ f(3)=3^3-2\cdot3^2-3\cdot3+5=5>0  $\\
+άρα παίρνουμε $ f(2)\cdot f(3)=(-1)\cdot 5=-5<0 $
+\end{rlist}
+οπότε σύμφωνα με το θεώρημα του Bolzano θα υπάρχει τουλάχιστον ένα $ x_0\in(2,3) $ τέτοιο ώστε να ισχύει
+\[ f(x_0)=0 \]
+άρα η συνάρτηση $ f $ έχει μια τουλάχιστον ρίζα στο διάστημα $ (2,3) $.\\\\
+\Paradeigma{Θεώρημα Bolzano}
+\bmath{Δίνεται η συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με $ f(x)=ax^3+x $ όπου $ a\neq-1 $. Να δειχθεί ότι η $ f $ έχει μια τουλάχιστον ρίζα στο διάστημα $ (-1,1) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+\wrapr{-5mm}{7}{5cm}{-5mm}{\parat
+\begin{tcolorbox}[title=\Parathrhsh,hbox,    %%<<---- here
+lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white}]
+\begin{varwidth}{4cm}
+{\small Παρόλο που δε γνωρίζουμε τις τιμές $ f(-1),f(1) $, το γινόμενό τους είναι μια γνήσια αρνητική παράσταση.}
+\end{varwidth}
+\end{tcolorbox}}{
+Εξετάζουμε όπως προηγουμένως αν πληρούνται οι υποθέσεις του θεωρήματος Bolzano. Η συνάρτηση $ f $ είναι:
+\begin{rlist}
+\item συνεχής στο διάστημα $ [-1,1] $ και επίσης
+\item \begin{itemize}
+\item $ f(-1)=a(-1)^3-1=-a-1 $
+\item $ f(1)=a\cdot1^3+1=a+1  $
+\end{itemize}
+οπότε θα ισχύει $ f(-1)\cdot f(1)=(-a-1)(a+1)=-(a+1)^2<0 $ αφού σύμφωνα με την υπόθεση $ a\neq-1 $.
+\end{rlist}
+Έτσι θα υπάρχει τουλάχιστον ένα $ x_0\in(-1,1) $ τέτοιο ώστε να ισχύει $ f(x_0)=0 $.}\\\\
+\begin{Methodos}[Θεωρημα Bolzano - Υπαρξη ρίζας σε κλειστό διάστημα]{2cm}
+Αν εξετάζουμε για μια συνάρτηση $ f $, την ύπαρξη μιας ρίζας σε ένα κλειστό διάστημα $ [a,\beta] $ τότε αυτό προϋποθέτει το γινόμενο $ f(a)\cdot f(\beta) $ να είναι μη θετικό δηλαδή $ f(a)\cdot f(\beta)\leq0 $. Έτσι
+\begin{bhma}
+\item Εξετάζουμε τη συνέχεια της συνάρτησης στο κλειστό διάστημα $ [a,\beta] $.
+\item Αν στη συνέχεια ισχύει $ f(a)\cdot f(\beta)\leq0 $ τότε διακρίνουμε τις εξής περιπτώσεις:
+\begin{rlist}
+\item Αν $ f(a)\cdot f(\beta)<0 $ τότε σύμφωνα με το Θ. Bolzano άρα υπάρχει τουλάχιστον ένα $ x_0\in(a,\beta) $, ώστε $ f(x_0)=0 $.
+\item Αν $ f(a)\cdot f(\beta)=0 $ τότε $ f(a)=0 $ ή $ f(\beta)=0 $ άρα ένα τουλάχιστον από τα άκρα $ a,\beta $ θα είναι ρίζα της $ f $.
+\end{rlist}
+Συνδυάζοντας τις περιπτώσεις i. και ii. παίρνουμε την ύπαρξη της ρίζας στο κλειστό διάστημα $ [a,\beta] $.
+\end{bhma}
+\end{Methodos}
+\noindent
+\Paradeigma{Θ. Bolzano - Ύπαρξη ρίζας σε κλειστό διάστημα}
+\bmath{Δίνεται η συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με $ f(x)=\hm{x} $. Να δείξετε ότι η συνάρτηση $ f $ έχει μια τουλάχιστον ρίζα στο κλειστό διάστημα $ [-a,a] $ με $ a>0 $.}\\\\
+\textbf{ΛΥΣΗ}\\
+Η συνάρτηση $ f $ έχει πεδίο ορισμού το σύνολο $ \mathbb{R} $. Γι αυτήν επίσης θα έχουμε ότι:
+\begin{rlist}
+\item είναι συνεχής στο διάστημα $ [-a,a] $ και επιπλέον
+\item $ f(-a)=\hm{(-a)} $\ \ και\ \ 
+$ f(a)=\hm{a} $.\\
+Γνωρίζουμε όμως ότι οι αντίθετες γωνίες $ -a $ και $ a $ έχουν αντίθετα ημίτονα άρα θα ισχύει $ \hm{(-a)}=-\hm{a} $ και έτσι παίρνουμε:
+\[ f(-a)\cdot f(a)=\hm{(-a)}\cdot\hm{a}=-\hm^2{a}\leq0 \]
+\end{rlist}
+Εξετάζουμε τώρα τις παρακάτω περιπτώσεις:
+\begin{itemize}
+\item Αν $ f(-a)\cdot f(a)<0 $ τότε σύμφωνα με το θεώρημα Bolzano θα υπάρχει τουλάχιστον ένας αριθμός $ x_0 $ στο ανοικτό διάστημα $ (-a,a) $ τέτοιος ώστε
+\[ f(x_0)=\hm{x_0}=0 \]
+\item Αν $ f(-a)\cdot f(a)=0 $ τότε θα ισχύει $ f(-a)=0 $ ή $ f(a)=0 $ άρα το $ a $ θα είναι ρίζα της $ f $.
+\end{itemize}
+Από τις δύο παραπάνω περιπτώσεις καταλήγουμε στο συμπέρασμα ότι η ρίζα της συνάρτησης θα ανήκει στο κλειστό διάστημα $ [-a,a] $.\\\\
+\begin{Methodos}[Ύπαρξη λύσης εξίσωσης]{8cm}\label{bol:ex}
+Μεγάλο πλήθος εξισώσεων που δε λύνονται με τους γνωστούς αλγεβρικούς τρόπους επίλυσης εξισώσεων αντιμετωπίζονται με τη βοήθεια του θεωρήματος Bolzano, προκειμένου να αποδειχθεί η ύπαρξη μιας τουλάχιστον λύσης. Αν $ A(x)=B(x) $ είναι μια εξίσωση, όπου $ A,B $ είναι αλγεβρικές παραστάσεις του $ x $ και μας ζητείται η ύπαρξη λύσης σε ένα ανοικτό διάστημα $ (a,\beta) $ τότε:
+\begin{bhma}
+\item Μεταφέρουμε όλους τους όρους στο πρώτο μέλος της εξίσωσης: $ A(x)-B(x)=0 $.
+\item Ορίζουμε μια συνάρτηση $ f $ με τύπο την παράσταση που σχηματίστηκε στο πρώτο μέλος: \[ f(x)=A(x)-B(x) \]
+\item Εφαρμόζουμε το θεώρημα Bolzano για τη συνάρτηση $ f $ στο διάστημα $ [a,\beta] $.
+\end{bhma}
+Ακολουθούμε την ίδια διαδικασία και για την απόδειξη ισοτήτων, σχηματίζοντας την αντίστοιχη εξίσωση.
+\end{Methodos}
+\noindent
+\Paradeigma{Υπαρξη λύσης εξίσωσης}
+\bmath{Να αποδείξετε ότι η εξίσωση \[ x^2-\syn{(x\pi)}=e^x \] έχει μια τουλάχιστον λύση στο διάστημα $ (-2,0) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+Μεταφέροντας όλους τους όρους της εξίσωσης στο πρώτο μέλος, αυτή θα πάρει τη μορφή:
+\[ x^2-\syn{(x\pi)}-e^x=0 \]
+Ορίζουμε τη συνάρτηση $ f(x)=x^2-\syn{(x\pi)}-e^x $ με πεδίο ορισμού το $ \mathbb{R} $. Γι αυτήν θα έχουμε ότι
+\begin{rlist}
+\item είναι συνεχής στο κλειστό διάστημα $ [-2,0] $ και
+\item \begin{itemize}
+\item $ f(-2)=(-2)^2-\syn{(-2\pi)}-e^{-2}=4-1-e^{-2}=3-\frac{1}{e^2}>0 $
+\item $ f(0)=0^2-\syn{0}-e^0=-1-1=-2<0 $
+\end{itemize}
+οπότε παίρνουμε $ f(-2)\cdot f(0)=-2\left(3-\frac{1}{e^2} \right)<0 $.
+\end{rlist}
+Έτσι σύμφωνα με το θεώρημα του Bolzano η συνάρτηση $ f $ θα έχει μια τουλάχιστον ρίζα $ x_0\in(-2,0) $, ή ισοδύναμα η αρχική εξίσωση θα έχει μια τουλάχιστον λύση $ x_0 $ στο ανοικτό διάστημα $ (-2,0) $.\\\\
+\Paradeigma{Απόδειξη ισότητας}
+\bmath{Να δείξετε ότι υπάρχει τουλάχιστον ένα $ x_0\in(-1,0) $ τέτοιο ώστε να ισχύει
+\[ e^{x_0}=\hm{(\pi x_0)}-2x_0 \]}
+\textbf{ΛΥΣΗ}\\
+Θα σχηματίσουμε από τη ζητούμενη ισότητα την αντίστοιχη εξίσωση θέτοντας όπου $ x_0 $ τη μεταβλητή $ x $. Προκύπτει λοιπόν η εξίσωση
+\[ e^{x}=\hm{(\pi x)}-2x\Rightarrow e^{x}-\hm{(\pi x)}+2x=0 \]
+Θεωρούμε τη συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με τύπο $ f(x)=e^{x}-\hm{(\pi x)}+2x $. Θα ισχύει ότι
+\begin{rlist}
+\item η $ f $ είναι συνεχής στο διάστημα $ [-1,0] $ και
+\item \begin{itemize}
+\item $ f(-1)=e^{-1}-\hm{(-\pi)}+2(-1)=\frac{1}{e}-2<0 $
+\item $ f(0)=e^0-\hm{0}+2\cdot 0=1>0 $
+\end{itemize}
+οπότε προκύπτει $ f(-1)\cdot f(0)=\frac{1}{e}-2<0 $
+\end{rlist}
+Σύμφωνα λοιπόν με το θεώρημα Bolzano η $ f $ θα έχει μια τουλάχιστον ρίζα $ x_0\in(-1,0) $, ή ισοδύναμα η εξίσωση θα έχει μια τουλάχιστον λύση $ x_0 $ στο $ (-1,0) $ άρα τελικά υπάρχει $ x_0\in(-1,0) $ τέτοιο ώστε
+\[ e^{x_0}=\hm{(\pi x_0)}-2x_0 \]
+\begin{Methodos}[Ύπαρξη λύσης κλασματικής εξίσωσης]{5cm}
+Σε περίπτωση που εξετάζουμε την ύπαρξη λύσης μιας ρητής εξίσωσης σε ένα ανοικτό διάστημα $ (a,\beta) $ και η εξίσωση δεν ορίζεται σε κάποιο από τα άκρα του διαστήματος, τότε:
+\begin{bhma}
+\item Με απαλοιφή παρονομαστών, μετατρέπουμε την κλασματική εξίσωση σε μια ισοδύναμη εξίσωση χωρίς κλάσματα.
+\item Εργαζόμαστε σύμφωνα με τη μέθοδο \ref{bol:ex}.
+\end{bhma}
+\end{Methodos}
+\noindent
+\Paradeigma{Ύπαρξη λύσης κλασματικής εξίσωσης}
+\bmath{Να δειχθεί ότι η εξίσωση
+\[ \frac{e^x}{x-1}=x^2-3 \]
+έχει μια τουλάχιστον λύση στο διάστημα $ (0,1) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+\wrapr{-5mm}{7}{5cm}{-5mm}{\parat
+\begin{tcolorbox}[title=\Parathrhsh,hbox,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white}]
+\begin{varwidth}{4cm}
+{\small Οι δύο εξισώσεις είναι ισοδύναμες στο $ (0,1) $ γιατί στο διάστημα αυτό δεν ανήκει το $ x=1 $ του περιορισμού.}
+\end{varwidth}
+\end{tcolorbox}}{
+Για την αρχική εξίσωση απαιτούμε να ισχύει $ x-1\neq0\Rightarrow x\neq1 $. Όμως για κάθε $ x\in(0,1) $ η αρχική μετατρέπεται στην ισοδύναμη εξίσωση:
+\begin{equation}\label{par:ex}
+e^x=(x-1)\left( x^2-3\right)
+\end{equation}
+Στη συνέχεια, η τελευταία θα γραφτεί:
+\[ e^x-(x-1)\left( x^2-3\right)=0 \]
+Ορίζουμε έτσι τη συνάρτηση $ f(x)=e^x-(x-1)\left( x^2-3\right) $ με πεδίο ορισμού το $ \mathbb{R} $. Το θεώρημα Bolzano εφαρμόζεται στο διάστημα $ [0,1] $ και έτσι έχουμε ότι}
+\begin{rlist}
+\item Η $ f $ είναι συνεχής στο διάστημα $ [0,1] $ και επιπλέον
+\item \begin{itemize}
+\item $ f(0)=e^0-(0-1)\left( 0^2-3\right)=-2<0 $
+\item $ f(1)=e^1-(1-1)\left( 1^2-3\right)=e>0 $
+\end{itemize}
+οπότε παίρνουμε $ f(0)\cdot f(1)=-2e<0 $.
+\end{rlist}
+Έτσι σύμφωνα με το θεώρημα Bolzano η εξίσωση \eqref{par:ex} και κατά συνέπεια η αρχική εξίσωση θα έχει μια τουλάχιστον λύση $ x_0 $ στο ανοικτό διάστημα $ (0,1) $.\\\\
+\begin{Methodos}[Κοινά σημεία με άξονα - Κοινά σημεία καμπυλών]{2cm}
+Δίνονται δύο συναρτήσεις $ f,g $ με γραφικές παραστάσεις $ C_f,C_g $ αντίστοιχα. Αν ζητούμε την ύπαρξη κοινού σημείου των δύο γραφικών παραστάσεων τότε:
+\begin{bhma}
+\item Εξισώνουμε τις δύο συναρτήσεις: $ f(x)=g(x) $.
+\item Μεταφέρουμε την $ g(x) $ στο πρώτο μέλος της ισότητας και ορίζουμε μια νέα συνάρτηση: \[ h(x)=f(x)-g(x) \]
+\item Εφαρμόζουμε το Θ. Bolzano στο κατάλληλο διάστημα $ [a,\beta] $ στο οποίο θα ανήκει η τετμημένη του σημείου.
+\end{bhma}
+Για την ύπαρξη κοινού σημείου της γραφικής παράστασης $ C_f $ με τον οριζόντιο άξονα θέτουμε $ f(x)=0 $ και εργαζόμαστε όπως παραπάνω.
+\end{Methodos}\mbox{}\\
+\Paradeigma{Κοινό σημείο γραφικών παραστάσεων}
+\bmath{Δίνονται οι συναρτήσεις $ f,g:(1,+\infty)\to\mathbb{R} $ με $ f(x)=x^2-3x $ και $ g(x)=\ln{(x-1)} $ αντίστοιχα. Να δειχθεί οι γραφικές παραστάσεις των δύο συναρτήσεων έχουν τουλάχιστον ένα κοινό σημείο με τετμημένη $ x_0\in(2,4) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+Για να υπάρχει τουλάχιστον ένα κοινό σημείο $ A(x_0,f(x_0)) $ των δύο γραφικών παραστάσεων αρκεί ισοδύναμα να υπάρχει τουλάχιστον ένα $ x_0\in(2,4) $ τέτοιο ώστε $ f(x_0)=g(x_0) $. Απαιτούμε λοιπόν να ισχύει $ f(x)=g(x) $ και ορίζουμε τη συνάρτηση
+\[ h(x)=f(x)-g(x)=x^2-3x-\ln{(x-1)}\ ,\ x\in(1,+\infty) \]
+Για τη συνάρτηση $ h $ έχουμε ότι:
+\begin{rlist}
+\item είναι συνεχής στο διάστημα $ [2,4] $ και επίσης
+\item \begin{itemize}
+\item $ h(2)=2^2-3\cdot2-\ln1=-2<0 $
+\item $ h(4)=4^2-3\cdot4-\ln{3}=4-\ln{3}>0 $
+\end{itemize}
+οπότε προκύπτει ότι $ h(2)\cdot h(4)=-2(4-\ln3)<0 $.
+\end{rlist}
+Έτσι σύμφωνα με το θεώρημα Bolzano υπάρχει τουλάχιστον ένα $ x_0\in(2,4) $ τέτοιο ώστε $ h(x_0)=0 $ ή ισοδύναμα $ f(x_0)=g(x_0) $.\\\\
+\begin{Methodos}[Μοναδική λύση εξίσωσης]{7cm}
+Είδαμε στη μέθοδο \ref{bol:ex} τον τρόπο να εξετάσουμε την ύπαρξη τουλάχιστον μιας λύσης μιας δοσμένης εξίσωσης. Αν θέλουμε να αποδείξουμε ότι η λύση αυτή είναι μοναδική τότε:
+\begin{bhma}
+\item Ακολουθούμε τα βήματα της μεθόδου \ref{bol:ex}.
+\item Εξετάζουμε τη συνάρτηση που σχηματίσαμε ως προς τη μονοτονία της. Αν είναι γνησίως μονότονη τότε θα έχει μοναδική ρίζα στο ζητούμενο διάστημα.
+\end{bhma}
+\end{Methodos}\mbox{}\\
+\Paradeigma{Μοναδική λύση εξίσωσης}
+\bmath{Να δείξετε ότι η εξίσωση
+\[ e^x=2-x \]
+έχει μοναδική λύση στο διάστημα $ (0,1) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+Η αρχική εξίσωση γράφεται ισοδύναμα στη μορφή
+\[ e^x+x-2=0 \]
+και έτσι ορίζουμε τη συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με $ f(x)=e^x+x-2 $. Για τη συνάρτηση αυτή θα έχουμε ότι
+\begin{rlist}
+\item είναι συνεχής στο διάστημα $ [0,1] $ και επιπλέον
+\item \begin{itemize}
+\item $ f(0)=e^0+0-2=-1<0 $
+\item $ f(1)=e^1+1-2=e-1>0 $
+\end{itemize}
+άρα θα ισχύει $ f(0)\cdot f(1)=1-e<0 $.
+\end{rlist}
+Έτσι η εξίσωση θα έχει τουλάχιστον μια λύση $ x_0\in(0,1) $. Για να αποδείξουμε τη μοναδικότητα αυτής της λύσης εξετάζουμε τη συνάρτηση ως προς τη μονοτονία της. Έχουμε λοιπόν για κάθε $ x_1,x_2\in\mathbb{R} $ με $ x_1<x_2 $ ότι:
+\begin{gather*}
+x_1<x_2\Rightarrow e^{x_1}<e^{x_2}\Rightarrow\\ e^{x_1}+x_1<e^{x_2}+x_2\Rightarrow\\ e^{x_1}+x_1-2<e^{x_2}+x_2-2\Rightarrow\\ f(x_1)<f(x_2)
+\end{gather*}
+Επομένως η συνάρτηση $ f $ είναι γνησίως αύξουσα στο $ \mathbb{R} $ άρα η λύση $ x_0\in(0,1) $ είναι μοναδική.\\\\
+\begin{Methodos}[Ύπαρξη ρίζας με τη βοήθεια ορίου]{5cm}
+Σε περιπτώσεις όπου ζητούμε την ύπαρξη ρίζας για μια συνάρτηση $ f $ σε ένα διάστημα $ (a,\beta) $, αλλά κάποιο άκρο του διαστήματος είναι το άπειρο ή βρίσκεται εκτός πεδίου ορισμού, προσεγγίζουμε το πρόσημο της τιμής της συνάρτησης με τη βοήθεια ορίου ως εξής:
+\begin{bhma}
+\item Υπολογίζουμε το όριο της συνάρτησης στο άκρο που βρίσκεται εκτός πεδίου ορισμού: $ \lim_{x\to a}{f(x)} $ ή $ \lim_{x\to \beta}{f(x)} $.
+\item Το πρόσημο του ορίου μας δίνει το πρόσημο της συνάρτησης κοντά στο σημείο αυτό:
+\begin{gather*}
+\textrm{Αν }\lim_{x\to a}{f(x)}> 0\ (\textrm{ ή }< 0)\Rightarrow\ \ \textrm{Υπάρχει }x_1>a\textrm{ ώστε } f(x_1)>0\ (\textrm{ ή }<0)\\
+\textrm{Αν }\lim_{x\to\beta}{f(x)}> 0\ (\textrm{ ή }< 0)\Rightarrow\ \ \textrm{Υπάρχει }x_2<\beta\textrm{ ώστε } f(x_2)>0\ (\textrm{ ή }<0)
+\end{gather*}
+\item Εφαρμόζουμε το Θ. Bolzano σε ένα από τα νέα διαστήματα $ [x_1,x_2],[a,x_2],[x_1,\beta] $ ανάλογα με τις απαιτήσεις της άσκησης.
+\end{bhma}
+\end{Methodos}\mbox{}\\
+\Paradeigma{Ύπαρξη ρίζας από όριο}
+\bmath{Να αποδείξετε ότι η συνάρτηση $ f:(0,+\infty)\to\mathbb{R} $ με 
+\[ f(x)=\ln{x}+x \] έχει μια τουλάχιστον ρίζα στο διάστημα $ (0,1) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+Παρατηρούμε ότι η συνάρτηση δεν ορίζεται στο $ 0 $ το οποίο είναι το κάτω άκρο του διαστήματος. Έτσι υπολογίζουμε το όριο της $ f $ στο $ 0 $ και έχουμε ότι:
+\[ \lim_{x\to 0}{f(x)}=\lim_{x\to 0}{(\ln{x}+x)}=-\infty<0 \]
+Άρα θα υπάρχει ένας πραγματικός αριθμός $ x_1 $ κοντά στο $ 0 $ έτσι ώστε $ f(x_1)<0 $. Στη συνέχεια εφαρμόζουμε το Θ. Bolzano για τη συνάρτηση $ f $ στο διάστημα $ [x_1,1] $ και ισχύει ότι:
+\begin{rlist}
+\item η $ f $ είναι συνεχής στο $ [x_1,1] $ ενώ
+\item \begin{itemize}
+\item $ f(x_1)<0 $
+\item $ f(1)=\ln1+1=1>0 $
+\end{itemize}
+άρα παίρνουμε $ f(x_1)\cdot f(1)<0 $.
+\end{rlist}
+Έτσι, από το θεώρημα Bolzano, θα υπάρχει τουλάχιστον ένα $ x_0\in(x_1,1)\subseteq(0,1) $ τέτοιο ώστε $ f(x_0)=0 $.\\\\
+\begin{Methodos}[Ύπαρξη δύο ή περισσοτέρων ριζών]{5cm}
+Για να αποδείξουμε την ύπαρξη δύο ή περισσοτέρων ριζών μιας συνάρτησης, σε ένα ανοικτό διάστημα $ (a,\beta) $, θα χρειαστεί να εφαρμόσουμε το θεώρημα Bolzano σε ισάριθμα υποδιαστήματα του $ (a,\beta) $. Για την ύπαρξη δύο ριζών:
+\begin{bhma}
+\item Επιλέγουμε κατάλληλα ένα εσωτερικό σημείο $ \gamma $ του $ (a,\beta) $ έτσι ώστε $ f(a)\cdot f(\gamma)<0 $ και $ f(\gamma)\cdot f(\beta)<0 $.
+\item Εφαρμόζουμε το θεώρημα Bolzano στα διαστήματα $ [a,\gamma] $ και $ [\gamma,\beta] $ και παίρνουμε έτσι την ύπαρξη δύο ριζών:
+\[ x_1\in(a,\gamma)\ \ \textrm{και}\ \ x_2\in(\gamma,\beta) \]
+\end{bhma}
+Γενικότερα, για την ύπαρξη $ \nu $ ριζών, επιλέγουμε κατάλληλα $ \nu-1 $ σε πλήθος σημεία $ x_1,x_2,\ldots,x_{\nu-1} $ ώστε να χωριστεί το $ (a,\beta) $ σε $ \nu $ πλήθους διαστήματα $ (a,x_1),\ (x_1,x_2),\ \ldots,\ (x_{\nu-1},\beta) $.
+\end{Methodos}
+\noindent
+\Paradeigma{Ύπαρξη δύο ριζών}
+\bmath{Δίνεται η συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με $ f(x)=e^x-\hm{(\pi x)}-3x $. Να δείξετε ότι η συνάρτηση $ f $ έχει δύο τουλάχιστον ρίζες στο διάστημα $ (0,2) $.}\\\\
+\textbf{ΛΥΣΗ}\\
+\wrapr{-5mm}{7}{5cm}{-8mm}{\tcbset{
+enhanced,colback=red!5!white,boxrule=0.1pt,
+colframe=\xrwma,fonttitle=\bfseries}
+\begin{tcolorbox}[title=\Parathrhsh,hbox,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white}]
+\begin{varwidth}{4cm}
+{\small Οι τιμές $ f(0) $ και $ f(2) $ στα άκρα του αρχικού διαστήματος είναι ομόσημες. Έτσι η επιλογή του ενδιάμεσου σημείου είναι τέτοια ώστε η τιμή του να είναι ετερόσημη με τις προηγούμενες.}
+\end{varwidth}
+\end{tcolorbox}}{Ως ενδιάμεσο σημείο επιλέγουμε το $ x=1 $ έτσι ώστε να χωρίσουμε το αρχικό διάστημα σε δύο υποδιαστήματα $ [0,1],[1,2] $. Για τη συνάρτηση $ f $ έχουμε ότι:
+\begin{rlist}
+\item είναι συνεχής στα διαστήματα $ [0,1] $ και $ [1,2] $ ενώ
+\item \begin{itemize}
+\item $ f(0)=e^0-\hm{0}-3\cdot0=1>0 $
+\item $ f(1)=e^1-\hm{\pi}-3\cdot1=e-3<0 $
+\item $ f(2)=e^2-\hm{2\pi}-3\cdot2=e^2-6>0 $
+\end{itemize}
+οπότε προκύπτει ότι $ f(0)\cdot f(1)=e-3<0 $ και $ f(1)\cdot f(2)=(e-3)\left( e^2-6\right)<0 $
+\end{rlist}
+Σύμφωνα λοιπόν με το θεώρημα του Bolzano υπάρχει τουλάχιστον ένα $ x_1\in(0,1) $ και ένα $ x_2\in(1,2) $ έτσι ώστε $ f(x_1)=f(x_2)=0 $ άρα η $ f $ έχει τουλάχιστον δύο ρίζες στο $ (0,2) $.}\\\\
+\end{document}
+

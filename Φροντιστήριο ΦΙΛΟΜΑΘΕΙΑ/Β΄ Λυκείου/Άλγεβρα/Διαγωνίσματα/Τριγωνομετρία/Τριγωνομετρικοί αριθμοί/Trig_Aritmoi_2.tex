@@ -1,0 +1,135 @@
+\documentclass[twoside,nofonts,ektypwsh]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{cyan!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathALa
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Τργωνομετρικοί αριθμοί}{Β}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να δώσετε τον ορισμό του συνημιτόνου μιας οξείας γωνίας $ \omega $ ενός ορθογωνίου τριγώνου.\monades{8}
+\item Να γράψετε τον τύπο μετατροπής μιας γωνίας από μοίρες σε ακτίνια και αντίστροφα.\monades{2}
+\item Δίνεται σημείο $ M(x,y) $ σε σύστημα συντεταγμένων $ xOy $ και έστω γωνία $ \omega=x\hat{O}M $. Να γράψετε τον τύπο του ημιτόνου και της συνεφαπτομένης της γωνίας $ \omega $.\monades{5}
+\item \swstolathospan
+\begin{alist}
+\item Ισχύει ότι $ \syn{\frac{\pi}{3}}=\frac{\sqrt{3}}{2} $.
+\item Η γωνία $ 300\degree $ έχει θετικό ημίτονο.
+\item Οι συντεταγμένες ενός σημείου $ M $ που βρίσκεται πάνω στον τριγωνομετρικό κύκλο έχουν τη μορφή $ M(\syn{\omega},\hm{\omega}) $ όπου $ \omega=x\hat{O}M $.
+\item Αν για μια γωνία $ \omega $ ισχύει $ \hm{\omega}=\frac{3}{2} $ τότε $ \omega=\frac{\pi}{6} $.
+\item Για οποιαδήποτε γωνία $ \omega $ ισχύει $ |\syn{\omega}|\leq 1 $.
+\end{alist}
+\end{erwthma}\monades{10}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να μετατραπούν οι παρακάτω γωνίες σε ακτίνια
+\begin{multicols}{2}
+\begin{alist}
+\item $ 90\degree $
+\item $ 240\degree $
+\end{alist}
+\end{multicols}\monades{6}
+\item Να υπολογίσετε τις παρακάτω παραστάσεις
+\begin{alist}
+\item $ A=2\syn^2{45\degree}+\hm^2{30\degree}+\syf^2{30\degree} $
+\item $ B=4\syn{30\degree}\cdot\ef{45\degree}\cdot\hm{60\degree} $
+\item $ \varGamma=\hm{\frac{\pi}{2}}-\syn{\frac{3\pi}{2}}+\ef{\pi} $
+\end{alist}\monades{12}
+\item Να υπολογίσετε τους τριγωνομετρικούς αριθμούς των παρακάτω γωνιών.
+\begin{multicols}{2}
+\begin{alist}
+\item $ 2565\degree $
+\item $ \dfrac{25\pi}{4} $
+\end{alist}
+\end{multicols}
+\end{erwthma}\monades{7}
+\item Δίνεται τρίγωνο $ AB\varGamma $ με $ \hat{A}=90\degree, A\varGamma=20 $ και $ \ef{\hat{\varGamma}}=\frac{3}{4} $.
+\begin{erwthma}
+\item Να βρεθούν οι πλευρές $ AB $ και $ B\varGamma $.\monades{8}
+\item Να βρεθούν οι τριγωνομετρικοί αριθμοί της γωνίας $ \hat{B} $.\monades{6}
+\item Αν $ A\varDelta $ είναι το ύψος του τριγώνου τότε να βρεθούν τα μήκη των πλευρών $ A\varDelta,B\varDelta $ και $ \varGamma\varDelta $.\monades{11}
+\end{erwthma}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να βρεθούν τα πρόσημα των τριγωνομετρικών αριθμών και των παρακάτω παραστάσεων.
+\begin{alist}
+\item $ \hm{\frac{9\pi}{5}} $\monades{3}
+\item $ A=\syn{200\degree}\cdot\syn{190\degree}\cdot\ef{315\degree} $.\monades{5}
+\end{alist}
+\item Να δείξετε ότι για οποιεσδήποτε γωνίες $ x,y $ ισχύουν οι παρακάτω ανισότητες:
+\begin{alist}
+\item $ -5\leq 3\hm{x}+2\syn{y}\leq 5 $
+\item $ \syn^2{x}+3\leq 4 $
+\end{alist}\monades{8}
+\item Δίνονται γωνίες $ \phi $ και $ \omega $ για τις οποίες ισχύει
+\[ \systeme[\phi\omega]{3\phi-4\omega=15\degree,2\phi+3\omega=180\degree} \]
+Να υπολογίσετε την παράσταση $ A=\hm^2{\omega}+\syn^2{\phi}+\ef^2{\omega}+\hm^2{\phi} $
+\end{erwthma}\monades{9}
+\end{thema}
+\end{document}

@@ -1,0 +1,157 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\ekthetesdeiktes
+\usepackage{path}
+\pathal
+\let\oldlim\lim
+\renewcommand{\lim}{\displaystyle\oldlim}
+
+
+\let\oldccases\ccases
+\renewcommand{\ccases}[1]{{%
+  \def\arraystretch{1.2}%
+  \LEFTRIGHT\lbrace.{\,\array{@{}c@{\quad}l@{}}#1\endarray}%
+}}
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά προσανατολισμού}{Όρια - Συνέχεια}{Όριο σε σημείο - Μη πεπερασμένο όριο - Όριο στο άπειρο}
+\begin{thema}
+\item \mbox{}\\
+\vspace{-7mm}
+\begin{erwthma}
+\item Δίνεται ένα πολυώνυμο $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ και $ x_0\in\mathbb{R} $. Να αποδείξετε ότι $ {\displaystyle{\lim_{x\to x_0}{P(x)}=P(x_0)}} $.\monades{8}
+\item Έστω $ f:A\to\mathbb{R} $ μια ρητή συνάρτηση με $ f(x)=\dfrac{P(x)}{Q(x)} $ όπου $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ και $ Q(x)=\beta_\mu x^\mu+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0 $ πολυώνυμα βαθμών $ \nu $ και $ \mu $ αντίστοιχα. Να υπολογίσετε το όριο \[ \lim_{x\to +\infty}{f(x)} \] εξετάζοντας περιπτώσεις για τη σχέση μεταξύ των βαθμών $ \nu $ και $ \mu $ των δύο πολυωνύμων.\monades{7}
+\item \swstolathospan
+\begin{alist}
+\item Αν υπάρχει το όριο μιας συνάρτησης $ f $ σε ένα σημείο $ x_0 $ τότε τα πλευρικά όρια $ \lim_{x\to x_0^-}{f(x)} $ και $ \lim_{x\to x_0^+}f(x) $ θα είναι μεταξύ τους ίσα.
+\item Αν για δύο συναρτήσεις $ f,g $ ισχύουν οι σχέσεις $ \lim_{x\to x_0}{f(x)}=0 $ και $ \lim_{x\to x_0}{g(x)}=+\infty $ τότε παίρνουμε ότι $ \lim_{x\to x_0}{f(x)\cdot g(x)}=0 $.
+\item Αν για μια συνάρτηση $ f $, με πεδίο ορισμού ένα σύνολο $ A $, ισχύει ότι $ \lim_{x\to x_0}{f(x)}>0 $ τότε προκύπτει $ f(x)>0 $ για κάθε $ x\in A $.
+\item Δίνεται μια συνάρτηση $ f:A\to\mathbb{R} $ και $ x_0\in\mathbb{R} $. Αν ισχύουν οι σχέσεις $ \lim_{x\to x_0}{f(x)}=0 $ και $ f(x)>0 $ κοντά στο $ x_0 $ τότε $ \lim_{x\to x_0}{\dfrac{1}{f(x)}}=+\infty $.
+\item Έστω μια εκθετική συνάρτηση $ f(x)=a^x $ με $ a>1 $. Τότε θα ισχύει ότι $ \lim_{x\to -\infty}{f(x)}=0 $.
+\end{alist}\monades{10}
+\end{erwthma}
+\item \mbox{}\\
+Δίνεται η συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ με
+\[ f(x)=\ccases{\dfrac{3x^2-5x+2}{x^2-x}, & \textrm{ αν }\ x>1\\ [4mm]\dfrac{\hm{[a(x-1)]}}{x-1}, & \textrm{ αν }\  x<1} \]
+\begin{erwthma}
+\item Αν γνωρίζουμε ότι υπάρχει το όριο $ \lim_{x\to 1}{f(x)} $ τότε να αποδείξετε ότι $ a=1 $.\monades{9}
+\item Να υπολογίσετε το όριο $ \lim_{x\to+\infty}{f(x)} $.\monades{8}
+\item Να υπολογίσετε το όριο $ \lim_{x\to-\infty}{f(x)} $.\monades{8}
+\end{erwthma}
+\item \mbox{}\\
+Δίνεται η συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $ για την οποία ισχύει
+\[ \frac{\hm{x}+2x^2+10x}{x+2}\leq f(x)\leq \dfrac{2x^2+8x+7}{x+1} \] για κάθε $ x>0 $.
+\begin{erwthma}
+\item Να αποδείξετε ότι $ \lim_{x\to +\infty}{\dfrac{f(x)}{x}}=2 $ και $ \lim_{x\to +\infty}{(f(x)-2x)}=6 $.\monades{12}
+\item Να υπολογίσετε το όριο $ \lim_{x\to+\infty}{\dfrac{f(x)+3x+x^2\cdot\hm{\frac{1}{x}}}{xf(x)-2x^2-4x+3}} $.\monades{13}
+\end{erwthma}\mbox{}\\
+\item \mbox{}\\
+Δίνεται η συνάρτηση $ f:\mathbb{R}\to\mathbb{R} $, για την οποία ισχύει:
+\[ \lim_{x\to 0}{\dfrac{x(f(x)+2)+\hm{3x}}{\sqrt{x+4}-2}}=24 \]
+Να βρείτε τα όρια:
+\begin{erwthma}
+\item $ \lim_{x\to 0}{f(x)} $\monades{7}
+\item $ \lim_{x\to 0}{\dfrac{f(x)-4}{|f(x)+1|-|f^2(x)-3f(x)|}} $ \monades{8}
+\item Θεωρούμε τη συνάρτηση 
+\[ g(x)=\ln{\left(f^2(x)-2f(x)+\syn^2{\left(f(x)-1\right)}\right) }-\ln{\left( f^2(x)-2f(x)+1\right)} \]
+Αν η $ f $ είναι $ 1-1 $ και $ f(0)=1 $, να βρείτε
+\begin{multicols}{2}
+\begin{rlist}
+\item το πεδίο ορισμού της $ g $,
+\item το όριο $ \lim_{x\to 0}{g(x)} $.
+\end{rlist}
+\end{multicols}\monades{4+6}
+\end{erwthma}
+\end{thema}
+\kaliepityxia
+\end{document}

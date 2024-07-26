@@ -1,0 +1,63 @@
+\documentclass[internet]{diag-pan-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=3.00cm]{geometry}
+\xroma{cyan}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{adjustbox}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+
+\begin{document}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ ΚΑΤΕΥΘΥΝΣΗΣ Γ΄ ΛΥΚΕΙΟΥ}{ΟΡΙΑ - ΣΥΝΕΧΕΙΑ}
+\begin{thema}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item \textbf{Θεωρία}\\
+
+\monades{12}
+\end{erwthma}
+\item 
+\item 
+\item 
+\end{thema}
+
+\end{document}

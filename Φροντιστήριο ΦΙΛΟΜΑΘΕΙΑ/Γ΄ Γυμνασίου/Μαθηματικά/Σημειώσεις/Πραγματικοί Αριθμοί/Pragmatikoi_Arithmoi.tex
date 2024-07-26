@@ -1,0 +1,352 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{xcolor}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+%------- ΟΡΙΣΜΟΣ --------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\arabic{orismos}\;:\;}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%------------------------------
+\usepackage{hhline}
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+%------- ΘΕΩΡΗΜΑ ΑΠΛΗ ΜΟΡΦΗ -----------------
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\arabic{thewrhma}\;:\;}  
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%----------------------------------
+%--------- ΘΕΩΡΗΜΑΤΑ ------------------
+\newcommand{\thewrhmata}{\begin{center}
+{\large {\textbf{ΘΕΩΡΗΜΑΤΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------------
+\newcommand{\pinakasdyo}[8]{
+\begin{tikzpicture}
+\foreach \x in {#6,#7}{
+\draw (-3,0) -- (#8,0);
+\draw (\x,-.5)--(\x,.0);
+\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#8-.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+\node at (0.5*#6-0.25,-0.3) {$#4$};
+\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+\begin{tikzpicture}
+\draw (-3,0) -- (#5,0);
+\draw (#4,-.5)--(#4,.0);
+\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#5-0.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+\node at (0.5*#4-0.25,-.3) {$#3$};
+\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+\begin{tikzpicture}
+\draw (-3,0) -- (5,0);
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (4.7,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+\end{tikzpicture}}
+
+%-------- ΜΕΘΟΔΟΛΟΓΙΑ ---------
+\newcounter{methodologia}[section]
+\renewcommand{\themethodologia}{\arabic{methodologia}\;:\;}   
+\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia}}\hspace{1mm} \MakeUppercase{\textbf{#1}}\\}{}
+\newcommand{\methodologia}{\begin{center}
+{\large {\textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%-------------------------------
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%------------------------------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+
+
+
+\begin{document}
+\section*{\LARGE ΑΛΓΕΒΡΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΠΡΑΓΜΑΤΙΚΟΙ ΑΡΙΘΜΟΙ}
+\end{center}\mbox{}\\
+\orismoi
+\Orismos{Σύνολα αριθμών}
+\vspace{-5mm}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Φυσικοί Αριθμοί} : Το σύνολο των αριθμών από το 0 εως το άπειρο όπου κάθε αριθμός έχει διαφορά μιας μονάδας από τον προηγούμενο.
+\item \textbf{Ακέραιοι Αριθμοί}: Το σύνολο των φυσικών αριθμών μαζί με τους αντίθετους τους.
+\item \textbf{Ρητοί Αριθμοί}: Όλοι οι αριθμοί που μπορούν να γραφτούν με τη μορφή κλάσματος με ακέραιους όρους.
+\item \textbf{¶ρρητοι Αριθμοί}: Κάθε αριθμός ο οποίος δεν είναι ρητός. Κατά κύριο λόγο, άρρητοι αριθμοί είναι οι ρίζες που δεν έχουν ρητό αποτέλεσμα, ο αριθμός $ \pi $ κ.τ.λ.
+\item \textbf{Πραγματικοί Αριθμοί} : Οι ρητοί μαζί με το σύνολο των άρρητων μας δίνουν τους πραγματικούς αριθμούς, όλους τους αριθμούς που γνωρίζουμε.
+\end{enumerate}
+\Orismos{Αντίθετοι - Αντίστροφοι αριθμοι}
+\begin{enumerate}[itemsep=0mm]
+\vspace{-5mm}
+\item \textbf{Αντίθετοι αριθμοί}\\
+Αντίθετοι ονομάζονται οι αριθμοί οι οποίοι έχουν άθροισμα μηδέν. Οι αντίθετοι αριθμοί έχουν ίσες απόλυτες τιμές και αντίθετα πρόσημα.
+\[ a+(-a)=0 \]
+\item \textbf{Αντίστροφοι αριθμοί}\\
+Αντίστροφοι ονομάζονται δύο πραγματικοί αριθμοί οι οποίοι έχουν γινόμενο ίσο με τη μονάδα. \[ a\cdot \frac{1}{a}=1 \]
+\end{enumerate}
+\Orismos{Πράξεισ αριθμών}
+Στον παρακάτω πίνακα φαίνονται τα ονόματα των αριθμών που αποτελούν μια πράξη, τα ονόματα των αποτελεσμάτων και ο συμβολισμός κάθε πράξης.
+\begin{center}
+\begin{tabular}{cccc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Πράξη} & \textbf{Όροι} & \textbf{Αποτέλεσμα} & \textbf{Συμβολισμός} \\ 
+\hhline{====} \rule[-2ex]{0pt}{5.5ex} \textbf{Πρόσθεση} & Προσθετέοι & ¶θροισμα & $ a+\beta $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Αφαίρεση} & Μειωτέος - Αφαιρετέος & Διαφορά & $ a-\beta $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Πολλαπλασιασμός} & Παράγοντες & Γινόμενο & $ a\cdot\beta $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Διαίρεση} & Διαιρετέος - Διαιρέτης & Πηλίκο & $ a:\beta $ \\ 
+\hline\end{tabular}
+\end{center}
+Η αφαίρεση $ a-\beta $ και η διαίρεση $ a:\beta $ δύο αρθμών $ a,\beta\in\mathbb{R} $ είναι οι πράξεις που προκύπτουν από την πρόσθεση και τον πολλαπλασιασμό αντίστοιχα και μπορούν να γραφτούν με τη βοήθεια τους.
+\[ a-\beta=a+(-\beta)\;\;,\;\;a:\beta=\frac{a}{\beta}=a\cdot\frac{1}{\beta} \]
+\Orismos{Απόλυτη Τιμή Πραγματικού Αριθμού}
+Απόλυτη τιμή ενός πραγματικού αριθμού  ορίζεται να είναι η απόσταση της εικόνας του αριθμού αυτού απο το 0 και συμβολίζεται με $ |a| $.
+\begin{center}
+\begin{tabular}{c >{\centering\arraybackslash}m{6cm}}
+$ |a|=\LEFTRIGHT\{.{\begin{aligned}
+a & \;,\;a\geq0\\
+-a & \;,\;a<0
+\end{aligned}} $  & \begin{tikzpicture}
+\draw[-latex] (-1,0) -- coordinate (x axis mid) (4.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\foreach \x in {-1,0,...,4}
+\draw (\x,.5mm) -- (\x,-.5mm) node[anchor=north,fill=white] {{\scriptsize \x}};
+\draw[line width=.7mm] (0,0) -- (3,0);
+\tkzText(1.5,.34){$ \overcbrace{\rule{27mm}{0mm}}^{{\scriptsize |3|=3}} $}
+\tkzDefPoint(3,0){A}
+\tkzDrawPoint[size=7,fill=white](A)
+\tkzLabelPoint[above right](A){{\scriptsize $A(3)$}}
+\end{tikzpicture}
+\end{tabular} 
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Η απόλυτη τιμή ενός θετικού αριθμού $ a $ είναι ίση με τον ίδιο τον αριθμό.
+\item Η απόλυτη τιμή ενός αρνητικού αριθμού $ a $ είναι ίση με τον αντίθετο του αριθμού $ a $.
+\end{itemize}
+Η απόλυτη τιμή ενός πραγματικού αριθμού είναι θετικός αριθμός αφού εξ' ορισμού παριστάνει απόσταση, που σαν μέγεθος παιρνει μόνο θετικές τιμές.
+\thewrhmata
+\Thewrhma{Ιδιότητεσ των Πράξεων}
+Στον παρακάτω πίνακα βλέπουμε τις βασικές ιδιότητες της πρόσθεσης και του πολλαπλασιασμού στο σύνολο των πραγματικών αριθμών.
+\begin{center}
+\begin{tabular}{ccc}
+	\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Πρόσθεση} & \textbf{Πολλαπλασιασμός} \\ 
+	\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Αντιμεταθετική} & $ a+\beta=\beta+a $ & $ a\cdot\beta=\beta\cdot a $ \\
+	\rule[-2ex]{0pt}{5ex} \textbf{Προσεταιριστική} & $ a+\left( \beta+\gamma\right) =\left( a+\beta\right) +\gamma $ & $ a\cdot\left( \beta\cdot\gamma\right) =\left( a\cdot\beta\right)\cdot\gamma $\\
+	\rule[-2ex]{0pt}{5ex} \textbf{Ουδέτερο στοιχείο} & $ a+0=a $ & $ a\cdot1= a $\\
+	\rule[-2ex]{0pt}{5ex} \textbf{Αντίθετοι / Αντίστροφοι} & $ a+(-a)=0 $ & $ a\cdot\frac{1}{a}= 1 $\\
+	\rule[-2ex]{0pt}{5ex} \textbf{Επιμεριστική} & \multicolumn{2}{c}{$ a\cdot\left( \beta\pm\gamma\right)=a\cdot\beta\pm a\cdot\gamma  $}\\
+	\hline
+\end{tabular}
+\end{center}
+Ισχύουν επίσης :
+\begin{itemize}[itemsep=0mm]
+\item Για κάθε πραγματικό αριθμό $ a $ ισχύει $ a\cdot0=0 $
+\item Δύο αριθμοί που έχουν άθροισμα 0 λέγονται \textbf{αντίθετοι}.
+\item Το 0 λέγεται \textbf{ουδέτερο στοιχείο της πρόσθεσης}.
+\item Δύο αριθμοί που έχουν γινόμενο 1 λέγονται \textbf{αντίστροφοι}.
+\item Το 1 λέγεται \textbf{ουδέτερο στοιχείο του πολλαπλασιασμού}.
+\item Το 0 δεν έχει αντίστροφο.
+\end{itemize}
+\Thewrhma{Γινόμενο - Πηλίκο πραγματικων αριθμών}
+Για οποιουσδήποτε δύο πραγματικούς $ a,\beta\in\mathbb{R} $ ισχύουν οι παρακάτω προτάσεις :
+\begin{itemize}[itemsep=0mm]
+\item Το γινόμενο και το πηλίκο δύο ομόσημων πραγματικών αριθμών $ a,\beta $ είναι θετικό.
+\item Το γινόμενο και το πηλίκο δύο ετερόσημων πραγματικών αριθμών $ a,\beta $ είναι αρνητικό.
+\end{itemize}
+\begin{gather*}
+a,\beta\textrm{ ομόσημοι }\Rightarrow a\cdot\beta>0\textrm{ και }\dfrac{a}{\beta}>0\\
+a,\beta\textrm{ ετερόσημοι }\Rightarrow a\cdot\beta<0\textrm{ και }\dfrac{a}{\beta}<0
+\end{gather*}
+\hspace*{\fill}
+{\footnotesize Σπύρος Φρόνιμος}
+\end{document}

@@ -1,0 +1,110 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά προσανατολισμού}{Επαναληπτικό διαγώνισμα}{Συναρτήσεις - Ιδιότητες Συναρτήσεων - Αντίστροφη συνάρτηση}
+\begin{thema}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ και $ \varDelta $ ένα διάστημα του πεδίου ορισμού της. Πότε η συνάρτηση $ f $ λέγεται γνησίως αύξουσα στο διάστημα $ \varDelta $;
+\monades{8}
+\item Να δώσετε τον ορισμό του ολικού ελάχιστου μιας συνάρτησης $ f $ με πεδίο ορισμού ένα σύνολο $ A $.\\\monades{7}
+\item \swstolathospan
+\begin{alist}
+\item Αν μια συνάρτηση $ f:A\to\mathbb{R} $ είναι γνησίως μονότονη σε κάθε διάστημα του πεδίου ορισμού της τότε είναι και $ 1-1 $.
+\item Έστω $ f $ μια αντιστρέψιμη συνάρτηση. Το σύνολο τιμών της $ f $ είναι το πεδίο ορισμού της $ f^{-1} $.
+\item Το πεδίο ορισμού μιας ρητής συνάρτησης $ f(x)=\frac{P(x)}{Q(x)} $ ισούται με $ A=\{x\in\mathbb{R}|Q(x)=0\} $.
+\item Αν ένα σημείο $ A(x,y) $ ανήκει στη γραφική παράσταση μιας συνάρτησης $ f $ τότε για τις συντεταγμένες του ισχύει $ y=f(x) $.
+\item Στα σημεία όπου η γραφική παράσταση μιας συνάρτησης $ f $ τέμνει τον οριζόντιο άξονα $ x'x $ ισχύει $ x=0 $.
+\end{alist}\monades{10}
+\end{erwthma}
+\item \mbox{}\\
+Δίνονται οι ακόλουθες συναρτήσεις $ f:A\to\mathbb{R} $ και $ g:B\to\mathbb{R} $ με τύπους $ f(x)=\frac{x}{x-2} $ και $ g(x)=\ln{(x-1)} $.
+\begin{erwthma}
+\item Να βρείτε τα πεδία ορισμού $ A,B $ των συναρτήσεων $ f,g $ αντίστοιχα.\monades{5}
+\item Να αποδείξετε ότι η συνάρτηση $ f $ είναι γνησίως φθίνουσα στα διαστήματα $ (-\infty,2) $, $ (2,+\infty) $, ενώ η $ g $ είναι γνησίως αύξουσα στο $ (1,+\infty) $.\monades{10}
+\item Να εξηγήσετε γιατί είναι αντιστρέψιμες οι δύο παραπάνω συναρτήσεις και να βρείτε τις αντίστροφες συναρτήσεις τους $ f^{-1} $ και $ g^{-1} $.\\\monades{10}
+\end{erwthma}
+\item 
+\item 
+\end{thema}
+
+\end{document}

@@ -1,0 +1,405 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Τρίγωνα}{ΙΣΟΤΗΤΑ ΤΡΙΓΩΝΩΝ}
+\orismoi
+\Orismos{Τρίγωνο - Κύρια στοιχεία τριγώνου}
+\wrapr{-4mm}{2}{4cm}{-3mm}{\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[pl] (-0.5,1.2) node(A){} -- (-1.5,-0.5) node(B){} 
+-- (1.5,-0.5) node(C){}--cycle;
+\tkzMarkAngle[size=4mm](B,A,C)
+\tkzMarkAngle[size=4mm](A,C,B)
+\tkzMarkAngle[size=4mm](C,B,A)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (-1.25,0.5) {$\gamma$};
+\node at (.75,0.5) {$\beta$};
+\node at (0,-0.75) {$a$};
+\end{tikzpicture}}{
+Τρίγωνο ονομάζεται το κυρτό πολύγωνο που έχει τρεις πλευρές και τρεις γωνίες. \begin{itemize}
+\item Τα κύρια στοιχεία ενός τριγώνου είναι οι πλευρές, οι γωνίες και οι κορυφές του.
+\item Κάθε τρίγωνο συμβολίζεται με τη χρήση των ονομάτων των τριών κορυφών του για παράδειγμα $ AB\varGamma $.
+\end{itemize}
+\[ B\varGamma\rightarrow a\;\;,\;\;A\varGamma\rightarrow \beta\;\;,\;\;AB\rightarrow \gamma \]
+\begin{itemize}
+\item Οι πλευρές ενός τριγώνου, εκτός από το συνηθισμένο συμβολισμό ενός ευθύγραμμου τμήματος, μπορούν εναλλακτικά να συμβολιστούν με ένα μικρό γράμμα, αντίστοιχο του ονόματος της απέναντι κορυφής.
+\end{itemize}}\mbox{}\\\\\\
+\Orismos{Δευτερεύοντα στοιχεία τριγώνου}
+Τα δευτερεύοντα στοιχεία κάθε τριγώνου είναι η διάμεσος, η διχοτόμος και το ύψος του. Αναλυτικά ορίζονται ως εξής :
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Διάμεσος}\\
+Διαμεσος ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα το οποίο ενώνει μια κορυφή του τριγώνου με το μέσο της απέναντι πλευράς. \begin{itemize}
+\item Κάθε διάμεσος συμβολίζεται είτε με τα γράμματα των δύο άκρων της είναι με το γράμμα $ \mu $ το οποίο θα έχει δείκτη, το όνομα της πλευράς στην οποία αντιστοιχεί η διάμεσος. 
+\item Οι διάμεσοι για ένα τρίγωνο $ AB\varGamma $ θα συμβολίζονται $ \mu_a,\mu_\beta,\mu_\gamma $.
+\end{itemize}
+\item \textbf{Διχοτόμος}\\
+Διχοτόμος ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα το οποίο χωρίζει μια γωνία του τριγώνου σε δύο ίσα μέρη.
+\begin{itemize}
+\item Κάθε διχοτόμος συμβολίζεται εναλλακτικά με το γράμμα $ \delta $ το οποίο θα έχει δείκτη, το όνομα της πλευράς στην οποία αντιστοιχεί η διχοτόμος. 
+\item Οι διχοτόμοι για ένα τρίγωνο $ AB\varGamma $ θα συμβολίζονται $ \delta_a,\delta_\beta,\delta_\gamma $.
+\end{itemize}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{p{3.5cm}cp{3.5cm}cp{3.5cm}}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[pl] (-0.5,1.25) node(A){} -- (-1.5,-0.5) node(B){} 
+-- (1.5,-0.5) node(C){}--cycle;
+\tkzDefPoint(0,-.5){M}
+\draw[\xrwma,plm] (-0.5,1.25)--(M);
+\tkzMarkSegment[mark=|](B,M)
+\tkzMarkSegment[mark=|](M,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](M){$M$}
+\tkzDrawPoints(A,B,C,M)
+\node at (-0.5,0.25) {$\mu_a$};
+\end{tikzpicture} &  & \begin{tikzpicture}[x=1cm,y=1cm]
+\clip (-2,-.98) rectangle (2,1.75);
+\draw[pl] (-0.5,1.25) node(A){} -- (-1.5,-0.5) node(B){} 
+-- (1.5,-0.5) node(C){}--cycle;
+\tkzDefLine[bisector](B,A,C) \tkzGetPoint{a}
+\tkzInterLL(A,a)(B,C) \tkzGetPoint{D}
+\tkzDrawSegment[plm,\xrwma](A,D)
+\tkzMarkAngle[size=4mm,mark=|](B,A,D)
+\tkzMarkAngle[size=5mm,mark=|](D,A,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzDrawPoints(A,B,C,D)
+\node at (-0.6,0.25) {$\delta_a$};
+\end{tikzpicture} &  & \begin{tikzpicture}[x=1cm,y=1cm]
+\draw[pl] (-0.5,1.25) node(A){} -- (-1.5,-0.5) node(B){} 
+-- (1.5,-0.5) node(C){}--cycle;
+\tkzDefPoint(-.5,-.5){M}
+\tkzMarkRightAngle(C,M,A)
+\draw[\xrwma,plm] (-0.5,1.25)--(M);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](M){$H$}
+\tkzDrawPoints(A,B,C,M)
+\node at (-0.2,0.25) {$\upsilon_a$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\begin{enumerate}[label=\bf\arabic*.,start=3]
+\item \textbf{Ύψος}\\
+Ύψος ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα το οποίο έχει το ένα άκρο του σε μια κορυφή του τριγώνου και είναι κάθετο με την απέναντι πλευρά.
+\begin{itemize}
+\item Τα ύψη ενός τριγώνου συμβολίζονται με το γράμμα $ \upsilon $ το οποίο θα έχει δείκτη, το όνομα της πλευράς στην οποία αντιστοιχεί η διχοτόμος. 
+\item Τα ύψη για ένα τρίγωνο $ AB\varGamma $ θα συμβολίζονται $ \upsilon_a,\upsilon_\beta,\upsilon_\gamma $.
+\end{itemize}
+\end{enumerate}
+\Orismos{Είδη τριγώνων}
+Τα τρίγωνα μπορούν να χωριστούν σε κατηγορίες ως προς το είδος των γωνιών που περιέχουν και ως προς τη σχέση των πλευρων μεταξύ τους.
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Είδη τριγώνων ως προς τις γωνίες}\\
+Με κριτήριο το είδος των γωνιών που περιέχει ένα τρίγωνο διακρίνουμε τα παρακάτω τρία είδη τριγώνων.
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{4.5cm}|>{\centering\arraybackslash}m{4.5cm}|>{\centering\arraybackslash}m{4.5cm}}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Οξυγώνιο} & \textbf{Ορθογώνιο} & \textbf{Αμβλυγώνιο} \\ 
+\hhline{===} \vspace{2mm}\begin{tikzpicture}
+\tkzDefPoint(1,1.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2.7,0){C}
+\tkzMarkAngle[size=3.5mm,fill=\xrwma!50](B,A,C)
+\tkzMarkAngle[size=4mm,fill=\xrwma!50](A,C,B)
+\tkzMarkAngle[size=3.4mm,fill=\xrwma!50](C,B,A)
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.35,-.4){$\hat{A},\hat{B},\hat{\varGamma}<90\degree$};
+\end{tikzpicture}\vspace{2mm} & \begin{tikzpicture}
+\tkzDefPoint(0,1.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2.7,0){C}
+\tkzMarkAngle[size=4mm](B,A,C)
+\tkzMarkAngle[size=4mm](A,C,B)
+\tkzMarkRightAngle[fill=\xrwma!50](C,B,A)
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.35,-.4){$\hat{B}=90\degree$};
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint(0,1.5){A}
+\tkzDefPoint(0.5,0){B}
+\tkzDefPoint(2.7,0){C}
+\tkzMarkAngle[size=4mm](B,A,C)
+\tkzMarkAngle[size=4mm](A,C,B)
+\tkzMarkAngle[size=3mm,fill=\xrwma!50](C,B,A)
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.35,-.4){$\hat{B}>90\degree$};
+\end{tikzpicture}
+\\ \hline \vspace{2mm}Ένα τρίγωνο ονομάζεται
+\textbf{οξυγώνιο} εαν έχει \textbf{όλες} τις γωνίες του οξείες.\vspace{2mm} & Ένα τρίγωνο ονομάζεται \textbf{ορθογώνιο} εαν έχει μια ορθή γωνία. & Ένα τρίγωνο ονομάζεται \textbf{αμβλυγώνιο} εαν έχει μια αμβλεία γωνία.\\ 
+\hline 
+\end{tabular}
+\end{center}
+\item \textbf{Είδη τριγώνων ως προς τις πλευρές}\\
+Με βάση τη σχέση μεταξύ των πλευρών ενός τριγώνου χωρίζουμε τα τρίγωνα στις παρακάτω τρεις κατηγορίες.
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{4.7cm}|>{\centering\arraybackslash}m{4.7cm}|>{\centering\arraybackslash}m{4.7cm}}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Σκαληνό} & \textbf{Ισοσκελές} & \textbf{Ισόπλευρο} \\ 
+\hhline{===} \vspace{2mm}\begin{tikzpicture}
+\tkzDefPoint(1,1.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2.7,0){C}
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.35,-.4){$AB\neq A\varGamma\neq B\varGamma$};
+\end{tikzpicture}\vspace{2mm} & \begin{tikzpicture}
+\tkzDefPoint(1.35,1.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2.7,0){C}
+\tkzDrawSegments[plm,\xrwma](A,B A,C)
+\tkzMarkSegments[mark=|](A,B A,C)
+\tkzDrawSegments[pl](B,C)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.35,-.4){$AB=A\varGamma$};
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint(0.86,1.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1.73,0){C}
+\tkzDrawSegments[pl](A,B A,C B,C)
+\tkzMarkSegments[mark=|](A,B A,C B,C)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (0.86,-.4){$AB=A\varGamma=B\varGamma$};
+\end{tikzpicture}
+\\ \hline \vspace{2mm}Ένα τρίγωνο ονομάζεται
+\textbf{σκαληνό} εαν όλες οι πλευρές του είναι μεταξύ τους άνισες.\vspace{2mm} & Ένα τρίγωνο ονομάζεται \textbf{ισοσκελές} εαν έχει δύο πλευρές ίσες. Η τρίτη πλευρά ονομάζεται \textbf{βάση}. & Ένα τρίγωνο ονομάζεται \textbf{ισόπλευρο} εαν έχει όλες τις πλευρές του ίσες.\\ 
+\hline 
+\end{tabular}
+\end{center}
+\end{enumerate}
+\thewrhmata
+\Thewrhma{1\tssL{o} Κριτήριο Ισότητασ Τριγώνων}
+Αν ένα τρίγωνο έχει δύο πλευρές τους ίσες μια προς μια και τις περιεχόμενες σ' αυτές γωνίες μεταξύ τους ίσες τότε έιναι ίσα.
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+\coordinate [label=left:{$ B $}] (B) at (0,0);
+\coordinate [label=right:{$ \varGamma $}] (C) at (4,0);
+\coordinate[label=above:{$ A $}] (A) at (1,2);
+\coordinate [label=left:{$ B' $}] (B') at (5.5,0);
+\coordinate [label=right:{$ \varGamma' $}] (C') at (9.5,0);
+\coordinate [label=above:{$ A' $}] (A') at (6.5,2);
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPolygon[pl](A',B',C')
+\tkzMarkAngle[fill=\xrwma,%
+size=0.4](B,A,C)
+\tkzMarkAngle[fill=\xrwma,%
+size=0.4,](B',A',C')
+\tkzMarkSegments[mark=|,color=\xrwma](A,B A',B')
+\tkzMarkSegments[mark=||,color=\xrwma](A,C A',C')
+\tkzDrawPoints(A,B,C,A',B',C')
+\node at (12,1.5) {$AB=A'B'$};
+\node at (12,1) {$A\varGamma=A'\varGamma'$};
+\node at (12,.5) {$\hat{A}=\hat{A'}$};
+\end{tikzpicture}
+\end{center}
+\Thewrhma{2\tssL{o} Κριτήριο Ισότητασ Τριγώνων}
+Αν δυο τριγωνα έχουν μια πλευρά και τις προσκείμενες σ' αυτήν γωνίες ίσες, τότε ειναι ίσα.
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+\tkzDefPoint(-1.4,0){E}
+\coordinate [label=left:{$ B $}] (B) at (0,0);
+\coordinate [label=right:{$ \varGamma $}] (C) at (4,0);
+\coordinate[label=above:{$ A $}] (A) at (1,2);
+\coordinate [label=left:{$ B' $}] (B') at (5.5,0);
+\coordinate [label=right:{$ \varGamma' $}] (C') at (9.5,0);
+\coordinate [label=above:{$ A' $}] (A') at (6.5,2);
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPolygon[pl](A',B',C')
+\tkzMarkAngle[fill=\xrwma,%
+size=0.4,mark=|](C',B',A')
+\tkzMarkAngle[fill=\xrwma,%
+size=0.4,mark=|](C,B,A)
+\tkzMarkAngle[fill=\xrwma,%
+size=0.5,mark=||](A,C,B)
+\tkzMarkAngle[fill=\xrwma,%
+size=0.5,mark=||](A',C',B')
+\tkzMarkSegments[mark=|,color=\xrwma](B,C B',C')
+\tkzDrawPoints(A,B,C,A',B',C')
+\node at (12,1.5) {$B\varGamma=B'\varGamma'$};
+\node at (12,1) {$\hat{B}=\hat{B'}$};
+\node at (12,.5) {$\hat{\varGamma}=\hat{\varGamma'}$};
+\end{tikzpicture}
+\end{center}
+\Thewrhma{3\tssL{o} Κριτήριο Ισότητασ Τριγώνων}
+Αν δυο τριγωνα έχουν όλες τις πλευρές τους ίσες μια προς μια, τότε ειναι ίσα.
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+\tkzDefPoint(-1.4,0){E}
+\coordinate [label=left:{$ B $}] (B) at (0,0);
+\coordinate [label=right:{$ \varGamma $}] (C) at (4,0);
+\coordinate[label=above:{$ A $}] (A) at (1,2);
+\coordinate [label=left:{$ B' $}] (B') at (5.5,0);
+\coordinate [label=right:{$ \varGamma' $}] (C') at (9.5,0);
+\coordinate [label=above:{$ A' $}] (A') at (6.5,2);
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDrawPolygon[pl](A',B',C')
+\tkzMarkSegments[mark=|,color=\xrwma](A,B A',B')
+\tkzMarkSegments[mark=||,color=\xrwma](A,C A',C')
+\tkzMarkSegments[mark=|||,color=\xrwma](B,C B',C')
+\tkzDrawPoints(A,B,C,A',B',C')
+\node at (12,1.5) {$AB=A'B'$};
+\node at (12,1) {$A\varGamma=A'\varGamma'$};
+\node at (12,.5) {$B\varGamma=B'\varGamma'$};
+\end{tikzpicture}
+\end{center}
+\Thewrhma{1\tssL{o} Πόρισμα για το ισοσκελές τρίγωνο}
+Σε κάθε ισοσκελές τριγωνο\\
+\wrapr{-11mm}{5}{3.8cm}{-9mm}{\begin{tikzpicture}[scale=.9]
+\coordinate [label=left:$ B $] (B) at (0,0);
+\coordinate [label=right:$ \varGamma $] (C) at (3,0);
+\coordinate[label=above:$ A $] (A) at (1.5,4);
+\tkzDrawPolygon[pl](A,B,C)
+\tkzDefMidPoint(B,C) \tkzGetPoint{D}
+\tkzDrawSegment[pl](A,D)
+\tkzMarkAngle[mark=|,fill=\xrwma,%
+size=0.5,   
+opacity=0.7](A,C,B)
+\tkzMarkAngle[mark=|,fill=\xrwma,%
+size=0.5,   
+opacity=0.7](C,B,A)
+\tkzMarkSegments[mark=|,color=\xrwma](A,B A,C)
+\tkzLabelPoint[below](D){$ \varDelta $}
+\tkzMarkRightAngles(C,D,A)
+\tkzDrawPoints(A,B,C,D)
+\end{tikzpicture}}{
+\begin{itemize}[itemsep=0mm]
+\item Οι προσκείμενες γωνίες στη βάση είναι ίσες.
+\item Η διχοτόμος της γωνίας της κορυφης του ισοσκελούς τριγώνου ειναι και διάμεσος και ύψος.
+\end{itemize}}\mbox{}\\\\\\
+\Thewrhma{2\tssL{ο} Πόρισμα για το ισοσκελές τρίγωνο}
+Οι γωνίες ισοπλευρου τριγώνου είναι ίσες.\\\\
+\Thewrhma{3\tssL{ο} Πόρισμα για το ισοσκελές τρίγωνο}
+Σε κάθε ισοσκελές τριγωνο η διάμεσος που αντιστοιχεί στη βάση του είναι και ύψος και διχοτόμος του.\\\\
+\Thewrhma{1\tssL{ο} Πόρισμα για τη μεσοκάθετο}
+\wrapr{-4mm}{7}{4cm}{-10mm}{\begin{tikzpicture}[scale=.8]
+\coordinate [label=left:$ A $] (A) at (0,0);
+\coordinate [label=right:$ B $] (B) at (4,0);
+\coordinate[label=left:$ M $] (M) at (2,4);
+\tkzDrawPolygon[pl](A,B,M)
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDrawLine(M,K)
+\tkzMarkSegments[mark=|,color=\xrwma](A,K K,B)
+\tkzLabelPoint[below left](K){$ K $}
+\tkzText(2.2,4.2){$ \varepsilon $}
+\tkzMarkRightAngle(B,K,M)
+\tkzDrawPoints(A,B,M,K)
+\end{tikzpicture}}{
+Κάθε σημείο της μεσοκαθέτου ενός ευθυγράμμου τμήματος ισαπέχει από τα άκρα του.\\\\
+\Thewrhma{2\tssL{ο} Πόρισμα για τη μεσοκάθετο}
+Κάθε σημείο το οποίο ισαπέχει από τα άκρα ενός ευθυγράμμου τμήματος, θα ανήκει στη μεσοκάθετό του.}
+\newpage
+\noindent
+\Thewrhma{1\tssL{ο} Πόρισμα για τον κύκλο}
+Αν δύο τόξα ενός κύκλου ειναι ίσα τότε και οι χορδές τους ειναι ίσες.\\\\
+\wrapr{-4mm}{7}{3.7cm}{-24mm}{\begin{tikzpicture}[scale=.8]
+\coordinate [label=above left:$ O $] (O) at (0,0);
+\coordinate [label=right:$ B $] (B) at (2,0);
+\tkzDefPointBy[rotation=center O angle 50](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 240](B) \tkzGetPoint{Γ}
+\tkzDefPointBy[rotation=center O angle 290](B) \tkzGetPoint{Δ}
+\tkzDrawCircle(O,B)
+\tkzLabelPoint[above right](A){$ A $}
+\tkzLabelPoint[below left](Γ){$ \varGamma $}
+\tkzLabelPoint[below](Δ){$ \varDelta $}
+\tkzDrawArc[color=\xrwma,plm](O,B)(A)
+\tkzDrawArc[color=\xrwma,plm](O,Γ)(Δ)
+\tkzDrawSegments(A,B Γ,Δ)
+\tkzMarkSegments[mark=|](A,B Γ,Δ)
+\tkzDrawSegments(O,A O,B O,Γ O,Δ)
+\tkzMarkAngle[fill=\xrwma,size=0.7,](B,O,A)
+\tkzMarkAngle[fill=\xrwma,size=0.7,](Γ,O,Δ)
+\tkzDrawPoints[size=2.7](O,A,B,Γ,Δ)
+\end{tikzpicture}}{
+\Thewrhma{2\tssL{ο} Πόρισμα για τον κύκλο}
+Αν οι χορδές δύο τόξων μικρότερων του ημικυκλίου είναι ίσες μεταξύ τους, τότε και τα τόξα είναι ίσα.}\mbox{}\\\\
+\Thewrhma{3\tssL{ο} Πόρισμα για τον κύκλο}
+Αν οι χορδές δύο τόξων μεγαλύτερων του ημικυκλίου είναι ίσες μεταξύ τους, τότε και τα τόξα είναι ίσα.
+\end{document}

@@ -1,0 +1,169 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage{venndiagram}
+%------ ΕΙΚΟΝΑ ΓΥΡΩ ΑΠΟ ΚΕΙΜΕΝΟ ------------
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+
+\begin{document}
+\titlos{ΑΛΓΕΒΡΑ Α΄ ΛΥΚΕΙΟΥ}{Σύνολα - Πιθανότητες}{Η έννοια του συνόλου}
+\orismoi
+\Orismos{Σύνολο} Σύνολο ονομάζεται μια συλλογή όμοιων αντικειμένων, τα οποία είναι καλά ορισμένα και διακριτά μεταξύ τους.
+\begin{itemize}[itemsep=0mm]
+\item Τα αντικείμενα ενός συνόλου ονομάζονται \textbf{στοιχεία}.
+\item Τα σύνολα τα συμβολίζουμε με ένα κεφαλαίο γράμμα.
+\end{itemize}
+\textbf{ΒΑΣΙΚΑ ΣΥΝΟΛΑ ΑΡΙΘΜΩΝ}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Φυσικοί Αριθμοί} : Το σύνολο των αριθμών από το 0 έως το άπειρο όπου κάθε αριθμός έχει διαφορά μιας μονάδας από τον προηγούμενο. Συμβολίζεται με $ \mathbb{N} $ και είναι : $ \mathbb{N}=\{0,1,2,\ldots\} $.
+\item \textbf{Ακέραιοι Αριθμοί} : Το σύνολο των φυσικών αριθμών μαζί με τους αντίθετους τους. Συμβολίζεται με $ \mathbb{Z} $ και είναι : $ \mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\} $.
+\item \textbf{Ρητοί Αριθμοί} : Όλοι οι αριθμοί που μπορούν να γραφτούν με τη μορφή κλάσματος με ακέραιους όρους. Συμβολίζεται με $ \mathbb{Q} $ και είναι : $ \mathbb{Q}=\LEFTRIGHT\{\}{\left. \frac{a}{\beta}\right|a,\beta\in\mathbb{Z},\beta\neq0\;} $.
+\item \textbf{Άρρητοι Αριθμοί} : Κάθε αριθμός ο οποίος δεν είναι ρητός. Κατά κύριο λόγο, άρρητοι αριθμοί είναι οι ρίζες που δεν έχουν ρητό αποτέλεσμα, ο αριθμός $ \pi $ κ.τ.λ.
+\item \textbf{Πραγματικοί Αριθμοί} : Οι ρητοί μαζί με το σύνολο των άρρητων μας δίνουν τους πραγματικούς αριθμούς, όλους τους αριθμούς που γνωρίζουμε. Συμβολίζεται με $ \mathbb{R} $ και είναι : $ \mathbb{R}= $ $ \{ $όλοι οι αριθμοί$ \} $.
+\end{enumerate}
+Τα παραπάνω σύνολα χωρίς το μηδενικό τους στοιχείο συμβολίζονται αντίστοιχα με $ \mathbb{N}^*,\mathbb{Z}^*,\mathbb{Q}^*,\mathbb{R}^*$.\\\\
+\Orismos{Ίσα σύνολα} Ίσα ονομάζονται δύο σύνολα $ A,B $ τα οποία έχουν ακριβώς τα ίδια στοιχεία. Ισοδύναμα, τα σύνολα $ Α,Β $ λέγονται ίσα εαν ισχύουν οι σχέσεις :
+\begin{enumerate}[itemsep=0mm]
+\item Κάθε στοιχείο του $ A $ είναι και στοιχείο του $ B $
+\item Κάθε στοιχείο του $ B $ είναι και στοιχείο του $ A $.
+\end{enumerate}
+\Orismos{Υποσύνολο} Ένα σύνολο $ A $ λέγεται υποσύνολο ενός συνόλου $ B $ όταν κάθε στοιχείο του $ A $ είναι και στοιχείο του $ B $. Συμβολίζεται με τη χρήση του συμβόλου $ \subseteq $ ως εξής :
+\[ A\subseteq B \]
+\Orismos{Κενό σύνολο} Κενό ονομάζεται το σύνολο που δεν έχει κανένα στοιχείο. Συμβολίζεται με $ \varnothing $ ή $ \left\lbrace \right\rbrace  $.\\\\
+\Orismos{Βασικό σύνολο} Βασικό ονομάζεται το σύνολο το οποίο περιέχει όλα τα στοιχεία που μπορούμε να επιλέξουμε, από τα οποία φτιάχνουμε άλλα σύνολα. Συμβολίζεται με $ \varOmega $.\\\\
+\Orismos{Πράξεισ μεταξύ συνόλων}
+\vspace{-4mm}
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Ένωση}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7,samples=100},shade=\xrwma!50,labelNotAB={$ \varOmega $}]
+\fillA \fillB
+\end{venndiagram2sets}
+\end{WrapText1}
+Ένωση δύο υποσυνόλων $ A,B $ ενός βασικού συνόλου $ \varOmega $ ονομάζεται το σύνολο των στοιχείων του $ \varOmega $ τα οποία ανήκουν σε τουλάχιστον ένα από τα σύνολα $ A $ και $ B $. Συμβολίζεται με $ A\cup B $.  \[ A\cup B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ ή } x\in B\right.\right\rbrace \]
+Η ένωση των συνόλων $ A $ και $ B $ περιέχει τα κοινά και μή κοινά στοιχεία των δύο συνόλων. Τα κοινά στοιχεία αναγράφονται μια φορά.\end{minipage}
+\item \textbf{Τομή}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{7}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7},shade=\xrwma!50,labelNotAB={$ \varOmega $}]
+\fillACapB
+\end{venndiagram2sets}
+\end{WrapText1}
+Τομή δύο υποσυνόλων $ A,B $ ενός βασικού συνόλου $ \varOmega $ ονομάζεται το σύνολο των στοιχείων του $ \varOmega $ τα οποία ανήκουν και στα δύο σύνολα $ A $ και $ B $. Συμβολίζεται με $ A\cap B $. \[ A\cap B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ και } x\in B\right.\right\rbrace \]
+Η τομή των συνόλων $ A $ και $ B $ περιέχει μόνο τα κοινά στοιχεία των δύο συνόλων.\end{minipage}
+\item \textbf{Συμπλήρωμα}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{tikzpicture}[scale=.77]
+\filldraw[fill=\xrwma!50] (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[white] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){$ \varOmega $}
+\tkzText(-.45,.3){$ A $}
+\end{tikzpicture}
+\end{WrapText1}
+Συμπλήρωμα ενός συνόλου $ A $ ονομάζεται το σύνολο των στοιχείων του βασικού συνόλου $ \varOmega $ τα οποία \textbf{δεν} ανήκουν στο σύνολο $ A $. Συμβολίζεται με $ A' $. \[ A'=\left\lbrace x\in\varOmega\left| x\notin A\right.\right\rbrace \] Ονομάζεται συμπλήρωμα του $ Α $ γιατί η ένωσή του με το σύνολο αυτό μας δίνει το βασικό σύνολο $ \varOmega $.\end{minipage}
+\item \textbf{Διαφορά}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7},shade=\xrwma!50,labelNotAB={$ \varOmega $}]
+\fillANotB
+\end{venndiagram2sets}
+\end{WrapText1}
+Διαφορά ενός συνόλου $ B $ από ένα σύνολο $ A $ ονομάζεται το σύνολο των στοιχείων του βασικού συνόλου $ \varOmega $ τα οποία ανήκουν μόνο στο σύνολο $ A $, το πρώτο σύνολο της διαφοράς. Συμβολίζεται με $ A-B $. \[ A-B=\left\lbrace x\in\varOmega\left| x\in A\textrm{ και }x\notin B\right. \right\rbrace  \]
+\end{minipage}
+\end{enumerate}\mbox{}\\\\
+\thewrhmata
+\Thewrhma{Ιδιότητεσ Υποσυνολου}
+Για οποιαδήποτε σύνολα $ A,B,\varGamma $ ισχύουν οι ακόλουθες ιδιότητες που αφορούν τη σχέση του υποσυνόλου :
+\begin{rlist}
+\item Για κάθε σύνολο $ A $ ισχύει : $ A\subseteq A $.
+\item Αν $ A\subseteq B $ και $ B\subseteq \varGamma $ τότε $ A\subseteq \varGamma $.
+\item Αν $ A\subseteq B $ και $ B\subseteq A $ τότε $ A=B $.
+\end{rlist}
+\end{document}

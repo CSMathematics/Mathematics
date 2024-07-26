@@ -1,0 +1,198 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing,intersections}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\newcommand{\miniskos}[7][]{
+ \coordinate (#6) at (#2);
+  \coordinate (#7) at (#3);
+  \begin{scope}[overlay]
+  \path [name path=#6] (#6) circle [radius=#4];
+  \path [name path=#7] (#7) circle [radius=#5];
+  \path [name intersections={of=#6 and #7, by={p1,p2}}];
+  \end{scope}
+  \filldraw [#1] let
+    \p1=(#6),\p2=(#7),\p3=(p1),\p4=(p2),
+    \n1={veclen(\x3-\x1,\y3-\y1)},
+    \n2={atan2(\y3-\y1,\x3-\x1)}, \n3={atan2(\y4-\y1,\x4-\x1)},
+    \n4={veclen(\x3-\x2,\y3-\y2)},
+    \n5={atan2(\y3-\y2,\x3-\x2)}, \n6={atan2(\y4-\y2,\x4-\x2)} in
+    ($(#6)+(\n2:\n1)$) arc (\n2:\n3:\n1) arc(\n6:\n5:\n4) -- cycle;
+}
+
+
+
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Μέτρηση κύκλου}{Εμβαδόν κύκλου - Κυκλικού τομέα - Κυκλικού τμήματος}
+\orismoi
+\Orismos{Εμβαδόν κύκλου}
+Εμβαδόν ενός κύκλου $ (O,R) $ ονομάζεται ο θετικός αριθμός $ E $ ο οποίος είναι το όριο των ακολουθιών $ (E_\nu) $ των εγγεγραμμένων και $ (E_\nu') $ των περιγεγραμμένων κανονικών πολυγώνων, καθώς το πλήθος $ \nu $ των πλευρών αυξάνεται.\\\\
+\Orismos{Κυκλικός τομέας}
+\wrapr{-5mm}{5}{2.4cm}{-12mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (240:1.2);
+\coordinate (B)  at (300:1.2);
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](O){$O$}
+\draw[fill=\xrwma!30,pl,draw=\xrwma] (A)--(O)--(B) arc[start angle=300, end angle=240, radius=1.2] (A);
+\tkzMarkAngle[size=.35](A,O,B)
+\tkzDrawPoints(A,B,O)
+\node at (0,-0.5) {\footnotesize$ \mu $};
+\end{tikzpicture}}{
+Κυκλικός τομέας κέντρου $ O $ και ακτίνας $ R $ ενός κύκλου $ (O,R) $ ονομάζεται το σύνολο των σημείων που περικλείει μια επίκεντρη $ \hat{O} $ γωνία και το αντίστοιχο τόξο της $ \widearc{AB} $. Συμβολίζεται με $ O\widearc{AB} $.}\mbox{}\\\\\\
+\Orismos{Κυκλικό τμήμα}
+\wrapr{-5mm}{5}{2.4cm}{-12mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (240:1.2);
+\coordinate (B)  at (300:1.2);
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](O){$O$}
+\draw (A)--(O)--(B);
+\draw[fill=\xrwma!30,pl,draw=\xrwma] (A)--(B) arc[start angle=300, end angle=240, radius=1.2cm] (A);
+\tkzMarkAngle[size=.35](A,O,B)
+\tkzDrawPoints(A,B,O)
+\node at (0,-0.5) {\footnotesize$ \mu $};
+\end{tikzpicture}}{
+Κυκλικό τμήμα ονομάζεται το σύνολο των σημείων που περικλείονται μεταξύ ενός τόξου και της αντίστοιχης χορδής του, σε έναν κύκλο $ (O,R) $.}\mbox{}\\\\\\
+\Orismos{Μηνισκος}
+\wrapr{-5mm}{5}{2.8cm}{-5mm}{\begin{tikzpicture}
+\draw (0,0) circle (1.2);
+\draw (.55,.55) circle (.7);
+\miniskos[\xrwma!30,draw=\xrwma,line width=.3mm]{0,0}{.55,.55}{1.2}{.7}{A}{B}
+\draw (p1)--(p2);
+\tkzLabelPoint[left](A){$ K $}
+\tkzLabelPoint[left](B){$ \varLambda $}
+\tkzLabelPoint[above left](p1){$ A $}
+\tkzLabelPoint[right](p2){$ B $}
+\tkzDrawPoints(p1,p2,A,B)
+\end{tikzpicture}}{
+Μηνίσκος ονομάζεται το σύνοο των σημείων του επιπέδου που βρίσκονται μεταξύ δύο τόξων με κοινή χορδή. Τα τόξα αυτά βρίσκονται προς το ίδιο μέρος της χορδής.}\mbox{}\\\\
+\thewrhmata
+\Thewrhma{Εμβαδόν κύκλου}
+Το εμβαδόν $ E $ ενός κύκλου ακτίνας $ R $ ισούται με $ E=\pi R^2 $.\\\\
+\Thewrhma{Εμβαδόν κυκλικού τομέα}\label{th2}
+Το εμβαδόν ενός κυκλικού τομέα $ O\widearc{AB} $ κέντρου $ O $ και ακτίνας $ R $ ισούται με \[ ( O\widearc{AB} )=\pi R^2\cdot\frac{\mu}{360\degree}=\frac{1}{2}aR^2 \]
+όπου $ \mu $ είναι το μέτρο του τομέα σε μοίρες και $ a $ το μέτρο του σε ακτίνια.\\\\\\
+\Thewrhma{Εμβαδόν κυκλικού τμήματος}\label{th3}
+Το εμβαδόν ενός κυκλικού τμήματος $ \varepsilon $ που βρίσκεται μεταξύ ενός τόξου $ AB $ και της αντίστοιχης χορδής του δίνεται από τον τύπο:
+\[ \varepsilon=(O\widearc{AB})-(OAB)=\frac{\pi R^2\mu}{360\degree}-\frac{R^2\hm{\mu}}{2}=\frac{R^2}{2}(a-\hm{a}) \]
+\Thewrhma{Εμβαδόν μηνισκου}
+\wrapr{-5mm}{7}{3.1cm}{-10mm}{\begin{tikzpicture}[scale=1.59]
+\clip (-.5,-.5) rectangle (1.6,1.6);
+\draw[dashed] (0,0) circle (1.2);
+\draw[dashed] (.55,.55) circle (.7);
+\miniskos[\xrwma!30,draw=\xrwma,line width=.3mm]{0,0}{.55,.55}{1.2}{.7}{A}{B}
+\tkzMarkAngle[size=.15](p2,B,p1)
+\tkzMarkAngle[size=.19](p2,A,p1)
+\draw (p1)--(A)--(p2)--(B)--cycle;
+\draw (p1)--(p2);
+\tkzLabelPoint[left](A){$ K $}
+\tkzLabelPoint[left](B){$ \varLambda $}
+\tkzLabelPoint[above left](p1){$ A $}
+\tkzLabelPoint[right](p2){$ B $}
+\tkzDrawPoints(p1,p2,A,B)
+\node at (.23,.23){\footnotesize$ \theta $};
+\node[fill=white,inner sep=.2mm] at (.74,.74){\footnotesize$ \varphi $};
+\node at (.94,.94){\footnotesize$ \mu $};
+\node at (.57,0.01){\footnotesize$ R $};
+\node at (.75,0.33){\footnotesize$ \rho $};
+\end{tikzpicture}}{Το εμβαδόν ενός μηνίσκου $ \mu $ που ορίζεται από δύο κυκλικά τόξα κοινής χορδής $ AB $ ισούται με τη διαφορά των εμβαδών των δύο κυκλικών τμημάτων που ορίζει η χορδή στους δύο κύκλους. 
+\[ \mu=(K\widearc{AB})-(\varLambda\widearc{AB})+(K AB)-(\varLambda AB) \]
+Με τη βοήθεια των \textbf{Θεωρημάτων \ref{th2} και \ref{th3}} προκύπτουν επιπλέον τύποι για τον υπολογισμό του εμβαδού του μηνίσκου:
+\[ \mu=\frac{\pi R^2(\theta-\varphi)}{360\degree}+\frac{R^2(\hm{\theta}-\hm{\varphi})}{2}=\frac{R^2}{2}(a-\beta+\hm{a}-\hm{\beta}) \]
+όπου $ a $ και $ \beta $ είναι τα μέτρα των γωνιών $ \theta $ και $ \varphi $ αντίστοιχα, δοσμένα σε ακτίνια.}\mbox{}\\\\
+\end{document}

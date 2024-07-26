@@ -1,0 +1,195 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+\ekthetesdeiktes
+\begin{document}
+\titlos{Μαθηματικά προσανατολισμού}{Β΄ Λυκείου}{Διαγώνισμα - διανύσματα}
+\begin{thema}
+\item \mbox{}\\\vspace{-5mm}\begin{erwthma}
+\item Να αποδείξετε ότι αν δύο διανύσματα $ \vec{a},\vec{\beta} $ είναι μεταξύ τους κάθετα τότε θα ισχύει $ \lambda_{\vec{a}}\cdot\lambda_{\vec{\beta}}=-1 $. \\\monades{1}
+\item Να γράψετε τον τύπο από τον οποίο δίνεται
+\begin{rlist}
+\item το εσωτερικό γινόμενο δύο διανυσμάτων $ \vec{a},\vec{\beta} $ (2 τύποι),
+\item το μέτρο ενός διανύσματος $ \vec{a}=(x,y) $,
+\item το διάνυσμα $ \dsx{AB} $ με άκρα $ A(x_1,y_1), B(x_2,y_2) $,
+\item οι συντεταγμένες του μέσου $ M $ του διανύσματος $ \dsx{AB} $ με άκρα $ A(x_1,y_1), B(x_2,y_2) $,
+\item η συνθήκη για να είναι δύο διανύσματα $ \vec{a},\vec{\beta} $ μεταξύ τους παράλληλα (3 συνθήκες).
+\end{rlist}\monades{1,5}
+\item \swstolathos
+\begin{rlist}
+\item Τα διανύσματα $ \vec{a}=(2,5) $ και $ \vec{\beta}=(-4,-10) $ είναι παράλληλα.
+\item Ο συντελεστής διεύθυνσης του διανύσματος $ \vec{a}=(8,12) $ είναι $ \lambda=\frac{3}{4} $.
+\item Αν δύο διανύσματα $ \vec{a},\vec{\beta} $ είναι ομόρροπα τότε $ \vec{a}\cdot\vec{\beta}=|\vec{a}|\cdot|\vec{\beta}| $.
+\item Αν για δύο διανύσματα $ \dsx{AB},\dsx{B\varGamma} $ ισχύει $ \dsx{AB}=2\dsx{B\varGamma} $ τότε τα σημεία $ A,B,\varGamma $ είναι συνευθειακά.
+\item Αν $ \vec{a}\cdot\vec{\beta}=0 $ τότε τα διανύσματα $ \vec{a},\vec{\beta} $ είναι υποχρεωτικά κάθετα. 
+\end{rlist}\monades{1,5}
+\item Να επιλέξετε τη σωστή απάντηση σε καθεμία από τις παρακάτω προτάσεις.
+\begin{rlist}
+\item Αν $ \dsx{AB} $ είναι ένα μη μηδενικό διάνυσμα και $ Ο $ ένα τυχαίο σημείο τότε
+\begin{multicols}{4}
+\begin{itemize}
+\item $ \dsx{AB}=\dsx{OA}-\dsx{OB} $
+\item $ \dsx{AB}=\dsx{OA}+\dsx{OB} $
+\item $ \dsx{AB}=\dsx{OB}-\dsx{OA} $
+\item $ \dsx{AB}=\dsx{OB}+\dsx{OA} $
+\end{itemize}
+\end{multicols}
+\item Το μέσο του διανύσματος $ \dsx{AB} $ με άκρα $ A(-3,2) $, $ B(1,4) $ είναι
+\begin{multicols}{4}
+\begin{itemize}
+\item $ M(-1,3) $
+\item $ M(4,6) $
+\item $ M(2,6) $
+\item $ M(-4,2) $
+\end{itemize}
+\end{multicols}
+\item Το διάνυσμα $ \dsx{AB} $ με άκρα $ A(-2,4) $, $ B(7,-5) $ είναι
+\begin{multicols}{4}
+\begin{itemize}
+\item $ \dsx{AB}=(5,-1) $
+\item $ \dsx{AB}=(9,-9) $
+\item $ \dsx{AB}=(-9,9) $
+\item $ \dsx{AB}=(5,9) $
+\end{itemize}
+\end{multicols}
+\item Ο συντελεστής διεύθυνσης του διανύσματος $ \dsx{AB} $ με άκρα $ A(0,-5) $, $ B(3,-2) $ είναι
+\begin{multicols}{4}
+\begin{itemize}
+\item $ \lambda_{\dsx{AB}}=-1 $
+\item $ \lambda_{\dsx{AB}}=1 $
+\item $ \lambda_{\dsx{AB}}=-\frac{7}{3} $
+\item $ \lambda_{\dsx{AB}}=-\frac{3}{7} $
+\end{itemize}
+\end{multicols}
+\end{rlist}\monades{1}
+\end{erwthma}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Δίνονται τα σημεία $ A,B,\varGamma,\varDelta $ για τα οποία ισχύει η σχέση
+\[ \dsx{AB}+2\dsx{A\varDelta}=3\dsx{A\varGamma} \]
+Να αποδείξετε ότι τα σημεία $ B,\varGamma,\varDelta $ είναι συνευθειακά. \monades{1}
+\item Αν $ A(2,0), B(3,-1) $ και $ M(x-2,3x-8) $ να βρεθεί η τιμή του $ x $ για την οποία 
+\begin{rlist}
+\item $ \dsx{AB}\perp\dsx{AM} $. \monades{1}
+\item $ \dsx{AB}\parallel\dsx{AM} $. \monades{1}
+\end{rlist}
+\item Αν $ x=3 $ τότε να υπολογίσετε τα παρακάτω εσωτερικά γινόμενα
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \dsx{AB}\cdot\dsx{BM} $
+\item $ \dsx{AM}\cdot\dsx{BM} $
+\item $ \dsx{AB}\cdot\dsx{AM} $
+\end{rlist}\monades{2}
+\end{multicols}
+\end{erwthma}
+\item \mbox{}\\
+Δίνονται διανύσματα $ \vec{a},\vec{\beta} $ για τα οποία έχουμε $ |\vec{a}|=1,|\vec{\beta}|=2 $ και $ \gwndian{a}{\beta}=\frac{\pi}{3} $. Έστω τα διανύσματα $ \vec{u}=2\vec{a}+3\vec{\beta} $ και $ \vec{v}=\vec{a}-2\vec{\beta} $. Να υπολογίσετε
+\begin{erwthma}
+\item Το εσωτερικό γινόμενο $ \vec{a}\cdot\vec{\beta} $.\monades{1}
+\item Τα μέτρα $ |\vec{u}|,|\vec{v}| $ των διανυσμάτων $ \vec{u},\vec{v} $.\monades{2}
+\item Το εσωτερικό γινόμενο $ \vec{u}\cdot\vec{v} $.\monades{1}
+\item Το συνημίτονο της γωνίας $ \gwndian{u}{v} $.\monades{1}
+\end{erwthma}
+\item \mbox{}\\
+Δίνονται τα σημεία $ A(7,0),B(1,-2) $ και $ \varGamma(-3,2) $.
+\begin{erwthma}
+\item Να αποδείξετε ότι τα σημεία αυτά είναι κορυφές τριγώνου.\monades{1}
+\item Να βρείτε το μήκος της διαμέσου $ \dsx{AM} $.\monades{1}
+\item Να βρείτε το εσωτερικό γινόμενο $ \dsx{AB}\cdot\dsx{A\varGamma} $.\monades{1}
+\item Να βρείτε το συνημίτονο της γωνίας $ \hat{\varGamma} $.\monades{2}
+\end{erwthma}
+\end{thema}
+\kaliepityxia
+\end{document}

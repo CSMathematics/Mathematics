@@ -1,0 +1,213 @@
+\documentclass[a4paper,11pt,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase\textsuperscript{#1}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+%----ΣΤΥΛ ΑΣΚΗΣΗΣ ----------
+\newcounter{askhsh}[section]
+\renewcommand{\theaskhsh}{\bf\thesection.\arabic{askhsh}}   
+\newcommand{\Askhsh}[1]{\noindent\refstepcounter{askhsh}\textcolor{black}{{\large \theaskhsh}\hspace{2mm}{\textbf{#1}}}\\}{}
+%---------------------------
+
+
+\begin{document}
+\twocolumn[
+\begin{@twocolumnfalse}
+\section*{\LARGE ΟΡΙΑ - ΣΥΝΕΧΕΙΑ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΣΥΝΕΧΕΙΑ}
+\end{center}
+\end{@twocolumnfalse}]
+\paragraph{\large ΘΕΩΡΙΑ}
+\begin{enumerate}[itemsep=5mm,,leftmargin=0mm,itemindent=5mm]
+\item \textbf{Θεωρία}\\
+Να απαντήσετε στις παρακάτω ερωτήσεις.
+\begin{rlist} 
+\item Πότε μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της?
+\item Πότε μια συνάρτηση $ f $ λέγεται συνεχή σε ένα ανοιχτό διάστημα $ (a,\beta) $ του πεδίου ορισμού της?
+\item Να διατυπώσετε τον ορισμό της συνέχειας μιας συνάρτησης $ f $ σε ένα κλειστό διάστημα $ [a,\beta] $.
+\end{rlist}
+\item 
+\end{enumerate}
+\paragraph{\large ΑΣΚΗΣΕΙΣ}
+\begin{enumerate}[itemsep=5mm,leftmargin=0mm,itemindent=5mm]
+\item \textbf{Συνέχεια σε σημείο}\\
+Έστω μια συνάρτηση $ f:\mathbb{R}\rightarrow\mathbb{R} $ η οποία ορίζεται από τον τύπο
+\[ f(x)=\ccases{\dfrac{\sqrt{x^2+3x}-2}{x-1} &\textrm{, αν } x<1\\[3mm]
+\ln{xe^x}+\dfrac{1}{3}\hm{\dfrac{\pi x}{6}} &\textrm{, αν } x\geq1} \]
+Να εξεταστεί αν η συνάρτηση $ f $ είναι συνεχής στο σημείο $ x_0=1 $.
+\item \textbf{Εύρεση παραμέτρου}\\
+Δίνεται η συνάρτηση $ f:(1,+\infty)\rightarrow\mathbb{R} $ με τύπο \[ f(x)=\ccases{ax^2+(1-a)\syn{\pi x}-2 & \textrm{, αν }x<2\\
+\sqrt{ax-1}+e^{x-2} &\textrm{, αν }x\geq2}\]
+Να βρεθεί η τιμή της παραμέτρου $ a $ ώστε η συνάρτηση να είναι συνεχής στο πεδίο ορισμού της.
+\item \textbf{Εύρεση παραμέτρου}\\
+Έστω μια συνάρτηση $ f $ με πεδίο ορισμού το $ \mathbb{R} $ η οποία ορίζεται από τον τύπο
+\[ f(x)=\ccases{(1-a)x^2-\beta\ln{ex^2}  &\textrm{, }x<1\\
+3\syn{(2\pi x)}-|x-3|+1 &\textrm{, }1\leq x\leq2\\[1mm]
+\dfrac{\sqrt{2x+5}-3}{|x-2|}+ax-\beta &\textrm{, }x>2} \]
+Να βρεθούν οι τιμές των παραμέτρων $ a,\beta $ ώστε η συνάρτηση $ f $ να είναι συνεχής.
+\item \textbf{Εύρεση τύπου}\\
+Δίνεται η συνεχής συνάρτηση $ f:(0,+\infty)\rightarrow\mathbb{R} $ για την οποία ισχύει η σχέση \[ x^2f(x)=|x^2-3x|-2x+f(x) \]
+Να βρεθεί ο τύπος της συνάρτησης $ f $ για κάθε $ x\in(0,+\infty) $.
+\item \textbf{Αποδεικτική}\\
+Έστω μια συνάρτηση $ f $ με πεδίο ορισμού το διάστημα $ [0,+\infty) $ για την οποία ισχύει η σχέση
+\[ x^2-x\hm{x}+1\leq x^2f(x)+1\leq \syn^2{x}-2x\syn{x}+2 \]
+για κάθε $ x\in[0,+\infty) $. Να δειχθεί οτι η συνάρτηση είναι συνεχής στο σημείο $ x_0=0 $.
+\end{enumerate}
+\end{document}

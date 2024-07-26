@@ -1,0 +1,112 @@
+\documentclass[ektypwsh]{diag-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=3.00cm]{geometry}
+\xroma{red!80!black}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase\textsuperscript{#1}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\usepackage{mathimatika,gensymb,wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+
+
+
+
+\begin{document}
+\titlos{Γεωμετρία Β' Λυκείου}{Μετρικές Σχέσεις}
+\begin{thema}
+\item \textbf{Θεωρία}\\
+Να διατυπώσετε και να αποδείξετε το 1\tss{ο} Θεώρημα διαμέσων.\monades{5}
+\item \textbf{Γενικευμένο Πυθαγόρειο θεώρημα}\\
+Δίνεται ένα τρίγωνο $ AB\varGamma $ όπως αυτό φαίνεται στο παρακάτω σχήμα, με πλευρές $ a=7,\beta=8 $ και $ \gamma=10 $.
+\begin{center}
+\begin{tikzpicture}[scale=.4]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(10,0){C}
+\tkzDefPoint(4.25,5.56){A}
+\tkzDefPoint(4.25,0){D}
+\draw[pl] (A) -- (B) -- (C) -- cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\draw (A) -- (D);
+\node at (4.9,2.4){$\upsilon_a$};
+\end{tikzpicture}
+\end{center}
+\begin{rlist}
+\item Να αποδείξετε οτι το τρίγωνο είναι οξυγώνιο.\monades{2}
+\item Να υπολογίσετε την προβολή της πλευράς $ \beta $ στην πλευρά $ \gamma $.\monades{2}
+\item Να υπολογίσετε το ύψος που αντιστοιχεί στην πλευρά $ a $.\monades{1}
+\end{rlist}
+\item \textbf{Θεώρημα διαμέσων}\\
+Επιλέγουμε ένα τυχαίο σημείο $ M $ στο εξωτερικό μέρος ενός ορθογωνίου $ AB\varGamma\varDelta $. Να αποδείξετε ότι ισχύουν οι παρακάτω σχέσεις.\\
+\wrapr{-8mm}{8}{4.2cm}{-7mm}{\begin{tikzpicture}[scale=.8]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(4,2.5){B}
+\tkzDefPoint(0,2.5){A}
+\tkzDefPoint(2,1.25){O}
+\tkzDefPoint(3,3){M}
+\draw[pl] (A)--(B)--(C)--(D) -- cycle;
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[below](O){$O$}
+\tkzLabelPoint[above](M){$M$}
+\draw (A) -- (C);
+\draw (B) -- (D);
+\draw (M) -- (D);
+\draw (M) -- (A);
+\draw (M) -- (B);
+\draw (M) -- (C);
+\draw[plm] (M) -- (O);
+\tkzDrawPoints(A,B,C,D,O,M)
+\end{tikzpicture}}{
+\begin{rlist}
+\item $ MA^2+M\varGamma^2=MB^2+M\varDelta^2 $\monades{2}
+\item $ MA^2+M\varGamma^2+MB^2+M\varDelta^2=A\varGamma^2+4MO^2 $\monades{3}
+\end{rlist}}\mbox{}\\\\
+\item \textbf{Σύνθετο θέμα}\\
+Έστω $ A\varDelta $ η διχοτόμος της γωνίας $ \hat{A} $ ενός τριγώνου $ AB\varGamma $. Στην προέκταση της $ \varGamma B $ παίρνουμε τμήμα $ BE $ τέτοιο ώστε $ BE=A\varGamma $.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,1.5){A}
+\tkzDefPoint(-1.8,0){E}
+\tkzDefPoint(1.26,0){D}
+\tkzDefPoint(-.7,-1.04){Z}
+\draw[pl] (A) -- (B) -- (C) -- cycle;
+\draw[plm] (A) -- (D);
+\draw (A) -- (D);
+\draw (B) -- (Z);
+\draw (B) -- (E);
+\draw (A) -- (E);
+\draw (-.27,.51) circle (1.61);
+\tkzLabelPoint[above right](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[left](E){$E$}
+\tkzLabelPoint[below](Z){$Z$}
+\tkzDrawPoints(A,B,C,D,E,Z)
+\end{tikzpicture}
+\end{center}
+Η ευθεία $ AB $ τέμνει τον περιγεγραμμένο κύκλο του τριγώνου $ A\varDelta E $ στο σημείο $ Z $. Να αποδείξετε ότι ισχύει $ \varGamma\varDelta=BZ $.\monades{5}
+\end{thema}
+\end{document}
+

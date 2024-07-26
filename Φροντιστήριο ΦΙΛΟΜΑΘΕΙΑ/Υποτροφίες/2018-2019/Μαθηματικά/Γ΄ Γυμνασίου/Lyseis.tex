@@ -1,0 +1,302 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\begin{center}
+{\Large \textbf{Λύσεις διαγωνίσματος}}
+\end{center}
+\begin{thema}
+\item\mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item 
+\begin{alist}
+\item Ταυτότητα ονομάζεται μια ισότητα που περιέχει μεταβλητές και αληθεύει για κάθε τιμή των μεταβλητών.
+\item $ \varDelta=\beta^2-4a\gamma $\ \ ,\ \ $ x_{1,2}=\dfrac{-\beta\pm\sqrt{\varDelta}}{2a} $
+\item Η διάμεσος, η διχοτόμος και το ύψος.
+\item Δύο τρίγωνα είναι ίσα αν έχουν μια πλευρά ίση και τις προσκείμενες στην πλευρά γωνίες ίσες, μια προς μια.
+\end{alist}
+\item 
+\begin{alist}
+\item Σωστό
+\item Λάθος. Πρέπει τα τρίγωνα να είναι ίσα για να συμβεί αυτό.
+\item Σωστό
+\item Λάθος. Μπορεί να έχει μια λύση ή να είναι αδύνατη.
+\item Λάθος. Μόνο η διάμεσος που καταλήγει στη βάση είναι και διχοτόμος και ύψος.
+\end{alist}
+\item 
+\begin{multicols}{2}
+\begin{alist}
+\item ii. $ 4x^2-12x+9 $
+\item i. έχει δύο λύσεις
+\item iii. $ (2x+5)(2x-5) $
+\item iii. τις περιεχόμενες γωνίες ίσες
+\item i. $ \ef{x}=\frac{8}{15} $
+\end{alist}
+\end{multicols}
+\item 
+\begin{alist}
+\item γινόμενο
+\item δύο γωνίες
+\item αντικατάστασης\ \ ,\ \ αντίθετων συντελεστών
+\item ισαπέχει
+\item $ \varDelta<0 $
+\end{alist}
+\end{erwthma}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Κάνοντας τις πράξεις στο 1\tss{ο} μέλος θα καταλήξουμε στο 2\tss{ο}.
+\begin{align*}
+&\left( x+y\right)^2-\left( x-y\right)^2=\\
+&=x^2+2xy+y^2-\left(x^2-2xy+y^2 \right)=\\
+&=x^2+2xy+y^2-x^2+2xy-y^2=4xy
+\end{align*}
+\item Η παράσταση $ A $ έχει την ίδια μορφή με το πρώτο μέλος της ταυτότητας που αποδείξαμε, με $ x=20 $ και $ y=\frac{1}{80} $ άρα δίχως πράξεις γράφουμε το δεύτερο μέλος της βάζοντας όπου $ x $ και $ y $ τους αριθμούς αυτούς.
+\[ A=\left( 20+\frac{1}{80}\right)^2-\left( 20-\frac{1}{80}\right)^2=4\cdot 20\cdot \frac{1}{80} \]
+\item 
+\begin{alist}
+\item Βγάζοντας κοινό παράγοντα από όλους τους όρους της παράστασης έχουμε
+\[ A=12x^3y^4-16x^4y^2z+18x^3y^3z^2=2x^3y^2\left( 6y^2-8xz+9yz^2\right)  \]
+\item Η παράσταση θα παραγοντοποιηθεί με ομαδοποίηση άρα 
+\begin{align*}
+B&=x^3-4x^2+5x-20=\\
+&=x^2(x-4)+5(x-4)=(x-4)\left( x^2+5\right) 
+\end{align*}
+\item Η παράσταση είναι διαφορά τετραγώνων με $ a=x-2 $ και $ \beta=3 $ άρα
+\[ \varGamma=(x-2)^2-9=(x-2)^2-3^2=(x-2+3)(x-2-3)=(x+1)(x-5) \]
+\item Η παράσταση αποτελεί ανάπτυγμα ταυτότητας άρα 
+\[ \varDelta=4x^2-4x+1=(2x)^2-2\cdot 2x\cdot 1+1^2=(2x-1)^2 \]
+\end{alist}
+
+\end{erwthma}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item 
+
+\begin{alist}
+\item Για την εξίσωση $ x^2-8x+15=0 $ έχουμε $ a=1,\beta=-8 $ και $ \gamma=15 $ άρα
+\[ \varDelta=\beta^2-4a\gamma=(-8)^2-4\cdot 1\cdot 15=64-60=4>0 \]
+Άρα η εξίσωση έχει δύο λύσεις που είναι
+\[ x_{1,2}=\frac{-\beta\pm\sqrt{\varDelta}}{2a}=\frac{-(-8)\pm\sqrt{4}}{2\cdot 1}=\frac{8\pm 2}{2} \]
+άρα έχουμε 
+\[ x_1=\frac{8+2}{2}=\frac{10}{2}=5\ \ \textrm{και}\ \ x_2=\frac{8-2}{2}=\frac{6}{2}=3\]
+\item Για την εξίσωση $ (x-1)^2 +3x-5=7x-12 $ αρχικά αναπτύσσουμε την ταυτότητα, έπειτα μεταφέρουμε όλους τους όρους στο πρώτο μέλος και ύστερα από αναγωγή ομοίων όρων προκύπτει απλή εξίσωση 2\tss{ου} βαθμού. Είναι λοιπόν
+\begin{gather*}
+(x-1)^2 +3x-5=7x-12\Rightarrow\\
+x^2-2x+1+3x-5=7x-12\Rightarrow\\
+x^2-2x+1+3x-5-7x+12=0\Rightarrow\\
+x^2-6x+8=0
+\end{gather*}
+Άρα σύμφωνα με τα γνωστά
+\[ \varDelta=\beta^2-4a\gamma=(-6)^2-4\cdot 1\cdot 8=36-32=4>0 \]
+Η εξίσωση λοιπόν έχει δύο λύσεις που είναι
+\[ x_{1,2}=\frac{-\beta\pm\sqrt{\varDelta}}{2a}=\frac{-(-6)\pm\sqrt{4}}{2\cdot 1}=\frac{6\pm 2}{2} \]
+άρα έχουμε 
+\[ x_1=\frac{6+2}{2}=\frac{8}{2}=4\ \ \textrm{και}\ \ x_2=\frac{6-2}{2}=\frac{4}{2}=2\]
+\end{alist}
+
+\item Με τη μέθοδο των αντίθετων συντελεστών θα έχουμε
+\begin{center}
+\begin{tabular}{lrr}
+$ \displaystyle\sysdelim\{|\systeme{3x+2y=7,x-4y=-7}\synt{1}{(-3)}\Rightarrow $ & $ \sysdelim\{.\systeme{3x+2y=7,-3x+12y=21} $  &  \\ 
+\hhline{~-~}& $ 14y=28 $ & $ \Rightarrow y=2 $
+\end{tabular}
+\end{center}
+Αντικαθιστώντας την τιμή του $ y $ στη δεύτερη εξίσωση έχουμε
+\[ x-4\cdot 2=-7\Rightarrow x-8=-7\Rightarrow x=8-7\Rightarrow x=1 \]
+Άρα η λύση του συστήματος θα είναι $ (x,y)=(1,2) $.
+\item 
+\begin{rlist}
+\item Από τη σχέση $ \hm^2{x}+\syn^2{x}=1 $ παίρνουμε ότι
+\begin{gather*}
+\hm^2{x}+\syn^2{x}=1\Rightarrow\\
+\left( \frac{5}{13}\right)^2+\syn^2{x}=1\Rightarrow\\
+\frac{25}{169}+\syn^2{x}=1\Rightarrow\\
+\syn^2{x}=1-\frac{25}{169}\Rightarrow\\
+\syn^2{x}=\frac{144}{169}\Rightarrow\\
+\syn{x}=\pm\frac{12}{13}
+\end{gather*}
+Γνωρίζουμε όμως ότι η γωνία $ x $ είναι αμβλεία και έτσι έχει αρνητικό συνημίτονο. Επομένως θα είναι $ \syn{x}=-\frac{12}{13} $.
+\item Από τη σχέση $ \ef{x}=\frac{\hm{x}}{\syn{x}} $ έχουμε
+\[ \ef{x}=\frac{\hm{x}}{\syn{x}}=\ef{x}=\frac[2mm]{\frac{5}{13}}{-\frac{12}{13}}=-\frac{5\cdot 13}{12\cdot 13}=-\frac{5}{12} \]
+\end{rlist}
+\item Αναπτύσσοντας τις ταυτότητες θα έχουμε
+\begin{align*}
+&(\hm{x}+\syn{x})^2+(\hm{x}-\syn{x})^2=\\
+&=\hm^2{x}+2\hm{x}\syn{x}+\syn^2{x}+\hm^2{x}-2\hm{x}\syn{x}+\syn^2{x}=\\
+&=2\hm^2{x}+2\syn^2{x}=\\
+&=2\left( \hm^2{x}+\syn^2{x}\right) =2
+\end{align*}
+\end{erwthma}
+\item\mbox{}\\
+\begin{erwthma}
+\item\mbox{}\\\vspace{-11mm}
+\begin{alist}[leftmargin=5mm]
+\item\mbox{}\\ \wrapr{-9.9mm}{7}{3.4cm}{-11mm}{\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1.5,4){A}
+\tkzDefPoint(2.25,2){D}
+\tkzDefPoint(.75,2){E}
+\tkzInterLL(B,D)(C,E)\tkzGetPoint{M}
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (B)--(D);
+\draw[pl,\xrwma] (C)--(E);
+\draw[pl,\xrwma] (A)--(M);
+\tkzLabelPoint[above](A){$ A $}
+\tkzLabelPoint[left](B){$ B $}
+\tkzLabelPoint[right](C){$ \varGamma $}
+\tkzLabelPoint[right](D){$ \varDelta $}
+\tkzLabelPoint[left](E){$ E $}
+\tkzLabelPoint[below,yshift=-1mm](M){$ M $}
+\tkzDrawPoints(A,B,C,D,E,M)
+\end{tikzpicture}
+}{Συγκρίνουμε τα τρίγωνα $ AB\varDelta $ και $ A\varGamma E $. Έχουμε ότι 
+\begin{rlist}
+\item $ AB=A\varGamma\label{1} $ διότι το τρίγωνο $ AB\varGamma $ είναι ισοσκελές. 
+\item Επίσης
+\[ AB=A\varGamma\Rightarrow\frac{AB}{2}=\frac{A\varGamma}{2}\Rightarrow A\varDelta=AE\label{2} \]
+\item Τέλος η γωνία $ A $ είναι κοινή γωνία των δύο τριγώνων \label{3}.
+\end{rlist}}\mbox{}\\\\
+Από τις σχέσεις \ref{1},\ref{2} και \ref{3} παίρνουμε ότι τα τρίγωνα είναι ίσα σύμφωνα με το 1\tss{ο} κριτήριο ισότητας τριγώνων. Κατά συνέπεια θα ισχύει $ B\varDelta=\varGamma E $.
+\item Συγκρίνουμε τα τρίγωνα $ ABM $ και $ A\varGamma M $. Έχουμε ότι 
+\begin{rlist}
+\item $ AB=A\varGamma\label{1} $ διότι το τρίγωνο $ AB\varGamma $ είναι ισοσκελές. 
+\item $ AM $ κοινή πλευρά
+\item και $ BM=\varGamma M $ όπως γνωρίζουμε από την υπόθεση.
+\end{rlist}
+Άρα από τις σχέσεις \ref{1},\ref{2} και \ref{3} παίρνουμε ότι τα τρίγωνα είναι ίσα σύμφωνα με το 3\tss{ο} κριτήριο ισότητας τριγώνων. Έτσι θα είναι
+\[ B\hat{A}M=\varGamma\hat{A}M\Rightarrow AM\ \ \textrm{διχοτόμος της γωνίας }\hat{A} \]
+\end{alist}
+\wrapr{-5mm}{7}{4cm}{-5mm}{
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,2){B}
+\tkzDefPoint(3,0){C}
+\tkzDrawAltitude[draw=\xrwma](B,C)(A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.25](C,A,B)
+\tkzMarkRightAngle[size=.25](A,D,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[left](A){$ A $}
+\tkzLabelPoint[left](B){$ B $}
+\tkzLabelPoint[right](C){$ \varGamma $}
+\tkzLabelPoint[above right](D){$ \varDelta $}
+\tkzDrawPoints(A,B,C,D)
+\end{tikzpicture}
+}{
+\item 
+\begin{alist}
+\item Τα τρίγωνα $ AB\varGamma $ και $ A\varGamma\varDelta $ είναι όμοια διοτι
+\begin{rlist}
+\item $ \hat{A}=\hat{\varDelta}=90\degree $ διότι είναι ορθογώνια και
+\item η γωνία $ \hat{\varGamma} $ είναι κοινή γωνία
+\end{rlist}
+\item Αφού, όπως δείξαμε προηγουμένως, τα τρίγωνα είναι όμοια τότε οι πλευρές τους θα είναι ανάλογες δηλαδή
+\[ \frac{AB}{A\varDelta}=\frac{A\varGamma}{\varGamma\varDelta}=\frac{B\varGamma}{A\varGamma} \]
+Από τα δύο πρώτα κλάσματα έχουμε
+\begin{gather*}
+\frac{AB}{A\varDelta}=\frac{A\varGamma}{\varGamma\varDelta}\Rightarrow\frac{15}{12}=\frac{20}{\varGamma\varDelta}\Rightarrow\\
+15\varGamma\varDelta=240\Rightarrow \varGamma\varDelta=\frac{240}{15}=16
+\end{gather*}
+Ομοίως από το 1\tss{ο} και το 3\tss{ο} κλάσμα παίρνουμε
+\begin{gather*}
+\frac{AB}{A\varDelta}=\frac{B\varGamma}{A\varGamma}\Rightarrow\frac{15}{12}=\frac{B\varGamma}{20}\Rightarrow\\
+12 B\varGamma=300\Rightarrow B\varGamma=\frac{300}{12}=25
+\end{gather*}
+Άρα $ B\varDelta=B\varGamma-\varGamma\varDelta=25-16=9 $.
+\end{alist}}
+\end{erwthma}
+\end{thema}
+\end{document}

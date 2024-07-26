@@ -1,0 +1,83 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf\textcolor{black}{{\large \arabic*.}}}
+\usepackage{adjustbox}
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+	\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+	\par\nobreak\noindent\setcounter{answers}{0}
+	\seq_map_inline:Nn \l_results_a_seq
+	{
+		\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1} \hfill
+	}
+	\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+
+\begin{document}
+\section*{\textcolor{black}{{\LARGE ΜΙΓΑΔΙΚΟΙ}}}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textcolor{black}{\textbf{{\large ΕΠΑΝΑΛΗΨΗ}}}
+\end{center}
+\paragraph{\textcolor{black}{{\large ΑΣΚΗΣΕΙΣ}}}\mbox{}\\
+\begin{enumerate}[itemsep=5mm]
+\item Να λυθούν οι παρακάτω εξισώσεις
+\results{$ z^2-2\overline{z}+1=0 $,$ z^3+z^2-2=0 $,$ z^4=1 $, $ |z+i|=iz $}
+\item Να βρεθεί ο γεωμετρικός τόπος των εικόνων των μιγαδικών $ z $ για 
+τους οποίους ισχύει : 
+\[ Re\PARENS{z+\frac{1}{z}}=5Re(z) \]
+\item Να βρεθεί ο γεωμετρικός τόπος τον 
+εικόνων των μιγαδικών $ z $ για τους οποίους ισχύει : \[ |z+1-2i|=3 \]
+\item Να βρεθεί ο γεωμετρικός τόπος τον 
+εικόνων των μιγαδικών $ z $ για τους οποίους ισχύει: \[ |z-2i|=|z+1| \]
+\item Έστω Μ και Ν οι εικόνες των μιγαδικών $ z $ και $ w $, για τους οποίους 
+ισχύει \[ w=iz-\frac{i}{z} \]
+και για το Μ ισχύει $ |z| =1 $ (δηλαδή κινείται σε 
+μοναδιαίο κύκλο), να δεχθεί ότι το σημείο Ν κινείται σε ευθύγραμμο τμήμα.
+\item Δίνεται ο μιγαδικός αριθμός $ z $ με την ιδιότητα \[ |z-2-2i|=3\!\sqrt{2} \] 
+α) Να βρεθεί ο γεωμετρικός τόπος της εικόνας Μ του $ z $.\\
+β) Ποίος απ' τους παραπάνω μιγαδικούς έχει το μεγαλύτερο και ποίος το μικρότερο μέτρο?
+\item Έστω $ z, w $ μιγαδικοί αριθμοί για τους οποίους ισχύει: 
+\[ |(1-i)z-2|=2\;\textrm{ και }\;|w+2i|=|w-2+4i| \] 
+α) Να βρεθεί ο γεωμετρικός τόπος των εικόνων των μιγαδικών $ z $.\\ 
+β) Να βρεθεί ο γεωμετρικός τόπος των εικόνων των μιγαδικών $ w $.\\
+γ) Να βρεθεί η ελάχιστη τιμή του $ |z-w| $.
+\end{enumerate}
+\end{document}

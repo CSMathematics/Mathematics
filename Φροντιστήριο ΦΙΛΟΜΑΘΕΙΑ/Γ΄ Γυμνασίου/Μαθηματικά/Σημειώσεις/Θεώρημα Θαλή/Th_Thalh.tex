@@ -1,0 +1,156 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Γεωμετρία}{Θεώρημα Θαλή}
+\thewrhmata
+\Thewrhma{Θεώρημα Θαλή}
+\wrapr{-4mm}{5}{4.3cm}{-11mm}{\begin{tikzpicture}[scale=1.3]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,.5){C}
+\tkzDefPoint(3,0.5){D}
+\tkzDefPoint(0,1.5){E}
+\tkzDefPoint(3,1.5){Z}
+\tkzDefPoint(.7,1.7){H}
+\tkzDefPoint(.4,-.3){I}
+\tkzDefPoint(1.7,1.7){K}
+\tkzDefPoint(2.7,-.3){L}
+\draw[pl] (A)--(B);
+\draw[pl] (C)--(D);
+\draw[pl] (E)--(Z);
+\draw[pl,\xrwma] (H)--(I);
+\draw[pl,\xrwma] (K)--(L);
+\tkzInterLL(E,Z)(H,I)\tkzGetPoint{S}
+\tkzInterLL(C,D)(H,I)\tkzGetPoint{T}
+\tkzInterLL(A,B)(H,I)\tkzGetPoint{Y}
+\tkzInterLL(E,Z)(K,L)\tkzGetPoint{O}
+\tkzInterLL(C,D)(K,L)\tkzGetPoint{P}
+\tkzInterLL(A,B)(K,L)\tkzGetPoint{Q}
+\tkzDrawPoints(S,T,Y,O,P,Q)
+\tkzLabelPoint[above left](S){$A$}
+\tkzLabelPoint[above left](T){$B$}
+\tkzLabelPoint[above left](Y){$\varGamma$}
+\tkzLabelPoint[above right](O){$\varDelta$}
+\tkzLabelPoint[above right](P){$E$}
+\tkzLabelPoint[above right](Q){$Z$}
+\node at (3.2,1.5) {\footnotesize$\varepsilon_1$};
+\node at (3.2,0.5) {\footnotesize$\varepsilon_2$};
+\node at (3.2,0) {\footnotesize$\varepsilon_3$};
+\node at (0.6,-0.2) {\footnotesize$\varepsilon$};
+\node at (2.4,-0.2) {\footnotesize$\zeta$};
+\end{tikzpicture}}{
+Αν τρεις ή περισσότερες παράλληλες ευθείες τέμνουν δύο άλλες ευθείες, τότε τα τμήματα που ορίζονται σ' αυτές είναι ανάλογα. Τα τμήματα της πρώτης ευθείας είναι ανάλογα προς τα τμήματα της δεύτερης.
+\[ \textrm{Αν }\ \varepsilon_1\parallel\varepsilon_2\parallel\varepsilon_3\Rightarrow \dfrac{AB}{\varDelta E}=\dfrac{B\varGamma}{EZ}=\dfrac{A\varGamma}{\varDelta Z} \]}\mbox{}\\\\\\
+\Thewrhma{Ανάλογα τμήματα τριγώνου}
+\wrapr{-4mm}{5}{4.5cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.2,2){A}
+\tkzDefPoint(.48,.8){M}
+\tkzDefPoint(2.57,.8){N}
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[dashed] (0,.8)--(3.3,.8);
+\draw[plm,\xrwma] (M)--(N);
+\tkzDrawPoints(A,B,C,M,N)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left,yshift=2mm](M){$\varDelta$}
+\tkzLabelPoint[right,yshift=2mm](N){$E$}
+\node at (3.5,.8) {\footnotesize$\varepsilon$};
+\end{tikzpicture}}{
+Έστω τρίγωνο $ AB\varGamma $ και μια ευθεία $ \varepsilon $ παράλληλη προς την πλευρά $ B\varGamma $. Αν αυτή τέμνει τις άλλες δύο πλευρές $ AB,A\varGamma $ στα σημεία $ \varDelta,E $ αντίστοιχα τότε τα τμήματα $ A\varDelta,AE $ είναι ανάλογα προς τα τμήματα $ \varDelta B,E\varGamma $ αντίστοιχα.
+\[ \varDelta E\parallel B\varGamma\Rightarrow \dfrac{A\varDelta}{\varDelta B}=\dfrac{AE}{E\varGamma} \]}
+\end{document}

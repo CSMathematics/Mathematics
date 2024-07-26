@@ -1,0 +1,126 @@
+\documentclass[ektypwsh]{diag-pan-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{mtpro2}
+\xroma{cyan}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{adjustbox}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+
+
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ Γ΄ ΕΠΑΛ}{ΣΥΝΕΧΕΙΑ - ΠΑΡΑΓΩΓΟΣ}
+\begin{thema}
+\item \textbf{Θεωρία}\mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Έστω μια συνάρτηση $ f $ ορισμένη σε ένα σύνολο $ A $ και $ x_0 $ ένα σημείο του πεδίου ορισμού της. Να διατυπώσετε τον ορισμό της συνέχειας της συνάρτησης $ f $ στο σημείο $ x_0 $ καθώς και σε όλο το πεδίο ορισμού της. \monades{10}
+\item Να γράψετε τον τύπο με τον οποίο δίνεται η παράγωγος μιας συνάρτησης $ f $ σε ένα σημείο $ x_0 $ του πεδίου ορισμού της. Πότε η $ f $ λέγεται παραγωγίσιμη στο σημείο αυτό;\monades{5}
+\item \swstolathos
+\begin{rlist}
+\item Η παράγωγος μιας συνάρτησης $ f $ σε ένα σημείο $ x_0 $ του πεδίου ορισμού της είναι πάντα πραγματικός αριθμός.
+\item Η παράγωγος της συνάρτησης $ f(x)=\hm{x} $ είναι η $ f'(x)=\syn{x} $.
+\item Η συνάρτηση $ f(x)=\frac{x}{x+1} $ είναι συνεχής σε όλο το πεδίο ορισμού της.
+\item Ο κανόνας ο οποίος μας δίνει την παράγωγο του γινομένου δύο συναρτήσεων είναι $ \left( f(x)\cdot g(x)\right)'=f'(x)\cdot g'(x) $.
+\item Η παράγωγος της συνάρτησης $ f(x)=\syn{\varphi} $ είναι $ f'(x)=-\hm{\varphi} $.
+\end{rlist}\monades{10}
+\end{erwthma}
+\item \textbf{Συνέχεια}
+\begin{erwthma}
+\item Έστω η συνάρτηση $ f $ με πεδίο ορισμού το σύνολο $ \mathbb{R} $ η οποία δίνεται από τον τύπο :
+\[ f(x)=\ccases{\dfrac{\sqrt{x^2+3}-2}{x^2-x}&\ ,\  x\neq1\\
+\qquad\ \ 2&\ ,\  x=1} \]
+Να εξετάσετε αν η συνάρτηση είναι συνεχής στο $ x_0=1 $.\monades{10}
+\item Έστω η συνάρτηση $ f $ με πεδίο ορισμού το σύνολο $ \mathbb{R} $ η οποία δίνεται από τον τύπο :
+\[ f(x)=\ccases{\dfrac{x^2-3x+2}{x^2-2x}&\ ,\  x\neq2\\
+\qquad\ \ 3\lambda-2&\ ,\  x=2} \]
+Να βρεθεί η τιμή της παραμέτρου $ \lambda $ ώστε η συνάρτηση ωα είναι συνεχής στο $ x_0=2 $.\monades{15}
+\end{erwthma}
+\item \textbf{Παράγωγος}
+\begin{erwthma}
+\item Να υπολογίσετε τις παραγώγους των παρακάτω συναρτήσεων.
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ f(x)=x^2\cdot\hm{x} $
+\item $ f(x)=3x^3-5x^2+8x-\ef{\pi} $
+\item $ f(x)=\hm{x}\cdot\syn{x} $
+\item $ f(x)=x^2\cdot\hm{x}+x\cdot\syn{x} $
+\end{itemize}
+\end{multicols}\monades{10}
+\newpage
+\item Να υπολογίσετε τις παραγώγους των παρακάτω συναρτήσεων.
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ f(x)=\dfrac{x-2}{x^2} $
+\item $ f(x)=\dfrac{x^2-3x}{x^3-2x^2} $
+\item $ f(x)=\dfrac{\hm{x}}{\ef{x}} $
+\item $ f(x)=\dfrac{3x^2}{x-2}+\dfrac{x^4}{x^2-x} $
+\end{itemize}
+\end{multicols}\monades{15}
+\end{erwthma}
+\item \textbf{Σύνθετο θέμα}\\
+Δίνεται μια συνάρτηση $ f $ με πεδίο ορισμού το $ \mathbb{R} $ η οποία δίνεται από τον παρακάτω τύπο
+\[ f(x)=\ccases{\dfrac{x^2-ax+6}{x-3}&\ ,\  x\neq2\\
+\quad\ \ \beta-4&\ ,\  x=2} \]
+\begin{erwthma}
+\item Αν γνωρίζουμε οτι η γραφική παράσταση της συνάρτησης $ f $ διέρχεται από το σημείο $ A(1,-1) $ τότε να βρεθεί η τιμή της παραμέτρου $ a $.\monades{8}
+\item Για την τιμή της παραμέτρου $ a $ του προηγούμενου ερωτήματος, να βρεθεί η τιμή της παραμέτρου $ \beta $ ώστε η συνάρτηση $ f $ να είναι συνεχής στο $ x_0=2 $.\monades{9}
+\item Να υπολογίσετε την παράγωγο $ f'(x) $ της συνάρτησης $ f $ για κάθε $ x\neq2 $.\monades{9}
+\end{erwthma}
+\end{thema}
+\kaliepityxia
+\end{document}

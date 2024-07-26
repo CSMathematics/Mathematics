@@ -1,0 +1,267 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Διαγωνισμός Υποτροφίας}{2018 - 2019}
+\vspace{-5mm}
+\begin{thema}
+\item\mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Να απαντήσετε στις ακόλουθες ερωτήσεις.
+\begin{alist}
+\item Τι ονομάζεται ταυτότητα;
+\item Γράψτε το τύπο από τον οποίο δίνεται η διακρίνουσα $ \varDelta $ της εξίσωσης $ ax^2+\beta x+\gamma=0,\ a\neq0 $ καθώς και τον τύπο από τον οποίο δίνονται οι λύσεις της εξίσωσης όταν $ \varDelta>0 $.
+\item Ποια είναι τα δευτερεύοντα στοιχεία ενός τριγώνου;
+\item Να διατυπώσετε το 2\tss{ο} κριτήριο ισότητας τριγώνων.
+\end{alist}\monades{4$ \times $0,5=2}
+\item \swstolathos
+\begin{alist}
+\item Υπάρχει γωνία $ x $ με $ \hm{x}=\frac{3}{5} $ και $ \syn{x}=\frac{4}{5} $.
+\item Σε δύο τρίγωνα απέναντι από ίσες γωνίες βρίσκονται ίσες πλευρές.
+\item Δύο όμοια τρίγωνα έχουν πλευρές ανάλογες.
+\item Μια εξίσωση 2\tss{ου} βαθμού έχει πάντα δύο λύσεις.
+\item Σε κάθε ισοσκελές τρίγωνο μια διάμεσος είναι και διχοτόμος και ύψος.
+\end{alist}\monades{5$ \times $0,2=1}
+\item Να επιλέξετε τη σωστή απάντηση σε καθεμία από τις παρακάτω προτάσεις.
+\begin{alist}
+\item Το ανάπτυγμα της ταυτότητας $ (2x-3)^2 $ είναι:
+\begin{multicols}{4}
+\begin{rlist}
+\item $ 4x^2-9 $
+\item $ 4x^2-12x+9 $
+\item $ 4x^2+12x+9 $
+\item $ 4x^2+9 $
+\end{rlist}
+\end{multicols}
+\item Η εξίσωση $ 2x^2-5x+3=0 $
+\begin{multicols}{3}
+\begin{rlist}
+\item έχει δύο λύσεις.
+\item έχει μια λύση.
+\item είναι αδύνατη.
+\end{rlist}
+\end{multicols}
+\item Η παράσταση $ 4x^2-25 $ γράφεται σε παραγοντοποιημένη μορφή ως:
+\begin{multicols}{4}
+\begin{rlist}
+\item $ (4x-5)(4x+5) $
+\item $ (4x^2-5)(4x^2+5) $
+\item $ (2x+5)(2x-5) $
+\item $ (2x-5)^2 $
+\end{rlist}
+\end{multicols}
+\item Για να είναι δύο τρίγωνα ίσα πρέπει να έχουν δύο πλευρές ίσες μια προς μια και 
+\begin{multicols}{2}
+\begin{rlist}
+\item μια γωνία ίση.
+\item τις προσκείμενες γωνίες ίσες.
+\item τις περιεχόμενες γωνίες ίσες.
+\item δύο γωνίες ίσες.
+\end{rlist}
+\end{multicols}
+\item Αν για μια οξεία γωνία $ x $ ισχύει $ \hm{x}=\frac{8}{17} $ και $ \syn{x}=\frac{15}{17} $ τότε
+\begin{multicols}{4}
+\begin{rlist}
+\item $ \ef{x}=\frac{8}{15} $
+\item $ \ef{x}=\frac{15}{8} $
+\item $ \ef{x}=\frac{17}{15} $
+\item $ \ef{x}=\frac{17}{8} $
+\end{rlist}
+\end{multicols}
+\end{alist}\monades{5$ \times $0,2=1}
+\item Να συμπληρώσετε τα κενά στις παρακάτω προτάσεις.
+\begin{alist}
+\item Παραγοντοποίηση ονομάζεται η διαδικασία με την οποία μια παράσταση που είναι άθροισμα μετατρέπεται σε \ldots\ldots\ldots\ldots\ldots\ldots\ldots
+\item Δύο τρίγωνα είναι όμοια όταν έχουν \ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ ίσες μια προς μια.
+\item Οι αλγεβρικές μέθοδοι για να λυθεί ένα γραμμικό σύστημα εξισώσεων είναι η μέθοδος της \ldots\ldots\ldots\ldots\ \ldots\ldots\ldots\ldots\ldots\ και η μέθοδος των \ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots
+\item Κάθε σημείο της μεσοκαθέτου ενός ευθύγραμμου τμήματος \ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ από τα άκρα του.
+\item Μια εξίσωση δευτέρου βαθμού είναι αδύνατη όταν ισχύει \ldots\ldots\ldots\ldots\ldots\ldots
+\end{alist}
+\end{erwthma}\monades{5$ \times $0,2=1}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Να αποδείξετε ότι για οποιουσδήποτε αριθμούς $ x,y $ ισχύει η παρακάτω ταυτότητα.
+\[ \left( x+y\right)^2-\left( x-y\right)^2=4xy \]\monades{2}
+\item Να υπολογίσετε \textbf{χρησιμοποιώντας το προηγούμενο ερώτημα} την τιμή της παρακάτω παράστασης.
+\[ A=\left( 20+\frac{1}{80}\right)^2-\left( 20-\frac{1}{80}\right)^2 \]\monades{1}
+\item Να παραγοντοποιηθούν οι παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $ A=12x^3y^4-16x^4y^2z+18x^3y^3z^2 $
+\item $ B=x^3-4x^2+5x-20 $
+\item $ \varGamma=(x-2)^2-9 $
+\item $ \varDelta=4x^2-4x+1 $
+\end{alist}
+\end{multicols}\monades{4$ \times $0,5=2}
+\end{erwthma}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $ x^2-8x+15=0 $
+\item $ (x-1)^2 +3x-5=7x-12 $
+\end{alist}
+\end{multicols}\monades{0,5+1=1,5}
+\item Να λυθεί το ακόλουθο γραμμικό σύστημα: $ \systeme{3x+2y=7,x-4y=-7} $.
+\monades{1}
+\item Αν για μια \textbf{αμβλεία} γωνία ισχύει $ \hm{x}=\frac{5}{13} $ τότε να δείξετε ότι:
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \syn{x}=-\frac{12}{13} $
+\item $ \ef{x}=-\frac{5}{12} $
+\end{rlist}
+\end{multicols}
+\monades{1+0,5=1,5}
+\item Να αποδείξετε ότι
+\[ (\hm{x}+\syn{x})^2+(\hm{x}-\syn{x})^2=2 \]\monades{1}
+\end{erwthma}
+\item\mbox{}\\
+\begin{erwthma}
+\wrapr{-17mm}{7}{3.4cm}{-5mm}{\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1.5,4){A}
+\tkzDefPoint(2.25,2){D}
+\tkzDefPoint(.75,2){E}
+\tkzInterLL(B,D)(C,E)\tkzGetPoint{M}
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (B)--(D);
+\draw[pl,\xrwma] (C)--(E);
+\draw[pl,\xrwma] (A)--(M);
+\tkzLabelPoint[above](A){$ A $}
+\tkzLabelPoint[left](B){$ B $}
+\tkzLabelPoint[right](C){$ \varGamma $}
+\tkzLabelPoint[right](D){$ \varDelta $}
+\tkzLabelPoint[left](E){$ E $}
+\tkzLabelPoint[below,yshift=-1mm](M){$ M $}
+\tkzDrawPoints(A,B,C,D,E,M)
+\end{tikzpicture}
+}{
+\item Δίνεται ισοσκελές τρίγωνο $ AB\varGamma $ με $ AB=A\varGamma $. Αν $ B\varDelta $ και $ \varGamma E $ είναι διάμεσοι τότε 
+\begin{alist}[leftmargin=5mm]
+\item να δείξετε ότι $ B\varDelta=\varGamma E $.\monades{1,5}
+\item αν $ M $ είναι το σημείο τομής των διαμέσων και $ BM=\varGamma M $ να δείξετε ότι η $ AM $ διχοτομεί τη γωνία $ \hat{A} $.\monades{1}
+\end{alist}}
+\wrapr{-5mm}{7}{4cm}{-5mm}{
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,2){B}
+\tkzDefPoint(3,0){C}
+\tkzDrawAltitude[draw=\xrwma](B,C)(A)\tkzGetPoint{D}
+\tkzMarkRightAngle[size=.25](C,A,B)
+\tkzMarkRightAngle[size=.25](A,D,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[left](A){$ A $}
+\tkzLabelPoint[left](B){$ B $}
+\tkzLabelPoint[right](C){$ \varGamma $}
+\tkzLabelPoint[above right](D){$ \varDelta $}
+\tkzDrawPoints(A,B,C,D)
+\end{tikzpicture}
+}{
+\item Δίνεται ορθογώνιο τρίγωνο $ AB\varGamma $ με $ \hat{A}=90\degree $ και $ A\varDelta $ το ύψος του τριγώνου. Επίσης αν γνωρίζουμε ότι $ AB=15, A\varDelta=12 $ και $ A\varGamma=20 $ τότε
+\begin{alist}
+\item να δείξετε ότι τα τρίγωνα $ AB\varGamma $ και $ A\varGamma\varDelta $ είναι όμοια.\monades{1}
+\item να δείξετε ότι $ \varGamma\varDelta=16 $ και $ B\varDelta=9 $.\monades{1,5}
+\end{alist}}
+\end{erwthma}
+\end{thema}
+\vfill
+\begin{flushright}
+Διάρκεια $ 2 $ ώρες και $ 30 $ λεπτά.\\
+\textit{Καλή επιτυχία!}
+\end{flushright}
+\end{document}

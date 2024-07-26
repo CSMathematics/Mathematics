@@ -1,0 +1,222 @@
+\documentclass[internet]{diag-xelatex}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!80!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Μαθηματικά Α΄ Γυμνασίου}{ΔΕΚΑΔΙΚΟΙ ΑΡΙΘΜΟΙ}
+\thewria
+\begin{thema}
+\item \mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να απαντήσετε στις παρακάτω ερωτήσεις.
+\begin{rlist}
+\item Ποιά είναι τα μέρη ενός δεκαδικού αριθμού;
+\item Ποιές είναι οι βασικές μοναδες μέτρησης χρόνου;
+\item Με πόσα μέτρα ισούται ένα ναυτικό μίλι;
+\item Ποιά είναι η πιο συνηθισμένη μονάδα μέτρησης επιφάνειας για τη μέτρηση της έκτασης ενός χωραφιού;
+\item Πόσα δευτερόλεπτα περιέχει μια μέρα;\monades{2,5}
+\end{rlist}
+\item \swstolathos
+\begin{rlist}
+\item Μια απόσταση των $ 2{,}75\si{km} $ ισούται με $ 2.750\si{m} $.
+\item Ισχύει ότι $ 4\si{lt}=400\si{cm}^3 $
+\item Η χρονική διάρκεια μεταξύ $ 3:40 $μ.μ. και $ 17:25 $ είναι $ 1\si{h} $  $ 45\si{min} $.
+\item Ένα κιβώτιο βάρους $ 473{,}5\si{kg} $ είναι πιο βαρύ από ένα κιβώτιο βάρους $ 4{,}735\si{t} $.
+\item Ένα έτος ισούται με $ 525.600\si{min} $.\monades{3,5}
+\end{rlist}
+\end{erwthma}
+\item \mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να απαντήσετε στις παρακάτω ερωτήσεις.
+\begin{rlist}
+\item Ποιές είναι οι βασικές μονάδες μέτρησης όγκου;
+\item Ποιές είναι οι βασικές μονάδες μέτρησης μάζας;
+\item Πως αλλιώς συμβολίζονται οι μονάδες μέτρησης όγκου $ \si{dm}^3 $ και $ \si{cm}^3 $;
+\item Ένα στρέμμα με πόσα $ \si{m} $ και με πόσα $ \si{km} $ ισούται;
+\item Οι 3 εβδομάδες ή οι $ 500\si{h} $ έχουν μεγαλύτερη χρονική διάρκεια; Αιτιολογήστε την απάντηση.
+\end{rlist}\monades{2,5}
+\item Να επιλέξετε τη σωστή απάντηση από τις παρακάτω προτάσεις.
+\begin{rlist}
+\item Η περίμετρος ενός τριγώνου με πλευρές $ 34\si{cm} $, $ 4{,}2\si{dm} $ και $ 270\si{mm} $ ισούται με:
+\begin{multicols}{4}
+\begin{alist}
+\item $ 10{,}3\si{dm} $
+\item $ 308{,}2\si{cm} $
+\item $ 103\si{cm} $
+\item $ 103\si{dm} $
+\end{alist}
+\end{multicols}
+\item Ένας ποδοσφαιρικός αγώνας διάρκειας $ 95\si{min} $ αν ξεκίνησε τις $ 9:45 $μ.μ. τότε τελείωσε στις:
+\begin{multicols}{4}
+\begin{alist}
+\item $ 23:20 $
+\item $ 11:15 $μ.μ.
+\item $ 11:20 $π.μ.
+\item $ 12:15 $π.μ.
+\end{alist}
+\end{multicols}
+\item Η απόσταση Κέρκυρας - Ηγουμενίτσας ισούται με $ 19 $ ναυτικά μίλια. Η απόσταση αυτή είναι:
+\begin{multicols}{4}
+\begin{alist}
+\item $ 35\si{km} $
+\item $ 35{,}188\si{km} $
+\item $ 19.000\si{m} $
+\item $ 19\si{km} $
+\end{alist}
+\end{multicols}
+\item Ο όγκος μιας δεξαμενής σχήματος ορθογωνίου παραλληλεπιπέδου με διαστάσεις $ 3\si{m} $, $ 25\si{dm} $ και $ 400\si{cm} $ είναι:
+\begin{multicols}{4}
+\begin{alist}
+\item $ 30\si{m}^3 $
+\item $ 300.000\si{cm}^3 $
+\item $ 3.000\si{lt} $
+\item $ 3.000.000\si{ml} $
+\end{alist}
+\end{multicols}
+\item Ένα οικόπεδο σχήματος ορθογωνίου με επιφάνεια $ 3{,}5 $ στρεμμάτων και μήκος $ 70\si{m} $ έχει πλάτος:
+\begin{multicols}{4}
+\begin{alist}
+\item $ 500\si{m} $
+\item $ 5.000\si{dm} $
+\item $ 5\si{m} $
+\item $ 50m\si{m} $
+\end{alist}
+\end{multicols}
+\end{rlist}\monades{3,5}
+\end{erwthma}
+\end{thema}
+\askhseis
+\begin{thema}
+\item \mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να υπολογίσετε την περίμετρο και την επιφάνεια από τα παρακάτω ορθογώνια παραλληλόγραμμα.
+\begin{center}
+\begin{tikzpicture}
+\draw  (-1,1.5) rectangle (1.5,0);
+\node at (0.25,1.75) {$32cm$};
+\node at (-1.75,.75) {$2{,}4dm$};
+\end{tikzpicture}\qquad\begin{tikzpicture}
+\draw  (-1,1.5) rectangle (1.5,0);
+\node at (0.25,1.75) {$85m$};
+\node at (-1.75,.75) {$250dm$};
+\end{tikzpicture}
+\end{center}\monades{3}
+\item Να τοποθετήσετε σε αύξουσα σειρά τα παρακάτω μεγέθη:
+\begin{multicols}{5}
+\begin{rlist}
+\item $ 4\si{lt} $
+\item $ 3500\si{ml} $
+\item $ 0{,}037\si{m}^3 $
+\item $ 412.000\si{mm}^3 $
+\item $ 389\si{dm}^3 $
+\end{rlist}
+\end{multicols}\monades{4}
+\end{erwthma}
+\item \mbox{}\\
+Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις:
+\begin{enumerate}
+\item $ 2{,}5^2+3{,}2\left(5^2-12{,}5\cdot2^3 \right)+1{,}44:1{,}2^2  $\monades{3}
+\item $ 3{,}45\cdot 10^3-0{,}02\cdot10^2+42.000\cdot\dfrac{1}{10^4} $\monades{2}
+\item $ \dfrac{0{,}25\cdot 2^4+20:2^3}{10:4-1{,}25} $\monades{2}
+\end{enumerate}
+\item \mbox{}\\
+Μια δεξαμενή σχήματος ορθογωνίου παραλληλεπιπέδου έχει διαστάσεις $ 2{,}4\si{m} $, $ 80\si{cm} $ και $ 12{,}5\si{dm} $ ενώ στο κάτω μέρος της έχει μια βρύση από την οποία αδειάζει με ρυθμό $ 4\si{lt}/\si{min} $. Αν ανοίξουμε τη βρύση στις $ 2:45 $μ.μ. και η δεξαμενή είναι γεμάτη νερό να βρεθούν:
+\begin{rlist}
+\item Ο όγκος της δεξαμενής.\monades{2,5}
+\item Ο χρόνος που χρειάζεται για να αδειάσει τελείως.\monades{2,5}
+\item Τι ώρα θα έχει αδειάσει τελείως η δεξαμενή.\monades{2}
+\end{rlist}
+\end{thema}
+\end{document}
+

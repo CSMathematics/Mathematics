@@ -1,0 +1,115 @@
+\documentclass[twoside,nofonts,ektypwsh]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{cyan!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathALa
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Ισότητα - Πράξεις - Σύνθεση συναρτήσεων}{Β}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Πότε δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ D_f,D_g $ αντίστοιχα, λέγονται ίσες;\monades{5}
+\item Να δώσετε τον ορισμό της πρόσθεσης $ f+g $ και του πηλίκου $ \frac{f}{g} $ δύο συναρτήσεων $ f,g $.\monades{5}
+\item Να ορίσετε τη σύνθεση $ g\circ f $ δύο συναρτήσεων $ f,g $.\monades{5}
+\item \swstolathospan
+\begin{alist}
+\item Η συνάρτηση $ f(x)=\sqrt[3]{x^2} $ ισούται με τη συνάρτηση $ g(x)=x^{\frac{2}{3}} $.
+\item Η συνάρτηση $ f(x)=\sqrt[4]{x^3} $ ισούται με τη συνάρτηση $ g(x)=x^{\frac{3}{4}} $.
+\item Οι συναρτήσεις $ f\circ g $ και $ g\circ f $ είναι πάντα ίσες.
+\item Για κάθε $ x\in(0,+\infty) $ οι συναρτήσεις $ f(x)=2\ln{x} $ και $ g(x)=\ln{x^2} $ είναι ίσες.
+\item Η συνάρτηση $ h\circ g $ έχει πεδίο ορισμού το σύνολο $ D_{h\circ g}=\{x\in D_g\ \textrm{και}\ g(x)\in D_h\} $.
+\end{alist}\monades{10}
+\end{erwthma}
+\item\mbox{}\\
+Δίνονται οι συναρτήσεις $ f,g $ με τύπους $ f(x)=\frac{1}{x-3} $ και $ g(x)=\sqrt{x+2} $ αντίστοιχα.
+\begin{erwthma}
+\item Να ορίσετε τη συνάρτηση $ f\circ g $.\monades{9}
+\item Να ορίσετε τη συνάρτηση $ f+g $.\monades{6}
+\item Να ορίσετε τη συνάρτηση $ f\circ f $ και να εξετάσετε αν είναι ίση με τη συνάρτηση $ h(x)=\frac{3-x}{3x-10} $.\\\monades{10}
+\end{erwthma}
+\item\mbox{}\\
+Δίνονται οι συναρτήσεις $ f,g $ με τύπους $ f(x)=2\ln{\left(x-4\right)} $ και $ g(x)=\ln{\left(x^2-8x+16 \right) } $ αντίστοιχα.
+\begin{erwthma}
+\item Να εξετάσετε αν οι δύο συναρτήσεις είναι ίσες.\monades{8}
+\item Να ορίσετε τη συνάρτηση $ \frac{g}{f} $ και στη συνέχεια να σχεδιάσετε τη γραφική της παράσταση.\monades{8}
+\item Να βρεθούν υα σημεία τομής της γραφικής παράστασης της συνάρτησης $ f+g $ με τους άξονες $ x'x $ και $ y'y $.\monades{9}
+\end{erwthma}
+\item\mbox{}\\
+Δίνονται οι συναρτήσεις $ f,g $ με 
+\[ f(x)=(a^2-a)x^2-(2\beta+1)x+\beta\ \textrm{και}\ g(x)=2ax^2+(\beta^2-a+1)x-3\beta-11 \]
+των οποίων οι γραφικές παραστάσεις τέμνονται στην ευθεία $ x=-1 $.
+\begin{erwthma}
+\item Να δείξετε ότι $ a=2$ και $\beta=-3 $.\monades{10}
+\item Να εξηγήσετε γιατί δεν υπάρχει συνάρτηση $ h:\mathbb{R}\to\mathbb{R} $ ώστε να ισχύει
+\[ (h\circ f)(x)=g(x) \]\monades{15}
+\end{erwthma}
+\end{thema}
+\diarkeia{3}
+\kaliepityxia
+\end{document}

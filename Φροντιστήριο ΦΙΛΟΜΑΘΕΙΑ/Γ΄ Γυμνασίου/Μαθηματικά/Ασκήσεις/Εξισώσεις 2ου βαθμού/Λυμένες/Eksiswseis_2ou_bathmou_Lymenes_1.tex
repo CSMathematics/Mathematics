@@ -1,0 +1,242 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,methodoi]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Εξισώσεις}{Εξισώσεις 2\tssL{ου} βαθμού}
+\begin{Methodos}[Εύρεση λύσεων εξίσωσησ 2\textsuperscript{\MakeLowercase{ου}} βαθμου]
+\begin{bhma}
+\item \textbf{Σχηματισμός τριωνύμου}\\
+Αν η εξίσωση δεν έχει την ίδια μορφή με αυτή του \textbf{Ορισμού 2} τότε μεταφέρουμε όλους τους όρους στο πρώτο μέλος και με κατάλληλες πράξεις τη μετασχηματίζουμε ώστε στο 1\textsuperscript{ο} μέλος της να προκύψει τριώνυμο 2\textsuperscript{\MakeLowercase{ου}} βαθμου.
+\item \textbf{Υπολογισμός διακρίνουσας}\\
+Υπολογίζουμε τη διακρίνουσα του τριωνύμου.
+\item \textbf{Υπολογισμός λύσεων}\\
+Ανάλογα με το πρόσημο της διακρίνουσας υπολογίζουμε τις λύσεις της εξίσωσης ακολουθώντας τον κανόνα στο \textbf{Θεώρημα 1}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λυση εξίσωσησ 2\tssL{ου} βαθμού}
+Να λυθούν οι παρακάτω εξισώσεις 2\tss{ου} βαθμού.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ x^2-3x+2=0 $
+\item $ x^2+4x+4=0 $
+\item $ 2x^2-x+3=0 $
+\end{rlist}
+\end{multicols}
+\noindent
+\lysh\\
+Οι παραπάνω εξισώσεις θα λυθούν με τη βοήθεια του τύπου δηλαδή με υπολογισμό της διακρίνουσας.
+\begin{rlist}
+\item Η εξίσωση $ x^2-3x+2=0 $ είναι ήδη στην επιλύσιμη μορφή της, αφού το πρώτο μέλος της είναι τριώνυμο 2\tss{ου} βαθμού και δεύτερο μέλος της το $ 0 $. Έχουμε λοιπόν
+\[ x^2-3x+2=0 \]
+Οι συντελεστές του τριωνύμου είναι οι $ a=1\;,\;\beta=-3\;,\;\gamma=2 $ οπότε θα έχουμε
+\[ \varDelta=\beta^2-4a\gamma=(-3)^2-4\cdot1\cdot2=9-8=1>0 \]
+Αφού η διακρίνουσα του τριωνύμου είναι θετική τότε η εξίσωση θα έχει δύο λύσεις τις :
+\[ x_{1,2}=\frac{-\beta\pm\sqrt{\varDelta}}{2a}=\frac{-(-3)\pm\sqrt{1}}{2\cdot1}=\frac{3\pm1}{2}=\ccases{\frac{3+1}{2}=2\\\\\frac{3-1}{2}=1} \]
+Επομένως η εξίσωση θα έχει λύσεις τις $ x=2 $ και $ x=1 $.
+\item Για την εξίσωση $ x^2+4x+4=0 $, εργαζόμαστε με τον ίδιο τρόπο όπως και παραπάνω :
+\[ x^2+4x+4=0 \]
+Οι συντελεστές του τριωνύμου είναι $ a=1\;,\;\beta=4\;,\;\gamma=4 $ οπότε η διακρίνουσα θα είναι
+\[ \varDelta=\beta^2-4a\gamma=4^2-4\cdot1\cdot4=16-16=0 \]
+Η διακρίνουσα του τριωνύμου είναι μηδενική και αυτό σημαίνει οτι η εξίσωση θα έχει μια διπλή λύση η οποία είναι :
+\[ x=-\frac{\beta}{2a}=-\frac{4}{2\cdot1}=-2 \]
+Επομένως η λύση θα είναι η $ x=-2 $.
+\item Τέλος για την εξίσωση $ 2x^2-x+3=0 $ ακολουθώντας τα ίδια βήματα θα έχουμε
+\[ 2x^2-x+3=0 \]
+Οι συντελεστές του τριωνύμου είναι $ a=2\;,\;\beta=-1\;,\;\gamma=3 $ οπότε η διακρίνουσα θα είναι
+\[ \varDelta=\beta^2-4a\gamma=(-1)^2-4\cdot2\cdot3=1-24=-23<0 \]
+Η διακρίνουσα του τριωνύμου είναι αρνητική άρα η εξίσωση δεν έχει καμία λύση οπότε είναι αδύνατη.
+\end{rlist}\mbox{}\\
+\Paradeigma{Λύση εξίσωσησ 2\tssL{ου} βαθμού}
+Να λυθεί η παρακάτω εξίσωση \[ (x-2)^2-3x=7-5x \]
+\lysh\\
+Παρατηρούμε οτι η παραπάνω εξίσωση δεν έχει την απλή μορφή εξίσωσης 2\tss{ου} βαθμού, δεν παυεί όμως να αποτελεί μια. Θα χρειαστεί να γίνουν κατάλληλες πράξεις ώστε να τη μετασχηματίσουμε σε μια αναγνωρίσιμη μορφή, δηλαδή να σχηματιστεί τριώνυμο 2\tss{ου} βαθμού στο πρώτο μέλος. Για να το πετύχουμε θα εκτελέσουμε όλες τις πράξεις και στη συνέχεια θα μεταφέρουμε όλους τους όρους στο 1\tss{ο} μέλος για να γίνει αναγωγή ομοίων όρων.
+\begin{align*}
+(x-2)^2-3x=7-5x&\Rightarrow x^2-4x+4-3x=7-5x\Rightarrow\\&\Rightarrow x^2-4x+4-3x-7+5x=0\Rightarrow\\&\Rightarrow x^2-2x-3=0
+\end{align*}
+Αφού σχηματίσαμε τριώνυμο στο 1\tss{ο} μέλος της εξίσωσης, συνεχίζουμε την επίλυση ακολουθώντας τα βήματα του \textbf{Παραδείγματος 1} και βρίσκουμε τις λύσεις $ x=3 $ και $ x=-1 $.
+\begin{Methodos}[Εύρεση λύσεων ειδικήσ μορφήσ εξίσωσησ 2\textsuperscript{\MakeLowercase{ου}} βαθμου]
+Για την εξίσωση 2\textsuperscript{ου} βαθμού $ ax^2+\beta x+\gamma=0 $ με $ a\neq0 $ διακρίνουμε τις δύο ειδικές περιπτώσεις
+\begin{enumerate}
+\item Αν $ \gamma=0 $ τότε η εξίσωση θα είναι της μορφής $ ax^2+\beta x=0 $. Μπορεί να λυθεί είτε με τη \textbf{Μέθοδο 1} είτε ως εξής :
+\begin{bhma}
+\item \textbf{Παραγοντοποίηση}\\
+Παραγοντοποιούμε το πολυώνυμο βγάζοντας κοινό παράγοντα το $ x $ : $ x(ax+\beta)=0 $
+\item \textbf{Μηδενικό γινόμενο}\\
+Χρησιμοποιούμε την ιδιότητα $ x\cdot y=0\Rightarrow x=0\;\textrm{ή}\;y=0 $ για να σχηματίσουμε τις επιμέρους εξισώσεις : $ x=0 $ και $ ax+\beta=0 $ τις οποίες και λύνουμε.
+\end{bhma}
+\item Αν $ \beta=0 $ τότε η εξίσωση θα είναι της μορφής $ ax^2+\gamma=0 $. Η εξίσωση αυτή λύνεται
+\begin{rlist}
+\item με τη βοήθεια του τύπου \textbf{(Μέθοδος 1) }
+\item παραγοντοποιώντας το πολυώνυμο $ ax^2+\gamma $ αν αυτό αποτελεί διαφορά τετραγώνων και χρησιμοποιούμε την ιδιότητα $ x\cdot y=0\Rightarrow x=0\;\textrm{ή}\;y=0 $ για να σχηματίσουμε και να λύσουμε τις επιμέρους εξισώσεις.
+\item Χωρίζουμε τους γνωστούς από τους άγνωστους όρους και βάζουμε ρίζα και στα δύο μέλη της εξίσωσης.
+\end{rlist}
+\end{enumerate}
+\end{Methodos}
+\Paradeigma{Λύση ειδικήσ μορφήσ εξίσωσησ 2\tssL{ου} βαθμού}
+Να λυθούν οι παρακάτω εξισώσεις 2\tss{ου} βαθμού.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ x^2-4x=0 $
+\item $ x^2-9=0 $
+\end{rlist}
+\end{multicols}
+\noindent
+\lysh\\
+Οι παραπάνω εξισώσεις μπορούν να λυθούν με τον ίδιο τρόπο που λύθηκαν και οι εξισώσεις στο \textbf{Παράδειγμα 1}, δηλαδή με τη βοήθεια του τύπου. Εναλλακτικά όμως μπορούμε να εργαστούμε και ως εξής
+\begin{rlist}
+\item Στην εξίσωση $ x^2-4x=0 $ παρατηρούμε ότι δεν υπάρχει πρωτοβάθμιος όρος και αυτό σημαίνει οτι $ \beta=0 $. Παραγοντοποιήσουμε το πολυώνυμο στο 1\tss{ο} μέλος της εξίσωσης \[ x^2-4x=0\Rightarrow x(x-4)=0 \]
+Εκμεταλευόμενοι την ιδιότητα $ a\cdot\beta=0\Rightarrow a=0\;\textrm{ή}\;\beta=0 $ σχηματίζουμε και λύνουμε δύο εξισώσεις 1\tss{ου} βαθμού.
+\[ x(x-4)=0\Rightarrow x=0\;\textrm{ή}\;x-4=0\Rightarrow x=4 \]
+Άρα οι λύσεις της εξίσωσης θα είναι $ x=0 $ και $ x=4 $.
+\item Στην εξίσωση $ x^2-9=0 $ ο σταθερός όρος είναι μηδεν δηλαδή $ \gamma=0 $. Μπορεί να λυθεί με δύο επιπλέον τρόπους
+\begin{center}
+\textbf{1\tss{ος} Τρόπος : Παραγοντοποίηση}
+\end{center}
+Παραγοντοποιούμε το 1\tss{ο} μέλος το οποίο αποτελεί διαφορά τετραγώνων και έχουμε \[ x^2-9=0\Rightarrow (x-3)(x+3)=0 \]
+Χρησιμοποιούμε την ιδιότητα $ a\cdot\beta=0\Rightarrow a=0\;\textrm{ή}\;\beta=0 $.
+\[ (x-3)(x+3)=0\Rightarrow x-3=0\Rightarrow x=3\;\textrm{ή}\;x+3=0\Rightarrow x=-3 \]
+Επομένως οι λύσεις είναι $ x=3 $ και $ x=-3 $.
+\begin{center}
+\textbf{2\tss{ος} Τρόπος : Ρίζα}
+\end{center}
+Χωρίζουμε μέλη τους γνωστούς και τους άγνωστους όρους της εξίσωσης \[ x^2-9=0\Rightarrow x^2=9 \]
+Βάζουμε και τα δύο μέλη της εξίσωσης σε τετραγωνική ρίζα
+\[ x^2=9\Rightarrow \sqrt{x^2}=\sqrt{9}\Rightarrow x=\pm3 \]
+Οπότε οι λύσεις όπως και με τον προηγούμενο τρόπο θα είναι $ x=3 $ και $ x=-3 $.
+\end{rlist}\mbox{}\\
+\begin{Methodos}[Παραγοντοποίηση τριωνύμου]
+Για να παραγοντοποιηθεί ένα τριώνυμο της μορφής $ ax^2+\beta x+\gamma $ :
+\begin{bhma}
+\item \textbf{Υπολογισμός διακρίνουσας}\\
+Υπολογίζουμε τη διακρίνουσα $ \varDelta $ του τριωνύμου.
+\item \textbf{Λύση εξίσωσης}\\
+Ανάλογα το πρόσημο της παραγοντοποιούμε ακολουθώντας τον κανόνα στο \textbf{Θεώρημα 2}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Παραγοντοποίηση τριωνύμου}
+Να παραγοντοποιηθούν τα παρακάτω τριώνυμα.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ x^2-8x+7 $
+\item $ 9x^2+6x+1 $
+\item $ x^2+x+1 $
+\end{rlist}
+\end{multicols}
+\noindent
+\lysh\\
+Για κάθε τριώνυμο θα χρειαστεί να υπολογίσουμε τη διακρίνουσα και τις ρίζες του.
+\begin{rlist}
+\item Για το τριώνυμο $ x^2-8x+7 $ θα ισχύει
+\[ \varDelta=\beta^2-4a\gamma=(-8)^2-4\cdot1\cdot7=64-28=36>0 \]
+Οι ρίζες του τριωνύμου θα είναι
+\[ x_{1,2}=\frac{-\beta\pm\sqrt{\varDelta}}{2a}=\frac{-(-8)\pm\sqrt{36}}{2\cdot1}=\frac{8\pm6}{2}=\ccases{\frac{8+6}{2}=7\\\\\frac{8-6}{2}=1} \]
+Άρα το τριώνυμο θα παραγοντοποιηθεί ως εξής
+\[ x^2-8x+7=1(x-7)(x-1)=(x-7)(x-1) \]
+\item Ομοίως για το τριώνυμο $ 9x^2+6x+1 $ θα ισχύει
+\[ \varDelta=\beta^2-4a\gamma=6^2-4\cdot9\cdot1=36-36=0 \]
+Η διπλή ρίζα του τριωνύμου θα είναι
+\[ x=-\frac{\beta}{2a}=-\frac{6}{2\cdot9}=-\frac{6}{18}=-\frac{1}{3} \]
+Άρα το τριώνυμο θα παραγοντοποιηθεί ως εξής
+\[ 9x^2+6x+1=9\left( x-\left( -\frac{1}{3}\right) \right) ^2=9\left( x+\frac{1}{3}\right)^2=(3x+1)^2 \]
+\item Τέλος για το τριώνυμο $ x^2+x+1 $ θα έχουμε
+
+\[ \varDelta=\beta^2-4a\gamma=1^2-4\cdot1\cdot1=1-4=-3<0 \]
+Άρα το τριώνυμο δεν έχει καμία ρίζα οπότε δεν παραγοντοποιείται.
+\end{rlist}
+\end{document}
+

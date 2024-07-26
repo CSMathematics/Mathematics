@@ -1,0 +1,200 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,methodoi]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl,cancel,accents}
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Συστήματα}{Αλγεβρική επίλυση συστήματος}
+\begin{Methodos}[Μέθοδοσ τησ αντικατάστασησ]
+Για την επίλυση ενός συστήματος με δύο μεταβλητές έστω $ x,y $ με τη μέθοδο της αντικατάστασης ακολουθούμε τα παρακάτω βήματα.
+\begin{bhma}
+\item \textbf{Επιλογή εξίσωσης}\\
+Επιλέγουμε μια απ' τις δύο εξισώσεις ώστε να λύσουμε ως προς οποιαδήποτε μεταβλητή. Θα προκύψει μια σχέση (1) που θα μας δίνει την μεταβλητή αυτή ως συνάρτηση της άλλης. 
+\item \textbf{Αντικατάσταση}\\
+Τη μεταβλητή αυτή την αντικαθιστούμε στην άλλη εξίσωση του συστήματος οπότε προκύπτει μια εξίσωση με έναν άγνωστο. Λύνοντας την εξίσωση υπολογίζουμε τον δεύτερο άγνωστο.
+\item \textbf{Υπολογισμός 2\tss{ου} αγνώστου}\\
+Την τιμή που θα βρούμε για τη δεύτερη μεταβλητή λύνοντας την εξίσωση, την αντικατιστούμε στη σχέση (1) ώστε να βρεθεί και η πρώτη μεταβλητή του συστήματος.
+\item \textbf{Λύση συστήματος}\\
+Όταν βρεθούν οι τιμές $ x_0,y_0 $ και των δύο αγνώστων, σχηματίζουμε το διατεταγμένο ζεύγος $ (x,y)=(x_0,y_0) $ το οποίο είναι η λύση του συστήματος.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λύση συστήματοσ με αντικατάσταση}
+\textbf{Να λυθεί το παρακάτω σύστημα με τη μέθοδο της αντικατάστασης}
+{\boldmath\[ \systeme{2x+3y=5,x-4y=-3} \]}
+\lysh\\
+Παρατηρούμε οτι η 2\tss{η} εξίσωση είναι εύκολο να λυθεί ως προς $ x $ οπότε έχουμε
+\begin{equation}
+\systeme{2x+3y=5,x-4y=-3}\Rightarrow x=4y-3
+\end{equation}
+Αντικάθιστώντας το αποτέλεσμα της σχέσης (1) στην 1\tss{η} εξίσωση προκύπτει :
+\begin{equation}\begin{aligned}
+2x+3y=5\Rightarrow 2(4y-3)+3y=5&\Rightarrow 8y-6+3y=5\\&\Rightarrow 8y+3y=5+6\Rightarrow 11y=11\Rightarrow y=1\end{aligned}
+\end{equation}
+Τη λύση της εξίσωσης (2) την αντικαθιστούμε στη σχέση (1) για να υπολογίσουμε τον άγνωστο $ x $
+\[ x=4y-3=4\cdot1-3=4-3=1 \]
+Επομένως η λύση του συστήματος θα είναι η $ (x,y)=(1,1) $.
+\begin{Methodos}[Μέθοδοσ των αντίθετων συντελεστών]
+Για την επίλυση ενός συστήματος με τη μέθοδο των αντίθετων συντελεστών
+\begin{bhma}
+\item \textbf{Επιλογή μεταβλητής}\\
+Επιλέγουμε ποιά από τις δύο μεταβλητές θα απαλείψουμε χρησιμοποιώντας τη μέδοδο αυτή.
+\item \textbf{Πολλαπλασιασμός εξισώσεων}\\
+Τοποθετούμε δίπλα από κάθε εξίσωση τους συντελεστές την μεταβλητής που επιλέξαμε \textquotedblleft χιαστί\textquotedblright\;αλλάζοντας το πρόσημο του ενός από τους δύο. Πολλαπλασιάζουμε την κάθε εξίσωση με τον αριθμό που προκύπτει.
+\item \textbf{Πρόσθεση κατά μέλη}\\
+Προσθέτουμε κατά μέλη τις νέες εξισώσεις οπότε προκύπτει μια εξίσωση με έναν άγνωστο τον οποίο και υπολογίζουμε λύνοντας την.
+\item \textbf{Εύρεση 2\tss{ης} μεταβλητής}\\
+Αντικαθιστούμε το αποτέλεσμα σε οποιαδήποτε εξίσωση του αρχικού συστήματος ώστε να υπολογίσουμε και τη δεύτερη μεταβλητή.
+\item \textbf{Λύση συστήματος}\\
+Όταν βρεθούν οι τιμές $ x_0,y_0 $ και των δύο αγνώστων, σχηματίζουμε το διατεταγμένο ζεύγος $ (x,y)=(x_0,y_0) $ το οποίο είναι η λύση του συστήματος.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λύση συστήματοσ με αντίθετουσ συντελεστέσ}
+\textbf{Να λυθεί το παρακάτω σύστημα με τη μέθοδο των αντίθετων συντελεστών}
+{\boldmath\[ \systeme{4x-y=5,3x+2y=12} \]}
+\lysh\\
+Επιλέγουμε με τη μέθοδο αυτή να απαλοίψουμε τη μεταβλητή $ y $ του συστήματος. Έχουμε λοιπόν
+\[ \left. \systeme{4x-y=5,3x+2y=12}\right| \synt{2}{1}\Rightarrow\systeme{8x-2y=10,3x+2y=12} \]
+Οπότε προσθέτοντας τις εξισώσεις κατά μέλη προκύπτει
+\begin{center}
+\vspace{-5mm}
+\begin{equation}
+\begin{tabular}{rr}
+$ \displaystyle\systeme{8x-2y=10,3x+2y=12} $  &  \\ 
+\hhline{-~} $ 11x=22 $ & $ \Rightarrow x=2  $
+\end{tabular}
+\end{equation}
+\end{center}
+Την τιμή αυτή της μεταβλητής $ x $ από τη σχέση (3) την αντικαθιστούμε σε οποιαδήποτε εξίσωση και υπολογίζουμε τη δεύτερη μεταβλητή $ y $.
+\begin{equation}\begin{aligned}
+3x+2y=12\Rightarrow 3\cdot2+2y=12&\Rightarrow 6+2y=12\\&\Rightarrow 2y=12-6\Rightarrow 2y=6\Rightarrow y=3\end{aligned}
+\end{equation}
+Από τις σχέσεις (3) και (4) παίρνουμε τη λύση του συστήματος η οποία είναι $ (x,y)=(2,3) $.
+\begin{Methodos}[Επίλυση σύνθετου συστήματοσ]
+Αν μας ζητείται να λύσουμε ένα σύστημα του οποίου οι εξισώσεις δεν είναι στην απλή γραμμική μορφή όπως φαίνεται στον \textbf{Ορισμό 3}, τότε
+\begin{bhma}
+\item \textbf{Πράξεις}\\
+Εκτελούμε πράξεις και στα δύο μέλη κάθε εξίσωσης και διαχωρίζουμε τους γνωστούς από τους άγνωστους όρους, ώστε να τις φέρουμε σε γραμμική μορφή.
+\item \textbf{Λύση γραμμικού συστήματος}\\
+Λύνουμε το γραμμικό πλέον σύστημα με οποιαδήποτε μέθοδο μας συμφέρει, επιλέγοντας μια από τις \textbf{Μεθόδους 1} και \textbf{2}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Σύνθετο σύστημα}
+\textbf{Να λυθεί το παρακάτω σύστημα με οποιαδήποτε μέθοδο.}
+{\boldmath\[ \ccases{
+\;\dfrac{x+2}{3}+\dfrac{1-y}{2}=2\\
+\;\dfrac{2x-1}{5}+\dfrac{y}{3}=-\dfrac{2}{15}} \]}
+\lysh\\
+Η μορφή στην οποία βρίσκεται κάθε εξίσωση του συστήματος δεν είναι η απλή γραμμική. Αυτό σημαίνει οτι δεν μπορεί να εφαρμοστεί ακόμα κάποια από τις μεθόδους επίλυσης. Κάνοντας πράξεις θα απλοποιήσουμε τη μορφή του συστήματος.
+\begin{gather*}
+\ccases{
+\;\dfrac{x+2}{3}+\dfrac{1-y}{2}=2\\
+\;\dfrac{2x-1}{5}+\dfrac{y}{3}=-\dfrac{2}{15}}\Rightarrow\ccases{
+\;6\dfrac{x+2}{3}+6\dfrac{1-y}{2}=2\cdot 6\\[2mm]
+\;15\dfrac{2x-1}{5}+15\dfrac{y}{3}=-15\dfrac{2}{15}}\Rightarrow\\
+\ccases{
+\;2(x+2)+3(1-y)=12\\
+\;3(2x-1)+5y=-2}\Rightarrow\ccases{2x+4+3-3y=12\\6x-3+5y=-2}\Rightarrow\ccases{2x-3y=5\\6x+5y=1}
+\end{gather*}
+Το τελευταίο σύστημα έχει τη ζητούμενη μορφή οπότε μπορούμε να το λύσουμε με μια από τις μεθόδους. Με τη μέθοδο των αντίθετων συντελεστών υπολογίζουμε τις τιμές των δύο μεταβλητών οι οποίες θα είναι $ x=1 $ και $ y=-1 $ που μας δίνουν τη λύση $ (x,y)=(1,-1) $.
+\begin{Methodos}[Επίλυση προβλημάτων]
+Συχνά καλούμαστε να λύσουμε προβλήματα τα οποία μας ζητούν την εύρεση δύο άγνωστων αριθμών, οι οποίοι σχετίζονται μεταξύ τους. Τότε χρειάζεται η κατασκευή και επίλυση ενός συστήματος ώστε να βρεθούν συγχρόνως και οι δύο άγνωστοι. Για να γίνει αυτό
+\begin{bhma}
+\item \textbf{Εντοπισμός αγνώστων}\\
+Εντοπίζουμε τους ζητούμενους άγνωστους αριθμούς του προβλήματος και τους ονομάζουμε χρησιμοποιώντας δύο γράμματα ώστε να σχηματιστούν οι μεταβλητές.
+\item \textbf{Κατασκευή συστήματος}\\
+Με τη βοήθεια των δεδομένων του προβλήματος, αναγνωρίζουμε τις σχέσεις μεταξύ των δύο αγνώστων και κατασκευάζουμε τις εξισώσεις.
+\item \textbf{Επίλυση συστήματος}\\
+Με τις εξισώσεις αυτές σχηματίζουμε το γραμμικό σύστημα το οποίο και λυνουμε.
+\item \textbf{Λύση συστήματος - Εξέταση περιορισμών}\\
+Αφού βρεθεί η λύση του συστήματος, επαληθεύουμε τη λύση αυτή εξετάζοντας τυχόν περιορισμούς του προβλήματος.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Επίλυση προβλήματοσ}
+\textbf{Θέλουμε να μοιράσουμε 210 βιβλία σε 40 πακέτα των 4 και 6 βιβλίων. Πόσα μικρά πακέτα των 4 βιβλίων και πόσα μεγάλα πακέτα των 6 θα χρειαστούμε?}\\\\
+\lysh\\
+Από την εκφώνηση του προβλήματος παρατηρούμε οτι αυτό που ζητάει το πρόβλημα είναι ο αριθμός των μικρών πακέτων, δηλαδή των πακέτων με τα 4 βιβλία, και ο αριθμός των μεγάλων πακέτων, αυτών με τα 6 βιβλία. Έτσι θα πρέπει να κατασκευάσουμε 2 εξισώσεις με 2 άγνωστους αριθμούς και συνδυαζοντας τες να βρούμε μοναδική λύση γι αυτούς.
+Συμβολίζουμε τους άγνωστους αριθμούς με μεταβλητές : \begin{gather}
+x\;:\;\textrm{Το πλήθος των μικρών πακέτων με τα 4 βιβλία}\\
+y\;:\;\textrm{Το πλήθος των μεγάλων πακέτων με τα 6 βιβλία}
+\end{gather}
+Κατασκευάζουμε τις 2 εξισώσεις, χρησιμοποιώντας τα δεδομένα του προβλήματος.
+\begin{enumerate}[label=\bf\textit{\arabic*\textsuperscript{o}\;στοιχείο},leftmargin=0cm,itemindent=2cm]
+\item \mbox{}\\Όλα τα πακέτα μαζί θα πρέπει να είναι 40. Άρα η πρόταση αυτή με συμβολισμό θα γραφτεί  \begin{equation}
+x+y=40
+\end{equation} 
+\item \mbox{}\\Όλα τα βιβλία είναι 210. Αναλυτικά θα έχουμε : 
+\begin{itemize}
+\item Ένα μικρό πακέτο έχει 4 βιβλία οπότε $ x $ μικρά πακέτα θα έχουν $ 4\cdot x $ βιβλία.
+\item Ένα μεγάλο πακέτο έχει 6 βιβλία οπότε $ x $ μικρά πακέτα θα έχουν $ 6\cdot y $ βιβλία.
+\end{itemize}
+Επομένως θα ισχύει η ισότητα \begin{equation}
+4x+6y=210
+\end{equation} 
+\end{enumerate}
+Ο συνδυασμός 2 εξισώσεων με 2 άγνωστους ονομάζεται σύστημα. Συνδυάζοντας λοιπόν τις ισότητες (13) και (14) προκύπτει το σύστημα \begin{equation}
+\systeme[xy]{4x+6y=210,x+y=40}
+\end{equation}
+Λύνοντας το σύστημα (15) θα φτάσουμε στο ζητούμενο. Έχουμε λοιπόν με τη μέθοδο της αντικατάστασης
+\begin{equation} 
+\systeme[xy]{4x+6y=210,x+y=40}\Rightarrow x=40-y \end{equation}
+Με αντικατάσταση έχουμε
+\[ 4x+6y=210\Rightarrow 4(40-y)+6y=210\Rightarrow 160 -4y+6y=210\Rightarrow2y=50\Rightarrow y=25 \]
+Βρίκαμε λοιπόν οτι ο αριθμός των μεγάλων πακέτων είναι $ 25 $. Άρα από τη σχέση (16) ο αριθμός των μικρών πακέτων θα είναι
+\[ x=40-y=40-25=15 \]
+Έχουμε λοιπόν $ (x,y)=(15,25) $ άρα $ 15 $ μικρά και $ 25 $ μεγάλα πακέτα.
+
+\end{document}

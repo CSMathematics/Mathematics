@@ -1,0 +1,179 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{A΄ Λυκείου}{Γεωμετρία}{Διαγώνισμα - Τρίγωνα}
+\begin{thema}
+\item \mbox{}\\
+\vspace{-7mm}
+\begin{erwthma}
+\item Να αποδείξετε το παρακάτω θεώρημα: Κάθε σημείο της διχοτόμου μιας γωνίας ισαπέχει από τις πλευρές τις και αντίστροφα, κάθε εσωτερικό σημείο της γωνίας που ισαπέχει από τις πλευρές είναι σημείο της διχοτόμου.\monades{3}
+\item Θεωρούμε δύο κύκλους $ (K,R_1) $ και $ (\varLambda,R_2) $.
+\begin{alist}
+\item Τι ονομάζουμε διάκεντρο $ \delta $ των δύο κύκλων;\monades{1}
+\item Να αντιστοιχίσετε κάθε συνθήκη από τη στήλη Α με μια σχετική θέση κύκλων από τη στήλη Β.
+\begin{center}
+\begin{tabular}{|m{0.3\linewidth} |m{0.4\linewidth}|}
+\hline 
+\rule[-2ex]{0pt}{5ex} \textbf{Στήλη Α - Συνθήκη} & \textbf{Στήλη Β - Σχετική θέση κύκλων} \\ 
+\hline 
+\rule[-2ex]{0pt}{5ex} \vspace{-5mm}\begin{itemize}
+\item $ \delta=R_1+R_2 $
+\item $ \delta<R_1-R_2 $
+\item $ R_1-R_2<\delta<R_1+R_2 $
+\item $ \delta=R_1-R_2 $
+\item $ \delta>R_1+R_2 $
+\end{itemize} & \vspace{1mm}\begin{itemize}
+\item Τέμνονται
+\item Εφάπτονται εσωτερικά
+\item Εφάπτονται εξωτερικά
+\item Καθένας βρίσκεται εκτός του άλλου
+\item Ο ένας βρίσκεται μέσα στον άλλο
+\end{itemize} \\ 
+\hline 
+\end{tabular}
+\end{center}
+\end{alist}\monades{1}
+\end{erwthma}
+\item \mbox{}\\
+Δίνεται ισοσκελές τρίγωνο $ AB\varGamma $, τα μέσα $ M,N $ των $ AB,A\varGamma $ αντίστοιχα και οι διχοτόμοι του $ B\varDelta $ και $ \varGamma E $, οι οποίες τέμνονται στο $ I $. Να αποδείξετε ότι:
+\begin{erwthma}
+\item $ BE=\varGamma\varDelta $\monades{1}
+\item $ IE=I\varDelta $\monades{2}
+\item τα τρίγωνα $ BIM $ και $ \varGamma IN $ είναι ίσα,\monades{1}
+\item τα τρίγωνα $ IEM $ και $ I\varDelta N $ είναι ίσα.\monades{1}
+\end{erwthma}
+\item\mbox{}\\
+Δίνεται οξυγώνιο τρίγωνο $ AB\varGamma $, με $ AB<A\varGamma $, και η διχοτόμος $ A\varDelta $. Φέρουμε τη $ BE\perp A\varDelta $ και η προέκτασή της τέμνει την $ A\varGamma $ στο $ Z $.
+\begin{erwthma}
+\item Να αποδείξετε ότι $ A\varGamma-AB=\varGamma Z $.\monades{2}
+\item Αν $ EH\perp AB $ και $ E\varTheta\perp A\varGamma $, να αποδείξετε ότι $ BH=Z\varTheta $.\monades{2}
+\item Να αποδείξετε ότι το τρίγωνο $ B\varDelta Z $ είναι ισοσκελές.\monades{1}
+\end{erwthma}
+\item\mbox{}\\
+\wrapr{-5mm}{7}{3.8cm}{-11mm}{\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm,scale=.8]
+\draw [line width=0.8pt] (3.32,1.5) circle (2.cm);
+\draw [line width=0.8pt] (3.32,5.26)-- (2.338526684209486,-0.2426158872198927);
+\draw [line width=0.8pt] (3.32,5.26)-- (4.301473315790515,-0.2426158872198928);
+\draw [line width=0.8pt] (3.32,5.26)-- (1.6264043623717106,2.5638297872340434);
+\draw [line width=0.8pt] (3.32,5.26)-- (5.013595637628288,2.563829787234043);
+\draw [line width=0.8pt] (3.32,1.5)-- (1.6264043623717106,2.5638297872340434);
+\draw [line width=0.8pt] (3.32,1.5)-- (5.013595637628288,2.563829787234043);
+\draw [fill=black] (3.32,1.5) circle (1.5pt);
+\draw[color=black] (3.32,1.2) node {$O$};
+\draw [fill=black] (3.32,5.26) circle (1.5pt);
+\draw[color=black] (3.32,5.69) node {$M$};
+\draw [fill=black] (2.338526684209486,-0.2426158872198927) circle (1.5pt);
+\draw[color=black] (2.3,-0.7) node {$B$};
+\draw [fill=black] (3.001526114710125,3.4744807885589495) circle (1.5pt);
+\draw[color=black] (2.7,3.73) node {$A$};
+\draw [fill=black] (4.301473315790515,-0.2426158872198928) circle (1.5pt);
+\draw[color=black] (4.3,-0.7) node {$\varDelta$};
+\draw [fill=black] (3.638473885289876,3.4744807885589495) circle (1.5pt);
+\draw[color=black] (3.9,3.73) node {$\varGamma$};
+\draw [fill=black] (1.6264043623717106,2.5638297872340434) circle (1.5pt);
+\draw[color=black] (1.2,2.5) node {$E$};
+\draw [fill=black] (5.013595637628288,2.563829787234043) circle (1.5pt);
+\draw[color=black] (5.4,2.5) node {$Z$};
+\end{tikzpicture}}{
+Στον κύκλο κέντρου $ O $ του διπλανού σχήματος, οι χορδές $ AB $ και $ \varGamma\varDelta $ είναι ίσες και τέμνονται στο σημείο $ M $. Από το $ M $ φέρουμε τα εφαπτόμενα τμήματα $ ME $ και $ MZ $. Να αποδείξετε ότι:
+\begin{erwthma}
+\item $ MA=M\varGamma $\monades{2}
+\item $ EB=\varDelta Z $\monades{2}
+\item $ \widearc{AE}=\widearc{\varGamma Z} $\monades{1}
+\end{erwthma}}
+\end{thema}
+\end{document}

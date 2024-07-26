@@ -1,0 +1,137 @@
+\documentclass[ektypwsh]{diag-xelatex}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!80!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{ΕΠΑΝΑΛΗΠΤΙΚΟ}
+\begin{thema}
+\item Α. Να αποδείξετε ότι σε κάθε ισοσκελές τρίγωνο οι γωνίες πάνω στη βάση του είναι ίσες.\monades{3}\\\\
+Β. \swstolathos
+\begin{rlist}
+\item Σε κάθε τρίγωνο με πλευρές $ a,\beta,\gamma $ ισχύει η σχέση $ \beta-\gamma<a<\beta+\gamma $.
+\item Δύο εντός εναλλάξ γωνίες είναι μεταξύ τους ίσες.
+\item Τα εφαπτόμενα τμήματα προς ένα κύκλο που άγονται από ένα εξωτερικό σημείο του είναι ίσα.
+\item Αν δύο ορθογώνια τρίγωνα έχουν δύο γωνίες ίσες μια προς μια τότε είναι ίσα.
+\item Τα σημεία της διχοτόμου μιας γωνίας ισαπέχουν από τις πλευρές της.\monades{2}
+\end{rlist}
+\item Έστω $ AB\varGamma $ ένα ισοσκελές τρίγωνο με $ AB=A\varGamma $ και $ B\varDelta,\varGamma E $ διάμεσοι του τριγώνου. Αν $ M $ είναι το σημείο τομής των δύο διαμέσων τότε να αποδείξετε ότι
+\begin{rlist}
+\item $ B\varDelta=\varGamma E $.\monades{2}
+\item $ M\varDelta=ME $.\monades{1}
+\item το τρίγωνο $ MB\varGamma $ είναι ισοσκέλές.\monades{2}
+\end{rlist}
+\item Δίνεται ισοσκελές τρίγωνο $ AB\varGamma (AB=A\varGamma)$ και η διάμεσός του $ AM $. Φέρουμε $ \varGamma x\bot B\varGamma $ προς το ημιεπίπεδο που δεν ανήκει το $ A $ και παίρνουμε σε αυτή τμήμα $ \varGamma\varDelta=AB $. 
+\begin{rlist}
+\item Να αποδείξετε ότι η $ A\varDelta $ είναι διχοτόμος της γωνίας $ M\hat{A} \varGamma$.\monades{3}
+\item Να αποδείξετε ότι $ A\hat{\varDelta}\varGamma=45\degree-\frac{\hat{\varGamma}}{2} $.\monades{2}
+\end{rlist}
+\item Έστω δύο κύκλοι $ (K, R) $ και $ (\varLambda,\rho) $ με $ R>\rho $, που δεν τέμνονται. Φέρουμε τις κοινές εξωτερικές εφαπτόμενες τους. Να δείξετε ότι:
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint[label=left:$K$](0,0){K}
+\tkzDefPoint[label=right:$O$](4,0){O}
+\tkzDefPoint[label=left:$\varLambda$](2,0){L}
+\tkzDefPoint[label=above:$A$](75:1){A}
+\tkzDefPoint[label=above:$B$,shift={(2,0)}](75:.5){B}
+\tkzDefPoint[label=below:$\varGamma$](-75:1){C}
+\tkzDefPoint[label=below:$\varDelta$,shift={(2,0)}](-75:.5){D}
+\draw[pl](K) circle (1);
+\draw[pl](L) circle (.5);
+\draw[pl] (A)--(K)--(C);
+\draw[pl] (B)--(L)--(D);
+\tkzDrawLine[add=.4 and 1.](A,B)
+\tkzDrawLine[add=.4 and 1](C,D)
+\tkzDrawPoints(K,L,A,B,C,D,O)
+\end{tikzpicture}
+\end{center}
+\begin{rlist}
+\item τέμνονται σε σημείο της διακέντρου.\monades{2}
+\item οι μεσοκάθετοι των κοινών εξωτερικών εφαπτόμενων τμημάτων τέμνονται σε σημείο της διακέντρου.\\\monades{3}
+\end{rlist}
+\end{thema}
+\end{document}
+

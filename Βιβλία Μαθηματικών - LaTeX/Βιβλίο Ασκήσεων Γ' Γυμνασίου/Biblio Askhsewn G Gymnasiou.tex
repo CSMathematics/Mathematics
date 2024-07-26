@@ -1,0 +1,647 @@
+\documentclass[twoside,10pt]{book}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+    \fancyhead{} %
+    \renewcommand{\headrulewidth}{0pt}}
+    
+
+\newcounter{methodologia}[chapter]
+\renewcommand{\themethodologia}{\thechapter.\arabic{methodologia}}   
+\newenvironment{methodologia}[1][]{%
+    \refstepcounter{methodologia}
+    \begin{mdframed}[%
+        frametitle={{ΜΕΘΟΔΟΛΟΓΙΑ \themethodologia}\quad\ #1},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=0.5pt,
+        frametitlerule=true,
+        linecolor=black,
+            outerlinewidth=2pt,
+            roundcorner=3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=10pt
+    ]%
+}{%
+    \end{mdframed}
+}
+
+\newcounter{askhsh}[chapter]
+\renewcommand{\theaskhsh}{\bf\thechapter.\arabic{askhsh}}   
+\newcommand{\Askhsh}[1]{\refstepcounter{askhsh}\textcolor{black}{{\Large \theaskhsh}\hspace{2mm}{#1}}}{}
+
+\newcounter{paradeigma}[chapter]
+\renewcommand{\theparadeigma}{\bf\thechapter.\arabic{paradeigma}}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{black}{{\Large \theparadeigma}\hspace{2mm}{\bf#1}}}{}
+
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+  {
+   \normalfont\Huge}
+  {\gdef\chapterlabel{\thechapter\ }}{0pt}
+  {{\fontsize{30}{50}\MakeUppercase {\textbf{Κεφάλαιο} }\fontsize{50}{60}\textbf{\qquad\quad\thechapter}}\\
+{\Huge\textsc {##1}}\\{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(13,0){B}
+\tkzDrawSegment(A,B)
+\end{tikzpicture}}
+  }
+  \titlespacing*{\chapter}{0pt}{0pt}{0pt}
+}
+
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+  {0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+  {0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{doc}{\textbf{\thetypos}}}{}
+
+\newcommand{\lysh}{{\large \textbf{ΛΥΣΗ}}}
+
+\newcommand{\Lymena}{\begin{center}
+{\Large \textbf{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}}\\
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=black,] (-4cm,0) rectangle (0,.1mm);
+  \tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (4cm,.1mm);   
+  \end{tikzpicture}
+\end{center}}
+
+
+\newcommand{\Alyta}{\begin{center}
+{\Large \textbf{ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ}}\\
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.1mm);
+  \tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.1mm);   
+  \end{tikzpicture}
+\end{center}}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\Large ΜΕΡΟΣ\quad}%
+{}
+{}
+{}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\;\titlerule\;\normalsize\ Σελίδα}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2.4pc}}
+{}
+{\hfill\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+  {\normalfont\LARGE\bf}%
+  {}{0em}%
+  {{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+  \titlespacing*{\section}{0pt}{0pt}{0pt}
+
+\begin{document}
+\title{\MakeUppercase{ΣΧΟΛΙΚΟ ΤΥΠΟΛΟΓΙΟ}}
+\pagestyle{empty}
+\frontmatter
+\begin{titlepage}
+\newgeometry{left=2.5cm,top=2.5cm} %defines the geometry for the titlepage
+\pagecolor{white}
+\begin{center}
+{\large Σπύρος Φρόνιμος\\Μαθηματικός}
+\end{center}
+\noindent
+\par
+\noindent
+\mbox{}\\\\
+\begin{center}
+\textbf{\fontsize{25}{30}\selectfont{ΑΣΚΗΣΕΙΣ ΜΑΘΗΜΑΤΙΚΩΝ}}\par\mbox{}\\
+{\fontsize{25}{30}\selectfont \MakeUppercase{\textbf{Γ ΓΥΜΝΑΣΙΟΥ}}}\\
+\vspace{5mm}
+{\fontsize{15}{20}\selectfont \MakeUppercase{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ ΚΑΙ}}\\
+\vspace{1mm}
+{\fontsize{15}{20}\selectfont \MakeUppercase{ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ}}
+
+\end{center}
+\vspace{1.5cm}
+\[ f(x)= \frac{\eta\mu x}{x}\]
+\vspace{-5mm}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{./ekswfyllo.eps}
+\end{figure}
+
+\vfill
+\noindent
+\color{black}
+\begin{center}
+{\large{ΕΚΔΟΣΕΙΣ \_\_\_\_\_}\\
+\large{ΚΕΡΚΥΡΑ 2015}}
+\vskip\baselineskip
+\end{center}
+\hbox{ % Horizontal box
+\hspace*{0.2\textwidth} % Whitespace to the left of the title page
+\rule{1pt}{\textheight} % Vertical line
+\hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+\parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+
+{\textbf{ΑΣΚΗΣΕΙΣ ΜΑΘΗΜΑΤΙΚΩΝ}\\\textbf{Γυμνασίου - Λυκείου}\\\\\noindent \textbf{Σπύρος Φρόνιμος - Μαθηματικός}\\\selectlanguage{english}{e-mail : spyrosfronimos@gmail.com}\\[0.5\baselineskip]
+\selectlanguage{greek}Σελίδες : ...\\
+\selectlanguage{english}ΙΣΒΝ\selectlanguage{greek} : ...\\
+Εκδόσεις : ...\\
+\textcopyright \selectlanguage{english}{ Copyright 2015}}\\[2\baselineskip] % Title
+{Φιλολογική Επιμέλεια :\\\textbf{Μαρία Πρεντουλή}}
+{\selectlanguage{english} - e-mail : predouli@yahoo.com\selectlanguage{greek}}\\[0.5\baselineskip]
+{Επιστημονική Επιμέλεια :}\\
+{\textbf{Ιωάννα Γραμμένου - }}{\selectlanguage{english} - e-mail : predouli@yahoo.com\selectlanguage{greek}}\\{\textbf{Σπύρος Φρόνιμος}}\\[0.5\baselineskip]
+{Εξώφυλλο : \\\textbf{Δημήτρης Πρεντουλής}}\\[1\baselineskip] % Tagline or further description
+% Author name
+
+\vspace{.4\textheight} % Whitespace between the title block and the publisher
+{Πνευματικά Δικαιώματα : ...}\\[\baselineskip]}}
+\vspace*{2\baselineskip}
+\newpage
+\mbox{}\\\\\\\\\\\\
+\hspace*{0.75\textwidth}
+\textit{{\large Στους γονείς μου.}}
+\newpage
+\mbox{}
+\newpage
+\mbox{}
+{\LARGE \textbf{Πρόλογος}}\\\\\\\\
+
+Το βιβλίο περιέχει συγκεντρωμένη όλη τη θεωρία των μαθηματικών όλων των τάξεων του γυμνασίου και του λυκείου γραμμένη αναλυτικά και κατανοητά.\\\\
+Ειδικότερα ο αναγνώστης θα βρει\\
+\vspace{-.4cm}
+\begin{itemize}
+\item Ορισμούς
+\item Θεωρήματα
+\item Τυπολόγιο
+\item Μεθοδολογία
+\end{itemize}
+Σκοπό έχει να αποτελέσει ένα χρήσιμο βοήθημα για μικρούς ή μεγάλους μαθητές όπου μπορούν να έχουν όλη τη θεωρία της χρονιάς τους συγκεντρωμένη, χρήσιμη για επανάληψη και διαγωνίσματα, αλλά και να μπορούν εύκολα να καλύψουν τυχόν κενά από προηγούμενες τάξεις.\\\\\\
+Θέλω να ευχαριστήσω όλους όσους βοήθησαν.
+\newpage
+\end{titlepage}
+\restoregeometry % restores the geometry
+\nopagecolor
+
+\tableofcontents
+\mainmatter
+\part{ΑΛΓΕΒΡΑ}
+\pagestyle{fancy}
+\chapter{Πραγματικοί Αριθμοί}
+\section{Πράξεις Πραγματικών Αριθμών}\mbox{}\\
+\Lymena
+\Paradeigma{Να υπολογιστεί η τιμή των παρακάτω παραστάσεων.}
+\begin{enumerate}[label=\roman*.]
+\item $ 2\cdot 32+3(48-7\cdot 5)+2(144:9-10) $
+\item $ \dfrac{1}{2}
+\cdot\dfrac{7}{5}-\PARENS{-\dfrac{3}{4}+\dfrac{5}{12}}+\dfrac{14}{8}:\PARENS{\dfrac{2}{3}-\dfrac{5}{4}} $
+\end{enumerate}
+\lysh
+\begin{enumerate}[label=\roman*.]
+\item $ 2\cdot 32+3(48-7\cdot 5)+2(144:9-10) $\\\\
+Από τη σειρά των πράξεων γνωρίζουμε οτι προτεραιότητα έχουν οι πολλαπλασιασμοί και οι διαιρέσεις και ύστερα προσθέσεις και αφαιρέσεις.\\\\Οι πράξεις πραγματοποιούνται πρώτα μέσα στις παρενθέσεις και μετά απ' έξω με τη δεδομένη σειρά. Οπότε θα έχουμε :
+\begin{align*}
+& 2\cdot 32+3(48-7\cdot 5)+2(144:9-10)=\\& 2\cdot 32+3(48-35)+2(16-10)=\\
+& 2\cdot 32+3\cdot 13+2\cdot 6=\\& 64+39+12=115
+\end{align*}
+\item $ \dfrac{1}{2}
+\cdot\dfrac{7}{5}-\PARENS{-\dfrac{3}{4}+\dfrac{5}{12}}+\dfrac{14}{8}:\PARENS{\dfrac{2}{3}-\dfrac{5}{4}} $\\\\ Ομοίως θα έχουμε
+\begin{align*}
+&\dfrac{1}{2}
+\cdot\dfrac{7}{5}-\PARENS{-\dfrac{3}{4}+\dfrac{5}{12}}+\dfrac{14}{8}:\PARENS{\dfrac{2}{3}-\dfrac{5}{4}}=\dfrac{1}{2}
+\cdot\dfrac{7}{5}-\PARENS{-\dfrac{9}{12}+\dfrac{5}{12}}+\dfrac{14}{8}:\PARENS{\dfrac{8}{12}-\dfrac{15}{12}}=\\& \dfrac{1}{2}
+\cdot\dfrac{7}{5}-\PARENS{-\dfrac{4}{12}}+\dfrac{14}{8}:\PARENS{-\dfrac{7}{12}}=\dfrac{1}{2}
+\cdot\dfrac{7}{5}+\dfrac{4}{12}-\dfrac{14}{8}:\dfrac{7}{12}=\\& \dfrac{1}{2}
+\cdot\dfrac{7}{5}+\dfrac{4}{12}-\dfrac{14}{8}\cdot\dfrac{12}{7}=\dfrac{7}{10}+\dfrac{4}{12}-\dfrac{168}{56}\stackrel{\textrm{απλοποίηση}}{=}\dfrac{7}{10}+\dfrac{1}{3}-3=\\
+& \dfrac{21}{30}+\dfrac{10}{30}-\dfrac{90}{30}=-\dfrac{59}{30}
+\end{align*}
+\end{enumerate}
+\Paradeigma{Αν είναι γνωστό οτι $ a-2\beta=3 $ να υπολογιστεί η τιμή της παράστασης \[ A=3(a+2)-4\beta-2(2a-3\beta+5) \]}
+\lysh\\
+Για να υπολογιστεί η τιμή της παραπάνω παράστασης θα πρέπει να γνωρίζουμε την τιμή των άγνωστων αριθμών $ a, \beta $.\\Δεν μας είναι γνωστό όμως ποιά είναι η τιμή κάθε αριθμού ξεχωριστά παρά μας δίνεται η σχέση $ a-2\beta=3 $ μεταξύ των δύο αριθμών.\\\\Αυτό σημαίνει οτι για να υπολογίσουμε την παράσταση $ A $ θα πρέπει να εμφανίσουμε ύστερα από πράξεις την προηγούμενη σχέση. Έχουμε :
+\begin{align*}
+A= & 3(a+2)-4\beta-2(2a-3\beta+5)= 3a+6-4\beta-4a+6\beta-10=\\& -a+2\beta-4=-(a-2\beta)-4\stackrel{a-2\beta=3}{=}-3-4=-7
+\end{align*}
+\Paradeigma{Να αποδειχθεί η παρακάτω ισότητα \[ 2x+4(1-y)+32:4-2(3-x)+3\cdot4-2=4(x-y+4) \]}
+\vspace{-5mm}
+\begin{methodologia}[Αποδεικτικές Ασκήσεις]
+Στις αποδεικτικές ασκήσεις εργαζόμαστε με τους εξής δύο τρόπους :
+\begin{itemize}[itemsep=0mm]
+\item Επιλέγουμε το μέλος της σχέσης στο οποίο γίνονται οι πιο πολλές πράξεις και διαδοχικά καταλήγουμε στο άλλο μέλος.
+\item Κάνουμε πράξεις και στα δύο μέλη της δοθείσας σχέσης και καταλήγουμε σε μια ισοδύναμη σχέση που αληθεύει.
+\end{itemize}
+\end{methodologia}
+\vspace{7mm}
+\lysh\\
+Για τη συγκεκριμένη άσκηση θα κάνουμε πράξεις και στα δύο μέλη της παραπάνω ισότητας. Έχουμε λοιπόν : \begin{gather*}
+2x+4(1-y)+32:4-2(3-x)+3\cdot4-2=4(x-y+4)\Leftrightarrow\\
+2x+4-4y+32:4-6+2x+3\cdot4-2=4x-4y+16\Leftrightarrow\\
+2x+4-4y+8-6+2x+12-2=4x-4y+16\Leftrightarrow\\
+2x+4-4y+8-6+2x+12-2-4x+4y-16=0\Leftrightarrow\\
+0=0\quad\textrm{ όπου ισχύει }\checkmark
+\end{gather*}\mbox{}\\
+\Alyta
+\paragraph*{$ \blacksquare\quad $ ΠΡΑΞΕΙΣ ΜΕ ΠΡΑΓΜΑΤΙΚΟΥΣ ΑΡΙΘΜΟΥΣ}\mbox{}\\\\
+\Askhsh{Να υπολογιστεί η τιμή των παρακάτω παραστάσεων.}
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.]
+\item $ 2(4\cdot5+144:16)-3(100:10-3\cdot4) $
+\item $ 4(25-4\cdot6)+120:(9\cdot5-3\cdot10) $
+\item $ (4\cdot5+2\cdot12):(7\cdot8-9\cdot5) $
+\item $ (150:25+2)(81-8\cdot9)-5\cdot10 $
+\item $ 3\cdot5+7\cdot8-5\cdot4 $
+\item $ 3\cdot4\cdot5+2\cdot3\cdot4-4\cdot5\cdot6 $
+\item $ 144:16:3+120:8:5+21:3:7 $
+\item $ 3[4(120:8-7)-2(4\cdot5+3)] $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να υπολογιστεί η τιμή των παρακάτω παραστάσεων.}
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.]
+\item $ \dfrac{1}{3}+\dfrac{4}{5}-\PARENS{-\dfrac{7}{15}}+\dfrac{2}{15} $
+\item $ \dfrac{3}{2}\PARENS{2-\dfrac{4}{3}}+4:\PARENS{\dfrac{9}{5}-1} $
+\item $ \dfrac{3}{4}\PARENS{\dfrac{5}{6}-\dfrac{2}{3}}+\dfrac{20}{12}:\PARENS{\dfrac{8}{12}-\dfrac{3}{4}} $
+\item $ \PARENS{\dfrac{5}{4}+\dfrac{3}{12}}:\PARENS{\dfrac{4}{12}+\dfrac{7}{6}} $
+\item $ \PARENS{3-\dfrac{4}{5}:\dfrac{3}{15}}\PARENS{-\dfrac{5}{8}:\dfrac{3}{4}+1} $
+\item $ \dfrac{4}{9}\cdot\dfrac{3}{4}+\dfrac{12}{8}\cdot\dfrac{5}{9}-\dfrac{15}{14}\cdot\dfrac{7}{5} $
+\item $ \dfrac{3}{2}\cdot\dfrac{4}{5}:\dfrac{4}{10}+\dfrac{4}{3}:\dfrac{5}{2}\cdot\dfrac{8}{5}-2\cdot\dfrac{3}{12}\cdot\dfrac{5}{9} $
+\item $ \dfrac{2}{5}\PARENS{-\dfrac{3}{4}-\dfrac{5}{8}}-\PARENS{\dfrac{4}{5}\cdot\dfrac{15}{8}+1} $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να υπολογιστεί η τιμή των παρακάτω παραστάσεων.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item $ \dfrac{1+\dfrac{3}{2}}{4} $
+\item $ \dfrac{\dfrac{2}{5}+\dfrac{3}{4}}{2} $
+\item $ \dfrac{\dfrac{3}{5}-\dfrac{1}{3}}{1+\dfrac{1}{2}} $
+\item $ \dfrac{\dfrac{4}{5}-1+\dfrac{2}{3}}{\dfrac{4}{3}-\dfrac{1}{2}} $
+\item $ \dfrac{3\cdot\dfrac{3}{2}-\dfrac{2}{3}\cdot\dfrac{4}{3}}{\dfrac{1}{2}-2\cdot\dfrac{2}{5}} $
+\item $ \dfrac{\dfrac{7}{2}:\dfrac{3}{4}+\dfrac{2}{3}\cdot\dfrac{4}{3}}{\dfrac{2}{5}-\dfrac{1}{10}} $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να βρεθεί η τιμή της παρακάτω παράστασης.}
+\[ A=a+3(2-\beta)+2(a-4) \]
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item για $ a=2 $ και $ \beta=-1 $
+\item για $ a=-3 $ και $ \beta=4 $
+\item για $ a-b=2$
+\end{enumerate}
+\end{multicols}
+\paragraph*{$ \blacksquare\quad $ ΑΠΟΔΕΙΚΤΙΚΕΣ ΑΣΚΗΣΕΙΣ}\mbox{}\\\\
+\Askhsh{Να αποδειχθούν οι παρακάτω ισότητες.}
+\begin{enumerate}[label=\roman*.]
+\item $ 3(4\cdot7-85:5)+140:20-(90:15+4)=30 $
+\item $ -\PARENS{-\dfrac{3}{2}+\dfrac{4}{5}}+\dfrac{1}{4}\PARENS{7-\dfrac{4}{3}\cdot\dfrac{9}{4}}=\dfrac{17}{10} $
+\item $ 3(2-a)+4(\beta-1)+2(a-2\beta)=2-a $
+\end{enumerate}\mbox{}\\
+\Askhsh{}
+\section{Δυνάμεις}\mbox{}\\
+\Lymena
+\Paradeigma{Να υπολογιστούν οι παρακάτω παραστάσεις.}
+\begin{multicols}{4}
+\begin{enumerate}[label=\roman*.,itemsep=2mm]
+\item $ 3^2\cdot3^4 $
+\item $ 5^7:5^4 $
+\item $ (4\cdot x)^2 $
+\item $ \PARENS{\dfrac{3}{4}}^3 $
+\item $ \left(3^2 \right)^3 $
+\item $ 4^{-3} $
+\item $ \PARENS{\dfrac{5}{2}}^{-3} $
+\item $ 5^7\cdot5^{-7} $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\lysh\\
+Εφαρμόζοντας τις βασικές ιδιότητες των δυνάμεων έχουμε :
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ 3^2\cdot3^4=3^{2+4}=3^6=729 $
+\item $ 5^7:5^4=5^{7-4}=5^3=125 $
+\item $ (4x)^2=4^2x^2=16x^2 $
+\item $ \PARENS{\dfrac{3}{4}}^3=\dfrac{3^3}{4^3}=\dfrac{27}{64} $
+\item $ \left(3^2 \right)^3=3^{2\cdot3}=3^6=729 $
+\item $ 4^{-3}=\dfrac{1}{4^3}=\dfrac{1}{64} $
+\item $ \PARENS{\dfrac{5}{2}}^{-3}=\PARENS{\dfrac{2}{5}}^3=\dfrac{2^3}{5^3}=\dfrac{8}{125} $
+\item $ 5^7\cdot5^{-7}=5^{7+(-7)}=5^0=1 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Paradeigma{Να απλοποιηθούν οι παρακάτω παραστάσεις.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ 7^2\cdot7^3:7^4 $
+\item $ 2^5\cdot5^5 $
+\item $ 4^3\cdot2^6 $
+\item $ 243:3^2 $
+\item $ 7^4\dfrac{343}{7^2} $
+\item $ 3^{20}:9^7 $
+\item $ \dfrac{2^8\cdot5^4}{4^4\cdot25^2} $
+\item $ (-2)^{10}\cdot2^4 $
+\item $ \PARENS{\dfrac{3}{4}}^8\cdot\PARENS{\dfrac{4}{3}}^8 $
+\item $ \dfrac{21^5}{7^5} $
+\item $ \left(3^2\right)^{-3}\cdot9^3 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\lysh
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item Στην περίπτωση αυτή παρατηρούμε οτι έχουμε γινόμενο και πηλίκο δυνάμεων που έχουν κοινή βάση.\\\\Οπότε σύμφωνα με τις αντίστοιχες ιδιότητες θα έχουμε : \[ 7^2\cdot7^3:7^4=\frac{7^2\cdot7^3}{7^4}=\frac{7^{2+3}}{7^4}=\frac{7^5}{7^4}=7^{5-4}=7^1=7 \]
+Κάτι που βοηθάει στο να κατανοούμε και να παρατηρούμε μια παράσταση καλύτερα είναι να μετατρέπουμε το συμβολισμό της διαίρεσης από << : >> σε μορφή κλάσματος.
+\item Οι δυνάμεις της παράστασης $ 2^5\cdot5^5 $ παρατηρούμε οτι έχουν κοινό εκθέτη οπότε : \[ 2^5\cdot5^5=\left( 2\cdot5\right)^5=10^5=100.000 \]
+\item Οι δυνάμεις της συγκεκριμένης παράστασης δεν παρουσιάζουν κάτι κοινό επομένως, προκειμένου να την απλοποιήσουμε θα εξετάσουμε μήπως υπάρχει κάποια σχέση ανάμεσα σε βάσεις ή εκθέτες.\\\\
+Έχουμε λοιπόν : \[ 4^3\cdot2^6=\left(2^2 \right)^3\cdot4^3=2^6\cdot2^6=2^{6+6}=2^{12} \]
+\item Για να απλοποιηθεί η παράσταση $ 243:3^2 $ με τη χρήση των ιδιοτήτων των δυνάμεων θα πρέπει να γράψουμε το $ 243 $ ως δύναμη του 3. \[ 243:3^2=3^5:3^2=3^{5-2}=3^3=27 \]
+\item Ομοίως θα έχουμε \[ 7^4\frac{343}{7^2}=7^4\dfrac{7^3}{7^2}=7^4\cdot7=7^{4+1}=7^5 \]
+\item Οι βάση της 2\textsuperscript{ης} δύναμης είναι πολλαπλάσια της 1\textsuperscript{ης} οπότε : \[ 3^{20}:9^7=3^{20}:\left( 3^2\right)^7=3^{20}:3^{14}=3^{20-14}=3^6 \]
+\item $ \dfrac{2^8\cdot5^4}{4^4\cdot25^2}=\dfrac{2^8\cdot5^4}{\left(2^2\right)^4\cdot\left(5^2\right)^2}=\dfrac{2^8\cdot5^4}{2^8\cdot5^4}=1 $
+\item Για την παράσταση $ (-2)^{10}\cdot2^4 $ θα εκμεταλευτούμε το γεγονός ότι ένας αρνητικός αριθμός όταν υψωθεί σε \textbf{άρτιο} εκθέτη, δίνει θετικό αποτέλεσμα. ¶ρα : \[ (-2)^{10}\cdot2^4\overset{\left(-2\right)^{10}=2^{10}}{=}2^{10}\cdot2^4=2^{10+4}=2^{14}\]
+\item $ \PARENS{\dfrac{3}{4}}^8\cdot\PARENS{\dfrac{4}{3}}^8=\PARENS{\dfrac{3}{4}\cdot\dfrac{4}{3}}^8=1^8=1 $
+\item $ \dfrac{21^5}{7^5}=\PARENS{\dfrac{21}{7}}^5=3^5 $
+\item $ \left(3^2\right)^{-3}\cdot9^3=3^{-6}\cdot\left(3^2\right)^3=3^{-6}\cdot3^6=3^{-6+6}=3^1=3 $
+\end{enumerate}
+\begin{methodologia}[Απλοποίηση Παραστάσεων με Δυνάμεις]
+Σε παραστάσεις όπως οι προηγούμενες, όπου μας ζητείται να απλοποιηθούν, εξετάζουμε αν υπάρχουν κοινές βάσεις ή κοινοί εκθέτες και εφαρμόζουμε την κατάλληλη ιδιότητα.\\
+Εαν δεν παρουσιάζονται ούτε κοινοί εκθέτες ούτε κοινές βάσεις, τότε :
+\begin{itemize}[itemsep=0mm]
+\item Εξετάζουμε αν είτε οι βάσεις είτε οι εκθέτες είναι πολλαπλάσια του ίδιου αριθμού και εμφανίζουμε το κοινό αυτό πολλαπλάσιο.
+\item Μετατρέπουμε όσους αριθμούς μπορούν να μετατραπούν, σε δύναμη ώστε να προκύψει βάση ή εκθέτης κοινός με τις υπόλοιπες δυνάμεις.
+\end{itemize}
+\end{methodologia}
+\Paradeigma{Να υπολογιστούν οι παρακάτω αριθμητικές παραστάσεις.}
+\begin{enumerate}[label=\roman*.]
+\item $ 3^2(144:4^2-4^3:16)-(7^2+56:2^3-10) $
+\item $ \PARENS{\dfrac{3}{2}}^3-\dfrac{2^3}{4^2}-\PARENS{-\dfrac{2}{5}}^{-3} $
+\end{enumerate}\mbox{}\\
+\lysh\\
+Ακολουθώντας τη σειρά των πράξεων εκτελούμε τις πράξεις πρώτα μέσα στις παρενθέσεις και ύστεrα απ' έξω.
+\begin{enumerate}[label=\roman*.]
+\item $ 3^2(144:4^2-4^3:16)-(7^2+56:2^3-10)=\\3^2(144:16-64:16)-(49+56:8-10)=\\3^2(9-4)-(49+7-10)=3^2\cdot5-46=\\9\cdot5-46=45-46=-1 $
+\item $ \PARENS{\dfrac{3}{2}}^3 $
+\end{enumerate}\mbox{}\\
+\Paradeigma{Να απλοποιηθούν οι παρακάτω παραστάσεις.}
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.]
+\item $ \left(x^2\cdot y^3\right)^3\cdot x^4:y^2 $
+\item $ \left[x^3\cdot y^4\cdot(x^2y)^2\right]^3:\left(xy^3\right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\lysh\\
+Στις παραπάνω παραστάσεις μπορούν να εφαρμοστούν πολλές από τις ιδιότητες των δυνάμεων.\\
+Η σειρά με την οποία θα τις εφαρμόσουμε μας δίνει το αποτέλεσμα σε λίγο ή περισσότερο χρόνο κάθε φορά.
+\begin{enumerate}[label=\roman*.]
+\item $ \left(x^2\cdot y^3\right)^3\cdot x^4:y^2=\left(x^2\right)^3\cdot\left(y^3\right)^3\cdot x^4:y^2=x^6\cdot y^9\cdot x^4:y^2=x^{6+4}\cdot y^{9-2}=x^{10}\cdot y^7 $
+\item Ομοίως θα έχουμε :
+\begin{align*}
+&\left[x^3\cdot y^4\cdot(x^2y)^2\right]^3:\left(xy^3\right)^2=\dfrac{\left[x^3\cdot y^4\cdot(x^2y)^2\right]^3}{\left(xy^3\right)^2}=\dfrac{\left(x^3\right)^3\cdot \left(y^4\right)^3\cdot\left(x^2y\right)^{2\cdot3}}{x^2\left(y^3\right)^2}=\\
+&\dfrac{x^9\cdot y^{12}\cdot x^{12}\cdot y^6}{x^2\cdot y^6}=\dfrac{x^{21}\cdot y^{18}}{x^2\cdot y^6}=x^{21-2}\cdot y^{18-6}=x^{19}\cdot y^{12}
+\end{align*}
+\end{enumerate}
+
+\section{Τετραγωνική Ρίζα}
+\chapter{Μονώνυμα}
+\chapter{Πολυώνυμα}
+\section{Βασικές Έννοιες}
+\section{Πράξεις Πολυωνύμων}
+\chapter{Ταυτότητες}
+\section{¶θροισμα και Διαφορά στο Τετράγωνο}\mbox{}\\
+\Alyta
+\Askhsh{Να βρεθούν τα αναπτύγματα.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item $ \left(x+2 \right)^2 $
+\item $ \left(2x+1 \right)^2 $
+\item $ \left(3x+2y \right)^2 $
+\item $ \left(4x+5y \right)^2 $
+\item $ \left(x^2+3 \right)^2 $
+\item $ \left(x^3+3x \right)^2 $
+\item $ \left(\dfrac{x}{2}+2 \right)^2 $
+\item $ \left(\dfrac{1}{x}+\dfrac{x}{2} \right)^2 $
+\item $ \left(\!\sqrt{x}+3 \right)^2 $
+\item $ \left(y+\!\sqrt{3}\right)^2 $
+\item $ \left(\!\sqrt{x}+2\!\sqrt{y} \right)^2 $
+\item $ \left(x^2+x^4 \right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να βρεθούν τα αναπτύγματα.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ \left(x-1 \right)^2 $
+\item $ \left(3x-2 \right)^2 $
+\item $ \left(2x-y \right)^2 $
+\item $ \left(3x-7y \right)^2 $
+\item $ \left(x^2-x \right)^2 $
+\item $ \left(2x^2-x^3 \right)^2 $
+\item $ \left(\dfrac{x}{2}-1 \right)^2 $
+\item $ \left(\dfrac{2}{x}-\dfrac{x}{2} \right)^2 $
+\item $ \left(\!\sqrt{x}-2 \right)^2 $
+\item $ \left(z-\!\sqrt{2}\right)^2 $
+\item $ \left(\!\sqrt{x}-\!\sqrt{y} \right)^2 $
+\item $ \left(z^3-z^4 \right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\\\\\
+\Askhsh{Να βρεθούν τα αναπτύγματα.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ \left(xy+2 \right)^2 $
+\item $ \left(x+xy \right)^2 $
+\item $ \left(2x+x^2y \right)^2 $
+\item $ \left(xy^2+3y \right)^2 $
+\item $ \left(xy+yz \right)^2 $
+\item $ \left(x^2y+xy^2 \right)^2 $
+\item $ \left(x\!\sqrt{y}+y\right)^2 $
+\item $ \left(\!\sqrt{xy}+1 \right)^2 $
+\item $ \left(\!\sqrt{x}+x\sqrt{y} \right)^2 $
+\item $ \left(\dfrac{2}{\!\sqrt{x}}+\sqrt{x}\right)^2 $
+\item $ \left(\dfrac{1}{2x}+2\sqrt{x}\right)^2 $
+\item $ \left(\dfrac{2x}{\!\sqrt{x}}+\dfrac{\!\sqrt{x}}{x} \right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να βρεθούν τα αναπτύγματα.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ \left(x-2xy \right)^2 $
+\item $ \left(2x-x^2y \right)^2 $
+\item $ \left(x^2-3xy \right)^2 $
+\item $ \left(xy^2-y \right)^2 $
+\item $ \left(xy-yz \right)^2 $
+\item $ \left(x^2y-xy^2 \right)^2 $
+\item $ \left(x\!\sqrt{y}-y\right)^2 $
+\item $ \left(\!\sqrt{xy}-4 \right)^2 $
+\item $ \left(\!\sqrt{x}-x\!\sqrt{y} \right)^2 $
+\item $ \left(\dfrac{2}{y}-\dfrac{y^2}{2}\right)^2 $
+\item $ \left(\dfrac{1}{4x}-4\!\sqrt{x}\right)^2 $
+\item $ \left(\dfrac{x}{\!\sqrt{x}}-\dfrac{\!\sqrt{x}}{x} \right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να βρεθούν τα αναπτύγματα.}
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ \left(x+y+1\right)^2 $
+\item $ \left(2x+3y+4\right)^2 $
+\item $ \left(x^2+y^3+z^4\right)^2 $
+\item $ \left(\!\sqrt{x}+\!\sqrt{y}+\!\sqrt{z}\right)^2 $
+\item $ \left(x-y+2\right)^2 $
+\item $ \left(3x+5y-1\right)^2 $
+\item $ \left(x^2-y^3-z^4\right)^2 $
+\item $ \left(\!\sqrt{x}-2\!\sqrt{y}+3\!\sqrt{z}\right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Nα υπολογιστούν οι παρακάτω παραστάσεις.}
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ \left(\!\sqrt{2}+1\right)^2 $
+\item $ \left(\!\sqrt{3}+\!\sqrt{5}\right)^2 $
+\item $ \left(\!\sqrt{3}+\!\sqrt{27}\right)^2 $
+\item $ \left(\!2\sqrt{2}+3\sqrt{3}\right)^2 $
+\item $ \left(\!\sqrt{8}+\dfrac{1}{\sqrt{2}}\right)^2 $
+\item $ \left(\dfrac{\sqrt{2}}{\sqrt{3}}+\dfrac{\sqrt{27}}{\sqrt{8}}\right)^2 $
+\item $ \left(\!\sqrt{3}-1\right)^2 $
+\item $ \left(\!\sqrt{5}-\!\sqrt{7}\right)^2 $
+\item $ \left(\!\sqrt{8}-\!\sqrt{2}\right)^2 $
+\item $ \left(\!3\sqrt{5}-5\sqrt{3}\right)^2 $
+\item $ \left(\!\sqrt{18}-\dfrac{1}{\sqrt{2}}\right)^2 $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Askhsh{Να αποδειχθούν οι παρακάτω ταυτότητες.}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\begin{multicols}{2}
+\item $ x^2+y^2=\left(x+y\right)^2-2xy $
+\item $ \left(x+y\right)^2-\left(x-y\right)^2=4xy $
+\item $ \left(x+y\right)^2+\left(x-y\right)^2=2x^2+2y^2 $
+\item $ \left(x+y\right)^2-2\left(\!\sqrt{xy}\right)^2=\left( x-y\right)^2 $
+\end{multicols}
+\vspace{-3mm}
+\item $ x^2+y^2+z^2=\left(x+y+z\right)^2-2xyz\left(\dfrac{1}{x}+\dfrac{1}{y}+\dfrac{1}{z}\right) $
+\end{enumerate}\mbox{}\\
+\section{¶θροισμα στον Κύβο}
+\section{Διαφορά στον Κύβο}
+\section{Γινόμενο Αθροίσματος επί Διαφοράς}
+\section{¶θροισμα Κύβων}
+\section{Διαφορά Κύβων}
+\chapter{Παραγοντοποίηση}
+\section{Κοινός Παράγοντας}
+\section{Ομαδοποίηση}
+\section{Διαφορά Τετραγώνων}
+\section{¶θροισμα - Διαφορά Κύβων}
+\section{Ανάπτυγμα Τετραγώνου}
+\chapter{Διαίρεση Πολυωνύμων}
+\chapter{Ε.Κ.Π. και Μ.Κ.Δ.\\Αλγεβρικών Παραστάσεων}
+\chapter{Ρητές Παραστάσεις}
+\section{Περιορισμοί}
+\section{Απλοποίηση}
+\chapter{Πράξεις Ρητών Παραστάσεων}
+\section{Πρόσθεση - Αφαίρεση}
+\section{Πολλαπλασιασμός - Διαίρεση}
+\chapter{Εξισώσεις $ 1^{o\upsilon} $ Βαθμού}
+\chapter{Εξισώσεις $ 2^{o\upsilon} $ Βαθμού}
+\section{Λύση Εξισώσεων}
+\section{Παραγοντοποίηση Τριωνύμου}
+\chapter{Προβλήματα\\Εξισώσεων 2\textsuperscript{ου} Βαθμού}
+\chapter{Κλασματικές Εξισώσεις}
+\chapter{Ανισώσεις 1\textsuperscript{ου} Βαθμού}
+\section{Ανισωτικές Σχέσεις}
+\section{Λύση Ανισώσεων}
+\backmatter
+\nocite {book1,book2,book3}
+\bibliography{bibliografia}
+\bibliographystyle{plain}
+\end{document}

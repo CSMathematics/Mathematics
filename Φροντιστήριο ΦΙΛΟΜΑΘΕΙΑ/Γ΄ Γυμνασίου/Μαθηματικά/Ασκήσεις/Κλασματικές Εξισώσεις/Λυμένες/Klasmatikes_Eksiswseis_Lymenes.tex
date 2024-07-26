@@ -1,0 +1,178 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,methodoi]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl,cancel,accents}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Εξισώσεις}{Κλασματικές Εξισώσεις}
+\begin{Methodos}[Κλασματικές Εξισώσεις - Γενική μέθοδος]
+Για το γενικό τρόπο επίλυσης μιας κλασματικής εξίσωσης ακολουθούμε τα παρακάτω βήματα :
+\begin{bhma}
+\item \textbf{Παραγοντοποίηση παρονομαστών}\\
+Παραγοντοποιούμε όσους παρονομαστές των ρητών παραστάσεων μπορούν να παραγοντοποιηθούν.
+\item \textbf{Ε.Κ.Π.}\\
+Υπολογίζουμε το Ε.Κ.Π. των παρονομαστών.
+\item \textbf{Περιορισμοί}\\
+Θέτουμε τους περιορισμούς της εξίσωσης παίρνοντας το Ε.Κ.Π. των παρονομαστών διάφορο του μηδενός : $ E.K.\varPi.\neq0 $. Λύνουμε την εξίσωση που σχηματίζεται ώστε να προκύψουν οι τιμές της μεταβλητής για τις οποίες ορίζονται οι ρητές παραστάσεις της εξίσωσης.
+\item \textbf{Απαλοιφή παρονομαστών}\\
+Πολλαπλασιάζουμε όλους τους όρους της εξίσωσης με το Ε.Κ.Π. των παρονομαστών και διαιρούμε τους κοινούς παράγοντες του με τους παρονομαστές.
+\item \textbf{Πράξεις}\\
+Εκτελούμε όλες τις δυνατές πράξεις ώστε να απαλοιφθούν τυχόν παρενθέσεις και κάνουμε αναγωγή ομοίων όρων.
+\item \textbf{Λύση εξίσωσης}\\
+Λύνουμε την πολυωνυμική εξίσωση που προκύπτει.
+\item \textbf{Έλεγχος λύσεων}\\
+Ελέγχουμε αν είναι δεκτές οι λύσεις της εξίσωσης εξετάζοντας τους περιορισμούς \textbf{(Βήμα 3)}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Γενική μέθοδος}
+\textbf{Να λύθεί η παρακάτω κλασματική εξίσωση}
+{\boldmath\[ \frac{x+1}{x}+\frac{1}{x-1}=\frac{1}{x^2-x} \]}
+\lysh\\
+Παρατηρούμε ότι από τους παρονομαστές της εξίσωσης παραγοντοποιείται μόνο ο τρίτος παρονομαστής οπότε θα έχουμε :
+\[ x^2-x=x(x-1) \]
+Έτσι το Ε.Κ.Π. των τριών παρονομαστών θα είναι : $ E.K.\varPi.=x(x-1) $. Για να ορίζονται οι ρητές παραστάσεις της εξίσωσης θα πρέπει να ισχύει :
+\[ E.K.\varPi.\neq0\Rightarrow x(x-1)\neq0\Rightarrow x\neq0\ \textrm{ και }\ x-1\neq0\Rightarrow x\neq1 \]
+Πολλαπλασιάζοντας όλους τους όρους της εξίσωσης με το Ε.Κ.Π. θα προκύψει :
+\begin{gather*}
+\cancel{x}(x-1)\cdot\frac{x+1}{\cancel{x}}+x\cancel{(x-1)}\cdot\frac{1}{\cancel{x-1}}=\cancel{x(x-1)}\cdot\frac{1}{\cancel{x(x-1)}}\Rightarrow\\
+(x-1)\cdot\left( x+1\right) +x\cdot 1=1\Rightarrow\\
+x^2-1 +x=1\Rightarrow x^2+x-2=0
+\end{gather*}
+Καταλήξαμε λοιπόν σε μια πολυωνυμική εξίσωση 2\tss{ου} βαθμού η οποία μας δίνει τις λύσεις $ x=-2 $ και $ x=1 $. Παρατηρούμε όμως ότι η λύση $ x=1 $ έρχεται σε αντίθεση με τους περιορισμούς της αρχικής εξίσωσης οπότε και απόρρίπτεται. Επομένως μοναδική λύση της εξίσωσης είναι η $ x=-2 $. 
+\begin{Methodos}[Κλασματικές εξισώσεις - Δύο όροι]
+Στην ειδική περίπτωση μιας κλασματικής εξίσωσης με δύο όρους, εκτός από τη γενική μέθοδο, μπορούμε εναλλακτικά να ακολουθήσουμε τα παρακάτω βήματα :
+\begin{bhma}
+\item \textbf{Περιορισμοί}\\
+Θέτουμε τους περιορισμούς της εξίσωσης παίρνοντας κάθε διάφορο του μηδενός. Λύνουμε τις εξισώσεις που σχηματίζονται ώστε να προκύψουν οι τιμές της μεταβλητής για τις οποίες ορίζονται οι ρητές παραστάσεις της εξίσωσης.
+\item \textbf{Ισότητα κλασμάτων}\\
+Μεταφέρουμε αν αυτό χρειαστεί, έναν από τους δύο όρους της εξίσωσης σε διαφορετικό μέλος από τον άλλο ώστε να αποκτήσουμε μια ισότητα με κλάσματα.
+\item \textbf{Χιαστί πολλαπλασιασμός}\\
+Πολλαπλασιάζουμε χιαστί τους όρους των δύο κλασμάτων οπότε και αποκτάμε μια πολυωνυμική εξίσωση.
+\item \textbf{Πράξεις - Λύση εξίσωσης}\\
+Εκτελούμε τις πράξεις και λύνουμε την πολυωνυμική εξίσωση.
+\item \textbf{Έλεγχος λύσεων}\\
+Ελέγχουμε αν είναι δεκτές οι λύσεις της εξίσωσης εξετάζοντας τους περιορισμούς \textbf{(Βήμα 1)}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Εξισώσεις με δύο όρους}
+\textbf{Να λυθεί η παρακάτω εξίσωση}
+{\boldmath\[ \frac{x+3}{x+1}-\frac{7-x}{2+x}=0 \]}
+\lysh\\
+Προκειμένου να ορίζονται οι ρητές παραστάσεις της εξίσωσης θα πρέπει να ισχύει :
+\begin{multicols}{2}
+\begin{itemize}[itemsep=0mm]
+\item $ x+1\neq0\Rightarrow x\neq-1 $ και
+\item $ 2+x\neq0\Rightarrow x\neq-2 $
+\end{itemize}
+\end{multicols}
+Μεταφέροντας το ένα από τα δύο κλάσματα στο δεύτερο μέλος η εξίσωση θα πάρει τη μορφή :
+\begin{gather*}
+\frac{x+3}{x+1}=\frac{7-x}{2+x}\Rightarrow (x+3)(2+x)=(x+1)(7-x)\Rightarrow \\2x+x^2+6+3x=7x-x^2+7-x\Rightarrow
+2x+x^2+6+3x-7x+x^2-7+x=0\Rightarrow\\
+2x^2-x-1=0
+\end{gather*}
+Η εξίσωση 2\tss{ου} βαθμού μας δίνει λύσεις τις $ x=1 $ και $ x=-\frac{1}{2} $. Εξετάζοντας τους περιορισμούς βλέπουμε οτι και οι δύο λύσεις είναι δεκτές.
+\begin{Methodos}[Ομόνυμα κλάσματα]
+Σε αρκετές κλασματικές εξισώσεις είναι δυνατό να μετατρέψουμε εύκολα τις ρητές παραστάσεις σε ομώνυμες ώστε να μπορέσουμε να απλοποιήσουμε την εξίσωση. Για να γίνει αυτό έχουμε :
+\begin{bhma}
+\item \textbf{Παραγοντοποίηση παρονομαστών}\\
+Παραγοντοποιούμε όσους παρονομαστές των ρητών παραστάσεων μπορούν να παραγοντοποιηθούν.
+\item \textbf{Ε.Κ.Π.}\\
+Υπολογίζουμε το Ε.Κ.Π. των παρονομαστών.
+\item \textbf{Περιορισμοί}\\
+Θέτουμε τους περιορισμούς της εξίσωσης παίρνοντας το Ε.Κ.Π. των παρονομαστών διάφορο του μηδενός : $ E.K.\varPi.\neq0 $. Λύνουμε την εξίσωση που σχηματίζεται ώστε να προκύψουν οι τιμές της μεταβλητής για τις οποίες ορίζονται οι ρητές παραστάσεις της εξίσωσης.
+\item \textbf{Ομόνυμα κλάσματα}\\
+Μετατρέπουμε όλους τους όρους της εξίσωσης σε ομώνυμα κλάσματα. Στη συνέχεια μεταφέρουμε όλα τα κλάσματα αυτά στο πρώτο μέλος της εξίσωσης.
+\item \textbf{Πρόσθεση κλασμάτων - Μηδενικός αριθμητής}\\
+Αφού προσθέσουμε τα ομώνυμα κλάσματα και απλοποιήσουμε τον αριθμητή με αναγωγή ομοίων όρων, τότε αποκτάμε ένα κλάσμα ίσο με το $ 0 $ κάτι το οποίο σημαίνει ότι ο αριθμητής του θα ισούται με $ 0 $.
+\item \textbf{Λύση εξίσωσης}\\
+Λύνουμε την πολυωνυμική εξίσωση που προκύπτει.
+\item \textbf{Έλεγχος λύσεων}\\
+Ελέγχουμε αν είναι δεκτές οι λύσεις της εξίσωσης εξετάζοντας τους περιορισμούς \textbf{(Βήμα 3)}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Να λυθεί η παρακάτω κλασματική εξίσωση}
+{\boldmath\[ \frac{x}{x-2}+\frac{3x-4}{x}=4 \]}
+\lysh\\
+Παρατηρούμε ότι κανένας από τους παρονομαστές της εξίσωσης δεν παραγοντοποιήται οπότε και υπολογίζουμε το Ε.Κ.Π. τους το οποίο είναι :
+\[ E.K.\varPi.=x(x-2) \]
+Για να ορίζονται οι ρητές παραστάσεις της εξίσωσης θα πρέπει να ισχύει :
+\[ E.K.\varPi.\neq0\Rightarrow x(x-2)\neq0\Rightarrow x\neq0\ \textrm{ και }\ x-2\neq0\Rightarrow x\neq2 \]
+Μετατρέποντας όλους τους όρους σε ομώνυμα κλάσματα θα έχουμε :
+\begin{align*}
+\accentset{x}{\accentset{\smile}{\frac{x}{x-2}}}+\accentset{x-2}{\accentset{\smile}{\frac{3x-4}{x}}}=\accentset{x(x-2)}{\accentset{\smile}{4}}&\Rightarrow \frac{x^2}{x(x-2)}+\frac{(3x-4)(x-2)}{x(x-2)}=\frac{4x(x-2)}{x(x-2)}\Rightarrow\\
+&\Rightarrow\frac{x^2}{x(x-2)}+\frac{(3x-4)(x-2)}{x(x-2)}-\frac{4x(x-2)}{x(x-2)}=0\Rightarrow\\
+&\Rightarrow \frac{x^2+3x^2-6x-4x+8-4x^2+8x}{x(x-2)}=0\Rightarrow\\
+&\Rightarrow \frac{-2x+8}{x(x-2)}=0\Rightarrow -2x+8=0\Rightarrow -2x=-8 \Rightarrow x=4
+\end{align*}
+Η λύση $ x=4 $ στην οποία καταλλήξαμε, είναι δεκτή καθώς δεν έρχεται σε αντίθεση με τους περιορισμούς.
+\end{document}
+

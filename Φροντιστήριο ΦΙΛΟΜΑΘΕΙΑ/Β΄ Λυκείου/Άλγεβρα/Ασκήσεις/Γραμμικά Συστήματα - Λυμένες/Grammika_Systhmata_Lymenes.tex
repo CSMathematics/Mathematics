@@ -1,0 +1,486 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,methodoi]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+\newcommand{\syntd}[2]{{\scriptsize \begin{matrix}
+:#1\\\\ :#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+
+
+
+\begin{document}
+\titlos{Αλγεβρα Β΄ Λυκείου}{Συστήματα}{Γραμμικά Συστήματα}
+\begin{Methodos}[Μέθοδοσ τησ αντικατάστασησ]
+Για την επίλυση ενός συστήματος με δύο μεταβλητές έστω $ x,y $ με τη μέθοδο της αντικατάστασης ακολουθούμε τα παρακάτω βήματα.
+\begin{bhma}
+\item \textbf{Επιλογή εξίσωσης}\\
+Επιλέγουμε μια απ' τις δύο εξισώσεις ώστε να λύσουμε ως προς οποιαδήποτε μεταβλητή. Θα προκύψει μια σχέση (1) που θα μας δίνει την μεταβλητή αυτή ως συνάρτηση της άλλης. 
+\item \textbf{Αντικατάσταση}\\
+Τη μεταβλητή αυτή την αντικαθιστούμε στην άλλη εξίσωση του συστήματος οπότε προκύπτει μια εξίσωση με έναν άγνωστο. Λύνοντας την εξίσωση υπολογίζουμε τον άγνωστο αυτό.
+\item \textbf{Υπολογισμός 2\tss{ου} αγνώστου}\\
+Την τιμή που θα βρούμε για τη μια μεταβλητή λύνοντας την εξίσωση, την αντικαθιστούμε στη σχέση (1) ώστε να βρεθεί και η άλλη μεταβλητή του συστήματος.
+\item \textbf{Λύση συστήματος}\\
+Όταν βρεθούν οι τιμές $ x_0,y_0 $ και των δύο αγνώστων, σχηματίζουμε το διατεταγμένο ζεύγος $ (x,y)=(x_0,y_0) $ το οποίο είναι η λύση του συστήματος.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λύση συστήματοσ με αντικατάσταση}
+\textbf{Να λυθεί το παρακάτω σύστημα με τη μέθοδο της αντικατάστασης}
+{\boldmath\[ \systeme{2x+3y=5,x-4y=-3} \]}
+\lysh\\
+Παρατηρούμε οτι η 2\tss{η} εξίσωση είναι εύκολο να λυθεί ως προς $ x $ οπότε έχουμε
+\begin{equation}
+\systeme{2x+3y=5,x-4y=-3}\Rightarrow x=4y-3
+\end{equation}
+Αντικάθιστώντας το αποτέλεσμα της σχέσης (1) στην 1\tss{η} εξίσωση προκύπτει :
+\begin{equation}\begin{aligned}
+2x+3y=5\Rightarrow 2(4y-3)+3y=5&\Rightarrow 8y-6+3y=5\\&\Rightarrow 8y+3y=5+6\Rightarrow 11y=11\Rightarrow y=1\end{aligned}
+\end{equation}
+Τη λύση της εξίσωσης (2) την αντικαθιστούμε στη σχέση (1) για να υπολογίσουμε τον άγνωστο $ x $
+\[ x=4y-3=4\cdot1-3=4-3=1 \]
+Επομένως η λύση του συστήματος θα είναι η $ (x,y)=(1,1) $.
+\begin{Methodos}[Μέθοδοσ των αντίθετων συντελεστών]
+Για την επίλυση ενός συστήματος με τη μέθοδο των αντίθετων συντελεστών
+\begin{bhma}
+\item \textbf{Επιλογή μεταβλητής}\\
+Επιλέγουμε ποιά από τις δύο μεταβλητές θα απαλείψουμε χρησιμοποιώντας τη μέδοδο αυτή.
+\item \textbf{Πολλαπλασιασμός εξισώσεων}\\
+Τοποθετούμε δίπλα από κάθε εξίσωση τους συντελεστές την μεταβλητής που επιλέξαμε \textquotedblleft χιαστί\textquotedblright\;αλλάζοντας το πρόσημο του ενός από τους δύο. Πολλαπλασιάζουμε την κάθε εξίσωση με τον αριθμό που προκύπτει.
+\item \textbf{Πρόσθεση κατά μέλη}\\
+Προσθέτουμε κατά μέλη τις νέες εξισώσεις οπότε προκύπτει μια εξίσωση με έναν άγνωστο τον οποίο και υπολογίζουμε λύνοντας την.
+\item \textbf{Εύρεση 2\tss{ης} μεταβλητής}\\
+Αντικαθιστούμε το αποτέλεσμα σε οποιαδήποτε εξίσωση του αρχικού συστήματος ώστε να υπολογίσουμε και τη δεύτερη μεταβλητή.
+\item \textbf{Λύση συστήματος}\\
+Όταν βρεθούν οι τιμές $ x_0,y_0 $ και των δύο αγνώστων, σχηματίζουμε το διατεταγμένο ζεύγος $ (x,y)=(x_0,y_0) $ το οποίο είναι η λύση του συστήματος.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Λύση συστήματοσ με αντίθετουσ συντελεστέσ}
+\textbf{Να λυθεί το παρακάτω σύστημα με τη μέθοδο των αντίθετων συντελεστών}
+{\boldmath\[ \systeme{4x-y=5,3x+2y=12} \]}
+\lysh\\
+Επιλέγουμε με τη μέθοδο αυτή να απαλοίψουμε τη μεταβλητή $ y $ του συστήματος. Έχουμε λοιπόν
+\[ \left. \systeme{4x-y=5,3x+2y=12}\right| \synt{2}{1}\Rightarrow\systeme{8x-2y=10,3x+2y=12} \]
+Οπότε προσθέτοντας τις εξισώσεις κατά μέλη προκύπτει
+\begin{center}
+\vspace{-5mm}
+\begin{equation}
+\begin{tabular}{rr}
+$ \displaystyle\systeme{8x-2y=10,3x+2y=12} $  &  \\ 
+\hhline{-~} $ 11x=22 $ & $ \Rightarrow x=2  $
+\end{tabular}
+\end{equation}
+\end{center}
+Την τιμή αυτή της μεταβλητής $ x $ από τη σχέση (3) την αντικαθιστούμε σε οποιαδήποτε εξίσωση και υπολογίζουμε τη δεύτερη μεταβλητή $ y $.
+\begin{equation}\begin{aligned}
+3x+2y=12\Rightarrow 3\cdot2+2y=12&\Rightarrow 6+2y=12\\&\Rightarrow 2y=12-6\Rightarrow 2y=6\Rightarrow y=3\end{aligned}
+\end{equation}
+Από τις σχέσεις (3) και (4) παίρνουμε τη λύση του συστήματος η οποία είναι $ (x,y)=(2,3) $.
+\begin{Methodos}[Μέθοδοσ των οριζουσών]
+Ένα γραμμικό σύστημα δύο εξισώσεων με δύο άγνωστους μπορούμε πλέον να το λύσουμε με τη χρήση οριζουσών ως εξής.
+\begin{bhma}
+\item \textbf{Υπολογισμός ορίζουσας}\\
+Υπολογίζουμε την ορίζουσα $ D $ των συντελεστών του συστήματος και εξετάζουμε αν είναι μηδενική η όχι.
+\item \textbf{Υπολογισμός λύσεων}\\
+Διακρίνουμε τις εξής περιπτώσεις
+\begin{itemize}
+\item Αν $ D\neq0 $ τότε υπολογίζουμε τις τιμές των μεταβλητών σύμφωνα με το \textbf{Θεώρημα 3} οπότε η μοναδική λύση θα είναι $ (x,y)=\left(\frac{D_x}{D},\frac{D_y}{D} \right) $.
+\item Αν $ D=0 $ τότε προκειμένου να φανεί αν το σύστημα είναι αδύνατο ή αόριστο διαιρούμε ή πολλαπλασιάζουμε μια ή και τις δύο εξισώσεις με κατάλληλο αριθμό ώστε να προκύψουν τα πρώτα μέλη ίσα.
+\begin{itemize}
+\item Αν τα δεύτερα μέλη δεν είναι ίσα τότε το σύστημα είναι αδύνατο.
+\item Αν και τα δεύτερα μέλη είναι ίσα τότε το σύστημα είναι αόριστο.
+\end{itemize}
+\end{itemize}
+\end{bhma}
+\end{Methodos}\mbox{}\\\\
+\Paradeigma{Λύση συστήματοσ με τη μέθοδο οριζουσών}
+\textbf{Να λυθεί το παρακάτω σύστημα}
+{\boldmath\[ \systeme{x-5y=3,4x-3y=-5} \]}
+\textbf{με τη μέθοδο των οριζουσών}.\\\\
+\lysh\\
+Η ορίζουσα των συντελεστών του συστήματος θα είναι
+\[ D=\begin{vmatrix}
+1&-5\\4&-3
+\end{vmatrix}=1\cdot(-3)-4\cdot(-5)=-3+20=17 \]
+Η ορίζουσα των συντελεστών είναι διάφορη του μηδενός οπότε το σύστημα έχει μοναδική λύση. Οι ορίζουσες των μεταβλητών θα είναι
+\begin{gather*}
+D_x=\begin{vmatrix}
+3&-5\\-5&-3
+\end{vmatrix}=3\cdot(-3)-(-5)\cdot(-5)=-34\;\textrm{ και }\\D_y=\begin{vmatrix}
+1 & 3\\4&-5
+\end{vmatrix}=1\cdot(-5)-4\cdot3=-17 \end{gather*}
+Σύμφωνα με τα παραπάνω οι τιμές των μεταβλητών του συστήματος θα είναι 
+\[ x=\frac{D_x}{D}=\frac{-34}{17}=-2\;\textrm{ και }\;y=\frac{D_y}{D}=\frac{-17}{17}=-1 \]
+οι οποίες μας δίνουν τη λύση του συστήματος $ (x,y)=(-2,-1) $.\\\\
+\Paradeigma{Λύση συστήματοσ με τη μέθοδο οριζουσών}
+\textbf{Να λυθεί το παρακάτω σύστημα με τη μέθοδο των οριζουσών}
+{\boldmath\[ \systeme{4x-8y=1,6x-12y=4} \]}
+\lysh\\
+Υπολογίζουμε την ορίζουσα των συντελεστών
+\[ D=\begin{vmatrix}
+4& -8\\6 & -12
+\end{vmatrix}=4\cdot(-12)-6\cdot(-8)=-48+48=0 \]
+Η μηδενική ορίζουσα μας δείχνει οτι το σύστημα είναι είτε αόριστο έιτε αδύνατο. Για να προσδιορίσουμε το είδος του διαιρούμε τις εξισώσεις με κατάλληλους αριθμούς :
+\begin{center}
+\vspace{-5mm}
+\begin{equation}
+\left.\displaystyle\systeme{4x-8y=1,6x-12y=4}\right| \syntd{4}{6}\Rightarrow \displaystyle\systeme{x-2y=\frac{1}{4},x-2y=\frac{4}{6}}
+\end{equation}
+\end{center}
+Τα δεύτερα μέλη των εξισώσεων είναι άνισα οπότε το σύστημα είναι αδύνατο.\\\\
+\Paradeigma{Λύση συστήματοσ με τη μέθοδο οριζουσών}
+\textbf{Να λυθεί το παρακάτω σύστημα με τη μέθοδο των οριζουσών}
+{\boldmath\[ \systeme{3x-y=5,6x-2y=10} \]}
+\lysh\\
+Η ορίζουσα του συστήματος θα είναι
+\[ D=\begin{vmatrix}
+3& -1\\6 & -2
+\end{vmatrix}=3\cdot(-2)-6\cdot(-1)=-6+6=0 \]
+Θα πρέπει κι εδώ να προσδιορίσουμε αν το σύστημα είναι αδύνατο ή αόριστο. Πολλαπλασιάζοντας με κατάλληλους αριθμούς θα έχουμε :
+\begin{center}
+\vspace{-5mm}
+\begin{equation}
+\left.\displaystyle\systeme{3x-y=5,6x-2y=10}\right| \synt{2}{1}\Rightarrow  \displaystyle\systeme{6x-2y=10,6x-2y=10} 
+\end{equation}
+\end{center}
+Οι δύο εξισώσεις του συστήματος συμπίπτουν άρα το σύστημα είναι αόριστο. Για να βρούμε τη μορφή όλων των λύσεων τις εκφράζουμε με τη βοήθεια μιας παραμέτρου ως εξής : 
+Λύνουμε την πρώτη εξίσωση ως προς $ y $ : 
+\begin{equation} 
+3x-y=5\Rightarrow -y=5-3x\Rightarrow y=3x-5 
+\end{equation}
+Εξισώνουμε τη δεύτερη μεταβλητή με μια παράμετρο $ \lambda $ δηλαδή $ x=\lambda $. Αντικαθιστώντας στη σχέση (7) έχουμε επίσης $ y=3\lambda-5 $. Επομένως οι άπειρες λύσεις δίνονται παραμετρικά από τη σχέση \[ (x,y)=(\lambda,3\lambda-5) \]
+\begin{Methodos}[Γραφική επίλυση συστήματοσ]
+Ένα γραμμικό σύστημα μπορεί να λυθεί και γεωμετρικά με τη βοήθεια των καμπυλών των εξισώσεων όπου στην περίπτωση των γραμμικών εξισώσεων παριστάνουν ευθείες γραμμές.
+\begin{bhma}
+\item \textbf{Χάραξη των ευθειών}\\
+Σχεδιάζουμε τις δύο ευθείες του συστήματος βρίσκοντας για κάθεμια δύο σημεία της με τη βοήθεια της εξίσωσής της.
+\item \textbf{Σχετική θέση ευθειών}\\
+Διακρίνουμε τις εξής περιπτώσεις για τη σχετική θέση των δύο ευθειών
+\begin{itemize}[itemsep=0mm]
+\item Αν οι ευθείες \textbf{τέμνονται} σε ένα σημείο τότε οι συντεταγμένες του κοινού αυτού σημείου είναι η ζητούμενη λύση του συστήματος. Τις συντεταγμένες αυτές τις βρίσκουμε σχεδιάζοντας από το σημείο, κάθετες γραμμές προς τους άξονες $ x'x $ και $ y'y $.
+\item Αν οι δύο ευθείες είναι μεταξύ τους παράλληλες τότε \textbf{δεν υπάρχουν κοινά σημεία} μεταξύ τους και κατά συνέπεια το σύστημα δεν έχει λύση οπότε είναι \textbf{αδύνατο}.
+\item Τέλος αν οι ευθείες \textbf{ταυτίζονται} τότε έχουν μεταξύ τους άπειρα κοινά σημεία οπότε το σύστημα έχει άπειρες λύσεις δηλαδή είναι \textbf{αόριστο}.
+\end{itemize}
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}p{4cm}}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ticks=none,xlabel={\footnotesize $x$},
+ylabel={\footnotesize $y$},xmin=-.3,xmax=3.5,ymin=-.3,ymax=3.5,x=.8cm,y=.8cm]
+\addplot[grafikh parastash,domain=-.2:3.3]{-x+2.5};
+\addplot[grafikh parastash,domain=-.2:2.7]{.8*x+.7};
+\node (A) at (axis cs:1,1.5){};
+\end{axis}
+\tkzDrawPoint(A)
+\tkzLabelPoint[right](A){$A(x_0,y_0)$}
+\node at (0,0) {$O$};
+\node at (2,3.4) {\footnotesize {Μοναδική λύση}};
+\node at (2,1.9) {\footnotesize $\varepsilon_2$};
+\node at (.8,2) {\footnotesize $\varepsilon_1$};
+\end{tikzpicture}	& \begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ticks=none,xlabel={\footnotesize $x$},
+ylabel={\footnotesize $y$},xmin=-.3,xmax=3.5,ymin=-.3,ymax=3.5,x=.8cm,y=.8cm]
+\addplot[grafikh parastash,domain=-.2:2.5]{x+.7};
+\addplot[grafikh parastash,domain=-.2:3.3]{x-1};
+\end{axis}
+\node at (0,0) {$O$};
+\node at (2,3.4) {\footnotesize {Καμία λύση}};
+\node at (2,1.5) {\footnotesize $\varepsilon_2$};
+\node at (1,2) {\footnotesize $\varepsilon_1$};
+\end{tikzpicture} & \begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ticks=none,xlabel={\footnotesize $x$},
+ylabel={\footnotesize $y$},xmin=-.3,xmax=3.5,ymin=-.3,ymax=3.5,x=.8cm,y=.8cm]
+\addplot[grafikh parastash,domain=-.2:3.5]{0.7*x+.5};
+\addplot[grafikh parastash,domain=-.2:3.5,dashed]{0.7*x+.45};
+\end{axis}
+\node at (0,0) {$O$};
+\node at (2,3.4) {\footnotesize {Άπειρες λύσεις}};
+\node at (2,1.5) {\footnotesize $\varepsilon_2$};
+\node at (1,1.5) {\footnotesize $\varepsilon_1$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\end{bhma}
+\end{Methodos}\mbox{}\\
+\Paradeigma{Γραφική επίλυση συστήματοσ}
+\textbf{Να λυθούν γραφικά τα παρακάτω συστήματα}
+\begin{multicols}{3}
+\begin{brlist}
+\item {\boldmath$ \systeme{3x-2y=4,x+y=3} $}
+\item {\boldmath$ \systeme{2x-y=5,4x-2y=4} $}
+\item {\boldmath$ \systeme{x-3y=1,3x-9y=3} $}
+\end{brlist}
+\end{multicols}
+\noindent
+Για κάθε μια από τις εξισώσεις των παραπάνω συστημάτων θα βρούμε δύο ζεύγη αριθμών που τις επαληθεύουν τα οποία θα παριστάνουν σημεία στο επίπεδο.
+\begin{rlist}
+\item Στην πρώτη εξίσωση επιλέγουμε $ x=0 $ οπότε έχουμε
+\[ 3x-2y=4\Rightarrow 3\cdot0-2y=4\Rightarrow y=-2 \]
+Αποκτάμε έτσι το σημείο $ A(0,-2) $. Ένα δεύτερο σημείο θα βρεθεί παίρνοντας π.χ. $ y=0 $ οπότε με πράξεις προκύπτει
+\[ 3x-2y=4\Rightarrow 3χ-2\cdot0=4\Rightarrow3x=4\Rightarrow y=\frac{4}{3} \]
+Προκύπτει έτσι το σημείο $ B\left( \frac{4}{3},0\right) $. Με παρόμοιο τρόπο υπολογίζουμε δύο σημεία και της 2\tss{ης} ευθείας. Έχουμε από τη 2\tss{η} εξίσωση για $ y=0 $\\
+\wrapr{-9mm}{12}{4.5cm}{-2mm}{\begin{tikzpicture}
+	\begin{axis}[aks_on,belh ar,xlabel={\footnotesize $x$},
+	ylabel={\footnotesize $y$},xmin=-.3,xmax=3.5,ymin=-.3,ymax=3.5,x=1cm,y=.9cm]
+	\addplot[grafikh parastash,domain=-.2:3.3]{1.5*x-2};
+	\addplot[grafikh parastash,domain=-.2:3.2]{3-x};
+	\draw[dashed] (axis cs:2,0)--(axis cs:2,1)--(axis cs:0,1);
+	\node (A) at (axis cs:2,1){};
+	\end{axis}
+	\tkzDrawPoint(A)
+	\tkzLabelPoint[right](A){$M(2,1)$}
+	\node at (0,0) {$O$};
+	\node at (2.4,2) {\footnotesize $\varepsilon_1$};
+	\node at (1,2) {\footnotesize $\varepsilon_2$};
+	\end{tikzpicture}}{
+\[ x+y=3\Rightarrow x+0=3\Rightarrow x=3 \] και παίρνουμε έτσι το σημείο $ \varGamma(3,0) $. Επίσης για $ x=0 $
+\[ x+y=3\Rightarrow 0+y=3\Rightarrow y=3 \] άρα το δεύτερο σημείο της θα είναι το $ \varDelta(0,3) $. Σχεδιάζοντας τις δύο ευθείες προκύπτει το διπλανό σχήμα. Από το σχήμα αυτό παρατηρούμε οτι οι δύο ευθείες έχουν ένα κοινο σημείο $ M $. Από το σημείο αυτό αν σχεδιάσουμε κάθετες γραμμές πάνω στους άξονε $ x'x $ και $ y'y $ προκύπτουν οι συντεταγμένες του κοινού σημείου οι οποίες είναι $ (x,y)=(2,1) $. Οι συντεταγμένες αυτές είναι η λύση του συστήματος.\\}
+\item Με παρόμοιο τρόπο όπως και στο προηγούμενο παράδειγμα δύο σημεία για κάθε ευθεία είναι τα $ A(1,0) $, $ B(0,1) $ και $ \varGamma(2,-1) $, $ \varDelta(2{,}5,0) $ αντίστοιχα. Σχεδιάσοντας τις δύο ευθείες στο σύστημα συντεταγμένων παρατηρούμε οτι είναι παράλληλες άρα δεν έχουν κοινά σημεία οπότε το σύστημα είναι αδύνατο.
+\item Σχεδιάζοντας τις ευθείες και του τρίτου συστήματος με τον τρόπο που είδαμε στα προηγούμενα παραδείγματα παρατηρούμε οτι ταυτίζονται. Αυτό σημαίνει οτι έχουν άπειρα κοινά σημεία και κατά συνέπεια το σύστημα είναι αόριστο.
+\begin{center}
+\begin{tabular}{cc}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize $x$},
+ylabel={\footnotesize $y$},xmin=-.3,xmax=3.5,ymin=-2.5,ymax=1.5,x=1cm,y=1cm]
+\addplot[grafikh parastash,domain=-.2:3.3]{2*x-5};
+\addplot[grafikh parastash,domain=-.2:3.2]{2*x-2};
+\end{axis}
+\node at (0,2.2) {$O$};
+\node at (2.7,3) {\footnotesize $\varepsilon_2$};
+\node at (1.1,2.7) {\footnotesize $\varepsilon_1$};
+\node at (2,4.5) {\footnotesize {Καμία λύση}};
+\end{tikzpicture}	& \begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize $x$},
+ylabel={\footnotesize $y$},xmin=-.3,xmax=3.5,ymin=-1,ymax=2.5,x=1cm,y=1cm]
+\addplot[grafikh parastash,domain=-.2:3.3]{x/3-1/3};
+\addplot[grafikh parastash,domain=-.2:3.2,dashed]{x/3-1/3-.05};
+\end{axis}
+\node at (0,0.75) {$O$};
+\node at (2.7,1.2) {\footnotesize $\varepsilon_2$};
+\node at (1.2,1.2) {\footnotesize $\varepsilon_1$};
+\node at (2,2.5) {\footnotesize {Άπειρες λύσεις}};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\end{rlist}
+\begin{Methodos}[Επίλυση σύνθετου συστήματοσ]
+Αν μας ζητείται να λύσουμε ένα σύστημα του οποίου οι εξισώσεις δεν είναι στην απλή γραμμική μορφή όπως φαίνεται στον \textbf{Ορισμό 3}, τότε
+\begin{bhma}
+\item \textbf{Πράξεις}\\
+Εκτελούμε πράξεις και στα δύο μέλη κάθε εξίσωσης και διαχωρίζουμε τους γνωστούς από τους άγνωστους όρους, ώστε να τις φέρουμε σε γραμμική μορφή.
+\item \textbf{Λύση γραμμικού συστήματος}\\
+Λύνουμε το γραμμικό πλέον σύστημα με οποιαδήποτε μέθοδο μας συμφέρει, επιλέγοντας μια από τις \textbf{Μεθόδους 1,2,3} και \textbf{4}.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Σύνθετο σύστημα}
+\textbf{Να λυθεί το παρακάτω σύστημα με οποιαδήποτε μέθοδο.}
+{\boldmath\[ \ccases{
+\;\dfrac{x+2}{3}+\dfrac{1-y}{2}=2\\
+\;\dfrac{2x-1}{5}+\dfrac{y}{3}=-\dfrac{2}{15}} \]}
+\lysh\\
+Η μορφή στην οποία βρίσκεται κάθε εξίσωση του συστήματος δεν είναι η απλή γραμμική. Αυτό σημαίνει οτι δεν μπορεί να εφαρμοστεί ακόμα κάποια από τις μεθόδους επίλυσης. Κάνοντας πράξεις θα απλοποιήσουμε τη μορφή του συστήματος.
+\begin{gather*}
+\ccases{
+\;\dfrac{x+2}{3}+\dfrac{1-y}{2}=2\\
+\;\dfrac{2x-1}{5}+\dfrac{y}{3}=-\dfrac{2}{15}}\Rightarrow\ccases{
+\;6\dfrac{x+2}{3}+6\dfrac{1-y}{2}=2\cdot 6\\[2mm]
+\;15\dfrac{2x-1}{5}+15\dfrac{y}{3}=-15\dfrac{2}{15}}\Rightarrow\\
+\ccases{
+\;2(x+2)+3(1-y)=12\\
+\;3(2x-1)+5y=-2}\Rightarrow\ccases{2x+4+3-3y=12\\6x-3+5y=-2}\Rightarrow\ccases{2x-3y=5\\6x+5y=1}
+\end{gather*}
+Το τελευταίο σύστημα έχει τη ζητούμενη μορφή οπότε μπορούμε να το λύσουμε με μια από τις μεθόδους. Με τη μέθοδο των οριζουσών έχουμε :
+\[ D=\begin{vmatrix}
+2& -3\\6& 5
+\end{vmatrix}=28\;,\;D_x=\begin{vmatrix}
+5& -3\\1& 5
+\end{vmatrix}=28\;,\;D_y=\begin{vmatrix}
+2& 5\\6& 1
+\end{vmatrix}=-28 \]
+Οπότε οι τιμές των δύο μεταβλητών είναι $ x=\frac{D_x}{D}=\frac{28}{28}=1 $ και $ y=\frac{D_y}{D}=\frac{-28}{28}=-1 $ που μας δίνουν τη λύση $ (x,y)=(1,-1) $.
+\begin{Methodos}[Επίλυση συστήματοσ {$\mathbold{3\times 3}$}]
+Για να λυθεί ένα $ 3\times 3 $ γραμμικό σύστημα με μεταβλητές έστω $ x,y,z $, θα χρησιμοποιήσουμε τη μέθοδο της αντικατάστασης ώστε να μεταβούμε σε ένα $ 2\times 2 $ γραμμικό σύστημα.
+\begin{bhma}
+\item \textbf{Επιλογή εξίσωσης}\\
+Επιλέγουμε μια από τις τρεις εξισώσεις για να λύσουμε ως προς οποιονδήποτε άγνωστο.
+\item \textbf{Αντικατάσταση}\\
+Αντικαθιστούμε τη μεταβλητή αυτή στις υπόλοιπες δύο εξισώσεις του συστήματος με αποτέλεσμα να μετατραπούν σε γραμμικές εξισώσεις με δύο άγνωστους.
+\item \textbf{Επίλυση συστήματος {\boldmath{$ 2\times 2 $}}}\\
+Απλοποιούμε τις δύο νέες εξισώσεις ώστε να τις φέρουμε στην απλή γραμμικλή μορφή και λύνουμε το $ 2\times 2 $ σύστημα με οποιαδήποτε μέθοδο.
+\item \textbf{Εύρεση τρίτου αγνώστου}\\
+Όταν βρεθούν οι τιμές των δύο μεταβλητών του $ 2\times 2 $ συστήματος τις αντικαθιστούμε στη σχέση που προέκυψε στο \textbf{1\tss{ο} Βήμα} και υπολογίζουμε και τον τρίτο άγνωστο.
+\item \textbf{Λύση συστήματος}\\
+Σχηματίζουμε τη λύση του αρχικού συστήματος η οποία θα είναι μια διατεταγμένη τριάδα αριθμών της μορφής $ (x,y,z)=(x_0,y_0,z_0) $.
+\end{bhma}
+\end{Methodos}\mbox{}\\
+\Paradeigma{Λύση γραμμικού συστήματοσ {$\mathbold{3\times 3}$}}
+\textbf{Να λυθεί το παρακάτω γραμμικό σύστημα}
+{\boldmath\[ \systeme{2x-y+3z=8,3x+4y-z=1,x+y-4z=-3} \]}
+\lysh\\
+Επιλέγουμε την 3\tss{η} εξίσωση προκειμένου να λύσουμε ως προς τη μεταβλητή $ x $ οπότε θα έχουμε
+\begin{equation} \systeme{2x-y+3z=8,3x+4y-z=1,x+y-4z=-3}\Rightarrow x=4z-y-3 
+\end{equation}
+Αντικάθιστώντας τη μεταβλητη $ x $ απο τη σχέση (8) στις δύο πρώτες εξισώσεις του συστήματος προκύπτει
+\[ \ccases{2(4z-y-3)-y+3z=8\\3(4z-y-3)+4y-z=1}\Rightarrow\ccases{8z-2y-6-y+3z=8\\12z-3y-9+4y-z=1}\Rightarrow
+\systeme{-3y+11z=14,y+11z=10} \]
+Η μορφή του συστήματος μας επιτρέπει να χρησιμοποιήσουμε ένα τέχνασμα για να φτάσουμε γρήγορα στη λύση. Αφαιρώντας κατά μέλη έχουμε
+\begin{center}
+\vspace{-5mm}
+\begin{equation}
+\begin{tabular}{rr}
+$  \displaystyle\systeme{-3y+11z=14,y+11z=10} $  &  \\ 
+\hhline{-~}  $ -4y=4 $ & $ \Rightarrow y=-1 $
+\end{tabular}
+\end{equation}
+\end{center}
+Από την πρώτη εξίσωση και τη σχέση (9) υπολογίζουμε τον άγνωστο $ z $
+\begin{equation} -3y+11z=14\Rightarrow-3\cdot(-1)+11z=14\Rightarrow3+11z=14\Rightarrow11z=11\Rightarrow z=1 \end{equation}
+Τις τιμές των μεταβλητών $ y,z $ από τις σχέσεις (9) και (10) τις αντικαθιστούμε στην ισότητα (8) και υπολογίζουμε τη μεταβλητή $ x $.
+\[ x=4z-y-3=4\cdot1-(-1)-3=4+1-3=2 \]
+Επομένως η λύση του συστήματος θα είναι $ (x,y,z)=(2,-1,1) $.
+\begin{Methodos}[Επίλυση προβλημάτων]
+Συχνά καλούμαστε να λύσουμε προβλήματα τα οποία μας ζητούν την εύρεση δύο άγνωστων αριθμών, οι οποίοι σχετίζονται μεταξύ τους. Τότε χρειάζεται η κατασκευή και επίλυση ενός συστήματος ώστε να βρεθούν συγχρόνως και οι δύο άγνωστοι. Για να γίνει αυτό
+\begin{bhma}
+\item \textbf{Εντοπισμός αγνώστων}\\
+Εντοπίζουμε τους ζητούμενους άγνωστους αριθμούς του προβλήματος και τους ονομάζουμε χρησιμοποιώντας δύο γράμματα ώστε να σχηματιστούν οι μεταβλητές.
+\item \textbf{Κατασκευή συστήματος}\\
+Με τη βοήθεια των δεδομένων του προβλήματος, αναγνωρίζουμε τις σχέσεις μεταξύ των δύο αγνώστων και κατασκευάζουμε τις εξισώσεις.
+\item \textbf{Επίλυση συστήματος}\\
+Με τις εξισώσεις αυτές σχηματίζουμε το γραμμικό σύστημα το οποίο και λυνουμε.
+\item \textbf{Λύση συστήματος - Εξέταση περιορισμών}\\
+Αφού βρεθεί η λύση του συστήματος, επαληθεύουμε τη λύση αυτή εξετάζοντας τυχόν περιορισμούς του προβλήματος.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Επίλυση προβλήματοσ}
+\textbf{Θέλουμε να μοιράσουμε 210 βιβλία σε 40 πακέτα των 4 και 6 βιβλίων. Πόσα μικρά πακέτα των 4 βιβλίων και πόσα μεγάλα πακέτα των 6 θα χρειαστούμε?}\\\\
+\lysh\\
+Από την εκφώνηση του προβλήματος παρατηρούμε οτι αυτό που ζητάει το πρόβλημα είναι ο αριθμός των μικρών πακέτων, δηλαδή των πακέτων με τα 4 βιβλία, και ο αριθμός των μεγάλων πακέτων, αυτών με τα 6 βιβλία. Έτσι θα πρέπει να κατασκευάσουμε 2 εξισώσεις με 2 άγνωστους αριθμούς και συνδυαζοντας τες να βρούμε μοναδική λύση γι αυτούς.
+Συμβολίζουμε τους άγνωστους αριθμούς με μεταβλητές : \begin{gather}
+x\;:\;\textrm{Το πλήθος των μικρών πακέτων με τα 4 βιβλία}\\
+y\;:\;\textrm{Το πλήθος των μεγάλων πακέτων με τα 6 βιβλία}
+\end{gather}
+Κατασκευάζουμε τις 2 εξισώσεις, χρησιμοποιώντας τα δεδομένα του προβλήματος.
+\begin{enumerate}[label=\bf\textit{\arabic*\textsuperscript{o}\;στοιχείο},leftmargin=0cm,itemindent=2cm]
+\item \mbox{}\\Όλα τα πακέτα μαζί θα πρέπει να είναι 40. Άρα η πρόταση αυτή με συμβολισμό θα γραφτεί  \begin{equation}
+x+y=40
+\end{equation} 
+\item \mbox{}\\Όλα τα βιβλία είναι 210. Αναλυτικά θα έχουμε : 
+\begin{itemize}
+\item Ένα μικρό πακέτο έχει 4 βιβλία οπότε $ x $ μικρά πακέτα θα έχουν $ 4\cdot x $ βιβλία.
+\item Ένα μεγάλο πακέτο έχει 6 βιβλία οπότε $ x $ μικρά πακέτα θα έχουν $ 6\cdot y $ βιβλία.
+\end{itemize}
+Επομένως θα ισχύει η ισότητα \begin{equation}
+4x+6y=210
+\end{equation} 
+\end{enumerate}
+Ο συνδυασμός 2 εξισώσεων με 2 άγνωστους ονομάζεται σύστημα. Συνδυάζοντας λοιπόν τις ισότητες (13) και (14) προκύπτει το σύστημα \begin{equation}
+\systeme[xy]{4x+6y=210,x+y=40}
+\end{equation}
+Λύνοντας το σύστημα (15) θα φτάσουμε στο ζητούμενο. Έχουμε λοιπόν με τη μέθοδο της αντικατάστασης
+\begin{equation} 
+\systeme[xy]{4x+6y=210,x+y=40}\Rightarrow x=40-y \end{equation}
+Με αντικατάσταση έχουμε
+\[ 4x+6y=210\Rightarrow 4(40-y)+6y=210\Rightarrow 160 -4y+6y=210\Rightarrow2y=50\Rightarrow y=25 \]
+Βρίκαμε λοιπόν οτι ο αριθμός των μεγάλων πακέτων είναι $ 25 $. Άρα από τη σχέση (16) ο αριθμός των μικρών πακέτων θα είναι
+\[ x=40-y=40-25=15 \]
+Έχουμε λοιπόν $ (x,y)=(15,25) $ άρα $ 15 $ μικρά και $ 25 $ μεγάλα πακέτα.
+\begin{Methodos}[Παραμετρικά συστήματα]
+Η επίλυση-διερεύνηση ενός παραμετρικού συστήματος γίνεται ευκολότερα με τη μέθοδο των οριζουσών.
+\begin{bhma}
+\item \textbf{Υπολογισμός ορίζουσας}\\
+Υπολογίζουμε την ορίζουσα $ D $ του συστήματος η οποία θα αποτελεί μια παράσταση που θα περιέχει την παράμετρο.
+\item \textbf{Περιπτώσεις}\\
+Η ορίζουσα, ως αλγεβρική παράσταση, παίρνει διάφορες τιμές οπότε στο βήμα αυτό εξετάζουμε τις παρακάτω περιπτώσεις.
+\begin{itemize}
+\item Αν $ D\neq0 $ τότε το σύστημα θα έχει μοναδική λύση, η οποία υπολογίζεται σύμφωνα με τη \textbf{Μέθοδο 3}.Η λύση γράφεται με τη βοήθεια της παραμέτρου.
+\item Αν $ D=0 $ τότε τοποθετούμε στο αρχικό σύστημα τις τιμές της παραμέτρου που μηδενίζουν την ορίζουσα και λύνοντας τα αντίστοιχα συστήματα καταλήγουμε σε άπειρες λύσεις για το αόριστο και καμία λύση για το αδύνατο σύστημα που θα προκύψει.
+\end{itemize}
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Επίλυση παραμετρικού συστήματοσ}
+\textbf{Να βρεθούν οι λύσεις του παρακάτω συστήματος για κάθε τιμή της παραμέτρου {\boldmath$ {\lambda\in\mathbb{R}} $}.}
+{\boldmath\[ \systeme[xy]{\lambda x-y=1,(\lambda\-2)x+\lambda y=2} \]}
+\lysh\\
+Ξεκινάμε υπολογίζοντας την ορίζουσα των συντελεστών του συστήματος η οποία θα είναι
+\[ D=\begin{vmatrix}
+\lambda & -1\\\lambda-2 & \lambda
+\end{vmatrix}=\lambda^2-(\lambda-2)\cdot(-1)=\lambda^2+\lambda-2 \]
+Εξετάζουμε τώρα τις εξής περιπτώσεις
+\begin{rlist}
+\item Έστω $ D\neq0\Rightarrow \lambda^2+\lambda-2\neq0\Rightarrow \lambda\neq1\,\textrm{ και }\,\lambda\neq-2 $. Τότε το σύστημα θα έχει μοναδική λύση την οποία υπολογίζουμε με τη βοήθεια των τύπων. Έχουμε
+\[ D_x=\begin{vmatrix}
+1 & -1\\2 & \lambda
+\end{vmatrix}=\lambda+2\;,\;D_y=\begin{vmatrix}
+\lambda & 1\\\lambda-2 & 2
+\end{vmatrix}=\lambda+2 \]
+Επομένως οι τιμές των μεταβλητών του συστήματος θα γραφτούν με τη βοήθεια της παραμέτρου ως εξής 
+\begin{gather*} x=\frac{D_x}{D}=\frac{\lambda+2}{\lambda^2+\lambda-2}=\frac{\lambda+2}{(\lambda-1)(\lambda+2)}=\frac{1}{\lambda-1}\\
+y=\frac{D_y}{D}=\frac{\lambda+2}{\lambda^2+\lambda-2}=\frac{\lambda+2}{(\lambda-1)(\lambda+2)}=\frac{1}{\lambda-1}
+\end{gather*}
+Η λύση λοιπόν του συστήματος θα δίνεται από τον τύπο $ (x,y)=\left(\frac{1}{\lambda-1},\frac{1}{\lambda-1} \right)  $.
+\item Αν $ \lambda^2+\lambda-2=0 $ τότε $ \lambda=1 $ ή $ \lambda=-2 $. Εδώ διακρίνουμε τις εξής υποπεριπτώσεις :
+\begin{itemize}
+\item Αν $ \lambda=1 $ τότε το αρχικό σύστημα θα πάρει τη μορφή
+\[ \systeme{x-y=1,-x+y=2}\Rightarrow\systeme{x-y=1,x-y=-2} \]
+Παρατηρούμε οτι οι εξισώσεις του συστήματος έχουν ίσα πρώτα μέλη ενώ τα δεύτερα τους μέλη είναι άνισα. Οπότε το σύστημα θα είναι αδύνατο άρα δεν έχει καμία λύση.
+\item Αν $ \lambda=-2 $ τότε θα προκύψει το σύστημα
+\[ \systeme{-2x-y=1,-4x-2y=2}\Rightarrow\systeme{-2x-y=1,-2x-y=1} \]
+το οποίο παρατηρούμε οτι οι εξισώσεις του συστήματος είναι ίδιες άρα το σύστημα είναι αόριστο οπότε θα έχει άπειρες λύσεις. Για τη μορφή των λύσεων θα έχουμε :
+\[ -2x-y=1\Rightarrow y=-2x-1 \]
+και θέτοντας όπου $ x=\kappa $ προκύπτουν οι λύσεις : $ (x,y)=(\kappa,-2\kappa-1) $.
+\end{itemize}
+\end{rlist}
+\end{document}

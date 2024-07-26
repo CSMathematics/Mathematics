@@ -1,0 +1,166 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Τρίγωνα}{Ανισοτικές σχέσεις}
+\thewrhmata
+\Thewrhma{Σχέση εξωτερικής και εξωτερικής γωνίας}
+Σε κάθε τρίγωνο, οποιαδήποτε εξωτερική γωνία του είναι μεγαλύτερη από κάθε απέναντι εσωτερική.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint[label=above left:$A$](1,1.7){A}
+\tkzDefPoint[label=below:$B$](0,0){B}
+\tkzDefPoint[label=below:$\varGamma$](3,0){C}
+\tkzDefPoint(4,0){d}
+\tkzDefPoint(-.7,0){e}
+\tkzDefPoint(1.3,2.21){f}
+\tkzMarkAngle[size=.3,fill=\xrwma](d,C,A)
+\tkzMarkAngle[size=.3,fill=\xrwma](A,B,e)
+\tkzMarkAngle[size=.3,fill=\xrwma](C,A,f)
+\tkzMarkAngle[size=.4,fill=\xrwma!70](B,A,C)
+\tkzMarkAngle[size=.4,fill=\xrwma!70](C,B,A)
+\tkzMarkAngle[size=.4,fill=\xrwma!70](A,C,B)
+\draw[pl](A)--(B)--(C)--cycle;
+\draw(e)--(d);
+\draw(B)--(f);
+\tkzDrawPoints(A,B,C)
+\node at (3.2,0.5) {\footnotesize$ \hat{\varGamma}_{\textrm{εξ}} $};
+\node at (-0.2,0.5) {\footnotesize$ \hat{B}_{\textrm{εξ}} $};
+\node at (1.6,1.8) {\footnotesize$ \hat{A}_{\textrm{εξ}} $};
+\node at(5.5,1.6){$ \hat{A}_{\textrm{εξ}}>\hat{B} \textrm{ και }\hat{A}_{\textrm{εξ}}>\hat{\varGamma} $};
+\node at(5.5,1){$ \hat{B}_{\textrm{εξ}}>\hat{A} \textrm{ και }\hat{B}_{\textrm{εξ}}>\hat{\varGamma} $};
+\node at(5.5,.4){$ \hat{\varGamma}_{\textrm{εξ}}>\hat{A} \textrm{ και }\hat{\varGamma}_{\textrm{εξ}}>\hat{B} $};
+\end{tikzpicture}
+\end{center}
+\Thewrhma{Σχέσεις μεταξύ πλευρών και γωνιών}
+Σε κάθε τρίγωνο απέναντι από δύο άνισες πλευρές βρίσκονται δύο όμια άνισες γωνίες. Αντίστροφα απέναντι από δύο άνισες γωνίες βρίσκονται δύο όμοια άνισες πλευρές.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint[label=above:$A$](1,1.7){A}
+\tkzDefPoint[label=left:$B$](0,0){B}
+\tkzDefPoint[label=right:$\varGamma$](3,0){C}
+\tkzMarkAngle[size=.4,fill=\xrwma](C,B,A)
+\tkzMarkAngle[size=.4,fill=\xrwma](A,C,B)
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[pl,\xrwma] (B)--(A)--(C);
+\tkzDrawPoints(A,B,C)
+\node at (5,1) {$AB<A\varGamma\Leftrightarrow\hat{\varGamma}<\hat{B}$};
+\end{tikzpicture}
+\end{center}
+\Thewrhma{Πορίσματα για σχέσεις γωνιών και πλευρών}
+Ισχύουν οι εξής προτάσεις για τις σχέσεις μεταξύ πλευρών και γωνιών ενός τριγώνου :
+\begin{rlist}
+\item Απέναντι από την ορθή γωνία σε ένα ορθογώνιο τρίγωνο και απέναντι από την αμβλεία γωνία σε ένα αμβλυγώνιο τρίγωνο βρίσκεται η μεγαλύτερη πλευρά του τριγώνου.
+\item Αν ένα τρίγωνο έχει δύο γωνίες ίσες τότε είναι ισοσκελές.
+\item Αν ένα τρίγωνο έχει και τις τρεις γωνίες του ίσες τότε είναι ισόπλευρο.
+\end{rlist}
+\Thewrhma{Τριγωνική ανισότητα}
+\wrapr{-4mm}{8}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint[label=above:$A$](1,1.7){A}
+\tkzDefPoint[label=left:$B$](0,0){B}
+\tkzDefPoint[label=right:$\varGamma$](3,0){C}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\node at (1.5,-0.2) {\footnotesize$a$};
+\node at (2.2,1) {\footnotesize$\beta$};
+\node at (0.3,1) {\footnotesize$\gamma$};
+\end{tikzpicture}}{
+Σε κάθε τρίγωνο, οποιαδήποτε πλευρά είναι μικρότερη από το άθροισμα των άλλων δύο πλευρών και μεγαλύτερη από τη διαφορά τους.
+\[ \beta-\gamma<a<\beta+\gamma\quad,\quad\textrm{με }\beta\geq\gamma \]}\mbox{}\\\\\\
+\Thewrhma{Κριτήριο για ισοσκελές τρίγωνο}
+Αν σε ένα τρίγωνο, το ευθύγραμμο τμήμα που ενώνει μια κορυφή με ένα σημείο της απέναντι πλευράς είναι δύο από τα τρία δευτερεύοντα στοιχεία
+\begin{multicols}{3}
+\begin{rlist}
+\item διάμεσος
+\item διχοτόμος
+\item ύψος
+\end{rlist}
+\end{multicols}
+τότε το τρίγωνο είναι ισοσκελές με βάση την πλευρά αυτή.\\\\
+\Thewrhma{Ανισότητα πλευρών}
+Αν δύο τρίγωνα έχουν δύο πλευρές ίσες και τις περιεχόμενες γωνίες τους άνισες, τότε οι απέναντι πλευρές θα είναι όμοια άνισες.
+\[ AB=A\varGamma\textrm{ και }\hat{A}>\hat{\varDelta}\Rightarrow B\varGamma>EZ \]
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint[label=above:$A$](1,1.7){A}
+\tkzDefPoint[label=left:$B$](0,0){B}
+\tkzDefPoint[label=right:$\varGamma$](3,0){C}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDefPoint[label=above:$\varDelta$](5,1.7){D}
+\tkzDefPoint[label=left:$E$](4.2,0){E}
+\tkzDefPoint[label=right:$Z$](6.8,0){Z}
+\tkzMarkSegments[mark=|](A,B D,E)
+\tkzMarkSegments[mark=||](A,C D,Z)
+\tkzMarkAngle[size=.3,fill=\xrwma](B,A,C)
+\tkzMarkAngle[size=.3,fill=\xrwma](E,D,Z)
+\draw[pl,\xrwma](B)--(C);
+\draw[pl](D)--(E)--(Z)--cycle;
+\draw[pl,\xrwma](E)--(Z);
+\tkzDrawPoints(A,B,C,D,E,Z)
+\end{tikzpicture}
+\end{center}
+Αντίστροφα, αν δύο τρίγωνα έχουν δύο πλευρές ίσες και τις τρίτες πλευρές τους άνισες τότε οι απέναντι γωνίες θα είναι όμοια άνισες.
+\[ AB=A\varGamma\textrm{ και }B\varGamma>EZ \Rightarrow \hat{A}>\hat{\varDelta} \]
+\end{document}

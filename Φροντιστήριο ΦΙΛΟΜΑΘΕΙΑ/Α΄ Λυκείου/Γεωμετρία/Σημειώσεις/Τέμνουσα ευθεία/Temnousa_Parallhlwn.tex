@@ -1,0 +1,302 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,mathtools}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Παράλληλες Ευθείες}{Τέμνουσα παράλληλων}
+\orismoi
+\Orismos{Παράλληλες ευθείες}
+\wrapr{-4mm}{5}{4.1cm}{-7mm}{\begin{tikzpicture}
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-0.5) -- (2.5,-0.5);
+\draw (-1,-1.5) -- (2.5,-1.5);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-0.5) {\footnotesize$\varepsilon_2$};
+\node at (3,-1.5) {\footnotesize$\varepsilon_\nu$};
+\node at (-0.5,-.9) {$\vdots$};
+\node at (0.5,-.9) {$\vdots$};
+\node at (1.5,-.9) {$\vdots$};
+\end{tikzpicture}}{
+Παράλληλες ονομάζονται δύο ή περισσότερες ευθείες του ίδιου επιπέδου οι οποίες δεν έχουν κανένα κοινό σημείο. Ανάμεσα σε δύο παράλληλες ευθείες χρησιμοποιούμε το συμβολισμό $ \parallel $.
+\[ \varepsilon_1\parallel\varepsilon_2\parallel\ldots\parallel\varepsilon_\nu \]}\mbox{}\\\\\\
+\Orismos{Χαρακτηρισμοί γωνιών σε παράλληλες ευθείες}
+Δίνονται δύο παράλληλες ευθείες $ \varepsilon_1,\varepsilon_2 $ και μια τέμνουσα $ \varepsilon $ των δύο ευθειών. Η τέμνουσα ευθεία τέμνει τις παράλληλες $ \varepsilon_1,\varepsilon_2 $ στα σημεία $ A,B $ αντίστοιχα, οπότε σχηματίζονται 8 γωνίες με κορυφές τα σημεία $ A $ και $ B $. Οι χαρακτηρισμοί που δίνονται σ' αυτές τις γωνίες είναι οι ακόλουθοι :
+\begin{itemize}[itemsep=0mm]
+\item Οι γωνίες που βρίσκονται μεταξύ των παράλληλων ευθειών ονομάζονται \textbf{εντός}.
+\item Οι γωνίες που βρίσκονται στην περιοχή έξω από τις παράλληλες ευθείες ονομάζονται \textbf{εκτός}.
+\item Οι γωνίες που βρίσκονται στο ίδιο ημιεπίπεδο που ορίζει η τέμνουσα ονομάζονται \textbf{επί τα αυτά}.
+\item Οι γωνίες που βρίσκονται εκατέρωθεν της τέμνουσας ονομάζονται \textbf{εναλλάξ}.
+\end{itemize}
+\begin{center}
+\begin{tabular}{cccc}
+\begin{tikzpicture}[x=.77cm]
+\fill[\xrwma!20] (-.9,-1) rectangle (2.4,0);
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw (0,0.5) -- (1.5,-1.5);
+\tkzDefPoint(.37,0){A}
+\tkzDefPoint(1.12,-1){B}
+\tkzLabelPoint[above,xshift=1mm](A){$A$}
+\tkzLabelPoint[below,xshift=-1mm](B){$B$}
+\tkzDrawPoints(A,B)
+\node at (0,-0.5) {εντός};
+\end{tikzpicture} & \begin{tikzpicture}[x=.77cm]
+\fill[\xrwma!20] (-.9,-1) rectangle (2.4,-1.5);
+\fill[\xrwma!20] (-.9,0) rectangle (2.4,.5);
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw (0,0.5) -- (1.5,-1.5);
+\tkzDefPoint(.37,0){A}
+\tkzDefPoint(1.12,-1){B}
+\tkzLabelPoint[above,xshift=1mm](A){$A$}
+\tkzLabelPoint[below,xshift=-1mm](B){$B$}
+\tkzDrawPoints(A,B)
+\node at (1.5,0.25) {εκτός};
+\node at (0,-1.25) {εκτός};
+\end{tikzpicture} & \begin{tikzpicture}[x=.77cm]
+\fill[\xrwma!20] (1.5,-1.5) -- (3,-1.5)--(1.5,0.5)--(0,0.5);
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw (0,0.5) -- (1.5,-1.5);
+\tkzDefPoint(.37,0){A}
+\tkzDefPoint(1.12,-1){B}
+\tkzLabelPoint[above,xshift=1mm](A){$A$}
+\tkzLabelPoint[below,xshift=-1mm](B){$B$}
+\tkzDrawPoints(A,B)
+\node[rotate=-60,fill=\xrwma!20,inner sep=.4mm] at (1.5,-0.5) {επι τα αυτά};
+\end{tikzpicture} & \begin{tikzpicture}[x=.77cm]
+\fill[\xrwma!20] (1.5,-1.5) -- (3,-1.5)--(1.5,0.5)--(0,0.5);
+\fill[\xrwma!50] (0,-1.5) -- (1.5,-1.5)--(0,0.5)--(-1.5,0.5);
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw (0,0.5) -- (1.5,-1.5);
+\tkzDefPoint(.37,0){A}
+\tkzDefPoint(1.12,-1){B}
+\tkzLabelPoint[above,xshift=1mm](A){$A$}
+\tkzLabelPoint[below,xshift=-1mm](B){$B$}
+\tkzDrawPoints(A,B)
+\node at (.8,-0.5) {εναλλάξ};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+Επιλέγοντας δύο γωνίες, μια με κορυφή το σημείο $ A $ και μια με κορυφή το $ B $ συνδυάζουμε τους παραπάνω χαρακτηρισμούς οπότε προκύπτουν οι εξής ονομασίες :\\
+\wrapr{-11mm}{7}{5cm}{0mm}{\begin{tikzpicture}[scale=1.2]
+\tkzDefPoint(.37,0){A}
+\tkzDefPoint(1.12,-1){B}
+\fill[\xrwma] (A) circle (.2);
+\fill[\xrwma] (B) circle (.2);
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw (0,0.5) -- (1.5,-1.5);
+\tkzLabelPoint[above,xshift=1mm,yshift=1.2mm](A){$A$}
+\tkzLabelPoint[below,xshift=-1mm,yshift=-1.2mm](B){$B$}
+\tkzDrawPoints(A,B)
+\node at (0.8,-0.2) {\scriptsize$2$};
+\node at (1.45,-1.2) {\scriptsize$2$};
+\node at (0.8,-1.2) {\scriptsize$3$};
+\node at (1.4,-0.8) {\scriptsize$1$};
+\node at (0.8,-0.8) {\scriptsize$4$};
+\node at (0.8,0.2) {\scriptsize$1$};
+\node at (0,0.2) {\scriptsize$4$};
+\node at (0,-0.2) {\scriptsize$3$};
+\end{tikzpicture}}{
+\begin{rlist}
+\item εντός εναλλάξ : $ \hat{A}_2,\hat{B}_4 $ και $ \hat{A}_3,\hat{B}_1 $
+\item εκτός εναλλάξ : $ \hat{A}_1,\hat{B}_3 $ και $ \hat{A}_4,\hat{B}_2 $
+\item εντός εκτός εναλλάξ : $ \hat{A}_1,\hat{B}_4 $,\quad $ \hat{A}_4,\hat{B}_1 $,\quad $ \hat{A}_3,\hat{B}_2 $ και\quad $ \hat{A}_2,\hat{B}_3 $
+\item εντός και επί τα αυτά : $ \hat{A}_3,\hat{B}_4 $ και $ \hat{A}_2,\hat{B}_1 $
+\item εκτός και επί τα αυτά : $ \hat{A}_4,\hat{B}_3 $ και $ \hat{A}_1,\hat{B}_2 $
+\item εντός εκτός και επί τα αυτά : $ \hat{A}_1,\hat{B}_1 $,\quad $ \hat{A}_2,\hat{B}_2 $,\quad $ \hat{A}_3,\hat{B}_3 $ και\quad $ \hat{A}_4,\hat{B}_4 $
+\end{rlist}}
+\newpage
+\noindent
+\thewrhmata
+\Thewrhma{Συνθήκη παραλληλίας}
+Έστω δύο ευθείες $ \varepsilon_1 $ και $ \varepsilon_2 $ και μια τέμνουσα $ \varepsilon $ τέμνει αυτές στα σημεία $ A,B $ αντίστοιχα. Αν ισχύει μια από τις προτάσεις :
+\begin{rlist}
+\item οι εντός εναλλάξ γωνίες είναι ίσες.
+\item οι εντός εκτός και επί τα αυτά γωνίες είναι ίσες.
+\item οι εντός και επί τα αυτά γωνίες είναι παραπληρωματικές.
+\end{rlist}
+τότε οι ευθείες $ \varepsilon_1,\varepsilon_2 $ είναι παράλληλες : $ \varepsilon_1\parallel\varepsilon_2 $.\\\\
+\Thewrhma{Σχέσεις γωνιών από παράλληλες ευθείες}
+Έστω δύο ευθείες $ \varepsilon_1 $ και $ \varepsilon_2 $ και μια τέμνουσα $ \varepsilon $ τέμνει αυτές στα σημεία $ A,B $ αντίστοιχα. Αν οι ευθείες $ \varepsilon_1,\varepsilon_2 $ είναι παράλληλες τότε :
+\begin{rlist}
+\item Οι εντός εναλλάξ γωνίες είναι ίσες.
+\item Οι εντός εκτός και επί τα αυτά γωνίες είναι ίσες.
+\item Οι εντός και επί τα αυτά γωνίες είναι παραπληρωματικές.
+\end{rlist}
+\Thewrhma{Αίτημα παραλληλίας}
+Από ένα σημείο εκτός ευθείας διέρχεται μόνο μια ευθεία παράλληλη προς αυτήν.\\\\
+\Thewrhma{Κάθετες στην ίδια ευθεία}
+\wrapr{-4mm}{5}{4.1cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,-1){B}
+\tkzDefPoint(1,0){C}
+\tkzDefPoint(1,-1){D}
+\tkzMarkRightAngle[size=.25,fill=\xrwma](B,A,C)
+\tkzMarkRightAngle[size=.25,fill=\xrwma](D,B,A)
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw (0,0.25) -- (0,-1.25);
+\tkzLabelPoint[above right](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzDrawPoints(A,B)
+\node at (-0.2,0.2) {\footnotesize$\varepsilon$};
+\end{tikzpicture}}{
+Αν δύο ευθείες $ \varepsilon_1,\varepsilon_2 $ είναι κάθετες σε μια τρίτη ευθεία $ \varepsilon $ σε διαφορετικά σημεία της, τότε είναι μεταξύ τους παράλληλες.
+\[ \varepsilon_1\bot\varepsilon\ \textrm{ και }\ \varepsilon_2\bot\varepsilon\Rightarrow \varepsilon_1\parallel\varepsilon_2 \]}\mbox{}\\\\\\
+\Thewrhma{Ευθείες ανά δύο παράλληλες}
+\wrapr{-4mm}{7}{4.1cm}{-7mm}{\begin{tikzpicture}
+\draw (-1,0) -- (2.5,0);
+\draw (-1,-1) -- (2.5,-1);
+\node at (3,0) {\footnotesize$\varepsilon_1$};
+\node at (3,-1) {\footnotesize$\varepsilon_2$};
+\draw[\xrwma] (-1,-0.6) -- (2.5,-0.6);
+\node at (3,-0.6) {\footnotesize$\varepsilon$};
+\end{tikzpicture}}{
+Αν δύο ευθείες $ \varepsilon_1,\varepsilon_2 $ είναι παράλληλες προς μια τρίτη ευθεία $ \varepsilon $ τότε θα είναι και μεταξύ τους παράλληλες.
+\[ \varepsilon_1\parallel\varepsilon\ \textrm{ και }\ \varepsilon_2\parallel\varepsilon\Rightarrow \varepsilon_1\parallel\varepsilon_2 \]}\mbox{}\\\\\\
+\Thewrhma{Τέμνουσα ευθεία}
+Αν μια ευθεία $ \varepsilon $ είναι τέμνουσα μιας από τις δύο παράλληλες ευθείες $ \varepsilon_1,\varepsilon_2 $ τότε θα είναι τέμνουσα και της άλλης. Προκύπτει παρόμοια ότι άν μια ευθεία είναι κάθετη σε μια από τις δύο παράλληλες τότε θα είναι κάθετη και με την άλλη.\\\\
+\Thewrhma{Γωνίες με πλευρές παράλληλες}
+Εαν δύο γωνίες $ x\hat{O}y,\ x'\hat{O'}y' $ έχουν τις πλευρές τους παράλληλες τότε
+\begin{rlist}
+\item αν είναι και οι δύο οξείες ή και οι δύο αμβλείες είναι ίσες.
+\item αν είναι μια οξεία και μια αμβλεία τότε είναι παραπληρωματικές.
+\end{rlist}
+\begin{center}
+\begin{tabular}{ccc}
+\begin{tikzpicture}
+\tkzDefPoint(1.5,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(-1.5.2,1){D}
+\tkzDefPoint(-.2,1){E}
+\tkzDefPoint(-1.2,-.5){F}
+\tkzMarkAngle[fill=\xrwma,size=.3,mark=|](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.3,mark=|](D,E,F)
+\tkzDrawSegments(A,B A,C)
+\tkzDrawSegments(D,E E,F)
+\tkzLabelPoint[above](D){$ x' $}
+\tkzLabelPoint[left](F){$ y' $}
+\tkzLabelPoint[above](E){$ O' $}
+\tkzLabelPoint[below](B){$ x $}
+\tkzLabelPoint[left](C){$ y $}
+\tkzLabelPoint[below](A){$ O $}
+\node at (0,-1){$x\hat{O}y=x'\hat{O'}y'$};
+\end{tikzpicture} 
+&\begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0.2,0){A}
+\tkzDefPoint(-.8,1.5){C}
+\tkzDefPoint(-2.5,1){D}
+\tkzDefPoint(-1,1){E}
+\tkzDefPoint(0,-.5){F}
+\tkzMarkAngle[fill=\xrwma,size=.3,mark=|](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.3,mark=|](D,E,F)
+\tkzDrawSegments(A,B A,C)
+\tkzDrawSegments(D,E E,F)
+\tkzLabelPoint[above](D){$ x' $}
+\tkzLabelPoint[left](F){$ y' $}
+\tkzLabelPoint[above](E){$ O' $}
+\tkzLabelPoint[below](B){$ x $}
+\tkzLabelPoint[right](C){$ y $}
+\tkzLabelPoint[below](A){$ O $}
+\node at (0,-1){$x\hat{O}y=x'\hat{O'}y'$};
+\end{tikzpicture}
+&\begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(.5,-.3){D}
+\tkzDefPoint(2.5,-.3){E}
+\tkzDefPoint(3.5,1.2){F}
+\tkzMarkAngle[fill=\xrwma,size=.3](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.3](F,E,D)
+\tkzDrawSegments(A,B A,C)
+\tkzDrawSegments(D,E E,F)
+\tkzLabelPoint[below](D){$ x' $}
+\tkzLabelPoint[left](F){$ y' $}
+\tkzLabelPoint[below](E){$ O' $}
+\tkzLabelPoint[above](B){$ x $}
+\tkzLabelPoint[left](C){$ y $}
+\tkzLabelPoint[below](A){$ O $}
+\node at (1.5,-1){$x\hat{O}y+x'\hat{O'}y'=180\degree$};
+\end{tikzpicture}\\ 
+\end{tabular} 
+\end{center}
+\end{document}

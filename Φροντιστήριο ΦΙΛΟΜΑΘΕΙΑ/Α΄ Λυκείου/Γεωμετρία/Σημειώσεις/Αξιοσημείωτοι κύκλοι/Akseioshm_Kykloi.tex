@@ -1,0 +1,223 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,mathtools}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Παράλληλες Ευθείες}{Αξειοσημείωτοι κύκλοι}
+\orismoi
+\Orismos{Περιγεγραμμένος κύκλος}
+Περιγεγραμμένος ονομάζεται ο κύκλος που διέρχεται από τις κορυφές ενός τριγώνου $ AB\varGamma $. Το κέντρο του κύκλου ονομάζεται \textbf{περίκεντρο}.\\\\
+\Orismos{Εγγεγραμμένος κύκλος}
+Εγγεγραμμένος ονομάζεται ο κύκλος που εφάπτεται στις πλευρές ενός τριγώνου $ AB\varGamma $. Το κέντρο του κύκλου ονομάζεται \textbf{εγκεντρο}.\\\\
+\Orismos{Παρεγγεγραμμένος κύκλος}
+\wrapr{-4mm}{5}{4.2cm}{-5mm}{\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){C}
+\tkzDefPoint(.7,1.3){A}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawLine[add=1.4 and 1.4](A,B)
+\tkzDrawLine[add=.8 and 1](A,C)
+\tkzDrawLine[add=.9 and .7](C,B)
+\tkzDefLine[bisector](B,A,C) \tkzGetPoint{a}
+\tkzDefLine[bisector out](B,A,C) \tkzGetPoint{b}
+\tkzDefLine[bisector](A,C,B) \tkzGetPoint{c}
+\tkzDefLine[bisector out](A,C,B) \tkzGetPoint{d}
+\tkzDefLine[bisector](C,B,A) \tkzGetPoint{e}
+\tkzDefLine[bisector out](C,B,A) \tkzGetPoint{f}
+\tkzInterLL(A,a)(B,f) \tkzGetPoint{k}
+\tkzInterLL(C,c)(B,f) \tkzGetPoint{l}
+\tkzInterLL(B,e)(A,b) \tkzGetPoint{m}
+\tkzDrawPoints(A,B,C,k,l,m)
+\tkzDefPointBy[projection=onto C--B](k) \tkzGetPoint{F}
+\tkzDrawCircle[color=\xrwma,pl](k,F)
+\tkzDefPointBy[projection=onto A--B](l) \tkzGetPoint{G}
+\tkzDrawCircle[color=\xrwma,pl](l,G)
+\tkzDefPointBy[projection=onto C--A](m) \tkzGetPoint{H}
+\tkzDrawCircle[color=\xrwma,pl](m,H)
+\tkzLabelPoint[above,yshift=1.2mm](A){$A$}
+\tkzLabelPoint[below left,xshift=-1mm](B){$B$}
+\tkzLabelPoint[below right,xshift=2.2mm,yshift=.5mm](C){$\varGamma$}
+\tkzLabelPoint[below](k){$I_a$}
+\tkzLabelPoint[left](l){$I_\gamma$}
+\tkzLabelPoint[right](m){$I_\beta$}
+\end{tikzpicture}}{
+Περιγεγραμμένος ονομάζεται ο κύκλος εφάπτεται σε μια πλευρά και στις προεκτάσεις των άλλων δύο πλευρών ενός τριγώνου $ AB\varGamma $. Το κέντρο του κύκλου ονομάζεται \textbf{παράκεντρο}. Σε κάθε τρίγωνο υπάρχουν τρεις παρεγγεγραμμένοι κύκλοι.}
+\begin{center}
+\begin{tabular}{ccc}
+\begin{tikzpicture}
+\tkzDefPoint[label=left:$O$](0,0){O}
+\tkzDefPoint(210:1.3){B}
+\tkzDefPoint(330:1.3){C}
+\tkzDefPoint(120:1.3){A}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\draw[pl,\xrwma] (0,0) circle (1.3);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\clip (-0.4,-0.2) rectangle (4.4,3);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(1,2.5){A}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDefCircle[in](A,B,C)
+\tkzGetPoint{I} \tkzGetLength{rIN}
+\draw[\xrwma,pl](I) circle (\rIN pt);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](I){$I$}
+\tkzDrawPoints(A,B,C,O,I)
+\end{tikzpicture} & 
+ \\ 
+\end{tabular} 
+\end{center}
+\thewrhmata
+\Thewrhma{Περιγεγραμμένος κύκλος - περίκεντρο}
+Οι τρεις μεσοκάθετοι των πλευρών ενός τριγώνου διέρχονται από το ίδιο σημείο, το οποίο είναι το κέντρο του περιγεγραμμένου κύκλου, δηλαδή το περίκεντρο.\\\\
+\Thewrhma{Εγγεγραμμένος κύκλος - έγκεντρο}
+Οι τρεις διχοτόμοι των γωνιών ενός τριγώνου διέρχονται από το ίδιο σημείο, το οποίο είναι το κέντρο του εγγεγραμμένου κύκλου, δηλαδή το έγκεντρο.
+\begin{center}
+\begin{tabular}{cc}
+\begin{tikzpicture}
+\tkzDefPoint[label=below left:$O$](0,0){O}
+\tkzDefPoint(210:1.3){B}
+\tkzDefPoint(330:1.3){C}
+\tkzDefPoint(120:1.3){A}
+\tkzDefMidPoint(A,B) \tkzGetPoint{M}
+\tkzDefMidPoint(B,C) \tkzGetPoint{K}
+\tkzDefMidPoint(A,C) \tkzGetPoint{L}
+\tkzMarkRightAngle[fill=\xrwma,size=.2](B,M,O)
+\tkzMarkRightAngle[fill=\xrwma,size=.2](C,K,O)
+\tkzMarkRightAngle[fill=\xrwma,size=.2](C,L,O)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\draw[pl,\xrwma] (0,0) circle (1.3);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawLine[add=.5 and .5](O,M)
+\tkzDrawLine[add=.5 and 1](O,L)
+\tkzDrawLine[add=.5 and .5](O,K)
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\clip (-0.4,-0.2) rectangle (4.4,3);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(1,2.5){A}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDefCircle[in](A,B,C)
+\tkzGetPoint{I} \tkzGetLength{rIN}
+\draw[\xrwma,pl](I) circle (\rIN pt);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below left,xshift=1.5mm](I){$I$}
+\tkzDrawBisector(B,A,C)
+\tkzDrawBisector(C,B,A)
+\tkzDrawBisector(A,C,B)
+\tkzDrawPoints(A,B,C,O,I)
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Thewrhma{Παρεγγεγραμμένος κύκλος - παράκεντρο}
+Οι διχοτόμοι δύο εξωτερικών γωνιών ενός τριγώνου και η διχοτόμος της τρίτης εσωτερικής γωνίας διέρχονται από το ίδιο σημείο, το οποίο είναι το κέντρο του παρεγγεγραμμένου κύκλου, δηλαδή το παράγκεντρο.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){C}
+\tkzDefPoint(.7,1.3){A}
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawLine[add=1.4 and 1.4](A,B)
+\tkzDrawLine[add=.8 and 1](A,C)
+\tkzDrawLine[add=.9 and .7](C,B)
+\tkzDefLine[bisector](B,A,C) \tkzGetPoint{a}
+\tkzDefLine[bisector out](B,A,C) \tkzGetPoint{b}
+\tkzDefLine[bisector](A,C,B) \tkzGetPoint{c}
+\tkzDefLine[bisector out](A,C,B) \tkzGetPoint{d}
+\tkzDefLine[bisector](C,B,A) \tkzGetPoint{e}
+\tkzDefLine[bisector out](C,B,A) \tkzGetPoint{f}
+\tkzInterLL(A,a)(B,f) \tkzGetPoint{k}
+\tkzInterLL(C,c)(B,f) \tkzGetPoint{l}
+\tkzInterLL(B,e)(A,b) \tkzGetPoint{m}
+\draw (k)--(l)--(m)--cycle;
+\draw (A)--(k);
+\draw (B)--(m);
+\draw (C)--(l);
+\tkzDrawPoints(A,B,C,k,l,m)
+\tkzDefPointBy[projection=onto C--B](k) \tkzGetPoint{F}
+\tkzDrawCircle[color=\xrwma,pl](k,F)
+\tkzDefPointBy[projection=onto A--B](l) \tkzGetPoint{G}
+\tkzDrawCircle[color=\xrwma,pl](l,G)
+\tkzDefPointBy[projection=onto C--A](m) \tkzGetPoint{H}
+\tkzDrawCircle[color=\xrwma,pl](m,H)
+\tkzLabelPoint[above,yshift=1.2mm](A){$A$}
+\tkzLabelPoint[below left,xshift=-1mm](B){$B$}
+\tkzLabelPoint[below right,xshift=2.2mm,yshift=.5mm](C){$\varGamma$}
+\tkzLabelPoint[below](k){$I_a$}
+\tkzLabelPoint[left](l){$I_\gamma$}
+\tkzLabelPoint[right](m){$I_\beta$}
+\end{tikzpicture}
+\end{center}
+\end{document}

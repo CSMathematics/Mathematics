@@ -1,0 +1,1479 @@
+\documentclass[twoside,11pt,a4paper,openany]{book}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\def\xrwma{red!70!black}
+\def\xrwmath{red!90!black}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0]{Nimbus Roman}
+%\newfontfamily\mpro{Minion Pro}
+\usepackage{amsmath}
+\usepackage[amsbb]{mtpro2}
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\DeclareRobustCommand{\Algebra}[1]{\index{{\LARGE\bf Άλγεβρα\\}!#1}}
+\DeclareRobustCommand{\Gewmetria}[1]{\index{{\LARGE\bf\vspace*{5mm}Γεωμετρία\\}!#1}}
+\DeclareRobustCommand{\Analysh}[1]{\index{{\LARGE\bf\vspace*{5mm}Ανάλυση\\}!#1}}
+\DeclareRobustCommand{\Statistikh}[1]{\index{{\LARGE\bf\vspace*{5mm}Στατιστική\\}!#1}}
+%------ ΕΙΚΟΝΑ ΓΥΡΩ ΑΠΟ ΚΕΙΜΕΝΟ ------------
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+%\usetkzobj{all}
+\usepackage{calc}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage{cleveref}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usetikzlibrary{backgrounds}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{mathimatika,tkz-tab,gensymb}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{methodologia}[chapter]
+\renewcommand{\themethodologia}{\thechapter.\arabic{methodologia}}\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{black}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\thechapter.\theorismos\;}:\;}}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\usepackage{venndiagram}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.08\paperwidth,yshift=.1\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.07\paperwidth,yshift=.05\paperheight,rectangle] {\fontsize{27}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.77\paperwidth,yshift=.077\paperheight,rectangle]
+{\fontsize{80}{20}\textbf{\textit{\contour{black}{\thechapter}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{gray}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill\;\normalsize\ Σελίδα}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\large \textcolor{\xrwma}{\textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwma] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwma, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textcolor{\xrwmath}{\textbf{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwmath,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwmath, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+\usepackage{wrapfig}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{caption}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=2.9,fill=white]
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\setlist[itemize]{itemsep=0mm}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\makeatletter
+\usetikzlibrary{patterns}
+\tikzstyle{chart}=[
+legend label/.style={font={\scriptsize},anchor=west,align=left},
+legend box/.style={rectangle, draw, minimum size=5pt},
+axis/.style={black,semithick,->},
+axis label/.style={anchor=east,font={\tiny}},
+]
+
+\tikzstyle{bar chart}=[
+chart,
+bar width/.code={
+\pgfmathparse{##1/2}
+\global\let\bar@w\pgfmathresult
+},
+bar/.style={very thick, draw=white},
+bar label/.style={font={\bf\small},anchor=north},
+bar value/.style={font={\footnotesize}},
+bar width=.75,
+]
+
+\tikzstyle{pie chart}=[
+chart,
+slice/.style={line cap=round, line join=round,thick,draw=white},
+pie title/.style={font={\bf}},
+slice type/.style 2 args={
+##1/.style={fill=##2},
+values of ##1/.style={}
+}
+]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\newcommand{\pie}[3][]{
+\begin{scope}[#1]
+\pgfmathsetmacro{\curA}{90}
+\pgfmathsetmacro{\r}{1}
+\def\c{(0,0)}
+\node[pie title] at (90:1.3) {#2};
+\foreach \v/\s/\l in{#3}{
+\pgfmathsetmacro{\deltaA}{\v/100*360}
+\pgfmathsetmacro{\nextA}{\curA + \deltaA}
+\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+
+\path[slice,\s] \c
+-- +(\curA:\r)
+arc (\curA:\nextA:\r)
+-- cycle;
+\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+
+\begin{pgfonlayer}{foreground}
+\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
+\end{pgfonlayer}
+
+\global\let\curA\nextA
+}
+\end{scope}
+}
+
+\newcommand{\legend}[2][]{
+\begin{scope}[#1]
+\path
+\foreach \n/\s in {#2}
+{
+++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
+}
+;
+\end{scope}
+}
+\definecolor{a}{cmyk}{0,1,1,0.05}
+\definecolor{b}{cmyk}{0,.8,.8,.15}
+\definecolor{c}{cmyk}{0,.8,.8,.0}
+\definecolor{d}{cmyk}{0,.7,.7,0}
+\definecolor{e}{cmyk}{0,.5,.5,0}
+
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\newcommand{\shmeio}[2]{
+\foreach \a in {1,...,#2}{
+\node[dot] at (#1+.5,\a/2-.2){};}}
+
+\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt 
+}
+\makeatother
+
+\newfontfamily\scfont{GFS Artemisia}
+\font\mymath = "MyMathSymbols"
+\newcommand{\titlos}[3]{
+\begin{center}
+{\LARGE {\textcolor{\xrwma}{\scfont\textsc{Σπύρος Φρόνιμος}}\,\,$ - $\,\,\textcolor{black}{\scfont\textsc{Μαθηματικός}}}}\\
+\vspace{-2.5mm}
+\rule{12.7cm}{.1mm}\\
+\vspace{2mm}
+ΣΗΜΕΙΩΣΕΙΣ - ΣΥΝΟΠΤΙΚΗ ΘΕΩΡΙΑ ΑΠΟ ΟΛΗ ΤΗΝ ΥΛΗ\\
+\vspace{1mm}
+{\bf Σχολική χρονιά 2021 - 2022}
+\end{center}
+\vspace{.5cm}
+\begin{center}
+{\Large\bf\MakeUppercase{#1}}
+\end{center}
+\begin{center}
+\textbf{{\Huge \textcolor{black}{#2}}}
+\end{center}
+\vspace{-1mm}
+\begin{center}
+{\Large\bf{\MakeUppercase{#3}}}
+\end{center}
+\vspace{1cm}}
+\newcommand{\telos}{\hfill\rule{2mm}{2mm}\par\noindent\vspace{2mm}}
+
+\begin{document}
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+\clearpage
+\backmatter
+\pagestyle{empty}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ ΓΕΝΙΚΗΣ ΠΑΙΔΕΙΑΣ}{Γ΄ Λυκείου}{Ορισμοί και θεωρήματα}
+\vspace{1cm}
+\begin{center}
+\begin{tikzpicture}[domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[fill=\xrwma!10] (.5,1.3) -- (.8,1.3) arc (0:60:3mm) -- cycle;
+\draw[plm,\xrwma] plot function{log(x)+2};
+\tkzDefPoint(4,3.38){A}
+\draw[dashed] (0,3.38) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (4,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzDefPoint(.5,1.3){B}
+\draw[dashed] (0,1.3) node[anchor=east]{{\scriptsize $ f(x_0) $}}  -- (B) -- (.5,0) node[anchor=north] {{\scriptsize $ x_0 $}};
+\tkzLabelPoint[above](A){{\footnotesize $ M $}}
+\tkzLabelPoint[below right](B){{\footnotesize $ M_0 $}}
+\tkzText(2.3,.5){$ \lambda=f'(x_0)=\textrm{εφ}\varphi $}
+\tkzDrawLine(A,B)
+\draw[domain=0:2,samples=100] plot function{2*x+.3};
+\draw[dashed] (-.1,1.3) -- (5,1.3);
+\tkzText[fill=white,inner sep=.4mm](1.1,1.55){{\footnotesize $ \varphi $}}
+\tkzText(2,4){{\footnotesize $ \varepsilon $}}
+\draw[-latex,opacity=.5,line width=.4mm] (4,0) -- (3,0);
+\draw[-latex,opacity=.5,line width=.4mm] (0,3.38) -- (0,2.5);
+\draw[-latex] (.5,1.3) ++(30.7:1.4) arc (30.7:63.43:1.4);
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDrawPoints[fill=black](A,B)
+\end{tikzpicture}\mbox{}\\
+\vspace{3cm}
+\begin{minipage}{9cm}
+\begin{center}
+ΣΥΝΟΠΤΙΚΟ ΤΥΠΟΛΟΓΙΟ ΓΙΑ ΤΗ ΘΕΩΡΙΑ ΤΩΝ ΜΑΘΗΜΑΤΙΚΩΝ ΓΕΝΙΚΗΣ ΠΑΙΔΕΙΑΣ Γ΄ ΛΥΚΕΙΟΥ
+\end{center}
+\end{minipage}
+\end{center}
+
+\newpage\phantom{}
+\vspace{7cm}
+\begin{center}
+\begin{flushright}
+\begin{minipage}{9.5cm}
+\textit{Τα καθαρά Μαθηματικά είναι, κατά κάποιο τρόπο, η ποίηση των λογικών ιδεών.}\\\\
+Albert Einstein, 1879-1955
+\end{minipage}
+\end{flushright}
+\end{center}
+\pagenumbering{arabic}
+\mainmatter
+\pagestyle{fancy}
+\chapter{Διαφορικός λογισμός}
+\section{Συναρτήσεις}\mbox{}\\
+\orismoi
+\Orismos{Συνάρτηση}
+Συνάρτηση ονομάζεται ο κανόνας (αντιστοίχηση) με τον οποίο \textbf{κάθε} στοιχείο ενός συνόλου $ A $ αντιστοιχεί σε \textbf{ένα μόνο} στοιχείο ενός συνόλου $ B $.\telos Συμβολίζεται με οποιοδήποτε γράμμα του λατινικού ή και του ελληνικού αλφαβήτου $ f, g, h, t, s, \sigma\ldots $ και γράφουμε : \[ f:A\rightarrow B \]
+Είναι η σχέση που συνδέει δύο μεταβλητές $ x,y $ όπου κάθε τιμή της πρώτης $ (x\in A) $, στο πρώτο σύνολο, αντιστοιχεί σε μόνο μια τιμή της δεύτερης $ (y\in B) $, στο δεύτερο σύνολο.\vspace{-3mm}
+\begin{center}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!30] (4.1,0) ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.6);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4,.2){B}
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[right](B){{\footnotesize $ y $}}
+\tkzText(0,1.8){$ A $}
+\tkzText(4,1.8){$ B $}
+\tkzText(2,1.45){$ f $}
+\draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
+\end{tikzpicture}
+\end{figure}
+\end{center}
+\vspace{-1.1cm}
+\begin{itemize}[itemsep=0mm]
+\item Η μεταβλητή $ x $ του συνόλου $ A $ ονομάζεται \textbf{ανεξάρτητη} ενώ η $ y $ \textbf{εξαρτημένη}.
+\item Η τιμή της $ y $ ονομάζεται \textbf{τιμή} της $ f $ στο $ x $ και συμβολίζεται $ y=f(x) $.
+\item Ο κανόνας της συνάρτησης, με τον οποίο γίνεται η αντιστοίχηση από το $ x $  στο $ f(x) $, εκφράζεται συμβολικά με τη βοήθεια του $ x $ και ονομάζεται \textbf{τύπος της συνάρτησης}.
+\item Το σύνολο $ A $ λέγεται \textbf{πεδίο ορισμού} της συνάρτησης $ f $. Είναι το σύνολο των δυνατών τιμών την ανεξάρτητης μεταβλητής της συνάρτησης.
+\item Το σύνολο με στοιχεία όλες τις δυνατές τιμές $ f(x) $ της εξαρτημένης μεταβλητής για κάθε $ x\in A $ λέγεται \textbf{σύνολο τιμών} της $ f $, συμβολίζεται $ f\left(A\right) $ και ισχύει $ f\left(A\right)\subseteq B $.
+\item Μια συνάρτηση συμβολίζεται επίσης με τους εξής τρόπους : \[ x\overset{f}{\mapsto}f(x)\;\;,\;\;A\overset{f}{\rightarrow}f\left(A\right) \]
+\item Για το συμβολισμό της ανεξάρτητης μεταβλητής ή της συνάρτησης μπορούμε να χρησιμοποιήσουμε οποιοδήποτε συμβολισμό στη θέση της μεταβλητής $ x $ ή του ονόματος $ f $ της συνάρτησης αντίστοιχα. \[ f(x)\;\;,\;\;g(t)\;\;,\;\;h(s)\ldots \]
+\vspace{-3mm}
+\item Για να ορίσουμε μια συνάρτηση θα πρέπει να γνωρίζουμε
+\vspace{-3mm}
+\begin{enumerate}[itemsep=0mm]
+\begin{multicols}{2}
+\item To πεδίο ορισμού $ A $.
+\item Το σύνολο $ B $.
+\end{multicols}
+\vspace{-3mm}
+\item Τον τύπο $ f(x) $ της συνάρτησης, για κάθε $ x\in A $.
+\end{enumerate}
+\item Εαν τα σύνολα $ A,B $ είναι υποσύνολα του συνόλου των πραγματικών αριθμών τότε μιλάμε για \textbf{πραγματική συνάρτηση πραγματικής μεταβλητής}.
+\item Οι συναρτήσεις των οποίων ο τύπος δίνεται από δύο ή περισσότερες αλγεβρικές παραστάσεις ονομάζονται συναρτήσεις \textbf{πολλαπλού τύπου}.
+\[ f(x)=\ccases{f_1(x) & \textrm{αν }x\in A_1\subseteq A\\
+f_2(x) & \textrm{αν }x\in A_2\subseteq A\\
+\;\;\;\;\vdots & \qquad\vdots\\
+f_\nu(x) & \textrm{αν }x\in A_\nu\subseteq A} \]
+όπου $ A_1,A_2,\ldots,A_\nu $ είναι υποσύνολα του πεδίου ορισμού ολόκληρης της συνάρτησης $ f $ με $ A_1\cup A_2\cup \ldots\cup A_\nu=A $ και $  A_1\cap A_2\cap \ldots\cap A_\nu=\varnothing $.
+\end{itemize}
+Στον πίνακα βλέπουμε τα βασικά είδη συναρτήσεων τον τύπο τους και το πεδίο ορισμού τους.
+\begin{center}
+\begin{longtable}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Είδος} & \textbf{Τύπος} & \textbf{Πεδίο Ορισμού} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Πολυωνυμική} & $ f(x)=a_\nu x^\nu+\ldots+a_1x+a_0 $ & $ A=\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρητή} & $ f(x)=\dfrac{P(x)}{Q(x)} $ & $ A=\left\lbrace\left.  x\in\mathbb{R}\right| Q(x)\neq0\right\rbrace $  \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Άρρητη} & $ f(x)=\sqrt{A(x)} $ & $ A=\left\lbrace\left. x\in\mathbb{R}\right| A(x)\geq0\right\rbrace $ \\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{5}{*}{\textbf{Τριγωνομετρική}} & $ f(x)=\hm{x}\;\;,\;\;\syn{x} $ & $ A=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\ef{x} $ & $ A=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi+\frac{\pi}{2}\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\syf{x} $ & $ A=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+%\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \textbf{Εκθετική} & $ f(x)=a^x\;\;,\;\;0<a\neq1 $ & $ A=\mathbb{R} $ \\ 
+%\rule[-2ex]{0pt}{5.5ex} \textbf{Λογαριθμική} & $ f(x)=\log{x}\;\;,\;\;\ln{x} $ & $ A=(0,+\infty) $ \\ 
+\hline 
+\end{longtable}
+\end{center}
+\vspace{-.8cm}
+Επιπλέον, ειδικές περιπτώσεις πολυωνυμικών συναρτήσεων αποτελούν οι παρακάτω συναρτήσεις
+\begin{center}
+\begin{minipage}{2.5cm}
+\textbf{Ταυτοτική}\\$ f(x)=x $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Σταθερή}\\$ f(x)=c $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Μηδενική}\\$ f(x)=0 $
+\end{minipage}
+\end{center}
+\Orismos{Πράξεισ συναρτήσεων}
+Αν $ f,g $ δύο συναρτήσεις με πεδία ορισμού $ A,B $ αντίστοιχα τότε οι πράξεις μεταξύ των δύο συναρτήσεων ορίζονται ως εξής.
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Τύπος} & \textbf{Πεδίο ορισμού} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} $ (f+g)(x)=f(x)+g(x) $ & $ A_{f+g}=\{x\in\mathbb{R}|x\in A\cap B\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f-g)(x)=f(x)-g(x) $ & $ A_{f-g}=\{x\in\mathbb{R}|x\in A\cap B\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f\cdot g)(x)=f(x)\cdot g(x) $ & $ A_{f\cdot g}=\{x\in\mathbb{R}|x\in A\cap B\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \left(\dfrac{f}{g} \right) (x)=\dfrac{f(x)}{g(x)} $ & $ A_{\frac{f}{g}}=\left\lbrace x\in\mathbb{R}|x\in A\cap B\textrm{ και }g(x)\neq0\right\rbrace  $ \\
+\rule[0ex]{0pt}{-.5ex} & \\
+\hline
+\end{longtable}
+\end{center}
+%\Orismos{Ορθογώνιο - Ορθοκανονικό Σύστημα Συντεταγμένων}
+%Ορθογώνιο σύστημα συντεταγμένων ονομάζεται το σύστημα αξόνων προσδιορισμού της θέσης σημείων. Στο επίπεδο αποτελείται από δύο κάθετα τοποθετημένους μεταξύ τους άξονες αρίθμησης πάνω στους οποίους παίρνουν τιμές δύο μεταβλητές.
+%\begin{itemize}[itemsep=0mm]
+%\item Το σημείο τομής των δύο αξόνων ονομάζεται \textbf{αρχή των αξόνων}.
+%\item Σε κάθε άξονα του συστήματος, επιλέγουμε αυθαίρετα ένα μήκος το οποίο ορίζουμε ως μονάδα μέτρησης.
+%\item Εαν σε κάθε άξονα θέσουμε την ίδια μονάδα μέτρησης το σύστημα ονομάζεται \textbf{ορθοκανονικό}.
+%\item Ο οριζόντιος άξονας ονομάζεται \textbf{άξονας τετμημένων} και συμβολίζεται με $ x'x $.
+%\end{itemize}
+%\begin{minipage}{\linewidth}\mbox{}\\
+%\vspace{-1.2cm}
+%\begin{WrapText1}{10}{5cm}
+%\begin{tikzpicture}[scale=.48,y=1cm]
+%\tkzInit[xmin=-4,xmax=4.4,ymin=-4,ymax=4.4,ystep=1]
+%\draw[-latex]  (-4,0) node[left,fill=white] {{\footnotesize $ x' $}} -- coordinate (x axis mid) (4.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+%\draw[-latex] (0,-4) node[below,fill=white] {{\footnotesize $ y' $}} -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+%\draw (1,.15) -- (1,-.15) node[anchor=north] {\scriptsize 1};
+%\draw (.15,1) -- (-.15,1) node[anchor=east] {\scriptsize 1};
+%\tkzDefPoint(0,0){O}
+%\tkzDefPoint(2,1.8){M}
+%\tkzLabelPoint[below left](O){$ O $}
+%\tkzLabelPoint[right](M){{\footnotesize $ Μ(x,y) $}}
+%\draw[dashed] (0,1.8) node[left]{{\scriptsize $ y $}}--(2,1.8)--(2,0) node[below]{{\scriptsize $ x $}};
+%\tkzDrawPoint[fill=white](M)
+%\tkzText(2.2,3.3){{\scriptsize 1\textsuperscript{ο} Τεταρτημόριο}}
+%\tkzText(-2.2,3.3){{\scriptsize 2\textsuperscript{ο} Τεταρτημόριο}}
+%\tkzText(-2.2,-2){{\scriptsize 3\textsuperscript{ο} Τεταρτημόριο}}
+%\tkzText(2.2,-2){{\scriptsize 4\textsuperscript{ο} Τεταρτημόριο}}
+%\tkzText(2.2,2.7){{\scriptsize $ (+,+) $}}
+%\tkzText(-2.2,2.7){{\scriptsize $ (-,+) $}}
+%\tkzText(-2.2,-1.4){{\scriptsize $ (-,-) $}}
+%\tkzText(2.2,-1.4){{\scriptsize $ (+,-) $}}
+%\end{tikzpicture}
+%\end{WrapText1}
+%\begin{itemize}[itemsep=0mm]
+%\item Ο κατακόρυφος άξονας ονομάζεται \textbf{άξονας τεταγμένων} και συμβολίζεται με $ y'y $.
+%\item Κάθε σημείο του επιπέδου του συστήματος συντεταγμένων αντιστοιχεί σε ένα ζευγάρι αριθμών της μορφής $(x,y)$. Aντίστροφα, κάθε ζευγάρι αριθμών $(x,y)$ αντιστοιχεί σε ένα σημείο του επιπέδου.
+%\item Το ζεύγος αριθμών $(x,y)$ ονομάζεται \textbf{διατεταγμένο ζεύγος αριθμών} διότι έχει σημασία η διάταξη δηλαδή η σειρά με την οποία εμφανίζονται οι αριθμοί.
+%\item Οι αριθμοί $x,y$ ονομάζονται \textbf{συντεταγμένες} του σημείου στο οποίο αντιστοιχούν. Ο αριθμός $x$ ονομάζεται \textbf{τετμημένη} του σημείου ενώ ο $y$ \textbf{τεταγμένη}.
+%\end{itemize}\end{minipage}\mbox{}\\
+%\vspace{-2mm}
+%\begin{itemize}
+%\item Στον οριζόντιο άξονα $ x'x $, δεξιά της αρχής των αξόνων, βρίσκονται οι θετικές τιμές της μεταβλητής $x$ ενώ αριστερά, οι αρνητικές.
+%\item Αντίστοιχα στον κατακόρυφο άξονα $ y'y $, πάνω από την αρχή των αξόνων βρίσκονται οι θετικές τιμές της μεταβλητής $y$, ενώ κάτω οι αρνητικές τιμές.
+%\item Οι άξονες χωρίζουν το επίπεδο σε τέσσερα μέρη τα οποία ονομάζονται \textbf{τεταρτημόρια}. Ως 1\textsuperscript{ο} τεταρτημόριο ορίζουμε το μέρος στο οποίο ανήκουν οι θετικοί ημιάξονες $ Ox $ και $ Oy $.
+%\end{itemize}
+\Orismos{Γραφική Παράσταση συνάρτησησ}
+Γραφική παράσταση μιας συνάρτησης $ f:A\rightarrow\mathbb{R} $ ονομάζεται το σύνολο των σημείων του επιπέδου με συντεταγμένες $ M(x,y) $ όπου \[ x\in A\;\;,\;\;y=f(x) \]
+Το σύνολο των σημείων της γραφικής παράστασης είναι 
+\[ C_f=\{M(x,y)|y=f(x)\textrm{ για κάθε }x\in A\} \]
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1.2cm}
+\begin{WrapText1}{8}{4.7cm}
+\vspace{0mm}
+\begin{tikzpicture}[scale=.7,domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[,domain=.3:3.7,samples=200,line width=.4mm,\xrwma] plot function{(x-2)**3-2*x+6};
+\tkzDefPoint(1.5,2.875){A}
+\tkzDrawPoint[fill=\xrwma,color=\xrwma](A)
+\draw[dashed] (0,2.875) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (1.5,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzLabelPoint[above=1mm](A){{\footnotesize $ M\left( x,f(x)\right)  $}}
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDefPoint(3,1){B}
+\draw[dashed] (3,-.5) -- (3,3.7);
+\tkzDrawPoint[fill=\xrwma,color=\xrwma](B)
+\end{tikzpicture}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item Συμβολίζεται με $ C_f $ και το σύνολο των σημείων της παριστάνει σχήμα.
+\item Τα σημεία της γραφικής παράστασης είναι της μορφής $Μ\left(x,f(x)\right) $.
+\item Η εξίσωση $ y=f(x) $ είναι η εξίσωση της γραφικής παράστασης την οποία επαληθεύουν οι συντεταγμένες των σημείων της.
+\item Κάθε κατακόρυφη ευθεία $ \varepsilon\parallel y'y $ της μορφής $ x=\kappa $ τέμνει τη $ C_f $ \textbf{σε ένα το πολύ} σημείο.
+\end{itemize}\end{minipage}\mbox{}\\\\
+\Orismos{Άρτια - Περιττή συνάρτηση}
+\vspace{-5mm}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Άρτια συνάρτηση}\\ Άρτια ονομάζεται μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ για την οποία ισχύουν οι παρακάτω συνθήκες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \textrm{Για κάθε } x\in A\Rightarrow -x\in A $
+\item $ f(-x)=f(x)\;,\;\textrm{για κάθε } x\in A$
+\end{enumerate}
+\item \textbf{Περιττή συνάρτηση}\\ Περιττή ονομάζεται μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ για την οποία ισχύουν οι παρακάτω συνθήκες :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \textrm{Για κάθε } x\in A\Rightarrow -x\in A $
+\item $ f(-x)=-f(x)\;,\;\textrm{για κάθε } x\in A$
+\end{enumerate}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\draw[dashed] (0.44,.4) node[anchor=north]{\scriptsize $-x$} -- (0.44,2.96);
+\draw[dashed] (3.96,.4) node[anchor=north]{\scriptsize $x$}-- (3.96,2.96);
+\draw[dashed] (0.44,2.96) -- (3.96,2.96);
+\begin{axis}[x=2.2cm,y=4cm,aks_on,xmin=-1,xmax=1,ymin=-.1,ymax=0.9,ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.85:.85]{(x^2)};
+\end{axis}
+\node[fill=white,inner sep=.1mm] at (2.2,3.2){\scriptsize $f(-x)=f(x)$};
+\end{tikzpicture}	& \begin{tikzpicture}
+\draw[dashed] (0.44,1.98) node[anchor=south]{\scriptsize $-x$} -- (0.44,0.84);
+\draw[dashed] (3.96,2) node[anchor=north]{\scriptsize $x$}-- (3.96,3.1);
+\draw[dashed] (2.2,3.1) -- (3.96,3.1);
+\draw[dashed] (0.44,0.84) -- (2.2,0.84);
+\node at (3.4,4) {\scriptsize $f(-x)=-f(x)$};
+\node at (1.85,3.1){\scriptsize $f(x)$};
+\node at (2.7,.84){\scriptsize $f(-x)$};
+\begin{axis}[x=2.2cm,y=2.2cm,aks_on,xmin=-1,xmax=1,ymin=-.9,ymax=.9,ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.9:.9]{(x^3)};
+\end{axis}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Η γραφική παράσταση μιας άρτιας συνάρτησης είναι συμμετρική ως προς τον κατακόρυφο άξονα.
+\item H γραφική παράσταση μιας περιττής συνάρτησης είναι συμμετρική ως προς την αρχή των αξόνων.
+\item Η αρχή των αξόνων για μια περιττή συνάρτηση ονομάζεται \textbf{κέντρο συμμετρίας} της.
+\end{itemize}
+\Orismos{Μονοτονία}
+Μια συνάρτηση γνησίως αύξουσα ή γνησίως φθίνουσα συνάρτηση χαρακτηρίζεται ως \textbf{γνησίως μονότονη}. Οι χαρακτηρισμοί αυτοί αφορούν τη \textbf{μονοτονία} μιας συνάρτησης.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Γνησίως αύξουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως αύξουσα στο $ \varDelta $ εάν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)<f(x_2) \]
+\item \textbf{Γνησίως φθίνουσα}\\ Μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ ονομάζεται γνησίως φθίνουσα στο $ \varDelta $ εαν για κάθε ζεύγος αριθμών $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $ ισχύει \[ f(x_1)>f(x_2) \]
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\draw[dashed] (3.3,1.4) node[anchor=north]{\scriptsize $x_2$} -- 
+(3.3,2.58)--(1,2.58) node[left]{\scriptsize $f(x_2)$};
+\draw[dashed] (2,1.4) node[anchor=north]{\scriptsize $x_1$}-- 
+(2,2.08)--(1,2.08)node[left]{\scriptsize $f(x_1)$};
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-1,xmax=3,
+ymin=-1.4,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.5:3]{ln(x+1)};
+\end{axis}
+\tkzDrawPoint[fill=black](2,2.09)
+\tkzDrawPoint[fill=black](3.3,2.59)
+\node[fill=white,inner sep=.1mm] at (2.7,0.6) {\scriptsize $ x_1<x_2\Rightarrow f(x_1)<f(x_2)$};
+\end{tikzpicture}	& \begin{tikzpicture}
+\draw[dashed] (2.6,1.4) node[anchor=north]{\scriptsize $x_2$} -- 
+(2.6,2.02)--(1,2.02) node[left]{\scriptsize $f(x_2)$};
+\draw[dashed] (1.5,1.4) node[anchor=north]{\scriptsize $x_1$}-- 
+(1.5,2.7)--(1,2.7)node[left]{\scriptsize $f(x_1)$};
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-1,xmax=3,
+ymin=-1.4,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.6:3]{-0.2*(x+.5)^2+1.5};
+\end{axis}
+\tkzDrawPoint[fill=\xrwma](2.6,2.02)
+\tkzDrawPoint[fill=\xrwma](1.5,2.7)
+\node[fill=white,inner sep=.1mm] at (1.95,0.6) {\scriptsize $ x_1<x_2\Rightarrow f(x_1)>f(x_2)$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\end{enumerate}
+\Orismos{Τοπικά - Ολικά Ακρότατα}
+Ακρότατα, τοπικά ή ολικά ονομάζονται οι μέγιστες ή ελάχιστες τιμές μιας συνάρτησης $ f:A\rightarrow\mathbb{R} $ τις οποίες παίρνει σε ένα διάστημα ή σε ολόκληρο το πεδίο ορισμού της.
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Τοπικό μέγιστο}\\
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ παρουσιάζει τοπικό μέγιστο σε ένα σημείο $ x_0\in A $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μεγαλύτερη από κάθε άλλη $ f(x) $ σε μια περιοχή του $ x_0 $. \[ f(x)\leq f(x_0) \]
+\item \textbf{Τοπικό ελάχιστο}\\
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ παρουσιάζει τοπικό ελάχιστο σε ένα σημείο $ x_0\in A $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μικρότερη από κάθε άλλη $ f(x) $ σε μια περιοχή του $ x_0 $. \[ f(x)\geq f(x_0) \]
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3.2,
+ymin=-1,ymax=1.7,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[fill=\xrwma!30,domain=.52:1.12]{(x-1.5)^3-1.4*x+2.5} \closedcycle;
+\addplot[grafikh parastash,domain=0:2.9]{(x-1.5)^3-1.4*x+2.5};
+\end{axis}
+\tkzDrawPoint[fill=black](1.52,2.03)
+\node at (1.95,0.4) {\scriptsize $ f(x)\leq f(x_0)$};
+\draw[dashed] (1.52,1) node[anchor=north]{\scriptsize $x_0$} -- 
+(1.52,2.03)--(0.7,2.03) node[left]{\scriptsize $f(x_0)$};
+\node at (0.5,0.8) {\footnotesize $ O $};
+\end{tikzpicture}	& \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.7,xmax=3,
+ymin=-.7,ymax=2,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[fill=\xrwma!30,domain=1.47:2.07]{(x-1.2)^3-x+2.2} \closedcycle;
+\addplot[grafikh parastash,domain=-.21:2.5]{(x-1.2)^3-x+2.2};
+\end{axis}
+\tkzDrawPoint[fill=black](2.47,1.32)
+\node at (2.1,0.2) {\scriptsize $ f(x)\leq f(x_0)$};
+\draw[dashed] (2.47,0.7) node[anchor=north]{\scriptsize $x_0$} -- 
+(2.47,1.32)--(0.7,1.32) node[left]{\scriptsize $f(x_0)$};
+\node[fill=white,inner sep=.5pt] at (0.5,0.5) {\footnotesize $ O $};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\item \textbf{Ολικό μέγιστο}\\
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ παρουσιάζει ολικό μέγιστο σε ένα σημείο $ x_0\in A $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μεγαλύτερη από κάθε άλλη $ f(x) $ για κάθε σημείο $ x_0 $ του πεδίου ορισμού. Συμβολίζεται με $ \max{f(x)} $. \[ f(x)\leq f(x_0)\;\;,\;\;\textrm{για κάθε } x\in A \]
+\item \textbf{Ολικό ελάχιστο}\\
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ παρουσιάζει ολικό ελάχιστο σε ένα σημείο $ x_0\in A $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μικρότερη από κάθε άλλη $ f(x) $ για κάθε σημείο $ x_0 $ του πεδίου ορισμού. Συμβολίζεται με $ \min{f(x)}$. \[ f(x)\geq f(x_0)\;\;,\;\;\textrm{για κάθε } x\in A \]
+\end{enumerate}
+\Orismos{Όριο συνάρτησησ}
+Όριο μιας συνάρτησης $ f:A\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0 $ ονομάζεται η προσέγγιση των τιμών της μεταβλητής $ f(x) $ σε μια τιμή $ L $ καθώς το $ x $ πλησιάζει την τιμή $ x_0 $. Συμβολίζεται με \[ \lim_{x\rightarrow x_0}{f(x)}=L \]
+\Orismos{Συνέχεια}
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν το όριο της στο $ x_0 $ είναι ίσο με την τιμή της στο σημείο αυτό. Δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+Μια συνάρτηση $ f $ θα λέμε ότι είναι \textbf{συνεχής} εάν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.
+\thewrhmata
+\Thewrhma{Σημεία τομής γραφικών παραστάσεων}
+Έστω δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A $ και $ B $ αντίστοιχα. Για τις γραφικές παραστάσεις των συναρτήσεων αυτών θα ισχύουν οι εξής προτάσεις.
+\begin{rlist}
+\item Τα σημεία τομής της γραφικής παράστασης $ C_f $ της συνάρτησης $ f $ με τον οριζόντιο άξονα $ x'x $ έχουν τεταγμένη ίση με το $ 0 $. Οι τετμημένες των σημείων είναι ρίζες της εξίσωσης :
+\[ f(x)=0 \]
+\item Το μοναδικό σημείο τομής της γραφικής παράστασης $ C_f $ της συνάρτησης $ f $ με τον κατακόρυφο άξονα $ y'y $ έχουν τετμημένη ίση με το $ 0 $. Θα είναι της μορφής $ M(0,f(0)) $.
+\item Στα κοινά σημεία των γραφικών παραστάσεων $ C_f $ και $ C_g $ ισχύει $ f(x)=g(x) $. Οι τετμημένες $ x_0 $ των σημείων αυτών είναι ρίζες της παραπάνω εξίσωσης ενώ ισχύει $ x_0\in A\cap B $.
+\end{rlist}
+\Thewrhma{Σχετική θέση γραφικών παραστάσεων}
+Έστω δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A $ και $ B $ αντίστοιχα. Για τις γραφικές παραστάσεις των συναρτήσεων αυτών θα ισχύουν οι εξής προτάσεις.
+\begin{rlist}
+\item Τα σημεία της γραφικής παράστασης $ C_f $ της συνάρτησης $ f $ που βρίσκονται πάνω από τον οριζόντιο άξονα $ x'x $ έχουν θετική τεταγμένη. Οι τετμημένες των σημείων είναι λύσεις της ανίσωσης :
+\[ f(x)>0 \]
+\item Τα σημεία της γραφικής παράστασης $ C_f $ της συνάρτησης $ f $ που βρίσκονται κάτω από τον οριζόντιο άξονα $ x'x $ έχουν αρνητική τεταγμένη. Οι τετμημένες των σημείων είναι λύσεις της ανίσωσης :
+\[ f(x)<0 \]
+\item Τα διαστήματα στα οποία η γραφική παράσταση της συνάρτησης $ f $ βρίσκεται πάνω από τη γραφική παράσταση της $ g $ είναι λύσεις της ανίσωσης \[ f(x)>g(x)\ \ ,\ \ x\in A\cap B \]
+\item Τα διαστήματα στα οποία η γραφική παράσταση της συνάρτησης $ f $ βρίσκεται κάτω από τη γραφική παράσταση της $ g $ είναι λύσεις της ανίσωσης \[ f(x)<g(x)\ \ ,\ \ x\in A\cap B \]
+\end{rlist}
+\Thewrhma{υπολογισμός ορίου}
+Για τα όρια των βασικών συναρτήσεων σε ένα σημείο $ x_0 $ του πεδίου ορισμού τους ισχύουν οι παρακάτω σχέσεις.
+\begin{enumerate}
+\item \textbf{Πολυωνυμικές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού. Θα ισχύει
+\[ \lim_{x\rightarrow x_0}{P(x)}=a_\nu x^\nu_0+a_{\nu-1}x^{\nu-1}_0+\ldots+a_1x_0+a_0=P(x_0) \]
+\item \textbf{Ρητές}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ με $ a_\nu\neq0 $ ένα πολυώνυμο $ \nu- $οστού βαθμού και $ Q(x)=\beta_\nu x^\nu+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0 $ με $ \beta_\mu\neq0 $ ένα πολυώνυμο $ \mu- $οστού βαθμού. Θα ισχύει
+\[ \lim_{x\rightarrow x_0}{\frac{P(x)}{Q(x)}}=\frac{a_\nu x^\nu_0+a_{\nu-1}x^{\nu-1}_0+\ldots+a_1x_0+a_0}{\beta_\nu x^\nu_0+\beta_{\mu-1}x^{\mu-1}_0+\ldots+\beta_1x_0+\beta_0}=\frac{P(x_0)}{Q(x_0)} \]
+\item \textbf{Άρρητες}\\
+Έστω $ f(x)=\sqrt{A(x)} $ με $ A(x)\geq0 $ μια άρρητη συνάρτηση και $ x_0 $ ένα σημείο του πεδίου ορισμού της. Το όριο της $ f $ όταν $ x\to x_0 $ θα είναι :
+\[ \lim_{x\to x_0}{f(x)}=\lim_{x\to x_0}{\sqrt{A(x)}}=\sqrt{A(x_0)} \]
+\item \textbf{Τριγωνομετρικές}\\
+Για τα όρια των βασικών τριγωνομετρικών συναρτήσεων ισχύουν οι παρακάτω σχέσεις :
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\hm{x}}=\hm{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syn{x}}=\syn{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\ef{x}}=\ef{x_0}} $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}{\syf{x}}=\syf{x_0}} $
+\end{enumerate}
+\end{multicols}
+\item \textbf{Λογαριθμικές και εκθετικές}\\
+Έστω $ f(x)=\log_{a}{x} $ και $ g(x)=a^x $ μια λογαριθμική και εκθετική συνάρτηση αντίστοιχα με $ 0<a\neq 1 $ και $ x_0 $ ένα σημείο του πεδίου ορισμού τους. Θα ισχύει :
+\[ \lim_{x\to x_0}{\log_{a}{x}}=\log_{a}{x_0}\ \textrm{ και }\ \lim_{x\to x_0}{a^x}=a^{x_0} \]
+\end{enumerate}
+\Thewrhma{Πράξεισ με όρια}
+Θεωρούμε δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A,B $ αντίστοιχα και $ x_0\in A\cap B $ ένα κοινό στοιχείο των δύο πεδίων ορισμού. Αν τα όρια των δύο συναρτήσεων στο $ x_0 $ υπάρχουν με $ \displaystyle\lim_{x\rightarrow x_0}{f(x)}=l_1 $ και $ \displaystyle\lim_{x\rightarrow x_0}{g(x)}=l_2 $ τότε οι πράξεις μεταξύ των ορίων ακολουθούν τους παρακάτω κανόνες :
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Όριο} & \textbf{Κανόνας} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} \textbf{Αθροίσματος} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\pm g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\pm\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\pm l_2 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Πολλαπλάσιου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( k\cdot f(x)\right) }=k\cdot\displaystyle{\lim_{x\rightarrow x_0}f(x)}=k\cdot l_1\;\;,\;\;\textrm{για κάθε } k\in\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Γινομένου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\cdot g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\cdot\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\cdot l_2 $ \\ 
+\rule[-2ex]{0pt}{7ex} \textbf{Πηλίκου} & $ \displaystyle{\lim_{x\rightarrow x_0}\left(\dfrac{ f(x)} {g(x)}\right)=\dfrac{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}{\displaystyle{\lim_{x\rightarrow x_0}g(x)}}}=\frac{l_1}{l_2}\;\;,\;\;l_2\neq0 $ \\ 
+\rule[-2ex]{0pt}{6.5ex} \textbf{Απολύτου} & $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=\left| \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right|=|l_1|  $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρίζας} & $ \displaystyle{\lim_{x\rightarrow x_0}\!\!\sqrt[\kappa]{f(x)}}=\!\sqrt[\kappa]{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}\;\;=\!\!\sqrt[\kappa]{l_1}\;\;,\;\;l_1\geq0 $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Δύναμης} & $ \displaystyle{\lim_{x\rightarrow x_0}f^\nu(x)}=\left( \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right)^\nu=l_1^\nu  $\vspace{2mm} \\ 
+\hline 
+\end{longtable}
+\end{center}
+\Thewrhma{Συνέχεια Πράξεων συναρτήσεων}
+Εάν οι συναρτήσεις $ f,g $ είναι συνεχείς σε ένα κοινό σημείο $ x_0 $ των πεδίων ορισμού τους τότε και οι συναρτήσεις \[ f+g\;,\;f-g\;,\;c\cdot f\;,\;f\cdot g\;,\;\frac{f}{g}\;,\;|f|\;,\;f^\nu\textrm{ και }\sqrt[\mu]{f} \]
+με $ \nu\in\mathbb{Z}\ ,\ \mu\in\mathbb{N} $, είναι συνεχείς στο σημείο $ x_0 $ εφόσον ορίζονται στο σημείο αυτό.\\\\
+\Thewrhma{Συνέχεια Σύνθεσησ συναρτήσεων}
+Εάν η συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ και η συνάρτηση $ g $ είναι συνεχής στο σημείο $ f(x_0) $ η σύνθεση τους $ g(f(x)) $ είναι συνεχής στο σημείο $ x_0 $.\\\\
+\section{Η έννοια της παραγώγου}\mbox{}\\
+\orismoi
+\Orismos{Παράγωγοσ σε σημείο}
+Παράγωγος μιας συνάρτησης $ f $ στο σημείο $ x_0\in A $ του πεδίου ορισμού της, ονομάζεται το όριο \[ \lim_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h} \]
+Συμβολίζεται με $ f'(x_0) $ και θα λέμε οτι η $ f $ είναι \textbf{παραγωγίσιμη} στο $ x_0 $ αν το όριο της παραγώγου υπάρχει και είναι πραγματικός αριθμός.\\
+Έχουμε δηλαδή \[ f'(x_0)=\lim_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h} \]
+Το κλάσμα $ \frac{f(x_0+h)-f(x_0)}{h} $ ονομάζεται \textbf{λόγος μεταβολής} της $ f $.\\\\
+\Orismos{Γεωμετρική Ερμηνεία Παραγώγου}
+Η παράγωγος μιας συνάρτησης $ f:A\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0\in A $ παριστάνει το \textbf{συντελεστή διεύθυνσης} της εφαπτόμενης ευθείας στο σημείο επαφής $ Μ_0(x_0,f(x_0)) $.
+\[ \lambda=f'(x_0)=\lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0}=\ef{\varphi} \]
+Είναι ίση με την εφαπτομένη της γωνίας $ \varphi $ που σχηματίζει η εφαπτόμενη ευθεία $ \varepsilon $ με τον οριζόντιο άξονα $ x'x $.
+\vspace{-3mm}
+\begin{center}
+\begin{tikzpicture}[domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[fill=\xrwma!10] (.5,1.3) -- (.8,1.3) arc (0:60:3mm) -- cycle;
+\draw[plm,\xrwma] plot function{log(x)+2};
+\tkzDefPoint(4,3.38){A}
+\draw[dashed] (0,3.38) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (4,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzDefPoint(.5,1.3){B}
+\draw[dashed] (0,1.3) node[anchor=east]{{\scriptsize $ f(x_0) $}}  -- (B) -- (.5,0) node[anchor=north] {{\scriptsize $ x_0 $}};
+\tkzLabelPoint[above](A){{\footnotesize $ M $}}
+\tkzLabelPoint[below right](B){{\footnotesize $ M_0 $}}
+\tkzText(2.3,.5){$ \lambda=f'(x_0)=\textrm{εφ}\varphi $}
+\tkzDrawLine(A,B)
+\draw[domain=0:2,samples=100] plot function{2*x+.3};
+\draw[dashed] (-.1,1.3) -- (5,1.3);
+\tkzText[fill=white](1.1,1.53){{\footnotesize $ \varphi $}}
+\tkzText(2,4){{\footnotesize $ \varepsilon $}}
+\draw[-latex,opacity=.5,line width=.4mm] (4,0) -- (3,0);
+\draw[-latex,opacity=.5,line width=.4mm] (0,3.38) -- (0,2.5);
+\draw[-latex] (.5,1.3) ++(30.7:1.4) arc (30.7:63.43:1.4);
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDrawPoints[fill=black](A,B)
+\end{tikzpicture}
+\end{center}
+Όσο πλησιάζει το $ x $ στο $ x_0 $ τόσο αλλάζει η θέση του τυχαίου σημείου $ Μ $ ώστε να τείνει να ταυτιστεί με το $ M_0 $. Τότε η ευθεία $ MM_0 $ τείνει να γίνει εφαπτόμενη στο σημείο $ M_0(x_0,f(x_0)) $.\\\\
+\Orismos{Ρυθμός Μεταβολής}
+Ρυθμός μεταβολής μιας ποσότητας $ f(x) $ ως προς $ x $ σε μια συγκεκριμένη θέση $ x=x_0 $ ονομάζεται η παράγωγος $ f'(x_0) $ της ποσότητας αυτής στο $ x_0 $.
+\begin{itemize}
+\item Ο ρυθμός μεταβολής της ποσότητας $ f $ σε κάθε θέση είναι η ποσότητα $ f'(x) \ ,\ x\in A $.
+\item Ο ρυθμός μεταβολής της απόστασης $ s(t) $ ως προς το χρόνο $ t $, ενός αντικειμένου είναι η ταχύτητά του : $ s'(t)=v(t) $.
+\item Ο ρυθμός μεταβολής της ταχύτητας $ v(t) $ ως προς το χρόνο $ t $, ενός αντικειμένου είναι η επιτάχυνσή του : $ v'(t)=a(t) $. Επίσης η επιτάχυνση του αντικειμένου ισούται και με τη δεύτερη παράγωγο της απόστασης : $ a(t)=x''(t) $.
+\item Αν ο ρυθμός μεταβολής ενός ποσού $ f(x) $ σε κάποια θέση $ x_0 $ είναι θετικός τότε το ποσό αυτό \textbf{αυξάνεται}. Εάν ο ρυθμός είναι αρνητικός το ποσό \textbf{μειώνεται}.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Εφαπτόμενη ευθεία}
+Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ η οποία είναι παραγωγίσιμη και $ x_0\in A $ ένα σημείο του πεδίου ορισμού της. Η εξίσωση της εφαπτόμενης ευθείας στο σημείο $ A(x_0,f(x_0)) $ δίνεται από τον τύπο
+\[ y=f'(x_0)x+\beta \]
+\section{Παράγωγος συνάρτησης}\mbox{}\\
+\orismoi
+\Orismos{Παράγωγος συνάρτηση}
+Η συνάρτηση με την οποία κάθε τιμή $ x_0\in A $ μιας μεταβλητής $ x $ αντιστοιχεί στην παράγωγο $ f'(x_0) $ στο σημείο $ x_0 $, μιας συνάρτησης $ f $, ονομάζεται \textbf{παράγωγος συνάρτηση} της συνάρτησης $ f $. Συμβολίζεται με $ f' $ και η τιμή της $ f'(x) $ στο $ x $ ισούται με 
+\[ f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\ \ ,\ x\in A\subset A \]
+\begin{itemize}[itemsep=0mm]
+\item Το σύνολο $ Α $ είναι το υποσύνολο του πεδίου ορισμού $ A $ της συνάρτησης $ f $ στο οποίο είναι παραγωγίσιμη.
+\item Η παράγωγος της $ f $ λέγεται και \textbf{πρώτη παράγωγος} της.
+\item Η παράγωγος της πρώτης παραγώγου $ f' $ ονομάζεται \textbf{δεύτερη παράγωγος} και συμβολίζεται $ f'' $.
+\item Ομοίως η παράγωγος της $ f'' $ λέγεται \textbf{τρίτη παράγωγος} και συμβολίζεται $ f''' $.
+\item Η διαδικασία εύρεσης της παραγώγου μιας συνάρτησης ονομάζεται \textbf{παραγώγιση}.
+\item Ο αριθμός που μας δίνει το πλήθος των παραγωγίσεων ονομάζεται \textbf{τάξη} της παραγώγου.
+\item Οι παράγωγοι τάξης μεγαλύτερης του $ 3 $ συμβολίζονται $ f^{[\nu]} $ όπου $ \nu>3 $ είναι η τάξη της παραγώγου.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Κανόνες παραγώγισης}
+Στον παρακάτω πίνακα βλέπουμε τους κανόνες υπολογισμού της παραγώγου παραστάσεων που αποτελούν πράξεις συναρτήσεων. Για οποιεσδήποτε παραγωγίσιμες συναρτήσεις $ f,g $ θα ισχύει :
+\begin{center}
+\begin{tabular}{ccc}
+\hline 
+\rule[-2ex]{0pt}{5ex} \textbf{Πράξη} & \textbf{Συνάρτηση} & \textbf{Παράγωγος} \\ 
+\hhline{===}
+\rule[-2ex]{0pt}{5ex} \textbf{Άθροισμα - Διαφορά} & $ f(x)\pm g(x) $ & $ f'(x)\pm g'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Πολλαπλάσιο} & $ c\cdot f(x) $ & $ c\cdot f'(x) $ \\  
+\rule[-2ex]{0pt}{5ex} \textbf{Γινόμενο} & $ f(x)\cdot g(x) $ & $ f'(x)\cdot g(x)+f(x)\cdot g'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Πηλίκο} & $ \dfrac{f(x)}{g(x)} $ & $ \dfrac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g^2(x)} $ \\ 
+\rule[-2ex]{0pt}{7ex} \textbf{Αντίστροφη} & $ \dfrac{1}{f(x)} $ & $ -\dfrac{f'(x)}{f^2(x)} $ \\  
+\rule[-2ex]{0pt}{5ex} \textbf{Σύνθεση} & $ f(g(x)) $ & $ f'(g(x))\cdot g'(x) $ \\ 
+\hline 
+\end{tabular}  
+\end{center}
+\Thewrhma{Παράγωγοι συναρτήσεων}
+Στον πίνακα που ακολουθεί βλέπουμε τύπους για την παραγώγιση των βασικών συναρτήσεων καθώς και κανόνες παραγώγισης σύνθετων συναρτήσεων. Η απλή συνάρτηση και η σύνθεση συναρτήσεων που βρίσκονται στην ίδια γραμμή έχουν την ίδια μορφή ως προς τον τύπο τους.
+\begin{center}
+\begin{longtable}{cc|cc}
+\hline \rule[-2ex]{0pt}{5.5ex} Συνάρτηση $ f $& Παράγωγος $ f' $ & Συνάρτηση $ g\circ f $ & Παράγωγος $ \left( g\circ f \right)' $ \\ 
+\hhline{====} \rule[-2ex]{0pt}{5.5ex} $ c $ & $ 0 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x $ & $ 1 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x^\nu $ & $ \nu x^{\nu-1} $ & $ f^\nu(x) $ & $ \nu f^{\nu-1}(x)\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \dfrac{1}{x} $ & $ -\dfrac{1}{x^2} $ & $ \dfrac{1}{f(x)} $ & $ -\dfrac{f'(x)}{f^2(x)} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \sqrt{x} $ & $ \dfrac{1}{2\!\sqrt{x}} $ & $ \sqrt{f(x)} $ & $ \dfrac{f'(x)}{2\!\sqrt{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \hm{x} $ & $ \syn{x} $ & $ \hm{f(x)} $ & $ \syn{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \syn{x} $ & $ -\hm{x} $ & $ \syn{f(x)} $ & $ -\hm{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \ef{x} $ & $ \dfrac{1}{\syn^2{x}} $ & $ \ef{f(x)} $ & $ \dfrac{f'(x)}{\syn^2{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \syf{x} $ & $ -\dfrac{1}{\hm^2{x}} $ & $ \syf{f(x)} $ & $ -\dfrac{f'(x)}{\hm^2{f(x)}} $ \\ 
+%\rule[-2ex]{0pt}{5ex} $ a^x $ & $ a^x\ln{a} $ & $ a^{f(x)} $ & $ a^{f(x)}\ln{a}\cdot f'(x) $ \\ 
+%\rule[-2ex]{0pt}{5ex} $ e^x $ & $ e^x $ & $ e^{f(x)} $ & $ e^{f(x)}\cdot f'(x) $ \\ 
+%\rule[-2ex]{0pt}{7ex} $ \ln{|x|} $ & $ \dfrac{1}{x} $ & $ \ln{|f(x)|} $ & $ \dfrac{f'(x)}{f(x)} $ \\
+\hline 
+\end{longtable}
+\end{center}
+\section{Εφαρμογές των παραγώγων}\mbox{}\\
+\thewrhmata
+\Thewrhma{Κριτήριο της 1\tssL{η$ \textrm{ς} $} παραγώγου}
+Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ η οποία είναι παραγωγίσιμη.
+\begin{rlist}
+\item Αν ισχύει $ f'(x)>0 $ για κάθε $ x\in\varDelta $ τότε η συνάρτηση είναι γνησίως αύξουσα στο διάστημα $ \varDelta $.
+\item Αν ισχύει $ f'(x)<0 $ για κάθε $ x\in\varDelta $ τότε η συνάρτηση είναι γνησίως φθίνουσα στο διάστημα $ \varDelta $.
+\end{rlist}
+\Thewrhma{Κριτήριο τοπικών ακρότατων}
+Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ η οποία είναι παραγωγίσιμη και $ x_0 $ ένα εσωτερικό σημείο του διαστήματος.
+\begin{rlist}
+\item Αν ισχύουν οι σχέσεις 
+\begin{multicols}{3}
+\begin{itemize}[leftmargin=4mm]
+\item $ f'(x_0)=0 $
+\item $ f'(x)>0 $ για κάθε $ x<x_0 $ και 
+\item $ f'(x)<0 $ για κάθε $ x>x_0 $
+\end{itemize}
+\end{multicols}
+τότε η συνάρτηση παρουσιάζει \textbf{τοπικό μέγιστο} στο σημείο $ x_0 $.
+\item Αν ισχύουν οι σχέσεις
+\begin{multicols}{3} 
+\begin{itemize}[leftmargin=4mm]
+\item $ f'(x_0)=0 $
+\item $ f'(x)<0 $ για κάθε $ x<x_0 $ και 
+\item $ f'(x)>0 $ για κάθε $ x>x_0 $
+\end{itemize}
+\end{multicols}
+τότε η συνάρτηση παρουσιάζει \textbf{τοπικό ελάχιστο} στο σημείο $ x_0 $.
+\end{rlist}
+\chapter{Στατιστική}
+\section{Βασικές έννοιες}\mbox{}\\
+\orismoi
+\Orismos{Πληθυσμος}
+Πληθυσμός ονομάζεται ένα σύνολο όμοιων στοιχείων τα οποία εξετάζονται ως προς ένα ή περισσότερα χαρακτηριστικά. Το πλήθος των στοιχείων ενός πληθυσμού ονομάζεται \textbf{μέγεθος} του πληθυσμού.\\\\
+\Orismos{Δείγμα}
+Δείγμα ονομάζεται ένα υποσύνολο ενός πληθυσμού. \begin{itemize}
+\item Ένα δείγμα λέγεται \textbf{αντιπροσωπευτικό} ενός πληθυσμού όταν τα συμπεράσματα που προκύπτουν από τη μελέτη του είναι αρκετά αξιόπιστα ώστε να μπορούν να γενικευτούν για ολόκληρο τον πληθυσμό.
+\item Το πλήθος των στοιχείων ενός δείγματος ονομάζεται \textbf{μέγεθος} του δείγματος.
+\end{itemize}
+\Orismos{Μεταβλητή - Είδη μεταβλητών}
+Μεταβλητή ονομάζεται το χαρακτηριστικό ως προς το οποίο εξετάζονται τα στοιχεία ενός πληθυσμού. \begin{itemize}
+\item Συμβολίζεται με οποιοδήποτε κεφαλαίο γράμμα : $ X,Y,A,B,\ldots $
+\item Οι πιθανές τιμές οι οποίες μπορεί να πάρει μια μεταβλητή ονομάζονται \textbf{τιμές της μεταβλητής}. Συμβολίζονται με το ίδιο μικρό γράμμα του ονόματος της μεταβλητής π.χ. $ x_i,y_i\ldots $ όπου ο δείκτης $ i $ φανερώνει τον αύξοντα αριθμό της τιμής.
+\item Τα στατιστικά δεδομένα που συλλέγονται από ένα πληθυσμό ή δείγμα που εξετάζεται ως προς κάποια μεταβλητή ονομάζονται \textbf{παρατηρήσεις}. Συμβολίζονται συνήθως με $ t_i $ όπου ο δείκτης $ i $ φανερώνει τον αύξοντα αριθμό της παρατήρησης.
+\end{itemize} 
+Οι μεταβλητές διακρίνονται στις εξής κατηγορίες :
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Ποιοτικές}\\
+Ποιοτική ονομάζεται κάθε μεταβλητή της οποίας οι τιμές δεν είναι αριθμητικές.
+\item \textbf{Ποσοτικές}\\
+Ποσοτική ονομάζεται κάθε μεταβλητή της οποίας οι τιμές είναι αριθμοί. Οι ποσοτικές μεταβλητές χωρίζονται σε
+\begin{rlist}
+\item συνεχείς, αν μπορούν να πάρουν όλες τις τιμές μέσα σε ένα διάστημα $ (a,\beta) $ πραγματικών αριθμών.
+\item διακριτές, αν μπορούν να πάρουν μεμονωμένες τις τιμές μέσα σε ένα διάστημα $ (a,\beta) $ πραγματικών αριθμών.
+\end{rlist}
+\end{enumerate}
+\Orismos{Απογραφή - Δειγματοληψία}
+\vspace{-5mm}
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Απογραφή}\\
+Απογραφή ονομάζεται η συλλογή και επεξεργασία δεδομένων από έναν ολόκληρο πληθυσμό.
+\item \textbf{Δειγματοληψία}\\
+Δειγματοληψία ονομάζεται η συλλογή και επεξεργασία δεδομένων από ένα δείγμα ενός πληθυσμού.
+\end{enumerate}
+\section{Παρουσίαση στατιστικών δεδομένων}\mbox{}\\
+\orismoi
+\Orismos{Στατιστικοί πίνακες}
+Οι πίνακες στους οποίους συγκεντρώνουμε τα στατιστικά δεδομένα καθώς και πληροφορίες που μας βοηθούν να εξάγουμε συμπεράσματα για το δείγμα ή πληθυσμό ονομάζονται στατιστικοί πίνακες. Οι κατηγορίες πινάκων είναι :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Γενικοί πίνακες}\\
+Οι γενικοί πίνακες περιέχουν αναλυτικά όλες τις πληροφορίες που αφορούν τα δεδομένα που συλλέξαμε.
+\item \textbf{Ειδικοί πίνακες}\\
+Οι ειδικοί πίνακες είναι συνοπτικοί και περιέχουν πληροφορίες από τους γενικούς πίνακες.
+\end{enumerate}
+\Orismos{Συχνότητες}
+Συχνότητες ονομάζονται τα αριθμητικά μεγέθη τα οποία μας δίνουν πληροφορίες για τις τιμές των μεταβλητών των δεδομένων που έχουμε συλλέξει από ένα δέιγμα ή πληθυσμό, όπως ο αριθμός εμφανίσεων, το ποσοστό και άλλα. Έστω ένα δείγμα μεγέθους $ \nu $ το οποίο μελετάται ως προς μια μεταβλητή $ X $ με $ \kappa $ σε πλήθος τιμές $ x_i\ ,\ 1\leq i\leq \kappa\leq\nu $. Οι βασικές συχνότητες είναι οι ακόλουθες :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Απόλυτη συχνότητα ή Συχνότητα}\\
+Συχνότητα μιας τιμής $ x_i $ ονομάζεται ο φυσικός αριθμός $ \nu_i $ ο οποίος μας δίνει το πλήθος των εμφανίσεων της τιμής αυτής μέσα στο δείγμα.
+\item \textbf{Σχετική συχνότητα}\\
+Σχετική συχνότητα μιας τιμής $ x_i $ ονομάζεται το κλάσμα $ f_i=\frac{\nu_i}{\nu} $ το οποίο μας δίνει το ποσοστό εμφάνισης της τιμής ως μέρος του δείγματος. Μπορεί να εκφραστεί και ως ποσοστό επί τοις $ 100 $ και είναι \[ f_i\%=\frac{\nu_i}{\nu}\cdot 100\% \]
+\item \textbf{Αθροιστική συχνότητα}\\
+Αθροιστική συχνότητα ονομάζεται ο φυσικός αριθμός $ N_i $ ο οποίος μας δίνει το πλήθος των παρατηρήσεων που είναι μικρότερες ή ίσες την τιμή $ x_i $.
+\[ N_i=\nu_1+\nu_2+\ldots+\nu_i \]
+Υπολογίζεται μόνο για ποσοτικές μεταβλητές.
+\item \textbf{Σχετική αθροιστική συχνότητα}\\
+Σχετική αθροιστική συχνότητα ονομάζεται ο φυσικός αριθμός $ F_i $ ο οποίος μας δίνει το ποσοστό των παρατηρήσεων που είναι μικρότερες ή ίσες την τιμή $ x_i $.
+\[ F_i=f_1+f_2+\ldots+f_i \]
+Υπολογίζεται μόνο για ποσοτικές μεταβλητές. Μπορεί να εκφραστεί και ως ποσοστό επί τοις $ 100 $ και είναι $ F_i\%=F_i\cdot 100\% $.
+\end{enumerate}
+\Orismos{Ομαδοποίηση παρατηρήσεων}
+Η ομαδοποίηση των παρατηρήσεων ενός δείγματος είναι η διαδικασία με την οποία μοιράζονται οι παρατηρήσεις μιας ποσοτικής μεταβλητής σε ομάδες. Χρησιμοποιείται όταν παρουσιάζεται μεγάλο πλήθος διαφορετικών μεταξύ τους παρατηρήσεων ώστε να μελετηθεί καλύτερα το δείγμα.
+\begin{itemize}
+\item Οι ομάδες στις οποίες μοιράζονται οι παρατηρήσεις ονομάζονται \textbf{κλάσεις}. Αποτελούν διαστήματα τιμών της μορφής $ [\ ,\ ) $.
+\item Τα άκρα των κλάσεων ονομάζονται \textbf{όρια}. Επιλέγουμε το άνω όριο της τελευταίας κλάσης να είναι κλειστό ώστε αυτή να έχει τη μορφή $ [\ ,\ ] $.
+\item Το μέγεθος κάθε κλάσης δίνεται από τον τύπο $ c=\dfrac{R}{\kappa} $ όπου $ R $ είναι το εύρος των παρατηρήσεων και $ \kappa $ το πλήθος των κλάσεων.
+\item Το κέντρο κάθε κλάσης ονομάζεται \textbf{κεντρική τιμή} και συμβολίζεται $ x_i $.
+\end{itemize}
+\Orismos{Γραφική παράσταση δεδομένων}
+Τα δεδομένα που έχουμε συλλέξει σε μια κατανομή συχνοτήτων μπορούμε να τα παραστήσουμε γραφικά με τη χρήση διαφόρων ειδών διαγραμμάτων ανάλογα το είδος της μεταβλητής. Έστω μια μεταβλητή $ X $ με τιμές $ x_1,x_2,\ldots,x_\kappa $. Βασικοί τρόποι γραφικής παράστασης δεδομένων είναι οι ακόλουθοι :
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Ραβδόγραμμα}\\
+Το ραβδόγραμμα συχνοτήτων χρησιμοποιείται για τη γραφική παράσταση δεδομένων ενός δείγματος το οποίο έχει εξεταστεί ως προς \textbf{ποιοτική} μεταβλητή $ X $. Σε ένα σύστημα ορθογωνίων αξόνων θέτουμε στον οριζόντιο άξονα τις τιμές της μεταβλητής $ X $ ενώ στον κατακόρυφο οποιαδήποτε συχνότητα θέλουμε να μελετήσουμε. Σχεδιάζουμε κάθετες μπάρες στη θέση κάθε τιμής $ x_i\ ,\ i=1,2,\ldots,\kappa $ των οποίων το ύψος ισούται με την τιμή της αντίστοιχης συχνότητας.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,
+width  = 7cm,
+height = 5cm,
+major x tick style = transparent,
+ybar=2*\pgflinewidth,
+bar width=20pt,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,,anchor=center},
+ymajorgrids = true,
+symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.25,
+ymin=0,title={\textbf{Ραβδόγραμμα}},
+legend cell align=left,
+legend style={at={(1,1.05)},anchor=south east,
+column sep=1ex}]
+\addplot[style={rred,fill=rred,mark=none}]
+coordinates {($ x_1 $, 5.0) ($ x_2 $,3.0) ($ x_3 $,4.0)};
+%\legend{Μαθηματικά,Φυσική,TreeScore $>3$,TreeScore $>4$}
+\end{axis}
+\end{tikzpicture}\quad
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,
+width  = 8cm,
+height = 5cm,
+major x tick style = transparent,title={\textbf{Πολλαπλό Ραβδόγραμμα}},
+ybar=2*\pgflinewidth,
+bar width=20pt,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-1mm,,anchor=center},
+ymajorgrids = true,
+symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.25,
+ymin=0,
+legend cell align=left,
+legend style={at={(1.3,1.05)},anchor=north east,
+column sep=1ex}]
+\addplot[style={rred,fill=rred,mark=none}]
+coordinates {($ x_1 $, 5.0) ($ x_2 $,3.0) ($ x_3 $,4.0)};
+\addplot[style={\xrwma,fill=\xrwma,mark=none}]
+coordinates {($ x_1 $, 4.0) ($ x_2 $,5.0) ($ x_3 $,3.0)};
+\legend{Δείγμα Α,Δείγμα Β}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Αν εξετάζονται δύο η περισσότερα δείγματα ως προς την ίδια ποιοτική μεταβλητή τότε χρησιμοποιούμε το πολλαπλό ραβδόγραμμα το οποίο περιέχει σε κάθε θέση $ x_i $ τις ράβδους συχνοτήτων από όλα τα δείγματα.
+\item \textbf{Διάγραμμα}\\
+\wrapr{-5mm}{7}{7.1cm}{-11mm}{\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,ybar,enlarge x limits=0.25,bar width=1pt,ymin=0,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,,anchor=center},height=4cm,width=7.5cm,symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $,$\ldots$,$ x_\kappa $},
+xtick = data]
+\addplot
+[draw=\xrwma,fill=\xrwma] 
+coordinates
+{($ x_1 $,20) ($ x_2 $,17) ($ x_3 $,15) ($\ldots$,23) ($ x_\kappa $,19)};
+\end{axis}
+\end{tikzpicture}}{
+Το διάγραμμα συχνοτήτων χρησιμοποιείται στην περίπτωση μιας \textbf{ποσοτικής} μεταβλητής και σε αντίθεση με το ραβδόγραμμα αποτελείται από κατακόρυφες ευθείες τοποθετημένες στις θέσεις $ x_1,x_2,\ldots,x_\nu $ των τιμών της μεταβλητής. Κάθε ευθεία έχει ύψος ίσο με την τιμή της συχνότητας που αντιστοιχεί σε κάθε $ x_i $.}
+\item \textbf{Πολύγωνο συχνοτήτων}\\
+\wrapl{-5mm}{7}{7.1cm}{-7mm}{\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,ymajorgrids = true,enlarge x limits=0.2,height=4cm,width=7.5cm,ymin=0,symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $,$ \ldots. $,$ \ldots $,$ x_\kappa $},
+xtick = data,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,anchor=center}]
+\addplot
+[draw=\xrwma,pl] 
+coordinates
+{($ x_1 $,5) ($ x_2 $,8) ($ x_3 $,7) ($ \ldots. $,7.5) ($ \ldots $,10) ($ x_\kappa $,9)};
+\end{axis}
+\end{tikzpicture}}{
+Το πολύγωνο συχνοτήτων χρησιμοποιείται στην παράσταση δεδομένων που μελετήθηκαν ως προς \textbf{ποσοτική μεταβλητή}. Είναι μια τεθλασμένη γραμμή η οποία ενώνει τα σημεία της μορφής $ (x_i,\nu_i) $ ή $ (x_i,f_i) $ κ.τ.λ. δηλαδή τα σημεία με συντεταγμένες τις τιμές $ x_i $ και τις αντίστοιχες συχνότητες.}
+\newpage
+\item \textbf{Κυκλικό διάγραμμα}\\
+\wrapr{-5mm}{10}{7.1cm}{-11mm}{\begin{tikzpicture}
+[pie chart,slice type={comet}{a},
+slice type={legno}{b},
+slice type={coltello}{d},
+slice type={sedia}{c},
+slice type={caffe}{e},
+pie values/.style={font={\small}},
+scale=2
+]
+\pie[values of coltello/.style={pos=.7}]{}{40/comet/a_1,27/legno/a_2,14/sedia/a_3,11/coltello/\ldots,8/caffe/a_\kappa}
+\legend[shift={(1.3cm,1cm)}]{{$ x_1 $}/comet, {$ x_2 $}/legno, {$ x_3 $}/coltello}
+\legend[shift={(2.1cm,1cm)}]{{$ \ldots $}/sedia, {$ x_\kappa $}/caffe}
+\end{tikzpicture}}{
+Το κυκλικό διάγραμμα χρησιμοποιείται για την παράσταση δεδομένων που έχουν μελετηθεί και ως προς ποιοτική και ως προς ποσοτική μεταβλητή $ X $ με τιμές $ x_2,x_2,\ldots,x_\kappa $. Ένας κύκλος χωρίζεται σε $ \kappa $ κυκλικούς τομείς όπου το μέγεθος του κάθε κυκλικού τομέα είναι αντίστοιχο της τιμής της συχνότητας που μελετάμε. Το μέτρο του τόξου κάθε τομέα συμβολίζεται με $ a_i\ ,\ i=1,2,\ldots,\nu $ και είναι :
+\[ a_i=\frac{\nu_i}{\nu}\cdot 360\degree=f_i\cdot 360\degree \]}
+\item \textbf{Σημειόγραμμα}\\
+\wrapr{-5mm}{5}{6.1cm}{-12mm}{
+\begin{tikzpicture}[dot/.style={
+        circle,
+        inner sep=1.5pt,
+        fill,
+        color=\xrwma
+    }]
+    \clip (-.2,-.4) rectangle (5.9,2.5);
+\begin{axis}[aks_on,x=1cm,belh ar,xlabel={\footnotesize$x_i$},
+axis y line=none,ymin=0,ymax=1,
+xmin=-.5,xmax=5,xticklabels={,$x_1$,$x_2$,$x_3$,$\ldots$,$x_\kappa$},extra x ticks={-.5}
+]
+\end{axis}
+\shmeio{0}{2}
+\shmeio{1}{3}
+\shmeio{2}{5}
+\shmeio{3}{1}
+\shmeio{4}{3}
+\end{tikzpicture}}{
+Το σημειόγραμμα αποτελείται από έναν άξονα στον οποίο τοποθετούμε τις τιμές $ x_1,x_2,\ldots,x_\kappa $ της μεταβλητής $ X $ και σε κάθε θέση σχεδιάζονται κατακόρυφα τόσα σημεία όσα και η συχνότητα της κάθε τιμής.}
+\item \textbf{Χρονόγραμμα}\\
+Το χρονόγραμμα χρησιμοποιείται στην περίπτωση μιας ποσοτικής μεταβλητής όταν αυτή παριστάνει χρόνο. Στον οριζόντιο άξονα τοποθετούνται οι τιμές της μεταβλητής του χρόνου ενώ στονα κατακόρυφο οποιαδήποτε από τις συχνότητες των τιμών αυτών.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ymajorgrids = true,height=5cm,width=8cm,xmajorgrids = true,enlarge x limits=0.2,bar width=1pt,ylabel={\footnotesize $ \nu_i $},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=1mm, anchor=center},ylabel style={at={(current axis.above origin)},yshift=1mm,anchor=center},ymin=0]
+\addplot
+[draw=\xrwma,pl] 
+coordinates
+{(2010,5) (2011,4) (2012,8) (2013,7) (2014,12)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Το χρονόγραμμα μας δίνει μια εικόνα για τις διάφορες μεταβολές της εκάστοτε συχνότητας κατά την πάροδο του χρόνου.
+\item \textbf{Ιστόγραμμα}\\
+Το ιστόγραμμα συχνοτήτων χρησιμοποιείται για τη γραφική παρουσίαση ομαδοποιημένων δεδομένων. Οριζόντιος άξονας είναι ό άξονας των ομάδων ενώ κατακόρυφος ο άξονας της οποιαδήποτε συχνότητας.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,width=7cm,
+height=5cm,xmin=-2,xmax=10,xlabel style={at={(current axis.right of origin)},xshift=8mm,yshift=5mm, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=-2mm,xshift=3mm,anchor=center},
+ymin=0, ymax=7.7,xlabel={Κλάσεις},ylabel={\rotatebox{-90}{$ \nu_i $}},xticklabels={,,$a$,$a+c$,$a+2c$,$\ldots$,$b$},title={\textbf{Ιστόγραμμα}}]
+\draw[fill=\xrwma] (axis cs:0,0) rectangle (axis cs:2,4);
+\draw[fill=\xrwma] (axis cs:2,0) rectangle (axis cs:4,3);
+\draw[fill=\xrwma] (axis cs:4,0) rectangle (axis cs:6,7);
+\draw[fill=\xrwma] (axis cs:6,0) rectangle (axis cs:8,5);
+\end{axis}
+\end{tikzpicture}\quad
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,width=7cm,
+height=5cm,xmin=-2,xmax=10,xlabel style={at={(current axis.right of origin)},xshift=8mm,yshift=5mm, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=-2mm,xshift=3mm,anchor=center},
+ymin=0, ymax=7.7,xlabel={Κλάσεις},ylabel={\rotatebox{-90}{$ \nu_i $}},xticklabels={,,$a$,$a+c$,$a+2c$,$\ldots$,$b$},title={\textbf{Ιστόγραμμα - Πολύγωνο}}]
+\draw[fill=\xrwma] (axis cs:0,0) rectangle (axis cs:2,4);
+\draw[fill=\xrwma] (axis cs:2,0) rectangle (axis cs:4,3);
+\draw[fill=\xrwma] (axis cs:4,0) rectangle (axis cs:6,7);
+\draw[fill=\xrwma] (axis cs:6,0) rectangle (axis cs:8,5);
+\draw[pl] (axis cs:-1,0)--(axis cs:1,4)--(axis cs:3,3)--(axis cs:5,7)--(axis cs:7,5)--(axis cs:9,0);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Αποτελείται από μπάρες (ιστοί) ίσου πλάτους μιας κλάσης και ύψους ίσου με την τιμή της συχνότητας. \begin{itemize}
+\item Το εμβαδόν κάθε ιστού ισούται με την τιμή της αντίστοισχης συχνότητας αν θεωρήσουμε ως μονάδα μέτρησης το πλάτος $ c $ της ομάδας.
+\item Το εμβαδόν όλων των ιστών ισούται με το μέγεθος $ \nu $ του δείγματος.
+\item Ενώνοντας το μέσο της άνω πλευράς κάθε ιστού συμπεριλαμβάνοντας την αμέσως προηγούμενη και αμέσως επόμενη κλάση, πορκύπτει το \textbf{πολύγωνο συχνοτήτων}.
+\end{itemize}
+\end{enumerate}
+\Orismos{Καμπύλη συχνοτήτων}
+Η καμπύλη συχνοτήτων αποτελεί ένα πολύγωνο συχνοτήτων ομαδοποιημένων παρατηρήσεων στην περίπτωση όπου το πλήθος των ομάδων είναι αρκετά μεγάλο ενώ το πλάτος κάθε ομάδας πολύ μικρό. Έτσι το πολύγωνο τείνει να γίνει μια ομαλή καμπύλη. 
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,
+  no markers, domain=0:7.7,xmax=8, samples=200,
+  axis lines*=left, xlabel=$x_i$, ylabel=$\nu_i$,
+  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, width=9cm,xticklabels={$ \bar{x}-3s $,$ \bar{x}-2s $,$ \bar{x}-s $,$ \bar{x} $,$ \bar{x}+s $,$ \bar{x}+2s $,$ \bar{x}+3s $},ymajorgrids=true,
+  xtick={1,2,3,4,5,6,7},ymax=.45,
+  enlargelimits=false, clip=false, axis on top]
+  \addplot [very thick,red!80!black] {gauss(4,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Βασική καμπύλη συχνοτήτων είναι αυτή της κανονικής κατανομής στην οποία οι παρατηρήσεις είναι εξίσου κατανεμημένες εκατέρωθεν της μέσης τιμής ενώ το μεγαλύτερο πλήθος τους συσπειρώνεται γύρω της.
+\thewrhmata
+\Thewrhma{Ιδιότητες συχνοτήτων}
+Έστω ένα δείγμα μεγέθους $ \nu $ το οποίο μελετάται ως προς μια μεταβλητή $ X $ με $ \kappa $ σε πλήθος τιμές $ x_i\ ,\ 1\leq i\leq \kappa\leq\nu $. Για τις συχνότητες των τιμών του ισχύουν οι ακόλουθες ιδιότητες :\\
+\bmath{Ιδιότητες της συχνότητας $ \nu_i $}
+\begin{rlist}
+\item Για κάθε συχνότητα $ \nu_i\ ,\ i=1,2,\ldots,\kappa $ ισχύει $ 0\leq\nu_i\leq\nu $.
+\item Το άθροισμα όλων των συχνοτήτων $ \nu_i\ ,\ i=1,2,\ldots,\kappa $ ισούται με το μέγεθος του δείγματος.
+\[ \nu_1+\nu_2+\ldots+\nu_\kappa=\nu \]
+\end{rlist}
+\bmath{Ιδιότητες της συχνότητας $ f_i,f_i\% $}
+\begin{rlist}[resume]
+\item Για κάθε σχετική συχνότητα $ f_i\textrm{ και σχετική συχνότητα τοις 100 }f_i\%\ ,\ i=1,2,\ldots,\kappa $ ισχύουν οι σχέσεις $ 0\leq f_i\leq 1\ \textrm{ και }\ 0\leq f_i\%\leq100\% $.
+\item Το άθροισμα όλων των σχετικών συχνοτήτων $ f_i\ ,\ i=1,2,\ldots,\kappa $ ισούται με τη μονάδα ενώ το άθροισμα των σχετικών συχνοτήτων επί τοις $ 100 $ είναι ίσο με $ 100\% $.
+\[ f_1+f_2+\ldots+f_\kappa=1\ \textrm{ και }\ f_1\%+f_2\%+\ldots+f_\kappa\%=100\% \]
+\end{rlist}
+\bmath{Ιδιότητες της συχνότητας $ N_i $}
+\begin{rlist}[resume]
+\begin{multicols}{3}
+\item $ \nu_i=N_i-N_{i-1} $
+\item $ \nu_1=N_1 $
+\item $ N_\kappa=\nu $
+\end{multicols}
+\end{rlist}
+\newpage
+\bmath{Ιδιότητες της συχνότητας $ F_i,F_i\% $}
+\begin{rlist}[resume]
+\begin{multicols}{3}
+\item $ f_i=F_i-F_{i-1} $
+\item $ f_i\%=F_i\%-F_{i-1}\% $
+\item $ F_i=\dfrac{N_i}{\nu} $
+\item $ F_i\%=\dfrac{N_i}{\nu}\cdot 100\% $
+\item $ f_1=F_1 $
+\item $ f_1\%=F_1\% $
+\item $ F_\kappa=1 $
+\item $ F_\kappa\%=100\% $
+\end{multicols}
+\end{rlist}
+\section{Μέτρα θέσης και διασποράς}\mbox{}\\
+\orismoi
+\Orismos{Μέτρο θέσης}
+Μέτρα θέσης ονομάζονται τα αριθμητικά μεγέθη τα οποία μας δίνουν τη θέση του κέντρου των παρατηρήσεων μιας δειγματοληψίας. Τα μέτρα θέσης ενός δείγματος $ \nu $ παρατηρήσεων $ t_1,t_2,\ldots,t_\nu $ για μια μεταβλητή $ X $ είναι τα εξής :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Μέση τιμή}\\
+Η μέση τιμή ορίζεται ως το πηλίκο του αθροίσματος των παρατηρήρεων ενός δείγματος προς το πλήθος τους. Συμβολίζεται $ \bar{x} $ και είναι :
+\[ \bar{x}=\frac{t_1+t_2+\ldots+t_\nu}{\nu}=\frac{1}{\nu}\sum_{i=1}^{\nu}{t_i} \]
+Εναλλακτικοί τύποι για τη μέση τιμή είναι οι ακόλουθοι οι οποίοι χρησιμοποιούνται σε κατανομές συχνοτήτων. Αν κάποια μεταβλητή $ X $ έχει τιμές $ x_1,x_2\ldots,x_\kappa $ με συχνότητες $ \nu_1,\nu_2\ldots,\nu_\kappa $ και σχετικές συχνότητες $ f_1,f_2,\ldots,f_\kappa $ τότε θα έχουμε :
+\[ \bar{x}=\frac{1}{\nu}\sum_{i=1}^{\kappa}{x_i\nu_i}\ \textrm{ και }\ \bar{x}=\sum_{i=1}^{\kappa}{x_if_i} \]
+Για τα ομαδοποιημένα δεδομένα το $ x_i $ συμβολίζει την κεντρική τιμή κάθε κλάσης.
+\item \textbf{Σταθμικός μέσος}\\
+Ο σταθμικός μέσος ορίζεται ως η μέση τιμή των παρατηρήσεων όταν αυτές έχουν ξεχωριστό συντελεστή βαρύτητας. Ισούται με 
+\[ \bar{x}=\frac{t_iw_1+t_2w_2+\ldots+t_\nu w_\nu}{w_1+w_2+\ldots+w_\nu}=\frac{\sum\limits_{i=1}^{\nu}{t_iw_i}}{\sum\limits_{i=1}^{\nu}{w_i}} \]
+όπου $ w_i\ ,\ i=1,2,\ldots,\nu $ είναι οι συντελεστές βαρύτητας των παρατηρήσεων.
+\item \textbf{Διάμεσος}\\
+Διάμεσος ονομάζεται η κεντρική παρατήρηση $ \nu $ σε πλήθους παρατηρήσεων όταν αυτές έχουν τοποθετηθεί σε αύξουσα σειρά. Συμβολίζεται με $ \delta $. Ξεχωρίζουμε τις εξής περιπτώσεις :
+\begin{rlist}
+\item Αν το πλήθος των $ \nu $ παρατηρήσεων είναι περιττό τότε η διάμεσος ισούται με τη μεσαία παρατήρηση.
+\[ \delta=t_{_{\frac{\nu}{2}}} \]
+\item Αν το πλήθος των $ \nu $ παρατηρήσεων είναι άρτιο τότε η διάμεσος ισούται με το ημιάθροισμα των δύο μεσαίων παρατηρήσεων.
+\[ \delta=\frac{t_{_{\frac{\nu}{2}}}+t_{_{\frac{\nu}{2}+1}}}{2} \]
+\end{rlist}
+Η διάμεσος σε κατανομή συχνοτήτων ισούται με την τιμή $ x_i $ για την οποία η σχετική αρθροιστική συχνότητα $ F_i\% $ είτε ισούται είτε ξεπερνάει για πρώτη φορά το $ 50\% $. Δηλαδή
+\[ \delta=x_i\ \textrm{ για την οποία }\ F_{i-1}\%<50\%\leq F_i\% \]
+\end{enumerate}
+\Orismos{Μέτρο διασποράς}
+Μέτρα διασποράς ονομάζονται τα αριθμητικά μεγέθη τα οποία μας δίνουν τη διασπορά των παρατηρήσεων μιας δειγματοληψίας γύρω από το κέντρο. Τα μέτρα θέσης ενός δείγματος $ \nu $ παρατηρήσεων $ t_1,t_2,\ldots,t_\nu $ για μια μεταβλητή $ X $ είναι τα εξής :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Εύρος}\\
+Εύρος ονομάζεται η διαφορά την μέγιστης μείον την ελάχιστη παρατήρηση του δέιγματος. Συμβολίζεται με $ R $ και είναι :
+\[ R=t_{max}-t_{min} \]
+\item \textbf{Διακύμανση}\\
+Διακύμανση ονομάζεται η μέση τιμή των τετραγώνων των διαφορών των παρατηρήσεων $ t_i $ από τη μέση τιμή $ \bar{x} $ τους. Συμβολίζεται με $ s^2 $.
+\[ s^2=\frac{1}{\nu}\sum_{i=1}^{\nu}{(t_i-\bar{x})^2} \]
+Σε μια κατανομή συχνοτήτων αν μια μεταβλητή έχει τιμές $ x_1,x_2,\ldots,x_\kappa $ με συχνότητες $ \nu_1,\nu_2,\ldots,\nu_\kappa $ και σχετικές συχνότητες $ f_1,f_2,\ldots,f_\kappa $ τότε η διακύμανση δίνεται από τους παρακάτω τύπους :
+\begin{multicols}{2}
+\begin{rlist}
+\item $ s^2=\dfrac{1}{\nu}\LEFTRIGHT\{\}{\sum\limits_{i=1}^{\nu}{t_i^2}-\frac{\left( \sum\limits_{i=1}^{\nu}{t_i}\right)^2 }{\nu}} $
+\item $ s^2=\frac{1}{\nu}\sum\limits_{i=1}^{\kappa}{(x_i-\bar{x})^2\nu_i} $
+\item $ s^2=\dfrac{1}{\nu}\LEFTRIGHT\{\}{\sum\limits_{i=1}^{\kappa}{x_i^2\nu_i}-\frac{\left( \sum\limits_{i=1}^{\kappa}{x_i\nu_i}\right)^2 }{\nu}} $
+\item $ s^2=\sum\limits_{i=1}^{\kappa}{(x_i-\bar{x})^2 f_i} $
+\end{rlist}
+\end{multicols}
+\begin{rlist}[start=5]
+\item $ s^2=\sum\limits_{i=1}^{\kappa}{x_i^2f_i}-\bar{x}^2 $
+\item $ s^2=\overline{x^2}-\bar{x}^2 $ όπου $ \overline{x^2}=\frac{1}{\nu}\sum\limits_{i=1}^{\nu}{t_i^2}=\frac{1}{\nu}\sum\limits_{i=1}^{\kappa}{x_i^2\nu_i}=\sum\limits_{i=1}^{\kappa}{x_i^2f_i} $
+\end{rlist}
+\item \textbf{Τυπική απόκλιση}\\
+Η τυπική απόκλιση ορίζεται ως η θετική τετραγωνική ρίζα της διακύμανσης.
+\[ s=\sqrt{s^2} \]
+\item \textbf{Συντελεστής μεταβλητότητας}\\
+Συντελεστής μεταβολής ή μεταβλητότητας ονομάζεται ο λόγος της τυπικής απόκλισης προς την απόλυτη τιμή του μέσου όρου του δείγματος. Συμβολίζεται $ CV $.
+\[ CV=\frac{s}{|x|}\cdot 100\% \]
+\begin{itemize}
+\item Μας δίνει την ομοιογένεια των δεδομένων ενός δείγματος.
+\item Ένα δείγμα χαρακτηρίζεται ομοιογενές αν ο συντελεστής μεταβολής του είναι μικρότερος του $ 10\% $.
+\end{itemize}
+\end{enumerate}
+\chapter{Πιθανότητες}
+\section{Δειγματικός χώρος - Ενδεχόμενα}\mbox{}\\
+\orismoi
+\Orismos{Πείραμα τύχησ} Πείραμα τύχης ονομάζεται κάθε πείραμα του οποίου το αποτέλεσμα δεν μπορεί να προβλευθεί με απόλυτη βεβαιότητα όσες φορές κι αν αυτό επαναληφθεί, κάτω από τις ίδιες συνθήκες.\\\\
+\Orismos{Δειγματικόσ Χώροσ} Δειγματικός χώρος ονομάζεται το σύνολο το οποίο περιέχει όλα τα πιθανά αποτελέσματα ενός πειράματος τύχης. Ο δειγματικός αποτελέι βασικό σύνολο. \[ \varOmega=\left\lbrace \omega_1,\omega_2,\ldots,\omega_\nu \right\rbrace \]
+\Orismos{Ενδεχόμενο} Ενδεχόμενο ονομάζεται το σύνολο το οποίο περιέχει ένα ή περισσότερα στοιχεία του δειγματικού χώρου ενός πειράματος.
+\begin{itemize}[itemsep=0mm]
+\item Κάθε ενδεχόμενο είναι υποσύνολο του δειγματικού του χώρου.
+\item Συμβολίζεται με κεφαλαίο γράμμα π.χ. : $ A,B,\ldots $
+\item Τα ενδεχόμενα που έχουν ένα στοιχείο ονομάζονται \textbf{απλά} ενδεχόμενα, ενώ αν περιέχουν περισσότερα στοιχεία ονομάζονται \textbf{σύνθετα}.
+\item Εαν το αποτέλεσμα ενός πειράματος είναι στοιχείο ενός ενδεχομένου τότε το ενδεχόμενο \textbf{πραγματοποιείται}.
+\item Τα στοιχεία ενός ενδεχομένου ονομάζονται ευνοϊκές περιπτώσεις.
+\item Ο δειγματικός χώρος $ \varOmega $ ονομάζεται \textbf{βέβαιο} ενδεχόμενο, ενώ το κενό σύνολο ονομάζεται \textbf{αδύνατο} ενδεχόμενο.
+\item Εαν δύο ενδεχόμενα $ A,B $ δεν έχουν κοινά στοιχεία τότε ονομάζονται \textbf{ασυμβίβαστα} ή ξένα μεταξύ τους δηλαδή : \[ A,B \textrm{ ασυμβίβαστα }\Leftrightarrow A\cap B=\varnothing \]
+\end{itemize}\mbox{}\\
+\Orismos{πράξεισ με ενδεχόμενα}
+Οι πράξεις μεταξύ ενδεχομένων ορίζονται ακριβώς όπως και οι πράξεις μεταξύ συνόλων. Κάθε ορισμός προσαρμόζεται ώστε να περιγράψει την ισχύ του ενδεχομένου σε κάθε περίπτωση.
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Ένωση}\\
+Ένωση δύο ενδεχομένων $ A,B $ ονομάζεται το ενδεχόμενο το οποίο περιέχει τα κοινά και μη κοινά στοιχεία των δύο ενδεχομένων. Η ένωση πραγματοποιείται όταν πραγματοποιείται τουλάχιστον ένα από τα ενδεχόμενα $ A $ ή $ B $. \[ x\in A\cup B\Leftrightarrow x\in A \textrm{ ή }x\in B \]
+\item \textbf{Τομή}\\
+Τομή δύο ενδεχομένων $ A,B $ ονομάζεται το ενδεχόμενο το οποίο περιέχει τα κοινά στοιχεία των δύο ενδεχομένων. Η τομή πραγματοποιείται όταν πραγματοποιούνται συγχρόνως και τα δύο ενδεχόμενα $ A $ και $ B $. \[ x\in A\cap B\Leftrightarrow x\in A \textrm{ και }x\in B \]
+\item \textbf{Συμπλήρωμα}\\Συμπλήρωμα ενός ενδεχομένου $ A $ ονομάζεται το ενδεχόμενο το οποίο περιέχει τα στοιχεία εκείνα τα οποία \textbf{δεν} ανήκουν στο σύνολο $ A $. Το συμπλήρωμα πραγματοποιείται όταν δεν πραγματοποιείται το $ A $. \[ x\in A'\Leftrightarrow x\notin A\]
+\item \textbf{Διαφορά}\\
+Διαφορά ενός ενδεχομένου $ A $ από ένα ενδεχόμενο $ B $ ονομάζεται το ενδεχόμενο που περιέχει τα στοιχεία που ανήκουν μόνο στο ενδεχόμενο $ A $. Η διαφορά πραγματοποιείται όταν πραγματοποιείται μόνο το ενδεχόμενο $ A $. \[ x\in A-B\Leftrightarrow x\in A \textrm{ και }x\notin B \]
+\end{enumerate}
+Στον παρακάτω πίνακα φαίνονται τα ενδεχόμενα, οι πράξεις μεταξύ δύο ενδεχομένων $ A,B $, οι συμβολισμοί τους, λεκτική περιγραφή καθώς και διάγραμμα για κάθε περίπτωση.
+\begin{center}
+\begin{longtable}{c>{\centering}m{2.5cm}>{\centering}m{5cm} c}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Συμβολισμός} & \textbf{Ενδεχόμενο} & \textbf{Περιγραφή} & \textbf{Διάγραμμα} \\ 
+\hhline{====} \rule[-2ex]{0pt}{8.5ex} $ x\in A $ & Ενδεχόμενο Α & Το ενδεχόμενο $ A $ πραγματοποιείται. & \parbox[c]{22mm}{\mbox{}\\\begin{tikzpicture}[scale=.438]
+\draw (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[\xrwma!50] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){{\scriptsize $ \varOmega $}}
+\tkzText(-.45,.1){{\scriptsize $ A $}}
+\end{tikzpicture}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A' $ & Συμπλήρωμα του $ A $ & Το ενδεχόμενο $ A $ \textbf{δεν} πραγματοποιείται. & \parbox[c]{22mm}{\mbox{}\\\begin{tikzpicture}[scale=.438]
+\filldraw[fill=\xrwma!50] (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[white] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){{\scriptsize $ \varOmega $}}
+\tkzText(-.45,.1){{\scriptsize $ A $}}
+\end{tikzpicture}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A\cup B $ & Ένωση του $ A $ με το $ B $ & Πραγματοποιείται ένα \textbf{τουλάχιστον} από τα ενδεχόμενα $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillA \fillB
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A\cap B $ & Τομή του $ A $ με το $ B $ & Πραγματοποιούνται \textbf{συγχρόνως} τα ενδ. $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillACapB
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in A-B $ & Διαφορά του $ B $ απ' το $ A $ & Πραγματοποιείται \textbf{μόνο} το ενδεχόμενο $ A $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillANotB
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in B-A $ & Διαφορά του $ A $ απ' το $ B $ & Πραγματοποιείται \textbf{μόνο} το ενδεχόμενο $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillBNotA
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left(A-B\right)\cup\left(B-A\right) $ & Ένωση διαφορών & Πραγματοποιείται \textbf{μόνο} ένα από τα δύο ενδεχόμενα (ή μόνο το $ A $ ή μόνο το $ B $). & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillANotB \fillBNotA
+\end{venndiagram2sets}} \\ 
+\rule[-2ex]{0pt}{8.5ex} \begin{minipage}{2.8cm}
+\begin{center}
+$ A\subseteq B $\\
+$ x\in A\Rightarrow x\in B $
+\end{center}
+\end{minipage} & $ A $ υποσύνολο του $ Β $ & Η πραγματοποίηση του $ A $ συνεπάγεται πραγμ/ση του $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{tikzpicture}[scale=.438]
+\draw (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\filldraw[fill=\xrwma!50] (-.45,-.5) circle (1.1);
+\draw[fill=\xrwma!50] (-.5,-.5) circle (.7);
+\endscope
+\tkzText(-1.6,-1.6){{\scriptsize $ \varOmega $}}
+\tkzText(.9,.1){{\scriptsize $ B $}}
+\tkzText(-.45,-.2){{\scriptsize $ A $}}
+\end{tikzpicture}} \\ 
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left(A\cap B\right)' $ & Συμπλήρωμα τομής & \textbf{Δεν} πραγματοποιούνται \textbf{συγχρονως} τα ενδ. $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorNotB
+\end{venndiagram2sets}}\\
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left(A\cup B\right)' $ & Συμπλήρωμα ένωσης & Δεν πραγματοποιείται \textbf{κανένα} από τα ενδ. $ A $ και $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB
+\end{venndiagram2sets}}\\
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left( A-B\right)'  $ & Συμπλήρωμα διαφοράς & \textbf{Δεν} πραγματοποιείται αποκλειστικά το ενδεχόμενο $ A $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB \fillB
+\end{venndiagram2sets}} \\
+\rule[-2ex]{0pt}{8.5ex} $ x\in \left(B-A\right)'  $ & Συμπλήρωμα διαφοράς & \textbf{Δεν} πραγματοποιείται αποκλειστικά το ενδεχόμενο $ B $. & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB \fillA
+\end{venndiagram2sets}} \\
+\rule[-2ex]{0pt}{8.5ex} $ x\in\left( \left(A-B\right)\cup\left(B-A\right)\right)'  $ & Συμπλήρωμα ένωσης διαφορών & \textbf{Δεν} πραγματοποιείται αποκλειστικά ένα από τα δύο ενδεχόμενα (ή κανένα από τα δύο ή και τα δύο). & \parbox[c]{22mm}{\mbox{}\\\begin{venndiagram2sets}[tikzoptions={scale=.4},shade=\xrwma!50,labelA={{\scriptsize $ A $}},labelB={{\scriptsize $ B $}},labelNotAB={{\scriptsize $ \varOmega $}}]
+\fillNotAorB \fillACapB
+\end{venndiagram2sets}} \\
+\rule[-1ex]{0pt}{0ex} &&&\\
+\hline
+\end{longtable}
+\end{center}
+\section{Η έννοια της πιθανότητας}\mbox{}\\
+\orismoi
+\Orismos{Κλασικόσ Ορισμόσ Πιθανότητασ}
+Πιθανότητα ενός ενδεχομένου $ A=\{a_1,a_2,\ldots,a_\kappa\} $ ενός δειγματικού χώρου $ \varOmega $ ονομάζεται ο λόγος του πλήθους των ευνοϊκών περιπτώσεων του $ A $ προς το πλήθος όλων των δυνατών περιπτώσεων.
+\[ P(A)=\frac{N(A)}{N(\varOmega)} \]
+\begin{itemize}[itemsep=0mm]
+\item Ο παραπάνω ορισμός ονομάζεται \textbf{κλασικός ορισμός} της πιθανότητας και εφαρμόζεται όταν το ενδεχόμενο $ A $ αποτελείται από ισοπίθανα απλά ενδεχόμενα $ \{a_i\}\ ,\ i=1,2,\ldots,\kappa $.
+\item Το πλήθος των στοιχείων ενός ενδεχομένου $ A $ συμβολίζεται με $ N(A) $.
+\end{itemize}
+\Orismos{Αξιωματικός Ορισμός Πιθανότητας}
+Η πιθανότητα ενός ενδεχομένου $ A=\{a_1,a_2,\ldots,a_\kappa\} $ ενός δειγματικού χώρου $ \varOmega=\{\omega_1,\omega_2,\ldots,\omega_\nu\} $ ορίζεται ώς το άθροισμα των πιθανοτήτων $ P(a_i)\ ,\ i=1,2,\ldots,\nu $ των απλών ενδεχομένων του.
+\[ P(A)=P(a_1)+P(a_2)+\ldots+P(a_\kappa) \]
+\begin{itemize}[itemsep=0mm]
+\item Για κάθε στοιχείο $ \omega_i\ ,\ i=1,2,\ldots,\nu $ του δειγματικού χώρου $ \varOmega $ ονομάζουμε τον αριθμό $ P(\omega_i) $ πιθανότητα του ενδεχομένου $ \{\omega_i\} $.
+\item Ο παραπάνω ορισμός ονομάζεται \textbf{αξιοματικός ορισμός} της πιθανότητας και εφαρμόζεται όταν το ενδεχόμενο $ A $ δεν αποτελείται από ισοπίθανα απλά ενδεχόμενα $ \{a_i\}\ ,\ i=1,2,\ldots,\kappa $.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Ιδιότητες Πιθανοτήτων}
+Από τον κλασικό ορισμό της πιθανότητας προκύπτουν οι παρακάτω ιδιότητες :
+\begin{rlist}
+\item Πιθανότητα κενού συνόλου : $ P(\varnothing)=0 $.
+\item Πιθανότητα δειγματικού χώρου : $ P(\varOmega)=1 $.
+\item Για κάθε ενδεχόμενο $ A $ ισχύει : $ 0\leq P(A)\leq1 $.
+\end{rlist}
+\Thewrhma{Κανόνες λογισμού πιθανοτήτων}
+Οι παρακάτω ιδιότητες μας δείχνουν τις σχέσεις με τις οποίες συνδέονται οι πιθανότητες οποιονδήποτε ενδεχομένων $ A,B $ με τις πιθανότητες των ενδεχομένων των πράξεων που περιέχουν τα ενδεχόμενα αυτά.
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ενδεχόμενο} & \textbf{Πιθανότητα} \\ 
+\hhline{==} \rule[-2ex]{0pt}{7.5ex} Ένωση & $ P(A\cup B)=\ccases{P(A)+P(B)-P(A\cap B)\ \ ,\ \ \textrm{αν }A\cap B\neq\varnothing\\
+P(A)+P(B)\ \ ,\ \ \textrm{αν }A\cap B=\varnothing} $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Συμπλήρωμα & $ P(A')=1-P(A) $ \\ 
+ \hhline{~-}\rule[-2ex]{0pt}{5.5ex} \multirow{3}{*}{Διαφορά} & $ P(A-B)=P(A)-P(A\cap B) $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ P(B-A)=P(B)-P(A\cap B) $ \\ 
+   \hhline{~-}\rule[-2ex]{0pt}{5.5ex} Υποσύνολο & $ A\subseteq B\Rightarrow P(A)\leq P(B) $ \\ 
+\hline 
+\end{tabular} 
+\end{center}\mbox{}\\
+\Thewrhma{Ανισότητες μεταξύ πιθανοτήτων}
+Μεταξύ των πιθανοτήτων δύο οποιονδήποτε ενδεχομένων $ A,B $ καθώς και των ενδεχομένων που προκύπτουν από πράξεις που τα περιέχουν, ισχύουν οι ακόλουθες ανισότητες.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ P(A)\leq P(A\cup B) $
+\item $ P(B)\leq P(A\cup B) $
+\item $ P(A\cap B)\leq P(A) $
+\item $ P(A\cap B)\leq P(B) $
+\item $ P(A\cap B)\leq P(A\cup B) $
+\item $ P(A-B)\leq P(A) $
+\item $ P(B-A)\leq P(B) $
+\item $ P(A-B)\leq P(A\cup B) $
+\item $ P(B-A)\leq P(A\cup B) $
+\end{rlist}
+\end{multicols}
+\end{document}

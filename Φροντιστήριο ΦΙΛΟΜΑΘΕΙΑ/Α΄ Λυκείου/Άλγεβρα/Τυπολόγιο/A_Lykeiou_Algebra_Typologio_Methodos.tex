@@ -1,0 +1,362 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,greek]{babel}
+\usepackage{alphabeta}
+\usepackage[T1]{fontenc}
+\RequirePackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{nimbusserif,multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,mathimatika}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb]{mtpro2}
+\usepackage{xcolor}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\newcommand{\eng}{\selectlanguage{english}}
+\newcommand{\gr}{\selectlanguage{greek}}
+
+\newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+
+\makeatletter
+\newcommand{\subsup}{
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt}
+}
+\makeatother}
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+\usepackage{etoolbox,hhline,moreenum}
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+
+\newlist{alist}{enumerate}{1}
+\setlist[alist]{label=\let\textdexiakeraia\relax\alph*.}
+
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex,anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={red,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
+\AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
+
+\definecolor{titlecolor}{HTML}{cd0f00}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+  {%
+    \bgroup
+    \setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+    \setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+    \ul{#1}%
+    \egroup
+  }
+\newcommand*\SectionNumberBox[1]
+  {%
+    \colorbox{red!80!black}
+      {%
+        \makebox[2em][c]
+          {%
+            \color{white}%
+            \strut
+            \csname the#1\endcsname
+          }%
+      }%
+    \TitleUnderline{\ \ \ }%
+  }
+\titleformat{\section}[hang]
+    {\Large\bfseries\fontfamily{maksf}\selectfont}%
+    {\colorbox{red!80!black}{%
+      \raisebox{0pt}[13pt][3pt]{\makebox[80pt]{% height, width
+          \color{white}{\kerkissans{\thesection ο Κεφάλαιο}}}%
+      }}}%
+    {0pt}%
+    {\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ #1\ }}}
+
+\titleformat{\subsection}[hang]
+    {\large\bfseries\fontfamily{maksf}\selectfont}%
+    {\colorbox{red!80!black}{%
+      \raisebox{0pt}[13pt][3pt]{\makebox[30pt]{% height, width
+          \color{white}{\kerkissans{\thesubsection}}}%
+      }}}%
+    {0pt}%
+    {\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ #1\ }}}
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\titleformat{\part}[display]
+  {\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{red!80!black}{ \kerkissans{ #1}}}
+\titlespacing*{\part} 
+  {0pt}{0pt}{0pt}
+
+\setlist[enumerate]{itemsep=0mm,label=\thesection.\arabic*}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\makeatletter
+\usetikzlibrary{patterns}
+\tikzstyle{chart}=[
+legend label/.style={font={\scriptsize},anchor=west,align=left},
+legend box/.style={rectangle, draw, minimum size=5pt},
+axis/.style={black,semithick,->},
+axis label/.style={anchor=east,font={\tiny}},
+]
+
+\tikzstyle{bar chart}=[
+chart,
+bar width/.code={
+\pgfmathparse{##1/2}
+\global\let\bar@w\pgfmathresult
+},
+bar/.style={very thick, draw=white},
+bar label/.style={font={\bf\small},anchor=north},
+bar value/.style={font={\footnotesize}},
+bar width=.75,
+]
+
+\tikzstyle{pie chart}=[
+chart,
+slice/.style={line cap=round, line join=round,thick,draw=white},
+pie title/.style={font={\bf}},
+slice type/.style 2 args={
+##1/.style={fill=##2},
+values of ##1/.style={}
+}
+]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\newcommand{\pie}[3][]{
+\begin{scope}[#1]
+\pgfmathsetmacro{\curA}{90}
+\pgfmathsetmacro{\r}{1}
+\def\c{(0,0)}
+\node[pie title] at (90:1.3) {#2};
+\foreach \v/\s/\l in{#3}{
+\pgfmathsetmacro{\deltaA}{\v/100*360}
+\pgfmathsetmacro{\nextA}{\curA + \deltaA}
+\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+
+\path[slice,\s] \c
+-- +(\curA:\r)
+arc (\curA:\nextA:\r)
+-- cycle;
+\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+
+\begin{pgfonlayer}{foreground}
+\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
+\end{pgfonlayer}
+
+\global\let\curA\nextA
+}
+\end{scope}
+}
+
+\newcommand{\legend}[2][]{
+\begin{scope}[#1]
+\path
+\foreach \n/\s in {#2}
+{
+++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
+}
+;
+\end{scope}
+}
+\definecolor{a}{cmyk}{0,1,1,0.05}
+\definecolor{b}{cmyk}{0,.8,.8,.15}
+\definecolor{c}{cmyk}{0,.8,.8,.0}
+\definecolor{d}{cmyk}{0,.7,.7,0}
+\definecolor{e}{cmyk}{0,.5,.5,0}
+
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+
+\begin{document}
+\begin{center}
+\includegraphics[width=0.4\linewidth]{/home/spyros/texmf/tex/latex/local/frontisthrio/Logotypo-Filomatheia_1}\\
+\vspace{-1mm}
+{\faIcon{map-marker-alt}} : Ιακώβου Πολυλά 24 - \ Πεζόδρομος\,\,|\,\,{\faIcon{phone-alt}} : 26610 20144\,\,|\,\, {\faIcon{mobile-alt}} : 6932327283 - 6955058444\\
+\rule{14.7cm}{.1mm}\\
+\vspace{2mm}
+{\bf\today}\\
+\vspace{3cm}
+{\Huge \textbf{Άλγεβρα Α' Λυκείου}}\\
+\vspace*{3cm}
+{{\LARGE }\textbf{ΤΥΠΟΛΟΓΙΟ ΚΑΙ ΜΕΘΟΔΟΛΟΓΙΑ}\\[2mm]\textbf{ΒΑΣΙΚΩΝ ΑΣΚΗΣΕΩΝ}}
+\vspace*{\fill}
+\vfil
+Φρόνιμος Σπύρος
+\end{center}
+\pagenumbering{gobble}
+\newpage
+\null
+\newpage
+\pagenumbering{arabic}
+\begin{center}
+\part{Τυπολόγιο}
+\end{center}
+\section{Σύνολα}
+\subsection{Η έννοια του συνόλου}
+\begin{enumerate}[label=\thesection.\arabic*]
+\item Σύνολο : Ομάδα όμοιων αντικειμένων.
+\item Το $ x $ ανήκει στο σύνολο $ A $: $ x\in A $.
+\item Κενό σύνολο : Το σύνολο χωρίς στοιχεία : $ \varnothing $.
+\item Βασικά σύνολα αριθμών
+\begin{alist}
+\item Φυσικοί αριθμοί : $\mathbb{N}=\{0,1,2,\ldots\}$
+\item Ακέραιοι αριθμοί : $\mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}$
+\item Ρητοί Αριθμοί : $ \mathbb{Q}=\left\lbrace \left. \frac{a}{\beta}\right|a,\beta\in\mathbb{Z},\beta\neq0\;\right\rbrace  $.
+\item Άρρητοι Αριθμοί : Κάθε αριθμός που δεν είναι ρητός.
+\item Πραγματικοί Αριθμοί : $\mathbb{R}=\{ \textrm{όλοι οι αριθμοί} \} $.
+\end{alist}
+\item Ίσα σύνολα : $ A=B $ αν έχουν τα ίδια στοιχεία. 
+\item Υποσύνολο : $ A\subseteq B $.
+\end{enumerate}
+\subsection{Πράξεις συνόλων}
+\begin{enumerate}[resume]
+\item Πράξεις μεταξύ συνόλων
+\begin{alist}
+\item Ένωση : $ A\cup B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ ή } x\in B\right.\right\rbrace $
+\item Τομή : $ A\cap B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ και } x\in B\right.\right\rbrace $
+\item Συμπλήρωμα : $ A'=\left\lbrace x\in\varOmega\left| x\notin A\right.\right\rbrace $
+\item Διαφορά : $ A-B=\left\lbrace x\in\varOmega\left| x\in A\textrm{ και }x\notin B\right. \right\rbrace $
+\end{alist}
+\end{enumerate}
+\section{Πραγματικοί αριθμοί}
+\subsection{Πράξεις πραγματικών αριθμών}
+\begin{enumerate}
+\item Δύναμη πραγματικού αριθμού: $ a\cdot a\cdot\ldots a=a^\nu $. Ο $ a $ λέγεται \textbf{βάση} και ο $ \nu $ \textbf{εκθέτης}.
+\item Ιδιότητες δυνάμεων : 
+\begin{multicols}{2}
+\begin{alist}
+\item $a^{\nu}\cdot a^{\mu}=a^{\nu+\mu}$
+\item $a^{\nu}:a^{\mu}=a^{\nu-\mu}$
+\item $(a\cdot \beta)^{\nu}=a^{\nu}\cdot \beta^{\nu}$
+\item $\left(\dfrac{a}{\beta}\right)^{\nu}=\dfrac{a^{\nu}}{\beta^{\nu}}$
+\item $(a^{\nu})^{\mu}=a^{\nu\cdot\mu}$
+\end{alist}
+\end{multicols}
+\item \textbf{Ταυτότητα:} Μια ισότητα που περιέχει μεταβλητές και επαληθεύεται για κάθε τιμή των μεταβλητών.
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \parbox[t]{7cm}{\textbf{Άθροισμα στο τετράγωνο}\\$ (a+\beta)^2=a^2+2a\beta+\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά στο τετράγωνο}\\$ (a-\beta)^2=a^2-2a\beta+\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Άθροισμα στον κύβο}\\$ (a+\beta)^3=a^3+3a^2\beta+3a\beta^2+\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά στον κύβο}\\$ (a-\beta)^3=a^3-3a^2\beta+3a\beta^2-\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Γινόμενο αθροίσματος επί διαφορά}\\$ (a+\beta)(a-\beta)=a^2-\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Άθροισμα κύβων}\\$ (a+\beta)\left(a^2-a\beta+\beta^2 \right)=a^3+\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά κύβων}\\$ (a-\beta)\left(a^2+a\beta+\beta^2 \right)=a^3-\beta^3 $}
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+\subsection{Διάταξη}
+\subsection{Απόλυτη τιμή}
+\begin{enumerate}
+\item Απόλυτη τιμή πραγματικού αριθμού $a$ : $|a|$.
+\end{enumerate}
+\subsection{Ρίζες}
+\begin{enumerate}[resume]
+\item Τετραγωνική ρίζα : $\sqrt{x}$ με $x\geq 0$ και $a\geq 0$
+\item Ν-οστή ρίζα : $\sqrt[\nu]{x}$ με $x\geq 0,\nu\in\mathbb{N}^*$ και $a\geq 0$
+\begin{itemize}[itemsep=0mm]
+\item Ο αριθμός $ x $ ονομάζεται \textbf{υπόριζο}.
+\item Δεν ορίζεται ρίζα αρνητικού αριθμού.
+\end{itemize}
+\end{enumerate}
+\section{Εξισώσεις}
+\subsection{Εξισώσεις 1ου βαθμού}
+\begin{enumerate}
+\item Εξίσωση 1ου βαθμού : $ax+\beta$
+\end{enumerate}
+\subsection{Εξισώσεις της μορφής \bmath{$x^{\nu}=a$}}
+\subsection{Εξισώσεις 2ου βαθμού}
+\begin{enumerate}
+\item Εξίσωση 2ου βαθμού : $ax^2+\beta x+\gamma=0$ με $a\neq 0$
+\item Τύποι \eng{Vieta} : $S=x_1+x_2=\dfrac{\beta}{a}$ και $P=x_1\cdot x_2=\dfrac{\gamma}{a}$ όπου $x_1,x_2$ οι ρίζες της εξίσωσης.
+\end{enumerate}
+\section{Ανισώσεις}
+\subsection{Ανισώσεις 1ου βαθμού}
+\begin{enumerate}
+\item Ανίσωση 1ου βαθμού : $ax+\beta\gtrless0\ $.
+\end{enumerate}
+\subsection{Ανισώσεις 2ου βαθμού}
+\begin{enumerate}
+\item Ανίσωση 2ου βαθμού : $ax^2+\beta x+\gamma\gtrless0$ με $a\neq 0$.
+\end{enumerate}
+\section{Ακολουθίες}
+\subsection{Η έννοια της ακολουθίας}
+\subsection{Αριθμητική πρόοδος}
+\begin{enumerate}
+\item Αριθμητική πρόοδος : $a_{\nu+1}=a_{\nu}+\omega\ ,\ \nu\in\mathbb{N}^*$.
+\item Γενικός τύπος αριθμητικής προόδου : $a_{\nu}=a_1+(\nu-1)\cdot\omega$
+\item Διαφορά αριθμητικής προόδου : $\omega$
+\end{enumerate}
+\subsection{Γεωμετρική πρόοδος}
+\begin{enumerate}[resume]
+\item Γεωμετρική πρόοδος : $a_{\nu+1}=\lambda\cdot a_{\nu}\ ,\ \nu\in\mathbb{N}^*$.
+\item Γενικός τύπος γεωμετρικής προόδου : $a_{\nu}=a_1\cdot\lambda^{\nu+1}$
+\item Λόγος γεωμετρικής προόδου : $\lambda\neq 0$.
+\end{enumerate}
+\section{Συναρτήσεις}
+\subsection{Η έννοια της συνάρτησης}
+\subsection{Γραφική παράσταση}
+\subsection{Η συνάρτηση \bmath{$f(x)=ax+\beta$}}
+\end{document}
+
+

@@ -1,0 +1,324 @@
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\ekthetesdeiktes
+
+
+
+\begin{document}
+\titlos{Άλγεβρα Α΄ Λυκείου}{Εξισώσεις}{Εξισώσεις 2\tssL{ου} Βαθμού}
+\twocolkentro{\thewria}
+\begin{enumerate}
+\item \textbf{Ερωτήσεις}
+\vspace{-2mm}
+\begin{rlist}
+\item Τι ονομάζουμε εξίσωση 2\textsuperscript{ου} βαθμού;
+\item Ποιος αριθμός μας δείχνει το πλήθος των ριζών μιας εξίσωσης 2\textsuperscript{ου} βαθμού;
+\item Πότε μια εξίσωση έχει 2 ρίζες, πότε μια και πότε είναι αδύνατη στο $ \mathbb{R} $;
+\item Να γραφούν οι τύποι του Vieta.
+\end{rlist}
+\item \textbf{Σωστό - Λάθος}\\
+Να χαρακτηριστούν οι παρακάτω εξισώσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{rlist}[leftmargin=4mm]
+\item Αν για μια εξίσωση 2\textsuperscript{ου} βαθμού έχουμε $ \varDelta>0 $ τότε έχει 2 άνισες λύσεις.
+\item Αν για μια εξίσωση 2\textsuperscript{ου} βαθμού έχουμε $ \varDelta<0 $ τότε έχει μια διπλή λύση.
+\item Η εξίσωση $ ax^2+\beta x+\gamma=0 $ παριστάνει μια εξίσωση 2\textsuperscript{ου} βαθμού για κάθε τιμή του $ a $.
+\item Αν $ x_1, x_2 $ είναι οι λύσεις μιας εξίσωσης 2\textsuperscript{ου} βαθμού τότε : $ x_1+x_2=\frac{\beta}{a} $ και $ x_1\cdot x_2=\frac{\gamma}{a} $.
+\item Αν $ x_1, x_2 $ είναι οι λύσεις μιας εξίσωσης 2\textsuperscript{ου} βαθμού με $ x_1=-x_2 $ τότε $ \beta=0 $.
+\end{rlist}
+\end{enumerate}
+\twocolkentro{\askhseis}
+\begin{enumerate}
+\item \textbf{Εξισώσεις 2\tss{ου} βαθμού με {\boldmath{$ \varDelta>0 $}}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item $ x^2-5x+6=0 $
+\item $ x^2-3x+2=0 $
+\item $ x^2-7x+12=0 $
+\item $ x^2+3x-4=0 $
+\item $ x^2-6x+8=0 $
+\item $ x^2-6x+5=0 $
+\item $ 2x^2-5x+3=0 $
+\item $ 2x^2-9x+10=0 $
+\item $ 3x^2-x-4=0 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις 2\tss{ου} βαθμού με {\boldmath{$ \varDelta=0 $}}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=1mm]
+\item $ x^2-4x+4=0 $
+\item $ x^2-6x+9=0 $
+\item $ x^2-10x+25=0 $
+\item $ 4x^2+4x+1=0 $
+\item $ 36x^2+12x+1=0 $
+\item $ 4x^2+12x+9=0 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις 2\tss{ου} βαθμού με {\boldmath{$ \varDelta<0 $}}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ x^2+x+4=0 $
+\item $ x^2+3x+12=0 $
+\item $ 2x^2-3x+8=0 $
+\item $ 2x^2+x+5=0 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις 2\tss{ου} βαθμού}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[itemsep=0mm]
+\item $ x^2-\left(\sqrt{2}-1\right)x-\sqrt{2}=0 $
+\item $ x^2-\left(\sqrt{3}+1\right)x+\sqrt{3}=0 $
+\item $ x^2+\left(\sqrt{3}+\sqrt{5}\right)x+\sqrt{15}=0 $
+\item $ x^2-\left(\sqrt{8}-\sqrt{2}\right)x-4=0 $
+\end{rlist}
+\item \textbf{Λύσεις εξίσωσης}\\
+Να βρεθούν οι λύσεις $ x_1, x_2 $, μιας εξίσωσης 2\textsuperscript{ου} βαθμού, οι οποίες έχουν άθροισμα $ S $ και γινόμενο $ P $ με:
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=2mm]
+\item $ S=9 $ και $ P=-10 $
+\item $ S=-7 $ και $ P=12 $
+\item $ S=6 $ και $ P=9 $
+\item $ S=0 $ και $ P=4 $
+\item $ S=12 $ και $ P=0 $
+\item $ S=8 $ και $ P=-8 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εύρεση εξίσωσης}\\
+Αν $ x_1, x_2 $ είναι οι λύσεις μιας εξίσωσης 2\tss{ου} βαθμού, να βρεθεί η εξίσωση, αν γι αυτήν ισχύει
+\begin{rlist}
+\item $ x_1+x_2=7 $ και $ x_1\cdot x_2=6 $
+\item $ x_1+x_2=8 $ και $ x_1\cdot x_2=12 $
+\item $ x_1+x_2=-3 $ και $ x_1\cdot x_2=-28 $
+\item $ x_1+x_2=-12 $ και $ x_1\cdot x_2=20 $
+\end{rlist}
+\item \textbf{Εύρεση εξίσωσης}\\
+Να βρεθεί η εξίσωση 2\tss{ου} βαθμού, η οποία έχει λύσεις τους παρακάτω αριθμούς $ x_1,x_2 $.
+\begin{rlist}
+\item $ x_1=3 $ και $ x_2=5 $
+\item $ x_1=-2 $ και $ x_2=-4 $
+\item $ x_1=\frac{1}{2} $ και $ x_2=-\frac{3}{4} $
+\item $ x_1=\sqrt{2} $ και $ x_2=3 $
+\end{rlist}
+\item \textbf{Εύρεση λύσεων}\\
+Να βρεθούν οι λύσεις $ x_1, x_2 $, αν υπάρχουν, μιας εξίσωσης 2\tss{ου} βαθμού, για τις οποίες ισχύουν οι παρακάτω σχέσεις:
+\begin{rlist}
+\item $ x_1+x_2=4 $ και $ x_1\cdot x_2=3 $
+\item $ x_1+x_2=-7 $ και $ x_1\cdot x_2=-8 $
+\item $ x_1+x_2=3 $ και $ x_1\cdot x_2=5 $
+\item $ x_1^2+x_2^2=29 $ και $ (x_1+x_2)^2=49 $
+\end{rlist}
+\item \textbf{Εξισώσεις που ανάγονται σε 2\tss{ου} βαθμού - Απόλυτες τιμές}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=3mm]
+\item $ x^2-5\left|x\right|+6=0 $
+\item $ x^2-4\left|x\right|+3=0 $
+\item $ x^2-2\left|x\right|-3=0 $
+\item $ x^2+7\left|x\right|+10=0 $
+\item $ 2x^2-\left|x\right|-10=0 $
+\item $ x^2-10\left|x\right|+25=0 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις που ανάγονται σε 2\tss{ου} βαθμού - Διτετράγωνες}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=3mm]
+\item $ x^4-5x^2+6=0 $
+\item $ x^4-4x^2+3=0 $
+\item $ x^4-6x^2+9=0 $
+\item $ x^6-2x^3-15=0 $
+\item $ 2x^4-x^2-10=0 $
+\item $ x^8-10x^4+9=0 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις που ανάγονται σε 2\tss{ου} βαθμού - Κλασματικές}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \dfrac{x-3}{x}+\dfrac{x}{x-1}=\dfrac{3-x}{x^2-x} $
+\item $ \dfrac{2 x-1}{x-2}+\dfrac{x-1}{x-1}=\dfrac{3-2 x}{x^2-3 x+2} $
+\item $ \dfrac{x+4}{x^2-4}+\dfrac{2 x+1}{x-2}=\dfrac{x-3}{x+2} $
+\item $ \dfrac{x+4}{x^2-2 x}+2=\dfrac{x-2}{x} $
+\end{rlist}
+\item \textbf{Εξισώσεις που ανάγονται σε 2\tss{ου} βαθμού - Σύνθετες}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \left(x-1\right)^2-5\left|x-1\right|+6=0 $
+\item $ \left(2x-3\right)^2-7\left|2x-3\right|+12=0 $
+\item $ \left(x-2\right)^4-13\left(x-2\right)^2+36=0 $
+\item $ \left(x+3\right)^6+19\left(x+3\right)^3-216=0 $
+\end{rlist}
+\item \textbf{Εξισώσεις που ανάγονται σε 2\tss{ου} βαθμού - Σύνθετες}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \left(x^2-x\right)^2+4\left|x^2-x\right|-12=0 $
+\item $ \left(x+\frac{1}{x}\right)^2-7\left(x+\frac{1}{x}\right)+10=0 $
+\item $ \left(x^3-2\right)^2+19\left(x^3-2\right)-150=0 $
+\item $ \left(|x|-3\right)^2+8\left(|x|-3\right)-12=0 $
+\end{rlist}
+\item \textbf{Παραμετρικές εξισώσεις 2\tss{ου} βαθμού}\\
+Δίνεται η παρακάτω εξίσωση 2\tss{ου} βαθμού
+\[ x^2+(\lambda-2) x+2\lambda^2=0 \]
+όπου $ \lambda\in\mathbb{R} $ είναι μια τυχαία παράμετρος.
+\begin{rlist}
+\item Να βρεθεί η διακρίνουσα της εξίσωσης.
+\item Να βρεθούν οι τιμές τις παραμέτρου $ \lambda $ ώστε η εξίσωση να έχει δύο άνισες λύσεις.
+\item Να βρεθούν οι τιμές τις παραμέτρου $ \lambda $ ώστε η εξίσωση να έχει μια διπλή λύση.
+\item Για ποίες τιμές τις παραμέτρου $ \lambda $ είναι αδύνατη η εξίσωση;
+\end{rlist}
+\item \textbf{Παραμετρικές εξισώσεις 2\tss{ου} βαθμού}\\
+Δίνεται η παρακάτω εξίσωση 2\tss{ου} βαθμού
+\[ x^2+3\lambda x+2\lambda^2-\lambda=0 \]
+όπου $ \lambda\in\mathbb{R} $ είναι μια τυχαία παράμετρος.
+\begin{rlist}
+\item Να βρεθεί η διακρίνουσα της εξίσωσης.
+\item Να βρεθούν οι τιμές τις παραμέτρου $ \lambda $ ώστε η εξίσωση να έχει μια διπλή λύση.
+\end{rlist}
+
+\item \textbf{Παραμετρικές εξισώσεις 2\tss{ου} βαθμού}\\
+Να δειχθεί ότι η εξίσωση
+\[ x^2+x-\lambda^2=0 \]
+έχει 2 άνισες λύσεις για κάθε τιμή του $ \lambda\in\mathbb{R} $.
+\item \textbf{Παραμετρικές εξισώσεις 2\tss{ου} βαθμού}\\
+Να δειχτεί ότι η εξίσωση
+\[ ax^2+(a-1)x-1=0 \]
+\begin{enumerate}[label=\roman*.]
+\item έχει λύσεις για κάθε $ a\in\mathbb{R}^* $.
+\item έχει μια διπλή λύση για $ a=-1 $.
+\end{enumerate}
+\item \textbf{Παραμετρικές εξισώσεις 2\tss{ου} βαθμού}\\
+Να δειχτεί ότι η εξίσωση
+\[ x^2+(a-3) x+a^2+4=0 \]
+δεν έχει λύσεις για καμία τιμή του $ a $.
+\item \textbf{Εύρεση παραμέτρου}\\
+Να βρεθεί η τιμή της παραμέτρου $ a\in\mathbb{R}^* $ έτσι ώστε η εξίσωση
+\[ 2ax^2+(a-4)x+a+2=0 \]
+να έχει μια διπλή ρίζα.
+\item \textbf{Εύρεση παραμέτρου}\\
+Να βρεθούν οι σταθερές $ a,\beta\in\mathbb{R}^* $ έτσι ώστε η εξίσωση
+\[ ax^2+(2a-3\beta)x+(a-\beta+2)=0 \] 
+να έχει λύσεις τις $ x_1=-2, x_2=1 $.
+\item \textbf{Εύρεση παραμέτρου}\\
+Να βρεθούν οι σταθερές $ a, \beta\in\mathbb{R} $ έτσι ώστε η εξίσωση
+ \[ x^2+2(\beta-1)x+a+\beta^2-7=0 \] 
+ να έχει μια διπλή λύση τη $ x=-2$.
+\item \textbf{Εύρεση παραμέτρου}\\
+Να βρεθούν οι σταθερές $ a, \beta\in\mathbb{R} $ έτσι ώστε η εξίσωση
+ \[ x^2+(a+3\beta-2)x+4a-2a\beta-2=0 \]
+να έχει λύσεις τις $ x_1=4-2a $ και $ x_2=\beta-3 $.
+\item \textbf{Λύσεις εξίσωσης}\\
+Αν $ x_1,x_2 $ είναι οι λύσεις της εξίσωσης
+\[ x^2-7x+8=0 \]
+τότε χωρίς αυτή να λυθεί, να υπολογίσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ x_1+x_2 $
+\item $ x_1x_2 $
+\item $ x_1^2+x_2^2 $
+\item $ x_1^2x_2+x_1x_2^2 $
+\item $ x_1^3+x_2^3 $
+\item $ \frac{1}{x_1}+\frac{1}{x_2} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Λύσεις εξίσωσης}\\
+Αν $ x_1,x_2 $ είναι οι λύσεις της εξίσωσης \[ x^2-4x+3=0 \] τότε να βρεθεί να βρεθεί η εξίσωση η οποία έχει λύσεις τις $ y_1=2x_1+x_2 $ και $ y_2=x_1-3x_2 $.
+\item \textbf{Γεωμετρική εφαρμογή}\\
+Να βρεθεί η τιμή της μεταβλητής $ x $ για την οποία το εμβαδόν του παρακάτω σχήματος ισούται με $ E=84m^2 $.
+\begin{center}
+\begin{tikzpicture}
+\draw  (-2.5,1.5) rectangle (1,-0.5);
+\node at (-.75,1.75) {$x$};
+\node at (-3.2,0.5) {$x-5$};
+\node at (1.5,0.5) {};
+\node at (-.75,0.5) {$E=84m^2$};
+\end{tikzpicture}
+\end{center}
+\item 
+\end{enumerate}
+\end{document}
+

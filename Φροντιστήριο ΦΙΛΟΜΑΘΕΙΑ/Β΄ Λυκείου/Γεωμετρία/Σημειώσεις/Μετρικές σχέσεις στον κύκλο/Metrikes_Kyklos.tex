@@ -1,0 +1,107 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+\usepackage{multicol,gensymb,mathimatika}
+\usepackage{wrap-rl}
+
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Μετρικές Σχέσεις}{Μετρικές σχέσεις στον κύκλο}
+\orismoi
+\Orismos{Δύναμη σημείου ως προς κύκλο}
+Δύναμη ενός σημείου $ M $ ως προς ένα κύκλο $ (O,R) $ ονομάζεται η διαφορά
+\[ \Delta_{_{(O,R)}}^{^{M}}=\delta^2-R^2 \]
+όπου $ \delta $ είναι η απόσταση του σημείου $ M $ από το κέντρο του κύκλου : $ OM=\delta $. Συμβολίζεται με $ \Delta_{_{(O,R)}}^{^{M}} $.
+\thewrhmata
+\Thewrhma{Τέμνουσες κύκλου}
+Έστω $ AB $ και $ \varGamma\varDelta $ δύο χορδές ενός κύκλου $ (O,\rho) $. Αν $ M $ είναι το σημείο τομής αυτών ή των προεκτάσεών τους τότε τα γινόμενα των τμημάτων που ορίζει το σημείο τομής με τα άκρα κάθε χορδής είναι μεταξύ τους ίσα.
+\[ MA\cdot MB=M\varGamma\cdot M\varDelta \]
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(30:1.25){A}
+\tkzDefPoint(160:1.25){B}
+\tkzDefPoint(110:1.25){C}
+\tkzDefPoint(290:1.25){D}
+\tkzInterLL(A,B)(C,D)\tkzGetPoint{M}
+\draw[pl]  (O) circle (1.25);
+\draw[pl,\xrwma](A)--(B);
+\draw[pl,\xrwma](C)--(D);
+\tkzDrawPoints(A,B,C,D,M)
+\tkzLabelPoint[above right](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[above right](M){$M$}
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(30:1.25){A}
+\tkzDefPoint(150:1.25){B}
+\tkzDefPoint(110:1.25){C}
+\tkzDefPoint(290:1.25){D}
+\tkzInterLL(A,C)(B,D)\tkzGetPoint{M}
+\draw[pl]  (O) circle (1.25);
+\draw[pl,\xrwma](A)--(M);
+\draw[pl,\xrwma](D)--(M);
+\tkzDrawPoints(A,B,C,D,M)
+\tkzLabelPoint[above right](A){$A$}
+\tkzLabelPoint[left,yshift=-1mm](B){$\varGamma$}
+\tkzLabelPoint[above](C){$B$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[above right](M){$M$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Thewrhma{Ακρα εγγράψιμου τετραπλεύρου}
+Έστω δύο ευθύγραμμα τμήματα $ AB $ και $ \varGamma\varDelta $ και $ M $ το σημείο τομής αυτών ή των προεκτάσεων τους. Αν τα γινόμενα των τμημάτων που ορίζει το σημείο τομής με τα άκρα κάθε τμήματος να είναι ίσα τότε το τετράπλευρο $ AB\varGamma\varDelta $ είναι εγγράψιμο.
+\[ MA\cdot MB=M\varGamma\cdot M\varDelta\Rightarrow AB\varGamma\varDelta\ \ \textrm{εγγράψιμο} \]
+\Thewrhma{Τέμνουσα και εφαπτόμενη}
+\wrapr{-5mm}{5}{4cm}{-12mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(-50:1.25){A}
+\tkzDefPoint(170:1.25){B}
+\tkzDefPoint(110:1.25){C}
+\tkzTangent[at=C](O)
+\tkzGetPoint{h}
+\tkzInterLL(C,h)(A,B)\tkzGetPoint{M}
+\draw[pl,\xrwma](A)--(M)--(C);
+\draw[pl]  (O) circle (1.25);
+\tkzDrawPoints(A,B,C,M)
+\tkzLabelPoint[below right](A){$A$}
+\tkzLabelPoint[left,yshift=-1mm](B){$B$}
+\tkzLabelPoint[above](C){$\varGamma$}
+\tkzLabelPoint[left](M){$M$}
+\end{tikzpicture}}{
+Έστω $ AB $ μια χορδή ενός κύκλου $ (O,\rho) $ και $ \varGamma $ ένα σημείο του κύκλου. Αν $ M $ είναι ένα εξωτερικό σημείο του κύκλου τότε το γινόμενο των τμημάτων που ορίζει το σημείο τομής με τα άκρα της χορδής είναι ίσο με το τετράγωνο του εφαπτόμενου τμήματος.
+\[ M\varGamma^2=MA\cdot MB \]}\mbox{}\\\\\\
+\Thewrhma{Δύναμη σημείου ως προς κύκλο}
+Έστω ένας κύκλος $ (O,R) $ και $ M $ ένα σημείο του επιπέδου του κύκλου.
+\begin{rlist}
+\item Η δύναμη $ \Delta_{_{(O,R)}}^{^{M}} $ του σημείου $ M $ ως προς τον κύκλο είναι θετική αν και μόνο αν το σημείο είναι εξωτερικό του κύκλου.
+\[ \Delta_{_{(O,R)}}^{^{M}}>0\Leftrightarrow \delta>R \]
+\item Η δύναμη $ \Delta_{_{(O,R)}}^{^{M}} $ του σημείου $ M $ ως προς τον κύκλο είναι μηδενική αν και μόνο αν το σημείο είναι πάνω στον κύκλο.
+\[ \Delta_{_{(O,R)}}^{^{M}}=0\Leftrightarrow \delta=R \]
+\item Η δύναμη $ \Delta_{_{(O,R)}}^{^{M}} $ του σημείου $ M $ ως προς τον κύκλο είναι αρνητική αν και μόνο αν το σημείο είναι εσωτερικό του κύκλου.
+\[ \Delta_{_{(O,R)}}^{^{M}}<0\Leftrightarrow \delta<R \]
+\end{rlist}
+\end{document}

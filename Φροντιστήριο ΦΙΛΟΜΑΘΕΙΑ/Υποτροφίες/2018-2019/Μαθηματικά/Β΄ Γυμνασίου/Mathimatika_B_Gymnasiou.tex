@@ -1,0 +1,306 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{Μαθηματικά Β΄ Γυμνασίου}{Διαγωνισμός Υποτροφίας}{2018 - 2019}
+\vspace{-5mm}
+\begin{thema}
+\item\mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Να απαντήσετε στις ακόλουθες ερωτήσεις.
+\begin{alist}
+\item Τι ονομάζεται εξίσωση;
+\item Να διατυπώσετε το Πυθαγόρειο θεώρημα.
+\item Ποια σχέση συνδέει μια εγγεγραμμένη γωνία με το αντίστοιχο τόξο της;
+\item Τι ονομάζουμε ημίτονο μιας οξείας $ \omega $ γωνίας ενός ορθογωνίου τριγώνου;
+\end{alist}\monades{4$ \times $0,5=2}
+\item \swstolathos
+\begin{alist}
+\item 
+\item 
+\item 
+\item 
+\item 
+\end{alist}\monades{5$ \times $0,2=1}
+\item Να επιλέξετε τη σωστή απάντηση σε καθεμία από τις παρακάτω προτάσεις.
+\begin{alist}
+\item 
+\begin{multicols}{4}
+\begin{rlist}
+\item 
+\item 
+\item 
+\item 
+\end{rlist}
+\end{multicols}
+\item 
+\begin{multicols}{3}
+\begin{rlist}
+\item 
+\item 
+\item 
+\end{rlist}
+\end{multicols}
+\item 
+\begin{multicols}{4}
+\begin{rlist}
+\item 
+\item 
+\item 
+\item 
+\end{rlist}
+\end{multicols}
+\item 
+\begin{multicols}{4}
+\begin{rlist}
+\item 
+\item 
+\item 
+\item 
+\end{rlist}
+\end{multicols}
+\item 
+\begin{multicols}{4}
+\begin{rlist}
+\item 
+\item 
+\item 
+\item 
+\end{rlist}
+\end{multicols}
+\end{alist}\monades{5$ \times $0,2=1}
+\item Να συμπληρώσετε τα κενά στις παρακάτω προτάσεις.
+\begin{alist}
+\item 
+\end{alist}
+\end{erwthma}\monades{5$ \times $0,2=1}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item Να λυθεί η παρακάτω εξίσωση
+\[ \frac{x-3}{2}-\frac{4-3x}{5}-1=3(x-2)+\frac{4}{5} \]
+\monades{2}
+\item 
+Να λυθούν οι ακόλουθες εξισώσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $ 3(1+2x)-4x-7=2x-4 $
+\item $ \frac{x-2}{5}-x=-2+\frac{3-4x}{5} $
+\end{alist}
+\end{multicols}
+\monades{2}
+\item Να λυθεί η παρακάτω εξίσωση
+\[ \lambda x+3-2(1-x)=4-2\lambda +x \]
+\begin{multicols}{2}
+\begin{alist}
+\item όταν $ \lambda=2 $
+\item όταν $ \lambda=-1 $
+\end{alist}
+\end{multicols}\monades{2$ \times $0,5=1}
+\end{erwthma}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item 
+Να υπολογίσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \sqrt{\dfrac{16}{25}}+\sqrt{\dfrac{9}{100}} $
+\item $ \sqrt{22+\sqrt{4+\sqrt{25}}} $
+\end{alist}
+\end{multicols}
+\monades{0,5+0,5=1}
+\item 
+\begin{alist}
+\item Να υπολογίσετε την πλευρά $ AB $ του ορθογωνίου τριγώνου $ AB\varGamma $.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPoint(0,2){C}
+\tkzMarkRightAngle[size=.25](B,A,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[left](A){$ A $}
+\tkzLabelPoint[right](B){$ B $}
+\tkzLabelPoint[left](C){$ \varGamma $}
+\tkzDrawPoints(A,B,C)
+\node at (-.3,1){$ 8 $};
+\node at (2.5,1){$ 17 $};
+\end{tikzpicture}
+\end{center}\monades{1}
+\item Να αποδείξετε ότι το τρίγωνο $ AB\varGamma $ είναι ορθογώνιο.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPoint(0,2){C}
+\tkzMarkRightAngle[size=.25](B,A,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[left](A){$ A $}
+\tkzLabelPoint[right](B){$ B $}
+\tkzLabelPoint[left](C){$ \varGamma $}
+\tkzDrawPoints(A,B,C)
+\node at (-.3,1){$ 5 $};
+\node at (2.5,1){$ 13 $};
+\node at (2,-.3){$ 12 $};
+\end{tikzpicture}
+\end{center}\monades{1}
+\end{alist}
+\item Δίνεται το τρίγωνο $ AB\varGamma $ του παρακάτω σχήματος και $ A\varDelta $ το ύψος του. Αν γνωρίζουμε ότι $ A\varGamma=12 $, $ \hat{\varGamma}=30\degree $ και $ \hat{B}=45\degree $ τότε να υπολογίσετε τις πλευρές
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(0,2){A}
+\tkzDefPoint(-2,0){B}
+\tkzMarkAngle[size=.5](A,C,B)
+\tkzLabelAngle[pos=1](A,C,B){$ 30\degree $}
+\tkzMarkAngle[size=.5](C,B,A)
+\tkzLabelAngle[pos=1](C,B,A){$ 45\degree $}
+\tkzMarkRightAngle[size=.25](C,D,A)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw[pl] (A)--(D);
+\tkzLabelPoint[above](A){$ A $}
+\tkzLabelPoint[left](B){$ B $}
+\tkzLabelPoint[right](C){$ \varGamma $}
+\tkzLabelPoint[below](D){$ \varDelta $}
+\tkzDrawPoints(A,B,C)
+\node at (2.5,1){$ 12 $};
+\end{tikzpicture}
+\end{center}
+\begin{multicols}{3}
+\begin{alist}
+\item $ A\varDelta $
+\item $ B\varDelta $
+\item $ B\varGamma $
+\end{alist}
+\end{multicols}
+\monades{0,7+0,6+0,7=2}
+\end{erwthma}
+\item\mbox{}\\\vspace{-1.2cm}
+\begin{erwthma}
+\wrapr{-5mm}{7}{4cm}{-5mm}{
+\begin{tikzpicture}
+\tkzDefPoint(120:2){A}
+\tkzDefPoint(220:2){B}
+\tkzDefPoint(0:2){C}
+\draw[pl] (0,0) circle (2);
+\draw[pl](A)--(B)--(C)--cycle;
+\node at (60:2.3){$120\degree$};
+\node at (290:2.3){$140\degree$};
+\tkzLabelPoint[above,xshift=-1mm](A){$A$}
+\tkzLabelPoint[left,yshift=-1mm](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}
+}{\item Έστω τρίγωνο $ AB\varGamma $ εγγεγραμμένο σε κύκλο όπως φαίνεται στο διπλανό σχήμα. Αν γνωρίζουμε ότι $ \widearc{A\varGamma}=140\degree $ και $ \widearc{B\varGamma}=120\degree $ τότε να υπολογίσετε τις γωνίες του τριγώνου.}
+\item \begin{tikzpicture}
+\tkzDefPoint(120:2){A}
+\tkzDefPoint(180:2){B}
+\tkzDefPoint(0:2){C}
+\draw[pl] (0,0) circle (2);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzLabelPoint[above,xshift=-1mm](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}
+\end{erwthma}
+\end{thema}
+\vfill
+\begin{flushright}
+Διάρκεια $ 2 $ ώρες και $ 30 $ λεπτά.\\
+\textit{Καλή επιτυχία!}
+\end{flushright}
+\end{document}

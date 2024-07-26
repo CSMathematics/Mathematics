@@ -1,0 +1,752 @@
+\documentclass[b5paper,twoside,10pt]{book}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames,rgb,cmyk]{xcolor}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{graphicx,tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\newcommand{\textsldeltaone}[1]{\tikz[baseline=(X.base)] \node[xslant=0.2431153] (X) {#1};}
+\newcommand{\textslDelta}[1]{\kern-.8ex\scalebox{.89}[.98]{\upshape\textsldeltaone{#1}}\kern-1ex}
+%%%%%%%%%%%%%%%%%%%%%%%% Fancy Headers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}\ $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+    \fancyhead{} %
+    \renewcommand{\headrulewidth}{0pt}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[left=2.50cm, right=2.50cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage[framemethod=TikZ]{mdframed}
+\definecolor{cadred}{cmyk}{0,0.903,1,0.114}
+
+\renewcommand{\thepart}{\arabic{part}}
+% ΟΡΙΣΜΟΣ %   
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}
+\newenvironment{orismos}[1][]{%
+    \refstepcounter{orismos}
+    \begin{mdframed}[%
+        frametitle={\textcolor{orange}{ΟΡΙΣΜΟΣ \theorismos}\quad\ #1},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=0.5pt,
+        frametitlerule=true,
+        linecolor=orange,
+            outerlinewidth=2pt,
+            roundcorner=3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=10pt
+    ]%
+}{%
+    \end{mdframed}
+}
+% ΤΕΛΟΣ ΟΡΙΣΜΟΥ %
+% ΘΕΩΡΗΜΑ %
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\thesection.\arabic{thewrhma}}
+\newenvironment{thewrhma}[1][]{%
+    \refstepcounter{thewrhma}
+    \begin{mdframed}[%
+        frametitle={\textcolor{cadred}{ΘΕΩΡΗΜΑ \thethewrhma}\quad\ #1},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=1pt,
+        frametitlerule=true,
+        linecolor=cadred,
+            outerlinewidth=2pt,
+            roundcorner=3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=10pt
+    ]%
+}{%
+    \end{mdframed}
+}
+% ΤΕΛΟΣ ΘΕΩΡΗΜΑΤΟΣ %
+% ΣΧΟΛΙΟ %
+\newcounter{sxolio}[chapter]
+\renewcommand{\thesxolio}{\arabic{sxolio}}
+\newenvironment{sxolio}[1][]{%
+    \refstepcounter{sxolio}
+    \begin{mdframed}[%
+        frametitle={{ΣΧΟΛΙΟ \thesxolio}\quad\ #1},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=0.5pt,
+        frametitlerule=true,
+        linecolor=gray,
+            outerlinewidth=2pt,
+            roundcorner=3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=10pt
+    ]%
+}{%
+    \end{mdframed}
+}
+% ΤΕΛΟΣ ΣΧΟΛΙΟΥ %
+% ΣΥΜΒΟΥΛΗ %
+\newcounter{symbouli}[chapter]
+\renewcommand{\thesymbouli}{\arabic{symbouli}}
+\newenvironment{symbouli}[1][]{%
+    \refstepcounter{symbouli}
+    \begin{mdframed}[%
+        frametitle={{ΣΥΜΒΟΥΛΗ \thesymbouli}\quad\ #1},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=0.5pt,
+        frametitlerule=true,
+        linecolor=gray,
+            outerlinewidth=2pt,
+            roundcorner=3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=10pt
+    ]%
+}{%
+    \end{mdframed}
+}
+% ΤΕΛΟΣ ΣΥΜΒΟΥΛΗΣ %
+\newcounter{Number}
+\renewcommand{\theNumber}{\roman{Number}}
+\newcommand{\Item}{\stepcounter{Number}\theNumber.~}
+% ΠΑΡΑΓΡΑΦΟΣ %
+\newcommand{\paragrafos}[1]{\textcolor{cadred}{\section{\textit{#1}}}}
+% ΠΑΡΑΔΕΙΓΜΑ %
+\newcounter{Paradeigma}[section]
+\renewcommand{\theParadeigma}{\arabic{Paradeigma}}
+\newenvironment{paradeigma}{%
+    \refstepcounter{Paradeigma}
+\textcolor{orange}{$ \bullet $ ΠΑΡΑΔΕΙΓΜΑ  \theParadeigma\\}}{}
+% ΛΥΣΗ %
+\newenvironment{lysh}{
+\textcolor{cadred}{ΛΥΣΗ}\enspace}{}
+% ΑΣΚΗΣΕΙΣ %
+\newcounter{Askhseis}[section]
+\renewcommand{\theAskhseis}{\arabic{Askhseis}}
+\newcommand{\ask}{\textcolor{cadred}{\stepcounter{Askhseis}\theAskhseis.~}}
+\newcommand{\askhseis}{\textcolor{cadred}{
+\begin{center}
+{\LARGE ΑΣΚΗΣΕΙΣ}
+\end{center}
+}}{}
+% ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ %
+\newcounter{Lymena}[section]
+\renewcommand{\theLymena}{\arabic{Lymena}}
+\newcommand{\lp}{\textcolor{orange}{\stepcounter{Lymena}\theLymena.~}}
+\newcommand{\lymena}{\textcolor{orange}{
+\begin{center}
+{\LARGE ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}
+\end{center}}}{}
+
+% ΓΕΝΙΚΕΣ ΑΣΚΗΣΕΙΣ %
+\newcounter{Genikes}[chapter]
+\renewcommand{\theGenikes}{\arabic{Genikes}}
+\newcommand{\gen}{\textcolor{orange}{\stepcounter{Genikes}\theGenikes.~}}
+\newcommand{\genikes}{\textcolor{orange}{
+\begin{center}
+{\LARGE ΓΕΝΙΚΕΣ ΑΣΚΗΣΕΙΣ - ΘΕΜΑΤΑ}
+\end{center}}}{}
+
+\usepackage{lscape}
+
+\usepackage{tikz}
+
+\usepackage{titletoc}
+
+\RequirePackage{tikz}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{DejaVuSansCondensed}
+\RequirePackage[normalem]{ulem}
+
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+  {
+   \normalfont\Huge}
+  {\gdef\chapterlabel{\thechapter\ }}{0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+    \node[yshift=-10cm] at (current page.north west)
+      {\begin{tikzpicture}[remember picture, overlay]
+        \draw[top color = cadred!90!white,draw = white] (-.1,0) rectangle
+          (19cm,10.1cm);
+       \node[anchor=west,xshift=.12\paperwidth,yshift=.25\paperheight,rectangle]
+       {\color{white}\Huge\MakeUppercase {\textbf{Κεφάλαιο} }\textbf{\thechapter}};
+       \node[anchor=west,xshift=.12\paperwidth,yshift=.18\paperheight,rectangle] {\Huge {\color{white}{##1}}};
+       \end{tikzpicture}
+      };
+   \end{tikzpicture}
+  }
+  \titlespacing*{\chapter}{0pt}{50pt}{70pt}
+}
+
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+  {0pt}{50pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{13pt}%
+\color{cadred}\Large ΜΕΡΟΣ\quad}%
+{}
+{}
+{}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=cadred,draw=cadred] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\Large\sc\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\color{cadred}\large\sc\bfseries}%
+{}
+{}
+{\;\titlerule\;\normalsize\ Σελίδα}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2.4pc}}
+{}
+{\hfill\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\color{cadred}\Huge\sc\bfseries \contentsname};%
+\draw[fill=cadred,draw=cadred] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\begin{document}
+\title{Μαθηματικά Γ' Γυμνασίου}
+\author{Σπύρος Φρόνιμος}
+\pagestyle{empty}
+\frontmatter
+\begin{titlepage}
+\newgeometry{left=2.5cm,top=10cm} %defines the geometry for the titlepage
+\pagecolor{white}
+\noindent
+\color{cadred}
+\par
+\noindent
+\begin{center}
+\textbf{\fontsize{35}{60}\selectfont{ΜΑΘΗΜΑΤΙΚΑ}}\par \textcolor{cadred}{\fontsize{30}{60}\selectfont Γ' Γυμνασίου}
+\end{center}
+\vfill
+\noindent
+\begin{center}
+{\huge{Σπύρος Φρόνιμος}}
+\vskip\baselineskip
+\noindent{Μάρτης 2013}
+\end{center}
+\end{titlepage}
+\restoregeometry % restores the geometry
+\nopagecolor %
+
+
+\tableofcontents
+
+
+\mainmatter
+
+\part{ΑΛΓΕΒΡΑ}
+\pagestyle{fancy}
+\chapter{\textsc{Αλγεβρικέσ Παραστάσεισ}}
+\paragrafos{Πράξεισ με πραγματικούσ αριθμούσ}
+\subsection*{\textcolor{orange}{A - Οι πραγματικοί αριθμοί και οι πράξεις τους}}
+\begin{mdframed}[frametitlerule=true, frametitle=\textcolor{orange}{Σύνολα Αριθμών},
+hidealllines=true,leftline=true]
+\begin{enumerate}
+\item \textbf{Φυσικοί Αριθμοί} : Ξεκινώντας απ' το 0 οι φυσικοί αριθμοί είναι\\0, 1, 2, 3,...
+\item \textbf{Ακέραιοι Αριθμοί} : Οι φυσικοί αριθμοί μαζί με τους αντίθετους τους :\\...-2, -1, 0, 1, 2...
+\item \textbf{Ρητοί Αριθμοί} : Όλοι οι αριθμοί που μπορούν να γραφτούν με τη μορφή κλάσματος : 
+$ \frac{a}{\beta} $ όπου α και β ακέραιοι με $ \beta\neq 0 $.
+\item \textbf{Άρρητοι Αριθμοί} : Οποιοσδήποτε αριθμός δεν είναι ρητός π.χ.\\$ \sqrt{2}, \sqrt{3}, \pi .$
+\item \textbf{Πραγματικοί Αριθμοί} : Οι ρητοί μαζί με το σύνολο των άρρητων μας δίνουν τους
+πραγματικούς αριθμούς, όλους τους αριθμούς που γνωρίζουμε.
+\end{enumerate}
+\end{mdframed}
+\begin{orismos}[Απόλυτη Τιμή]
+\textbf{Απόλυτη τιμή} ενός αριθμού $x$ ονομάζεται η απόσταση του αριθμού αυτού απο το 0 και συμβολίζεται με $\left| x \right| $.
+\end{orismos}
+\begin{paradeigma}
+Για παράδειγμα έχουμε ότι : $ \left|3 \right|=3$ και $ \left|-1 \right|=1$.
+\vspace{-2mm}
+\begin{center}
+{\scriptsize ΕΥΘΕΙΑ ΤΩΝ ΑΡΙΘΜΩΝ}\\
+\includegraphics[width=0.7\linewidth,height=0.07\textheight]{C:/Users/Spyros/Documents/eytheia}
+\end{center}
+Η απόλυτη τιμή του \textcolor{orange}{3} είναι \textcolor{orange}{3 μονάδες} και η απόλυτη τιμή του \textcolor{orange}{-1} είναι \textcolor{orange}{1 μονάδα}.
+\end{paradeigma}\\\\
+Όπως φαίνεται στο σχήμα, η απόλυτη τιμή παιρνει κάθε αριθμό και δινει τη θετική τιμή του, αφού σύμφωνα με τον ορισμό παριστάνει \underline{απόσταση}, και ξέρουμε οτι η απόσταση σαν ποσό παίρνει μόνο θετικές τιμές.
+\paragraph{\underline{ΠΡΑΞΕΙΣ ΠΡΑΓΜΑΤΙΚΩΝ ΑΡΙΘΜΩΝ}}
+\begin{enumerate}[itemsep=0mm]
+\item \textbf{Πρόσθεση}
+\begin{itemize}[itemsep=0mm]
+\vspace*{-2mm}
+\item Όταν προσθέτουμε \underline{ομόσημους} αριθμούς κάνουμε πρόσθεση τις απόλυτες τιμές τους και βάζουμε στο αποτέλεσμα το κοινό πρόσημο.
+\item Όταν έχουμε \underline{ετερόσημους} αριθμούς κάνουμε αφαίρεση τις απόλυτες τιμές τους και βάζουμε στο αποτέλεσμα το πρόσημο του αριθμού που έχει τη μεγαλύτερη απόλυτη τιμή.
+\end{itemize}
+\vspace*{-2mm}
+\item \textbf{Πολλαπλασιασμός}
+\begin{itemize}[itemsep=0mm]
+\vspace*{-2mm}
+\item Όταν πολλαπλασιάζουμε 2 \underline{ομόσημους} αριθμούς το αποτέλεσμα είναι\\θετικό.
+\item Όταν πολλαπλασιάζουμε 2 \underline{ετερόσημους} αριθμούς το αποτέλεσμα είναι αρνητικό.
+\end{itemize}
+\end{enumerate}
+\begin{paradeigma}
+\begin{tabular}{c|cc}
+ & Πρόσθεση & Πολλαπλασιασμός \\ 
+\hline\multirow{2}{*}{Ομόσημοι}& $ 3+7=10 $ & $ 3\cdot 7=21 $ \\ 
+&$ -5-8=-13 $ & $ \left(-3 \right)\cdot\left(-4 \right)=12 $ \\
+\hline\multirow{2}{*}{Ετερόσημοι}&$ 12-7=5 $ & $ \left(-5 \right)\cdot 4=-20  $ \\ 
+&$ 9-17=-8 $ & $ 7\cdot\left(-5 \right)=-35  $ \\ 
+\end{tabular} 
+\end{paradeigma}\\\\\\
+\begin{paradeigma}
+$-\left( \dfrac{3}{2}-1\right) +\dfrac{5}{3}+2-2\cdot\left(-\dfrac{4}{6} \right)=- \dfrac{3}{2}+1 +\dfrac{5}{3}+2+\dfrac{8}{6}=- \dfrac{3}{2}+\dfrac{5}{3}+\dfrac{8}{6}+3=- \dfrac{9}{6}+\dfrac{10}{6}+\dfrac{8}{6}+3=\dfrac{-9+10+8}{6}+3=\dfrac{9}{6}+3=\dfrac{9}{6}+\dfrac{18}{6}=\dfrac{27}{6}=\dfrac{9}{2} $
+\end{paradeigma}\\\\\\
+\paragraph{\underline{ΙΔΙΟΤΗΤΕΣ ΠΡΑΞΕΩΝ}}\mbox{}\\\\
+Για την πρόσθεση και τον πολλαπλασιασμό έχουμε\\τις παρακάτω ιδιότητες :\\\\
+\begin{tabular}{c|c|c}
+\rule[-1ex]{0pt}{1.5ex}  \textcolor{orange}{Ιδιότητες} & \textcolor{orange}{Πρόσθεση} & \textcolor{orange}{Πολλαπλασιασμός} \\ 
+\hline\rule[-1.5ex]{0pt}{4ex}  Αντιμεταθετική & $ a+\beta=\beta+a$ & $ a\cdot\beta=\beta\cdot a$ \\ 
+\hline\rule[-1.5ex]{0pt}{4ex} Προσεταιριστική & $ a+\left(\beta+\gamma \right)=\left(a+\beta \right)+\gamma  $ & $ a\cdot\left(\beta\cdot\gamma \right)=\left(a\cdot\beta \right)\cdot\gamma $ \\ 
+\hline\rule[-1ex]{0pt}{4ex} \multirow{2}{*}{Ουδέτερο στοιχείο} & $ a+0=a $ & $ a\cdot 1=a$ \\\rule[-1.5ex]{0pt}{4ex}
+ & $ a+(-a)=0 $ & $a\cdot\frac{1}{a}=1\;,\;a\neq 0$ \\
+\hline\rule[-1ex]{0pt}{4ex} Επιμεριστική &\multicolumn{2}{c}{$ a\cdot\left(\beta+\gamma \right)=a\cdot\beta+a\cdot\gamma $} \\
+\end{tabular}\\\\
+Ισχύουν επίσης οι ιδιότητες :
+\begin{itemize}[itemsep=0mm]
+\item $ a\cdot 0=0 $
+\item Αν $ a\cdot\beta=0\Rightarrow a=0 \textrm{ ή }\beta=0 $
+\item Δύο αριθμοί που έχουν άθροισμα 0 λέγονται \textbf{αντίθετοι}.
+\item Δύο αριθμοί που έχουν γινόμενο 1 λέγονται \textbf{αντίστροφοι}.
+\end{itemize}
+\paragraph{\underline{ΑΦΑΙΡΕΣΗ - ΔΙΑΙΡΕΣΗ}}\mbox{}\\\\
+Η αφαίρεση και η διαίρεση προκύπτουν με τη βοήθεια της πρόσθεσης και του πολλαπλασιασμού αντίστοιχα αν :
+\begin{enumerate}[itemsep=0mm]
+\item Προσθέσουμε τον αντίθετο του μειωτέου : $ a-\beta=a+(-\beta). $
+\item Πολλαπλασιάσουμε με τον αντίστροφο του διαιρέτη :\\$ a:\beta =\frac{a}{\beta}=a\cdot\frac{1}{\beta}. $
+\end{enumerate}
+\subsection*{\textcolor{orange}{Β - Δυνάμεις πραγματικών αριθμών}}
+\begin{orismos}[Δύναμη πραγματικού αριθμού]
+\textbf{Δύναμη} με \underline{βάση} ένα πραγματικό αριθμό $a$ και \underline{εκθέτη} ένα πραγματικό αριθμό $\nu\geq 2$ λέγεται το γινόμενο ν παραγόντων ισων με $ a $ και συμβολίζεται με $ a^\nu $ $$ a^\nu=a\cdot a\cdot\ldots\cdot a.$$
+\end{orismos}
+\begin{paradeigma}
+$ \undercbrace{3\cdot 3\cdot 3\ldots\cdot 3}_{12 \textrm{{ \scriptsize παράγοντες}}}=3^{12} $\qquad $ \undercbrace{(-2)\cdot (-2)\ldots\cdot (-2)}_{7 \textrm{{ \scriptsize παράγοντες}}}=(-2)^{7} $\qquad $ \undercbrace{x\cdot x\cdot x\ldots\cdot x}_{n \textrm{{ \scriptsize παράγοντες}}}=x^{n} $
+\end{paradeigma}
+\paragraph{\underline{Ιδιότητες Δυνάμεων}}\mbox{}\\\\
+Για κάθε δυναμη ορίζουμε\\
+$a^1=a \qquad a^0=1\;(\textrm{ με } a\neq 0) \qquad \textrm{ και } \qquad a^{-\nu}=\frac{1}{a^\nu}\;(\textrm{ με } a\neq 0) $\\\\
+Επίσης για κάθε δυναμη με εκθέτη ακέραιο αριθμό και εφόσον ορίζεται,\\ισχύουν οι παρακάτω ιδιότητες :\\\\
+\begin{tabular}{c|c|c}
+ & \textcolor{orange}{Ιδιότητες} & \textcolor{orange}{Παραδείγματα} \\ 
+\hline \rule[-2ex]{0pt}{5.5ex}1 & $a^\nu\cdot a^\mu=a^{\nu+\mu}$ & $2^3\cdot 2^4=2^{3+4}=2^7$\\
+\rule[-2ex]{0pt}{4.5ex} 2 & $a^\nu:a^\mu=a^{\nu-\mu}$ & $3^4:3^2=3^{4-2}=3^2$\\
+\rule[-2ex]{0pt}{4.5ex} 3 & $ \left( a\cdot\beta\right)^\nu=a^\nu\cdot\beta^\nu $ & $ \left( 2\cdot 5\right)^3=2^3\cdot 5^3 $\\
+\rule[-2ex]{0pt}{4.5ex} 4 & $ \left( \frac{a}{\beta}\right) ^\nu=\frac{a^\nu}{\beta^\nu} $ & $\left( \frac{3}{4} \right)^2=\frac{3^2}{4^2} $\\
+\rule[-2ex]{0pt}{4.5ex} 5 & $ \PARENS{a^\nu}^\mu=a^{\nu\cdot\mu} $ & $ \PARENS{3^2}^4=3^{2\cdot 4}=3^8  $\\
+\rule[-2ex]{0pt}{4.5ex} 6 & $ \left( \frac{a}{\beta}\right) ^{-\nu}=\left( \frac{\beta}{a}\right) ^{\nu} $ & $\left( \frac{3}{4} \right)^{-2}=\left( \frac{4}{3} \right)^2 $
+\end{tabular}\\\\\\
+\begin{paradeigma}
+Να γραφτούν οι παρακάτω παραστάσεις ως μια δύναμη\\\\
+\begin{tabular}{l@{\hskip 1in}l@{\hskip 1in}l}\setcounter{Number}{0}
+\Item $ 2^4\cdot 2^5$ &
+       \Item $  3^{12} : 3^5$ &
+       \Item $ \num{2,5}^7\cdot 4^7$\\\rule[-2ex]{0pt}{5.5ex}
+       \Item $ \left(3^2 \right)^5$ &
+       \Item $ \frac{3^5}{4^5}$ &
+       \Item $ \frac{4^3}{2^{-3}}$\\ 
+\end{tabular}\\\\
+\begin{lysh}
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+       \item $ 2^4\cdot 2^5=2^{4+5}=2^9 $
+       \item $  3^{12} : 3^5=3^{12-5}=3^7 $
+       \item $ \num{2,5}^7\cdot 4^7=\left(\num{2,5}\cdot 4 \right)^7=10^7  $
+       \item $ \left(3^2 \right)^5=3^{2\cdot 5}=3^{10} $
+       \item $ \frac{3^5}{4^5}=\left(\frac{3}{4} \right)^5=\num{0,75}^5  $
+       \item $ \frac{4^3}{2^{-3}}=4^3\cdot 2^3=\left(4\cdot 2 \right)^3=8^3  $
+\end{enumerate}\end{multicols}
+\end{lysh}
+\end{paradeigma}
+\paragraph{\underline{ΠΡΟΤΕΡΑΙΟΤΗΤΑ ΠΡΑΞΕΩΝ}}
+\begin{enumerate}[itemsep=0mm]
+\item Δυνάμεις
+\item Πολλαπλασιασμοί - Διαιρέσεις
+\item Προσθέσεις - Αφαιρέσεις
+\end{enumerate}
+Αν η παράσταση περιέχει παρενθέσεις, εκτελούμε τις πράξεις με τη σειρά αυτή, πρώτα μέσα στις παρενθέσεις και μετά με την ίδια σειρά απ' έξω.\\\\\\
+\begin{paradeigma}
+Να υπολογιστεί η τιμή της παρακάτω παράστασης\\
+$ 2\cdot\left(8^2-7\cdot 6 \right)+4\left(5^3-144:4^2 \right)-\left(-100:5^2+2^3 \right)^2 $\\\\
+\begin{lysh}\\
+Σύμφωνα με την πρτεραιότητα των πράξεων η παράσταση έχει ως εξής :\\
+\begin{tabular}{ll}
+$ 2\cdot\left(8^2-7\cdot 6 \right)+4\left(5^2-144:4^2 \right)-\left(-100:5^2+2^3 \right)^2= $ & \\ 
+$ =2\cdot\left(64-7\cdot 6 \right)+4\left(25-144:16 \right)-\left(-100:25+8 \right)^2=$ & (Δυνάμεις) \\ 
+$ =2\cdot\left(64-42 \right)+4\left(25-9 \right)-\left(-4+8 \right)^2=$ & (Πολλ/μοί - Διαιρ.) \\ 
+$ =2\cdot 22+4\cdot 16-4^2=$  & (Προσθ. - Αφ.) \\ 
+$ =2\cdot 22+4\cdot 16-16=$ & (Δυνάμεις) \\ 
+$ =44+64-16=$ & (Πολλ/μοί - Διαιρ.) \\ 
+$ =\textbf{92}$ & (Προσθ. - Αφ.) \\ 
+\end{tabular} 
+\end{lysh}
+\end{paradeigma}
+\subsection*{\textcolor{orange}{Γ - Τετραγωνική ρίζα πραγματικού αριθμού}}
+
+\begin{orismos}[Ρίζα πραγματικού αριθμού]
+\textbf{Τετραγωνική Ρίζα} ενός θετικού αριθμού $x$ είναι ένας θετικός 
+αριθμός $ a $ που αν υψωθεί στο τετράγωνο δίνει τον αριθμό $x$ (υπόριζο) και συμβολίζεται με $\sqrt{x}$.
+ \begin{equation}
+ \sqrt{x}=α\textrm{ με }\ a>0
+ \end{equation}
+\end{orismos}
+Κατά συνέπεια \underline{δεν} ορίζεται ρίζα αρνητικού αριθμού διότι κανένας αριθμός υψωμένος στο τετράγωνο, δεν είναι δυνατόν να δώσει αρνητικό αποτέλεσμα.\\\\
+Ισχύουν δηλαδή οι σχέσεις $ \sqrt{x}=a$ και $ a^2=x $ με $ a>0 $.\\\\
+\begin{paradeigma}
+Να υπολογιστούν οι παρακάτω ριζες\\
+\begin{tabular}{l@{\hskip 0.7in}l@{\hskip 0.7in}l@{\hskip 0.7in}l}\setcounter{Number}{0}
+\Item $ \sqrt{16} $ & \Item $ \sqrt{49} $ & \Item $ \sqrt{81} $ & \Item $ \sqrt{144} $ \\
+\Item $ \sqrt{196} $ & \Item $ \sqrt{225} $ & \Item $ \sqrt{343} $ & \Item $ \sqrt{484} $ \\
+\end{tabular}\\
+\begin{lysh}\\
+\begin{tabular}{l@{\hskip 0.4in}l@{\hskip 0.4in}l@{\hskip 0.4in}l}\setcounter{Number}{0}
+\Item $ \sqrt{16}=4 $ & \Item $ \sqrt{49}=7 $ & \Item $ \sqrt{81}=9 $ & \Item $ \sqrt{144}=12 $ \\
+\Item $ \sqrt{196}=14 $ & \Item $ \sqrt{225}=15 $ & \Item $ \sqrt{361}=19 $ & \Item $ \sqrt{484}=22 $ \\
+\end{tabular}
+\end{lysh}
+\end{paradeigma}
+\newpage
+\begin{sxolio}[Ρίζα σε εξισώσεις]
+Η τετραγωνική ριζα έχει εφαρμογή στη λύση απλών εξισώσεων 2\textsuperscript{ου} βαθμού της μορφής $ x^2=a $, με $ a $ θετικό, όπου θα χρειαστεί να βάλουμε τη ρίζα σε κάθε μέλος της εξίσωσης, ώστε να υπολογισουμε την τιμή της μεταβλητής.\\\\
+Επειδή στην επίλυση μιας εξίσωσης ψάχνουμε \underline{όλες} τις πιθανές λύσεις, τότε στη συγκεκριμένη εξίσωση οι λύσεις θα είναι και η θετική και η αρνητική τιμή της ρίζας του $ a $. Δηλαδή για παράδειγμα:
+$$x^2=25\Rightarrow \sqrt{x^2}=\pm\sqrt{25}\Rightarrow x=\pm 5$$
+\end{sxolio}
+\begin{paradeigma}
+Να λυθούν οι παρακάτω εξισώσεις\\
+\begin{tabular}{l@{\hskip 0.4in}l@{\hskip 0.4in}l}\setcounter{Number}{0}
+\Item $ x^2=16 $ & \Item $ x^2=64 $ & \Item $ x^2=289 $ \\
+\end{tabular}\\
+\begin{lysh}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ x^2=16\Rightarrow\sqrt{x^2}=\sqrt{16}\Rightarrow x=\pm 4$
+\item $ x^2=64\Rightarrow\sqrt{x^2}=\sqrt{64}\Rightarrow x=\pm 8$
+\item $ x^2=289\Rightarrow\sqrt{x^2}=\sqrt{289}\Rightarrow x=\pm 17$
+\end{enumerate} 
+\end{lysh}
+\end{paradeigma}
+Σύμφωνα με τον παραπάνω ορισμό, για κάθε πραγματικό αριθμό $ x $ θα ισχύουν οι παρακάτω σχέσεις :
+	\begin{enumerate}
+	\item $ \sqrt{x^2}=\left|x \right|  $ και
+	\item$ (\sqrt{x})^2=x $ για $ x\geq 0 $.
+	\end{enumerate}
+Οι 2 σχέσεις αυτές μας δείχνουν οτι η τετραγωνική ρίζα ενός αριθμού και η δύναμη στο τετράγωνο
+είναι πράξεις αντίστροφες αφου βλέπουμε οτι "αλληλοαναιρούνται" και σε κάθε περίπτωση έχουμε
+στο αποτέλεσμα μόνο τον πραγματικό αριθμό $ x $.\\\\
+Παρατηρούμε όμως οτι στην πρώτη σχέση το αποτέλεσμα είναι κλεισμένο μέσα σε απόλυτη τιμή ενώ
+στη δεύτερη σχέση όχι.
+  \begin{itemize}
+  \item Από τον ορισμό της ρίζας γνωρίζουμε ότι ρίζα πραγματικού αριθμού είναι θετικός αριθμός.
+  \item Επίσης ξέρουμε οτι ακόμα και ένας αρνητικός αριθμός υψωμένος στο τετράγωνο δίνει θετικό αποτέλεσμα.
+  \item Άρα, στην πρώτη σχέση, για να εξασφαλίσουμε οτι το αποτέλεσμα θα είναι σίγουρα θετικό
+  παίρνουμε την απολυτη τιμή του αριθμού $ x $.
+  \end{itemize}
+
+Για παράδειγμα $ \sqrt{(-7)^2}=|-7|=7>0 $.
+\newpage
+\begin{symbouli}[Υπολογισμός Ριζών]
+Για να υπολογίσουμε ρίζες μεγάλων αριθμών καλό είναι να θυμόμαστε τα τετράγωνα των αριθμών από το 1 μέχρι το 9 όπως φαίνεται στον παρακάτω πίνακα :
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+\rule[-1ex]{0pt}{3.5ex} $ a $ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ 
+\hline \rule[-1ex]{0pt}{3.5ex} $ a^2 $ & 1 & 4 & 9 & 16 & 25 & 36 & 49 & 64 & 81 \\
+\end{tabular}
+\end{center}
+Βλέπουμε στον πίνακα οτι τα ζευγάρια αριθμών που βρίσκονται στα άκρα, πηγαίνοντας από έξω προς τα μέσα, έχουν τετράγωνα τα οποία έχουν το ίδιο τελευταίο ψηφίο. Για παράδειγμα τα τετράγωνα των αριθμών 1 και 9 έχουν τελευταίο ψηφίο το 1 (1 και 81), τα τετράγωνα των 2 και 8 τελειώνουν σε 4 (4 και 64) κτλ.\\\\
+Επειδή κατά 99\% των περιπτώσεων στις ασκήσεις που θα αντιμετωπίσουμε φέτος θα έχουμε να υπολογίσουμε ρίζες αριθμών που πιθανόν να έχουν ακέραιο αποτέλεσμα, για να τις υπολογίσουμε εργαζόμαστε ως εξής :
+Αν για παράδειγμα θέλουμε να βρούμε τη ρίζα$ \sqrt{729} $ τότε :
+\begin{itemize}[itemsep=0mm]
+\item Εξετάζουμε με δοκιμές υψώνοντας στο τετράγωνο, ανάμεσα από ποιές δεκάδες βρίσκεται το αποτέλεσμα που ψάχνουμε δηλαδή\[ 10^2=100<729\enspace ,\enspace 20^2=400<729\enspace ,\enspace 30^2=900>729 \]
+πράγμα που σημαίνει οτι αφού 729 βρίσκεται ανάμεσα από τα τετράγωνα των 20 και 30 τότε η$\sqrt{729} $  θα βρίσκεται ανάμεσα από το 20 και το 30 : $ 20<\sqrt{729}<30$ άρα η ρίζα του 729 θα είναι της μορφής$\sqrt{729}=2\_$
+\item Χρησιμοποιούμε τον πίνακα για να βρούμε ποιό ψηφίο είναι η μονάδα του αριθμού που ψάχνουμε οπότε αφού το τελευταίο ψηφίο του 729 είναι το 9 τότε η ρίζα του αριθμού θα τελειώνει σε 3 ή 7 άρα θα έιναι 23 ή 27.
+\item Υψώνουμε τα 2 πιθανά αποτελέσματα στο τετράγωνο και βρίσκουμε ποιό είναι το σωστό αποτέλεσμα \[ 23^2=529\quad\textrm{ και }\quad 27^2=729\quad\textrm{ άρα } \sqrt{729}=27.\]
+\end{itemize}
+Αν το υπόριζο ειναι αρκετά μεγάλο ξεκινάμε δοκιμάζοντας εκατονταδες, χιλιάδες κτλ και προχωράμε σε μικρότερες αξίες με τον ίδιο τρόπο.
+\end{symbouli}
+\begin{thewrhma}[Γινόμενο - Πηλίκο Ριζών]
+Αν α, β μη αρνητικοί αριθμοί τότε  :
+\begin{enumerate}
+\item Το γινόμενο των ριζών τους ισούται με τη ρίζα του γινομένου τους.
+$$\sqrt{a}\cdot \sqrt{\beta}=\sqrt{a\cdot\beta}$$
+\item Το πηλίκο των ριζών τους ισούται με τη ρίζα του πηλίκου τους.
+$$\frac{\sqrt{a}}{\sqrt{\beta}}=\sqrt{\frac{a}{\beta}}$$
+\end{enumerate}
+\end{thewrhma}
+Σε αντίθεση με τον πολλαπλασιασμό και τη διαίρεση, το παραπάνω θεώρημα δεν ισχύει για την προσθεση και την αφαιρεση. Δηλαδή :
+\[\sqrt{a}\pm\sqrt{\beta}\neq \sqrt{a\pm\beta}\]
+\begin{symbouli}[Απλοποίηση Ριζών]
+Σε πολλές ασκήσεις ειναι δυνατον να ζητείται, η απλώς να χρειάζεται να γραφεί μια ρίζα
+σε απλούστερη μορφή με μικρότερους αριθμούς στο υπόριζο.\\
+Αυτό γίνεται με το να αναλυθεί το υπόριζο σε γινόμενο 2 παραγόντων, όπου ο ένας απ' τους δυο θα πρέπει να ειναι τετράγωνο ενός ακέραιου αριθμού ώστε εκμεταλευόμενοι την ιδιότητα
+$\sqrt{a^2\cdot\beta}=a\sqrt{\beta} $ να απλοποιηθεί το αποτέλεσμα. Αυτό μπορεί να γίνει με 2 τρόπους :
+\end{symbouli}
+\paragraph{1\textsuperscript{ος} Τρόπος}\mbox{}\\
+Ένας σίγουρος τρόπος να αποφύγουμε το να ψάχνουμε "στην τύχη" το κατάλληλο γινόμενο 2 αριθμών που θα μας δώσει το υπόριζο, με έναν απ' τους δύο να είναι τετράγωνο ακεραίου, είναι να δημιουργήσουμε μια λίστα με τους διαιρέτες του αριθμού.
+Αυτό το κάνουμε γιατί :
+\begin{enumerate}[itemsep=0mm]
+\item Οι 2 παράγοντες θα είναι αναγκαστικά και διαιρέτες του.
+\item Κάθε αριθμός έχει ζυγό αριθμό διαιρετών.
+\end{enumerate}
+Πολλαπλασιάζοντας λοιπόν τους διαιρέτες σε ζευγάρια "αντιδιαμετρικά" δηλαδή πρώτο με τελευταίο, δευτερο με προτελευταίο κτλ. παίρνουμε τον αριθμό που έχουμε στο υπόριζο.
+Το καταλληλότερο ζευγάρι είναι αυτό που έχει ένα τετράγωνο ακέραιου αριθμού.
+Αν υπάρχουν πολλοί συνδυασμοί που να συμβαίνει αυτό επιλέγουμε το μεγαλύτερο δυνατό τετράγωνο.\\\\
+\begin{paradeigma}
+Να απλοποιηθεί η ρίζα$ \sqrt{300} $.\\\\
+\begin{lysh}\\
+Οι διαιρέτες του 300 είναι οι : 1,2,3,4,5,6,10,12,15,20,25,30,50,60,75,100,150,300.\\
+Φτιάχνοντας τα γινόμενα του πρώτου διαιρέτη στην αρχή με τον πρώτο απ' το τέλος, δεύτερο στην αρχή με δεύτερο απ' το τέλος, τρίτο κτλ. παίρνουμε πάντα τον αριθμό 300.\\
+Απ' τους παραπάνω συνδυασμούς αυτοί οι οποίοι έχουν τετράγωνο ακεραίου είναι οι
+$$ 3\cdot \textbf{100}\textrm{ , }\textbf{4}\cdot 75 \textrm{ και } 12\cdot \textbf{25}.$$
+Ο καταλληλότερος συνδυασμός έτσι ώστε να γίνει μόνο μια απλοποίηση είναι ο $ 3\cdot 100 $.
+Επομένως $ \sqrt{300}=\sqrt{3\cdot 100}=\sqrt{3}\cdot \sqrt{100}=10\sqrt{3}. $
+\end{lysh}
+\end{paradeigma}
+\paragraph{2\textsuperscript{ος} Τρόπος}\mbox{}\\
+Εαν αντιμετωπίζουμε δυσκολία στο να υπολογίσουμε τους διαιρέτες του αριθμού που έχουμε στο υπόριζο, ώστε να χρησιμοποιήσουμε τον 1\textsuperscript{ο} τρόπο, τότε τον αναλύουμε σε γινόμενο πρώτων παραγόντων.\\
+Ύστερα, με κατάλληλες πράξεις, χωρίζουμε τους αριθμούς που προέκυψαν στο υπόριζο έτσι ώστε να προκύψουν δυνάμεις με άρτιο εκθέτη και να βγουν έξω απ' τη ριζα.\\\\
+\begin{paradeigma}
+Να απλοποιηθεί η ρίζα$ \sqrt{3000} $.\\\\
+\begin{lysh}\\
+Αναλύοντας το 3000 σε γινόμενο πρώτων έχουμε :\\
+\begin{tabular}{r|c}
+3000 & 2 \\ 
+1500 & 2 \\ 
+750 & 2 \\ 
+375 & 3 \\ 
+125 & 5 \\ 
+25 & 5 \\ 
+5 & 5 \\ 
+1 &  \\
+\end{tabular}\qquad
+\begin{tabular}{p{7cm}}
+Άρα το 3000 θα γίνει $ 3000=2^3\cdot 3\cdot 5^3 $.\newline Επομένως η ρίζα θα είναι
+\begin{gather*}
+\sqrt{3000}=\sqrt{2^3\cdot 3\cdot 5^3}=\sqrt{2^2\cdot 2\cdot 3\cdot 5^2\cdot 5}=\\2\cdot 5\sqrt{2\cdot 3\cdot 5}=10\sqrt{30}
+\end{gather*}
+\end{tabular}
+\end{lysh}
+\end{paradeigma}
+\paragraph{\underline{Κλάσματα με άρρητο παρονομαστή}}\mbox{}\\\\
+Σε πολλές ασκήσεις ζητείται να μετατραπεί ένα κλάσμα, με άρρητο παρονομαστή, σε ένα ισοδυναμο με ρητό παρονομασή.Τέτοια ειναι τα κλάσματα που έχουν ρίζα στον παρονομαστή.\\\\
+\begin{paradeigma}
+Να μετατραπεί το κλάσμα $ \frac{1}{\sqrt{3}} $ το οποίο έχει άρρητο παρονομαστή, σε ένα ισοδύναμο με ρητό παρονομαστή.\\\\
+\begin{lysh}\\
+Για να γινει αυτό θα πρέπει η τετραγωνική ρίζα να υψωθεί στο τετράγωνο και αυτό θα το πετύχουμε με το να πολλαπλασιάσουμε \underline{αριθμητή και παρονομαστή} με το $ \sqrt{3} $.
+$$ \frac{1}{\sqrt{3}}=\frac{1\cdot\sqrt{3}}{\sqrt{3}\cdot\sqrt{3}}=\frac{\sqrt{3}}{(\!\sqrt{3})^2 }=\frac{\sqrt{3}}{3} $$
+\end{lysh}
+\end{paradeigma}\\
+\lymena\mbox{}\\
+\lp Να υπολογιστεί η τιμή της παράστασης\\
+\lp Nα υπολογιστεί η τιμή της παράστασης\\
+\\\\
+\askhseis\mbox{}\\
+\ask Να υπολογιστεί η τιμή της παράστασης\\
+\ask Να υπολογιστεί η τιμή της παράστασης\\
+
+\paragrafos{Μονώνυμα - Πράξεισ με μονώνυμα}
+\subsection*{\textcolor{orange}{Α - Μονώνυμα}}
+\begin{orismos}[Αλγεβρικές Παραστάσεισ]
+\begin{enumerate}
+\item \textbf{Αλγεβρικές παραστάσεις} ονομάζονται παραστάσεις που περιέχουν αριθμούς και μεταβλητές με πράξεις μεταξύ τους.
+\item \textbf{Ακεραία αλγεβρική παράσταση} καλείται μια αλγεβρική παράσταση με μόνες πράξεις τον πολλαπλασιασμό και την πρόσθεση και με εκθέτες φυσικούς αριθμούς.
+\end{enumerate}
+\end{orismos}
+\begin{orismos}[Μονώνυμο]
+\textbf{Μονώνυμο} ονομάζεται μια ακέραια αλγεβρική παράσταση που ανάμεσα από τις 
+μεταβλητές έχει \underline{μόνο πολλαπλασιασμό}.
+\end{orismos}
+Ένα μονώνυμο αποτελείται από 2 μέρη :
+\begin{enumerate}
+\item Ο αριθμός που βρίσκεται μέσα στην παράσταση λέγεται \textbf{συντελεστής}.
+\item Το σύνολο των μεταβλητών ονομάζεται \textbf{κύριο μέρος}.
+\\π.χ. : $ \textcolor{orange}{2}\textcolor{orange}{x^3y^2} $ : \textcolor{orange}{Συντελεστής} και \textcolor{orange}{Κύριο Μέρος}.
+\end{enumerate}	
+\begin{itemize}[itemsep=0mm]
+\item Ο εκθέτης μιας μεταβλητής λέγεται \textbf{βαθμός} του μονωνύμου ως προς τη μεταβλητή αυτή.\\Π.χ. Το μονώνυμο $ 3x^3y^2 $ είναι 3\textsuperscript{ου} βαθμού ως προς $ x $ και 2\textsuperscript{ου} βαθμού ως προς $ y $.
+\item Ο βαθμός ενός μονωνύμου ως προς όλες τις μεταβλητές είναι \textbf{το άθροισμα των\\βαθμών}.\\Ο βαθμός του $ 3x^3y^2 $ ως προς $ x $ και $ y $ ειναι 3\textsuperscript{ου}+2\textsuperscript{ου}$ = $5\textsuperscript{ου} βαθμού.
+\item Δύο μονώνυμα που έχουν το ίδιο κύριο μέρος λέγονται \textbf{όμοια}.\\Π.χ. $ 4x^2y $ και $ 3x^2y $.
+\item Δύο όμοια μονώνυμα που έχουν ίσους συντελεστές λέγονται \textbf{ίσα} ενώ αν έχουν\\αντίθετους συντελεστές λέγονται \textbf{αντίθετα}.
+\item Οι αριθμοί λέγονται \textbf{σταθερά} μονώνυμα. Το 0 λέγεται και \textbf{μηδενικό} μονώνυμο.
+\end{itemize}
+\subsection*{\textcolor{orange}{Β - Πράξεις με μονώνυμα}}
+\paragraph{\underline{ΠΡΟΣΘΕΣΗ - ΑΦΑΙΡΕΣΗ ΜΟΝΩΝΥΜΩΝ}}\mbox{}\\\\
+Το άθροισμα (ή η διαφορά) 2 ή περισσότερων όμοιων μονωνύμων είναι μονώνυμο όμοιο με αυτά και έχει συντελεστή το άθροισμα των συντελεστών τους.
+\paragraph{\underline{ΠΟΛΛΑΠΛΑΣΙΑΣΜΟΣ ΜΟΝΩΝΥΜΩΝ}}\mbox{}\\\\
+Το γινόμενο 2 ή περισσότερων μονωνύμων είναι μονώνυμο που έχει :
+  \begin{enumerate}[itemsep=0mm]
+  \item συντελεστή το γινόμενο των συντελεστών και 
+  \item κύριο μέρος το γινόμενο των κύριων μερών των μονωνύμων.
+  \end{enumerate}
+\paragraph{\underline{ΔΙΑΙΡΕΣΗ ΜΟΝΩΝΥΜΩΝ}}\mbox{}\\\\
+Το γινόμενο 2 ή περισσότερων μονωνύμων είναι μονώνυμο που έχει :
+  \begin{enumerate}[itemsep=0mm]
+  \item συντελεστή το πηλίκο των συντελεστών και 
+  \item κύριο μέρος το πηλίκο των κύριων μερών των μονωνύμων.
+  \end{enumerate}
+\lymena\mbox{}\\
+\lp Να υπολογιστεί η τιμή της παράστασης\\
+\lp Nα υπολογιστεί η τιμή της παράστασης\\
+\\\\
+\askhseis\mbox{}\\
+\ask Να υπολογιστεί η τιμή της παράστασης\\
+\ask Να υπολογιστεί η τιμή της παράστασης\\
+
+\paragrafos{Πολυώνυμα}
+\paragraph{\underline{ΠΟΛΥΩΝΥΜΑ}}\mbox{}\\
+\begin{orismos}[Πολυώνυμο]
+Μια ακέραια αλγεβρική παράσταση η οποία είναι άθροισμα \underline{ανόμοιων} μονωνύμων ονομάζεται \textbf{πολυώνυμο}.
+\end{orismos}
+Κάθε μονώνυμο που βρίσκεται μέσα σε ένα πολυώνυμο ονομάζεται \textbf{όρος} του πολυωνύμου.
+Κατά συνέπεια αν ένα μονώνυμο έχει :
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item 2 όρους ονομάζεται \textbf{δυώνυμο}.
+\item 3 όρους ονομάζεται \textbf{τριώνυμο}.
+\end{enumerate}
+Στην προηγούμενη παράγραφο είδαμε ότι ο εκθέτης μιας μεταβλητής λέγεται βαθμός του μονωνύμου
+ως προς τη μεταβλητή αυτή και οτι ο βαθμός ενός μονωνύμου ως προς όλες τις μεταβλητές είναι το 
+άθροισμα των βαθμών.
+
+Ετσι λοιπόν και σε ένα πολυώνυμο, \textbf{βαθμός} του πολυωνύμου ως προς μια ή περισσότερες
+μεταβλητές είναι ο \underline{μεγαλύτερος} από τους βαθμούς των όρων του (των μονωνύμων).
+
+Επίσης κάθε αριθμός ονομάζεται και \textbf{σταθερό} πολυώνυμο το οποίο είναι μηδενικού βαθμού
+και το 0 ονομάζεται και \textbf{μηδενικ}ό πολυώνυμο το οποίο \underline{δεν} έχει βαθμό.
+Τα περισσότερα πολυώνυμα που θα μελετήσουμε στο κεφάλαιο αυτό θα είναι μιας μεταβλητής.\\
+
+Γενικά τα πολυώνυμα συμβολίζοται με ένα κεφαλαίο γράμμα $ Α, Β, P, Q $ κτλ για το όνομα τους
+και διπλα, μέσα σε παρένθεση, τη μεταβλητή ή τις μεταβλητές τις οποίες έχει. 
+Για παράδειγμα το πολυώνυμο $ x^3-3x^2+x-2 $ μπορεί να συμβολιστεί :$$ Α(x)=x^3-3x^2+x-2 $$
+
+\subparagraph{Τιμή πολυωνύμου}\mbox{}\\
+Μπορούμε, βάζοντας μια τιμή για τη μεταβλητή $ x $, να βρούμε την αντίστοιχη τιμή του πολυωνύμου για τη μεταβλητή αυτή δηλαδή :\\
+Αν στο πολυώνυμο $ Α(x)=x^3-3x^2+x-2 $ θέσουμε $ x=-2 $ τότε θα έχουμε :$$ Α(-2)=(-2)^3-3(-2)^2+(-2)-2=-8-3\cdot 4-2-2=-24$$
+Άρα η τιμή του πολυωνύμου για $ x=- 2$ είναι $ Α(-2)=-24 $.
+
+\subparagraph{Αλλαγή μεταβλητής}\mbox{}\\
+Είδαμε οτι δίπλα από το όνομα ενός πολυωνύμου μέσα στην παρένθεση βρίσκεται η μεταβλητή την οποία έχει το πολυώνυμο.
+Στη θέση αυτή μπορούμε να βάλουμε οποιαδήποτε παράσταση σαν μεταβλητή του πολυωνύμου οπότε αλλάξει ανάλογα και η μορφή του δηλαδή :\\
+Αν $ Α(x)=x^3-3x^2+x-2 $ τότε το πολυώνυμο Α με μεταβλητή $ y $ θα είναι $$ Α(y)=y^3-3y^2+y-2 $$.
+\begin{sxolio}[Φθίνουσες Δυνάμεις]
+Συνηθίζουμε, ένα πολυώνυμο που έχει μια μεταβλητή, να το γράφουμε ξεκινώντας από το μεγιστοβάθμιο όρο προχωρώντας στους μικρότερους δηλαδή κατα \textbf{φθίνουσες} δυνάμεις.\[ Α(x)=x^3-3x^2+x-2 \]
+\end{sxolio}
+\paragrafos{Πολλαπλασιασμός Πολυωνύμων}
+\paragrafos{Ταυτότητες}
+\begin{orismos}[Ταυτότητα]
+\textbf{Ταυτότητα} λέγεται κάθε ισότητα που περιέχει μεταβλητές και επαληθεύεται \underline{για κάθε τιμή} των μεταβλητών.
+\end{orismos}
+\begin{mdframed}[frametitlerule=true, frametitle=\textcolor{orange}{Αξιοσημείωτες Ταυτότητες},
+hidealllines=true,leftline=true]
+\begin{enumerate}
+\item \textbf{Άθροισμα στο Τετράγωνο} :\\$ \left(a+\beta \right)^2=a^2+2a\beta+\beta^2  $
+\item \textbf{Διαφορά στο Τετράγωνο} :\\$ \left(a-\beta \right)^2=a^2-2a\beta+\beta^2  $
+\item \textbf{Άθροισμα στον Κύβο} :\\
+$ \left(a+\beta \right)^3=a^3+3a^2\beta+3a\beta^2+\beta^3 $
+\item \textbf{Διαφορά στον Κύβο} :\\
+$ \left(a-\beta \right)^3=a^3-3a^2\beta+3a\beta^2-\beta^3 $
+\item \textbf{Γινόμενο Αθροίσματος επί Διαφοράς} :\\
+$ \left(a+\beta \right)\cdot\left(a-\beta \right)=a^2-\beta^2  $
+\item \textbf{Άθροισμα Κύβων} :\\
+$ \left(a+\beta \right)\cdot\left(a^2-a\cdot\beta+\beta^2\right)=a^3+\beta^3  $
+\item \textbf{Διαφορά Κύβων} :\\
+$ \left(a-\beta \right)\cdot\left(a^2+a\cdot\beta+\beta^2\right)=a^3-\beta^3  $
+\end{enumerate}
+\end{mdframed}
+\paragrafos{Παραγοντοποίηση}
+\paragrafos{$ \varDelta $ιαίρεση Πολυωνύμων}
+\paragrafos{Ε.Κ.Π. - Μ.Κ.$ \varDelta $. Αλγεβρικών Παραστάσεων}
+\paragrafos{Ρητές Παραστάσεις}
+\paragrafos{Πράξεις Ρητών Παραστάσεων}
+\genikes\mbox{}\\
+\gen Να υπολογιστεί η τιμή της παράστασης\\
+\gen Να υπολογιστεί η τιμή της παράστασης\\
+\chapter{\textsc{Εξισώσεισ - Ανισώσεισ}}
+\paragrafos{Εξισώσεις $ 1\textsuperscript{ου} $ βαθμού}
+\paragrafos{Εξισώσεις $ 2\textsuperscript{ου} $ βαθμού}
+\paragrafos{Προβλήματα Εξισώσεων $ 2\textsuperscript{ου} $ βαθμού}
+\paragrafos{Κλασματικές Εξισώσεις}
+\paragrafos{Ανισώσεις}
+\chapter{\textsc{Συστήματα Εξισώσεων}}
+\paragrafos{Η έννοια της Γραμμικής εξίσωσης}
+\paragrafos{Η έννοια του γραμμικού συστήματος και η γραφική επίλυση του.}
+\paragrafos{Αλγεβρική επίλυση γραμμικού συστήματος}
+\chapter{\textsc{Συναρτήσεισ}}
+\paragrafos{Η συνάρτηση $ y=ax^2 $ με $ a\neq 0 $}
+\paragrafos{Η συνάρτηση $ y=ax^2+\beta x+\gamma $ με $ a\neq 0 $}
+\chapter{\textsc{Πιθανότητεσ}}
+\paragrafos{Σύνολα}
+\paragrafos{Δειγματικός χώρος - Ενδεχόμενα}
+\paragrafos{Έννοια της πιθανότητας}
+\setcounter{chapter}{0}
+\part{ΓΕΩΜΕΤΡΙΑ - ΤΡΙΓΩΝΟΜΕΤΡΙΑ}
+\chapter{\textsc{Γεωμετρία}}
+\paragrafos{Ισοτητα τριγώνων}
+\paragrafos{Λόγος ευθυγράμμων τμημάτων}
+\paragrafos{Θεώρημα Θαλή}
+\paragrafos{Ομοιότητα}
+\chapter{\textsc{Τριγωνομετρία}}
+\paragrafos{Τριγωνομετρικοί Αριθμοί γωνίας ω με $ 0\leq\omega\leq 180\degree $}
+\paragrafos{Τριγωνομετρικοί Αριθμοί παραπληρωματικών γωνιών}
+\paragrafos{Σχέσεις μεταξύ τριγωνομετρικών αριθμών μιας γωνίας}
+\paragrafos{Νόμος των Ημιτόνων - Νόμος των Συνημιτόνων}
+\end{document}

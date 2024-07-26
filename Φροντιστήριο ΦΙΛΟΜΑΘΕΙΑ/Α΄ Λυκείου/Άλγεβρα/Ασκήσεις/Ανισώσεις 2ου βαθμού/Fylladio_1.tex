@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[english,greek]{babel}
+\usepackage{amsmath} 
+\let\myBbbk\Bbbk 
+\let\Bbbk\relax 
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2} 
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---- 
+\usepackage{tikz,pgfplots,tkz-tab} 
+\usepackage{tkz-euclide} 
+\usepackage[framemethod=TikZ]{mdframed} 
+\usetikzlibrary{decorations.pathreplacing} 
+\tkzSetUpPoint[size=2.9,fill=white]
+%----------------------- 
+\usepackage{calc,tcolorbox} 
+\tcbuselibrary{skins,theorems,breakable} 
+\usepackage{hhline} 
+\usepackage[explicit]{titlesec} 
+\usepackage{graphicx} 
+\usepackage{multicol} 
+\usepackage{multirow} 
+\usepackage{tabularx} 
+\usetikzlibrary{backgrounds} 
+\usepackage{sectsty} 
+\sectionfont{\centering} 
+\usepackage{enumitem} 
+\usepackage{adjustbox} 
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl} 
+\usepackage{systeme,regexpatch} 
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ --------- 
+\usepackage{mathtools} 
+%---------------------- 
+%-------- ΠΙΝΑΚΕΣ --------- 
+\usepackage{booktabs} 
+%---------------------- 
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ---------- 
+\usepackage{calculator} 
+%---------------------------- 
+%------------------------------------------ 
+\newcommand{\tss}[1]{\textsuperscript{#1}} 
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}} 
+\tikzstyle{pl}=[line width=0.3mm] 
+\tikzstyle{plm}=[line width=0.4mm] 
+\usepackage{etoolbox} 
+\makeatletter 
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse} 
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false 
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse} 
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false 
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi} 
+\makeatother
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\makeatletter
+\xpatchcmd{\tkzTabLine}
+{\node at (Z\thetkz@cnt@impair\thetkz@cnt@lg){$0$};} % search
+{\node[fill=white,inner sep=.5mm] at (Z\thetkz@cnt@impair\thetkz@cnt@lg){$0$};} % replace
+{}{}
+\makeatother
+\newcommand{\en}[1]{\selectlanguage{english}{#1}\selectlanguage{greek}}
+\newcommand{\roloi}[4][]{
+\draw[line width=.5mm,#1] (0,0) circle(2);
+\foreach \n in {1,2,...,12}{
+\tkzDefPoint(30*\n-90:2){A_\n}
+%\tkzDrawPoint(A_\n)
+\node at (-30*\n+90:1.65){\n};}
+\draw[plm,,#1] (0,0)--(90-30*#2-0.5*#3:1);
+\draw[pl,#1] (0,0)--(90-6*#3-0.1*#4:1.5);
+\draw[#1](0,0)--(90-6*#4:1.2);
+\tkzDrawPoint[fill=#1,color=#1](0,0)
+\foreach \s in {1,2,...,12}{
+\draw[#1](90-30*\s:1.85)--(90-30*\s:2);}
+\foreach \t in {1,2,...,60}{
+\draw[#1](90-6*\t:1.93)--(90-6*\t:2);}}
+
+
+\begin{document}
+\begin{enumerate}
+
+
+\item
+%@ Όνομα: Ακολουθία
+%@ Βαθμός: 2
+Ακολουθία πραγματικών αριθμών ονομάζεται κάθε συνάρτηση της μορφής $ a:\mathbb{N}^*\rightarrow\mathbb{R} $ όπου κάθε φυσικός αριθμός $ \nu\in\mathbb{N}^* $, εκτός του μηδενός, αντιστοιχεί σε ένα πραγματικό αριθμό $ a(\nu)\in\mathbb{R} $ ή πιο απλά $ a_\nu $.
+\begin{itemize}[itemsep=0mm]
+\item Η ακολουθία των πραγματικών αριθμών συμβολίζεται $ \left( a_\nu\right)  $.
+\item Οι πραγματικοί αριθμοί $ a_1, a_2,\ldots,a_\nu $ ονομάζονται \textbf{όροι} της ακολουθίας.
+\item Ο όρος $ a_\nu $ ονομάζεται \textbf{ν-οστός} ή \textbf{γενικός} όρος της ακολουθίας.
+\item Οι όροι μιας ακολουθίας μπορούν να δίνονται είτε από 
+\begin{itemize}[itemsep=0mm]
+\item έναν \textbf{γενικό τύπο} της μορφής $ a_\nu=f(\nu) $, όπου δίνεται κατευθείαν ο γενικός όρος της
+\item είτε από \textbf{αναδρομικό τύπο} όπου κάθε όρος δίνεται με τη βοήθεια ενός ή περισσότερων προηγούμενων όρων. Θα είναι της μορφής \[ a_{\nu+i}=f(a_{\nu+i-1},\ldots,a_{\nu+1},a_\nu)\;\;,\;\;a_1,a_2,\ldots,a_i\textrm{ γνωστοί όροι.} \] Στον αναδρομικό τύπο, ο αριθμός $ i\in\mathbb{N} $ είναι το πλήθος των προηγούμενων όρων από τους οποίους εξαρτάται ο όρος $ a_{\nu+i} $. Είναι επίσης αναγκαίο να γνωρίζουμε τις τιμές των $ i $ πρώτων όρων της προκειμένου να υπολογίσουμε τους υπόλοιπους.
+\end{itemize}
+\item Μια ακολουθία της οποίας όλοι οι όροι είναι ίσοι ονομάζεται \textbf{σταθερή}.
+\end{itemize}
+
+
+
+\item
+%@ Κωδικός: Alg-GrammikaSys-GrafEpil-AA1
+%@ Κεφάλαιο: Γραμμικά Συστήματα
+%@ Είδος: Γραφική Επίλυση Συστήματος
+%@ Δυσκολία: 1
+Να λυθούν γραφικά τα παρακάτω γραμμικά συστήματα.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=5mm]
+\item $ \systeme{x-y=3,3x+y=13} $
+\item $ \systeme{2x+y=4,x+4y=8} $
+\item $ \systeme{3x-y=2,6x-2y=4} $
+\item $ \systeme{x-2y=-3,-2x+4y=5} $
+\end{rlist}
+\end{multicols}
+
+
+
+\item
+%@ Κωδικός: Alg-Anis2ou-EpilAnis-AA1
+%@ Κεφάλαιο: Ανισώσεις 2ου βαθμού
+%@ Είδος: Επίλυση απλής πολυωνυμικής ανίσωσης
+%@ Δυσκολία: 1
+Να βρεθούν οι λύσεις των παρακάτω ανισώσεων
+\begin{multicols}{2}
+\begin{alist}
+\item $ x^2-3x+2>0 $
+\item $ x^2-4x+3<0 $
+\item $ 2x^2-5x+3\geq 0 $
+\item $ x^2-x-2\leq 0 $
+\item $ x^2-6x+5<0 $
+\item $ 2x^2-x-1>0 $
+\end{alist}
+\end{multicols}
+
+
+
+\item
+%@ Κωδικός: Alg-GrammikaSys-GrafEpil-AA2
+%@ Κεφάλαιο: Γραμμικά Συστήματα
+%@ Είδος: Γραφική Επίλυση Συστήματος
+%@ Δυσκολία: 1
+Να βρεθούν, αν υπάρχουν, τα κοινά σημεία των παρακάτω ευθειών.
+\begin{rlist}
+\item $ x+3y=6 $ και $ 2x+y=8 $
+\item $ 3x+4y=5 $ και $ -x+5y=3 $
+\item $ 2x-y=10 $ και $ 4x-2y=7 $
+\item $ 3x-y=2 $ και $ 6x-2y=4 $
+\end{rlist}
+
+
+
+\item
+%@ Κωδικός: Alg-Anis2ou-EpilAnis-AA2
+%@ Κεφάλαιο: Ανισώσεις 2ου βαθμού
+%@ Είδος: Επίλυση απλής πολυωνυμικής ανίσωσης
+%@ Δυσκολία: 1
+Να βρεθούν οι λύσεις των παρακάτω ανισώσεων
+\begin{multicols}{2}
+\begin{alist}
+\item $ -x^2+7x-12>0 $
+\item $ -2x^2+3x+2<0 $
+\item $ -x^2+2x+15\geq 0 $
+\item $ -3x^2-2x+1\leq 0 $
+\item $ -x^2-3x>0 $
+\item $ -4x^2+x<0 $
+\end{alist}
+\end{multicols}
+
+
+\end{enumerate}
+\end{document}

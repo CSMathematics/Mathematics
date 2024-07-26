@@ -1,0 +1,3473 @@
+\documentclass[twoside,10pt]{book}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}\parttitle $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}}   
+\newenvironment{thewrhma}[1][]{%
+\refstepcounter{thewrhma}
+\begin{mdframed}[%
+frametitle={\textcolor{steelblue}{ΘΕΩΡΗΜΑ \thethewrhma}\quad\ #1},
+skipabove=\baselineskip plus 2pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=1pt,
+frametitlerule=true,
+linecolor=steelblue,
+outerlinewidth=.5pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlerulewidth=.3pt,
+innertopmargin=\baselineskip,
+innerbottommargin=\baselineskip,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=white,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}
+}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}   
+\newenvironment{porisma}[1][]{%
+\refstepcounter{porisma}
+\begin{mdframed}[%
+frametitle={\textcolor{doc}{ΠΟΡΙΣΜΑ \theporisma}\quad\ #1},
+skipabove=\baselineskip plus 2pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=1pt,
+frametitlerule=true,
+linecolor=doc,
+outerlinewidth=.5pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlerulewidth=.3pt,
+innertopmargin=\baselineskip,
+innerbottommargin=\baselineskip,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=white,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}
+}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}   
+\newenvironment{protasi}[1][]{%
+\refstepcounter{protasi}
+\begin{mdframed}[%
+frametitle={\textcolor{black}{ΠΡΟΤΑΣΗ \theprotasi}\quad\ #1},
+skipabove=\baselineskip plus 2pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=1pt,
+frametitlerule=true,
+linecolor=black,
+outerlinewidth=.5pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlerulewidth=.3pt,
+innertopmargin=\baselineskip,
+innerbottommargin=\baselineskip,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=white,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}
+}
+
+\newcommand{\apodeiksi}{
+\textcolor{black}{\textcolor{doc}{\qquad ΑΠΟΔΕΙΞΗ\\}}}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}\textcolor{doc}{\textbf{\theorismos. #1}}}{}
+
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-9cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+\draw[top color = doc!90!white,draw = white] (-.1,0) rectangle
+(19cm,9.1cm);
+\node[anchor=west,xshift=.12\paperwidth,yshift=.21\paperheight,rectangle]
+{\color{white}\Huge\MakeUppercase {\textbf{Κεφάλαιο} }\textbf{\thechapter}};
+\node[anchor=west,xshift=.12\paperwidth,yshift=.14\paperheight,rectangle] {\Huge\textsc {\color{white}{##1}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{50pt}{70pt}
+}
+
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{doc}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\color{doc}\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\titlerule\it\titlerule\titlerule\titlerule\hfill\normalsize\Large\thecontentspage}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{7pt}%
+\color{doc}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize\thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2.4pc}}
+{}
+{\hfill\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\color{doc}\contentsname}%
+\@starttoc{toc}}
+\makeatother
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+
+
+\begin{document}
+\title{\MakeUppercase{ΘΕΩΡΙΑ ΓΕΩΜΕΤΡΙΑΣ}}
+\pagestyle{empty}
+\frontmatter
+\begin{titlepage}
+\newgeometry{left=2.5cm,top=2.5cm} %defines the geometry for the titlepage
+\pagecolor{white}
+\begin{center}
+{\large Σπύρος Φρόνιμος\\Μαθηματικός}
+\end{center}
+\noindent
+\color{doc}
+\par
+\noindent
+\mbox{}\\\\
+\begin{center}
+\textbf{\fontsize{30}{50}\selectfont{ΘΕΩΡΙΑ ΓΕΩΜΕΤΡΙΑΣ}}\par\mbox{}\\ \textcolor{doc}{\fontsize{15}{30}\selectfont \MakeUppercase{Βασική θεωρία ευκλείδειασ γεωμετρίασ}}
+\mbox{}\\ \textcolor{doc}{\fontsize{15}{30}\selectfont \MakeUppercase{Α' και Β' Λυκείου}}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\tkzInit[xmin= 0,xmax=8 ,ymin=0 ,ymax=7 ] \tkzClip[space=.5]
+\tkzDefPoint(3,5.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(8,0){Γ}
+\tkzDrawPolygon(A,B,Γ)
+\tkzDefMidPoint(Γ,B) \tkzGetPoint{I}
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDefMidPoint(Γ,A) \tkzGetPoint{M}
+\tkzInterLC(B,A)(I,Γ) \tkzGetSecondPoint{Γ'}
+\tkzInterLC(Γ,A)(I,B) \tkzGetFirstPoint{B'}
+\tkzInterLL(B,B')(Γ,Γ') \tkzGetPoint{H}
+\tkzInterLL(B,M)(Ι,A) \tkzGetPoint{Θ}
+\tkzInterLL(A,H)(Γ,B) \tkzGetPoint{A'}
+\tkzDefMidPoint(Η,A) \tkzGetPoint{Δ}
+\tkzDefMidPoint(Η,B) \tkzGetPoint{E}
+\tkzDefMidPoint(Η,Γ) \tkzGetPoint{Z}
+\tkzDrawPolygon[draw=gray](I,K,M)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0](B,A,Γ)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0](A,Γ,B)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0](Γ,B,A)
+\tkzDrawSegments[color=steelblue](B,B' Γ,Γ' A,A' A,I B,M Γ,K)
+\tkzDrawSegments[color=doc](A,I B,M Γ,K)
+\tkzMarkRightAngles(Γ,A',A B,B',Γ Γ,Γ',B)
+\tkzDrawCircle[circum](A',B',I)
+\tkzDrawPoints(A',B',Γ',H,Θ,I,K,M,Δ,E,Z)
+\tkzLabelPoint[above](A){A}
+\tkzLabelPoint[left](B){B}
+\tkzLabelPoint[right](Γ){Γ}
+\tkzLabelPoint[right=.2](H){H}
+\tkzLabelPoint[below right=.2](Θ){Θ}
+\tkzLabelPoint[below](A'){A'}
+\tkzLabelPoint[above right](B'){B'}
+\tkzLabelPoint[left](Γ'){Γ'}
+\tkzLabelPoint[below](I){I}
+\tkzLabelPoint[left=](K){K}
+\tkzLabelPoint[right](M){M}
+\tkzLabelPoint[above left](Δ){Δ}
+\tkzLabelPoint[left=.15](E){E}
+\tkzLabelPoint[right=.15](Z){Z}
+\end{tikzpicture}
+\end{center}
+\vfill
+\noindent
+\color{black}
+\begin{center}
+{\large{ΚΕΡΚΥΡΑ 2013}}
+\vskip\baselineskip
+\end{center}
+\hbox{ % Horizontal box
+\hspace*{0.2\textwidth} % Whitespace to the left of the title page
+\rule{1pt}{\textheight} % Vertical line
+\hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+\parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+
+{\textbf{ΘΕΩΡΙΑ ΓΕΩΜΕΤΡΙΑΣ}\\\textbf{Βασική θεωρία ευκλείδειας γεωμετρίας}\\\textbf{Α' και Β' Λυκείου}\\\\\noindent \textbf{Σπύρος Φρόνιμος - Μαθηματικός}\\\selectlanguage{english}{e-mail : spyrosfronimos@gmail.com}\\[0.5\baselineskip]
+\selectlanguage{greek}Σελίδες : ...\\
+\selectlanguage{english}ΙΣΒΝ\selectlanguage{greek} : ...\\
+Εκδόσεις : ...\\
+\textcopyright \selectlanguage{english}{ Copyright 2013}}\\[2\baselineskip] % Title
+{Φιλολογική Επιμέλεια :\\\textbf{Μαρία Πρεντουλή}}
+{\selectlanguage{english} - e-mail : predouli@yahoo.com\selectlanguage{greek}}\\[0.5\baselineskip]
+{Επιστημονική Επιμέλεια :}\\
+{\textbf{Ιωάννα Γραμμένου - }}{\selectlanguage{english} - e-mail : predouli@yahoo.com\selectlanguage{greek}}\\{\textbf{Σπύρος Φρόνιμος}}\\[0.5\baselineskip]
+{Εξώφυλλο : \\\textbf{Δημήτρης Πρεντουλής}}\\[1\baselineskip] % Tagline or further description
+% Author name
+
+\vspace{.4\textheight} % Whitespace between the title block and the publisher
+{\noindent Εικόνα Εσωφύλλου : Ο Κύκλος του \selectlanguage{english}Euler\selectlanguage{greek}\\ Πνευματικά Δικαιώματα : ...}\\[\baselineskip]}}
+\vspace*{2\baselineskip}
+\newpage
+\mbox{}\\\\\\\\\\\\
+\hspace*{0.75\textwidth}
+\textit{{\large Στους γονείς μου.}}
+\newpage
+\mbox{}
+\newpage
+\mbox{}
+{\LARGE \textbf{Πρόλογος}}\\\\\\\\
+
+Το βιβλίο αυτό περιέχει συγκεντρωτικά τη θεωρία της ευκλέιδειας γεωμετρίας που διδάσκεται στην Α' και Β' λυκείου και έχει σκοπό να βοηθήσει τους μαθητές στην κατανόηση και εφαρμογή της καλύπτοντας όλη τη διδακτέα ύλη.\\\\
+Ο μαθητής έχει στη διαθεσή του\\
+\vspace{-.4cm}
+\begin{itemize}
+\item Ορισμούς
+\item Αναλυτικές αποδειξεις θεωρημάτων
+\item Τυπολόγιο
+\item Χρήσιμες συμβουλές και μεθοδολογία
+\end{itemize}
+για να βελτιώσει τις ικανότητες του και να εξοικειωθεί με την αποδεικτική διαδικασία, χρήσιμη τόσο στη λύση ασκήσεων και εφαρμογών όσο και στην ανάπτυξή της μαθηματικής λογικής.\\\\\\
+
+Θέλω να ευχαριστήσω τους πολύ καλούς φίλους και συνάδελφους Μαρία Πρεντουλή για τη φιλολογική επιμέλεια, Ιωάννα Γραμμένου για την επιστημονική επιμέλεια και τις συμβουλές της, Δημήτρη Πρεντουλή για το εξώφυλλο του βιβλίου και τον κ.Αντώνη Τσολομύτη, αναπληρωτή καθηγητή μαθηματικών της Σχολής Θετικών Επιστημών Πανεπιστημίου Αιγαίου για τη μεγάλη βοήθεια του στη συγγραφή του βιβλίου.
+\vspace{5cm}\\
+Το βιβλίο γράφτηκε με τη χρήση του λογισμικού \LaTeX \;και \TeX\selectlanguage{english}Studio\selectlanguage{greek} και της γραματοσειράς \selectlanguage{english}txfontsb\selectlanguage{greek} του κ. Τσολομύτη.
+\newpage
+\end{titlepage}
+\restoregeometry % restores the geometry
+\nopagecolor
+
+\tableofcontents
+\mainmatter
+\part{Α' ΛΥΚΕΙΟΥ}
+\pagestyle{fancy}
+\chapter{Τα Βασικά Γεωμετρικά Σχήματα}
+\section*{\textcolor{doc}{ΟΡΙΣΜΟΙ}}\mbox{}\\
+\paragraph*{\textcolor{doc}{ΣΗΜΕΙΟ - ΓΡΑΜΜΗ - ΕΠΙΦΑΝΕΙΑ}}\mbox{}\\
+\Orismos{Σημείο}
+είναι ένα σχήμα που έχει θέση στο επίπεδο ή στο χώρο, αλλά οχι διαστάσεις. Παριστάνεται με τελεία και το συμβολίζουμε με κεφαλαίο γράμμα π.χ. Α,Β,Ο κτλ.\\\\
+\Orismos{Γραμμή}
+ονομάζεται το σχημα που προκύπτει από το σύνολο των θέσεων ενός μετακινούμενου σημείου στο επίπεδο ή στο χώρο. Η γραμμή έχει μόνο μια διάσταση, το μήκος.\\\\
+\Orismos{Επιφάνεια}
+ονομάζεται το σύνολο των σημείων ενός σώματος που ορίζουν το εξωτερικό σχήμα του.\\\\
+\Orismos{Επίπεδο}
+ονομάζεται μια λεία ομοιόμορφη επιφάνεια. Το επίπεδο έχει δύο διαστάσεις μήκος και πλάτος.\\
+\paragraph*{\textcolor{doc}{ΕΥΘΕΙΑ - ΗΜΙΕΥΘΕΙΑ}}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τεμνόμενες} ονομάζονται δύο ευθείες που έχουν \ypogrammisi{ένα} κοινό σημείο. Το κοινό αυτό σημείο ονομάζεται \textbf{σημείο τομής}.} & \begin{tikzpicture}
+\tkzDefPoint(1.5,.5){B}
+\tkzDefPoint(1.5,-.5){D}
+\tkzDefPoint(-1.5,-.5){A}
+\tkzDefPoint(-1.5,0.5){C}
+\tkzDrawSegments(A,B C,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παράλληλες} λέγονται δύο ή περισσότερες ευθείες του ίδιου επιπέδου, οι οποίες δεν τέμνονται σε κανένα σημείο.} & 
+\begin{tikzpicture}
+\tkzDefPoint(1.5,.4){B}
+\tkzDefPoint(1.5,-.4){D}
+\tkzDefPoint(-1.5,-.4){A}
+\tkzDefPoint(-1.5,0.4){C}
+\tkzDrawSegments(A,D B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Φορέας} μιας ημιευθείας ή ενός ευθύγραμμου τμήματος ονομάζεται η ευθεία γραμμή φέρει πάνω την ημιευθεία ή το ευθύγραμμο τμήμα.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αντικείμενες ημιευθείες}
+ονομάζονται δυο ημιευθείες με κοινή αρχή που σχηματίζουν ευθεία γραμμή.} & 
+\begin{tikzpicture}
+\tkzDefPoint(1.5,.0){B}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(-1.5,0){A}
+\tkzDrawSegments(A,B)
+\tkzDrawPoint(O)
+\tkzLabelPoint[above,color=steelblue](O){O}
+\tkzText[color=steelblue](-1.4,.2){$ x' $}
+\tkzText[color=steelblue](1.4,.15){$ x $}
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\paragraph*{\textcolor{doc}{ΕΥΘΥΓΡΑΜΜΟ ΤΜΗΜΑ}}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ευθύγραμμο τμήμα} ονομάζεται το σχήμα που αποτελεί το μέρος μιας ευθείας που ορίζεται από τα δύο άκρα του. Το ευθύγραμμο τμήμα ονομάζεται από τα άκρα του π.χ. ΑΒ.} & 
+\begin{tikzpicture}
+\tkzDefPoint(1.5,1){B}
+\tkzDefPoint(-1.5,0){A}
+\tkzDrawSegments(A,B)
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[above,color=steelblue](B){B}
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Διαδοχικά}
+ονομάζονται δύο ή περισσότερα ευθύγραμμα τμήματα που ανά δύο έχουν \ypogrammisi{ένα} κοινό άκρο και κανένα κοινό σημείο.\\\\
+\Orismos{Εικόνα} ενός σχήματος ονομάζεται το τελικό σχήμα, το οποίο προκύπτει από το αρχικό με μετατόπιση χωρις να αλλοιωθεί.\\\\
+\Orismos{Μέσο}
+ενός ευθύγραμμου τμήματος, ονομάζεται το εσωτερικό σημείο του, το οποίο το χωρίζει σε δύο ίσα μέρη.\\\\
+\Orismos{Άθροισμα}
+δύο ή περισσοτέρων διαδοχικών ευθυγράμμων τμημάτων, που βρίσκονται στον ίδιο φορέα, ονομάζεται το ευθύγραμμο τμήμα το οποίο έχει αρχη, την αρχή του πρώτου ευθύγραμμου τμήματος και τέλος, το τέλος του τελευταίου.\\Εάν δεν έχουν τον ίδιο φορέα, τότε τα μετατοπίζουμε κατάλληλα.\\\\
+\Orismos{Γινόμενο} ενός ευθυγράμμου τμήματος επί έναν πραγματικό αριθμό ν, ονομάζεται το άθροισμα ν διαδοχικών ίσων ευθυγράμμων τμημάτων.\\\\
+\Orismos{Μονάδα μέτρησης μήκους} ονομάζεται το ευθύγραμμο τμήμα που χρησιμοποιούμε για τη μέτρηση και τη σύγκριση όλων των ευθυγράμμων τμημάτων.\\\\
+\Orismos{Μήκος} ενός ευθύγραμμου τμήματος ονομάζεται ο αριθμός που μας δείχνει πόσες φορές θα χρειαστεί να πολλαπλασιάσουμε τη μονάδα μέτρησης μήκους ώστε να προκύψει το ευθύγραμμο τμήμα.\\\\
+\Orismos{Ίσα}
+ονομάζονται δυο ή περισσότερα ευθύγραμμα τμήματα, τα οποία έχουν το ίδιο μήκος.\\\\
+\Orismos{Απόσταση δύο σημείων} ονομάζουμε το μήκος του ευθύγραμμου τμήματος που τα ενώνει.\\
+\Orismos{Συμμετρικό} ενός σημείου Α ως προς κέντρο Ο ονομάζεται το σημείο Β που είναι τέτοιο ώστε το κέντρο συμμετρίας Ο να είναι μέσο του ευθύγραμμου τμήματος ΑΒ που τα ενώνει.
+\paragraph*{\textcolor{doc}{ΓΩΝΙΑ}}\mbox{}\\
+\Orismos{Ημιεπίπεδο} ονομάζεται το μέρος ενός επιπέδου που χωρίζεται από μια ευθεία γραμμή.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κυρτή γωνία} ονομάζεται το σχημα που αποτελειται από δύο ημιευθείες με κοινή αρχή και το κοινό μέρος των ημιεπιπέδων που ορίζουν οι δύο ημιευθείες.\\
+Οι ημιευθείες ονομάζονται \textbf{πλευρές} και το κοινό σημείο \textbf{κορυφή}.} & 
+\begin{tikzpicture}
+\tkzDefPoint(3,1){B}
+\tkzDefPoint(3,-.8){A}
+\tkzDefPoint(0,0){O}
+\tkzDrawSegments(A,O O,B)
+\tkzDrawPoints(O)
+\tkzLabelPoint[above,color=steelblue](O){O}
+\tkzMarkAngle[fill=steelblue!70,
+size=7mm](A,O,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Μη κυρτή γωνία} ονομάζεται το σχήμα που αποτελείται από το σύνολο των σημείων που δεν ανήκουν στην κυρτή γωνία και τις δύο πλευρές.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Μηδενική} ονόμαζεται μια \ypogrammisi{κυρτή} γωνία  της οποίας οι πλευρές συμπίπτουν. Η μηδενική γωνία έχει μέτρο $0\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){O}
+\tkzDrawSegment(O,B)
+\tkzDrawPoints(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Πλήρης γωνία} ονομάζεται μια \ypogrammisi{μη κυρτή} γωνία της οποίας οι πλευρές συμπίπτουν. Η πλήρης γωνία έχει μέτρο $360\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(2,.01){A}
+\tkzMarkAngle[fill=steelblue!70,size=3mm](A,O,B)
+\tkzDrawSegment(O,B)
+\tkzDrawPoints(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Ευθεία γωνία} ονομάζεται μια γωνία της οποίας οι πλευρές είναι αντικειμενες ημιευθείες. Η ευθεία γωνία έχει μέτρο $180\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(-1.5,0){B}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(1.5,0){A}
+\tkzMarkAngle[fill=steelblue!70,size=3mm](A,O,B)
+\tkzDrawSegment(A,B)
+\tkzDrawPoints(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διχοτόμος} μιας γωνίας ονομάζεται η ημιευθεία η οποία χωρίζει τη γωνία σε 2 ίσα μέρη.} & 
+\begin{tikzpicture}
+\tkzDefPoint(3,1){B}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(3,0){A}
+\tkzMarkAngle[fill=steelblue!70,size=5mm](A,O,B)
+\tkzDefLine[bisector](A,O,B) \tkzGetPoint{a}
+\tkzDrawSegments(A,O B,O)
+\tkzDrawSegments[color=steelblue,add=0 and -.2](O,a)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ορθή} ονομάζεται μια γωνία η οποία είναι το μισό μιας ευθείας γωνίας. Η ορθή γωνία έχει μέτρο $90\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){G}
+\tkzDefPoint(0,1){O}
+\tkzDefPoint(-.5,0){A}
+\tkzDrawSegments(B,G B,O)
+\tkzMarkRightAngle[fill=steelblue!70,size=.3](G,B,O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Κάθετες} λέγονται δύο ευθείες που σχηματίζουν μεταξύ τους ορθή γωνία.\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Οξεία} ονομάζεται μια γωνία που είναι μικρότερη από μια ορθή. Η οξεία γωνία έχει μέτρο ανάμεσα από $0\degree$ και $90\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(3,1){B}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(3,0){A}
+\tkzMarkAngle[fill=steelblue!70,size=5mm](A,O,B)
+\tkzDrawSegments(A,O B,O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αμβλεία} ονομάζεται μια γωνία που είναι μεγαλύτερη από μια ορθή. Η αμβλεία γωνία έχει μέτρο ανάμεσα από $90\degree$ και $180\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(-1.5,1){B}
+\tkzDefPoint(-.2,0){O}
+\tkzDefPoint(1.5,0){A}
+\tkzMarkAngle[fill=steelblue!70,size=4mm](A,O,B)
+\tkzDrawSegments(A,O B,O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\
+\paragraph*{\textcolor{doc}{ΕΥΘΕΙΑ ΚΑΘΕΤΗ - ΜΕΣΟΚΑΘΕΤΟΣ}}\mbox{}\\
+\Orismos{Απόσταση σημείου από ευθεία} ονομάζεται το μήκος του \ypogrammisi{μοναδικού κάθετου} ευθύγραμμου τμήματος που ενώνει το σημείο με την ευθεία.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Μεσοκάθετος} ενός ευθύγραμμου τμήματος ονομάζεται η ευθεία που διέρχεται κάθετα από το μέσο το του ευθύγραμμου τμήματος.\\Η μεσοκάθετος είναι \textbf{άξονας συμμετρίας} του και τα άκρα  \textbf{συμμετρικά}.} & 
+\begin{tikzpicture}
+\tkzDefPoint(-1.5,0){A}
+\tkzDefPoint(0,-.7){O}
+\tkzDefPoint(0,.7){C}
+\tkzDefPoint(1.5,0){B}
+\tkzDefPoint(0,0){D}
+\tkzDrawSegments(A,B C,O)
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[above,color=steelblue](B){B}
+\tkzMarkRightAngle[size=.3](B,D,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\
+\paragraph*{\textcolor{doc}{ΠΡΑΞΕΙΣ ΓΩΝΙΩΝ}}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εφεξής} λέγονται \ypogrammisi{δύο} γωνίες που έχουν κοινή κορυφή, κοινή πλευρά και κανένα άλλο κοινό σημέιο} & \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){G}
+\tkzDefPoint(3,.5){A}
+\tkzDefPoint(3,.9){O}
+\tkzDrawSegments(B,G B,O B,A)
+\tkzMarkAngle[fill=steelblue,
+size=1,opacity=.7](G,B,A)
+\tkzMarkAngle[fill=steelblue,
+size=1,opacity=.4](G,B,O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διαδοχικές} λέγονται \ypogrammisi{τρεις} ή περισσότερες γωνίες οι οποίες ανά δύο είναι μεταξύ τους εφεξής.}& \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){G}
+\tkzDefPoint(3,.5){A}
+\tkzDefPoint(3,1.4){D}
+\tkzDefPoint(3,.9){O}
+\tkzDrawSegments(B,G B,O B,A D,B)
+\tkzMarkAngle[fill=steelblue,
+size=1,opacity=.7](G,B,A)
+\tkzMarkAngle[fill=steelblue,
+size=1,opacity=.4](G,B,O)
+\tkzMarkAngle[fill=steelblue,
+size=1,opacity=.9](O,B,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Άθροισμα δύο εφεξής γωνιών} ονομάζεται η γωνία που έχει πλευρές τις ημιευθείες που βρίσκονται εκατέρωθεν της κοινής πλευράς.\\\\
+\Orismos{Διαφορά δύο γωνιών} ονομάζεται το μη κοινό κομμάτι δύο γωνιών που έχουν μετατοπισθεί έτσι ώστε να έχουν κοινή κορυφή και κοινή πρώτη πλευρά. (Η μια θα βρίσκεται στο εσωτερικό της άλλης).\\\\
+\Orismos{Γινόμενο μιας γωνίας} με ένα φυσικό αριθμό ν ονομάζεται το άθροισμα ν διαδοχικών ίσων γωνιών με την αρχική.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Συμπλήρωματικές} ονομάζονται δύο γωνίες που έχουν άθροισμα ίσο με μια ορθή γωνία. Η καθεμία λέγεται \textbf{συμπληρωματική} της άλλης.}& \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){G}
+\tkzDefPoint(2,.5){A}
+\tkzDefPoint(0,1.5){O}
+\tkzDefPoint(-.5,0){C}
+\tkzMarkAngle[fill=steelblue!70,
+size=5mm](G,B,A)
+\tkzMarkAngle[fill=steelblue!40,
+size=5mm](A,B,O)
+\tkzMarkRightAngle[size=.3](G,B,O)
+\tkzDrawSegments(B,G B,O B,A)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παραπληρωματικές} ονομάζονται δύο γωνίες που έχουν άθροισμα ίσο με μια ευθεία γωνία. Η καθεμία λέγεται \textbf{παραπληρωματική} της άλλης.}& \begin{tikzpicture}
+\tkzDefPoint(1.5,0){B}
+\tkzDefPoint(1,1){G}
+\tkzDefPoint(-1.5,0){A}
+\tkzDefPoint(0,0){O}
+\tkzMarkAngle[fill=steelblue!70,
+size=5mm](B,O,G)
+\tkzMarkAngle[fill=steelblue!40,
+size=5mm](G,O,A)
+\tkzDrawSegments(O,G B,O B,A)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κατακορυφήν} ονομάζονται δύο γωνίες που έχουν κοινή κορυφή και οι πλευρές τους ανα δύο έχουν κοινό φορέα δηλαδή είναι αντικείμενες ημιευθείες.}& \begin{tikzpicture}
+\tkzDefPoint(1.5,.5){B}
+\tkzDefPoint(1.5,-.5){D}
+\tkzDefPoint(-1.5,-.5){A}
+\tkzDefPoint(-1.5,0.5){C}
+\tkzDefPoint(0,0){O}
+\tkzDrawSegments(A,B C,D)
+\tkzMarkAngle[fill=steelblue!70,
+size=.4](D,O,B)
+\tkzMarkAngle[fill=steelblue!70,
+size=.4](C,O,A)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\
+\paragraph*{\textcolor{doc}{ΚΥΚΛΟΣ}}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κύκλος} ονομάζεται το σύνολο των σημείων που έχουν σταθερή απόσταση από ένα σταθερό σημείο το οποίο λέγεται \textbf{κέντρο} του κύκλου.\\Η απόσταση αυτή ονομάζεται \textbf{ακτίνα} του κύκλου.\\Ο κύκλος συμβολίζεται ως εξής π.χ. κύκλος $\left(O,\rho\right) $ με \textbf{κέντρο} Ο και \textbf{ακτίνα} ρ.}& \begin{tikzpicture}
+\tkzDefPoint(1.4,0){A}
+\tkzDefPoint(0,0){O}
+\tkzDrawCircle(O,A)
+\tkzDrawPoint(O)
+\tkzDrawSegments(A,O)
+\tkzLabelPoint[above,color=steelblue](O){O}
+\tkzText[color=steelblue](.7,.2){$ \rho $}
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Γεωμετρικός τόπος} ονομάζεται το σύνολο όλων των σημείων του επιπέδου ή του χώρου με μια συγκεκριμένη ιδιότητα.\\
+Οι πιο γνωστοί γεωμετρικοί τοποι ειναι η \textbf{μεσοκάθετος} ενός ευθύγραμμου τμήματος, η \textbf{διχοτόμος} μιας γωνίας και ο \textbf{κύκλος}.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τόξο} ενός κύκλου ονομάζεται το μέρος ενός κύκλου που ορίζεται από δύο σημεία του.}& \begin{tikzpicture}
+\clip (-1.5,.1) rectangle (1.2,1);
+\tkzDefPoint(1,.5){A}
+\tkzDefPoint(0,-.5){O}
+\tkzDefPointBy[rotation=center O angle 70](A)
+\tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle -20](A) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle 90](A) \tkzGetPoint{D}
+\tkzDrawArc[dashed](O,C)(D)
+\tkzDrawArc[color=steelblue,ultra thick](O,A)(B)
+\tkzDrawPoints[size=2](A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Χορδή} λέγεται το ευθυγραμμο τμήμα που ενώνει δύο σημεία ενός κύκλου.}& \begin{tikzpicture}
+\clip (-1.5,.1) rectangle (1.2,1);
+\tkzDefPoint(1,.5){A}
+\tkzDefPoint(0,-.5){O}
+\tkzDefPointBy[rotation=center O angle 70](A)
+\tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle -20](A) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle 90](A) \tkzGetPoint{D}
+\tkzDrawArc(O,C)(D)
+\tkzDrawSegment(A,B)
+\tkzDrawPoints(A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Απόστημα} μιας χορδής ονομάζεται το ευθύγραμμο τμήμα του έχει αρχή το κέντρο του κύκλου και πάει \ypogrammisi{κάθετα} στην χορδή.}&
+\begin{tikzpicture}
+\tkzDefPoint(0,-1.5){A}
+\tkzDefPoint(0,0){O}
+\tkzDefPointBy[rotation=center O angle -80](A)
+\tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle 80](A) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle -40](A)
+\tkzGetPoint{D}
+\tkzDefPointBy[rotation=center O angle 40](A)
+\tkzGetPoint{E}
+\tkzDrawArc(O,B)(C)
+\tkzDefMidPoint(D,E) \tkzGetPoint{F}
+\tkzDrawSegment(D,E)
+\tkzDrawSegment[color=steelblue,thick](O,F)
+\tkzMarkRightAngle(E,F,O)
+\tkzDrawPoints(O,D,E,F)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάμετρος} ονομάζεται η μεγαλύτερη χορδή ενός κύκλου η οποία διέρχεται απ' το κέντρο του.\\Η διάμετρος ενός κύκλου ειναι ίση με δύο φορές την ακτίνα του.}& \begin{tikzpicture}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(-1.5,0){C}
+\tkzDefPoint(-1,0){Β}
+\tkzDefPoint(0,0){O}
+\tkzDrawCircle(O,A)
+\tkzDrawSegments(A,Β)
+\tkzLabelPoint[above,color=steelblue](O){O}
+\tkzText[color=steelblue](.5,.2){$ \rho $}
+\tkzDrawPoints(O,A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Αντιδιαμετρικά σημεία} λέγονται τα άκρα μιας διαμέτρου ενός κύκλου.\\\\
+\Orismos{Εσωτερικό σημείο} του επιπέδου ενός κύκλου λέγεται ένα σημείο του οποίου η απόσταση του από το κέντρο του κύκλου είναι μικρότερη από την ακτίνα.\\\\\\
+\Orismos{Εξωτερικό σημείο} του επιπέδου ενός κύκλου λέγεται ένα σημείο του οποίου η απόσταση του από το κέντρο του κύκλου ειναι μεγαλύτερη από την ακτίνα.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Επίκεντρη} ονομάζεται μια γωνία που έχει κορυφή το κέντρο ενός κύκλου.}& \begin{tikzpicture}
+\clip (-1.5,-1.1) rectangle (1.2,0.2);
+\tkzDefPoint(.86,-0.5){A}
+\tkzDefPoint(0,0){O}
+\tkzDefPointBy[rotation=center O angle -60](A)
+\tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle -90](A) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle 30](A) \tkzGetPoint{D}
+\tkzDrawArc[dashed](O,C)(D)
+\tkzDrawArc(O,B)(A)
+\tkzDrawSegments(O,A O,B)
+\tkzMarkAngle[fill=steelblue!70,size=.2](B,O,A)
+\tkzDrawPoints(O,A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αντίστοιχο τοξο} μιας επίκεντρης γωνίας λέγεται το τόξο που ορίζεται από τα σημεία τομής των πλευρών της κυρτής επίκεντρης γωνίας με τον κύκλο.\\Λέμε μια επίκεντρη γωνία \textbf{βαίνει} στο αντίστοιχο τόξο της.}& \begin{tikzpicture}
+\clip (-1.5,-1.1) rectangle (1.2,0.2);
+\tkzDefPoint(.86,-0.5){A}
+\tkzDefPoint(0,0){O}
+\tkzDefPointBy[rotation=center O angle -60](A)
+\tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle -90](A) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle 30](A) \tkzGetPoint{D}
+\tkzDrawArc[dashed](O,C)(D)
+\tkzDrawArc[color=steelblue,ultra thick](O,B)(A)
+\tkzDrawSegments(O,A O,B)
+\tkzMarkAngle[fill=steelblue!70,size=.2](B,O,A)
+\tkzDrawPoints[size=2](O,A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ημικύκλιο} λέγεται το τόξο ενός κύκλου που προκύπτει χωρίζοντας τον με τη διάμετρο. Είναι ίσο με $180\degree$.}& \begin{tikzpicture}
+\tkzDefPoint(1.2,0){A}
+\tkzDefPoint(-1.5,0){C}
+\tkzDefPoint(0,0){O}
+\tkzDefPointBy[rotation=center O angle 180](A)
+\tkzGetPoint{B}
+\tkzDrawArc[color=steelblue,ultra thick](O,A)(B)
+\tkzDrawSegments(O,A O,B)
+\tkzMarkAngle[fill=steelblue!70,size=.2](A,O,B)
+\tkzDrawPoints[size=2](O,A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τεταρτοκύκλιο} λέγεται το τόξο του κύκλου που προκύπτει χωριζοντας τον με δύο κάθετες διαμέτρους. Είναι ίσο με $90\degree$.}& \begin{tikzpicture}
+\tkzDefPoint(1.2,0){A}
+\tkzDefPoint(-1.2,0){C}
+\tkzDefPoint(0,0){O}
+\tkzDefPointBy[rotation=center O angle 90](A)
+\tkzGetPoint{B}
+\tkzDrawArc[color=steelblue,ultra thick](O,A)(B)
+\tkzDrawSegments(O,A O,B)
+\tkzMarkRightAngle[fill=steelblue!70,size=.2](A,O,B)
+\tkzDrawPoints[size=2](O,A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Μέσο ενός τόξου} λέγεται το σημείο του τόξου που το χωρίζει σε δύο ίσα μέρη.\\\\
+\Orismos{Διαδοχικά τοξα} λέγονται τα τοξα ενός που έχουν ένα κοινό άκρο και κανένα άλλο κοινό σημείο.\\\\
+\Orismos{Ν-οστό ενός τόξου} λέγεται το 1 από τα ν ίσα μέρη του τόξου.\\\\
+\Orismos{Μοίρα} ονομάζεται το $\frac{1}{360}$ ενός κύκλου και συμβολίζεται με $1\degree$.\\\\
+\Orismos{Μέτρο ενός τόξου} λέγεται ο φυσικός αριθμός που μας δειχνει πόσες φορές χωράει μέσα του το τόξο 1 μοίρας.\\
+\paragraph*{\textcolor{doc}{ΤΕΘΛΑΣΜΕΝΗ ΓΡΑΜΜΗ - ΠΟΛΥΓΩΝΑ}}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τεθλασμένη γραμμή} ονομάζεται το σχήμα που αποτελείται από διαδοχικά, μη συνευθειακά ευθύγραμμα τμήματα.}& \begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(.7,0.5){B}
+\tkzDefPoint(1.8,.1){C}
+\tkzDefPoint(3,1){D}
+\tkzDrawSegments(B,A C,B C,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Κορυφές μιας τεθλασμέσης γραμμής} ονομάζονται τα άκρα των ευθυγράμμων τμημάτων που την αποτελούν.\\\\
+\Orismos{Πλευρές μιας τεθλασμένης γραμμής} ονομάζονται τα ευθυγραμμα τμήματα που την αποτελούν.\\\\
+\Orismos{Περίμετρος} μιας τεθλασμένης γραμμής ονομάζεται το άθροισμα των ευθυγράμμων τμημάτων της.\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Απλή} λέγεται μια τεθλασμένη γραμμή όταν κάθε ζευγάρι μη διαδοχικών πλευρών δεν έχουν κοινά σημεία.}& \begin{tikzpicture}
+\tkzDefPoint(.5,.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(.5,-.5){C}
+\tkzDefPoint(1,.5){D}
+\tkzDefPoint(1,-.5){E}
+\tkzDefPoint(2,.5){F}
+\tkzDefPoint(1.5,0){G}
+\tkzDefPoint(2,-.5){H}
+\tkzDefPoint(3,-.5){I}
+\tkzDefPoint(3,.5){J}
+\tkzDrawSegments(D,A A,B B,C C,E)
+\tkzDrawSegments(I,F F,G G,H H,J)
+\tkzText(.75,.7){{\footnotesize Απλή}}
+\tkzText(2.3,.7){{\footnotesize Μη Απλή}}
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κυρτή} ονομάζεται μια τεθλασμένη γραμμή της οποίας κάθε φορέας την αφήνει όλη σε ένα μόνο απ' τα δύο ημιεπίπεδα τα οποία ορίζει.}& \begin{tikzpicture}
+\tkzDefPoint(.5,.4){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1.7,-.5){C}
+\tkzDefPoint(1.3,.5){D}
+\tkzDefPoint(2.5,-.2){E}
+\tkzDrawSegments(D,A A,B B,C C,E)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Μη κυρτή} ονομάζεται κάθε τεθλασμένη γραμμή η οποία δεν είναι κυρτή.}& \begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(.7,0.5){B}
+\tkzDefPoint(1.8,.1){C}
+\tkzDefPoint(3,.7){D}
+\tkzDrawSegments(B,A C,B C,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κλειστή} ονομάζεται μια τεθλασμένη γραμμή της οποίας τα άκρα συμπίπτουν.}& \begin{tikzpicture}
+\tkzDefPoint(.5,.4){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1.7,-.5){C}
+\tkzDefPoint(1.3,.4){D}
+\tkzDefPoint(2.5,-.2){E}
+\tkzDrawSegments(D,A A,B B,C C,E E,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Πολύγωνο} ονομάζεται κάθε κλειστή και απλή τεθλασμένη γραμμή.\\Εαν η γραμμή είναι κυρτή λέγεται \textbf{κυρτό} πολύγωνο αλλιώς λέγεται \textbf{μη κυρτό}.}& \begin{tikzpicture}
+\tkzDefPoint(.5,.7){A}
+\tkzDefPoint(0,-.5){B}
+\tkzDefPoint(3,-.5){C}
+\tkzDefPoint(1.7,.8){D}
+\tkzDrawSegments(D,A A,B B,C C,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διαγώνιος} ενός πολυγώνου ονομάζεται το ευθύγραμμο τμήμα που ενώνει δύο μη διαδοχικές κορυφές του.}& \begin{tikzpicture}
+\tkzDefPoint(.5,.9){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1.7,.9){D}
+\tkzDrawSegments(D,A A,B B,C C,D)
+\tkzDrawSegments[color=steelblue](D,B A,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Γωνίες του πολυγώνου} ονομάζονται οι κυρτές γωνίες που σχηματίζουν οι πλευρές του.}&\begin{tikzpicture}
+\tkzDefPoint(.5,.4){A}
+\tkzDefPoint(0,-.5){B}
+\tkzDefPoint(3,-.5){C}
+\tkzDefPoint(1.7,.4){D}
+\tkzDrawSegments(D,A A,B B,C C,D)
+\tkzMarkAngle[draw=steelblue,size=2mm](B,A,D)
+\tkzMarkAngle[draw=steelblue,size=3mm](C,B,A)
+\tkzMarkAngle[draw=steelblue,size=4mm](D,C,B)
+\tkzMarkAngle[draw=steelblue,size=2mm](A,D,C)
+\end{tikzpicture}\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εξωτερική γωνία του πολυγώνου} λέγεται η παραπληρωματική γωνία μιας εσωτερικής γωνίας του.}&\begin{tikzpicture}
+\clip (-.4,-.1) rectangle (3,1);
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.3){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1.7,.7){H}
+\tkzDefPoint(.2,.7){K}
+\tkzDefPoint(-.35,-.05){L}
+\tkzDefPoint(2.7,.2){N}
+\tkzDrawSegments(H,K A,L H,A B,C N,H)
+\tkzMarkAngle[draw=steelblue,%
+size=3mm](K,A,B)
+\tkzMarkAngle[draw=steelblue,%
+size=3mm](L,B,C)
+\end{tikzpicture}\end{tabular}\mbox{}\\
+\section*{\textcolor{doc}{ΘΕΩΡΗΜΑΤΑ - ΑΠΟΔΕΙΞΕΙΣ}}\mbox{}\\
+\begin{thewrhma}
+Δύο εφεξής και παραπληρωματικές γωνίες έχουν τις μη κοινές πλευρές τους αντικείμενες ημιευθείες και αντίστροφα.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & ($ \Rightarrow $)  $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ εφεξής και παραπληρωματικές \\ 
+& ($ \Leftarrow $) \textit{ΟΑ} και \textit{ΟΓ} αντικείμενες ημιευθείες \\
+\hline \multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}} & ($ \Rightarrow $) $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ εφεξής και \textit{ΟΑ} , \textit{ΟΓ} αντικείμενες ημιευθείες \\  & ($ \Leftarrow $)  $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ παραπληρωματικές
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[3]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=right:\textcolor{steelblue}{A}] (A) at (2.8,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (2,1.4);
+\coordinate[label=left:\textcolor{steelblue}{Γ}] (Γ) at (-2.8,0);
+\coordinate [label=below:\textcolor{steelblue}{O}] (O) at (0,0);
+\draw (A) -- (Γ); 
+\draw (O) -- (B);
+\tkzMarkAngle[fill=steelblue,size=0.7,opacity=0.7](A,O,B)
+\tkzLabelAngle[pos=1](A,O,B){$\theta$}
+\tkzMarkAngle[fill=steelblue,size=0.7,opacity=0.4](B,O,Γ)
+\tkzLabelAngle[pos=1](B,O,Γ){$180\degree-\theta$}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.8& Αντικείμενες ημιευθείες\\
+1.25& Ευθεία γωνία\\
+1.33 & Εφεξής γωνίες \\
+1.35 & Άθροισμα εφεξής γωνιών\\
+1.39 & Παραπληρωματικές γωνίες \\
+\end{tabular}\\\\\\
+\textbf{Ορθό} ($\Rightarrow$)\\Οι εφεξής γωνίες $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ είναι παραπληρωματικές :\\$  A\hat{O}B +  Β\hat{Ο}\textrm{\textit{Γ}}=180\degree \Rightarrow A\hat{Ο}\textrm{\textit{Γ}}=180\degree $\\
+άρα το άθροισμα τους είναι \textbf{ευθεία} γωνία επομένως οι πλευρές \textit{ΟΑ} και \textit{ΟΓ} είναι \textbf{αντικείμενες ημιευθείες}.\\\\
+\textbf{Αντίστροφο} ($\Leftarrow$)\\Οι γωνίες $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ είναι εφεξής επομένως $A\hat{O}B +  Β\hat{Ο}\textrm{\textit{Γ}}=A\hat{Ο}\textrm{\textit{Γ}}$\\Επίσης οι πλευρές τους : \textit{ΟΑ} και \textit{ΟΓ}, είναι  αντικείμενες ημιευθείες.\\Τότε από τον ορισμό του αθροίσματος δύο γωνιών προκύπτει οτι το άθροισμα των γωνιών είναι η \textbf{ευθεία} γωνία $ A\hat{Ο}\textrm{\textit{Γ}} $ δηλαδή\\ $A\hat{Ο}\textrm{\textit{Γ}}=180\degree = A\hat{O}B +  Β\hat{Ο}\textrm{\textit{Γ}}$\\ Άρα οι γωνίες $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ είναι \textbf{παραπληρωματικές}.
+\end{minipage}
+\newpage
+\begin{thewrhma}
+Οι κατακορυφήν γωνίες είναι ίσες.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $ x\hat{O}y $ και $ x'\hat{O}y' $ κατακορυφήν γωνίες \\ 
+\hline \textcolor{doc}{Συμπέρασμα} & $ x\hat{O}y = x'\hat{O}y' $ \\ 
+\end{tabular}\mbox{}\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[6]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=right:\textcolor{steelblue}{$ x $}] (x) at (2,2);
+\coordinate [label=below:\textcolor{steelblue}{Ο}] (Ο) at (0,1);
+\coordinate [label=left:\textcolor{steelblue}{$ y' $}] (a) at (-2,2);
+\coordinate[label=left:\textcolor{steelblue}{$ x' $}] (b) at (-2,0);
+\coordinate [label=right:\textcolor{steelblue}{$ y $}] (y) at (2,0);
+\draw (b) -- (x); 
+\draw (a) -- (y);
+\tkzMarkAngle[fill=steelblue,size=0.7, οpacity=0.7](y,O,x)
+\tkzLabelAngle[pos=1](y,O,x){$\theta$}
+\tkzMarkAngle[fill=steelblue,size=0.7,               opacity=0.7](a,O,b)
+\tkzLabelAngle[pos=-1](a,O,b){$ \theta $}
+\tkzMarkAngle[fill=steelblue,size=0.5,   
+opacity=0.4](x,O,a)
+\tkzLabelAngle[pos=.7](x,O,a){$ \varphi $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.39 & Παραπληρωματικές γωνίες \\
+1.40 & Κατακορυφην γωνίες\\
+\end{tabular}\\\\\\
+Θεωρούμε τις κατακορυφήν γωνίες $ x\hat{O}y $ και $ x'\hat{O}y' $.\\Η γωνία $ x\hat{O}y $ βλέπουμε οτι είναι \textbf{παραπληρωματική}\\της γωνίας $ \varphi $ άρα $ x\hat{O}y=180-\varphi $.\\
+Το ίδιο ισχύει και για τη γωνία $ x'\hat{O}y' $ οπότε $ x'\hat{O}y'=180-\varphi $.\\Επομένως έχουμε $ x\hat{O}y=x'\hat{O}y' $
+\end{minipage}\mbox{}\\\\
+\begin{thewrhma}
+Η προέκταση της διχοτομου μιας γωνίας είναι διχοτόμος και της κατακορυφήν της γωνίας.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ x\hat{O}y $ και $ x'\hat{O}y' $ κατακορυφήν γωνίες \\ 
+& $O\delta$ διχοτόμος της γωνίας $ x\hat{O}y $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & $O\delta'$ διχοτόμος της γωνίας $ x'\hat{O}y' $ \\ 
+\end{tabular}\mbox{}\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=right:\textcolor{steelblue}{$ x $}] (x) at (2,1);
+\coordinate [label=below:\textcolor{steelblue}{Ο}] (Ο) at (0,0);
+\coordinate [label=left:\textcolor{steelblue}{$ y' $}] (a) at (-2,1);
+\coordinate[label=left:\textcolor{steelblue}{$ x' $}] (b) at (-2,-1);
+\coordinate [label=right:\textcolor{steelblue}{$ y $}] (y) at (2,-1);
+\coordinate[label=left:\textcolor{steelblue}{δ'}] (D) at (-2,0);
+\coordinate [label=right:\textcolor{steelblue}{δ}] (d) at (2,0);
+\draw (b) -- (x); 
+\draw (a) -- (y);
+\draw (d) -- (D);
+\tkzMarkAngle[fill=steelblue,size=0.7,   
+opacity=0.7](y,O,x)     
+\tkzMarkAngle[fill=steelblue,size=0.7,opacity=0.7](a,O,b)
+\tkzLabelAngle[pos=-1](D,O,b){2}
+\tkzLabelAngle[pos=1](a,O,D){1}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.26 & Διχοτόμος γωνίας \\
+1.40 & Κατακορυφην γωνίες\\
+\end{tabular}
+\end{minipage}\mbox{}\\\newpage
+\noindent
+Θεωρούμε τις κατακορυφήν γωνίες $ x\hat{O}y $ και $ x'\hat{O}y' $\\\textit{Οδ} διχοτόμος της γωνίας $ x\hat{O}y \Rightarrow \textrm{\textit{δ}}\hat{O}x=\textrm{\textit{δ}}\hat{O}y $.\\\\Η \textit{Οδ'} ειναι η προέκταση της \textit{Οδ}, οπότε $ \hat{Ο}_{1}=\textrm{\textit{δ}}\hat{O}y $ \\(ως κατακορυφήν), και ομοίως $ \hat{Ο}_{2}=\textrm{\textit{δ}}\hat{O}x $.\\ Επομένως $ \hat{Ο}_{1}=\hat{Ο}_{2}$ άρα \textit{Οδ'} διχοτόμος της $ x'\hat{O}y' $.\\
+\begin{thewrhma}
+Οι διχοτόμοι δύο εφεξής και παραπληρωματικών γωνιών είναι μεταξύ τους κάθετες.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ εφεξής και παραπληρωματικές \\ 
+& \textit{ΟΔ, ΟΕ} οι διχοτόμοι των $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ αντίστοιχα \\
+\hline \textcolor{doc}{Συμπέρασμα} & $O\varDelta\perp OE$ \\ 
+\end{tabular}\mbox{}\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\clip (-3.3,-.4) rectangle (3.3,2.4);
+\coordinate [label=right:\textcolor{steelblue}{A}] (A) at (2.8,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (-1,2);
+\coordinate[label=left:\textcolor{steelblue}{Γ}] (Γ) at (-2.8,0);
+\coordinate [label=below:\textcolor{steelblue}{O}] (O) at (0,0);
+\draw (A) -- (Γ); 
+\draw (B) -- (Ο);
+\tkzMarkAngle[fill=steelblue,size=0.7,   
+opacity=0.7](A,O,Β)
+\tkzLabelAngle[pos=1](Α,Ο,B){}
+\tkzMarkAngle[fill=steelblue,size=0.7,   
+opacity=0.4](B,O,Γ)
+\tkzLabelAngle[pos=1](B,O,Γ){}
+\tkzDefLine[bisector](A,O,B) \tkzGetPoint{a}
+\tkzDrawLine[dashed,add=0 and -.5](O,a)
+\tkzDefLine[bisector](B,O,Γ) \tkzGetPoint{b}
+\tkzDrawLine[dashed,add=0 and -.3](O,b)
+\tkzMarkRightAngle[fill=blue!20,size=.5,opacity=.3](a,O,b)
+\tkzDefPoint(1.5,2.5){Δ}
+\tkzLabelPoint(Δ){\textcolor{steelblue}{Δ}}
+\tkzDefPoint(-2.8,1.8){Ε}
+\tkzLabelPoint(Ε){\textcolor{steelblue}{Ε}}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.26& Διχοτόμος γωνίας\\
+1.28& Κάθετες πλευρές\\
+1.33 & Εφεξής γωνίες \\
+1.39 & Παραπληρωματικές γωνίες \\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $ δύο εφεξής και παραπληρωματικές γωνίες\\Τότε $ A\hat{O}B + Β\hat{Ο}\textrm{\textit{Γ}}=180\degree$\\
+Επίσης \textit{ΟΔ, ΟΕ} είναι οι \textbf{διχοτόμοι} των γωνιών $ A\hat{O}B $ και $ Β\hat{Ο}\textrm{\textit{Γ}} $.\\
+Επομένως θα έχουμε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& A\hat{Ο}B=A\hat{O}\varDelta+\textrm{\textit{Δ}}\hat{O}B\\
+& A\hat{O}\varDelta=\textrm{\textit{Δ}}\hat{O}B
+\end{aligned}}\Rightarrow A\hat{Ο}B=2\textrm{\textit{Δ}}\hat{O}B$\footnote[1]{Επιλέξαμε τα μέρη $ \varDelta\hat{Ο}B $ και $ B\hat{O}E $ των δύο γωνιών γιατί αυτά είναι εκείνα τα οποία μας φτιάχνουν τη γωνία $ \varDelta\hat{Ο}E $ που χρειαζόμαστε.}\\
+και ομοίως για τη $ B\hat{Ο}\varGamma $\\ $\LEFTRIGHT.\}{%
+\begin{aligned}
+& B\hat{Ο}\varGamma=B\hat{O}E+E\hat{O}\varGamma\\
+& B\hat{O}E=E\hat{O}\varGamma
+\end{aligned}}\Rightarrow B\hat{Ο}\varGamma=2B\hat{O}E^{1}$\\\\
+Από τις δυο παραπάνω σχέσεις λοιπόν θα ισχύει :\\ $2\textrm{\textit{Δ}}\hat{O}B + 2Β\hat{Ο}\textrm{\textit{Ε}}=180\degree\Rightarrow$
+$ \textrm{\textit{Δ}}\hat{O}B + Β\hat{Ο}\textrm{\textit{Ε}}=\frac{180\degree}{2}\Rightarrow \textrm{\textit{Δ}}\hat{Ο}\textrm{\textit{Ε}}=90\degree $ άρα $ O\textrm{\textit{Δ}}\perp O\textrm{\textit{Ε}} $.
+\newpage
+\begin{thewrhma}
+Δύο τόξα ενός κύκλου είναι ίσα αν και μόνο αν οι επίκεντρες γωνίες που βαίνουν σ' αυτά είναι ίσες.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $(\Rightarrow)\; \widearc{AB} , \widearc{\textrm{\textit{ΓΔ}}} $ τόξα με $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $\\ 
+& $(\Leftarrow)\; A\hat{O}B , \textrm{\textit{Γ}}\hat{O}\textrm{\textit{Δ}} $ επίκεντρες γωνίες με $ A\hat{O}B = \textrm{\textit{Γ}}\hat{O}\textrm{\textit{Δ}} $ \\
+\hline \multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}} & $(\Rightarrow)\; A\hat{O}B = \textrm{\textit{Γ}}\hat{O}\textrm{\textit{Δ}} $ \\ 
+& $(\Leftarrow)\; \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=below:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (2,0);
+\tkzDefPointBy[rotation=center O angle 50](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 140](B) \tkzGetPoint{Γ}
+\tkzDefPointBy[rotation=center O angle 190](B) \tkzGetPoint{Δ}
+\tkzDrawCircle(O,B)
+\tkzLabelPoint[above right](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[above left](Γ){\textcolor{steelblue}{Γ}}
+\tkzLabelPoint[left](Δ){\textcolor{steelblue}{Δ}}
+
+\tkzDrawArc[color=steelblue,ultra thick](O,B)(A)
+\tkzDrawArc[color=steelblue,ultra thick](O,Γ)(Δ)
+\tkzDrawSegments(O,A O,B O,Γ O,Δ)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0.7](B,O,A)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0.7](Γ,O,Δ)
+\tkzDrawPoints[size=1.5](O,A,B,Γ,Δ)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{clll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.11& Εικόνα & 1.50 & Επίκεντρη γωνία \\
+1.43& Τόξο Κύκλου & 1.51 & Αντίστοιχο τόξο\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\textbf{Ορθό} ($\Rightarrow$)\\
+Έσtω $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $ δύο τοξα ενός κύκλου $\left(Ο,\rho\right) $.\\Μετά από κατάλληλη μετατόπιση τα δυο τόξα θα\\συμπίπτουν άρα οι πλευρές  $ OB, O\varGamma $ και $ O\varDelta, OA $\\των γωνιών τους θα συμπέσουν και αυτές επομένως\\θα είναι ίσες : $ A\hat{O}B =\textrm{\textit{Γ}}\hat{O}\textrm{\textit{Δ}} $.\\\\
+\textbf{Αντίστροφο} ($\Leftarrow$)\\Έστω $ A\hat{O}B = \textrm{\textit{Γ}}\hat{O}\textrm{\textit{Δ}} $ δύο επίκεντρες γωνίες του κύκλου $\left(Ο,\rho\right) $.\\Με κατάλληλη μετατόπιση οι πλευρές $ OB, O\varGamma $ και $ O\varDelta, OA $ των γωνιών θα συμπίπτουν, επομένως τα τόξα $ \widearc{AB}, \widearc{\textrm{\textit{ΓΔ}}} $ που βρίσκονται στο εσωτερικό των γωνιών θα είναι συμπίπτουν κι αυτά. Άρα $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $.
+\newpage
+\begin{porisma}
+\begin{enumerate}
+\item Μια διάμετρος ενός κύκλου τον διαιρει σε δύο ίσα τόξα.
+\item Δύο κάθετες διάμετροι διαιρούν τον κύκλο σε τέσσερα ίσα τόξα.
+\item Αν δύο επίκεντρες γωνίες ενός κύκλου ειναι άνισες τότε και τα τόξα τα οποία βαίνουν είναι αντιστοίχως άνισα.
+\end{enumerate}
+\end{porisma}
+\begin{thewrhma}
+Το μέσο ενός τόξου είναι μοναδικό.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ A\hat{O}B $ επίκεντρη γωνία, $ \widearc{AB}$ αντίστοιχο τοξο \\ 
+& $Μ$ μέσο του τόξου $ \widearc{AB}$ \\
+\hline \textcolor{doc}{Συμπέρασμα} & $ Μ $ μοναδικό μέσο \\ 
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[10]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=above:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=left:\textcolor{steelblue}{B}] (B) at (-1.4,-1.4);
+\tkzDefPointBy[rotation=center O angle 45](B) \tkzGetPoint{M}
+\tkzDefPointBy[rotation=center O angle 90](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 55](B) \tkzGetPoint{M'}
+\tkzDrawPoints(O,A,B,M,M')
+\tkzDrawCircle(O,B)
+\tkzLabelPoint[below right](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[below](M){\textcolor{steelblue}{M}}
+\tkzLabelPoint[below right](M'){\textcolor{steelblue}{M'}}
+\tkzDrawSegments(O,A O,B O,M)
+\tkzDrawSegments[dashed](O,M')
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{clll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.26 & Διχοτόμος & 1.51 & Αντίστοιχο τόξο \\
+1.43& Τόξο κύκλου & 1.54 & Μέσο τόξου\\
+1.50 & Επίκεντρη γωνία & & \\
+\end{tabular}\end{minipage}\\\\\\
+Έσtω $ \widearc{AB}$ τόξο ενός κύκλου $\left(Ο,\rho\right) $.\\Αφού το σημείο $ M $ είναι μέσο του τόξου $ \widearc{AB}$, θα έχουμε\\$  \widearc{MA}= \widearc{MB} \Rightarrow A\hat{O}M=B\hat{O}M$ ως επίκεντρες γωνίες τους.\\Αυτό σημαίνει οτι η $OM$ είναι \textbf{διχοτόμος} της γωνίας $A\hat{O}Β$.\\\\
+Έστω τώρα $M'$ ένα δευτερο σημείο του τόξου $OM$ ώστε\\να είναι και αυτό μέσο του.\\Αυτό σημαίνει οτι και το ευθύγραμμο τμήμα $OM'$ θα είναι διχοτόμος της γωνίας $A\hat{O}Β$, που είναι \textbf{άτοπο} γιατί η διχοτόμος μιας γωνίας είναι \textbf{μοναδική}.\\Επομένως $Μ$ μοναδικό μέσο του τόξου $ \widearc{AB}$.\\\\
+\paragraph*{ΣΧΟΛΙΟ}\mbox{}\\
+Η αποδεικτική μέθοδος που χρησιμοποιήσαμε προηγουμένως ονομάζεται \textbf{απάγωγη σε άτοπο}. Χρησιμοποιείται και στη γεωμετρία κυρίως σε περιπτώσεις όπου μας ζητείται να αποδειχθεί η μοναδικότητα της ύπαρξης ενός στοιχείου ή μιας ιδιότητας.\\Η διαδικασία έχει ως εξής.
+\begin{itemize}
+\item Η κάθε πρόταση αποτελείται από δύο μέρη, την υπόθεση και το συμπέρασμα.
+\item Η υπόθεση της πρότασης είναι αληθής και θέλουμε να αποδείξουμε οτι και το συμπέρασμα ισχύει.
+\item Για να γίνει αυτό ισχυριζόμαστε οτι ισχύει το αντίστροφο του συμπεράσματος (δηλαδη η άρνησή του).
+\item Εφαρμόζοντας τον παραπάνω ισχυρισμό στα δεδομένα της πρότασης καταλήγουμε σε συμπέρασμα το οποίο δεν συμφωνεί με την υπόθεση.
+\item Αυτό όμως δεν είναι δυνατόν να συμβαίνει γιατί γνωριζουμε οτι η υπόθεση της πρότασης είναι $100\percent$ αληθής.
+\item Επομένως αναφέρουμε οτι οδηγηθήκαμε σε \textbf{άτοπο} το οποίο προέκυψε από τον ισχυρισμό οτι ισχύει το αντίστροφο του συμπεράσματος.
+\item Αυτό σημαίνει οτι δεν ισχύει η άρνηση του συμπεράσματος άρα θα ισχύει το ορθό, δηλαδή αυτό που μας ζητάει η πρόταση.
+\end{itemize}
+\chapter{Τρίγωνα}
+\section*{\textcolor{doc}{ΟΡΙΣΜΟΙ}}\mbox{}\\
+\vspace{-.5cm}
+\paragraph*{\textcolor{doc}{ΣΤΟΙΧΕΙΑ ΚΑΙ ΕΙΔΗ ΤΡΙΓΩΝΩΝ}}\mbox{}\\
+\Orismos{Κύρια στοιχεία} ενός τριγώνου λέγονται οι πλευρές και οι γωνίες του.\\\\
+\Orismos{Περίμετρος} ενός τριγώνου είναι το άθροισμα όλων των πλευρών του.\\
+Συμβολίζεται με $2\tau$.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Σκαληνό} ονομάζεται ένα τρίγωνο που έχει όλες τις πλευρές του άνισες.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1){C}
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ισοσκελές} ονομάζεται ένα τρίγωνο που έχει \ypogrammisi{δύο} πλευρές του ίσες μεταξύ τους. Η τρίτη πλευρά ονομάζεται \textbf{βάση}.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1.5,1){C}
+\tkzDrawPolygon(A,B,C)
+\tkzMarkSegments[mark=|,color=steelblue](C,B A,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ισόπλευρο} ονομάζεται ένα τριγωνο που έχει \ypogrammisi{όλες} τις πλευρές του ίσες.} & \begin{tikzpicture}
+\tkzDefPoint(1.5,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(.75,1.3){C}
+\tkzDefPoint(-.75,0){D}
+\tkzDrawPolygon(A,B,C)
+\tkzMarkSegments[mark=|,color=steelblue](C,B A,C A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Οξυγώνιο} ονομάζεται ένα τρίγωνο που έχει \ypogrammisi{όλες} τις γωνίες του οξείες.} & \begin{tikzpicture}
+\tkzDefPoint(2.5,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(.4,1){C}
+\tkzMarkAngle[draw=steelblue](C,B,A)
+\tkzMarkAngle[draw=steelblue,size=.4](B,A,C)
+\tkzMarkAngle[draw=steelblue,size=.4](A,C,B)
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ορθογώνιο} ονομάζεται το τριγωνο που έχει μια ορθή γωνία.\\
+Η πλευρά που βρίσκεται απέναντι από την ορθή γωνία λέγεται \textbf{υποτείνουσα}.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,1.5){C}
+\tkzMarkRightAngle[draw=steelblue](B,A,C)
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αμβλυγώνιο} ονομάζεται ένα τρίγωνο που έχει μια αμβλεία γωνία.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(0,1){C}
+\tkzMarkAngle[draw=steelblue,size=3mm](B,A,C)
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Δευτερευοντα στοιχεια} ενός τριγώνου είναι οι \textbf{διάμεσος}, η \textbf{διχοτόμος} και το \textbf{ύψος}.\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάμεσος} ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα που ενώνει μια κορυφή του τριγώνου με το μέσο της απέναντι πλευράς.\\
+Για ένα τριγωνο \textit{ΑΒΓ} με πλευρές α, β, γ οι τρεις διαμεσοι του συμβολίζονται : $ \mu_{a}, \mu_{\beta}, \mu_{\gamma} $.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,2){C}
+\tkzDefMidPoint(A,B) \tkzGetPoint{D}
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment[color=steelblue,thick](C,D)
+\tkzMarkSegments[mark=|,color=steelblue](D,B A,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διχοτόμος} ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα που χωρίζει τη γωνία απ' την οποία ξεκινάει σε 2 ίσες.\\
+Για ένα τριγωνο \textit{ΑΒΓ} με πλευρές α, β, γ οι τρεις διχοτόμοι του συμβολίζονται : $ \delta_{a}, \delta_{\beta}, \delta_{\gamma} $.} & \begin{tikzpicture}
+\clip (-.1,-.1) rectangle (3.1,2.1);
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,2){C}
+\tkzDefLine[bisector](A,C,B) \tkzGetPoint{D}
+\tkzDrawSegment[color=steelblue,thick,add=0 and -.5](C,D)
+\tkzMarkAngle[mark=|,draw=steelblue,size=7mm](A,C,D)
+\tkzMarkAngle[mark=|,draw=steelblue,size=6mm](D,C,B)
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ύψος} ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα που έχει αρχή μια κορυφή του τριγώνου και πάει \ypogrammisi{κάθετα} στην απέναντι πλευρά.\\
+Το σημείο που το ύψος τέμνει την απέναντι πλευρά λέγεται \textbf{προβολή} της κορυφής.\\
+Για ένα τριγωνο \textit{ΑΒΓ} με πλευρές α, β, γ τα τρία ύψη του συμβολίζονται : $ \upsilon_{a}, \upsilon_{\beta}, \upsilon_{\gamma} $.} & \begin{tikzpicture}
+\clip (-.1,-.1) rectangle (3.1,2.1);
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,2){C}
+\tkzDefPoint(1,0){D}
+\tkzMarkRightAngle[draw=steelblue](B,D,C)
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment[color=steelblue,thick](C,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Αντίστοιχες ή ομόλογες} λέγονται οι πλευρές που βρίσκονται απέναντι από ίσες γωνίες.\\
+\paragraph*{\textcolor{doc}{ΣΥΜΜΕΤΡΙΚΑ ΣΧΗΜΑΤΑ}}\mbox{}\\
+\Orismos{Συμμετρικά ως προς σημείο} ονομάζονται δύο σχήματα αν και μόνο αν κάθε σημείο του ενός έχει ένα συμμετρικό σημείο στο άλλο, ως προς το κέντρο συμμετρίας.\\
+Ένα σχημα με κέντρο συμμετρίας λέμε οτι παρουσιάζει \textbf{κεντρική συμμετρία}.\\\\
+\Orismos{Συμμετρικά ως προς ευθεία} λέγονται δύο σχήματα αν και μόνο αν κάθε σημείο του ενός έχει ένα συμμετρικό σημείο στο άλλο, ως προς τον άξονα συμμετρίας.\\
+Ένα σχημα με άξονα συμμετρίας λέμε οτι παρουσιάζει \textbf{αξονικά συμμετρία}.\\\\
+\paragraph*{\textcolor{doc}{ΚΥΚΛΟΣ ΚΑΙ ΕΥΘΕΙΑ}}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εξωτερική ευθεία ενός κύκλου} λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι \ypogrammisi{μεγαλύτερη} από την ακτίνα του.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(-1.5,-1){G}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(1.5,-1){Β}
+\tkzDefPoint(0,-1){D}
+\tkzDefPoint(0.489,-.5){E}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawSegments(O,D O,E)
+\tkzDrawSegments[color=steelblue](B,G)
+\tkzDrawPoint(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εφαπτόμενη} ευθεία ενός κύκλου λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι \ypogrammisi{ίση} από την ακτίνα του.\\
+Το σημείο τομής της ευθείας και του κύκλου λέγεται \textbf{σημείο επαφής}.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(-1.5,-.7){G}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(1.5,-.7){Β}
+\tkzDefPoint(0,-.7){D}
+\tkzDefPoint(0.489,-.5){E}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawSegments(O,D O,E)
+\tkzDrawSegments[color=steelblue](B,G)
+\tkzDrawPoint(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τέμνουσα ευθεία ενός κύκλου} λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι \ypogrammisi{μικρότερη} από την ακτίνα του.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(-1.5,-.5){G}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(1.5,-.5){Β}
+\tkzDefPoint(0,-.5){D}
+\tkzDefPoint(0.489,-.5){E}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawSegments(O,D O,E)
+\tkzDrawSegments[color=steelblue](B,G)
+\tkzDrawPoint(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εφαπτόμενα τμήματα} ενός κύκλου λέγονται τα ευθύγραμμα τμήματα που έχουν ένα κοινό άκρο και εφάπτονται εκατέρωθεν του κύκλου.\\
+Η ευθεία που διέρχεται από το κοινό άκρο και το κέντρο του κύκλου ονομάζεται \textbf{διακεντρική ευθεία}.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(-2,0){Β}
+\tkzDrawCircle(Ο,Α)
+\tkzTangent[from=B](O,A) \tkzGetPoints{C}{D}
+\tkzDrawSegments[color=steelblue](B,C B,D)
+\tkzDrawSegments(B,O)
+\tkzDrawPoint(O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάκεντρος} ονομάζεται το ευθύγραμμο τμήμα που ενώνει τα κέντρα δύο κύκλων.}&\begin{tikzpicture}
+\tkzDefPoint(0.3,0){Ο}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(-1.7,0){Β}
+\tkzDefPoint(-2.5,0){C}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawCircle(B,C)
+\tkzDrawSegment[color=steelblue](B,O)
+\tkzDrawPoints(O,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κοινή χορδή} ονομάζεται το ευθύγραμμο τμήμα που ενώνει τα κοινά σημεία δύο τεμνόμενων κύκλων.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(.7,-.5){Β}
+\tkzDefPoint(-1.5,0){C}
+\tkzDrawCircle(Ο,B)
+\tkzDrawCircle(A,B)
+\tkzDrawSegment(O,A)
+\tkzInterCC(O,B)(A,B) \tkzGetPoints{D}{E}
+\tkzDrawSegment[steelblue](D,E)
+\tkzDrawPoints(O,A,D,E)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κοινή εξωτερική εφαπτομένη} δύο κύκλων ονομάζεται η ευθεία που εφάπτεται και στους δύο κύκλους και τους αφήνει και τους δύο στην ίδια μεριά.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(1.2,0){A}
+\tkzDefPoint(.7,0){Β}
+\tkzDefPoint(-1.5,0){C}
+\tkzDefPoint(0,0.7){F}
+\tkzDefPoint(1.2,.5){G}
+\tkzDrawCircle(Ο,B)
+\tkzDrawCircle(A,B)
+\tkzDrawPoints(O,A,F,G)
+\tkzDrawLine[add=.4 and 0.4,color=steelblue](F,G)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κοινή εσωτερική εφαπτομένη} δύο κύκλων ονομάζεται η ευθεία που εφάπτεται και στους δύο κύκλους και τους έχει εκατέρωθεν αυτής.}&\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(1.2,0){A}
+\tkzDefPoint(.7,0){Β}
+\tkzDefPoint(.7,.7){C}
+\tkzDefPoint(.7,-.7){D}
+\tkzDefPoint(-1.5,0){E}
+\tkzDrawCircle(Ο,B)
+\tkzDrawCircle(A,B)
+\tkzDrawSegment(O,A)
+\tkzDrawSegment[steelblue](D,C)
+\tkzDrawPoints(O,A)
+\tkzMarkRightAngle(O,B,C)
+\end{tikzpicture}
+\end{tabular}
+\section*{\textcolor{doc}{ΘΕΩΡΗΜΑΤΑ - ΑΠΟΔΕΙΞΕΙΣ}}\mbox{}\\
+\begin{thewrhma}[1\textsuperscript{o} Κριτήριο Ισότητας Τριγώνων (ΠΓΠ)]
+Αν δυο τριγωνα έχουν δύο πλευρές τους ίσες μια προς μια και τις περιεχομενες σε αυτές γωνίες ίσες, τότε ειναι ίσα.
+\end{thewrhma}
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ AB=A'B' $ και $ A\varGamma=A\varGamma' $ \\ 
+& $ \hat{A}=\hat{A'} $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & Τα τριγωνα $AB\varGamma$ και $ A'B'\varGamma' $ είναι ίσα.\\ 
+\end{tabular}
+\begin{center}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{B}] (B) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ}] (Γ) at (4,0);
+\coordinate[label=above:\textcolor{steelblue}{A}] (A) at (1,2);
+\coordinate [label=left:\textcolor{steelblue}{B'}] (B') at (5.5,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ'}] (Γ') at (9.5,0);
+\coordinate [label=above:\textcolor{steelblue}{A'}] (A') at (6.5,2);
+\tkzDrawPolygon(A,B,Γ)
+\tkzDrawPolygon(A',B',Γ')
+\tkzMarkAngle[fill=steelblue,%
+size=0.5,   
+opacity=0.7](B,A,Γ)
+\tkzMarkAngle[fill=steelblue,%
+size=0.5,   
+opacity=0.7](B',A',Γ')
+\tkzMarkSegments[mark=|,color=steelblue](A,B A',B')
+\tkzMarkSegments[mark=||,color=steelblue](A,Γ A',Γ')
+\end{tikzpicture}
+\end{center}
+\begin{thewrhma}[2\textsuperscript{o} Κριτήριο Ισότητας Τριγώνων (ΓΠΓ)]
+Αν δυο τριγωνα έχουν μια πλευρά και τις προσκείμενες σ' αυτήν γωνίες ίσες, τότε ειναι ίσα.
+\end{thewrhma}
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ \hat{B}=\hat{B'} , \hat{\varGamma}=\hat{\varGamma'} $ \\ 
+& $ B\varGamma=B'\varGamma' $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & Τα τριγωνα $AB\varGamma$ και $ A'B'\varGamma' $ είναι ίσα. \\ 
+\end{tabular}
+\begin{center} 
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{B}] (B) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ}] (Γ) at (4,0);
+\coordinate[label=above:\textcolor{steelblue}{A}] (A) at (1,2);
+\coordinate [label=left:\textcolor{steelblue}{B'}] (B') at (5.5,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ'}] (Γ') at (9.5,0);
+\coordinate [label=above:\textcolor{steelblue}{A'}] (A') at (6.5,2);
+\tkzDrawPolygon(A,B,Γ)
+\tkzDrawPolygon(A',B',Γ')
+\tkzMarkAngle[mark=||,fill=steelblue,%
+size=0.5,   
+opacity=0.7](A,Γ,B)
+\tkzMarkAngle[mark=||,fill=steelblue,%
+size=0.5,   
+opacity=0.7](A',Γ',B')
+\tkzMarkAngle[mark=|,fill=steelblue,%
+size=0.5,   
+opacity=0.7](Γ,B,A)
+\tkzMarkAngle[mark=|,fill=steelblue,%
+size=0.5,   
+opacity=0.7](Γ',B',A')
+\tkzMarkSegments[mark=|,color=steelblue](B,Γ B',Γ')
+\end{tikzpicture}
+\end{center}
+\begin{porisma}
+Σε κάθε ισοσκελές τριγωνο
+\begin{itemize}
+\item Οι προσκείμενες γωνίες στη βάση είναι ίσες.
+\item Η διχοτόμος της κορυφης του ισοσκελούς τριγώνου ειναι και διάμεσος και ύψος.
+\end{itemize}
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $AB\varGamma$ ισοσκελές με $ AB=A\varGamma $\\
+& $ A\varDelta $ Διχοτόμος\\
+\hline \multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}} & 1. $ \hat{B}=\hat{\varGamma} $ \\ 
+& 2. $ A\varDelta $ Διάμεσος και ύψος.
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[10]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{B}] (B) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ}] (Γ) at (3,0);
+\coordinate[label=above:\textcolor{steelblue}{A}] (A) at (1.5,4);
+\tkzDrawPolygon(A,B,Γ)
+\tkzDefMidPoint(B,Γ) \tkzGetPoint{Δ}
+\tkzDrawSegment(A,Δ)
+\tkzMarkAngle[mark=|,fill=steelblue,%
+size=0.5,   
+opacity=0.7](A,Γ,B)
+\tkzMarkAngle[mark=|,fill=steelblue,%
+size=0.5,   
+opacity=0.7](Γ,B,A)
+\tkzMarkSegments[mark=|,color=steelblue](A,B A,Γ)
+\tkzLabelPoint[below,color=steelblue](Δ){Δ}
+\tkzMarkRightAngles(Γ,Δ,A)
+\tkzLabelAngle[pos=.45](A,Δ,B){1}
+\tkzLabelAngle[pos=.45](Γ,Δ,A){2}
+\tkzLabelAngle[pos=.7](Δ,A,B){1}
+\tkzLabelAngle[pos=.7](Γ,A,Δ){2}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{llll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.33 & Εφεξής & 2.10 & Διάμεσος \\
+1.39 & Παραπληρωματικές γωνίες& 2.11 & Διχοτόμος \\
+2.4 & Ισοσκελές τρίγωνο & 2.12 & Ύψος \\
+\end{tabular}\end{minipage}\\\\\\
+Το τριγωνο $ AB\varGamma $ είναι \textbf{ισοσκελές} με $ AB=A\varGamma $.\\
+Φέρνουμε τη διχοτόμο $ A\varDelta $ οπότε σχηματίζονται\\τα τρίγωνα $ AB\varDelta $ και $ A\varGamma\varDelta $.\\\\
+Συγκρίνοντας τα δύο αυτά τριγωνα έχουμε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& AB=A\varGamma &\textrm{(ΑΒΓ ισοσκελές) }\\
+& \hat{A_1}=\hat{A_2} &\textrm{(ΑΔ διχοτόμος) }\\
+& A\varDelta &\textrm{κοινή πλευρά }
+\end{aligned}}\Rightarrow$ \begin{tabular}{c}
+Τα τριγωνα είναι ίσα \\ 
+($1^o$ Κριτήριο Ισότητας ΠΓΠ) \\ 
+\end{tabular}\\\\
+Αυτό σημαίνει ότι :
+\begin{enumerate}
+\item Οι γωνίες $ \hat{B} $ και $ \hat{\varGamma} $ θα είναι ίσες άρα $ \hat{B} = \hat{\varGamma} $.
+\item Οι πλευρές $ B\varDelta $ και $ \varDelta\varGamma $ θά ναι ίσες άρα $ B\varDelta=\varDelta\varGamma $ οπότε το σημείο $ \varDelta $ είναι \textbf{μέσο} της πλευράς $ B\varGamma $ πράγμα που σημαίνει οτι η $ A\varDelta $ ειναι \textbf{διάμεσος}.\\\\Ακόμα οι γωνίες $ \hat{\varDelta_1} $ και $ \hat{\varDelta_2} $ θα είναι ίσες άρα $ \hat{\varDelta_1} = \hat{\varDelta_2} $.\\\\
+Επίσης $ \hat{\varDelta_1} + \hat{\varDelta_2} =180\degree\Rightarrow \hat{\varDelta_1} + \hat{\varDelta_1} =180\degree\Rightarrow 2\hat{\varDelta_1} =180\degree\Rightarrow\\ \hat{\varDelta_1} =\dfrac{180\degree}{2}\Rightarrow
+\hat{\varDelta_1}=\hat{\varDelta_2}=90\degree$ επόμένως η πλευρά $ A\varDelta $ ειναι \textbf{ύψος}.
+\end{enumerate}
+\begin{porisma}
+Οι γωνίες ισοπλευρου τριγώνου είναι ίσες.
+\end{porisma}
+
+\begin{porisma}
+Κάθε σημείο της μεσοκαθέτου ενός ευθυγράμμου τμήματος ισαπέχει από τα άκρα του.
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}}& $ AB $ ευθύγραμμο τμήμα\\
+& $\epsilon$ μεσοκάθετος του ευθύγραμμου τμήματος $ AB $\\
+& $ M $ τυχαίο σημείο του $ AB $\\
+\hline \textcolor{doc}{Συμπέρασμα} & $ MA=MB $ 
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[10]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{A}] (A) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (4,0);
+\coordinate[label=left:\textcolor{steelblue}{M}] (M) at (2,4);
+\tkzDrawPolygon(A,B,M)
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDrawLine(M,K)
+\tkzMarkSegments[mark=|,color=steelblue](A,K K,B)
+\tkzLabelPoint[below left,color=steelblue](K){K}
+\tkzLabelAngle[pos=.45](A,K,M){1}
+\tkzLabelAngle[pos=.45](B,K,M){2}
+\tkzText[color=steelblue](2.2,4.2){$ \epsilon $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.9 & Ευθύγραμμο τμήμα\\
+1.13 & Μέσο ευθυγράμμου τμήματος\\
+1.32 & Μεσοκάθετος \\
+2.13 & Αντίστοιχες ή Ομόλογες πλευρές\\
+\end{tabular}\end{minipage}\\\\\\
+Έχουμε ένα ευθύγραμμο τμήμα $ AB $ και\\$ \epsilon $ η μεσοκάθετος του.\\
+Αν $ M $ είναι ένα τυχαιο σημείο της μεσοκαθέτου $ \epsilon $\\τότε δημιουργούνται τα τριγωνα $ AKM $ και $ BKM $.\\\\
+Συγκρίνοντας τα δύο αυτά τρίγωνα έχουμε :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& AK=KB &(\textrm{Κ μέσο του ΑΒ})\;\\
+& MK &\textrm{ κοινή πλευρά }\;\\
+& \hat{K}_{1}=\hat{K}_{2}=90\degree &(\epsilon \textrm{ μεσοκάθετος) }\;\\
+\end{aligned}}\Rightarrow $ \begin{tabular}{c}
+Τα τριγωνα είναι ίσα \\ 
+($1^o$ Κριτήριο Ισότητας ΠΓΠ) \\ 
+\end{tabular}\\\\
+Αυτό σημαινει οτι οι αντίστοιχες πλευρές $ MA, MB $ των δύο τριγώνων θα ειναι \textbf{ίσες}, δηλαδή $MA=MB$,  επομένως το τυχαίο σημείο $ M $ \textbf{ισαπέχει} από τα άκρα $A$ και $B$.
+\newpage
+\noindent
+\vspace{-.7cm}
+\begin{porisma}
+Αν δύο τόξα ενός κύκλου ειναι ίσα τότε και οι χορδές τους ειναι ίσες.
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $\widearc{AB} , \widearc{\textrm{\textit{ΓΔ}}} $ τόξα του κύκλου $(O,\rho)$ με $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & $AB =\varGamma\varDelta $ \\ 
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=above left:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (2,0);
+\tkzDefPointBy[rotation=center O angle 50](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 240](B) \tkzGetPoint{Γ}
+\tkzDefPointBy[rotation=center O angle 290](B) \tkzGetPoint{Δ}
+\tkzDrawPoints(O,A,B,Γ,Δ)
+\tkzDrawCircle(O,B)
+\tkzLabelPoint[above right](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[below left](Γ){\textcolor{steelblue}{Γ}}
+\tkzLabelPoint[below](Δ){\textcolor{steelblue}{Δ}}
+
+\tkzDrawSegment[color=steelblue,ultra thick](A,B)
+\tkzDrawSegment[color=steelblue,ultra thick](Δ,Γ)
+\tkzDrawSegments(O,A O,B O,Γ O,Δ)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0.7](B,O,A)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0.7](Γ,O,Δ)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{clll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.41 & Ακτίνα Κύκλου &1.50 & Επίκεντρη γωνία\\
+1.43& Τόξο Κύκλου & 1.51 & Αντίστοιχο τόξο \\
+1.44 & Χορδη κύκλου & 2.13 & Ομόλογες πλευρές
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έσtω $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $ δύο τοξα ενός κύκλου $\left(Ο,\rho\right) $.\\ Γνωρίζουμε από το \textcolor{steelblue}{\textbf{Θεώρημα 1.5}} οτι δύο τόξα ενός\\κύκλου ειναι ίσα αν και μόνο αν οι επίκεντρες γωνίες\\τους είναι ίσες.\\
+Αυτό σημαίνει οτι $A\hat{O}B=\varGamma\hat{O}\varDelta$.\\\\
+Σχεδιάζοντας τις χορδές $AB, \varGamma\varDelta$ δημιουργούνται τα τρίγωνα $AOB $ και $\varGamma O\varDelta $.\\
+Συγκρίνοντας τα δύο τρίγωνα έχουμε :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OA=O\varGamma &(\textrm{ακτίνες του ίδιου κύκλου})\;\\
+& OB=O\varDelta &(\textrm{ακτίνες του ίδιου κύκλου})\;\\
+& A\hat{O}B=\varGamma\hat{O}\varDelta &\textrm{(επίκεντρες γωνίες με ίσα τόξα)}\;\\
+\end{aligned}}\Rightarrow $ \begin{tabular}{c}
+Τα τριγωνα είναι ίσα \\ 
+($1^o$ Κριτήριο Ισότητας) \\ 
+\end{tabular}\\\\
+Σαν συμπέρασμα από την ισότητα τριγώνων έχουμε οτι οι πλευρές των τριγώνων και χορδές του κύκλου, $AB$ και $\varGamma\varDelta$ έιναι \textbf{ίσες} άρα $AB=\varGamma\varDelta$. 
+\newpage
+\begin{thewrhma}[3\textsuperscript{o} Κριτήριο Ισότητας Τριγώνων (ΠΠΠ)]
+Αν δυο τριγωνα έχουν όλες τις πλευρές τους ίσες μια προς μια, τότε ειναι ίσα.
+\end{thewrhma}
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $ AB=A'B' , B\varGamma=B'\varGamma' , A\varGamma=A'\varGamma' $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & Τα τριγωνα $AB\varGamma$ και $ A'B'\varGamma' $ είναι ίσα. \\ 
+\end{tabular}
+\begin{center}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{B}] (B) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ}] (Γ) at (4,0);
+\coordinate[label=above:\textcolor{steelblue}{A}] (A) at (1,2);
+\coordinate [label=left:\textcolor{steelblue}{B'}] (B') at (5.5,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ'}] (Γ') at (9.5,0);
+\coordinate [label=above:\textcolor{steelblue}{A'}] (A') at (6.5,2);
+\tkzDrawPolygon(A,B,Γ)
+\tkzDrawPolygon(A',B',Γ')
+\tkzMarkSegments[mark=|,color=steelblue](B,Γ B',Γ')
+\tkzMarkSegments[mark=||,color=steelblue](A,Γ A',Γ')
+\tkzMarkSegments[mark=|||,color=steelblue](B,A B',A')
+\end{tikzpicture}
+\end{center}
+\begin{porisma}
+Σε κάθε ισοσκελές τριγωνο η διάμεσος που αντιστοιχεί στη βάση του είναι και ύψος και διχοτόμος του.
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $AB\varGamma$ ισοσκελές με $ AB=A\varGamma $\\
+& $A\varDelta$ διάμεσος\\
+\hline \textcolor{doc}{Συμπέρασμα} 
+& $ A\varDelta $ Διχοτόμος και ύψος.
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[10]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{B}] (B) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{Γ}] (Γ) at (3,0);
+\coordinate[label=above:\textcolor{steelblue}{A}] (A) at (1.5,3.5);
+\tkzDrawPolygon(A,B,Γ)
+\tkzDefMidPoint(B,Γ) \tkzGetPoint{Δ}
+\tkzDrawSegment(A,Δ)
+\tkzMarkSegments[mark=|,color=steelblue](A,B A,Γ)
+\tkzLabelPoint[below,color=steelblue](Δ){Δ}
+\tkzMarkRightAngles(Γ,Δ,A)
+\tkzLabelAngle[pos=.45](A,Δ,B){1}
+\tkzLabelAngle[pos=.45](Γ,Δ,A){2}
+\tkzLabelAngle[pos=.7](Δ,A,B){1}
+\tkzLabelAngle[pos=.7](Γ,A,Δ){2}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{llll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.33 & Εφεξής & 2.10 & Διάμεσος \\
+1.39 & Παραπληρωματικές γωνίες& 2.11 & Διχοτόμος \\
+2.4 & Ισοσκελές τρίγωνο & 2.12 & Ύψος \\
+\end{tabular}\end{minipage}\\\\\\
+Το τριγωνο $ AB\varGamma $ είναι ισοσκελές με $ AB=A\varGamma $.\\
+Η διάμεσος $ A\varDelta $ σχηματίζει τα τρίγωνα $ AB\varDelta $ και $ A\varGamma\varDelta $.\\\\
+Συγκρίνοντας τα δύο αυτά τριγωνα έχουμε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& AB=A\varGamma &\textrm{(ΑΒΓ ισοσκελές) }\\
+& B\varDelta=\varGamma\varDelta &\textrm{(ΑΔ διάμεσος) }\\
+& A\varDelta &\textrm{κοινή πλευρά }
+\end{aligned}}\Rightarrow$ 
+\begin{tabular}{c}
+Τα τρίγωνα $ AB\varDelta $ και $A\varGamma\varDelta $ είναι ίσα.\\
+(3\textsuperscript{o} Κριτήριο Ισότητας Τριγώνων ΠΠΠ)
+\end{tabular}\\
+Αυτό σημαίνει ότι :
+\begin{enumerate}
+\item Οι γωνίες $ \hat{A_{1}} $ και $ \hat{A_{2}} $ θα είναι ίσες άρα $ \hat{A_{1}} = \hat{A_{2}} $ επομένως η $A\varDelta$ θα ναι \textbf{διχοτόμος} του τριγώνου.
+\item Οι γωνίες $ \hat{\varDelta_{1}} $ και $ \hat{\varDelta_{2}} $ θα είναι \textbf{ίσες} άρα $ \hat{\varDelta_{1}} = \hat{\varDelta_{2}} $\\
+Επίσης οι γωνίες $ \hat{\varDelta_{1}} $ και $ \hat{\varDelta_{2}} $ ειναι \textbf{παραπληρωματικές} άρα\\$ \hat{\varDelta_{1}} + \hat{\varDelta_{2}}=180\degree\Rightarrow 2\hat{\varDelta_{1}}=180\degree\Rightarrow\hat{\varDelta_{1}}=90\degree=\hat{\varDelta_{2}} $ άρα η $A\varDelta$ είναι και \textbf{ύψος} του τριγώνου.
+\end{enumerate}
+\begin{porisma}
+Κάθε σημείο το οποίο ισαπέχει από τα άκρα ενός ευθυγράμμου τμήματος, θα ανήκει στη μεσοκάθετό του.
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}}& $ AB $ ευθύγραμμο τμήμα\\
+& $\epsilon$ μεσοκάθετος του ευθύγραμμου τμήματος $ AB $\\
+& Μ τυχαιο δημείο με $ MA=MB$\\
+\hline \textcolor{doc}{Συμπέρασμα} &  M σημείο της μεσοκαθέτου του $ AB $  
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[10]{r}[20pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{A}] (A) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (4,0);
+\coordinate[label=left:\textcolor{steelblue}{M}] (M) at (2,4);
+\tkzDrawPolygon(A,B,M)
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDrawLine(M,K)
+\tkzMarkSegments[mark=|,color=steelblue](A,K K,B)
+\tkzLabelPoint[below left,color=steelblue](K){K}
+\tkzLabelAngle[pos=.45](A,K,M){1}
+\tkzLabelAngle[pos=.45](B,K,M){2}
+\tkzText[color=steelblue](2.2,4.2){$ \epsilon $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.9 & Ευθύγραμμο τμήμα\\
+1.13 & Μέσο ευθυγράμμου τμήματος\\
+1.32 & Μεσοκάθετος \\
+2.13 & Αντίστοιχες ή Ομόλογες πλευρές\\
+\end{tabular}\end{minipage}\\\\\\
+Έστω $ \epsilon $ μεσοκάθετος ενός ένα ευθύγραμμου τμήματος $ AB $.\\
+Αν $ M $ είναι ένα τυχαίο σημείο, με $MA=MB$ \\τότε το τριγωνο $ ABM $ ειναι \textbf{ισοσκελές}.\\\\
+Επίσης το σημείο Κ είναι μέσο της πλευράς $AB$\\ οπότε η $MK$ θα είναι \textbf{διάμεσος} επομένως σύμφωνα\\ με το προηγούμενο πόρισμα η $MK$ θα είναι και\\\textbf{ύψος} του $ABM$.\\ Άρα η $MK$ ειναι \textbf{μεσοκάθετος} του $AB$.\footnote[2]{Το συγκεκριμένο πόρισμα είναι το αντίστροφο του \textcolor{doc}{\textbf{Πορίσματος 2.3}} }
+\newpage
+\noindent
+\vspace{-.7cm}
+\begin{porisma}
+Αν οι χορδές δύο τόξων είναι ίσες μεταξύ τους, τότε και τα τόξα είναι ίσα.
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $AB , \varGamma\varDelta $ χορδές του κύκλου $(O,\rho)$ με $ AB =\varGamma\varDelta $ \\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα} & $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $\\ 
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=above left:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=right:\textcolor{steelblue}{B}] (B) at (2,0);
+\tkzDefPointBy[rotation=center O angle 50](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 240](B) \tkzGetPoint{Γ}
+\tkzDefPointBy[rotation=center O angle 290](B) \tkzGetPoint{Δ}
+\tkzDrawPoints(O,A,B,Γ,Δ)
+\tkzDrawCircle(O,B)
+\tkzLabelPoint[above right](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[below left](Γ){\textcolor{steelblue}{Γ}}
+\tkzLabelPoint[below](Δ){\textcolor{steelblue}{Δ}}
+\tkzDrawArc[color=steelblue,ultra thick](O,B)(A)
+\tkzDrawArc[color=steelblue,ultra thick](O,Γ)(Δ)
+\tkzDrawSegments(A,B Γ,Δ)
+\tkzMarkSegments[mark=|](A,B Γ,Δ)
+\tkzDrawSegments(O,A O,B O,Γ O,Δ)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,
+opacity=0.7](B,O,A)
+\tkzMarkAngle[fill=steelblue,%
+size=0.7,   
+opacity=0.7](Γ,O,Δ)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{clll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\ 
+\hline 1.41 & Ακτίνα Κύκλου &1.50 & Επίκεντρη γωνία\\
+1.43& Τόξο Κύκλου & 1.51 & Αντίστοιχο τόξο \\
+1.44 & Χορδη κύκλου & 2.13 & Ομόλογες πλευρές
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έσtω $ AB=\varGamma\varDelta $ δύο χορδές ενός κύκλου $\left(Ο,\rho\right) $.\\
+Φέρνοντας τις ακτίνες $OA, OB, O\varGamma, O\varDelta$\\σχηματίζονται τα τριγωνα $AOB$ και $\varGamma O\varDelta$.\\\\
+Συγκρίνοντας τα δύο τρίγωνα έχουμε :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OA=O\varGamma &(\textrm{ακτίνες του ίδιου κύκλου})\;\\
+& OB=O\varDelta &(\textrm{ακτίνες του ίδιου κύκλου})\;\\
+& AB=\varGamma\varDelta &\textrm{(από υπόθεση)}\;\\
+\end{aligned}}\Rightarrow $ \begin{tabular}{c}
+Τα τριγωνα είναι ίσα \\ 
+($3^o$ Κριτήριο Ισότητας) \\ 
+\end{tabular}\\\\
+Αφού τα τριγωνα είναι ίσα τότε οι επίκεντρες γωνίες των δύο τριγώνων $A\hat{O}B, \varGamma\hat{O}\varDelta$ είναι \textbf{ίσες} δηλαδή $A\hat{O}B=\varGamma\hat{O}\varDelta$.\\\\
+Σύμφωνα με το \textcolor{steelblue}{\textbf{Θεώρημα 1.5}} αυτό σημαίνει οτι και τα τόξα στα οποία βαίνουν οι γωνίες αυτές θα ναι \textbf{ίσα} μεταξύ τους επομένως $ \widearc{AB} =\widearc{\textrm{\textit{ΓΔ}}} $.\footnote[3]{Το παραπάνω πόρισμα είναι το αντίστροφο του \textcolor{doc}{\textbf{Πορίσματος 2.4}}}
+\newpage
+\noindent
+\vspace{-.7cm}
+\begin{thewrhma}
+Από σημείο εκτός ευθείας διέρχεται μοναδική κάθετη προς αυτή.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){G}
+\tkzDefPoint(1.3,1.7){A}
+\tkzDefPoint(1.3,0){O}
+\tkzDrawLines(B,G A,O)
+\tkzMarkRightAngle(G,O,A)
+\tkzDrawPoint(A)
+\tkzLabelPoint[left,color=steelblue](A){A}
+\tkzText[color=steelblue](-1,0.2){$ \epsilon $}
+\tkzText[color=steelblue](1.7,2){$ \epsilon' $}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ \epsilon $ ευθεία, $ A $ σημείο εκτός ευθείας\\
+& $ \epsilon' $ κάθετη προς την $ \epsilon $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & $ \epsilon' $ μοναδική κάθετη \\ 
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\begin{thewrhma}[1\textsuperscript{o} Κριτήριο Ισότητας Ορθωγωνίων Τριγώνων]
+Αν δύο ορθογώνια τρίγωνα έχουν τις υποτείνουσές τους ίσες και μια οξεία γωνία ίσες μια προς μια, τότε είναι ίσα.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,2){C}
+\tkzDefPoint(4,0){A'}
+\tkzDefPoint(7,0){B'}
+\tkzDefPoint(4,2){C'}
+\tkzMarkRightAngle[color=steelblue!70](B,A,C)
+\tkzMarkRightAngle[color=steelblue!70](B',A',C')
+\tkzDrawPolygon(A,B,C)
+\tkzDrawPolygon(A',B',C')
+\tkzMarkAngle[fill=steelblue!70,size=.5](C,B,A)
+\tkzMarkAngle[fill=steelblue!70,size=.5](C',B',A')
+\tkzLabelPoint[left,color=steelblue](A){A}
+\tkzLabelPoint[right,color=steelblue](B){B}
+\tkzLabelPoint[left,color=steelblue](C){Γ}
+\tkzLabelPoint[left,color=steelblue](A'){A'}
+\tkzLabelPoint[right,color=steelblue](B'){B'}
+\tkzLabelPoint[left,color=steelblue](C'){Γ'}
+\tkzMarkSegments[mark=|,color=steelblue](B,C B',C')
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ B\varGamma=B'\varGamma' $\\
+& $ \hat{B}=\hat{B'} $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & $ AB\varGamma=A'B'\varGamma' $\\ 
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\begin{thewrhma}[2\textsuperscript{o} Κριτήριο Ισότητας Ορθωγωνίων Τριγώνων]
+Αν δύο ορθογώνια τρίγωνα έχουν τις υποτείνουσές τους ίσες και μια κάθετη πλευρά ίσες μια προς μια, τότε είναι ίσα.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,2){C}
+\tkzDefPoint(4,0){A'}
+\tkzDefPoint(7,0){B'}
+\tkzDefPoint(4,2){C'}
+\tkzMarkRightAngle[color=steelblue!70](B,A,C)
+\tkzMarkRightAngle[color=steelblue!70](B',A',C')
+\tkzDrawPolygon(A,B,C)
+\tkzDrawPolygon(A',B',C')
+\tkzLabelPoint[left,color=steelblue](A){A}
+\tkzLabelPoint[right,color=steelblue](B){B}
+\tkzLabelPoint[left,color=steelblue](C){Γ}
+\tkzLabelPoint[left,color=steelblue](A'){A'}
+\tkzLabelPoint[right,color=steelblue](B'){B'}
+\tkzLabelPoint[left,color=steelblue](C'){Γ'}
+\tkzMarkSegments[mark=|,color=steelblue](B,C B',C' A,B A',B')
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ B\varGamma=B'\varGamma' $\\
+& $ AB=A'B' $ \\
+\hline \textcolor{doc}{Συμπέρασμα} & $ AB\varGamma=A'B'\varGamma' $\\ 
+\end{tabular}\end{minipage}
+\newpage
+\noindent
+\paragraph{ΣΧΌΛΙΟ}\mbox{}\\
+Από το 1\textsuperscript{o} και 2\textsuperscript{o} κριτήριο ισότητας τριγώνων προκύπτει :
+\begin{enumerate}
+\item Αν δυο ορθογώνια τρίγωνα έχουν τις κάθετες πλευρές τους ίσες μια προς μια τότε είναι ίσα.
+\item Αν δυο ορθογώνια τριγωνα έχουν μια κάθετη πλευρά και την προσκείμενη σ' αυτή οξεία γωνία ισες μια προς μια τότε είναι ίσα.
+\end{enumerate}
+\begin{porisma}
+Το ύψος που αντιστοιχει στη βάση ενός ισοσκελούς τριγώνου, είναι και διάμεσος και διχοτόμος του.
+\end{porisma}
+\begin{porisma}
+Η κάθετος που φέρεται από το κέντρο ενός κύκλου, κάθετα προς μια χορδή του, διχοτομοει τη χορδή και το αντίστοιχο τόξο της.
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $AB $ χορδή του κύκλου $(O,\rho)$ \\
+&$ OM\bot AB $\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα} & $M$ μέσο του τόξου $ \widearc{AB}$ και της χορδής $AB$.\\ 
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=above:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=below right:\textcolor{steelblue}{B}] (B) at (1,-1.732);
+\tkzDefPointBy[rotation=center O angle -60](B) \tkzGetPoint{A}
+\tkzDrawCircle(O,B)
+\tkzDefPoint(0,-2){M}
+\tkzInterLL(A,B)(O,M)  \tkzGetPoint{K}
+\tkzDrawArc[color=steelblue,ultra thick](O,A)(B)
+\tkzLabelPoint[below left](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[above left](K){\textcolor{steelblue}{K}}
+\tkzLabelPoint[below](M){\textcolor{steelblue}{M}}
+\tkzDrawSegments(A,B O,M)
+\tkzDrawSegments(O,A O,B)
+\tkzMarkAngle[fill=steelblue,size=0.7,
+opacity=0.7](A,O,B)
+\tkzMarkRightAngle(B,K,O)
+\tkzDrawPoints[size=1.5](O,A,B,M,K)
+\tkzLabelAngle[pos=1](A,O,K){$1$}
+\tkzLabelAngle[pos=1](K,O,B){$2$}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{clll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.41& Ακτίνα Κύκλου& 1.51 & Αντίστοιχο τόξο\\
+1.43& Τόξο Κύκλου & 2.10 & Διάμεσος \\
+1.44 & Χορδη κύκλου & 2.11 & Διχοτόμος \\
+1.50 & Επίκεντρη γωνία & 2.12 & Ύψος\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έσtω $ AB$ μια χορδή ενός κύκλου $\left(Ο,\rho\right) $\\και $OM$ ακτίνα του, η οποία τέμνει κάθετα\\τη χορδή $AB$ στο σημείο $K$.\\\\
+Φέροντας τις ακτίνες $OA, OB$ σχηματίζεται το τρίγωνο $AOB$\\το οποίο είναι \textbf{ισοσκελές} λόγω του οτι $OA=OB$ ως ακτίνες του ίδιου κύκλου.\\
+Ξέρουμε επίσης οτι $AB\bot OM$ επομένως η πλευρά $OK$ θα ναι \textbf{ύψος} του ισοσκελούς τριγώνου $AOB$ και σύμφωνα λοιπόν με το προηγούμενο \textcolor{doc}{\textbf{Πόρισμα 2.8}} θα ναι και \textbf{διάμεσος} και \textbf{διχοτόμος} του.\\\\
+Έχουμε λοιπόν :
+\begin{enumerate}
+\item $OK$ διάμεσος επομένως $Κ$ \textbf{μέσο της χορδής $AB$}.
+\item $OK$ διχοτόμος επομένως $\hat{O}_{1}=\hat{O}_{2}$ άρα τα αντίστοιχα τοξα των δυο γωνιών,\\$\widearc{AM}$ και $\widearc{BM}$ αντίστοιχα, θα ναι κι αυτά \textbf{ίσα} μεταξύ τους δηλαδη $\widearc{AM}=\widearc{BM}$ οπότε $M$ \textbf{μέσο του τόξου} $\widearc{AB}$.
+\end{enumerate}
+\begin{thewrhma}
+Δύο χορδές ενός κύκλου είναι ίσες αν και μόνο αν τα αποστήματα τους είναι ίσα.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}} & $AB, \varGamma\varDelta$ χορδές του κύκλου $(O,\rho)$ \\
+&$ OK, O\varLambda $ αποστήματα των χορδών $AB, \varGamma\varDelta$ αντίστοιχα\\
+&  $(\Rightarrow)\;AB = \varGamma\varDelta\qquad (\Leftarrow)\;OK = O\varLambda$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα} &$(\Rightarrow)\;OK = O\varLambda\qquad(\Leftarrow)\;AB = \varGamma\varDelta$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=above:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=below right:\textcolor{steelblue}{B}] (B) at (1.4142,-1.4142);
+\tkzDefPointBy[rotation=center O angle -90](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 30](B) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle 120](B) \tkzGetPoint{D}
+\tkzDrawCircle(O,B)
+\tkzDefPoint(1.732,1){M}
+\tkzDefPoint(0,-1.4142){K}
+\tkzInterLL(C,D)(O,M)  \tkzGetPoint{L}
+\tkzLabelPoint[below left](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[above left](K){\textcolor{steelblue}{K}}
+\tkzLabelPoint[right](C){\textcolor{steelblue}{Γ}}
+\tkzLabelPoint[above](D){\textcolor{steelblue}{Δ}}
+\tkzLabelPoint[right](L){\textcolor{steelblue}{Λ}}
+\tkzDrawSegments(A,B O,L O,K)
+\tkzDrawSegments(O,A O,C C,D)
+\tkzMarkRightAngle(B,K,O)
+\tkzMarkRightAngle(O,L,C)
+\tkzDrawPoints(O,A,B,C,D)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{clll}
+\multicolumn{4}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.13& Μέσο ευθύγραμμου τμήματος& 1.44 & Χορδη κύκλου\\
+1.41& Ακτίνα κύκλου & 1.45 & Απόστημα \\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω κύκλος $ (Ο,\rho) $ με $ AB,\varGamma\varDelta $ χορδές του και\\$ OK, O\varLambda $ τα αποστήματα τους αντίστοιχα.\\\\
+\textbf{Ορθό} $ (\Rightarrow) $\\
+Έστω οτι οι χορδές \textit{ΑΒ, ΓΔ} είναι ίσες δηλαδη $ AB=\varGamma\varDelta $.\\
+Συγκρίνουμε τα \textbf{ορθογώνια} τριγωνα $ AOK $ και $ \varGamma O\varLambda $ :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OA=O\varGamma &\textrm{(ακτίνες του ίδιου κύκλου) }\\
+& AB=\varGamma\varDelta\Rightarrow\dfrac{AB}{2}=\dfrac{\varGamma\varDelta}{2}\Rightarrow AK=\varGamma\varLambda &\textrm{(από υπόθεση) }
+\end{aligned}}\Rightarrow$\\$\Rightarrow$ Τα τριγωνα είναι ίσα\footnote[4]{\textrm{Επιλέξαμε τα μισά $AK, \varGamma\varLambda$ των πλευρών $AB, \varGamma\varDelta$ γιατί είναι πλευρές των τριγώνων που συγκρίνουμε.}}\quad($2^o$ Κριτήριο Ισότητας Ορθογωνίων Τριγώνων)\\\\
+Αυτό σημαίνει οτι $ OK=O\varLambda $ άρα τα αποστήματα των χορδών $ AB, \varGamma\varDelta $ είναι \textbf{ίσα}.\\\\
+\textbf{Αντίστροφο} $ (\Leftarrow) $\\
+Έστω οτι τα αποστήματα των χορδών $ AB, \varGamma\varDelta $ είναι ίσα δηλαδη $ OK=O\varLambda $.\\
+Συγκρίνουμε τα \textbf{ορθογώνια} τριγωνα $ AOK $ και $ \varGamma O\varLambda $ :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OA=O\varGamma &\textrm{(ακτίνες του ίδιου κύκλου) }\\
+& OK=O\varLambda &\textrm{(από υπόθεση) }
+\end{aligned}}\Rightarrow$
+\begin{tabular}{c}
+Τα τρίγωνα είναι ίσα.\\
+(2\textsuperscript{o} Κριτήριο Ισότητας Ορθ. Τριγώνων)
+\end{tabular}\\\\
+Επομένως $ AK=\varGamma\varLambda\Rightarrow 2AK=2\varGamma\Lambda\Rightarrow AB=\Gamma\varDelta $\\άρα οι χορδές $AB, \varGamma\varDelta$ είναι \textbf{ίσες}.
+\begin{thewrhma}
+Κάθε σημείο της διχοτόμου μιας γωνίας ισαπέχει από τις πλευρές της και αντίστροφα κάθε σημείο που ισαπέχει από τις πλευρές μιας γωνίας θα βρίσκεται πάνω στη διχοτομο της.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}} & $O\delta$ διχοτόμος της γωνίας $x\hat{O}y$ \\
+&$(\Rightarrow)\;M$ τυχαίο σημείο της  $O\delta$\\
+&  $(\Leftarrow)\;M$ εσωτερικό σημείο της γωνίας $x\hat{O}y$ με $MA=MB$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}}&$(\Rightarrow)\;MA=MB$\\ &$(\Leftarrow)\;M$ σημείο της  $O\delta$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(3,1){C} 
+\tkzDefPoint(3,-1){D}
+\tkzDefPoint(3,0){a'}
+\tkzDefPoint(2.7,0.9){k}
+\tkzDefPoint(2.7,-0.9){l}
+\tkzMarkAngle[fill=steelblue!70,size=.7](D,O,C)
+\tkzDrawLines[add= 0 and .3](O,D O,C)
+\tkzDefLine[bisector](D,O,C) \tkzGetPoint{a}
+\tkzDrawLine[add=0 and -0.1,color=steelblue](O,a)
+\tkzDrawSegments[steelblue](a',k a',l)
+\tkzLabelPoint[above,color=steelblue](k){A}
+\tkzLabelPoint[left,color=steelblue](O){O}
+\tkzLabelPoint[below,color=steelblue](l){B}
+\tkzLabelPoint[above right,color=steelblue](a'){M}
+\tkzMarkRightAngle(O,k,a')
+\tkzMarkRightAngle(a',l,O)
+\tkzText[color=steelblue](3.5,1.4){$ x $}
+\tkzText[color=steelblue](3.5,-1.5){$ y $}
+\tkzText[color=steelblue](4.4,0){$ \delta $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.21& Γωνία\\
+1.26 & Διχοτόμος γωνίας\\
+1.28 & Κάθετες ευθείες
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\newpage
+\noindent
+\textbf{Ορθό} ($ \Rightarrow $)\\
+Έστω γωνία $x\hat{O}y$ και $O\delta$ η διχοτόμος της.\\
+Αν επιλέξουμε ένα \textbf{τυχαιο} σημείο $M$ της διχοτόμου και φέρουμε τις αποστάσεις του $MA$ και $MB$ από τις πλευρές $Ox$ και $Oy$ αντίστοιχα τότε δημιουργούνται τα \textbf{ορθογώνια} τριγωνα $AOM$ και $BOM$ ($MA\bot Ox, MB\bot Oy$).\\\\
+Συγκρίνοντας τα δύο αυτά τριγωνα έχουμε :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OM &\textrm{κοινή πλευρά}\;\\
+& \hat{O}_{1}=\hat{O}_{2} &(O\delta\textrm{ διχοτόμος})\;\\
+\end{aligned}}\Rightarrow $ \begin{tabular}{c}
+Τα τριγωνα είναι ίσα \\ 
+($1^o$ Κριτήριο Ισότητας Ορθ. Τριγώνων) \\ 
+\end{tabular}\\\\
+Κατά συνέπεια, οι πλευρές $OA$ και $OB$ των δυο τριγώνων θα ναι κι αυτές \textbf{ίσες} μεταξύ τους επομένως \textbf{κάθε}\footnote[5]{Αφού αποδειξαμε την πρόταση για τυχαίο σημείο $M$ της διχοτόμου τοτε χωρίς βλάβη της γενικότητας το συμπέρασμα ισχύει για κάθε σημείο της.} σημείο $M$ της διχοτόμου \textbf{ισαπέχει} από τις πλευρές της γωνίας.\\\\
+\textbf{Αντίστροφο} ($\Leftarrow$)\\
+Ας θεωρήσουμε ένα \textbf{τυχαιο} εσωτερικό σημείο της γωνίας $x\hat{O}y$ ώστε οι αποστάσεις του από τις πλευρές τις γωνίας να ναι ίσες δηλαδή $MA=MB$ με $MA\bot Ox, MB\bot Oy$.\\\\
+Συγκρίνοντας τα \textbf{ορθογώνια} τριγωνα $AOM, BOM$ έχουμε :\\\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OM &\textrm{κοινή πλευρά}\;\\
+& MA=MB &(\textrm{από υπόθεση})\;\\
+\end{aligned}}\Rightarrow $ \begin{tabular}{c}
+Τα τριγωνα είναι ίσα \\ 
+($2^o$ Κριτήριο Ισότητας Ορθ. Τριγώνων) \\ 
+\end{tabular}\\\\
+Επόμένως και οι γωνίες $\hat{O}_{1}$ και $\hat{O}_{2}$ των δύο τριγώνων θα ναι \textbf{ίσες} δηλαδή $\hat{O}_{1}=\hat{O}_{2}$ πράγμα που σημαινει οτι η πλευρά $OM$ και κατ' επέκταση η ημιευθεία $O\delta$ θα ναι \textbf{διχοτόμος} της γωνίας $x\hat{O}y$.\\\\
+Άρα το εσωτερικό σημείο $M$ θα βρίσκεται αναγκαστικά \textbf{πάνω στη διχοτόμο}.
+\newpage
+\noindent
+\paragraph*{ΒΑΣΙΚΟΙ ΓΕΩΜΕΤΡΙΚΟΙ ΤΟΠΟΙ}
+\begin{enumerate}
+\item \textbf{Κύκλος : } Ο κύκλος είναι το σύνολο των σημείων που έχουν ορισμένη απόσταση από ένα σταθερό σημείο. Η απόσταση αυτή ονομάζεται \textbf{ακτίνα} και το σταθερο σημείο \textbf{κέντρο} του κύκλου. (\textcolor{doc}{\textbf{Ορισμός 1.41}})
+\item \textbf{Μεσοκάθετος ενός ευθύγραμμου τμήματος :} Η μεσοκάθετος ενός ευθύγραμμου τμήματος είναι το σύνολο των σημείων τα οποία έχουν την ιδιότητα να ισαπέχουν από τα άκρα ενός ευθύγραμμου τμήματος. (βλ. \textcolor{doc}{\textbf{Ορισμό 1.32}})
+\item \textbf{Διχοτόμος μιας γωνίας :} Η διχοτόμος μιας γωνίας ειναι το σύνολο των σημείων που ισαπέχουν από τις πλευρές μιας γωνίας.
+\end{enumerate}
+\paragraph*{ΣΧΟΛΙΟ}\mbox{}\\
+Για τη λύση προβλήματος γεωμετρικού τόπου εργαζόμαστε ως εξής :
+\begin{itemize}
+\item Επιλέγουμε ένα τυχαιο σημείο του γεωμετρικού τοπου και με βάση την χαρακτηριστική ιδιότητα του προσδιορίζουμε τη γραμμή στην οποία βρίσκεται.
+\item Σχεδιάζουμε τη γραμμή αυτή και επιλέγοντας ένα δευτερο τυχαίο σημείο εξετάζουμε αν ικανοποιει την ιδιότητα του γεωμετρικού τόπου.
+\end{itemize}
+\begin{thewrhma}
+Κάθε εξωτερική γωνία ενός τριγώνου ειναι μεγαλύτερη από κάθε απένταντι εσωτερική γωνία του.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(2,2){C}
+\tkzDefPoint(2.5,2.5){D}
+\tkzMarkAngle[fill=steelblue!70,size=.5](B,C,D)
+\tkzMarkAngle[fill=steelblue!70,size=.5](B,A,D)
+\tkzMarkAngle[fill=steelblue!70,size=.5](C,B,A)
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment(A,D)
+\tkzLabelPoint[left,color=steelblue](A){A}
+\tkzLabelPoint[right,color=steelblue](B){B}
+\tkzLabelPoint[left,color=steelblue](C){Γ}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $ AB\varGamma$ τρίγωνο\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $ \hat{\varGamma}_{\varepsilon\xi}>\hat{A}$ και $\hat{\varGamma}_{\varepsilon\xi}>\hat{B}$\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\begin{porisma}
+\begin{enumerate}
+\item Κάθε τρίγωνο έχει το πολύ μια ορθή ή μια αμβλεία γωνία.
+\item Το άθροισμα δύο γωνιών κάθε τριγώνου έιναι μικρότερο από 180\degree.
+\end{enumerate}
+\end{porisma}
+\begin{thewrhma}
+Σε κάθε τρίγωνο απέναντι από άνισες πλευρές βρίσκονται όμοια άνισες γωνίες και αντίστροφα.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $AB\varGamma$ σκαληνό τρίγωνο \\
+&$(\Rightarrow)\;A\varGamma<B\varGamma$\qquad$(\Leftarrow)\;\hat{B}>\hat{\varGamma}$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&$(\Rightarrow)\;\hat{B}>\hat{\varGamma}$\qquad\quad$\;$ $(\Leftarrow)\;A\varGamma<B\varGamma$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(1.5,2){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefPoint(3.85,.64){D}
+\tkzMarkAngle[fill=steelblue!70,size=.5](A,D,B)
+\tkzMarkAngle[fill=steelblue!70,size=.5](D,B,A)
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment(B,D)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[left,color=steelblue](B){B}
+\tkzLabelPoint[right,color=steelblue](C){Γ}
+\tkzLabelPoint[above right,color=steelblue](D){Δ}
+\tkzMarkSegment[mark=|,color=steelblue](A,B)
+\tkzMarkSegment[mark=|,color=steelblue](A,D)
+\tkzLabelAngle[pos=-.7](A,D,B){$\omega$}
+\tkzLabelAngle[pos=.7](D,B,A){$\omega$}
+\tkzText(.3,.2){{\footnotesize 1}}
+\tkzText(3.52,.7){{\footnotesize 1}}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 2.3& Σκαληνό τρίγωνο\\
+2.4 & Ισοσκελές τριγωνο
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\textbf{Ορθό} ($\Rightarrow$)\\
+Έστω $AB\varGamma$ τρίγωνο με $A\varGamma>AB$.\\
+Τότε θα υπάρχει \textbf{μοναδικό} σημείο $\varDelta$ της\\πλευράς $A\varGamma$ έτσι ώστε $AB=A\varDelta$.\\\\Αυτό σημαίνει οτι το τριγωνο $AB\varDelta$ θα ειναι \textbf{ισοσκελές} επομένως οι γωνίες πάνω στη βάση θα ναι \textbf{ίσες} δηλαδή $\hat{B_{1}}=\hat{\varDelta_{1}}=\omega$ (\textcolor{doc}{\textbf{Πόρισμα 2.1}}).\\\\
+Η πλευρά $B\varDelta$ είναι εσωτερική της γωνίας $\hat{B}$ επομένως θα ισχύει $\hat{B}>\hat{B_{1}}$.\\
+Επίσης η γωνία $\hat{\varDelta}_{1}$ είναι εξωτερική του τριγώνου $B\varGamma\varDelta$ άρα συμφωνα με το προηγούμενο \textcolor{steelblue}{\textbf{Θεώρημα 2.9}} θα ισχύει $\hat{\varDelta}_{1}>\hat{\varGamma}$.\\\\
+Από τις δυο προηγούμενες σχέσεις έχουμε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \hat{B}>\hat{B_{1}}=\omega\;\\
+& \omega=\hat{\varDelta}_{1}>\hat{\varGamma}\;\\
+\end{aligned}}\Rightarrow \hat{B}>\hat{B_{1}}=\omega=\hat{\varDelta}_{1}>\hat{\varGamma}\Rightarrow \hat{B}>\hat{\varGamma}$\\\\
+\textbf{Αντίστροφο} ($\Leftarrow$)\\
+Αν στο τριγωνο $AB\varGamma$ ισχύει $\hat{B}>\hat{\varGamma}$ τοτε θα έχουμε $A\varGamma>AB$ γιατί σε αντίθετη περίπτωση αν ισχύει $A\varGamma=AB$ ή $A\varGamma<AB$ τότε θα προκύψει $\hat{B}=\hat{\varGamma}$ ή $\hat{B}<\hat{\varGamma}$ αντίστοιχα που είναι \textbf{άτοπο} σύμφωνα με το ορθό της απόδειξης του παρόντος θεωρήματος.
+\newpage
+\noindent
+\vspace{-.7cm}
+\begin{porisma}
+\begin{enumerate}
+\item Αν μια γωνία σε ένα τριγωνο είναι ορθή ή αμβλεία τότε η απέναντι πλευρά ειναι η μεγαλύτερη του τριγώνου.
+\item Αν ένα τρίγωνο έχει δύο γωνίες ίσες τότε είναι ισοσκελές$^6$.
+\item Αν ένα τριγωνο έχει και τις τρεις γωνίες του ίσες τοτε είναι ισόπλευρο.
+\end{enumerate}
+\end{porisma}
+\blfootnote{$^6$Το \textcolor{doc}{\textbf{Πόρισμα 2.11.2}} είναι το αντίστροφο του \textcolor{doc}{\textbf{Πόρισματος 2.1}}.}
+\begin{thewrhma}[Τριγωνική Ανισότητα]
+Κάθε πλευρά τριγώνου ειναι μικρότερη από το άθροισμα των άλλων δύο και μικρότερη από τη διαφορά τους.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefPoint(2,2){A}
+\tkzDrawPolygon(A,B,C)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[left,color=steelblue](B){B}
+\tkzLabelPoint[right,color=steelblue](C){Γ}
+\tkzText[steelblue](2.5,-.2){$ a $}
+\tkzText[steelblue](4,1){$ \beta $}
+\tkzText[steelblue](.7,1){$ \gamma $}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $ AB\varGamma$ τρίγωνο με $\beta\geq\gamma$\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $ \beta-\gamma<a<\beta+\gamma $\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Ισχύει για κάθε πλευρά του τριγώνου $AB\varGamma$.\\\\
+\begin{porisma}
+Κάθε χορδή κύκλου είναι μικρότερη ή ίση της διαμέτρου.
+\end{porisma}
+\textbf{Υπόδειξη} : Έχοντας σχεδιάσει διάμετρο $AB$ σε ένα κύκλο $(O,\rho)$ μπορούμε φέροντας δύο χορδές $A\varGamma, B\varGamma$ από τα άκρα της να κατασκευάσουμε τρίγωνο $AB\varGamma$ το οποίο θα ειναι ορθογώνιο γιατί η γωνία $\hat{\varGamma}$ θα βαίνει σε ημικύκλιο.\\
+Επομένως αφού η διάμετρος θα βρίσκεται απέναντι από ορθή γωνία θα είναι η μεγαλύτερη πλευρά άρα και χορδή.
+\newpage
+\noindent
+\vspace{-.7cm}
+\begin{thewrhma}
+Αν δύο πλάγια τμήματα ειναι ίσα τοτε τα ίχνη τους ισαπέχουν από το ίχνος την καθέτου και αντίστροφα.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(2.5,2.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefPoint(2.5,0){D}
+\tkzMarkRightAngle(C,D,A)
+\tkzDrawLine(B,C)
+\tkzDrawSegments(A,D A,B A,C)
+\tkzLabelPoint[left,color=steelblue](A){A}
+\tkzLabelPoint[below,color=steelblue](B){B}
+\tkzLabelPoint[below,color=steelblue](C){Γ}
+\tkzLabelPoint[below,color=steelblue](D){K}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $ AB=A\varGamma$ πλάγια τμήματα\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $ ΒΚ=\varGamma Κ $\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\\\\\
+\begin{thewrhma}
+Αν από ένα σημείο εκτός ευθείας φέρουμε το κάθετο και δυο πλάγια ευθύγραμμα τμήματα τότε :\\
+\begin{enumerate}
+\item Το κάθετο τμήμα είναι μικρότερο από κάθε πλάγιο.
+\item Αν δύο πλάγια τμήματα είναι άνισα τότε και οι αποστάσεις των ιχνών τους από το ίχνος της καθέτου έιναι ομοιοτρόπως άνισες και αντίστροφα.
+\end{enumerate}
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(2.5,2.5){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(-3,0){C}
+\tkzDefPoint(2.5,0){D}
+\tkzMarkRightAngle(C,D,A)
+\tkzDrawLine(C,D)
+\tkzDrawSegments(A,D A,B A,C)
+\tkzLabelPoint[right,color=steelblue](A){A}
+\tkzLabelPoint[below,color=steelblue](B){B}
+\tkzLabelPoint[below,color=steelblue](C){Γ}
+\tkzLabelPoint[below,color=steelblue](D){K}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $ AB=A\varGamma$ πλάγια τμήματα\\
+&$ii. A\varGamma>AB$\\
+\hline \rule[-2ex]{0pt}{4.5ex}\multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}} & $i. AΚ<BΚ $ και $AK<\varGamma Κ$\\
+& $ ii. \varGamma K<BK$\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+\paragraph*{ΣΧΟΛΙΟ}\mbox{}\\
+Το κάθετο ευθύγραμμο τμήμα από σημείο εκτός ευθείας λέγεται απόσταση του σημείου από την ευθεία.
+\newpage
+\noindent
+\vspace{-.7cm}
+\begin{thewrhma}
+Μια ευθεία και ένας κύκλος έχουν το πολύ δυο κοινά σημεία.
+\end{thewrhma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\coordinate [label=left:\textcolor{steelblue}{O}] (O) at (0,0);
+\coordinate [label=below:\textcolor{steelblue}{B}] (B) at (0,-2);
+\tkzDefPointBy[rotation=center O angle -50](B) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 50](B) \tkzGetPoint{Γ}
+\tkzDefPointBy[rotation=center O angle -25](B) \tkzGetPoint{D}
+\tkzDefPointBy[rotation=center O angle 25](B) \tkzGetPoint{E}
+\tkzDrawCircle(O,B)
+\tkzLabelPoint[below left](A){\textcolor{steelblue}{A}}
+\tkzLabelPoint[below right](Γ){\textcolor{steelblue}{Γ}}
+\tkzDrawLine[color=steelblue,thick](A,B)
+\tkzDrawLine[color=steelblue,thick](B,Γ)
+\tkzDrawSegments(O,A O,B O,Γ)
+\tkzDrawSegments[add=0.3 and .3](O,D O,E)
+\tkzDrawPoints[size=2](O,A,B,Γ)
+\tkzText[steelblue](-1.9,-1.1){$ \epsilon $}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $ (O,\rho)$ κύκλος και $\epsilon$ ευθεία\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & Έχουν το πολύ δύο κοινά σημεια.\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Από το παρόν θεώρημα προκύπτει οτι τρία οποιαδήποτε\\σημεία ενός κύκλου δεν ειναι συνευθειακά.\\\\\\\\
+\begin{thewrhma}
+Τα εφαπτόμενα τμήματα κύκλου που άγονται από σημείο εκτός αυτού ειναι ίσα μεταξύ τους.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $(O,\rho)$ κύκλος \\
+&$PA, PB$ εφαπτόμενα τμήματα του κύκλου\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&$PA=PB$
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth} \begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(0,2){A}
+\tkzDefPoint(-4,0){Β}
+\tkzDrawCircle(Ο,Α)
+\tkzTangent[from=B](O,A) \tkzGetPoints{D}{C}
+\tkzDrawSegments[color=steelblue](B,C B,D)
+\tkzDrawSegments(B,O O,D O,C)
+\tkzDrawPoint(O)
+\tkzLabelPoint[left,color=steelblue](B){R}
+\tkzLabelPoint[right,color=steelblue](O){O}
+\tkzLabelPoint[above,color=steelblue](C){A}
+\tkzLabelPoint[below,color=steelblue](D){B}
+\tkzMarkRightAngle(B,D,O)
+\tkzMarkRightAngle(O,C,B)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.41& Κύκλος\\
+2.19 & Εφαπτόμενα τμήματα\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω κύκλος $ (Ο,\rho) $ και $P$ ένα εξωτερικό\\του σημείο.\\
+Φέροντας τις ακτίνες $OA, OB$ και τα εφαπτόμενα\\τμήματα $PA, PB$ δημιουργούνται τα \textbf{ορθογώνια}\footnote[7]{οι εφαπτόμενες ευθείες είναι κάθετες με τις ακτίνες στο σημείο επαφής.}\\τρίγωνα $PAO$ και $PBO$.\\
+Συγκρίνοντας τα δύο ορθογώνια τρίγωνα έχουμε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& OA=OB &\textrm{(ακτίνες του ίδιου κύκλου) }\\
+& OP &\textrm{(κοινή πλευρά) }
+\end{aligned}}\Rightarrow$
+\begin{tabular}{c}
+Τα τρίγωνα είναι ίσα.\\
+(2\textsuperscript{o} Κριτήριο Ισότητας Ορθ. Τριγώνων)
+\end{tabular}\\\\
+Επομένως και τα εφαπτόμενα τμήματα $PA, PB$ θά είναι \textbf{ίσα} δηλαδή $PA=PB$.
+\begin{porisma}
+Αν $P$ είναι ένα εξωτερικό σημείο ενός κύκλου τότε η διακεντρική ευθεία του :
+\begin{enumerate}
+\item Είναι μεσοκάθετος της χορδής με άκρα τα σημεία επαφής
+\item Διχοτομεί τη γωνία των εφαπτόμενων τμημάτων και τη γωνια των ακτίνων.
+\end{enumerate}
+\end{porisma}
+\begin{thewrhma}
+Η διάκεντρος δυο κύκλων είναι μεσοκάθετος της κοινής χορδής τους.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $(O,\rho)$ και $(K,\rho)$ κύκλοι με $AB$ κοινή χορδή \\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&Η διάκεντρος $OK$ είναι μεσοκάθετος της $AB$
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth} \begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(0,2){A}
+\tkzDefPoint(2.5,0){Β}
+\tkzDefPoint(2,1){C}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawCircle(Β,C)
+\tkzInterCC(O,A)(B,C) \tkzGetPoints{D}{E}
+\tkzDrawSegments[color=steelblue](D,E O,B)
+\tkzDrawSegments(O,D O,E B,D B,E)
+\tkzDrawPoints(O,B)
+\tkzLabelPoint[right,color=steelblue](B){K}
+\tkzLabelPoint[left,color=steelblue](O){O}
+\tkzLabelPoint[above=.2,color=steelblue](D){A}
+\tkzLabelPoint[below=.2,color=steelblue](E){B}
+\tkzText[steelblue](1,.7){$ R $}
+\tkzText[steelblue](1,-.7){$ R $}
+\tkzText[steelblue](2.25,.7){$ \rho $}
+\tkzText[steelblue](2.25,-.7){$ \rho $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.41& Κύκλος\\
+2.19 & Εφαπτόμενα τμήματα\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω οι κύκλοι $(O,R)$ και $(K,\rho)$ και $A, B$\\τα σημεία τομής τους.\\\\
+Το σημείο Ο ισαπέχει από τα άκρα $A$ και $B$ :\\ $OA=OB=R$ ώς ακτίνες του πρώτου κύκλου\\επομένως θα βρίσκεται \textbf{στη μεσοκάθετο} του $AB$.\\(\textcolor{doc}{\textbf{Πόρισμα 2.6}})\\Ομοίως και το σημείο $K$ θα ανήκει και αυτό στη μεσοκάθετο αφού $KA=KB=\rho$.\\
+Κατά συνέπεια η διάκεντρος $OK$ θα είναι η \textbf{μεσοκάθετος} του $AB$\footnote[8]{Αν οι κύκλοι ειναι ίσοι τότε και η κοινή χορδή θα είναι μεσοκάθετος της διακέντρου.}.
+\chapter{Παράλληλες Ευθείες}
+\section*{\textcolor{doc}{ΟΡΙΣΜΟΙ}}\mbox{}\\
+\vspace{-.5cm}
+\paragraph*{\textcolor{doc}{ΠΑΡΑΛΛΗΛΕΣ ΕΥΘΕΙΕΣ}}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Είδη γωνιών} :\newline Αν $\epsilon_{1}, \epsilon_{2}$ είναι δύο ευθείες και $\epsilon$ μια τέμνουσα τους τότε : \newline \textbf{\textcolor{doc}{Εντός}} λέγονται οι γωνίες που βρίσκονται ανάμεσα από τις $\epsilon_{1}, \epsilon_{2}$.\newline \textbf{\textcolor{doc}{Εκτός}} λέγονται οι γωνίες που βρίσκονται έξω από τις $\epsilon_{1}, \epsilon_{2}$.\newline \textbf{\textcolor{doc}{Επι τα αυτά}} λέγονται οι γωνίες που βρίσκονται στο ίδιο μέρος της τέμνουσας $\epsilon$.\newline \textbf{\textcolor{doc}{Εναλλάξ}} λέγονται οι γωνίες που βρίσκονται εκατέρωθεν της $\epsilon$.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,1.5){C}
+\tkzDefPoint(3,1.5){D}
+\tkzDefPoint(1,-.5){E}
+\tkzDefPoint(2,2){F}
+\tkzDefPoint(1,-.3){K}
+\tkzDefPoint(2,1.8){L}
+\tkzDrawSegments(A,B C,D E,F)
+\tkzInterLL(A,B)(E,F) \tkzGetPoint{G}
+\tkzInterLL(C,D)(E,F) \tkzGetPoint{H}
+\tkzDrawCircle[draw=steelblue](G,K)
+\tkzDrawCircle[draw=steelblue](H,L)
+\tkzText[steelblue](1.25,1.7){$ a $}
+\tkzText[steelblue](2.35,1.7){$ \beta $}
+\tkzText[steelblue](1.25,1.3){$ \delta $}
+\tkzText[steelblue](2.35,1.3){$ \gamma $}
+\tkzText[steelblue](.7,.2){$ \varepsilon $}
+\tkzText[steelblue](1.8,.2){$ \zeta $}
+\tkzText[steelblue](.7,-.2){$ \eta $}
+\tkzText[steelblue](1.8,-.2){$ \theta $}
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+Κάνοντας συνδιασμούς με τους παραπάνω χαρακτηρισμούς προκύπτουν οι βασικές ονομασίες :\\
+\textcolor{doc}{\textbf{Εντός εναλλάξ}} που ειναι τα ζευγάρια γωνιών $\delta, \zeta$ και $\gamma, \varepsilon$.\\
+\textcolor{doc}{\textbf{Εντός εκτός και επί τα αυτά}} που ειναι τα ζευγάρια γωνιών $\zeta, \beta$ - $\gamma, \theta$ - $a, \varepsilon$ και $\delta, \eta$.\\
+\textcolor{doc}{\textbf{Εντός και επί τα αυτά}} που είναι τα ζευγάρια γωνιών $\varepsilon, \delta$ και $\gamma, \zeta$.\\
+\paragraph*{\textcolor{doc}{ΑΞΙΟΣΗΜΕΙΩΤΟΙ ΚΥΚΛΟΙ}}\mbox{}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Περιγεγραμμένος} κύκλος ενός τριγώνου ονομάζεται ο κύκλος που διέρχεται από τις κορυφές του τριγώνου.\\
+Το κέντρο του περιγεγραμμένου κύκλου λέγεται \textbf{περίκεντρο} και είναι το σημείο τομής των μεσοκαθέτων των πλευρών του.} & \begin{tikzpicture}
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(-1,0){B}
+\tkzDefPoint(-1.5,0){F}
+\tkzDrawCircle[draw=steelblue](O,A)
+\tkzDefPointBy[rotation=center O angle 120](A) \tkzGetPoint{C}
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εγγεγραμμένος} κύκλος ενός τριγώνου ονομάζεται ο κύκλος που βρίσκεται μέσα στο τρίγωνο και εφάπτεται στις πλευρές του.\\
+Το κέντρο του εγγεγραμμένου κύκλου λέγεται \textbf{έγγκεντρο} και είναι το σημείο τομής των διχοτόμων του τριγώνου.} & \begin{tikzpicture}
+\clip (-.1,-.1) rectangle (3.1,1.6);
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(1,1.5){C}
+\tkzDefCircle[in](A,B,C)
+\tkzGetPoint{S}
+\tkzGetLength{rSN}
+\tkzDrawCircle[R,draw=steelblue](S,\rSN pt)
+\tkzDrawPolygon(A,B,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παρεγγεγραμμένος} κύκλος ενός τριγώνου ονομάζεται ο κύκλος που έχει κέντρο το σημείο τομής δύο εξωτερικών διχοτόμων του τρίγωνου και εφάπτεται στη μια πλευρά και στις προεκτάσεις των άλλων δύο.\\
+Το κέντρο του παρεγγεγραμμένου κύκλου λέγεται \textbf{παράκεντρο}.} & \begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(0,1){A}
+\tkzDefPoint(-.4,2){Β}
+\tkzDefPoint(-.74,1){E}
+\tkzDefPoint(.47,1){F}
+\tkzDefPoint(-1.5,0){G}
+\tkzDrawCircle[draw=steelblue](Ο,Α)
+\tkzTangent[from=B](O,A) \tkzGetPoints{D}{C}
+\tkzDrawSegments[add=0 and .4](B,C B,D)
+\tkzDrawSegments(O,D O,C E,F)
+\tkzDrawPoint(O)
+\tkzMarkRightAngle(B,D,O)
+\tkzMarkRightAngle(O,C,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\newpage
+\section*{\textcolor{doc}{ΘΕΩΡΗΜΑΤΑ - ΑΠΟΔΕΙΞΕΙΣ}}\mbox{}\\
+\begin{thewrhma}
+Αν δυο ευθείες τεμνόμενες από τρίτη σχηματίζουν εντός εναλλάξ γωνίες ίσες, τότε είναι παράλληλες.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $\epsilon_{1}, \epsilon_{2}$ ευθείες και $\epsilon$ τέμνουσα τους\\
+&$\omega, \varphi$ εντός εναλλάξ γωνίες με $\omega=\varphi$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&$\epsilon_{1}\parallel\epsilon_{2}$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(5,1.5){D}
+\tkzDefPoint(2.5,-.5){E}
+\tkzDefPoint(3.5,2){F}
+\tkzDefPoint(-1.5,0.75){Ν}
+\tkzInterLL(A,B)(E,F) \tkzGetPoint{G}
+\tkzInterLL(C,D)(E,F) \tkzGetPoint{H}
+\tkzMarkAngle[fill=steelblue!70,size=.4](B,G,F)
+\tkzMarkAngle[fill=steelblue!70,size=.4](C,H,E)
+\tkzDrawSegments(A,B C,D E,F)
+\tkzDrawSegments[dashed](A,N C,N)
+\tkzLabelPoint[below right,color=steelblue](G){B}
+\tkzLabelPoint[above left,color=steelblue](H){A}
+\tkzLabelPoint[left,color=steelblue](N){Γ}
+\tkzLabelAngle[pos=.7](B,G,F){$\varphi$}
+\tkzLabelAngle[pos=-.7](C,H,E){$\omega$}
+\tkzText[color=steelblue](3.7,1.7){$ \epsilon $}
+\tkzText[color=steelblue](1,1.7){$ \epsilon_{1} $}
+\tkzText[color=steelblue](1,-.2){$ \epsilon_{2} $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.5 & Τεμνόμενες ευθείες\\
+1.6 & Παράλληλες ευθείες\\
+3.1 & Είδη γωνιών
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Ας θεωήσουμε δυο ευθείες $\epsilon_{1}, \epsilon_{2}$.\\Αν $\epsilon$ μια τέμνουσά τους τότε δημιουργούνται\\οι εντός εναλλάξ γωνίες $\omega, \varphi$.\\\\
+Έστω $\omega=\varphi$. Αν οι ευθείες $\epsilon_{1}, \epsilon_{2}$ είναι τέμνουσες τότε θα τέμνονται σε ένα σημείο $\varGamma$ οπότε σχηματίζεται το τριγωνο $AB\varGamma$.\\
+Στο τριγωνο αυτό έχουμε οτι η η γωνία $\varphi$ είναι \textbf{εξωτερική} γωνία του και επίσης ισχύει $\omega=\varphi$ που σημαίνει οτι μια εξωτερική γωνία του ειναι ίση με μια απέναντι εσωτερική.\\\\
+Αυτό όμως συμφωνα με το \textcolor{steelblue}{\textbf{Θεώρημα 2.9}} είναι \textbf{άτοπο}.\\
+Επομένως οι $\epsilon_{1}, \epsilon_{2}$ θα είναι παράλληλες δηλαδή $\epsilon_{1}\parallel\epsilon_{2}$.
+\begin{porisma}
+Αν δύο ευθείες τεμνόμενες από τρίτη σχηματίζουν δύο εντός εκτός και επί τα αυτά γωνίες ίσες ή δυο εντός και επι τα αυτά γωνίες παραπληρωματικές τότε είναι παράλληλες.
+\end{porisma}
+\begin{porisma}
+Δύο ευθείες κάθετες στην ίδια ευθεία σε διαφορετικά σημεία ειναι μεταξύ τους παράληλες.
+\end{porisma}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(5,1.5){D}
+\tkzDefPoint(3,-.5){E}
+\tkzDefPoint(3,2){F}
+\tkzDefPoint(3,0){G}
+\tkzDefPoint(3,1.5){H}
+\tkzMarkRightAngle[draw=steelblue](G,H,D)
+\tkzMarkRightAngle[draw=steelblue](H,G,A)
+\tkzDrawSegments(A,B C,D E,F)
+\tkzLabelPoint[below right,color=steelblue](G){B}
+\tkzLabelPoint[above left,color=steelblue](H){A}
+\tkzText[color=steelblue](3.3,1.7){$ \epsilon $}
+\tkzText[color=steelblue](1,1.7){$ \epsilon_{1} $}
+\tkzText[color=steelblue](1,-.2){$ \epsilon_{2} $}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $\epsilon_{1}, \epsilon_{2}$ ευθείες\\
+&$\epsilon\perp\epsilon_{1}$ και $\epsilon\perp\epsilon_{2}$\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $ \epsilon_{1}\parallel\epsilon_{2} $\\
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Υπόδειξη : Εντός εναλλάξ γωνίες ίσες ώς ορθές.\\(Ισχύει και για εντός εκτός και επί τα αυτά ίσες και εντός και επί τα αυτά παραπληρωματικές).\\
+\begin{mdframed}[%
+frametitle={\textcolor{gray}{ΑΙΤΗΜΑ ΠΑΡΑΛΛΗΛΙΑΣ}},
+skipabove=\baselineskip plus 2pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=1pt,
+frametitlerule=true,
+linecolor=gray,
+outerlinewidth=.5pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlerulewidth=.3pt,
+innertopmargin=\baselineskip,
+innerbottommargin=\baselineskip,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=white,
+frametitleaboveskip=7pt
+]%
+Από σημείο εκτός ευθείας άγεται μόνο μια παράλληλη προς αυτή.
+\end{mdframed}
+\begin{protasi}
+Αν δύο παράλληλες ευθείες τέμνονται από τριτη τότε σχηματίζουν τις εντός εναλλάξ γωνίες ίσες.
+\end{protasi}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $\epsilon_{1}, \epsilon_{2}$ ευθείες και $\epsilon$ τέμνουσα τους\\
+&$\epsilon_{1}\parallel\epsilon_{2}$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&$\omega, \varphi$ εντός εναλλάξ γωνίες ίσες : $\omega=\varphi$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(5,1.5){D}
+\tkzDefPoint(2.5,-.5){E}
+\tkzDefPoint(3.5,2){F}
+\tkzDefPoint(1,0.75){Ν}
+\tkzInterLL(A,B)(E,F) \tkzGetPoint{G}
+\tkzInterLL(C,D)(E,F) \tkzGetPoint{H}
+\tkzMarkAngle[fill=steelblue!70,size=.4](B,G,F)
+\tkzMarkAngle[fill=steelblue!70,size=.4](C,H,E)
+\tkzDrawSegments(A,B C,D E,F)
+\tkzLabelPoint[below right,color=steelblue](G){B}
+\tkzLabelPoint[above left,color=steelblue](H){A}
+\tkzDrawSegments[dashed](H,N)
+\tkzLabelPoint[left,color=steelblue](N){$ x $}
+\tkzLabelAngle[pos=.7](B,G,F){$\varphi$}
+\tkzLabelAngle[pos=-.7](C,H,E){$\omega$}
+\tkzText[color=steelblue](3.7,1.7){$ \epsilon $}
+\tkzText[color=steelblue](1,1.7){$ \epsilon_{1} $}
+\tkzText[color=steelblue](1,-.2){$ \epsilon_{2} $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.5 & Τεμνόμενες ευθείες\\
+1.6 & Παράλληλες ευθείες\\
+3.1 & Είδη γωνιών
+\end{tabular}\end{minipage}\mbox{}\\\\
+Θεωρούμε τις παράλληλες ευθείες $\epsilon_{1}, \epsilon_{2}$ και $\epsilon$ μια τέμνουσά τους.\\
+Έστω οτι οι εντός εναλλάξ γωνίες $\omega, \varphi$ που σχηματίστηκαν δεν είναι ίσες.\\\\
+Φέρουμε μια ημίευθεία $Ax$ ώστε οι εντός εναλλάξ γωνίες που δημιουργεί η τέμνουσα $\epsilon$ να είναι ίσες δηλαδή $xAB=\varphi$.\\\\
+Αυτό σύμφωνα με το \textcolor{steelblue}{\textbf{Θεώρημα 3.1}} θα σημαίνει οτι οι $Ax\parallel\epsilon_{2}$ δηλαδη από το $A$ σημείο εκτός ευθείας $\epsilon_{2}$ περνάνε δύο παράλληλες κάτι που είναι \textbf{άτοπο} σύμφωνα με το \textcolor{gray}{\textbf{Αίτημα Παραλληλίας}}.\\
+Επομένως οι εντός εναλλάξ γωνίες $\omega, \varphi$ θα είναι \textbf{ίσες} δηλαδη $\omega=\varphi$\footnote[9]{Η \textbf{Πρόταση 3.1} είναι το αντίστροφο του \textcolor{steelblue}{\textbf{Θεωρήματος 3.1}}.\\
+$^{10}$Το \textcolor{doc}{\textbf{Πόρισμα 3.3}} είναι το αντίστροφο του \textcolor{doc}{\textbf{Πορίσματος 3.1}}.}.
+\begin{porisma}
+Αν δύο παράλληλες ευθείες τέμνονται από τριτη τότε σχηματίζουν :
+\begin{enumerate}
+\item Τις εντός εκτός και επί τα αυτά γωνίες ίσες.
+\item Τις εντός και επι τα αυτά γωνίες παραπληρωματικές.$^{10}$
+\end{enumerate}
+\end{porisma}
+\begin{protasi}
+Αν δύο διαφορετικές ευθείες $\epsilon_{1}, \epsilon_{2}$ είναι παράλληλες προς μια τριτη ευθεία τότε είναι παράλληλες και μεταξύ τους.
+\end{protasi}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $\epsilon_{1}, \epsilon_{2}, \epsilon$ ευθείες με $\epsilon_{1}\parallel\epsilon$ και $\epsilon_{2}\parallel\epsilon$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&$\epsilon_{1}\parallel\epsilon_{2}$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(5,1.5){D}
+\tkzDefPoint(.5,.75){E}
+\tkzDefPoint(4.5,.75){F}
+\tkzDefPoint(-.5,1){Ν}
+\tkzDrawSegments(A,B C,D E,F)
+\tkzDrawSegments[dashed](E,N C,N)
+\tkzLabelPoint[left,color=steelblue](N){$ A $}
+\tkzText[color=steelblue](0.5,0.95){$ \epsilon_{2} $}
+\tkzText[color=steelblue](1,1.7){$ \epsilon_{1} $}
+\tkzText[color=steelblue](1,-.2){$ \epsilon $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.5 & Τεμνόμενες ευθείες\\
+1.6 & Παράλληλες ευθείες
+\end{tabular}\end{minipage}\mbox{}\\\\
+Αν οι ευθείες $\epsilon_{1}, \epsilon_{2}$ τέμνονταν σε ένα σημείο $A$\\τότε από το σημείο αυτό θα περνάνε δύο παράλληλες\\προς την $\epsilon$ που είναι \textbf{άτοπο}. Άρα $\epsilon_{1}\parallel\epsilon_{2}$.
+\begin{protasi}
+Αν δύο ευθείες $\epsilon_{1}, \epsilon_{2}$ είναι παράλληλες και μια τριτη ευθεία $\epsilon$ τέμνει τη μια απ' αυτές τότε θα τέμνει και την άλλη.
+\end{protasi}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & $\epsilon_{1}, \epsilon_{2}$ ευθείες με $\epsilon_{1}\parallel\epsilon_{2}$ \\
+& $\epsilon$ τέμνουσα της $\epsilon_{1}$\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}&$\epsilon$ τέμνουσα της $\epsilon_{2}$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(5,1.5){D}
+\tkzDefPoint(2.5,-.5){E}
+\tkzDefPoint(3.5,2){F}
+\tkzDrawSegments(A,B C,D E,F)
+\tkzInterLL(A,B)(E,F) \tkzGetPoint{G}
+\tkzInterLL(C,D)(E,F) \tkzGetPoint{H}
+\tkzLabelPoint[above left,color=steelblue](H){A}
+\tkzText[color=steelblue](3.7,1.7){$ \epsilon $}
+\tkzText[color=steelblue](1,1.7){$ \epsilon_{1} $}
+\tkzText[color=steelblue](1,-.2){$ \epsilon_{2} $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{cl}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.5 & Τεμνόμενες ευθείες\\
+1.6 & Παράλληλες ευθείες
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω $\epsilon_{1}, \epsilon_{2}$ δύο παράλληλες ευθείες και $\epsilon$ τέμνουσα της $\epsilon_{1}$\\με $A$ να είναι το σημείο τομής τους.\\\\
+Αν η $\epsilon$ δεν είναι τέμνουσα και της $\epsilon_{2}$ τότε αυτό σημαίνει οτι θα ειναι παράλληλες επομένως από το σημείο $A$ περνάνε δύο παράλληλες προς την $\epsilon_{2}$ που είναι \textbf{άτοπο} συμφωνα με το \textcolor{gray}{\textbf{Αίτημα Παραλληλίας}}.\\
+Άρα η $\epsilon$ θα είναι \textbf{τέμνουσα} και της $\epsilon_{2}$.
+\begin{porisma}
+Αν σε δύο παράλληλες ευθείες μια τρίτη ευθεία είναι κάθετη σε μια από τις δύο θα είναι κάθετη και στην άλλη.
+\end{porisma}
+\begin{protasi}
+Αν δύο ευθείες τεμνόμενες από τριτη σχηματίζουν τις εντός και επι τα αυτά γωνίες με άθροισμα μικρότερο από δύο ορθές τότε θα τέμνονται προς το μέρος που βρίσκονται οι γωνίες.
+\end{protasi}
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(5,0){B}
+\tkzDefPoint(1,0.3){A}
+\tkzDefPoint(1,1.2){C}
+\tkzDefPoint(5,1.5){D}
+\tkzDefPoint(3,-.5){E}
+\tkzDefPoint(3,2){F}
+\tkzDefPoint(3,0.16){G}
+\tkzDefPoint(3,1.34){H}
+\tkzDefPoint(6,.75){M}
+\tkzMarkAngle[fill=steelblue!70,size=.3](C,H,G)
+\tkzMarkAngle[fill=steelblue!70,size=.3](H,G,A)
+\tkzMarkAngle[fill=steelblue!40,size=.3](G,H,D)
+\tkzDrawSegments(A,B C,D E,F)
+\tkzLabelPoint[below right,color=steelblue](G){B}
+\tkzLabelPoint[above left,color=steelblue](H){A}
+\tkzLabelPoint[right,color=steelblue](M){K}
+\tkzDrawSegments[dashed](B,M D,M)
+\tkzText[color=steelblue](3.3,1.7){$ \epsilon $}
+\tkzText[color=steelblue](1,1.4){$ \epsilon_{1} $}
+\tkzText[color=steelblue](1,.1){$ \epsilon_{2} $}
+\end{tikzpicture}\end{wrapfigure}\mbox{}\\\\
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}} & $\epsilon_{1}, \epsilon_{2}$ ευθείες\\
+&$\omega, \varphi$ εντός και επί τα αυτά\\& με  $\omega+\varphi<180\degree$\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $\epsilon_{1}, \epsilon_{2}$ τέμνονται\\
+\end{tabular}\end{minipage}\mbox{}\\
+\paragraph*{ΣΧΟΛΙΟ}\mbox{}\\
+Το παραπάνω πόρισμα αποτελεί βασικό τρόπο με τον οποίο εξετάζουμε αν δύο ευθείες τέμνονται.
+\begin{porisma}
+Η κατασκευή τριγώνου με δοσμένη μια πλευρά και τις προσκείμενες γωνίες έχει λύση αν και μόνο αν οι δύο γωνίες έχουν άθροισμα μικρότερο από $180\degree$.
+\end{porisma}
+\begin{thewrhma}
+Δύο γωνίες με πλευρές παράλληλες είναι ίσες αν :
+\begin{itemize}[itemsep=0mm]
+\item είναι και οι δύο οξείες
+\item είναι και οι δυο αμβλείες
+\end{itemize}
+ενώ είναι παραπληρωματικές αν είναι μια οξεία μια αμβλεία.
+\end{thewrhma}
+\begin{tabular}{ll}
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}} & $x\hat{O}y, x'\hat{O'}y'$ γωνίες\\
+&1. $x\hat{O}y, x'\hat{O'}y'$ οξείες\\
+&2. $x\hat{O}y, x'\hat{O'}y'$ αμβλείες\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $x\hat{O}y=x'\hat{O'}y'$\\
+\end{tabular}&
+\begin{tabular}{c|l}
+\multirow{3}{*}{\textcolor{doc}{Υπόθεση}} & $x\hat{O}y, x'\hat{O'}y'$ γωνίες\\
+&$x\hat{O}y$ οξεία\\
+&$x'\hat{O'}y'$ αμβλεία\\
+\hline \rule[-2ex]{0pt}{4.5ex}\textcolor{doc}{Συμπέρασμα} & $x\hat{O}y+x'\hat{O'}y'=180\degree$\\
+\end{tabular}\end{tabular}\mbox{}\\
+\begin{tabular}{ccc}
+\begin{tikzpicture}
+\tkzDefPoint(1.5,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(-1.5.2,1){D}
+\tkzDefPoint(-.2,1){E}
+\tkzDefPoint(-1.2,-.5){F}
+\tkzMarkAngle[fill=steelblue!70,size=.3](B,A,C)
+\tkzMarkAngle[fill=steelblue!70,size=.3](D,E,F)
+\tkzDrawSegments(A,B A,C)
+\tkzDrawSegments[dashed](D,E E,F)
+\tkzLabelPoint[above,color=steelblue](D){$ x' $}
+\tkzLabelPoint[left,color=steelblue](F){$ y' $}
+\tkzLabelPoint[above,color=steelblue](E){O'}
+\tkzLabelPoint[below,color=steelblue](B){$ x $}
+\tkzLabelPoint[left,color=steelblue](C){$ y $}
+\tkzLabelPoint[below,color=steelblue](A){O}
+\end{tikzpicture} 
+&\begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0.2,0){A}
+\tkzDefPoint(-.8,1.5){C}
+\tkzDefPoint(-2.5,1){D}
+\tkzDefPoint(-1,1){E}
+\tkzDefPoint(0,-.5){F}
+\tkzMarkAngle[fill=steelblue!70,size=.3](B,A,C)
+\tkzMarkAngle[fill=steelblue!70,size=.3](D,E,F)
+\tkzDrawSegments(A,B A,C)
+\tkzDrawSegments[dashed](D,E E,F)
+\tkzLabelPoint[above,color=steelblue](D){$ x' $}
+\tkzLabelPoint[left,color=steelblue](F){$ y' $}
+\tkzLabelPoint[above,color=steelblue](E){O'}
+\tkzLabelPoint[below,color=steelblue](B){$ x $}
+\tkzLabelPoint[right,color=steelblue](C){$ y $}
+\tkzLabelPoint[below,color=steelblue](A){O}
+\end{tikzpicture}
+&\begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1.5){C}
+\tkzDefPoint(.5,-.3){D}
+\tkzDefPoint(2.5,-.3){E}
+\tkzDefPoint(3.5,1.2){F}
+\tkzMarkAngle[fill=steelblue!70,size=.3](B,A,C)
+\tkzMarkAngle[fill=steelblue!70,size=.3](F,E,D)
+\tkzDrawSegments(A,B A,C)
+\tkzDrawSegments[dashed](D,E E,F)
+\tkzLabelPoint[below,color=steelblue](D){$ x' $}
+\tkzLabelPoint[left,color=steelblue](F){$ y' $}
+\tkzLabelPoint[below,color=steelblue](E){O'}
+\tkzLabelPoint[above,color=steelblue](B){$ x $}
+\tkzLabelPoint[left,color=steelblue](C){$ y $}
+\tkzLabelPoint[below,color=steelblue](A){O}
+\end{tikzpicture}\\ 
+\end{tabular} 
+\begin{thewrhma}
+Οι τρεις μεσοκάθετοι ενός τριγώνου δίερχονται από το ίδιο σημείο, το οποίο ειναι κέντρο του περιγεγραμμένου κύκλου του.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $AB\varGamma$ τυχαίο τρίγωνο και  $x, y, z$ μεσοκάθετοι των $AB, A\varGamma, A\varGamma$ \\
+\hline \rule[-2ex]{0pt}{5.5ex} \multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}}& Οι μεσοκάθετοι $x, y, z$ διέρχονται από το ίδιο σημείο $O$\\
+& Το σημείο $O$ είναι κέντρο του περιγεγραμμένου κύκλου\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\clip (-2.25,-2.1) rectangle (2.25,2.1);
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(2,0){K}
+\tkzDrawCircle(O,K)
+\tkzDefPointBy[rotation=center O angle 120](K) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 200](K) \tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle -20](K) \tkzGetPoint{C}
+\tkzDrawPolygon(A,B,C)
+\tkzDefPointBy[projection=onto B--C](O) \tkzGetPoint{L}
+\tkzDefPointBy[projection=onto A--C](O) \tkzGetPoint{M}
+\tkzDefPointBy[projection=onto A--B](O) \tkzGetPoint{N}
+\tkzDrawLines[add=.2 and .7,draw=steelblue](O,M O,N O,L)
+\tkzDrawSegments[dashed](O,A O,B O,C)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[left,color=steelblue](B){B}
+\tkzLabelPoint[right,color=steelblue](C){Γ}
+\tkzLabelPoint[above,color=steelblue](O){O}
+\tkzLabelPoint[below left,color=steelblue](L){Λ}
+\tkzLabelPoint[right,color=steelblue](M){M}
+\tkzLabelPoint[above left,color=steelblue](N){K}
+\tkzDrawPoint(O)
+\tkzText[steelblue](-2,1){$ x $}
+\tkzText[steelblue](.2,-1){$ y $}
+\tkzText[steelblue](.8,1.1){$ z $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.32 & Μεσοκάθετος ευθύγραμμου τμήματος\\
+1.41 & Ακτίνα κύκλου\\
+1.42 & Γεωμετρικός τόπος\\
+3.2 & Περιγεγραμμένος κύκλος
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Σε ένα τυχαιο τρίγωνο $AB\varGamma$ σχεδιάζουμε τον\\περιγεγραμμένο κύκλο του.\\\\
+Αν φέρουμε τις μεσοκάθετους $ x, y$ των πλευρών\\$AB, B\varGamma$ αντίστοιχα τότε αυτές θα τέμνονται στο σημείο $O$.\\\\
+Το σημείο $O$ ως σημείο της μεσοκαθέτου $ x $ της πλευράς $AB$ θα έχει την ιδιότητα να \textbf{ισαπέχει} από τα άκρα του ευθύγραμμου τμήματος $AB $ σύμφωνα με το \textcolor{doc}{\textbf{Πόρισμα 2.3}} δηλαδη $OA=OB$.\\\\
+Ομοίως το $ O $ θα ισαπέχει και από τα άκρα $B$ και $ \varGamma $ ως σημείο της μεσοκαθέτου $ y $ της πλευράς $ B\varGamma $ δηλαδη $OB=O\varGamma$.\\\\
+Επομένως θα ισχύει $OA=OB=O\varGamma$ άρα το σημείο $O$ θα \textbf{ισαπέχει} από τα σημεία $A, B$ και $\varGamma$.\\
+Στο ίδιο συμπέρασμα καταλλήγουμε και για τη μεσοκάθετο $ z $ της πλευράς $ A\varGamma $ οπότε οι τρεις μεσοκάθετοι \textbf{διέρχονται από το ίδιο σημείο}.\\\\
+Επειδή όμως οι κορυφές του τριγώνου είναι και σημεία του περιγεγραμμένου κύκλου αυτό σημαινει οτι το σημείο $O$ θα είναι το \textbf{κέντρο} του περιγεγραμμένου κύκλου αφού έχει σταθερή απόσταση από τα σημεία του.
+\begin{thewrhma}
+Οι τρεις διχοτόμοι ενός τριγώνου δίερχονται από το ίδιο σημείο, το οποίο ειναι κέντρο του εγγεγραμένου κύκλου του.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $AB\varGamma$ τρίγωνο και  $A\varDelta, BE, \Gamma Z$ διχοτόμοι των $\hat{A}, \hat{B}, \hat{\varGamma}$ \\
+\hline \rule[-2ex]{0pt}{5.5ex} \multirow{2}{*}{\textcolor{doc}{Συμπέρασμα}}& Οι διχοτόμοι $A\varDelta, BE, \Gamma Z$ διέρχονται από το ίδιο σημείο $I$\\
+& Το σημείο $I$ είναι κέντρο του εγγεγραμμένου κύκλου\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\clip (-.4,-.4) rectangle (5.4,3.4);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefPoint(1.5,3){A}
+\tkzDefCircle[in](A,B,C)
+\tkzGetPoint{S}
+\tkzGetLength{rSN}
+\tkzDrawCircle[R,draw=steelblue](S,\rSN pt)
+\tkzDrawPolygon(A,B,C)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[left,color=steelblue](B){B}
+\tkzLabelPoint[right,color=steelblue](C){Γ}
+\tkzDefLine[bisector](A,C,B) \tkzGetPoint{z}
+\tkzDefLine[bisector](C,B,A) \tkzGetPoint{e}
+\tkzDefLine[bisector](B,A,C) \tkzGetPoint{d}
+\tkzInterLL(B,C)(A,d) \tkzGetPoint{D}
+\tkzInterLL(A,C)(B,e) \tkzGetPoint{E}
+\tkzInterLL(A,B)(C,z) \tkzGetPoint{Z}
+\tkzDrawSegments[dashed](A,D B,E C,Z)
+\tkzInterLL(B,E)(A,D) \tkzGetPoint{I}
+\tkzDrawPoint(I)
+\tkzLabelPoint[above left,steelblue](I){I}
+\tkzDefPointBy[projection=onto B--C](I) \tkzGetPoint{N}
+\tkzDefPointBy[projection=onto A--C](I) \tkzGetPoint{M}
+\tkzDefPointBy[projection=onto A--B](I) \tkzGetPoint{L}
+\tkzLabelPoint[below right,steelblue](D){Δ}
+\tkzLabelPoint[right,steelblue](E){E}
+\tkzLabelPoint[below left,steelblue](Z){Z}
+\tkzLabelPoint[above left,steelblue](L){Λ}
+\tkzLabelPoint[above right,steelblue](M){M}
+\tkzLabelPoint[below left,steelblue](N){N}
+\tkzDrawSegments[dashed](I,L I,M I,N)
+\tkzMarkRightAngle[size=.2](B,N,I)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.26 & Διχοτόμος γωνίας\\
+1.41 & Ακτίνα κύκλου\\
+1.42 & Γεωμετρικός τόπος\\
+3.3 & Εγγεγραμμένος κύκλος
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω $AB\varGamma$ τυχαιο τρίγωνο.\\
+Οι διχοτόμοι $A\varDelta$ και $BE$ των γωνιών $\hat{B}$ και $\hat{E}$\\τέμνονται στο σημείο $I$ αφού\\$\dfrac{\hat{A}}{2}+\dfrac{\hat{B}}{2}<\hat{A}+\hat{B}<180\degree$ σύμφωνα με την \textbf{Πρόταση 3.4}.\\\\
+Το σημείο $I$, ως σημείο της διχοτόμου $A\varDelta$ θα έχει την ιδιότητα να \textbf{ισαπέχει} από τις πλευρές $AB$ και $ A\varGamma $ της γωνίας $ \hat{A} $ δηλαδή : $ I\varLambda=IM $.\\\\
+Επίσης το $I$ είναι σημείο και της διχοτόμου $BE$ επομένως θα \textbf{ισαπέχει} από τις $AB$ και $ B\varGamma $ δηλαδή : $ I\varLambda=IN $.\\\\
+Τέλος από την τριτη διχοτόμο προκύπτει οτι διέρχεται και αυτή από τι σημειο Ι με $IM=IN$.\\\\
+Από τα παραπάνω έχουμε ότι $I\varLambda=IM=IN$ άρα υπάρχει κύκλος που \textbf{διέρχεται από τα σημεία} $\varLambda, M, N$ των πλευρών $AB, A\varGamma, B\varGamma$ που δεν είναι άλλος από τον \textbf{εγγεγραμμένο}.\\
+Άρα το σημείο $I$ ειναι το κέντρο του εγγεγραμμένου κύκλου.\\
+\begin{thewrhma}
+Το άθροισμα των γωνιών κάθε τριγώνου είναι ίσο με $180\degree$.
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $AB\varGamma$ τρίγωνο και  $x'x\parallel B\varGamma$ \\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}& $ \hat{A}+\hat{B}+\hat{\varGamma}=180\degree $\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4.5,0){C}
+\tkzDefPoint(1.5,2.5){A}
+\tkzDefPoint(0,2.5){D}
+\tkzDefPoint(4.5,2.5){E}
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment(D,E)
+\tkzMarkAngle[fill=steelblue!70,size=.4](C,B,A)
+\tkzMarkAngle[fill=steelblue!70,size=.4](A,C,B)
+\tkzMarkAngle[fill=steelblue!70,size=.4](D,A,B)
+\tkzMarkAngle[fill=steelblue!40,size=.4](B,A,C)
+\tkzMarkAngle[fill=steelblue!70,size=.4](C,A,E)
+\tkzLabelPoint[above,steelblue](A){A}
+\tkzLabelPoint[left,steelblue](B){B}
+\tkzLabelPoint[right,steelblue](C){Γ}
+\tkzLabelPoint[above,steelblue](D){$ x $}
+\tkzLabelPoint[above,steelblue](E){$ x' $}
+\tkzLabelAngle[pos=-.7](D,A,B){$ \omega $}
+\tkzLabelAngle[pos=.7](C,A,E){$ \varphi $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.5 & Τεμνόμενες ευθείες\\
+1.6 & Παράλληλες ευθείες\\
+1.25 & Ευθεία γωνία\\
+3.1 & Είδη γωνιών
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έστω τριγωνο $AB\varGamma$. Φέρουμε την ευθεία $x'x$\\η οποία διέρχεται από την κορυφή $A$ του τριγώνου\\και ειναι \textbf{παράλληλη} με τη $B\varGamma$ : $x'x\parallel B\varGamma$.\\\\
+Με τέμνουσα την πλευρά $AB$ δημιουργούνται οι εντός εναλλάξ γωνίες $\omega, \hat{B}$ οι οποίες είναι \textbf{ίσες} σύμφωνα με το \textcolor{steelblue}{\textbf{Θεώρημα 3.1}} άρα $\omega=\hat{B}$.\\
+Ομοίως με τέμνουσα την $A\varGamma$ οι εντός εναλλάξ γωνίες $\varphi, \hat{\varGamma}$ θα είναι \textbf{ίσες} άρα $\varphi=\hat{\varGamma}$.\\\\
+'Εχουμε λοιπόν τις ισότητες :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \omega+\hat{A}+\varphi=180\degree &(\hat{A}\textrm{ ευθεία γωνία })\;\\
+& \omega=\hat{B}\textrm{ \;και\; }\varphi=\hat{\varGamma}\\
+\end{aligned}}\Rightarrow\hat{A}+\hat{B}+\hat{\varGamma}=180\degree$
+\begin{porisma}
+\begin{enumerate}
+\item Κάθε εξωτερική γωνία ενός τριγώνου είναι ίση με το άθροισμα των δύο απέναντι εσωτερικών γωνιών του.
+\item Αν δύο τριγωνα έχουν δύο γωνίες ίσες μια προς μια τότε έχουν και τις τριτες γωνίες τους ίσες.
+\item Οι οξείες γωνίες ενός ορθογωνίου τριγώνου ειναι συμπληρωματικές.
+\item κάθε γωνία ισόπλευρου τριγώνου είναι ίση με $60\degree$.
+\end{enumerate}
+\end{porisma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $AB\varGamma$ τρίγωνο και $\varGamma x$ προέκταση $B\varGamma$ \\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}& $ \hat{\varGamma}_{\varepsilon\xi}=\hat{A}+\hat{B} $\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(5,0){D}
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment(C,D)
+\tkzMarkAngle[fill=steelblue!70,size=.4](C,B,A)
+\tkzMarkAngle[fill=steelblue!70,size=.4](D,C,A)
+\tkzMarkAngle[fill=steelblue!70,size=.4](B,A,C)
+\tkzLabelPoint[above,steelblue](A){A}
+\tkzLabelPoint[left,steelblue](B){B}
+\tkzLabelPoint[below,steelblue](C){Γ}
+\tkzLabelPoint[above,steelblue](D){$ x $}
+\tkzLabelAngle[pos=.7](D,C,A){$ \varGamma_{\varepsilon\xi} $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί - Τύποι}}\\
+\hline 1.25 & Ευθεία γωνία\\
+1.70 & Εξωτερική γωνία\\
+Τ.1 & Άθροισμα γωνιών τριγώνου 
+\end{tabular}\end{minipage}\mbox{}\\\\
+1. Στο τυχαίο τριγωνο $AB\varGamma$ προεκτείνουμε την\\πλευρά $B\varGamma$κατά ημιευθεία $\varGamma x$ οπότε\\σχηματίζεται η εξωτερική γωνία του τριγώνου $\hat{\varGamma}_{\varepsilon\xi}$.\\
+'Εχουμε λοιπόν τις ισότητες :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \hat{A}+\hat{B}+\hat{\varGamma}=180\degree\\ & \hat{\varGamma}+\hat{\varGamma}_{\varepsilon\xi}=180\degree
+\end{aligned}}\Rightarrow\hat{A}+\hat{B}+\hat{\varGamma}=\hat{\varGamma}+\hat{\varGamma}_{\varepsilon\xi}\Rightarrow\hat{\varGamma}_{\varepsilon\xi}=\hat{A}+\hat{B}$
+\begin{thewrhma}
+Δύο γωνίες με πλευρές κάθετες είναι :
+\begin{enumerate}[itemsep=0mm]
+\item Ίσες είναι και οι δύο οξείες ή και οι δύο αμβλείες.
+\item Παραπληρωματικές αν είναι μια οξεία μια αμβλεία
+\end{enumerate}
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|ll}
+\multirow{2}{*}{\textcolor{doc}{Υπόθεση}} & \multicolumn{2}{l}{$x\hat{O}y, x'\hat{O'}y'$ γωνίες με πλευρές κάθετες} \\
+& 1. $x\hat{O}y, x'\hat{O'}y'$ οξείες ή αμβλείες & 2. $x\hat{O}y$ οξεία $ x'\hat{O'}y'$ αμβλεία\\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}& 1. $x\hat{O}y=x'\hat{O'}y'$& 2.  $x\hat{O}y+x'\hat{O'}y'=180\degree$\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}
+\tkzDefPoint(-1,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPoint(-1,-.5){C}
+\tkzDefPoint(2.2,1.2){D}
+\tkzDefPoint(3.5,0){E}
+\tkzDefPoint(3.5,-2.5){F}
+\tkzDefPoint(3.5,-2){G}
+\tkzDefPointBy[projection=onto C--D](G) \tkzGetPoint{H}
+\tkzInterLL(A,B)(C,D) \tkzGetPoint{K}
+\tkzInterLL(A,B)(G,H) \tkzGetPoint{M}
+\tkzLabelPoint[above,steelblue](K){O}
+\tkzLabelPoint[right,steelblue](D){$ x $}
+\tkzLabelPoint[right,steelblue](B){$ y $}
+\tkzLabelPoint[above right,steelblue](M){Β}
+\tkzLabelPoint[above,steelblue](E){Γ}
+\tkzLabelPoint[right,steelblue](G){O'}
+\tkzLabelPoint[above left,steelblue](H){A}
+\tkzMarkAngle[fill=steelblue!70,size=4mm](B,K,D)
+\tkzMarkAngle[fill=steelblue!70,size=5mm](E,G,M)
+\tkzMarkAngle[fill=steelblue!40,size=3mm](M,G,F)
+\tkzMarkAngle[fill=steelblue!40,size=3mm](H,M,A)
+\tkzMarkAngle[fill=steelblue!40,size=3mm](G,M,B)
+\tkzMarkAngle[fill=steelblue!40,size=3mm](C,K,B)
+\tkzMarkRightAngle[draw=steelblue](K,H,M)
+\tkzMarkRightAngle[draw=steelblue](A,E,G)
+\tkzDrawSegments(A,B C,D E,F G,H)
+\tkzLabelAngle[pos=.6](B,K,D){$ \omega $}
+\tkzLabelAngle[pos=.6](E,G,M){$ \varphi $}
+\tkzLabelAngle[pos=.5](H,M,A){1}
+\tkzLabelAngle[pos=.5](G,M,B){2}
+\tkzLabelAngle[pos=-.5](M,G,F){$ \theta' $}
+\tkzLabelAngle[pos=.5](C,K,B){$ \theta $}
+\tkzText[steelblue](2.7,-1){$ y' $}
+\tkzText[steelblue](3.7,-1){$ x' $}
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί}}\\
+\hline 1.28 & Κάθετες ευθείες\\
+1.39 & Παραπληρωματικές γωνίες\\
+1.40 & Κατακορυφήν γωνίες
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+1. Θεωρούμε δυο γωνίες $x\hat{O}y, x'\hat{O'}y'$ με πλευρές κάθετες.\\
+Όπως φαινεται στο σχήμα δημιουργούνται δύο ορθογώνια τρίγωνα.\\\\
+Τα τριγωνα $OAB, O'B\varGamma$ έχουν :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \hat{A}=\hat{\varGamma}=90\degree & \textrm{ορθές γωνίες }\\ 
+& \hat{B_{1}}=\hat{B_{2}} & \textrm{κατακορυφήν γωνίες }
+\end{aligned}}\Rightarrow$ Οι τρίτες γωνίες θα ναι ίσες (\textcolor{doc}{\textbf{Πόρισμα 3.6.2}})\\\\
+επομένως θα έχουμε $ \omega=\varphi $.\\\\
+Για τις αμβλείες γωνίες έχουμε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \omega+\theta=180\degree & \textrm{παραπληρωματικές γωνίες }\\ 
+& \varphi+\theta'=180\degree & \textrm{παραπληρωματικές γωνίες }
+\end{aligned}}\Rightarrow\omega+\theta=\varphi+\theta'\Rightarrow\theta=\theta'$\\\\\\
+2. Αν $x\hat{O}y$ οξεία και $ x'\hat{O'}y'$ αμβλεία τότε :\\
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \omega+\theta=180\degree & \textrm{παραπληρωματικές γωνίες }\\ 
+& \varphi+\theta'=180\degree & \textrm{παραπληρωματικές γωνίες }
+\end{aligned}}\Rightarrow\omega+\theta+\varphi+\theta'=360\degree\\\\\Rightarrow 2\omega+2\theta'=360\degree\Rightarrow\omega+\theta'=180\degree$
+\begin{thewrhma}
+Το άθροισμα των εξωτερικών γωνιών ενός κυρτού ν - γωνου είναι $360\degree$
+\end{thewrhma}
+\apodeiksi\\
+\begin{tabular}{c|l}
+\textcolor{doc}{Υπόθεση} & $A_{1}A_{2}\ldots A_{\nu}$ κυρτό πολύγωνο \\
+\hline \rule[-2ex]{0pt}{5.5ex} \textcolor{doc}{Συμπέρασμα}& $\hat{A}_{1\varepsilon\xi}+\hat{A}_{2\varepsilon\xi}+\ldots+ \hat{A}_{\nu\varepsilon\xi}=4$ ορθές\\
+\end{tabular}\mbox{}\\\\\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[7]{r}[0pt]{0cm}
+\begin{tikzpicture}[scale=2]
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.5){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1,-1){D}
+\tkzDefPoint(2,-.7){E}
+\tkzDefPoint(1.7,.7){H}
+\tkzDefPoint(.2,.7){K}
+\tkzDefPoint(-.35,-.05){L}
+\tkzDefPoint(0,-.9){M}
+\tkzDefPoint(1,.7){N}
+\tkzDrawSegments(H,K A,L B,M C,D H,A)
+\tkzDrawSegment[dashed](D,E)
+\tkzLabelPoint[above,color=steelblue](A){$ A_{1} $}
+\tkzLabelPoint[above left,color=steelblue](B){$ A_{2} $}
+\tkzLabelPoint[left,color=steelblue](C){$ A_{3} $}
+\tkzLabelPoint[below,color=steelblue](D){$ A_{4} $}
+\tkzLabelPoint[below,color=steelblue](E){$ A_{5} $}
+\tkzLabelPoint[above,color=steelblue](H){$ A_{\nu} $}
+\tkzMarkAngle[fill=steelblue!70,%
+size=2mm](K,A,B)
+\tkzMarkAngle[fill=steelblue!70,%
+size=2mm](M,C,D)
+\tkzMarkAngle[fill=steelblue!70,%
+size=2mm](L,B,C)
+\end{tikzpicture}
+\end{wrapfigure}\mbox{}\\
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textcolor{doc}{Χρήσιμοι Ορισμοί - Τύποι}}\\
+\hline 1.39 & Παραπληρωματικές γωνίες\\
+1.67 & Πολύγωνο\\
+1.70 & Εξωτερική γωνία\\
+Τ.9 & Άθροισμα γωνιών κυρτού ν - γωνου
+\end{tabular}\end{minipage}\mbox{}\\\\\\
+Έχουμε ένα κυρτό πολύγωνο $A_{1}A_{2}\ldots A_{\nu}$.\\
+Προεκτεινοντας τις πλευρές του σχηματίζονται οι\\ εξωτερικές γωνίες του $\hat{A}_{1\varepsilon\xi}, \hat{A}_{2\varepsilon\xi}, \ldots,  \hat{A}_{\nu\varepsilon\xi}$\\όπου για κάθε μία ισχύει :
+\newpage
+\noindent
+$\LEFTRIGHT.\}{%
+\begin{aligned}
+& \hat{A_{1}}+\hat{A}_{1\varepsilon\xi}=2\llcorner\;\\
+& \hat{A_{2}}+\hat{A}_{2\varepsilon\xi}=2\llcorner\;\\
+& \vdots \\
+& \hat{A_{\nu}}+\hat{A}_{\nu\varepsilon\xi}=2\llcorner\;
+\end{aligned}}\Rightarrow$ Προσθέτοντας κατα μέλη ισχύει :\\\\
+$\left(\hat{A_{1}}+\hat{A_{2}}+\ldots+\hat{A_{\nu}} \right)+\left(\hat{A_{1}\varepsilon\xi}+\hat{A}_{2\varepsilon\xi}+\ldots+\hat{A}_{\nu\varepsilon\xi} \right)=2\nu\llcorner \Rightarrow\\\left(2\nu-4 \right)\llcorner+ \hat{A}_{1\varepsilon\xi}+\hat{A}_{2\varepsilon\xi}+\ldots+\hat{A}_{\nu\varepsilon\xi}=2\nu\llcorner \Rightarrow\\
+\hat{A}_{1\varepsilon\xi}+\hat{A}_{2\varepsilon\xi}+\ldots+\hat{A}_{\nu\varepsilon\xi}=4\llcorner$
+\chapter{Παραλληλόγραμμα - Τραπέζια}
+\section*{\textcolor{doc}{ΟΡΙΣΜΟΙ}}\mbox{}\\
+\vspace{-.5cm}
+\paragraph*{\textcolor{doc}{ΠΑΡΑΛΛΗΛΟΓΡΑΜΜΑ}}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παραλληλόγραμμο} ονομάζεται ένα τετράπλευρο που έχει τις απέναντι πλευρές του παράλληλες.\\
+Το ευθύγραμμο τμήμα που ενώνει \ypogrammisi{κάθετα} τις απέναντι πλευρές λέγεται \textbf{ύψος} και οι πλευρές στις οποίες πέφτει \textbf{βάσεις}.} & \begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1){C}
+\tkzDefPoint(3,1){D}
+\tkzDefPoint(1,0){E}
+\tkzDrawPolygon(A,B,D,C)
+\tkzDrawSegment[draw=steelblue](C,E)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κέντρο του παραλληλογράμου} ονομάζεται το σημείο τομής των διαγωνίων του.} & \begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1){C}
+\tkzDefPoint(3,1){D}
+\tkzDrawPolygon(A,B,D,C)
+\tkzDrawSegments[draw=steelblue](A,D C,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ορθογώνιο} ονομάζεται το παραλληλόγραμμο που έχει μια ορθή γωνία.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,1){C}
+\tkzDefPoint(3,1){D}
+\tkzDrawPolygon(A,B,D,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ρόμβος} ονομάζεται το παραλληλόγραμμο που έχει δύο διαδοχικές πλευρές του ίσες.} & \begin{tikzpicture}
+\tkzDefPoint(3,0.5){B}
+\tkzDefPoint(0,0.5){A}
+\tkzDefPoint(1.5,1){C}
+\tkzDefPoint(1.5,0){D}
+\tkzDrawPolygon(A,D,Β,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τετράγωνο} ονομάζεται το παραλληλόγραμμο που είναι ορθογώνιο και ρόμβος.} & \begin{tikzpicture}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(1,1){C}
+\tkzDefPoint(2,1){D}
+\tkzDefPoint(0,0){Ε}
+\tkzDrawPolygon(A,B,D,C)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\newpage
+\noindent
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Μεσοπαράλληλος} ονομάζεται ο γεωμετρικός τόπος των σημείων που ισαπέχουν από δύο παράλληλες ευθείες.\\
+Είναι ευθεία παράλληλη με τις άλλες δυο και διέρχεται από το μέσο της απόστασης μεταξύ τους.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,1.5){C}
+\tkzDefPoint(3,1.5){D}
+\tkzDefPoint(0,0.75){Ε}
+\tkzDefPoint(3,0.75){F}
+\tkzDefPoint(1,0){G}
+\tkzDefPoint(1,1.5){H}
+\tkzMarkRightAngle[draw=steelblue](G,H,D)
+\tkzMarkRightAngle[draw=steelblue](B,G,H)
+\tkzDrawSegments(A,B C,D G,H)
+\tkzDrawSegment[draw=steelblue](E,F)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Βαρύκεντρο} ενός τριγώνου ονομάζεται σημείο τομής των τριών διαμέσων του.} & \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1,1.5){A}
+\tkzDefPoint(3,0){C}
+\tkzDefMidPoint(A,B) \tkzGetPoint{Z}
+\tkzDefMidPoint(B,C) \tkzGetPoint{D}
+\tkzDefMidPoint(A,C) \tkzGetPoint{E}
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegments[draw=steelblue](A,D B,E C,Z)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ορθόκεντρο} ενός τριγώνου ονομάζεται σημείο τομής των τριών υψών του.} & \begin{tikzpicture}
+\clip (-.1,-.1) rectangle (3.1,1.6);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(.5,1.5){A}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(.5,0){D}
+\tkzDrawPolygon(A,B,C)
+\tkzDefPointBy[projection=onto A--C](B) \tkzGetPoint{E}
+\tkzDefPointBy[projection=onto A--B](C) \tkzGetPoint{Z}
+\tkzDrawSegments[draw=steelblue](A,D B,E C,Z)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τραπέζιο} ονομάζεται ένα τετράπλευρο που έχει μόνο δυο απέναντι πλευρές παράλληλες.\\
+Το ευθύγραμμο τμήμα που ενώνει \ypogrammisi{κάθετα} τις απέναντι πλευρές λέγεται \textbf{ύψος} του και οι πλευρές στις οποίες πέφτει \textbf{βάσεις}.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(.5,1){C}
+\tkzDefPoint(2,1){D}
+\tkzDefPoint(.5,0){E}
+\tkzDrawPolygon(A,B,D,C)
+\tkzDrawSegment[draw=steelblue](C,E)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάμεσος τραπεζίου} ονομάζεται το ευθύγραμμο τμήμα που ενώνει τα μέσα των δύο μη παράλληλων πλευρών.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(.5,1){C}
+\tkzDefPoint(2,1){D}
+\tkzDefPoint(.25,0.5){E}
+\tkzDefPoint(2.5,0.5){F}
+\tkzDrawPolygon(A,B,D,C)
+\tkzDrawSegment[draw=steelblue](F,E)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ισοσκελές τραπέζιο} ονομάζεται ένα τραπέζιο που έχει τις μη παράλληλες πλευρές του ίσες.} & \begin{tikzpicture}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,1){C}
+\tkzDefPoint(2,1){D}
+\tkzDrawPolygon(A,B,D,C)
+\tkzDrawSegments[draw=steelblue](A,C B,D)
+\tkzMarkSegments[mark=|](A,C B,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\newpage
+\section*{\textcolor{doc}{ΘΕΩΡΗΜΑΤΑ - ΑΠΟΔΕΙΞΕΙΣ}}\mbox{}\\
+\begin{thewrhma}[Ιδιότητες παραλληλογράμμων]
+\begin{enumerate}[itemsep=0mm]
+\item Οι απέναντι πλευρές του είναι ίσες.
+\item Οι απέναντι γωνίες του είναι ίσες.
+\item Οι διαγώνιοι διχοτομούνται.
+\end{enumerate}
+\end{thewrhma}
+\chapter{Εγγεγραμμένα Σχηματα}
+\part{Β' ΛΥΚΕΙΟΥ}
+\chapter{Αναλογίες}
+\chapter{Ομοιότητες}
+\chapter{Μετρικές Σχέσεις}
+\chapter{Εμβαδά}
+\chapter{Μέτρηση Κύκλου}
+\part{ΤΥΠΟΛΟΓΙΟ - ΣΥΜΒΟΥΛΕΣ}
+\backmatter
+\chapter{\scshape{Τυπολογιο}}
+\newcolumntype{C}{>{\centering\arraybackslash} X}
+
+{\par\centering
+
+\begin{tabularx}{\textwidth}{lCC}
+\hline\rule[-2ex]{0pt}{5.5ex}\textcolor{doc}{\textbf{Τύπος}} & \textcolor{doc}{\textbf{Όνομα}} & \textcolor{doc}{\textbf{Σχήμα}}\\
+\hhline{===}\rule[-1ex]{0pt}{5.5ex}
+\Typos & \textbf{Τριγωνική Ανισότητα} & \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){G}
+\tkzDefPoint(1,1){A}
+\tkzDrawPolygon(B,G,A)
+\tkzText[color=steelblue](1.5,-.2){{\footnotesize $ a $}}
+\tkzText[color=steelblue](2.3,.5){{\footnotesize $ \beta $}}
+\tkzText[color=steelblue](.3,.5){{\footnotesize $ \gamma $}}
+\end{tikzpicture}}\\ 
+& $ \beta-\gamma<a<\beta+\gamma$& \\
+&&\\
+\rule[-1ex]{0pt}{5.5ex}
+\Typos & \textbf{Τέμνουσα Ευθεία Κύκλου} & \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(-1.5,-.5){G}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(1.5,-.5){Β}
+\tkzDefPoint(0,-.5){D}
+\tkzDefPoint(0.489,-.5){E}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawSegments(B,G O,D O,E)
+\tkzDrawPoint(O)
+\tkzLabelPoint[above,color=steelblue](O){{\footnotesize O}}
+\tkzText[color=steelblue](-.1,-.25){{\footnotesize $ \delta $}}
+\tkzText[color=steelblue](.4,-.2){{\footnotesize $ R $}}
+\end{tikzpicture}}\\
+& $ \delta<R $ &\\
+\rule[-1ex]{0pt}{8.5ex}\Typos & \textbf{Εφαπτόμενη Ευθεία Κύκλου} & \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(-1.5,-.7){G}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(1.5,-.7){Β}
+\tkzDefPoint(0,-.7){D}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawSegments(B,G O,D)
+\tkzDrawPoint(O)
+\tkzLabelPoint[above,color=steelblue](O){{\footnotesize O}}
+\tkzText[color=steelblue](0.05,-.25){{\footnotesize $\delta\;R $}}
+\end{tikzpicture}} \\
+&$\delta=R$&\\
+\rule[-1ex]{0pt}{8.5ex}\Typos & \textbf{Εξωτερική Ευθεία Κύκλου} & \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(-1.5,-1){G}
+\tkzDefPoint(0,.7){A}
+\tkzDefPoint(1.5,-1){Β}
+\tkzDefPoint(0,-1){D}
+\tkzDefPoint(0.489,-.5){E}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawSegments(B,G O,D O,E)
+\tkzDrawPoint(O)
+\tkzLabelPoint[above,color=steelblue](O){{\footnotesize O}}
+\tkzText[color=steelblue](-.1,-.25){{\footnotesize $ \delta $}}
+\tkzText[color=steelblue](.4,-.2){{\footnotesize $ R $}}
+\end{tikzpicture}}\\
+&$ \delta>R $&\\
+\rule[-1ex]{0pt}{7.5ex}\multirow{2}{*}{\Typos} & \multirow{2}{*}{\textbf{Kύκλοι χωρίς κοινά σημεία}} & \\
+&&\multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(0,-.7){A}
+\tkzDefPoint(0,-.2){Β}
+\tkzDefPoint(2.3,0){K}
+\tkzDefPoint(0,-.6){F}
+\tkzDefPoint(2.3,-.7){E}
+\tkzDefPoint(1.2,-.35){D}
+\tkzDefPoint(1.2,-.7){C}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawCircle(K,E)
+\tkzDrawCircle(B,F)
+\tkzDrawCircle(D,C)
+\tkzDrawPoints(O,B,K,D)
+\tkzDrawSegments(O,A K,D)
+\tkzText[color=steelblue](-.1,-.1){{\tiny $ \delta $}}
+\tkzText[color=steelblue](2,-.3){{\tiny $ \delta $}}
+\end{tikzpicture}}\\
+&$\LEFTRIGHT.\}{
+\begin{aligned}
+& \delta<R-\rho\\
+&  \delta>R+\rho\end{aligned}}\Rightarrow\left|\delta-\rho\right|>R$&\\
+\rule[-1ex]{0pt}{5.5ex}\multirow{2}{*}{\Typos} & \multirow{2}{*}{\textbf{Kύκλοι χωρίς κοινά σημεία}} & \\
+&&\multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(0,-.7){A}
+\tkzDefPoint(0,-.2){Β}
+\tkzDefPoint(2.3,0){K}
+\tkzDefPoint(2.3,-.7){E}
+\tkzDefPoint(1.3,-.35){D}
+\tkzDefPoint(1.3,-.7){C}
+\tkzDrawCircle(Ο,Α)
+\tkzDrawCircle(K,E)
+\tkzDrawCircle(B,A)
+\tkzDrawCircle(D,C)
+\tkzDrawPoints(O,B,K,D)
+\tkzDrawSegments(O,A K,D)
+\tkzText[color=steelblue](-.1,-.1){{\tiny $ \delta $}}
+\tkzText[color=steelblue](2,-.3){{\tiny $ \delta $}}
+\end{tikzpicture}}\\
+&$\LEFTRIGHT.\}{
+\begin{aligned}
+& \delta=R-\rho\\
+&  \delta=R+\rho\end{aligned}}\Rightarrow\left|\delta-\rho\right|=R$&\\
+\rule[-1ex]{0pt}{7.5ex}\multirow{2}{*}{\Typos} & \multirow{2}{*}{\textbf{Τεμνόμενοι Kύκλοι}} & \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){Ο}
+\tkzDefPoint(1,0){A}
+\tkzDefPoint(.7,-.3){Β}
+\tkzDrawCircle(Ο,B)
+\tkzDrawCircle(A,B)
+\tkzDrawSegment(O,A)
+\tkzDrawPoints(O,A)
+\tkzText[color=steelblue](.5,-.2){{\tiny $ \delta $}}\end{tikzpicture}} \\
+\rule[-1ex]{0pt}{3.5ex} & $R-\rho<\delta<R+\rho\Rightarrow\left|\delta-\rho\right|<R$ &\\
+&&\\&&\\
+\hline
+\end{tabularx}
+\par}
+\newpage
+\noindent
+{\par\centering
+
+\begin{tabularx}{\textwidth}{lCC}
+\hline\rule[-2ex]{0pt}{5.5ex}\textcolor{doc}{\textbf{Τύπος}} & \textcolor{doc}{\textbf{Όνομα}} & \textcolor{doc}{\textbf{Σχήμα}}\\
+\hhline{===}\rule[-1ex]{0pt}{5.5ex}
+\Typos & \textbf{Άθροισμα Γωνιών Τριγώνου} & \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){G}
+\tkzDefPoint(1,1){A}
+\tkzDrawPolygon(B,G,A)
+\tkzLabelPoint[above,color=steelblue](A){A}
+\tkzLabelPoint[left,color=steelblue](B){B}
+\tkzLabelPoint[right,color=steelblue](G){Γ}
+\tkzMarkAngle[fill=steelblue,%
+size=0.3,   
+opacity=0.4](B,A,G)
+\tkzMarkAngle[fill=steelblue,%
+size=0.5,   
+opacity=0.4](A,G,B)
+\tkzMarkAngle[fill=steelblue,%
+size=0.4,   
+opacity=0.4](G,B,A)
+\end{tikzpicture}}\\
+&$ \hat{A}+\hat{B}+\hat{\varGamma}=180\degree $&\\
+\rule[-1ex]{0pt}{8.5ex}\Typos & \textbf{Άθροισμα Γωνιών Κυρτού ν-γωνου}&\multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.5){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1,-1){D}
+\tkzDefPoint(2,-.7){E}
+\tkzDefPoint(2.5,-.3){F}
+\tkzDefPoint(2.3,.4){G}
+\tkzDefPoint(1.7,.7){H}
+\tkzDrawSegments(A,B B,C C,D D,E E,F F,G H,A)
+\tkzDrawSegment[dashed](G,H)
+\tkzLabelPoint[above,color=steelblue](A){$ A_{1} $}
+\tkzLabelPoint[left,color=steelblue](B){$ A_{2} $}
+\tkzLabelPoint[left,color=steelblue](C){$ A_{3} $}
+\tkzLabelPoint[below,color=steelblue](D){$ A_{4} $}
+\tkzLabelPoint[below,color=steelblue](E){$ A_{5} $}
+\tkzLabelPoint[right,color=steelblue](F){$ A_{6} $}
+\tkzLabelPoint[right,color=steelblue](G){$ A_{7} $}
+\tkzLabelPoint[above,color=steelblue](H){$ A_{n} $}
+\tkzMarkAngle[draw=steelblue,%
+size=0.2](B,A,H)
+\tkzMarkAngle[draw=steelblue,%
+size=0.2](C,B,A)
+\tkzMarkAngle[draw=steelblue,%
+size=0.2](D,C,B)
+\tkzMarkAngle[draw=steelblue,%
+size=0.2](E,D,C)
+\tkzMarkAngle[draw=steelblue,%
+size=0.2](F,E,D)
+\tkzMarkAngle[draw=steelblue,%
+size=0.2](G,F,E)
+\end{tikzpicture}}\\
+& $ \hat{A}_{1}+\hat{A}_{2}+\ldots+ \hat{A}_{\nu}=(2\nu-4)$ ορθές&\\
+&&\\
+\rule[-1ex]{0pt}{8.5ex}\Typos & \textbf{Άθροισμα Εξωτερικών Γωνιών Κυρτού ν-γωνου}& \multirow{2}{*}{\begin{tikzpicture}
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.5){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1,-1){D}
+\tkzDefPoint(2,-.7){E}
+\tkzDefPoint(1.7,.7){H}
+\tkzDefPoint(.2,.7){K}
+\tkzDefPoint(-.35,-.05){L}
+\tkzDefPoint(0,-.9){M}
+\tkzDefPoint(1,.7){N}
+\tkzDrawSegments(H,K A,L B,M C,D H,A)
+\tkzDrawSegment[dashed](D,E)
+\tkzLabelPoint[above,color=steelblue](A){$ A_{1} $}
+\tkzLabelPoint[above left,color=steelblue](B){$ A_{2} $}
+\tkzLabelPoint[left,color=steelblue](C){$ A_{3} $}
+\tkzLabelPoint[below,color=steelblue](D){$ A_{4} $}
+\tkzLabelPoint[below,color=steelblue](E){$ A_{5} $}
+\tkzLabelPoint[above,color=steelblue](H){$ A_{\nu} $}
+\tkzMarkAngle[draw=steelblue,%
+size=3mm](K,A,B)
+\tkzMarkAngle[draw=steelblue,%
+size=3mm](M,C,D)
+\tkzMarkAngle[draw=steelblue,%
+size=3mm](L,B,C)
+\end{tikzpicture}}\\
+&$\hat{A}_{1\varepsilon\xi}+\hat{A}_{2\varepsilon\xi}+\ldots+ \hat{A}_{\nu\varepsilon\xi}=4$ ορθές&\\
+\end{tabularx}
+\newpage
+\noindent
+
+\par}
+\chapter{\scshape{Συμβουλές}}
+\end{document}

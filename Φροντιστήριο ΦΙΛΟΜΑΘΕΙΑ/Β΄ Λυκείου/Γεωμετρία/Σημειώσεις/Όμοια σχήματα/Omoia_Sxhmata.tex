@@ -1,0 +1,152 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\setlist[itemize]{itemsep=0mm}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Ομοιότητα}{Όμοια ευθύγραμμα σχήματα}
+\orismoi
+\Orismos{Όμοια ευθύγραμμα σχήματα}
+Όμοια ονομάζονται τα ευθύγραμμα σχήματα τα οποία έχουν τις πλευρές τους ανάλογες και τις αντίστοιχες γωνίες μια προς μια ίσες.
+\begin{itemize}
+\item Οι πλευρές που βρίσκονται απέναντι από ίσες γωνίες ονομάζονται \textbf{ομόλογες}.
+\item Ο λόγος δύο ομόλογων πλευρών δύο όμοιων σχημάτων ονομάζεται \textbf{λόγος ομοιότητας}. Συμβολίζεται $ \lambda $.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Λόγος περιμέτρων}
+Ο λόγος των περιμέτρων δύο όμοιων σχημάτων ισούται με το λόγο ομοιότητας.
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (70:1.2);
+\coordinate (B) at (145:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (235:1.2);
+\coordinate (E) at (280:1.2);
+\coordinate (F) at (335:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[below right](F){$Z$}
+\tkzLabelPoint[right](G){$H$}
+\tkzDrawPoints(A,B,C,D,E,F,G)
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.8]
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (70:1.2);
+\coordinate (B) at (145:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (235:1.2);
+\coordinate (E) at (280:1.2);
+\coordinate (F) at (335:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzLabelPoint[above](A){$A'$}
+\tkzLabelPoint[above left](B){$B'$}
+\tkzLabelPoint[left](C){$\varGamma'$}
+\tkzLabelPoint[below left](D){$\varDelta'$}
+\tkzLabelPoint[below](E){$E'$}
+\tkzLabelPoint[below right](F){$Z'$}
+\tkzLabelPoint[right](G){$H'$}
+\tkzDrawPoints(A,B,C,D,E,F,G)
+\node at (5.7,0) {$ \dfrac{AB}{A'B'}=\dfrac{B\varGamma}{B'\varGamma'}=\ldots=\lambda $};
+\end{tikzpicture}
+\end{center}
+\end{document}

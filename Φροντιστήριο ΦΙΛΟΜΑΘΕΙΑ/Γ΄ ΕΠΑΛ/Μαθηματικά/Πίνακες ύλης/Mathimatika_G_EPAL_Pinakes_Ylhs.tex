@@ -1,0 +1,1050 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\OnPar="Century Gothic Bold" at 10pt
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[most]{tcolorbox}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\let\Bbbk\relax
+\usepackage{enumitem,amssymb,longtable}
+\usepackage{lipsum}
+\let\Bbbk\relax
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=\Large$\square$}
+
+
+\newtcolorbox{mybox}[2][]{colback=white,
+colframe=red!75!black,fonttitle=\Large\bfseries,
+colbacktitle=red!20!white,coltitle=black,enhanced,breakable,sharp corners,boxrule=0.3mm,center title,boxsep=3mm,top=1mm,subtitle style={fonttitle=\normalsize\bfseries},
+title=#2,#1}
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.2pt}
+\tcbset{mysubtitle/.style={subtitle style={fontupper={\OnPar\color{black}},top=0pt,colback={white},boxrule=1pt},top=0pt}}
+\newcommand{\ml}[1]{\setlength{\columnseprule}{#1pt}}
+\newtcolorbox{myleftbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-3mm,left=5mm,left skip=0mm,colbacktitle=white,colback=white,#1,sharp corners,grow to left by=0.68cm,titlerule=0.2mm,fonttitle=\OnPar}
+
+\newtcolorbox{myrightbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-2mm,left skip=6mm,colbacktitle=white,colback=white,#1,leftrule=0.2mm,sharp corners,right skip=0mm,titlerule=0.2mm,fonttitle=\OnPar}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{
+  \color{lightgray}{}
+  }
+\fancyhead[R]{
+ \color{gray} Μαθηματικά Γ΄ ΕΠΑΛ\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage
+  }
+  \fancyhead[L]{
+ \color{gray}\thesection\ $ \cdot $\ \leftmark
+  }
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\leftmark\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage}%
+  }
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\myitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faExclamationTriangle}\ \Large$\square$]}
+
+\newlist{arithmisi}{enumerate}{2}
+\setlist[arithmisi]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\textit{{\Large{\thesection}}.\arabic*}}}}
+
+\setlist[itemize]{itemsep=0mm}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\makeatletter
+\usetikzlibrary{patterns}
+\tikzstyle{chart}=[
+legend label/.style={font={\scriptsize},anchor=west,align=left},
+legend box/.style={rectangle, draw, minimum size=5pt},
+axis/.style={black,semithick,->},
+axis label/.style={anchor=east,font={\tiny}},
+]
+
+\tikzstyle{bar chart}=[
+chart,
+bar width/.code={
+\pgfmathparse{##1/2}
+\global\let\bar@w\pgfmathresult
+},
+bar/.style={very thick, draw=white},
+bar label/.style={font={\bf\small},anchor=north},
+bar value/.style={font={\footnotesize}},
+bar width=.75,
+]
+
+\tikzstyle{pie chart}=[
+chart,
+slice/.style={line cap=round, line join=round,thick,draw=white},
+pie title/.style={font={\bf}},
+slice type/.style 2 args={
+##1/.style={fill=##2},
+values of ##1/.style={}
+}
+]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\newcommand{\pie}[3][]{
+\begin{scope}[#1]
+\pgfmathsetmacro{\curA}{90}
+\pgfmathsetmacro{\r}{1}
+\def\c{(0,0)}
+\node[pie title] at (90:1.3) {#2};
+\foreach \v/\s/\l in{#3}{
+\pgfmathsetmacro{\deltaA}{\v/100*360}
+\pgfmathsetmacro{\nextA}{\curA + \deltaA}
+\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+
+\path[slice,\s] \c
+-- +(\curA:\r)
+arc (\curA:\nextA:\r)
+-- cycle;
+\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+
+\begin{pgfonlayer}{foreground}
+\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
+\end{pgfonlayer}
+
+\global\let\curA\nextA
+}
+\end{scope}
+}
+
+\newcommand{\legend}[2][]{
+\begin{scope}[#1]
+\path
+\foreach \n/\s in {#2}
+{
+++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
+}
+;
+\end{scope}
+}
+\definecolor{a}{cmyk}{0,1,1,0.05}
+\definecolor{b}{cmyk}{0,.8,.8,.15}
+\definecolor{c}{cmyk}{0,.8,.8,.0}
+\definecolor{d}{cmyk}{0,.7,.7,0}
+\definecolor{e}{cmyk}{0,.5,.5,0}
+
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\newcommand{\shmeio}[2]{
+\foreach \a in {1,...,#2}{
+\node[dot] at (#1+.5,\a/2-.2){};}}
+
+\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt 
+}
+\makeatother
+
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\begin{document}
+\section{Η έννοια της συνάρτησης}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Συνάρτηση
+\item Πεδίο ορισμού
+\item Σύνολο τιμών
+\item Τιμή της $ f $ στο $x_0$.
+\item Γραφική παράσταση συνάρτησης.
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Σημείο ανήκει στη $C_f$
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση πεδίου ορισμού.
+\item Εύρεση τιμής συνάρτησης.
+\item Λύση εξίσωσης - Ανίσωσης που περιέχει την $f(x)$.
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Συνάρτηση $f:D_f\to \mathbb{R}$
+\item Πεδίο ορισμού: $D_f$
+\item Σύνολο τιμών: $f(D_f)$
+\item Τιμή της $f$ στο $x$: $f(x)$.
+\item Γραφική παράσταση συνάρτησης: \[C_f=\{(x,y):y=f(x)\ \textrm{για κάθε}\ x\in D_f\} \]
+\item Σημείο που ανήκει στη $C_f$: $M(x,f(x))$.
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\orismoi
+\begin{arithmisi}
+\item\textbf{Συνάρτηση}\\
+
+\end{arithmisi}
+\thewrhmata
+\begin{arithmisi}
+\item\textbf{Όνομα}\\
+Περιγραφή
+\end{arithmisi}
+\methodologia
+\begin{arithmisi}
+\item\textbf{Εύρεση πεδίου ορισμού συνάρτησης}
+\begin{bhma}
+\item Θέτω τους απαραίτητους περιορισμούς και λύνω την εξίσωση ή ανίσωση προκύπτει.
+\item Γράφω τις λύσεις ως σύνολο.
+\end{bhma}
+\item\textbf{Εύρεση τιμής συνάρτησης}\\
+Θέτω όπου $x=x_0$ στον τύπο της συνάρτησης και κάνω πράξεις.
+\item\textbf{Λύση εξίσωσης - ανίσωσης που περιέχει την $f(x)$}
+\begin{bhma}
+\item Θέτω στη θέση της $f(x)$ τον τύπο της συνάρτησης και λύνω την εξίσωση - ανίσωση.
+\item Δέχομαι μόνο τις λύσεις που βρίσκονται μέσα στο πεδίο ορισμού.
+\end{bhma}
+\item\textbf{Σημείο ανήκει στη γραφική παράσταση}
+\begin{itemize}[leftmargin=4mm]
+ \item Αν θέλω να εξετάσω αν ένα σημείο $M(a,\beta)$ ανήκει στη γραφική παράσταση μιας συνάρτησης $f$ τότε θέτω όπου $x=a$ και ελέγχω αν $f(a)=\beta$.
+ \item Αν γνωρίζω ότι ένα σημείο $M(a,\beta)$ ανήκει στη ανήκει στη γραφική παράσταση μιας συνάρτησης $f$ τότε βάζω όπου $x=a$ και $f(x)=\beta$.
+\end{itemize}
+\end{arithmisi}
+
+ \begin{center}
+ \textbf{ΠΕΔΙΑ ΟΡΙΣΜΟΥ ΒΑΣΙΚΩΝ ΣΥΝΑΡΤΗΣΕΩΝ}
+\begin{longtable}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Είδος} & \textbf{Τύπος} & \textbf{Πεδίο Ορισμού} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Πολυωνυμική} & $ f(x)=a_\nu x^\nu+\ldots+a_1x+a_0 $ & $ A=\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρητή} & $ f(x)=\dfrac{P(x)}{Q(x)} $ & $ A=\left\lbrace\left.  x\in\mathbb{R}\right| Q(x)\neq0\right\rbrace $  \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Άρρητη} & $ f(x)=\sqrt{A(x)} $ & $ A=\left\lbrace\left. x\in\mathbb{R}\right| A(x)\geq0\right\rbrace $ \\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{5}{*}{\textbf{Τριγωνομετρική}} & $ f(x)=\hm{x}\;\;,\;\;\syn{x} $ & $ A=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\ef{x} $ & $ A=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi+\frac{\pi}{2}\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\syf{x} $ & $ A=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\hline 
+\end{longtable}
+\end{center}
+\newpage
+\section{Όριο - Συνέχεια συνάρτησης}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Όριο συνάρτησης σε σημείο
+\item Συνεχής συνάρτηση σε σημείο
+\item Συνεχής συνάρτηση σε όλο το πεδίο ορισμού
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Όρια βασικών συναρτήσεων
+\item Ιδιότητες ορίων
+\item Συνέχεια βασικών συναρτήσεων
+\item Πράξεις και συνέχεια συναρτήσεων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item Όριο συνάρτησης σε σημείο
+\myitem Όριο $ \frac{0}{0} $ με ρητή συνάρτηση.
+\myitem Όριο $ \frac{0}{0} $ με ρίζες.
+\myitem Συνέχεια συνάρτησης σε σημείο.
+\myitem Συνέχεια συνάρτησης σε όλο το πεδίο ορισμού.
+\item Εύρεση παραμέτρων.
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Όριο στο $ x_0 $: $ \lim\limits_{x\to x_0}{f(x)}=f(x_0) $
+\item Συνεχής στο $ x_0 $: $ \lim\limits_{x\to x_0}{f(x)}=f(x_0) $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\orismoi
+\begin{arithmisi}
+\item\textbf{Συνεχής συνάρτηση σε σημείο}\\
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν το όριο της στο $ x_0 $ είναι ίσο με την τιμή της στο σημείο αυτό. Δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+Μια συνάρτηση $ f $ θα λέμε ότι είναι \textbf{συνεχής} εάν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.
+\end{arithmisi}
+\thewrhmata
+\begin{arithmisi}
+\item\textbf{Όνομα}\\
+Περιγραφή
+\end{arithmisi}
+\methodologia
+\begin{arithmisi}
+\item\textbf{Συνέχεια συνάρτησης σε σημείο $ x_0 $}
+\begin{bhma}
+\item Υπολογίζουμε το όριο $ \lim\limits_{x\to x_0}{f(x)} $ και την τιμή $ f(x_0) $.
+\item Αν είναι ίσα μεταξύ τους απαντάμε ότι η $ f $ είναι συνεχής στο σημείο $ x_0 $.
+\end{bhma}
+\item\textbf{Συνέχεια συνάρτησης σε όλο το πεδίο ορισμού με δίκλαδη συνάρτηση}
+\begin{bhma}
+\item Αναφέρουμε για ποιο λόγο είναι η $ f $ συνεχής στα σημεία $ x\neq x_0 $.
+\item Εξετάζουμε αν η $ f $ είναι συνεχής στο $ x_0 $.
+\end{bhma}
+\end{arithmisi}
+\newpage
+\section{Η έννοια της παραγώγου}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Παράγωγος συνάρτησης σε σημείο
+\item Γεωμετρική ερμηνεία παραγώγου
+\item Παράγωγος συνάρτηση
+\item Παράγωγοι ανώτερης τάξης
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Παράγωγοι βασικών συναρτήσεων
+\item Κανόνες παραγώγισης
+\item Παραγώγιση σύνθετων συναρτήσεων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item Παράγωγος συνάρτησης σε σημείο
+\myitem Παράγωγος βασικών συναρτήσεων
+\item Παράγωγος δίκλαδων συναρτήσεων
+\myitem Παράγωγος σύνθετων συναρτήσεων
+\item Εύρεση παραμέτρων
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Παράγωγος στο $ x_0 $:\\\\ $ f'(x_0)=\lim\limits_{h\to 0}{\dfrac{f(x_0+h)-f(x_0)}{h}} $
+\item Γεωμετρική ερμηνεία παραγώγου:
+\[ f'(x_0)=\ef{\omega} \]
+\item Παράγωγος συνάρτηση: $ f'(x) $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\orismoi
+\begin{arithmisi}
+\item\textbf{Παράγωγος συνάρτησης σε σημείο}\\
+Παράγωγος μιας συνάρτησης $ f $ στο σημείο $ x_0\in A $ του πεδίου ορισμού της, ονομάζεται το όριο \[ \lim_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h} \]
+Συμβολίζεται με $ f'(x_0) $ και θα λέμε οτι η $ f $ είναι \textbf{παραγωγίσιμη} στο $ x_0 $ αν το όριο της παραγώγου υπάρχει και είναι πραγματικός αριθμός.\\
+Έχουμε δηλαδή \[ f'(x_0)=\lim_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h} \]
+\item\textbf{Γεωμετρική Ερμηνεία Παραγώγου}\\
+Η παράγωγος μιας συνάρτησης $ f:A\rightarrow\mathbb{R} $ σε ένα σημείο $ x_0\in A $ παριστάνει το \textbf{συντελεστή διεύθυνσης} της εφαπτόμενης ευθείας στο σημείο επαφής $ Μ_0(x_0,f(x_0)) $.
+\[ \lambda=f'(x_0)=\lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0}=\ef{\varphi} \]
+Ισούται με την εφαπτομένη της γωνίας $ \varphi $ που σχηματίζει η εφαπτόμενη ευθεία $ \varepsilon $ με τον άξονα $ x'x $.
+\vspace{-3mm}
+\begin{center}
+\begin{tikzpicture}[domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[fill=\xrwma!10] (.5,1.3) -- (.8,1.3) arc (0:60:3mm) -- cycle;
+\draw[plm,\xrwma] plot function{log(x)+2};
+\tkzDefPoint(4,3.38){A}
+\draw[dashed] (0,3.38) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (4,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzDefPoint(.5,1.3){B}
+\draw[dashed] (0,1.3) node[anchor=east]{{\scriptsize $ f(x_0) $}}  -- (B) -- (.5,0) node[anchor=north] {{\scriptsize $ x_0 $}};
+\tkzLabelPoint[above](A){{\footnotesize $ M $}}
+\tkzLabelPoint[below right](B){{\footnotesize $ M_0 $}}
+\tkzText(2.3,.5){$ \lambda=f'(x_0)=\textrm{εφ}\varphi $}
+\tkzDrawLine(A,B)
+\draw[domain=0:2,samples=100] plot function{2*x+.3};
+\draw[dashed] (-.1,1.3) -- (5,1.3);
+\tkzText[fill=white,inner sep=0.4mm](1.1,1.53){{\footnotesize $ \varphi $}}
+\tkzText(2,4){{\footnotesize $ \varepsilon $}}
+\draw[-latex,opacity=.5,line width=.4mm] (4,0) -- (3,0);
+\draw[-latex,opacity=.5,line width=.4mm] (0,3.38) -- (0,2.5);
+\draw[-latex] (.5,1.3) ++(30.7:1.4) arc (30.7:63.43:1.4);
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDrawPoints[size=7,fill=black](A,B)
+\end{tikzpicture}
+\end{center}
+\item\textbf{Παράγωγος συνάρτηση}\\
+Η συνάρτηση με την οποία κάθε τιμή $ x_0\in A $ μιας μεταβλητής $ x $ αντιστοιχεί στην παράγωγο $ f'(x_0) $ στο σημείο $ x_0 $, μιας συνάρτησης $ f $, ονομάζεται \textbf{παράγωγος συνάρτηση} της συνάρτησης $ f $. Συμβολίζεται με $ f' $ και η τιμή της $ f'(x) $ στο $ x $ ισούται με 
+\[ f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\ \ ,\ x\in D_{f'}\subset D_f \]
+\begin{itemize}[itemsep=0mm]
+\item Το σύνολο $ D_{f'} $ είναι το υποσύνολο του πεδίου ορισμού $ D_f $ της συνάρτησης $ f $ στο οποίο είναι παραγωγίσιμη.
+\item Η παράγωγος της $ f $ λέγεται \textbf{πρώτη παράγωγος} της.
+\item Η παράγωγος της πρώτης παραγώγου $ f' $ ονομάζεται \textbf{δεύτερη παράγωγος} και συμβολίζεται $ f'' $.
+\item Ομοίως η παράγωγος της $ f'' $ λέγεται \textbf{τρίτη παράγωγος} και συμβολίζεται $ f''' $.
+\item Η διαδικασία εύρεσης της παραγώγου μιας συνάρτησης ονομάζεται \textbf{παραγώγιση}.
+\item Ο αριθμός που μας δίνει το πλήθος των παραγωγίσεων ονομάζεται \textbf{τάξη} της παραγώγου.
+\item Οι παράγωγοι τάξης μεγαλύτερης του $ 3 $ συμβολίζονται $ f^{[\nu]} $ όπου $ \nu>3 $ είναι η τάξη της παραγώγου.
+\end{itemize}
+\end{arithmisi}
+\thewrhmata
+\begin{arithmisi}
+\item\textbf{Όνομα}\\
+Περιγραφή
+\end{arithmisi}
+\methodologia
+\begin{arithmisi}
+\item\textbf{Παράγωγος συνάρτησης σε σημείο $ x_0 $}
+\begin{bhma}
+\item Υπολογίζουμε τις τιμές $f(x_0+h)$ και $f(x_0)$.
+\item Αντικαθιστούμε τις τιμές αυτές στο όριο της παραγώγου και υπολογίζουμε.
+\end{bhma}
+\item\textbf{Παράγωγος συνάρτησης}\\
+Εφαρμόζουμε τους τύπους παραγώγισης βασικών συναρτήσεων (πίνακας) σε συνδυασμό με τους κανόνες παραγώγισης για τις πράξεις.
+\end{arithmisi}
+\begin{center}
+\textbf{ΠΙΝΑΚΑΣ ΠΑΡΑΓΩΓΩΝ ΒΑΣΙΚΩΝ ΣΥΝΑΡΤΗΣΕΩΝ}
+\begin{longtable}{cc|cc}
+\hline  \multicolumn{2}{c|}{\textbf{ΑΠΛΕΣ}} & \multicolumn{2}{c}{\textbf{ΣΥΝΘΕΤΕΣ}} \rule[-2ex]{0pt}{5.5ex} \\ 
+\hline \rule[-2ex]{0pt}{5.5ex} Συνάρτηση $ f $& Παράγωγος $ f' $ & Συνάρτηση $ g\circ f $ & Παράγωγος $ \left( g\circ f \right)' $ \\ 
+\hhline{====} \rule[-2ex]{0pt}{5.5ex} $ c $ & $ 0 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x $ & $ 1 $ &  &  \\ 
+\rule[-2ex]{0pt}{5ex} $ x^\nu $ & $ \nu x^{\nu-1} $ & $ f^\nu(x) $ & $ \nu f^{\nu-1}(x)\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \dfrac{1}{x} $ & $ -\dfrac{1}{x^2} $ & $ \dfrac{1}{f(x)} $ & $ -\dfrac{f'(x)}{f^2(x)} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \sqrt{x} $ & $ \dfrac{1}{2\!\sqrt{x}} $ & $ \sqrt{f(x)} $ & $ \dfrac{f'(x)}{2\!\sqrt{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \hm{x} $ & $ \syn{x} $ & $ \hm{f(x)} $ & $ \syn{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \syn{x} $ & $ -\hm{x} $ & $ \syn{f(x)} $ & $ -\hm{f(x)}\cdot f'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} $ \ef{x} $ & $ \dfrac{1}{\syn^2{x}} $ & $ \ef{f(x)} $ & $ \dfrac{f'(x)}{\syn^2{f(x)}} $ \\ 
+\rule[-2ex]{0pt}{7ex} $ \syf{x} $ & $ -\dfrac{1}{\hm^2{x}} $ & $ \syf{f(x)} $ & $ -\dfrac{f'(x)}{\hm^2{f(x)}} $ \\ 
+\hline 
+\end{longtable}
+\end{center}
+\begin{center}
+\vspace{5mm}
+\textbf{ΚΑΝΟΝΕΣ ΠΑΡΑΓΩΓΙΣΗΣ}\\
+\vspace{5mm}
+\begin{tabular}{ccc}
+\hline 
+\rule[-2ex]{0pt}{5ex} \textbf{Πράξη} & \textbf{Συνάρτηση} & \textbf{Παράγωγος} \\ 
+\hhline{===}
+\rule[-2ex]{0pt}{5ex} \textbf{Άθροισμα - Διαφορά} & $ f(x)\pm g(x) $ & $ f'(x)\pm g'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Πολλαπλάσιο} & $ c\cdot f(x) $ & $ c\cdot f'(x) $ \\  
+\rule[-2ex]{0pt}{5ex} \textbf{Γινόμενο} & $ f(x)\cdot g(x) $ & $ f'(x)\cdot g(x)+f(x)\cdot g'(x) $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Πηλίκο} & $ \dfrac{f(x)}{g(x)} $ & $ \dfrac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g^2(x)} $ \\  
+\rule[-2ex]{0pt}{5ex} \textbf{Σύνθεση} & $ f(g(x)) $ & $ f'(g(x))\cdot g'(x) $ \\ 
+\hline 
+\end{tabular}  
+\end{center}
+\newpage
+\section{Εφαπτομένη γραφικής παράστασης}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Εξίσωση εφαπτομένης
+\item Συντελεστής διεύθυνσης
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση εφαπτομένης όταν γνωρίζουμε το σημείο επαφής.
+\item Εύρεση εφαπτομένης όταν γνωρίζουμε το συντελεστή διεύθυνσης.
+\item Εύρεση εφαπτομένης που διέρχεται από εξωτερικό σημείο της $ C_f $.
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Εξίσωση εφαπτομένης: $ y=\lambda x+\beta $.
+\item Συντελεστής διεύθυνσης: $ \lambda=f'(x_0) $ όπου $ M(x_0,y_0) $ το σημείο επαφής.
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\thewrhmata
+ 
+\begin{arithmisi}
+\item\textbf{Εφαπτόμενη ευθεία}
+Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ η οποία είναι παραγωγίσιμη και $ x_0\in A $ ένα σημείο του πεδίου ορισμού της. Η εξίσωση της εφαπτόμενης ευθείας στο σημείο $ A(x_0,f(x_0)) $ δίνεται από τον τύπο
+\[ y=f'(x_0)x+\beta \]
+\end{arithmisi}
+\newpage
+\section{Ρυθμός μεταβολής}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Ρυθμός μεταβολής
+\end{enumerate}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση ρυθμού μεταβολής ενός ποσού.
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item 
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\orismoi
+\begin{arithmisi}
+\item\textbf{Ρυθμός μεταβολής}\\
+Ρυθμός μεταβολής μιας ποσότητας $ f(x) $ ως προς $ x $ σε μια συγκεκριμένη θέση $ x=x_0 $ ονομάζεται η παράγωγος $ f'(x_0) $ της ποσότητας αυτής στο $ x_0 $.
+\begin{itemize}
+\item Ο ρυθμός μεταβολής της ποσότητας $ f $ σε κάθε θέση είναι η ποσότητα $ f'(x) \ ,\ x\in A $.
+\item Ο ρυθμός μεταβολής της απόστασης $ s(t) $ ως προς το χρόνο $ t $, ενός αντικειμένου είναι η ταχύτητά του: $ x'(t)=v(t) $.
+\item Ο ρυθμός μεταβολής της ταχύτητας $ v(t) $ ως προς το χρόνο $ t $, ενός αντικειμένου είναι η επιτάχυνσή του: $ v'(t)=a(t) $. Επίσης η επιτάχυνση του αντικειμένου ισούται και με τη δεύτερη παράγωγο της απόστασης: $ a(t)=x''(t) $.
+\item Αν ο ρυθμός μεταβολής ενός ποσού $ f(x) $ σε κάποια θέση $ x_0 $ είναι θετικός τότε το ποσό αυτό \textbf{αυξάνεται}. Εάν ο ρυθμός είναι αρνητικός το ποσό \textbf{μειώνεται}.
+\end{itemize}
+\end{arithmisi}
+\newpage
+\section{Μονοτονία - Ακρότατα}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Κριτήριο 1\tss{ης} παραγώγου
+\item Κριτήριο τοπικών ακρότατων
+\end{enumerate}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση μονοτονίας συνάρτησης
+\myitem Εύρεση ακρότατων συνάρτησης
+\item Εύρεση παραμέτρων
+\item Απόδειξη ανισότητας με χρήση μονοτονίας
+\item Απόδειξη ανισότητας με τη βοήθεια ακρότατων
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item $ f'(x)>0\Rightarrow f\Auxousa\varDelta $
+\item $ f'(x)<0\Rightarrow f\Fthinousa\varDelta $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\thewrhmata
+\begin{arithmisi}
+\item\textbf{Κριτήριο 1\tss{ης} παραγώγου}\\
+Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ η οποία είναι παραγωγίσιμη.
+\begin{rlist}
+\item Αν ισχύει $ f'(x)>0 $ για κάθε $ x\in\varDelta $ τότε η συνάρτηση είναι γνησίως αύξουσα στο διάστημα $ \varDelta $.
+\item Αν ισχύει $ f'(x)<0 $ για κάθε $ x\in\varDelta $ τότε η συνάρτηση είναι γνησίως φθίνουσα στο διάστημα $ \varDelta $.
+\end{rlist}
+\item\textbf{Κριτήριο τοπικών ακρότατων}\\
+Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ η οποία είναι παραγωγίσιμη και $ x_0 $ ένα εσωτερικό σημείο του διαστήματος.
+\begin{rlist}
+\item Αν ισχύουν οι σχέσεις 
+\begin{itemize}[leftmargin=4mm]
+\item $ f'(x_0)=0 $
+\item $ f'(x)>0 $ για κάθε $ x<x_0 $ και 
+\item $ f'(x)<0 $ για κάθε $ x>x_0 $
+\end{itemize}
+τότε η συνάρτηση παρουσιάζει \textbf{τοπικό μέγιστο} στο σημείο $ x_0 $.
+\item Αν ισχύουν οι σχέσεις
+\begin{itemize}[leftmargin=4mm]
+\item $ f'(x_0)=0 $
+\item $ f'(x)<0 $ για κάθε $ x<x_0 $ και 
+\item $ f'(x)>0 $ για κάθε $ x>x_0 $
+\end{itemize}
+τότε η συνάρτηση παρουσιάζει \textbf{τοπικό ελάχιστο} στο σημείο $ x_0 $.
+\end{rlist}
+\end{arithmisi}
+\methodologia
+\begin{arithmisi}
+\item\textbf{Εύρεση μονοτονίας}
+\begin{bhma}
+\item Υπολογίζουμε την $ f'(x) $.
+\item Λύνουμε την εξίσωση $ f'(x)=0 $.
+\item Σχηματίζουμε πίνακα προσήμων της $ f' $ και μονοτονίας της $ f $.
+\item Απαντάμε γράφοντας τα διαστήματα μονοτονίας.
+\end{bhma}
+\item\textbf{Εύρεση ακρότατων}
+\begin{bhma}
+\item Ακολουθούμε όλα τα βήματα ώστε να φτιάξουμε πίνακα μονοτονίας της $ f $.
+\item Στα σημεία που αλλάζει η μονοτονία της $ f $ απαντάμε τι ακρότατο παρουσιάζει (μέγιστο ή ελάχιστο) και σε ποια θέση.
+\end{bhma}
+\item\textbf{Απόδειξη ανισότητας με τη βοήθεια μονοτονίας}
+\item\textbf{Απόδειξη ανισότητας με τη χρήση ακρότατων}
+\end{arithmisi}
+\newpage
+\section{Βασικές έννοιες στατιστικής}
+\orismoi
+\begin{arithmisi}
+\item \textbf{Πληθυσμός}\\
+Πληθυσμός ονομάζεται ένα σύνολο όμοιων στοιχείων τα οποια εξετάζονται ως προς ένα ή περισσότερα χαρακτηριστικά. Το πλήθος των στοιχείων ενός πληθυσμού ονομάζεται \textbf{μέγεθος} του πληθυσμού.
+\item\textbf{Δείγμα}\\
+Δείγμα ονομάζεται ένα υποσύνολο ενός πληθυσμού. \begin{itemize}
+\item Ένα δείγμα λέγεται \textbf{αντιπροσωπευτικό} ενός πληθυσμού όταν τα συμπεράσματα που προκύπτουν από τη μελέτη του είναι αρκετά αξιόπιστα ώστε να μπορούν να γενικευτούν για ολόκληρο τον πληθυσμό.
+\item Το πλήθος των στοιχείων ενός δείγματος ονομάζεται \textbf{μέγεθος} του δείγματος.
+\end{itemize}
+\item\textbf{Μεταβλητή - Είδη μεταβλητών}\\
+Μεταβλητή ονομάζεται το χαρακτηριστικό ως προς το οποίο εξετάζονται τα στοιχεία ενός πληθυσμού. 
+\begin{itemize}
+\item Συμβολίζεται με οποιοδήποτε κεφαλαίο γράμμα : $ X,Y,A,B,\ldots $
+\item Οι τιμές οι οποίες μπορεί να πάρει μια μεταβλητή ονομάζονται \textbf{τιμές της μεταβλητής}. Συμβολίζονται με το ίδιο μικρό γράμμα του ονόματος της μεταβλητής π.χ. $ x_i,y_i\ldots $ όπου ο δείκτης $ i $ φανερώνει τον αύξοντα αριθμό της τιμής.
+\item Τα στατιστικά δεδομένα που συλλέγονται από ένα πληθυσμό ή δείγμα που εξετάζεται ως προς κάποια μεταβλητή ονομάζονται \textbf{παρατηρήσεις}. Συμβολίζονται με $ t_i $ όπου ο δείκτης $ i $ φανερώνει τον αύξοντα αριθμό της παρατήρησης.
+\end{itemize} 
+Οι μεταβλητές διακρίνονται στις εξής κατηγορίες :
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Ποιοτικές}\\
+Ποιοτική ονομάζεται κάθε μεταβλητή της οποίας οι τιμές δεν είναι αριθμητικές.
+\item \textbf{Ποσοτικές}\\
+Ποσοτική ονομάζεται κάθε μεταβλητή της οποίας οι τιμές είναι αριθμοί. Οι ποσοτικές μεταβλητές χωρίζονται σε διακριτές και συνεχείς.
+\begin{rlist}
+\item \textbf{Διακριτές} ονομάζονται οι ποσοτικές μεταβλητές που παίρνουν μεμωνομένες τιμές από το σύνολο των πραγματικών αριθμών ή ένα διάστημα αυτού.
+\item \textbf{Συνεχείς} ονομάζονται οι ποσοτικές μεταβλητές που παίρνουν όλες τις τιμές στο σύνολο ή σε ένα διάστημα πραγματικών αριθμών.
+\end{rlist}
+\end{enumerate}
+\item\textbf{Απογραφή - Δειγματοληψία}\\
+\vspace{-5mm}
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Απογραφή}\\
+Απογραφή ονομάζεται η συλλογή και επεξεργασία δεδομένων από έναν ολόκληρο πληθυσμό.
+\item \textbf{Δειγματοληψία}\\
+Δειγματοληψία ονομάζεται η συλλογή και επεξεργασία δεδομένων από ένα δείγμα ενός πληθυσμού.
+\end{enumerate}
+\end{arithmisi}
+\newpage
+\section{Παρουσίαση στατιστικών δεδομένων}
+\orismoi
+\begin{arithmisi}
+\item\textbf{Στατιστικοί πίνακες}
+Οι πίνακες στους οποίους συγκεντρώνουμε τα στατιστικά δεδομένα καθώς και πληροφορίες που μας βοηθούν να εξάγουμε συμπεράσματα για το δείγμα ή πληθυσμό ονομάζονται στατιστικοί πίνακες. Οι κατηγορίες πινάκων είναι :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Γενικοί πίνακες}\\
+Οι γενικοί πίνακες περιέχουν αναλυτικά όλες τις πληροφορίες που αφορούν τα δεδομένα που συλλέξαμε.
+\item \textbf{Ειδικοί πίνακες}\\
+Οι ειδικοί πίνακες είναι συνοπτικοί και περιέχουν πληροφορίες από τους γενικούς πίνακες.
+\end{enumerate}
+\item\textbf{Συχνότητες}
+Συχνότητες ονομάζονται τα αριθμητικά μεγέθη τα οποία μας δίνουν πληροφορίες για τις τιμές των μεταβλητών των δεδομένων που έχουμε συλλέξει από ένα δέιγμα ή πληθυσμό, όπως ο αριθμός εμφανίσεων, το ποσοστό και άλλα. Έστω ένα δείγμα μεγέθους $ \nu $ το οποίο μελετάται ως προς μια μεταβλητή $ X $ με $ \kappa $ σε πλήθος τιμές $ x_i\ ,\ 1\leq i\leq \kappa\leq\nu $. Οι βασικές συχνότητες είναι οι ακόλουθες :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Απόλυτη συχνότητα ή Συχνότητα}\\
+Συχνότητα μιας τιμής $ x_i $ ονομάζεται ο φυσικός αριθμός $ \nu_i $ ο οποίος μας δίνει το πλήθος των εμφανίσεων της τιμής αυτής μέσα στο δείγμα.
+\item \textbf{Σχετική συχνότητα}\\
+Σχετική συχνότητα μιας τιμής $ x_i $ ονομάζεται το κλάσμα $ f_i=\frac{\nu_i}{\nu} $ το οποίο μας δίνει το ποσοστό εμφάνισης της τιμής ως μέρος του δείγματος. Μπορεί να εκφραστεί και ως ποσοστό επί τοις $ 100 $ και είναι \[ f_i\%=\frac{\nu_i}{\nu}\cdot 100\% \]
+\item \textbf{Αθροιστική συχνότητα}\\
+Αθροιστική συχνότητα ονομάζεται ο φυσικός αριθμός $ N_i $ ο οποίος μας δίνει το πλήθος των παρατηρήσεων που είναι μικρότερες ή ίσες την τιμή $ x_i $.
+\[ N_i=\nu_1+\nu_2+\ldots+\nu_i \]
+Υπολογίζεται μόνο για ποσοτικές μεταβλητές.
+\item \textbf{Σχετική αθροιστική συχνότητα}\\
+Σχετική αθροιστική συχνότητα ονομάζεται ο φυσικός αριθμός $ F_i $ ο οποίος μας δίνει το ποσοστό των παρατηρήσεων που είναι μικρότερες ή ίσες την τιμή $ x_i $.
+\[ F_i=f_1+f_2+\ldots+f_i \]
+Υπολογίζεται μόνο για ποσοτικές μεταβλητές. Μπορεί να εκφραστεί και ως ποσοστό επί τοις $ 100 $ και είναι $ F_i\%=F_i\cdot 100\% $.
+\end{enumerate}
+\item\textbf{Ομαδοποίηση παρατηρήσεων}
+Η ομαδοποίηση των παρατηρήσεων ενός δείγματος είναι η διαδικασία με την οποία μοιράζονται οι παρατηρήσεις μιας ποσοτικής μεταβλητής σε ομάδες. Χρησιμοποιείται όταν παρουσιάζεται μεγάλο πλήθος διαφορετικών μεταξύ τους παρατηρήσεων ώστε να μελετηθεί καλύτερα το δείγμα.
+\begin{itemize}
+\item Οι ομάδες στις οποίες μοιράζονται οι παρατηρήσεις ονομάζονται \textbf{κλάσεις}. Αποτελούν διαστήματα τιμών της μορφής $ [\ ,\ ) $.
+\item Τα άκρα των κλάσεων ονομάζονται \textbf{όρια}. Επιλέγουμε το άνω όριο της τελευταίας κλάσης να είναι κλειστό ώστε αυτή να έχει τη μορφή $ [\ ,\ ] $.
+\item Το μέγεθος κάθε κλάσης δίνεται από τον τύπο $ c=\frac{R}{\kappa} $ όπου $ R $ είναι το εύρος των παρατηρήσεων και $ \kappa $ το πλήθος των κλάσεων.
+\item Το κέντρο κάθε κλάσης ονομάζεται \textbf{κεντρική τιμή} και συμβολίζεται $ x_i $.
+\end{itemize}
+\item\textbf{Γραφική παράσταση δεδομένων}
+Τα δεδομένα που έχουμε συλλέξει σε μια κατανομή συχνοτήτων μπορούμε να τα παραστήσουμε γραφικά με τη χρήση διαφόρων ειδών διαγραμμάτων ανάλογα το είδος της μεταβλητής. Έστω μια μεταβλητή $ X $ με τιμές $ x_1,x_2,\ldots,x_\kappa $. Βασικοί τρόποι γραφικής παράστασης δεδομένων είναι οι ακόλουθοι :
+\begin{enumerate}[label=\bf\arabic*.,leftmargin=4mm]
+\item \textbf{Ραβδόγραμμα}\\
+Το ραβδόγραμμα συχνοτήτων χρησιμοποιείται για τη γραφική παράσταση δεδομένων ενός δείγματος το οποίο έχει εξεταστεί ως προς \textbf{ποιοτική} μεταβλητή $ X $. Σε ένα σύστημα ορθογωνίων αξόνων θέτουμε στον οριζόντιο άξονα τις τιμές της μεταβλητής $ X $ ενώ στον κατακόρυφο οποιαδήποτε συχνότητα θέλουμε να μελετήσουμε. Σχεδιάζουμε κάθετες μπάρες στη θέση κάθε τιμής $ x_i\ ,\ i=1,2,\ldots,\kappa $ των οποίων το ύψος ισούται με την τιμή της αντίστοιχης συχνότητας.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,
+width  = 7cm,
+height = 5cm,
+major x tick style = transparent,
+ybar=2*\pgflinewidth,
+bar width=20pt,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,,anchor=center},
+ymajorgrids = true,
+symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.25,
+ymin=0,title={\textbf{Ραβδόγραμμα}},
+legend cell align=left,
+legend style={at={(1,1.05)},anchor=south east,
+column sep=1ex}]
+\addplot[style={rred,fill=rred,mark=none}]
+coordinates {($ x_1 $, 5.0) ($ x_2 $,3.0) ($ x_3 $,4.0)};
+%\legend{Μαθηματικά,Φυσική,TreeScore $>3$,TreeScore $>4$}
+\end{axis}
+\end{tikzpicture}\ \ 
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,
+width  = 8cm,
+height = 5cm,
+major x tick style = transparent,title={\textbf{Πολλαπλό Ραβδόγραμμα}},
+ybar=2*\pgflinewidth,
+bar width=20pt,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-1mm,,anchor=center},
+ymajorgrids = true,
+symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.25,
+ymin=0,
+legend cell align=left,
+legend style={at={(1.3,1.05)},anchor=north east,
+column sep=1ex}]
+\addplot[style={rred,fill=rred,mark=none}]
+coordinates {($ x_1 $, 5.0) ($ x_2 $,3.0) ($ x_3 $,4.0)};
+\addplot[style={\xrwma,fill=\xrwma,mark=none}]
+coordinates {($ x_1 $, 4.0) ($ x_2 $,5.0) ($ x_3 $,3.0)};
+\legend{Δείγμα Α,Δείγμα Β}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Αν εξετάζονται δύο η περισσότερα δείγματα ως προς την ίδια ποιοτική μεταβλητή τότε χρησιμοποιούμε το πολλαπλό ραβδόγραμμα το οποίο περιέχει σε κάθε θέση $ x_i $ τις ράβδους συχνοτήτων από όλα τα δείγματα.
+\item \textbf{Διάγραμμα}\\
+\wrapr{-5mm}{7}{7.1cm}{-11mm}{\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,ybar,enlarge x limits=0.25,bar width=1pt,ymin=0,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,,anchor=center},height=4cm,width=7.5cm,symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $,$\ldots$,$ x_\kappa $},
+xtick = data]
+\addplot
+[draw=\xrwma,fill=\xrwma] 
+coordinates
+{($ x_1 $,20) ($ x_2 $,17) ($ x_3 $,15) ($\ldots$,23) ($ x_\kappa $,19)};
+\end{axis}
+\end{tikzpicture}}{
+Το διάγραμμα συχνοτήτων χρησιμοποιείται στην περίπτωση μιας \textbf{ποσοτικής} μεταβλητής και σε αντίθεση με το ραβδόγραμμα αποτελείται από κατακόρυφες ευθείες τοποθετημένες στις θέσεις $ x_1,x_2,\ldots,x_\nu $ των τιμών της μεταβλητής. Κάθε ευθεία έχει ύψος ίσο με την τιμή της συχνότητας που αντιστοιχεί σε κάθε $ x_i $.}
+\item \textbf{Πολύγωνο συχνοτήτων}\\
+\wrapl{-5mm}{7}{7.1cm}{-7mm}{\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,ymajorgrids = true,enlarge x limits=0.2,height=4cm,width=7.5cm,ymin=0,symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $,$ \ldots. $,$ \ldots $,$ x_\kappa $},
+xtick = data,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,anchor=center}]
+\addplot
+[draw=\xrwma,pl] 
+coordinates
+{($ x_1 $,5) ($ x_2 $,8) ($ x_3 $,7) ($ \ldots. $,7.5) ($ \ldots $,10) ($ x_\kappa $,9)};
+\end{axis}
+\end{tikzpicture}}{
+Το πολύγωνο συχνοτήτων χρησιμοποιείται στην παράσταση δεδομένων που μελετήθηκαν ως προς \textbf{ποσοτική μεταβλητή}. Είναι μια τεθλασμένη γραμμή η οποία ενώνει τα σημεία της μορφής $ (x_i,\nu_i) $ ή $ (x_i,f_i) $ κ.τ.λ. δηλαδή τα σημεία με συντεταγμένες τις τιμές $ x_i $ και τις αντίστοιχες συχνότητες.}
+\item \textbf{Κυκλικό διάγραμμα}\\
+\wrapr{-5mm}{10}{7.1cm}{-11mm}{\begin{tikzpicture}
+[pie chart,slice type={comet}{a},
+slice type={legno}{b},
+slice type={coltello}{d},
+slice type={sedia}{c},
+slice type={caffe}{e},
+pie values/.style={font={\small}},
+scale=2
+]
+
+\pie[values of coltello/.style={pos=.7}]{}{40/comet/a_1,27/legno/a_2,14/sedia/a_3,11/coltello/\ldots,8/caffe/a_\kappa}
+
+
+\legend[shift={(1.3cm,1cm)}]{{$ x_1 $}/comet, {$ x_2 $}/legno, {$ x_3 $}/coltello}
+\legend[shift={(2.1cm,1cm)}]{{$ \ldots $}/sedia, {$ x_\kappa $}/caffe}
+
+\end{tikzpicture}}{
+Το κυκλικό διάγραμμα χρησιμοποιείται για την παράσταση δεδομένων που έχουν μελετηθεί και ως προς ποιοτική και ως προς ποσοτική μεταβλητή $ X $ με τιμές $ x_2,x_2,\ldots,x_\kappa $. Ένας κύκλος χωρίζεται σε $ \kappa $ κυκλικούς τομείς όπου το μέγεθος του κάθε κυκλικού τομέα είναι αντίστοιχο της τιμής της συχνότητας που μελετάμε. Το μέτρο του τόξου κάθε τομέα συμβολίζεται με $ a_i\ ,\ i=1,2,\ldots,\nu $ και είναι :
+\[ a_i=\frac{\nu_i}{\nu}\cdot 360\degree=f_i\cdot 360\degree \]}
+\item \textbf{Σημειόγραμμα}\\
+\wrapr{-5mm}{5}{6.1cm}{-12mm}{
+\begin{tikzpicture}[dot/.style={
+        circle,
+        inner sep=1.5pt,
+        fill,
+        color=\xrwma
+    }]
+    \clip (-.2,-.4) rectangle (5.9,2.5);
+\begin{axis}[aks_on,x=1cm,belh ar,xlabel={\footnotesize$x_i$},
+axis y line=none,ymin=0,ymax=1,
+xmin=-.5,xmax=5,xticklabels={,$x_1$,$x_2$,$x_3$,$\ldots$,$x_\kappa$},extra x ticks={-.5}
+]
+\end{axis}
+\shmeio{0}{2}
+\shmeio{1}{3}
+\shmeio{2}{5}
+\shmeio{3}{1}
+\shmeio{4}{3}
+\end{tikzpicture}}{
+Το σημειόγραμμα αποτελείται από έναν άξονα στον οποίο τοποθετούμε τις τιμές $ x_1,x_2,\ldots,x_\kappa $ της μεταβλητής $ X $ και σε κάθε θέση σχεδιάζονται κατακόρυφα τόσα σημεία όσα και η συχνότητα της κάθε τιμής.}
+\item \textbf{Χρονόγραμμα}\\
+Το χρονόγραμμα χρησιμοποιείται στην περίπτωση μιας ποσοτικής μεταβλητής όταν αυτή παριστάνει χρόνο. Στον οριζόντιο άξονα τοποθετούνται οι τιμές της μεταβλητής του χρόνου ενώ στονα κατακόρυφο οποιαδήποτε από τις συχνότητες των τιμών αυτών.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ymajorgrids = true,height=5cm,width=8cm,xmajorgrids = true,enlarge x limits=0.2,bar width=1pt,ylabel={\footnotesize $ \nu_i $},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=1mm, anchor=center},ylabel style={at={(current axis.above origin)},yshift=1mm,anchor=center},ymin=0]
+\addplot
+[draw=\xrwma,pl] 
+coordinates
+{(2010,5) (2011,4) (2012,8) (2013,7) (2014,12)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Το χρονόγραμμα μας δίνει μια εικόνα για τις διάφορες μεταβολές της εκάστοτε συχνότητας κατά την πάροδο του χρόνου.
+\item \textbf{Ιστόγραμμα}\\
+Το ιστόγραμμα συχνοτήτων χρησιμοποιείται για τη γραφική παρουσίαση ομαδοποιημένων δεδομένων. Οριζόντιος άξονας είναι ό άξονας των ομάδων ενώ κατακόρυφος ο άξονας της οποιαδήποτε συχνότητας.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,width=7cm,
+height=5cm,xmin=-2,xmax=10,xlabel style={at={(current axis.right of origin)},xshift=8mm,yshift=5mm, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=-2mm,xshift=3mm,anchor=center},
+ymin=0, ymax=7.7,xlabel={Κλάσεις},ylabel={\rotatebox{-90}{$ \nu_i $}},xticklabels={,,$a$,$a+c$,$a+2c$,$\ldots$,$b$},title={\textbf{Ιστόγραμμα}}]
+\draw[fill=\xrwma] (axis cs:0,0) rectangle (axis cs:2,4);
+\draw[fill=\xrwma] (axis cs:2,0) rectangle (axis cs:4,3);
+\draw[fill=\xrwma] (axis cs:4,0) rectangle (axis cs:6,7);
+\draw[fill=\xrwma] (axis cs:6,0) rectangle (axis cs:8,5);
+\end{axis}
+\end{tikzpicture}\ \ 
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,width=7cm,
+height=5cm,xmin=-2,xmax=10,xlabel style={at={(current axis.right of origin)},xshift=8mm,yshift=5mm, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=-2mm,xshift=3mm,anchor=center},
+ymin=0, ymax=7.7,xlabel={Κλάσεις},ylabel={\rotatebox{-90}{$ \nu_i $}},xticklabels={,,$a$,$a+c$,$a+2c$,$\ldots$,$b$},title={\textbf{Ιστόγραμμα - Πολύγωνο}}]
+\draw[fill=\xrwma] (axis cs:0,0) rectangle (axis cs:2,4);
+\draw[fill=\xrwma] (axis cs:2,0) rectangle (axis cs:4,3);
+\draw[fill=\xrwma] (axis cs:4,0) rectangle (axis cs:6,7);
+\draw[fill=\xrwma] (axis cs:6,0) rectangle (axis cs:8,5);
+\draw[pl] (axis cs:-1,0)--(axis cs:1,4)--(axis cs:3,3)--(axis cs:5,7)--(axis cs:7,5)--(axis cs:9,0);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Αποτελείται από μπάρες (ιστοί) ίσου πλάτους μιας κλάσης και ύψους ίσου με την τιμή της συχνότητας. \begin{itemize}
+\item Το εμβαδόν κάθε ιστού ισούται με την τιμή της αντίστοισχης συχνότητας αν θεωρήσουμε ως μονάδα μέτρησης το πλάτος $ c $ της ομάδας.
+\item Το εμβαδόν όλων των ιστών ισούται με το μέγεθος $ \nu $ του δείγματος.
+\item Ενώνοντας το μέσο της άνω πλευράς κάθε ιστού συμπεριλαμβάνοντας την αμέσως προηγούμενη και αμέσως επόμενη κλάση, πορκύπτει το \textbf{πολύγωνο συχνοτήτων}.
+\end{itemize}
+\end{enumerate}
+\item\textbf{Καμπύλη συχνοτήτων}
+Η καμπύλη συχνοτήτων αποτελεί ένα πολύγωνο συχνοτήτων ομαδοποιημένων παρατηρήσεων στην περίπτωση όπου το πλήθος των ομάδων είναι αρκετά μεγάλο ενώ το πλάτος κάθε ομάδας πολύ μικρό. Έτσι το πολύγωνο τείνει να γίνει μια ομαλή καμπύλη. 
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,
+  no markers, domain=0:7.7,xmax=8, samples=200,
+  axis lines*=left, xlabel=$x_i$, ylabel=$\nu_i$,
+  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, width=9cm,xticklabels={$ \bar{x}-3s $,$ \bar{x}-2s $,$ \bar{x}-s $,$ \bar{x} $,$ \bar{x}+s $,$ \bar{x}+2s $,$ \bar{x}+3s $},ymajorgrids=true,
+  xtick={1,2,3,4,5,6,7},ymax=.45,
+  enlargelimits=false, clip=false, axis on top]
+  \addplot [very thick,red!80!black] {gauss(4,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Βασική περίπτωση καμπύλης συχνοτήτων είναι αυτή της κανονικής κατανομής στην οποία οι παρατηρήσεις είναι εξίσου κατανεμημένες εκατέρωθεν της μέσης τιμής ενώ το μεγαλύτερο πλήθος τους συσπειρώνεται γύρω της.
+\end{arithmisi}
+\thewrhmata
+\begin{arithmisi}
+\item\textbf{Ιδιότητες συχνοτήτων}\\
+Έστω ένα δείγμα μεγέθους $ \nu $ το οποίο μελετάται ως προς μια μεταβλητή $ X $ με $ \kappa $ σε πλήθος τιμές $ x_i\ ,\ 1\leq i\leq \kappa\leq\nu $. Για τις συχνότητες των τιμών του ισχύουν οι ακόλουθες ιδιότητες :\\
+\textbf{Ιδιότητες που αφορούν τη συχνότητα $ \nu_i $}
+\begin{rlist}
+\item Για κάθε συχνότητα $ \nu_i\ ,\ i=1,2,\ldots,\kappa $ ισχύει $ 0\leq\nu_i\leq\nu $.
+\item Το άθροισμα όλων των συχνοτήτων $ \nu_i\ ,\ i=1,2,\ldots,\kappa $ ισούται με το μέγεθος του δείγματος.
+\[ \nu_1+\nu_2+\ldots+\nu_\kappa=\nu \]
+\item $ \nu_i=N_i-N_{i-1} $
+\end{rlist}
+\textbf{Ιδιότητες που αφορούν τη συχνότητα $f_i$}
+\begin{rlist}[resume]
+\item Για κάθε σχετική συχνότητα $ f_i\textrm{ και σχετική συχνότητα τοις 100 }f_i\%\ ,\ i=1,2,\ldots,\kappa $ ισχύουν οι σχέσεις $ 0\leq f_i\leq 1\ \textrm{ και }\ 0\leq f_i\%\leq100\% $.
+\item Το άθροισμα όλων των σχετικών συχνοτήτων $ f_i\ ,\ i=1,2,\ldots,\kappa $ ισούται με τη μονάδα ενώ το άθροισμα των σχετικών συχνοτήτων επί τοις $ 100 $ είναι ίσο με $ 100\% $.
+\[ f_1+f_2+\ldots+f_\kappa=1\ \textrm{ και }\ f_1\%+f_2\%+\ldots+f_\kappa\%=100\% \]
+\item $ f_i=F_i-F_{i-1} $
+\item $ f_i\%=F_i\%-F_{i-1}\% $
+\end{rlist}
+\textbf{Ιδιότητες που αφορούν την αθροιστική συχνότητα $N_i$}
+\begin{rlist}[resume]
+\item $ N_1=\nu_1 $
+\item $ N_\kappa=\nu $
+\end{rlist}
+\textbf{Ιδιότητες που αφορούν την αθροιστική σχετική συχνότητα $F_i$}
+\ml{0}
+\begin{rlist}[resume]
+\begin{multicols}{3}
+\item $ F_i=\frac{N_i}{\nu} $
+\item $ F_i\%=\frac{N_i}{\nu}\cdot 100\% $
+\item $ F_1=f_1 $
+\item $ F_1\%=f_1\% $
+\item $ F_\kappa=1 $
+\item $ F_\kappa\%=100\% $
+\end{multicols}
+\end{rlist}
+\end{arithmisi}
+\ml{0.2}
+\section{Μέτρα θέσης και διασποράς}\mbox{}\\
+\orismoi
+\begin{arithmisi}
+\item\textbf{Μέτρο θέσης}\\
+Μέτρα θέσης ονομάζονται τα αριθμητικά μεγέθη τα οποία μας δίνουν τη θέση του κέντρου των παρατηρήσεων μιας δειγματοληψίας. Τα μέτρα θέσης ενός δείγματος $ \nu $ παρατηρήσεων $ t_1,t_2,\ldots,t_\nu $ για μια μεταβλητή $ X $ είναι τα εξής :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Μέση τιμή}\\
+Η μέση τιμή ορίζεται ως το πηλίκο του αθροίσματος των παρατηρήρεων ενός δείγματος προς το πλήθος τους. Συμβολίζεται $ \bar{x} $ και είναι :
+\[ \bar{x}=\frac{t_1+t_2+\ldots+t_\nu}{\nu}=\frac{1}{\nu}\sum_{i=1}^{\nu}{t_i} \]
+Εναλλακτικοί τύποι για τη μέση τιμή είναι οι ακόλουθοι οι οποίοι χρησιμοποιούνται σε κατανομές συχνοτήτων. Αν κάποια μεταβλητή $ X $ έχει τιμές $ x_1,x_2\ldots,x_\kappa $ με συχνότητες $ \nu_1,\nu_2\ldots,\nu_\kappa $ και σχετικές συχνότητες $ f_1,f_2,\ldots,f_\kappa $ τότε θα έχουμε :
+\[ \bar{x}=\frac{1}{\nu}\sum_{i=1}^{\kappa}{x_i\nu_i}\ \textrm{ και }\ \bar{x}=\sum_{i=1}^{\kappa}{x_if_i} \]
+Για τα ομαδοποιημένα δεδομένα το $ x_i $ συμβολίζει την κεντρική τιμή κάθε κλάσης.
+\item \textbf{Σταθμικός μέσος}\\
+Ο σταθμικός μέσος ορίζεται ως η μέση τιμή των παρατηρήσεων όταν αυτές έχουν ξεχωριστό συντελεστή βαρύτητας. Ισούται με 
+\[ \bar{x}=\frac{t_iw_1+t_2w_2+\ldots+t_\nu w_\nu}{w_1+w_2+\ldots+w_\nu}=\frac{\sum\limits_{i=1}^{\nu}{t_iw_i}}{\sum\limits_{i=1}^{\nu}{w_i}} \]
+όπου $ w_i\ ,\ i=1,2,\ldots,\nu $ είναι οι συντελεστές βαρύτητας των παρατηρήσεων.
+\item \textbf{Διάμεσος}\\
+Διάμεσος ονομάζεται η κεντρική παρατήρηση $ \nu $ σε πλήθους παρατηρήσεων όταν αυτές έχουν τοποθετηθεί σε αύξουσα σειρά. Συμβολίζεται με $ \delta $. Ξεχωρίζουμε τις εξής περιπτώσεις :
+\begin{rlist}
+\item Αν το πλήθος των $ \nu $ παρατηρήσεων είναι περιττό τότε η διάμεσος ισούται με τη μεσαία παρατήρηση.
+\[ \delta=t_{_{\frac{\nu}{2}}} \]
+\item Αν το πλήθος των $ \nu $ παρατηρήσεων είναι άρτιο τότε η διάμεσος ισούται με το ημιάθροισμα των δύο μεσαίων παρατηρήσεων.
+\[ \delta=\frac{t_{_{\frac{\nu}{2}}}+t_{_{\frac{\nu}{2}+1}}}{2} \]
+\end{rlist}
+Η διάμεσος σε κατανομή συχνοτήτων ισούται με την τιμή $ x_i $ για την οποία η σχετική αρθροιστική συχνότητα $ F_i\% $ είτε ισούται είτε ξεπερνάει για πρώτη φορά το $ 50\% $. Δηλαδή
+\[ \delta=x_i\ \textrm{ για την οποία }\ F_{i-1}\%<50\%\leq F_i\% \]
+\end{enumerate}
+\item\textbf{Μέτρο διασποράς}
+Μέτρα διασποράς ονομάζονται τα αριθμητικά μεγέθη τα οποία μας δίνουν τη διασπορά των παρατηρήσεων μιας δειγματοληψίας γύρω από το κέντρο. Τα μέτρα θέσης ενός δείγματος $ \nu $ παρατηρήσεων $ t_1,t_2,\ldots,t_\nu $ για μια μεταβλητή $ X $ είναι τα εξής :
+\begin{enumerate}[label=\bf\arabic*.,itemsep=0mm]
+\item \textbf{Εύρος}\\
+Εύρος ονομάζεται η διαφορά την μέγιστης μείον την ελάχιστη παρατήρηση του δέιγματος. Συμβολίζεται με $ R $ και είναι :
+\[ R=t_{max}-t_{min} \]
+\item \textbf{Διακύμανση}\\
+Διακύμανση ονομάζεται η μέση τιμή των τετραγώνων των διαφορών των παρατηρήσεων $ t_i $ από τη μέση τιμή $ \bar{x} $ τους. Συμβολίζεται με $ s^2 $.
+\[ s^2=\frac{1}{\nu}\sum_{i=1}^{\nu}{(t_i-\bar{x})^2} \]
+Ισοδύναμος τύπος που χρησιμοποιείται περισσότερο όταν η μέση τιμή $\bar{x}$ δεν είναι ακέραιος είναι ο
+\[s^2=\frac{1}{\nu}\LEFTRIGHT\{\}{\sum\limits_{i=1}^{\nu}{t_i^2}-\frac{\left( \sum\limits_{i=1}^{\nu}{t_i}\right)^2 }{\nu}}\]
+Σε μια κατανομή συχνοτήτων αν μια μεταβλητή έχει τιμές $ x_1,x_2,\ldots,x_\kappa $ με συχνότητες $ \nu_1,\nu_2,\ldots,\nu_\kappa $ και σχετικές συχνότητες $ f_1,f_2,\ldots,f_\kappa $ τότε η διακύμανση δίνεται από τους παρακάτω τύπους :\\
+\ml{0}
+\textbf{Τύποι με τη συχνότητα $\nu_i$}
+\begin{rlist}[resume]
+\begin{multicols}{2}
+\item $ s^2=\frac{1}{\nu}\sum\limits_{i=1}^{\kappa}{(x_i-\bar{x})^2\nu_i} $\\
+(για ακέραιο μέσο όρο.)
+\item $ s^2=\dfrac{1}{\nu}\LEFTRIGHT\{\}{\sum\limits_{i=1}^{\kappa}{x_i^2\nu_i}-\frac{\left( \sum\limits_{i=1}^{\kappa}{x_i\nu_i}\right)^2 }{\nu}} $\\(για μη ακέραιο μέσο όρο.)
+\end{multicols}
+\end{rlist}
+\textbf{Τύπος με τη συχνότητα $f_i$}
+\begin{rlist}[resume]
+\item $ s^2=\sum\limits_{i=1}^{\kappa}{(x_i-\bar{x})^2 f_i} $
+\end{rlist}
+\textbf{Επιπλέον τύποι}
+\begin{rlist}[resume]
+\item $ s^2=\sum\limits_{i=1}^{\kappa}{x_i^2f_i}-\bar{x}^2 $
+\item $ s^2=\overline{x^2}-\bar{x}^2 $ όπου $ \overline{x^2}=\frac{1}{\nu}\sum\limits_{i=1}^{\nu}{t_i^2}=\frac{1}{\nu}\sum\limits_{i=1}^{\kappa}{x_i^2\nu_i}=\sum\limits_{i=1}^{\kappa}{x_i^2f_i} $
+\end{rlist}
+\item \textbf{Τυπική απόκλιση}\\
+Η τυπική απόκλιση ορίζεται ως η θετική τετραγωνική ρίζα της διακύμανσης.
+\[ s=\sqrt{s^2} \]
+\item \textbf{Συντελεστής μεταβλητότητας}\\
+Συντελεστής μεταβολής ή μεταβλητότητας ονομάζεται ο λόγος της τυπικής απόκλισης προς την απόλυτη τιμή του μέσου όρου του δείγματος. Συμβολίζεται $ CV $.
+\[ CV=\frac{s}{|\overline{x}|}\cdot 100\% \]
+\begin{itemize}
+\item Μας δίνει την ομοιογένεια των δεδομένων ενός δείγματος.
+\item Ένα δείγμα χαρακτηρίζεται ομοιογενές αν ο συντελεστής μεταβολής του είναι μικρότερος του $ 10\% $.
+\item Μεταξύ δύο δειγμάτων, αυτό που έχει μικρότερο συντελεστή μεταβλητότητας έχει μεγαλύτερη ομοιογένεια.
+\end{itemize}
+\end{enumerate}
+\end{arithmisi}
+\end{document}

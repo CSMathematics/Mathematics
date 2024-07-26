@@ -1,0 +1,260 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{royalblue}{RGB}{0,0,0}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usepackage{eurosym}
+
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Συστήματα}{Γραμμικά Συστήματα}
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large \arabic*.}},
+itemsep=5mm]
+\item Δίνεται η ευθεία $ 3x-2y=4 $.
+\begin{enumerate}[label=\roman*.]
+\item Να εξεταστεί αν τα σημεία $ A(2,1) $ και $ B(-1,3) $ ανήκουν στην ευθεία.
+\item Να βρεθούν τα σημεία τομής της ευθείας με τους άξονες $ x'x $ και $ y'y $.
+\item Να βρεθούν όλες οι λύσεις
+\end{enumerate}
+\begin{center}
+\textcolor{royalblue}{\textbf{ΓΡΑΜΜΙΚΑ ΣΥΣΤΗΜΑΤΑ}}
+\end{center}
+\item Να λυθούν τα παρακάτω συστήματα με τη μέθοδο της αντικατάστασης.
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;x+2y=3\\
+\;4x-3y=1}$
+\item $\ccases{
+\;3x+2y=5\\
+\;-x+y=-5}$
+\item $\ccases{
+\;2(x-1)-(y-2)=9\\
+\;-(1-x)+3y=0}$
+\end{enumerate}\end{multicols}
+\item Να λυθούν τα παρακάτω συστήματα με τη μέθοδο των αντίθετων συντελεστών.
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;4x-y=3\\
+\;2x+3y=5}$
+\item $\ccases{
+\;2(x-2)+3(y+1)=1\\
+\;4x-(2-y)=2}$
+\item $\ccases{
+\;\dfrac{x+2}{3}+\dfrac{1-y}{2}=2\\
+\;\dfrac{2x-1}{5}+\dfrac{y}{3}=-\dfrac{2}{15}}$
+\end{enumerate}\end{multicols}
+\item Να λυθούν τα παρακάτω συστήματα με τη μέθοδο των οριζουσών.
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;2x-y=3\\
+\;x+3y=5}$
+\item $\ccases{
+\;2(x-1)+3(y+2)=13\\
+\;x-(2y-1)=2}$
+\item $\ccases{
+\;6x-4y=2\\
+\;3x-2y=4}$
+\end{enumerate}\end{multicols}
+\item Να λυθούν τα παρακάτω συστήματα
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=3mm]
+\item $\ccases{
+\;(2x-1)(y+1)-(x+4)(2y-3)=1\\
+\;(1-x)(3y+1)+(x+2)(3y+4)=2}$
+\item $\ccases{
+\;\dfrac{x+1}{3}-\dfrac{3(y-2)}{4}=1\\[3mm]
+\;\dfrac{x}{2}-\dfrac{2-y}{2}=x+y}$
+\item $\ccases{
+\;\dfrac{x-1}{2}+\dfrac{x-y}{3}=1-2x\\[3mm]
+\;\dfrac{3y-x}{4}-\dfrac{3(y-2x)}{2}=\dfrac{1}{8}}$
+\item $\ccases{
+\;\dfrac{3x^2-x+1}{3}-\dfrac{2x^2-y}{2}=-2\\[3mm]
+\;\dfrac{5y^2-x}{5}-\dfrac{y(3y-2)}{3}=\dfrac{1}{8}}$
+\end{enumerate}\end{multicols}
+\begin{center}
+\textcolor{royalblue}{\textbf{ΠΑΡΑΜΕΤΡΙΚΑ ΣΥΣΤΗΜΑΤΑ}}
+\end{center}
+\item Να λυθούν τα παρακάτω συστήματα
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;(\lambda^2+1)x-y=2\\
+\;2\lambda x+y=4}$
+\item $\ccases{
+\;(\lambda+2)x-3y=\lambda+2\\
+\;\lambda x+(\lambda-2)y=1}$
+\item $\ccases{
+\;\lambda^2x+4y=2\lambda\\
+\;(\lambda-1) x+y=\lambda-1}$
+\end{enumerate}\end{multicols}
+\item Να βρεθεί η τιμή του $ \lambda\in\mathbb{R} $ ώστε το παρακάτω σύστημα να είναι αδύνατο.
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;\lambda x+(\lambda-3)y=-1\\
+\;2x+(\lambda-3)y=1}$
+\item $\ccases{
+\;(\lambda+1) x-3y=-1\\
+\;x+(\lambda-3)y=1}$
+\end{enumerate}\end{multicols}
+\item Να βρεθεί η τιμή του $ \lambda\in\mathbb{R} $ ώστε το παρακάτω σύστημα να έχει άπειρες λύσεις οι οποίες να βρεθούν.
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;2\lambda x+(\lambda+3)y=2\\
+\;x+\lambda y=-1}$
+\item $\ccases{
+\;x+\lambda y=2-\lambda\\
+\;\lambda x+y=\lambda}$
+\end{enumerate}\end{multicols}
+\item Να βρεθεί η εξίσωση της ευθείας $ y=ax+\beta $ η οποία διέρχεται από τα σημεία
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ A(-2,1) $ και $ B(3,0) $
+\item $ A(-1,1) $ και $ B(4,-2) $
+\item $ A(0,-5) $ και $ B(2,4) $
+\item $ A\PARENS{\dfrac{3}{2},-1} $ και $ B\PARENS{0,\dfrac{1}{2}} $
+\end{enumerate}\end{multicols}
+\begin{center}
+\textcolor{royalblue}{\textbf{ΣΥΣΤΗΜΑΤΑ 3$\times$3}}
+\end{center}
+\item Να λυθούν τα παρακάτω συστήματα
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $\ccases{
+\;3x-2y+z=6\\
+\;x-3y-z=3\\
+\;2x+y-4z=-3}$
+\item $\ccases{
+\;x-2y+z=4\\
+\;x-y-z=2\\
+\;2x+3y-3z=0}$
+\item $\ccases{
+\;x-2y+3z=6\\
+\;2x-4y+6z=12\\
+\;x+y-z=0}$
+\end{enumerate}\end{multicols}
+\item Να βρεθεί η εξίσωση της παραβολής $ y=ax^2+\beta x+\gamma $ η οποία διέρχεται από τα σημεία
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=0mm]
+\item $ A(-2,1) $ , $ B(3,0) $ και $ \varGamma(1,-2) $
+\item $ A(-1,1) $ , $ B(1,3) $ και $ \varGamma(0,-2) $
+\item $ A(-4,3) $ , $ B(1,2) $ και $ \varGamma(0,1) $
+\item $ A(-2,4) $ , $ B(3,9) $ και $ \varGamma(1,1) $
+\end{enumerate}\end{multicols}
+\item Αν $ D, D_{x}, D_{y} $ είναι οι ορίζουσες ενός συστήματος $ 2\times2 $ και ισχύει \[ \ccases{
+\;D-2D_{x}-2D_{y}=-6\\
+\;4D-3D_{x}-2D_{y}=-1\\
+\;2D+3D_{x}-D_{y}=-4} \]
+να βρεθούν οι λύσεις $ x,y\in\mathbb{R} $ του $ 2\times2 $ συστήματος.
+\newpage
+\noindent
+\begin{center}
+\textcolor{royalblue}{\textbf{ΣΥΣΤΗΜΑΤΑ ΜΕ ΑΝΑΘΕΣΗ}}
+\end{center}
+\item Να λυθούν τα παρακάτω συστήματα
+\begin{multicols}{2}
+\begin{enumerate}[label=\roman*.,itemsep=3mm]
+\item $\ccases{
+\;|x|-|y|=3\\
+\;2|x|+3|y|=11}$
+\item $\ccases{
+\;|x-1|+2|y+2|=7\\
+\;3|x-1|-4|y+2|=1}$
+\item $\ccases{
+\;x^2+2y^3=0\\
+\;3x^2+5y^3=11}$
+\item $\ccases{
+\;\sqrt{x}-3\sqrt{y}=-1\\
+\;2\sqrt{x}+9\sqrt{y}=13}$
+\item $\ccases{
+\;\dfrac{1}{x}+\dfrac{1}{y}=7\\
+\;\dfrac{2}{x}-\dfrac{1}{2y}=4}$
+\item $\ccases{
+\;2(x^2+3x-3)+3(y^2-5y+7)=5\\
+\;-(x^2+3x-3)+2(y^2-5y+7)=1}$
+\item $\ccases{
+\;2\textrm{ημ}x+\textrm{συν}y=2 & , x\in(0,\pi/2)\\
+\;3\textrm{ημ}x-4\textrm{συν}y=\dfrac{5}{2} & , y\in(-\pi/2,\pi/2)}$
+\end{enumerate}\end{multicols}
+\begin{center}
+\textcolor{royalblue}{\textbf{ΠΡΟΒΛΗΜΑΤΑ}}
+\end{center}
+\item Ένα ξενοδοχείο έχει 30 δωμάτια, άλλα δίκλινα και άλλα τρίκλινα. Συνολικά τα κρεβάτια είναι 80. Πόσα είναι τα δίκλινα και πόσα τα τρίκλινα δωμάτια;
+\item Ένας μαθητής έχει στο πορτοφόλι του 15 χαρτονομίσματα. Κάποια είναι των 5\officialeuro\; και κάποια των 10\officialeuro. Με τα χρήματα αυτά αγοράζει ένα κινητό τηλέφωνο αξίας 112\officialeuro\; και παίρνει ρέστα 8\officialeuro. Πόσα χαρτονομίσματα είναι των 5\officialeuro\; και πόσα των 10\officialeuro?
+\item Μια εταιρία κινητής τηλεφωνίας έχει τις εξής χρεώσεις : 0{,}07\officialeuro/sms και 0{,}09\officialeuro/1' ομιλίας. Ένας συνδρομητής, με μια κάρτα των 10\officialeuro\;ξόδεψε συνολικά 120 λεπτά και μηνύματα. Πόσα ήταν τα λεπτά ομιλίας και πόσα τα μηνύματα?
+\item Ένας πατέρας είναι 32 χρόνια μεγαλύτερος από το γιό του. Σε 8 χρόνια ο πατέρας θα έχει τα 3πλάσια χρόνια από το γιό του. Ποιά είναι η ηλικία του πατέρα και του γιού?
+\item Σε ένα κουτί υπάρχουν κόκκινες και πράσινες μπάλες. Αν προσθέσουμε στο κουτί 3 κόκκινες μπάλες, οι πράσινες θα είναι διπλάσιες από τις κόκκινες ενώ αν προσθέσουμε 4 πράσινες τότε, κόκκινες και πράσινες θα είναι ίσες. Πόσες μπάλες από το κάθε χρώμα υπάρχουν?
+\item Σε μια φάρμα ζούν κότες και αγελάδες που είναι 80. Αν έχουν συνολικά 260 πόδια να βρεθούν πόσες κότες και πόσες αγελάδες ζούν στη φάρμα.
+\item Σε ένα ορθογώνιο, το μήκος είναι διπλάσιο του πλάτους και η περίμετρος είναι ίση με το μήκος αυξημένο κατα 12 μέτρα. Να βρεθούν οι πλευρές του ορθογωνίου.
+\item \begin{minipage}{\textwidth}
+   \begin{wrapfigure}[10]{r}[0pt]{0cm}
+\begin{tikzpicture}
+   \tkzDefPoint(3,0){B}
+   \tkzDefPoint(0,0){A}
+   \tkzDefPoint(1.5,1){C}
+   \tkzDrawPolygon(A,B,C)
+   \tkzText[royalblue](.3,.6){{\scriptsize $ 2x-1 $}}
+   \tkzText[royalblue](3.1,.6){{\scriptsize $ 3x+2y-4 $}}
+   \end{tikzpicture}
+   \end{wrapfigure}\mbox{}\\
+Να βρεθούν πραγματικοί οι αριθμοί $ x, y\in\mathbb{R} $ ώστε το διπλανό τρίγωνο να είναι ισοσκελές. Η περίμετρος του τριγώνου είναι 28 μέτρα.
+\end{minipage}\\\\
+\end{enumerate}
+\end{document}

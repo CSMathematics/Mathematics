@@ -1,0 +1,324 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{xcolor}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+%------- ΟΡΙΣΜΟΣ --------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\arabic{orismos}\;:\;}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%------------------------------
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+%------- ΘΕΩΡΗΜΑ ΑΠΛΗ ΜΟΡΦΗ -----------------
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\arabic{thewrhma}\;:\;}  
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%----------------------------------
+%--------- ΘΕΩΡΗΜΑΤΑ ------------------
+\newcommand{\thewrhmata}{\begin{center}
+{\large {\textbf{ΘΕΩΡΗΜΑΤΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------------
+\newcommand{\pinakasdyo}[8]{
+\begin{tikzpicture}
+\foreach \x in {#6,#7}{
+\draw (-3,0) -- (#8,0);
+\draw (\x,-.5)--(\x,.0);
+\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#8-.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+\node at (0.5*#6-0.25,-0.3) {$#4$};
+\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+\begin{tikzpicture}
+\draw (-3,0) -- (#5,0);
+\draw (#4,-.5)--(#4,.0);
+\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#5-0.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+\node at (0.5*#4-0.25,-.3) {$#3$};
+\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+\begin{tikzpicture}
+\draw (-3,0) -- (5,0);
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (4.7,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+\end{tikzpicture}}
+
+%-------- ΜΕΘΟΔΟΛΟΓΙΑ ---------
+\newcounter{methodologia}[section]
+\renewcommand{\themethodologia}{\arabic{methodologia}\;:\;}   
+\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia}}\hspace{1mm} \MakeUppercase{\textbf{#1}}\\}{}
+\newcommand{\methodologia}{\begin{center}
+{\large {\textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%-------------------------------
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+		xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+		ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%------------------------------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+
+
+
+\begin{document}
+\section*{\LARGE ΟΡΙΟ - ΣΥΝΕΧΕΙΑ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΣΥΝΑΡΤΗΣΗ 1-1}
+\end{center}\mbox{}\\
+\orismoi
+\Orismos{Συνάρτηση 1-1}
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ ονομάζεται $ 1-1 $ εαν κάθε στοιχείο $ x\in D_f $ του πεδίου ορισμού αντιστοιχεί μέσω της συνάρτησης, σε μοναδική τιμή $ f(x) $ του συνόλου τιμών της. Για κάθε ζεύγος αριθμών $ x_1,x_2\in D_f $ του πεδίου ορισμού της $ f $ θα ισχύει \[ x_1\neq x_2\Rightarrow f(x_1)\neq f(x_2) \]
+Μια συνάρτηση $ 1-1 $ ονομάζεται και \textbf{αμφιμονοσήμαντη} συνάρτηση και χρησιμοποιούμε το συμβολισμό $ 1-1 $ ο οποίος διαβάζεται : \textquotedblleft ένα προς ένα \textquotedblright.\\\\
+\thewrhmata
+\Thewrhma{Συνάρτηση 1-1}
+Μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $ είναι μια συνάρτηση $ 1-1 $ αν και μόνο αν για κάθε ζεύγος αριθμών $ x_1,x_2\in D_f $ του πεδίου ορισμού της, η ισότητα των εικόνων τους συναπάγεται την ισότητα μεταξύ τους. Δηλαδή θα ισχύει η παρακάτω σχέση \[ f(x_1)=f(x_2)\Rightarrow x_1= x_2 \]
+\Thewrhma{Ιδιότητεσ συνάρτησησ 1-1}
+Έστω μια συνάρτηση $ f:D_f\rightarrow\mathbb{R} $. Αν η $ f $ είναι μια συνάρτηση $ 1-1 $ τότε γι αυτήν ισχύουν οι παρακάτων ιδιότητες :\\
+\wrapr{-11mm}{8}{3.7cm}{0mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.4,xmax=3,
+ymin=-.4,ymax=3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=.1:2.7]{2*ln(x+1)};
+\end{axis}
+\draw[dashed](0,1)--(3.5,1);
+\draw[dashed](0,2)--(3.5,2);
+\draw[dashed](0,2.5)--(3.5,2.5);
+\draw[dashed](0,1.5)--(3.5,1.5);
+\tkzDrawPoint[fill=black](1.117,2*ln(2.117))
+\node at (0.2,0.2) {\footnotesize$O$};
+\node at (1.65,0.7) {\footnotesize$y=\kappa$};
+\node at (2.3,3) {\footnotesize$C_f$};
+\end{tikzpicture}}{
+\begin{rlist}
+\item Για κάθε $ x_1,x_2\in D_f $ ισχύει $ x_1=x_2\Leftrightarrow f(x_1)=f(x_2) $.
+\item Κάθε οριζόντια ευθεία της μορφής $ y=\kappa $ με $ \kappa\in\mathbb{R} $ θα έχει το πολύ ένα κοινό σημείο με τη γραφική παράσταση της συνάρτησης $ f $.
+\item\label{mon} Εαν η συνάρτηση είναι γνησίως μονότονη τότε θα είναι και $ 1-1 $. Το αντίστροφο δεν ισχύει πάντα.
+\item Η εξίσωση $ f(x)=0 $ έχει το πολύ μια λύση στο πεδίο ορισμού της $ f $. Εαν $ 0\in f(D_f) $ τότε η εξίσωση έχει μια λύση ακριβώς.
+\item Κάθε σημείο της γραφικής παράστασης της $ f $ έχει μοναδική τετμημένη.
+\end{rlist}
+Αν η συνάρτηση $ f $ δεν είναι $ 1-1 $ τότε θα υπάρχει τουλάχιστον ένα ζεύγος αριθμών $ x_1,x_2\in D_f $ που να έχουν την ίδια τιμή δηλαδή : \[ x_1\neq x_2\Rightarrow f(x_1)=f(x_2) \]}
+\newpage
+\noindent
+\methodologia
+\Methodologia{Συνάρτηση 1-1}
+Προκειμένου να δείξουμε ή να εξετάσουμε αν μια συνάρτηση είναι $ 1-1 $ ακολουθούμε έναν από τους παρακάτω τρόπους :
+\begin{tropos}
+\item \textbf{Χρήση του Ορισμού}\\
+Κάνουμε χρήση του \textbf{Ορισμού 1} οπότε :
+\begin{bhma}[leftmargin=.7cm,itemindent=1.8cm]
+\item \textbf{Πεδίο ορισμού}\\Βρίσκουμε το πεδίο ορισμού της συνάρτησης $ f $ αν αυτό δε μας δίνεται γνωστό.
+\item \textbf{Πράξεις}\\
+Ξεκινώντας από τη σχέση $ x_1\neq x_2 $, καταλλήγουμε κατασκευαστικά κάνοντας πράξεις σε διαδοχικά βήματα, στη σχέση $ f(x_1)\neq f(x_2) $.
+\end{bhma}
+\item \textbf{Χρήση του Θεωρήματος}\\
+Αν θέλουμε να χρησιμοποιήσουμε το \textbf{Θεώρημα 1} τότε :
+\begin{bhma}[leftmargin=.7cm]
+\item \textbf{Πεδίο ορισμού}\\Βρίσκουμε το πεδίο ορισμού της συνάρτησης $ f $ αν αυτό δε μας δίνεται γνωστό.
+\item \textbf{Πράξεις}\\
+Ξεκινώντας από τη σχέση $ f(x_1)=f(x_2) $, καταλλήγουμε κάνοντας πράξεις με διαδοχικές ισοδυναμίες στη σχέση $ x_1=x_2 $.
+\end{bhma}
+\item \textbf{Μονοτονία}\\
+Χρησιμοποιούμε την τον κανόνα \textbf{2.\ref{mon}} στο \textbf{Θεώρημα 2} που αφορά τη μονοτονία της συνάρτησης και
+\begin{bhma}[leftmargin=.7cm]
+\item \textbf{Πεδίο ορισμού}\\Βρίσκουμε το πεδίο ορισμού της συνάρτησης $ f $ αν αυτό είναι γνωστό.
+\item \textbf{Μονοτονία}\\
+Εξετάζουμε σε κάθε διάστημα του πεδίου ορισμού αν η συνάρτηση είναι γνησίως μονότονη και αν είναι καταλλήγουμε στο συμπέρασμα οτι είναι $ 1-1 $.
+\end{bhma}
+\item \textbf{Μοναδική τιμή {\boldmath{$ x $}} για κάθε {\boldmath{$ y $}}}\\
+Σχηματίζουμε και λύνουμε ως προς $ x $ την εξίσωση $ y=f(x) $ θεωρώντας μεταβλητή το $ x $ και παράμετρο το $ y $. Αν η εξίσωση δίνει μοναδική λύση για τη μεταβλητή $ x $ ως συνάρτηση του $ y $ τότε θα είναι και $ 1-1 $.
+\end{tropos}\mbox{}\\
+\Methodologia{Λύση εξισώσεων}
+
+\end{document}

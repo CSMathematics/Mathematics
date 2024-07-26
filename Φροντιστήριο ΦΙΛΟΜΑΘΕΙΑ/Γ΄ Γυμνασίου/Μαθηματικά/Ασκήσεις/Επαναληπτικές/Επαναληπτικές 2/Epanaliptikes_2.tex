@@ -1,0 +1,178 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Επαναληπτικές Ασκήσεις}{Ταυτότητες - Παραγοντοποίηση}
+\vspace{-4mm}
+\begin{enumerate}
+\item Να βρεθούν τα αναπτύγματα από τις παρακάτω ταυτότητες.
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item $ \left(x+3 \right)^2 $
+\item $ \left(x+2y \right)^2 $
+\item $ \left(4x+3y \right)^2 $
+\item $ \left(x^2-4x \right)^2 $
+\item $ \left(\frac{x}{2}-1 \right)^2 $
+\item $ \left(\frac{3}{x}-\frac{x}{3} \right)^2 $
+\item $ \left(x+2 \right)^3 $
+\item $ \left(3x+4 \right)^3 $
+\item $ \left(4x-y \right)^3 $
+\item $ \left(\frac{x}{2}-1 \right)^3  $
+\item $ (2z-5x)^3 $
+\item $ (x+5)(x-5) $
+\item $ (7x+2y)(7x-2y) $
+\item $ (3-2x)(2x+3) $
+\item $ \left(\sqrt{x}+\sqrt{y}\right)\left(\sqrt{x}-\sqrt{y}\right) $
+\end{enumerate}
+\end{multicols}
+\item Να βρεθούν τα αναπτύγματα από τις παρακάτω ταυτότητες.
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item $ \left(x-4 \right)^2 $
+\item $ \left(y+3z\right)^2 $
+\item $ \left(4x+y \right)^3 $
+\item $ \left(1-4x \right)^3 $
+\item $ \left(\frac{y}{3}-1 \right)^3 $
+\item $ \left(\frac{2}{x}-\frac{x}{2} \right)^2 $
+\item $ \left(\sqrt{3}+\sqrt{5}\right)^2 $
+\item $ \left(4x-5z\right)^2 $
+\item $ \left(3-2x \right)^3 $
+\item $ \left(x^2-1 \right)^3  $
+\item $ (-3-y)(y-3) $
+\item $ (\sqrt{7}-\sqrt{5})(\sqrt{5}+\sqrt{7}) $
+\item $ (-x^2-1)(x^2-1) $
+\item $ \left(\frac{x}{2}-3 \right) \left(\frac{x}{2}-3 \right)  $
+\end{enumerate}
+\end{multicols}
+\item Να παραγοντοποιηθούν οι παρακάτω παραστάσεις
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item $ 3x^2-6x $
+\item $ 4x^3-12x^2+8x $
+\item $ 15x^3y^2-25x^3y^4z $
+\item $ 2a(x-3)+\beta(x-3) $
+\item $ (1-2x)y+(1-2x)x $
+\item $ 24x^2y-8x^4y^3z-16x^2y^2 $
+\item $ x^2-ax+4x-4a $
+\item $ -xy-2x+4y+8 $
+\item $ 3x^3-9x^2-7x+21 $
+\item $ x^2-9 $
+\item $ y^2-49 $
+\item $ 9y^2-36z^2 $
+\item $ x^2+2x+1 $
+\item $ y^2-6y+9 $
+\item $ -z^2+4z-4 $
+\end{enumerate}
+\end{multicols}
+\item Να παραγοντοποιηθούν οι παρακάτω παραστάσεις
+\begin{multicols}{3}
+\begin{enumerate}[label=\roman*.]
+\item $ 4x-8 $
+\item $ 12x^3-16x^2 $
+\item $ 20x^2y-24xy^3 $
+\item $ 4x(y-2)+z(y-2) $
+\item $ (2x-3)a+(2x-3)\beta $
+\item $ y^3-y^2+y-1 $
+\item $ xy^2-y+2xy-2 $
+\item $ 3x^3-9x^2-7x+21 $
+\item $ 4x^2-25 $
+\item $ 9y^2-36z^2 $
+\item $ 16-x^2 $
+\item $ 4x^2-4x+1 $
+\item $ 25+10z+z^2 $
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+\end{document}
+

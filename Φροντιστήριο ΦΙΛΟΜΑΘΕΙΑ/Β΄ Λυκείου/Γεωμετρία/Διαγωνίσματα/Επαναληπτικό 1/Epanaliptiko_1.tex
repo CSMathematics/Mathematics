@@ -1,0 +1,178 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Διαγώνισμα}{Επαναληπτικό}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να απαντήσετε στις παρακάτω ερωτήσεις.
+\begin{rlist}
+\item Γράψτε τους τύπους από τους οποίους δίνονται τα εμβαδά των παρακάτω βασικών σχημάτων : Τετράγωνο, ορθογώνιο, παραλληλόγραμμο, τρίγωνο και τραπέζιο.
+\item Να διατυπώσετε το γενικευμένο πυθαγόρειο θεώρημα για πλευρά που βρίσκεται απέναντι από οξεία γωνία.
+\item Γράψτε τους τύπους από τους οποίους δίνεται το εμβαδόν ενός κύκλου, ενός κυκλικού τομέα και ενός κυκλικού τμήματος.
+\item Ποιο πολύγωνο ονομάζεται κανονικό;
+\item Με τι ισούται ο λόγος των εμβαδών δύο ομοίων τριγώνων;
+\end{rlist}\monades{3}
+\item \swstolathos
+\begin{rlist}
+\item Η κεντρική γωνία ενός κανονικού οκταγώνου ισούται με $ \omega_8=45\degree $.
+\item Η πλευρά ενός κανονικού εξαγώνου εγγεγραμμένο σε κύκλο ακτίνας $ R $ ισούται με $ \lambda_6=R\sqrt{2} $.
+\item Το εμβαδόν ενός τραπεζίου ισούται με το γινόμενο της διαμέσου επί το ύψος του τραπεζίου.
+\item Αν για ένα τρίγωνο $ AB\varGamma $ ισχύει η σχέση $ a^2>\beta^2+\gamma^2 $ τότε το τρίγωνο είναι αμβλυγώνιο.
+\item Το εμβαδόν ενός κυκλικού τομέα $ O\widearc{AB} $ μέτρου $ \mu $ δίνεται από τον τύπο
+\[ (O\widearc{AB})=\frac{\pi R\mu}{360\degree} \]
+\end{rlist}\monades{2}
+\end{erwthma}
+\item\mbox{}\\
+Δίνεται ένα τρίγωνο $ AB\varGamma $ όπως αυτό φαίνεται στο παρακάτω σχήμα, με πλευρές $ a=7,\beta=8 $ και $ \gamma=10 $.
+\begin{center}
+\begin{tikzpicture}[scale=.4]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(10,0){C}
+\tkzDefPoint(4.25,5.56){A}
+\tkzDefPoint(4.25,0){D}
+\draw[pl] (A) -- (B) -- (C) -- cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\draw (A) -- (D);
+\node at (4.9,2.4){$\upsilon_a$};
+\tkzDrawPoints(A,B,C,D)
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+\item Να αποδείξετε ότι το τρίγωνο είναι οξυγώνιο.\monades{1}
+\item Να υπολογίσετε την προβολή της πλευράς $ \beta $ στην πλευρά $ \gamma $.\monades{2}
+\item Να υπολογίσετε το ύψος που αντιστοιχεί στην πλευρά $ a $.\monades{2}
+\end{erwthma}
+\item\mbox{}\\
+\wrapr{-4mm}{7}{5cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(-1,.5){A}
+\tkzDefPoint(2,.5){B}
+\tkzDefPoint(1,-.5){C}
+\tkzDefPoint(-2,-.5){D}
+\draw[pl] (-1,0.5) -- (-2,-0.5) -- (1,-0.5) -- (2,0.5) --cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzMarkAngle[scale=.5](D,A,B)
+\tkzMarkAngle[scale=.55](A,B,C)
+\tkzDrawPoints(A,B,C,D)
+\end{tikzpicture}}{
+Σε παραλληλόγραμμο $ AB\varGamma\varDelta $ είναι $ \hat{A}=5\hat{B} $ και $ (AB\varGamma\varDelta) = 40$. Αν η περίμετρος είναι δωδεκαπλάσια της $ A\varDelta $, να δείξετε ότι:
+\begin{erwthma}
+\item $ AB=20 $ και $ B\varGamma=4 $.\monades{3}
+\item Τα ύψη του $ AB\varGamma\varDelta $ είναι $ 2 $ και $ 10 $.\monades{2}
+\end{erwthma}}\mbox{}\\\\
+\item\mbox{}\\
+Δίνεται τετράγωνο $ AB\varGamma\varDelta $ πλευράς $ a $ και τα τόξα $ \widearc{B\varDelta} $ ακτίνας $ B\varGamma $ και $ \widearc{\varGamma\varDelta} $ διαμέτρου $ \varGamma\varDelta $ .\\
+\begin{center}
+\begin{tikzpicture}
+\polygon[]{4}{2}{A,B,\varGamma,\varDelta}{pl,fill=white}
+\draw[fill=\xrwma!30] (1.4142,1.4142) arc (90:180:2.8251)--(1.4142,-1.4142)--(1.4142,1.4142);
+\draw[fill=white] (1.4142,-1.4142) arc (0:180:1.4142)--(1.4142,-1.4142);
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+\item Να βρεθεί η περίμετρος του καμπυλόγραμμου τριγώνου $ B\varGamma\varDelta $ συναρτήσει της πλευράς $ a $ του τετραγώνου.\\\monades{2}
+\item Να βρεθεί το εμβαδόν του χρωματισμένου μέρους συναρτήσει της πλευράς $ a $ του τετραγώνου.\\\monades{3}
+\end{erwthma}
+\end{thema}
+\kaliepityxia
+\end{document}

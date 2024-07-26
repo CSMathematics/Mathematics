@@ -1,0 +1,198 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Γεωμετρία}{Λόγος ευθυγράμμων τμημάτων}
+\orismoi
+\Orismos{Λόγοσ ευθυγράμμων τμημάτων}
+Λόγος δύο ευθυγράμμων τμημάτων $ AB $ και $ \varGamma\varDelta $ ονομάζεται ο θετικός αριθμός $ \lambda $ ο οποίος είναι ίσος με το πηλίκο τους ή ισοδύναμα το πηλίκο των μέτρων τους.
+\[ \lambda=\frac{AB}{\varGamma\varDelta} \]
+\Orismos{Αναλογία}
+Αναλογία ευθυγράμμων τμημάτων ονομάζεται η ισότητα δύο ή περισσότερων λόγων ευθυγράμμων τμημάτων. Αν $ a,\beta,\gamma,\delta $ είναι ευθύγραμμα τμήματα τότε η αναλογία έχει ως εξής
+\[ \frac{a}{\beta}=\frac{\gamma}{\delta}=\lambda \]
+\begin{itemize}[itemsep=0mm]
+\item Τα ευθύγραμμα τμήματα $ a,\beta,\gamma,\delta $ ονομάζονται \textbf{όροι} της αναλογίας.
+\item Οι αριθμητές της αναλογίας είναι ανάλογοι προς τους παρονομαστές της δηλαδή τα ευθύγραμμα τμήματα $ a,\gamma $ είναι ανάλογα προς τα $ \beta,\delta $.
+\item Τα ευθύγραμμα τμήματα $ a $ και $ \delta $ ονομάζονται \textbf{άκροι όροι} ενώ τα $ \beta,\gamma $ \textbf{μέσοι όροι} της αναλογίας.
+\item Τα ευθύγραμμα τμήματα που βρίσκονται μέσα στον ίδιο λόγο (κλάσμα) ονομάζονται \textbf{ομόλογα} ή \textbf{αντίστοιχα}.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Ίσα τμήματα από παράλληλες ευθείες}
+\wrapr{-4mm}{5}{4.3cm}{-8mm}{\begin{tikzpicture}[scale=1.3]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,.5){C}
+\tkzDefPoint(3,0.5){D}
+\tkzDefPoint(0,1){E}
+\tkzDefPoint(3,1){Z}
+\tkzDefPoint(.7,1.3){H}
+\tkzDefPoint(.4,-.3){I}
+\tkzDefPoint(1.7,1.3){K}
+\tkzDefPoint(2.7,-.3){L}
+\draw[pl] (A)--(B);
+\draw[pl] (C)--(D);
+\draw[pl] (E)--(Z);
+\draw[pl,\xrwma] (H)--(I);
+\draw[pl,\xrwma] (K)--(L);
+\tkzInterLL(E,Z)(H,I)\tkzGetPoint{S}
+\tkzInterLL(C,D)(H,I)\tkzGetPoint{T}
+\tkzInterLL(A,B)(H,I)\tkzGetPoint{Y}
+\tkzInterLL(E,Z)(K,L)\tkzGetPoint{O}
+\tkzInterLL(C,D)(K,L)\tkzGetPoint{P}
+\tkzInterLL(A,B)(K,L)\tkzGetPoint{Q}
+\tkzDrawPoints(S,T,Y,O,P,Q)
+\tkzLabelPoint[above left](S){$A$}
+\tkzLabelPoint[above left](T){$B$}
+\tkzLabelPoint[above left](Y){$\varGamma$}
+\tkzLabelPoint[above right](O){$\varDelta$}
+\tkzLabelPoint[above right](P){$E$}
+\tkzLabelPoint[above right](Q){$Z$}
+\node at (3.2,1) {\footnotesize$\varepsilon_1$};
+\node at (3.2,0.5) {\footnotesize$\varepsilon_2$};
+\node at (3.2,0) {\footnotesize$\varepsilon_3$};
+\node at (0.6,-0.2) {\footnotesize$\varepsilon$};
+\node at (2.4,-0.2) {\footnotesize$\zeta$};
+\end{tikzpicture}}{
+Αν τρεις ή περισσότερες παράλληλες ευθείες ορίζουν ίσα τμήματα σε μια τέμνουσα, τότε θα ορίζουν ίσα τμήματα και σε οποιαδήποτε άλλη τέμουσα ευθεία.
+\[ \varepsilon_1\parallel\varepsilon_2\parallel\varepsilon_3\textrm{ και }AB=B\varGamma\Rightarrow\varDelta E=EZ \]
+}\mbox{}\\\\\\
+\Thewrhma{Ιδιότητεσ των αναλογιών}
+Για κάθε αναλογία με όρους τα ευθύγραμμα τμήματα $ a,\beta,\gamma,\delta $ θα ισχύουν οι παρακάτω ιδιότητες :
+\begin{center}
+\begin{tabular}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex} & \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\
+\hhline{===}\rule[-2ex]{0pt}{5.5ex} \textbf{1} & Χιαστί γινόμενα & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}\Leftrightarrow a\cdot\delta=\beta\cdot\gamma $ \\
+\rule[-2ex]{0pt}{7ex} \textbf{2} & Εναλλαγή μέσων και άκρων όρων & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}\Leftrightarrow \dfrac{a}{\gamma}=\dfrac{\beta}{\delta}\;\;\textrm{ και }\;\;\dfrac{\delta}{\beta}=\dfrac{\gamma}{a} $\\
+\rule[-2ex]{0pt}{7ex} \textbf{5} & Άθροισμα - Διαφορά αριθμ. και παρονομ. & $ \dfrac{a}{\beta}=\dfrac{\gamma}{\delta}=\dfrac{a\pm\beta}{\gamma\pm\delta} $\\
+\hline
+\end{tabular}
+\end{center}\mbox{}\\
+\Thewrhma{Τμήμα από τα μέσα δύο πλευρών}
+\wrapr{-4mm}{7}{4.5cm}{-4mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.2,2){A}
+\tkzDefPoint(.6,1){M}
+\tkzDefPoint(2.35,1){N}
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[dashed] (0,1)--(3.3,1);
+\draw[plm,\xrwma] (M)--(N);
+\tkzDrawPoints(A,B,C,M,N)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left,yshift=2mm](M){$M$}
+\tkzLabelPoint[right,yshift=2mm](N){$N$}
+\end{tikzpicture}}{
+Το ευθύγραμμο τμήμα που ενώνει τα μέσα των δύο πλευρών ενός τριγώνου είναι παράλληλο με την τρίτη πλευρά και ισούται με το μισό της. Θα ισχύει
+\[ MN\parallel=\frac{B\varGamma}{2} \]
+για ένα τρίγωνο $ AB\varGamma $ με $ M,N $ τα μέσα των πλευρών $ AB,A\varGamma $ αντίστοιχα.}\mbox{}\\\\\\
+\Thewrhma{Διάμεσος από ορθή γωνία}
+\wrapr{-4mm}{7}{3cm}{-11mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(2,0){B}
+\tkzDefPoint(0,2.2){C}
+\tkzDefPoint(1,1.1){M}
+\draw[pl,\xrwma](A)--(M);
+\tkzMarkRightAngle[size=.3](B,A,C)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzMarkSegments[mark=|](C,M M,B M,A)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[right,yshift=1mm](M){$M$}
+\tkzDrawPoints(A,B,C,M)
+\end{tikzpicture}}{
+Η διάμεσος που άγεται από την ορθή γωνία προς την υποτείνουσα σε κάθε ορθογώνιο τρίγωνο, ισούται με το μισό της υποτείνουσας.}
+\end{document}

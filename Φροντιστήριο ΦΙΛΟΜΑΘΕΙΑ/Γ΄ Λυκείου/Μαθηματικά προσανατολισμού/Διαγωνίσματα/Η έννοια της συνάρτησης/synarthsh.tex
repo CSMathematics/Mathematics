@@ -1,0 +1,116 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Nimbus Roman Bold}]{Nimbus Roman}
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---------- ΛΙΣΤΕΣ ----------------------
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Η έννοια της συνάρτησης}{Β}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να δώσετε τον ορισμό της πραγματικής συνάρτησης πραγματικής μεταβλητής. \monades{8}
+\item Να δώσετε τον ορισμό της γραφικής παράστασης μιας συνάρτησης $ f $.\monades{7}
+\item \swstolathospan
+\begin{rlist}
+\item Το σημείο $ A(3,2) $ ανήκει στη γραφική παράσταση της συνάρτησης $ f(x)=3x-4 $.
+\item Η συνάρτηση $ f(x)=x^2,\ D_f=[-3,3) $ είναι άρτια.
+\item Η γραφική παράσταση της συνάρτησης $ f(x)=\sqrt{x-1} $ τέμνει τον άξονα $ y'y $.
+\item Η γραφική παράσταση μιας περιττής συνάρτησης είναι συμμετρική ως προς την αρχή των αξόνων.
+\item Η συνάρτηση $ f(x)=t^2 $ είναι σταθερή συνάρτηση.
+\end{rlist}\monades{10}
+\end{erwthma}
+\item\mbox{}\\ Δίνεται η συνάρτηση $ f $ με τύπο $ f(x)=\frac{x^2-x-2}{\sqrt{x-1}} $.
+\begin{erwthma}
+\item Να βρεθεί το πεδίο ορισμού της συνάρτησης $ f $.\monades{10}
+\item Να βρεθούν οι τιμές $ f(2),f(-3),f(f(5)) $.\monades{6}
+\item Να βρεθούν τα σημεία τομής της $ C_f $ με τους άξονες $ x'x $ και $ y'y $.\monades{9}
+\end{erwthma}
+\item\mbox{}\\ Δίνεται η συνάρτηση $ f $ με τύπο
+\[ f(x)=\ccases{ax^2+\beta &, x>1\\
+4a(x-2)-3\beta &, x\leq 1} \]
+όπου $ a,\beta\in\mathbb{R} $, της οποίας η γραφική παράσταση διέρχεται από το σημείο $ A(3,5) $ ενώ τέμνει την ευθεία $ y=0 $ στο σημείο $ B $ με τετμημένη $ x=-1 $.
+\begin{erwthma}
+\item Να δείξετε ότι $ a=1 $ και $ \beta=-4 $.\monades{9}
+\item Να βρεθούν τα διαστήματα στα οποία η $ C_f $ βρίσκεται κάτω από τον άξονα $ x'x $.\monades{8}
+\item Να σχεδιάσετε τη γραφική παράσταση της συνάρτησης $ f $.\monades{8}
+\end{erwthma}
+\item\mbox{}\\ Δίνονται οι συναρτήσεις $ f,g $ με τύπους
+\[ f(x)=x^2-9\ \ \textrm{και}\ \ g(x)=(3-\lambda)x+2\lambda-12 \]
+\begin{erwthma}
+\item Να βρεθούν τα διαστήματα στα οποία η $ C_f $ δεν βρίσκεται πάνω από τον άξονα $ x'x $.\monades{8}
+\item Να βρείτε για ποιες τιμές του $ \lambda $ οι $ C_f $ και $ C_g $ έχουν κοινά σημεία.\monades{9}
+\item Για $ \lambda=2 $ να βρεθεί το εμβαδόν που σχηματίζει η $ C_g $ με τους άξονες $ x'x $ και $ y'y $.\monades{8}
+\end{erwthma}
+\end{thema}
+\kaliepityxia
+\end{document}

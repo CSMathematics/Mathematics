@@ -1,0 +1,98 @@
+\documentclass[internet]{diag-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=3.00cm]{geometry}
+\xroma{red!80!black}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase\textsuperscript{#1}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\usepackage{multicol}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+
+
+
+\begin{document}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ Γ΄ ΓΥΜΝΑΣΙΟΥ}{ΣΥΣΤΗΜΑΤΑ}
+\thewria
+\begin{thema}
+\item \textbf{ΕΡΩΤΗΣΕΙΣ ΑΝΑΠΤΥΞΗΣ}\\
+Να απαντήσετε στις παρακάτω ερωτήσεις.
+\begin{rlist}
+\item Για ποιές τιμές των συντελεστών $ a,\beta $ η γραμμική εξίσωση $ ax+\beta y=\gamma $ παριστάνει ευθεία γραμμή;
+\item Τι ονομάζεται γραμμικό σύστημα;
+\item Ποιές μεθόδους αλγεβρικής επίλυσης ενός γραμμικού συστήματος γνωρίζετε;
+\item Τι ονομάζουμε λύση ενός γραμμικού συστήματος;
+\end{rlist}\monades{6}
+\item \textbf{A : ΣΩΣΤΟ - ΛΑΘΟΣ}\\
+Να χαρακτηρίσετε τις παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{rlist}
+\item Το σημείο $ A(-2,1) $ ανήκει στην ευθεία $ 3x-y=4 $.
+\item Η εξίσωση $ x=4 $ παριστάνει ευθεία παράλληλη με τον κατακόρυφο άξονα $ y'y $.
+\item Ένα γραμμικό σύστημα έχει πάντα λύση.
+\item 
+\end{rlist}\monades{3}\\
+\textbf{Β : ΠΟΛΛΑΠΛΗΣ ΕΠΙΛΟΓΗΣ}\\
+Να επιλέξετε τη σωστή απάντηση σε καθεμια από τις παρακάτω προτάσεις.
+\end{thema}
+\newpage
+\noindent
+\askhseis
+\begin{thema}
+\item \textbf{ΓΡΑΦΙΚΗ ΕΠΙΛΥΣΗ}\\
+Να λυθούν γραφικά τα παρακάτω γραμμικά συστήματα.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \systeme{3x+y=6,2x-4y=-10} $
+\item $ \systeme{x-4y=-7,3x+y=5} $
+\end{rlist}
+\end{multicols}\monades{7}
+\item \textbf{ΑΛΓΕΒΡΙΚΗ ΕΠΙΛΥΣΗ}\\
+Να λυθούν αλγεβρικά τα παρακάτω γραμμικά συστήματα με οποιαδήποτε μέθοδο.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \systeme{2x+5y=-1,3x+4y=2} $
+\item $ \systeme{4x-3y=2,x+7y=16} $
+\end{rlist}
+\end{multicols}\monades{7}
+\item \textbf{ΣΥΝΘΕΤΟ ΣΥΣΤΗΜΑ}\\
+Να λυθεί το παρακάτω γραμμικό σύστημα με οποιαδήποτε μέθοδο γραφική ή αλγεβρική.
+\[ \ccases{\dfrac{2x-y}{3}+\dfrac{x+2}{4}=1-\dfrac{2y-1}{12}\\[3mm]
+\dfrac{x-3}{4}+\dfrac{y+2}{5}=\dfrac{x-3y}{20}+\dfrac{1}{2}} \]
+\end{thema}
+\kaliepityxia
+\end{document}

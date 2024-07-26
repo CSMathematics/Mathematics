@@ -1,0 +1,322 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{xcolor}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+%------- ΟΡΙΣΜΟΣ --------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\arabic{orismos}\;:\;}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%------------------------------
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+%------- ΘΕΩΡΗΜΑ ΑΠΛΗ ΜΟΡΦΗ -----------------
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\arabic{thewrhma}\;:\;}  
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%----------------------------------
+%--------- ΘΕΩΡΗΜΑΤΑ ------------------
+\newcommand{\thewrhmata}{\begin{center}
+{\large {\textbf{ΘΕΩΡΗΜΑΤΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------------
+\newcommand{\pinakasdyo}[8]{
+	\begin{tikzpicture}
+	\foreach \x in {#6,#7}{
+		\draw (-3,0) -- (#8,0);
+		\draw (\x,-.5)--(\x,.0);
+		\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+	\draw (-.5,0.5) -- (-.5,-0.5);
+	\node at (-.15,0.25) {$-\infty$};
+	\node at (#8-.3,0.25) {$+\infty$};
+	\node at (-1.75,0.25) {$x$};
+	\node at (-1.75,-0.3) {$#1$};
+	\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+	\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+	\node at (0.5*#6-0.25,-0.3) {$#4$};
+	\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+	\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+	\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+	\begin{tikzpicture}
+	\draw (-3,0) -- (#5,0);
+	\draw (#4,-.5)--(#4,.0);
+	\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+	\draw (-.5,0.5) -- (-.5,-0.5);
+	\node at (-.15,0.25) {$-\infty$};
+	\node at (#5-0.3,0.25) {$+\infty$};
+	\node at (-1.75,0.25) {$x$};
+	\node at (-1.75,-0.3) {$#1$};
+	\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+	\node at (0.5*#4-0.25,-.3) {$#3$};
+	\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+	\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+	\begin{tikzpicture}
+	\draw (-3,0) -- (5,0);
+	\draw (-.5,0.5) -- (-.5,-0.5);
+	\node at (-.15,0.25) {$-\infty$};
+	\node at (4.7,0.25) {$+\infty$};
+	\node at (-1.75,0.25) {$x$};
+	\node at (-1.75,-0.3) {$#1$};
+	\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+	\end{tikzpicture}}
+
+%-------- ΜΕΘΟΔΟΛΟΓΙΑ ---------
+\newcounter{methodologia}[section]
+\renewcommand{\themethodologia}{\arabic{methodologia}\;:\;}   
+\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia}}\hspace{1mm} \MakeUppercase{\textbf{#1}}\\}{}
+\newcommand{\methodologia}{\begin{center}
+{\large {\textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\tikz[overlay] \shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\tikz[overlay] \shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%-------------------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\begin{document}
+\section*{\LARGE ΑΝΙΣΩΣΕΙΣ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΑΝΙΣΩΣΕΙΣ 2\MakeLowercase{\textsuperscript{ου}} ΒΑΘΜΟΥ}
+\end{center}\mbox{}\\
+\orismoi
+\Orismos{Τριώνυμο 2\tssL{ου} Βαθμού}
+Τριώνυμο 2\tss{ου} βαθμού ονομάζεται κάθε πολυώνυμο 2\tss{ου} βαθμού με τρεις όρους το οποίο είναι της μορφής 
+\[ ax^2+\beta x+\gamma \]
+με πραγματικούς συντελεστές $ a,\beta,\gamma\in\mathbb{R} $ και $ a\neq0 $.\\\\
+\Orismos{Ανίσωση 2\MakeLowercase{\textsuperscript{ου}} βαθμού}
+Ανίσωση 2\MakeLowercase{\textsuperscript{ου}} βαθμού ονομάζεται κάθε πολυωνυμική ανίσωση η οποία περιέχει τριώνυμο 2\MakeLowercase{\textsuperscript{ου}} βαθμού και είναι της μορφής \[ ax^2+\beta x+\gamma>0\;\;\textrm{ή}\;\;ax^2+\beta x+\gamma<0\;\;\textrm{με}\;\;a\neq0 \]\mbox{}\\
+\thewrhmata
+\Thewrhma{Παραγοντοποίηση τριωνύμου}
+Για τη μετατροπή ενός τριωνύμου $ ax^2+\beta x+\gamma\;\;\textrm{με}\;\;a\neq0 $ σε γινόμενο παραγόντων διακρίνουμε τις εξής περιπτώσεις :
+\begin{enumerate}[itemsep=0mm]
+\item Αν η διακρίνουσα του τριωνύμου είναι θετική $\left( \varDelta>0\right)  $ τότε το τριώνυμο παραγοντοποιείται ως εξής \[ ax^2+\beta x+\gamma=a(x-x_1)(x-x_2) \]
+όπου $ x_1,x_2 $ είναι οι ρίζες του τριωνύμου.
+\item Αν η διακρίνουσα είναι μηδενική $\left( \varDelta=0\right)  $ τότε το τριώνυμο παραγοντοποιείται ως εξής : \[ ax^2+\beta x+\gamma=a\left(x-x_0\right)^2=a\left(x+\frac{\beta}{2a}\right)^2  \]
+όπου $ x_0 $ είναι η διπλή ρίζα του τριωνύμου.
+\item Αν η διακρίνουσα είναι αρνητική $\left( \varDelta<0\right)  $ τότε το τριώνυμο δεν γράφεται ως γινόμενο πρώτων παραγόντων. Εναλλακτικά όμως μπορεί να γραφεί : \[ ax^2+\beta x+\gamma=a\left[\left(x+\frac{\beta}{2a}\right)^2+\frac{|\varDelta|}{4a^2}\right]  \]
+\end{enumerate}
+\Thewrhma{Πρόσημο τριωνύμου}
+Για το πρόσημο των τιμών ενός τριωνύμου $ ax^2+\beta x+\gamma $ ισχύουν οι παρακάτω κανόνες.
+\begin{enumerate}[itemsep=0mm]
+\item Αν η διακρίνουσα είναι θετική $\left( \varDelta>0\right)  $ τότε το τριώνυμο είναι
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item ομόσημο του συντελεστή $ a $ στα διαστήματα που βρίσκονται έξω από τις ρίζες $ x_1,x_2 $.
+\item ετερόσημο του $ a $ στο διάστημα ανάμεσα στις ρίζες.
+\item ίσο με το μηδέν στις ρίζες.
+\end{enumerate}
+\begin{center}
+	\pinakasdyo{ax^2+\beta x+\gamma}{x_1}{x_2}{ \textrm{ομόσημο του }a}{\textrm{ετερόσημο του }a}{2.5}{6}{9}
+\end{center}
+\item Αν η διακρίνουσα είναι μηδενική $\left( \varDelta=0\right)  $ τότε το τριώνυμο είναι
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item ομόσημο του συντελεστή $ a $ στα διαστήματα που βρίσκονται δεξιά και αριστερά της ρίζας $ x_0 $.
+\item ίσο με το μηδέν στη ρίζα.
+\end{enumerate}
+\begin{center}
+\pinakasmia{ax^2+\beta x+\gamma}{x_0}{\textrm{ομόσημο του }a}{3}{6.5}
+\end{center}
+\item Αν η διακρίνουσα είναι αρνητική $\left( \varDelta<0\right)  $ τότε το τριώνυμο είναι
+ομόσημο του συντελεστή $ a $ για κάθε $ x\in\mathbb{R}$.
+\begin{center}
+\pinakaskamia{ax^2+\beta x+\gamma}{\textrm{ομόσημο του }a}
+\end{center}
+\end{enumerate}\mbox{}\\
+\methodologia
+\Methodologia{Παραγοντοποίηση τριωνύμου}
+Για να παραγοντοποιηθεί ένα τριώνυμο της μορφής $ ax^2+\beta x+\gamma $ :
+\begin{bhma}
+\item \textbf{Υπολογισμός διακρίνουσας}\\
+Υπολογίζουμε τη διακρίνουσα $ \varDelta $ του τριωνύμου.
+\item \textbf{Πρόσημο τριωνύμου}\\
+Ανάλογα το πρόσημο της παραγοντοποιούμε ακολουθώντας τον κανόνα στο \textbf{Θεώρημα 1}.
+\end{bhma}\mbox{}\\
+\Methodologia{Ευρεση προσημου τριωνύμου}
+Για την εύρεση του προσήμου των τιμών ενός τριωνύμου για τις διάφορες τιμές της μεταβλητής :
+\begin{bhma}
+\item \textbf{Υπολογισμός διακρίνουσας}\\
+Υπολογίζουμε τη διακρίνουσα του.
+\item \textbf{Ρίζες τριωνύμου}\\
+Υπολογίζουμε τις ρίζες του τριωνύμου δηλαδή τις τιμές για τις οποίες μηδενίζεται.
+\item \textbf{Πίνακας προσήμων}\\
+Κατασκευάζουμε και συμπληρώνουμε τον κατάλληλο πίνακα προσήμων ανάλογα το πρόσημο της διακρίνουσας ακολουθόντας τον κανόνα στο \textbf{Θεώρημα 2}. Στον άξονα των τιμών της μεταβλητής $ x $ τοποθετούμε τις ρίζες σε αύξουσα σειρά.
+\item \textbf{Πρόσημο τριωνύμου}\\
+Δίνουμε απάντηση για κάθε πρόσημο του τριωνύμου αναφέροντας και το διάστημα των τιμών του $ x $ για το οποίο προκύπτει.
+\end{bhma}\mbox{}\\
+\Methodologia{Λύση ανίσωσησ 2\MakeLowercase{\textsuperscript{ου}} βαθμού}
+Για να λυθεί μια ανίσωση 2\textsuperscript{ου} βαθμού
+\begin{bhma}
+\item \textbf{Σχηματισμός τριωνύμου}\\
+Αν η ανίσωση δεν είναι της μορφής του \textbf{Ορισμού 1}, εκτελούμε κατάλληλες πράξεις ώστε να τη μετασχηματίσουμε στη μορφή αυτή. 
+\item \textbf{Διακρίνουσα - Πίνακας προσήμων}\\
+Ακολουθούμε τα βήματα $ 1,2 $ και $ 3 $ της \textbf{Μεθόδου 2} για την εύρεση προσήμου.
+\item \textbf{Λύση ανίσωσης}\\
+Απαντάμε γράφοντας τις λύσεις της ανίσωσης για τις οποίες προκύπτει μόνο το πρόσημο που μας ενδιαφέρει, δηλαδή το πρόσημο που μας υποδεικνύει η ανίσωση.
+\end{bhma}
+\end{document}

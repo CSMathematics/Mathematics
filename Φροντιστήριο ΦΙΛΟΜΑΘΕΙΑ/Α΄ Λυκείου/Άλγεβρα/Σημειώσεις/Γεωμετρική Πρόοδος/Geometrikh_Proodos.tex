@@ -1,0 +1,100 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+
+
+\begin{document}
+\titlos{ΑΛΓΕΒΡΑ Α΄ ΛΥΚΕΙΟΥ}{Ακολουθίες - Πρόοδοι}{Γεωμετρική Πρόοδος}
+\orismoi
+\Orismos{Γεωμετρική πρόοδοσ}
+Γεωμετρική πρόοδος ονομάζεται κάθε ακολουθία $ (a_\nu),\nu\in\mathbb{N}^* $ πραγματικών αριθμών στην οποία κάθε όρος της προκύπτει πολλαπλασιάζοντας κάθε φορά τον προηγούμενο όρο με τον ίδιο σταθερό αριθμό. Θα ισχύει
+\[ a_{\nu+1}=\lambda\cdot a_\nu \]
+Ο αριθμός $ \lambda=\frac{a_{\nu+1}}{a_\nu} $ ονομάζεται \textbf{λόγος} της γεωμετρικής προόδου.\\\\
+\Orismos{Γεωμετρικόσ μέσοσ}
+Γεωμετρικός μέσος τριών διαδοχικών όρων $ a,\beta,\gamma $ μιας γεωμετρικής προόδου $ (a_\nu) $ ονομάζεται ο μεσαίος όρος $ \beta $ για τον οποίο ισχύει \[ \beta^2=a\cdot\gamma \]
+Πιο γενικά, ο γεωμετρικός μέσος $ \nu $ διαδοχικών όρων $ a_1,a_2,\ldots,a_\nu $ γεωμετρικής προόδου ονομάζεται ο πραγματικός αριθμός $ \mu $ για τον οποίο ισχύει \[ \mu^\nu=a_1\cdot a_2\cdot\ldots\cdot a_\nu \]
+\Orismos{Παρεμβολή γεωμετρικών ενδιαμέσων}
+Γεωμετρικοί ενδιάμεσοι δύο αριθμών $ a $ και $ \beta $ ονομάζονται $\nu$ σε πλήθος πραγματικοί αριθμοί $ x_1,x_2,\ldots,x_\nu $ όταν αυτοί μπορούν να παρεμβληθούν μεταξύ των $ a $ και $ \beta $ ώστε οι πραγματικοί αριθμοί \[ a,x_1,x_2,\ldots x_\nu,\beta \] να αποτελούν, $ \nu+2 $ σε πλήθος, διαδοχικούς όρους γεωμετρικής προόδου.\\\\
+\thewrhmata
+\Thewrhma{Γενικόσ όροσ γεωμετρικήσ προόδου}
+Εαν $ (a_\nu) $ είναι μια γεωμετρική πρόοδος με λόγο $ \lambda $ τότε ο γενικός όρος της $ a_\nu $ θα δίνεται από τον τύπο \[ a_\nu=a_1\cdot\lambda^{\nu-1} \]
+\Thewrhma{Αθροισμα όρων γεωμετρικήσ προόδου}
+Εαν $ (a_\nu) $ είναι μια γεωμετρική πρόοδος με λόγο $ \lambda\neq1 $, τότε το άθροισμα των $ \nu $ πρώτων όρων της δίνεται από τους τύπους
+\[ S_\nu=\dfrac{a_\nu\cdot\lambda-a_1}{\lambda-1}\;\;,\;\;S_\nu=a_1\frac{\lambda^\nu-1}{\lambda-1} \]
+Εαν ο λόγος είναι $ \lambda=1 $ τότε το άθροισμα θα δίνεται από τον τύπο $ S_\nu=\nu a_1 $.\\\\
+\Thewrhma{Γεωμετρικόσ μέσοσ}
+Τρεις πραγματικοί αριθμοί $ a,\beta,\gamma $ αποτελούν διαδοχικούς όρους γεωμετρικής προόδου αν και μόνο αν ισχύει \[ \beta^2=a\cdot\gamma \]
+Εαν οι τρεις όροι $ a,\beta,\gamma $ είναι θετικοί έχουμε ισοδύναμα $ \beta=\!\sqrt{a\cdot\gamma} $.\\
+Γενικά έχουμε οτι μια ακολουθία πραγματικών αριθμών $ (a_\nu) $ αποτελεί γεωμετρική πρόοδο αν και μόνο αν γιια κάθε $ \nu\in\mathbb{N}^* $ ισχύει \[ a_\nu^2=a_{\nu+1}\cdot a_{\nu-1} \]
+\Thewrhma{Λόγοσ γεωμετρικήσ παρεμβολήσ}
+Εαν οι πραγματικοί αριθμοί $ x_1,x_2,\ldots,x_\nu $ είναι γεωμετρικοί ενδιάμεσοι δύο αριθμών $ a,\beta\in\mathbb{R}^*$ τότε για το λόγο της γεωμετρικής προόδου στην οποία ανήκουν ισχύει :
+\begin{enumerate}[itemsep=0mm]
+\item Αν ο εκθέτης $ \nu+1 $ είναι άρτιος και $ a,\beta $ ομόσημοι τότε $ \lambda=\pm\!\sqrt[\nu+1]{\frac{\beta}{a}} $.
+\item Αν ο εκθέτης $ \nu+1 $ είναι περιττός έχουμε
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ a,\beta $ ομόσημοι τότε $ \lambda=\!\sqrt[\nu+1]{\frac{\beta}{a}} $
+\item Αν $ a,\beta $ ετερόσημοι τότε $ \lambda=-\!\sqrt[\nu+1]{\left| \frac{\beta}{a}\right| } $
+\end{enumerate}
+\end{enumerate}
+Στην περίπτωση όπου ο εκθέτης $ \nu+1 $ είναι άρτιος και $ a,\beta $ ετερόσημοι τότε δεν ορίζεται λόγος $ \lambda $ και κατά συνέπεια δε σχηματίζεται γεωμετρική πρόοδος.\\\\
+\Thewrhma{Παράσταση όρων αριθμητικήσ προόδου}
+Εαν $ (a_\nu) $ είναι μια αριθμητική πρόοδος με διαφορά $ \omega $ τότε ισχύουν οι παρακάτω ιδιότητες για τους όρους της :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Εαν $ a_1,a_2,\ldots,a_\nu $ είναι $ \nu $ σε πλήθος διαδοχικοί όροι γεωμετρικής προόδου τότε ο $ \mu -$οστός όρος από το τέλος βρίσκεται στη θέση $ \nu-\mu+1 $ και δίνεται από τον τύπο \[ a_{\nu-\mu+1}=a_\nu\cdot\lambda^{1-\mu} \]
+\item Το άθροισμα $ S $ των $ \mu $ τελευταίων όρων μιας γεωμετρικής προόδου $ (a_\nu) $ είναι \[ S=S_\nu-S_{\nu-\mu} \]
+\end{enumerate}
+\end{document}

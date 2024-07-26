@@ -1,0 +1,166 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά προσανατολισμού}{Όρια - Συνέχεια}{Μη πεπερασμένο όριο}
+\orismoi
+\Orismos{Μη πεπερασμένο όριο}
+Δίνεται μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ και $ x_0\in\mathbb{R} $. Το όριο της $ f $ όταν το $ x $ τείνει στο $ x_0 $ λέγεται μη πεπερασμένο όταν είναι ένα από τα $ +\infty $ ή $ -\infty $.
+\[ \lim_{x\to x_0}{f(x)}=\pm\infty \]
+\thewrhmata
+\Thewrhma{Μη πεπερασμένο όριο και διάταξη}
+Θεωρούμε μια συνάρτηση $ f:A\to\mathbb{R} $ και $ x_0\in\mathbb{R} $. Θα ισχύει ότι:
+\begin{rlist}
+\item Αν $ \lim_{x\to x_0}{f(x)}=+\infty $ τότε $ f(x)>0 $ σε μια περιοχή του $ x_0 $.
+\item Αν $ \lim_{x\to x_0}{f(x)}=-\infty $ τότε $ f(x)<0 $ σε μια περιοχή του $ x_0 $.
+\end{rlist}
+\Thewrhma{Ιδιότητες μη πεπερασμένου ορίου}
+Θεωρούμε μια συνάρτηση $ f:A\to\mathbb{R} $ και $ x_0\in\mathbb{R} $. Αν η $ f $ έχει μη πεπερασμένο όριο στο σημείο $ x_0 $ τότε ισχύουν γι αυτήν οι ακόλουθες ιδιότητες.
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Αν $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=\pm\infty$ τότε $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{f(x)}=0} $.
+\item Αν ισχύουν οι σχέσεις $ \ccases{\displaystyle{\lim_{x\rightarrow x_0}f(x)}=0\\f(x)>0 \ \ (<0)\textrm{ κοντά στο }x_0}$ τότε $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{f(x)}=+\infty(-\infty)} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)\pm\infty}\Rightarrow\displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=+\infty $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=+\infty\Rightarrow\displaystyle{\lim_{x\rightarrow x_0}\!\sqrt[\kappa]{f(x)}=+\infty} $.
+\begin{multicols}{2}
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{(x-x_0)^{2\nu}}=+\infty} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{|x-x_0|}=+\infty} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0^-}\frac{1}{(x-x_0)^{2\nu+1}}=-\infty} $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0^+}\frac{1}{(x-x_0)^{2\nu+1}}=+\infty} $.
+\end{multicols}
+\item Δεν υπάρχουν τα όρια της μορφής $ \displaystyle{\lim_{x\rightarrow x_0}\frac{1}{(x-x_0)^{2\nu+1}}} $.
+\end{enumerate}
+\Thewrhma{Μη πεπερασμένο όριο και διάταξη 2}
+Αν για δύο συναρτήσεις $ f,g $ ισχύει η σχέση $ f(x)\leq g(x) $ κοντά στο $ x_0 $ τότε παίρνουμε ότι:
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f(x)}=+\infty\Rightarrow \displaystyle{\lim_{x\rightarrow x_0}g(x)}=+\infty $.
+\item $ \displaystyle{\lim_{x\rightarrow x_0}g(x)}=-\infty\Rightarrow \displaystyle{\lim_{x\rightarrow x_0}f(x)}=-\infty $.
+\end{enumerate}
+\Thewrhma{Όριο αθροίσματος}
+Για το όριο του αθροίσματος δύο συναρτήσεων $ f,g $ έχουμε τις παρακάτω περιπτώσεις:
+\begin{center}
+\begin{tabular}{c|cccccc}
+\hline  Όριο συνάρτησης & \multicolumn{6}{c}{Τιμή ορίου} \rule[-2ex]{0pt}{5.5ex}\\
+\hhline{=======} \rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}f(x)} $ & $ a\in\mathbb{R} $ & $ a\in\mathbb{R} $ & $ +\infty $ & $ +\infty $ & $ -\infty $ & $ -\infty $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}g(x)} $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ \\ 
+\hhline{~------}\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}(f+g)(x)} $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & Απροσδιόριστη & Απροσδιόριστη & $ -\infty $ \\ 
+\hline 
+\end{tabular}
+\end{center}
+\Thewrhma{Όριο γινομένου}
+Για το όριο του γινομένου δύο συναρτήσεων $ f,g $ έχουμε τις παρακάτω περιπτώσεις:
+\begin{center}
+\begin{tabular}{c|cccccccccc}
+\hline  Όριο συνάρτησης & \multicolumn{10}{c}{Τιμή ορίου} \rule[-2ex]{0pt}{5.5ex}\\
+\hhline{===========} \rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}f(x)} $ & $ a>0 $ & $ a>0 $ & $ a<0 $ & $ a<0 $ & $ +\infty $ & $ +\infty $ & $ -\infty $ & $ -\infty $ & 0 & 0 \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}g(x)} $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ & $ +\infty $ & $ -\infty $ \\ 
+\hhline{~----------}\rule[-2ex]{0pt}{5.5ex} $ \displaystyle{\lim_{x\rightarrow x_0}(f\cdot g)(x)} $ & $ +\infty $ & $ -\infty $ & $ -\infty $ & $ +\infty $ & $ +\infty $ & $ -\infty $ & $ -\infty $ & $ +\infty $ & Απρ. & Απρ. \\ 
+\hline 
+\end{tabular}
+\end{center}
+Από τα δύο προηγούμενα θεωρήματα παίρνουμε τις εξής απροσδιόριστες μορφές:
+\begin{center}
+\begin{tcolorbox}[title=ΑΠΡΟΣΔΙΟΡΙΣΤΕΣ ΜΟΡΦΕΣ,hbox,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white},enhanced,
+colback=black!5!white,
+boxrule=0.1pt,
+colframe=\xrwma,
+fonttitle=\bfseries,center title,toptitle=3pt,bottomtitle=3pt]
+\begin{minipage}{5.5cm}
+\vspace{-3mm}
+\[ +\infty-\infty\ \ ,\ \ -\infty+\infty \]
+\[ 0\cdot(\pm\infty)\ \ ,\ \ \dfrac{0}{0}\ \ ,\ \ \dfrac{\pm\infty}{\pm\infty} \]
+\end{minipage}
+\end{tcolorbox}
+\end{center}
+\end{document}

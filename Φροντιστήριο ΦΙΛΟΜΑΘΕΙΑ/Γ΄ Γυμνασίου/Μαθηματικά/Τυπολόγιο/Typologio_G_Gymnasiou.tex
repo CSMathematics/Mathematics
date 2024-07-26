@@ -1,0 +1,207 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\section{Αλγεβρικές Παραστάσεις}
+\begin{enumerate}
+\item \textbf{Μονώνυμο:} Αλγεβρική παράσταση που περιέχει μόνο πολλαπλασιασμό. Παράδειγμα : $ 2x^3y^4 $
+\begin{rlist}
+\item Ο αριθμός λέγεται \textbf{συντελεστής}.
+\item Οι μεταβλητές αποτελούν το \textbf{κύριο μέρος}.
+\end{rlist}
+\item \textbf{Όμοια μονώνυμα:} Τα μονώνυμα με ίδιο κύριο μέρος.
+\item \textbf{Ίσα μονώνυμα:} Τα μονώνυμα με ίδιο κύριο μέρος και ίδιους συντελεστές.
+\item \textbf{Αντίθετα μονώνυμα:} Τα μονώνυμα με ίδιο κύριο μέρος και αντίθετους συντελεστές.
+\item \textbf{Πολυώνυμο:} Άθροισμα ανόμοιων μονωνύμων. Παράδειγμα:
+\[ 3x^2y+4x^3z-xy^4 \]
+\begin{rlist}
+\item Κάθε προσθετέος μέσα σε ένα πολυώνυμο λέγεται \textbf{όρος}.
+\item Ο μεγαλύτερος εκθέτης μιας μεταβλητής λέγεται \textbf{βαθμός} του πολυωνύμου.
+\end{rlist}
+\item \textbf{Ταυτότητα:} Μια ισότητα που έχει μεταβλητές και επαληθεύεται πάντα. Βασικές ταυτότητες:
+\begin{rlist}
+\item $ \left(a+\beta \right)^2=a^2+2a\beta+\beta^2  $
+\item $ \left(a-\beta \right)^2=a^2-2a\beta+\beta^2  $
+\item $ \left(a+\beta \right)^3=a^3+3a^2\beta+3a\beta^2+\beta^3 $
+\item $ \left(a-\beta \right)^3=a^3-3a^2\beta+3a\beta^2-\beta^3 $
+\item $ \left(a+\beta \right)\cdot\left(a-\beta \right)=a^2-\beta^2  $
+\item $ \left(a+\beta \right)\cdot\left(a^2-a\cdot\beta+\beta^2\right)=a^3+\beta^3  $
+\item $ \left(a-\beta \right)\cdot\left(a^2+a\cdot\beta+\beta^2\right)=a^3-\beta^3  $
+\end{rlist}
+\item \textbf{Παραγοντοποίηση:} Διαδικασία με την οποία μετατρέπουμε το άθροισμα σε γινόμενο. Βασικοί τρόποι:
+\begin{rlist}
+\item \textbf{Κοινός παράγοντας:} Από αριθμούς βγάζουμε το Μ.Κ.Δ. και από μεταβλητές βγάζουμε τις κοινές στη μικρότερη δύναμη.
+\item \textbf{Ομαδοποίηση:} Μοιράζουμε την παράσταση σε ομάδες και από κάθε ομάδα βγάζουμε κοινό παράγοντα.
+\item \textbf{Διαφορά τετραγώνων:} $ a^2-\beta^2=(a-\beta)(a+\beta) $.
+\item \textbf{Ανάπτυγμα τετραγώνου:} $ a^2\pm 2a\beta+\beta^2=(a\pm\beta)^2 $
+\end{rlist}
+\item \begin{rlist}
+\item \textbf{Ε.Κ.Π. αλγεβρικών παραστάσεων:} Επιλέγουμε όλους τους παράγοντες στη μεγαλύτερη δύναμη.
+\item \textbf{Μ.Κ.Δ. αλγεβρικών παραστάσεων:} Επιλέγουμε τους κοινούς παράγοντες στη μικρότερη δύναμη.
+\end{rlist}
+Αν έχουμε πολυώνυμα πρώτα παραγοντοποιούμε.
+\item \textbf{Ρητή αλγεβρική παράσταση:} Μια αλγ. παράσταση που έχει τη μορφή κλάσματος. (Πρέπει ο παρονομαστής να είναι διάφορος του μηδέν.)
+\end{enumerate}
+\newpage
+\noindent
+\section{Εξισώσεις - Ανισώσεις}
+\begin{enumerate}
+\item \textbf{Εξίσωση 2ου βαθμού:} $ ax^2+\beta x+\gamma=0\ \ ,\ \ a\neq0 $.
+\begin{rlist}
+\item  Οι $ a,\beta,\gamma $ λέγονται \textbf{συντελεστές}.
+\item Ο αριθμός $ \varDelta=\beta^2-4a\gamma $ λέγεται \textbf{διακρίνουσα}.
+\item Οι λύσεις μια εξίσωσης 2ου βαθμού φαίνονται στον παρακάτω πίνακα:
+\begin{center}
+\begin{tabular}{ccc}
+\hline\textbf{Διακρίνουσα} & \textbf{Πλήθος λύσεων} & \textbf{Λύσεις} \rule[-2ex]{0pt}{5.5ex}\\ 
+\hhline{===}\rule[-2ex]{0pt}{7ex} $ \varDelta>0 $ &  2 λύσεις & $ x_{1,2}=\dfrac{-\beta\pm\!\sqrt{\varDelta}}{2a} $  \\
+\rule[-2ex]{0pt}{5.5ex} $ \varDelta=0 $ & 1 διπλή λύση & $ x=-\dfrac{\beta}{2a} $\\
+\rule[-2ex]{0pt}{5.5ex} $ \varDelta<0 $ & \multicolumn{2}{c}{Καμία λύση}\\
+\hline 
+\end{tabular}
+\end{center}
+\end{rlist}
+\item \textbf{Ανίσωση:}  Μια ανισότητα που περιέχει μεταβλητές.\\
+\textbf{Ιδιότητες ανισοτήτων:}
+\begin{rlist}
+\item $ a>\beta\Leftrightarrow\ccases{a+\gamma>\beta+\gamma\\a-\gamma>\beta-\gamma} $
+\item $
+\textrm{Αν }\gamma>0\textrm{ τότε }a>\beta\Leftrightarrow a\cdot\gamma>\beta\cdot\gamma\textrm{ και }\dfrac{a}{\gamma}>\dfrac{\beta}{\gamma}$ \\ $
+\textrm{Αν }\gamma<0\textrm{ τότε }a>\beta\Leftrightarrow a\cdot\gamma<\beta\cdot\gamma\textrm{ και }\dfrac{a}{\gamma}<\dfrac{\beta}{\gamma}
+$
+\end{rlist}
+\end{enumerate}\mbox{}\\
+\section{Συστήματα Εξισώσεων}
+\begin{enumerate}
+\item \textbf{Γραμμική εξίσωση:} Μια εξίσωση της μορφής $ ax+\beta y=\gamma $.
+\begin{rlist}
+\item Έχει $ 2 $ μεταβλητές $ x,y $.
+\item Οι $ a,\beta,\gamma $ είναι γνωστοί αριθμοί.
+\item Οι λύσεις είναι ζευγάρια αριθμών $ (x,y) $.
+\item Αν $ a\neq0 $ ή $ \beta\neq0 $ τότε η εξίσωση παριστάνει ευθεία γραμμή.
+\item Κάθε εξίσωση $ y=a $ παριστάνει \textbf{οριζόντια} ευθεία που περνάει από το σημείο $ (0,a) $.
+\item Κάθε εξίσωση $ x=a $ παριστάνει \textbf{κατακόρυφη} ευθεία που περνάει από το σημείο $ (a,0) $.
+\end{rlist}
+\item \textbf{Σύστημα γραμμικών εξισώσεων:} Δύο εξισώσεις με δύο άγνωστους $ x,y $ γραμμένες μαζί. Παράδειγμα:
+\[ \systeme[xy]{2x+3 y=5,x-4y=-3} \]
+\begin{rlist}
+\item Το ζευγάρι αριθμών $ (x,y) $ που επαληθεύει και τις δύο εξισώσεις είναι η \textbf{λύση του συστήματος}.
+\item Κάθε εξίσωση είναι ευθεία γραμμή. Το κοινό σημείο των ευθειών είναι η λύση.
+\item Αν ένα σύστημα δεν έχει λύσεις είναι \textbf{αδύνατο}. (Οι ευθείες είναι παράλληλες.)
+\item Αν έχει άπειρες λύσεις είναι \textbf{αόριστο}. (Οι ευθείες ταυτίζονται.)
+\end{rlist}
+\item \textbf{Μέθοδοι για να λύσουμε σύστημα:}
+\begin{rlist}
+\item Μέθοδος της αντικατάστασης
+\item Μέθοδος των αντίθετων συντελεστών
+\end{rlist}
+\end{enumerate}
+\newpage
+\noindent
+\section{Πιθανότητες}
+\begin{enumerate}
+\item \textbf{Σύνολο:} Μια ομάδα από όμοια αντικείμενα. Τα αντικείμενα λέγονται \textbf{στοιχεία}.
+\item \textbf{Τρόποι παράστασης συνόλου:}
+\begin{brlist}[leftmargin=4mm]
+\item \textbf{Αναγραφή:} Γράφουμε όλα τα στοιχεία μέσα σε άγκιστρα. Π.χ. $ A=\{1,2,3\} $.
+\item \textbf{Περιγραφή:} Γράφουμε την ιδιότητα που έχουν τα στοιχεία και που ανήκουν. Π.χ. $ A=\{x\in\mathbb{N}/x<4\} $.
+\item \textbf{Διάγραμμα Venn:} Σχεδιάζουμε με κύκλους τα σύνολα μέσα στο βασικό σύνολο $ \Omega $ που είναι ορθογώνιο.
+\end{brlist}
+\item \textbf{Πράξεις με σύνολα:}
+\begin{brlist}
+\item \textbf{Ένωση:} Το σύνολο που περιέχει όλα τα στοιχεία από δύο σύνολα. $ A\cup B $.
+\item \textbf{Τομή:} 
+\end{brlist}
+\end{enumerate}
+\end{document}

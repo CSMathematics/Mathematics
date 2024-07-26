@@ -1,0 +1,450 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+
+
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+
+%------ Tikz - Item ----------------
+\newcommand{\tikzitem}{\leavevmode\vadjust{\vspace{-\baselineskip}}\newline}
+%\begin{tikzpicture}[level/.style={sibling distance=50mm/#1},baseline]
+%-----------------------------------
+\usepackage{mathimatika}
+
+
+\begin{document}
+\twocolkentro{
+\titlos{Άλγεβρα Α΄ Λυκείου}{Πραγματικοί Αριθμοί}{Διάταξη πραγματικών αριθμών}
+\thewria}
+\begin{enumerate}
+\item 
+\end{enumerate}
+\twocolkentro{\askhseis}
+\begin{enumerate}
+\item \textbf{Πρόσημο παράστασης}\\
+Δίνεται πραγματικός αριθμός $ a\in\mathbb{R} $ τέτοιος ώστε να ισχύει $ 1<a<4 $. Να βρεθούν τα πρόσημα των παρακάτω παραστάσεων.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ a-4 $
+\item $ a-1 $
+\item $ 1-a $
+\item $ 8-a $
+\item $ a-5 $
+\item $ 7-a $
+\end{rlist}
+\end{multicols}
+\item \textbf{Πρόσημο παράστασης}\\
+Έστω ένας πραγματικός αριθμός $ a\in\mathbb{R} $ ο οποίος ικανοποιεί τη σχέση $ 2<a<7 $. Να βρεθούν τα πρόσημα των παρακάτω παραστάσεων.
+\begin{rlist}
+\item $ (a-2)(a-7) $
+\item $ (2a-3)(7-a)(1-a) $
+\item $ (3a-5)(14-2a) $
+\end{rlist}
+\item \textbf{Πρόσημο παράστασης}\\
+Δίνονται τρεις πραγματικοί αριθμοί $ x,y,z $ τέτοιοι ώστε $ x<y<z $. Να βρεθεί το πρόσημο των παρακάτω παραστάσεων.
+\begin{rlist}
+\item $ (x-y)(z-x) $
+\item $ (x-z)(y-x) $
+\item $ (y-z)(x-y)(x-z) $
+\end{rlist}
+\item \textbf{Πρόσημο παράστασης}\\
+Έστω ένας πραγματικός αριθμός $ a $ για τον οποίο γνωρίζουμε ότι ισχύει $ 2<a<4 $. Να βρεθούν οι αριθμοί μεταξύ των οποίων βρίσκονται οι παρακάτω παραστάσεις.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ a^2-4 $
+\item $ 2a^2+3 $
+\item $ a^3 $
+\item $ 2a-a^2 $
+\item $ 3a^2-a^3 $
+\item $ a^4-3a^2 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Σύγκριση αριθμών}\\
+Να συγκρίνετε τους πραγματικούς αριθμούς $ A $ και $ B $ στις παρακάτω περιπτώσεις.
+\begin{rlist}
+\item $ A=3\sqrt{3}-1 $ και $ B=2\sqrt{3}-2 $
+\item $ A=4\sqrt{5}+\sqrt{2} $ και $ B=3\sqrt{5}+2\sqrt{2} $
+\item $ A=\frac{2\sqrt{2}-1}{2} $ και $ B=\frac{3}{2} $
+\item $ A=\left(\!\sqrt{2}\right)^3+1 $ και $ B=\sqrt{2}+2 $
+\end{rlist}
+\item \textbf{Σύγκριση αριθμών}\\
+Να συγκρίνετε τους πραγματικούς αριθμούς $ A $ και $ B $ στις παρακάτω περιπτώσεις.
+\begin{rlist}
+\item $ A=2^{70} $ και $ B=4^{30} $
+\item $ A=9^{120} $ και $ B=8^{150} $
+\item $ A= $ και $ B= $
+\item $ A= $ και $ B= $
+\end{rlist}
+\item \textbf{Σύγκριση αριθμών}\\
+Να συγκριθούν οι παρακάτω αλγεβρικές παραστάσεις $ A $ και $ B $ στις παρακάτω περιπτώσεις.
+\begin{rlist}
+\item $ A=(x+y)^2 $ και $ B=1-(x-y)^2 $
+\item 
+\item 
+\item 
+\end{rlist}
+\item \textbf{Σύγκριση αριθμών}\\
+Να συγκριθούν οι παρακάτω αλγεβρικές παραστάσεις $ A $ και $ B $ στις παρακάτω περιπτώσεις.
+\begin{rlist}
+\item $ A=\frac{a-\beta}{a+\beta} $ και $ B=\frac{a\beta}{a^2-\beta^2} $
+\item 
+\item 
+\item 
+\end{rlist}
+\item \textbf{Τετράγωνο αριθμού}\\
+Να αποδειχθεί ότι ισχύουν οι παρακάτω ανισότητες για κάθε τιμή της μεταβλητής $ x $.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ x^2+1\geq 2x $
+\item $ 4x\leq 1+4x^2 $
+\item $ 6x-9\leq x^2 $
+\item $ (x+1)^2\geq 4x $
+\end{rlist}
+\end{multicols}
+\item \textbf{Τετράγωνο αριθμού}\\
+Να αποδειχθεί ότι ισχύουν οι παρακάτω ανισότητες για κάθε τιμή των μεταβλητών $ x,y $.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ x^2+y^2\geq 2xy $
+\item $ x^2+1\geq 2y-y^2 $
+\item $ (x+y)^2\geq 4xy $
+\item $ 4x^2\geq x^2-4y^2 $
+\end{rlist}
+\end{multicols}
+\vspace{-8mm}
+\begin{rlist}[start=5]
+\item $ 3x^2+1\geq 4x-x^2-y^2 $
+\end{rlist}
+\item \textbf{Τετράγωνο αριθμού}\\
+Να βρεθούν οι πραγματικοί αριθμοί $ x,y $ σε καθεμία από τις παρακάτω περιπτώσεις.
+\begin{rlist}
+\item $ (x-1)^2+(y+2)^2=0 $
+\item $ (3x-6)^2+(2y-8)^2=0 $
+\item $ x^2+y^2-2y+1=0 $
+\item $ x^2+y^2-4x+6y+13=0 $
+\end{rlist}
+\item \textbf{Ιδιότητες ανισοτήτων}\\
+Έστω $ a\in\mathbb{R} $ πραγματικός αριθμός για τον οποίο ισχύει $ 2<a<5 $. Να βρεθεί μεταξύ ποιών αριθμών βρίσκονται οι παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ a-7 $
+\item $ 3a+4 $
+\item $ 3-2a $
+\item $ 7a+13 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Ιδιότητες ανισοτήτων}\\
+Δίνονται δύο πραγματικοί αριθμοί $ a,\beta\in\mathbb{R} $ για τους οποίους ισχύουν οι σχέσεις $ 3<a<7 $ και $ 2<\beta<4 $. Να αποδειχθούν οι παρακάτω ανισότητες.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ 8<2a+\beta<18 $
+\item $ -1<a-\beta<5 $
+\item $ 24<4a\beta<112 $
+\item $ \frac{3}{4}<\frac{a}{\beta}<\frac{7}{2} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Ιδιότητες ανισοτήτων}\\
+Δίνονται δύο πραγματικοί αριθμοί $ a,\beta\in\mathbb{R} $ για τους οποίους ισχύουν οι σχέσεις $ 1<a<5 $ και $ 2<\beta<3 $. Να βρεθεί μεταξύ ποιών αριθμών βρίσκονται οι παρακάτω παραστάσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ 3a+2\beta $
+\item $ 4a-3\beta $
+\item $ 4a\beta-5 $
+\item $ \frac{3a}{2\beta} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διαστήματα}\\
+Να γραφτούν τα παρακάτω διαστήματα με τη μορφή ανισοτήτων.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ [3,7] $
+\item $ [-2,5) $
+\item $ (0,3] $
+\item $ (-\infty,4] $
+\item $ (0,+\infty) $
+\item $ (-4,4) $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διαστήματα}\\
+Να γραφτούν οι παρακάτω ανισότητες με τη μορφή διαστημάτων.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ 2\leq x\leq 8 $
+\item $ -3<x<10 $
+\item $ x>-2 $
+\item $ x\leq 4 $
+\item $ -1\leq x<3 $
+\item $ x\geq 0 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διαστήματα}\\
+Να παρασταθούν τα παρακάτω διαστήματα γραφικά, πάνω στην ευθεία των πραγματικών αριθμών.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=5mm]
+\item $ [-2,2] $
+\item $ [4,9) $
+\item $ (-3,0] $
+\item $ (4,+\infty) $
+\item $ (-\infty,3] $
+\item $ (-4,5) $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διαστήματα}\\
+Να παραστήσετε γραφικά σε άξονα τα σύνολα αριθμών που ορίζονται από τις παρακάτω ανισότητες.
+\begin{multicols}{3}
+\begin{rlist}[leftmargin=2mm]
+\item $ -3\leq x\leq 2 $
+\item $ 1<x\leq 5 $
+\item $ 0<x<10 $
+\item $ x>-4 $
+\item $ x<0 $
+\item $ x\geq 9 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διαστήματα}\\
+Να γράψετε σε μορφή διαστήματος κάθε σύνολο αριθμών από τα παρακάτω, όπως αυτά φαίνονται στους άξονες.
+\begin{multicols}{2}
+\begin{rlist}
+\item \tikzitem\begin{tikzpicture}
+\diasthma{1}{4}{0}{2}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{k}{0}
+\akro{k}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\diasthma{-2}{5}{0}{2}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\akro{k}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\diasthma{0}{1}{0}{2}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{k}{0}
+\akro{a}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\diasthma{-4}{5}{0}{2}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\akro{a}{2}
+\end{tikzpicture}
+\end{rlist}
+\end{multicols}
+\vspace{-5mm}
+\item \textbf{Διαστήματα}\\
+Να γράψετε σε μορφή διαστήματος κάθε σύνολο αριθμών από τα παρακάτω, όπως αυτά φαίνονται στους άξονες.
+\begin{multicols}{2}
+\begin{rlist}
+\item \tikzitem\begin{tikzpicture}
+\Xapeiro{2}{0}{2.3}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\apeiroX{4}{2}{-.3}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{k}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\Xapeiro{-5}{0}{2.3}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{k}{0}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\apeiroX{0}{2}{-.3}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{2}
+\end{tikzpicture}
+\end{rlist}
+\end{multicols}
+\vspace{-5mm}
+\item \textbf{Διαστήματα}\\
+Να βρεθούν τα κοινά στοιχεία των παρακάτω διαστημάτων.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ [2,4]\ ,\ [3,7] $
+\item $ (-\infty,5)\ ,\ (-3,7) $
+\item $ [0,3)\ ,\ (1,3] $
+\item $ (-\infty,4)\ ,\ [5,+\infty) $
+\item $ (-3,4]\ ,\ (-\infty,4) $
+\item $ [2,+\infty)\ ,\ (3,+\infty) $
+\end{rlist}
+\end{multicols}
+\item \textbf{Διαστήματα}\\
+Αν $ \varDelta_1,\varDelta_2 $ είναι δύο διαστήματα πραγματικών αριθμών τότε να βρεθεί η ένωση $ \varDelta_1\cup\varDelta_2 $ και η τομή τους $ \varDelta_1\cap\varDelta_2 $ σε καθεμία από τις παρακάτω περιπτώσεις.
+\begin{rlist}
+\item $ \varDelta_1=[-3,3] $ και $ \varDelta_2=(-2,4] $.
+\item $ \varDelta_1=[1,4) $ και $ \varDelta_2=(0,+\infty) $.
+\item $ \varDelta_1=(-4,0) $ και $ \varDelta_2=(-\infty,-2] $.
+\item $ \varDelta_1=(-\infty,10) $ και $ \varDelta_2=(11,+\infty) $.
+\end{rlist}
+\item \textbf{Διαστήματα}\\
+Δίνονται τα διαστήματα πραγματικών αρθμών $ \varDelta_1=[1,4],\varDelta_2=(2,+\infty) $. Να βρεθούν τα παρακάτω σύνολα.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ \varDelta_1\cup\varDelta_2 $
+\item $ \varDelta_1\cap\varDelta_2 $
+\item $ \varDelta_1' $
+\item $ \varDelta_2' $
+\item $ \varDelta_1-\varDelta_2 $
+\item $ \varDelta_2-\varDelta_1 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Μετατροπή σχήματος σε σύνολο}\\
+Να βρείτε και να γράψετε στη μορφή διαστήματος ή ένωσης διαστημάτων τα κοινά στοιχεία των συνόλων που φαίνονται στα παρακάτω σχήματα.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=4mm]
+\item \tikzitem\begin{tikzpicture}
+\apeiroX{5}{2}{-.4}{.35}{orange}
+\Xapeiro{1}{0}{2.4}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\akro{k}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\Xapeiro{3}{.5}{2.3}{.35}{orange}
+\Xapeiro{-2}{0}{2.5}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\akro{k}{0.5}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\apeiroX{-1}{2.1}{-.3}{.3}{orange}
+\apeiroX{-4}{1.5}{-.1}{.35}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{1.5}
+\akro{k}{2.1}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\apeiroX{5}{1.5}{-.3}{.3}{orange}
+\diasthma{2}{7}{0.1}{2}{.35}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{k}{.1}
+\akro{a}{1.5}
+\akro{k}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\Xapeiro{-3}{.55}{2.4}{.35}{orange}
+\diasthma{-5}{4}{0}{2}{.3}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\akro{k}{.55}
+\akro{k}{2}
+\end{tikzpicture}
+\item \tikzitem\begin{tikzpicture}
+\diasthma{0}{7}{0}{1.5}{.3}{orange}
+\diasthma{2}{9}{0.5}{2}{.35}{\xrwma}
+\axonas{-.3}{2.5}
+\akro{a}{0}
+\akro{k}{.5}
+\akro{a}{2}
+\akro{k}{1.5}
+\end{tikzpicture}
+\end{rlist}
+\end{multicols}
+\end{enumerate}
+\end{document}

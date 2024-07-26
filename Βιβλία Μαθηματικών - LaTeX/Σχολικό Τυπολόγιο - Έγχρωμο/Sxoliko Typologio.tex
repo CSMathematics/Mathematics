@@ -1,0 +1,2028 @@
+\documentclass[twoside,10pt]{book}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm,paperwidth=17cm,paperheight=24cm]{geometry}
+\usepackage{makeidx}
+\makeindex
+\DeclareRobustCommand{\Algebra}[1]{\index{{\LARGE\bfΆλγεβρα\\}!#1}}
+\DeclareRobustCommand{\Gewmetria}[1]{\index{{\LARGE\bf\vspace*{5mm}Γεωμετρία\\}!#1}}
+\DeclareRobustCommand{\Analysh}[1]{\index{{\LARGE\bf\vspace*{5mm}Ανάλυση\\}!#1}}
+\DeclareRobustCommand{\Statistikh}[1]{\index{{\LARGE\bf\vspace*{5mm}Στατιστική\\}!#1}}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+    \fancyhead{} %
+    \renewcommand{\headrulewidth}{0pt}}
+    
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\thesection.\arabic{thewrhma}}   
+
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}\textcolor{black}{\textbf{Θ.\hspace{1mm}\thethewrhma\hspace{1mm} \MakeUppercase{#1}}}}{}
+
+\newcounter{methodologia}[section]
+\renewcommand{\themethodologia}{\thesection.\arabic{methodologia}}   
+
+\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{black}{\textbf{M.\hspace{1mm}\themethodologia\hspace{1mm} \MakeUppercase{#1}}}}{}
+
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}\textcolor{black}{\textbf{ΟΡ.\hspace{1mm}\theorismos\hspace{1mm} \MakeUppercase{#1}}}}{}
+
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+  {
+   \normalfont\Huge}
+  {\gdef\chapterlabel{\thechapter\ }}{0pt}
+  {{\fontsize{30}{50}\MakeUppercase {\textbf{Κεφάλαιο} }\fontsize{50}{60}\textbf{\qquad\quad\thechapter}}\\
+{\Huge\textsc {##1}}\\{\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(13,0){B}
+      \tkzDrawSegment(A,B)
+      \end{tikzpicture}}
+  }
+  \titlespacing*{\chapter}{0pt}{0pt}{-20pt}
+}
+
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+  {0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+  {0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{gray}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\Large ΜΕΡΟΣ\quad}%
+{}
+{}
+{}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\;\titlerule\;\normalsize\ Σελίδα}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2.4pc}}
+{}
+{\hfill\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+  {\normalfont\Large\bf}%
+  {}{0em}%
+  {{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+  \titlespacing*{\section}{0pt}{0pt}{0pt}
+  
+\newcommand{\methodologia}{\begin{center}
+{\large\textcolor{steelblue}{\textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+  \tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+  \end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large\textcolor{steelblue}{\textbf{ΟΡΙΣΜΟΙ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=steelblue,] (-3cm,0) rectangle (0,.2mm);
+  \tikz[overlay] \shade[left color=steelblue, right color=white,] (0,0) rectangle (3cm,.2mm);   
+  \end{tikzpicture}
+\end{center}}
+
+\newcommand{\thewrhmata}{\begin{center}
+{\large\textcolor{steelblue}{\textbf{ΘΕΩΡΗΜΑΤΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+  \tikz[overlay] \shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+  \end{tikzpicture}
+\end{center}}
+
+\begin{document}
+\title{\MakeUppercase{ΣΧΟΛΙΚΟ ΤΥΠΟΛΟΓΙΟ}}
+\pagestyle{empty}
+\frontmatter
+\begin{titlepage}
+\newgeometry{left=2.5cm,top=2.5cm} %defines the geometry for the titlepage
+\pagecolor{white}
+\begin{center}
+{\large Σπύρος Φρόνιμος\\Μαθηματικός}
+\end{center}
+\noindent
+\par
+\noindent
+\mbox{}\\\\
+\begin{center}
+\textbf{\fontsize{30}{50}\selectfont{ΣΧΟΛΙΚΟ ΤΥΠΟΛΟΓΙΟ}}\par\mbox{}\\
+{\fontsize{30}{50}\selectfont \MakeUppercase{\textbf{ΜΑΘΗΜΑΤΙΚΩΝ}}}\\
+\vspace{5mm}
+{\fontsize{15}{20}\selectfont \MakeUppercase{ΤΥΠΟΙ ΟΡΙΣΜΟΙ ΚΑΙ ΘΕΩΡΗΜΑΤΑ ΤΩΝ}}\\
+\vspace{1mm}
+{\fontsize{15}{20}\selectfont \MakeUppercase{ΜΑΘΗΜΑΤΙΚΩΝ ΓΥΜΝΑΣΙΟΥ ΚΑΙ ΛΥΚΕΙΟΥ}}
+
+\end{center}
+\vspace{1.5cm}
+\[ f(x)= \frac{\eta\mu x}{x}\]
+\vspace{-5mm}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{./ekswfyllo-eps-converted-to}
+\end{figure}
+
+\vfill
+\noindent
+\color{black}
+\begin{center}
+{\large{ΕΚΔΟΣΕΙΣ \_\_\_\_\_}\\
+\large{ΚΕΡΚΥΡΑ 2015}}
+\vskip\baselineskip
+\end{center}
+\hbox{ % Horizontal box
+\hspace*{0.2\textwidth} % Whitespace to the left of the title page
+\rule{1pt}{\textheight} % Vertical line
+\hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+\parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+
+{\textbf{ΣΧΟΛΙΚΟ ΤΥΠΟΛΟΓΙΟ ΜΑΘΗΜΑΤΙΚΩΝ}\\\textbf{Γυμνασίου - Λυκείου}\\\\\noindent \textbf{Σπύρος Φρόνιμος - Μαθηματικός}\\\selectlanguage{english}{e-mail : spyrosfronimos@gmail.com}\\[0.5\baselineskip]
+\selectlanguage{greek}Σελίδες : ...\\
+\selectlanguage{english}ΙΣΒΝ\selectlanguage{greek} : ...\\
+Εκδόσεις : ...\\
+\textcopyright \selectlanguage{english}{ Copyright 2015}}\\[2\baselineskip] % Title
+{Φιλολογική Επιμέλεια :\\\textbf{Μαρία Πρεντουλή}}
+{\selectlanguage{english} - e-mail : predouli@yahoo.com\selectlanguage{greek}}\\[0.5\baselineskip]
+{Επιστημονική Επιμέλεια :}\\
+{\textbf{Ιωάννα Γραμμένου - }}{\selectlanguage{english} - e-mail : predouli@yahoo.com\selectlanguage{greek}}\\{\textbf{Σπύρος Φρόνιμος}}\\[0.5\baselineskip]
+{Εξώφυλλο : \\\textbf{Δημήτρης Πρεντουλής}}\\[1\baselineskip] % Tagline or further description
+% Author name
+
+\vspace{.4\textheight} % Whitespace between the title block and the publisher
+{Πνευματικά Δικαιώματα : ...}\\[\baselineskip]}}
+\vspace*{2\baselineskip}
+\newpage
+\mbox{}\\\\\\\\\\\\
+\hspace*{0.75\textwidth}
+\textit{{\large Στους γονείς μου.}}
+\newpage
+\mbox{}
+\newpage
+\mbox{}
+{\LARGE \textbf{Πρόλογος}}\\\\\\\\
+
+Το βιβλίο περιέχει συγκεντρωμένη όλη τη θεωρία των μαθηματικών όλων των τάξεων του γυμνασίου και του λυκείου γραμμένη αναλυτικά και κατανοητά.\\\\
+Ειδικότερα ο αναγνώστης θα βρει\\
+\vspace{-.4cm}
+\begin{itemize}
+\item Ορισμούς
+\item Θεωρήματα
+\item Τυπολόγιο
+\item Μεθοδολογία
+\end{itemize}
+Σκοπό έχει να αποτελέσει ένα χρήσιμο βοήθημα για μικρούς ή μεγάλους μαθητές όπου μπορούν να έχουν όλη τη θεωρία της χρονιάς τους συγκεντρωμένη, χρήσιμη για επανάληψη και διαγωνίσματα, αλλά και να μπορούν εύκολα να καλύψουν τυχόν κενά από προηγούμενες τάξεις.\\\\\\
+Θέλω να ευχαριστήσω όλους όσους βοήθησαν.
+\newpage
+\end{titlepage}
+\restoregeometry % restores the geometry
+\nopagecolor
+
+\tableofcontents
+\mainmatter
+\part{ΓΥΜΝΑΣΙΟ}
+\pagestyle{fancy}
+\chapter{Α' Γυμνασιου}
+\section{Αριθμοί}\mbox{}\\
+\orismoi
+\Orismos{Φυσικοί Αριθμοί.} \Algebra{Φυσικοί αριθμοί}Φυσικοί ονομάζονται οι αριθμοί που έχουν σαν αρχή το $ 0 $ και αυξάνονται με βήμα $ 1 $ δηλαδή : $ 0, 1, 2, 3, \ldots $\\\\
+\Orismos{Δεκαδικό Σύστημα Αρίθμησησ.} Δεκαδικό ονομάζεται το σύστημα αρίθμησης στο οποίο έχουμε σαν βάση τον αριθμό $ 10 $. Χρησιμοποιούμε $ 10 $ σύμβολα - αριθμούς : $ 0,1,2,3,4,5,6,7,8,9 $ για να σχηματίσουμε οποιονδήποτε άλλον αριθμό και οι αξίες των ψηφίων σχηματίζονται ανά $ 10 $ και ονομάζονται <<ΜΟΝΑΔΕΣ, ΔΕΚΑΔΕΣ...>> κ.τ.λ.\\\\
+\Orismos{Αρτιοι Αριθμοί.} \Algebra{Άρτιοι αριθμοί}Άρτιοι ονομάζονται οι αριθμοί που έχουν τελευταίο ψηφίο ένα από τα $ 0,2,4,6,8 $. Οι άρτιοι αριθμοί διαιρούνται με το 2.\\\\
+\Orismos{Περιττοί Αριθμοί.} \Algebra{Περιττοί αριθμοί}Περιττοί ονομάζονται οι αριθμοί που έχουν τελευταίο ψηφίο ένα από τα $ 1,3,5,7,9 $. Οι περιττοί αριθμοί δεν διαιρούνται με το 2.\\\\
+\Orismos{Διάταξη.} Διάταξη ονομάζεται η ιδιότητα του συνόλου των φυσικών αριθμών που μας επιτρέπει να τους συγκρίνουμε και να τους τοποθετήσουμε σε αύξουσα ή φθίνουσα σειρά. Για τη σύγκριση χρησιμοποιούμε τους συμβολισμούς
+\[ ">" : \textrm{ μεγαλύτερο} \qquad "<" : \textrm{ μικρότερο} \]
+\Orismos{Πρόσθεση.} Πρόσθεση ονομάζεται η πράξη με την οποία μπορούμε από δύο αροθμούς $ a, \beta $ να βρούμε τον αριθμό $ a+\beta $ που ονομάζεται \textbf{άθροισμα}.\\\\
+\Orismos{Πολλαπλασιασμόσ.} Πολλαπλασιασμός ονομάζεται η πράξη με την οποία μπορούμε από δύο αροθμούς $ a, \beta $ να βρούμε τον αριθμό $ a\cdot\beta $ που ονομάζεται \textbf{γινόμενο}.\\
+\Orismos{Αφαίρεση - Διαίρεση}. Η αφαίρεση $ a-\beta $ και η διαίρεση $ a:\beta $ δύο αρθμών $ a, \beta $ είναι πράξεις που προκύπτουν από την πρόσθεση και τον πολλαπλασιασμό.\\\\Στον παρακάτω πίνακα φαίνονται τα ονόματα των αριθμών που αποτελούν μια πράξη, τα ονόματα των αποτελεσμάτων και ο συμβολισμός κάθε πράξης.\\\\\begin{tabular}{cccc}
+\hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Πράξη}} & {\textbf{Όροι}} & {\textbf{Αποτέλεσμα}} & {\textbf{Συμβολισμός}}\\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Πρόσθεση} & Προσθετέοι & Άθροισμα & $ a+\beta $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Αφαίρεση} & Μειωτέος - Αφαιρετέος & Διαφορά & $ a-\beta $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Πολλαπλασιασμός} & Παράγοντες & Γινόμενο & $ a\cdot\beta $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Διαίρεση} & Διαιρετέος : Διαιρέτης & Πηλίκο & $ a:\beta $\\
+ \hline 
+\end{tabular}\mbox{}\\\\
+\Orismos{Δύναμη.} \Algebra{Δύναμη}Δύναμη ενός φυσικού αριθμού $ a $ ονομάζεται το γινόμενο πολλών ίσων παραγόντων του αριθμού αυτού. Συμβολίζεται με $ a^\nu $ όπου $ \nu $ είναι το πλήθος των ίσων παραγόντων. \[ \undercbrace{a\cdot a\cdot\ldots\cdot a}_{\nu \textrm{ παράγοντες}}=a^\nu \]
+Ο αριθμός $ a $ ονομάζεται \Algebra{Βάση δύναμης}\textbf{βάση} και ο αριθμός $ \nu $ \Algebra{Εκθέτης δύναμης}\textbf{εκθέτης} της δύναμης.
+\begin{itemize}[itemsep=0mm]
+\item Η δύναμη $ a^2 $ ονομάζεται και $ a $ \textbf{στο τετράγωνο}.
+\item Η δύναμη $ a^3 $ ονομάζεται και $ a $ \textbf{στον κύβο}.
+\item Σε μία αριθμητική παράσταση, η σειρά με την οποία πρέπει να γίνονται οι πράξεις είναι :
+\begin{enumerate}[itemsep=0mm]
+\item Δυνάμεις
+\item Πολλαπλασιασμοί - Διαιρέσεις
+\item Προσθέσεις - Αφαιρέσεις
+\end{enumerate}
+Η σειρά αυτή γίνεται πρώτα μέσα στις παρενθέσεις αν υπάρχουν και μετά απ' έξω.
+\end{itemize}\mbox{}\\
+\Orismos{Ευκλείδεια Διαίρεση.} \Algebra{Ευκλείδεια διαίρεση}Ευκλείδεια διαίρεση ονομάζεται η διαίρεση δύο αριθμών $ \varDelta $ (\textbf{Διαιρετέος}) και $ \delta $ (\textbf{διαιρέτης}) η οποία δίνει αριθμούς $ \pi $ (\textbf{πηλίκο}) που είναι το αποτέλεσμα της διαίρεσης και $ \upsilon $ (\textbf{υπόλοιπο}).\\\\ Οι αριθμοί $ \varDelta, \delta, \pi, \upsilon $ είναι φυσικοί αριθμοί και ικανοποιούν τη σχέση : \[ \varDelta=\delta\cdot\pi+\upsilon \] η οποία είναι η \textbf{ταυτότητα της Ευκλείδειας διαίρεσης}.
+\newpage
+\noindent
+Ισχύουν οι παρακάτω ιδιότητες
+\begin{enumerate}[itemsep=0mm]
+\item Για να είναι μια διαίρεση ευκλείδεια πρέπει να ισχύει $ \upsilon<\delta $.
+\item Αν σε μια διαίρεση το υπόλοιπο είναι $ 0 $ : $ \upsilon=0 $ η διαίρεση ονομάζεται \Algebra{Τέλεια διαίρεση}\textbf{τέλεια} και ισχύει : $ \varDelta=\delta\cdot\pi $.
+\item Αν έχουμε $ \varDelta=\delta $ τότε $ \pi=1 $ ενώ αν $ \delta=1 $ τότε $ \varDelta=\pi $.
+\end{enumerate}
+\Orismos{Πολλαπλάσιο.} Πολλαπλάσιο ενος αριθμού $ a $ είναι ο φυσικός αριθμός που προκύπτει από πολλαπλασιασμό του $ a $ με τους φυσικούς αριθμούς.\[ a\textrm{ πολλαπλάσιο του } \beta\quad :\quad a=\nu\cdot\beta\quad(\nu \textrm{ φυσικός αριθμός}) \]
+Ένας αριθμός $ a $ λέμε οτι \textbf{διαιρεί} έναν άλλον $ \beta $ όταν ο $ \beta $ είναι πολλαπλάσιο του $ a $. Αν γίνει δηλαδή η διαίρεση $ \beta:a $ έχουμε υπόλοιπο 0.\\\\
+\Orismos{Διαιρέτησ.} Διαιρέτης ενός αριθμου $ \beta $ ονομάζεται ένας αριθμός $ a $ ο οποίος διαιρεί τον $ \beta $.\\\\
+\Orismos{Ε.Κ.Π.} Ελάχιστο κοινό πολλαπλάσιο από δύο ή περισσότερους αριθμούς ονομάζεται το μικρότερο, μη μηδενικό κοινό πολλαπλάσιο τους.\\\\
+\Orismos{Μ.Κ.Δ.} Μέγιστος κοινός διαιρέτης από δύο ή περισσότερους αριθμούς ονομάζεται ο μεγαλύτερος από τους κοινούς τους διαιρέτες.\\\\
+\Orismos{Πρώτοσ Αριθμόσ.} Πρώτος ονομάζεται ένας αριθμός που διαιρείται \textbf{μόνο} με τον εαυτό του και το 1.\\Οποιοσδήποτε άλλος αριθμός λέγεται \textbf{σύνθετος}.\\\\
+\Orismos{Πρώτοι μεταξύ τουσ.} Πρώτοι μεταξύ τους ονομάζονται δύο αριθμοί $ a $ και $ \beta $ για τους οποίους ισχύει $ M.K.\varDelta(a,\beta)=1 $.\\
+\thewrhmata
+\Thewrhma{Κανόνεσ Διαιρετότητασ.} Με τους παρακάτω κανόνες εξετάζουμε αν ένας αριθμός διαρείται με καθένα από τα παρακάτω νούμερα.\\\\
+\begin{tabular}{>{\centering}cp{8.5cm}<{\centering}}
+ \hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Αριθμός}} & {\textbf{Κανόνας}} \\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Κανόνας του 2} & Ένας αριθμός διαιρείται με το 2 αν το τελευταίο ψηφίο του είναι ένα από τα 0,2,4,6,8.\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κανόνας του 3 (του 9)} & Ένας αριθμός διαιρείται με το 3 (με το 9) αν το άθροισμα των ψηφίων του είναι πολλαπλάσιο του 3 (του 9). \\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κανόνας του 5} & Ένας αριθμός διαιρείται με το 5 αν το τελευταίο ψηφίο του είναι 0 ή 5.\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κανόνας του 10} & Ένας αριθμός διαιρείται με το 10 αν το τελευταίο ψηφίο του είναι 0. \\
+\rule[-2ex]{0pt}{4.5ex} \textbf{Κανόνας του 4 (του 25)} & Ένας αριθμός διαιρείται με το 4 (το 25) αν το τελευταίο διψήφιο μέρος του είναι πολλαπλάσιο του 4 (του 25).\\
+\hline
+\end{tabular}\mbox{}\\\\
+\methodologia
+\Methodologia{Ευκλείδεια Διαίρεση.} Για να εξετάσουμε αν μια σχέση της μορφής $ \varDelta=a\cdot\beta+\upsilon $ παριστάνει ταυτότητα ευκλείδειας διαίρεσης :
+\begin{itemize}[itemsep=0mm]
+\item Διακρίνουμε περιπτώσεις για το ποιός από τους αριθμούς $ a,\beta $ είναι ο διαιρέτης.
+\item Εξετάζουμε αν ισχύει η σχέση $ \upsilon<\delta $.
+\end{itemize}
+\Methodologia{Ανάλυση Αριθμού σε Γινόμενο Πρώτων.} Για να αναλύσουμε ένα σύνθετο αριθμό σε γινόμενο πρώτων παραγόντων
+\begin{enumerate}[itemsep=0mm]
+\item Ξεκινάμε διαιρόντας τον με τον πρώτο σε σειρά πρώτο αριθμό που τον διαιρεί.
+\item Το πηλίκο της διαίρεσης το γράφουμε κάτω από τον αριθμό και εξετάζουμε αν το αποτέλεσμα αυτό διαιρείται ξανά με τον πρώτο αριθμό που επιλέξαμε. Αν όχι επιλέγουμε τον επόμενο πρώτο αριθμό που διαιρεί το αποτέλεσμα.
+\item Συνεχίζουμε τη διαδικασία ώσπου να προκύψει τελικό πηλίκο ο αριθμός $ 1 $.
+\item Ο αριθμός είναι ίσος με το γινόμενο των πρώτων παραγόντων που χρησιμοποιήσαμε στη διαδικασία αυτή. Τους ίσους παράγοντες τους μαζεύουμε σαν δύναμη.
+\end{enumerate}
+\Methodologia{Εύρεση Ε.Κ.Π και Μ.Κ.Δ.} Για να υπολογίσουμε το Ε.Κ.Π. ή τον Μ.Κ.Δ δύο ή περισσότερων αριθμών
+\begin{enumerate}[itemsep=0mm]
+\item Αναλύουμε όλους τους αριθμούς σε γινόμενο πρώτων παραγόντων.
+\item \begin{enumerate}[itemsep=0mm]
+\item[$ a $.] Για το Ε.Κ.Π. επιλέγουμε \textbf{κοινούς και μη κοινούς παράγοντες} από όλους τους αριθμούς τον καθένα στο \textbf{μεγαλύτερο} εκθέτη.
+\item[$ \beta $.] Για το Μ.Κ.Δ. επιλέγουμε \textbf{μόνο τους κοινούς παράγοντες} από όλους τους αριθμούς τον καθένα στο \textbf{μικρότερο} εκθέτη.
+\end{enumerate}
+\end{enumerate}
+\newpage
+\noindent
+\section{Κλάσματα}\mbox{}\\
+\orismoi
+\Orismos{Κλάσμα.} Κλάσμα ονομάζεται ένας αριθμός της μορφής $ \frac{a}{\beta} $, όπου $ a, \beta $ φυσικοί αριθμοί.
+\begin{itemize}[itemsep=0mm]
+\item Με το κλάσμα εκφράζουμε ένα μέρος μιας ποσότητας.
+\item Ο αριθμός $ a $ ονομάζεται \textbf{αριθμητής} ενώ ο $ \beta $ \textbf{παρονομαστής} του κλάσματος.
+\item Το κλάσμα σαν πράξη είναι διαίρεση.
+\item Ο παρονομαστής $ \beta $ του κλάσματος δεν πρέπει να είναι 0 : $ \beta\neq0 $.
+\end{itemize}
+\Orismos{Κλασματική Μονάδα.} Κλασματική μονάδα ονομάζεται το κλάσμα που έχει αριθμητή το 1 : $ \frac{1}{\nu} $.\\\\
+\Orismos{Δεκαδικό Κλάσμα.} Δεκαδικό ονομάζεται ένα κλάσμα το οποίο έχει ως παρονομαστή μια δύναμη του $ 10 $.\[ \frac{1}{10}\quad,\quad\frac{1}{100}\quad,\quad\frac{1}{1000}\quad\textrm{ και γενικά } \frac{1}{10^\nu}\]
+\Orismos{Ίσα κλάσματα.} Ίσα ονομάζονται δύο ή περισσότερα κλάσματα που εκφράζουν το ίδιο μέρος μιας ποσότητας. \[ \frac{a}{\beta}=\frac{\gamma}{\delta} \]
+\Orismos{Απλοποίηση.} Απλοποίηση ονομάζεται η διαδικασία με την οποία, ένα κλάσμα το μετατρέπουμε σε ένα ισοδύναμό του με μικρότερους όρους, διαιρόντας τους αρχικούς με το $ M.K.\varDelta $ αριθμητή και παρονομαστή.\\\\
+\Orismos{Ανάγωγο κλάσμα.} Ανάγωγο λέγεται ένα κλάσμα του οποίου ο $ M.K.\varDelta. $ αριθμητή και παρονομαστή είναι $ 1 $. Ένα ανάγωγο κλάσμα δεν απλοποιείται.\[ \frac{a}{\beta} \textrm{ ανάγωγο } \Leftrightarrow M.K.\varDelta.(a, \beta)=1 \]
+\Orismos{Ομώνυμα Κλάσματα.} Ομώνυμα λέγονται δύο ή περισσότερα κλάσματα που έχουν τον ίδιο παρονομαστή.\\\\
+\Orismos{Ετερώνυμα Κλάσματα.} Ετερώνυμα λέγονται δύο ή περισσότερα κλάσματα που έχουν διαφορετικούς παρονομαστές.\\\\
+\Orismos{Μεικτόσ Αριθμόσ.} Μεικτός ονομάζεται ο αριθμός ο οποίος είναι άθροισμα ενός ακεραίου και ενός κλάσματος \textbf{μικρότερο} της μονάδας. \[ a+\frac{\beta}{\gamma}=a\frac{\beta}{\gamma}\quad\textrm{ όπου }\quad\frac{\beta}{\gamma}<1 \]
+Το άθροισμα αυτό μετατρέπεται σε μεικτό παραλείποντας το σύμβολο της πρόσθεσης.\\\\
+\Orismos{Σύνθετο Κλάσμα.} Σύνθετο ονομάζεται ένα κλάσμα του οποίου ένας τουλάχιστον από τους δύο όρους του είναι κλάσμα.\\\\\\
+\thewrhmata
+\Thewrhma{Χιαστί Γινόμενα.} Δύο κλάσματα είνα ίσα αν και μόνο αν τα <<χιαστί>> γινομενά τους είναι ίσα. \[ \frac{a}{\beta}=\frac{\gamma}{\delta}\Leftrightarrow a\cdot\delta=\beta\cdot\gamma \]\\\\
+\Thewrhma{Σύγκριση Κλασμάτων με το 1.} Για τη σύγκριση ενός κλάσματος $ \frac{a}{\beta} $ με τον αριθμό $ 1 $ έχουμε
+\begin{itemize}[itemsep=0mm]
+\item Αν σε ένα κλάσμα, ο αριθμητής είναι μεγαλύτερος από τον παρονομαστή τότε το κλάσμα είναι μεγαλύτερο του $ 1 $.
+\item Αν σε ένα κλάσμα, ο αριθμητής είναι μικρότερος από τον παρονομαστή τότε το κλάσμα είναι μικρότερο του $ 1 $.
+\item Αν σε ένα κλάσμα, ο αριθμητής είναι ίσος με τον παρονομαστή τότε το κλάσμα είναι ίσο με το $ 1 $.
+\[ a<\beta\Leftrightarrow\frac{a}{\beta}<1\quad,\quad a>\beta\Leftrightarrow\frac{a}{\beta}>1\quad\textrm{ και}\quad a=\beta\Leftrightarrow\frac{a}{\beta}=1\]
+\end{itemize}
+\Thewrhma{Σύγκριση Κλασμάτων.} Για τη σύγκριση κλασμάτων μεταξύ τους έχουμε
+\begin{itemize}[itemsep=0mm]
+\item Αν δύο κλάσματα είναι ομώνυμα τότε μεγαλύτερο είναι εκείνο με το μεγαλύτερο αριθμητή.
+\item Αν δύο κλάσματα έχουν κοινό αριθμητή, μεγαλύτερο είναι εκείνο με το μικρότερο παρονομαστή.
+\item Για να συγκρίνουμε δύο ετερώνυμα κλάσματα με διαφορετικούς αριθμητές, τα μετατρέπουμε σε ομώνυμα και τα συγκρίνουμε όπως στην πρώτη περίπτωση.
+\[ a<\beta\Leftrightarrow\frac{a}{\gamma}<\frac{\beta}{\gamma}\quad,\quad a<\beta\Leftrightarrow\frac{\gamma}{a}>\frac{\gamma}{\beta}\]
+\end{itemize}\mbox{}\\
+\methodologia
+\Methodologia{Ισοδύναμα Κλάσματα.} Έχοντας ένα κλάσμα για να κατασκευάσουμε ένα ισοδύναμο του \begin{enumerate}[itemsep=0mm]
+\item Πολλαπλασιάζουμε και τους δύο όρους του κλάσματος με τον \textbf{ίδιο} αριθμό.
+\item Διαιρούμε και τους δύο όρους του κλάσματος με τον \textbf{ίδιο} αριθμό.
+\end{enumerate}
+\Methodologia{Ομώνυμα Κλάσματα.} Για να μετατρέψουμε δύο ή περισσότερα ετερώνυμα κλάσματα σε ομώνυμα
+\begin{enumerate}[itemsep=0mm]
+\item Βρίσκουμε το $ E.K.\varPi. $ των παρονομαστων.
+\item Διαιρούμε το $ E.K.\varPi. $ με κάθε παρονομαστή ξεχωριστά.
+\item Το αποτέλεσμα κάθε διαίρεσης (καπελάκι) το πολλάπλασιάζουμε και με τους δύο όρους του κλάσματος.
+\end{enumerate}
+\Methodologia{Πρόσθεση - Αφαίρεση Κλασμάτων.} Για να προσθέσουμε ή να αφαιρέσουμε δύο ή περισσότερα κλάσματα, τα μετατρέπουμε σε ομόνυμα και κάνουμε τις πράξεις με τους αριθμητές. \[ \frac{a}{\gamma}+\frac{\beta}{\gamma}=\frac{a+\beta}{\gamma} \]
+\Methodologia{Μετατροπή Μεικτού σε Κλάσμα.} Για να μετατρέψουμε ένα μεικτό αριθμό σε κλάσμα \begin{enumerate}
+\item Eμφανίζουμε το σύμβολο της πρόσθεσης ανάμεσα στον ακέραιο και το κλάσμα
+\item Κάνουμε τους δύο αριθμούς, ομώνυμα κλάσματα και τα προσθέτουμε
+\end{enumerate}
+\Methodologia{Μετατροπή Κλάσματοσ σε Μεικτό.} Για να μετατρέψουμε ένα κλάσμα, \textbf{μεγαλύτερο της μονάδας}, σε μεικτό αριθμό \begin{enumerate}
+\item Διαιρούμε με \textbf{ευκλείδεια διαίρεση} τον αριθμητή με τον παρονομαστή
+\item Αντικαθιστούμε τον αριθμητή του κλάσματος με το 2\textsuperscript{ο} μέλος της ευκλείδειας ταυτότητας ($ \delta\cdot\pi+\upsilon $)
+\item Χωρίζουμε το κλάσμα σε δύο κλάσματα στο σημείο που βρίσκεται η πρόσθεση και απλοποιούμε το 1\textsuperscript{ο} κλάσμα ώστε να προκύψει ακέραιος αριθμός
+\item Παραλείπουμε το σύμβολο της πρόσθεσης ανάμεσα στον ακέραιο και το κλάσμα και προκύπτει ο ζητούμενος μεικτός αριθμός. \[ \frac{\varDelta}{\delta}=\frac{\delta\cdot\pi+\upsilon}{\delta}=\frac{\delta\cdot\pi}{\delta}+\frac{\upsilon}{\delta}=\pi+\frac{\upsilon}{\delta}=\pi\frac{\upsilon}{\delta} \]
+\end{enumerate}
+\Methodologia{Πολλαπλασιασμόσ Κλασμάτων.} Για να πολλαπλασιάσουμε δύο ή περισσότερα κλάσματα μεταξύ τους πολλαπλασιάζουμε αριθμητή με αριθμητή και παρονομαστή με παρονομαστή.\[ \frac{a}{\beta}\cdot\frac{\gamma}{\delta}=\frac{a\cdot\gamma}{\beta\cdot\delta} \]
+Όταν θέλουμε να πολλαπλασιάσουμε έναν ακέραιο αριθμό με ένα κλάσμα πολλαπλασιάζουμε τον ακέραιο αριθμό με τον αριθμητή του κλάσματος.\[ a\cdot\frac{\beta}{\gamma}=\frac{a\cdot\beta}{\gamma} \]
+\Methodologia{Διαίρεση Κλασμάτων.} Για να διαιρέσουμε δύο κλάσματα, αντιστρέφουμε το 2\textsuperscript{ο} κλάσμα και \textbf{πολλαπλασιάζουμε} το 1\textsuperscript{ο} με το αντίστροφο του 2\textsuperscript{ου}. \[ \frac{a}{\beta}:\frac{\gamma}{\delta}=\frac{a}{\beta}\cdot\frac{\delta}{\gamma} \]
+\Methodologia{Μετατροπή Σύνθετου Κλάσματοσ σε Απλό.} Ένα σύνθετο κλάσμα είναι ίσο με ένα απλό το οποίο έχει αριθμητή το γινόμενο των άκρων όρων του σύνθετου κλάσματος ($ a, \delta $) και παρονομαστή το γινόμενο των μέσων όρων ($ \beta, \gamma $). \[ \frac{\dfrac{a}{\beta}}{\dfrac{\gamma}{\delta}}=\frac{a\cdot\delta}{\beta\cdot\gamma} \]
+\section{Δεκαδικοί Αριθμοί}\mbox{}\\
+\orismoi
+\Orismos{Δεκαδικόσ Αριθμόσ.} Δεκαδικός ονομάζεται ένας αριθμός ο οποίος αποτελείται από ακέραιο και δεκαδικό μέρος χωρισμένα με ένα κόμμα που ονομάζεται \textbf{υποδιαστολή}.\\\\
+\Orismos{Δεκαδικό Μέροσ.} Δεκαδικό ονομάζεται το μέρος ενός δεκαδικού αριθμού το οποίο βρίσκεται δεξιά από την υποδιαστολή και αποτελείται από εκέινα τα ψηφία που είναι μικρότερα της μονάδας.\\\\
+Τα ψηφία αυτά προκύπτουν από διαιρέσεις τις μονάδας με δυνάμεις του 10 και ονομάζονται από τα από τα δεκαδικά κλάσματα με την αντίστοιχη δύναμη του 10 : <<Δέκατα, Εκατοστά, Χιλιοστά, Δεκάκις Χιλιοστά...>>.\\\\
+\Orismos{Τυποποιημένη Μορφή Αριθμού.} Τυποποιημένη ονομάζεται η μορφή $ a\cdot10^\nu $ στην οποία μπορεί να γραφτεί οποιοσδήποτε αριθμός ως γινόμενο ενός αριθμού $ a $ επί μιας δύναμης του $ 10 $. \[ A=a\cdot10^\nu \textrm{ όπου } 1<a<10 \] Ο αριθμός $ a $ είναι δεκαδικός αριθμός μικρότερος του 10.\\\\
+\Orismos{Μονάδεσ Μέτρησησ.} Μονάδες μέτρησης ονομάζονται τα μεγέθη - ποσότητες τα οποία χρησιμοποιούμε για τη μέτρηση άλλων ποσοτήτων.\\\\
+Στους παρακάτω πίνακες φαίνονται μερικές μονάδες μέτρησης βασικών ποσών.
+\begin{center}
+\textbf{ΜΗΚΟΣ}\mbox{}\\
+\vspace{3mm}
+\begin{tabular}{ccc}
+ \hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Μονάδες Μέτρησης}} & {\textbf{Συμβολισμός}} & {\textbf{Σχέσεις μεταξύ Μ.Μ.}} \\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Χιλιόμετρο} & $ 1km $ & $ 1km=1000m $ \\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Μέτρο} & $ 1m $ & $ 1m=10dm=100cm=1000mm $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Δεκατόμετρο} & $ 1dm $ & $ \frac{1}{10}m=1dm=10cm=100mm $ \\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Εκατοστόμετρο} & $ 1cm $ & $ \frac{1}{100}m=\frac{1}{10}dm=1cm=10mm $ \\ \rule[-2ex]{0pt}{4.5ex} \textbf{Χιλιοστόμετρο} & $ 1mm $ & $ \frac{1}{1000}m=\frac{1}{100}dm=\frac{1}{10}cm=1mm $\\
+ \hline
+\end{tabular}\mbox{}\\
+\vspace{8mm}
+\textbf{ΕΜΒΑΔΟΝ}\mbox{}\\
+\vspace{5mm}
+\begin{tabular}{ccc}
+ \hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Μονάδες Μέτρησης}} & {\textbf{Συμβολισμός}} & {\textbf{Σχέσεις μεταξύ Μ.Μ.}} \\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Τετρ. Χιλιόμετρο} & $ 1km^2 $ & $ 1km^2=1000\textrm{στρ.}=1000000m^2 $ \\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Στρέμμα} & $ 1\textrm{στρέμμα} $ & $ 1\textrm{στρ.}=1000m^2 $\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Τετραγωνικό Μέτρο} & $ 1m^2 $ & $ 1m^2=100dm^2=10^4cm^2=10^6mm^2 $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Τετρ. Δεκατόμετρο} & $ 1dm^2 $ & $ \frac{1}{100}m^2=1dm^2=100cm^2=10^4mm^2 $ \\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Τετρ. Εκατοστόμετρο} & $ 1cm^2 $ & $ \frac{1}{10^4}m^2=\frac{1}{100}dm^2=1cm^2=100mm^2 $ \\ \rule[-2ex]{0pt}{4.5ex} \textbf{Τετρ. Χιλιοστόμετρο} & $ 1mm^2 $ & $ \frac{1}{10^6}m^2=\frac{1}{10^4}dm^2=\frac{1}{100}cm^2=1mm^2 $\\
+ \hline
+\end{tabular}\mbox{}\\
+\vspace{12mm}
+\textbf{ΟΓΚΟΣ}\mbox{}\\
+\vspace{5mm}
+\begin{tabular}{ccc}
+ \hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Μονάδες Μέτρησης}} & {\textbf{Συμβολισμός}} & {\textbf{Σχέσεις μεταξύ Μ.Μ.}} \\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Κυβικό Χιλιόμετρο} & $ 1km^3 $ & $ 1km^3=10^9m^2 $ \\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κυβικό Μέτρο} & $ 1m^3 $ & $ 1m^3=10^3dm^3=10^6cm^3=10^9mm^3 $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κυβ. Δεκατόμετρο} & $ 1dm^3/1l $ & $ \frac{1}{10^3}m^3=1dm^3=10^3cm^3=10^6mm^3 $ \\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κυβ. Εκατοστόμετρο} & $ 1cm^3/1ml $ & $ \frac{1}{10^6}m^3=\frac{1}{10^3}dm^2=1cm^2=1000mm^2 $ \\ \rule[-2ex]{0pt}{4.5ex} \textbf{Κυβ. Χιλιοστόμετρο} & $ 1mm^3 $ & $ \frac{1}{10^9}m^3=\frac{1}{10^6}dm^3=\frac{1}{10^3}cm^3=1mm^3 $\\
+ \hline
+\end{tabular}
+\mbox{}\\
+\vspace{5mm}
+\textbf{ΜΑΖΑ}\mbox{}\\
+\vspace{5mm}
+\begin{tabular}{ccc}
+\hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Μονάδες Μέτρησης}} & {\textbf{Συμβολισμός}} & {\textbf{Σχέσεις μεταξύ Μ.Μ.}} \\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Τόνος} & $ 1\tau $ & $ 1\tau=1000kg $ \\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Κιλό} & $ 1kg $ & $ \frac{1}{10^3}\tau=1kg=1000g=10^6mg $\\ 
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Γραμμάριο} & $ 1g $ & $ \frac{1}{10^6}\tau=\frac{1}{10^3}kg=1g=1000mg $\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Χιλιοστόγραμμο} & $ 1mg $ & $ \frac{1}{10^9}\tau=\frac{1}{10^6}kg=\frac{1}{10^3}g=1mg $\\
+ \hline
+\end{tabular}
+\end{center}\mbox{}\\
+\begin{center}
+\textbf{ΧΡΟΝΟΣ}\mbox{}\\
+\vspace{5mm}
+\begin{tabular}{ccc}
+\hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Μονάδες Μέτρησης}} & {\textbf{Συμβολισμός}} & {\textbf{Σχέσεις μεταξύ Μ.Μ.}} \\ 
+\hline\hline \rule[-2ex]{0pt}{4.5ex} \textbf{Έτος} & 1 έτος & 1έτος = 12μήνες = 52,143εβδ. = 365ημέρες\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Μήνας} & 1 μήνας & $ \frac{1}{12} $έτη = 1μήνας $ \simeq $ 30ημέρες\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Εβδομάδα} & 1 εβδομάδα & 1εβδομάδα = 7ημέρες = 168$ h $\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Ημέρα} & 1 ημέρα & $ \frac{1}{7} $εβδ. = 1ημέρα = $ 24h$ = 1440$ min $\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Ώρα} & $ 1h $ & $ \frac{1}{24} $ημέρες $ =1h=60min=3600s $\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Λεπτό} & $ 1min $ & $ \frac{1}{1440} $ημέρες $ =\frac{1}{60}h=1min=60s $\\
+ \rule[-2ex]{0pt}{4.5ex} \textbf{Δευτερόλεπτο} & $ 1s $ & $ \frac{1}{86400} $ημέρες $ =\frac{1}{3600}h=\frac{1}{60}min=1s $\\
+ \hline
+\end{tabular}\mbox{}\\
+\end{center}
+\vspace{3mm}
+\methodologia
+\Methodologia{Μετατροπή Δεκαδικού Αριθμού σε Δεκαδικό Κλάσμα.} Για να μετατρέψουμε ένα δεκαδικό αριθμό σε δεκαδικό κλάσμα γράφουμε το δεκαδικό αριθμό, χωρίς την υποδιαστολή, στον αριθμητή του κλάσματος και παρονομαστή του κλάσματος γράφουμε τη δύναμη του 10 που έχει εκθέτη το πληθος των δεκαδιών ψηφίων του αριθμού.\\\\
+\Methodologia{Μετατροπή Δεκαδικού Κλάσματοσ σε Δεκαδικό Αριθμό.} Για να μετατρέψουμε ένα δεκαδικό κλάσμα σε δεκαδικό αριθμό, κάνουμε διαίρεση μεταξύ αριθμητή και παρονομαστή.\\\\
+\Methodologia{Στρογγυλοποίηση Δεκαδικού Αριθμού.} Αν θέλουμε να στρογγυλοποιήσουμε ένα δεκαδικό αριθμό ακολουθούμε την παρακάτω διαδικασία :
+\begin{enumerate}[itemsep=0mm]
+\item Επιλέγουμε το ψηφίο το στο οποίο θα γίνει η στρογγυλοποίηση
+\item Εξετάζουμε αν το ψηφίο της αμέσως μικρότερης αξίας (το ψηφίο στα δεξιά) είναι μικρότερο ή μεγαλύτερο - ίσο του 5.
+\item Αν το ψηφίο αυτό είναι
+\begin{enumerate}[itemsep=0mm]
+\item[$ a. $] Μικρότερο του 5, τότε το ψηφίο που θα γίνει η στρογυλλοποίηση παραμένει ίδιο και όλα τα ψηφία μικρότερης αξίας μηδενίζονται.
+\item[$ \beta. $] Μεγαλύτερο ή ίσο του 5, τότε το ψηφίο που θα γίνει η στρογυλλοποίηση αυξάνεται κατά 1 και όλα τα ψηφία μικρότερης αξίας μηδενίζονται.
+\end{enumerate}
+\end{enumerate}
+\Methodologia{Πρόσθεση - Αφαίρεση Δεκαδικών.} Η πρόσθεση ή η αφαίρεση δύο δεκαδικούς αριθμους γίνεται όπως ακριβώς και στους ακέραιους αριθμούς, τοποθετώντας τους κάθετα ώστε σε κάθε στήλη να βρήσκονται ψηφία ίσης αξίας και οι υποδιαστολές να είναι η μία κάτω απ' την άλλη.\\\\
+Στην περίπτωση της αφαίρεσης αν οι δύο δεκαδικοί δεν έχουν ίσο πλήθος δεκαδικών ψηφίων, για αποφυγή λαθών, συμπληρώνουμε τον δεκαδικό που έχει τα λιγότερα δεκαδικά ψηφία με μηδενικα στο δεξίο μέρος του.\\\\
+\Methodologia{Πολλαπλασιασμόσ Δεκαδικών Αριθμών.} Στον πολλαπλασιασμό δεκαδικών, όπως και στον πολλαπλασιασμό ακεραίων, δεν ενδιαφερόμαστε για τη σειρά με την οποία θα τους τοποθετήσουμε κάθετα.\\\\
+Πολλαπλασιάζουμε τους αριθμούς χωρίς να λάβουμε υποψιν μας την υποδιαστολή.\\Το απότελεσμα θα έχει τόσα δεκαδικά ψηφία, όσα και το σύνολο των δεκαδικών ψηφίων των δύο αριθμών.\\\\
+\Methodologia{Διαίρεση Δεκαδικών Αριθμών.} Αν σε μια διαίρεση, ένας τουλάχιστον από τους διαιρετέο και διαιρέτη είναι δεκαδικός αριθμός τότε πολλαπλασιάζουμε και τους δύο αριθμούς με τη δύναμη του 10 που χρειάζεται ώστε να γίνουν και οι δύο ακέραιοι οπότε αναγόμαστε στη διαίρεση ακεραίων.\\\\
+\Methodologia{Δύναμη Δεκαδικού Αριθμού.} Για να υπολογίσουμε τη δύναμη $ a^\nu $ όπου $ a $ δεκαδικός, υψώνουμε τον αριθμό στη δύναμη $ \nu $ χωρίς να λάβουμε υποψιν μας την υποδιαστολή.\\\\
+Αν ο δεκαδικός αριθμός έχει σε πλήθος $ \mu $ δεκαδικά ψηφία τότε το αποτέλεσμα θα έχει $ \nu\cdot\mu $ σε πλήθος δεκαδικά ψηφία.
+\section{Εξισώσεις}\mbox{}\\
+\orismoi
+\Orismos{Εξίσωση.} Εξίσωση ονομάζεται κάθε ισότητα που περιέχει έναν άγνωστο αριθμό τον οποίο συχνά συμβολίζουμε με το γράμμα $ x $. \[ ax+\beta=0 \]
+\Orismos{Λύση ή Ρίζα Εξίσωσησ.} Λύση ή ρίζα μιας εξίσωσης λέγεται ο αριθμός που αν τοποθετήσουμε στη θέση του άγνωστου $ x $, επαληθεύει την εξίσωση.
+\begin{itemize}[itemsep=0mm]
+\item Αν μια εξίσωση έχει άπειρες λύσεις ονομάζεται \textbf{αόριστη ή ταυτότητα}.
+\item Αν μια εξίσωση δεν έχει καθόλου λύσεις ονομάζεται \textbf{αδύνατη}.
+\end{itemize}
+\Orismos{Επίλυση.} Επίλυση ονομάζεται η διαδικασία με την οποία υπολογίζουμε τη λύση μιας εξίσωσης.\\\\
+\Orismos{Επαλήθευση.} Επαλήθευση ονομάζεται η διαδικασία με την οποία εξετάζουμε αν ένας αριθμός είναι λύση μιας εξίσωσης αντικαθιστώντας τον στη θέση του άγνωστου $ x $.
+\section{Ποσοστά}\mbox{}\\
+\orismoi
+\Orismos{Ποσοστό.} Ποσοστό ονομάζεται ένα κλάσμα το οποίο εκφράζει μέρος μιας ποσότητας.\\\\
+\Orismos{Ποσοστό επί τισ 100.} Ποσοστό επί τις 100 ονομάζεται ένα κλάσμα το οποίο έχει παρονομαστή το 100. \[ \textrm{Ποσοστό : }\frac{a}{100}=a\% \]
+\begin{itemize}[itemsep=0mm]
+\item Συμβολίζεται με $ a\% $ όπου $ a $ ο αριθμητής του κλάσματος.
+\item Το ποσοστό τις χιλίοις είναι το κλάσμα $ \frac{a}{1000} $ και συμβολίζεται με $ a\mbox{\textperthousand} $.
+\end{itemize}
+\section{Ανάλογα - Αντιστρόφως Ανάλογα Ποσά}\mbox{}\\
+\orismoi
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9cm}{\Orismos{Ορθοκανονικό Σύστημα Συντεταγμένων.}\\Ορθοκανονικό σύστημα συντεταγμένων ονομάζεται το σχήμα που αποτελέιται από δύο κάθετα τοποθετημένους μεταξύ τους ημιάξονες αρίθμησης, με κοινή αρχή, στους οποίους έχουμε ορίσει την ίδια μονάδα μέτρησης.\\\\Το ορθοκανονικό σύστημα συντεταγμένων λέγεται και \textbf{καρτεσιανό σύστημα συντεταγμένων.\\}} &
+\begin{tikzpicture}
+\tkzInit[xmax=2.5, ymax=2.5]
+\tkzAxeXY
+\tkzClip
+\tkzDefPoint(1.5,2){A}
+\tkzDefPoint(1.5,0){B}
+\tkzDefPoint(0,2){C}
+\tkzDrawSegments[dashed](C,A A,B)
+\tkzDrawPoint(A)
+\tkzLabelPoint[above](A){$ A(x,y) $}
+\end{tikzpicture}\end{tabular}\mbox{}\\
+\begin{itemize}[itemsep=0mm]
+\item Ο οριζόντιος άξονας ονομάζεται \textbf{άξονας τετμημένων} και συμβολίζεται με $ Ox $.
+\item Ο κατακόρυφος άξονας ονομάζεται \textbf{άξονας τεταγμένων} και συμβολίζεται με $ Oy $.
+\item Η κοινή αρχή Ο ονομάζεται \textbf{αρχή των ημιαξόνων}.
+\end{itemize}
+\Orismos{Διατεταγμένο Ζεύγοσ.} Διατεταγμένο ζεύγος αριθμών ονομάζεται κάθε ζευγάρι αριθμών της μορφής $ (x,y) $.\\\\
+Λέγεται διατεταγμένο γιατί οι αριθμοί $ x, y $ βρίσκονται σε διάταξη. Μας ενδιαφέρει δηλαδή η σειρά με την οποία εμφανίζονται ο δύο αριθμοί.\\\\
+\Orismos{Σημείο.} Σημείο στο επίπεδο είναι το σχήμα με το οποίο συμβολίζουμε τη θέση ενός διατεταγμένου ζεύγους αριθμών $ (x,y) $ στο ορθοκανονικό σύστημα συντεταγμένων.\\\\Ένα σημείο ονομάζεται με κεφαλαίο γράμμα για παράδειγμα $ A(x,y) $.\\\\
+\Orismos{Συντεταγμένεσ Σημείου.} Συντεταγμένες ενός σημείου ονομάζονται οι αριθμοί $ x,y $ του ζεύγους αριθμών $ (x,y) $ που αντιστοιχεί το σημείο.
+\begin{itemize}[itemsep=0mm]
+\item Ο αριθμός $ x $ ονομάζεται \textbf{τετμημένη} του σημείου.
+\item Ο αριθμός $ y $ ονομάζεται \textbf{τεταγμένη} του σημείου.
+\end{itemize}
+\Orismos{Λόγοσ Δύο Μεγεθών.} Λόγος δύο όμοιων μεγεθών ονομάζεται το πηλίκο των μέτρων τους και συμβολίζεται με κλάσμα $ \frac{a}{\beta} $.\\\\
+\Orismos{Αναλογία.} Αναλογία ονομάζεται η ισότητα δύο ή περισσότερων λόγων.\[ \frac{a}{\beta}=\frac{\gamma}{\delta} \]
+\Orismos{Εικόνα Αντικειμένου.} Εικόνα ενος αντικειμένου ονομάζεται ένα αντικείμενο όμοιο με το αρχικό που είναι σμίκρυνση ή μεγένθυση του.\\\\
+\Orismos{Κλίμακα.} Κλίμακα ονομάζεται ο λόγος της απόστασης δύο σημείων της εικόνας ενός αντικειμένου προς την πραγματική απόσταση δύο αντίστοιχων σημείων.\\\\Συνηθέστερη εφαρμογή της κλίμακας είναι στους χάρτες όπου η κλίμακα είναι ο λόγος των αποστάσεων με αριθμητή το 1.\\\\
+\Orismos{Ανάλογα Ποσά.} Ανάλογα ποσά ονομάζονται δύο ποσά $ x, y $ που έχουν σταθερό λόγο για αντίστοχες τιμές τους. \[ \frac{y}{x}=a\Leftrightarrow y=a\cdot x\quad\textrm{ όπου } a \textrm{ σταθερό με } a\neq0 \]
+\begin{itemize}[itemsep=0mm]
+\item Ο αριθμός $ a $ ονομάζεται συντελεστής αναλογίας.
+\item Όταν το ποσό $ y $ είναι ποσοστό του ποσού $ x $ έχουμε τη σχέση \[ y=\frac{a}{100}x\Leftrightarrow y=a\%x \]
+\end{itemize}\mbox{}\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9cm}{\Orismos{Γραφική Παράσταση Ανάλογων Ποσών.}\\Γραφική παράσταση δύο ανάλογων ποσών $ x, y $ είναι η ημιευθεία με αρχή την αρχή των αξόνων που αποτελείται από τα σημεία $ (x,y) $ που σχηματίζουν τα δύο ανάλογα ποσά.\begin{itemize}[itemsep=0mm]
+\item Η εξίσωση της ημιευθείας είναι της μορφής $ y=a\cdot x $.
+\item Ένα σημείο ανήκει στην ημιευθεία αυτή αν οι συντεταγμένες του επαληθεύουν την εξισωσή της.
+\end{itemize}} &
+\begin{tikzpicture}
+\tkzInit[xmax=2.5, ymax=2.5]
+\tkzAxeXY
+\tkzClip
+\tkzDefPoint(1.5,2){A}
+\tkzDefPoint(0,0){O}
+\tkzDrawSegments[add=0 and 0.5](O,A)
+\tkzDrawPoint(A)
+\tkzLabelPoint[above left](A){$ A(x,y) $}
+\tkzText(1.7,1){$ y=a\cdot x $}
+\end{tikzpicture}\end{tabular}\mbox{}\\\\
+\Orismos{Αντιστρόφωσ Ανάλογα Ποσά.} Αντιστρόφως ανάλογα ονομάζονται δύο ποσά $ x, y $ των οποίων το γινόμενο παραμένει σταθερό για αντίστοιχες τιμές τους.\[ y\cdot x=a\Leftrightarrow y=\frac{a}{x}\quad\textrm{ όπου } a \textrm{ σταθερό με } a\neq0 \]
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9cm}{\Orismos{Γραφική Παράσταση Αντιστρόφωσ Ανάλογων Ποσών.}\\Γραφική παράσταση δύο αντιστρόφως ανάλογων ποσών $ x, y $ είναι η καμπύλη που ονομάζεται \textbf{υπερβολή} και αποτελείται από τα σημεία $ (x,y) $ που σχηματίζουν τα δύο ποσά.\begin{itemize}[itemsep=0mm]
+\item Η εξίσωση της υπερβολής είναι της μορφής $ y=\frac{a}{x} $.
+\item Ένα σημείο ανήκει στην ημιευθεία αυτή αν οι συντεταγμένες του επαληθεύουν την εξισωσή της.
+\end{itemize}} &
+\begin{tikzpicture}
+    \tkzInit[xmax=2.5, ymax=2.5]
+    \tkzAxeXY
+    \tkzClip
+      \clip (0,0) rectangle (3,3);
+      \draw [samples = 50, domain = -.1:2.99,
+      rotate around = {0:(0,0)}, xshift = 0cm, yshift = 0cm]
+      plot ({\x}, {1/\x});
+      \tkzText(1.7,1.2){$ y=\frac{a}{x} $}
+      \tkzDefPoint(1/2,2){A}
+      \tkzDrawPoint(A)
+      \tkzLabelPoint[above right](A){$ A(x,y) $}
+  \end{tikzpicture}\end{tabular}\mbox{}\\
+\section{Ακέραιοι Αριθμοί}\mbox{}\\
+\orismoi
+\Orismos{Πρόσημα.} Πρόσημα ονομάζονται τα σύμβολα $ + $ και $ - $ τα οποία γράφονται μπροστά από έναν αριθμό και τον χαρακτιρίζουν ως θετικό ή αρνητικό.\\\\
+\Orismos{Θετικοί και Αρνητικοί Αριθμοί.} Θετικοί ονομάζονται οι αριθμοί που είναι μεγαλύτεροι από το 0.\\Αρνητικοί ονομάζονται αυτοί που είναι μικρότεροι από το 0.
+\begin{itemize}[itemsep=0mm]
+\item Κάθε θετικός αριθμός είναι μεγαλύτερος από έναν αρνητικό.
+\item Το πρόσημο $ + $ για ένα θετικό αριθμό μπορεί να παραλειφθεί ενώ το πρόσημο $ - $ γραφεται υποχρεωτικά.
+\end{itemize}
+\Orismos{Ομόσημοι και Ετερόσημοι Αριθμοί.} Ομόσημοι ονομάζονται δύο ή περισσότεροι αριθμοί που έχουν κοινό πρόσημο.\\
+Ετερόσημοι ονομάζονται δύο αριθμοί με διαφορετικά πρόσημα.\\\\
+\Orismos{Ακέραιοι Αριθμοί.} Ακέραιοι ονομάζονται οι φυσικοί αριθμοί μαζί με τους αντίστοιχους αρνητικούς τους.\\\\
+\Orismos{Απόλυτη Τιμή.} Απόλυτη τιμή ενός αριθμού $ a $ ονομάζεται η απόσταση του αριθμού αυτού από το 0 πάνω στην ευθεία των αριθμών.
+\begin{itemize}[itemsep=0mm]
+\item Η απόλυτη τιμή του $ a $ συμβολίζεται με $ |a| $.
+\item Η απόλυτη τιμή οποιουδήποτε αριθμού είναι πάντα θετικός αριθμός. Παίρνει οποιονδήποτε αριθμό και τον κάνει θετικό.
+\end{itemize}
+\section{Βασικά Σχήματα}\mbox{}\\
+\section{Συμμετρία}\mbox{}\\
+\section{Τρίγωνα - Παραλληλόγραμμα - Τραπέζια}\mbox{}\\
+\chapter{Β' Γυμνασιου}
+\section{Εξισώσεις - Ανισώσεις}\mbox{}\\
+\orismoi
+\Orismos{Αριθμητική Παράσταση.} Αριθμητική παράσταση ονομάζεται μια παράσταση η οποία περιέχει αριθμούς με τις βασικές πράξεις ανάμεσά τους.\\\\
+\Orismos{Αλγεβρική παράσταση.} Αλγεβρική παράσταση ονομάζεται μια παράσταση που περιέχει πράξεις με αριθμούς και μεταβλητές.\\\\
+\Orismos{Μεταβλητή.} Μεταβλητή ονομάζεται ο άγνωστος αριθμός που βρίσκεται μέσα σε μια εξίσωση και γενικά σε μια αλγεβική παράσταση και γενικά σε μια σχέση.\\\\Συμβολίζεται με ένα γράμμα όπως $ x, y, a, \beta $ κ.τ.λ.\\\\
+\Orismos{Εξίσωση με έναν άγνωστο.} Εξίσωση με έναν άγνωστο ονομάζεται μια ισότητα η οποία περιέχει μια μεταβλητή.
+\[ ax+\beta=0 \]
+\begin{itemize}
+\item Μια εξίσωση αποτελείται από \textbf{2 μέλη}, τα οποία είναι τα μέρη της εξίσωσης δεξιά και αριστερά του $ = $.
+\item \textbf{Άγνωστοι} ονομάζονται οι όροι της εξίσωσης οι οποίοι περιέχουν τη μεταβλητή, ενώ \textbf{γνωστοί} ονομάζονται οι αριθμοί δηλαδή οι σταθεροί όροι της εξίσωσης.
+\item Σε μια εξίσωση μπορούμε να βάλουμε τον ίδιο αριθμό και στα τα δύο μέλη της με οποιαδήποτε πράξη δηλαδή : \[ a=\beta\Leftrightarrow\ccases{a+\gamma=\beta+\gamma\\a-\gamma=\beta-\gamma\\a\cdot\gamma=\beta\cdot\gamma\\\dfrac{a}{\gamma}=\dfrac{\beta}{\gamma} & \gamma\neq0} \]
+\item Αν μια εξίσωση έχει άπειρες λύσεις ονομάζεται \textbf{αόριστη ή ταυτότητα}.
+\item Αν μια εξίσωση δεν έχει καθόλου λύσεις ονομάζεται \textbf{αδύνατη}.
+\end{itemize}\mbox{}\\
+\Orismos{Λύση Εξίσωσησ.} Λύση μιας εξίσωσης ονομάζεται κάθε αριθμός που την επαληθεύει.\\\\
+\Orismos{Επαλήθευση.} Επαλήθευση ονομάζεται η διαδικασία με την οποία εξετάζουμε αν ένας αριθμός είναι λύση μιας εξίσωσης, αντικαθιστώντας τη μεταβλητή της εξίσωσης με τον αριθμό αυτό.\\\\
+\Orismos{Αναγωγή ομοίων όρων.} Αναγωγή ομοίων όρων ονομάζεται οι διαδικασία με την οποία απλοποιούμε μια αλγεβρική παράσταση ή μια εξίσωση προσθέτοντας τους όμοιους όρους μεταξύ τους.\\\\
+\Orismos{Ανίσωση.} Ανίσωση με έναν άγνωστο ονομάζεται μια ανισότητα που περιέχει αριθμούς και έναν άγνωστο αριθμό.\[ ax+\beta>0\quad\textrm{ ή }\quad ax+\beta<0 \]
+\begin{itemize}[itemsep=0mm]
+\item Μπορούμε να προσθέσουμε ή να αφαιρέσουμε έναν αριθμό και απ' τα δύο μέλη μιας ανίσωσης δηλαδή : \[ a<\beta\Leftrightarrow\ccases{a+\gamma<\beta+\gamma\\a-\gamma<\beta-\gamma} \]
+Για να πολλαπλασιάσουμε ή να διαιρέσουμε και τα δύο μέλη μιας εξίσωσης έχουμε τις εξής περπτώσεις :
+\begin{align*}
+&\textrm{Αν }\gamma>0\textrm{ τότε } a<\beta\Leftrightarrow a\cdot\gamma<\beta\cdot\gamma \textrm{ και }\frac{a}{\gamma}<\frac{\beta}{\gamma}\\
+&\textrm{Αν }\gamma<0\textrm{ τότε } a<\beta\Leftrightarrow a\cdot\gamma>\beta\cdot\gamma \textrm{ και }\frac{a}{\gamma}>\frac{\beta}{\gamma}\\
+\end{align*}
+Οταν δηλαδή πολλαπλασιάζουμε ή διαιρούμε και τα δύο μέλη με \textbf{αρνητικό} αριθμό, η φορά της ανίσωσης \textbf{αλλάζει}.
+\item Μια ανίσωση της μορφής $ a\leq x\leq\beta $ ονομάζεται \textbf{διπλή ανίσωση}.
+\item Αν μια ανίσωση έχει λύσεις όλους τους αριθμούς ονομάζεται \textbf{αόριστη}.
+\item Αν μια ανίσωση δεν έχει καθόλου λύσεις ονομάζεται \textbf{αδύνατη}.
+\end{itemize}
+\section{Τετραγωνική Ρίζα}\mbox{}\\
+\orismoi
+\Orismos{Τετραγωνική Ρίζα.} Τετραγωνική ρίζα ενός \textbf{θετικού} αριθμού $ x $ ονομάζεται ο \textbf{θετικός} αριθμός $ a $ ο οποίος όταν υψωθεί στο τετράγωνο δίνει τον αρθμό $ x $.\\Συμβολίζεται με $ \sqrt{x} $. \[ \sqrt{x}=a\Leftrightarrow a^2=x\qquad\textrm{ όπου }x\geq0\textrm{ και }a\geq0 \]
+Ισχύουν οι ιδιότητες
+\begin{itemize}[itemsep=0mm]
+\item Δεν ορίζεται ρίζα αρνητικού αριθμού.
+\item Για $ x\geq0\Rightarrow \left(\SQRT{x}\right)^2=x $.
+\end{itemize}
+\Orismos{Ρητόσ Αριθμόσ.} Ρητός ονομάζεται οποιοσδήποτε αριθμός μπορεί να γραφτεί στη μρφή κλάσματος $ \frac{\mu}{\nu} $ όπου οι $ \mu, \nu $ είναι ακέραιοι. \[ \textrm{Ρητός Αριθμός : }\frac{\mu}{\nu}\qquad\textrm{ όπου }\mu, \nu\textrm{ ακέραιοι} \]
+\Orismos{Αρρητοσ Αριθμόσ.} Άρρητος ονομάζεται ένας αριθμός ο οποίος δεν είναι ρητός. Άρρητοι αριθμοί είναι οι ρίζες αριθμών που δεν έχουν ακέραιο αποτέλεσμα όπως $ \sqrt{2}, \sqrt{3}, \sqrt{5} $, ο αριθμός $ \pi=3{,}14\ldots $ κ.τ.λ.\\\\
+\Orismos{Πραγματικόσ Αριθμόσ.} Πραγματικός ονομάζεται οποιοσδήποτε αριθμός γνωρίζουμε είτε είναι ρητός είτε άρρητος.
+\section{Συναρτήσεις}\mbox{}\\
+\orismoi
+\Orismos{Συνάρτηση.} \Analysh{Συνάρτηση}Συνάρτηση ονομάζεται μια διαδικασία (σχέση) που συνδέει δύο μεταβλητές $ x, y $ με την οποία κάθε τιμή της μεταβλητής $ x $ αντιστοιχεί σε \textbf{μόνο μια} τιμή της μεταβλητής $ y $.
+\begin{itemize}[itemsep=0mm]
+\item Η μεταβλητή $ x $ ονομάζεται \Analysh{Ανεξάρτητη μεταβλητή}\textbf{ανεξάρτητη}.
+\item Η μεταβλητή $ y $ ονομάζεται \Analysh{Εξαρτημένη μεταβλητή}\textbf{εξαρτημένη}.
+\end{itemize}
+\Orismos{Απόσταση Σημείων.} Η απόσταση δύο σημείων $ A(x_1,y_1) $ και $ B(x_2,y_2) $ του ορθοκανονικού σηστήματος συνταταγμένων δίνεται από τον τύπο \[ AB=\SQRT{\left(x_2-x_1\right)^2+\left(y_2-y_1\right)^2} \]
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{8cm}{\Orismos{Ορθοκανονικό Σύστημα Συντεταγμένων.}\\Ορθοκανονικό σύστημα συντεταγμένων ονομάζεται το σχήμα που αποτελέιται από δύο κάθετα τοποθετημένους μεταξύ τους άξονες αρίθμησης, στους οποίους έχουμε ορίσει την ίδια μονάδα μέτρησης.
+\begin{itemize}[itemsep=0mm]
+\item Ο οριζόντιος άξονας ονομάζεται \textbf{άξονας τετμημένων} και συμβολίζεται με $ x'x $.
+\item Ο κατακόρυφος άξονας ονομάζεται \textbf{άξονας τεταγμένων} και συμβολίζεται με $ y'y $.
+\end{itemize}} &
+\begin{tikzpicture}
+\tkzInit[xmin=-2,xmax=1.8,ymin=-2,ymax=1.8]
+\tkzAxeXY
+\tkzClip
+\tkzDefPoint(1.2,1){A}
+\tkzDefPoint(1.2,0){B}
+\tkzDefPoint(0,1){C}
+\tkzDrawSegments[dashed](C,A A,B)
+\tkzDrawPoint(A)
+\tkzLabelPoint[above](A){$ A(x,y) $}
+\end{tikzpicture}\end{tabular}\mbox{}\\
+\Orismos{Σημείο.} Σημείο στο επίπεδο είναι το σχήμα με το οποίο συμβολίζουμε τη θέση ενός διατεταγμένου ζεύγους αριθμών $ (x,y) $ στο ορθοκανονικό σύστημα συντεταγμένων.
+\begin{itemize}[itemsep=0mm]
+\item Ένα σημείο ονομάζεται με κεφαλαίο γράμμα για παράδειγμα $ A(x,y) $.
+\item Κάθε σημείο του επιπέδου αντιστοιχεί σε ένα διατεταγμένο ζεύγος αριθμών και αντίστροφα.\end{itemize}\mbox{}\\
+\Orismos{Συντεταγμένεσ Σημείου.} Συντεταγμένες ενός σημείου ονομάζονται οι αριθμοί $ x,y $ του ζεύγους αριθμών $ (x,y) $ που αντιστοιχεί το σημείο.
+\begin{itemize}[itemsep=0mm]
+\item Ο αριθμός $ x $ ονομάζεται \textbf{τετμημένη} του σημείου.
+\item Ο αριθμός $ y $ ονομάζεται \textbf{τεταγμένη} του σημείου.
+\end{itemize}
+\Orismos{Τεταρτημοριο.}\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{8cm}{Τεταρτημόριο ονομάζεται το καθένα από τα τέσσερα μέρη του επιπέδου μου ορίζεται από τους 2 κάθετους άξονες συντεταγμένων.\\\\Το 1\textsuperscript{ο} τεταρτημόριο είναι το κομμάτι του καρτεσιανού επιπέδου στο οποίο βρίσκονται τα θετικά μέρη των δύο αξόνων.\\\\Τα ονομάζουμε μετρώντας τα από το 1\textsuperscript{ο} με φορά αντίθετη από αυτή του ρολογιού.} &
+\begin{tikzpicture}
+\tkzInit[xmin=-2,xmax=1.9,ymin=-2,ymax=1.8]
+\tkzAxeXY
+\tkzClip
+\tkzText(1,1.2){{\scriptsize 1\textsuperscript{ο} τεταρτημόριο}}
+\tkzText(-1,1.2){{\scriptsize 2\textsuperscript{ο} τεταρτημόριο}}
+\tkzText(-1,-1.2){{\scriptsize 3\textsuperscript{ο} τεταρτημόριο}}
+\tkzText(1,-1.2){{\scriptsize 4\textsuperscript{ο} τεταρτημόριο}}
+\end{tikzpicture}\end{tabular}\mbox{}\\
+\Orismos{Γραφικη Παρασταση Συναρτησησ.} Γραφική παράσταση συνάρτησης ονομάζεται το σύνολο $ (x,y) $ όλων των σημείων του επιπέδου, των οποίων οι συντεταγμένες επαληθεύουν τη σχέση της συνάρτησης.\\\\
+\Orismos{Η συνάρτηση} $ y=ax $. Η συνάρτηση $ y=ax $ είναι η συνάρτηση η οποία συνδέει δύο \textbf{ανάλογα} ποσά $ x $ και $ y $.
+\begin{itemize}
+\item Η γραφική παράσταση της συνάρτησης $ y=ax $ είναι \textbf{ευθεία γραμμή}, η οποία διέρχεται από την αρχή των αξόνων.
+\item Τα ποσά $ x $ και $ y $ παίρνουν και αρνητικές τιμές.
+\item Τα ποσά $ x $ και $ y $ έχουνα σταθερό λόγο $ \dfrac{y}{x}=a $
+\end{itemize}
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{7.5cm}{\Orismos{Κλίση Ευθείασ.}\\Κλίση μιας ευθείας, η οποία είναι γραφική παράσταση της συνάρτησης $ y=ax $, ονομάζεται ο αριθμός $ a $ που λέγεται \textbf{συντελεστής διεύθυνσης} της ευθείας και είναι ίση με την εφαπτομένη της γωνίας που σχηματίζει η ευεθεία με τον άξονα $ x'x $.\[ a=\frac{y}{x}=\varepsilon\varphi\omega \]} &
+\begin{tikzpicture}
+\tkzInit[xmin=-2,xmax=2,ymin=-1.8, ymax=1.8]
+\tkzAxeXY
+\tkzClip
+\tkzDefPoint(2,1.5){A}
+\tkzDefPoint(-2,-1.5){B}
+\tkzDefPoint(2,0){O}
+\tkzDefPoint(0,0){C}
+\tkzMarkAngle[fill=black,size=0.7,opacity=0.7](O,C,A)
+\tkzLabelAngle[pos=1](O,C,A){$\omega$}
+\tkzDrawLine(A,B)
+\end{tikzpicture}\end{tabular}\mbox{}\\
+Η ευθεία $ y=0 $ έχει συντελεστή διεύθυνσης $ a=0 $ και είναι παράλληλη με τον οριζόντιο άξονα $ x'x $.\\\\
+\Orismos{Η συνάρτηση} $ y=ax+\beta $. Η συνάρτηση $ y=ax+\beta $ είναι αυτή που συνδέει γραμμικά τις μεταβλητές $ x,y $.\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{7.5cm}{\begin{itemize}[itemsep=0mm]
+\item Η γραφική της παράσταση είναι ευθεία γραμμή και είναι παράλληλη με τη γραφική παράσταση της συνάρτησης $ y=ax $.\\Σχεδιάζεται μεταφέροντας παράλληλα την ευθεία της $ y=ax $, $ \beta $ μονάδες κατακόρυφα στον άξονα $ y'y $.
+\item Τα σημεία τομής της με τους άξονες $ x'x $ και $ y'y $ είναι $ (-\frac{\beta}{a},0) $ και $ (0,\beta) $ αντίστοιχα.
+\end{itemize}} &
+\begin{tikzpicture}
+\tkzInit[xmin=-2,xmax=2,ymin=-1.8, ymax=1.8]
+\tkzAxeXY
+\tkzClip
+\tkzDefPoint(2,1.5){A}
+\tkzDefPoint(-2,-1.5){B}
+\tkzDefPoint(-2,-0.5){O}
+\tkzDefPoint(2,2.5){C}
+\tkzDefPoint(-2,-2.5){D}
+\tkzDefPoint(2,.5){E}
+\tkzDrawLine[dashed](A,B)
+\tkzDrawLine(C,O)
+\tkzDrawLine(D,E)
+\draw [->] (.5,0.375) -- (.5,1.375);
+\draw [->] (-.5,-0.375) -- (-.5,-1.375);
+\tkzText(.9,1){{\scriptsize $ \beta>0 $}}
+\tkzText(-.9,-1.1){{\scriptsize $ \beta<0 $}}
+\end{tikzpicture}\end{tabular}\mbox{}\\
+\Orismos{Γενική Μορφή Εξίσωσησ Ευθείασ.} Η γενική μορφή εξίσωσης ευθείας είναι η $ ax+\beta y=\gamma $ όπου $ a\neq0\textrm{ ή }\beta\neq0 $.\\\\
+\Orismos{Η συνάρτηση} $ y=\dfrac{a}{x} $ \textbf{ΜΕ} $ a\neq0 $. Η συνάρτηση $ y=\dfrac{a}{x} $ είναι η συνάρτηση η οποία συνδέει δύο αντιστρόφως ανάλογα ποσά $ x, y $.\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{8cm}{\begin{itemize}[itemsep=0mm]
+\item Η γραφική παράσταση της συνάρτησης $ y=\dfrac{a}{x} $ ονομάζεται υπερβολή η οποία έχει δύο κλάδους.
+\item Για $ a>0 $ η γραφική παράταση βρίσκεται στο 1\textsuperscript{ο} και 3\textsuperscript{ο} τεταρτημόριο.
+\item Για $ a<0 $ η γραφική παράταση βρίσκεται στο 2\textsuperscript{ο} και 4\textsuperscript{ο} τεταρτημόριο.
+\item Η αρχή των αξόνων $ O $ είναι \textbf{κέντρο συμμετρίας} της γραφικής παράστασης.
+\item Οι ευθείες $ y=x $ και $ y=-x $ είναι άξονες συμμετρίας για $ a>0 $ και $ a<0 $ αντίστοιχα. \end{itemize}} &
+\begin{tikzpicture}[scale=0.7]
+    \tkzInit[xmin=-3,xmax=2.8,ymin=-3, ymax=2.8]
+    \tkzAxeXY
+    \tkzClip
+      \clip (-3.2,-3.2) rectangle (3,3);
+     \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/\x});
+     \draw[dashed] plot[variable=\x,samples=100,domain=-3:3] ({\x},{-1/\x});
+     \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{\x});
+     \draw[dashed] plot[variable=\x,samples=100,domain=-3:3] ({\x},{-\x});
+      \tkzText(2,1){$ a>0 $}
+      \tkzText(-2,1){$ a<0 $}
+      \tkzText(1.4,2){{\scriptsize $ y=x $}}
+      \tkzText(-1.25,2){{\scriptsize $ y=-x $}}
+  \end{tikzpicture}\end{tabular}\mbox{}\\
+\section{Στατιστική}\mbox{}\\
+\orismoi
+\Orismos{Πληθυσμόσ.} \Statistikh{Πληθυσμός}Πληθυσμός ονομάζεται το σύνολο όλων των στοιχείων τα οποία μελετάμε ως προς κάποιο χαρακτηριστικό.\\\\
+\Orismos{Μεταβλητή.} \Statistikh{Μεταβλητή}Μεταβλητή ονομάζεται το κοινό χαρακτηριστικό των στοιχείων ενός πληθυσμού για το οποίο γίνεται στατιστική μελέτη.\\\\
+\Orismos{Δείγμα.} \Statistikh{Δείγμα}Δείγμα ονομάζεται ένα μέρος του πληθυσμού το οποίο επιλέγουμε για να γίνει η στατιστική μελέτη.\\\\
+\Orismos{Δειγματολειψία.} Δειγματολειψία ονομάζεται η διαδικασία με την οποία επιλέγουμε το δείγμα μιας έρευνας μέσα από τα στοιχεία ενός πληθυσμού.\\\\
+\Orismos{Μέγεθος Δείγματοσ.} Μέγεθος ενός δείγματος ονομάζεται το πληθος των στοιχείων του.\\\\
+\Orismos{Αντιπροσωπευτικό Δείγμα.} Αντιπροσωπευτικό ονομάζεται ένα δείγμα του οποίου τα αποτελέσμα από μια στατιστική μελέτη είναι τέτοια ώστε να μπορούν να γενικευτούν για ολόκληρο τον πληθυσμό.\\\\
+\Orismos{Διάγραμμα.} Διάγραμμα ονομάζεται το σχήμα με το οποίο μπορούμε να παραστήσουμε γραφικά τα απότελέσματα των μετρήσεων μιας δειγματολειψίας.\\\\
+Στον οριζόντιο ημιάξονα βρίσκονται οι διάφορές κατηγορίες - τιμές της μεταβλητής ενώ στον κατακόρυφο μπορούμε να έχουμε το πλήθος των στοιχείων κάθε κατηγορίας ή το ποσοστό κ.τ.λ.\\\\
+\textbf{Κατηγορίες Διαγραμμάτων}
+\begin{enumerate}
+\item \textbf{Εικονόγραμμα}\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[11]{r}[-23pt]{0cm}
+\includegraphics[width=0.5\linewidth]{./eik-eps-converted-to}
+\end{wrapfigure}\mbox{}\\\\
+Το εικονόγραμμα, όπως και τα υπόλοιπα γραφήματα αποτελείται από δύο ημιάξονες με τον οριζόντιο ημιάξονα να δέχεται τις διάφορες τιμές της μεταβλητής ενώ στον κατακόρυφο έχουμε το πλήθος των εμφανίσεων κάθε τιμής.\\
+Για να απεικονήσουμε το πλήθος αυτό χρησιμοποιούμε μια εικόνα, που να\\συνδέεται άμεσα με το αντικείμενο του πειράματος, την οποία τοποθετούμε\\σε στήλες.\\\\ Χρησιμοποιούμε τόσες εικόνες ώστε το ύψος κάθε στήλης να φτάσει μέχρι\\τον αριθμό που μας δίνει το πληθος εμφανίσεων κάθε τιμής. 
+\end{minipage}\mbox{}\\
+\item \textbf{Ραβδόγραμμα}\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[11]{r}[-23pt]{0cm}
+\includegraphics[width=0.5\linewidth]{./rabdogramma}
+\end{wrapfigure}\mbox{}\\\\
+Στο ραβδόγραμμα χρησιμοποιούμε κατακόρυφες ράβδους για να απεικονείσουμε το πλήθος εμφανίσεων κάθε τιμής της μεταβλητής.\\Έχουν ίσο πλάτος και ύψος που φτάνει στον αριθμό που μας δίνει το πλήθος, ή στο ποσοστό, ανάλογα με το ποσό που έχουμε θέσει στον κατακόρυφο άξονα του διαγράμματος.\\Σ' ένα ραβδόγραμμα οι ράβδοι μπορούν να είναι τοποθετημένες είτε κατακόρυφα\\είτε οριζόντια.
+\end{minipage}\mbox{}\\
+\item \textbf{Κυκλικό Διάγραμμα.}\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[15]{r}[-10pt]{0cm}
+\includegraphics[width=0.4\linewidth]{./kykliko_diagramma.eps}
+\end{wrapfigure}\mbox{}\\\\
+Το κυκλικό διάγραμμα παριστάνεται με ένα κυκλικό δίσκο, χωρισμένο σε τόσους τομείς, όσες και οι κατηγορίες της μεταβλητής.\\Κάθε τομέας καταλαμβάνει ποσοστό του δίσκου ίσο με το ποσοστό που προκύπτει από κάθε κατηγορία.\\Το άνοιγμα της γωνίας κάθε τομέα δίνεται από τον τύπο \[ \varphi=\dfrac{\nu}{N}\cdot360\degree \] όπου $ \nu $ είναι η συχνότητα εμφανίσεων κάθε κατηγορίας και $ N $ το μέγεθος του δείγματος.
+\end{minipage}\mbox{}\\
+\item \textbf{Χρονόγραμμα}\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[10]{r}[-25pt]{0cm}
+\includegraphics[width=0.4\linewidth]{./xronodiagrama.eps}
+\end{wrapfigure}\mbox{}\\\\
+Το χρονόγραμμα χρησιμοποιείται για να παραστήσουμε στατιστικά δεδομένα για μετρήσεις όπου έχουμε ως μεταβλητή το χρόνο.\\Σχεδιάζεται με μια συνεχή τεθλασμένη γραμμή που ενώνει όλα τα σημεία του επιπέδου που προέκυψαν από αυτές τις μετρήσεις για κάθε χρονική στιγμή ξεχωριστά.\\Μας δίνει τη χρονική εξέλιξη ενός φαινομένου ή ποσού και χρησιμοποιείται\\κυρίως στην οικονομία.
+\end{minipage}\mbox{}\\
+\end{enumerate}
+\Orismos{Συχνότητα.} Συχνότητα ονομάζεται ο αριθμός που μας δείχνει το πλήθος των εμφανήσεων της τιμής - κατηγορίας μιας μεταβλητής σε μια στατιστική έρευνα.\begin{itemize}[itemsep=0mm]
+\item Συμβολίζεται με $ \nu $.
+\item Το άθροισμα όλων των συχνοτήτων μας δίνει το μέγεθος του δείγματος.
+\end{itemize}\mbox{}\\
+\Orismos{Σχετική Συχνότητα.} Σχετική συχνότητα ονομάζεται ο αριθμός που μας δείχνει τι ποσοστό καταλαμβάνει η τιμή μιας μεταβλητής σαν μέρος από το σύνολο των μετρήσεων.\begin{itemize}[itemsep=0mm]
+\item Η σχετική συχνότητα δίνεται από τον τύπο \[ f=\frac{\nu}{N} \] όπου $ \nu $ είναι η συχνότητα της τιμής και $ N $ είναι το σύνολο των παρατηρήσεων δηλαδή το πλήθος του δείγματος.
+\item Η σχετική συχνότητα μιας τιμής μπορεί να γραφτεί και σαν ποσοστό επί τοις 100.
+\item Το άθροισμα όλων των σχετικών συχνοτήτων μας δίνει τον αριθμό 1 ή ποσοστό 100\%.
+\end{itemize}\mbox{}\\
+\Orismos{Πίνακασ Κατανομήσ Συχνοτήτων.} Πίνακας κατανομής συχνοτήτων ονομάζεται ο πίνακας όπου οι τιμές, οι συχνότητες και οι σχετικές συχνότητες των παρατηρήσεων μιας έρευνας.\\
+\begin{center}
+\begin{tabular}{ccc}
+\hline\rule[-1.5ex]{0pt}{4.5ex} {\textbf{Τιμές}} & {\textbf{Συχνότητες}} & {\textbf{Σχετικές συχνότητες}} \\ 
+\hline\hline \rule[-2ex]{0pt}{5.5ex} $ A $ & $ \nu_1 $ & $ f_1=\dfrac{\nu_1}{N} $ \\
+ \rule[-2ex]{0pt}{5.5ex} $ B $ & $ \nu_2 $ & $ f_2=\dfrac{\nu_2}{N} $\\ 
+ \rule[-2ex]{0pt}{5.5ex} $ \varGamma $ & $ \nu_3 $ & $ f_3=\dfrac{\nu_3}{N} $\\
+ \rule[-2ex]{0pt}{5.5ex} $ \varDelta $ & $ \nu_1 $ & $ f_4=\dfrac{\nu_4}{N} $\\
+ \hline\rule[-2ex]{0pt}{5.5ex} Σύνολο & $ N $ & $ 100 \% $\\
+ \hline
+\end{tabular}
+\end{center}
+\Orismos{Ομαδοποίηση.} Ομαδοποίηση ονομάζεται η διαδικασία με την οποία χωρίζουμε σε ομάδες της παρατηρήσεις μιας μεταβλητής σε μια έρευνα, συνήθως σε περιπτώσεις όπου μεγάλο πλήθος παρατηρήσεων.
+\begin{itemize}[itemsep=0mm]
+\item Οι ομάδες στις οποίες χωρίζονται οι μεταβλητές, ονομάζονται \textbf{κλάσεις}.
+\item Το εύρος παρατηρήσεων που έχει κάθε κλάση ονομάζεται \textbf{πλάτος}.
+\end{itemize}
+\Orismos{Ιστόγραμμα.}\\
+\begin{minipage}{\textwidth}
+\begin{wrapfigure}[10]{r}[0pt]{0cm}
+\includegraphics[width=0.4\linewidth]{./rabdograma.eps}
+\end{wrapfigure}\mbox{}\\Το ιστόγραμμα είναι το γράφημα το οποίο οποίο χρησιμοποιούμε για να παραστήσουμε γραφικά τις ομαδοποιημένες παρατηρήσεις.\vspace*{5mm}\\
+Παριστάνεται με συνεχόμενες ορθογώνιες ράβδους. Στον οριζόντιο άξονα βρίσκονται οι ομάδες των παρατηρήσεων ενώ στον κατακόρυφο βρίσκονται οι συχνότητες ή οι σχετικές συχνότητες τους.\end{minipage}\mbox{}\\\\
+\Orismos{Μέση τιμή.} Μέση τιμή ορίζεται ώς το άθροισμα όλων των παρατηρήσεων προς το πλήθος των παρατηρήσεων
+του δείγματος. Αν $ x_1, x_2,\ldots,x_\nu $ είναι οι παρατηρήσεις του δείγματος τότε η μέση τιμή είναι \[ \textrm{Μέση τιμή}=\dfrac{x_1+x_1+\ldots+x_\nu}{N} \]Είναι ο αριθμός που μας δίνει ένα μέσο αποτέλεσμα το οποίο εκπροσωπεί τις παρατηρήσεις ενός δείγματος.\\\\
+\Orismos{Διάμεσοσ.} Διάμεσος ονομάζεται 
+\begin{itemize}[itemsep=0mm]
+\item η μεσαία παρατήρηση από το σύνολο των παρατηρήσεων ενός δείγματος αν το πλήθος τους είναι \textbf{περιττό}
+\item η μέση τιμή των δύο μεσαίων παρατηρήσεων αν το πλήθος είναι \textbf{άρτιο}
+\end{itemize}
+όταν οι παρατηρήσεις έχουν τοποθετηθεί σε αύξουσα σειρά.\\\\
+\Orismos{Κέντρο Κλάσησ.} Κέντρο κλάσης ονομάζεται ο αριθμός που είναι ο μέσος όρος (ημιάθροισμα) των άκρων της κλάσης.
+\section{Εμβαδά}\mbox{}\\
+\section{Τριγωνομετρία - Διανύσματα}\mbox{}\\
+\section{Κύκλος}\mbox{}\\
+\section{Στερεά}\mbox{}\\
+\chapter{Γ' Γυμνασιου}
+\section{Πραγματικοί Αριθμοί}\mbox{}\\
+\orismoi
+\Orismos{Βασικά Σύνολα Αριθμών.} Τα βασικά σύνολα αριθμών τα οποία συναντάμε είναι τα εξής :\\\\
+\textbf{Σύνολα Αριθμών}
+\begin{enumerate}
+\item \textbf{Φυσικοί Αριθμοί} : Ξεκινώντας απ' το 0 οι φυσικοί αριθμοί είναι\\0, 1, 2, 3,...
+\item \textbf{Ακέραιοι Αριθμοί} : Οι φυσικοί αριθμοί μαζί με τους αντίθετους τους π.χ. :...-2, -1, 0, 1, 2...
+\item \textbf{Ρητοί Αριθμοί} : Όλοι οι αριθμοί που μπορούν να γραφτούν με τη μορφή κλάσματος : 
+$ \frac{a}{\beta} $ όπου α και β ακέραιοι με $ \beta\neq 0 $.
+\item \textbf{Άρρητοι Αριθμοί} : Οποιοσδήποτε αριθμός δεν είναι ρητός π.χ.\\$ \sqrt{2}, \sqrt{3}, \pi .$
+\item \textbf{Πραγματικοί Αριθμοί} : Οι ρητοί μαζί με το σύνολο των άρρητων μας δίνουν τους
+πραγματικούς αριθμούς, όλους τους αριθμούς που γνωρίζουμε.
+\end{enumerate}\mbox{}\\
+\Orismos{Απόλυτη Τιμή Πραγματικού Αριθμού.} Απόλυτη τιμή ενός πραγματικού αριθμού $a$ ορίζεται να είναι η απόσταση του αριθμού αυτού απο το 0 και συμβολίζεται με $\left| a \right| $. \[ \left| a\right| =\ccases{ a & a\geq 0 \\ -a & a<0} \]
+\Orismos{Ιδιότητεσ των Πράξεων.} Ισχύουν οι παρακάτω ιδιότητες :\\\\
+\begin{tabular}{ccc}
+\hline\rule[-1.5ex]{0pt}{4.5ex}  
+\textbf{Ιδιότητες} & \textbf{Πρόσθεση} & \textbf{Πολλαπλασιασμός} \\ 
+\hline\rule[-1.5ex]{0pt}{4ex}  Αντιμεταθετική & $ a+\beta=\beta+a$ & $ a\cdot\beta=\beta\cdot a$ \\ 
+\rule[-1.5ex]{0pt}{4ex} Προσεταιριστική & $ a+\left(\beta+\gamma \right)=\left(a+\beta \right)+\gamma  $ & $ a\cdot\left(\beta\cdot\gamma \right)=\left(a\cdot\beta \right)\cdot\gamma $ \\ 
+\rule[-1ex]{0pt}{4ex} \multirow{2}{*}{Ουδέτερο στοιχείο} & $ a+0=a $ & $ a\cdot 1=a$ \\\rule[-1.5ex]{0pt}{4ex}
+ & $ a+(-a)=0 $ & $a\cdot\frac{1}{a}=1\;,\;a\neq 0$ \\
+\rule[-1ex]{0pt}{4ex} Επιμεριστική &\multicolumn{2}{c}{$ a\cdot\left(\beta+\gamma \right)=a\cdot\beta+a\cdot\gamma $} \\
+\hline
+\end{tabular}\\\\
+Ισχύουν επίσης :
+\begin{itemize}[itemsep=0mm]
+\item $ a\cdot 0=0 $
+\item Αν $ a\cdot\beta=0\Rightarrow a=0 \textrm{ ή }\beta=0 $
+\item Δύο αριθμοί που έχουν άθροισμα 0 λέγονται \textbf{αντίθετοι}.
+\item Δύο αριθμοί που έχουν γινόμενο 1 λέγονται \textbf{αντίστροφοι}.
+\end{itemize}
+\Orismos{Δύναμη Πραγματικού Αριθμού.} Δύναμη με \textbf{βάση} ένα πραγματικό αριθμό $a$ και \textbf{εκθέτη} ένα πραγματικό αριθμό $\nu\geq 2$ λέγεται το γινόμενο ν παραγόντων ισων με $ a $ και συμβολίζεται με $ a^\nu $. $$ a^\nu=\undercbrace{a\cdot a\cdot\ldots\cdot a}_{\nu \textrm{ - παράγοντες}}.$$
+Για κάθε δυναμη ορίζουμε\\
+$a^1=a \qquad a^0=1\;(\textrm{ με } a\neq 0) \qquad \textrm{ και } \qquad a^{-\nu}=\frac{1}{a^\nu}\;(\textrm{ με } a\neq 0) $\\\\
+Επίσης για κάθε δυναμη με εκθέτη ακέραιο αριθμό και εφόσον ορίζεται,\\ισχύουν οι παρακάτω ιδιότητες :\\\\
+\begin{tabular}{cccc}\hline\rule[-1.5ex]{0pt}{4ex} \textbf{Αρ.} & \textbf{Ιδιότητες} & \textbf{Αρ.} & \textbf{Ιδιότητες} \\ 
+\hline\hline\rule[-2ex]{0pt}{7ex}1 & $a^\nu\cdot a^\mu=a^{\nu+\mu}$ & 4 & $ \left( \dfrac{a}{\beta}\right) ^\nu=\dfrac{a^\nu}{\beta^\nu} $\\
+\rule[-2ex]{0pt}{4.5ex} 2 & $a^\nu:a^\mu=a^{\nu-\mu}$ & 5 & $ \PARENS{a^\nu}^\mu=a^{\nu\cdot\mu} $\\
+\rule[-2ex]{0pt}{4.5ex} 3 & $ \left( a\cdot\beta\right)^\nu=a^\nu\cdot\beta^\nu $ & 6 & $ \left( \dfrac{a}{\beta}\right) ^{-\nu}=\left( \dfrac{\beta}{a}\right) ^{\nu} $\\
+\hline
+\end{tabular}\\\\\\
+\Orismos{Τετραγωνική Ρίζα.} Τετραγωνική Ρίζα ενός θετικού αριθμού $x$ ονομάζεται ο θετικός 
+αριθμός $ a $ που αν υψωθεί στο τετράγωνο δίνει τον αριθμό $x$ (υπόριζο) και συμβολίζεται με $\sqrt{x}$.
+ \[\sqrt{x}=α\qquad\textrm{ όπου }x\geq0\textrm{ και }a\geq0\]
+\begin{itemize}[itemsep=0mm]
+\item Δεν ορίζεται ρίζα αρνητικού αριθμού.
+\item $ \sqrt{x}=a \Leftrightarrow a^2=x $
+\item $ \sqrt{x^2}=\left|x \right|  $
+\item $ \left( \sqrt{x}\right)^2=x $ για $ x\geq 0 $.
+\end{itemize}
+\Orismos{Αλγεβρικέσ Παραστάσεισ.}
+\begin{enumerate}[itemsep=0mm]
+\item \textbf{Αλγεβρικές παραστάσεις} ονομάζονται οι παραστάσεις που περιέχουν αριθμούς και μεταβλητές με πράξεις μεταξύ τους.
+\item \textbf{Ακεραία αλγεβρική παράσταση} καλείται μια αλγεβρική παράσταση η οποία έχει μόνες πράξεις τον πολλαπλασιασμό και την πρόσθεση ανάμεσα στις μεταβλητές και με εκθέτες φυσικούς αριθμούς.
+\end{enumerate}
+\Orismos{Μονώνυμο.} Μονώνυμο ονομάζεται κάθε ακέραια αλγεβρική παράσταση που ανάμεσα στις μεταβλητές έχει \textbf{μόνο} την πράξη του πολλαπλασιασμού.\\\\
+\Orismos{Κύριο Μέροσ - Συντελεστήσ.}
+\begin{enumerate}[itemsep=0mm]
+\item Κύριο μέρος ενός μονωνύμου ονομάζεται το σύνολο των μεταβλητών του.
+\item Συντελεστής ενός μονωνύμου ονομάζεται ο σταθερός αριθμός με τον οποίο πολλαπλασιάζουμε το κύριο μέρος ενός μονωνύμου.
+\end{enumerate}
+\Orismos{Βαθμόσ Μονωνύμου.}
+\begin{itemize}[itemsep=0mm]
+\item Βαθμός ενός μονωνύμου \textbf{ως προς κάποια μεταβλητή} του ονομάζεται ο εκθέτης της μεταβλητής αυτής.
+\item Βαθμός ενός μονωνύμου \textbf{ως προς όλες τις μεταβλητές του} ονομάζεται το άθροισμα των βαθμών κάθε μεταβλητής.
+\item Οι πραγματικοί αριθμοί ονομάζονται και σταθερά μονώνυμα και είναι μηδενικού βαθμού, ενώ το $ 0 $ ονομάζεται μηδενικό μονώνυμο και δεν έχει βαθμό.
+\end{itemize}
+\Orismos{Όμοια - Ίσα - Αντίθετα Μονώνυμα.}
+\begin{itemize}[itemsep=0mm]
+\item \textbf{Όμοια} ονομάζονται τα μονώνυμα που έχουν το ίδιο κύριο μέρος.
+\item \textbf{Ίσα} ονομάζονται δύο ή περισσότερα \textbf{όμοια} μονώνυμα που έχουν ίσους συντελεστές.
+\item \textbf{Αντίθετα} ονομάζονται δύο ή περισσότερα \textbf{όμοια} μονώνυμα που έχουν αντίθετους συντελεστές.
+\end{itemize}
+\Orismos{Πολυώνυμο.} Πολυώνυμο ονομάζεται η ακέραια αλγεβρική παράσταση η οποία είναι άθροισμα \textbf{ανόμοιων} μονωνύμων.
+\begin{itemize}
+\item Κάθε μονώνυμο μέσα σ' ένα πολυώνυμο ονομάζεται \textbf{όρος} του πολυωνύμου.
+\item Το πολυώνυμο με 3 όρους ονομάζεται \textbf{τριώνυμο}.
+\item Οι αριθμοί ονομάζονται \textbf{σταθερά} πολυώνυμα ενώ το $ 0 $ \textbf{μηδενικό} μονώνυμο.
+\item Τα πολυώνυμα τα συμβολίζουμε με ένα κεφαλαίο γράμμα όπως : $ P(x), Q(x), A(x), B(x) $ κτλ. και δίπλα σε μια παρένθεση γράφουμε τη μεταβλητή τους.
+\item Τα πολυώνυμα μιας μεταβλητής τα γράφουμε κατά \textbf{φθίνουσες} δυνάμεις της μεταβλητής δηλαδή από τη μεγαλύτερη στη μικρότερη. \[ P(x)=a_{\nu}x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 \]
+\end{itemize}
+\Orismos{Αναγωγή Ομοίων Όρων.} Αναγωγή ομοίων όρων ονομάζεται η διαδικασία με την οποία προσθέτουμ εή αφαιρούμε τα όμοια μονώνυμα μιας αλγεβρικής παράστασης.\\\\
+\Orismos{Ταυτότητα.} Ταυτότητα ονομάζεται κάθε ισότητα που περιέχει μεταβλητές και επαληθεύεται για κάθε τιμή των μεταβλητών.\\\\
+\textbf{Αξιοσημείωτες Ταυτότητες}
+\begin{multicols}{2}
+\begin{enumerate}
+\item \textbf{Άθροισμα στο Τετράγωνο} :\\$ \left(a+\beta \right)^2=a^2+2a\beta+\beta^2  $
+\item \textbf{Διαφορά στο Τετράγωνο} :\\$ \left(a-\beta \right)^2=a^2-2a\beta+\beta^2  $
+\item \textbf{Άθροισμα στον Κύβο} :\\
+$ \left(a+\beta \right)^3=a^3+3a^2\beta+3a\beta^2+\beta^3 $
+\item \textbf{Διαφορά στον Κύβο} :\\
+$ \left(a-\beta \right)^3=a^3-3a^2\beta+3a\beta^2-\beta^3 $
+\vfill
+\columnbreak
+\vfill
+\item \textbf{Γιν. Αθροίσματος επί Διαφοράς} :\\
+$ \left(a+\beta \right)\cdot\left(a-\beta \right)=a^2-\beta^2  $
+\item \textbf{Άθροισμα Κύβων} :\\
+$ \left(a+\beta \right)\cdot\left(a^2-a\cdot\beta+\beta^2\right)=a^3+\beta^3  $
+\item \textbf{Διαφορά Κύβων} :\\
+$ \left(a-\beta \right)\cdot\left(a^2+a\cdot\beta+\beta^2\right)=a^3-\beta^3  $
+\end{enumerate}
+\end{multicols}\mbox{}\\
+\Orismos{Παραγοντοποίηση.} Παραγοντοποίηση ονομάζεται η διαδικασία με την οποία μια παράσταση η οποία είναι άθροισμα τη μετατρέπουμε σε γινόμενο παραγόντων.\\\\
+\textbf{Βασικοί Τρόποι Παραγοντοποίησης.}
+\begin{enumerate}
+\item \textbf{Κοινός Παράγοντας}.
+	   Σ' όλους τους προσθετέους μιας παράστασης υπάρχει κοινός παράγοντας.
+\item \textbf{Ομαδοποίηση}.
+	    Στην περίπτωση που δεν υπάρχει σε όλους τους όρους μιας σχέσης κάτι κοινό τότε κοιτάζουμε 
+	    να τα χωρίσουμε σε ομάδες έτσι ώστε σε κάθε ομάδα ξεχωριστά να υπάρχει κοινός παράγοντας.
+\item \textbf{Διαφορά Τετραγώνων}.
+	    Κάθε σχέση της μορφής $ a^2-\beta^2 $ παραγοντοποιείται ως εξής : 
+	    \[ a^2-\beta^2=\left(a-\beta\right)\left(a+\beta\right) \]
+\item \textbf{Διαφορά - Άθροισμα Κύβων}.
+Κάθε σχέση της μορφής $ a^3-\beta^3 $ ή $ a^3+\beta^3 $ παραγοντοποιείται ως εξής :
+\begin{enumerate}[label=\roman*.]
+\item $ a^3-\beta^3=\left(a-\beta\right)\left(a^2+a\beta+\beta^2 \right) $
+\item $ a^3+\beta^3=\left(a+\beta\right)\left(a^2-a\beta+\beta^2 \right) $
+\end{enumerate}
+\item \textbf{Ανάπτυγμα Τετραγώνου}.
+Κάθε σχέση της μορφής $ a^2+2a\beta+\beta^2 $ ή $ a^2-2a\beta+\beta^2 $ παραγοντοποιείται ως εξής :
+\begin{enumerate}[label=\roman*.]
+\item $ a^2+2a\beta+\beta^2=\left(a+\beta\right)^2 $
+\item $ a^2-2a\beta+\beta^2=\left(a-\beta\right)^2 $
+\end{enumerate}
+\item \textbf{Τριώνυμο}.
+Κάθε σχέση της μορφής $ x^2+\left(a+\beta\right)x+a\beta $ παραγοντοποιείται ως εξής : $ x^2+\left(a+\beta\right)x+a\beta=\left(x+a \right)\left(x+\beta\right) $
+\end{enumerate}
+\section{Εξισώσεις}\mbox{}\\
+\orismoi
+\Orismos{Εξίσωση} 1\textsuperscript{ου} \textbf{ΒΑΘΜΟΥ.} Εξίσωση 1\textsuperscript{ου} βαθμού με έναν άγνωστο, ονομάζεται κάθε ισότητα που περιέχει μια μεταβλητή, με μεγαλύτερο εκθέτη το 1. Η εξίσωση 1\textsuperscript{ου} βαθμού είναι της μορφής \[ ax+\beta=0 \]
+Για την εξίσωση $ ax+\beta=0 $ διακρίνουμε τις παρακάτω περιπτώσεις.
+\begin{itemize}[itemsep=0mm]
+\item Αν $ a\neq0 $ τότε η εξίσωση έχει μοναδική λύση η οποία είναι $ x=-\dfrac{\beta}{a} $
+\item Αν $ a=0 $ τότε
+\begin{itemize}[itemsep=0mm]
+\item Αν $ \beta=0 $ η εξίσωση παίρνει τη μορφή $ 0x=0 $ η οποία ονομάζεται \textbf{ταυτότητα} και έχει λύσεις όλους τους πραγματικούς αριθμούς.
+\item Αν $ \beta\neq0 $ η εξίσωση παίρνει τη μορφή $ 0x=\beta $ η οποία ονομάζεται \textbf{αδύνατη} διότι δεν έχει καμία λύση.
+\end{itemize}
+\end{itemize}
+\Orismos{Εξίσωση} 2\textsuperscript{ου} \textbf{ΒΑΘΜΟΥ.} Εξίσωση 2\textsuperscript{ου} βαθμού με έναν άγνωστο ονομάζεται κάθε ισότητα που περιέχει μια μεταβλητή, με μεγαλύτερο εκθέτη το 2. Η εξίσωση 2\textsuperscript{ου} βαθμού είναι της μορφής \[ ax^2+\beta x+\gamma=0 \textrm{ με } a\neq0 \]
+\begin{itemize}[itemsep=0mm]
+\item Οι αριθμοί $ a,\beta,\gamma $ ονομάζονται \textbf{συντελεστές της εξίσωσης}.
+\item Ο συντελεστής $ \gamma $ ονομάζεται \textbf{σταθερός όρος}.
+\end{itemize}
+\Orismos{Διακρίνουσα.} Διακρίνουσα μιας εξίσωσης 2\textsuperscript{ου} βαθμού ορίζεται ο αριθμος \[ \varDelta=\beta^2-4a\gamma \]
+Διακρίνουμε τις εξής περιπτώσεις :
+\begin{itemize}[itemsep=0mm]
+\item Αν $ \varDelta>0 $ η εξίσωση έχει \textbf{2 λύσεις} τις $ x_{1,2}=\dfrac{-\beta\pm\sqrt{\varDelta}}{2a} $.
+\item Αν $ \varDelta=0 $ η εξίσωση έχει \textbf{1 διπλή λύση} τη $ x=-\dfrac{\beta}{2a} $.
+\item Αν $ \varDelta<0 $ η εξίσωση δεν έχει λύσεις.
+\end{itemize}
+\Orismos{Κλασματική Εξίσωση.} Κλασματική ονομάζεται μια εξίσωση η οποία τουλάχιστον μια ρητή αλγεβρική παράσταση.\\\\
+\Orismos{Διαταξη.} Διάταξη ονομάζεται η ιδιότητα των πραγματικών αριθμών με την οποία μπορούν να συγκριθούν και να μπουν σε αύξουσα ή φθίνουσα σειρά.\begin{itemize}[itemsep=0mm]
+\item Δύο ή περισσότεροι αριθμοί που μπορούν να μπουν σε κάποια σειρά ή να τοποθετηθούν σε αριθμημένο άξονα ονομάζονται διατεταγμένοι.
+\item Οι σχέσεις διάταξης που χρησιμοποιούμε είναι οι <<μεγαλύτερο>> : $ > $, <<μικρότερο>> : $ < $, <<μεγαλύτερο ίσο>> : $ \geq $ και <<μικρότερο ίσο>> : $ \leq $.
+\end{itemize}
+Για τη διάταξη των πραγματικών αριθμών ισχύουν οι παρακάτω ιδιότητες :
+\begin{itemize}[itemsep=0mm]
+\item $ a-\beta>0\Leftrightarrow a>\beta $
+\item $ a-\beta<0\Leftrightarrow a<\beta $
+\item $ a-\beta=0\Leftrightarrow a=\beta $
+\item $ a^2\geq0 $ για κάθε πραγματικό αριθμό $ a $.
+\item Για δύο πραγματικούς αριθμούς $ a, \beta $ ισχύει $ a^2+\beta^2=0\Leftrightarrow a=0 \textrm{ και } \beta=0 $ αφού $ a^2,\beta^2\geq0 $.
+\item Μπορούμε να προσθέσουμε ή να αφαιρέσουμε έναν αριθμό και απ' τα δύο μέλη μιας ανίσωσης δηλαδή : \[ a<\beta\Leftrightarrow\ccases{a+\gamma<\beta+\gamma\\a-\gamma<\beta-\gamma} \]
+Για να πολλαπλασιάσουμε ή να διαιρέσουμε και τα δύο μέλη μιας εξίσωσης έχουμε τις εξής περπτώσεις :
+\begin{align*}
+&\textrm{Αν }\gamma>0\textrm{ τότε } a<\beta\Leftrightarrow a\cdot\gamma<\beta\cdot\gamma \textrm{ και }\frac{a}{\gamma}<\frac{\beta}{\gamma}\\
+&\textrm{Αν }\gamma<0\textrm{ τότε } a<\beta\Leftrightarrow a\cdot\gamma>\beta\cdot\gamma \textrm{ και }\frac{a}{\gamma}>\frac{\beta}{\gamma}\\
+\end{align*}
+Οταν  πολλαπλασιάζουμε ή διαιρούμε και τα δύο μέλη με \textbf{αρνητικό} αριθμό, η φορά της ανίσωσης \textbf{αλλάζει}.
+\item Μπορούμε να αντιστρέψουμε τους όρους μιας ανίσωσης αν και μόνο αν είναι \textbf{ομόσημοι}. \[ \textrm{Αν }a,\beta\textrm{ ομόσημοι τότε }a>\beta\Leftrightarrow \frac{1}{a}<\frac{1}{\beta} \]
+Οταν αντιστρέφουμε τους όρους μιας ανίσωσης τότε \textbf{αλλάζει η φορά της}.
+\end{itemize}
+Επίσης για τις πράξεις κατα μέλη μεταξύ ανισοτήτων ισχύει : 
+\begin{itemize}[itemsep=0mm]
+\item Μπορούμε να προσθέσουμε κατα μέλη δύο ανισότητες με την ίδια φορά.
+\item Μπορούμε να πολλαπλασιάσουμε κατα μέλη δύο ανισότητες με την ίδια φορά μόνο άν όλοι οι όροι είναι θετικοί.
+\begin{center}
+\begin{tabular}{ccc}
+ \begin{tabular}{c}
+ $ a>\beta $ \\
+ $ \gamma>\delta $\\
+ \hline$ a+\gamma>\beta+\delta $
+ \end{tabular}& και & \begin{tabular}{c}
+ $ a>\beta $ \\
+  $ \gamma>\delta $\\
+  \hline$ a\cdot\gamma>\beta\cdot\delta $
+ \end{tabular}
+\end{tabular}\mbox{}\\
+\vspace*{5mm}
+\qquad\qquad\qquad\qquad\qquad\qquad με $ a,\beta,\gamma,\delta>0 $
+\end{center}
+\end{itemize}
+\Orismos{Ανίσωση} 1\textsuperscript{ου} \textbf{ΒΑΘΜΟΥ.} Ανίσωση 1\textsuperscript{ου} βαθμού ονομάζεται κάθε ανισότητα που περιέχει μια μεταβλητή, με μεγαλύτερο εκθέτη το 1. Η ανίσωση είναι της μορφής \[ ax+\beta>0 \]
+\section{Συστήματα Εξισώσεων}\mbox{}\\
+\orismoi
+\Orismos{Η Εξίσωση }$ ax+\beta y=\gamma $. Η εξίσωση $ ax+\beta y=\gamma $ με $ a,\beta\neq0 $ ονομάζεται γραμμική εξίσωση δύο αγνώστων.\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{7.5cm}{\begin{itemize}[itemsep=0mm]
+\item Κάθε ζευγάρι αριθμών $ (x,y) $ το οποίο επαληθεύει την εξίσωση ονομάζεται \textbf{λύση} της εξίσωσης.
+\item Η γραφική παράσταση της εξίσωσης\\$ ax+\beta y=\gamma $ είναι ευθεία γραμμή.
+\item Η εξίσωση $ y=k $ παριστάνει ευθεία, παράλληλη με τον οριζόντιο άξονα $ x'x $.\\
+Για $ k=0 $ έχουμε την ευθεία $ y=0 $ η οποία είναι ο οριζόντιος άξονας.
+\item Η εξίσωση $ x=k $ παριστάνει ευθεία, παράλληλη με τον κατακόρυφο άξονα $ y'y $.\\
+Για $ k=0 $ έχουμε την ευθεία $ x=0 $ η οποία είναι ο κατακόρυφος άξονας.
+\end{itemize}} &
+\begin{tikzpicture}[scale=0.8]
+    \tkzInit[xmin=-3,xmax=2.8,ymin=-3, ymax=2.8]
+    \tkzAxeXY
+    \tkzClip
+     \clip (-3.2,-3.2) rectangle (3,3);
+     \draw[dashed] plot[variable=\x,samples=100,domain=-3:3] ({\x},{2});
+     \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/2*\x+1});
+     \draw[dashed] plot[variable=\x,samples=100,domain=-3:3] ({1},{\x});
+      \tkzText(-2,.7){{\scriptsize $ ax+\beta y=\gamma $}}
+      \tkzText(1.5,-2){{\scriptsize $ x=k $}}
+      \tkzText(-1.25,2.2){{\scriptsize $ y=k $}}
+  \end{tikzpicture}\end{tabular}\mbox{}\\\\
+\Orismos{Γραμμικό Σύστημα 2 Εξισώσεων με 2 Αγνώστουσ.} Γραμμικό σύστημα 2 εξισώσεων με 2 αγνώστους ορίζεται ως ο συνδυασμός δύο γραμμικών εξισώσεων της μορφής $ ax+\beta y=\gamma $, με δύο άγνωστους $ x,y $, για τις οποίες ψάχνουμε μια λύση που θα τις επαληθεύει ταυτόχρονα.\\\\
+\Orismos{Λύση Γραμμικού Συστήματοσ.} Λύση γραμμικού συστήματος ονομάζεται κάθε ζευγάρι αριθμών $ (x,y) $ το οποίο επαληθεύει τις εξισώσεις του συστήματος.\\\\
+\thewrhmata
+\Thewrhma{Σημείο Ευθείασ.} Αν ένα σημείο $ A(x,y) $ ανήκει στην ευθεία, τότε οι συντεταγμένες του επαληθεύουν την εξίσωσή της $ ax+\beta y=\gamma $ και αντίστροφα.\\\\
+{\large\textbf{ΜΕΘΟΔΟΛΟΓΊΑ}}\\\\
+\Methodologia{Γραφική Επίλυση Γραμμικού Συστήματοσ.} Για να λύσουμε ένα γραμμικό σύστημα 2 εξισώσεων με 2 άγνωστους γραφικά θα χρειαστεί να σχεδιάσουμε \textbf{στο ίδιο σύστημα αξόνων} τις γραφφικές παραστάσεις των δύο εξισώσεων, οι οποίες όπως είπαμε είναι ευθείες γραμμές.\\Ύστερα, η σχετική θέση των δύο ευθειών θα μας δώσει τη λύση του συστήματος.\\\\Διακρίνουμε τις εξής περιπτώσεις :
+\begin{itemize}[itemsep=0mm]
+\item Εαν οι δύο ευθείες \textbf{τέμνονται}, τότε το σύστημα έχει \textbf{μοναδική λύση} η οποία είναι οι συντεταγμένες $ (x,y) $ του σημείου τομής τους.\\Αυτό ισχύει διότι το σημείο τομής των δύο ευθειών ανήκει και στις δύο ευθείες (ως κοινό σημείο) επομένως επαληθεύει και τις δύο εξισώσεις ταυτόχρονα.
+\item Εαν οι ευθείες είναι παράλληλες τότε το σύστημα δεν εχει καμία λύση, άρα είναι αδύνατο, αφού οι παράλληλες ευθείες δεν έχουν κανένα κοινό σημείο.
+\item Εαν οι ευθείες συμπίπτουν, τότε το σύστημα έχει άπειρες λύσεις και αυτό γιατί οι ευθείες έχεουν άπειρα κοινά σημεία.
+\end{itemize}
+\begin{center}
+\begin{tabular}{ccccc}
+\begin{tikzpicture}[scale=0.5]
+    \tkzInit[xmin=-3,xmax=2.8,ymin=-3, ymax=2.8]
+    \tkzAxeXY
+    \tkzClip
+     \clip (-3.2,-3.2) rectangle (3,3);
+     \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/2*\x+1});
+     \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{-2*\x+3});
+  \end{tikzpicture} &  & \begin{tikzpicture}[scale=0.5]
+      \tkzInit[xmin=-3,xmax=2.8,ymin=-3, ymax=2.8]
+      \tkzAxeXY
+      \tkzClip
+       \clip (-3.2,-3.2) rectangle (3,3);
+       \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/2*\x-1});
+       \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/2*\x+1});
+    \end{tikzpicture} &  & \begin{tikzpicture}[scale=0.5]
+        \tkzInit[xmin=-3,xmax=2.8,ymin=-3, ymax=2.8]
+        \tkzAxeXY
+        \tkzClip
+         \clip (-3.2,-3.2) rectangle (3,3);
+         \draw plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/2*\x+1});
+         \draw[dashed] plot[variable=\x,samples=100,domain=-3:3] ({\x},{1/2*\x+1.03});
+      \end{tikzpicture}\\
+Μια λύση & & Καμία λύση & & Άπειρες λύσεις
+\end{tabular} 
+\end{center}
+\section{Συναρτήσεις}\mbox{}\\
+\orismoi
+\Orismos{Η συνάρτηση }$ y=ax^2 , a\neq0$. Η συνάρτηση $ y=ax^2 $ 
+\section{Πιθανότητες}\mbox{}\\
+\section{Τρίγωνα}\mbox{}\\
+\section{Τριγωνομετρία}\mbox{}\\
+\part{ΛΥΚΕΙΟ}
+\chapter{Α' Λυκείου}
+\section{Πιθανότητες}\mbox{}\\
+\section{Πραγματικοι Αριθμοι}\mbox{}\\
+\section{Εξισωσεις}\mbox{}\\
+\section{Ανισωσεις}\mbox{}\\
+\section{Προοδοι}\mbox{}\\
+\section{Βασικες Εννοιες Συναρτησεων}\mbox{}\\
+\section{Μελετη Συναρτησεων}\mbox{}\\
+\section{Βασικα Σχήματα}\mbox{}\\
+\orismoi
+\Orismos{Σημείο.} Σημείο
+είναι ένα σχήμα που έχει θέση στο επίπεδο ή στο χώρο, αλλά οχι διαστάσεις. Παριστάνεται με τελεία και το συμβολίζουμε με κεφαλαίο γράμμα π.χ. Α,Β,Ο κτλ.\\\\
+\Orismos{Γραμμή.} Γραμμή
+ονομάζεται το σχημα που προκύπτει από το σύνολο των θέσεων ενός μετακινούμενου σημείου στο επίπεδο ή στο χώρο. Η γραμμή έχει μόνο μια διάσταση, το μήκος.\\\\
+\Orismos{Επιφάνεια.} Επιφάνεια
+ονομάζεται το σύνολο των σημείων ενός σώματος που ορίζουν το εξωτερικό σχήμα του.\\\\
+\Orismos{Επίπεδο}. Επίπεδο
+ονομάζεται μια λεία ομοιόμορφη επιφάνεια. Το επίπεδο έχει δύο διαστάσεις μήκος και πλάτος.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τεμνόμενεσ.} Τεμνόμενες ονομάζονται δύο ευθείες που έχουν \textbf{ένα} κοινό σημείο. Το κοινό αυτό σημείο ονομάζεται \textbf{σημείο τομής}.} & \begin{tikzpicture}
+   \tkzDefPoint(1.5,.5){B}
+   \tkzDefPoint(1.5,-.5){D}
+   \tkzDefPoint(-1.5,-.5){A}
+   \tkzDefPoint(-1.5,0.5){C}
+   \tkzDrawSegments(A,B C,D)
+   \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παράλληλεσ.} Παράλληλες λέγονται δύο ή περισσότερες ευθείες του ίδιου επιπέδου, οι οποίες δεν τέμνονται σε κανένα σημείο.} & 
+ \begin{tikzpicture}
+    \tkzDefPoint(1.5,.4){B}
+    \tkzDefPoint(1.5,-.4){D}
+    \tkzDefPoint(-1.5,-.4){A}
+    \tkzDefPoint(-1.5,0.4){C}
+    \tkzDrawSegments(A,D B,C)
+    \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\Orismos{Φορέασ.} Φορέας μιας ημιευθείας ή ενός ευθύγραμμου τμήματος ονομάζεται η ευθεία γραμμή φέρει πάνω την ημιευθεία ή το ευθύγραμμο τμήμα.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αντικείμενεσ ημιευθείεσ.} Αντικείμενες ημιευθείες
+ονομάζονται δυο ημιευθείες με κοινή αρχή που σχηματίζουν ευθεία γραμμή.} & 
+ \begin{tikzpicture}
+ \tkzDefPoint(1.5,.0){B}
+ \tkzDefPoint(0,0){O}
+ \tkzDefPoint(-1.5,0){A}
+ \tkzDrawSegments(A,B)
+ \tkzDrawPoint(O)
+ \tkzLabelPoint[above,color=black](O){O}
+ \tkzText[color=black](-1.4,.2){$ x' $}
+ \tkzText[color=black](1.4,.15){$ x $}
+    \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ευθύγραμμο τμήμα.} Ευθύγραμμο τμήμα ονομάζεται το σχήμα που αποτελεί το μέρος μιας ευθείας που ορίζεται από τα δύο άκρα του. Το ευθύγραμμο τμήμα ονομάζεται από τα άκρα του π.χ. ΑΒ.} & 
+  \begin{tikzpicture}
+  \tkzDefPoint(1.5,1){B}
+  \tkzDefPoint(-1.5,0){A}
+  \tkzDrawSegments(A,B)
+  \tkzDrawPoints(A,B)
+  \tkzLabelPoint[above,color=black](A){A}
+  \tkzLabelPoint[above,color=black](B){B}
+     \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διαδοχικά.} Διαδοχικά
+ονομάζονται δύο ή περισσότερα ευθύγραμμα τμήματα που ανά δύο έχουν \textbf{ένα} κοινό άκρο και κανένα κοινό σημείο.} & 
+  \begin{tikzpicture}
+  \tkzDefPoint(.2,1){B}
+  \tkzDefPoint(-1.5,0){A}
+  \tkzDefPoint(1.3,.5){C}
+  \tkzDrawSegments(A,B B,C)
+  \tkzDrawPoints(A,B,C)
+  \tkzLabelPoint[above,color=black](A){A}
+  \tkzLabelPoint[above,color=black](B){B}
+  \tkzLabelPoint[above,color=black](C){Γ}
+     \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\Orismos{Εικόνα.} Εικόνα ενός σχήματος ονομάζεται το τελικό σχήμα, το οποίο προκύπτει από το αρχικό με μετατόπιση χωρις να αλλοιωθεί.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Μέσο.} Μέσο
+ενός ευθύγραμμου τμήματος, ονομάζεται το εσωτερικό σημείο του, το οποίο το χωρίζει σε δύο ίσα μέρη.} & 
+  \begin{tikzpicture}
+  \tkzDefPoint(1.5,1){B}
+  \tkzDefPoint(-1.5,0){A}
+  \tkzDefPoint(0,.5){M}
+  \tkzDrawSegments(A,B)
+  \tkzDrawPoints(A,B,M)
+  \tkzLabelPoint[above,color=black](A){A}
+  \tkzLabelPoint[above,color=black](B){B}
+  \tkzLabelPoint[above,color=black](M){M}
+     \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\Orismos{Άθροισμα.} Άθροισμα
+δύο ή περισσοτέρων διαδοχικών ευθυγράμμων τμημάτων, που βρίσκονται στον ίδιο φορέα, ονομάζεται το ευθύγραμμο τμήμα το οποίο έχει αρχη, την αρχή του πρώτου ευθύγραμμου τμήματος και τέλος, το τέλος του τελευταίου.\\Εάν δεν έχουν τον ίδιο φορέα, τότε τα μετατοπίζουμε κατάλληλα.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Γινόμενο.} Γινόμενο ενός ευθυγράμμου τμήματος επί έναν πραγματικό αριθμό ν, ονομάζεται το άθροισμα ν διαδοχικών ίσων ευθυγράμμων τμημάτων. \[ \varGamma\varDelta=\nu\cdot AB \]} & 
+   \begin{tikzpicture}
+   \tkzDefPoint(0,.5){A}
+   \tkzDefPoint(.7,.5){B}
+   \tkzDefPoint(0,0){M}
+   \tkzDefPoint(2.8,0){N}
+   \tkzDrawSegments(A,B M,N)
+   \tkzDrawPoints(A,B,M,N)
+   \tkzLabelPoint[above,color=black](A){A}
+   \tkzLabelPoint[above,color=black](B){B}
+   \tkzLabelPoint[above,color=black](M){Γ}
+   \tkzLabelPoint[above,color=black](N){Δ}
+      \end{tikzpicture}
+    \end{tabular}\mbox{}\\\\\\
+\Orismos{Μονάδα μέτρησησ μήκουσ.} Μονάδα μέτρησης μήκους ονομάζεται το ευθύγραμμο τμήμα που χρησιμοποιούμε για τη μέτρηση και τη σύγκριση όλων των ευθυγράμμων τμημάτων.\\\\
+\Orismos{Μήκοσ.} Μήκος ενός ευθύγραμμου τμήματος ονομάζεται ο αριθμός που μας δείχνει πόσες φορές θα χρειαστεί να πολλαπλασιάσουμε τη μονάδα μέτρησης μήκους ώστε να προκύψει το ευθύγραμμο τμήμα.\\\\
+\Orismos{Ίσα.} Ίσα
+ονομάζονται δυο ή περισσότερα ευθύγραμμα τμήματα, τα οποία έχουν το ίδιο μήκος.\\\\
+\Orismos{Απόσταση δύο σημείων} ονομάζουμε το μήκος του ευθύγραμμου τμήματος που τα ενώνει.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Συμμετρικό.} Συμμετρικό ενός σημείου Α ως προς κέντρο Ο ονομάζεται το σημείο Β που είναι τέτοιο ώστε το κέντρο συμμετρίας Ο να είναι μέσο του ευθύγραμμου τμήματος ΑΒ που τα ενώνει.} & 
+   \begin{tikzpicture}
+   \tkzDefPoint(1.5,1){B}
+   \tkzDefPoint(-1.5,0){A}
+   \tkzDefPoint(0,0.5){O}
+   \tkzDrawSegments(A,O O,B)
+   \tkzDrawPoints(O,A,B)
+   \tkzLabelPoint[above,color=black](O){O}
+   \tkzLabelPoint[above,color=black](A){A}
+   \tkzLabelPoint[above,color=black](B){B}
+   \tkzMarkSegments[mark=|,color=black](A,O O,B)
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\Orismos{Ημιεπίπεδο.} Ημιεπίπεδο ονομάζεται το μέρος ενός επιπέδου που χωρίζεται από μια ευθεία γραμμή.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κυρτή γωνία.} Κυρτή γωνία ονομάζεται το σχημα που αποτελειται από δύο ημιευθείες με κοινή αρχή και το κοινό μέρος των ημιεπιπέδων που ορίζουν οι δύο ημιευθείες.\\
+Οι ημιευθείες ονομάζονται \textbf{πλευρές} και το κοινό σημείο \textbf{κορυφή}.} & 
+  \begin{tikzpicture}
+  \tkzDefPoint(3,1){B}
+  \tkzDefPoint(3,-.8){A}
+  \tkzDefPoint(0,0){O}
+  \tkzDrawSegments(A,O O,B)
+  \tkzDrawPoints(O)
+  \tkzLabelPoint[above,color=black](O){O}
+  \tkzMarkAngle[fill=black!70,
+   size=7mm](A,O,B)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\Orismos{Μη κυρτή γωνία.} Μη κυρτή γωνία ονομάζεται το σχήμα που αποτελείται από το σύνολο των σημείων που δεν ανήκουν στην κυρτή γωνία και τις δύο πλευρές.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Μηδενική.} Μηδενική ονόμαζεται μια \textbf{κυρτή} γωνία  της οποίας οι πλευρές συμπίπτουν. Η μηδενική γωνία έχει μέτρο $0\degree$.} & 
+   \begin{tikzpicture}
+   \tkzDefPoint(3,0){B}
+   \tkzDefPoint(0,0){O}
+   \tkzDrawSegment(O,B)
+   \tkzDrawPoints(O)
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Πλήρησ γωνία.} Πλήρης γωνία ονομάζεται μια \textbf{μη κυρτή} γωνία της οποίας οι πλευρές συμπίπτουν. Η πλήρης γωνία έχει μέτρο $360\degree$.} & 
+    \begin{tikzpicture}
+    \tkzDefPoint(2.5,0){B}
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(2,.01){A}
+    \tkzMarkAngle[fill=black!70,size=3mm](A,O,B)
+    \tkzDrawSegment(O,B)
+    \tkzDrawPoints(O)
+    \end{tikzpicture}
+    \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[c]{9.5cm}{\Orismos{Ευθεία γωνία.} Ευθεία γωνία ονομάζεται μια γωνία της οποίας οι πλευρές είναι αντικειμενες ημιευθείες. Η ευθεία γωνία έχει μέτρο $180\degree$.} & 
+\begin{tikzpicture}
+ \tkzDefPoint(-1.5,0){B}
+ \tkzDefPoint(0,0){O}
+ \tkzDefPoint(1.5,0){A}
+ \tkzMarkAngle[fill=black!70,size=3mm](A,O,B)
+ \tkzDrawSegment(A,B)
+ \tkzDrawPoints(O)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διχοτόμοσ.} Διχοτόμος μιας γωνίας ονομάζεται η ημιευθεία η οποία χωρίζει τη γωνία σε 2 ίσα μέρη.} & 
+ \begin{tikzpicture}
+  \tkzDefPoint(3,1){B}
+  \tkzDefPoint(0,0){O}
+  \tkzDefPoint(3,0){A}
+  \tkzMarkAngle[fill=black!70,size=5mm](A,O,B)
+  \tkzDefLine[bisector](A,O,B) \tkzGetPoint{a}
+  \tkzDrawSegments(A,O B,O)
+  \tkzDrawSegments[color=black,add=0 and -.2](O,a)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ορθή.} Ορθή ονομάζεται μια γωνία η οποία είναι το μισό μιας ευθείας γωνίας. Η ορθή γωνία έχει μέτρο $90\degree$.} & 
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){G}
+\tkzDefPoint(0,1){O}
+\tkzDefPoint(-.5,0){A}
+\tkzDrawSegments(B,G B,O)
+\tkzMarkRightAngle[fill=black!70,size=.3](G,B,O)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Κάθετεσ.} Κάθετες λέγονται δύο ευθείες που σχηματίζουν μεταξύ τους ορθή γωνία.\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Οξεία.} Οξεία ονομάζεται μια γωνία που είναι μικρότερη από μια ορθή. Η οξεία γωνία έχει μέτρο ανάμεσα από $0\degree$ και $90\degree$.} & 
+  \begin{tikzpicture}
+ \tkzDefPoint(3,1){B}
+ \tkzDefPoint(0,0){O}
+ \tkzDefPoint(3,0){A}
+ \tkzMarkAngle[fill=black!70,size=5mm](A,O,B)
+ \tkzDrawSegments(A,O B,O)
+ \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αμβλεία.} Αμβλεία ονομάζεται μια γωνία που είναι μεγαλύτερη από μια ορθή. Η αμβλεία γωνία έχει μέτρο ανάμεσα από $90\degree$ και $180\degree$.} & 
+   \begin{tikzpicture}
+    \tkzDefPoint(-1.5,1){B}
+    \tkzDefPoint(-.2,0){O}
+    \tkzDefPoint(1.5,0){A}
+    \tkzMarkAngle[fill=black!70,size=4mm](A,O,B)
+    \tkzDrawSegments(A,O B,O)
+    \end{tikzpicture}
+    \end{tabular}\mbox{}\\
+\Orismos{Απόσταση σημείου από ευθεία.} Απόσταση σημείου από ευθεία ονομάζεται το μήκος του \textbf{μοναδικού κάθετου} ευθύγραμμου τμήματος που ενώνει το σημείο με την ευθεία.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Μεσοκάθετοσ.} Μεσοκάθετος ενός ευθύγραμμου τμήματος ονομάζεται η ευθεία που διέρχεται κάθετα από το μέσο το του ευθύγραμμου τμήματος.\\Η μεσοκάθετος είναι \textbf{άξονας συμμετρίας} του και τα άκρα  \textbf{συμμετρικά}.} & 
+ \begin{tikzpicture}
+ \tkzDefPoint(-1.5,0){A}
+ \tkzDefPoint(0,-.7){O}
+ \tkzDefPoint(0,.7){C}
+ \tkzDefPoint(1.5,0){B}
+ \tkzDefPoint(0,0){D}
+ \tkzDrawSegments(A,B C,O)
+ \tkzDrawPoints(A,B)
+ \tkzLabelPoint[above,color=black](A){A}
+ \tkzLabelPoint[above,color=black](B){B}
+ \tkzMarkRightAngle[size=.3](B,D,C)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εφεξήσ.} Εφεξής λέγονται \textbf{δύο} γωνίες που έχουν κοινή κορυφή, κοινή πλευρά και κανένα άλλο κοινό σημέιο} & \begin{tikzpicture}
+ \tkzDefPoint(0,0){B}
+ \tkzDefPoint(3,0){G}
+ \tkzDefPoint(3,.5){A}
+ \tkzDefPoint(3,.9){O}
+ \tkzDrawSegments(B,G B,O B,A)
+ \tkzMarkAngle[fill=black,
+ size=1,opacity=.7](G,B,A)
+ \tkzMarkAngle[fill=black,
+  size=1,opacity=.4](G,B,O)
+ \end{tikzpicture}
+\end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διαδοχικέσ.} Διαδοχικές λέγονται \textbf{τρεις ή περισσότερες} γωνίες οι οποίες ανά δύο είναι μεταξύ τους εφεξής.}& \begin{tikzpicture}
+  \tkzDefPoint(0,0){B}
+  \tkzDefPoint(3,0){G}
+  \tkzDefPoint(3,.5){A}
+  \tkzDefPoint(3,1.4){D}
+  \tkzDefPoint(3,.9){O}
+  \tkzDrawSegments(B,G B,O B,A D,B)
+  \tkzMarkAngle[fill=black,
+  size=1,opacity=.7](G,B,A)
+  \tkzMarkAngle[fill=black,
+   size=1,opacity=.4](G,B,O)
+  \tkzMarkAngle[fill=black,
+  size=1,opacity=.9](O,B,D)
+  \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\Orismos{Άθροισμα δύο εφεξήσ γωνιών.} Άθροισμα δύο εφεξής γωνιών ονομάζεται η γωνία που έχει πλευρές τις ημιευθείες που βρίσκονται εκατέρωθεν της κοινής πλευράς.\\\\
+\Orismos{Διαφορά δύο γωνιών.} Διαφορά δύο γωνιών ονομάζεται το μη κοινό κομμάτι δύο γωνιών που έχουν μετατοπισθεί έτσι ώστε να έχουν κοινή κορυφή και κοινή πρώτη πλευρά. (Η μια θα βρίσκεται στο εσωτερικό της άλλης).\\\\
+\Orismos{Γινόμενο γωνίασ με φυσικό αριθμό.} Γινόμενο μιας γωνίας με ένα φυσικό αριθμό $ \nu $ ονομάζεται το άθροισμα $ \nu $ διαδοχικών ίσων γωνιών με την αρχική.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Συμπλήρωματικέσ Γωνίεσ.} Συμπλήρωματικές ονομάζονται δύο γωνίες που έχουν άθροισμα ίσο με μια ορθή γωνία. Η καθεμία λέγεται \textbf{συμπληρωματική} της άλλης.}& \begin{tikzpicture}
+   \tkzDefPoint(0,0){B}
+   \tkzDefPoint(2,0){G}
+   \tkzDefPoint(2,.5){A}
+   \tkzDefPoint(0,1.5){O}
+   \tkzDefPoint(-.5,0){C}
+   \tkzMarkAngle[fill=black!70,
+   size=5mm](G,B,A)
+   \tkzMarkAngle[fill=black!40,
+   size=5mm](A,B,O)
+   \tkzMarkRightAngle[size=.3](G,B,O)
+   \tkzDrawSegments(B,G B,O B,A)
+   \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παραπληρωματικέσ Γωνίεσ.} Παραπληρωματικές ονομάζονται δύο γωνίες που έχουν άθροισμα ίσο με μια ευθεία γωνία. Η καθεμία λέγεται \textbf{παραπληρωματική} της άλλης.}& \begin{tikzpicture}
+    \tkzDefPoint(1.5,0){B}
+    \tkzDefPoint(1,1){G}
+    \tkzDefPoint(-1.5,0){A}
+    \tkzDefPoint(0,0){O}
+    \tkzMarkAngle[fill=black!70,
+    size=5mm](B,O,G)
+    \tkzMarkAngle[fill=black!40,
+    size=5mm](G,O,A)
+    \tkzDrawSegments(O,G B,O B,A)
+    \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κατακορυφήν Γωνίεσ.} Κατακορυφήν ονομάζονται δύο γωνίες που έχουν κοινή κορυφή και οι πλευρές τους ανα δύο έχουν κοινό φορέα δηλαδή είναι αντικείμενες ημιευθείες.}& \begin{tikzpicture}
+  \tkzDefPoint(1.5,.5){B}
+  \tkzDefPoint(1.5,-.5){D}
+  \tkzDefPoint(-1.5,-.5){A}
+  \tkzDefPoint(-1.5,0.5){C}
+  \tkzDefPoint(0,0){O}
+  \tkzDrawSegments(A,B C,D)
+  \tkzMarkAngle[fill=black!70,
+  size=.4](D,O,B)
+  \tkzMarkAngle[fill=black!70,
+  size=.4](C,O,A)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κύκλοσ.} Κύκλος ονομάζεται το σύνολο των σημείων που έχουν σταθερή απόσταση από ένα σταθερό σημείο το οποίο λέγεται \textbf{κέντρο} του κύκλου.\\Η απόσταση αυτή ονομάζεται \textbf{ακτίνα} του κύκλου.\\Ο κύκλος συμβολίζεται ως εξής π.χ. κύκλος $\left(O,\rho\right) $ με \textbf{κέντρο} Ο και \textbf{ακτίνα} ρ.}& \begin{tikzpicture}
+   \tkzDefPoint(1.4,0){A}
+   \tkzDefPoint(0,0){O}
+   \tkzDrawCircle(O,A)
+   \tkzDrawPoint(O)
+   \tkzDrawSegments(A,O)
+   \tkzLabelPoint[above,color=black](O){O}
+   \tkzText[color=black](.7,.2){$ \rho $}
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\Orismos{Γεωμετρικόσ τόποσ.} Γεωμετρικός τόπος ονομάζεται το σύνολο όλων των σημείων του επιπέδου ή του χώρου με μια συγκεκριμένη ιδιότητα.\\
+Οι πιο γνωστοί γεωμετρικοί τοποι ειναι η \textbf{μεσοκάθετος} ενός ευθύγραμμου τμήματος, η \textbf{διχοτόμος} μιας γωνίας και ο \textbf{κύκλος}.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τόξο.} Τόξο ενός κύκλου ονομάζεται το μέρος ενός κύκλου που ορίζεται από δύο σημεία του.}& \begin{tikzpicture}
+ \clip (-1.5,.1) rectangle (1.2,1);
+ \tkzDefPoint(1,.5){A}
+ \tkzDefPoint(0,-.5){O}
+ \tkzDefPointBy[rotation=center O angle 70](A)
+ \tkzGetPoint{B}
+ \tkzDefPointBy[rotation=center O angle -20](A) \tkzGetPoint{C}
+ \tkzDefPointBy[rotation=center O angle 90](A) \tkzGetPoint{D}
+ \tkzDrawArc[dashed](O,C)(D)
+ \tkzDrawArc[color=black,ultra thick](O,A)(B)
+ \tkzDrawPoints[size=2](A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Χορδή.} Χορδή λέγεται το ευθυγραμμο τμήμα που ενώνει δύο σημεία ενός κύκλου.}& \begin{tikzpicture}
+  \clip (-1.5,.1) rectangle (1.2,1);
+  \tkzDefPoint(1,.5){A}
+  \tkzDefPoint(0,-.5){O}
+  \tkzDefPointBy[rotation=center O angle 70](A)
+  \tkzGetPoint{B}
+  \tkzDefPointBy[rotation=center O angle -20](A) \tkzGetPoint{C}
+  \tkzDefPointBy[rotation=center O angle 90](A) \tkzGetPoint{D}
+  \tkzDrawArc(O,C)(D)
+  \tkzDrawSegment(A,B)
+  \tkzDrawPoints(A,B)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Απόστημα.} Απόστημα μιας χορδής ονομάζεται το ευθύγραμμο τμήμα του έχει αρχή το κέντρο του κύκλου και πάει \textbf{κάθετα} στην χορδή.}&
+ \begin{tikzpicture}
+   \tkzDefPoint(0,-1.5){A}
+   \tkzDefPoint(0,0){O}
+   \tkzDefPointBy[rotation=center O angle -80](A)
+   \tkzGetPoint{B}
+   \tkzDefPointBy[rotation=center O angle 80](A) \tkzGetPoint{C}
+   \tkzDefPointBy[rotation=center O angle -40](A)
+   \tkzGetPoint{D}
+   \tkzDefPointBy[rotation=center O angle 40](A)
+   \tkzGetPoint{E}
+   \tkzDrawArc(O,B)(C)
+   \tkzDefMidPoint(D,E) \tkzGetPoint{F}
+   \tkzDrawSegment(D,E)
+   \tkzDrawSegment[color=black,thick](O,F)
+   \tkzMarkRightAngle(E,F,O)
+   \tkzDrawPoints(O,D,E,F)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάμετροσ.} Διάμετρος ονομάζεται η μεγαλύτερη χορδή ενός κύκλου η οποία διέρχεται απ' το κέντρο του.\\Η διάμετρος ενός κύκλου ειναι ίση με δύο φορές την ακτίνα του.}& \begin{tikzpicture}
+ \tkzDefPoint(1,0){A}
+ \tkzDefPoint(-1.5,0){C}
+ \tkzDefPoint(-1,0){Β}
+ \tkzDefPoint(0,0){O}
+ \tkzDrawCircle(O,A)
+ \tkzDrawSegments(A,Β)
+ \tkzLabelPoint[above,color=black](O){O}
+ \tkzText[color=black](.5,.2){$ \rho $}
+ \tkzDrawPoints(O,A,B)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\Orismos{Αντιδιαμετρικά σημεία.} Αντιδιαμετρικά σημεία λέγονται τα άκρα μιας διαμέτρου ενός κύκλου.\\\\
+\Orismos{Εσωτερικό σημείο.} Εσωτερικό σημείο του επιπέδου ενός κύκλου λέγεται ένα σημείο του οποίου η απόσταση του από το κέντρο του κύκλου είναι μικρότερη από την ακτίνα.\\\\\\
+\Orismos{Εξωτερικό σημείο.} Εξωτερικό σημείο του επιπέδου ενός κύκλου λέγεται ένα σημείο του οποίου η απόσταση του από το κέντρο του κύκλου ειναι μεγαλύτερη από την ακτίνα.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Επίκεντρη.} Επίκεντρη ονομάζεται μια γωνία που έχει κορυφή το κέντρο ενός κύκλου.}& \begin{tikzpicture}
+  \clip (-1.5,-1.1) rectangle (1.2,0.2);
+  \tkzDefPoint(.86,-0.5){A}
+  \tkzDefPoint(0,0){O}
+  \tkzDefPointBy[rotation=center O angle -60](A)
+  \tkzGetPoint{B}
+  \tkzDefPointBy[rotation=center O angle -90](A) \tkzGetPoint{C}
+  \tkzDefPointBy[rotation=center O angle 30](A) \tkzGetPoint{D}
+  \tkzDrawArc[dashed](O,C)(D)
+  \tkzDrawArc(O,B)(A)
+  \tkzDrawSegments(O,A O,B)
+ \tkzMarkAngle[fill=black!70,size=.2](B,O,A)
+ \tkzDrawPoints(O,A,B)
+ \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αντίστοιχο τοξο.} Αντίστοιχο τοξο μιας επίκεντρης γωνίας λέγεται το τόξο που ορίζεται από τα σημεία τομής των πλευρών της κυρτής επίκεντρης γωνίας με τον κύκλο.\\Λέμε μια επίκεντρη γωνία \textbf{βαίνει} στο αντίστοιχο τόξο της.}& \begin{tikzpicture}
+   \clip (-1.5,-1.1) rectangle (1.2,0.2);
+   \tkzDefPoint(.86,-0.5){A}
+   \tkzDefPoint(0,0){O}
+   \tkzDefPointBy[rotation=center O angle -60](A)
+   \tkzGetPoint{B}
+   \tkzDefPointBy[rotation=center O angle -90](A) \tkzGetPoint{C}
+   \tkzDefPointBy[rotation=center O angle 30](A) \tkzGetPoint{D}
+   \tkzDrawArc[dashed](O,C)(D)
+   \tkzDrawArc[color=black,ultra thick](O,B)(A)
+   \tkzDrawSegments(O,A O,B)
+  \tkzMarkAngle[fill=black!70,size=.2](B,O,A)
+  \tkzDrawPoints[size=2](O,A,B)
+  \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ημικύκλιο.} Ημικύκλιο λέγεται το τόξο ενός κύκλου που προκύπτει χωρίζοντας τον με τη διάμετρο. Είναι ίσο με $180\degree$.}& \begin{tikzpicture}
+ \tkzDefPoint(1.2,0){A}
+ \tkzDefPoint(-1.5,0){C}
+ \tkzDefPoint(0,0){O}
+ \tkzDefPointBy[rotation=center O angle 180](A)
+ \tkzGetPoint{B}
+ \tkzDrawArc[color=black,ultra thick](O,A)(B)
+ \tkzDrawSegments(O,A O,B)
+ \tkzMarkAngle[fill=black!70,size=.2](A,O,B)
+ \tkzDrawPoints[size=2](O,A,B)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τεταρτοκύκλιο.} ω λέγεται το τόξο του κύκλου που προκύπτει χωριζοντας τον με δύο κάθετες διαμέτρους. Είναι ίσο με $90\degree$.}& \begin{tikzpicture}
+\tkzDefPoint(1.2,0){A}
+\tkzDefPoint(-1.2,0){C}
+\tkzDefPoint(0,0){O}
+\tkzDefPointBy[rotation=center O angle 90](A)
+\tkzGetPoint{B}
+\tkzDrawArc[color=black,ultra thick](O,A)(B)
+\tkzDrawSegments(O,A O,B)
+\tkzMarkRightAngle[fill=black!70,size=.2](A,O,B)
+\tkzDrawPoints[size=2](O,A,B)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Μέσο τόξου.} Μέσο ενός τόξου λέγεται το σημείο του τόξου που το χωρίζει σε δύο ίσα μέρη.\\\\
+\Orismos{Διαδοχικά τοξα.} Διαδοχικά τοξα λέγονται τα τοξα ενός που έχουν ένα κοινό άκρο και κανένα άλλο κοινό σημείο.\\\\
+\Orismos{Ν-οστό ενόσ τόξου.} Ν-οστό ενός τόξου λέγεται το 1 από τα ν ίσα μέρη του τόξου.\\\\
+\Orismos{Μοίρα.} Μοίρα ονομάζεται το $\frac{1}{360}$ ενός κύκλου και συμβολίζεται με $1\degree$.\\\\
+\Orismos{Μέτρο τόξου.} Μέτρο ενός τόξου λέγεται ο φυσικός αριθμός που μας δειχνει πόσες φορές χωράει μέσα του το τόξο 1 μοίρας.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τεθλασμένη γραμμή.} Τεθλασμένη γραμμή ονομάζεται το σχήμα που αποτελείται από διαδοχικά, μη συνευθειακά ευθύγραμμα τμήματα.}& \begin{tikzpicture}
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(.7,0.5){B}
+  \tkzDefPoint(1.8,.1){C}
+  \tkzDefPoint(3,1){D}
+  \tkzDrawSegments(B,A C,B C,D)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\Orismos{Κορυφέσ τεθλασμέσησ γραμμήσ.} Κορυφές μιας τεθλασμέσης γραμμής ονομάζονται τα άκρα των ευθυγράμμων τμημάτων που την αποτελούν.\\\\
+\Orismos{Πλευρέσ τεθλασμένησ γραμμήσ.} Πλευρές μιας τεθλασμένης γραμμής ονομάζονται τα ευθυγραμμα τμήματα που την αποτελούν.\\\\
+\Orismos{Περίμετροσ.} Περίμετρος μιας τεθλασμένης γραμμής ονομάζεται το άθροισμα των ευθυγράμμων τμημάτων της.\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Απλή.} Απλή λέγεται μια τεθλασμένη γραμμή όταν κάθε ζευγάρι μη διαδοχικών πλευρών δεν έχουν κοινά σημεία.}& \begin{tikzpicture}
+   \tkzDefPoint(.5,.5){A}
+   \tkzDefPoint(0,0){B}
+   \tkzDefPoint(.5,-.5){C}
+   \tkzDefPoint(1,.5){D}
+   \tkzDefPoint(1,-.5){E}
+   \tkzDefPoint(2,.5){F}
+   \tkzDefPoint(1.5,0){G}
+   \tkzDefPoint(2,-.5){H}
+   \tkzDefPoint(3,-.5){I}
+   \tkzDefPoint(3,.5){J}
+   \tkzDrawSegments(D,A A,B B,C C,E)
+   \tkzDrawSegments(I,F F,G G,H H,J)
+   \tkzText(.75,.7){{\footnotesize Απλή}}
+   \tkzText(2.3,.7){{\footnotesize Μη Απλή}}
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κυρτή.} Κυρτή ονομάζεται μια τεθλασμένη γραμμή της οποίας κάθε φορέας την αφήνει όλη σε ένα μόνο απ' τα δύο ημιεπίπεδα τα οποία ορίζει.}& \begin{tikzpicture}
+    \tkzDefPoint(.5,.4){A}
+    \tkzDefPoint(0,0){B}
+    \tkzDefPoint(1.7,-.5){C}
+    \tkzDefPoint(1.3,.5){D}
+    \tkzDefPoint(2.5,-.2){E}
+    \tkzDrawSegments(D,A A,B B,C C,E)
+    \end{tikzpicture}
+    \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Μη κυρτή.} Μη κυρτή ονομάζεται κάθε τεθλασμένη γραμμή η οποία δεν είναι κυρτή.}& \begin{tikzpicture}
+   \tkzDefPoint(0,0){A}
+   \tkzDefPoint(.7,0.5){B}
+   \tkzDefPoint(1.8,.1){C}
+   \tkzDefPoint(3,.7){D}
+   \tkzDrawSegments(B,A C,B C,D)
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κλειστή.} Κλειστή ονομάζεται μια τεθλασμένη γραμμή της οποίας τα άκρα συμπίπτουν.}& \begin{tikzpicture}
+     \tkzDefPoint(.5,.4){A}
+     \tkzDefPoint(0,0){B}
+     \tkzDefPoint(1.7,-.5){C}
+     \tkzDefPoint(1.3,.4){D}
+     \tkzDefPoint(2.5,-.2){E}
+     \tkzDrawSegments(D,A A,B B,C C,E E,D)
+     \end{tikzpicture}
+     \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Πολύγωνο.} Πολύγωνο ονομάζεται κάθε \textbf{κλειστή και απλή} τεθλασμένη γραμμή.\\Εαν η γραμμή είναι κυρτή λέγεται \textbf{κυρτό} πολύγωνο αλλιώς λέγεται \textbf{μη κυρτό}.}& \begin{tikzpicture}
+  \tkzDefPoint(.5,.7){A}
+  \tkzDefPoint(0,-.5){B}
+  \tkzDefPoint(3,-.5){C}
+  \tkzDefPoint(1.7,.8){D}
+  \tkzDrawSegments(D,A A,B B,C C,D)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διαγώνιοσ.} Διαγώνιος ενός πολυγώνου ονομάζεται το ευθύγραμμο τμήμα που ενώνει δύο μη διαδοχικές κορυφές του.}& \begin{tikzpicture}
+   \tkzDefPoint(.5,.9){A}
+   \tkzDefPoint(0,0){B}
+   \tkzDefPoint(3,0){C}
+   \tkzDefPoint(1.7,.9){D}
+   \tkzDrawSegments(D,A A,B B,C C,D)
+   \tkzDrawSegments[color=black](D,B A,C)
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Γωνίεσ πολυγώνου.} Γωνίες του πολυγώνου ονομάζονται οι κυρτές γωνίες που σχηματίζουν οι πλευρές του.}&\begin{tikzpicture}
+    \tkzDefPoint(.5,.4){A}
+    \tkzDefPoint(0,-.5){B}
+    \tkzDefPoint(3,-.5){C}
+    \tkzDefPoint(1.7,.4){D}
+    \tkzDrawSegments(D,A A,B B,C C,D)
+    \tkzMarkAngle[draw=black,size=2mm](B,A,D)
+    \tkzMarkAngle[draw=black,size=3mm](C,B,A)
+    \tkzMarkAngle[draw=black,size=4mm](D,C,B)
+    \tkzMarkAngle[draw=black,size=2mm](A,D,C)
+    \end{tikzpicture}\end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εξωτερική γωνία πολυγώνου.} Εξωτερική γωνία του πολυγώνου λέγεται η παραπληρωματική γωνία μιας εσωτερικής γωνίας του.}&\begin{tikzpicture}
+ \clip (-.4,-.1) rectangle (3,1);
+\tkzDefPoint(0,0.2){B}
+\tkzDefPoint(0,-.3){C}
+\tkzDefPoint(.7,.7){A}
+\tkzDefPoint(1.7,.7){H}
+\tkzDefPoint(.2,.7){K}
+\tkzDefPoint(-.35,-.05){L}
+\tkzDefPoint(2.7,.2){N}
+\tkzDrawSegments(H,K A,L H,A B,C N,H)
+\tkzMarkAngle[draw=black,%
+size=3mm](K,A,B)
+\tkzMarkAngle[draw=black,%
+size=3mm](L,B,C)
+\end{tikzpicture}\end{tabular}\mbox{}\\
+\section{Τριγωνα}\mbox{}\\
+\orismoi
+\Orismos{Κύρια στοιχεία.} Κύρια στοιχεία ενός τριγώνου ονομάζονται οι πλευρές και οι γωνίες του.\\\\
+\Orismos{Περίμετροσ.} Περίμετρος ενός τριγώνου είναι το άθροισμα όλων των πλευρών του. Συμβολίζεται με $2\tau$. \[ 2\tau=a+\beta+\gamma \] όπου $ a,\beta,\gamma $ οι πλευρές του τριγώνου.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Σκαληνό.} Σκαληνό ονομάζεται ένα τρίγωνο που έχει όλες τις πλευρές του άνισες.} & \begin{tikzpicture}
+ \tkzDefPoint(3,0){B}
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(1,1){C}
+ \tkzDrawPolygon(A,B,C)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ισοσκελέσ.} Ισοσκελές ονομάζεται ένα τρίγωνο που έχει \textbf{δύο} πλευρές του ίσες μεταξύ τους. Η τρίτη πλευρά ονομάζεται \textbf{βάση}.} & \begin{tikzpicture}
+  \tkzDefPoint(3,0){B}
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(1.5,1){C}
+  \tkzDrawPolygon(A,B,C)
+  \tkzMarkSegments[mark=|,color=black](C,B A,C)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ισόπλευρο.} Ισόπλευρο ονομάζεται ένα τριγωνο που έχει \textbf{όλες} τις πλευρές του ίσες.} & \begin{tikzpicture}
+   \tkzDefPoint(1.5,0){B}
+   \tkzDefPoint(0,0){A}
+   \tkzDefPoint(.75,1.3){C}
+   \tkzDefPoint(-.75,0){D}
+   \tkzDrawPolygon(A,B,C)
+   \tkzMarkSegments[mark=|,color=black](C,B A,C A,B)
+   \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Οξυγώνιο.} Οξυγώνιο ονομάζεται ένα τρίγωνο που έχει \textbf{όλες} τις γωνίες του οξείες.} & \begin{tikzpicture}
+ \tkzDefPoint(3,0){B}
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(1,1){C}
+ \tkzMarkAngle[draw=black,size=5mm](C,B,A)
+ \tkzMarkAngle[draw=black,size=.4](B,A,C)
+ \tkzMarkAngle[draw=black,size=.4](A,C,B)
+ \tkzDrawPolygon(A,B,C)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ορθογώνιο.} Ορθογώνιο ονομάζεται το τριγωνο που έχει μια ορθή γωνία.\\
+Η πλευρά που βρίσκεται απέναντι από την ορθή γωνία λέγεται \textbf{υποτείνουσα}.} & \begin{tikzpicture}
+ \tkzDefPoint(3,0){B}
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(0,1.5){C}
+ \tkzMarkRightAngle[draw=black](B,A,C)
+ \tkzDrawPolygon(A,B,C)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Αμβλυγώνιο.} Αμβλυγώνιο ονομάζεται ένα τρίγωνο που έχει μια αμβλεία γωνία.} & \begin{tikzpicture}
+  \tkzDefPoint(3,0){B}
+  \tkzDefPoint(1,0){A}
+  \tkzDefPoint(0,1){C}
+  \tkzMarkAngle[draw=black,size=3mm](B,A,C)
+  \tkzDrawPolygon(A,B,C)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\Orismos{Δευτερευοντα στοιχεια.} Δευτερευοντα στοιχεια ενός τριγώνου είναι οι \textbf{διάμεσος}, η \textbf{διχοτόμος} και το \textbf{ύψος}.\\\\
+\newpage
+\noindent
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάμεσοσ.} Διάμεσος ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα που ενώνει μια κορυφή του τριγώνου με το μέσο της απέναντι πλευράς.\\
+Για ένα τριγωνο \textit{ΑΒΓ} με πλευρές α, β, γ οι τρεις διαμεσοι του συμβολίζονται : $ \mu_{a}, \mu_{\beta}, \mu_{\gamma} $.} & \begin{tikzpicture}
+  \tkzDefPoint(3,0){B}
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(1,2){C}
+  \tkzDefMidPoint(A,B) \tkzGetPoint{D}
+  \tkzDrawPolygon(A,B,C)
+  \tkzDrawSegment[color=black,thick](C,D)
+  \tkzMarkSegments[mark=|,color=black](D,B A,D)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διχοτόμοσ.} Διχοτόμος ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα που χωρίζει τη γωνία απ' την οποία ξεκινάει σε 2 ίσες.\\
+Για ένα τριγωνο \textit{ΑΒΓ} με πλευρές α, β, γ οι τρεις διχοτόμοι του συμβολίζονται : $ \delta_{a}, \delta_{\beta}, \delta_{\gamma} $.} & \begin{tikzpicture}
+\clip (-.1,-.1) rectangle (3.1,2.1);
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,2){C}
+\tkzDefLine[bisector](A,C,B) \tkzGetPoint{D}
+\tkzDrawSegment[color=black,thick,add=0 and -.5](C,D)
+\tkzMarkAngle[mark=|,draw=black,size=7mm](A,C,D)
+\tkzMarkAngle[mark=|,draw=black,size=6mm](D,C,B)
+\tkzDrawPolygon(A,B,C)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Ύψοσ.} Ύψος ενός τριγώνου ονομάζεται το ευθύγραμμο τμήμα που έχει αρχή μια κορυφή του τριγώνου και πάει \textbf{κάθετα} στην απέναντι πλευρά.\\
+Το σημείο που το ύψος τέμνει την απέναντι πλευρά λέγεται \textbf{προβολή} της κορυφής.\\
+Για ένα τριγωνο \textit{ΑΒΓ} με πλευρές α, β, γ τα τρία ύψη του συμβολίζονται : $ \upsilon_{a}, \upsilon_{\beta}, \upsilon_{\gamma} $.} & \begin{tikzpicture}
+\clip (-.1,-.1) rectangle (3.1,2.1);
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(1,2){C}
+\tkzDefPoint(1,0){D}
+\tkzMarkRightAngle[draw=black](B,D,C)
+\tkzDrawPolygon(A,B,C)
+\tkzDrawSegment[color=black,thick](C,D)
+\end{tikzpicture}
+\end{tabular}\mbox{}\\\\\\
+\Orismos{Αντίστοιχες ή ομόλογες} λέγονται οι πλευρές που βρίσκονται απέναντι από ίσες γωνίες.\\\\
+\Orismos{Συμμετρικά σημεία ωσ προσ σημείο.} Συμμετρικά ως προς σημείο ονομάζονται δύο σχήματα αν και μόνο αν κάθε σημείο του ενός έχει ένα συμμετρικό σημείο στο άλλο, ως προς το κέντρο συμμετρίας.\\
+Ένα σχημα με κέντρο συμμετρίας λέμε οτι παρουσιάζει \textbf{κεντρική συμμετρία}.\\\\
+\Orismos{Συμμετρικά σημεία ωσ προσ ευθεία.} Συμμετρικά ως προς ευθεία λέγονται δύο σχήματα αν και μόνο αν κάθε σημείο του ενός έχει ένα συμμετρικό σημείο στο άλλο, ως προς τον άξονα συμμετρίας.\\
+Ένα σχημα με άξονα συμμετρίας λέμε οτι παρουσιάζει \textbf{αξονικά συμμετρία}.\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εξωτερική ευθεία ενός κύκλου} λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι \textbf{μεγαλύτερη} από την ακτίνα του.}&\begin{tikzpicture}
+ \tkzDefPoint(0,0){Ο}
+ \tkzDefPoint(-1.5,-1){G}
+ \tkzDefPoint(0,.7){A}
+ \tkzDefPoint(1.5,-1){Β}
+ \tkzDefPoint(0,-1){D}
+ \tkzDefPoint(0.489,-.5){E}
+ \tkzDrawCircle(Ο,Α)
+ \tkzDrawSegments(O,D O,E)
+ \tkzDrawSegments[color=black](B,G)
+ \tkzDrawPoint(O)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εφαπτόμενη.} Εφαπτόμενη ευθεία ενός κύκλου λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι \textbf{ίση} από την ακτίνα του.\\
+Το σημείο τομής της ευθείας και του κύκλου λέγεται \textbf{σημείο επαφής}.}&\begin{tikzpicture}
+ \tkzDefPoint(0,0){Ο}
+ \tkzDefPoint(-1.5,-.7){G}
+ \tkzDefPoint(0,.7){A}
+ \tkzDefPoint(1.5,-.7){Β}
+ \tkzDefPoint(0,-.7){D}
+ \tkzDefPoint(0.489,-.5){E}
+ \tkzDrawCircle(Ο,Α)
+ \tkzDrawSegments(O,D O,E)
+ \tkzDrawSegments[color=black](B,G)
+ \tkzDrawPoint(O)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Τέμνουσα ευθεία ενόσ κύκλου.} Τέμνουσα ευθεία ενός κύκλου λέγεται μια ευθεία αν η απόσταση της από το κέντρο του κύκλου είναι \textbf{μικρότερη} από την ακτίνα του.}&\begin{tikzpicture}
+  \tkzDefPoint(0,0){Ο}
+  \tkzDefPoint(-1.5,-.5){G}
+  \tkzDefPoint(0,.7){A}
+  \tkzDefPoint(1.5,-.5){Β}
+  \tkzDefPoint(0,-.5){D}
+  \tkzDefPoint(0.489,-.5){E}
+  \tkzDrawCircle(Ο,Α)
+  \tkzDrawSegments(O,D O,E)
+  \tkzDrawSegments[color=black](B,G)
+  \tkzDrawPoint(O)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εφαπτόμενα τμήματα.} Εφαπτόμενα τμήματα ενός κύκλου λέγονται τα ευθύγραμμα τμήματα που έχουν ένα κοινό άκρο και εφάπτονται εκατέρωθεν του κύκλου.\\
+Η ευθεία που διέρχεται από το κοινό άκρο και το κέντρο του κύκλου ονομάζεται \textbf{διακεντρική ευθεία}.}&\begin{tikzpicture}
+  \tkzDefPoint(0,0){Ο}
+  \tkzDefPoint(0,.7){A}
+  \tkzDefPoint(-2,0){Β}
+  \tkzDrawCircle(Ο,Α)
+  \tkzTangent[from=B](O,A) \tkzGetPoints{C}{D}
+  \tkzDrawSegments[color=black](B,C B,D)
+  \tkzDrawSegments(B,O)
+  \tkzDrawPoint(O)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Διάκεντροσ.} Διάκεντρος ονομάζεται το ευθύγραμμο τμήμα που ενώνει τα κέντρα δύο κύκλων.}&\begin{tikzpicture}
+ \tkzDefPoint(0.3,0){Ο}
+ \tkzDefPoint(1,0){A}
+ \tkzDefPoint(-1.7,0){Β}
+ \tkzDefPoint(-2.5,0){C}
+ \tkzDrawCircle(Ο,Α)
+ \tkzDrawCircle(B,C)
+ \tkzDrawSegment[color=black](B,O)
+ \tkzDrawPoints(O,B)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κοινή χορδή.} Κοινή χορδή ονομάζεται το ευθύγραμμο τμήμα που ενώνει τα κοινά σημεία δύο τεμνόμενων κύκλων.}&\begin{tikzpicture}
+ \tkzDefPoint(0,0){Ο}
+ \tkzDefPoint(1,0){A}
+ \tkzDefPoint(.7,-.5){Β}
+ \tkzDefPoint(-1.5,0){C}
+ \tkzDrawCircle(Ο,B)
+ \tkzDrawCircle(A,B)
+ \tkzDrawSegment(O,A)
+ \tkzInterCC(O,B)(A,B) \tkzGetPoints{D}{E}
+ \tkzDrawSegment[black](D,E)
+ \tkzDrawPoints(O,A,D,E)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+ \begin{tabular}{lr}
+  \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κοινή εξωτερική εφαπτομένη.} Κοινή εξωτερική εφαπτομένη δύο κύκλων ονομάζεται η ευθεία που εφάπτεται και στους δύο κύκλους και τους αφήνει και τους δύο στην ίδια μεριά.}&\begin{tikzpicture}
+  \tkzDefPoint(0,0){Ο}
+  \tkzDefPoint(1.2,0){A}
+  \tkzDefPoint(.7,0){Β}
+  \tkzDefPoint(-1.5,0){C}
+  \tkzDefPoint(0,0.7){F}
+  \tkzDefPoint(1.2,.5){G}
+  \tkzDrawCircle(Ο,B)
+  \tkzDrawCircle(A,B)
+  \tkzDrawPoints(O,A,F,G)
+  \tkzDrawLine[add=.4 and 0.4,color=black](F,G)
+ \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+\begin{tabular}{lr}
+\hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Κοινή εσωτερική εφαπτομένη.} Κοινή εσωτερική εφαπτομένη δύο κύκλων ονομάζεται η ευθεία που εφάπτεται και στους δύο κύκλους και τους έχει εκατέρωθεν αυτής.}&\begin{tikzpicture}
+ \tkzDefPoint(0,0){Ο}
+ \tkzDefPoint(1.2,0){A}
+ \tkzDefPoint(.7,0){Β}
+ \tkzDefPoint(.7,.7){C}
+ \tkzDefPoint(.7,-.7){D}
+ \tkzDefPoint(-1.5,0){E}
+ \tkzDrawCircle(Ο,B)
+ \tkzDrawCircle(A,B)
+ \tkzDrawSegment(O,A)
+ \tkzDrawSegment[black](D,C)
+ \tkzDrawPoints(O,A)
+ \tkzMarkRightAngle(O,B,C)
+ \end{tikzpicture}
+\end{tabular}
+\section{Παραλληλες Ευθείες}\mbox{}\\
+\orismoi
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Είδη γωνιών.} :\newline Αν $\epsilon_{1}, \epsilon_{2}$ είναι δύο ευθείες και $\epsilon$ μια τέμνουσα τους τότε : \newline \textbf{Εντός} λέγονται οι γωνίες που βρίσκονται ανάμεσα από τις $\epsilon_{1}, \epsilon_{2}$.\newline \textbf{Εκτός} λέγονται οι γωνίες που βρίσκονται έξω από τις $\epsilon_{1}, \epsilon_{2}$.\newline \textbf{Επι τα αυτά} λέγονται οι γωνίες που βρίσκονται στο ίδιο μέρος της τέμνουσας $\epsilon$.\newline \textbf{Εναλλάξ} λέγονται οι γωνίες που βρίσκονται εκατέρωθεν της $\epsilon$.} & \begin{tikzpicture}
+ \tkzDefPoint(3,0){B}
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(0,1.5){C}
+ \tkzDefPoint(3,1.5){D}
+ \tkzDefPoint(1,-.5){E}
+ \tkzDefPoint(2,2){F}
+ \tkzDefPoint(1,-.3){K}
+ \tkzDefPoint(2,1.8){L}
+ \tkzDrawSegments(A,B C,D E,F)
+ \tkzInterLL(A,B)(E,F) \tkzGetPoint{G}
+ \tkzInterLL(C,D)(E,F) \tkzGetPoint{H}
+ \tkzDrawCircle[draw=black](G,K)
+ \tkzDrawCircle[draw=black](H,L)
+ \tkzText[black](1.25,1.7){$ a $}
+ \tkzText[black](2.35,1.7){$ \beta $}
+ \tkzText[black](1.25,1.3){$ \delta $}
+ \tkzText[black](2.35,1.3){$ \gamma $}
+ \tkzText[black](.7,.2){$ \varepsilon $}
+ \tkzText[black](1.8,.2){$ \zeta $}
+ \tkzText[black](.7,-.2){$ \eta $}
+ \tkzText[black](1.8,-.2){$ \theta $}
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+ Κάνοντας συνδιασμούς με τους παραπάνω χαρακτηρισμούς προκύπτουν οι βασικές ονομασίες :\\
+ \textbf{Εντός εναλλάξ} που ειναι τα ζευγάρια γωνιών $\delta, \zeta$ και $\gamma, \varepsilon$.\\
+\textbf{Εντός εκτός και επί τα αυτά} που ειναι τα ζευγάρια γωνιών $\zeta, \beta$ - $\gamma, \theta$ - $a, \varepsilon$ και $\delta, \eta$.\\
+\textbf{Εντός και επί τα αυτά} που είναι τα ζευγάρια γωνιών $\varepsilon, \delta$ και $\gamma, \zeta$.\\
+\begin{tabular}{lr}
+ \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Περιγεγραμμένοσ Κύκλοσ.} Περιγεγραμμένος κύκλος ενός τριγώνου ονομάζεται ο κύκλος που διέρχεται από τις κορυφές του τριγώνου.\\
+ Το κέντρο του περιγεγραμμένου κύκλου λέγεται \textbf{περίκεντρο} και είναι το σημείο τομής των μεσοκαθέτων των πλευρών του.} & \begin{tikzpicture}
+ \tkzDefPoint(0,0){O}
+ \tkzDefPoint(1,0){A}
+ \tkzDefPoint(-1,0){B}
+ \tkzDefPoint(-1.5,0){F}
+ \tkzDrawCircle[draw=black](O,A)
+ \tkzDefPointBy[rotation=center O angle 120](A) \tkzGetPoint{C}
+ \tkzDrawPolygon(A,B,C)
+ \end{tikzpicture}
+ \end{tabular}\mbox{}\\\\\\
+ \begin{tabular}{lr}
+  \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Εγγεγραμμένοσ Κύκλοσ.} Εγγεγραμμένος κύκλος ενός τριγώνου ονομάζεται ο κύκλος που βρίσκεται μέσα στο τρίγωνο και εφάπτεται στις πλευρές του.\\
+  Το κέντρο του εγγεγραμμένου κύκλου λέγεται \textbf{έγγκεντρο} και είναι το σημείο τομής των διχοτόμων του τριγώνου.} & \begin{tikzpicture}
+  \clip (-.1,-.1) rectangle (3.1,1.6);
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(3,0){B}
+  \tkzDefPoint(1,1.5){C}
+  \tkzDefCircle[in](A,B,C)
+  \tkzGetPoint{S}
+  \tkzGetLength{rSN}
+  \tkzDrawCircle[R,draw=black](S,\rSN pt)
+  \tkzDrawPolygon(A,B,C)
+  \end{tikzpicture}
+  \end{tabular}\mbox{}\\\\\\
+ \begin{tabular}{lr}
+   \hspace{-.2cm}\parbox[b]{9.5cm}{\Orismos{Παρεγγεγραμμένοσ Κύκλοσ.} Παρεγγεγραμμένος κύκλος ενός τριγώνου ονομάζεται ο κύκλος που έχει κέντρο το σημείο τομής δύο εξωτερικών διχοτόμων του τρίγωνου και εφάπτεται στη μια πλευρά και στις προεκτάσεις των άλλων δύο.\\
+   Το κέντρο του παρεγγεγραμμένου κύκλου λέγεται \textbf{παράκεντρο}.} & \begin{tikzpicture}
+     \tkzDefPoint(0,0){Ο}
+     \tkzDefPoint(0,1){A}
+     \tkzDefPoint(-.4,2){Β}
+     \tkzDefPoint(-.74,1){E}
+     \tkzDefPoint(.47,1){F}
+     \tkzDefPoint(-1.5,0){G}
+     \tkzDrawCircle[draw=black](Ο,Α)
+     \tkzTangent[from=B](O,A) \tkzGetPoints{D}{C}
+     \tkzDrawSegments[add=0 and .4](B,C B,D)
+     \tkzDrawSegments(O,D O,C E,F)
+     \tkzDrawPoint(O)
+     \tkzMarkRightAngle(B,D,O)
+     \tkzMarkRightAngle(O,C,B)
+     \end{tikzpicture}
+   \end{tabular}\mbox{}\\\\\\
+\section{Παραλληλογραμμα - Τραπέζια}\mbox{}\\
+\section{Εγγεγραμμενα Σχήματα}\mbox{}\\
+\section{Αναλογίες}\mbox{}\\
+\section{Ομοιότητα}\mbox{}\\
+\chapter{Β' Λυκείου}
+\section{Συστήματα Εξισώσεων}\mbox{}\\
+\section{Ιδιοτητες Συναρτησεων}\mbox{}\\
+\section{Τριγωνομετρια}\mbox{}\\
+\section{Πολυώνυμα - Εξισώσεις}\mbox{}\\
+\section{Εκθετική - Λογαριθμική Συνάρτηση}\mbox{}\\
+\section{Μετρικες Σχέσεις}\mbox{}\\
+\section{Εμβαδά}\mbox{}\\
+\section{Κύκλος}\mbox{}\\
+\section{Ευθείες - Επίπεδα στο χώρο}\mbox{}\\
+\section{Στερεά}\mbox{}\\
+\section{Διανύσματα}\mbox{}\\
+\section{Εξίσωση Ευθείας}\mbox{}\\
+\section{Κωνικές Τομές}\mbox{}\\
+\section{Θεωρια Αριθμων}\mbox{}\\
+\chapter{Γ' Λυκείου}
+\section{Διαφορικος Λογισμος}\mbox{}\\
+\section{Στατιστική}\mbox{}\\
+\section{Πιθανοτητες}\mbox{}\\
+\section{Πινακες}\mbox{}\\
+\section{Μιγαδικοι Αριθμοι}\mbox{}\\
+\section{Οριο - Συνεχεια}\mbox{}\\
+\section{Διαφορικος Λογισμος}\mbox{}\\
+\section{Ολοκληρωτικος Λογισμος}\mbox{}\\
+\chapter{Στατιστική - Επιλογής}
+\section{Στοιχεία Περιγραφικής Στατιστικής}\mbox{}\\
+\section{Συνδιαστική - Πιθανότητες}\mbox{}\\
+\section{Κατανομές Πιθανότητας}\mbox{}\\
+\section{Ειδικές Διακριτές Κατανομές}\mbox{}\\
+\section{Ειδικές Συνεχείς Κατανομές}\mbox{}\\
+\section{Εκτιμητική και Ελεγχος Υποθέσεων}\mbox{}\\
+\chapter{ΠΑΝΕΛΛΑΔΙΚΕΣ}
+\backmatter
+\printindex
+\nocite {book1,book2,book3}
+\bibliography{bibliografia}
+\bibliographystyle{plain}
+\end{document}

@@ -1,0 +1,317 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow,longtable}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Όρια - Συνέχεια}{Συναρτήσεις}
+\orismoi
+\Orismos{Συνάρτηση}
+Συνάρτηση ονομάζεται ο κανόνας (αντιστοίχηση) με τον οποίο \textbf{κάθε} στοιχείο ενός συνόλου $ A $ αντιστοιχεί σε \textbf{ένα μόνο} στοιχείο ενός συνόλου $ B $.\\Συμβολίζεται με οποιοδήποτε γράμμα του λατινικού ή και του ελληνικού αλφαβήτου $ f, g, h, t, s, \sigma\ldots $ και γράφουμε : \[ f:A\rightarrow B \]
+Είναι η σχέση που συνδέει δύο μεταβλητές $ x,y $ όπου κάθε τιμή της πρώτης $ (x\in A) $, στο πρώτο σύνολο, αντιστοιχεί σε μόνο μια τιμή της δεύτερης $ (y\in B) $, στο δεύτερο σύνολο.\vspace{-3mm}
+\begin{center}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!30] (4.1,0) ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.6);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4,.2){B}
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[right](B){{\footnotesize $ y $}}
+\tkzText(0,1.8){$ A $}
+\tkzText(4,1.8){$ B $}
+\tkzText(2,1.45){$ f $}
+\draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
+\end{tikzpicture}
+\end{figure}
+\end{center}
+\vspace{-1.1cm}
+\begin{itemize}[itemsep=0mm]
+\item Η μεταβλητή $ x $ του συνόλου $ A $ ονομάζεται \textbf{ανεξάρτητη} ενώ η $ y $ \textbf{εξαρτημένη}.
+\item Η τιμή της $ y $ ονομάζεται \textbf{τιμή} της $ f $ στο $ x $ και συμβολίζεται $ y=f(x) $.
+\item Ο κανόνας της συνάρτησης, με τον οποίο γίνεται η αντιστοίχηση από το $ x $  στο $ f(x) $, εκφράζεται συμβολικά με τη βοήθεια του $ x $ και ονομάζεται \textbf{τύπος της συνάρτησης}.
+\item Το σύνολο $ A $ λέγεται \textbf{πεδίο ορισμού} της συνάρτησης $ f $ και συμβολίζεται $ D_f $. Είναι το σύνολο των δυνατών τιμών την ανεξάρτητης μεταβλητής της συνάρτησης.
+\item Το σύνολο με στοιχεία όλες τις δυνατές τιμές $ f(x) $ της εξαρτημένης μεταβλητής για κάθε $ x\in D_f $ λέγεται \textbf{σύνολο τιμών} της $ f $, συμβολίζεται $ f\left(D_f\right) $ και ισχύει $ f\left(D_f\right)\subseteq B $.
+\item Μια συνάρτηση συμβολίζεται επίσης με τους εξής τρόπους : \[ x\overset{f}{\mapsto}f(x)\;\;,\;\;D_f\overset{f}{\rightarrow}f\left(D_f\right) \]
+\item Για το συμβολισμό της ανεξάρτητης μεταβλητής ή της συνάρτησης μπορούμε να χρησιμοποιήσουμε οποιοδήποτε συμβολισμό στη θέση της μεταβλητής $ x $ ή του ονόματος $ f $ της συνάρτησης αντίστοιχα. \[ f(x)\;\;,\;\;g(t)\;\;,\;\;h(s)\ldots \]
+\vspace{-3mm}
+\item Για να ορίσουμε μια συνάρτηση θα πρέπει να γνωρίζουμε
+\vspace{-3mm}
+\begin{enumerate}[itemsep=0mm]
+\begin{multicols}{2}
+\item To πεδίο ορισμού $ D_f $.
+\item Το σύνολο $ B $.
+\end{multicols}
+\vspace{-3mm}
+\item Τον τύπο $ f(x) $ της συνάρτησης, για κάθε $ x\in D_f $.
+\end{enumerate}
+\item Εαν τα σύνολα $ D_f,B $ είναι υποσύνολα του συνόλου των πραγματικών αριθμών τότε μιλάμε για \textbf{πραγματική συνάρτηση πραγματικής μεταβλητής}.
+\item Οι συναρτήσεις των οποίων ο τύπος δίνεται από δύο ή περισσότερες αλγεβρικές παραστάσεις ονομάζονται συναρτήσεις \textbf{πολλαπλού τύπου}.
+\[ f(x)=\ccases{f_1(x) & \textrm{αν }x\in D_{f_1}\subseteq D_f\\
+f_2(x) & \textrm{αν }x\in D_{f_2}\subseteq D_f\\
+\;\;\;\;\vdots & \qquad\vdots\\
+f_\nu(x) & \textrm{αν }x\in D_{f_\nu}\subseteq D_f} \]
+όπου $ D_{f_1},D_{f_2},\ldots,D_{f_\nu} $ είναι υποσύνολα του πεδίου ορισμού ολόκληρης της συνάρτησης $ f $ με $ D_{f_1}\cup D_{f_2}\cup \ldots\cup D_{f_\nu}=D_f $ και $  D_{f_1}\cap D_{f_2}\cap \ldots\cap D_{f_\nu}=\varnothing $.
+\end{itemize}
+Στον πίνακα βλέπουμε τα βασικά είδη συναρτήσεων τον τύπο τους και το πεδίο ορισμού τους.
+\begin{center}
+\begin{longtable}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Είδος} & \textbf{Τύπος} & \textbf{Πεδίο Ορισμού} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Πολυωνυμική} & $ f(x)=a_\nu x^\nu+\ldots+a_1x+a_0 $ & $ D_f=\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρητή} & $ f(x)=\dfrac{P(x)}{Q(x)} $ & $ D_f=\left\lbrace\left.  x\in\mathbb{R}\right| Q(x)\neq0\right\rbrace $  \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Άρρητη} & $ f(x)=\sqrt{A(x)} $ & $ D_f=\left\lbrace\left. x\in\mathbb{R}\right| A(x)\geq0\right\rbrace $ \\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{5}{*}{\textbf{Τριγωνομετρική}} & $ f(x)=\hm{x}\;\;,\;\;\syn{x} $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\ef{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi+\frac{\pi}{2}\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\syf{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \textbf{Εκθετική} & $ f(x)=a^x\;\;,\;\;0<a\neq1 $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Λογαριθμική} & $ f(x)=\log{x}\;\;,\;\;\ln{x} $ & $ D_f=(0,+\infty) $ \\ 
+\hline 
+\end{longtable}
+\end{center}
+\vspace{-.8cm}
+Επιπλέον, ειδικές περιπτώσεις πολυωνυμικών συναρτήσεων αποτελούν οι παρακάτω συναρτήσεις
+\begin{center}
+\begin{minipage}{2.5cm}
+\textbf{Ταυτοτική}\\$ f(x)=x $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Σταθερή}\\$ f(x)=c $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Μηδενική}\\$ f(x)=0 $
+\end{minipage}
+\end{center}
+\Orismos{Πράξεισ συναρτήσεων}
+Αν $ f,g $ δύο συναρτήσεις με πεδία ορισμού $ D_f,D_g $ αντίστοιχα τότε οι πράξεις μεταξύ των δύο συναρτήσεων ορίζονται ως εξής.
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Τύπος} & \textbf{Πεδίο ορισμού} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} $ (f+g)(x)=f(x)+g(x) $ & $ D_{f+g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f-g)(x)=f(x)-g(x) $ & $ D_{f-g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f\cdot g)(x)=f(x)\cdot g(x) $ & $ D_{f\cdot g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \left(\dfrac{f}{g} \right) (x)=\dfrac{f(x)}{g(x)} $ & $ D_{\frac{f}{g}}=\left\lbrace x\in\mathbb{R}|x\in D_f\cap D_g\textrm{ και }g(x)\neq0\right\rbrace  $ \\
+\rule[0ex]{0pt}{-.5ex} & \\
+\hline
+\end{longtable}
+\end{center}
+\Orismos{Ορθογώνιο - Ορθοκανονικό Σύστημα Συντεταγμένων}
+Ορθογώνιο σύστημα συντεταγμένων ονομάζεται το σύστημα αξόνων προσδιορισμού της θέσης ενός σημείου. Στο επίπεδο αποτελείται από δύο κάθετα τοποθετημένους μεταξύ τους άξονες αρίθμησης πάνω στους οποίους παίρνουν τιμές δύο μεταβλητές.
+\begin{itemize}[itemsep=0mm]
+\item Το σημείο τομής των δύο αξόνων ονομάζεται \textbf{αρχή των αξόνων}.
+\item Σε κάθε άξονα του συστήματος επιλέγουμε αυθαίρετα μια μονάδα μέτρησης.
+\item Εάν σε κάθε άξονα θέσουμε την ίδια μονάδα μέτρησης το σύστημα ονομάζεται \textbf{ορθοκανονικό}.
+\item Ο οριζόντιος άξονας ονομάζεται \textbf{άξονας τετμημένων} και συμβολίζεται με $ x'x $.
+\end{itemize}
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1.2cm}
+\begin{WrapText1}{10}{5cm}
+\begin{tikzpicture}[scale=.48,y=1cm]
+\tkzInit[xmin=-4,xmax=4.4,ymin=-4,ymax=4.4,ystep=1]
+\draw[-latex]  (-4,0) node[left,fill=white] {{\footnotesize $ x' $}} -- coordinate (x axis mid) (4.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) node[below,fill=white] {{\footnotesize $ y' $}} -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw (1,.15) -- (1,-.15) node[anchor=north] {\scriptsize 1};
+\draw (.15,1) -- (-.15,1) node[anchor=east] {\scriptsize 1};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(2,1.8){M}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzLabelPoint[right](M){{\footnotesize $ Μ(x,y) $}}
+\draw[dashed] (0,1.8) node[left]{{\scriptsize $ y $}}--(2,1.8)--(2,0) node[below]{{\scriptsize $ x $}};
+\tkzDrawPoint[size=7,fill=white](M)
+\tkzText(2.2,3.3){{\scriptsize 1\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(-2.2,3.3){{\scriptsize 2\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(-2.2,-2){{\scriptsize 3\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(2.2,-2){{\scriptsize 4\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(2.2,2.7){{\scriptsize $ (+,+) $}}
+\tkzText(-2.2,2.7){{\scriptsize $ (-,+) $}}
+\tkzText(-2.2,-1.4){{\scriptsize $ (-,-) $}}
+\tkzText(2.2,-1.4){{\scriptsize $ (+,-) $}}
+\end{tikzpicture}
+\end{WrapText1}
+\begin{itemize}[itemsep=0mm]
+\item Ο κατακόρυφος άξονας ονομάζεται \textbf{άξονας τεταγμένων} και συμβολίζεται με $ y'y $.
+\item Κάθε σημείο του επιπέδου του συστήματος συντεταγμένων αντιστοιχεί σε ένα ζευγάρι αριθμών της μορφής $(x,y)$. Αντίστροφα, κάθε ζευγάρι αριθμών $(x,y)$ αντιστοιχεί σε ένα σημείο του επιπέδου.
+\item Το ζεύγος αριθμών $(x,y)$ ονομάζεται \textbf{διατεταγμένο ζεύγος αριθμών} διότι έχει σημασία η σειρά με την οποία εμφανίζονται οι αριθμοί.
+\item Οι αριθμοί $x,y$ ονομάζονται \textbf{συντεταγμένες} του σημείου. Ο αριθμός $x$ ονομάζεται \textbf{τετμημένη} του σημείου ενώ ο $y$ \textbf{τεταγμένη}.
+\end{itemize}\end{minipage}\mbox{}\\
+\vspace{-2mm}
+\begin{itemize}
+\item Στον οριζόντιο άξονα $ x'x $, δεξιά της αρχής των αξόνων, βρίσκονται οι θετικές τιμές της μεταβλητής $x$ ενώ αριστερά, οι αρνητικές.
+\item Αντίστοιχα στον κατακόρυφο άξονα $ y'y $, πάνω από την αρχή των αξόνων βρίσκονται οι θετικές τιμές της μεταβλητής $y$, ενώ κάτω οι αρνητικές τιμές.
+\item Οι άξονες χωρίζουν το επίπεδο σε τέσσερα μέρη τα οποία ονομάζονται \textbf{τεταρτημόρια}. Ως 1\textsuperscript{ο} τεταρτημόριο ορίζουμε το μέρος στο οποίο ανήκουν οι θετικοί ημιάξονες $ Ox $ και $ Oy $.
+\end{itemize}
+\Orismos{Γραφική Παράσταση συνάρτησησ}
+Γραφική παράσταση μιας συνάρτησης $ f:D_f\rightarrow\mathbb{R} $ ονομάζεται το σύνολο των σημείων του επιπέδου με συντεταγμένες $ M(x,y) $ όπου \[ x\in D_f\;\;,\;\;y=f(x) \]
+Το σύνολο των σημείων της γραφικής παράστασης είναι 
+\[ C_f=\{M(x,y)|y=f(x)\textrm{ για κάθε }x\in D_f\} \]
+\wrapr{-15mm}{5}{4.5cm}{0mm}{\begin{tikzpicture}[scale=.7,domain=.2:4.5,y=1cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-.5,0) -- coordinate (x axis mid) (5,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-.5) -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw[,domain=.3:3.7,samples=200,line width=.4mm,\xrwma] plot function{(x-2)**3-2*x+6};
+\tkzDefPoint(1.5,2.875){A}
+\tkzDrawPoint[size=7,fill=\xrwma,color=\xrwma](A)
+\draw[dashed] (0,2.875) node[anchor=east]{{\scriptsize $ f(x) $}}  -- (A) -- (1.5,0) node[anchor=north] {{\scriptsize $ x $}};
+\tkzLabelPoint[above=1mm](A){{\footnotesize $ M\left( x,f(x)\right)  $}}
+\tkzText(4.1,3){{\footnotesize $ C_f $}}
+\tkzDefPoint(0,0){O}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzDefPoint(3,1){B}
+\draw[dashed] (3,-.5) -- (3,3.7);
+\tkzDrawPoint[size=7,fill=\xrwma,color=\xrwma](B)
+\end{tikzpicture}}{
+\begin{itemize}[itemsep=0mm]
+\item Συμβολίζεται με $ C_f $ και το σύνολο των σημείων της παριστάνει σχήμα.
+\item Τα σημεία της γραφικής παράστασης είναι της μορφής $Μ\left(x,f(x)\right) $.
+\item Η εξίσωση $ y=f(x) $ είναι η εξίσωση της γραφικής παράστασης την οποία επαληθεύουν οι συντεταγμένες των σημείων της.
+\item Κάθε κατακόρυφη ευθεία $ \varepsilon\parallel y'y $ της μορφής $ x=\kappa $ τέμνει τη $ C_f $ \textbf{σε ένα το πολύ} σημείο.
+\item Οι τετμημένες $ x $ όλων των σημείων της γραφικής παράστασης σχηματίζουν το πεδίο ορισμού της.
+\end{itemize}}
+
+\begin{itemize}[itemsep=0mm]
+\item Οι τεταγμένες $ f(x) $ όλων των σημείων της γραφικής παράστασης σχηματίζουν το σύνολο τιμών της.
+\item Η $ C_f $ τέμνει τον οριζόντιο άξονα $ x'x $ στα σημεία όπου $ f(x)=0 $, ενώ έχει ένα το πολύ κοινό σημείο με τον κατακόρυφο άξονα, το $ M(0,f(0)) $.
+\item Τα σημεία της $ C_f $ που βρίσκονται πάνω από τον οριζόντιο άξονα έχουν $ f(x)>0 $, ενώ όσα βρίσκονται κάτω από τον άξονα έχουν $ f(x)<0 $.
+\item Στα σημεία τομής δύο γραφικών παραστάσεων $ C_f,C_g $ δύο συναρτήσεων $ f,g $, ισχύει $ f(x)=g(x) $.
+\item Αν η $ C_f $ βρίσκεται πάνω από τη $ C_g $ τότε ισχύει $ f(x)>g(x) $, ενώ όπου η $ C_f $ είναι κάτω από τη $ C_g $ έχουμε $ f(x)<g(x) $.
+\end{itemize}
+\Orismos{Ίσες συναρτήσεις}
+Δύο συναρτήσεις $ f $ και $ g $ είναι μεταξύ τους ίσες όταν έχουν το ίδιο πεδίο ορισμού $ A $ και επιπλέον ισχύει
+\[ f(x)=g(x)\ \ ,\ \ \textrm{για κάθε }x\in A \]
+Αν έχουν διαφορετικά πεδία ορισμού $ A,B $ αντίστοιχα τότε είναι ίσες στο σύνολο $ A\cap B $.\\\\
+\Orismos{Σύνθεση συναρτήσεων}
+Η σύνθεση μιας συνάρτησης $ f $ με μια συνάρτηση $ g $ με πεδία ορισμού $ D_f,D_g $ αντίστοιχα, ονομάζεται η συνάρτηση $ g\circ f $ με τύπο και πεδίο ορισμού
+\[ (g\circ f)(x)=g(f(x))\ \ ,\ \ D_{g\circ f}=\{x\in\mathbb{R}| x\in D_f\ \textrm{ και }\ f(x)\in D_g\} \]
+\begin{center}
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\begin{scope}
+\draw[clip](4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!30] (5,0) ellipse (1cm and 1.5cm);
+\end{scope}
+\draw (5,0) ellipse (1cm and 1.5cm);
+\draw (9,0) ellipse (1cm and 1.5cm);
+\draw (-.1,0)[fill=\xrwma!30] ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.95);
+\draw[-latex] (4.5,.2) arc (140:40:2.95);
+\draw[-latex] (0,.2) arc (140:40:5.9);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4.5,.15){B}
+\tkzDefPoint(9,.15){C}
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[below](B){{\footnotesize $ f(x) $}}
+\tkzLabelPoint[below](C){{\footnotesize $ g(f(x)) $}}
+\tkzText(0,1.8){\footnotesize$ D_f $}
+\tkzText(3.8,1.8){\footnotesize$ f(D_f) $}
+\tkzText(5.2,1.8){\footnotesize$ D_g $}
+\tkzText(2.4,1.55){\footnotesize$ f $}
+\tkzText(6.4,1.55){\footnotesize$ g $}
+\tkzText(4.5,2.55){\footnotesize$ g\circ f $}
+\tkzText(9,1.8){\footnotesize$ g(D_g) $}
+\draw[-latex] (4.5,-0.8) -- (3.2,-1.9) node[anchor=east] {\footnotesize $ f\left( D_f \right)\cap D_g  $};
+\draw[-latex] (0,-.5) -- (-.8,-1.7) node[anchor=east,xshift=1mm] {\footnotesize $ D_{g\circ f}  $};
+\end{tikzpicture}
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Διαβάζεται «σύνθεση της $ f $ με τη $ g $» ή «$ g $ σύνθεση $ f $».
+\item Για να ορίζεται η συνάρτηση $ g\circ f $ θα πρέπει να ισχύει $ f(D_f)\cap D_g\neq\varnothing $.
+\item Αντίστοιχα ορίζεται και η σύνθεση $ f\circ g $ με πεδίο ορισμού το $ D_{f\circ g}=\{x\in\mathbb{R}|x\in D_g\ \ \textrm{και}\ \ g(x)\in D_f\} $ και τύπο $ (f\circ g)(x)=f(g(x)) $.
+\end{itemize}
+\end{document}
+
+
+

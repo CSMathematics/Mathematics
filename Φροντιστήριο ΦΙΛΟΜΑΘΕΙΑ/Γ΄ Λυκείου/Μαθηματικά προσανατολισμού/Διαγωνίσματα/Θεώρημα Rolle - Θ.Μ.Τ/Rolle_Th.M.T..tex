@@ -1,0 +1,137 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usepackage{adjustbox}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{royalblue}{cmyk}{0,0,0,1}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\newcommand{\monades}[1]{\begin{minipage}[t]{0.91\textwidth}
+\begin{flushright}
+\textcolor{royalblue}{\textbf{\textit{Μονάδες #1}}}
+\end{flushright}
+\end{minipage}}
+
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{systeme}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%---------------------------------
+\makeatletter
+\renewcommand*{\@alph}[1]{%
+  \ifcase#1\or α\or β\or γ\or
+    δ\or ε\or ζ\or η\or θ\or ι\or κ\or
+    λ\or μ\or ν\or ξ\or ο\or π\or ρ\or σ\or
+    τ\or υ\or φ\or χ\or ψ\or
+    ω\else\@ctrerr\fi
+}
+\renewcommand*{\@Alph}[1]{%
+  \ifcase#1\or Α\or Β\or Γ\or
+    Δ\or Ε\or Ζ\or Η\or Θ\or Ι\or Κ\or
+    Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or Ρ\or Σ\or
+    Τ\or Υ\or Φ\or Χ\or Ψ\or
+    Ω\else\@ctrerr\fi
+}
+\makeatother
+%--------------------------------
+
+
+
+\begin{document}
+\section*{\textcolor{royalblue}{{\LARGE ΕΠΑΝΑΛΗΠΤΙΚΟ - \eng{Rolle} - Θ.Μ.Τ.}}}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\end{center}
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large ΘΕΜΑ \Alph*.}},
+itemsep=5mm,leftmargin=2cm]
+\item\mbox{}\\\vspace{-5mm} \begin{enumerate}[label=\bf\textcolor{royalblue}{{\large A.\arabic*}},itemsep=5mm,leftmargin=-.5cm]
+\item Έστω μια συνάρτηση $ f:\varDelta\rightarrow\mathbb{R} $ μια συνάρτηση συνεχής και παραγωγίσιμη στο $ \varDelta $. Αν ισχύει $ f'(x)\neq0 $ για κάθε $ x\in\varDelta $ να δειχθεί οτι η συνάρτηση $ f $ είναι $ 1-1 $.\\\monades{10}
+\item Να δώσεις τη γεωμερτρική ερμηνεία του θεωρήματος \foreignlanguage{english}{Rolle}.\\\monades{5}
+\item Να χαρακτηρίσεις τις παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large \alph*.}}]
+\item Εαν μια παραγωγίσιμη συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ έχει δύο ρίζες $ x_1, x_2\in(a,\beta) $ τότε υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώστε η εφαπτομένη στο σημείο $ Μ\left(\xi,f(\xi) \right)  $ να είναι παράλληλη με τον άξονα $ x'x $.
+\item Εαν για μια συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώατε να ισχύει $ f'(\xi)=0 $ τότε $ f(a)=f(\beta) $.
+\item Έστω μια $ f:[0,1]\rightarrow\mathbb{R} $ με $ f(x)=\sqrt{1-x^2} $. Τότε θα υπάρχει τουλάχιστον ένα $ \xi\in(0,1) $ ώστε $ f'(\xi)=-1 $.
+\item Εαν μια συνάρτηση $ f:[a,\beta]\rightarrow\mathbb{R} $ είναι συνεχής στο $ [a,\beta] $, παραγωγίσιμη στο $ (a,\beta) $ τότε υπάρχει ένα τουλάχιστον $ \xi\in[a,\beta] $ ώστε $ f'(\xi)=\dfrac{f(\beta)-f(a)}{\beta-a} $.
+\item Υπάρχει σημείο της γραφικής παράστασης της συνάρτησης $ f:[1,2]\rightarrow\mathbb{R} $ όπου $ f(x)=x^2-2x $, στο οποίο η εφαπτομένη να είναι κάθετη στην ευθεία $ \varepsilon : x+y+1=0 $.
+\end{enumerate}\mbox{}\\\monades{10}
+\end{enumerate}
+\item\mbox{}\\
+ \begin{enumerate}[label=\bf\textcolor{royalblue}{{\large B.\arabic*}},
+itemsep=3mm,leftmargin=-.5cm]
+\item Δίνεται συνάρτηση $ f(x)=\ccases{ax^2+\beta+1 & x\leq1\\\gamma x^2+2(a+1)x & x>1} $\\
+Αν για τη συνάρτηση $ f $ εφαρμόζεται το θεώρημα \eng{Rolle} στο διάστημα $ \varDelta=[-1,3] $ τότε :
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+	\item να βρεθούν οι τιμές των $ a,\beta,\gamma $.
+	\item να εφαρμοστεί για τη συνάρτηση $ f $ στο θεώρημα \eng{Rolle} στο διάστημα $ \varDelta=[-1,3] $.
+\end{enumerate}\mbox{}\\\monades{12}
+\item Δίνεται η συνάρτηση $ g(x)=e^xf(x) $, όπου $ f $ παραγωγίσιμη συνάρτηση στο $ \mathbb{R} $ και $ f(0)=f\left( \frac{3}{2}\right) =0 $. Να δειχθεί οτι υπάρχει ένα τουλάχιστον $ \xi\in\left(0,\frac{3}{2} \right)  $ ώστε $ f'(\xi)=-f(\xi) $.\\\monades{13}
+\end{enumerate}
+\newpage
+\noindent\item Έστω συνάρτηση $ f(x)=\sqrt{x^2-1} $. Να δειχθεί οτι \mbox{}\\
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large Γ.\arabic*}},
+itemsep=5mm,leftmargin=-.5cm]
+\item για τη συνάρτηση $ f $ ισχύει το Θ.Μ.Τ. στο διάστημα $ [a,\beta] $ όπου ισχύει $ 1<a<\beta $.\\\monades{9}
+\item η συνάρτηση $ f' $ είναι γνησίως φθίνουσα στο $ [a,\beta] $.\\\monades{9}
+\item  \[ \frac{\beta}{\sqrt{\beta^2-1}}<\frac{\sqrt{\beta^2-1}-\sqrt{a^2-1}}{\beta-a}<\frac{a}{\sqrt{a^2-1}} \]
+\monades{7}
+\end{enumerate}
+\item\mbox{}\\Έστω $ f:\mathbb{R}\rightarrow\mathbb{R} $ μια παραγωγίσιμη συνάρτηση με : \[ f(0)=0\quad\textrm{και}\quad f(x)-e^{-f(x)}=x-1\;\textrm{για κάθε }x\in\mathbb{R} \]
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large Δ.\arabic*}},
+itemsep=5mm,leftmargin=-.5cm]
+\item Να εκφραστεί η $ f' $ ώς συνάρτηση της $ f $.\\\monades{5}
+\item Να αποδειχθεί οτι η $ f $ είναι δύο φορές παραγωγίσιμη και να βρεθεί ο αριθμός $ f''(0) $.\\\monades{5}
+\item Να αποδειχθεί οτι οι συναρτήσεις $ f $ και $ f' $ είναι γνησίως αύξουσες.\\\monades{8}
+\item Να αποδειθχεί οτι $ \frac{x}{2}\leq f(x)\leq xf'(x) $ για κάθε $ x\in\mathbb{R} $. Πότε ισχύει η ισότητα?\\\monades{7}
+
+\end{enumerate}
+\end{enumerate}
+\mbox{}\\
+\hspace*{0.75\textwidth}
+\textit{{\scriptsize Σπύρος Φρόνιμος}}
+\end{document}

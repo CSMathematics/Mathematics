@@ -1,0 +1,249 @@
+\documentclass[twoside,a4paper,11pt]{book}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+ \let\myBbbk\Bbbk
+ \let\Bbbk\relax
+ \usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usepackage[outline]{contour}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\definecolor{royalblue}{RGB}{65, 105, 225}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+    \fancyhead{} %
+    \renewcommand{\headrulewidth}{0pt}}
+    
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\thesection.\arabic{thewrhma}}   
+\newenvironment{thewrhma}[1][]{%
+    \refstepcounter{thewrhma}
+    \begin{mdframed}[%
+        frametitle={\textcolor{cyan}{ΘΕΩΡΗΜΑ \thethewrhma}\quad\ \MakeUppercase{#1}},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=1pt,
+        frametitlerule=true,
+        linecolor=cyan,
+            outerlinewidth=.5pt,
+            rightline=false,
+            bottomline=false,
+            topline=false,
+            frametitlerulewidth=.3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=7pt
+    ]%
+}{%
+    \end{mdframed}
+}
+
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}\textcolor{cyan}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcounter{porisma}[section]
+\renewcommand{\theporisma}{\thesection.\arabic{porisma}}   
+\newenvironment{porisma}[1][]{%
+    \refstepcounter{porisma}
+    \begin{mdframed}[%
+        frametitle={\textcolor{doc}{ΠΟΡΙΣΜΑ \theporisma}\quad\ \MakeUppercase{#1}},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=1pt,
+        frametitlerule=true,
+        linecolor=doc,
+            outerlinewidth=.5pt,
+            rightline=false,
+            bottomline=false,
+            topline=false,
+            frametitlerulewidth=.3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=7pt
+    ]%
+}{%
+    \end{mdframed}
+}
+
+\newcounter{protasi}[section]
+\renewcommand{\theprotasi}{\thesection.\arabic{protasi}}   
+\newenvironment{protasi}[1][]{%
+    \refstepcounter{protasi}
+    \begin{mdframed}[%
+        frametitle={\textcolor{black}{ΠΡΟΤΑΣΗ \theprotasi}\quad\ \MakeUppercase{#1}},
+        skipabove=\baselineskip plus 2pt minus 1pt,
+        skipbelow=\baselineskip plus 2pt minus 1pt,
+        linewidth=1pt,
+        frametitlerule=true,
+        linecolor=black,
+            outerlinewidth=.5pt,
+            rightline=false,
+            bottomline=false,
+            topline=false,
+            frametitlerulewidth=.3pt,
+            innertopmargin=\baselineskip,
+            innerbottommargin=\baselineskip,
+            innerrightmargin=20pt,
+            innerleftmargin=20pt,
+            backgroundcolor=white,
+            frametitleaboveskip=7pt
+    ]%
+}{%
+    \end{mdframed}
+}
+
+\newcommand{\apodeiksi}{
+\textcolor{black}{\textcolor{doc}{\qquad ΑΠΟΔΕΙΞΗ\\}}}{}
+
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}\textcolor{steelblue}{\textbf{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+
+\newcounter{methodologia}[section]
+\renewcommand{\themethodologia}{\thesection.\arabic{methodologia}}   
+
+\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{royalblue}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia}}\hspace{1mm} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+  {
+   \normalfont\Huge}
+  {\gdef\chapterlabel{\thechapter\ }}{0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+    \node[yshift=-8cm] at (current page.north west)
+      {\begin{tikzpicture}[remember picture, overlay]
+        \draw[top color = doc!90!white,draw = white] (-.1,0) rectangle
+          (22cm,8.1cm);
+       \node[anchor=west,xshift=.12\paperwidth,yshift=.16\paperheight,rectangle]
+       {\color{white}{\fontsize{40}{20}\MakeUppercase {\textbf{Κεφάλαιο}} }\hspace{3cm}\fontsize{50}{20}\textbf{\thechapter}};
+       \node[anchor=west,xshift=.12\paperwidth,yshift=.10\paperheight,rectangle] {\Huge\textsc {\color{black}{\textbf{##1}}}};
+       \end{tikzpicture}
+      };
+   \end{tikzpicture}
+  }
+  \titlespacing*{\chapter}{0pt}{50pt}{30pt}
+}
+
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+  {0pt}{-20pt}{30pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+  {0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textcolor{royalblue}{\textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=royalblue,] (-3cm,0) rectangle (0,.2mm);
+  \tikz[overlay] \shade[left color=royalblue, right color=white,] (0,0) rectangle (3cm,.2mm);   
+  \end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textcolor{steelblue}{\textbf{ΟΡΙΣΜΟΙ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=steelblue,] (-3cm,0) rectangle (0,.2mm);
+  \tikz[overlay] \shade[left color=steelblue, right color=white,] (0,0) rectangle (3cm,.2mm);   
+  \end{tikzpicture}
+\end{center}}
+
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textcolor{cyan}{\textbf{ΘΕΩΡΗΜΑΤΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+  \tikz[overlay] \shade[left color=white, right color=cyan,] (-3cm,0) rectangle (0,.2mm);
+  \tikz[overlay] \shade[left color=cyan, right color=white,] (0,0) rectangle (3cm,.2mm);   
+  \end{tikzpicture}
+\end{center}}
+
+\titleformat{\section}
+  {\normalfont\Large\bf}%
+  {}{0em}%
+  {{\color{steelblue}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\textcolor{steelblue}{\thesection~#1}\strut}}}[\vskip 0\baselineskip{\color{steelblue}\titlerule[1pt]}]
+  \titlespacing*{\section}{0pt}{0pt}{30pt}
+
+
+\begin{document}
+\mainmatter
+\pagestyle{fancy}
+\chapter{ΦΥΣΙΚΟΙ ΑΡΙΘΜΟΙ}
+\section{Φυσικοί αριθμοί}
+\orismoi
+\Orismos{Φυσικοί αριθμοί}Φυσικοί αριθμοί ονομάζεται το σύνολο των αριθμών με αρχή το 0 και διαφορά μιας μονάδας μεταξύ διαδοχικών αριθμών : 0, 1, 2, 3,...\\\\
+\Orismos{¶ρτιοσ Αριθμόσ}¶ρτιοι ονομάζονται οι αριθμοί που έχουν τελευταίο ψηφίο ένα από τα 0,2,4,6,8.
+Οι άρτιοι αριθμοί διαιρούνται ακριβώς με το 2.\\\\
+\Orismos{Περιττοσ αριθμοσ}
+Περιττοί ονομάζονται οι αριθμοί που έχουν τελευταίο ψηφίο ένα από τα 1,3,5,7,9.
+Οι περιττοί αριθμοί δεν διαιρούνται με το 2.\\\\
+\Orismos{Διάταξη}
+Διάταξη ονομάζεται η ιδιότητα του συνόλου των φυσικών αριθμών που μας επιτρέπει να τους συγκρίνουμε και να τους τοποθετήσουμε σε αύξουσα ή φθίνουσα σειρά. Για τη σύγκριση χρησιμοποιούμε τους συμβολισμούς
+\begin{center}
+$ < $ : μικρότερο και $ > $ : μεγαλύτερο
+\end{center}
+\Orismos{Δεκαδικό σύστημα αρίθμησησ} Δεκαδικό ονομάζεται το σύστημα αρίθμησης στο οποίο έχουμε σαν βάση τον αριθμό 10. Χρησιμοποιούμε 10 σύμβολα - αριθμούς : 0,1,2,3,4,5,6,7,8,9 για να σχηματίσουμε οποιονδήποτε άλλον αριθμό στον οποίο η θέση κάθε ψηφίου καθορίζει την αξία του.\\\\
+\Orismos{Στρογγυλοποίηση} Στρογγυλοποίηση ονομάζεται η διαδικασία με την οποία αντικαθιστούμε έναν αριθμό με την πλησιέστερη προσέγγησή του.
+\methodologia
+\Methodologia{Σύγκριση φυσικών αριθμών}
+\Methodologia{Στρογγυλοποίηση}
+\mbox{}\\
+\hspace*{0.75\textwidth}
+\textit{{\scriptsize Σπύρος Φρόνιμος}}
+\end{document}

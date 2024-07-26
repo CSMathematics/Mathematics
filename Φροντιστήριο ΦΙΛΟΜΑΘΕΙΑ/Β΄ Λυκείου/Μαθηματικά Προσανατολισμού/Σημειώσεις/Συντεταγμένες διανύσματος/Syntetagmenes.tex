@@ -1,0 +1,188 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,gensymb}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\setlist[itemize]{itemsep=0mm}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+\usepackage{multicol}
+\usepackage{mathimatika,wrap-rl}
+
+
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Κατεύθυνσης Β΄ Λυκείου}{Διανύσματα}{Συντεταγμένες διανύσματος}
+\orismoi
+\Orismos{Μοναδιαίο διάνυσμα}
+Μοναδιαίο ονομάζεται κάθε διάνυσμα $ \overrightarrow{OA}=\vec{i} $του οποίου το μέτρο ισούται με τη μονάδα. Ως μονάδα ορίζουμε οποιοδήποτε μήκος το οποίο δεχόμαστε ως μονάδα μέτρησης.
+\begin{center}
+\begin{tikzpicture}
+\draw (-3,0) -- (3,0);
+\dianysma{0,0}{1,0}{O}{A}
+\tkzDefPoint(2.3,0){B}
+\tkzDrawPoint(B)
+\tkzLabelPoint[above](O){$O$}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B(x)$}
+\node at (-3,.2) {$x'$};
+\node at (3,.2) {$x$};
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item Το μοναδιαίο διάνυσμα μπορεί να τοποθετηθεί πάνω στον άξονα των αριθμών, με αρχή την αρχή $ O $ του άξονα $ x'x $. Η ημιευθεία $ Ox $ ονομάζεται \textbf{θετικός} ημιάξονας ενώ η $ Ox' $ \textbf{αρνητικός ημιάξονας}.
+\item Για κάθε σημείο $ B $ του άξονα θα υπάρχει πραγματικός αριθμός $ x $ ώστε να ισχύει $ \overrightarrow{OB}=x\cdot\vec{i} $. Αντίστροφα, για κάθε πραγματικό αριθμό $ x $ υπάρχει σημείο $ B $ του άξονα ώστε $ \overrightarrow{OB}=x\cdot\vec{i} $.
+\item Ο αριθμός $ x $ ονομάζεται \textbf{τετμημένη} του σημείου $ B $.
+\end{itemize}
+\Orismos{Ορθοκανονικό Σύστημα Συντεταγμένων}
+Ορθοκανονικό σύστημα συντεταγμένων ονομάζεται το σύστημα αξόνων προσδιορισμού της θέσης ενός σημείου. Αποτελείται από δύο κάθετα τοποθετημένους μεταξύ τους άξονες αρίθμησης πάνω στους οποίους παίρνουν τιμές δύο μεταβλητές $ x,y $.\\
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{-1.2cm}
+\begin{WrapText1}{7}{5.8cm}
+\begin{tikzpicture}[scale=.58,y=1cm]
+\tkzInit[xmin=-4,xmax=4.4,ymin=-4,ymax=4.4,ystep=1]
+\draw[-latex]  (-4,0) node[left,fill=white] {{\footnotesize $ x' $}} -- coordinate (x axis mid) (4.4,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (0,-4) node[below,fill=white] {{\footnotesize $ y' $}} -- (0,4.4) node[above,fill=white] {{\footnotesize $ y $}};
+\draw (1,.15) -- (1,-.15) node[anchor=north] {\scriptsize 1};
+\draw (.15,1) -- (-.15,1) node[anchor=east] {\scriptsize 1};
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(2,1.8){M}
+\tkzLabelPoint[below left](O){$ O $}
+\tkzLabelPoint[right](M){{\footnotesize $ M(x,y) $}}
+\draw[dashed] (0,1.8) node[left]{{\scriptsize $ M_2(y) $}}--(2,1.8)--(2,0) node[below,xshift=1mm]{{\scriptsize $ M_1(x) $}};
+\tkzDrawPoint[size=7,fill=white](M)
+\tkzText(2.2,3.3){{\scriptsize 1\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(-2.2,3.3){{\scriptsize 2\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(-2.2,-2){{\scriptsize 3\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(2.2,-2){{\scriptsize 4\textsuperscript{ο} Τεταρτημόριο}}
+\tkzText(2.2,2.7){{\scriptsize $ (+,+) $}}
+\tkzText(-2.2,2.7){{\scriptsize $ (-,+) $}}
+\tkzText(-2.2,-1.4){{\scriptsize $ (-,-) $}}
+\tkzText(2.2,-1.4){{\scriptsize $ (+,-) $}}
+\dianysma{0,0}{1,0}{O}{A}
+\dianysma{0,0}{0,1}{O}{B}
+\node at (.5,-.3) {$ i $};
+\node at (-.3,.5) {$ j $};
+\end{tikzpicture}
+\end{WrapText1}
+\begin{itemize}
+\item Το σημείο τομής των δύο αξόνων ονομάζεται \textbf{αρχή των αξόνων}.
+\item Σε κάθε άξονα του συστήματος, επιλέγουμε την ίδια μονάδα μέτρησης.
+\item Ο οριζόντιος άξονας ονομάζεται \textbf{άξονας τετμημένων} και συμβολίζεται με $ x'x $.
+\item Ο κατακόρυφος άξονας ονομάζεται \textbf{άξονας τεταγμένων} και συμβολίζεται με $ y'y $.
+\item Κάθε σημείο $ M $ του επιπέδου του συστήματος συντεταγμένων αντιστοιχεί σε ένα ζευγάρι αριθμών της μορφής $(x,y)$. Aντίστροφα, κάθε ζευγάρι αριθμών $(x,y)$ αντιστοιχεί σε ένα σημείο $ M $ του επιπέδου.
+\end{itemize}\end{minipage}\mbox{}\\
+\vspace{-2mm}
+\begin{itemize}
+\item Το ζεύγος αριθμών $(x,y)$ ονομάζεται \textbf{διατεταγμένο ζεύγος αριθμών} διότι έχει σημασία η διάταξη δηλαδή η σειρά με την οποία εμφανίζονται οι αριθμοί.
+\item Οι αριθμοί $x,y$ ονομάζονται \textbf{συντεταγμένες} του σημείου στο οποίο αντιστοιχούν. Ο αριθμός $x$ ονομάζεται \textbf{τετμημένη} του σημείου ενώ ο $y$ \textbf{τεταγμένη}.
+\item Στον ημιάξονα $ Ox $ βρίσκονται οι θετικές τιμές της μεταβλητής $x$ ενώ στον $ Ox' $ οι αρνητικές. Το μοναδιαίο διάνυσμα του οριζόντιου άξονα είναι το $ \vec{i} $.
+\item Αντίστοιχα στον κατακόρυφο ημιάξονα $ Oy $ βρίσκονται οι θετικές τιμές της μεταβλητής $y$, ενώ στον $ Oy' $ οι αρνητικές τιμές. Το μοναδιαίο διάνυσμα του κατακόρυφου άξονα είναι το $ \vec{j} $.
+\item Οι άξονες χωρίζουν το επίπεδο σε τέσσερα μέρη τα οποία ονομάζονται \textbf{τεταρτημόρια}. Ως 1\textsuperscript{ο} τεταρτημόριο ορίζουμε το μέρος εκείνο στο οποίο ανήκουν οι θετικοί ημιάξονες $ Ox $ και $ Oy $.
+\end{itemize}
+\Orismos{Συντεταγμένες διανύσματος}
+Συντεταγμένες ενός διανύσματος $ \overrightarrow{OA}=\vec{a} $ του επιπέδου, ονομάζεται το μοναδικό ζεύγος αριθμών $ (x,y) $ με το οποίο το διάνυσμα $ \vec{a} $ γράφεται ως γραμμικός συνδιασμός των μοναδιαίων διανυσμάτων $ i $ και $ j $.
+\[ \vec{a}=x\cdot\vec{i}+y\cdot\vec{j}\qquad\textrm{ή}\qquad\vec{a}=(x,y) \]
+\wrapr{-13mm}{10}{5.1cm}{-7mm}{
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ticks=none,xlabel={{\footnotesize $ x $}},ylabel={{\footnotesize $ y $}},xmin=-.5,xmax=3.5,ymin=-.5,ymax=3,x=1cm,y=1cm]
+\end{axis}
+\dianysma{.5,.5}{3,2.5}{O}{A}
+\tkzLabelPoint[above](A){$A(x,y)$}
+\draw[dashed](A)--(3,.5)node[below]{$ A_1(x) $};
+\draw[dashed](A)--(.5,2.5)node[left]{$ A_2(y) $};
+\dianysma{.5,.5}{1.5,.5}{O}{B}
+\dianysma{.5,.5}{.5,1.5}{O}{C}
+\dianysma{.5,.5}{3,.5}{O}{D}
+\dianysma{.5,.5}{.5,2.5}{O}{E}
+\node at (1,.2) {$ i $};
+\node at (.2,1) {$ j $};
+\node at (.2,0.2) {$O$};
+\end{tikzpicture}
+}
+{\begin{rlist}
+\item Κάθε διάνυσμα $ \overrightarrow{OA}=\vec{a} $ γράφεται κατά \textbf{μοναδικό} τρόπο ως γραμμικός συνδυασμός των μοναδιαίων διανυσμάτων $ i $ και $ j $.
+\item Τα διανύσματα $ \overrightarrow{OA_1} $ και $ \overrightarrow{OA_2} $ ονομάζονται \textbf{συνιστώσες} του $ \vec{a} $.
+\item Ο αριθμός $x$ ονομάζεται \textbf{τετμημένη} ενώ ο $y$ \textbf{τεταγμένη} του διανύσματος $ \vec{a} $.
+\end{rlist}}\\\\
+\Orismos{Συντελεστής διεύθυνσης διανύσματος}
+Συντελεστής διεύθυνσης $ \lambda $ ενός μη μηδενικού διανύσματος $ \vec{a} $ με συντεταγμένες $ (x,y) $ ισούται με το πηλίκο της τεταγμένης προς την τετμημένη του διανύσματος.
+\[ \lambda=\frac{y}{x}=\ef{\omega} \]
+\thewrhmata
+\Thewrhma{Συντεταγμένες γραμμικού συνδυασμού διανυσμάτων}
+Αν $ \vec{a}=(x_1,y_1) $ και $ \beta=(x_2,y_2) $ είναι δύο διανύσματα του καρτεσιανού επιπέδου και $ \lambda,\mu\in\mathbb{R} $ οποιοιδήποτε πραγματικοί αριθμοί τότε οι συντεταγμένες του αθροίσματος, του γινομένου και του γραμμικού συνδυασμού των διανυσμάτων δίνονται από τις παρακάτω σχέσεις.
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Πράξη} & \textbf{Συντεταγμένες} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} Άθροισμα & $ \vec{a}+\vec{\beta}=(x_1,y_1)+(x_2,y_2)=(x_1+x_2,y_1+y_2) $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Πολλαπλασιασμός & $ \lambda\cdot\vec{a}=\lambda(x_1,y_1)=(\lambda x_1,\lambda y_1) $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Γραμμικός συνδυασμός & $ \lambda\vec{a}+\mu\vec{\beta}=\lambda(x_1,y_1)+\mu(x_2,y_2)=(\lambda x_1+\mu x_2,\lambda y_1+\mu y_2) $ \\ 
+\hline 
+\end{tabular}
+\end{center}\mbox{}\\
+\Thewrhma{Συντεταγμένες μέσου τμήματος}
+Αν $ A(x_1,y_1) $ και $ B(x_2,y_2) $ είναι δύο τυχαία σημεία του επιπέδου τότε οι συντεταγμένες του μέσου $ M $ του ευθύγραμμου τμήματος $ AB $ ισούνται με το ημιάθροισμα των συντεταγμένων των άκρων $ A $ και $ B $.
+\[ x_{_M}=\frac{x_{_A}+x_{_B}}{2}\quad,\quad y_{_M}=\frac{y_{_A}+y_{_B}}{2} \]
+\Thewrhma{Συντεταγμένες διανύσματος με γνωστά άκρα}
+Αν $ A(x_1,y_1) $ και $ B(x_2,y_2) $ είναι δύο τυχαία σημεία του επιπέδου τότε οι συντεταγμένες του διανύσματος $ \overrightarrow{AB} $ ισούνται με τις συντεταγμένες του πέρατος μείον τις συντεταγμένες της αρχής.
+\[ \overrightarrow{AB}=\left(x_2-x_1,y_2-y_1 \right)  \]
+\Thewrhma{Συνθήκες παραλληλίας διανυσμάτων}
+Δύο διανύσματα $ \vec{a}=(x_1,y_1) $ και $ \vec{\beta}=(x_2,y_2) $ με συντελεστές $ \lambda_1 $ και $ \lambda_2 $ αντίστοιχα, θα είναι παράλληλα αν και μόνο αν ισχύουν οι ακόλουθες σχέσεις.
+\begin{rlist}
+\item Οι συντελεστές διεύθυνσης των διανυσμάτων είναι ίσοι : $ \vec{a}\parallel\vec{\beta}\Leftrightarrow \lambda_1=\lambda_2 $.
+\item Η ορίσουσα $ \det{(\vec{a},\vec{\beta})} $ των συντεταγμένων των διανυσμάτων ισούται με το $ 0 $
+\[  \vec{a}\parallel\vec{\beta}\Leftrightarrow \det{(\vec{a},\vec{\beta})}=\begin{vmatrix}
+x_1 & y_1\\x_2 & y_2
+\end{vmatrix}=0 \]
+\end{rlist}
+\Thewrhma{Συντεταγμένες βαρύκεντρου τριγώνου}
+\wrapr{-4mm}{8}{4cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(1.33,.66){G}
+\tkzDefPoint(1.5,0){M}
+\tkzDefPoint(.5,1){N}
+\tkzDefPoint(2,1){P}
+\draw[pl](A)--(B)--(C)-- cycle;
+\draw(A)--(M);
+\draw(B)--(P);
+\draw(C)--(N);
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[below](M){$\varDelta$}
+\tkzLabelPoint[right](P){$E$}
+\tkzLabelPoint[left](N){$Z$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left,yshift=-3mm,xshift=1.7mm](G){$G$}
+\tkzDrawPoints(A,B,C,M,N,P,G)
+\end{tikzpicture}}{
+Οι συντεταγμένες του βαρύκεντρου $ G $ ενός τριγώνου $ AB\varGamma $ με κορυφές $ A(x_1,y_1), B(x_2,y_2) $ και $ \varGamma(x_3,y_3) $ είναι ίσες με το ένα τρίτο του αθροίσματος των συντεταγμένων των κορυφών του τριγώνου.
+\[ x_{_G}=\frac{x_1+x_2+x_3}{3}\quad,\quad y_{_G}=\frac{y_1+y_2+y_3}{3} \]}\mbox{}\\\\\\
+\Thewrhma{Μέτρο διανύσματος - Απόσταση σημείων}
+Το μέτρο ενός διανύσματος $ \vec{a}=(x,y) $ του επιπέδου ισούται με την τετραγωνική ρίζα του αθροίσματος των τετραγώνων των συντεταγμένων του.
+\[ |\vec{a}|=\sqrt{x^2+y^2} \]
+Αν $ A(x_1,y_1) $ και $ B(x_2,y_2) $ είναι δύο τυχαία σημεία του επιπέδου τότε το μέτρο του διανύσματος $ \overrightarrow{AB} $ ή ισοδύναμα η απόσταση ανάμεσα στα σημεία $ A $ και $ B $ δίνεται από τον τύπο.
+\[ \left| \overrightarrow{AB}\right| =\sqrt{(x_2-x_1)^2+(y_2-y_1)^2} \]
+
+
+
+
+\end{document}

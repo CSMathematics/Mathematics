@@ -1,0 +1,116 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{blue!50!green}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\usepackage{multirow}
+
+\begin{document}
+\titlos{Άλγεβρα Α΄ Λυκειου}{Σύνολα - Πιθανότητες}{Πιθανότητες}
+\orismoi
+\Orismos{Κλασικόσ Ορισμόσ Πιθανότητασ}
+Πιθανότητα ενός ενδεχομένου $ A=\{a_1,a_2,\ldots,a_\kappa\} $ ενός δειγματικού χώρου $ \varOmega $ ονομάζεται ο λόγος του πλήθους των ευνοϊκών περιπτώσεων του $ A $ προς το πλήθος όλων των δυνατών περιπτώσεων.
+\[ P(A)=\frac{N(A)}{N(\varOmega)} \]
+\begin{itemize}[itemsep=0mm]
+\item Ο παραπάνω ορισμός ονομάζεται \textbf{κλασικός ορισμός} της πιθανότητας και εφαρμόζεται όταν το ενδεχόμενο $ A $ αποτελείται από ισοπίθανα απλά ενδεχόμενα $ \{a_i\}\ ,\ i=1,2,\ldots,\kappa $.
+\item Το πλήθος των στοιχείων ενός ενδεχομένου $ A $ συμβολίζεται με $ N(A) $.
+\end{itemize}
+\Orismos{Αξιωματικός Ορισμός Πιθανότητας}
+Η πιθανότητα ενός ενδεχομένου $ A=\{a_1,a_2,\ldots,a_\kappa\} $ ενός δειγματικού χώρου $ \varOmega=\{\omega_1,\omega_2,\ldots,\omega_\nu\} $ ορίζεται ώς το άθροισμα των πιθανοτήτων $ P(a_i)\ ,\ i=1,2,\ldots,\nu $ των απλών ενδεχομένων του.
+\[ P(A)=P(a_1)+P(a_2)+\ldots+P(a_\kappa) \]
+\begin{itemize}[itemsep=0mm]
+\item Για κάθε στοιχείο $ \omega_i\ ,\ i=1,2,\ldots,\nu $ του δειγματικού χώρου $ \varOmega $ ονομάζουμε τον αριθμό $ P(\omega_i) $ πιθανότητα του ενδεχομένου $ \{\omega_i\} $.
+\item Ο παραπάνω ορισμός ονομάζεται \textbf{αξιοματικός ορισμός} της πιθανότητας και εφαρμόζεται όταν το ενδεχόμενο $ A $ δεν αποτελείται από ισοπίθανα απλά ενδεχόμενα $ \{a_i\}\ ,\ i=1,2,\ldots,\kappa $.
+\end{itemize}
+\thewrhmata
+\Thewrhma{Ιδιότητες Πιθανοτήτων}
+Από τον κλασικό ορισμό της πιθανότητας προκύπτουν οι παρακάτω ιδιότητες :
+\begin{rlist}
+\item Πιθανότητα κενού συνόλου : $ P(\varnothing)=0 $.
+\item Πιθανότητα δειγματικού χώρου : $ P(\varOmega)=1 $.
+\item Για κάθε ενδεχόμενο $ A $ ισχύει : $ 0\leq P(A)\leq1 $.
+\end{rlist}
+\Thewrhma{Κανόνες λογισμού πιθανοτήτων}
+Οι παρακάτω ιδιότητες μας δείχνουν τις σχέσεις με τις οποίες συνδέονται οι πιθανότητες οποιονδήποτε ενδεχομένων $ A,B $ με τις πιθανότητες των ενδεχομένων των πράξεων που περιέχουν τα ενδεχόμενα αυτά.
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ενδεχόμενο} & \textbf{Πιθανότητα} \\ 
+\hhline{==} \rule[-2ex]{0pt}{7.5ex} Ένωση & $ P(A\cup B)=\ccases{P(A)+P(B)-P(A\cap B)\ \ ,\ \ \textrm{αν }A\cap B\neq\varnothing\\
+P(A)+P(B)\ \ ,\ \ \textrm{αν }A\cap B=\varnothing} $ \\ 
+ \rule[-2ex]{0pt}{5.5ex} Συμπλήρωμα & $ P(A')=1-P(A) $ \\ 
+ \hhline{~-}\rule[-2ex]{0pt}{5.5ex} \multirow{3}{*}{Διαφορά} & $ P(A-B)=P(A)-P(A\cap B) $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ P(B-A)=P(B)-P(A\cap B) $ \\ 
+   \hhline{~-}\rule[-2ex]{0pt}{5.5ex} Υποσύνολο & $ A\subseteq B\Rightarrow P(A)\leq P(B) $ \\ 
+\hline 
+\end{tabular} 
+\end{center}\mbox{}\\
+\Thewrhma{Ανισότητες μεtαξύ πιθανοτήτων}
+Μεταξύ των πιθανοτήτων δύο οποιονδήποτε ενδεχομένων $ A,B $ καθώς και των ενδεχομένων που προκύπτουν από πράξεις που τα περιέχουν, ισχύουν οι ακόλουθες ανισότητες.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ P(A)\leq P(A\cup B) $
+\item $ P(B)\leq P(A\cup B) $
+\item $ P(A\cap B)\leq P(A) $
+\item $ P(A\cap B)\leq P(B) $
+\item $ P(A\cap B)\leq P(A\cup B) $
+\item $ P(A-B)\leq P(A) $
+\item $ P(B-A)\leq P(B) $
+\item $ P(A-B)\leq P(A\cup B) $
+\item $ P(B-A)\leq P(A\cup B) $
+\end{rlist}
+\end{multicols}
+\end{document}

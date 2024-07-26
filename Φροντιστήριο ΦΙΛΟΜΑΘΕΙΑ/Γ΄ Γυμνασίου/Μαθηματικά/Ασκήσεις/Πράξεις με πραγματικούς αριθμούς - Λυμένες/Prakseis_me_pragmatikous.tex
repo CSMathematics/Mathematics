@@ -1,0 +1,347 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+\newcommand{\eqq}[2]{\xlongequal[#2]{#1}}
+\DeclareMathOperator*{\Eq}{=}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[section]
+\renewcommand{\theparadeigma}{\bf\arabic{paradeigma}\;:\;}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{black}{\textbf{ΠΑΡΑΔΕΙΓΜΑ\hspace{2mm}\theparadeigma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%-----------------------------------
+
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{\textbf{ΛΥΣΗ}}
+%------------------------------------
+%---------- ΜΕΘΟΔΟΣ --------------
+\newcounter{Methodos}[section]
+\renewcommand{\theMethodos}{\arabic{Methodos}} 
+\newenvironment{Methodos}[1][]{%
+\refstepcounter{Methodos}
+\begin{mdframed}[%
+frametitle={\vspace{-1.5mm}\begin{center}
+{\Large ΜΕΘΟΔΟΣ \;\;\theMethodos\;:\quad\ \MakeUppercase{#1}}
+\end{center}\vspace{.5mm}},
+skipabove=\baselineskip plus 0pt minus 1pt,
+skipbelow=\baselineskip plus 2pt minus 1pt,
+linewidth=1pt,
+frametitlerule=true,
+linecolor=black,
+outerlinewidth=.5pt,
+rightline=false,
+bottomline=false,
+topline=false,
+frametitlerulewidth=.3pt,
+innertopmargin=\baselineskip,
+innerbottommargin=0mm,
+innerrightmargin=20pt,
+innerleftmargin=20pt,
+backgroundcolor=white,
+frametitleaboveskip=7pt
+]%
+}{%
+\end{mdframed}}
+%------------------------------------------
+%--------- ΑΝΙΣΩΣΕΙΣ -------
+\tikzset{
+thickest/.style={line width=1mm,steelblue},
+a/.style={decoration={markings,
+mark=at position #1 with {\fill[white,draw=black,thin] circle (3pt);}},postaction={decorate}},
+k/.style={decoration={markings,
+mark=at position #1 with {\fill[black] circle (3pt);}},postaction={decorate}},
+}
+%--------- ΔΙΑΣΤΗΜΑ ------------
+\newcommand{\diasthma}[7]{
+\foreach \x in {#3,#4}
+\draw (\x,#7+.2) -- (\x,#7-.2);
+\node[anchor=north,fill=white] at (#3,#7)[below=1mm] {$ #1 $};
+\node[anchor=north,fill=white] at (#4,#7)[below=1mm] {$ #2 $};
+\draw [#5=0,#6=1,thickest] (#3,#7)--(#4,#7);
+}
+%--------- ΑΞΟΝΑΣ ------------------
+\newcommand{\axonas}[3]{
+\draw[-latex] (#1,#3) -- (#2,#3)node[below]{$x$};
+}
+%--------- ΚΑΤΩ ΑΚΡΟ ------------------
+\newcommand{\Xapeiro}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3-.3,#5);
+}
+%--------- ΠΑΝΩ ΑΚΡΟ ------------------
+\newcommand{\apeiroX}[5]{
+\draw (#2,#5+.2) -- (#2,#5-.2);
+\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
+\draw [#4=0,thickest] (#2,#5)--(#3+.3,#5);
+}
+%----- ΔΙΑΚΕΚΟΜΜΕΝΕΣ ΓΡΑΜΜΕΣ ------
+\newcommand{\oria}[3]{\draw [dashed] (#1,#2)--(#1,#3);}
+%--------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+
+
+\begin{document}
+\section*{\LARGE ΑΛΓΕΒΡΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΠΡΑΞΕΙΣ ΜΕ ΠΡΑΓΜΑΤΙΚΟΥΣ ΑΡΙΘΜΟΥΣ}
+\end{center}
+\begin{Methodos}[Πράξεισ μεταξύ αριθμών]
+Σε αριθμητικές παραστάσεις όπου καλούμαστε να κάνουμε πράξεις μεταξύ πραγματικών αριθμών ακολουθούμε τα παρακάτω βήματα για κάθε πράξη
+\begin{enumerate}[leftmargin=.5cm]
+\item \textbf{Πρόσθεση}
+\begin{rlist}[leftmargin=.5cm]
+\item Για να προσθέσουμε δύο ομόσημους αριθμούς, προσθέτουμε τις απόλυτες τιμές τους και γράφουμε μπροστά από το αποτέλεσμα το κοινό τους πρόσημο.
+\item Για να προσθέσουμε δύο ετερόσημους αριθμούς, αφαιρούμε τις απόλυτες τιμές τους και γράφουμε μπροστά από το αποτέλεσμα το πρόσημο του αριθμού με τη μεγαλύτερη απόλυτη τιμή.
+\end{rlist}
+\item \textbf{Πολλαπλασιασμός}
+\begin{rlist}[leftmargin=.5cm]
+\item Για να πολλαπλασιάσουμε δύο ομόσημους αριθμούς, πολλαπλασιάζουμε τις απόλυτες τιμές τους και γράφουμε μπροστά από το αποτέλεσμα το πρόσημο $ + $.
+\item Για να πολλαπλασιάσουμε δύο ετερόσημους αριθμούς, πολλαπλασιάζουμε τις απόλυτες τιμές τους και γράφουμε μπροστά από το αποτέλεσμα το πρόσημο $ - $.
+\end{rlist}
+\end{enumerate}
+\end{Methodos}
+\Paradeigma{Πράξεισ μεταξύ αριθμών}
+\textbf{Να υπολογιστούν οι τιμές των παρακάτω αθροισμάτων και γινομένων}
+\begin{multicols}{4}
+{\boldmath\begin{rlist}[label=\bf\roman{*.}]
+\item $ 17+23 $
+\item $ 32-47 $
+\item $ 28-15 $
+\item $ -54-27 $
+\item $ 8\cdot9 $
+\item $ (-14)\cdot15 $
+\item $ 25\cdot(-8) $
+\item $ (-32)\cdot(-100) $
+\end{rlist}}
+\end{multicols}
+\noindent
+\lysh\\
+Σε κάθε πράξη απο τις παραπάνω εξετάζουμε αν οι αριθμοί είναι ομόσημοι ή ετερόσημοι.
+\begin{rlist}
+\item Οι αριθμοί της παράστασης είναι ομόσημοι οπότε προσθέτουμε τις απόλυτες τιμές τους. Το αποτέλεσμα θα έχει το ίδιο πρόσημο.
+\[ 17+23=+(17+23)=+40=40 \]
+\item Στην παράσταση αυτή θα αφαιρέσουμε τις απόλυτες τιμές των αριθμών αφού είναι ετερόσημοι. Το αποτέλεσμα θα έχει το πρόσημο του αριθμού με τη μεγαλύτερη απόλυτη τιμή.
+\[ 32-47=-(47-32)=-15 \]
+Συνεχίζουμε και στα επόμενα παραδείγματα με τον ίδιο τρόπο.
+\item $ 28-15=+(28-15)=+13=13 $
+\item $ -54-27=-(54+27)=-81 $
+\item Οι παράγοντες του γινομένου είναι ομόσημοι. Επομένως το αποτέλεσμα θα είναι θετικο.
+\[ 8\cdot9=+72=72 \]
+\item Το γινόμενο αυτό περιέχει ετερόσημους παράγοντες. Το αποτέλεσμα του γινομένου θα είναι αρνητικό.
+\[ (-14)\cdot15=-14\cdot15=-210 \]
+Ομοίως και στα επόμενα παραδείγματα θα έχουμε
+\item $ 25\cdot(-8)=-25\cdot8=-200 $
+\item $ (-32)\cdot(-100)=+32\cdot100=3200 $
+\end{rlist}
+\begin{Methodos}[Αριθμητικέσ παραστάσεισ]
+Σε σύνθετες αριθμητικές παραστάσεις, οι οποίες περιέχουν πολλές πράξεις, ακολουθούμε τη σειρά των πράξεων που γνωρίζουμε από την Α' Γυμνασίου δηλαδή
+\begin{enumerate}[itemsep=0mm]
+\item Πολλαπλασιασμοί - Διαιρέσεις
+\item Προσθέσεις - Αφαιρέσεις
+\end{enumerate}
+Οι πράξεις εκτελούνται με τη σειρά αυτή πρώτα μέσα σε παρενθέσεις, αν υπάρχουν και ύστερα έξω απ' αυτές. Μπορούν οι πολλπλασιασμοί και διαιρέσεις μεταξύ προσήμων και μεταξύ αριθμών να γίνουν σε ξεχωριστά βήματα προκειμένου να αποφύγουμε τα λάθη. Αν υπάρχει εμπειρία μπορούμε να βγάλουμε και κατευθείαν το αποτέλεσμα.
+\end{Methodos}
+\Paradeigma{Αριθμητική παράσταση}
+\textbf{Να βρεθεί η τιμή της παρακάτω αλγεβρικής παράστασης.}
+{\boldmath\[ -2\cdot5+4\cdot\left(-\frac{3}{5} \right)-\frac{35}{4}:\left(-\frac{15}{2}\right)   \]}
+\lysh\\
+Ακολουθώντας τα βήματα που μας υποδεικνύει η μέθοδος θα έχουμε
+\begin{gather*}
+-2\cdot5+4\cdot\left(-\frac{3}{5} \right)-\frac{35}{4}:\left(-\frac{15}{2}\right)\eq{\textrm{Πρόσημα}}-2\cdot5-4\cdot\frac{3}{5} +\frac{35}{4}:\frac{15}{2}=\\
+\eq{\textrm{Πολλ.-Διαιρ.}}-10-\frac{12}{5} +\frac{35}{4}\cdot\frac{2}{15}=-10-\frac{12}{5} +\frac{7}{6}=\\
+\eq{\textrm{Πρ.-Αφ.}}-\frac{300}{30}-\frac{72}{30} +\frac{35}{30}=\frac{337}{30}
+\end{gather*}
+\begin{Methodos}[Υπολογισμόσ παραστασησ με αγνωστο αριθμο]
+Εαν μια αριθμητική παράσταση περιέχει έναν άγνωστο αριθμό ή αγνωστη παράσταση, των οποίων όμως η τιμή δίνεται γνωστή από την εκφώνση της άσκησης, τότε προκειμένου να υπολογίσουμε την τιμή της παράστασης :
+\begin{bhma}
+\item \textbf{Αντικατάσταση}\\
+Αντικαθιστούμε τον άγνωστο αριθμό με την τιμή του. Στην περίπτωση άγνωστης παράστασης με πολλούς άγνωστους αριθμούς, αντικαθιστούμε ολόκληρη την παράσταση αυτή με την τιμή που μας δίνεται χωρίς να είναι απαραίτητο να γνωρίζουμε την τιμή κάθε αγνώστου ξεχωριστά.
+\item \textbf{Πράξεις}\\
+Στη συνέχεια εκτελούμε τις πράξεις σύμφωνα με τις οδηγίες της \textbf{Μεθόδου 1} για πραγματικούς αριθμούς ώστε να υπολογίσουμε την τιμή της παράστασης.
+\end{bhma}
+\end{Methodos}
+\Paradeigma{Αριμητική παράσταση με άγνωστο}
+{Να υπολογιστεί η αριθμητική τιμή των παρακάτω παραστάσεων}
+{\boldmath
+\begin{brlist}
+\item $ 3x-4+2y-8-4y+x-5 $ \textbf{για} $ x=-2 $ \textbf{και} $ y=3 $
+\item $ 2-7y-3-3x+1-x+3y+9 $ \textbf{όταν} $ x+y=4 $
+\end{brlist}}
+\noindent
+\lysh\\
+\begin{rlist}
+\vspace{-5mm}
+\item Στην 1\tss{η} παράσταση γνωρίζουμε την τιμή κάθε μεταβλητής ξεχωριστά. Μπορούμε λοιπόν να αντικαταστήσουμε τις μεταβλητές με τους αριθμούς και να υπολογίσουμε την τιμή. Πριν απ' αυτό θα χρειαστεί να γίνει αναγωγή ομοίων όρων.
+\[ 3x-4+2y-8-4y+x-5=4x-2y-17 \]
+Με αντικατάσταση θα έχουμε όπου $ x=-2 $ και $ y=3 $
+\[ 4x-2y-17=4\cdot(-2)-2\cdot3-17=-8-6-17=-31 \]
+\item Στην παράσταση αυτή θα χρειαστεί να απλοποιήσουμε τη μορφή της κάνοντας αναγωγή ομοίων όρων και να εμφανίσουμε την παράσταση $ x+y $ μιας και δεν γνωρίζουμε την τιμή κάθε μεταβλητής ξεχωριστά.
+\[ 2-7y-3-3x+1-x+3y+9=-4x-4y+9\eq{\textrm{Επιμ. Ιδ.}}-4(x+y)+9 \]
+Αντικαθιστώντας όπου $ x+y=4 $ θα έχουμε
+\[ -4(x+y)+9=-4\cdot4+9=-16+9=-7 \]
+\end{rlist}
+\hspace*{\fill}
+{\footnotesize Σπύρος Φρόνιμος}
+\end{document}

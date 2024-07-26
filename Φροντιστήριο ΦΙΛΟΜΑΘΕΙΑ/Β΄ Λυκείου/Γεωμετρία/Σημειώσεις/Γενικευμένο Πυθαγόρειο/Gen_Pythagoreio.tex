@@ -1,0 +1,122 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\usepackage{multicol,gensymb,mathimatika}
+\usepackage{wrap-rl}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\textcolor{\xrwma}{\roman*.}}
+
+\begin{document}
+\titlos{Γεωμετρία Β΄ Λυκείου}{Μετρικές Σχέσεις}{Γενικευμένο Πυθαγόρειο Θεώρημα}
+\thewrhmata
+\Thewrhma{Γενικευμένο Πυθαγόρειο για οξεία γωνία}
+Το τετράγωνο μιας πλευράς ενός τριγώνου που βρίσκεται απέναντι από οξεία γωνία ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών μειωμένο κατά το διπλάσιο γινόμενο της μιας πλευράς επί την προβολή της άλλης πάνω στην πρώτη.
+\begin{align*}
+\hat{A}<90\degree \Rightarrow a^2=\beta^2+\gamma^2-2\beta\cdot AE \quad\textrm{και }\ \ \  & a^2=\beta^2+\gamma^2-2\gamma\cdot AZ\\
+\hat{B}<90\degree \Rightarrow\beta^2=a^2+\gamma^2-2a\cdot B\varDelta \quad\textrm{και }\ \ \  & \beta^2=a^2+\gamma^2-2\gamma\cdot BZ\\
+\hat{\varGamma}<90\degree \Rightarrow\gamma^2=a^2+\beta^2-2a\cdot \varGamma E \quad\textrm{και }\ \ \  & \gamma^2=a^2+\beta^2-2\beta\cdot \varGamma\varDelta
+\end{align*}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}}
+ \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzDefPoint(1,0){D}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{c}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{b}
+\tkzMarkRightAngle[size=.2](C,D,A)
+\tkzMarkRightAngle[size=.2](B,c,C)
+\tkzMarkRightAngle[size=.2](B,b,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(D);
+\draw(C)--(c);
+\draw(B)--(b);
+\tkzDrawPoints(A,B,C,D,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[right,yshift=1mm](b){$E$}
+\end{tikzpicture} & \begin{tikzpicture}
+\clip (-1.2,-1.5) rectangle (3.5,2.5);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(-1,2){A}
+\tkzDefPointBy[projection=onto A--B](C)\tkzGetPoint{c}
+\tkzDefPointBy[projection=onto C--B](A)\tkzGetPoint{a}
+\tkzDefPointBy[projection=onto A--C](B)\tkzGetPoint{b}
+\tkzMarkRightAngle[size=.2](C,a,A)
+\tkzMarkRightAngle[size=.2](B,c,C)
+\tkzMarkRightAngle[size=.2](B,b,C)
+\draw[pl] (A)--(B)--(C)--cycle;
+\draw(A)--(a);
+\draw(C)--(c);
+\draw(B)--(b);
+\draw[dashed](B)--(a);
+\draw[dashed](B)--(c);
+\tkzDrawPoints(A,B,C,a,b,c)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](a){$\varDelta$}
+\tkzLabelPoint[left](c){$Z$}
+\tkzLabelPoint[above right](b){$E$}
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\Thewrhma{Γενικευμένο Πυθαγόρειο για αμβλεία γωνία}
+Το τετράγωνο μιας πλευράς ενός τριγώνου που βρίσκεται απέναντι από αμβλεία γωνία ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών αυξημένο κατά το διπλάσιο γινόμενο της μιας πλευράς επί την προβολή της άλλης πάνω στην πρώτη.
+\begin{align*}
+\hat{A}<90\degree \Rightarrow a^2=\beta^2+\gamma^2-2\beta\cdot AE \quad\textrm{και }\ \ \  & a^2=\beta^2+\gamma^2-2\gamma\cdot AZ\\
+\hat{B}>90\degree \Rightarrow\beta^2=a^2+\gamma^2+2a\cdot B\varDelta \quad\textrm{και }\ \ \  & \beta^2=a^2+\gamma^2+2\gamma\cdot BZ\\
+\hat{\varGamma}<90\degree \Rightarrow\gamma^2=a^2+\beta^2-2a\cdot \varGamma E \quad\textrm{και }\ \ \  & \gamma^2=a^2+\beta^2-2\beta\cdot \varGamma\varDelta
+\end{align*}
+\Thewrhma{Είδος γωνίας τριγώνου}
+Εαν το τετράγωνο μιας πλευράς τριγώνου είναι μεγαλύτερο, ίσο ή μικρότερο από το άθροισμα των τετραγώνων των άλλων δύο πλευρών τότε η απέναντι γωνία της πλευράς αυτής είναι αντίστοιχα αμβλεία, ορθή ή οξεία.
+\begin{gather*}
+a^2>\beta^2+\gamma^2\Rightarrow \hat{A}>90\degree\\
+a^2=\beta^2+\gamma^2\Rightarrow \hat{A}=90\degree\\
+a^2<\beta^2+\gamma^2\Rightarrow \hat{A}<90\degree
+\end{gather*}
+\Thewrhma{Είδος τριγώνου ως προς γωνία}
+Aν το τετράγωνο της μεγαλύτερης πλευράς ενός τριγώνου είναι μεγαλύτερο, ίσο ή μικρότερο από το άθροισμα των τετραγώνων των άλλων δύο πλευρών τότε το τρίγωνο θα είναι αντίστοιχα αμβλυγώνιο, ορθογώνιο ή οξυγώνιο.\\\\
+\Thewrhma{Υψος τριγώνου}
+Σε κάθε τρίγωνο τα ύψη εκφράζονται ως συνάρτηση των πλευρών του τριγώνου με τους παρακάτω τύπους :
+\[ \upsilon_a=\frac{2}{a}\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)}\ \ ,\ \ \upsilon_\beta=\frac{2}{\beta}\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)}\ \ ,\ \ \upsilon_\gamma=\frac{2}{\gamma}\sqrt{\tau(\tau-a)(\tau-\beta)(\tau-\gamma)} \]
+\Thewrhma{Νόμος συνημιτόνων}
+Το τετράγωνο μιας πλευράς ενός τριγώνου ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών ελλατωμένο κατά το διπλάσιο γινόμενό τους επί το συνημίτονο της περιεχόμενης γωνίας.
+\begin{center}
+ \begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1,2){A}
+\tkzMarkAngle[size=.3](C,B,A)
+\tkzMarkAngle[size=.3](B,A,C)
+\tkzMarkAngle[size=.35](A,C,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (5.8,1.5) {$a^2=\beta^2+\gamma^2-2\beta\gamma\syn{\hat{A}}$};
+\node at (5.8,1) {$\beta^2=a^2+\gamma^2-2a\gamma\syn{\hat{B}}$};
+\node at (5.8,.5) {$\gamma^2=a^2+\beta^2-2a\beta\syn{\hat{\varGamma}}$};
+\node at (2.35,1) {\footnotesize$\beta$};
+\node at (0.3,1) {\footnotesize$\gamma$};
+\node at (1.5,-0.25) {\footnotesize$a$};
+\end{tikzpicture}
+\end{center}
+\end{document}

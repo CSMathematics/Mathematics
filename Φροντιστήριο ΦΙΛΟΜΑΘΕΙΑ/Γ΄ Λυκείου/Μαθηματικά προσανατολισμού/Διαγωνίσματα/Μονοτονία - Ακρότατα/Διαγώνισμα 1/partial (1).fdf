@@ -1,0 +1,138 @@
+%FDF-1.2
+1 0 obj
+<< /FDF << /JavaScript << /Doc 2 0 R >> >> >>
+endobj
+2 0 obj
+[ (Rangen) 3 0 R ]
+endobj
+3 0 obj
+<<>>
+stream
+var partre = /rEval|rFrac/;
+function rngCorrAnsButton()
+{
+    var theprecision,fieldname,theanswer;
+    if (arguments.length==4) {
+        var theformat=arguments[0];
+        var fieldname=arguments[1];
+        var theanswer=arguments[2];
+        var thequiz=arguments[3];
+    } else {
+        var fieldname=arguments[0];
+        var theanswer=arguments[1];
+        var thequiz=arguments[2];
+    }
+    theanswer = partialExpand(0,theanswer);
+    if (arguments.length==4)
+        theanswer=util.printf(theformat,eval(theanswer));
+    DisplayAnswer(fieldname,theanswer,thequiz);
+}
+function partialExpand(level,Ans)
+{
+    Ans = correctPlusMinus(Ans)
+    level += 1;
+    var n=0, m, bP, eP, subExp;
+    while ( true ) {
+        try { m = Ans.match(partre); }
+        catch (e) { break; }
+        if ( m != null ) {
+            bP = m.index + m[0].length;
+            eP = FindBalP(Ans, bP, true);
+            var subExp = Ans.substring(bP+1, eP);
+            // n = beginning of "rEval",
+            // eP = beginning of balanced parens,
+            // bP = end of balanced parens
+            Ans = Ans.substring(0, m.index)
+                + eval(m[0]+"(level,subExp)") + Ans.substring(eP+1);
+         } else {
+            if ( level == 1 ) {
+                 break;
+            }
+        }
+    }
+    Ans = correctPlusMinus(Ans);
+    return Ans;
+}
+function rEval(level, Ans)
+{
+    level += 1;
+    var n=0, m, bP, eP, subExp;
+    while ( true )
+    {
+        try { m = Ans.match(partre); }
+        catch (e) { break; }
+        if ( m != null ) {
+            bP = m.index + m[0].length;
+            eP = FindBalP(Ans, bP, true);
+            var subExp = Ans.substring(bP+1, eP);
+            // n = beginning of "rEval",
+            // eP = beginning of balanced parens,
+            // bP = end of balanced parens
+            Ans = Ans.substring(0, m.index)
+                +eval(m[0]+"(level,subExp)")+Ans.substring(eP+1);
+         } else {
+            Ans = ParseInput(Ans);
+            with(Math) { Ans = eval( Ans ) };
+            break;
+        }
+    }
+    return Ans;
+}
+function rFrac(level, Ans)
+{
+    level += 1;
+    var n=0, m, bP, eP, subExp;
+    while ( true ) {
+        try { m = Ans.match(partre); }
+        catch (e) { break; }
+        if ( m != null ) {
+            bP = m.index + m[0].length;
+            eP = FindBalP(Ans, bP, true);
+            var subExp = Ans.substring(bP+1, eP);
+            // n = beginning of "rEval",
+            // eP = beginning of balanced parens,
+            // bP = end of balanced parens
+            Ans = Ans.substring(0, m.index)
+                + eval(m[0]+"(level,subExp)") + Ans.substring(eP+1);
+         } else {
+            var numDenom = Ans.split("/");
+            numDenom[0] = eval(numDenom[0]);
+            numDenom[1] = eval(numDenom[1]);
+            var g = gcd(numDenom[0], numDenom[1]);
+            numDenom[0] /= g;
+            numDenom[1] /= g;
+            if ( numDenom[1] == 1)
+                Ans = numDenom[0];
+            else
+                Ans = numDenom.join("/");
+            break;
+        }
+    }
+    return Ans;
+}
+function correctPlusMinus(Ans)
+{
+    Ans = "" + Ans;
+    Ans  = Ans.replace(/\s*([\+-])\s*\1\s*/g, " + ");
+    Ans  = Ans.replace(/\s*\+\s*-\s*/g, " - ");
+    Ans  = Ans.replace(/\s*-\s*\+\s*/g, " - ");
+    return Ans;
+}
+function gcd(a,b)
+{
+    var x = a, y = b, r;
+    while (true)
+    {
+        r = x % y;
+        if ( r == 0 ) break;
+        x = y;
+        y = r;
+    }
+    return Math.abs(y);
+}
+function lcm (a,b) { return (a*b)/gcd(a,b); }
+endstream
+endobj
+trailer
+<< /Root 1 0 R >>
+%%EOF

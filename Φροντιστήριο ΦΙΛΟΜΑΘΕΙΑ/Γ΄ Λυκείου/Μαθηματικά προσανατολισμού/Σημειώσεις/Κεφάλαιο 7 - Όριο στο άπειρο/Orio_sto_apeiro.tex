@@ -1,0 +1,156 @@
+\documentclass[twoside,nofonts,ektypwsh,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\ekthetesdeiktes
+
+\begin{document}
+\titlos{Γ΄ Λυκείου - Μαθηματικά Προσανατολισμού}{Όρια - Συνέχεια}{Όριο στο άπειρο}
+\orismoi
+\Orismos{Όριο στο άπειρο}
+Έστω μια συνάρτηση $ f $ η οποία ορίζεται σε ένα διάστημα της μορφής $ (a,+\infty) $. Το όριο της $ f $ όταν το $ x $ τείνει στο $ +\infty $ θα είναι είτε ένας πραγματικός αριθμός είτε ένα από τα $ \pm\infty $.
+\[ \displaystyle{\lim_{x\rightarrow+\infty}f(x)=\ccases{\mathcal{l}\in\mathbb{R}\ \ \textrm{ή}\\\pm\infty}} \]
+Ομοίως αν η συνάρτηση ορίζεται σε ένα διάστημα της μορφής $ (-\infty,a) $ έχουμε το όριο της όταν το $ x\to-\infty $: $ {\displaystyle{\lim_{x\rightarrow-\infty}{f(x)}}} $.\\\\
+\thewrhmata
+\Thewrhma{Όρια βασικών συναρτήσεων στο άπειρο}
+\vspace{-5mm}
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Όριο πολυωνυμικών συναρτήσεων}\\
+Έστω $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ ένα πολυώνυμο $ \nu- $στού βαθμού. Το όριο του πολυωνύμου όταν $ x\to\pm\infty $ ισούται με το όριο του μεγιστοβάθμιου όρου.
+\[ \lim_{x\rightarrow\pm\infty}{P(x)}=\lim_{x\rightarrow\pm\infty}{a_\nu x^\nu} \]
+\item \textbf{Όριο ρητής συνάρτησης}\\
+Έστω $ f(x)=\dfrac{P(x)}{Q(x)} $ μια ρητή συνάρτηση με $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ και $ Q(x)=\beta_\mu x^\mu+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0 $ βαθμών $ \nu $ και $ \mu $ αντίστοιχα. Το όριο της συνάρτησης όταν $ x\to\pm\infty $ ισούται με 
+\[ \displaystyle{\lim_{x\rightarrow\pm\infty}\frac{P(x)}{Q(x)}=\lim_{x\rightarrow\pm\infty}\frac{a_\nu x^\nu}{\beta_\mu x^\mu}} \]
+\begin{rlist}
+\item Αν $ \nu>\mu $ τότε $ \displaystyle\lim_{x\rightarrow\pm\infty}{f(x)}=\pm\infty $.
+\item Αν $ \nu<\mu $ τότε $ \displaystyle\lim_{x\rightarrow\pm\infty}{f(x)}=0 $.
+\item Αν $ \nu=\mu $ τότε $ \displaystyle\lim_{x\rightarrow\pm\infty}{f(x)}=\dfrac{a_\nu}{\beta_\mu} $.
+\end{rlist}
+\item \bmath{Όριο εκθετικής - λογαριθμικής για $ a>1 $.}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}a^x}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow-\infty}a^x}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow0^+}\log_ax}=-\infty $
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}\log_ax}=+\infty $
+\end{enumerate}
+\end{multicols}
+\item \bmath{Όριο εκθετικής - λογαριθμικής για $ 0<a<1 $.}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}a^x}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow-\infty}a^x}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow0^+}\log_ax}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow+\infty}\log_ax}=-\infty $
+\end{enumerate}
+\end{multicols}
+\item \textbf{Βασικά όρια}
+\begin{enumerate}[itemsep=0mm,label=\alph*.]
+\begin{multicols}{2}
+\item $ \displaystyle{\lim_{x\rightarrow0^+}e^{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow+\infty}e^{y}}=+\infty $
+\item $ \displaystyle{\lim_{x\rightarrow0^-}e^{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow-\infty}e^{y}}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{ημ}{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow0}\textrm{ημ}{y}}=0 $
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{συν}{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow0}\textrm{συν}{y}}=1 $
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}x\textrm{ημ}{\frac{1}{x}}}\eq{y=\frac{1}{x}}\displaystyle{\lim_{y\rightarrow0}\frac{\textrm{ημ}{y}}{y}}=1 $
+\end{multicols}
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}\frac{\textrm{ημ}x}{x}}=\displaystyle{\lim_{x\rightarrow\pm\infty}\frac{1}{x}{\textrm{ημ}x}}=0 $\quad Μηδενική επί φραγμένη (αποδεικνείεται με κριτήριο παρεμβολής)
+\item $ \displaystyle{\lim_{x\rightarrow\pm\infty}(x+\textrm{ημ}x)}= \displaystyle{\lim_{x\rightarrow\pm\infty}x\left( 1+\frac{\textrm{ημ}x}{x}\right) }=\pm\infty $\\\\
+Τα παρακάτω όρια ΔΕΝ υπάρχουν
+\begin{multicols}{2}
+\item $  \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{ημ}x} $
+\item $  \displaystyle{\lim_{x\rightarrow\pm\infty}\textrm{συν}x} $
+\end{multicols}
+\end{enumerate}
+\end{enumerate}
+\end{document}
+
+
+

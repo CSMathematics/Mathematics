@@ -1,0 +1,358 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\OnPar="Century Gothic Bold" at 10pt
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[most]{tcolorbox}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\let\Bbbk\relax
+\usepackage{enumitem,amssymb}
+\usepackage{lipsum,venndiagram}
+\let\Bbbk\relax
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=\Large$\square$}
+
+
+\newtcolorbox{mybox}[2][]{colback=white,
+colframe=red!75!black,fonttitle=\Large\bfseries,
+colbacktitle=red!20!white,coltitle=black,enhanced,breakable,sharp corners,boxrule=0.3mm,center title,boxsep=3mm,top=1mm,subtitle style={fonttitle=\normalsize\bfseries},
+title=#2,#1}
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.2pt}
+\tcbset{mysubtitle/.style={subtitle style={fontupper={\OnPar\color{black}},top=0pt,colback={white},boxrule=1pt},top=0pt}}
+
+\newtcolorbox{myleftbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-3mm,left=5mm,left skip=0mm,colbacktitle=white,colback=white,#1,sharp corners,grow to left by=0.68cm,titlerule=0.2mm,fonttitle=\OnPar}
+
+\newtcolorbox{myrightbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-2mm,left skip=6mm,colbacktitle=white,colback=white,#1,leftrule=0.2mm,sharp corners,right skip=0mm,titlerule=0.2mm,fonttitle=\OnPar}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{
+  \color{lightgray}{}
+  }
+\fancyhead[R]{
+ \color{gray} Άλγεβρα Α΄ Λυκείου\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage
+  }
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\leftmark\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage}%
+  }
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\myitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faExclamationTriangle}\ \Large$\square$]}
+
+\newlist{arithmisi}{enumerate}{2}
+\setlist[arithmisi]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\textit{{\Large{\thesection}}.\arabic*}}}}
+
+\begin{document}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{\section{Σύνολα}}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{enumerate}[itemsep=0mm]
+\item Σύνολο
+\item Τρόποι παράστασης συνόλου
+\item Βασικό σύνολο
+\item Κενό σύνολο
+\item Διάγραμμα Venn
+\item Ίσα σύνολα
+\item Υποσύνολο
+\item Πράξεις συνόλων
+\end{enumerate}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{enumerate}[itemsep=0mm]
+\item Ιδιότητες υποσυνόλου
+\item Ιδιότητες ένωσης
+\item Ιδιότητες τομής
+\item Ιδιότητες συμπληρώματος
+\item Ιδιότητες διαφοράς συνόλων
+\end{enumerate}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item Μετατροπή αναγραφής σε περιγραφή.
+\myitem Πράξεις μεταξύ συνόλων
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Ανήκει: $ \in $
+\item Δεν ανήκει: $ \notin $
+\item Φυσικοί αριθμοί: $ \mathbb{N} $
+\item Ακέραιοι αριθμοί: $ \mathbb{Z} $
+\item Ρητοί αριθμοί: $ \mathbb{Q} $
+\item Πραγματικοί αριθμοί: $ \mathbb{R} $
+\item Κενό σύνολο: $ \varnothing $
+\item Βασικό σύνολο: $ \Omega $
+\item Υποσύνολο: $ \subseteq $
+\item Ένωση:\\$ A\cup B=\{x\in\Omega:x\in A\textrm{ και }x\in B \} $
+\item Τομή:\\
+$ A\cap B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ και } x\in B\right.\right\rbrace $
+\item Συμπλήρωμα:\\
+$ A'=\{x\in\Omega:x\notin A\} $
+\item Διαφορά:\\
+$ A-B=\{x\in\Omega:x\in A\textrm{ και }x\notin B \} $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\newpage
+\orismoi
+\begin{arithmisi}
+\item\textbf{Σύνολο}\\
+Σύνολο ονομάζεται μια συλλογή όμοιων αντικειμένων, που είναι καλά ορισμένα και διακριτά μεταξύ τους.
+\begin{itemize}[itemsep=0mm]
+\item Τα αντικείμενα ενός συνόλου ονομάζονται \textbf{στοιχεία}.
+\item Τα σύνολα τα συμβολίζουμε με ένα κεφαλαίο γράμμα.
+\item Για να δηλώσουμε ότι ένα στοιχείο $ x $ \textbf{ανήκει} σε ένα σύνολο $ A $ γράφουμε $ x\in A $. Ενώ αν το $ x $ \textbf{δεν ανήκει} στο σύνολο $ A $ γράφουμε $ x\notin A $.
+\end{itemize}
+\item\textbf{Βασικό σύνολο}\\
+Βασικό ονομάζεται το σύνολο που περιέχει όλα τα στοιχεία στο χώρο στον οποίο εργαζόμαστε. Συμβολίζεται με $ \varOmega $.
+\item\textbf{Κενό σύνολο}\\
+Κενό ονομάζεται το σύνολο που δεν έχει στοιχεία. Συμβολίζεται με $ \varnothing $ ή $ \left\lbrace \right\rbrace  $.
+\item\textbf{Τρόποι παράστασης συνόλου}\\
+Οι τρόποι με τους οποίους μπορούμε να παραστήσουμε ένα σύνολο είναι οι εξής:
+\vspace{-2mm}
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Αναγραφή}\\
+Γράφουμε τα στοιχεία ενός συνόλου μέσα σε άγκιστρα: $ \{\,\,\} $ όπου κάθε στοιχείο αναγράφεται μια φορά.
+\[ A=\{a_1,a_2,\ldots,a_\nu\} \]
+Τα στοιχεία του συνόλου χωρίζονται με κόμμα (,).
+\item \textbf{Περιγραφή}\\
+Γράφουμε που ανήκουν τα στοιχεία και ποια ιδιότητα έχουν. Έχει τη μορφή: $ A=\{x\in\varOmega\;|\;\textrm{Ιδιότητα }I\} $.
+\item \textbf{Διάγραμμα Venn}\\
+\wrapr{-4mm}{5}{2.5cm}{-11mm}{\begin{tikzpicture}[scale=.5]
+\draw(-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[\xrwma!30] (-.3,-.5) circle (1.1);
+\draw[black] (-.3,-.5) circle (1.1);
+\endscope
+\tkzText(-1.5,-1.6){$ \varOmega $}
+\tkzText(-.3,.2){$ A $}
+\end{tikzpicture}}{
+Σχεδιάζουμε με ορθογώνιο το βασικό σύνολο και με κύκλους τα υποσύνολά του.}\mbox{}\\
+\end{enumerate}
+\item\textbf{Ίσα σύνολα}\\
+Δύο σύνολα $ A,B $ ονομάζονται αν έχουν ακριβώς τα ίδια στοιχεία. Συμβολίζεται $ A=B $. Ισοδύναμα, τα σύνολα $ Α,Β $ λέγονται ίσα εάν ισχύουν συγχρόνως οι σχέσεις :
+\begin{enumerate}[itemsep=0mm]
+\item Κάθε στοιχείο του $ A $ είναι και στοιχείο του $ B $
+\item Κάθε στοιχείο του $ B $ είναι και στοιχείο του $ A $.
+\end{enumerate}
+\item\textbf{Υποσύνολο}\\
+Ένα σύνολο $ A $ λέγεται υποσύνολο ενός συνόλου $ B $ όταν κάθε στοιχείο του $ A $ είναι και στοιχείο του $ B $. Συμβολίζεται $ A\subseteq B $.
+\item\textbf{Ξένα σύνολα}\\
+Δύο σύνολα $ A,B $ ονομάζονται ξένα μεταξύ τους αν δεν έχουν κοινά στοιχεία.
+\item\textbf{Πράξεις μεταξύ συνόλων}\\
+\vspace{-5mm}
+\begin{enumerate}[label=\bf\arabic*.,itemsep=3mm]
+\item \textbf{Ένωση}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7,samples=100},shade=\xrwma!30,labelNotAB={$ \varOmega $}]
+\fillA \fillB
+\end{venndiagram2sets}
+\end{WrapText1}
+Ένωση δύο υποσυνόλων $ A,B $ ενός βασικού συνόλου $ \varOmega $ ονομάζεται το σύνολο των στοιχείων του $ \varOmega $ τα οποία ανήκουν σε \textbf{τουλάχιστον ένα} από τα σύνολα $ A $ και $ B $. Συμβολίζεται με $ A\cup B $.  \[ A\cup B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ ή } x\in B\right.\right\rbrace \]
+Η ένωση των συνόλων $ A $ και $ B $ περιέχει \textbf{όλα} τα στοιχεία των δύο συνόλων. Τα κοινά στοιχεία αναγράφονται μια φορά.\end{minipage}
+\item \textbf{Τομή}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{7}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7},shade=\xrwma!30,labelNotAB={$ \varOmega $}]
+\fillACapB
+\end{venndiagram2sets}
+\end{WrapText1}
+Τομή δύο υποσυνόλων $ A,B $ ενός βασικού συνόλου $ \varOmega $ ονομάζεται το σύνολο των στοιχείων του $ \varOmega $ τα οποία ανήκουν \textbf{και στα δύο} σύνολα $ A $ και $ B $. Συμβολίζεται με $ A\cap B $. \[ A\cap B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ και } x\in B\right.\right\rbrace \]
+Η τομή των συνόλων $ A $ και $ B $ περιέχει μόνο τα \textbf{κοινά} στοιχεία των δύο συνόλων.\end{minipage}
+\item \textbf{Συμπλήρωμα}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-9mm}
+\begin{tikzpicture}[scale=.77]
+\filldraw[fill=\xrwma!30] (-2,-2) rectangle (2.6,1);
+\scope % A \cap B
+\fill[white] (-.45,-.5) circle (1.1);
+\draw[black] (-.45,-.5) circle (1.1);
+\endscope
+\tkzText(-1.6,-1.6){$ \varOmega $}
+\tkzText(-.45,.3){$ A $}
+\end{tikzpicture}
+\end{WrapText1}
+Συμπλήρωμα ενός συνόλου $ A $ ονομάζεται το σύνολο των στοιχείων του βασικού συνόλου $ \varOmega $ τα οποία \textbf{δεν} ανήκουν στο $ A $. Συμβολίζεται με $ A' $. \[ A'=\left\lbrace x\in\varOmega\left| x\notin A\right.\right\rbrace \]\end{minipage}
+\item \textbf{Διαφορά}\\
+\begin{minipage}{\linewidth}
+\begin{WrapText1}{8}{3.5cm}
+\vspace{-5mm}
+\begin{venndiagram2sets}[tikzoptions={scale=.7},shade=\xrwma!30,labelNotAB={$ \varOmega $}]
+\fillANotB
+\end{venndiagram2sets}
+\end{WrapText1}
+Διαφορά ενός συνόλου $ B $ από ένα σύνολο $ A $ ονομάζεται το σύνολο των στοιχείων του βασικού συνόλου $ \varOmega $ τα οποία ανήκουν \textbf{μόνο} στο σύνολο $ A $, το πρώτο σύνολο της διαφοράς. Συμβολίζεται με $ A-B $. \[ A-B=\left\lbrace x\in\varOmega\left| x\in A\textrm{ και }x\notin B\right. \right\rbrace  \]
+\end{minipage}
+\end{enumerate}\mbox{}\\
+\end{arithmisi}
+\thewrhmata
+\begin{arithmisi}
+\item\textbf{Ιδιότητες υποσυνόλου}\\
+Για οποιαδήποτε σύνολα $ A,B,\varGamma $ ισχύουν οι παρακάτω ιδιότητες που αφορούν τη σχέση του υποσυνόλου:
+\begin{rlist}
+\item $ A\subseteq A $.
+\item Αν $ A\subseteq B $ και $ B\subseteq \varGamma $ τότε $ A\subseteq \varGamma $.
+\item Αν $ A\subseteq B $ και $ B\subseteq A $ τότε $ A=B $.
+\end{rlist}
+\item\textbf{Ιδιότητες ένωσης συνόλων}\\
+Για οποιαδήποτε σύνολα $ A,B,\varGamma $ ισχύουν οι παρακάτω ιδιότητες για την πράξη της ένωσης.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ A\cup\varnothing=A $
+\item $ A\cup A=A $
+\item $ A\cup B=B\cup A $
+\item $ (A\cup B)\cup\varGamma=A\cup(B\cup\varGamma) $
+\item $ A\subseteq A\cup B $ και $ B\subseteq A\cup B $
+\item Αν $ A\subseteq B $ τότε $ A\cup B=B $
+\end{rlist}
+\end{multicols}
+\item\textbf{Ιδιότητες τομής συνόλων}\\
+Για οποιαδήποτε σύνολα $ A,B,\varGamma $ ισχύουν οι παρακάτω ιδιότητες για την πράξη της τομής.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ A\cap\varnothing=\varnothing $
+\item $ A\cap A=A $
+\item $ A\cap B=B\cap A $
+\item $ (A\cap B)\cap\varGamma=A\cap(B\cap\varGamma) $
+\item $ A\cap B\subseteq A $ και $ A\cap B\subseteq B $
+\item Αν $ A\subseteq B $ τότε $ A\cap B=A $
+\item Αν $ A\cap B=\varnothing $ τα $ A,B $ είναι ξένα μεταξύ τους.
+\end{rlist}
+\end{multicols}
+\item\textbf{Επιμεριστική ιδιότητα ως προς ένωση και τομή}\\
+Για οποιαδήποτε σύνολα $ A,B,\varGamma $ ισχύουν οι σχέσεις
+\begin{center}
+\begin{tikzpicture}
+\draw[-latex] (-3.2,0) arc (130.7501:45.0195:0.55);
+\node at (-0.5,-0.25) {$ A\cap(B\cup \varGamma)=(A\cap B)\cup(A\cap\varGamma)$};
+\draw[-latex] (-3.2,0) arc (150.402:26.8204:0.85);
+\draw[-latex] (-1.695,-0.45) arc (-121.4289:-55.6842:2.2);
+
+\draw[-latex] (-3.2,-1.5) arc (130.7501:45.0195:0.55);
+\draw[-latex] (-3.2,-1.5) arc (150.402:26.8204:0.85);
+\draw[-latex] (-1.695,-1.95) arc (-121.4289:-55.6842:2.2);
+\node at (-0.5,-1.75) {$ A\cup(B\cap \varGamma)=(A\cup B)\cap(A\cup\varGamma)$};
+\end{tikzpicture}
+\end{center}
+\item\textbf{Ιδιότητες συμπληρώματος}\\
+Για οποιοδήποτε σύνολο $ A\subseteq\Omega $ ισχύουν οι παρακάτω ιδιότητες για την πράξη του συμπληρώματος.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \Omega'=\varnothing $
+\item $ \varnothing'=\Omega $
+\item $ A\cap A'=\varnothing $
+\item $ A\cup A'=\Omega $
+\item $ (A')'=A $
+\end{rlist}
+\end{multicols}
+\item\textbf{Ιδιότητες διαφοράς}\\
+Για οποιαδήποτε σύνολα $ A,B $ ισχύουν οι παρακάτω ιδιότητες για την πράξη της διαφοράς.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ A-B=A\cap B' $
+\item $ B-A=B\cap A' $
+\item $ A-B\subseteq A $
+\item $ B-A\subseteq B $
+\end{rlist}
+\end{multicols}
+\end{arithmisi}
+\methodologia
+\begin{arithmisi}
+\item\textbf{Τα σύμβολα ανήκει $ \in $ και δεν ανήκει $ \notin $}\\
+Θέλουμε να εξετάσουμε αν ένας αριθμός $ x $ ανήκει ή όχι σε ένα σύνολο $ A $.
+\begin{itemize}
+\item Εκτελούμε αρχικά τυχόν πράξεις.
+\item Αν το σύνολο είναι γραμμένο με αναγραφή, εξετάζουμε αν ο $ x $ είναι ένα από τα στοιχεία του $ A $.
+\item Αν το σύνολο είναι γραμμένο με περιγραφή, εξετάζουμε αν ο $ x $ ικανοποιεί την ιδιότητα που ζητάει το σύνολο. 
+\end{itemize}
+\item\textbf{Μετατροπή μεταξύ αναγραφής, περιγραφής και διαγράμματος Venn}
+\begin{rlist}
+\item Αναγραφή $ \leftrightarrow $ Περιγραφή
+\begin{bhma}
+\item 
+\end{bhma}
+\end{rlist}
+\end{arithmisi}
+\end{document}

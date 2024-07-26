@@ -1,0 +1,229 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol,longtable}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\usepackage[xetex,
+            pdfauthor={Spyros},
+            pdftitle={Τυπολόγιο},
+            pdfsubject={Στατιστική Γ' Λυκείου},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={xelatex}]{hyperref}
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\titlos{Μαθηματικά και Στοιχεία Στατιστικής}{Γ΄ Λυκείου}{Τυπολόγιο}
+\begin{enumerate}
+\item \textbf{Συνάρτηση}\\
+Αντιστοίχηση με την οποία \textbf{κάθε} $ x\in A $ αντιστοιχεί σε \textbf{ένα μόνο} $ y\in B $.
+\begin{itemize}[itemsep=0mm]
+\item $ x $: \textbf{ανεξάρτητη}, $ y $ \textbf{εξαρτημένη} μεταβλητή.
+\item $ y $: \textbf{τιμή} της $ f $ στο $ x $ δηλαδή $ y=f(x) $.
+\item $ y=f(x) $: τύπος της συνάρτησης.
+\item $ A $: πεδίο ορισμού.
+\item $ f\left(A\right) $ σύνολο τιμών. $ f\left(D_f\right)\subseteq B $.
+\end{itemize}
+Είδη συναρτήσεων.
+\begin{center}
+\begin{longtable}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Είδος} & \textbf{Τύπος} & \textbf{Πεδίο Ορισμού} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Πολυωνυμική} & $ f(x)=a_\nu x^\nu+\ldots+a_0 $ & $ D_f=\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρητή} & $ f(x)=\dfrac{P(x)}{Q(x)} $ & $ D_f=\left\lbrace\left.  x\in\mathbb{R}\right| Q(x)\neq0\right\rbrace $  \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Άρρητη} & $ f(x)=\sqrt{A(x)} $ & $ D_f=\left\lbrace\left. x\in\mathbb{R}\right| A(x)\geq0\right\rbrace $ \\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{5}{*}{\textbf{Τριγωνομετρική}} & $ f(x)=\hm{x}\;\;,\;\;\syn{x} $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\ef{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi+\frac{\pi}{2}\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\syf{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \textbf{Εκθετική} & $ f(x)=a^x\;\;,\;\;0<a\neq1 $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} \textbf{Λογαριθμική} & $ f(x)=\log{x}\;\;,\;\;\ln{x} $ & $ D_f=(0,+\infty) $ \\ 
+\hline 
+\end{longtable}
+\end{center}
+\vspace{-.8cm}
+\begin{center}
+\begin{minipage}{2.5cm}
+\textbf{Ταυτοτική}\\$ f(x)=x $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Σταθερή}\\$ f(x)=c $
+\end{minipage}\qquad
+\begin{minipage}{2.5cm}
+\textbf{Μηδενική}\\$ f(x)=0 $
+\end{minipage}
+\end{center}
+\item \textbf{Πράξεισ συναρτήσεων}
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Τύπος} & \textbf{Πεδίο ορισμού} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} $ (f+g)(x)=f(x)+g(x) $ & $ D_{f+g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f-g)(x)=f(x)-g(x) $ & $ D_{f-g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ (f\cdot g)(x)=f(x)\cdot g(x) $ & $ D_{f\cdot g}=\{x\in\mathbb{R}|x\in D_f\cap D_g\} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} $ \left(\dfrac{f}{g} \right) (x)=\dfrac{f(x)}{g(x)} $ & $ D_{\frac{f}{g}}=\{x\in\mathbb{R}|x\in D_f\cap D_g\textrm{ και }g(x)\neq0\} $ \\
+\rule[0ex]{0pt}{-.5ex} & \\
+\hline
+\end{longtable}
+\end{center}
+\end{enumerate}
+\newpage
+\begin{enumerate}
+\item \textbf{Συχνότητες}
+\begin{rlist}
+\item \textbf{Απόλυτη συχνότητα ή Συχνότητα}\\
+$ \nu_i $: το \textbf{πλήθος} των παρατηρήσεων ίσες με την τιμή $ x_i $.
+\item \textbf{Σχετική συχνότητα}\\
+$ f_i=\frac{\nu_i}{\nu} $: το \textbf{ποσοστό} των παρατηρήσεων ίσες με την τιμή $ x_i $ από όλο το δείγμα.\\ 
+$ f_i\%=\frac{\nu_i}{\nu}\cdot 100\% $
+\item \textbf{Αθροιστική συχνότητα}\\
+$ N_i=\nu_1+\nu_2+\ldots+\nu_i  $: το \textbf{πλήθος} των παρατηρήσεων που είναι μικρότερες ή ίσες της τιμής $ x_i $ 
+(μόνο για ποσοτικές μεταβλητές).
+\item \textbf{Σχετική αθροιστική συχνότητα}\\
+$ F_i=f_1+f_2+\ldots+f_i $: το \textbf{ποσοστό} των παρατηρήσεων που είναι μικρότερες ή ίσες της τιμής $ x_i $ 
+(μόνο για ποσοτικές μεταβλητές).\\
+$ F_i\%=F_i\cdot 100\% $.
+\end{rlist}
+\item \textbf{Ιδιότητες συχνοτήτων}\\
+Το $ \nu $ είναι το μέγεθος του δείγματος και το $ \kappa $ το πλήθος των τιμών $ x_i $.
+\begin{rlist}
+\item  $ 0\leq\nu_i\leq\nu $.
+\item $ \nu_1+\nu_2+\ldots+\nu_\kappa=\nu $
+\item  $ 0\leq f_i\leq 1\ \textrm{ και }\ 0\leq f_i\%\leq100\% $.
+\item $ f_1+f_2+\ldots+f_\kappa=1$
+\item $f_1\%+f_2\%+\ldots+f_\kappa\%=100\% $
+\begin{multicols}{3}
+\item $ \nu_i=N_i-N_{i-1} $
+\item $ f_i=F_i-F_{i-1} $
+\item $ f_i\%=F_i\%-F_{i-1}\% $
+\item $ F_i=\frac{N_i}{\nu} $
+\item $ F_i\%=\frac{N_i}{\nu}\cdot 100\% $
+\item $ \nu_1=N_1 $
+\item $ f_1=F_1 $
+\item $ f_1\%=F_1\% $
+\item $ N_\kappa=\nu $
+\item $ F_\kappa=1 $
+\item $ F_\kappa\%=100\% $
+\end{multicols}
+\end{rlist}
+\item \textbf{Μέση τιμή}\\
+Το \textbf{κέντρο} των παρατηρήσεων. Η μέση τιμή ενός δείγματος δίνεται από τους παρακάτω τύπους:
+\begin{center}
+\begin{tabular}{c|c}
+\hline 
+\rule[-2ex]{0pt}{5.5ex}\textbf{Όταν γνωρίζουμε} & \bmath{Μέση τιμή $ \bar{x} $} \\ 
+\hhline{==} 
+\rule[-2ex]{0pt}{5.5ex} Παρατηρήσεις $ t_1,t_2,\ldots,t_\nu $ & $ \displaystyle{\bar{x}=\dfrac{1}{\nu}\sum_{i=1}^{\nu}{t_i}} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Συνχότητες $ \nu_1,\nu_2,\ldots,\nu_\kappa $ & $ \displaystyle{\bar{x}=\dfrac{1}{\nu}\sum_{i=1}^{\kappa}{x_i\cdot\nu_i}} $ \\ 
+\rule[-2ex]{0pt}{5ex} Σχετικές συχνότητες $ f_1,f_2,\ldots,f_\kappa $ & $ \displaystyle{\bar{x}=\sum_{i=1}^{\kappa}{x_i\cdot f_i}} $ \\ 
+\hline 
+\end{tabular}
+\end{center} 
+\item \textbf{Σταθμικός Μέσος} : $ \displaystyle{\bar{x}=\dfrac{\sum\limits_{i=1}^{\nu}{t_i\cdot w_i}}{\sum\limits_{i=1}^{\nu}{w_i}}} $
+\item \textbf{Διάμεσος}
+\item \textbf{Εύρος} : $ R=\max{t_i}-\min{t_i} $
+\item \textbf{Διακύμανση}\\
+\begin{center}
+\begin{longtable}{c|c}
+\hline 
+\rule[-2ex]{0pt}{5ex} \textbf{Όταν γνωρίζουμε} & \bmath{Διακύμανση $ s^2 $} \\ 
+\hhline{==}
+\rule[-2ex]{0pt}{5ex} Παρατηρήσεις $ t_i $ (μ.ο. ακέραιος) & $ s^2=\displaystyle{\frac{1}{\nu}\sum_{i=1}^{\nu}{(t_i-\bar{x})^2}} $ \\  
+\rule[-2ex]{0pt}{5ex} Παρατηρήσεις $ t_i $ (μ.ο. μη ακέραιος) & $ s^2=\dfrac{1}{\nu}\LEFTRIGHT\{\}{\displaystyle{\sum\limits_{i=1}^{\nu}{t_i^2}-\frac{\left( \sum\limits_{i=1}^{\nu}{t_i}\right)^2 }{\nu}}} $ \\ 
+\rule[-2ex]{0pt}{5ex} Συχνότητες $ \nu_i $ (μ.ο. ακέραιος) & $ s^2=\frac{1}{\nu}\displaystyle{\sum\limits_{i=1}^{\kappa}{(x_i-\bar{x})^2\nu_i}} $ \\
+\rule[-2ex]{0pt}{5ex} Συχνότητες $ \nu_i  $ (μ.ο. μη ακέραιος) & $ s^2=\dfrac{1}{\nu}\LEFTRIGHT\{\}{\displaystyle{\sum\limits_{i=1}^{\kappa}{x_i^2\nu_i}-\frac{\left( \sum\limits_{i=1}^{\kappa}{x_i\nu_i}\right)^2 }{\nu}}} $
+\\ 
+\rule[-2ex]{0pt}{5ex} Σχετικές Συχν. $ f_i $ (μ.ο ακέραιος) & $ s^2=\displaystyle{\sum_{i=1}^{\kappa}{(x_i-\bar{x})^2 f_i}} $ \\ 
+\rule[-2ex]{0pt}{5ex} Σχετικές Συχν. $ f_i $ (μ.ο μη ακέραιος) & $ s^2=\displaystyle{\sum\limits_{i=1}^{\kappa}{x_i^2f_i}-\bar{x}^2} $ \\ 
+\rule[-2ex]{0pt}{5ex} $ t_i,\ \nu_i $ ή $ f_i $ & $ s^2=\overline{x^2}-\bar{x}^2 $  \\
+\hline 
+\end{longtable} 
+\end{center}
+όπου $ \overline{x^2}=\frac{1}{\nu}\sum\limits_{i=1}^{\nu}{t_i^2}=\frac{1}{\nu}\sum\limits_{i=1}^{\kappa}{x_i^2\nu_i}=\sum\limits_{i=1}^{\kappa}{x_i^2f_i} $.
+\item \textbf{Τυπική απόκλιση} : $ s=\sqrt{s^2} $.
+\item \textbf{Συντελεστής Μεταβλητότητας} : $ CV=\dfrac{s}{|\bar{x}|}.\ \  $ Αν $ CV<10\% $ το δέιγμα είναι ομοιογενές.
+\end{enumerate}
+\end{document}

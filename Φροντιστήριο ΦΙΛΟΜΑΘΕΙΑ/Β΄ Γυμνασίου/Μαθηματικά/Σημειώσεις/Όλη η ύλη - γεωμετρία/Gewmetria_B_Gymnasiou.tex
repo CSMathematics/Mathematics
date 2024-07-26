@@ -1,0 +1,799 @@
+\documentclass[twoside,11pt,a4paper]{book}
+\usepackage[amsbb,mtpcal]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\def\xrwma{red!70!black}
+\def\xrwmath{red!90!black}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0]{Minion Pro}
+\newfontfamily\mpro{Minion Pro}
+\usepackage{amsmath}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{cleveref}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{backgrounds}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{mathimatika,tkz-tab,gensymb}
+\usepackage[decimalsymbol=comma]{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\thepage\ $\cdot$\ \scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark} $\cdot$\ \thepage}
+\fancypagestyle{plain}{%
+\fancyhead{} %
+\renewcommand{\headrulewidth}{0pt}}
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{methodologia}[chapter]
+\renewcommand{\themethodologia}{\thechapter.\arabic{methodologia}}\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}\textcolor{black}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\arabic{orismos}}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\thechapter.\theorismos\;}:\;}}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\usepackage{venndiagram}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-7cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
+\node[anchor=west,xshift=.08\paperwidth,yshift=.1\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
+\node[anchor=west,xshift=.07\paperwidth,yshift=.05\paperheight,rectangle] {\fontsize{27}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+%\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
+\node[anchor=west,xshift=.77\paperwidth,yshift=.077\paperheight,rectangle]
+{\fontsize{80}{20}\textbf{\textit{\contour{black}{\thechapter}}}};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+}
+%------------------------------------------------
+
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{40pt}
+}
+
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\newcounter{typos}[chapter]
+\renewcommand{\thetypos}{T\arabic{typos}}   
+\newcommand{\Typos}{\refstepcounter{typos}\textcolor{gray}{\textbf{\thetypos}}}{}
+
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill\;\normalsize\ Σελίδα}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+\pgfmathdeclarefunction{gauss}{2}{%
+\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[1pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\thesection~#1\strut}}}[\vskip 0\baselineskip{\color{black}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\large \textcolor{\xrwma}{\textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwma] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwma, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textcolor{\xrwmath}{\textbf{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwmath,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwmath, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+
+\usepackage{wrapfig,wrap-rl}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%----- ΟΡΙΖΟΝΤΙΑ ΛΙΣΤΑ ------
+\usepackage{xparse}
+\newcounter{answers}
+\renewcommand\theanswers{\arabic{answers}}
+\ExplSyntaxOn
+\NewDocumentCommand{\results}{m}
+{
+\seq_set_split:Nnn \l_results_a_seq {,}{#1}
+\par\nobreak\noindent\setcounter{answers}{0}
+\seq_map_inline:Nn \l_results_a_seq
+{
+\makebox[.18\linewidth][l]{\stepcounter{answers}\theanswers.~##1}\hfill
+}
+\par
+}
+\seq_new:N \l_results_a_seq
+\ExplSyntaxOff
+%----------------------------
+
+\usepackage{microtype,mathimatika}
+\usepackage{float}
+\usepackage{caption}
+
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=7,fill=white]
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\setlist[itemize]{itemsep=0mm}
+
+
+
+
+\begin{document}
+\mainmatter
+\pagestyle{fancy}
+\chapter{Εμβαδά - Πυθαγόριεο Θεώρημα}
+\section{Εμβαδόν επίπεδης επιφάνειας}\mbox{}\\
+\orismoi
+\Orismos{Εμβαδόν}
+Εμβαδόν μιας επίπεδης επιφάνειας ονομάζεται ο θετικός αριθμός ο οποίος εκφράζει το μέγεθος της έκτασης που καταλαμβάνει η επιφάνεια αυτή.\\\\
+\Orismos{Μονάδα μέτρησης}
+Μονάδα μέτρησης επιφάνειας ονομάζεται μια επιφάνεια οποιουδήποτε σχήματος η οποία χρησιμοποιείται για η μέτρηση και σύγκριση όλων των επιφανειών.\\\\
+\section{Μονάδες μέτρησης επιφάνειας}\mbox{}\\
+\orismoi
+\Orismos{Βασικές μονάδες μέτρησης επιφάνειας}
+Στον παρακάτω πίνακα βλέπουμε τις βασικές μονάδες μέτρησης επιφανειών που χρησιμοποιούμε καθώς και τις σχέσεις που τις συνδέουν στο διάγραμμα που ακολουθεί:
+\begin{center}
+\textbf{ ΕΠΙΦΑΝΕΙΑ}\\\vspace{2mm}
+\begin{tabular}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Μονάδα Μέτρησης} & \textbf{Συμβολισμός} & \textbf{Σχέσεις μεταξύ Μ.Μ.} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Τ.Χιλιόμετρο} & $ 1km^2 $ & $ 1km^2=1000\textrm{ στρέμματα}=10^6m^2 $ \\ 
+\rule[-2ex]{0pt}{4ex} \textbf{Στρέμμα} & $ 1\textrm{ στρέμμα} $ & $ \frac{1}{1000}km^2=1\textrm{ στρέμμα}=1000m^2 $ \\
+\rule[-2ex]{0pt}{4ex} \textbf{Τ.Μέτρο} & $ 1m^2 $ & $ 1m^2=100dm^2=10^4cm^2=10^6mm^2 $ \\ 
+\rule[-2ex]{0pt}{4ex} \textbf{Τ.Δεκατόμετρο} & $ 1dm^2 $ & $ \frac{1}{100}m^2=1dm^2=100cm^2=10^4mm^2 $ \\ 
+\rule[-2ex]{0pt}{4ex} \textbf{Τ.Εκατοστόμετρο} & $ 1cm^2 $ & $ \frac{1}{10^4}m^2=\frac{1}{100}dm^2=1cm^2=100mm^2 $ \\ 
+\rule[-2ex]{0pt}{4ex} \textbf{Τ.Χιλιοστόμετρο} & $ 1mm^2 $ & $ \frac{1}{10^6}m^2=\frac{1}{10^4}dm^2=\frac{1}{100}cm^2=1mm^2 $ \\ 
+\hline 
+\end{tabular}
+\end{center}
+Οι σχέσεις μεταξύ των μονάδων μέτρησης επιφάνειας και ο τρόπος με τον οποίο μετατρέπουμε μια ποσότητα από μια μονάδα μέτρησης σε άλλη φαίνονται στο διάγραμμα :\vspace{-1mm}
+\begin{center}
+\begin{tikzpicture}[box/.style={minimum height=1cm,draw,rounded corners,text width=1.6cm,align=center}]
+\node[box] (km) {{\footnotesize Τ.Χιλιόμετρα}\\{\footnotesize $ (km^2) $}};
+\node[box,text width=1.3cm,right=1cm of km] (st) {{\footnotesize Στρέμματα}\\{\footnotesize στρ.}};
+\node[box,text width=1.1cm,right=1cm of st] (m) {{\footnotesize Τ.Μετρα}\\{\footnotesize $ (m^2) $}};
+\node[box,text width=1.2cm,right=1cm of m] (dm) {{\footnotesize Τ.Δέκατα}\\{\footnotesize $ (dm^2) $}};
+\node[box,text width=1.4cm,right=1cm of dm] (cm) {{\footnotesize Τ.Εκατοστά}\\{\footnotesize $ (cm^2) $}};
+\node[box,text width=1.3cm,right=1cm of cm] (mm) {{\footnotesize Τ.Χιλιοστά}\\{\footnotesize $ (mm^2) $}};
+\draw[-latex] ($(km.north east)!1/3!(km.south east)$) -- ($(st.north west)!1/3!(st.south west)$) node[anchor=south east] {{\scriptsize $ \cdot10^3 $}};
+\draw[-latex] ($(st.north east)!1/3!(st.south east)$) -- ($(m.north west)!1/3!(m.south west)$) node[anchor=south east] {{\scriptsize $ \cdot10^3 $}};
+\draw[-latex] ($(m.north east)!1/3!(m.south east)$) -- ($(dm.north west)!1/3!(dm.south west)$) node[anchor=south east] {{\scriptsize $ \cdot100 $}};
+\draw[-latex] ($(dm.north east)!1/3!(dm.south east)$) -- ($(cm.north west)!1/3!(cm.south west)$) node[anchor=south east] {{\scriptsize $ \cdot100 $}};
+\draw[-latex] ($(cm.north east)!1/3!(cm.south east)$) -- ($(mm.north west)!1/3!(mm.south west)$) node[anchor=south east] {{\scriptsize $ \cdot100 $}};
+\draw[latex-] ($(km.north east)!2/3!(km.south east)$) -- ($(st.north west)!2/3!(st.south west)$) node[anchor=north east] {{\scriptsize $ :10^3 $}};
+\draw[latex-] ($(st.north east)!2/3!(st.south east)$) -- ($(m.north west)!2/3!(m.south west)$) node[anchor=north east] {{\scriptsize $ :10^3 $}};
+\draw[latex-] ($(m.north east)!2/3!(m.south east)$) -- ($(dm.north west)!2/3!(dm.south west)$) node[anchor=north east] {{\scriptsize $ :100 $}};
+\draw[latex-] ($(dm.north east)!2/3!(dm.south east)$) -- ($(cm.north west)!2/3!(cm.south west)$) node[anchor=north east] {{\scriptsize $ :100 $}};
+\draw[latex-] ($(cm.north east)!2/3!(cm.south east)$) -- ($(mm.north west)!2/3!(mm.south west)$) node[anchor=north east] {{\scriptsize $ :100 $}};
+\end{tikzpicture}
+\end{center}
+\section{Εμβαδά βασικών σχημάτων}\mbox{}\\
+\thewrhmata
+\Thewrhma{Εμβαδά βασικών σχημάτων}
+Τα βασικά πολυγωνικά χωρία που συναντάμε είναι το τετράγωνο, το ορθογώνιο, το παραλληλόγραμμο, το τρίγωνο, το τραπέζιο και ο ρόμβος. Τα εμβαδά τους είναι τα εξής :
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \textbf{Τετράγωνο}\\
+Το εμβαδόν ενός τετραγώνου πλευράς $ a $ ισούται με το τετράγωνο της πλευράς του: $ E=a^2 $.
+\item \textbf{Ορθογώνιο}\\
+Το εμβαδόν ενός ορθογωνίου με διαστάσεις $ a,\beta $ ισούται με το γινόμενο του μήκους επί του πλάτους του.
+\[ E=a\cdot \beta \]
+\item \textbf{Παραλληλόγραμμο}\\
+Το εμβαδόν ενός παραλληλογράμμου ισούται με το γινόμενο μιας πλευράς επί το αντίστοιχο ύψος της
+\[ E=a\cdot\upsilon_a=\beta\cdot\upsilon_\beta \]
+\begin{center}
+\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(3,3){B}
+\tkzDefPoint(0,3){A}
+\draw[pl] (A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[below right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\node at (1.5,1.5) {$E=a^2$};
+\node at (1.5,-0.25) {$a$};
+\node at (3.25,1.5) {$a$};
+\node at (1.5,3.25) {$a$};
+\node at (-0.25,1.5) {$a$};
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(4,3){B}
+\tkzDefPoint(0,3){A}
+\draw[pl] (A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[below right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\node at (2,1.5) {$E=a\cdot\beta$};
+\node at (2,-0.5) {$\beta$};
+\node at (4.25,1.5) {$a$};
+\node at (2,3.25) {$\beta$};
+\node at (-0.25,1.5) {$a$};
+\end{tikzpicture}\quad\begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(5,3){B}
+\tkzDefPoint(1,3){A}
+\tkzDefPoint(1.5,0){a}
+\tkzDefPoint(1.5,3){b}
+\tkzDefPoint(4.5,1.5){c}
+\tkzDefPoint(.9,2.7){d}
+\tkzMarkRightAngle(C,a,b)
+\tkzMarkRightAngle(D,d,c)
+\draw[pl] (A)--(B)--(C)--(D)--cycle;
+\tkzDrawPoints(A,B,C,D)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[below right](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\node at (3,1.5) {$E=a\cdot\upsilon_a$};
+\node at (3,1) {$E=\beta\cdot\upsilon_\beta$};
+\node at (2,-0.5) {$\beta$};
+\node at (5,1.5) {$a$};
+\node at (3,3.25) {$\beta$};
+\node at (0,1.5) {$a$};
+\draw (a) -- (b);
+\draw (c) -- (d);
+\node at (2.5,2.35) {\footnotesize$\upsilon_a$};
+\node at (1.25,0.5) {\footnotesize$\upsilon_\beta$};
+\end{tikzpicture}
+\end{center}
+\item \textbf{Τρίγωνο}\\
+\wrapr{-7mm}{5}{4.4cm}{-11mm}{\begin{tikzpicture}
+\clip (-.5,-.52) rectangle (4,2.5);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.,2.1){A}
+\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{M}
+\tkzDefPointBy[projection = onto A--C](B) \tkzGetPoint{L}
+\tkzDefPoint(1,0){K}
+\tkzInterLL(A,K)(B,L)\tkzGetPoint{H}
+\tkzMarkRightAngle[size=.2](C,K,A)
+\tkzMarkRightAngle[size=.2](C,M,A)
+\tkzMarkRightAngle[size=.2](B,L,A)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawAltitude[draw=\xrwma](A,B)(C)
+\tkzDrawAltitude[draw=\xrwma](A,C)(B)
+\tkzDrawAltitude[draw=\xrwma](B,C)(A)
+\tkzDrawPoints(A,B,C,K,L,M)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below](K){$K$}
+\tkzLabelPoint[right,yshift=1mm](L){$\varLambda$}
+\tkzLabelPoint[left](M){$M$}
+\node at (1.25,0.5) {\footnotesize$\upsilon_a$};
+\node at (1.35,1.25) {\footnotesize$\upsilon_\beta$};
+\node at (2,0.5) {\footnotesize$\upsilon_\gamma$};
+\end{tikzpicture}}{
+Το εμβαδόν ενός τριγώνου ισούται με το μισό του γινομένου μιας πλευράς επί το αντίστοιχο ύψος της.
+\[ E=\frac{1}{2}a\cdot\upsilon_a=\frac{1}{2}\beta\cdot\upsilon_\beta=\frac{1}{2}\gamma\cdot\upsilon_\gamma \]}
+\item \textbf{Ορθογώνιο τρίγωνο}\\
+\wrapr{-7mm}{7}{4.3cm}{-9mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(0,2.1){A}
+\tkzMarkRightAngle[size=.2](C,B,A)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above left](A){$B$}
+\tkzLabelPoint[left](B){$A$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.75,-0.25) {\footnotesize$\beta$};
+\node at (-0.25,1) {\footnotesize$\gamma$};
+\end{tikzpicture}}{
+Το εμβαδόν ενός ορθογωνίου τριγώνου ισούται με το μισό του γινομένου των κάθετων πλευρών του.
+\[ E=\frac{\beta\cdot\gamma}{2} \]}
+\item \textbf{Τραπέζιο}\\
+\wrapr{-7mm}{5}{4.1cm}{-4mm}{\begin{tikzpicture}
+\tkzDefPoint(0,-1.5){D}
+\tkzDefPoint(0.5,.5){A}
+\tkzDefPoint(2.5,.5){B}
+\tkzDefPoint(3.5,-1.5){C}
+\tkzDefPoint(0.9,0.5){E}
+\tkzDefPoint(0.9,-1.5){Z}
+\tkzMarkRightAngle(C,Z,E)
+\draw (0.9,0.5) -- (0.9,-1.5);
+\draw[pl] (0,-1.5) -- (0.5,0.5) -- (2.5,0.5) -- (3.5,-1.5) -- cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzDrawPoints(A,B,C,D)
+\node at (1.5,0.7) {\footnotesize$\beta$};
+\node at (1.7,-1.8) {\footnotesize$B$};
+\node at (.7,-.2) {\footnotesize$ \upsilon $};
+\end{tikzpicture}}{
+Το εμβαδόν ενός τραπεζίου ισούται με το γινόμενο του αθροίσματος των βάσεων επί το μισό του ύψους του.
+\[ E=\frac{(\beta+B)\cdot\upsilon}{2} \]}
+\end{enumerate}
+\section{Πυθαγόρειο Θεώρημα}\mbox{}\\
+\thewrhmata
+\Thewrhma{Πυθαγόρειο θεώρημα}
+\wrapr{-7mm}{7}{4.3cm}{-9mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(0,2.1){A}
+\tkzMarkRightAngle[size=.2](C,B,A)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above left](A){$B$}
+\tkzLabelPoint[left](B){$A$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.75,-0.25) {\footnotesize$\beta$};
+\node at (-0.25,1) {\footnotesize$\gamma$};
+\node at (2,1.25) {\footnotesize$a$};
+\end{tikzpicture}}{
+Σε κάθε ορθογώνιο τρίγωνο το τετράγωνο της υποτείνουσας ισούται με το άθροισμα των τετραγώνων των δύο κάθετων πλευρών.
+\[ B\varGamma^2=AB^2+A\varGamma^2\ \ \textrm{ή}\ \ a^2=\beta^2+\gamma^2 \]}\mbox{}\\\\\\
+\Thewrhma{Αντίστροφο Πυθαγορείου θεωρήματος}
+Αν το τετράγωνο της μεγαλύτερης πλευράς ενός τριγώνου ισούται με το άθροισμα των τετραγώνων των δύο άλλων πλευρών τότε το τρίγωνο έιναι ορθογώνιο. Η ορθή γωνία βρίσκεται απέναντι από τη μεγαλύτερη πλευρά.
+\[ \textrm{Αν }\ B\varGamma^2=AB^2+A\varGamma^2\Rightarrow\ \hat{A}=90\degree \]
+\chapter{Τριγωνομετρία - Διανύσματα}
+\section{Εφαπτομένη οξείας γωνίας}\mbox{}\\
+\orismoi
+\Orismos{Εφαπτομένη οξείας γωνίας}
+\wrapr{-7mm}{7}{4.3cm}{-9mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(0,2.1){A}
+\tkzMarkRightAngle[size=.2](C,B,A)
+\tkzMarkAngle[size=.3](B,A,C)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above left](A){$B$}
+\tkzLabelPoint[left](B){$A$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.75,-0.25) {\footnotesize$\beta$};
+\node at (-0.25,1) {\footnotesize$\gamma$};
+\node at (2,1.25) {\footnotesize$a$};
+\node at (0.2589,1.6348) {\footnotesize$\omega$};
+\end{tikzpicture}}{
+Εφαπτομένη μιας οξέιας γωνίας ενός ορθογωνίου τριγώνου $ AB\varGamma $ με $ \hat{A}=90\degree $ ονομάζεται ο λόγος της απέναντι κάθετης πλευράς προς την προσκείμενη κάθετη.
+\[ \textrm{Εφαπτομένη}=\frac{\textrm{Απέναντι Κάθετη}}{\textrm{Προσκείμενη Κάθετη}}\;\;,\;\;\ef{\omega}=\frac{A\varGamma}{AB} \]}\mbox{}\\\\
+\thewrhmata
+\Thewrhma{Κλίση ευθείας}
+\wrapr{-5mm}{7}{4cm}{-12mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=.7cm,aks_on,xmin=-.5,xmax=3,
+ymin=-.5,ymax=3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\addplot[grafikh parastash,domain=-.5:2.7]{x};
+\end{axis}
+\node[fill=white,inner sep=.2mm] at (0.25,0.1) {$O$};
+\node at (1.5,2) {{\footnotesize $y=ax$}};
+\draw (0.8755,0.3357) arc (-0.0023:36.5289:0.3584);
+\node at (1.153,0.5606) {\footnotesize$\omega$};
+\tkzDefPoint(1.853,1.2906){A}
+\draw[dashed] (1.853,.35)--(1.853,1.2906)--(0.5,1.2906);
+\tkzDrawPoint(A)
+\tkzLabelPoint[right,yshift=-1mm](A){\footnotesize$M(x,y)$}
+\end{tikzpicture}}{
+Η κλίση $ a $ μιας ευθείας $ y=ax $ ισούται με την εφατομένη της γωνίας $ \omega $ που σχηματίζει η ευθεία με τον οριζόντιο άξονα $ x'x $.
+\[ a=\frac{y}{x}=\ef{\omega} \]
+}\mbox{}\\\\\\
+\section{Ημίτονο και συνημίτονο οξείας γωνίας}\mbox{}\\
+\orismoi
+\Orismos{Ημίτονο οξέιας γωνίας}
+\wrapr{-7mm}{7}{4.3cm}{-9mm}{\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(0,2.1){A}
+\tkzMarkRightAngle[size=.2](C,B,A)
+\tkzMarkAngle[size=.3](B,A,C)
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above left](A){$B$}
+\tkzLabelPoint[left](B){$A$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (1.75,-0.25) {\footnotesize$\beta$};
+\node at (-0.25,1) {\footnotesize$\gamma$};
+\node at (2,1.25) {\footnotesize$a$};
+\node at (0.2589,1.6348) {\footnotesize$\omega$};
+\end{tikzpicture}}{
+Ημίτονο μιας οξέιας γωνίας ενός ορθογωνίου τριγώνου $ AB\varGamma $ με $ \hat{A}=90\degree $ ονομάζεται ο λόγος της απέναντι κάθετης πλευράς προς την υποτείνουσα.
+\[ \textrm{Ημίτονο}=\frac{\textrm{Απέναντι Κάθετη}}{\textrm{Υποτείνουσα}}\;\;,\;\;\hm{\omega}=\frac{A\varGamma}{B\varGamma} \]}\mbox{}\\\\\\
+\Orismos{Συνημίτονο οξέιας γωνίας}
+Συνημίτονο μιας οξέιας γωνίας ενός ορθογωνίου τριγώνου $ AB\varGamma $ με $ \hat{A}=90\degree $ ονομάζεται ο λόγος της προσκείμενης κάθετης πλευράς προς την υποτείνουσα.
+\[ \textrm{Συνημίτονο}=\frac{\textrm{Προσκείμενη Κάθετη}}{\textrm{Υποτείνουσα}}\;\;,\;\;\syn{\omega}=\frac{AB}{B\varGamma} \]
+\thewrhmata
+\Thewrhma{Ιδιότητες τριγωνομετρικών αριθμών}
+Για τους τριγωνομετρικούς αριθμούς μιας οξείας γωνίας $ \omega $ ισχύουν οι παρακάτω ιδιότητες.
+\begin{multicols}{3}
+\begin{rlist}
+\item $ 0<\hm{\omega}<1 $
+\item $ 0<\syn{\omega}<1 $
+\item $ \ef{\omega}=\dfrac{\hm{\omega}}{\syn{\omega}} $
+\end{rlist}
+\end{multicols}
+\section{Μεταβολές τριγωνομετρικών αριθμών}\mbox{}\\
+\thewrhmata
+\Thewrhma{Μεταβολές τριγωνομετρικών αριθμών}
+Όταν αυξάνεται μια οξεία γωνία τότε αυξάνεται το ημίτονο και η εφαπτομένη της, ενώ μειώνεται το συνημίτονό της. Αν $ \varphi,\theta,\omega $ είναι τρεις οξείες γωνίες με $ \varphi<\theta<\omega $ τότε:
+\begin{multicols}{3}
+\begin{rlist}
+\item $ \hm{\varphi}<\hm{\theta}<\hm{\omega} $
+\item $ \syn{\varphi}>\syn{\theta}>\syn{\omega} $
+\item $ \ef{\varphi}<\ef{\theta}<\ef{\omega} $
+\end{rlist}
+\end{multicols}
+\Thewrhma{Ίσες γωνίες}
+Αν δύο ή περισσότερες γωνίες έχουν ίσα ημίτονα ή συνημίτονα ή εφαπτομένες τότε είναι μεταξύ τους ίσες.
+\[ \textrm{Αν }\LEFTRIGHT.\}{
+\begin{aligned}
+\hm{\varphi}=\hm{\omega}\ \textrm{ή}\ \\
+\syn{\varphi}=\syn{\omega}\ \textrm{ή}\ \\
+\ef{\varphi}=\ef{\omega}
+\end{aligned} }\Rightarrow \varphi=\omega \]
+\section{Τριγωνομετρικοί αριθμοί των γωνιών {$ \mathbold{30\degree,45\degree,60\degree} $}}\mbox{}\\
+\thewrhmata
+\Thewrhma{Τριγωνομετρικοί αριθμοί των γωνιών {$ \mathbold{30\degree,45\degree,60\degree} $}}
+Στον παρακάτω πίνακα βλέπουμε το μέτρο μερικών βασικών γωνιών δοσμένο σε μοίρες αλλά και τους τριγωνομετρικούς αριθμούς των γωνιών αυτών.
+\begin{center}
+\begin{tabular}{c>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}>{\centering\arraybackslash}m{.8cm}} 
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Γωνία} & $ 30\degree $ & $ 45\degree $ & $ 60\degree $ \\ 
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Σχήμα}  & \begin{tikzpicture}
+\fill[fill=black!10] (0,0) -- (.7,0) arc (0:30:.7) -- cycle;
+\draw (0,0) -- (.7,0);
+\draw (0,0) -- (0,.7);
+\draw (0,0) -- (.7,0) arc (0:90:.7);
+\coordinate (A) at (30:.7);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=black!10] (0,0) -- (.7,0) arc (0:45:.7) -- cycle;
+\draw (0,0) -- (.7,0);
+\draw (0,0) -- (0,.7);
+\draw (0,0) -- (.7,0) arc (0:90:.7);
+\coordinate (A) at (45:.7);
+\draw (0,0) -- (A);
+\end{tikzpicture} & \begin{tikzpicture}
+\fill[fill=black!10] (0,0) -- (.7,0) arc (0:60:.7) -- cycle;
+\draw (0,0) -- (.7,0);
+\draw (0,0) -- (0,.7);
+\draw (0,0) -- (.7,0) arc (0:90:.7);
+\coordinate (A) at (60:.7);
+\draw (0,0) -- (A);
+\end{tikzpicture}\\ 
+\hhline{====} \rule[-2ex]{0pt}{5ex} $ \hm{\omega} $  & $ \frac{1}{2} $ & $ \frac{\sqrt{2}}{2} $ & $ \frac{\sqrt{3}}{2} $  \\ 
+\rule[-2ex]{0pt}{4ex} $ \syn{\omega} $  & $ \frac{\sqrt{3}}{2} $ & $ \frac{\sqrt{2}}{2} $ & $ \frac{1}{2} $  \\ 
+\rule[-2ex]{0pt}{4ex} $ \ef{\omega} $ &  $ \frac{\sqrt{3}}{3} $ & $ 1 $ & $ \sqrt{3} $ \\
+\hline 
+\end{tabular}
+\end{center}
+\chapter{Μέτρηση κύκλου}
+\section{Εγγεγραμμένες γωνίες}\mbox{}\\
+\orismoi
+\Orismos{Εγγεγραμμένη γωνία}
+\wrapr{-4mm}{7}{2.9cm}{-7mm}{\begin{tikzpicture}
+\tkzDefPoint[label=below right:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.45](B,A,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture}}{
+Εγγεγραμμένη γωνία σε έναν κύκλο ονομάζεται η γωνία η οποία έχει κορυφή ένα σημείο του κύκλου, ενώ οι πλευρές της τέμνουν τον κύκλο.
+\begin{itemize}
+\item Το τόξο με άκρα τα σημεία τομής της γωνίας και του κύκλου, που βρίσκεται στο εσωτερικό της γωνίας ονομάζεται \textbf{αντίστοιχο τόξο} της γωνίας.
+\item Μια εγγεγραμμένη γωνία θα λέμε ότι \textbf{βαίνει} στο αντίστοιχο τόξο της.
+\end{itemize}}\mbox{}\\\\\\
+\Orismos{Επίκεντρη γωνία}
+Εγγεγραμμένη γωνία σε έναν κύκλο ονομάζεται η γωνία η οποία έχει κορυφή στο κέντρο του κύκλου.\\\\
+\thewrhmata
+\Thewrhma{επίκεντρη - εγγεγραμμένη γωνία και αντίστοιχο τόξο}
+Μεταξύ των εγγεγραμμένων των επίκεντρων γωνιών και των αντίστοιχων τόξων τους ισχύουν οι ακόλουθες προτάσεις :
+\begin{rlist}
+\item Αν μια εγγεγραμμένη και μια επίκεντρη γωνία βαίνουν στο ίδιο τόξο ή σε ίσα τόξα ίσων κύκλων τότε η εγγεγραμμένη ισούται με το μισό της επίκεντρης : $ \hat{A}=\dfrac{\hat{O}}{2} $.
+\item Κάθε εγγεγραμμένη γωνία ισούται με το μισό του μέτρου του αντίστοιχου τόξου της : $ \hat{A}=\dfrac{\widearc{B\varGamma}}{2} $.
+\item Κάθε επίκεντρη γωνία ισούται με το μέτρο του αντίστοιχου τόξου της : $ \hat{A}=\hat{O} $.
+\item Αν δύο εγγεγραμμένες γωνίες βαίνουν στο ίδιο τόξο ή σε ίσα τόξα ίσων κύκλων τότε έιναι ίσες. $ \hat{A}=\hat{\varDelta} $.
+\end{rlist}
+\begin{center}
+\begin{tabular}{cccc}
+\begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.3](B,O,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B)--(O)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(A,B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above:$O$](0,0){O}
+\tkzDefPoint[label=below:$B$](260:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](340:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.3](B,O,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](B)--(O)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (260:340:1.25);
+\tkzDrawPoints(B,C,O)
+\end{tikzpicture} & \begin{tikzpicture}
+\tkzDefPoint[label=above left:$O$](0,0){O}
+\tkzDefPoint[label=above left:$A$](120:1.25){A}
+\tkzDefPoint[label=above right:$\varDelta$](70:1.25){D}
+\tkzDefPoint[label=below:$B$](240:1.25){B}
+\tkzDefPoint[label=right:$\varGamma$](320:1.25){C}
+\tkzMarkAngle[fill=\xrwma,size=.4](B,A,C)
+\tkzMarkAngle[fill=\xrwma,size=.4](B,D,C)
+\draw[pl] (O) circle (1.25);
+\draw[pl,\xrwma](C)--(A)--(B)--(D)--(C);
+\draw[pl,\xrwma] (O) ++(B) arc (240:320:1.25);
+\tkzDrawPoints(A,B,C,O,D)
+\end{tikzpicture} \\ 
+\end{tabular}
+\end{center}
+\section{Κανονικά πολύγωνα}\mbox{}\\
+\orismoi
+\Orismos{Κανονικό πολύγωνο (\MakeLowercase{$ \mathbold\nu $}-γωνο)}
+\wrapr{-4mm}{9}{3.3cm}{-4mm}{\begin{tikzpicture}
+\draw(15:1.2) arc (15:-290:1.2);
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (90:1.2);
+\coordinate (B) at (135:1.2);
+\coordinate (C) at (180:1.2);
+\coordinate (D) at (225:1.2);
+\coordinate (E) at (270:1.2);
+\coordinate (F) at (315:1.2);
+\coordinate (G) at (0:1.2);
+\coordinate (H) at (45:1.2);
+\draw[pl,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--(G);
+\tkzDrawSegments[dashed,add=0 and -.4](A,H G,H);
+\tkzMarkSegments[mark=|,size=.7mm](A,B B,C C,D D,E E,F F,G);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[left](C){$\varGamma$}
+\tkzLabelPoint[below left](D){$\varDelta$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[below right](F){$Z$}
+\tkzLabelPoint[right](G){$H$}
+\tkzLabelPoint[above](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F,G)
+\end{tikzpicture}}{
+Κανονικό ονομάζεται κάθε πολύγωνο το οποίο έχει όλες τις πλευρές του ίσες και όλες τις γωνίες του ίσες μεταξύ τους.
+\begin{itemize}
+\item Ένα κανονικό πολύγωνο συμβολίζεται $ \nu $-γωνο, όπου $ \nu $ είναι ο φυσικός αριθμός που καθορίζει το πλήθος των πλευρών του πολυγώνου με $ \nu\geq3 $.
+\item Κάθε κανονικό πολύγωνο εγγράφεται σε έναν κύκλο και ο κύκλος αυτός ονομάζεται \textbf{κύκλος του πολυγώνου}.
+\item Το κέντρο του περιγεγραμμένου κύκλου ονομάζεται \textbf{κέντρο του πολυγώνου}
+\end{itemize}}\mbox{}\\\\\\
+\Orismos{Γωνίες πολυγώνου}
+\wrapr{-5mm}{5}{3.4cm}{-3mm}{\begin{tikzpicture}
+\coordinate (O)  at (0,0);
+\coordinate (A)  at (120:1.2);
+\coordinate (B) at (60:1.2);
+\coordinate (C) at (0:1.2);
+\coordinate (D) at (-60:1.2);
+\coordinate (E) at (-120:1.2);
+\coordinate (F) at (180:1.2);
+\tkzMarkAngle[size=.3](B,O,A)
+\tkzMarkAngle[size=.25](E,F,A)
+\draw[pl,\xrwma] (A)--(B)--(C)--(D)--(E)--(F)--cycle;
+\draw (B)--(O)--(A);
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below right](D){$\varDelta$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[left](F){$Z$}
+\tkzLabelPoint[below](O){$O$}
+\tkzDrawPoints(O,A,B,C,D,E,F)
+\node at (0,0.4979) {\footnotesize$\omega$};
+\node at (-0.798,0) {\footnotesize$\varphi$};
+\end{tikzpicture}}{
+Οι γωνίες που σχηματίζονται μέσα σε ένα κανονικό $ \nu- $γωνο είναι οι εξής:
+\begin{enumerate}[label=\bf\arabic*.]
+\item \textbf{Κεντρική γωνία}\\
+Η κεντρική γωνία είναι η γωνία που σχηματίζουν δύο ακτίνες του κύκλου του πολυγώνου που ενώνουν το κέντρο με δύο διαδοχικές κορυφές του. Συμβολίζεται με $ \omega $.
+\item \textbf{Γωνία πολυγώνου}\\
+Η γωνία του πολυγώνου είναι η γωνία που σχηματίζουν δύο διαδοχικές πλευρές του. Συμβολίζεται $ \varphi $.
+\end{enumerate}}
+\thewrhmata
+\Thewrhma{Γωνίες πολυγώνου}
+Για τις γωνίες $ ,\omega,\varphi $ ενός κανονικού πολυγώνου ισχύουν τα παρακάτω:
+\begin{rlist}
+\item Η κεντρική γωνία $ \omega $ ισούται με $ \omega=\dfrac{360\degree}{\nu} $.
+\item Η γωνία $ \varphi $ του πολυγώνου ισούται με $ \varphi=180\degree-\omega $.
+\end{rlist}
+\section{Μήκος κύκλου}\mbox{}\\
+\orismoi
+\Orismos{Ο αριθμός \MakeLowercase{π}}
+Ο αριθμός $ \pi $ ορίζεται ως το πηλίκο του μήκους ενός κύκλου προς τη διάμετρό του. Ο $ \pi $ είναι άρρητος αριθμός. Ισούται κατά προσέγγιση με 
+\[ \pi=3.14 \]
+\thewrhmata
+\Thewrhma{Μήκος κύκλου}
+Το μήκος $ L $ ενός κύκλου ακτίνας $ \rho $ και διαμέτρου $ \delta $ δίνεται από τους παρακάτω τύπους:
+\[ L=\pi\delta\ \ \textrm{ή}\ \ L=2\pi\rho \]
+\section{Μήκος τόξου}\mbox{}\\
+\orismoi
+\Orismos{Ακτίνιο}
+Ακτίνιο ονομάζεται το τόξο ενός κύκλου του οποίου το μήκος είναι ίσο με την ακτίνα του κύκλου. Ορίζεται και ως η γωνία που αν γίνει επίκεντρη, βαίνει σε τόξο με μήκος ίσο με την ακτίνα του κύκλου. Συμβολίζεται με $ 1rad $.\\\\
+\thewrhmata
+\Thewrhma{Μετατροπή μοιρών σε ακτίνια}
+Αν $ \mu $ είναι το μέτρο μιας γωνίας σε μοίρες και $ a $ το μέτρο της ίδιας γωνίας σε ακτίνια, η σχέση που τα συνδέει και με την οποία μπορούμε να μετατρέψουμε το μέτρο μιας γωνίας από μοίρες σε ακτίνια και αντίστροφα είναι :
+\[ \frac{\mu}{180\degree}=\frac{a}{\pi} \]
+\Thewrhma{Μήκος τόξου}
+Το μήκος $ \mathcal{l} $ του τόξου ενός κύκλου μέτρου $ \mu $ μοιρών ή $ a $ ακτινίων δίνεται από τους παρακάτω τύπους:
+\[ \mathcal{l}=\dfrac{2\pi\rho\mu}{360\degree}\ \ \textrm{ή}\ \ \mathcal{l}=a\rho \]
+\section{Εμβαδόν κύκλου}\mbox{}\\
+\thewrhmata
+\Thewrhma{Εμβαδόν κύκλου}
+Το εμβαδόν $ E $ ενός κύκλου ακτίνας $ \rho $ δίνεται από τον παρακάτω τύπο:
+\[ E=\pi\rho^2 \]
+\end{document}

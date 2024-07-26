@@ -1,0 +1,170 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+\usepackage{adjustbox}
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{royalblue}{cmyk}{0,0,0,1}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\newcommand{\monades}[2]{\begin{minipage}[t]{#2\textwidth}
+\begin{flushright}
+\textbf{\textit{Μονάδες #1}}
+\end{flushright}
+\end{minipage}}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{systeme}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\section*{\textcolor{royalblue}{{\LARGE ΜΑΘΗΜΑΤΙΚΑ ΚΑΙ ΣΤΟΙΧΕΙΑ ΣΤΑΤΙΣΤΙΚΗΣ}}}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\end{center}
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large ΘΕΜΑ \Alph*.}},
+itemsep=5mm,leftmargin=2cm]
+\item\mbox{}\\\vspace{-5mm} \begin{enumerate}[label=\bf\textcolor{royalblue}{{\large A.\arabic*}},
+itemsep=5mm,leftmargin=-.7cm]
+\item Έστω $ H(x)=f(x)+g(x) $. Η παράγωγος της $ h $ θα είναι : \begin{gather*} H'(x)=\lim_{h\rightarrow0}{\dfrac{H(x+h)-H(x)}{h}}=\lim_{h\rightarrow0}{\dfrac{f(x+h)+g(x+h)-f(x)-g(x)}{h}}=\\\lim_{h\rightarrow0}{\dfrac{f(x+h)-f(x)}{h}}+\lim_{h\rightarrow0}{\dfrac{g(x+h)-g(x)}{h}}=f'(x)+g'(x) 
+\end{gather*}
+\item Μια συνάρτηση $ f $ είναι συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της εαν το όριο στο $ x_0 $ είναι ίσο με την τιμή της $ f $ στο $ x_0 $ δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+\item Ο σταθμικός μέσος των παρατηρήσεων $ x_1.x_2,\ldots,x_\nu $ με συντελεστές βαρύτητας $ w_1,w_2,\ldots,w_\nu $ αντίστοιχα δίνεται από τον τύπο \[ \overline{x}=\dfrac{x_1w_1+x_2w_2+\ldots x_\nu w_\nu}{w_1+w_2+\ldots+w_\nu}=\dfrac{\sum_{i=1}^{\nu}x_iw_i}{\sum_{i=1}^{\nu}w_i} \]
+\item \begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+	\item Σωστό \item Σωστό \item Λάθος \item Λάθος \item Σωστό
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+\item\mbox{}\\
+ \begin{enumerate}[label=\bf\textcolor{royalblue}{{\large B.\arabic*}},
+itemsep=3mm,leftmargin=-.7cm]
+\item Λύνοντας την πρώτη εξίσωση έχουμε \[ (3x-1)\left(8x^2-6x+1\right)=0\Rightarrow\ccases{3x-1=0\Rightarrow x=\frac{1}{3}\\8x^2-6x-1=0\Rightarrow x=\frac{1}{2}\;\textrm{ ή }\;x=\frac{1}{4}}  \]
+επομένως το σύνολο των λύσεων της πρώτης εξίσωσης είναι $ \left\lbrace\frac{1}{3},\frac{1}{2},\frac{1}{4}\right\rbrace $. Επίσης για τα σύνολα $ A,A\cap B $ και $ A\cup B $ ισχύει η σχέση $ A\cap B\subseteq A\subseteq A\cup B $. Επομένως θα ισχύει \[ A\cap B\subseteq A\subseteq A\cup B\Rightarrow P(A\cap B)\leq P(A)\leq P(A\cup B) \] επομένως οι παραπάνω πιθανότητες είναι αντίστοιχα \[ P(A\cap B)=\frac{1}{4}\;\;,\;\;P(A)=\frac{1}{3}\;\;,\;\;P(A\cup B)=\frac{1}{2} \]
+\item Για την πιθανότητα του ενδεχομένου $ Α'-Β' $ ισχύει \begin{gather*} P(A'-B')=P(A')-P(A'\cap B')=P(A')-P\left((A\cup B)'\right)=\\
+1-P(A)-1+P(A\cup B)=P(A\cup B)-P(A)=\frac{1}{2}-\frac{1}{3}=\frac{1}{6}
+\end{gather*}
+Επίσης το ενδεχόμενο $ \varDelta : $ να πραγματοποιείται το πολύ ένα από τα δύο ενδεχόμενα $ Α $ και $ Β $ μεταφράζεται συμβολικά $ \varDelta=(A\cap B)' $. Επομένως \[ P(\varDelta)=P\left( (A\cap B)'\right)=1-P(A\cap B)=1-\frac{1}{4}=\frac{3}{4} \]
+\item Το ενδεχόμενο $ E : $ να πραγματοποιείται μόνο ένα από τα δύο ενδεχόμενα $ Α $ και $ Β $ μεταφράζεται συμβολικά $ E=(A-B)\cup(B-A) $. Οπότε για την πιθανότητα του $ E $ θα ισχύει 
+\begin{gather*} 
+	P(E)=P\left((A-B)\cup(B-A)\right)=P(A)-P(A\cap B)+P(B)-P(A\cap B)=\\P(A)+P(B)-2P(A\cap B) 
+\end{gather*}
+Επίσης από τον προσθετικό νόμο τα έχουμε \[ P(A\cup B)=P(A)+P(B)-P(A\cap B)\Rightarrow \frac{1}{2}=\frac{1}{3}+P(B)-\frac{1}{4}\Rightarrow P(B)=\frac{5}{12} \]
+Άρα προκύπτει $$ P(E)=\frac{1}{3}+\frac{5}{12}-2\cdot\frac{1}{4}=\frac{1}{4} $$
+\item Οι λύσεις της δεύτερης εξίσωσης είναι \[ 9x^2-3x-2=0\Rightarrow x=\frac{2}{3}\;\textrm{ ή };x=-\frac{1}{3} \]
+όμως η δεύτερη λύση απορρίπτεται λόγω του ότι $ 0\leq P(\varGamma)\leq 1 $ άρα \[ x=\frac{2}{3}\Rightarrow P(\varGamma)=\frac{2}{3} \]
+Έστω οτι τα ενδεχόμενα $ B $ και $ \varGamma $ είναι ασυμβίβαστα. Τότε από τον προσθετικό νόμο θα ισχύει \[ P(B\cup\varGamma)=P(B)+P(\varGamma)=\frac{5}{12}+\frac{2}{3}=\frac{13}{12}>1 \] άτοπο. Επομένως τα ενδεχόμενα $ B $ και $ \varGamma $ δεν είναι ασυμβίβαστα.
+\end{enumerate}
+\item\mbox{}\\
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large Γ.\arabic*}},
+itemsep=5mm,leftmargin=-.7cm]
+\item Από την υπόθεση της άσκησης γνωρίζουμε οτι 
+\begin{enumerate}[itemsep=0mm,label=\roman*.]
+\item Το ποσοστό των παρατηρήσεων του δείγματος που είναι μικρότερες του 10 είναι $ 10\percent $ άρα έχουμε $ f_1\%=10\% $.
+\item Το ποσοστό των παρατηρήσεων του δείγματος που είναι μεγαλύτερες ή ίσες του
+16 είναι $ 30\% $ άρα $ f_5\%=30\% $.
+\end{enumerate}
+\wrapr{-4mm}{12}{4.5cm}{-14mm}{
+\includegraphics[width=1.1\linewidth]{pie.pdf}
+}{
+Επίσης είναι γνωστό οτι η κεντρική γωνία του κυκλικού διαγράμματος είναι οτι η κεντρική γωνία του τομέα της τρίτης σχετικής συχνότητας είναι $ 108\degree $. Εαν $ \omega_3 $ είναι η κεντρική γωνία της $ f_3 $ τότε 
+\[ f_3=\frac{\omega_3}{360\degree}=\frac{108\degree}{360\degree}=0{,}3 \]
+Από τον πίνακα προκύπτουν οι κεντρικές τιμές των κλάσεων $ x_1=9, x_2=11, x_3=13, x_4=15, x_5=17 $. Επίσης για τη μέση τιμή του δείγματος ισχύει }
+\begin{gather*} \overline{x}=\sum_{i=1}^{5}{x_if_i}=14\Rightarrow 9\cdot0{,}1+11\cdot f_2+13\cdot0{,}3+15\cdot f_4+17\cdot0{,}3=14\Rightarrow \\11\cdot f_2+15\cdot f_4=4{,}1 \end{gather*}
+Γνωρίζουμε οτι το άθροισμα των σχετικών συχνοτήτων είναι ίσο με $ 1 $ οπότε θα αποκτήσουμε μια ακόμα σχέση με τις ζητούμενες συχνότητες :
+\[ \sum_{i=1}^{5}f_i=1\Rightarrow f_1+f_2+f_3+f_4+f_5=1\Rightarrow f_2+f_4=0{,}3 \]
+Συνδυάζοντας τις δύο σχέσεις προκύπτει το σύστημα :
+\[ \systeme[f_2f_4]{11\cdot f_2+15\cdot f_4=4{,}1,f_2+f_4=0{,}3}\Rightarrow f_2=0{,}1=10\%\;\textrm{ και }\;f_4=0{,}2=20\% \]
+\item Η διακύμανση των τιμών του δείγματος έχει ως εξής : \begin{gather*}
+s^2=\sum_{i=1}^{5}{\left(x_i-\overline{x}\right)^2f_i }=(9-14)^20{,}1+(11-14)^20{,}1+(13-14)^20{,}3+\\(15-14)^20{,}2+(17-14)^20{,}3=6{,}6
+\end{gather*}
+Επομένως η τυπική απόκλιση θα είναι $ s=\!\sqrt{s^2}=\!\sqrt{6{,}6}=2{,}57 $. Για το συντελεστή μεταβλητότητας θα έχουμε \[ CV=\frac{s}{|\overline{x}|}=\frac{2{,}57}{14}\simeq0{,}187>0{,}1 \]
+πράγμα που μας δείχνει οτι το δείγμα δεν είναι ομοιογενές.
+\item Ισχύει οτι 
+\begin{gather*}
+\overline{x}=14\Rightarrow \frac{\sum_{i=1}^5{x_i\cdot\nu_i}}{\nu}=14\Rightarrow\frac{\sum_{i=1}^4{x_i\cdot\nu_i}+x_5\nu_5}{\nu}=14\Rightarrow \frac{1780}{\nu}+x_5f_5=14\Rightarrow\\
+\frac{1780}{\nu}=14-17\cdot 0{,}3\Rightarrow \frac{1780}{\nu}=8{,}9\Rightarrow \nu=200
+\end{gather*}
+\item Η μέση τιμή των παρατηρήσεων $ \beta_i\;,\;i=1,2,3,4,5 $ θα είναι 
+\begin{gather*} \overline{\beta}=\frac{1}{5}\sum_{i=1}^5{\beta_1}=\frac{\beta_1+\beta_2+\beta_3+\beta_4+\beta_5}{5}=\frac{a_1-\overline{a}+a_2-\overline{a}+a_3-\overline{a}+a_4-\overline{a}+a_5-\overline{a}}{5s_a}=\\\frac{a_1+a_2+a_3+a_4+a_5}{5s_a}-\frac{5\overline{a}}{5s_a}=\frac{\overline{a}}{s_a}-\frac{\overline{a}}{s_a}=0
+ \end{gather*}
+ Επίσης για τη διακύμανση των τιμών αυτών ισχύει
+ \[ s_\beta^2=\frac{1}{5}\sum_{i=1}^5{(\beta_i-\overline{\beta})^2}=\frac{\beta_1^2+\beta_2^2+\beta_3^2+\beta_4^2+\beta_5^2}{5}=\frac{(a_1-\overline{a})^2+\ldots+(a_5-\overline{a})^2}{5s_a^2}=\frac{s_a^2}{s_a^2}=1 \]
+\end{enumerate}
+\item\mbox{}\\
+\begin{enumerate}[label=\bf\textcolor{royalblue}{{\large Δ.\arabic*}},
+itemsep=5mm,leftmargin=-.7cm]
+\item 
+\end{enumerate}
+\end{enumerate}
+\mbox{}\\
+\hspace*{0.75\textwidth}
+\textit{{\scriptsize Σπύρος Φρόνιμος}}
+\end{document}

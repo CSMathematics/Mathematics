@@ -1,0 +1,174 @@
+\documentclass[twoside,nofonts,internet,fil,maria]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\usepackage{path}
+\pathal
+
+\begin{document}
+\titlos{Νεοελληνική γλώσσα Β΄ Γυμνασίου}{Διαγωνισμός Υποτροφίας}{2018 - 2019}
+\textcolor{\xrwma}{\textbf{Α΄ ΚΕΙΜΕΝΟ}}
+\begin{center}
+ΟΙ ΣΧΕΣΕΙΣ ΣΤΑ ΧΡΟΝΙΑ ΤΟΥ FACEBOOK
+\end{center}
+… Αλλά τι είναι ένας φίλος σήμερα; Μπορούμε όντως να τον βρούμε στο διαδίκτυο;
+Σύμφωνα με την ψυχαναλύτρια Daniele Brun, 4 είναι τα συστατικά στοιχεία της
+φιλίας : η εμπιστοσύνη, η ένταξη σε μια περιορισμένη κοινότητα φίλων , κοινά
+ενδιαφέροντα και, εφόσον μιλάμε για διαδικτυακή φιλία, ένα κοινό βίωμα που
+μπορεί να συντηρηθεί μέσω του διαδικτύου. Άλλοι προσθέτουν την ειλικρίνεια, την
+ευθύτητα, την ανιδιοτέλεια και την έλλειψη ζήλιας.
+
+Τα κριτήρια της φιλίας διαφοροποιούνται ανάλογα με το επάγγελμα, το
+μορφωτικό επίπεδο και το φύλο. Για τους εργάτες, ο φίλος είναι μέλος της
+οικογένειας, κάποιος στον οποίο μπορείς να υπολογίζεις σε μια δύσκολη στιγμή.
+Στην κατηγορία των υπαλλήλων προέχει η εχεμύθεια, τα κοινά ενδιαφέροντα και η
+διάρκεια της σχέσης. Για τα στελέχη επιχειρήσεων με με πτυχία ανώτατης
+εκπαίδευσης το σημαντικό στοιχείο μιας φιλίας είναι η κοινωνική «εγγύτητα», η
+απλότητα , αλλά και η ανεπιτήδευτη συμπεριφορά.
+Σύμφωνα με την καθηγήτρια Daniele Brun , ο φίλος μας αντανακλά μια θετική
+εικόνα για τον εαυτό μας . Αυτό συμβαίνει , διότι , μέσα από την ελευθερία λόγου
+της φιλίας, μπορούμε να κρίνουμε και να κρινόμαστε , να εκφράζουμε τις σκέψεις
+μας για τους πάντες και τα πάντα. Να γιατί είναι τόσο δύσκολο να ζούμε χωρίς
+φίλους.
+
+Όμως, το βασικό ερώτημα παραμένει : ένας φίλος στο Facebook κι ένας φίλος
+στην πραγματική ζωή είναι το ίδιο πράγμα; Μπορούμε να λέμε ότι έχουμε φίλο
+κάποιον χωρίς να τον συναντάμε; Έρευνα του Πανεπιστημίου Αθηνών έδειξε ότι οι
+άνθρωποι κατανοούν και βιώνουν τη φιλία στο διαδίκτυο με εντελώς διαφορετικό
+τρόπο απ’ ό,τι στην πραγματική ζωή. Έτσι, δεν περιμένουν και δεν προσφέρουν
+στους διαδικτυακούς φίλους ό,τι προσφέρουν στους φίλους της πραγματικής ζωής.
+Η φιλία εμπεριέχει την εμπιστοσύνη, την αμοιβαία αποδοχή, την επιθυμία για
+συναναστροφή, άρα και τη φυσική εγγύτητα. Όπως λέει χαρακτηριστικά και η
+Daniele Brun, στη φιλία υπάρχει πάντα το στοιχείο της φυσικής παρουσίας, της
+σωματικής «συνάντησης» που δεν μπορεί να παραβλεφθεί .Επίσης, στην
+πραγματική φιλία εκδηλώνονται και αρνητικά συναισθήματα ή συμπεριφορές,
+όπως ζήλια, έπαρση, εμπάθεια που μπορεί να μεταφερθούν και στη διαδικτυακή
+κοινότητα, με τη διαφορά ότι εκεί οδηγούν ευκολότερα σε ρήξεις . Στην πραγματική
+ζωή, ωστόσο, καλείσαι να διαχειριστείς αυτά τα συναισθήματα, καθώς ο άλλος
+βρίσκεται μπροστά σου, ενώ στο διαδίκτυο πατώντας delete τελειώνεις μια κι έξω
+μαζί του.
+
+Άλλες μελέτες έχουν δείξει ότι ακόμα και οι πιο εξοικειωμένοι με το διαδίκτυο,
+όπως οι έφηβοι, δίνουν το ίδιο μεγάλη σημασία στη φυσική παρουσία. Ξέρουν ότι
+κάποια στιγμή θα πρέπει να εγκαταλείψουν την οθόνη του υπολογιστή που κρύβει
+πολύ καλά τα αντιπαθητικά σπυράκια τους και να συναντηθούν με τον άλλο στον
+κόσμο των τριών διαστάσεων , για να του μεταδώσουν ένα πιο σαφές μήνυμα.
+
+Αντίθετα απ’ ό,τι θα περίμενε κανείς, οι έφηβοι μοιράζονται άλλο ένα κοινό σημείο
+με τους μεγαλύτερούς τους. Ενώ έχουν πολλούς διαδικτυακούς φίλους, στην
+πραγματικότητα μόνον 3-4 θεωρούν σημαντικούς και θέλουν να εμβαθύνουν τη
+σχέση τους μαζί τους .
+\begin{flushright}
+\begin{minipage}{5.5cm}
+\begin{flushleft}
+\textit{Νίκος Κυριακίδης\\
+(12/ 2011 από το περιοδ. «Ε» της Ελευθεροτυπίας , απόσπασμα σε διασκευή.)}
+\end{flushleft}
+\end{minipage}
+\end{flushright}
+\textcolor{\xrwma}{\textbf{Β΄ ΠΑΡΑΤΗΡΗΣΕΙΣ}}
+\begin{enumerate}
+\item Να γράψετε περίληψη του αποσπάσματος ( περίπου 150 λέξεις ).\monades{2}
+\item Ποια χαρακτηριστικά στοιχεία διαφοροποιούν τη φιλία της πραγματικής ζωής από τη φιλία του διαδικτύου σύμφωνα με την άποψη του συγγραφέα;\\ \monades{2}
+\item Να δώσετε  έναν πλαγιότιτλο στη δεύτερη παράγραφο.\monades{1}
+\item Να γράψετε μια συνώνυμη για κάθε μία από τις παρακάτω λέξεις του κειμένου: 
+ \begin{center}
+ζήλιας,σημαντικό ,αντανακλά, έπαρση, σαφές.
+\end{center} \monades{5}
+\item Να αναφέρετε ποια είναι η δομή και ο τρόπος (ή οι τρόποι) ανάπτυξης της
+2ης και 3ης παραγράφου του κειμένου.\monades{2}
+\item Σε ένα άρθρο που θα δημοσιευτεί στην εφημερίδα του σχολείου σας να αναφέρετε τα κριτήρια με τα οποία πρέπει να επιλέγουμε τους φίλους μας. \monades{8}
+\end{enumerate}
+
+
+
+\end{document}

@@ -1,0 +1,462 @@
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+
+
+\usepackage{calc}
+\usepackage{hhline}
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+
+
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+
+
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\DeclareMathOperator{\card}{card}
+
+
+\begin{document}
+\twocolkentro{\titlos{Άλγεβρα Β΄ Λυκείου}{Τριγωνομετρία}{Τριγωνομετρικές εξισώσεις}
+\thewria}
+\begin{enumerate}
+\item 
+\end{enumerate}
+\twocolkentro{\askhseis}
+\begin{enumerate}
+\item \textbf{Η εξίσωση {\boldmath$ \hm{x}=a $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \hm{x}=\frac{1}{2} $
+\item $ \hm{x}=\frac{\sqrt{2}}{2} $
+\item $ \hm{x}=1 $
+\item $ \hm{x}=\frac{\sqrt{3}}{2} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Η εξίσωση {\boldmath$ \syn{x}=a $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \syn{x}=\frac{\sqrt{2}}{2} $
+\item $ \syn{x}=\frac{\sqrt{3}}{2} $
+\item $ \syn{x}=0 $
+\item $ \syn{x}=1 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Οι εξίσωσεις {\boldmath$ \ef{x}=a $} και {\boldmath$ \syf{x}=a $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \ef{x}=\frac{\sqrt{3}}{3} $
+\item $ \syf{x}=\sqrt{3} $
+\item $ \ef{x}=1 $
+\item $ \syf{x}=\frac{\sqrt{3}}{3} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Η εξίσωση {\boldmath$ \hm{f(x)}=a $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=3mm]
+\begin{multicols}{2}
+\item $ \hm{(2x)}=\frac{\sqrt{2}}{2} $
+\item $ \hm{(3x)}=\frac{\sqrt{3}}{2} $
+\item $ \hm{(x+\pi)}=\frac{1}{2} $
+\item $ \hm{\left(2x+\frac{\pi}{3}\right)}=1 $
+\end{multicols}
+\end{rlist}
+\item \textbf{Η εξίσωση {\boldmath$ \syn{f(x)}=a $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=3mm]
+\begin{multicols}{2}
+\item $ \syn{(3x)}=\frac{\sqrt{3}}{2} $
+\item $ \syn{(2x)}=\frac{1}{2} $
+\item $ \syn{\left( x+\frac{\pi}{4}\right) }=1 $
+\item $ \syn{\left(4x+\frac{\pi}{6}\right)}=\frac{\sqrt{3}}{2} $
+\end{multicols}
+\end{rlist}
+\item \textbf{Οι εξισώσεις {\boldmath$ \ef{f(x)}=a $ και {\boldmath$ \syf{f(x)}=a $}}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=3mm]
+\begin{multicols}{2}
+\item $ \ef{(2x)}=\frac{\sqrt{3}}{3} $
+\item $ \syf{(5x)}=1 $
+\item $ \syf{\left( 3x+\frac{3\pi}{4}\right) }=\sqrt{3} $
+\item $ \ef{\left(3x+\frac{\pi}{2}\right)}=\frac{\sqrt{3}}{3} $
+\end{multicols}
+\end{rlist}
+\item \textbf{Εξισώσεις - Αναγωγή στο 1ο τετ.}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \hm{x}=-\frac{1}{2} $
+\item $ \hm{x}=-\frac{\sqrt{2}}{2} $
+\item $ \syn{x}=-\frac{1}{2} $
+\item $ \syn{x}=-\frac{\sqrt{3}}{2} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις - Αναγωγή στο 1ο τετ.}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \ef{x}=-\frac{\sqrt{3}}{3} $
+\item $ \syf{x}=-1 $
+\item $ \syf{x}=-\sqrt{3} $
+\item $ \ef{x}=-\sqrt{3} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις - Αναγωγή στο 1ο τετ.}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=2mm]
+\item $ \hm{\left( \pi-x\right) }=\frac{1}{2} $
+\item $ \syn{\left(\pi-x\right) }=-1 $
+\item $ \syn{\left(\pi+x\right) }=-\frac{\sqrt{2}}{2} $
+\item $ \hm{\left(\pi+x \right) }=\frac{\sqrt{3}}{2} $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις - Αναγωγή στο 1ο τετ.}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=2mm]
+\item $ \ef{\left( \pi-x\right) }=\frac{\sqrt{3}}{3} $
+\item $ \syf{\left(\pi-x\right) }=0 $
+\item $ \syf{\left(\pi+x\right) }=-\frac{\sqrt{3}}{3} $
+\item $ \ef{\left(\pi+x \right) }=1 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Εξισώσεις - Αναγωγή στο 1ο τετ.}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}[leftmargin=2mm]
+\item $ \hm{\left( \frac{\pi}{2}-x\right) }=\frac{\sqrt{2}}{2} $
+\item $ \syn{\left(\frac{\pi}{2}-x\right) }=-\frac{1}{2} $
+\item $ \ef{\left(\frac{\pi}{2}-x\right) }=\frac{\sqrt{3}}{3} $
+\item $ \syf{\left(\frac{\pi}{2}-x \right) }=1 $
+\end{rlist}
+\end{multicols}
+\item \bmath{Οι εξισωσεις $ \hm{f(x)}=a $ και $ \syn{f(x)}=a $}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \hm{(3x)}=-\frac{\sqrt{3}}{2} $
+\item $ \hm{\left(2x-\frac{\pi}{3}\right) }=-\frac{\sqrt{2}}{2} $
+\item $ \syn{\left(\frac{\pi}{6}-x\right) }=-1 $
+\item $ \syn{\left(3x-\frac{5\pi}{6}\right) }=-\frac{\sqrt{3}}{2} $
+\end{rlist}
+\item \bmath{Οι εξισωσεις $ \ef{f(x)}=a $ και $ \syf{f(x)}=a $}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \ef{(2x)}=\frac{\sqrt{3}}{3} $
+\item $ \syf{\left(3x-\frac{2\pi}{3}\right) }=\frac{\sqrt{2}}{2} $
+\item $ \syf{\left(\frac{\pi}{4}-2x\right) }=1 $
+\item $ \ef{\left(x-\frac{5\pi}{6}\right) }=-\sqrt{3} $
+\end{rlist}
+\item \textbf{Εξισώσεις 1\tss{ου} βαθμού και {\boldmath$ a\cdot\beta=0 $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ 2\hm{x}-1=0 $
+\item $ 2\syn{x}-\sqrt{3}=0 $
+\item $ (\hm{x}-1)\cdot\syn{x}=0 $
+\item $ (2\syn{x}-1)\left( 2\hm{x}-\sqrt{3}\right) =0 $
+\end{rlist}
+\item \textbf{Εξισώσεις 1\tss{ου} βαθμού και {\boldmath$ a\cdot\beta=0 $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \ef{x}-1=0 $
+\item $ 3\ef{x}-\sqrt{3}=0 $
+\item $ \left( \syf{x}-\sqrt{3}\right) \cdot\syf{x}=0 $
+\item $ \left( 2\syf{x}-2\sqrt{3}\right) \left( \ef{x}-\sqrt{3}\right) =0 $
+\end{rlist}
+\item \textbf{Εξισώσεις 1\tss{ου} βαθμού και αναγωγή στο 1\tss{ο} τετ.}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \hm{x}+\hm{(\pi-x)}=1 $
+\item $ \syn{x}-\syn{(\pi+x)}=\sqrt{2} $
+\item $ \hm{\left( \frac{\pi}{2}-x\right) }+\syn{(-x)}=\sqrt{3} $
+\item $ \syn{\left(\the\year\pi+x \right) }-\syn{x}=1 $
+\end{rlist}
+\item \textbf{Εξισώσεις 2\tss{ου} βαθμού της μορφής {\boldmath$ x^2=a $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \hm^2{x}=\frac{3}{4} $
+\item $ 4\syn^2{x}-1=0 $
+\item $ \ef^2{x}-3=0 $
+\item $ \syf^2{x}=1 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath$ a\cdot\beta=0 $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \left(2\syn{x}-1\right)\left( 2\hm^2{x}-1\right)=0 $
+\item $ \left(2\hm{x}-\sqrt{3}\right)\left(3-\ef^2{x}\right)=0  $
+\item $ \left( 1-\ef^2{x}\right)\left( \syf{x}-\sqrt{3}\right)=0  $
+\end{rlist}
+\item \textbf{Εξισώσεις 2\tss{ου} βαθμού}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ 4\hm^2{x}-4\hm{x}+1=0 $
+\item $ 2\syn^2{x}-3\syn{x}+1=0 $
+\item $ 3\ef^2{x}-(3+\sqrt{3})\ef{x}+\sqrt{3}=0 $
+\end{rlist}
+\item \textbf{Τριγωνομετρικές εξισώσεις - Απόλυτη τιμή}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ |2\hm{x}|=1 $
+\item $ |\syn{x}-\sqrt{2}|=\frac{\sqrt{2}}{2} $
+\item $ |\syn^2{x}-1|=\frac{1}{4} $
+\item $ |\hm{x}|=|\hm{x}-1| $
+\end{rlist}
+\item \textbf{Τριγωνομετρικές εξισώσεις - Απόλυτη τιμή}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ |3\ef{x}|=\sqrt{3} $
+\item $ \left| \frac{1}{2}-\syf{x}\right| =\frac{1}{2} $
+\item $ |\ef^2{x}-2|=1 $
+\item $ |\syf{x}|=|\ef{x}| $
+\end{rlist}
+\item \textbf{Τριγωνομετρικές εξισώσεις - Διωνυμική εξίσωση}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{rlist}
+\item $ \hm^4{x}=\frac{1}{16} $
+\item $ \syn^5{x}=1 $
+\item $ \hm^6{x}=\frac{1}{8} $
+\item $ \syn^7{x}=-1 $
+\end{rlist}
+\end{multicols}
+\item \textbf{Τριγωνομετρικές εξισώσεις - Τρ. ταυτότητες}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \hm{x}=\syn{x} $
+\item $ \syn{x}+2\hm^2{x}=2 $
+\item $ \ef{x}-\syf{x}=0 $
+\item $ \syn^2{x}=\frac{\ef^2{x}}{1+\ef^2{x}} $
+\end{rlist}
+\item \textbf{Εξισώσεις πολυωνυμικής μορφής}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \syn^2{x}-\syn{x}=0 $
+\item $ 4\hm^3{x}-\hm{x}=0 $
+\item $ 3\ef^3{x}+\ef{x}=0 $
+\item $ \syf^4{x}=\syf^2{x} $
+\end{rlist}
+\item \textbf{Εξισώσεις πολυωνυμικής μορφής}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=4mm]
+\item $ 2\hm^3{x}-\hm^2{x}-6\hm{x}+3=0 $
+\item $ \syn^3{x}-\syn{x}+2=0 $
+\item $ \ef^3{x}-\left( \sqrt{3}+1\right) \ef^2{x}+\sqrt{3}\ef{x}=0 $
+\item $ \syf^3{x}-\syf^2{x}+\syf{x}-1=0 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath{$ a^2+\beta^2=0 $}}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \hm^2{x}+\left(\syn{y}-1\right)^2=0 $
+\item $ \left(2\hm{x}-1\right)^2+\syn^2{y}=0 $
+\item $ \ef^4{x}+\left(\syf^2{y}-3\right)^4=0 $
+\item $ \left(2\hm{x}-3\right)^2+\left( \ef{y}-\sqrt{3}\right)^2=0 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath{$ a^2+\beta^2=0 $}}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=4mm]
+\item $ 4\hm^2{x}-4\hm{x}+1+\syn^2{y}=0 $
+\item $ \hm^2{x}-2\hm{x}+4\syn^2{y}-4\sqrt{3}\syn{x}=-4 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath$ \textrm{\textbf{τριγ}}f(x)=a $} και 1\tss{ου} βαθμού}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ 2\syn{(3x)}-1=0 $
+\item $ 3\ef{(2x)}-\sqrt{3}=0 $
+\item $ 2\hm{\left( 2x-\frac{\pi}{4}\right) }-1=0 $
+\item $ \syf{(3x-\pi)}-1=0 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath$ \textrm{\textbf{τριγ}}f(x)=a $ και 1\tss{ου} βαθμού και $ a\cdot\beta=0 $}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}
+\item $ \hm{(2x)}\left(\syn{(3x)-1}\right)=0 $
+\item $ \syn{\left(2x-\frac{\pi}{3}\right) } \left[ \hm{(4x)}-1\right]=0 $
+\item $ \left[ \ef{\left( x+\frac{\pi}{6}\right)}-\sqrt{3}\right]\syf{(3x)}=0 $
+\item $ \left[ \syf{\left( \frac{\pi}{4}-x\right)}-1\right]\ef{(2x)}=0 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath$ \textrm{\textbf{τριγ}}f(x)=a $ και 2\tss{ου} βαθμού}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=4mm]
+\item $ 4\hm^2{(2x)}-1=0 $
+\item $ \syn^2{\left( 3x-\frac{\pi}{4}\right) }-\frac{3}{4}=0 $
+\item $ 3\ef^2{\left( \frac{\pi}{2}-x\right) }=1 $
+\item $ \syf^2{\left(2x+ \frac{\pi}{3}\right) }=1 $
+\end{rlist}
+\item \textbf{Εξισώσεις {\boldmath$ \textrm{\textbf{τριγ}}f(x)=a $ και 2\tss{ου} βαθμού}}\\
+Να λυθούν οι παρακάτω εξισώσεις.
+\begin{rlist}[leftmargin=-2mm]
+\item $ 4\hm^2{(2x)}-3\hm{(2x)}+1=0 $
+\item {\small $ 2\syn^2{\left( x+\frac{\pi}{3}\right)}-\left( 2+\sqrt{3}\right)\syn{\left( x+\frac{\pi}{3}\right)}+\sqrt{3}=0 $}
+\item $ 3\ef^2{\left(2x-\frac{\pi}{2} \right) }-2\sqrt{3}\ef{\left(2x-\frac{\pi}{2} \right) }+1=0 $
+\end{rlist}
+\item \textbf{Λύση τριγωνομετρικής εξίσωσης σε διάστημα}\\
+Να λυθούν οι παρακάτω τριγωνομετρικές εξισώσεις σε καθένα από τα διαστήματα που δίνονται.
+\begin{rlist}
+\item $ \hm{x}=\frac{1}{2}\ ,\ x\in\left[\frac{\pi}{2},\pi\right]  $
+\item $ \hm{x}=\frac{\sqrt{2}}{2}\ ,\ x\in[0,\pi] $
+\item $ \hm{x}=\frac{\sqrt{3}}{2}\ ,\ x\in\left[\frac{\pi}{2},\frac{3\pi}{2}\right]  $
+\item $ \hm{x}=1\ ,\ x\in(\pi,3\pi] $
+\end{rlist}
+\item \textbf{Λύση τριγωνομετρικής εξίσωσης σε διάστημα}\\
+Να λυθούν οι παρακάτω τριγωνομετρικές εξισώσεις σε καθένα από τα διαστήματα που δίνονται.
+\begin{rlist}
+\item $ \syn{x}=\frac{\sqrt{2}}{2}\ ,\ x\in\left[0,\pi\right]  $
+\item $ \syn{x}=\frac{\sqrt{3}}{2}\ ,\ x\in[0,\frac{\pi}{2}] $
+\item $ \syn{x}=\frac{1}{2}\ ,\ x\in\left[0,2\pi\right]  $
+\item $ \syn{x}=0\ ,\ x\in[\pi,3\pi) $
+\end{rlist}
+\item \textbf{Λύση τριγωνομετρικής εξίσωσης σε διάστημα}\\
+Να λυθούν οι παρακάτω τριγωνομετρικές εξισώσεις σε καθένα από τα διαστήματα που δίνονται.
+\begin{rlist}
+\item $ \ef{x}=\frac{\sqrt{3}}{3}\ ,\ x\in\left[0,\pi\right]  $
+\item $ \ef{x}=\sqrt{3}\ ,\ x\in\left[ \pi,\frac{3\pi}{2}\right]  $
+\item $ \syf{x}=1\ ,\ x\in\left[0,2\pi\right]  $
+\item $ \ef{x}=0\ ,\ x\in[3\pi,4\pi) $
+\end{rlist}
+\item \textbf{Λύση τριγωνομετρικής εξίσωσης σε διάστημα}\\
+Να λυθούν οι παρακάτω τριγωνομετρικές εξισώσεις σε καθένα από τα διαστήματα που δίνονται.
+\begin{rlist}
+\item $ \hm{(3x)}=\frac{1}{2}\ ,\ x\in\left[\frac{\pi}{2},\pi\right]  $
+\item $ \hm{\left(2x+\frac{\pi}{3}\right) }=\frac{\sqrt{3}}{2}\ ,\ x\in[0,\pi] $
+\item $ \hm{\left(\frac{x}{2}\right) }=\frac{1}{2}\ ,\ x\in\left[\frac{\pi}{2},\frac{3\pi}{2}\right]  $
+\item $ \hm{\left(\frac{x+2\pi}{3}\right) }=0\ ,\ x\in[2\pi,3\pi] $
+\end{rlist}
+\item \textbf{Λύση τριγωνομετρικής εξίσωσης σε διάστημα}\\
+Να λυθούν οι παρακάτω τριγωνομετρικές εξισώσεις σε καθένα από τα διαστήματα που δίνονται.
+\begin{rlist}
+\item $ \syn{(2x)}=\frac{\sqrt{2}}{2}\ ,\ x\in\left[\frac{\pi}{2},\frac{3\pi}{2}\right]  $
+\item $ \syn{\left(3x+\frac{3\pi}{4}\right) }=\frac{\sqrt{3}}{2}\ ,\ x\in[0,2\pi] $
+\item $ \syn{\left(\frac{3x}{4}\right) }=\frac{1}{2}\ ,\ x\in\left[\frac{\pi}{2},\frac{3\pi}{2}\right]  $
+\item $ \syn{\left(\frac{3x+\pi}{2}\right) }=1\ ,\ x\in[\pi,3\pi] $
+\end{rlist}
+\item \textbf{Λύση τριγωνομετρικής εξίσωσης σε διάστημα}\\
+Να λυθούν οι παρακάτω τριγωνομετρικές εξισώσεις σε καθένα από τα διαστήματα που δίνονται.
+\begin{rlist}
+\item $ \ef{(4x)}=\frac{\sqrt{3}}{3}\ ,\ x\in\left[\frac{\pi}{2},\frac{3\pi}{2}\right]  $
+\item $ \syf{\left(x+\frac{\pi}{6}\right) }=\sqrt{3}\ ,\ x\in[0,\pi] $
+\item $ \ef{\left(\frac{3x}{2}\right) }=1\ ,\ x\in\left[\frac{\pi}{2},\frac{3\pi}{2}\right]  $
+\item $ \syf{\left(\frac{2x+\pi}{3}\right) }=\sqrt{3}\ ,\ x\in[2\pi,4\pi] $
+\end{rlist}
+\item \textbf{Συστήματα τριγωνομετρικών εξισώσεων}\\
+Να λυθούν τα παρακάτω συστήματα.
+\begin{rlist}
+\item $ \ccases{3\hm{x}-\syn{y}=2\\2\hm{x}+4\syn{y}=-1} $
+\item $ \ccases{\hm^2{x}-\syn^2{y}=\frac{1}{4}\\\hm{x}+\syn{y}=\frac{1}{4}} $
+\item $ \ccases{3\ef{x}-\syf{y}=2\\\ef{x}+2\frac{1}{\syf{y}}=-1} $
+\end{rlist}
+\item \textbf{Εύρεση παραμέτρου}\\
+Να υπολογιστεί η τιμή της παραμέτρου $ \lambda\in\mathbb{R}^* $ ώστε η παρακάτω τριγωνομετρική εξίσωση \[ \hm{\left( \frac{x}{\lambda}\right) }=\frac{\sqrt{3}}{2} \]
+
+\item \textbf{Γωνίες τριγώνου}\\
+Στο ορθογώνιο τρίγωνο $ AB\varGamma,(\hat{A}=90\degree) $ του παρακάτω σχήματος έχουμε $ AB=3 , B\varGamma=6 $.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(0,2){B}
+\tkzMarkAngle[scale=.7](B,C,A)
+\tkzMarkAngle[scale=.7](A,B,C)
+\tkzMarkRightAngle(C,A,B)
+\draw[pl] (A)--(B)--(C)--cycle;
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzDrawPoints(A,B,C)
+\node at (-0.2,1) {\footnotesize$3$};
+\node at (1.9,1) {\footnotesize$6$};
+\node at (1.7,0.3) {\footnotesize$3x-\frac{\pi}{4}$};
+\node at (0.4,1.33) {\footnotesize$2y$};
+\end{tikzpicture}
+\end{center}
+Να υπολογιστούν οι τιμές των μεταβλητών $ x,y $.
+\end{enumerate}
+\end{document}

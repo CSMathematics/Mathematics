@@ -1,0 +1,66 @@
+\documentclass[ektypwsh]{diag-pan-xelatex}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=3.00cm]{geometry}
+\xroma{cyan}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{systeme,regexpatch}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{adjustbox}
+\makeatletter
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+  {\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+  {\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+  {}{}
+\def\SYS@MT@LEFTRIGHT{%
+  \expandafter\expandafter\expandafter\LEFTRIGHT
+  \expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\begin{document}
+\titlos{ΜΑΘΗΜΑΤΙΚΑ ΚΑΤΕΥΘΥΝΣΗΣ Γ΄ ΛΥΚΕΙΟΥ}{ΕΠΑΝΑΛΗΠΤΙΚΟ}
+\begin{thema}
+\item \mbox{}\\\vspace{-5mm}
+\begin{erwthma}
+\item 
+\monades{12}
+\end{erwthma}
+\item 
+\item Δίνεται συνάρτηση $ f:R \to R $, παραγωγίσιμη, με $ f(0)=1 $ και $ f(x)-a=f'(x)-ax $ για κάθε $ x\in R $ και $ a>0 $.
+\begin{erwthma}
+\item Να δείξετε ότι $ f(x)=e^x-ax $ και στη συνέχεια να βρείτε την ελάχιστη τιμή της συνάρτησης $ f $ .\monades{6}
+\item Να δείξετε ότι η μεγαλύτερη τιμή του $ a>0 $ για την οποία ισχύει $ e^x \geq ax $, για κάθε $ x \in R $, είναι η $ a=e $.\monades{7}
+\item Να δείξετε ότι $ 2f(x)<f(x+2015)+f(x-2015) $ για κάθε $ x \in R $.\monades{7}
+\item Αν για την τιμή του $ a $ του ερωτήματος 3, ισχύει: $ f(x)+b^x \geq x+2 $
+για κάθε $ x \in R $, να δείξετε ότι $ \displaystyle{b=e^e} $.\monades{5}
+\end{erwthma}
+
+\item 
+\end{thema}
+\end{document}
+

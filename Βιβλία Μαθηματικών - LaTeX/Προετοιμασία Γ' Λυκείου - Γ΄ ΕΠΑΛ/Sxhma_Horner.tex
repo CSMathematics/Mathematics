@@ -1,0 +1,102 @@
+\documentclass{book}
+\usepackage{xparse}
+\usepackage{array,hhline,xcolor,colortbl}
+\usepackage[amsbb]{mtpro2}
+
+\newcolumntype{C}[1]{>{\centering$}p{#1}<{$}}
+
+
+\ExplSyntaxOn
+% from https://tex.stackexchange.com/questions/165517/
+\NewDocumentCommand{\horner}{sO{2em}mm}
+ {
+  \IfBooleanTF{#1}
+   { \bool_set_false:N \l_silke_show_bool }
+   { \bool_set_true:N \l_silke_show_bool }
+  \silke_horner:nnn { #2 } { #3 } { #4 }
+ }
+
+\bool_new:N \l_silke_show_bool
+\seq_new:N \l_silke_top_seq
+\seq_new:N \l_silke_middle_seq
+\seq_new:N \l_silke_bottom_seq
+\seq_new:N \l_silke_temp_seq
+\int_new:N \l_silke_degree_int
+\tl_new:N \l_silke_remainder_tl
+
+\cs_new_protected:Npn \silke_horner:nnn #1 #2 #3
+ {
+  \seq_set_split:Nnn \l_silke_top_seq { , } { #2 }
+  \int_set:Nn \l_silke_degree_int { \seq_count:N \l_silke_top_seq }
+  \seq_clear:N \l_silke_middle_seq
+  \seq_clear:N \l_silke_bottom_seq
+  \seq_put_right:Nn \l_silke_middle_seq { \cellcolor{black} }
+  \seq_put_right:Nx \l_silke_bottom_seq
+   {
+    \int_to_arabic:n { \seq_item:Nn \l_silke_top_seq { 1 } }
+   }
+  \int_step_inline:nnnn { 2 } { 1 } { \l_silke_degree_int }
+   {
+    \seq_put_right:Nx \l_silke_middle_seq
+     {
+      \int_to_arabic:n { \seq_item:Nn \l_silke_bottom_seq { ##1 - 1 } * #3 }
+     }
+    \seq_put_right:Nx \l_silke_bottom_seq
+     {
+      \int_to_arabic:n
+       {
+        \seq_item:Nn \l_silke_top_seq { ##1 }
+        +
+        \seq_item:Nn \l_silke_middle_seq { ##1 }
+       }
+     }
+   }
+  \silke_print_scheme:nn { #1 } { #3 }
+ }
+
+\cs_new_protected:Npn \silke_print_scheme:nn #1 #2
+ {
+  \bool_if:NF \l_silke_show_bool
+   {
+    \silke_phantom:N \l_silke_middle_seq
+    \silke_phantom:N \l_silke_bottom_seq
+   }
+  \seq_pop_right:NN \l_silke_bottom_seq \l_silke_remainder_tl
+  \begin{tabular}{ *{\int_eval:n {\l_silke_degree_int-1}}{|C{#1}} || C{#1} | C{#1} | }
+  \hline \rule[-1ex]{0pt}{4ex}
+  \seq_use:Nn \l_silke_top_seq { & } & #2 \tabularnewline
+  \hline \rule[-1ex]{0pt}{4ex}
+  \seq_use:Nn \l_silke_middle_seq { & } \tabularnewline
+  \cline{1-\l_silke_degree_int} \rule[-1ex]{0pt}{4ex}
+  \seq_use:Nn \l_silke_bottom_seq { & } & 
+  {\mathbold\l_silke_remainder_tl} \tabularnewline
+  \cline{1-\l_silke_degree_int}
+  \end{tabular}
+ }
+
+\cs_new_protected:Npn \silke_phantom:N #1
+ {
+  \seq_clear:N \silke_temp_seq
+  \seq_map_inline:Nn #1 { \seq_put_right:Nn \silke_temp_seq { \phantom{##1} } }
+  \seq_set_eq:NN #1 \silke_temp_seq
+ }
+
+\ExplSyntaxOff
+
+\begin{document}
+
+\horner{1,3,-2,5}{1}
+
+\bigskip
+
+\horner{3,2,-5,-10}{2}
+
+\bigskip
+
+\horner*{3,2,-5,-10}{2}
+
+\bigskip
+
+\horner[3em]{1,5,100,100,5,1}{-1}
+
+\end{document}

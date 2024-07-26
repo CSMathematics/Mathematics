@@ -1,0 +1,124 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usetkzobj{all}
+\usepackage{hhline}
+%----------- ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ---------
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+%-----------------------------------------
+\usepackage{multicol}
+\usepackage{wrap-rl}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{gensymb}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Τρίγωνα}{Κάθετες και πλάγιες}
+\orismoi
+\Orismos{Ίχνος πλάγιας - καθέτου}
+\wrapr{-4mm}{8}{4cm}{-7mm}{\begin{tikzpicture}
+\draw (-1,0) -- (3.2,0);
+\tkzDefPoint[label=above:$A$](-.4,1){A}
+\tkzDefPoint[label=above left:$K$](-.4,0){K}
+\tkzDefPoint[label=above right:$B$](1.77,0){B}
+\tkzMarkRightAngle[fill=\xrwma](B,K,A)
+\draw (A)--(-.4,-.2);
+\draw (A)--(2.2,-0.2);
+\node at (3.4,0) {\footnotesize$\zeta$};
+\node at (-0.2,-0.2) {\footnotesize$\kappa$};
+\node at (2.4,-0.2) {\footnotesize$\varepsilon$};
+\tkzDrawPoints(A,K,B)
+\end{tikzpicture}}{
+Ίχνος μιας πλάγιας ή κάθετης ευθείας $ \varepsilon $ πάνω σε μια ευθεία $ \zeta $ ονομάζεται το σημείο στο οποίο η ευθεία $ \varepsilon $ τέμνει τη $ \zeta $. Ομοίως, ίχνος ενός ευθυγράμμου τμήματος πάνω σε μια ευθεία ονομάζεται το σημείο τομής τους.}\mbox{}\\\\\\
+\thewrhmata
+\Thewrhma{Ίσα πλάγια τμήματα}
+Αν δύο πλάγια προς μια ευθεία τμήματα είναι ίσα τότε τα ίχνη τους ισαπέχουν από το ίχνος της καθέτου.\\\\
+\Thewrhma{Πορίσματα για τα πλάγια και κάθετα τμήματα}
+Αν φέρουμε από ένα σημείο εκτός ευθείας το κάθετο και δύο πλάγια ευθύγραμμα τμήματα τότε
+\begin{rlist}
+\item Το κάθετο τμήμα έχει το μικρότερο μήκος από οποιοδήποτε άλλο πλάγιο.
+\item Δύο πλάγια τμήματα είναι άνισα αν και μόνο αν οι αποστάσεις των ιχνών τους από το ίχνος της καθέτου είναι όμοια άνισες.
+\end{rlist}
+\begin{center}
+\begin{tabular}{cc}
+\begin{tikzpicture}
+\draw (0,0) -- (3,0);
+\tkzDefPoint[label=above:$A$](1.5,1.4){A}
+\tkzDefPoint[label=above left:$K$](1.5,0){K}
+\tkzDefPoint[label=above right:$B$](2.4,0){B}
+\tkzDefPoint[label=above left:$\varGamma$](.6,0){C}
+\tkzMarkRightAngle[fill=\xrwma](B,K,A)
+\draw[pl] (A)--(K);
+\draw[pl,\xrwma] (A)--(B);
+\draw[pl,\xrwma] (A)--(C);
+\tkzMarkSegments[mark=|,size=2pt](A,B A,C)
+\tkzMarkSegments[mark=||,size=2pt](K,B K,C)
+\tkzDrawPoints(A,K,B,C)
+\node at (1.5,-0.4) {$AB=A\varGamma\Leftrightarrow KB=K\varGamma$};
+\end{tikzpicture} & \begin{tikzpicture}
+\draw (0,0) -- (3.7,0);
+\tkzDefPoint[label=above:$A$](1.5,1.4){A}
+\tkzDefPoint[label=above left:$K$](1.5,0){K}
+\tkzDefPoint[label=above right:$B$](3,0){B}
+\tkzDefPoint[label=above left:$\varGamma$](.6,0){C}
+\tkzMarkRightAngle[fill=\xrwma](B,K,A)
+\draw[pl] (A)--(K);
+\draw[pl,\xrwma] (A)--(B);
+\draw[pl,\xrwma] (A)--(C);
+\tkzDrawPoints(A,K,B,C)
+\node at (1.8,-0.4) {$AB>A\varGamma\Leftrightarrow KB>K\varGamma$};
+\end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\end{document}

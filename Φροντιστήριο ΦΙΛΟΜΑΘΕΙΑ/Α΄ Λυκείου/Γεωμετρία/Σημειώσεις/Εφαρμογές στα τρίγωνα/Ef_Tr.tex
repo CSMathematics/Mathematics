@@ -1,0 +1,119 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,tkz-euclide,enumitem}
+\usetkzobj{all}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{rotating}
+\usepackage{hhline}
+\usepackage{multicol,multirow,gensymb,mathimatika}
+\usepackage{wrap-rl}
+
+
+\begin{document}
+\titlos{Γεωμετρία Α΄ Λυκείου}{Παραλληλόγραμμα}{Εφαρμογές στα τρίγωνα}
+\orismoi
+\Orismos{Μεσοπαράλληλος}
+\wrapr{-4mm}{7}{4.5cm}{-5mm}{\begin{tikzpicture}
+\draw (-2,1.5) -- (2,1.5);
+\draw[\xrwma] (-2,0.75) -- (2,0.75);
+\draw (-2,0) -- (2,0);
+\tkzDefPoint(-1.4,0){A}
+\tkzDefPoint(-1,0){B}
+\tkzDefPoint(-1.4,1.5){C}
+\node at (2.4,1.5) {\footnotesize$\varepsilon_1$};
+\node at (2.4,0) {\footnotesize$\varepsilon_2$};
+\node at (2.4,.75) {\footnotesize$\varepsilon$};
+\draw (-1.4,1.5) -- (-1.4,0);
+\tkzMarkSegment[mark=|,pos=.25](A,C)
+\tkzMarkSegment[mark=|,pos=.75](A,C)
+\tkzMarkRightAngle[size=.2](B,A,C)
+\tkzLabelPoint[above left](C){$ A $}
+\tkzLabelPoint[below left](A){$ B $}
+\tkzLabelPoint[above left](-1.4,.75){$ \varGamma $}
+\end{tikzpicture}}{
+Μεσοπαράλληλος δύο παράλληλων ευθειών $ \varepsilon_1,\varepsilon_2 $ ονομάζεται ο γεωμετρικός τόπος των σημείων του ίδιου επιπέδου τα οποία έχουν ίσες αποστάσεις από τις ευθείες αυτές.
+\[ \varepsilon\parallel\varepsilon_1\parallel\varepsilon_2\qquad A\varGamma=B\varGamma \]
+Είναι ευθεία γραμμή, παράλληλη με τις $ \varepsilon_1,\varepsilon_2 $ και βρίσκεται στο μέσο της απόστασής τους.}
+\thewrhmata
+\Thewrhma{Τμήμα από τα μέσα δύο πλευρών}
+Το ευθύγραμμο τμήμα που ενώνει τα μέσα των δύο πλευρών ενός τριγώνου είναι παράλληλο με την τρίτη πλευρά και ισούται με το μισό της.
+\[ MN\parallel=\frac{B\varGamma}{2} \]
+για ένα τρίγωνο $ AB\varGamma $ με $ M,N $ τα μέσα των πλευρών $ AB,A\varGamma $ αντίστοιχα.
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3.5,0){C}
+\tkzDefPoint(1.2,2){A}
+\tkzDefPoint(.6,1){M}
+\tkzDefPoint(2.35,1){N}
+\draw[pl](A)--(B)--(C)--cycle;
+\draw[dashed] (0,1)--(3.3,1);
+\draw[plm,\xrwma] (M)--(N);
+\tkzDrawPoints(A,B,C,M,N)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left,yshift=2mm](M){$M$}
+\tkzLabelPoint[right,yshift=2mm](N){$N$}
+\end{tikzpicture}
+\end{center}
+\Thewrhma{Τμήμα παράλληλο από μέσο}
+Η ευθεία που διέρχεται από το μέσο μιας πλευράς ενός τριγώνου και είναι παράλληλη προς μια δεύτερη πλευρά, θα διέρχεται και από το μέσο της τρίτης πλευράς.
+\[ M\textrm{ μέσο }AB\textrm{ και }MN\parallel B\varGamma\Rightarrow N\textrm{ μέσο }A\varGamma \]
+\Thewrhma{Ίσα τμήματα από παράλληλες ευθείες}
+\wrapr{-4mm}{5}{4.5cm}{-8mm}{\begin{tikzpicture}[scale=1.3]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+\tkzDefPoint(0,.5){C}
+\tkzDefPoint(3,0.5){D}
+\tkzDefPoint(0,1){E}
+\tkzDefPoint(3,1){Z}
+\tkzDefPoint(.7,1.3){H}
+\tkzDefPoint(.4,-.3){I}
+\tkzDefPoint(1.7,1.3){K}
+\tkzDefPoint(2.7,-.3){L}
+\draw[pl] (A)--(B);
+\draw[pl] (C)--(D);
+\draw[pl] (E)--(Z);
+\draw[pl,\xrwma] (H)--(I);
+\draw[pl,\xrwma] (K)--(L);
+\tkzInterLL(E,Z)(H,I)\tkzGetPoint{S}
+\tkzInterLL(C,D)(H,I)\tkzGetPoint{T}
+\tkzInterLL(A,B)(H,I)\tkzGetPoint{Y}
+\tkzInterLL(E,Z)(K,L)\tkzGetPoint{O}
+\tkzInterLL(C,D)(K,L)\tkzGetPoint{P}
+\tkzInterLL(A,B)(K,L)\tkzGetPoint{Q}
+\tkzDrawPoints(S,T,Y,O,P,Q)
+\tkzLabelPoint[above left](S){$A$}
+\tkzLabelPoint[above left](T){$B$}
+\tkzLabelPoint[above left](Y){$\varGamma$}
+\tkzLabelPoint[above right](O){$\varDelta$}
+\tkzLabelPoint[above right](P){$E$}
+\tkzLabelPoint[above right](Q){$Z$}
+\node at (3.2,1) {\footnotesize$\varepsilon_1$};
+\node at (3.2,0.5) {\footnotesize$\varepsilon_2$};
+\node at (3.2,0) {\footnotesize$\varepsilon_3$};
+\node at (0.6,-0.2) {\footnotesize$\varepsilon$};
+\node at (2.4,-0.2) {\footnotesize$\zeta$};
+\end{tikzpicture}}{
+Αν τρεις ή περισσότερες παράλληλες ευθείες ορίζουν ίσα τμήματα σε μια τέμνουσα, τότε θα ορίζουν ίσα τμήματα και σε οποιαδήποτε άλλη τέμουσα ευθεία.
+\[ \varepsilon_1\parallel\varepsilon_2\parallel\varepsilon_3\textrm{ και }AB=B\varGamma\Rightarrow\varDelta E=EZ \]
+}
+\end{document}

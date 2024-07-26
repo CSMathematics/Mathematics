@@ -1,0 +1,199 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newlist{theory}{enumerate}{1}
+\setlist[theory]{itemsep=0mm,label=\bf\thesection.\arabic*}
+
+\newcommand{\lysh}{\textcolor{black}{\textbf{\faCheck\ \ ΛΥΣΗ}}}
+\renewcommand{\textstigma}{\textsigma\texttau}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textcolor{black}{\kerkissans{Ορισμός\hspace{2mm}\theorismos}}\;:\;}{}}}
+
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos {\textcolor{black}{\kerkissans{#1}}},breakable,bottomtitle=-1.5mm,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{black},leftrule=2mm,sharp corners,coltitle=black]}
+{\end{tcolorbox}}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\newcommand{\orismoi}{\begin{center}
+\Large {\kerkissans{\textbf{ΟΡΙΣΜΟΙ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\Large {\kerkissans{\textbf{ΑΠΟΔΕΙΞΕΙΣ ΘΕΩΡΗΜΑΤΩΝ}}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\begin{document}
+\section{Διαφορικός Λογισμός}
+\orismoi
+\begin{theory}
+\item\textbf{Συνάρτηση}\\
+Συνάρτηση από ένα σύνολο $A$ σε ένα σύνολο $B$ ονομάζεται μια διαδικασία με την οποία \textbf{κάθε} στοιχείο του συνόλου $A$ αντιστοιχίζεται \textbf{σε ένα ακριβώς} στοιχείο του συνόλου $B$.
+\item \textbf{Πράξεις συναρτήσεων}\\
+Έστω $f,g$ δύο συναρτήσεις με κοινό πεδίο ορισμού $A$. Τότε ορίζουμε τις συναρτήσεις:
+\begin{itemize}
+\item Άθροισμα $S=f+g$ με τύπο $S(x)=f(x)+g(x)$ για κάθε $x\in A$.
+\item Διαφορά $D=f-g$ με τύπο $D(x)=f(x)-g(x)$ για κάθε $x\in A$.
+\item Γινόμενο $P=f\cdot g$ με τύπο $P(x)=f(x)\cdot g(x)$ για κάθε $x\in A$.
+\item Πηλίκο $R=f+g$ με τύπο $R(x)=\frac{f(x)}{g(x)}$ για κάθε $x\in A$ με $g(x)\neq 0$.
+\end{itemize}
+\item \textbf{Γραφική παράσταση}\\
+Δίνεται μια συνάρτηση $f$ με πεδίο ορισμού $A$. Το σύνολο των σημείων $M(x,y)$ για τα οποία ισχύει $y=f(x)$ δηλαδή το σύνολο των σημείων $M(x,f(x))$ για κάθε $x\in A$ ονομάζεται \textbf{γραφική παράσταση} της συνάρτησης $f$ και συμβολίζεται με $C_f$.
+\item \textbf{Γνησίως αύξουσα}\\
+Μια συνάρτηση $f$ λέγεται \textbf{γνησίως αύξουσα} σε ένα διάστημα $\Delta$ του πεδίου ορισμού της όταν για κάθε $x_1,x_2\in\Delta$ με $x_1<x_2$ ισχύει
+\[ f(x_1)<f(x_2) \]
+\item \textbf{Γνησίως φθίνουσα}\\
+Μια συνάρτηση $f$ λέγεται \textbf{γνησίως αύξουσα} σε ένα διάστημα $\Delta$ του πεδίου ορισμού της όταν για κάθε $x_1,x_2\in\Delta$ με $x_1<x_2$ ισχύει
+\[ f(x_1)<f(x_2) \]
+\item \textbf{Τοπικό μέγιστο}\\
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ παρουσιάζει τοπικό μέγιστο σε ένα σημείο $ x_0\in A $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μεγαλύτερη από κάθε άλλη $ f(x) $ σε μια περιοχή του $ x_0 $. \[ f(x)\leq f(x_0) \]
+\item \textbf{Τοπικό ελάχιστο}\\
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ παρουσιάζει τοπικό ελάχιστο σε ένα σημείο $ x_0\in A $ του πεδίου ορισμού της όταν η τιμή $ f(x_0) $ είναι μικρότερη από κάθε άλλη $ f(x) $ σε μια περιοχή του $ x_0 $. \[ f(x)\geq f(x_0) \]
+\item \textbf{Συνεχής στο \bmath{$x_0$}}\\
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της ισχύει \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+\item \textbf{Συνεχής συνάρτηση}\\
+Μια συνάρτηση $ f $ θα λέμε ότι είναι συνεχής εάν είναι συνεχής \textbf{σε κάθε} σημείο $x_0$ του πεδίου ορισμού της.
+\item \textbf{Παράγωγος στο \bmath{$x_0$}}\\
+Έστω μια συνάρτηση $f$ και $x_0$ ένα σημείο του πεδίου ορισμού της. Αν το όριο
+\[ \lim_{h\to 0}{\frac{f(x_0+h)-f(x_0)}{h}} \]
+υπάρχει και είναι πραγματικός αριθμός, τότε η $f$ λέγεται παραγωγίσιμη στο $x_0$ και το όριο αυτό ονομάζεται \textbf{παράγωγος} της $f$ στο $x_0$. Συμβολίζεται με $f'(x_0)$ και είναι 
+\[ f'(x_0)=\lim_{h\to 0}{\frac{f(x_0+h)-f(x_0)}{h}} \]
+\item \textbf{Παράγωγος συνάρτηση}\\
+Έστω $f$ μια συνάρτηση με πεδίο ορισμού $A$ και έστω $B\subseteq A$ το σύνολο των τιμών του $x\in A$ για τα οποία η $f$ είναι παραγωγίσιμη.
+Η συνάρτηση με την οποία κάθε $ x\in Β $ αντιστοιχεί στην παράγωγο 
+\[ f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h} \] ονομάζεται \textbf{(πρώτη) παράγωγος} της συνάρτησης $ f $. Συμβολίζεται με $ f' $.
+\item \textbf{Εφαπτόμενη ευθεία}\\
+Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ η οποία είναι παραγωγίσιμη στο σημείο $ x_0\in A $ του πεδίου ορισμού της. Η εξίσωση της εφαπτόμενης ευθείας στο σημείο $ A(x_0,f(x_0)) $ δίνεται από τον τύπο
+\[ y=f'(x_0)+\beta \]
+Ο \textbf{συντελεστής διεύθυνσης} της εφαπτόμενης ευθείας στο σημείο επαφής $ Α(x_0,f(x_0)) $ είναι
+\[ \lambda=f'(x_0)=\ef{\varphi} \]
+\item \textbf{Ρυθμός Μεταβολής}\\
+Ρυθμός μεταβολής μιας συνάρτησης $ y=f(x) $ ως προς $ x $ όταν $ x=x_0 $ ορίζεται ως η παράγωγος $ f'(x_0) $.
+\end{theory}
+\thewrhmata
+\begin{theory}[resume]
+\item \bmath{Να αποδείξετε ότι η παράγωγος της σταθερής συνάρτησης $f(x)=c$ είναι $f'(x)=(c)'=0$.}\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Για τη συνάρτηση $f(x)=c$ έχουμε ότι
+\[ f(x+h)-f(x)=c-c=0 \]
+Για κάθε $h\neq 0$ είναι:
+\[ \frac{f(x+h)-f(x)}{h}=\frac{0}{h}=0 \]
+Άρα \[ \lim_{h\to 0}{\frac{f(x+h)-f(x)}{h}}=\lim_{h\to 0}{0}=0 \]
+Επομένως $f'(x)=0$ για κάθε $x\in\mathbb{R}$ δηλαδή $(c)'=0$.
+\item \bmath{Να αποδείξετε ότι η παράγωγος της συνάρτησης $f(x)=x$ είναι $f'(x)=(x)'=1$.}\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Για τη συνάρτηση $f(x)=x$ έχουμε ότι
+\[ f(x+h)-f(x)=x+h-x=0 \]
+Για κάθε $h\neq 0$ είναι:
+\[ \frac{f(x+h)-f(x)}{h}=\frac{h}{h}=1 \]
+Άρα \[ \lim_{h\to 0}{\frac{f(x+h)-f(x)}{h}}=\lim_{h\to 0}{1}=1 \]
+Επομένως $f'(x)=1$ για κάθε $x\in\mathbb{R}$ δηλαδή $(x)'=0$.
+\item \bmath{Να αποδείξετε ότι η παράγωγος της συνάρτησης $f(x)=x^2$ είναι $f'(x)=(x^2)'=0$.}\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Για τη συνάρτηση $f(x)=x^2$ έχουμε ότι
+\[ f(x+h)-f(x)=(x+h)^2-x^2=x^2+2xh+h^2-x^2=2xh+h^2 \]
+Για κάθε $h\neq 0$ είναι:
+\[ \frac{f(x+h)-f(x)}{h}=\frac{2xh+h^2}{h}=\frac{h(2x+h)}{h}=2x+h \]
+Άρα \[ \lim_{h\to 0}{\frac{f(x+h)-f(x)}{h}}=\lim_{h\to 0}{(2x+h)}=2x \]
+Επομένως $f'(x)=2x$ για κάθε $x\in\mathbb{R}$ δηλαδή $(x^2)'=2x$.
+\item \bmath{Να αποδείξετε ότι $ (cf(x))'=cf'(x) $.}\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Θεωρούμε τη συνάρτηση $F(x)=cf(x)$. Έχουμε ότι
+\[ F(x+h)-F(x)=cf(x+h)-cf(x)=c\left(f(x+h)-f(x)\right) \]
+Για κάθε $h\neq 0$ είναι
+\[ \frac{F(x+h)-F(x)}{h}=\frac{c\left(f(x+h)-f(x)\right)}{h}=c\frac{f(x+h)-f(x)}{h} \]
+Άρα
+\[ \lim_{h\to 0}{\frac{F(x+h)-F(x)}{h}}=\lim_{h\to 0}{\left[c\frac{f(x+h)-f(x)}{h}\right]}=c\cdot\lim_{h\to 0}{\frac{f(x+h)-f(x)}{h}}=cf'(x) \]
+\item \bmath{Να αποδείξετε ότι $ (f(x)+g(x))'=f'(x)+g'(x) $.}\\\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Θεωρούμε τη συνάρτηση $F(x)=f(x)+g(x)$. Έχουμε ότι
+\[ F(x+h)-F(x)=\left[f(x+h)+g(x+h)\right]=\left[f(x)-g(x)\right]=f(x+h)-f(x)+g(x+h)-g(x) \]
+Για κάθε $h\neq 0$ είναι
+\[ \frac{F(x+h)-F(x)}{h}=\frac{f(x+h)-f(x)+g(x+h)-g(x)}{h}=\frac{f(x+h)-f(x)}{h}+\frac{g(x+h)-g(x)}{h} \]
+Άρα
+\begin{align*}
+\lim_{h\to 0}{\frac{F(x+h)-F(x)}{h}}&=\lim_{h\to 0}{\left(\frac{f(x+h)-f(x)}{h}+\frac{g(x+h)-g(x)}{h}\right)}=\\&=\lim_{h\to 0}{\frac{f(x+h)-f(x)}{h}}+\lim_{h\to 0}{\frac{g(x+h)-g(x)}{h}}=f'(x)+g'(x)
+\end{align*}
+\item \bmath{Να αποδείξετε ότι $(\ef{x})'=\frac{1}{\syn^2{x}}$}\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Για τη συνάρτηση $f(x)=\ef{x},D_f=\{x\in\mathbb{R}/x\neq \kappa\pi+\frac{\pi}{2}\}$ έχουμε $f(x)=\dfrac{\hm{x}}{\syn{x}}$. Επομένως
+\begin{align*}
+f'(x)&=(\ef{x})'=\left(\frac{\hm{x}}{\syn{x}}\right)'=\\&=\frac{(\hm{x})'\syn{x}-\hm{x}(\syn{x})'}{\syn^2{x}}=\frac{\syn{x}\cdot\syn{x}-\hm{x}(-\hm{x})}{\syn^2{x}}=\\
+&=\frac{\syn^2{x}+\hm^2{x}}{\syn^2{x}}=\frac{1}{\syn^2{x}} 
+\end{align*}
+\item \bmath{Να αποδείξετε ότι $(\syf{x})'=-\frac{1}{\hm^2{x}}$}\\
+\textbf{\kerkissans{Απόδειξη}}\\
+Για τη συνάρτηση $f(x)=\syf{x},D_f=\{x\in\mathbb{R}/x\neq \kappa\pi\}$ έχουμε $f(x)=\dfrac{\syn{x}}{\hm{x}}$. Επομένως
+\begin{align*}
+f'(x)&=(\syf{x})'=\left(\frac{\syn{x}}{\hm{x}}\right)'=\\&=\frac{(\syn{x})'\hm{x}-\syn{x}(\hm{x})'}{\hm^2{x}}=\frac{-\hm{x}\cdot\hm{x}-\syn{x}\cdot\syn{x}}{\hm^2{x}}=\\
+&=\frac{-\hm^2{x}-\syn^2{x}}{\hm^2{x}}=-\frac{1}{\hm^2{x}} 
+\end{align*}
+\item \textbf{Να διατυπώσετε τα κριτήρια μονοτονίας μιας συνάρτησης $f$.}
+\begin{enumerate}
+\item Έστω μια συνάρτηση $f$ παραγωγίσιμη σε ένα διάστημα $\Delta$ του πεδίου ορισμού της. Αν $f'(x)>0$ σε κάθε εσωτερικό σημείο του διαστήματος τότε η $f$ είναι γνησίως αύξουσα στο $\Delta$.
+\item Έστω μια συνάρτηση $f$ παραγωγίσιμη σε ένα διάστημα $\Delta$ του πεδίου ορισμού της. Αν $f'(x)<0$ σε κάθε εσωτερικό σημείο του διαστήματος τότε η $f$ είναι γνησίως φθίνουσα στο $\Delta$.
+\end{enumerate}
+\item \textbf{Να διατυπώσετε τα κριτήρια τοπικών ακροτάτων μιας συνάρτησης $f$.}
+\begin{enumerate}
+\item Έστω μια συνάρτηση $f$,παραγωγίσιμη σε ένα διάστημα $(a,\beta)$ και $x_0\in(a,\beta)$. Αν ισχύει
+\begin{itemize}
+\item $f'(x_0)=0$
+\item $f'(x)>0$ για κάθε $x\in(a,x_0)$
+\item $f'(x)<0$ για κάθε $x\in(x_0,\beta)$
+\end{itemize}
+τότε η $f$ παρουσιάζει τοπικό μέγιστο στη θέση $x_0$.
+\item Έστω μια συνάρτηση $f$,παραγωγίσιμη σε ένα διάστημα $(a,\beta)$ και $x_0\in(a,\beta)$. Αν ισχύει
+\begin{itemize}
+\item $f'(x_0)=0$
+\item $f'(x)<0$ για κάθε $x\in(a,x_0)$
+\item $f'(x)>0$ για κάθε $x\in(x_0,\beta)$
+\end{itemize}
+τότε η $f$ παρουσιάζει τοπικό ελάχιστο στη θέση $x_0$.
+\end{enumerate}
+\end{theory}
+\end{document}

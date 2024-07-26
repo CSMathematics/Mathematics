@@ -1,0 +1,118 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots,gensymb,tkz-euclide,tkz-fct,varwidth}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+\usepackage{multicol}
+\usepackage{mathimatika,wrap-rl}
+\setlist[itemize]{itemsep=0mm}
+
+
+
+
+\begin{document}
+\titlos{Μαθηματικά Κατεύθυνσης Β' Λυκείου}{Κωνικές Τομές}{Κύκλος}
+\orismoi
+\Orismos{Κύκλος}
+Κύκλος ονομάζεται το σύνολο όλων των σημείων του επιπέδου που έχουν σταθερή απόσταση από ένα σταθερό σημείο του ίδιου επιπέδου.
+\begin{itemize}
+\item Το σταθερό σημείο ονομάζεται \textbf{κέντρο} του κύκλου.
+\item Η σταθερή απόσταση των σημείων του κύκλου από το κέντρο ονομάζεται \textbf{ακτίνα} του κύκλου : $  KM=\rho $.
+\item Ένας κύκλος συμβολίζεται ως $ (K,\rho) $ όπου $ K $ είναι το κέντρο και $ \rho $ η ακτίνα του.
+\begin{center}
+\begin{tabular}{p{5cm}cp{5cm}}
+\begin{tikzpicture}
+\begin{axis}[xmin=-2.2,xmax=2.2,ymin=-2.2,ymax=2.2,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:1,1.24);
+\coordinate (B) at (axis cs:0,1.6);
+\coordinate (C) at (axis cs:1.6,0);
+\coordinate (D) at (axis cs:0,-1.6);
+\coordinate (E) at (axis cs:-1.6,0);
+\node at(axis cs:.7,.6){\footnotesize$\rho$};
+\end{axis}
+\draw[pl,\xrwma] (O) circle (1.6);
+\draw[pl] (A)--(O);
+\tkzDrawPoints(A,O,B,C,D,E)
+\tkzLabelPoint[right,yshift=2mm](A){\footnotesize$M(x,y)$}
+\tkzLabelPoint[below left](O){\footnotesize$O$}
+\tkzLabelPoint[above,xshift=-1.4mm](B){\footnotesize$B(0,\rho)$}
+\tkzLabelPoint[below,fill=white,inner sep=.1mm,yshift=-1mm](C){\footnotesize$A(\rho,0)$}
+\tkzLabelPoint[below,xshift=-.7mm](D){\footnotesize$\varDelta(0,-\rho)$}
+\tkzLabelPoint[below,fill=white,inner sep=.1mm,yshift=-1mm](E){\footnotesize$\varGamma(-\rho,0)$}
+\node at (2.2,5){\footnotesize$x^2+y^2=\rho^2$};
+\end{tikzpicture}
+ &  & \begin{tikzpicture}
+ \begin{axis}[xmin=-.7,xmax=3.4,ymin=-.7,ymax=3.7,x=1cm,y=1cm, ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+ aks_on,belh ar]
+ \coordinate (O) at (axis cs:1,1);
+ \coordinate (A) at (axis cs:2,2.24);
+ \node at(axis cs:1.2,1.7){\footnotesize$\rho$};
+ \end{axis}
+ \draw[pl,\xrwma] (O) circle (1.6);
+ \draw[pl] (A)--(O);
+ \tkzDrawPoints(A,O)
+ \tkzLabelPoint[above,xshift=4mm](A){\footnotesize$M(x,y)$}
+ \tkzLabelPoint[below](O){\footnotesize$K(x_0,y_0)$}
+ \node[fill=white,inner sep=.1mm] at (2.2,3.8){\footnotesize$(x-x_0)^2+(y-y_0)^2=\rho^2$};
+ \tkzLabelPoint[below left](0.7,.7){\footnotesize$O$}
+ \end{tikzpicture} \\ 
+\end{tabular} 
+\end{center}
+\item Η καμπύλη του κύκλου με κέντρο το σημείο $ K(x_0,y_0) $ και ακτίνα $ \rho $, παριστάνεται αλγεβρικά από την εξίσωση
+\[ (x-x_0)^2+(y-y_0)^2=\rho^2 \]
+όπου $ x,y $ είναι οι συντεταγμένες των σημείων $ M(x,y) $ του κύκλου.
+\item Αν ο κύκλος έχει κέντρο την αρχή των αξόνων τότε θα έχει εξίσωσή της μορφής $ x^2+y^2=\rho^2 $. Αν η ακτίνα του κύκλου αυτού είναι ίση με τη μονάδα τότε ο κύκλος ονομάζεται \textbf{μοναδιαίος} και έχει εξίσωση $ x^2+y^2=1 $.
+\end{itemize}
+\Orismos{Εφαπτομένη κύκλου}
+\wrapr{-5mm}{7}{4.5cm}{-4mm}{\begin{tikzpicture}
+\begin{axis}[xmin=-2.2,xmax=2.2,ymin=-1.8,ymax=2.2,x=.8cm,y=.8cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:-.97,1);
+\node at(axis cs:-.3,.6){\footnotesize$\rho$};
+\addplot[domain=-2.2:2,pl,\xrwma] {.97*x+1.96};
+\end{axis}
+\draw[pl] (O) circle (1.12);
+\draw[pl] (A)--(O);
+\tkzDrawPoints(A,O)
+\tkzLabelPoint[left,yshift=2mm](A){\footnotesize$A(x_1,y_1)$}
+\tkzLabelPoint[below left](O){\footnotesize$O$}
+\end{tikzpicture}}{
+Εφαπτομένη ενός κύκλου $ (K,\rho) $ σε ένα σημείο $ A(x_1,y_1) $ ονομάζεται η ευθεία η οποία εφάπτεται στον κύκλο στο σημείο αυτό, έχει δηλαδή ένα μόνο κοινό σημείο με τον κύκλο.
+\begin{itemize}
+\item Η εφαπτόμενη ευθεία για τον κύκλο $ x^2+y^2=\rho^2 $ με κέντρο την αρχή των αξόνων έχει εξίσωση \[ xx_1+yy_1=\rho^2 \]
+\end{itemize}
+
+\begin{itemize}
+\item Η εφαπτόμενη ευθεία του κύκλου με κέντρο $ K(x_0,y_0) $ και ακτίνα $ \rho $ έχει εξίσωση  $ \overrightarrow{KA}\cdot\overrightarrow{AM}=0 $ όπου $ M $ είναι ένα τυχαίο σημείο της ευθείας.
+\end{itemize}}\mbox{}\\\\
+\thewrhmata
+\Thewrhma{Η εξίσωση {\MakeLowercase{$\mathbold{ x^2+y^2+\MakeUppercase{A}x+\MakeUppercase{B}y+\varGamma=0} $}}}
+Κάθε εξίσωση της μορφής $ x^2+y^2+Ax+By+\varGamma=0 $ παριστάνει κύκλο με κέντρο το σημείο $ K\left(-\frac{A}{2},-\frac{B}{2} \right) $ και ακτίνα $ \rho=\frac{\sqrt{A^2+B^2-4\varGamma}}{2} $ αν και μόνο αν ισχύει η σχέση $ A^2+B^2-4\varGamma>0 $. Αντιστρόφως, κάθε κύκλος με κέντρο $ K(x_0,y_0) $ και ακτίνα $ \rho $ έχει εξίσωση την μορφής $ x^2+y^2+Ax+By+\varGamma=0 $.
+\begin{rlist}
+\item Αν ισχύει $ A^2+B^2-4\varGamma=0 $ τότε η παραπάνω εξίσωση παριστάνει ένα σημείο, το $ K\left(-\frac{A}{2},-\frac{B}{2} \right) $.
+\item Αν ισχύει $ A^2+B^2-4\varGamma<0 $ τότε η παραπάνω εξίσωση δεν έχει λύσεις και κατά συνέπεια κανενός σημείου οι συντεταγμένες δεν την επαληθεύουν.
+\end{rlist}
+\end{document}
+

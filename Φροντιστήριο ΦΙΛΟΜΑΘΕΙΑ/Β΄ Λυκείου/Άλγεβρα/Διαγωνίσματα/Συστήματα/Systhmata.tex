@@ -1,0 +1,121 @@
+\documentclass[ektypwsh]{frontisthrio-diag}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\ekthetesdeiktes
+\usepackage{path}
+
+
+\begin{document}
+\titlos{Άλγεβρα Β΄ Λυκείου}{Συστήματα}{Β}
+\vspace{-15mm}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Ποια συνθήκη πρέπει να ισχύει ώστε ένα $ 2\times2 $ γραμμικό σύστημα να έχει μοναδική λύση;\monades{1}
+\item Τι ονομάζεται λύση ενός γραμμικού συστήματος;\monades{1}
+\item Για ποιες τιμές των συντελεστών $ a,\beta $ παριστάνει ευθεία γραμμή η εξίσωση $ ax+\beta y=\gamma $;\monades{1}
+\item \swstolathos
+\begin{alist}[leftmargin=3mm]
+\item Το σημείο $ A(3,-2) $ ανήκει στην ευθεία $ 2x-y=8 $.
+\item Το σύστημα $ \systeme{x+3y=2,2x+6y=1} $ \ είναι αόριστο.
+\item Η εξίσωση $ 0x+0y=3 $ παριστάνει ευθεία γραμμή.
+\item Το ζεύγος $ (x,y)=(2,1) $ είναι λύση του μη γραμμικού συστήματος $ \ccases{x^2-y^2=4\\3x+y=7} $.
+\item Αν για ένα γραμμικό σύστημα ισχύει $ D\neq0 $ τότε έχει μοναδική λύση.\monades{2}
+\end{alist}
+\end{erwthma}
+\item\mbox{}\\
+Να λυθούν τα παρακάτω συστήματα.
+\begin{erwthma}
+\item $ \systeme{4x-3y=9,2x+y=7}\ \  $ με τη μέθοδο της αντικατάστασης.\monades{1,7}
+\item $ \systeme{x-7y=-9,3x+4y=23}\ \  $ με τη μέθοδο των αντίθετων συντελεστών.\monades{1,6}
+\item $ \systeme{5x-y=7,2x+3y=-4}\ \  $ με τη μέθοδο των οριζουσών.\monades{1,7}
+\end{erwthma}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Δίνεται το ακόλουθο παραμετρικό σύστημα.
+\[ \systeme[xy]{\lambda x+3y=\lambda,x+{(\lambda-2)}y=4-\lambda} \]
+\begin{alist}
+\item Να βρεθούν οι τιμές της παραμέτρου $ \lambda $ για τις οποίες το σύστημα έχει μοναδική λύση, καθώς και να βρεθεί η λύση αυτή.\monades{2}
+\item Για ποιες τιμές της παραμέτρου το σύστημα είναι αόριστο και για ποιες αδύνατο;\monades{1}
+\end{alist}
+\item Να λυθεί το ακόλουθο μη γραμμικό σύστημα.
+\[ \ccases{x^2+(y-2)^2=13\\3x+y=10} \]\monades{2}
+\end{erwthma}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Έστω $ D,D_x,D_y $ είναι οι ορίζουσες ενός $ 2\times2 $ γραμμικού συστήματος με μοναδική λύση για τις οποίες ισχύει η σχέση :
+\[ \left( 3D_x-4D_y-D\right) ^2+\left( 2D_x+D_y+D\right) ^2=0\]
+\begin{alist}
+\item Χρησιμοποιώντας την παραπάνω σχέση να σχηματίσετε το $ 2\times2 $ γραμμικό σύστημα ως προς τις μεταβλητές $ (x,y) $.\\\monades{1}
+\item Να βρεθεί η λύση $ (x,y) $ του γραμμικού συστήματος.\monades{2}
+\end{alist}
+\item Το μέγεθος μιας τηλεόρασης είναι $ 42'' $ και γνωρίζουμε επίσης ότι οι πλευρές έχουν λόγο 16:9 (HD Video Standard). Να βρεθούν οι διαστάσεις της τηλεόρασης.\\
+{\footnotesize \textit{Υπόδειξη} : Το μέγεθος μιας τηλεόρασης δίνεται από το μήκος της διαγωνίου της οθόνης δοσμένο σε ίντσες.\\(Μια ίντσα $ 1''=2{,}54cm $)}\monades{2}
+\end{erwthma}
+\end{thema}
+\end{document}

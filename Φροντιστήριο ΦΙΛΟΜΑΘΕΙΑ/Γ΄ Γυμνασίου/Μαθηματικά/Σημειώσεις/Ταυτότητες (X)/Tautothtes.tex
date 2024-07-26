@@ -1,0 +1,307 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[amsbb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0]{Minion Pro}
+\newfontfamily\mpro{Minion Pro}
+\usepackage{amsmath}
+\usepackage[amsbb]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{xcolor}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+%------- ΟΡΙΣΜΟΣ --------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\arabic{orismos}\;:\;}   
+\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{ΟΡΙΣΜΟΣ\hspace{2mm}\theorismos}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{ΟΡΙΣΜΟΙ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%------------------------------
+%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+%-------------------------------------------
+
+\usepackage{calc}
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+%----------------------------------------
+%------- ΣΥΣΤΗΜΑ -------------------
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+\expandafter\expandafter\expandafter\LEFTRIGHT
+\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+\times#1\\\\ \times#2
+\end{matrix}}}
+%----------------------------------------
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+%------------------------------------------
+
+%------------------------------------------
+\usepackage{extarrows}
+\newcommand{\eq}[1]{\xlongequal{#1}}
+%------------------------------------------
+%------ ΌΡΙΣΜΑ ----------
+\newcommand{\Arg}[8]{
+\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
+\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
+%------------------------
+%------- ΘΕΩΡΗΜΑ ΑΠΛΗ ΜΟΡΦΗ -----------------
+\newcounter{thewrhma}[section]
+\renewcommand{\thethewrhma}{\arabic{thewrhma}\;:\;}  
+\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{ΘΕΩΡΗΜΑ\hspace{2mm}\thethewrhma\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%----------------------------------
+%--------- ΘΕΩΡΗΜΑΤΑ ------------------
+\newcommand{\thewrhmata}{\begin{center}
+{\large {\textbf{ΘΕΩΡΗΜΑΤΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------------
+\newcommand{\pinakasdyo}[8]{
+\begin{tikzpicture}
+\foreach \x in {#6,#7}{
+\draw (-3,0) -- (#8,0);
+\draw (\x,-.5)--(\x,.0);
+\node[fill=white,inner sep=1pt] at (\x,-0.25) {$0$};}
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#8-.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#6,0.25) {$#2$};
+\node[fill=white,inner sep=1pt] at (#7,0.25) {$#3$};
+\node at (0.5*#6-0.25,-0.3) {$#4$};
+\node at (0.5*#7+0.5*#6,-0.3) {$#5$};
+\node at (0.5*#7+0.5*#8,-0.3) {$#4$};
+\end{tikzpicture}}
+
+\newcommand{\pinakasmia}[5]{
+\begin{tikzpicture}
+\draw (-3,0) -- (#5,0);
+\draw (#4,-.5)--(#4,.0);
+\node[fill=white,inner sep=1pt] at (#4,-0.25) {$0$};
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (#5-0.3,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (#4,0.25) {$#2$};
+\node at (0.5*#4-0.25,-.3) {$#3$};
+\node at (0.5*#4+0.5*#5,-0.3) {$#3$};
+\end{tikzpicture}}
+
+\newcommand{\pinakaskamia}[2]{
+\begin{tikzpicture}
+\draw (-3,0) -- (5,0);
+\draw (-.5,0.5) -- (-.5,-0.5);
+\node at (-.15,0.25) {$-\infty$};
+\node at (4.7,0.25) {$+\infty$};
+\node at (-1.75,0.25) {$x$};
+\node at (-1.75,-0.3) {$#1$};
+\node[fill=white,inner sep=1pt] at (2.25,-0.3) {$#2$};
+\end{tikzpicture}}
+
+%-------- ΜΕΘΟΔΟΛΟΓΙΑ ---------
+\newcounter{methodologia}[section]
+\renewcommand{\themethodologia}{\arabic{methodologia}\;:\;}   
+\newcommand{\Methodologia}[1]{\refstepcounter{methodologia}{\textbf{MΕΘΟΔΟΣ\hspace{2mm}\themethodologia}}\hspace{1mm} \MakeUppercase{\textbf{#1}}\\}{}
+\newcommand{\methodologia}{\begin{center}
+{\large {\textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+%-------------------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=2cm}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=2.4cm}
+
+
+
+\begin{document}
+\section*{\LARGE ΑΛΓΕΒΡΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ}
+\begin{center}
+{\normalsize  \bf\today}\mbox{}\\
+\vspace{5mm}
+\textbf{\large ΤΑΥΤΟΤΗΤΕΣ}
+\end{center}\mbox{}\\
+\orismoi
+\Orismos{Ταυτότητα}
+Ταυτότητα ονομάζεται κάθε ισότητα η οποία περιέχει μεταβλητές και επαληθεύεται για κάθε τιμή των μεταβλητών της.
+\begin{center}
+\textbf{ΑΞΙΟΣΗΜΕΙΩΤΕΣ ΤΑΥΤΟΤΗΤΕΣ}
+\end{center}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,label=\bf\arabic*.]
+\item \parbox[t]{7cm}{\textbf{Άθροισμα στο τετράγωνο}\\$ (a+\beta)^2=a^2+2a\beta+\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά στο τετράγωνο}\\$ (a-\beta)^2=a^2-2a\beta+\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Άθροισμα στον κύβο}\\$ (a+\beta)^3=a^3+3a^2\beta+3a\beta^2+\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά στον κύβο}\\$ (a-\beta)^3=a^3-3a^2\beta+3a\beta^2-\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Γινόμενο αθροίσματος επί διαφορά}\\$ (a+\beta)(a-\beta)=a^2-\beta^2 $}
+\item \parbox[t]{7cm}{\textbf{Άθροισμα κύβων}\\$ (a+\beta)\left(a^2-a\beta+\beta^2 \right)=a^3+\beta^3 $}
+\item \parbox[t]{7cm}{\textbf{Διαφορά κύβων}\\$ (a-\beta)\left(a^2+a\beta+\beta^2 \right)=a^3-\beta^3 $}
+\end{enumerate}
+\end{multicols}
+\methodologia
+\Methodologia{Εύρεση αναπτύγματοσ ταυτότητασ}
+Προκειμένου να υπολογίσουμε το ανάπτυγμα μιας από τις βασικές ταυτότητες
+\begin{bhma}
+\item Εξετάζουμε τη μορφή της παράστασης που θέλουμε να αναπτύξουμε ώστε να αναγνωρίσουμε το είδος της ταυτότητας που θα χρησιμοποιήσουμε
+\item Επιλέγουμε την κατάλληλη ταυτότητα από αυτές της λίστας στον \textbf{Ορισμό 1} και γράφουμε το ανάπτυγμα, κάνοντας απλή αντικατάσταση στη θέση των αριθμών $ a,\beta $ τις μεταβλητές που μας δίνει η άσκηση.
+\end{bhma}
+\Methodologia{Απόδειξη Ταυτότητασ}
+Αν θέλουμε να αποδείξουμε την ισχύ μιας ταυτότητας, γνωρίζοντας από τον \textbf{Ορισμό 1} ότι μια ταυτότητα είναι μια ισότητα τότε
+\begin{tropos}
+\item \textbf{Πράξεις σε ένα μέλος}\\
+Εκτελούμε τις πράξεις στο πιο πολύπλοκο μέλος της ισότητας και με τη χρήση των βασικών ταυτοτήτων και άλλων κανόνων της Άλγεβρας, με διαδοχικά βήματα καταλλήγουμε στο άλλο μέλος της.
+\item \textbf{Πράξεις και στα δύο μέλη}\\
+Αν οι πράξεις σε ένα μόνο μέλος της ταυτότητας δε μας οδηγήσουν στο άλλο μέλος της με ευκολία, τότε μπορούμε να εκτελέσουμε πράξεις και στα δύο μέλη της, αν αυτό είναι δυνατό και με διαδοχικά βήματα να καταλλήξουμε σε μια ισότητα που είναι φανερά αληθής. 
+\end{tropos}
+\newpage
+\noindent
+\Methodologia{Εφαρμογή Ταυτότητασ}
+Σε μεγάλο αριθμό ασκήσεων μας ζητείται να υπολογίσουμε την τιμή μιας πολύπλοκης αριθμητικής παράστασης και παρατηρούμε οτι με τις βασικές πράξεις, αυτό είναι αρκετά χρονοβόρο. Έτσι μπορούμε να εκμεταλευτούμε μια ταυτότητα ώστε να απλοποιηθεί η διαδικασία αυτή. Ετσι
+\begin{bhma}
+\item Εξετάζουμε αν η δοσμένη αριθμητική παράσταση έχει τη μορφή ενός μέλους κάποιας βασικής ή άλλης αποδεδειγμένης ταυτότητας.
+\item Βρίσκουμε την αντιστοιχία μεταξύ αριθμών της παράστασης και μεταβλητών της ταυτότητας.
+\item Γράφουμε το άλλο μέλος της ταυτότητας αντικαθιστόντας τις μεταβλητές με τους αριθμούς της παράστασης και εκτελούμε τις πράξεις.
+\end{bhma}
+\Methodologia{Μετατροπή άρρητου παρονομαστή σε ρητό}
+Κάθε κλάσμα με άρρητο παρονομαστή της μορφής $ \frac{A}{\sqrt{a}\pm\sqrt{\beta}} $ με $ a,\beta,A $ πραγματικούς αριθμούς, μπορεί να μετατραπεί σε ένα ισοδύναμο κλάσμα με ρητό παρονομαστή κάνοντας χρήση της ταυτότητας \textbf{Γινόμενο αθροίσματος επί διαφορά} που βλέπουμε στον \textbf{Ορισμό 1}.
+\begin{bhma}
+\item Πολλαπλασιάζουμε τον αριθμητή και τον παρονομαστή του κλάσματος με τη συζυγή παράσταση του παρονομαστή. (Συζυγή παράσταση του παρονομαστή ονομάζουμε την παράσταση που χρειάζεται για να σχηματιστεί η ταυτότητα. Αν ο παρονομαστής έχει άθροισμα, τότε χρειαζόμαστε τη διαφορά και αντίστροφα.)
+\begin{center}
+\begin{tabular}{cc}
+\textbf{Παρονομαστής} & \textbf{Συζυγής παράσταση} \\ 
+\multicolumn{2}{c}{$ \sqrt{a}+\sqrt{\beta} \;\;\;\longrightarrow\;\;\; \sqrt{a}-\sqrt{\beta} $} \\ 
+\multicolumn{2}{c}{$ \sqrt{a}-\sqrt{\beta} \;\;\;\longrightarrow\;\;\; \sqrt{a}+\sqrt{\beta} $} \\
+\end{tabular} 
+\end{center}
+\item Μετά τις πράξεις, στον παρονομαστή προκύπτει το ανάπτυγμα της ταυτότητας με αποτέλεσμα οι ρίζες να υψωθούν στο τετράγωνο και να απαλοιφθούν.
+\[ \frac{A}{\sqrt{a}\pm\sqrt{\beta}}=\frac{A\left(\!\!\sqrt{a}-\!\!\sqrt{\beta} \right) }{\left( \!\!\sqrt{a}-\!\!\sqrt{\beta}\right) \left( \!\!\sqrt{a}+\!\!\sqrt{\beta}\right) }=\frac{A\left(\!\!\sqrt{a}-\!\!\sqrt{\beta} \right) }{\!\!\sqrt{a}^2-\!\!\sqrt{\beta}^2 }=\frac{A\left(\!\!\sqrt{a}-\!\!\sqrt{\beta} \right) }{a-\beta} \]
+\end{bhma}
+\end{document}
