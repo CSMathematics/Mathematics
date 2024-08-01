@@ -1,0 +1,397 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\twocolumn[{
+\centering
+\kerkissans{{\huge Γραμμικά συστήματα}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
+\paragraph{Γραμμική εξίσωση}
+\askhsh Για καθεμιά από τις παρακάτω εξισώσεις να γραφτούν οι συντελεστές καθώς και ο σταθερός όρος.
+\begin{multicols}{2}
+\begin{alist}
+\item $ 2x+y=8 $
+\item $ -3x+7y=-1 $
+\item $ x=2 $
+\item $ y=9 $
+\item $ \sqrt{2}x+\frac{y}{4}=1 $
+\item $ 2x=y $
+\end{alist}
+\end{multicols}
+\askhsh Να εξεταστεί αν το σημείο $ A(2,1) $ ανήκει σε καθεμία από τις παρακάτω ευθείες.
+\begin{multicols}{2}
+\begin{alist}
+\item $ x-3y=4 $
+\item $ 2x+3y=7 $
+\item $ 4x+2y=5 $
+\item $ 8x-7y=9 $
+\item $ y=3 $
+\item $ x=2 $
+\end{alist}
+\end{multicols}
+\askhsh Να βρεθεί ποιο ή ποια από τα παρακάτω σημεία ανήκουν στην ευθεία $ x+4y=9 $.
+\begin{multicols}{2}
+\begin{alist}
+\item $ A(2,-3) $
+\item $ A(1,2) $
+\item $ A(-3,3) $
+\item $ A(0,2) $
+\end{alist}
+\end{multicols}
+\askhsh Να βρεθούν τα σημεία τομής των παρακάτω ευθειών με τους άξονες $ x'x $ και $ y'y $.
+\begin{multicols}{2}
+\begin{alist}
+\item $ x-2y=4 $
+\item $ 4x-y=8 $
+\item $ 2x-3y=-6 $
+\item $ 7x-4y=11 $
+\end{alist}
+\end{multicols}
+\askhsh Να βρεθούν τα σημεία τομής των παρακάτω ευθειών με τους άξονες $ x'x $ και $ y'y $.
+\begin{multicols}{2}
+\begin{alist}
+\item $ x=3 $
+\item $ y=5 $
+\item $ -2x=-7 $
+\item $ 2y=4 $
+\end{alist}
+\end{multicols}
+\askhsh Να βρεθεί η μορφή των λύσεων καθεμιάς από τις παρακάτω εξισώσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $ x-2y=4 $
+\item $ 3x+4y=7 $
+\item $ x=7 $
+\item $ y=-4 $
+\end{alist}
+\end{multicols}
+\askhsh Να σχεδιαστούν οι ακόλουθες ευθείες σε ορθογώνιο σύστημα συντεταγμένων.
+\begin{multicols}{2}
+\begin{alist}
+\item $ x-3y=6 $
+\item $ 2x-y=-3 $
+\item $ x=5 $
+\item $ y=3 $
+\end{alist}
+\end{multicols}
+\paragraph{Γραμμικό Σύστημα}
+\askhsh Για καθένα από τα παρακάτω γραμμικά συστήματα, να γράψετε τους συντελεστές των μεταβλητών και τους σταθερούς όρους.
+\begin{alist}
+\begin{multicols}{2}
+\item $ \systeme{3x-y=5,2x+4y=7} $
+\item $ \systeme{x-y=4,8x+5y=0} $
+\item $ \systeme{\frac{3x}{4}-\frac{y}{2}=\frac{1}{5},\frac{3x}{4}-\frac{y}{2}=\frac{1}{5}} $
+\item $ \systeme{{0,1}x+{1.2}y=2,x-{0,4}y=3} $
+\end{multicols}
+\item $ \systeme{\sqrt{3}x-\sqrt{2}y=4,{\left(\sqrt{5}-1\right)}x-y=9} $
+\end{alist}
+\askhsh Για καθένα από τα παρακάτω γραμμικά συστήματα, να γράψετε τους συντελεστές των μεταβλητών και τους σταθερούς όρους.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{x-y=5,y=3} $
+\item $ \systeme{x=2,y=-4} $
+\item $ \systeme{x=2y,x-y=2} $
+\item $ \systeme{x+3y=0,y=0} $
+\end{alist}
+\end{multicols}
+\paragraph{Μεθοδος Αντικαταστασης}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο της αντικατάστασης.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{x-y=1,x=4} $
+\item $ \systeme{2x+4y=8,y=3} $
+\item $ \systeme{x=4,x-y=9} $
+\item $ \systeme{x-y=2,x+y=8} $
+\end{alist}
+\end{multicols}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο της αντικατάστασης.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{3x+2y=5,2x-y=1} $
+\item $ \systeme{x+4y=-2,3x-7y=13} $
+\item $ \systeme{4x-3y=-1,5x-2y=4} $
+\item $ \systeme{7x+2y=29,3x-y=18} $
+\end{alist}
+\end{multicols}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο της αντικατάστασης.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{x-2y=4,2x-4y=8} $
+\item $ \systeme{3x-4y=1,-6x+8y=-2} $
+\item $ \systeme{4x+2y=6,6x+3y=9} $
+\end{alist}
+\end{multicols}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο της αντικατάστασης.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{-x+y=2,2x-2y=3} $
+\item $ \systeme{x=2y-1,4x-8y=5} $
+\item $ \systeme{2x+y=1,y=7-2x} $
+\end{alist}
+\end{multicols}
+\paragraph{Μεθοδος Αντιθετων Συντελεστων}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο των αντίθετων συντελεστών.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{x-y=3,x+y=7} $
+\item $ \systeme{2x-3y=1,4x-5y=1} $
+\item $ \systeme{x+y=10,3x+y=16} $
+\item $ \systeme{-x-y=4,7x+4y=-19} $
+\end{alist}
+\end{multicols}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο των αντίθετων συντελεστών.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{4x-5y=-1,3x+7y=10} $
+\item $ \systeme{4x-y=7,x+2y=4} $
+\item $ \systeme{11x-8y=27,5x+9y=-13} $
+\item $ \systeme{8x+6y=28,7x-5y=4} $
+\end{alist}
+\end{multicols}
+\paragraph{Μεθοδος Οριζουσων}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο των οριζουσών.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{2x+y=5,x-4y=-2} $
+\item $ \systeme{3x+5y=16,4x-y=6} $
+\item $ \systeme{x+5y=12,7x+3y=20} $
+\item $ \systeme{6x-y=20,4x+9y=-6} $
+\end{alist}
+\end{multicols}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με τη μέθοδο των οριζουσών.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{2x+y=5,4x+2y=3} $
+\item $ \systeme{4x+2y=8,6x+3y=12} $
+\item $ \systeme{x-y=3,2x-2y=5} $
+\item $ \systeme{3x+5y=2,6x+10y=4} $
+\end{alist}
+\end{multicols}
+\paragraph{Γραφικη Επιλυση}
+\askhsh Να λυθούν γραφικά τα παρακάτω γραμμικά συστήματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $ \systeme{x-y=3,3x+y=13} $
+\item $ \systeme{2x+y=4,x+4y=8} $
+\item $ \systeme{3x-y=2,6x-2y=4} $
+\item $ \systeme{x-2y=-3,-2x+4y=5} $
+\end{alist}
+\end{multicols}
+\askhsh Να βρεθούν, αν υπάρχουν, τα κοινά σημεία των παρακάτω ευθειών.
+\begin{alist}
+\item $ x+3y=6 $ και $ 2x+y=8 $
+\item $ 3x+4y=5 $ και $ -x+5y=3 $
+\item $ 2x-y=10 $ και $ 4x-2y=7 $
+\item $ 3x-y=2 $ και $ 6x-2y=4 $
+\end{alist}
+\paragraph{Συνθετα Συστηματα}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με οποιαδήποτε μέθοδο επίλυσης.
+\begin{alist}
+\item $ \ccases{2(x-1)+3(y+2)=11\\x+3-(4-y)=2} $
+\item $ \ccases{3(x+y)-2y=1+x\\x-4y+2=3x+4} $
+\end{alist}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με οποιαδήποτε μέθοδο επίλυσης.
+\begin{alist}
+\item $ \ccases{4(x-3)+3(y+2)=1\\3x-5=2(3-y)+2} $
+\item $ \ccases{5(x-y)+3(2x+y)=16\\15-x-y=3x+2y-2} $
+\end{alist}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με οποιαδήποτε μέθοδο επίλυσης.
+
+\begin{alist}[leftmargin=3mm]
+\item $ \ccases{
+2(x-1)-(y-2)=9\\
+-(1-x)+3y=0} $
+\item $ \ccases{
+2(x-1)+3(y+2)=13\\
+x-(2y-1)=2} $
+\item $\ccases{
+\;2(x-2)+3(y+1)=1\\
+\;4x-(2-y)=2}$
+\end{alist}
+\askhsh Να λυθούν τα παρακάτω γραμμικά συστήματα με οποιαδήποτε μέθοδο.
+\begin{enumerate}[label=\roman*.,itemsep=3mm]
+\item $\ccases{
+\;(2x-1)(y+1)-(x+4)(2y-3)=1\\
+\;(1-x)(3y+1)+(x+2)(3y+4)=2}$
+\item $\ccases{
+\;\dfrac{x+1}{3}-\dfrac{3(y-2)}{4}=1\\[3mm]
+\;\dfrac{x}{2}-\dfrac{2-y}{2}=x+y}$
+\item $\ccases{
+\;\dfrac{x-1}{2}+\dfrac{x-y}{3}=1-2x\\[3mm]
+\;\dfrac{3y-x}{4}-\dfrac{3(y-2x)}{2}=\dfrac{1}{8}}$
+\item $\ccases{
+\;\dfrac{3x^2-x+1}{3}-\dfrac{2x^2-y}{2}=-2\\[3mm]
+\;\dfrac{5y^2-x}{5}-\dfrac{y(3y-2)}{3}=\dfrac{1}{8}}$
+\end{enumerate}
+\paragraph{Γραμμικά Συστήματα $ 3\times3$}
+\askhsh Να επιλυθούν τα παρακάτω $ 3\times3 $ γραμμικά συστήματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\ccases{
+3x-2y+z=6\\
+x-3y-z=3\\
+2x+y-4z=-3}$
+\item $\ccases{
+x-2y+z=4\\
+x-y-z=2\\
+2x+3y-3z=0}$
+\item $\ccases{
+x-2y+3z=6\\
+2x-4y+6z=12\\
+x+y-z=0}$
+\end{alist}\end{multicols}
+\askhsh Οι ορίζουσες $ D,D_x,D_y $ ενός $ 2\times2 $ γραμμικού συστήματος με μεταβλητές $ x,y $ ικανοποιούν τις παρακάτω εξισώσεις :
+\[ \ccases{
+\;D-2D_{x}-2D_{y}=-6\\
+\;4D-3D_{x}-2D_{y}=-1\\
+\;2D+3D_{x}-D_{y}=-4} \]
+Να βρεθεί η λύση $ (x,y) $ του $ 2\times2 $ γραμμικού συστήματος.\\
+\askhsh Να βρεθεί η εξίσωση της παραβολής $ y=ax^2+\beta x+\gamma $ η οποία διέρχεται από τα σημεία
+\begin{alist}
+\item $ A(-2,1) $ , $ B(3,0) $ και $ \varGamma(1,-2) $
+\item $ A(-1,1) $ , $ B(1,3) $ και $ \varGamma(0,-2) $
+\item $ A(-4,3) $ , $ B(1,2) $ και $ \varGamma(0,1) $
+\item $ A(-2,4) $ , $ B(3,9) $ και $ \varGamma(1,1) $
+\end{alist}
+\paragraph{Προβλήματα}
+\askhsh Ένα ξενοδοχείο έχει 45 δωμάτια, άλλα δίκλινα και άλλα τρίκλινα. Συνολικά τα κρεβάτια είναι 110. Πόσα είναι τα δίκλινα και πόσα τα τρίκλινα δωμάτια;\\\\
+\askhsh Ένας μαθητής έχει στο πορτοφόλι του 15 χαρτονομίσματα. Κάποια είναι των 5\officialeuro\; και κάποια των 10\officialeuro. Με τα χρήματα αυτά αγοράζει ένα κινητό τηλέφωνο αξίας 112\officialeuro\; και παίρνει ρέστα 8\officialeuro. Πόσα χαρτονομίσματα είναι των 5\officialeuro\; και πόσα των 10\officialeuro;\\\\
+\askhsh Μια εταιρία κινητής τηλεφωνίας έχει τις εξής χρεώσεις : 0{,}07\officialeuro/sms και 0{,}09\officialeuro/1' ομιλίας. Ένας συνδρομητής, με μια κάρτα των 10\officialeuro\;ξόδεψε συνολικά 120 λεπτά και μηνύματα. Πόσα ήταν τα λεπτά ομιλίας και πόσα τα μηνύματα;\\\\
+\askhsh Ένας πατέρας είναι 32 χρόνια μεγαλύτερος από το γιο του. Σε 8 χρόνια ο πατέρας θα έχει τα 3πλάσια χρόνια από το γιο του. Ποια είναι η ηλικία του πατέρα και του γιου;\\\\
+\askhsh Σε ένα κουτί υπάρχουν κόκκινες και πράσινες μπάλες. Αν προσθέσουμε στο κουτί 3 κόκκινες μπάλες, οι πράσινες θα είναι διπλάσιες από τις κόκκινες ενώ αν προσθέσουμε 4 πράσινες τότε, κόκκινες και πράσινες θα είναι ίσες. Πόσες μπάλες από το κάθε χρώμα υπάρχουν;\\\\
+\askhsh Σε μια φάρμα ζουν 80 σε πλήθος κότες και αγελάδες. Αν όλα τα ζώα έχουν συνολικά 260 πόδια να βρεθούν πόσες κότες και πόσες αγελάδες ζουν στη φάρμα.\\\\
+\askhsh Σε ένα ορθογώνιο, το μήκος είναι διπλάσιο του πλάτους ενώ η περίμετρος είναι ίση με το μήκος αυξημένο κατά 12 μέτρα. Να βρεθούν οι πλευρές του ορθογωνίου.\\\\
+\askhsh Η περίμετρος του τριγώνου του παρακάτω σχήματος είναι $ 38 $ εκατοστά. Να βρεθούν πραγματικοί οι αριθμοί $ x, y\in\mathbb{R} $ ώστε το τρίγωνο να είναι ισοσκελές.
+\vspace{-5mm}
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(1.5,1){A}
+\tkzDrawPolygon[pl](A,B,C)
+\tkzText(.2,.6){{\scriptsize $ 2x+6 $}}
+\tkzText(3.2,.6){{\scriptsize $ 3x+2y-4 $}}
+\tkzText(1.5,-.24){{\scriptsize $ y+7 $}}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzDrawPoints(A,B,C)
+\end{tikzpicture}
+\end{center}
+\paragraph{Παραμετρικά Συστήματα - Εύρεση παραμέτρου}
+\askhsh Να βρεθούν οι τιμές της παραμέτρου $ \lambda\in\mathbb{R} $ ώστε η ευθεία $ \lambda x+(\lambda-1)y=4 $ να διέρχεται από το σημείο $ A(-2,3) $.\\\\
+\askhsh Να βρεθούν οι τιμές της παραμέτρου $ \lambda\in\mathbb{R} $ ώστε η ευθεία $ (\lambda^2-1)x+(1-\lambda)y=2 $ να διέρχεται από το σημείο $ A(1,3) $.\\\\
+\askhsh Αν γνωρίζουμε ότι το σημείο $ A(3\lambda-1,4-\lambda) $ ανήκει στην ευθεία $ 2x+3y=1 $ τότε να βρεθούν οι τιμές της παραμέτρου $ \lambda\in\mathbb{R} $.\\\\
+\askhsh Δίνεται το παρακάτω παραμετρικό σύστημα με παράμετρο $ \lambda\in\mathbb{R} $.
+\[ \ccases{
+\lambda x+(\lambda+2)y=\lambda\\
+x+ \lambda y=\lambda-1} \]
+\begin{alist}
+\item Να βρεθούν οι ορίζουσες $ D,D_x,D_y $ του συστήματος με τη βοήθεια της παραμέτρου $ \lambda $.
+\item Να εξεταστεί για ποιες τιμές της παραμέτρου το σύστημα έχει μοναδική λύση.
+\item Για ποια τιμή της παραμέτρου το σύστημα είναι αόριστο και για ποια αδύνατο;
+\end{alist}
+\askhsh Να βρεθούν οι λύσεις των παρακάτω συστημάτων για κάθε τιμή της παραμέτρου $ \lambda\in\mathbb{R} $.
+\begin{alist}
+\item $\ccases{
+2\lambda x+(\lambda+3)y=2\\
+x+\lambda y=-1}$
+\item $\ccases{
+x+\lambda y=2-\lambda\\
+\lambda x+y=\lambda}$
+\end{alist}
+\askhsh Να βρεθούν οι λύσεις των παρακάτω συστημάτων για κάθε τιμή της παραμέτρου $ \lambda\in\mathbb{R} $.
+\begin{alist}
+\item $\ccases{
+(\lambda^2+1)x-y=2\\
+2\lambda x+y=4}$
+\item $\ccases{
+(\lambda+2)x-3y=\lambda+2\\
+\lambda x+(\lambda-2)y=1}$
+\item $\ccases{
+\lambda^2x+4y=2\lambda\\
+(\lambda-1) x+y=\lambda-1}$
+\end{alist}
+\askhsh Να βρεθούν οι λύσεις των παρακάτω συστημάτων για κάθε τιμή της παραμέτρου $ \lambda\in\mathbb{R} $.
+\begin{alist}
+\item $\ccases{
+\lambda x+(\lambda-3)y=-1\\
+2x+(\lambda-3)y=1}$
+\item $\ccases{
+(\lambda+1) x-3y=-1\\
+x+(\lambda-3)y=1}$
+\end{alist}
+\end{document}

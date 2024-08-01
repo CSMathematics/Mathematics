@@ -1,104 +1,79 @@
-\PassOptionsToPackage{no-math,cm-default}{fontspec}
-\documentclass[twoside,nofonts,internet,twocolumn]{askhseis}
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
 \usepackage{amsmath}
-\usepackage{xgreek}
-\let\hbar\relax
-\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
-\newfontfamily\scfont{GFS Artemisia}
-\font\icon = "Webdings"
-\usepackage[amsbb]{mtpro2}
-\usepackage{tikz,pgfplots}
-\tkzSetUpPoint[size=7,fill=white]
-\xroma{red!70!black}
-%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
-\usepackage{tikz}
-\usepackage{tkz-euclide}
-\usetkzobj{all}
-\usepackage[framemethod=TikZ]{mdframed}
-\usetikzlibrary{decorations.pathreplacing}
-\usepackage{pgfplots}
-\usetkzobj{all}
-%-----------------------
-
-
-\usepackage{calc}
-\usepackage{hhline}
-\usepackage{float}
-\usepackage{subfig}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
 \usepackage[explicit]{titlesec}
-\usepackage{graphicx}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage{enumitem}
-\usepackage{tabularx}
-\usepackage[decimalsymbol=comma]{siunitx}
-\usetikzlibrary{backgrounds}
-\usepackage{sectsty}
-\sectionfont{\centering}
-\usepackage{enumitem}
-\setlist[enumerate]{label=\bf{\large \arabic*.}}
-\usepackage{adjustbox,mathimatika,gensymb,wrap-rl}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
 
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
 
-%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
-\usepackage{mathtools}
-%----------------------
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
 
-%-------- ΠΙΝΑΚΕΣ ---------
-\usepackage{booktabs}
-%----------------------
-%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
-\usepackage{calculator}
-%----------------------------
-%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
-\usepackage{array}
-\newcommand\diag[5]{%
-\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
-$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
-\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
-\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
-minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
-\draw[line cap=round] (box.north west) -- (box.south east);
-\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
-\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
-\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
-%---------------------------------
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
 
-%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
-\newcommand{\orag}[3]{\node at (#1)
-{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
 
-\newcommand{\kag}[3]{\node at (#1)
-{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
 
-\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
-{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
-%-----------------------------------------
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
 
-%------ Tikz - Item ----------------
-\newcommand{\tikzitem}{\leavevmode\vadjust{\vspace{-\baselineskip}}\newline}
-%\begin{tikzpicture}[level/.style={sibling distance=50mm/#1},baseline]
-%-----------------------------------
-
-
-
-
-\newcommand{\tss}[1]{\textsuperscript{#1}}
-\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
-%---------- ΛΙΣΤΕΣ ----------------------
-\newlist{bhma}{enumerate}{3}
-\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
-\newlist{tropos}{enumerate}{3}
-\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
-% Αν μπει το bhma μεσα σε tropo τότε
-%\begin{bhma}[leftmargin=.7cm]
-\tkzSetUpPoint[size=7,fill=white]
-\tikzstyle{pl}=[line width=0.3mm]
-\tikzstyle{plm}=[line width=0.4mm]
-\usepackage{amsmath}
-
-
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
 
 \newcommand{\roloi}[4][]{
 \draw[line width=.5mm,#1] (0,0) circle(2);
@@ -115,80 +90,15 @@ minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
 \foreach \t in {1,2,...,60}{
 \draw[#1](90-6*\t:1.93)--(90-6*\t:2);}}
 
-
 \begin{document}
-\twocolkentro{
-\titlos{Άλγεβρα Β΄ Λυκείου}{Τριγωνομετρία}{Τριγωνομετρικοί Αριθμοί}
-\thewria}
-\begin{enumerate}
-\item 
-\end{enumerate}
-\twocolkentro{\askhseis}
-\begin{enumerate}
-\item \textbf{Μετατροπή μοιρών σε ακτίνια}\\
-Οι παρακάτω γωνίες οι οποίες είναι δοσμένες σε μοίρες να εκφραστούν σε ακτίνια (rad).
-\begin{multicols}{4}
-\begin{rlist}[leftmargin=4mm]
-\item $ 30\degree $
-\item $ 60\degree $
-\item $ 45\degree $
-\item $ 120\degree $
-\item $ 150\degree $
-\item $ 300\degree $
-\item $ 270\degree $
-\item $ 240\degree $
-\item $ 330\degree $
-\item $ 400\degree $
-\item $ 480\degree $
-\item $ 1200\degree $
-\end{rlist}
-\end{multicols}
-\item \textbf{Μετατροπή ακτινίων σε μοίρες}\\
-Οι παρακάτω γωνίες οι οποίες είναι δοσμένες σε ακτίνια να εκφραστούν σε μοίρες.
-\begin{multicols}{4}
-\begin{rlist}[leftmargin=4mm]
-\item $ \frac{\pi}{4} $
-\item $ \frac{2\pi}{3} $
-\item $ \frac{\pi}{6} $
-\item $ \frac{3\pi}{4} $
-\item $ \frac{2\pi}{5} $
-\item $ \pi $
-\item $ \frac{3\pi}{2} $
-\item $ \frac{4\pi}{5} $
-\item $ 24\pi $
-\item $ \frac{35\pi}{3} $
-\item $ \frac{105\pi}{4} $
-\item $ 400\pi $
-\end{rlist}
-\end{multicols}
-\item \textbf{Τριγωνομετρικοί αριθμοί}\\
-Να υπολογίσετε τους τριγωνομετρικούς αριθμούς των παρακάτω γωνιών.
-\begin{multicols}{3}
-\begin{rlist}
-\item $ 390\degree $
-\item $ 450\degree $
-\item $ 780\degree $
-\item $ 1260\degree $
-\item $ 1125\degree $
-\item $ 1845\degree $
-\end{rlist}
-\end{multicols}
-\item \textbf{Τρ. αριθμοί γωνίας σε καρτεσιανό σύστημα}\\
-Να υπολογίσετε τους τριγωνομετρικούς αριθμούς της γωνίας $ x\hat{O}M $ η οποία σχηματίζεται μέσα σε ένα ορθοκανονικό σύστημα συντεταγμένων $ xOy $ για καθένα από τα παρακάτω σημεία $ M $.
-\begin{multicols}{3}
-\begin{rlist}[leftmargin=4mm]
-\item $ M(3,4) $
-\item $ M(5,12) $
-\item $ M(-8,15) $
-\item $ M(6,-8) $
-\item $ M(-4,-3) $
-\item $ M(12,-9) $
-\end{rlist}
-\end{multicols}
-\item \textbf{Τριγωνομετρικοί αριθμοί σε τρίγωνο}\\
+\twocolumn[{
+\centering
+\kerkissans{{\huge Η έννοια του τριγωνομετρικού αριθμού}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
+\paragraph{Τριγωνομετρικοί αριθμοί σε τρίγωνο}
+\askhsh
 Να υπολογίσετε τους τριγωνομετρικούς αριθμούς της γωνίας $ \omega $ σε καθένα από τα παρακάτω ορθογώνια τρίγωνα.
 \begin{multicols}{2}
-\begin{rlist}
+\begin{alist}
 \item\tikzitem \begin{tikzpicture}
 \draw (-1,0.5) -- (-1,-1) -- (1,-1) -- cycle;
 \draw (0.5955,-0.7061) arc (143.9987:180:0.5);
@@ -226,20 +136,86 @@ minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
 \draw  (-1,-0.8) rectangle (-0.8,-1);
 \node at (-1.5,-1.2) {\footnotesize$9$};
 \end{tikzpicture}
-\end{rlist}
+\end{alist}
 \end{multicols}
-\item \textbf{Τρ. αριθμοί βασικών γωνιών}\\
-Να υπολογίσετε τις παρακάτω αριθμιτικές παραστάσεις.
+\paragraph{Μοίρες - Ακτίνια}
+\askhsh
+Οι παρακάτω γωνίες οι οποίες είναι δοσμένες σε μοίρες να εκφραστούν σε ακτίνια (\eng{rad}).
+\begin{multicols}{3}
+\begin{alist}
+\item $ 30\degree $
+\item $ 60\degree $
+\item $ 45\degree $
+\item $ 120\degree $
+\item $ 150\degree $
+\item $ 300\degree $
+\item $ 270\degree $
+\item $ 240\degree $
+\item $ 330\degree $
+\item $ 400\degree $
+\item $ 480\degree $
+\item $ 1200\degree $
+\end{alist}
+\end{multicols}
+\askhsh
+Οι παρακάτω γωνίες οι οποίες είναι δοσμένες σε ακτίνια να εκφραστούν σε μοίρες.
+\begin{multicols}{3}
+\begin{alist}
+\item $ \frac{\pi}{4} $
+\item $ \frac{2\pi}{3} $
+\item $ \frac{\pi}{6} $
+\item $ \frac{3\pi}{4} $
+\item $ \frac{2\pi}{5} $
+\item $ \pi $
+\item $ \frac{3\pi}{2} $
+\item $ \frac{4\pi}{5} $
+\item $ 24\pi $
+\item $ \frac{35\pi}{3} $
+\item $ \frac{105\pi}{4} $
+\item $ 400\pi $
+\end{alist}
+\end{multicols}
+\paragraph{Τριγωνομετρικοί αριθμοί}
+\askhsh
+Να υπολογίσετε τους τριγωνομετρικούς αριθμούς των παρακάτω γωνιών.
+\begin{multicols}{3}
+\begin{alist}
+\item $ 390\degree $
+\item $ 450\degree $
+\item $ 780\degree $
+\item $ 1260\degree $
+\item $ 1125\degree $
+\item $ 1845\degree $
+\end{alist}
+\end{multicols}
+\askhsh
+Να υπολογίσετε τους τριγωνομετρικούς αριθμούς της γωνίας $ x\hat{O}M $ η οποία σχηματίζεται μέσα σε ένα ορθοκανονικό σύστημα συντεταγμένων $ xOy $ για καθένα από τα παρακάτω σημεία $ M $.
 \begin{multicols}{2}
-\begin{rlist}[leftmargin=4mm]
+\begin{alist}
+\item $ M(3,4) $
+\item $ M(5,12) $
+\item $ M(-8,15) $
+\item $ M(6,-8) $
+\item $ M(-4,-3) $
+\item $ M(12,-9) $
+\end{alist}
+\end{multicols}
+\askhsh
+Να υπολογίσετε τους τριγωνομετρικούς αριθμούς της γωνίας $ \omega $ σε καθένα από τα παρακάτω ορθογώνια τρίγωνα.
+\paragraph{Τριγωνομετρικοί αριθμοί βασικών γωνιών}
+\askhsh
+Να υπολογίσετε τις παρακάτω αριθμητικές παραστάσεις.
+\begin{multicols}{2}
+\begin{alist}
 \item $ \hm{30\degree}\cdot\hm{60\degree} $
 \item $ \hm^2{40\degree}-2\syn{60\degree} $
 \item $ \ef{45\degree}+2\syn^2{30\degree} $
 \item $ \syf^2{60\degree}-\hm^2{60\degree} $
-\end{rlist}
+\end{alist}
 \end{multicols}
-\item Ένα κτήριο ύψους $ h $ δημιουργεί σκιά στο έδαφος μήκους $ 250m $. Αν γνωρίζουμε ότι η γωνία που σχηματίζουν οι ακτίνες του ήλιου με το έδαφος είναι $ 30\degree $ τότε να βρεθεί το ύψος του κτηρίου.
-\item Δίνεται ημικύκλιο με διάμετρο $ AB=10cm $ και ένα τυχαίο σημείο $ \varGamma $ του ημικυκλίου. Αν $ M $ είναι το μέσο του τόξου $ \widearc{B\varGamma} $ και $ \varDelta $ το σημείο τομής των ευθειών $ BM $ και $ A\varGamma $ τότε:
+\paragraph{Προβλήματα}
+\askhsh Ένα κτήριο ύψους $ h $ δημιουργεί σκιά στο έδαφος μήκους $ 250m $. Αν γνωρίζουμε ότι η γωνία που σχηματίζουν οι ακτίνες του ήλιου με το έδαφος είναι $ 30\degree $ τότε να βρεθεί το ύψος του κτηρίου.\\\\
+\askhsh Δίνεται ημικύκλιο με διάμετρο $ AB=10cm $ και ένα τυχαίο σημείο $ \varGamma $ του ημικυκλίου. Αν $ M $ είναι το μέσο του τόξου $ \widearc{B\varGamma} $ και $ \varDelta $ το σημείο τομής των ευθειών $ BM $ και $ A\varGamma $ τότε:
 \begin{center}
 \begin{tikzpicture}
 \tkzDefPoint(0:1.5){A}
@@ -262,22 +238,22 @@ minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
 \node at (0,-0.25) {\footnotesize$10$};
 \end{tikzpicture}
 \end{center}
-\begin{rlist}
+\begin{alist}
 \item να δείξετε ότι $ BM=\varDelta M $ και $ A\varDelta=AB $.
 \item να δείξετε ότι $ B\varDelta=20\hm{x} $.
 \item αν $ x=45\degree $ να βρείτε τα $ B\varDelta,AM $ και $ A\varGamma $.
 \item για ποιά τιμή του $ x $ το τρίγωνο $ AB\varDelta $ γίνεται ισόπλευρο;
-\end{rlist}
-\item Σε ένα αναλογικό ρολόι τοίχου δείκτης των ωρών έχει μήκος $ 7cm $, ο δείκτης των λεπτών έχει μήκος $ 12cm $ ενώ ο δείκτης των δευτερολέπτων έχει μήκος $ 10cm $.
+\end{alist}
+\askhsh Σε ένα αναλογικό ρολόι τοίχου δείκτης των ωρών έχει μήκος $ 7cm $, ο δείκτης των λεπτών έχει μήκος $ 12cm $ ενώ ο δείκτης των δευτερολέπτων έχει μήκος $ 10cm $.
 \begin{center}
 \begin{tikzpicture}[scale=.8]
 \roloi[black]{3}{35}{55}
 \end{tikzpicture}
 \end{center}
-\begin{rlist}
+\begin{alist}
 \item Να υπολογίσετε το μήκος του τόξου που διαγράφει ο δείκτης των δευτερολέπτων σε $ 20 $ δευτερόλεπτα.
 \item Να υπολογίσετε το μέτρο και το μήκος του τόξου που διαγράφει ο ωροδείκτης σε $ 2 $ ώρες και $ 10 $ λεπτά.
 \item Να υπολογίσετε το μήκος του τόξου που διαγράφει ο λεπτοδείκτης από τις $ 3:30 $ μέχρι τις $ 5:10 $. Ποιο είναι το μέτρο του τόξου αυτού και ποιοι είναι οι τριγωνομετρικοί αριθμοί του;
-\end{rlist}
-\end{enumerate}
+\end{alist}
+
 \end{document}
