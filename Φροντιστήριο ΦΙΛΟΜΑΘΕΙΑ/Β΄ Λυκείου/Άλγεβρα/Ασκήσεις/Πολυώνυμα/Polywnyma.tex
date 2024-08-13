@@ -1,0 +1,187 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+
+\begin{document}
+\twocolumn[{
+\centering
+\kerkissans{{\huge Η έννοια του πολυωνύμου}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
+\paragraph{Βασικές έννοιες}
+\askhsh Για καθένα από τα παρακάτω πολυώνυμα να βρείτε τους όρους, τους συντελεστές, το σταθερό όρο και το βαθμό.
+\begin{alist}
+\item $P(x)=2x^3-4x^2+5x-7$
+\item $Q(x)=x^2+5x-2$
+\item $S(x)=-x^4+x^3-5x+8$
+\item $K(x)=x^2-x^3+1$
+\item $M(x)=\dfrac{x^3}{4}-\sqrt{2}x^2+\dfrac{3x}{5}$
+\end{alist}
+\askhsh Βρείτε το βαθμό σε καθένα από τα παρακάτω πολυώνυμα.
+\begin{alist}
+\item $P(x)=3x-x^3+5+x^2$
+\item $Q(x)=4x^2+0x^4-x^3+7$
+\item $R(x)=x^4-2x^2+4x^3-x^4+7-5x$
+\item $S(x)=0x^2+0x+3$
+\item $K(x)=-5$
+\item $G(x)=0$
+\end{alist}
+\askhsh Δίνεται το πολυώνυμο
+\[ P(x)=\left(\lambda^2-3\lambda\right)x^3-(\lambda-3)x^2+\left(9-\lambda^2\right)x+2\lambda-6 \]
+με $\lambda\in\mathbb{R}$. Να βρείτε το βαθμό του $P(x)$ για κάθε τιμή της παραμέτρου $\lambda$.
+\paragraph{Ισότητα πολυωνύμων}
+\askhsh Βρείτε τις τιμές της παραμέτρου $a\in\mathbb{R}$ έτσι ώστε το πολυώνυμο
+\[ P(x)=(|a|-1)x^3+(a^2-a)x^2+(2a-2)x+a^2-1 \]
+να είναι το μηδενικό πολυώνυμο.\\\\
+\askhsh Να υπολογίσετε τις τιμές της παραμέτρου $\lambda\in\mathbb{R}$ έτσι ώστε τα πολυώνυμα
+\begin{align*}
+A(x)&=(\lambda+1)x^3+(\lambda^2+2)x^2+2\lambda x-3\ \text{και}\\
+B(x)&=\left(\lambda^2-1\right)x^3+3\lambda x^2 +4x-1-\lambda
+\end{align*}
+να είναι ίσα.\\\\
+\askhsh Να βρεθούν οι τιμές της παραμέτρου $ a $ ώστε τα παρακάτω πολυώνυμα να είναι ίσα.
+\begin{align*}
+P(x)&=(a^2-3a)x^3+x^2+a
+\;\;\textrm{ και }\\Q(x)&=-2x^3+a^2x^2+(a^3-1) x + 1
+\end{align*}
+\paragraph{Τιμές - Ρίζες πολυωνύμων}
+\askhsh Δίνεται το πολυώνυμο $P(x)=x^3-3x^2+7x-10$.
+\begin{alist}
+\item Να υπολογίσετε τις τιμές $P(-2),P(1),P(0)$ και $P(3)$.
+\item Να βρεθεί η τιμή της παράστασης $3P^2(2)-4P(-1)+P(0)$.
+\end{alist}
+\askhsh Δίνεται το πολυώνυμο $P(x)=x^3-4x^2+x+6$. Να εξετάσετε ποιοι από τους αριθμούς $\pm1,\pm2,\pm3$ είναι ρίζες του $P(x)$.\\\\
+\askhsh Δίνεται το πολυώνυμο \[P(x)=x^3+ax^2-(2a-1)x-3, \text{με }a\in\mathbb{R},\] για το οποίο ισχύει $P(2)=7$.
+\begin{alist}
+\item Να δείξετε ότι $a=3$.
+\item Να γράψετε τους όρους και τους συντελεστές του $P(x)$.
+\item Να υπολογίσετε τις τιμές $P(3),P(-1),P(0)$ και $P(-4)$.
+\end{alist}
+\askhsh Δίνεται το πολυώνυμο 
+\[ P(x)=x^3-(3-a)x^2+a^2x-4 \]
+με $a\in\mathbb{R}$, το οποίο έχει ρίζα τον αριθμό $1$.
+\begin{alist}
+\item Να δείξετε ότι $a=2$.
+\item Να βρεθούν οι τιμές $P(-1),P(2)$ και $P(0)$.
+\end{alist}
+\askhsh Δίνεται το πολυώνυμο 3\tss{ου} βαθμού
+\[ P(x)=(a^2-1)x^3+\left(a^2-3a+2\right)x^2+(a+2)x-8 \]
+με $a\in\mathbb{R}$, για το οποίο ισχύει $P(1)=-1$.
+\begin{alist}
+\item  Να δείξετε ότι $a=2$.
+\item  Να γράψετε τους όρους και τους συντελεστές του $P(x)$.
+\item Να βρεθεί η τιμή της παράστασης \[\dfrac{2P(2)-P^2(-1)}{P(0)}\]
+\end{alist}
+\askhsh Δίνεται το πολυώνυμο \[P(x)=ax^3+\beta x^2+2x+5\]
+με $a,\beta\in\mathbb{R}$, για το οποίο ισχύει $P(2)=-1$ και $P(-1)=2$.
+\begin{alist}
+\item Να δείξετε ότι $a=1$ και $\beta=-2$.
+\item Να βρεθεί η τιμή της παράστασης $ P(P(1)) $.
+\end{alist}
+\paragraph{Πράξεις πολυωνύμων}
+\askhsh Δίνονται τα ακόλουθα πολυώνυμα $A(x)=x^3-2x^2-5x+4,\ B(x)=-x^3+3x^2+8x-10$ και $\varGamma(x)=3x-4$.
+\begin{alist}
+\item Να υπολογίσετε τα πολυώνυμα
+\begin{rlist}
+\item $P(x)=A(x)+B(x)$
+\item $Q(x)=B(x)-A(x)$
+\item $R(x)=\varGamma(x)\cdot A(x)$
+\end{rlist}
+\item Ποιος είναι ο βαθμός αυτών των πολυωνύμων?
+\end{alist}
+\askhsh Έστω $P(x)$ ένα πολυώνυμο τέτοιο ώστε 
+\[ (x-2)\cdot P(x)=x^3-2x^2+x-1 \]
+\begin{alist}
+\item Να προσδιορίσετε το πολυώνυμο $P(x)$.
+\item Υπολογίστε την τιμή της παράστασης $2P(-1)+P^2(0)$.
+\end{alist}
+\askhsh Δίνονται τα πολυώνυμα $A(x)=x^2-3x+2$ και $B(x)=x^3-x^2+4x-3$.
+Να βρεθούν τα πολυώνυμα
+\begin{multicols}{2}
+\begin{alist}
+\item $P^2(x)$
+\item $P(x)\cdot Q(x)$
+\item $P^2(x)-xQ(x)$
+\item $xP(x)-Q(x)$
+\end{alist}
+\end{multicols}
+\askhsh Δίνεται το πολυώνυμο \[ P(x)=x^4-2x^3-3x^2+4x+4 \] Να βρεθεί πολυώνυμο $ Q(x) $ έτσι ώστε να ισχύει $ Q^2(x)=P(x) $.\\\\
+\askhsh Δίνεται το πολυώνυμο \[P(x)=x^3+ax^2+\beta x+3\]
+με $a,\beta\in\mathbb{R}$, για το οποίο ισχύει $P(-2)=7$ και $P(1)=10$.
+\begin{alist}
+\item Να δείξετε ότι $a=4$ και $\beta=2$.
+\item Να βρεθεί το πολυώνυμο $ (x-1)P(x) $.
+\end{alist}
+\end{document}
