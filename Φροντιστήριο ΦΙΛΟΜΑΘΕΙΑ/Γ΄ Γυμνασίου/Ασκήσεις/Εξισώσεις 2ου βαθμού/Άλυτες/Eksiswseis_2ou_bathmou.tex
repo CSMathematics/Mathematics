@@ -1,134 +1,122 @@
-\documentclass[twoside,nofonts,internet]{askhseis}
-\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
-\usepackage[no-math,cm-default]{fontspec}
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
 \usepackage{amsmath}
-\usepackage{xunicode}
-\usepackage{xgreek}
-\let\hbar\relax
-\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
-\newfontfamily\scfont{GFS Artemisia}
-\font\icon = "Webdings"
-\usepackage{fontawesome}
-\newfontfamily{\FA}{fontawesome.otf}
-\xroma{red!70!black}
-%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
-\usepackage{tikz,pgfplots}
-\usepackage{tkz-euclide}
-\usetkzobj{all}
-\usepackage[framemethod=TikZ]{mdframed}
-\usetikzlibrary{decorations.pathreplacing}
-\tkzSetUpPoint[size=7,fill=white]
-%-----------------------
-\usepackage{calc}
-\usepackage{hhline}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
 \usepackage[explicit]{titlesec}
-\usepackage{graphicx}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage{tabularx}
-\usetikzlibrary{backgrounds}
-\usepackage{sectsty}
-\sectionfont{\centering}
-\usepackage{enumitem}
-\setlist[enumerate]{label=\bf{\large \arabic*.}}
-\usepackage{adjustbox}
-\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
-\usepackage{systeme,regexpatch}
-%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
-\usepackage{mathtools}
-%----------------------
-%-------- ΠΙΝΑΚΕΣ ---------
-\usepackage{booktabs}
-%----------------------
-%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
-\usepackage{calculator}
-%----------------------------
-%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
-\usepackage{array}
-\newcommand\diag[5]{%
-\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
-$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
-\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
-\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
-minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
-\draw[line cap=round] (box.north west) -- (box.south east);
-\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
-\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
-\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
-%---------------------------------
-%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
-\newcommand{\orag}[3]{\node at (#1)
-{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
-\newcommand{\kag}[3]{\node at (#1)
-{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
-\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
-{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
-%-----------------------------------------
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
 
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
 
-%------------------------------------------
-\newcommand{\tss}[1]{\textsuperscript{#1}}
-\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
-%---------- ΛΙΣΤΕΣ ----------------------
-\newlist{bhma}{enumerate}{3}
-\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
-\newlist{brlist}{enumerate}{3}
-\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
-\newlist{tropos}{enumerate}{3}
-\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
-% Αν μπει το bhma μεσα σε tropo τότε
-%\begin{bhma}[leftmargin=.7cm]
-\tkzSetUpPoint[size=7,fill=white]
-\tikzstyle{pl}=[line width=0.3mm]
-\tikzstyle{plm}=[line width=0.4mm]
-\usepackage{etoolbox}
-\makeatletter
-\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
-\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
-\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
-\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
-\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
-\makeatother
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
 
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
 
 \begin{document}
-\titlos{Μαθηματικά Γ΄ Γυμνασίου}{Εξισώσεις}{Εξισώσεις 2\tssL{ου} βαθμού}
-\thewria
-\begin{enumerate}
-\item
-\begin{enumerate}[label=\roman*.]
+\twocolumn[{
+\centering
+\kerkissans{{\huge Εξισώσεις 2ου βαθμού}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
+\paragraph{Ερωτήσεις θεωρίας}
+\begin{alist}
 \item Τι ονομάζουμε εξίσωση 2\textsuperscript{ου} βαθμού;
 \item Ποιός αριθμός μας δείχνει το πλήθος των ριζών μιας εξίσωσης 2\textsuperscript{ου} βαθμού;
 \item Πότε μια εξίσωση έχει 2 ρίζες, πότε μια και πότε είναι αδύνατη;
-\end{enumerate}
-\item \textbf{Να χαρακτηριστούν οι παρακάτω εξισώσεις ως σωστές (Σ) ή λανθασμένες (Λ).}
-\begin{enumerate}[label=\roman*.]
+\end{alist}
+\askhsh Να χαρακτηριστούν οι παρακάτω εξισώσεις ως σωστές (Σ) ή λανθασμένες (Λ).
+\begin{alist}
 \item Αν για μια εξίσωση 2\textsuperscript{ου} βαθμού έχουμε $ \varDelta>0 $ τότε έχει 2 άνισες λύσεις.
 \item Αν για μια εξίσωση 2\textsuperscript{ου} βαθμού έχουμε $ \varDelta<0 $ τότε έχει μια διπλή λύση.
 \item Η εξίσωση $ ax^2+\beta x+\gamma=0 $ παριστάνει μια εξίσωση 2\textsuperscript{ου} βαθμού για κάθε τιμή του $ a $.
-\end{enumerate}
-\end{enumerate}
-\newpage
-\askhseis
-\begin{enumerate}
-\item Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με παραγοντοποίηση.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\end{alist}
+\paragraph{Επίλυση εξισώσεων - Ειδικές περιπτώσεις}
+\askhsh Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με παραγοντοποίηση.
+\begin{multicols}{2}
+\begin{alist}
 \item $ x^2+4x=0 $
 \item $ x^2-5x=0 $
 \item $ 2x^2-4x=0 $
 \item $ 4x^2-3x=0 $
+\item $ 2x^2-15x=0 $
+\end{alist}
+\end{multicols}
+\askhsh Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με παραγοντοποίηση.
+\begin{multicols}{2}
+\begin{alist}
 \item $ x^2-4=0 $
 \item $ x^2-25=0 $
 \item $ 2x^2-32=0 $
 \item $ x^2+16=0 $
-\item $ 2x^3-72x=0 $
-\end{enumerate}
+\item $2x^2-3=0$
+\item $3x^2=48$
+\end{alist}
 \end{multicols}
-\item Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με τη βοήθεια του τύπου.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\paragraph{Επίλυση εξισώσεων - Τύπος}
+\askhsh Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με τη βοήθεια του τύπου.
+\begin{multicols}{2}
+\begin{alist}[leftmargin=5mm]
 \item $ x^2-3x+2=0 $
 \item $ x^2-5x+6=0 $
 \item $ x^2-7x+12=0 $
@@ -136,32 +124,32 @@ minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
 \item $ -z^2+3z+4=0 $
 \item $ 2x^2-5x+3=0 $
 \item $ \frac{1}{2}x^2-x-4=0 $
-\item $ 0{,}1x^2-0{,}7x+1{,}2=0 $
+\item {\small $ 0{,}1x^2-0{,}7x+1{,}2=0 $}
 \item $ -y^2+y+3=0 $
-\end{enumerate}
+\end{alist}
 \end{multicols}
-\item Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με τη βοήθεια του τύπου.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\askhsh Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με τη βοήθεια του τύπου.
+\begin{multicols}{2}
+\begin{alist}
 \item $ x^2-2x+1=0 $
 \item $ x^2+4x+4=0 $
 \item $ -x^2+6x-9=0 $
 \item $ 25y^2+10y+1=0 $
 \item $ z^2-z+\frac{1}{4}=0 $
 \item $ \frac{x^2}{9}-\frac{2x}{3}+1=0 $
-\end{enumerate}
+\end{alist}
 \end{multicols}
-\item Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με τη βοήθεια του τύπου.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\askhsh Να λυθούν οι παρακάτω εξισώσεις 2\textsuperscript{ου} βαθμού με τη βοήθεια του τύπου.
+\begin{multicols}{2}
+\begin{alist}
 \item $ x^2-x+1=0 $
 \item $ -x^2+x-3=0 $
 \item $ 4x^2+1=0 $
-\end{enumerate}
+\item $2x^2+x+1=0$
+\end{alist}
 \end{multicols}
-\item Να λυθούν οι παρακάτω εξισώσεις.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\askhsh Να λυθούν οι παρακάτω εξισώσεις.
+\begin{alist}
 \item $ x^2-x-4=2 $
 \item $ y^2-3y+6=2y $
 \item $ x^2-3x+1=x-2 $
@@ -171,19 +159,19 @@ minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
 \item $ 2x^2-5x+3=(x-1)^2 $
 \item $ x^2+5x-4=2x^2 $
 \item $ (x-3)^2+x=2x-1 $
-\end{enumerate}
-\end{multicols}
-\item Να λυθούν οι παρακάτω εξισώσεις.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\end{alist}
+\askhsh Να λυθούν οι παρακάτω εξισώσεις.
+\begin{alist}
+\item $\dfrac{x^2+2}{3}=\dfrac{x+5}{3}-1$
+\item $\dfrac{x^2}{4}+\dfrac{3x-2}{2}=3$
 \item $ \dfrac{x^2-3}{4}-\dfrac{2x+1}{3}=2+\dfrac{3x}{8} $
 \item $ \dfrac{(x-2)^2}{3}-x=\dfrac{x}{5}-3 $
 \item $ x\left(\dfrac{x}{2}-\dfrac{3}{4} \right)+\dfrac{1-x}{5}=\dfrac{37}{20}  $
-\end{enumerate}
-\end{multicols}
-\item Να παραγοντοποιηθούν τα παρακάτω τριώνυμα.
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\end{alist}
+\paragraph{Παραγοντοποίηση τριωνύμου}
+\askhsh Να παραγοντοποιηθούν τα παρακάτω τριώνυμα.
+\begin{multicols}{2}
+\begin{alist}
 \item $ x^2-3x+2 $
 \item $ x^2-5x+6 $
 \item $ y^2-y-2 $
@@ -193,9 +181,21 @@ minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
 \item $ -4y^2+4y-1 $
 \item $ 3z^2+10z-8 $
 \item $ 4x^2+20x+25 $
-\end{enumerate}
+\end{alist}
 \end{multicols}
-\item Για καθένα από τα παρακάτω σχήματα 
-\end{enumerate}
-\end{document}
+\askhsh Απλοποιήστε τα παρακάτω κλάσματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\dfrac{x^2-3x+2}{(x-1)^2}$
+\item $\dfrac{x^2-4}{x^2-x-2}$
+\item $\dfrac{x^2+3x-4}{x^2-16}$
+\item $\dfrac{x^2+7x+12}{x^2+x-6}$
+\item $\dfrac{2x^2+3x-2}{4x^2-1}$
+\item $\dfrac{-x^2+2x+3}{x^2-3x}$
+\item $\dfrac{x^2-4x+4}{-x^2+3x-2}$
+\item $\dfrac{2x^2-5x+3}{4x^2-12x+9}$
+\end{alist}
+\end{multicols}
+\askhsh Για καθένα από τα παρακάτω σχήματα 
 
+\end{document}
