@@ -1,0 +1,123 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\twocolumn[{
+\centering
+\kerkissans{{\huge Διαίρεση πολυωνύμων}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
+\paragraph{Διαίρεση πολυωνύμων}
+\askhsh Για καθεμία από τις παρακάτω διαιρέσεις, να βρεθεί, με κάθετη διαίρεση, το πηλίκο και το υπόλοιπο. Στη συνέχεια να γράψετε την ταυτότητα της διαίρεσης.
+\begin{alist}
+\item $\left(x^3-4x^2+5x-12\right):\left(x^2+2x+3\right)$
+\item $\left(x^3+7x^2-8x+4\right):\left(x^2-x\right)$
+\item $\left(2x^3+x^2+3x-9\right):\left(x^2-3\right)$
+\item $\left(x^3+5x^2-11x+10\right):\left(x+2\right)$
+\item $\left(x^4-2x^3+5x^2+4x-8\right):\left(x^2+4x-2\right)$
+\item $\left(x^4-2x^2+3x+2\right):\left(x^2-3x-5\right)$
+\item $\left(x^4+x-+8\right):\left(x-4\right)$
+\item $\left(2x^4+6x^3-5x^2+x+7\right):\left(2x^2+7\right)$
+\end{alist}
+\askhsh Για καθεμία από τις παρακάτω διαιρέσεις, να βρεθεί, με τη χρήση του σχήματος \eng{Horner}, το πηλίκο και το υπόλοιπο. Στη συνέχεια να γράψετε την ταυτότητα της διαίρεσης.
+\begin{alist}
+\item $\left(x^3+3x^2+4x-2\right):\left(x-1\right)$
+\item $\left(x^3+9x^2+2x-8\right):\left(x-2\right)$
+\item $\left(x^3+4x^2-7x+10\right):\left(x+3\right)$
+\item $\left(2x^3-5x^2+8x+4\right):\left(x+2\right)$
+\item $\left(x^3+x-2\right):\left(x+1\right)$
+\item $\left(x^4+6x^2+4\right):\left(x-1\right)$
+\item $\left(x^4+2x^3-5x^2-7x+8\right):\left(x-4\right)$
+\item $\left(2x^4-9x^3-4x+5\right):\left(x+2\right)$
+\end{alist}
+\paragraph{Βασικά θεωρήματα}
+\askhsh Δίνεται το πολυώνυμο
+\[ P(x)=x^3-4x^2+5x-2 \]
+Να εξετάσετε ποιο από τα παρακάτω πολυώνυμα είναι παράγοντας του $P(x)$.
+\begin{multicols}{4}
+\begin{alist}
+\item $x-1$
+\item $x+2$
+\item $x-3$
+\item $x-2$
+\end{alist}
+\end{multicols}
+\askhsh Δίνεται το πολυώνυμο \[ P(x)=(\lambda-1)x^3-5x^2+(\lambda^2-2)x+8 \] όπου $ \lambda\in\mathbb{R} $.
+\begin{alist}
+\item Να βρεθεί η τιμή της παραμέτρου $ \lambda $ για την οποία το πολυώνυμο έχει παράγοντα το $ x-2 $.
+\item Να βρεθούν οι τιμές της μεταβλητής $ x $ για τις οποίες η γραφική παράσταση της συνάρτησης $ P(x) $ βρίσκεται πάνω από τον άξονα $ x'x $.
+\item Να βρεθούν οι τιμές της παραμέτρου $ \lambda $ για τις οποίες το πολυώνυμο $ P(x) $ αν διαιρεθεί με το $ x-1 $ δίνει υπόλοιπο $ 2 $.
+\end{alist}
+\end{document}
