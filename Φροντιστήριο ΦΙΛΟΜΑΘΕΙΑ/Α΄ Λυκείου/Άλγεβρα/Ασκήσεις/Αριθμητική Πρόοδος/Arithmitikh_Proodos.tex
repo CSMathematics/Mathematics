@@ -1,87 +1,141 @@
-\documentclass[a4paper,11pt]{article}
-\usepackage{psfrag}
+\documentclass[11pt,a4paper,twocolumn]{article}
 \usepackage[english,greek]{babel}
-\usepackage[iso-8859-7]{inputenc}
-\usepackage{amssymb}
-\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
 \usepackage[T1]{fontenc}
-\usepackage{txfontsb}
- \let\myBbbk\Bbbk
- \let\Bbbk\relax
-\usepackage{mtpro2}
-\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
-\usepackage{tikz}
-\usepackage{tkz-euclide,tkz-fct}
-\usepackage{wrapfig}
-\usetkzobj{all}
-\usepackage{calc}
-\usepackage[framemethod=TikZ]{mdframed}
-
-\usepackage{titletoc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize}
+\definecolor{ag}{HTML}{A102D1}
+\definecolor{bg}{HTML}{BE4267}
+\definecolor{gg}{HTML}{E16024}
+\definecolor{al}{HTML}{64AA00}
+\definecolor{bl}{HTML}{C80000}
+\definecolor{gl}{HTML}{3D93CD}
+\definecolor{ep}{HTML}{BBC320}
+\colorlet{xrwma}{ep}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
 \usepackage[explicit]{titlesec}
-\usepackage{graphicx}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage{enumitem}
-\usepackage{tabularx}
-\usepackage[decimalsymbol=comma]{siunitx}
-\usetikzlibrary{backgrounds}
-\usepackage{sectsty}
-\sectionfont{\centering}
-\usepackage{enumitem}
-\setlist[enumerate]{label=\bf\textcolor{black}{{\large \arabic*.}}}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΞΞ•ΞΞ‘ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=xrwma, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{xrwma}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
 
 \begin{document}
-\input mtp2
-\loadbm
-\section*{\textcolor{black}{{\LARGE ΠΡΟΟΔΟΙ}}}
-\begin{center}
-{\normalsize  \bf\today}\mbox{}\\
-\vspace{5mm}
-\textcolor{black}{\textbf{{\large ΑΡΙΘΜΗΤΙΚΗ ΠΡΟΟΔΟΣ}}}
-\end{center}
-\paragraph{\textcolor{black}{{\large ΑΣΚΗΣΕΙΣ}}}\mbox{}\\
-\begin{enumerate}[itemsep=5mm]
-\item \textbf{Να βρεθεί ο ν\textsuperscript{ος} όρος των παρακάτω αριθμητικών προόδων.}
-\begin{multicols}{3}
-\begin{enumerate}[label=\roman*.]
+\twocolumn[{
+\begin{tikzpicture}[overlay,remember picture]
+\fill[xrwma]($(current page.north west)$)--($(current page.north west)+(2cm,0)$)--($(current page.north west)+(2cm,-2.4cm)$)--($(current page.north west)+(-2cm,-2.4cm)$)--cycle;
+\node (fig1) at ($(current page.north west)+(1cm,-1.2cm)$)
+       {\includegraphics[width=0.07\linewidth]{/home/Spyros/ΞΞ±ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬/Ξ¦ΟΞΏΞ½Ο„ΞΉΟƒΟ„Ξ®ΟΞΉΞΏ Ξ¦Ξ™Ξ›ΞΞΞ‘ΞΞ•Ξ™Ξ‘/Ξ’Ξ±ΞΈΞΌΞΏΞ― - Ξ¦Ο…Ξ»Ξ»Ξ¬Ξ΄ΞΉΞΏ ΟΞ»Ξ·Ο‚ - Ξ”ΞΉΞ¬Ο†ΞΏΟΞ±/Ξ›ΞΏΞ³ΟΟ„Ο…Ο€Ξ±/logo.png}};
+\node[gray2] at ($(0,0)+(-2.4cm,1.5cm)$) {\kerkissans{Ξ¦\,Ξ΅ΞΞΞ¤Ξ™Ξ£Ξ¤Ξ—Ξ΅Ξ™Ξ ΞΞ•Ξ£Ξ—Ξ£ Ξ•ΞΞ Ξ‘Ξ™Ξ”Ξ•Ξ¥Ξ£Ξ—Ξ£}};
+\node[xrwma] at ($(0,0)+(-2.4cm,.9cm)$) {\kerkissans{\huge {\fontsize{28}{33.6}\selectfont Ξ¦\,Ξ™Ξ›ΞΞΞ‘ΞΞ•Ξ™Ξ‘}}};
+\draw[gray4] (-5.2,.4)--(.4,.4);
+\node at ($(0,0)+(-2.4cm,0cm)$) {\textcolor{xrwma}{\faMapMarker*} Ξ™Ξ±ΞΊΟΞ²ΞΏΟ… Ξ ΞΏΞ»Ο…Ξ»Ξ¬ 24, Ξ ΞµΞ¶ΟΞ΄ΟΞΏΞΌΞΏΟ‚};
+\node (title) at ($(current page.north east)+(-3.5cm,-.7cm)$){\textcolor{gray2}{ \kerkissans{\LARGE Ξ¦\,Ξ¥Ξ›Ξ›Ξ‘Ξ”Ξ™Ξ Ξ‘Ξ£ΞΞ—Ξ£Ξ•Ξ©Ξ}}};
+\node[below=of title.east,anchor=east,yshift=3mm] (mob) {\textcolor{xrwma}{\faPhone*} 26610 20144 - \textcolor{xrwma}{\faMobile*\ \faTelegram\ \faViber} 693 232 7283};
+\node[below=of mob.east,anchor=east,yshift=4mm] (fb) {\textcolor{xrwma}{\faFacebook} Ξ¦ΟΞΏΞ½Ο„ΞΉΟƒΟ„Ξ®ΟΞΉΞΏ Ξ¦ΞΉΞ»ΞΏΞΌΞ¬ΞΈΞµΞΉΞ± - \textcolor{xrwma}{\faInstagram}\ {\eng{front\_filomatheia}}};
+\end{tikzpicture}
+\vspace{10mm}\mbox{}\\
+\centering
+\kerkissans{{\huge Ξ†Ξ»Ξ³ΞµΞ²ΟΞ± - Ξ‘' Ξ›Ο…ΞΊΞµΞ―ΞΏΟ…}\\\vspace{2mm} {\LARGE Ξ‘ΟΞΉΞΈΞΌΞΉΟ„ΞΉΞΊΞ® Ο€ΟΟΞΏΞ΄ΞΏΟ‚}}\\\vspace{4mm}{\kerkissans{\today}}\\\vspace{3mm}}]
+\paragraph{Ξ Ξ±ΟΞ¬Ξ³ΟΞ±Ο†ΞΏΟ‚}
+\askhsh ΞΞ± Ξ²ΟΞµΞΈΞµΞ― ΞΏ Ξ½\textsuperscript{ΞΏΟ‚} ΟΟΞΏΟ‚ Ο„Ο‰Ξ½ Ο€Ξ±ΟΞ±ΞΊΞ¬Ο„Ο‰ Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΟΞ½ Ο€ΟΞΏΟΞ΄Ο‰Ξ½.
+\begin{multicols}{2}
+\begin{alist}
 \item $ 1,3,5,\ldots $
 \item $ 0,2,4,\ldots $
 \item $ 3,8,13,\ldots $
 \item $ -5,-2,1,\ldots $
 \item $ \dfrac{1}{2},2,\frac{7}{2}\ldots $
-\end{enumerate}
+\end{alist}
 \end{multicols}
-\item \textbf{Να βρεθεί ο ζητούμενος όρος κάθε αριθμητικής προόδου.}
-\begin{multicols}{2}
-\begin{enumerate}[label=\roman*.]
-\item Ο $ a_9 $ της $ 0,3,6,\ldots $
-\item Ο $ a_{15} $ της $ -2,3,8,\ldots $
-\item Ο $ a_{21} $ της $ 17,29,41,\ldots $
-\item Ο $ a_{20} $ της $ 42,35,28,\ldots $
-\item Ο $ a_{50} $ της $ -50,-35,-20\ldots $
-\item Ο $ a_{38} $ της $ -40,-10,20,\ldots $
-\end{enumerate}
-\end{multicols}
-\item \textbf{Να βρεθεί ο πρώτος όρος και η διαφορά $ \mathbold\omega $ κάθε αριθμητικής προόδου όταν :}
-\begin{multicols}{2}
-\begin{enumerate}[label=\roman*.]
-\item $ a_3=9 $ και $ a_{8}=24 $
-\item $ a_7=18 $ και $ a_{18}=40 $
-\item $ a_{12}=30 $ και $ a_{25}=72 $
-\item $ a_{14}=21 $ και $ a_{30}=-11 $
-\end{enumerate}
-\end{multicols}
-\item \textbf{Να βρεθεί ποιος όρος από την παρακάτω ακολουθία είναι ίσος με $ \mathbold{157} $}
-\[ 4,7,10\ldots \]
-\textbf{Ομοίως και για τις ακολουθίες :}
-\begin{multicols}{2}
-\begin{enumerate}[label=\roman*.]
-\item $ -2,5,12\ldots $ με $ a_\nu=236 $
-\item $ 21,35,49\ldots $ με $ a_\nu=567 $
-\item $ 128,104,80\ldots $ με $ a_\nu=-1600 $
-\item $ \dfrac{3}{2},\dfrac{7}{4},2\ldots $ με $ a_\nu=8 $
-\end{enumerate}
-\end{multicols}
-\end{enumerate}
+\askhsh ΞΞ± Ξ²ΟΞµΞΈΞµΞ― ΞΏ Ξ¶Ξ·Ο„ΞΏΟΞΌΞµΞ½ΞΏΟ‚ ΟΟΞΏΟ‚ ΞΊΞ¬ΞΈΞµ Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΞ®Ο‚ Ο€ΟΞΏΟΞ΄ΞΏΟ….
+\begin{alist}
+\item Ξ $ a_9 $ Ο„Ξ·Ο‚ $ 0,3,6,\ldots $
+\item Ξ $ a_{15} $ Ο„Ξ·Ο‚ $ -2,3,8,\ldots $
+\item Ξ $ a_{21} $ Ο„Ξ·Ο‚ $ 17,29,41,\ldots $
+\item Ξ $ a_{20} $ Ο„Ξ·Ο‚ $ 42,35,28,\ldots $
+\item Ξ $ a_{50} $ Ο„Ξ·Ο‚ $ -50,-35,-20\ldots $
+\item Ξ $ a_{38} $ Ο„Ξ·Ο‚ $ -40,-10,20,\ldots $
+\end{alist}
+\askhsh ΞΞ± Ξ²ΟΞµΞΈΞµΞ― ΞΏ Ο€ΟΟΟ„ΞΏΟ‚ ΟΟΞΏΟ‚ ΞΊΞ±ΞΉ Ξ· Ξ΄ΞΉΞ±Ο†ΞΏΟΞ¬ $ \mathbold\omega $ ΞΊΞ¬ΞΈΞµ Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΞ®Ο‚ Ο€ΟΞΏΟΞ΄ΞΏΟ… ΟΟ„Ξ±Ξ½:
+\begin{alist}
+\item $ a_3=9 $ ΞΊΞ±ΞΉ $ a_{8}=24 $
+\item $ a_7=18 $ ΞΊΞ±ΞΉ $ a_{18}=40 $
+\item $ a_{12}=30 $ ΞΊΞ±ΞΉ $ a_{25}=72 $
+\item $ a_{14}=21 $ ΞΊΞ±ΞΉ $ a_{30}=-11 $
+\end{alist}
+\askhsh Ξ£Ξµ ΞΊΞ±ΞΈΞµΞΌΞ―Ξ± Ξ±Ο€Ο Ο„ΞΉΟ‚ Ο€Ξ±ΟΞ±ΞΊΞ¬Ο„Ο‰ Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞ―ΞµΟ‚, Ξ½Ξ± Ξ²ΟΞµΞΈΞµΞ― Ξ· ΞΈΞ­ΟƒΞ· Ο„ΞΏΟ… Ξ΄ΞΏΟƒΞΌΞ­Ξ½ΞΏΟ… ΟΟΞΏΟ… $ a_{\nu} $.
+\begin{alist}
+\item $4,7,10\ldots$ ΞΌΞµ $a_{\nu}=157$
+\item $ -2,5,12\ldots $ ΞΌΞµ $ a_\nu=236 $
+\item $ 21,35,49\ldots $ ΞΌΞµ $ a_\nu=567 $
+\item $ 128,104,80\ldots $ ΞΌΞµ $ a_\nu=-1600 $
+\item $ \dfrac{3}{2},\dfrac{7}{4},2\ldots $ ΞΌΞµ $ a_\nu=8 $
+\end{alist}
 \end{document}

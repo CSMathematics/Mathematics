@@ -1,0 +1,227 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize}
+\definecolor{xrwma}{HTML}{3d93cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=xrwma, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{xrwma}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\twocolumn[{
+\begin{tikzpicture}[overlay,remember picture]
+\fill[xrwma]($(current page.north west)$)--($(current page.north west)+(2cm,0)$)--($(current page.north west)+(2cm,-2.4cm)$)--($(current page.north west)+(-2cm,-2.4cm)$)--cycle;
+\node (fig1) at ($(current page.north west)+(1cm,-1.2cm)$)
+{\includegraphics[width=0.07\linewidth]{/home/spyros/Μαθηματικά/Φροντιστήριο ΦΙΛΟΜΑΘΕΙΑ/Βαθμοί - Φυλλάδιο ύλης - Διάφορα/Λογότυπα/logo.png}};
+\node[gray2] at ($(0,0)+(-2.4cm,1.5cm)$) {\kerkissans{Φ\,ΡΟΝΤΙΣΤΗΡΙΟ ΜΕΣΗΣ ΕΚΠΑΙΔΕΥΣΗΣ}};
+\node[xrwma] at ($(0,0)+(-2.4cm,.9cm)$) {\kerkissans{\huge {\fontsize{28}{33.6}\selectfont Φ\,ΙΛΟΜΑΘΕΙΑ}}};
+\draw[gray4] (-5.2,.4)--(.4,.4);
+\node at ($(0,0)+(-2.4cm,0cm)$) {\textcolor{xrwma}{\faMapMarker*} Ιακώβου Πολυλά 24, Πεζόδρομος};
+\node (title) at ($(current page.north east)+(-3.5cm,-.7cm)$){\textcolor{gray2}{ \kerkissans{\LARGE Φ\,ΥΛΛΑΔΙΟ ΑΣΚΗΣΕΩΝ}}};
+\node[below=of title.east,anchor=east,yshift=3mm] (mob) {\textcolor{xrwma}{\faPhone*} 26610 20144 - \textcolor{xrwma}{\faMobile*\ \faTelegram\ \faViber} 693 232 7283};
+\node[below=of mob.east,anchor=east,yshift=4mm] (fb) {\textcolor{xrwma}{\faFacebook} Φροντιστήριο Φιλομάθεια - \textcolor{xrwma}{\faInstagram}\ {\eng{front\_filomatheia}}};
+\end{tikzpicture}
+\vspace{10mm}\mbox{}\\
+\centering
+\kerkissans{{\huge Άλγεβρα - Α' Λυκείου}\\\vspace{2mm} {\LARGE Ρίζες}}\\\vspace{4mm}{\kerkissans{\today}}\\\vspace{3mm}}]
+\paragraph{Υπολογισμός ριζών}
+\askhsh Να υπολογίσετε τις παρακάτω ρίζες.
+\begin{multicols}{3}
+\begin{alist}
+\item $\sqrt{16}$
+\item $\sqrt{25}$
+\item $\sqrt{9}$
+\item $\sqrt{36}$
+\item $\sqrt{4}$
+\item $\sqrt{1}$
+\item $\sqrt{0}$
+\item $\sqrt{49}$
+\item $\sqrt{64}$
+\item $\sqrt{100}$
+\item $\sqrt{81}$
+\item $\sqrt{121}$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις παρακάτω ρίζες.
+\begin{multicols}{3}
+\begin{alist}
+\item $\sqrt[3]{8}$
+\item $\sqrt[4]{16}$
+\item $\sqrt[3]{27}$
+\item $\sqrt[5]{32}$
+\item $\sqrt[4]{81}$
+\item $\sqrt[100]{1}$
+\item $\sqrt[20]{0}$
+\item $\sqrt[3]{343}$
+\item $\sqrt[3]{64}$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{3}
+\begin{alist}
+\item $\left(\sqrt{3}\right)^2$
+\item $\sqrt{(-2)^2}$
+\item $\left(\sqrt{-5}\right)^2$
+\item $\sqrt{-3^2}$
+\item $\left(\sqrt{19}\right)^2$
+\item $\left(\sqrt{-29}\right)^2$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις παρακάτω παραστάσεις.
+\begin{multicols}{3}
+\begin{alist}
+\item $\left(\sqrt[3]{5}\right)^3$
+\item $\left(\sqrt[4]{2}\right)^4$
+\item $\left(\sqrt[3]{-3}\right)^3$
+\item $\sqrt[3]{(-2)^3}$
+\item $\sqrt[4]{(-2)^4}$
+\item $\left(\sqrt[6]{4}\right)^6$
+\item $\sqrt[4]{-3^4}$
+\item $\sqrt[21]{3^{21}}$
+\item $\sqrt[21]{(-3)^{21}}$
+\item $\sqrt[20]{(-3)^{20}}$
+\end{alist}
+\end{multicols}
+\paragraph{Ιδιότητες ριζών}
+\askhsh Να υπολογίσετε τις ακόλουθες παραστάσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $\sqrt{2}\cdot\sqrt{8}$
+\item $\sqrt{3}\cdot\sqrt{27}$
+\item $\sqrt{2}\cdot\sqrt{3}\cdot\sqrt{6}$
+\item $\sqrt{5}\cdot\sqrt{15}\cdot\sqrt{3}$
+\item $\sqrt{8}\cdot\sqrt{12}\cdot\sqrt{6}$
+\item $\sqrt{40}\cdot\sqrt{10}$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις ακόλουθες παραστάσεις.
+\begin{multicols}{2}
+\begin{alist}
+\item $\sqrt[3]{2}\cdot\sqrt[3]{4}$
+\item $\sqrt[4]{8}\cdot\sqrt[4]{2}$
+\item $\sqrt[3]{32}\cdot\sqrt[3]{16}$
+\item $\sqrt[5]{27}\cdot\sqrt[5]{9}$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις επόμενες παραστάσεις.
+\begin{multicols}{3}
+\begin{alist}
+\item $\dfrac{\sqrt{18}}{\sqrt{2}}$
+\item $\dfrac{\sqrt{3}}{\sqrt{12}}$
+\item $\dfrac{\sqrt{20}}{\sqrt{5}}$
+\item $\dfrac{\sqrt{48}}{\sqrt{3}}$
+\item $\dfrac{\sqrt{32}\cdot\sqrt{5}}{\sqrt{10}}$
+\item $\dfrac{\sqrt{12}}{\sqrt{2}\cdot\sqrt{24}}$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις τιμές των παρακάτω παραστάσεων.
+\begin{multicols}{3}
+\begin{alist}
+\item $\dfrac{\sqrt[3]{48}}{\sqrt[3]{6}}$
+\item $\dfrac{\sqrt[3]{54}}{\sqrt[3]{2}}$
+\item $\dfrac{\sqrt[4]{3}}{\sqrt[4]{48}}$
+\item $\dfrac{\sqrt[4]{5}}{\sqrt[4]{405}}$
+\item $\dfrac{\sqrt[3]{2}\cdot\sqrt[3]{12}}{\sqrt[3]{3}}$
+\item $\dfrac{\sqrt[4]{5}}{\sqrt[4]{10}\cdot\sqrt[4]{8}}$
+\end{alist}
+\end{multicols}
+\paragraph{Δυνάμεις με ρητό εκθέτη}
+\askhsh Να υπολογίσετε τις τιμές των παρακάτω δυνάμεων.
+\begin{multicols}{3}
+\begin{alist}
+\item $9^{\frac{1}{2}}$
+\item $8^{\frac{2}{3}}$
+\item $4^{\frac{3}{2}}$
+\item $16^{\frac{3}{2}}$
+\item $1^{\frac{21}{20}}$
+\item $0^{\frac{15}{8}}$
+\end{alist}
+\end{multicols}
+\askhsh Να εξετάσετε αν ορίζονται οι ακόλουθες παραστάσεις.
+\begin{multicols}{3}
+\begin{alist}
+\item $(-2)^{\frac{2}{3}}$
+\item $(-1)^{\frac{4}{3}}$
+\item $0^{\frac{3}{2}}$
+\item $0^{-\frac{1}{2}}$
+\item $3^{\frac{3}{5}}$
+\item $0^{\frac{2}{3}}$
+\end{alist}
+\end{multicols}
+\askhsh Να υπολογίσετε τις τιμές των παρακάτω παραστάσεων.
+\begin{multicols}{2}
+\begin{alist}
+\item $\sqrt[3]{4}\cdot\sqrt[4]{8}$
+\end{alist}
+\end{multicols}
+\end{document}
