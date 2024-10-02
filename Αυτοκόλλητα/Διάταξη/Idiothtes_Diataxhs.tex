@@ -1,0 +1,212 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+%\begin{itemize}[label={\footnotesize \faPlay}]
+%\item \kerkissans{Σύγκριση αριθμών}
+%\begin{itemize}[label={\footnotesize \faEdit}]
+%\item $a>\beta\Leftrightarrow a-\beta>0$
+%\item $a<\beta\Leftrightarrow a-\beta<0$
+%\end{itemize}
+%\item \kerkissans{Μεταβατική ιδιότητα}\\
+%Αν $ a>\beta $ και $ \beta>\gamma \Rightarrow a>\gamma $.
+%\item \kerkissans{Διπλή ανισότητα} : $A<B<\varGamma$
+%\item \kerkissans{Πρόσημα}
+%\begin{itemize}[label={\footnotesize \faEdit}]
+%\item Αν $ a>0 $ και $ \beta>0 $ τότε $ a+\beta>0 $.
+%\item Αν $ a<0 $ και $ \beta<0 $ τότε $ a+\beta<0 $.
+%\item Αν $ a,\beta\ \textrm{ομόσημοι}\ \Leftrightarrow a\cdot\beta>0\ \textrm{και}\ \dfrac{a}{\beta}>0 $.
+%\item Αν $ a,\beta\ \textrm{ετερόσημοι}\ \Leftrightarrow a\cdot\beta<0\ \textrm{και}\ \dfrac{a}{\beta}<0 $.
+%\item $a^2\geq0$ για κάθε $a\in\mathbb{R}$.
+%\item Γενικά: $a^{2\kappa}\geq0\;\;,\;\;\kappa\in\mathbb{Z}$ για κάθε $a\in\mathbb{R}$.
+%\end{itemize}
+%\item \kerkissans{Άθροισμα τετραγώνων}
+%\begin{itemize}[label={\footnotesize \faEdit}]
+%\item $a^2+\beta^2\geq0$ , για κάθε $a,\beta\in\mathbb{R}$.
+%\item $a^2+\beta^2=0\Leftrightarrow a=0$ και $\beta=0$.
+%\item Γενικά: $ a_1^{2\kappa_1}+a_2^{2\kappa_2}+\ldots+a_\nu^{2\kappa_\nu}\geq0$ όπου $\;,\;\kappa_i\in\mathbb{Z}\;,\;i=1,2,\ldots,\nu $
+%\item και $ a_1^{2\kappa_1}+a_2^{2\kappa_2}+\ldots+a_\nu^{2\kappa_\nu}=0\Leftrightarrow a_1=a_2=\ldots=a_{\nu}=0$
+%\end{itemize}
+%\item \kerkissans{Πράξεις}
+%\begin{itemize}[label={\footnotesize \faEdit}]
+%\item Αν $ a>\beta\Leftrightarrow a+\gamma>\beta+\gamma$.
+%\item Αν $ a>\beta\Leftrightarrow a-\gamma>\beta-\gamma$.
+%\item $ \textrm{Αν }\gamma>0\textrm{ τότε }a>\beta\Leftrightarrow a\cdot\gamma>\beta\cdot\gamma\textrm{ και }\dfrac{a}{\gamma}>\dfrac{\beta}{\gamma} $
+%\item $ \textrm{Αν }\gamma<0\textrm{ τότε }a>\beta\Leftrightarrow a\cdot\gamma<\beta\cdot\gamma\textrm{ και }\dfrac{a}{\gamma}<\dfrac{\beta}{\gamma} $
+%\item Αν  $ a,\beta>0 $ και $\nu\in\mathbb{N}^*$ τότε $ a>\beta\Leftrightarrow a^\nu>\beta^\nu$
+%\item Αν $a,\beta\in\mathbb{R}$ και $ \nu: $ \textbf{περιττός} τότε $ a>\beta\Leftrightarrow a^\nu>\beta^\nu $
+%\item Αν $ a,\beta\geq0 $ τότε $ a>\beta\Leftrightarrow\sqrt[\nu]{a}>\!\sqrt[\nu]{\beta} $
+%\item $ \textrm{Αν }a,\beta\textrm{ ομόσημοι τότε } a>\beta\Leftrightarrow \dfrac{1}{a}<\dfrac{1}{\beta} $
+%\end{itemize}
+%\end{itemize}
+%\kerkissans{Πράξεις κατά μέλη}
+%\begin{itemize}[resume,label={\footnotesize \faPlay}]
+%\item \kerkissans{Πρόσθεση κατά μέλη }\\
+%$ a>\beta\;\;\textrm{και}\;\;\gamma>\delta\Rightarrow a+\gamma>\beta+\delta $
+%\item \kerkissans{Πολλαπλασιασμός κατά μέλη}\\ 
+%$a>\beta\;\;\textrm{και}\;\;\gamma>\delta\Rightarrow a\cdot\gamma>\beta\cdot\delta\;\;,\;\;\textrm{με }a,\beta,\gamma,\delta>0$
+%\item \textbf{Δεν} αφαιρούμε ούτε διαιρούμε ανισότητες κατά μέλη.
+%\item \kerkissans{Σύγκριση αριθμών}
+%\begin{itemize}[label={\footnotesize \faEdit}]
+%\item $a^2+\beta^2>0\Leftrightarrow a\neq0$ ή $\beta\neq0$.
+%\item $ a_1^{2\kappa_1}+a_2^{2\kappa_2}+\ldots+a_\nu^{2\kappa_\nu}>0\Leftrightarrow a_1\neq 0$ ή $ a_2\neq 0$ ή $\ldots$ ή $a_{\nu}\neq0$.
+%\item $ a_1>\beta_1\;\textrm{και}\;a_2>\beta_2\;\textrm{και}\;\ldots\;\textrm{και}\;a_{\nu}>\beta_{\nu}\Rightarrow a_1+a_2+\ldots+a_{\nu}>\beta_1+\beta_2+\ldots+\beta_{\nu}$
+%\item  $ a_1>\beta_1\;\textrm{και}\;a_2>\beta_2\;\textrm{και}\;\ldots\;\textrm{και}\;a_{\nu}>\beta_{\nu}\Rightarrow a_1\cdot a_2\cdot\ldots\cdot a_{\nu}>\beta_1\cdot\beta_2\cdot\ldots\cdot\beta_{\nu}$ με $a_i,\beta_i>0$
+%\end{itemize}
+%\end{itemize}
+%\begin{center}
+%\begin{mytblr}{rows={m}}
+%Διάστημα & Ανισότητα & Σχήμα & Περιγραφή \\ 
+%$ [a,\beta] $ & $ a\leq x\leq\beta $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+%\Axonas{0}{3}
+%\Akro{k}{.7}
+%\Akro{k}{2.3}
+%\end{tikzpicture} & Κλειστό $ a,\beta $ \\ 
+%$ (a,\beta) $ & $ a< x<\beta $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+%\Axonas{0}{3}
+%\Akro{a}{.7}
+%\Akro{a}{2.3}
+%\end{tikzpicture} & Ανοιχτό $ a,\beta $\\
+%$ [a,\beta) $ & $ a\leq x<\beta $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+%\Axonas{0}{3}
+%\Akro{k}{.7}
+%\Akro{a}{2.3}
+%\end{tikzpicture} & Κλειστό $a$ ανοιχτό $\beta$\\
+%$ (a,\beta] $ & $ a< x\leq\beta $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+%\Axonas{0}{3}
+%\Akro{a}{.7}
+%\Akro{k}{2.3}
+%\end{tikzpicture} & Ανοιχτό $a$ κλειστό $\beta$ \\
+%$ [a,+\infty) $ & $ x\geq a $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\Xapeiro{a}{.7}{3}{.3}{red!30}
+%\Axonas{0}{3}
+%\Akro{k}{.7}
+%\end{tikzpicture} & Κλειστό $a$ συν άπειρο \\
+%$ (a,+\infty) $ & $ x>a $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\Xapeiro{a}{.7}{3}{.3}{red!30}
+%\Axonas{0}{3}
+%\Akro{a}{.7}
+%\end{tikzpicture} & Ανοιχτό $a$ συν άπειρο \\
+%$ (-\infty,a] $ & $ x\leq a $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\ApeiroX{a}{2.3}{0}{.35}{red!30}
+%\Axonas{0}{3}
+%\Akro{k}{2.3}
+%\end{tikzpicture} & Μείον άπειρο $a$ κλειστό \\
+%$ (-\infty,a) $ & $ x<a $ & \begin{tikzpicture}
+%\tkzDefPoint(0,.57){A}
+%\ApeiroX{a}{2.3}{0}{.35}{red!30}
+%\Axonas{0}{3}
+%\Akro{a}{2.3}
+%\end{tikzpicture} & Μείον άπειρο $a$ ανοιχτό 
+%\end{mytblr}
+%\end{center}
+%\[ [a,\beta]=\{x\in\mathbb{R}\ |\ a\leq x\leq \beta\} \]
+%\begin{itemize}[itemsep=0mm]
+%\item Οι $ a,\beta $ ονομάζονται \textbf{άκρα} του διαστήματος.
+%\item Τα $\pm\infty$ δεν είναι πραγματικοί αριθμοί.
+%\item \textbf{Μήκος} διαστήματος: $ \mu=\beta-a $ 
+%\item \textbf{Κέντρο} διαστήματος: $ x_0=\frac{a+\beta}{2} $
+%\item \textbf{Ακτίνα} διαστήματος: $ \rho=\frac{\beta-a}{2} $
+%\end{itemize}
+%\kerkissans{Σύμβολα διάταξης}
+%\begin{itemize}
+%\item $ < $ : μικρότερο
+%\item $ > $ : μεγαλύτερο
+%\item $ \leq $  μικρότερο ίσο
+%\item $ \geq $  μεγαλύτερο ίσο  
+%\end{itemize}
+Όσο δεξιότερα βρίσκεται ένας αριθμός πάνω στον άξονα των πραγματικών αριθμών, τόσο μεγαλύτερος είναι.\\
+\begin{tikzpicture}
+\tkzText(1.5,.3){$a<\beta$}
+\tkzText(.3,-.3){$a$}
+\tkzText(2.3,-.3){$\beta$}
+\Axonas{0}{3}
+\Akro{k}{2.3}
+\Akro{k}{0.3}
+\end{tikzpicture}
+\end{document}
