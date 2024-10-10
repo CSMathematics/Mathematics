@@ -1,0 +1,326 @@
+\documentclass[11pt,landscape]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm,a3paper]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{white}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{white}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\lysh}{\textcolor{white}{\textbf{\faCheck\ \ ΛΥΣΗ}}}
+\renewcommand{\textstigma}{\textsigma\texttau}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textcolor{white}{\kerkissans{Ορισμός\hspace{2mm}\theorismos}}\;:\;}{}}}
+
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos {\textcolor{white}{\kerkissans{#1}}},breakable,bottomtitle=-1.5mm,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{white},leftrule=2mm,sharp corners,coltitle=white]}
+{\end{tcolorbox}}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=cyan!20!white!80,fg=black,ht=8mm},
+ row{even} = {bg=cyan!70!gray!50,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=cyan!70!black, fg=white, font=\Large\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+
+\begin{document}
+\begin{mytblr}{column{2} = {c,5.5cm},column{3} = {c,4.3cm},column{4} = {c,5.8cm},column{5} = {c,6.7cm},column{1} = {font=\Large\bfseries\fontfamily{maksf},m}}
+& {Παραλληλόγραμμο} & {Ορθογώνιο} & {Ρόμβος} & {Τετράγωνο} \\
+Σχήμα  & \begin{tikzpicture}
+\tkzDefPoint(-3,-.5){D}
+\tkzDefPoint(-2,1){A}
+\tkzDefPoint(.5,1){B}
+\tkzDefPoint(-.5,-.5){C}
+\tkzDefPoint(-2,1){E}
+\draw[pl] (-3,-0.5) -- (-2,1) -- (0.5,1) -- (-0.5,-0.5) -- cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\draw[pl] (A)--(C);
+\draw[pl] (B)--(D);
+\tkzInterLL(A,C)(B,D)\tkzGetPoint{O}
+\tkzLabelPoint[above,xshift=.3mm](O){$O$}
+\tkzDrawPoints(A,B,C,D,O)
+\end{tikzpicture} & \begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(0,1.8){A}
+\tkzDefPoint(3,1.8){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(1.5,.9){O}
+\draw[pl] (0,0) -- (0,1.8) -- (3,1.8) -- (3,0) -- cycle;
+\draw[pl] (A)--(C);
+\draw[pl] (B)--(D);
+\tkzMarkRightAngle(C,D,A)
+\tkzMarkRightAngle(B,C,D)
+\tkzMarkRightAngle(D,A,B)
+\tkzMarkRightAngle(A,B,C)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[above](O){$O$}
+\tkzDrawPoints(A,B,C,D,O)
+\end{tikzpicture} & \begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,1.5){D}
+\tkzDefPoint(3,3){A}
+\tkzDefPoint(6,1.5){B}
+\tkzDefPoint(3,0){C}
+\tkzDefPoint(3,1.5){O}
+\tkzMarkRightAngle[size=.4](B,O,A)
+\tkzMarkAngle[size=.7](B,D,A)
+\tkzMarkAngle[size=.7](C,D,B)
+\tkzMarkAngle[size=.7](A,B,D)
+\tkzMarkAngle[size=.7](D,B,C)
+\tkzMarkAngle[size=.5](D,A,C)
+\tkzMarkAngle[size=.5](C,A,B)
+\tkzMarkAngle[size=.5](B,C,A)
+\tkzMarkAngle[size=.5](A,C,D)
+\draw[pl] (A)--(B)--(C)--(D) -- cycle;
+\draw[pl] (A)--(C);
+\draw[pl] (B)--(D);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[above left](O){$O$}
+\tkzDrawPoints(A,B,C,D,O)
+\end{tikzpicture} & \begin{tikzpicture}[scale=.7]
+\tkzDefPoint(0,-1.5){D}
+\tkzDefPoint(0,1.5){A}
+\tkzDefPoint(3,1.5){B}
+\tkzDefPoint(3,-1.5){C}
+\tkzDefPoint(1.5,0){O}
+\tkzMarkRightAngle[scale=1.5](C,D,A)
+\tkzMarkRightAngle[scale=1.5](B,C,D)
+\tkzMarkRightAngle[scale=1.5](D,A,B)
+\tkzMarkRightAngle[scale=1.5](A,B,C)
+\draw[pl] (A) -- (B) -- (C) -- (D) -- cycle;
+\draw[pl] (A)--(C);
+\draw[pl] (B)--(D);
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\tkzLabelPoint[above](O){$O$}
+\tkzDrawPoints(A,B,C,D,O)
+\end{tikzpicture} \\
+\textbf{Ορισμός}  &\large Παραλληλόγραμμο ονομάζεται το τετράπλευρο το οποίο έχει τις απέναντι πλευρές του ανά δύο παράλληλες. &\large Ορθογώνιο ονομάζεται το παραλληλόγραμμο το οποίο έχει μία γωνία ορθή &\large Ρόμβος ονομάζεται το παραλληλόγραμμο το οποίο έχει δύο διαδοχικές πλευρές ίσες. &\large Τετράγωνο ονομάζεται το παραλληλόγραμμο το οποίο είναι και ορθογώνιο και ρόμβος. \\
+\textbf{Ιδιότητες} & 
+\large\begin{alist}[leftmargin=5mm]
+\item Οι απέναντι πλευρές είναι ίσες.
+\item Οι απέναντι γωνίες είναι ίσες.
+\item Δύο διαδοχικές γωνίες είναι παραπληρωματικές.
+\item Οι διαγώνιοι διχοτομούνται.
+\end{alist} & 
+\large\begin{alist}[leftmargin=5mm]
+\item Οι διαγώνιοι είναι ίσες.
+\item Όλες οι γωνίες είναι ίσες.
+\item Έχει όλες τις ιδιότητες ενός παραλληλογράμμου.
+\end{alist} & 
+\large\begin{alist}[leftmargin=5mm]
+\item Οι διαδοχικές πλευρές είναι ίσες.
+\item Οι διαγώνιοι τέμνονται κάθετα.
+\item Οι διαγώνιοι διχοτομούν τις γωνίες του.
+\item Έχει όλες τις ιδιότητες ενός παραλληλογράμμου.
+\end{alist} & 
+\large\begin{alist}[leftmargin=5mm]
+\item Όλες οι πλευρές είναι ίσες.
+\item Όλες οι γωνίες είναι ίσες.
+\item Οι απέναντι πλευρές είναι παράλληλες.
+\item Οι διαγώνιοι είναι ίσες, διχοτομούν τις γωνίες του και τέμνονται κάθετα.
+\end{alist} \\
+\textbf{Κριτήρια}  & 
+\large \begin{alist}[leftmargin=5mm]
+\item Οι απέναντι πλευρές είναι παράλληλες.
+\item Οι απέναντι πλευρές είναι ίσες.
+\item Δύο απέναντι πλευρές είναι παράλληλες και ίσες.
+\item Οι απέναντι γωνίες είναι ίσες.
+\item Οι διαγώνιοι διχοτομούνται.
+\end{alist} & 
+\large\begin{alist}[leftmargin=5mm]
+\item Είναι παραλληλόγραμμο και έχει μια ορθή γωνία.
+\item Είναι παραλληλόγραμμο και οι διαγώνιοι είναι ίσες.
+\item Έχει 3 ορθές γωνίες.
+\item Έχει όλες τις γωνίες ίσες.
+\end{alist} & 
+\large\begin{alist}[leftmargin=5mm]
+\item Όλες οι πλευρές του είναι ίσες.
+\item Είναι παραλληλόγραμμο και έχει δύο διαδοχικές πλευρές ίσες.
+\item Είναι παραλληλόγραμμο και έχει διαγώνιους κάθετες.
+\item Είναι παραλληλόγραμμο και μια διαγώνιος διχοτομεί μια γωνία.
+\end{alist} & Παραλληλόγραμμο και
+\large\begin{alist}[leftmargin=5mm]
+\item Έχει μια ορθή γωνία και δύο διαδοχικές πλευρές ίσες.
+\item Έχει μια ορθή γωνία και διαγώνιους κάθετες.
+\item Έχει μια ορθή γωνία και μια διαγώνιος διχοτομεί μια γωνία.
+\item Έχει διαγώνιους ίσες και κάθετες.
+\item Έχει διαγώνιους ίσες και δύο διαδοχικές πλευρές ίσες.
+\item Έχει διαγώνιους ίσες και μια απ' αυτές διχοτομεί μια γωνία.
+\end{alist}
+\end{mytblr}
+%\newpage
+%\begin{mytblr}{column{2}={3.1cm},rows={m}}
+% \SetCell[c=4]{c}{\boldmath$ AB\varGamma\varDelta $} Παραλληλόγραμμο και\\ 
+% && \SetCell[c=2]{c} \kerkissans{Ιδιότητες Ορθογωνίου}\\ 
+% &&  Μια ορθή γωνία & Διαγώνιοι ίσες \rule[-2ex]{0pt}{5.5ex}\\ 
+%\SetCell[r=3]{c}\rotatebox{90}{\kerkissans{Ιδιότητες ρόμβου}} & Διαδοχικές πλευρές ίσες & 1ο Κριτήριο & 4ο Κριτήριο\\ 
+% & Διαγώνιοι κάθετες & 2ο Κριτήριο & 5ο Κριτήριο \\ 
+% & Διαγώνιος διχοτομεί μια γωνία & 3ο Κριτήριο & 6ο Κριτήριο \\  
+%\end{mytblr} 
+%\noindent
+%Τραπέζιο ονομάζεται το τετράπλευρο \\το οποίο έχει δύο απέναντι πλευρές \\του παράλληλες.
+%\begin{center}
+%\begin{tabular}{p{3.9cm}cp{4cm}}
+%\begin{tikzpicture}
+%\tkzDefPoint(0,-1.5){D}
+%\tkzDefPoint(0.5,.5){A}
+%\tkzDefPoint(2.5,.5){B}
+%\tkzDefPoint(3.5,-1.5){C}
+%\tkzDefPoint(.25,-.5){M}
+%\tkzDefPoint(3,-.5){N}
+%\tkzDefPoint(0.9,0.5){E}
+%\tkzDefPoint(0.9,-1.5){Z}
+%\tkzMarkRightAngle(C,Z,E)
+%\draw (0.9,0.5) -- (0.9,-1.5);
+%\draw[pl] (0,-1.5) -- (0.5,0.5) -- (2.5,0.5) -- (3.5,-1.5) -- cycle;
+%\draw[plm,white](M)--(N);
+%\tkzLabelPoint[above left](A){$A$}
+%\tkzLabelPoint[above right](B){$B$}
+%\tkzLabelPoint[below right](C){$\varGamma$}
+%\tkzLabelPoint[below left](D){$\varDelta$}
+%\tkzLabelPoint[left](M){$M$}
+%\tkzLabelPoint[right](N){$N$}
+%\tkzLabelPoint[above](E){$E$}
+%\tkzLabelPoint[below](Z){$Z$}
+%\tkzDrawPoints(A,B,C,D,M,N)
+%\node at (1.5,0.7) {\footnotesize$\beta$};
+%\node at (1.7,-1.8) {\footnotesize$B$};
+%\node at (.7,-.2) {\footnotesize$ \upsilon $};
+%\node at (1.75,-.35) {\footnotesize$ \delta $};
+%\end{tikzpicture} & \hspace{.5cm} & \begin{tikzpicture}
+%\tkzDefPoint(0,-1.5){D}
+%\tkzDefPoint(0.75,.5){A}
+%\tkzDefPoint(2.75,.5){B}
+%\tkzDefPoint(3.5,-1.5){C}
+%\tkzDefPoint(.25,-.5){M}
+%\tkzDefPoint(3,-.5){N}
+%\tkzDefPoint(0.9,0.5){E}
+%\tkzDefPoint(0.9,-1.5){Z}
+%\tkzDrawSegment[pl](A,B)
+%\tkzDrawSegment[pl](C,D)
+%\tkzDrawSegment[plm,white](A,D)
+%\tkzDrawSegment[plm,white](B,C)
+%\tkzMarkSegment[mark=|](A,D)
+%\tkzMarkSegment[mark=|](B,C)
+%\tkzLabelPoint[above](A){$A$}
+%\tkzLabelPoint[above](B){$B$}
+%\tkzLabelPoint[below](C){$\varGamma$}
+%\tkzLabelPoint[below](D){$\varDelta$}
+%\tkzDrawPoints(A,B,C,D)
+%\node at (1.7,0.7) {\footnotesize$\beta$};
+%\node at (1.7,-1.8) {\footnotesize$B$};
+%\end{tikzpicture} \\ 
+%\end{tabular} 
+%\end{center}
+%\begin{itemize}[itemsep=0mm,label=\faEdit]
+%\item $AB$ και $\varGamma\varDelta$ : \textbf{βάσεις}.
+%\item $MN$ : \textbf{διάμεσος} του τραπεζίου.
+%\item $MN\parallel ΑΒ\parallel\varGamma\varDelta$ και $MN=\dfrac{AB+\varGamma\varDelta}{2}$
+%\item $EZ$ : \textbf{ύψος} του τραπεζίου.
+%\item Το τραπέζιο το οποίο έχει τις μη \\παράλληλες πλευρές του ίσες \\ονομάζεται \textbf{ισοσκελές τραπέζιο}.
+%\end{itemize}
+%{\footnotesize \faPlay} {Ιδιότητες ισοσκελούς τραπεζίου}
+%\begin{itemize}[itemsep=0mm,label=\faEdit]
+%\item $ \hat{A}=\hat{B} $ και $ \hat{\varGamma}=\hat{\varDelta} $.
+%\item $ A\varGamma=B\varDelta $.
+%\end{itemize}
+%\vspace{-7mm}
+%\begin{center}
+%\begin{tikzpicture}
+%\tkzDefPoint(0,-1.5){D}
+%\tkzDefPoint(0.75,.5){A}
+%\tkzDefPoint(2.75,.5){B}
+%\tkzDefPoint(3.5,-1.5){C}
+%\tkzDefPoint(.25,-.5){M}
+%\tkzDefPoint(3,-.5){N}
+%\tkzDefPoint(0.9,0.5){E}
+%\tkzDefPoint(0.9,-1.5){Z}
+%\tkzMarkAngle[size=.4,mark=|,fill=white](D,A,B)
+%\tkzMarkAngle[size=.4,mark=|,fill=white](A,B,C)
+%\tkzMarkAngle[size=.4,mark=||,fill=white](C,D,A)
+%\tkzMarkAngle[size=.4,mark=||,fill=white](B,C,D)
+%\tkzDrawSegment[pl](A,B)
+%\tkzDrawSegment[pl](C,D)
+%\tkzDrawSegment[plm](A,D)
+%\tkzDrawSegment[plm](B,C)
+%\draw[pl,white] (A)--(C);
+%\draw[pl,white] (B)--(D);
+%\tkzMarkSegments[mark=|](A,D B,C)
+%\tkzMarkSegments[mark=|](A,C B,D)
+%\tkzLabelPoint[above](A){$A$}
+%\tkzLabelPoint[above](B){$B$}
+%\tkzLabelPoint[below](C){$\varGamma$}
+%\tkzLabelPoint[below](D){$\varDelta$}
+%\tkzDrawPoints(A,B,C,D)
+%\node at (1.7,0.7) {\footnotesize$\beta$};
+%\node at (1.7,-1.8) {\footnotesize$B$};
+%\end{tikzpicture}
+%\end{center}
+%{\footnotesize \faPlay} {Κριτήρια για ισοσκελές τραπέζιο}\\
+%$ AB\varGamma\varDelta $ με $ AB\parallel\varGamma\varDelta $ ισοσκελές αν
+%\begin{itemize}[itemsep=0mm,label=\faEdit]
+%\item Οι προσκείμενες γωνίες μιας βάσης\\είναι ίσες.
+%\item Οι διαγώνιοι είναι ίσες.
+%\end{itemize}
+\end{document}
