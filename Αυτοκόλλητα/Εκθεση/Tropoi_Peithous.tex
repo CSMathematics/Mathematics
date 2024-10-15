@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm,a4paper]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\lysh}{\textcolor{black}{\textbf{\faCheck\ \ ΛΥΣΗ}}}
+\renewcommand{\textstigma}{\textsigma\texttau}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textcolor{black}{\kerkissans{Ορισμός\hspace{2mm}\theorismos}}\;:\;}{}}}
+
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos {\textcolor{black}{\kerkissans{#1}}},breakable,bottomtitle=-1.5mm,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{black},leftrule=2mm,sharp corners,coltitle=black]}
+{\end{tcolorbox}}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=cyan!20!white!80,fg=black,ht=8mm},
+ row{even} = {bg=cyan!70!gray!50,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=cyan!70!black, fg=white, font=\Large\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+
+\begin{document}
+\begin{itemize}[label=\faEdit,itemsep=-1mm]
+\item Παραδείγματα
+\item Αποδείξεις
+\item Γεγονότα
+\item Στατιστικά στοιχεία
+\item Πορίσματα ερευνών
+\item Γενικές αλήθειες
+\item Αυθεντίες
+\item Γνωμικά
+\item Μαρτυρίες
+\item Παραθέματα
+\item Παραγωγικοί
+\item Επαγωγικοί
+\item Αναλογικοί
+\item Κατηγορικοί
+\item Υποθετικοί
+\item Διαζευκτικοί
+\item Περιγραφή ή αφήγηση
+\item Χιούμορ
+\item Ειρωνεία
+\item Μεταφορά
+\item Υπερβολή
+\item Λογοπαίγνιο
+\item Ερωτήματα
+\item Ποιητικός / εικονοπλαστικός λόγος
+\item Δισημία
+\item Συνειρμός
+\item Ρητορικά ερωτήματα
+\item Ύβρεις / Αρνητικοί \\χαρακτηρισμοί
+\item Αναφορά σε αρνητικές ενέργειες -\\ συμπεριφορές
+\item Αθέμιτη κριτική / επίθεση \\στην προσωπική ζωή
+\item Θετικοί χαρακτηρισμοί σε α'\\ πρόσωπο
+\item Αναφορά σε θετικές ενέργειες - \\συμπεριφορές
+\item Προβολή της προσωπικότητας \\και των αρχών του
+\item Έπαινοι
+\item Εγκώμια
+\item Αξιοπιστος λόγος
+\item Όνομα αυθεντίας
+\item Ρήση αυθεντίας
+\item Όνομα και ρήση αυθεντίας
+\end{itemize}
+\end{document}
