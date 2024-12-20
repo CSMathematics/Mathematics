@@ -1,0 +1,125 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize}
+\definecolor{xrwma}{HTML}{3d93cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=xrwma, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{{\large\theaskhsh.}\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{xrwma}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\titlespacing{\paragraph}{0mm}{2mm}{2mm}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\twocolumn[{
+\begin{tikzpicture}[overlay,remember picture]
+\fill[xrwma]($(current page.north west)$)--($(current page.north west)+(2cm,0)$)--($(current page.north west)+(2cm,-2.4cm)$)--($(current page.north west)+(-2cm,-2.4cm)$)--cycle;
+%\node (fig1) at ($(current page.north west)+(1cm,-1.2cm)$)
+%{\includegraphics[width=0.07\linewidth]{}};
+\node[gray2] at ($(0,0)+(-2.4cm,1.5cm)$) {\kerkissans{Φ\,ΡΟΝΤΙΣΤΗΡΙΟ ΜΕΣΗΣ ΕΚΠΑΙΔΕΥΣΗΣ}};
+\node[xrwma] at ($(0,0)+(-2.4cm,.9cm)$) {\kerkissans{\huge {\fontsize{28}{33.6}\selectfont Φ\,ΙΛΟΜΑΘΕΙΑ}}};
+\draw[gray4] (-5.2,.4)--(.4,.4);
+\node at ($(0,0)+(-2.4cm,0cm)$) {\textcolor{xrwma}{\faMapMarker*} Ιακώβου Πολυλά 24, Πεζόδρομος};
+\node (title) at ($(current page.north east)+(-3.5cm,-.7cm)$){\textcolor{gray2}{ \kerkissans{\LARGE Φ\,ΥΛΛΑΔΙΟ ΑΣΚΗΣΕΩΝ}}};
+\node[below=of title.east,anchor=east,yshift=3mm] (mob) {\textcolor{xrwma}{\faPhone*} 26610 20144 - \textcolor{xrwma}{\faMobile*\ \faTelegram\ \faViber} 693 232 7283};
+\node[below=of mob.east,anchor=east,yshift=4mm] (fb) {\textcolor{xrwma}{\faFacebook} Φροντιστήριο Φιλομάθεια - \textcolor{xrwma}{\faInstagram}\ {\eng{front\_filomatheia}}};
+\end{tikzpicture}
+\vspace{10mm}\mbox{}\\
+\centering
+\kerkissans{{\huge Άλγεβρα - Α' Γυμνασίου}\\\vspace{2mm} {\LARGE Ισοδύναμα κλάσματα}}\\\vspace{4mm}{\kerkissans{\today}}\\\vspace{3mm}}]
+\paragraph{}
+\askhsh Να εξετάσετε αν τα παρακάτω κλάσματα είναι ίσα μεταξύ τους.
+\begin{multicols}{3}
+\begin{alist}
+\item $\dfrac{3}{4}$ και $\dfrac{6}{8}$
+\item $\dfrac{8}{5}$ και $\dfrac{9}{6}$
+\item $\dfrac{12}{15}$ και $\dfrac{8}{10}$
+\item $\dfrac{20}{15}$ και $\dfrac{9}{5}$
+\item $\dfrac{28}{32}$ και $\dfrac{14}{16}$
+\item $\dfrac{40}{56}$ και $\dfrac{15}{21}$
+\item $\dfrac{18}{24}$ και $\dfrac{20}{28}$
+\item $\dfrac{7}{9}$ και $\dfrac{21}{27}$
+\item $\dfrac{5}{2}$ και $\dfrac{60}{24}$
+\end{alist}
+\end{multicols}
+\askhsh Να μετατρέψετε τα παρακάτω κλάσματα σε ομώνυμα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\dfrac{8}{9}$ και $\dfrac{7}{6}$
+\item $\dfrac{3}{2}$ και $\dfrac{4}{5}$
+\item $\dfrac{5}{4}$ και $\dfrac{1}{8}$
+\item $\dfrac{7}{18}$ και $\dfrac{11}{24}$
+\item $\dfrac{1}{10},\dfrac{2}{5}$ και $\dfrac{6}{15}$
+\item $\dfrac{15}{8},\dfrac{5}{12}$ και $\dfrac{9}{16}$
+\item $\dfrac{3}{25},\dfrac{8}{15}$ και $\dfrac{11}{20}$
+\end{alist}
+\end{multicols}
+\end{document}
