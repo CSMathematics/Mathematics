@@ -1,0 +1,105 @@
+\documentclass[a3paper]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[left=1.5cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize}
+\tkzSetUpPoint[size=7,fill=white]
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.text}
+\usepackage{pgfplots}
+%-----------------------
+\usepackage{calc}
+\usepackage{graphicx}
+\usetikzlibrary{backgrounds}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+
+\begin{document}
+\begin{center}
+
+\usetikzlibrary{calc}
+%\tikzset{curveinscope/.style={every path/.style={draw=white, text=white}}}
+
+\begin{tikzpicture}[scale=1.2]
+\draw[line width=.7mm] (0,0) circle(7);
+\foreach \s in {0,1,2,...,359}{
+\draw (\s:6.7)--(\s:7);
+}
+
+\foreach \s in {0,1,2,...,627}{
+\draw (\s/628*360:7.3)--(\s/628*360:7);
+}
+\foreach \s in {0,5,10,...,625}{
+\draw (\s/628*360:7.5)--(\s/628*360:7);
+}
+\foreach \s in {0,10,20,...,620}{
+\draw (\s/628*360:7.7)--(\s/628*360:7);
+\node at (\s/628*360:8){\pgfmathparse{0.01*\s}% Evaluate the expression
+\pgfmathprintnumber[    % Print the result
+fixed,
+fixed zerofill,
+precision=1
+]{\pgfmathresult}};
+}
+\foreach \gwnia/\xtext in {
+30/\dfrac{\pi}{6},
+45/\dfrac{\pi}{4},
+60/\dfrac{\pi}{3},
+90/\dfrac{\pi}{2},
+120/\dfrac{2\pi}{3},
+135/\dfrac{3\pi}{4},
+150/\dfrac{5\pi}{6},
+180/\pi,
+210/\dfrac{7\pi}{6},
+225/\dfrac{5\pi}{4},
+240/\dfrac{4\pi}{3},
+270/\dfrac{3\pi}{2},
+300/\dfrac{5\pi}{3},
+315/\dfrac{7\pi}{4},
+330/\dfrac{11\pi}{6},
+360/2\pi}
+{\draw (\gwnia:9.2) node {{ \Large$\xtext$}};
+\draw(\gwnia:8.7)--(\gwnia:8.3);}
+\foreach \d/\s in {0/3,30/2,60/1,90/12,120/11,150/10,180/9,210/8,240/7,270/6,300/5,330/4}{
+\draw (\d:5.4)--(\d:5);
+\node at (\d:4.5){\huge$\s$};
+\draw (\d:4.5) circle (.5);
+}
+\foreach \d in {0,10,20,...,350}{
+\draw[pl] (\d:7)--(\d:6.4);
+\node at (\d:5.9){\large$\d\degree$};
+}
+\foreach \d in {0,5,10,...,355}{
+\draw[pl] (\d:7)--(\d:6.6);
+}
+
+\foreach \d in {-3.5,-3,...,3.5}{
+\draw (\d,-.1)--(\d,0.1);
+\draw (-.1,\d)--(0.1,\d);
+}
+\draw (-4,0) -- (4,0);
+\draw (0,4) -- (0,-4);
+\draw[thick] (0,0) circle (10);
+\end{tikzpicture}
+\end{center}
+\pagenumbering{gobble}
+\end{document}
+

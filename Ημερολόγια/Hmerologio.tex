@@ -1,0 +1,118 @@
+\documentclass[a3paper]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpccal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,SizeFeatures={Size=14},BoldFont={Nimbus Roman Bold}]{Kerkis Sans Bold}
+\newfontfamily\kerkis{Kerkis Sans Bold}
+
+\usepackage{tikz}
+\usetikzlibrary{calendar,folding}
+
+%%%<
+\usepackage{verbatim,custom_calendar}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5mm}%
+%%%>
+\makeatletter%
+\tikzoption{day headings}{\tikzstyle{day heading}=[#1]}
+\tikzstyle{day heading}=[]
+\tikzstyle{day letter headings}=[
+    execute before day scope={ \ifdate{day of month=1}{%
+      \pgfmathsetlength{\pgf@ya}{\tikz@lib@cal@yshift}%
+      \pgfmathsetlength\pgf@xa{\tikz@lib@cal@xshift}%
+      \pgftransformyshift{-\pgf@ya}
+      \foreach \d/\l in {0/Κ,1/Δ,2/Τ,3/Τ,4/Π,5/Π,6/Σ} {
+        \pgf@xa=\d\pgf@xa%
+        \pgftransformxshift{\pgf@xa}%
+        \pgftransformyshift{\pgf@ya}%
+        \node[every day,day heading]{\l};%
+      } 
+    }{}%
+  }%
+]
+
+\makeatother%
+\begin{comment}
+:Title: Foldable dodecahedron with Calendar
+:Tags: Calendars; Manual
+:Author: Till Tantau
+
+An example of the folding library and the folding library, straight from
+the manual.
+\end{comment}
+\usetikzlibrary{calendar,positioning}
+\makeatletter
+\tikzstyle{week list sunday}=[
+% Note that we cannot extend from week list,
+% the execute before day scope is cumulative
+execute before day scope={%
+  \ifdate{day of month=1}{\ifdate{equals=\pgfcalendarbeginiso}{}{
+      % On first of month, except when first date in calendar.
+      \pgfmathsetlength{\pgf@y}{\tikz@lib@cal@month@yshift}%
+      \pgftransformyshift{-\pgf@y}
+    }}{}%
+},
+execute at begin day scope={%
+  % Because for TikZ Monday is 0 and Sunday is 6,
+  % we can't directly use \pgfcalendercurrentweekday,
+  % but instead we define \c@pgf@counta (basically) as:
+  % (\pgfcalendercurrentweekday + 1) % 7
+  \pgfmathsetlength\pgf@x{\tikz@lib@cal@xshift}%
+  \ifnum\pgfcalendarcurrentweekday=6
+  \c@pgf@counta=0
+  \else
+  \c@pgf@counta=\pgfcalendarcurrentweekday
+  \advance\c@pgf@counta by 1
+  \fi
+  \pgf@x=\c@pgf@counta\pgf@x
+  % Shift to the right position for the day.
+  \pgftransformxshift{\pgf@x}
+},
+execute after day scope={
+  % Week is done, shift to the next line.
+  \ifdate{Saturday}{
+    \pgfmathsetlength{\pgf@y}{\tikz@lib@cal@yshift}%
+    \pgftransformyshift{-\pgf@y}
+  }{}%
+},
+% This should be defined, glancing from the source code.
+tikz@lib@cal@width=7
+]
+\makeatother
+
+
+\begin{document}
+
+\begin{tikzpicture}[transform shape,
+every calendar/.style={
+at={(-8.5ex,5ex)},
+week list sunday,
+month label above centered,
+month text=\bfseries\textcolor{red!80!black}{\%mt} \%y0,
+if={(Sunday) [red]}
+},every month/.append style={yshift=7mm},
+day headings=red,
+day letter headings]
+\tikzfoldingdodecahedron[
+folding line length=5.8cm,
+face 1={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Ιανουάριος }\the\year,dates=\the\year-01-01 to \the\year-01-last];},
+face 2={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Φεβρουάριος }\the\year,dates=\the\year-02-01 to \the\year-02-last];},
+face 3={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Μάρτιος }\the\year,dates=\the\year-03-01 to \the\year-03-last];},
+face 4={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Απρίλιος }\the\year,dates=\the\year-04-01 to \the\year-04-last];},
+face 5={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Μάιος }\the\year,dates=\the\year-05-01 to \the\year-05-last];},
+face 6={\addwatermark \calendar [month text=\bf\kerkis\large\textcolor{red}{ Ιούνιος }\the\year,dates=\the\year-06-01 to \the\year-06-last];},
+face 7={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Ιούλιος }\the\year,dates=\the\year-07-01 to \the\year-07-last];},
+face 8={\addwatermark\calendar[month text=\bf\kerkis\large\textcolor{red}{ Αύγουστος }\the\year,dates=\the\year-08-01 to \the\year-08-last];},
+face 9={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Σεπτέμβριος }\the\year,dates=\the\year-09-01 to \the\year-09-last];},
+face 10={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Οκτώβριος }\the\year,dates=\the\year-10-01 to \the\year-10-last];},
+face 11={\addwatermark\calendar [month text=\bf\kerkis\large\textcolor{red}{ Νοέμβριος }\the\year,dates=\the\year-11-01 to \the\year-11-last];},
+face 12={\addwatermark\calendar [month text={\bf\kerkis\large\textcolor{red}{ Δεκέμβριος }\the\year},dates=\the\year-12-01 to \the\year-12-last];}
+];
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[a3paper]{mathroloi}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\font\ArKef="Nimbus Roman" at 144pt
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Nimbus Roman Bold}]{Nimbus Roman}
+%\newfontfamily\scfont{GFS Artemisia}
+%\font\icon = "Webdings"
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\def\xrwma{red!90!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.text}
+\usepackage{pgfplots}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\newcommand{\roloi}[4][]{
+\draw[line width=1mm,#1] (0,0)--(90-30*#2-0.5*#3:4);
+\draw[line width=.7mm,#1] (0,0)--(90-6*#3-0.1*#4:6.3);
+\draw[#1,pl,\xrwma](0,0)--(90-6*#4:6.5);}
+
+
+\begin{document}
+\pagenumbering{gobble}
+\clearpage 
+\begin{center}
+\begin{tikzpicture}[scale=1.59,every node/.style={scale=1.59}]
+\begin{scope}
+\clip (0,0) circle (7.5);
+\draw[opacity=.1,step=.5] (-8,-8) grid (8,8);
+\draw[opacity=.2,step=2] (-8,-8) grid (8,8);
+\end{scope}
+\draw[line width=.7mm] (0,0) circle (7.5);
+\foreach \s/\t in {0/$\hspace{-7mm}\textcolor{\xrwma}{\displaystyle{\lim_{x\to0}{\dfrac{3x-x^2}{e^x-1}}}}\ \ \ $
+,30/$\hspace{-1cm}\sup\left\{ 2-\dfrac{1}{n}\right\}$,
+60/$-e^{i\pi}$,
+90/$\textcolor{\xrwma}{\displaystyle\int_{-3\pi}^{3\pi}{\!\!\!|\!\cos(x)|dx}}$,
+120/$ 1011_2 $,
+150/$\hspace{18mm} {\displaystyle{\bigcap_{n=1}^{\infty}}}\left[10{,}10+\frac{1}{n}\right]$,
+180/$\textcolor{\xrwma}{\hspace{9mm}\displaystyle\prod_{n=1}^{8}{\frac{10-n}{n}}}$,
+210/$\ \ \ 17\!\bmod{(9)}$,
+240/$ \log_{\sqrt[7]{x}}{x} $,
+270/$\textcolor{\xrwma}{ \displaystyle\pi^2\left(\sum_{n=1}^{\infty}{\frac{1}{n^2}}\right)^{-1}} $,
+300/$ \sqrt[3]{125} $,
+330/$\dfrac{1}{\sin^4\left( \frac{\pi}{4} \right)}$}{
+\node at (\s:5.8){\LARGE\t};
+}
+\foreach \a in {0,30,60,...,330}{
+\draw[line cap=round,line width=.8mm] (\a:7)--(\a:7.5);
+}
+\foreach \a in {0,6,12,...,354}{
+\draw[line cap=round,line width=.3mm] (\a:7.2)--(\a:7.5);
+}
+\path[decoration={reverse path=true,text along path, text={|\huge| 3.1415926535897932384626433832795028841971693993751}, text align={align=center}, raise=.5ex},decorate,rotate=270] (0,0)circle(2.5);
+\draw (0,0) circle (7.2);
+\draw[fill=black] (0,0) circle (.2);
+\node[opacity=.5] at (0,0){\ArKef \textcolor{black!20}{π}};
+%\node at (0,-2.25){{\Large Φροντιστήριο Μέσης Εκπαίδευσης}};
+%\node at (0,-3){{\LARGE ΦΙΛΟΜΑΘΕΙΑ}};
+\end{tikzpicture}
+\end{center}
+\end{document}
