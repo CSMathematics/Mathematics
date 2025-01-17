@@ -15,8 +15,8 @@
 
 
 %------------------- Γεωμετρία - Στύλ ----------------------------------
-\usepackage[inner=2cm, top=3cm, bottom=2cm]{geometry}
-\geometry{textwidth=12cm,marginparsep=5mm,marginparwidth=5cm}
+\usepackage[inner=1.5cm, top=3cm, bottom=2cm]{geometry}
+\geometry{textwidth=12cm,marginparsep=5mm,marginparwidth=5.5cm}
 \newcommand{\full}[1]{\begin{mdframed}[outermargin=\dimexpr-\marginparwidth-\marginparsep\relax,innerleftmargin=0mm,innerrightmargin=0mm,hidealllines=true]
 #1
 \end{mdframed}}
@@ -30,7 +30,7 @@
 \let\myBbbk\Bbbk
 \let\Bbbk\relax
 \usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
-\usepackage{mathimatika,venndiagram,tkz-euclide,diffcoeff}
+\usepackage{mathimatika,venndiagram,tkz-euclide,diffcoeff,mathtools}
 
 \DeclareMathSizes{10.95}{10.95}{7}{5}
 \DeclareMathSizes{6}{6}{3.8}{2.7}
@@ -60,6 +60,7 @@
 \tikzstyle{l3}=[line width=0.3mm]
 \tikzstyle{l4}=[line width=0.4mm]
 \tkzSetUpPoint[size=2.8,fill=white]
+\pgfplotsset{compat=newest}
 %\usepgfplotslibrary{external}
 %\tikzexternalize[prefix=tikz/]
 %----------------------------------------------------------------------
@@ -93,10 +94,10 @@
 % ΟΡΙΣΜΟΣ
 \newcounter{orismos}[chapter]
 \renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
-\newcommand{\orism}{\refstepcounter{orismos}{\titlefont{\textcolor{maincolor}{\large{Ορισμός}\hspace{2mm}\theorismos}}}\hspace{1mm}}{}
+\newcommand{\orism}{\refstepcounter{orismos}{\bf\titlefont{\textcolor{maincolor}{\large{Ορισμός}\hspace{2mm}\theorismos}}}\hspace{1mm}}{}
 
 \newenvironment{Orismos}[1]
-{\begin{tcolorbox}[title=\orism:\ \  {\titlefont{#1}},
+{\begin{tcolorbox}[title=\orism:\ \  {\bf{\large\titlefont{#1}}},
 breakable,
 enhanced standard,
 titlerule=-.2pt,
@@ -119,10 +120,10 @@ coltitle=black]}
 % ΘΕΩΡΗΜΑ
 \newcounter{thewrhma}[chapter]
 \renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
-\newcommand{\thewr}{\refstepcounter{thewrhma}{\titlefont{\textcolor{secondarycolor}{\large Θεώρημα\hspace{2mm}\thethewrhma}}}\hspace{1mm}}{}
+\newcommand{\thewr}{\refstepcounter{thewrhma}{\bf\titlefont{\textcolor{secondarycolor}{\large Θεώρημα\hspace{2mm}\thethewrhma}}}\hspace{1mm}}{}
 
 \newenvironment{Thewrhma}[1]
-{\begin{tcolorbox}[title=\thewr\ \ :\ \  {\textcolor{black}{\titlefont{#1}}},
+{\begin{tcolorbox}[title=\thewr\ \ :\ \  {\textcolor{black}{\bf{\large\titlefont{#1}}}},
 breakable,
 enhanced standard,
 titlerule=-.2pt,
@@ -150,6 +151,7 @@ lifted shadow={1mm}{-2mm}{3mm}{0.3mm}{black!50!white},
 colback=red!5!white,
 boxrule=0.1pt,
 colframe=yellow!80!black,
+hyphenationfix=true,
 fonttitle=\bfseries,
 width=#1]}
 {\end{tcolorbox}}
@@ -304,7 +306,7 @@ hline{2} = {.7mm}, % midrule
 \titleformat{\paragraph}
 {\large}%
 {}{0em}%
-{\textcolor{red!80!black}{\faSquare\ \ \titlefont{\bmath{#1}}}}
+{\textcolor{maincolor}{\faSquare\ \ \titlefont{\bmath{#1}}}}
 \setlength{\parindent}{0pt}
 \titlespacing{\paragraph}{0mm}{2mm}{2mm}
 
@@ -397,6 +399,11 @@ F\left(x,y,y',\ldots,y^{(\nu)}\right)=0
 \begin{Paradeigma}{Λύσεις διαφορικής εξίσωσης}
 Χρησιμοποιώντας τις βασικές γνώσεις πάνω στις παραγώγους γνωστών συναρτήσεων, να προσδιορίσετε τις λύσεις των παρακάτω εξισώσεων...
 \end{Paradeigma}
+\section{Προβλήματα αρχικών και συνοριακών τιμών}
+\begin{Orismos}{Πρόβλημα αρχικών τιμών}
+
+\end{Orismos}
+
 \begin{Thewrhma}{Σύγκριση αριθμών}
 Ένας αριθμός $ a $ λέγεται μεγαλύτερος από έναν αριθμό $ \beta $ όταν η διαφορά $ a-\beta $ είναι θετικός αριθμός.
 \end{Thewrhma}
@@ -422,27 +429,261 @@ F\left(x,y,y',\ldots,y^{(\nu)}\right)=0
 }
 \chapter{Διαφορικές εξισώσεις 1\tss{ης} τάξης}
 \section{Εξισώσεις χωριζομένων μεταβλητών}
-\section{Ακριβείς διαφορικές εξισώσεις}
+Το όνομά τους υποδεικνύει και τη δομή τους. Είναι τέτοια ώστε να μπορέσουμε να διαχωρίσουμε στα δύο μέλη της εξίσωσης την ανεξάρτητη μεταβλητή $x$ από την εξαρτημένη $y$. Οι διαφορικές εξισώσεις χωριζομένων μεταβλητών είναι από τις πιο απλές, στην επίλυσή τους, που θα συναντήσουμε. Αν η εξίσωση είναι γραμμένη στην επιλύσιμη μορφή της, η εύρεση της λύσης γίνεται με άμεση ολοκλήρωση.
+\begin{Orismos}{Εξίσωση χωριζομένων μεταβλητών}
+Μια διαφορική εξίσωση 1ης τάξης, της μορφής
+\[ y'=h(x,y) \]
+θα λέγεται εξίσωση χωριζομένων μεταβλητών εάν η συνάρτηση $h$ μπορεί να γραφτεί ως γινόμενο δύο συναρτήσεων $f(x)$, μεταβλητής $x$ και $g(y)$, μεταβλητής $y$. Θα έχει δηλαδή τη μορφή
+\begin{equation}\label{eq:sepvar:1}
+y'=f(x)g(y)
+\end{equation}
+\end{Orismos}
+Βλέπουμε ότι πρόκειται για μια \textbf{μη γραμμική} διαφορική εξίσωση 1ης τάξης. Η διαδικασία επίλυσής της έχει τα εξής βήματα. 
+\paragraph{Γενική λύση}
+Η παράγωγος $y'$ γράφεται στη διαφορική της μορφή δηλαδή $\diff{y}{x}$. Στη συνέχεια, αν είναι απαραίτητο, παραγοντοποιούμε το δεύτερο μέλος της εξίσωσης ώστε να προκύψουν οι παράγοντες $f(x)$ και $g(y)$. Η εξίσωση τότε μπορεί να πάρει τη μορφή
+\[ \diff{y}{x}=f(x)g(y)\Rightarrow \diff{y}{x}\frac{1}{g(y)}=f(x)\d x \]
+Ολοκληρώνουμε τα δύο μέλη της ως προς $x$ και καταλήγουμε στη σχέση
+\begin{equation}\label{eq:sepvar:2}
+\int\frac{1}{g(y)}\diff{y}{x}\d x=\int f(x)\d x+c
+\end{equation}
+η οποία, χρησιμοποιώντας την αντικατάσταση $y=y(x)\Rightarrow\d y=\d y(x)\Rightarrow \d y=\diff{y}{x}\d x$, γράφεται ισοδύναμα
+\begin{equation}\label{eq:sepvar:3}
+\int\frac{1}{g(y)}\d y=\int f(x)\d x+c
+\end{equation}
+από την οποία οδηγούμαστε στη γενική λύση της εξίσωσης, είτε σε λυμένη είτε σε πεπλεγμένη μορφή. Καθώς οι σχέσεις \eqref{eq:sepvar:2} και \eqref{eq:sepvar:3} είναι ισοδύναμες, μπορούμε από δω και πέρα χάριν συντομίας, να χρησιμοποιούμε κατευθείαν τον τύπο \eqref{eq:sepvar:3} μόλις επιτύχουμε το διαχωρισμό των μεταβλητών.\\\\
+\begin{Paradeigma}{Εξίσωση χωριζομένων μεταβλητών}
+Βρείτε τη γενική λύση της εξίσωσης.
+\[ y'=-xy^2 \]
+όπου $x\in\mathbb{R}^*$.
+\end{Paradeigma}
+\begin{marginfigure}[-3cm]
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=7cm,
+xmin=-5,xmax=5,
+ymin=-8,ymax=8,
+xtick={-5,-3,...,5},
+ytick={-8,-6,...,8},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+restrict y to domain=-20:20,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4]
+\begin{scope}
+\clip (axis cs:-5,-8) rectangle (axis cs:5,8);
+\addplot[grafikh parastash,domain=-7:7,maincolor]{1/x^2};
+\addplot[grafikh parastash,domain=-7:7,secondarycolor]{-1/x^2};
+\end{scope}
+\node at (axis cs:3,3) {$y(x)=\frac{2+c}{x^2}$};
+\node at (axis cs:-.5,-0.5) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Ολοκληρωτικές καμπύλες της εξίσωσης $y'=-xy^2$}
+\end{marginfigure}
+Η εξίσωση είναι μη γραμμική διαφορική 1ης τάξης. Σύμφωνα με την παραπάνω μέθοδο έχουμε
+\begin{gather*}
+y'=-xy^2\Rightarrow
+\diff{y}{x}=-xy^2\Rightarrow\\
+-\frac{1}{y^2}\diff{y}{x}=x\Rightarrow
+-\int{\frac{1}{y^2}\d y}=\int{x\d x}\Rightarrow\\
+\frac{1}{y}=\frac{x^2}{2}+c_1\Rightarrow y(x)=\frac{2+c}{x^2}
+\end{gather*}
+\begin{Paradeigma}{Πεπλεγμένη λύση}
+Βρείτε τη γενική λύση της ακόλουθης διαφορικής εξίσωσης χωριζομένων μεταβλητών
+\[ \left(3y^2-1\right)y'=1\ ,\ x\in\mathbb{R} \]
+\end{Paradeigma}
+Παρατηρούμε ότι στην εξίσωση είναι ήδη διαχωρισμένες οι μεταβλητές
+\begin{gather*}
+\left(3y^2-1\right)y'=1\Leftrightarrow\\
+3y^2y'-y'=2x\Leftrightarrow\\
+\int{\left(3y^2y'-y'\right)\d y}=\int{1\d x}+c\Leftrightarrow\\
+y^3-y=x+c
+\end{gather*}
+με $c\in\mathbb{R}$ μια αυθαίρετη σταθερά. Η λύση της εξίσωσης είναι δοσμένη σε πεπλεγμένη μορφή. Στο διπλανό σχήμα βλέπουμε την ολοκληρωτική καμπύλη της ειδικής λύσης της, για $c=0$.
+\begin{marginfigure}[-5cm]
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=5.9cm,
+xmin=-6,xmax=6,
+ymin=-3,ymax=3,
+xtick={-6,-4,...,6},
+ytick={-3,-2,...,3},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+restrict y to domain=-20:20,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4]
+\begin{scope}
+\clip (axis cs:-7,-7) rectangle (axis cs:7,7);
+\addplot +[grafikh parastash,domain=-7:7,RoyalBlue,no markers,
+      raw gnuplot,
+      thick,
+      empty line = jump % not strictly necessary, as this is the default behaviour in the development version of PGFPlots
+      ] gnuplot {
+      set contour base;
+      set cntrparam levels discrete 0.003;
+      unset surface;
+      set view map;
+      set isosamples 500;
+      set samples 500;
+      splot y^3-y-x;
+    };
+\end{scope}
+\node at (axis cs:-3,1.5) {$y^3-y=x$};
+\node at (axis cs:-.5,-0.5) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Πεπλεγμένη λύση της εξίσωσης για $c=0$}
+\end{marginfigure}
+\paragraph{Πρόβλημα αρχικών τιμών}
+Ένα πρόβλημα αρχικών τιμών με διαφορική εξίσωση χωριζομένων μεταβλητών, μπορεί να αντιμετωπιστεί με δύο τρόπους.
+\begin{itemize}
+\item Είτε εύρεση της γενικής λύσης της εξίσωσης και κατόπιν χρήση της αρχικής συνθήκης $y(x_0)=y_0$ για την εύρεση των σταθερών
+\item είτε ολοκλήρωση των μελών της εξίσωσης χρησιμοποιώντας ορισμένο ολοκλήρωμα.
+\end{itemize}
+Ας δούμε την κατασκευή του τύπου για τη δεύτερη μέθοδο. Το πρόβλημα αποτελείται από την εξίσωση \eqref{eq:sepvar:1} με αρχική $y(x_0)=y_0$. Όταν η εξίσωση γραφτεί στη μορφή
+\[ \frac{1}{g(y(x))}\diff{y}{x}=f(x)\d x \]
+ολοκληρώνουμε κάθε μέλος της από $x_0$ έως $x$ και παίρνουμε
+\[ \int_{x_0}^{x}{\frac{1}{g(y(t))}\diff{y}{t}\d t}=\int_{x_0}^{x}{f(t)\d t} \]
+Χρησιμοποιούμε την αντικατάσταση $s=y(t)$ η οποία μας δίνει
+\begin{itemize}
+\item $s=y(t)\Rightarrow \d s=\d y(t)=\diff{y}{t}\d t$ και
+\item για $t=x_0\Rightarrow s=y(x_0)=y_0$ καθώς και $t=x\Rightarrow s=y(x)=y$.
+\end{itemize}
+Έτσι η τελευταία ισότητα μας δίνει το ζητούμενο τύπο 
+\begin{equation}\label{eq:sepvar:4}
+\int_{y_0}^{y}{\frac{1}{g(s)}\d s}=\int_{x_0}^{x}{f(t)\d t}
+\end{equation}
+Στο επόμενο παράδειγμα θα αντιμετωπίσουμε ένα πρόβλημα αρχικών τιμών με την πρώτη μέθοδο.\\\\
+\begin{Paradeigma}{Εξίσωση χωριζομένων μεταβλητών}
+Διαπιστώστε ότι η διαφορική εξίσωση 
+\[y'=2xy-4x+y-2\]
+είναι εξίσωση χωριζομένων μεταβλητών και βρείτε τη λύση του προβλήματος αρχικών τιμών στο οποίο $y(1)=0$.
+\end{Paradeigma}
+Παραγοντοποιούμε το δεύτερο μέλος της εξίσωσης και έχουμε
+\begin{align*}
+y'&=2xy-4x+y-2=\\&=2x(y-2)+(y-2)=\\&=(y-2)(2x-1)
+\end{align*}
+επομένως πρόκειται για μια εξίσωση χωριζομένων μεταβλητών. Αυτή τώρα μας δίνει
+\begin{gather*}
+y'=(y-2)(2x-1)\Leftrightarrow\\
+\diff{y}{x}=(y-2)(2x-1)\Leftrightarrow
+\frac{1}{y-2}\diff{y}{x}=(2x-1)\d x\Leftrightarrow\\
+\int{\frac{\d y}{y-2}}=\int{(2x-1)\d x}+c_1\Leftrightarrow\\
+\ln{|y-2|}=x^2-x+c_1\Leftrightarrow\\
+|y-2|=ce^{x^2-x}
+\end{gather*}
+\begin{marginfigure}[-3cm]
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=7cm,
+xmin=-1,xmax=2,
+ymin=-3,ymax=1,
+xtick={-1,-0.5,...,2},
+ytick={-3,-2.5,...,1},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4]
+\begin{scope}
+\clip (axis cs:-1,-3) rectangle (axis cs:2,1);
+\addplot[grafikh parastash,domain=-1:2,maincolor]{2-2*exp(x^2-x)};
+\end{scope}
+\node at (axis cs:1.2,0.7) {\footnotesize $y(x)=2-2e^{x^2-x}$};
+\node[fill=white,inner sep=0.2mm,opacity=0.7,text opacity=1] at (axis cs:-.15,-0.15) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Ολοκληρωτική καμπύλη της λύσης της $y'=2xy-4x+y-2$.}
+\end{marginfigure}
+όπου $c_1,c=e^{c_1}>0$ αυθαίρετες σταθερές. Η λύση αυτή είναι γραμμένη σε πεπλεγμένη μορφή. Επιπλέον γνωρίζουμε ότι η συνάρτηση $y$ και κατά συνέπεια η $y-2$ ανήκει στο χώρο $C(\mathbb{R})$ των συνεχώς παραγωγίσιμων συναρτήσεων, δεν μηδενίζεται διότι ούτε και η $ce^{x^2-x}$ μηδενίζεται άρα η τελευταία σχέση γράφεται
+\[ y-2=\pm ce^{x^2-x} \]
+Σύμφωνα τώρα με την αρχική συνθήκη $y(1)=0$ παίρνουμε $y(1)-2=-2<0$ άρα $y-2<0$ για κάθε $x\in\mathbb{R}$ καθώς και
+\[|y(1)-2|=ce^{0}\Rightarrow |-2|=c\Rightarrow c=2\]
+και παίρνουμε έτσι τη λύση του Π.Α.Τ.: $2-y=2e^{x^2-x}\Rightarrow y(x)=2-2e^{x^2-x}$.\\\\
+\begin{Paradeigma}{Εξίσωση χωριζομένων μεταβλητών - Π.Α.Τ.}
+Λύστε το ακόλουθο πρόβλημα αρχικών τιμών
+\[\ccases{e^{x}y'=\dfrac{1-x}{2y}\\y(1)=\frac{1}{\sqrt{e}}}\]
+με $y\neq 0$ και $x\in[0,+\infty)$.
+\end{Paradeigma}
+\begin{marginfigure}[0mm]
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=5.5cm,
+xmin=-4,xmax=16,
+ymin=-0.25,ymax=0.75,
+xtick={-4,0,...,16},
+ytick={-0.25,0,...,1},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4]
+\begin{scope}
+\clip (axis cs:-1,-1) rectangle (axis cs:15,1);
+\addplot[grafikh parastash,domain=0:15,secondarycolor]{sqrt(x*exp(-x))};
+\end{scope}
+\node at (axis cs:3,3) {$y(x)=-\frac{2}{x}$};
+\node at (axis cs:-1,-0.05) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Λύση του προβλήματος $e^{x}y'=\frac{1-x}{2y}$}
+\end{marginfigure}
+Διαχωρίζουμε αρχικά τις μεταβλητές στην εξίσωση
+\[ e^{x}y'=\dfrac{1-x}{2y}\Rightarrow 2yy'=e^{-x}(1-x) \]
+εφαρμόζουμε στη τελευταία, τον τύπο \eqref{eq:sepvar:4} οπότε παίρνουμε
+\begin{gather*}
+\int_{y(1)}^{y}2ss'\d s=\int_{1}^{x}e^{-t}(1-t)\d t\Rightarrow\\
+\left.s^2\right|_{\frac{1}{\sqrt{e}}}^{y}=\left.te^{-t}\right|_{1}^{x}\Rightarrow y^2-\dfrac{1}{e}=xe^{-x}-\dfrac{1}{e}\Rightarrow\\
+y^2=xe^{-x}
+\end{gather*}
+Αφού $y\in C((0,+\infty)),\ y\neq 0$ και $y(1)>0$ τότε $y(x)>0,\ x\in(0,+\infty)$ άρα η λύση του προβλήματος είναι $y(x)=\sqrt{xe^{-x}}$.
+\section{Πλήρεις διαφορικές εξισώσεις}
+\begin{Orismos}{Πλήρης διαφορική εξίσωση 1ης τάξης}
+Μια διαφορική εξίσωση ονομάζεται \textbf{πλήρης} διαφορική εξίσωση 1ης τάξης εάν έχει τη μορφή
+\begin{equation}\label{eq:exact:1}
+M(x,y)\d x+N(x,y)\d y=0
+\end{equation}
+όπου $M(x,y),N(x,y)$ 
+\end{Orismos}
 \section{Ομογενείς διαφορικές εξισώσεις}
-\lipsum[1-3]
+\lipsum[1-2]
 \section{Γραμμικές διαφορικές εξισώσεις}
+Όπως αναφέραμε στην εισαγωγή, οι γραμμικές Σ.Δ.Ε έχουν πολυωνυμική μορφή, με συντελεστές συνεχείς συναρτήσεις $a_i(x),\ x\in\varDelta\subseteq\mathbb{R}$. Η γενική μορφή μιας 1ης τάξης γραμμικής διαφορικής εξίσωσης θα είναι
+\[ a_1(x)y'+a_0(x)y=\beta(x) \]
+Για κάθε $x\in\varDelta$ για το οποίο $a_1(x)\neq 0$, η προηγούμενη εξίσωση παίρνει την λυμένη μορφή της όπως βλέπουμε στον επόμενο ορισμό.
 \begin{Orismos}{Γραμμική εξίσωση 1ης τάξης}
 Μια διαφορική εξίσωση ονομάζεται γραμμική 1ης τάξης, αν έχει ή μπορεί να πάρει την
 μορφή
 \begin{equation}\label{eq:linode1:1}
-y'+p(x)y=q(x)
+y'+p(x)y=q(x)\ ,\ x\in\varDelta
 \end{equation}
-όπου $p(x)$ και $q(x)$ συνεχείς συναρτήσεις σε ένα διάστημα $[a,\beta]$.
+όπου $p(x)$ και $q(x)$ συνεχείς συναρτήσεις στο διάστημα $\varDelta\subseteq\mathbb{R}$.
 \end{Orismos}
-Ας δούμε λίγο την κατασκευή της λύσης της \eqref{eq:linode1:1}. Θα σχηματίσουμε παράγωγο γινομένου στο 1ο μέλος της χρησιμοποιώντας τον παράγοντα $e^{\dintt{p(x)\d x}}$. Έχουμε λοιπόν
+\begin{marginfigure}[0mm]
+\begin{Parathrhsh}{5.2cm}
+Μια ομογενής γραμμική διαφορική εξίσωση 1ης τάξης έχει τετριμμένη λύση την $y(x)=0,x\in\varDelta$.
+\end{Parathrhsh}
+\end{marginfigure}
+Θέσαμε $p(x)=\frac{a_0(x)}{a_1(x)}$ και $q(x)=\frac{\beta(x)}{a_1(x)}$. Στην περίπτωση όπου $q(x)\equiv0$ έχουμε την αντίστοιχη \textbf{ομογενή} γραμμική διαφορική εξίσωσης της \eqref{eq:linode1:1}. 
+\paragraph{Βασική μέθοδος επίλυσης}
+Ας δούμε λίγο την κατασκευή της λύσης της ομογενούς εξίσωσης. Θα σχηματίσουμε παράγωγο γινομένου στο 1ο μέλος της, χρησιμοποιώντας τον παράγοντα $e^{\int{p(x)}\d x}$ με $a\in\varDelta$. Πολλαπλασιάζοντας έχουμε
 \begin{gather*}
-e^{\dintt{p(x)\d x}}y'+e^{\dintt{p(x)\d x}}p(x)y=0\Leftrightarrow\\
-\left(e^{\dintt{p(x)\d x}}y\right)'=0\Leftrightarrow e^{\dintt{p(x)\d x}}y=c
+e^{\dintt{p(x)}\d x}y'+e^{\dintt{p(x)}\d x}p(x)y=0\Leftrightarrow\\
+\left(e^{\dintt{p(x)}\d x}y\right)'=0\Leftrightarrow e^{\dintt{p(x)}\d x}y=c
 \end{gather*}
 όπου $c$ μια σταθερά. Έτσι, σύμφωνα με την τελευταία σχέση η γενική λύση της \eqref{eq:linode1:1} θα δίνεται από τον τύπο:
 \begin{equation}\label{eq:linode1:2}
-y(x)=ce^{-\dintt{p(x)\d x}}
+y(x)=ce^{-\dintt{p(x)}\d x}
 \end{equation}
+Χρησιμοποιούμε την ίδια τεχνική ώστε να κατασκευάσουμε και τη λύση της μη ομογενούς διαφορικής εξίσωσης \eqref{eq:linode1:1}. Ο πολλαπλασιασμός με τον ίδιο ολοκληρωτικό παράγοντα θα μας δώσει
+\begin{gather}
+e^{\dintt{p(x)}\d x}y'+e^{\dintt{p(x)}\d x}p(x)y=q(x)e^{\dintt{p(x)}\d x}\Leftrightarrow\nonumber\\
+\left(e^{\dintt{p(x)}\d x}y\right)'=q(x)e^{\dintt{p(x)}\d x}\Leftrightarrow\nonumber\\e^{\dintt{p(x)}\d x}y=\int{q(x)e^{\dintt{p(t)}\d t}\d x}+c\Leftrightarrow\nonumber\\
+y(x)=e^{-\dintt{p(x)}\d x}\left[c+\int{q(x)e^{\dintt{p(t)}\d t}\d x}\right]\label{eq:linode1:3}
+\end{gather}
 \begin{Paradeigma}{Ομογενής γραμμική εξίσωση 1ης τάξης}
 Να βρεθεί η γενική λύση της γραμμικής διαφορικής εξίσωσης
 \[xy'-y = 0\]
@@ -476,7 +717,7 @@ legend image post style={scale=0.5}]
 \addplot[grafikh parastash,domain=-7:7,secondarycolor]{-x/2};
 \end{scope}
 \node at (axis cs:-.5,-0.5) {\footnotesize$O$};
-\legend{${c=1,-1}$,${c=2,-2}$,${c=\frac{1}{2},-\frac{1}{2}}$}
+\legend{${c=1,-1}$,${c=2,-2}$,${c=\frac{1}{2},-\frac{1}{2}}$};
 \end{axis}
 \end{tikzpicture}\captionof{figure}{Λύσεις της εξίσωσης \eqref{example:linode1:1}}\label{plot:linode1:1}
 \end{marginfigure}
@@ -489,43 +730,6 @@ y'-\frac{1}{x}y = 0
 όπου $c$ μια αυθαίρετη σταθερά. Στο \ref{plot:linode1:1} δείχνουμε τα γραφήματα κάποιων λύσεων της  \eqref{eq:linode1:1} που αντιστοιχούν σε διάφορες τιμές της σταθεράς $c$. Σύμφωνα τώρα με την αρχική συνθήκη έχουμε
 \[ y(1)=-2\Rightarrow c=-2 \]
 έτσι η λύση του Π.Α.Τ. θα είναι η $y(x)=-2x$.\\\\
-\begin{Paradeigma}{Μη ομογενής εξίσωση 1ης τάξης}
-Βρείτε τη λύση του παρακάτω προβλήματος αρχικών τιμών.
-\[ \ccases{y'+y=x^2\\y(0)=1} \]
-\vspace{-5mm}
-\end{Paradeigma}
-\begin{marginfigure}[-0.5cm]
-\begin{tikzpicture}
-\begin{axis}[width=6cm,height=7.5cm,
-xmin=-1,xmax=4,
-ymin=-1,ymax=7,
-xtick={-1,0,...,4},
-ytick={-1,0,...,7},
-xlabel={\footnotesize $ x $},
-ylabel={\footnotesize $ y $},
-belh ar,aks_on,
-grid=both,
-grid style={line width=.1pt, draw=gray!10},
-major grid style={line width=.2pt,draw=gray!50},
-minor tick num=4]
-\begin{scope}
-\clip (axis cs:-1,-1) rectangle (axis cs:4,7);
-\addplot[grafikh parastash,domain=-1:4,secondarycolor]{exp(-x)+x^2-2*x+2};
-\end{scope}
-\node[fill=white,inner sep=.2mm,opacity=0.7,text opacity=1] at (axis cs:2,0.5) {\footnotesize$y(x)=e^{-x}+x^2-2x+2$};
-\node at (axis cs:-.5,-0.5) {\footnotesize$O$};
-\end{axis}
-\end{tikzpicture}\captionof{figure}{Ειδική λύση του προβλήματος αρχικών τιμών.}
-\end{marginfigure}
-Η εξίσωση έχει ήδη τη μορφή ... με $p(x)=1$ και $q(x)=x^2$. Η γενική λύση της εξίσωσης, σύμφωνα με τον τύπο ... είναι
-\begin{align*}
-y(x)&=e^{-\dintt_{0}^{x}{\d t}}\left[c+\int_{0}^{x}t^2e^{\dintt_{0}^{t}{\d s}}\d t\right]=\\&=e^{-x}\left(c+\int_{0}^{x}t^2e^t\d t\right)=\\&=e^{-x}\left[c+\left(x^2-2x+2\right)e^x\right]\textbf=\\&=ce^{-x}+x^2-2x+2
-\end{align*}
-όπου $c$ μια αυθαίρετη πραγματική σταθερά. Σύμφωνα επιπλέον με την αρχική συνθήκη θα έχουμε
-\begin{gather*}
-y(0)=1\Rightarrow ce^0=1\Rightarrow c=1
-\end{gather*}
-επομένως η λύση του ΠΑΤ θα είναι η $y(x)=e^{-x}+x^2-2x+2$.\\\\
 \begin{Paradeigma}{Μη ομογενής γραμμική εξίσωση 1ης τάξης}
 Βρείτε τη γενική λύση της ακόλουθης γραμμικής διαφορικής εξίσωσης
 \begin{equation}\label{example:linode1:2}
@@ -569,10 +773,107 @@ legend columns=2
 \[ x^2y'+xy=1\Leftrightarrow y'+\frac{1}{x}y=\frac{1}{x^2} \]
 οπότε και έχουμε $p(x)=\frac{1}{x}$ και $q(x)=\frac{1}{x^2}$. Η γενική λύση αυτής θα δίνεται από τον παρακάτω τύπο
 \begin{align*}
-y(x)&=e^{-\dintt_{1}^{x}{\frac{1}{t}\d t}}\left[c+\int_{1}^{x}\frac{1}{t^2}e^{\dintt_{1}^{t}{\frac{1}{s}\d s}}\d t\right]=\\&=e^{-\ln{x}}\left(c+\int_{1}^{x}\frac{1}{t^2}e^{\ln{t}}\d t\right)=\\&=\frac{1}{x}\left(c+\int_{1}^{x}\frac{1}{t}\d t\right)=\\&=\frac{c+\ln{x}}{x}
+y(x)&=e^{-\dintt{\frac{1}{x}\d x}}\left[c+\int\frac{1}{x^2}e^{\dintt{\frac{1}{t}\d t}}\d x\right]=\\&=e^{-\ln{x}}\left(c+\int\frac{1}{x^2}e^{\ln{x}}\d x\right)=\\&=\frac{1}{x}\left(c+\int\frac{1}{x}\d x\right)=\\&=\frac{c+\ln{x}}{x}
 \end{align*}
-όπου $c$ μια αυθαίρετη σταθερά. Στο διπλανό σχήμα βλέπουμε τις γραφικές παραστάσεις μερικών ειδικών λύσεων της εξίσωσης.
+όπου $c$ μια αυθαίρετη σταθερά. Στο διπλανό σχήμα βλέπουμε τις ολοκληρωτικές καμπύλες μερικών ειδικών λύσεων της εξίσωσης.
+\paragraph{Ομογενής γραμμική - Μέθοδος χωριζομένων μεταβλητών}
+Εύκολα παρατηρούμε ότι μια ομογενής γραμμική διαφορική εξίσωση 1ης τάξης, μετατρέπεται σε εξίσωση χωριζομένων μεταβλητών. Εάν $y$ είναι μια μη τετριμμένη λύση της εξίσωσης $y'+p(x)y=0$ τότε έχουμε τα εξής:
+\begin{align*}
+&y'+p(x)y=0\Rightarrow\\\Rightarrow &y'=-p(x)y\Rightarrow\\\Rightarrow &\diff{y}{x}=-p(x)y\Rightarrow \frac{\d y}{y}=-p(x)\d x\Rightarrow
+\end{align*}
+Έτσι σύμφωνα με όσα αναπτύξαμε στην παράγραφο των διαφορικών εξισώσεων χωριζομένων μεταβλητών, από την τελευταία σχέση παίρνουμε
+\begin{align*}
+\ln{|y|}=-\int{p(x)\d x}+c&\Rightarrow |y|=ce^{-\dintt{p(x)\d x}}\Rightarrow\\
+&\xRightarrow[y\neq 0]{y\in C(\varDelta)}y=\pm ce^{-\dintt{p(x)\d x}}
+\end{align*}
+για κάθε $x\in\varDelta$. Ας δούμε τώρα στο επόμενο παράδειγμα τον εναλλακτικό αυτό τρόπο επίλυσης.\\\\
+\begin{Paradeigma}{Ομογενής εξίσωση - Επίλυση με ολοκλήρωση}
+Ζητείται η γενική λύση της γραμμικής διαφορικής εξίσωσης
+\[ y'+2xy=0 \]
+όπου $y>0$ και $x\in\mathbb{R}$.
+\end{Paradeigma}
+\begin{marginfigure}[-10mm]
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=6.5cm,
+xmin=-3,xmax=3,
+ymin=-1,ymax=2.5,
+xtick={-3,-2,...,3},
+ytick={-1,-0.5,...,2.5},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4,
+legend style={draw=none, fill opacity=0.7,text opacity=0.7,font=\scriptsize},
+legend pos=north west,
+legend image post style={scale=0.5}]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:3,3);
+\addplot[grafikh parastash,domain=-2.5:2.5,maincolor]{2*exp(-x^2)};
+\addplot[grafikh parastash,domain=-2.5:2.5,secondarycolor]{exp(-x^2)};
+\addplot[grafikh parastash,domain=-2.5:2.5,thirdcolor]{exp(-x^2)/2};
+\end{scope}
+\node[fill=white,opacity=0.7,text opacity=1] at (axis cs:1.7,-0.7) {$y(x)=ce^{-x^2}$};
+\node at (axis cs:-.5,-0.25) {\footnotesize$O$};
+\legend{${c=2}$,${c=1}$,${c=\frac{1}{2}}$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Μερικές λύσεις της εξίσωσης $y'+2xy=0$.}
+\end{marginfigure}
+Καθώς έχουμε $y>0$ τότε αναζητούμε μη τετριμμένες λύσης της εξίσωσης. Με διαχωρισμό των μεταβλητών έχουμε:
+\begin{gather*}
+y'+2xy=0\Leftrightarrow
+y'=-2xy\Leftrightarrow\\
+\diff{y}{x}=-2xy\Leftrightarrow \int{\dfrac{\d y}{y}}=\int{-2x\d x}+c_1\Leftrightarrow\\
+\ln{y}=-x^2+c_1\Leftrightarrow y=e^{-x^2+c_1}\Leftrightarrow\\
+y=ce^{-x^2}
+\end{gather*}
+όπου $c_1,c=e^{c_1}$ αυθαίρετες σταθερές.
+\paragraph{Πρόβλημα αρχικών τιμών}
+Στην περίπτωση ενός προβλήματος αρχικών τιμών, με αρχική συνθήκη $y(a)=y_0$ εύκολα βλέπουμε ότι $c=y_0$, ο ολοκληρωτικός παράγοντας θα έχει τη μορφή $e^{\int_{a}^{x}{p(t)\d t}}$ και άρα οι τύποι \eqref{eq:linode1:2} και \eqref{eq:linode1:3} για τη λύση του γράφονται
+\begin{equation}\label{eq:linode1:4}
+y(x)=y_0e^{-\dintt_{\!\!\!a}^{x}{p(t)}\d t}\ ,\ y(x)=e^{-\dintt_{\!\!\!a}^{x}{p(t)}\d t}\left[y_0+\int_{a}^{x}{q(t)e^{\dintt_{\!\!\!a}^{t}{p(s)}\d s}\d t}\right]
+\end{equation}
+\begin{Paradeigma}{Μη ομογενής γραμμική εξίσωση 1ης τάξης - Π.Α.Τ.}
+Βρείτε τη λύση του παρακάτω προβλήματος αρχικών τιμών.
+\[ \ccases{y'+y=x^2\\y(0)=1} \]
+\vspace{-5mm}
+\end{Paradeigma}
+\begin{marginfigure}[-0.5cm]
+\begin{tikzpicture}
+\begin{axis}[width=6cm,height=7.5cm,
+xmin=-1,xmax=4,
+ymin=-1,ymax=7,
+xtick={-1,0,...,4},
+ytick={-1,0,...,7},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4]
+\begin{scope}
+\clip (axis cs:-1,-1) rectangle (axis cs:4,7);
+\addplot[grafikh parastash,domain=-1:4,secondarycolor]{exp(-x)+x^2-2*x+2};
+\end{scope}
+\node[fill=white,inner sep=.2mm,opacity=0.7,text opacity=1] at (axis cs:2,0.5) {\footnotesize$y(x)=e^{-x}+x^2-2x+2$};
+\node at (axis cs:-.5,-0.5) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Λύση του προβλήματος αρχικών τιμών.}
+\end{marginfigure}
+Η εξίσωση έχει ήδη τη μορφή \eqref{eq:linode1:1} με $p(x)=1$ και $q(x)=x^2$. Η λύση της εξίσωσης, σύμφωνα με τον τύπο \eqref{eq:linode1:4}β είναι:
+\begin{align*}
+y(x)&=e^{-\dintt_{\!\!\!0}^{x}{\d t}}\left[y(0)+\int_{0}^{x}t^2e^{\dintt_{\!\!\!0}^{t}{\d s}}\d t\right]=\\&=e^{-x}\left(1+\int_{0}^{x}t^2e^t\d t\right)=\\&=e^{-x}\left[1+\left(x^2-2x+2\right)e^x\right]\textbf=\\&=e^{-x}+x^2-2x+2
+\end{align*}
 \section{Εξισώσεις \eng{Bernoulli - Ricatti}}
+\begin{Orismos}{Διφορική εξίσωση \eng{Bernoulli}}
+\[ y'+p(x)y=q(x)y^{\sigma}(x) \]
+\end{Orismos}
+\begin{Orismos}{Διαφορική εξίσωση \eng{Ricatti}}
+\[y'+p(x)y+q(x)y^2(x)+r(x)=0\]
+\end{Orismos}
 \lipsum[1-2]
 \section{Περιοδικές εξισώσεις}
 \lipsum[1-2]
