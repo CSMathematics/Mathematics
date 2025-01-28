@@ -13,7 +13,6 @@
 \usepackage[explicit]{titlesec}
 %--------------------------------------------------------------------------
 
-
 %------------------- Γεωμετρία - Στύλ ----------------------------------
 \usepackage[inner=1.5cm, top=3cm, bottom=2cm]{geometry}
 \geometry{textwidth=12cm,marginparsep=5mm,marginparwidth=5.5cm}
@@ -59,10 +58,9 @@
 \tikzset{>=latex}
 \tikzstyle{l3}=[line width=0.3mm]
 \tikzstyle{l4}=[line width=0.4mm]
+\tikzset{labelbox/.style args={#1}{align=center,draw=#1,fill=#1!30!white,rectangle,rounded corners=1,font=\tiny\linespread{0.8}\selectfont}}
 \tkzSetUpPoint[size=2.8,fill=white]
 \pgfplotsset{compat=newest}
-%\usepgfplotslibrary{external}
-%\tikzexternalize[prefix=tikz/]
 %----------------------------------------------------------------------
 
 %------------------- Χρώματα -------------------------------------
@@ -188,9 +186,18 @@ width=#1]}
 
 % ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ ΤΙΤΛΟΣ 
 \newcommand{\Alyta}{
-\begin{tikzpicture}
-\path[left color=maincolor,right color=cyan!80!black,middle color=cyan!70!white] (-.3cm,.7cm) --(-.3cm,-.5cm) -- (7.9cm,-.5cm) -- (8.7cm,.63cm) -- (17.2cm,.63cm) -- (17.2cm,.7cm)-- cycle;
+\begin{tikzpicture}[overlay,remember picture]
+\path[left color=maincolor,right color=maincolor!80!black,middle color=maincolor!70!white] (-.5cm,.7cm) --(-.5cm,-.5cm) -- (7.9cm,-.5cm) -- (8.7cm,.63cm) -- (18.3cm,.63cm) -- (18.3cm,.7cm)-- cycle;
+\path[bottom color=white, middle color=maincolor,top color=maincolor] (-0.5cm,-0.5cm)--(-0.5cm,-3cm)--(-0.45cm,-3cm)--(-0.45cm,-0.5cm)--cycle;
+\path[bottom color=white,top color=maincolor!80!black] (18.3cm,0.7cm)--(18.3cm,-3cm)--(18.25cm,-3cm)--(18.25cm,0.7cm)--cycle;
 \node at (3.8cm,.1) {\LARGE \textcolor{white}{\textbf{\faPenSquare\ \ \rule{.5mm}{5mm}\ \ \titlefont{ΑΣΚΗΣΕΙΣ - ΠΡΟΒΛΗΜΑΤΑ}}}};
+\end{tikzpicture}\mbox{}\\}
+
+\newcommand{\alyta}{
+\begin{tikzpicture}[overlay,remember picture]
+\path[left color=maincolor,right color=maincolor,middle color=maincolor!50!white] (-.5cm,0cm) --(-.5cm,.05cm) -- (18.3cm,.05cm) -- (18.3cm,.0cm) -- cycle;
+\path[top color=white,bottom color=maincolor] (-0.5cm,0cm)--(-0.5cm,2cm)--(-0.45cm,2cm)--(-0.45cm,0cm)--cycle;
+\path[top color=white,bottom color=maincolor] (18.3cm,0cm)--(18.3cm,2cm)--(18.25cm,2cm)--(18.25cm,0cm)--cycle;
 \end{tikzpicture}\mbox{}\\}
 
 \newcounter{porisma}[chapter]
@@ -219,7 +226,7 @@ width=#1]}
 % Στυλ άσκησης
 \newcounter{askhsh}[chapter]
 \renewcommand{\theaskhsh}{\bf{\textit{{\Large{\thechapter}}.\arabic{askhsh}}}}   
-\newcommand{\Askhsh}{\refstepcounter{askhsh}\textcolor{secondarycolor}{{\theaskhsh}\hspace{2mm}}}{}
+\newcommand{\Askhsh}{\refstepcounter{askhsh}\textcolor{maincolor}{{\theaskhsh}\hspace{2mm}}}{}
 \setlist[itemize]{itemsep=0mm}
 %---------------------------------------------------------------
 
@@ -228,7 +235,7 @@ width=#1]}
 %-----------------------------------------------------------------
 
 %----------------- Πίνακες ------------------------------------
-\usepackage{tabularx,longtable,tabularray}
+\usepackage{tabularx,longtable,tabularray,capt-of,caption}
 \DeclareTblrTemplate{caption}{nocaptemplate}{}
 \DeclareTblrTemplate{capcont}{nocaptemplate}{}
 \DeclareTblrTemplate{contfoot}{nocaptemplate}{}
@@ -253,6 +260,9 @@ row{1} = {bg=maincolor, fg=white, font=\bfseries\fontfamily{maksf}},
 rowhead = 1,
 hline{2} = {.7mm}, % midrule  
 }
+
+\captionsetup[figure]{format=hang,labelsep=period,name={\titlefont{\textbf{Σχήμα}}}}
+\renewcommand\thefigure{{\bf\titlefont{\thechapter.\arabic{figure}}}}
 %-------------------------------------------------------------------
 
 %-------------- Περιεχόμνα ------------------------------------------
@@ -313,6 +323,7 @@ hline{2} = {.7mm}, % midrule
 \newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
 \newcommand{\tss}[1]{\textsuperscript{#1}}
 \newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
 
 \begin{document}
 \pagestyle{empty}
@@ -403,7 +414,6 @@ F\left(x,y,y',\ldots,y^{(\nu)}\right)=0
 \begin{Orismos}{Πρόβλημα αρχικών τιμών}
 
 \end{Orismos}
-
 \begin{Thewrhma}{Σύγκριση αριθμών}
 Ένας αριθμός $ a $ λέγεται μεγαλύτερος από έναν αριθμό $ \beta $ όταν η διαφορά $ a-\beta $ είναι θετικός αριθμός.
 \end{Thewrhma}
@@ -412,11 +422,21 @@ F\left(x,y,y',\ldots,y^{(\nu)}\right)=0
 Δεν ορίζεται ρίζα αρνητικού αριθμού.
 \end{Prosoxi}
 \end{marginfigure}
-\lipsum\lipsum
-\full{\Alyta}\vspace{-10mm}
-\fulltwoc{
-\Askhsh Ταξινομήστε τις ακόλουθες διαφορικές εξισώσεις σε συνήθεις και μερικές.\\
-\Askhsh Χαρακτηρίστε καθεμία από τις ακόλουθες συνήθεις διαφορικές εξισώσεις ως γραμμική ή μη γραμμική. Στην περίπτωση μη γραμμικής να αναφέρετε αν είναι ημιγραμμική, σχεδόν γραμμική ή πλήρως μη γραμμική.\\
+\lipsum\lipsum\\\\
+\full{\Alyta}\vspace{-5mm}
+\fulltwoc{\begin{adjustwidth}{3mm}{3mm}
+\Askhsh Ταξινομήστε τις ακόλουθες διαφορικές εξισώσεις σε συνήθεις και μερικές.
+\begin{alist}
+\item $y''+2y'+y=x^2$
+\item $u_x+u_y=x$
+\item $\left(y''\right)^3-2y'=e^x$
+\item $\diffp[2]{u}{x}+\diffp{u}{x,y}=u$
+\item $\Delta^2y=0$
+\item $\sin{x}\d y+e^y\d x=0$
+\item $r'-(1-\theta)r=\cos{\theta}$
+\item $uu_y=1-u_x$
+\end{alist}
+\Askhsh Χαρακτηρίστε καθεμία από τις ακόλουθες συνήθεις διαφορικές εξισώσεις ως γραμμική ή μη γραμμική. Στην περίπτωση μη γραμμικής να αναφέρετε αν είναι ημιγραμμική, σχεδόν γραμμική ή πλήρως μη γραμμική.
 \begin{alist}
 \item $x^3y''+xy'-2y=\cos{x}$
 \item $x^2y''+3xy'+y^2=1$
@@ -426,7 +446,8 @@ F\left(x,y,y',\ldots,y^{(\nu)}\right)=0
 \item $x^2 \d y-y^3\d x=0$
 \item $(1+x^2)y''-2xy'+y=e^x$
 \end{alist}
-}
+\end{adjustwidth}}
+\full{\alyta}
 \chapter{Διαφορικές εξισώσεις 1\tss{ης} τάξης}
 \section{Εξισώσεις χωριζομένων μεταβλητών}
 Το όνομά τους υποδεικνύει και τη δομή τους. Είναι τέτοια ώστε να μπορέσουμε να διαχωρίσουμε στα δύο μέλη της εξίσωσης την ανεξάρτητη μεταβλητή $x$ από την εξαρτημένη $y$. Οι διαφορικές εξισώσεις χωριζομένων μεταβλητών είναι από τις πιο απλές, στην επίλυσή τους, που θα συναντήσουμε. Αν η εξίσωση είναι γραμμένη στην επιλύσιμη μορφή της, η εύρεση της λύσης γίνεται με άμεση ολοκλήρωση.
@@ -518,11 +539,10 @@ major grid style={line width=.2pt,draw=gray!50},
 minor tick num=4]
 \begin{scope}
 \clip (axis cs:-7,-7) rectangle (axis cs:7,7);
-\addplot +[grafikh parastash,domain=-7:7,RoyalBlue,no markers,
+\addplot +[grafikh parastash,domain=-7:7,maincolor,no markers,
       raw gnuplot,
       thick,
-      empty line = jump % not strictly necessary, as this is the default behaviour in the development version of PGFPlots
-      ] gnuplot {
+      empty line = jump] gnuplot {
       set contour base;
       set cntrparam levels discrete 0.003;
       unset surface;
@@ -595,7 +615,11 @@ minor tick num=4]
 \end{scope}
 \node at (axis cs:1.2,0.7) {\footnotesize $y(x)=2-2e^{x^2-x}$};
 \node[fill=white,inner sep=0.2mm,opacity=0.7,text opacity=1] at (axis cs:-.15,-0.15) {\footnotesize$O$};
+\node[labelbox={maincolor}](A) at (0.5,-0.75){Αρχική\\συνθήκη};
+\draw[-latex] (A.30)--(axis cs:1,0);
+\coordinate (iv) at (axis cs:1,0);
 \end{axis}
+\fill[maincolor] (iv) circle(0.07);
 \end{tikzpicture}\captionof{figure}{Ολοκληρωτική καμπύλη της λύσης της $y'=2xy-4x+y-2$.}
 \end{marginfigure}
 όπου $c_1,c=e^{c_1}>0$ αυθαίρετες σταθερές. Η λύση αυτή είναι γραμμένη σε πεπλεγμένη μορφή. Επιπλέον γνωρίζουμε ότι η συνάρτηση $y$ και κατά συνέπεια η $y-2$ ανήκει στο χώρο $C(\mathbb{R})$ των συνεχώς παραγωγίσιμων συναρτήσεων, δεν μηδενίζεται διότι ούτε και η $ce^{x^2-x}$ μηδενίζεται άρα η τελευταία σχέση γράφεται
@@ -628,7 +652,11 @@ minor tick num=4]
 \end{scope}
 \node at (axis cs:3,3) {$y(x)=-\frac{2}{x}$};
 \node at (axis cs:-1,-0.05) {\footnotesize$O$};
+\node[xshift=1.7cm,yshift=-5mm,labelbox={secondarycolor}](A) at (1,0.61){Αρχική\\συνθήκη};
+\draw[-latex] (A.west)--(axis cs:1,0.61);
+\coordinate (iv) at (axis cs:1,0.61);
 \end{axis}
+\fill[secondarycolor] (iv) circle (0.07);
 \end{tikzpicture}\captionof{figure}{Λύση του προβλήματος $e^{x}y'=\frac{1-x}{2y}$}
 \end{marginfigure}
 Διαχωρίζουμε αρχικά τις μεταβλητές στην εξίσωση
@@ -642,20 +670,132 @@ y^2=xe^{-x}
 Αφού $y\in C((0,+\infty)),\ y\neq 0$ και $y(1)>0$ τότε $y(x)>0,\ x\in(0,+\infty)$ άρα η λύση του προβλήματος είναι $y(x)=\sqrt{xe^{-x}}$.
 \section{Πλήρεις διαφορικές εξισώσεις}
 \begin{Orismos}{Πλήρης διαφορική εξίσωση 1ης τάξης}
-Μια διαφορική εξίσωση ονομάζεται \textbf{πλήρης} διαφορική εξίσωση 1ης τάξης εάν έχει τη μορφή
+Μια διαφορική εξίσωση της μορφής
 \begin{equation}\label{eq:exact:1}
 M(x,y)\d x+N(x,y)\d y=0
 \end{equation}
-όπου $M(x,y),N(x,y)$ 
+ονομάζεται \textbf{πλήρης} διαφορική εξίσωση 1ης τάξης εάν ισχύει 
+\begin{equation}\label{eq:exact:2}
+\diffp{M}{y}=\diffp{N}{x}
+\end{equation}
 \end{Orismos}
+Η συνθήκη \eqref{eq:exact:2} λέγεται \textbf{συνθήκη πληρότητας}. Στην περίπτωση ικανοποίησης της συνθήκης πληρότητας, η παράσταση $M\d x+N\d y$ αποτελεί ένα \textbf{πλήρες διαφορικό}. Μας είναι γνωστό από την πραγματική ανάλυση ότι το διαφορικό μιας συνάρτησης $f(x,y)$ δίνεται από τη σχέση
+\begin{equation}\label{eq:exact:4}
+\d f(x,y)=\diffp{f}{x}\d x+\diffp{f}{y}\d y
+\end{equation}
+Θέλουμε έτσι η παράσταση αυτή να ταυτίζεται με το πλήρες διαφορικό που αναφέραμε, επομένως πρέπει
+\[ \diffp{f}{x}=M(x,y)\ \text{ και }\ \diffp{f}{y}=N(x,y) \]
+και καθώς το διαφορικό αυτό είναι ταυτοτικά μηδέν, τότε η ζητούμενη συνάρτηση $f(x,y)$ είναι σταθερή δηλαδή
+\begin{equation}\label{eq:exact:3}
+f(x,y)=c
+\end{equation}
+Έτσι συμπεραίνουμε ότι η λύση μιας πλήρους διαφορικής εξίσωσης δίνεται σε πεπλεγμένη μορφή από την παραπάνω σχέση. Η εξίσωση \eqref{eq:exact:1} γράφεται στη μορφή
+$\d f(x,y)=0$. 
+\paragraph{Βασική μέθοδος επίλυσης}
+Για την εύρεση της λύσης επιλέγουμε μια από τις σχέσεις \eqref{eq:exact:4}, για παράδειγμα την $f_x=M$ και ολοκληρώνουμε κάθε μέλος ως προς $x$. Έτσι παίρνουμε
+\begin{equation}\label{eq:exact:5}
+f(x,y)=\int{M(x,y)\d x}+g(y)
+\end{equation}
+όπου $g(y)$ συνεχής στο διάστημα $\varDelta$. Έπειτα παραγωγίζουμε την παραπάνω σχέση ως προς $y$ και προσδιορίζουμε τη συνάρτηση $g(y)$:
+\begin{gather*}
+\diffp{f}{y}=\diffp{}{y}\left[\int{M(x,y)\d x}+g(y)\right]\Rightarrow N(x,y)=\int{\diffp{M}{y}\d x}+g'(y)\Leftrightarrow\\
+N(x,y)=\int{\diffp{N}{x}\d x}+g'(y)\Leftrightarrow g(y)=\int{\left(N(x,y)-\int{N_x\d x}\right)\d y}
+\end{gather*}
+Αντικαθιστούμε την $g(y)$ στη σχέση \eqref{eq:exact:5} και οδηγούμαστε έτσι στη λύση της εξίσωσης. Η διαδικασία ακολουθεί τα ίδια βήματα κι στην περίπτωση όπου επιλέξουμε να ξεκινήσουμε από τη δεύτερη σχέση της \eqref{eq:exact:5}. την οποία θα ολοκληρώσουμε ως προς $y$. Θα έχουμε 
+\begin{equation}\label{eq:exact:6}
+f_y=N\Leftrightarrow f(x,y)=\int{N(x,y)\d y}+h(x)
+\end{equation}
+Παραγωγίζουμε την \eqref{eq:exact:6} ως προς $x$ και προσδιορίζουμε την συνάρτηση $h(x)$
+\begin{gather*}
+\diffp{f}{x}=\diffp{}{x}\left[\int{N(x,y)\d y}+h(x)\right]\Rightarrow M(x,y)=\int{\diffp{N}{x}\d y}+h'(x)\Rightarrow\\
+M(x,y)=\int{\diffp{M}{y}\d y}+h'(x)\Rightarrow h(x)=\int{\left(M(x,y)-\int{M_y}\d y\right)\d x}
+\end{gather*}
+οποία και αντικαθιστούμε στην \eqref{eq:exact:6} και προκύπτει η πεπλεγμένη μορφή της λύσης.\\\\
+\begin{Paradeigma}{Πλήρης διαφορική εξίσωση}
+\[ ye^x\d x+(e^x+\sin{y})\d y=0 \]
+\end{Paradeigma}
+Η εξίσωση έχει τη μορφή \eqref{eq:exact:1} και βλέπουμε ότι $M(x,y)=ye^x$ και $N(x,y)=e^x+\sin{y}$. Στη συνέχεια έχουμε 
+\[ \diffp{M}{y}=\diffp{(ye^x)}{y}=e^x=\diffp{(e^x+\sin{y})}{x}=\diffp{N}{x} \]
+οπότε η εξίσωση είναι πλήρης αφού ικανοποιείται η συνθήκη πληρότητας. Υπάρχει λοιπόν σταθερή συνάρτηση της μορφής $f(x,y)=c$ για την οποία $f_x=M$ και $f_y=N$. Ολοκληρώνουμε την πρώτη σχέση ως προς $x$ και έχουμε
+\begin{gather}
+f_x=ye^x\Rightarrow f(x,y)=\int{ye^x\d x}+g(y)\Rightarrow \nonumber\\
+f(x,y)=ye^x+g(y)\label{example:exact:1}
+\end{gather}
+Παραγωγίζουμε στη συνέχεια την τελευταία ως προς $y$ και είναι
+\begin{gather*}
+f_y=e^x+g'(y)\Rightarrow e^x+\sin{y}=e^x+g'(y)\Rightarrow\\
+g'(y)=\sin{y}\Rightarrow g(y)=-\cos{y}+c_1
+\end{gather*}
+Αν αντικαταστήσουμε έτσι την $g(y)$ στην \eqref{example:exact:1} καταλήγουμε στην πεπλεγμένη λύση της εξίσωσης
+\[ f(x,y)=ye^x-\cos{y}+c_1\Rightarrow ye^x-\cos{y}=c \]
+\begin{Paradeigma}{}
+Να λυθεί η διαφορική εξίσωση
+\[ y' = -\frac{y^2 + e^x}{2xy} \]
+με $y\neq 0$ και $x\in\mathbb{R}$.
+\end{Paradeigma}
+\begin{marginfigure}[0mm]
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=7cm,
+xmin=-3,xmax=2,
+ymin=-4,ymax=4,
+xtick={-3,-2,...,2},
+ytick={-4,-3,...,4},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4,
+legend style={draw=none, fill opacity=0.7,text opacity=0.7,font=\scriptsize},
+legend pos=north west,
+legend image post style={scale=0.5}]
+\begin{scope}
+\foreach [evaluate=\c as \percent using 100-30*\c] \c in {3,2,1.5,0.5,0.15}
+{\edef\temp{\noexpand%
+\addplot +[grafikh parastash,domain=-3:3,maincolor!\percent!secondarycolor,no markers,
+      raw gnuplot,
+      thick,
+      empty line = jump] gnuplot {
+      set contour base;
+      set cntrparam levels discrete 0.003;
+      unset surface;
+      set view map;
+      set isosamples 500;
+      set samples 200;
+      splot x*y^2+exp(x)-\c;
+    };}\temp
+}
+\end{scope}
+\node at (axis cs:3,3) {$y(x)=-\frac{2}{x}$};
+\node at (axis cs:-.25,-0.5) {\footnotesize$O$};
+\legend{$c=3$,$c=2$,$c=1.5$,$c=0.5$,$c=0.15$}
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Μερικές λύσεις της εξίσωσης $y' = -\frac{y^2 + e^x}{2xy}$}
+\end{marginfigure}
+Η εξίσωση γράφεται ισοδύναμα στη μορφή
+\begin{gather*}
+y' = -\frac{y^2 + e^x}{2xy}\Leftrightarrow\diff{y}{x}=-\frac{y^2 + e^x}{2xy}\Leftrightarrow\\
+\left(y^2+e^x\right)\d x+2xy\d y=0
+\end{gather*}
+από την οποία βλέπουμε ότι $M(x,y)=y^2+e^x$ και $N(x,y)=2xy$. Ελέγχουμε στη συνέχεια αν η εξίσωση είναι πλήρης. Πράγματι
+\[ \diffp{M}{y}=\diffp{\left(y^2+e^x\right)}{y}=2y=\diffp{(2xy)}{x}=\diffp{N}{x} \]
+επομένως υπάρχει συνάρτηση $f(x,y)=c$ η οποία ικανοποιεί την εξίσωση. Γι αυτήν ισχύει $\diffp{f}{x}=M$ και $\diffp{f}{y}=N$. Με ολοκλήρωση της δεύτερης σχέσεις ως προς $y$ έχουμε
+\[ f_y=2xy\Leftrightarrow f(x,y)=xy^2+h(x) \]
+Παραγωγίζουμε ως προς $x$ και παίρνουμε
+\[ f_x=y^2+h'(x)\Leftrightarrow y^2+e^x=y^2+h'(x)\Leftrightarrow h(x)=e^x \]
+Συνεπώς η λύση δίνεται από τον τύπο
+\[ f(x,y)=c\Leftrightarrow xy^2+e^x=c \]
+όπου $c$ αυθαίρετη σταθερά. Αξίζει να αναφέρουμε ότι εξίσωση του παραδείγματος είναι μια διαφορική εξίσωση \eng{Bernoulli} με την οποία θα ασχοληθούμε στην παράγραφο \ref{sec:Bernoulli} όπου και θα την επιλύσουμε ξανά, χρησιμοποιώντας την αντίστοιχη μέθοδο.
+\paragraph{Ολοκληρωτικός παράγοντας}
 \section{Ομογενείς διαφορικές εξισώσεις}
-\lipsum[1-2]
+\lipsum[1]
 \section{Γραμμικές διαφορικές εξισώσεις}
 Όπως αναφέραμε στην εισαγωγή, οι γραμμικές Σ.Δ.Ε έχουν πολυωνυμική μορφή, με συντελεστές συνεχείς συναρτήσεις $a_i(x),\ x\in\varDelta\subseteq\mathbb{R}$. Η γενική μορφή μιας 1ης τάξης γραμμικής διαφορικής εξίσωσης θα είναι
 \[ a_1(x)y'+a_0(x)y=\beta(x) \]
-Για κάθε $x\in\varDelta$ για το οποίο $a_1(x)\neq 0$, η προηγούμενη εξίσωση παίρνει την λυμένη μορφή της όπως βλέπουμε στον επόμενο ορισμό.
+όπου $a_1,a_0$ και $\beta$ συνεχείς συναρτήσεις σε ένα διάστημα $\varDelta$. Για κάθε $x\in\varDelta$ για το οποίο $a_1(x)\neq 0$, η προηγούμενη εξίσωση παίρνει την λυμένη μορφή της όπως βλέπουμε στον επόμενο ορισμό.
 \begin{Orismos}{Γραμμική εξίσωση 1ης τάξης}
-Μια διαφορική εξίσωση ονομάζεται γραμμική 1ης τάξης, αν έχει ή μπορεί να πάρει την
+Μια διαφορική εξίσωση ονομάζεται γραμμική 1ης τάξης, αν έχει την
 μορφή
 \begin{equation}\label{eq:linode1:1}
 y'+p(x)y=q(x)\ ,\ x\in\varDelta
@@ -681,8 +821,8 @@ y(x)=ce^{-\dintt{p(x)}\d x}
 Χρησιμοποιούμε την ίδια τεχνική ώστε να κατασκευάσουμε και τη λύση της μη ομογενούς διαφορικής εξίσωσης \eqref{eq:linode1:1}. Ο πολλαπλασιασμός με τον ίδιο ολοκληρωτικό παράγοντα θα μας δώσει
 \begin{gather}
 e^{\dintt{p(x)}\d x}y'+e^{\dintt{p(x)}\d x}p(x)y=q(x)e^{\dintt{p(x)}\d x}\Leftrightarrow\nonumber\\
-\left(e^{\dintt{p(x)}\d x}y\right)'=q(x)e^{\dintt{p(x)}\d x}\Leftrightarrow\nonumber\\e^{\dintt{p(x)}\d x}y=\int{q(x)e^{\dintt{p(t)}\d t}\d x}+c\Leftrightarrow\nonumber\\
-y(x)=e^{-\dintt{p(x)}\d x}\left[c+\int{q(x)e^{\dintt{p(t)}\d t}\d x}\right]\label{eq:linode1:3}
+\left(e^{\dintt{p(x)}\d x}y\right)'=q(x)e^{\dintt{p(x)}\d x}\Leftrightarrow\nonumber\\e^{\dintt{p(x)}\d x}y=\int{q(x)e^{\dintt{p(x)}\d x}\d x}+c\Leftrightarrow\nonumber\\
+y(x)=e^{-\dintt{p(x)}\d x}\left[c+\int{q(x)e^{\dintt{p(x)}\d x}\d x}\right]\label{eq:linode1:3}
 \end{gather}
 \begin{Paradeigma}{Ομογενής γραμμική εξίσωση 1ης τάξης}
 Να βρεθεί η γενική λύση της γραμμικής διαφορικής εξίσωσης
@@ -757,9 +897,9 @@ legend columns=2
 ]
 \begin{scope}
 \clip (axis cs:0,-7) rectangle (axis cs:7,8);
-\addplot[grafikh parastash,domain=-0.01:7,secondarycolor!70!white]{(-1+ln(x))/x};
+\addplot[grafikh parastash,domain=-0.01:7,secondarycolor!70!maincolor]{(-1+ln(x))/x};
 \addplot[grafikh parastash,domain=-0.01:7,secondarycolor]{(ln(x))/x};
-\addplot[grafikh parastash,domain=-0.01:7,maincolor!70!white]{(1+ln(x))/x};
+\addplot[grafikh parastash,domain=-0.01:7,maincolor!70!secondarycolor]{(1+ln(x))/x};
 \addplot[grafikh parastash,domain=-0.01:7,maincolor]{(2+ln(x))/x};
 \addplot[grafikh parastash,domain=-0.01:7,maincolor!80!black]{(3+ln(x))/x};
 \end{scope}
@@ -773,7 +913,7 @@ legend columns=2
 \[ x^2y'+xy=1\Leftrightarrow y'+\frac{1}{x}y=\frac{1}{x^2} \]
 οπότε και έχουμε $p(x)=\frac{1}{x}$ και $q(x)=\frac{1}{x^2}$. Η γενική λύση αυτής θα δίνεται από τον παρακάτω τύπο
 \begin{align*}
-y(x)&=e^{-\dintt{\frac{1}{x}\d x}}\left[c+\int\frac{1}{x^2}e^{\dintt{\frac{1}{t}\d t}}\d x\right]=\\&=e^{-\ln{x}}\left(c+\int\frac{1}{x^2}e^{\ln{x}}\d x\right)=\\&=\frac{1}{x}\left(c+\int\frac{1}{x}\d x\right)=\\&=\frac{c+\ln{x}}{x}
+y(x)&=e^{-\dintt{\frac{1}{x}\d x}}\left[c+\int\frac{1}{x^2}e^{\dintt{\frac{1}{x}\d x}}\d x\right]=\\&=e^{-\ln{x}}\left(c+\int\frac{1}{x^2}e^{\ln{x}}\d x\right)=\\&=\frac{1}{x}\left(c+\int\frac{1}{x}\d x\right)=\\&=\frac{c+\ln{x}}{x}
 \end{align*}
 όπου $c$ μια αυθαίρετη σταθερά. Στο διπλανό σχήμα βλέπουμε τις ολοκληρωτικές καμπύλες μερικών ειδικών λύσεων της εξίσωσης.
 \paragraph{Ομογενής γραμμική - Μέθοδος χωριζομένων μεταβλητών}
@@ -843,10 +983,10 @@ y(x)=y_0e^{-\dintt_{\!\!\!a}^{x}{p(t)}\d t}\ ,\ y(x)=e^{-\dintt_{\!\!\!a}^{x}{p(
 \begin{marginfigure}[-0.5cm]
 \begin{tikzpicture}
 \begin{axis}[width=6cm,height=7.5cm,
-xmin=-1,xmax=4,
-ymin=-1,ymax=7,
-xtick={-1,0,...,4},
-ytick={-1,0,...,7},
+xmin=-3,xmax=3,
+ymin=-3,ymax=5,
+xtick={-3,-2,...,3},
+ytick={-3,-2,...,5},
 xlabel={\footnotesize $ x $},
 ylabel={\footnotesize $ y $},
 belh ar,aks_on,
@@ -855,25 +995,139 @@ grid style={line width=.1pt, draw=gray!10},
 major grid style={line width=.2pt,draw=gray!50},
 minor tick num=4]
 \begin{scope}
-\clip (axis cs:-1,-1) rectangle (axis cs:4,7);
-\addplot[grafikh parastash,domain=-1:4,secondarycolor]{exp(-x)+x^2-2*x+2};
+\clip (axis cs:-3,-3) rectangle (axis cs:4,5);
+\addplot[grafikh parastash,domain=-3:3,secondarycolor]{-exp(-x)+x^2-2*x+2};
 \end{scope}
-\node[fill=white,inner sep=.2mm,opacity=0.7,text opacity=1] at (axis cs:2,0.5) {\footnotesize$y(x)=e^{-x}+x^2-2x+2$};
+\node[fill=white,inner sep=.2mm,opacity=0.7,text opacity=1] at (axis cs:0,-1.5) {\footnotesize$y(x)=e^{-x}+x^2-2x+2$};
 \node at (axis cs:-.5,-0.5) {\footnotesize$O$};
+\node[xshift=0.7cm,yshift=1cm,labelbox={secondarycolor}](A) at (axis cs:0,1) { Αρχική\\συνθήκη};
+\draw[-latex] (A.south)--(0,1);
+\fill[secondarycolor] (axis cs:0,1) circle(0.1);
 \end{axis}
 \end{tikzpicture}\captionof{figure}{Λύση του προβλήματος αρχικών τιμών.}
 \end{marginfigure}
 Η εξίσωση έχει ήδη τη μορφή \eqref{eq:linode1:1} με $p(x)=1$ και $q(x)=x^2$. Η λύση της εξίσωσης, σύμφωνα με τον τύπο \eqref{eq:linode1:4}β είναι:
 \begin{align*}
-y(x)&=e^{-\dintt_{\!\!\!0}^{x}{\d t}}\left[y(0)+\int_{0}^{x}t^2e^{\dintt_{\!\!\!0}^{t}{\d s}}\d t\right]=\\&=e^{-x}\left(1+\int_{0}^{x}t^2e^t\d t\right)=\\&=e^{-x}\left[1+\left(x^2-2x+2\right)e^x\right]\textbf=\\&=e^{-x}+x^2-2x+2
+y(x)&=e^{-\dintt_{\!\!\!0}^{x}{\d t}}\left[y(0)+\int_{0}^{x}t^2e^{\dintt_{\!\!\!0}^{t}{\d s}}\d t\right]=\\&=e^{-x}\left(1+\int_{0}^{x}t^2e^t\d t\right)=\\&=e^{-x}\left[1+\left(x^2-2x+2\right)e^x-2\right]\textbf=\\&=-e^{-x}+x^2-2x+2
 \end{align*}
-\section{Εξισώσεις \eng{Bernoulli - Ricatti}}
-\begin{Orismos}{Διφορική εξίσωση \eng{Bernoulli}}
-\[ y'+p(x)y=q(x)y^{\sigma}(x) \]
+\section{Εξισώσεις \eng{Bernoulli - Ricatti}}\label{sec:Bernoulli}
+Στην ενότητα αυτή θα μελετήσουμε δύο ειδικές, μη γραμμικές διαφορικές εξισώσεις 1ης τάξης, τις εξισώσεις \eng{Bernoulli} και \eng{Ricatti}. Οι ειδικές αυτές μορφές σχετίζονται άμεσα με τις γραμμικές διαφορικές εξισώσεις 1ης τάξης καθώς η μεν \eng{Ricatti} μετασχηματίζεται σε \eng{Bernoulli}, η δε \eng{Bernoulli} με τη σειρά της μετατρέπεται σε γραμμική 1ης τάξης. 
+\begin{Orismos}{Διαφορική εξίσωση \eng{Bernoulli}}
+Κάθε διαφορική εξίσωση 1ης τάξης της μορφής
+\begin{equation}\label{eq:Bernoulli}
+y'+p(x)y=q(x)y^{\sigma}(x)
+\end{equation}
+με $x\in\varDelta\subseteq\mathbb{R}$ και $\sigma\in\mathbb{R}$, ονομάζεται εξίσωση \eng{Bernoulli}.
 \end{Orismos}
+\begin{marginfigure}[0mm]
+\begin{Parathrhsh}{5.2cm}
+Μια διαφορική εξίσωση \eng{Bernoulli} έχει τετριμμένη λύση την $y(x)=0,\ x\in\varDelta$.
+\end{Parathrhsh}
+\end{marginfigure}
+Στην ειδική περίπτωση όπου $\sigma=1$ η \eqref{eq:Bernoulli} είναι μια ομογενής γραμμική διαφορική εξίσωση, ενώ για $\sigma=0$ παίρνουμε την αντίστοιχη μη γραμμική, τις οποίες μελετήσαμε στην προηγούμενη παράγραφο. Η αναγωγή της σε γραμμική 1ης τάξης επιτυγχάνεται με τον ακόλουθο μετασχηματισμό
+\begin{equation}\label{eq:bernoulli_to_1st}
+z=y^{1-\sigma}
+\end{equation}
+Παραγωγίζοντας παίρνουμε
+\[ z'=(1-\sigma)y^{-\sigma}y'\Rightarrow y^{-\sigma}y'=\frac{z'}{1-\sigma} \]
+Πολλαπλασιάζουμε στη συνέχεια την \eqref{eq:Bernoulli} με $y^{-\sigma}$ και αντικαθιστώντας τις σχέσεις αυτές προκύπτει
+\begin{gather*}
+y^{-\sigma}y'+p(x)y^{1-\sigma}=q(x)\Leftrightarrow
+\frac{z'}{1-\sigma}+p(x)z=q(x)\Leftrightarrow\\
+z'+(1-\sigma)p(x)z=(1-\sigma)q(x)
+\end{gather*}
+και καταλήξαμε στη ζητούμενη γραμμική. Επιλύουμε τη γραμμική και χρησιμοποιώντας ξανά τον μετασχηματισμό \eqref{eq:bernoulli_to_1st} οδηγούμαστε στην λύση $y(x)$ της αρχικής εξίσωσης.\\\\
+\begin{Paradeigma}{Εξίσωση \eng{Bernoulli}}
+Να λύσετε την εξίσωση
+\[ y'-\frac{1}{x}y=y^3\ \text{ , }\ x<0 \]
+\end{Paradeigma}
+Η αρχική διαφορική εξίσωση είναι \eng{Bernoulli} με $\sigma=3,p(x)=-\frac{1}{x}$ και $q(x)=1$. Χρησιμοποιούμε το μετασχηματισμό 
+\[ z=y^{1-3}=y^{-2} \]
+από τον οποίο παραγωγίζοντας παίρνουμε
+\[z'=-2y^{-3}y'\Rightarrow y^{-3}y'=\frac{z'}{2}\]
+Πολλαπλασιάζουμε στη συνέχεια την αρχική εξίσωση με $y^{-3}$ και αντικαθιστούμε τα παραπάνω οπότε παίρνουμε
+\begin{gather*}
+y^{-3}y'-\frac{1}{x}y^{-2}=1\Rightarrow \frac{z'}{2}-\frac{1}{x}z=1\Rightarrow\\
+z'-\frac{2}{x}z=2
+\end{gather*}
+\begin{marginfigure}[0mm]
+\begin{tikzpicture}
+\begin{axis}[width=7cm,height=7cm,
+xmin=-7,xmax=1,
+ymin=-1,ymax=7,
+xtick={-7,-6,...,1},
+ytick={-1,0,...,7},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+restrict y to domain=-20:20,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4,
+legend style={draw=none, fill opacity=0.7,text opacity=0.7,font=\scriptsize},
+legend pos=north west,
+legend image post style={scale=0.5}]
+\begin{scope}
+%\clip (axis cs:-7,-7) rectangle (axis cs:7,7);
+\addplot[grafikh parastash,domain=-7:1,maincolor]{1/sqrt(x^2-2*x)};
+\addplot[grafikh parastash,domain=-4:1,maincolor!50!secondarycolor]{1/sqrt(-0.5*x^2-2*x)};
+\addplot[grafikh parastash,domain=-2:1,secondarycolor]{1/sqrt(-x^2-2*x)};
+\end{scope}
+\node at (axis cs:-.5,-0.5) {\footnotesize$O$};
+\legend{$c=1$,$c=-0.5$,$c=-1$}
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Λύσεις της εξίσωσης \eng{Bernoulli} $y'=-\frac{1}{x}y=y^3$.}
+\end{marginfigure}
+Η τελευταία είναι γραμμική 1ης τάξης και σύμφωνα με τη σχέση \eqref{eq:linode1:3} η γενική της λύση θα δίνεται από τον τύπο
+\begin{align*}
+z(x)&=e^{\dintt{\frac{2}{x}}\d x}\left[c+\int{2e^{-\dintt{\frac{2}{x}}\d x}\d x}\right]=\\
+&=e^{2\ln{x}}\left[c+\int{2e^{-2\ln{x}}\d x}\right]=\\
+&=x^2\left(c+\int{\frac{2}{x^2}\d x}\right)=\\
+&=x^2\left(c-\frac{2}{x}\right)=cx^2-2x
+\end{align*}
+Τέλος, χρησιμοποιώντας ξανά τον αρχικό μετασχηματισμό θα έχουμε
+\begin{gather*}
+z=cx^2-2x\Rightarrow y^{-2}=cx^2-2x\Rightarrow\\
+y(x)=\frac{1}{\sqrt{cx^2-2x}}
+\end{gather*}
+όπου $c$ αυθαίρετη σταθερά.\\\\
+\begin{Paradeigma}{}
+\[y'=-\frac{y^2+e^x}{2xy}\]
+\end{Paradeigma}
 \begin{Orismos}{Διαφορική εξίσωση \eng{Ricatti}}
-\[y'+p(x)y+q(x)y^2(x)+r(x)=0\]
+\begin{equation}\label{eq:Ricatti}
+y'=a(x)y^2+\beta(x)y+\gamma(x)
+\end{equation}
 \end{Orismos}
+Παρατηρούμε ότι αν $\gamma(x)\equiv 0$, η \eqref{eq:Ricatti} αποτελεί διαφορική εξίσωση \eng{Bernoulli} με $\sigma=2$ ενώ για $\beta(x)\equiv 0$ έχουμε μια γραμμική διαφορική εξίσωση 1ης τάξης. Η βασική μέθοδος επίλυσης μιας διαφορικής εξίσωσης \eng{Ricatti} θέλει να γνωρίζουμε μία μερική λύση της εξίσωσης, έστω $y_1(x)$. Με τη χρήση αυτής και το μετασχηματισμό
+\[ y=y_1+w \]
+η \eqref{eq:Ricatti} μετατρέπεται σε διαφορική εξίσωση \eng{Bernoulli}. Παραγωγίζοντας έχουμε $y'=y_1'+w'$ και με αντικατάσταση παίρνουμε
+\begin{gather}
+y_1'+w'=a(y_1+w)^2+\beta(y_1+w)+\gamma\Leftrightarrow\nonumber\\
+y_1'+w'=ay_1^2+2ay_1w+aw^2+\beta y_1+\beta w+\gamma\Leftrightarrow\nonumber\\
+\left(ay_1^2+\beta y+\gamma\right)+w'=aw^2+2ay_1w+\beta w+\left(ay_1^2+\beta y+\gamma\right)\Leftrightarrow\nonumber\\
+w'-\left(2ay_1+\beta\right)w=aw^2\label{eq:Ricatti:1}
+\end{gather}
+Η \eng{Bernoulli} στην οποία καταλήξαμε έχει $\sigma=2$. Σύμφωνα με όσα μελετήσαμε προηγουμένως, ο μετασχηματισμός
+\[ z=w^{1-2}=\frac{1}{w} \]
+θα μετατρέψει την \eqref{eq:Ricatti:1} σε γραμμική. Έχουμε $z'=-\frac{w'}{w^2}$ άρα
+\begin{gather*}
+w'-\left(2ay_1+\beta\right)w=aw^2\Leftrightarrow
+\frac{w'}{w^2}-\left(2ay_1+\beta\right)\frac{1}{w}=a\Leftrightarrow\\
+z'+\left(2ay_1+\beta\right)z=-a
+\end{gather*}
+Η τελευταία έχει γενική λύση την
+\begin{equation}\label{eq:Ricatti:solution}
+z(x)=e^{-\dintt{p(x)\d x}}\left(c-\int{a(x)e^{\dintt{p(x)\d x}}\d x}\right)
+\end{equation}
+όπου $p(x)=2a(x)y_1(x)+\beta(x)$. Αντικαθιστούμε ξανά στην τελευταία σχέση $z=\frac{1}{w}=\frac{1}{y-y_1}$ και οδηγούμαστε στην γενική λύση της \eqref{eq:Ricatti}. Παρατηρούμε ότι εάν συνδυάσουμε τους δύο μετασχηματισμούς μπορούμε να μεταβούμε κατευθείαν από την εξίσωση \eng{Ricatti} στην τελική γραμμική διαφορική εξίσωση και στη γενική λύση της, μέθοδο την οποία θα ακολουθήσουμε, με τον άμεσο μετασχηματισμό 
+\[y=y_1+\frac{1}{z}\]
+παρακάμπτοντας την ενδιάμεση \eqref{eq:Bernoulli}.\\\\
+\begin{Paradeigma}{}
+\[y'=xy^2-y+e^x\]
+\end{Paradeigma}
+Εάν όπως είδαμε θέσουμε $y=y_1+\frac{1}{z}$...
 \lipsum[1-2]
 \section{Περιοδικές εξισώσεις}
 \lipsum[1-2]
