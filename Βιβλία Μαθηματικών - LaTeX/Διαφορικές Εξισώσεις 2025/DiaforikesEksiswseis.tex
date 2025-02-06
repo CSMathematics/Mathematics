@@ -151,6 +151,24 @@ boxrule=0.1pt,
 colframe=yellow!80!black,
 hyphenationfix=true,
 fonttitle=\bfseries,
+toptitle=1mm,
+bottomtitle=1mm,
+width=#1]}
+{\end{tcolorbox}}
+
+% ΠΛΗΡΟΦΟΡΙΑ
+\newenvironment{Plhroforia}[1]
+{\begin{tcolorbox}[title=\textbf{\faBook\ \ \ \titlefont{Πληροφορία}},
+breakable,
+enhanced standard,
+lifted shadow={1mm}{-2mm}{3mm}{0.3mm}{black!50!white},
+colback=thirdcolor!5!white,
+boxrule=0.1pt,
+colframe=thirdcolor!80!black,
+hyphenationfix=true,
+fonttitle=\bfseries,
+toptitle=1mm,
+bottomtitle=1mm,
 width=#1]}
 {\end{tcolorbox}}
 
@@ -164,6 +182,8 @@ colback=red!5!white,
 boxrule=0.1pt,
 colframe=red!80!black,
 fonttitle=\bfseries,
+toptitle=1mm,
+bottomtitle=1mm,
 width=#1]}
 {\end{tcolorbox}}
 
@@ -679,6 +699,13 @@ M(x,y)\d x+N(x,y)\d y=0
 \diffp{M}{y}=\diffp{N}{x}
 \end{equation}
 \end{Orismos}
+\begin{marginfigure}[0mm]
+\begin{Plhroforia}{5.4cm}
+Αν $F(x,y)$ είναι μια συνεχής συνάρτηση δύο μεταβλητών σε κάποιο χωρίο $D\subseteq\mathbb{R}^2$ τότε η παράσταση
+\[ \d F=\diffp{F}{x}\d x+\diffp{F}{y}\d y \]
+ονομάζεται πλήρες διαφορικό της $F$.
+\end{Plhroforia}
+\end{marginfigure}
 Η συνθήκη \eqref{eq:exact:2} λέγεται \textbf{συνθήκη πληρότητας}. Στην περίπτωση ικανοποίησης της συνθήκης πληρότητας, η παράσταση $M\d x+N\d y$ αποτελεί ένα \textbf{πλήρες διαφορικό}. Μας είναι γνωστό από την πραγματική ανάλυση ότι το διαφορικό μιας συνάρτησης $f(x,y)$ δίνεται από τη σχέση
 \begin{equation}\label{eq:exact:4}
 \d f(x,y)=\diffp{f}{x}\d x+\diffp{f}{y}\d y
@@ -793,7 +820,7 @@ y' = -\frac{y^2 + e^x}{2xy}\Leftrightarrow\diff{y}{x}=-\frac{y^2 + e^x}{2xy}\Lef
 \mu(x,y) M(x,y)\d x+\mu(x,y)N(x,y)\d y=0
 \end{equation}
 πλήρη και κατά συνέπεια θα ισχύει η συνθήκη πληρότητας
-\[ \diffp{\mu M}{y}=\diffp{\mu N}{x} \]
+\[ \diffp{(\mu M)}{y}=\diffp{(\mu N)}{x} \]
 Από τη σχέση αυτή παίρνουμε
 \begin{gather}
 \diffp{(\mu M)}{y}=\diffp{(\mu N)}{x}\Leftrightarrow\nonumber\\
@@ -801,6 +828,39 @@ y' = -\frac{y^2 + e^x}{2xy}\Leftrightarrow\diff{y}{x}=-\frac{y^2 + e^x}{2xy}\Lef
 \diffp{\mu}{y}M-\diffp{\mu}{x}N=\mu\diffp{N}{x}-\mu\diffp{M}{y}\Leftrightarrow\nonumber\\
 \frac{\mu_x N-\mu_y M}{\mu}=M_y-N_x\label{eq:exact:7}
 \end{gather}
+Η τελευταία σχέση αποτελεί μια μερική διαφορική εξίσωση ως προς τη ζητούμενη συνάρτηση $\mu$ και η επίλυσή της έχει αυξημένο βαθμό δυσκολίας σε σχέση με την αρχική μας εξίσωση. Για το λόγο αυτό θα εξετάσουμε μόνο κάποιες ειδικές περιπτώσεις για τη συνάρτηση $\mu(x,y)$ ώστε η \eqref{eq:exact:7} να μας δώσει κάποια γενική λύση.
+\begin{bAlist}
+\item \bmath{$\mu=\mu(x)$}\\
+Αν η ζητούμενη συνάρτηση $\mu$ εξαρτάται μόνο από τη μεταβλητή $x$ δηλαδή $\mu=\mu(x)$ τότε και τα δύο μέλη της \eqref{eq:exact:7} αποτελούν συναρτήσεις ως προς $x$ ενώ παίρνουμε
+\[ \mu_x=\mu'\ \textrm{και}\ \mu_y=0 \]
+οπότε η \eqref{eq:exact:7} απλοποιείται, ανάγεται σε συνήθη διαφορική εξίσωση και γίνεται
+\begin{gather*}
+\frac{\mu'}{\mu}=\frac{M_y-N_x}{N}\Leftrightarrow
+\ln{\mu}=\int{\frac{M_y-N_x}{N}\d x}\Leftrightarrow\\
+\mu(x)=e^{\dintt{P(x)\d x}}
+\end{gather*}
+όπου $P(x)=\frac{M_y-N_x}{N}$. Καταλήγουμε έτσι στο εξής συμπέρασμα: Εάν η παράσταση $\frac{M_y-N_x}{N}$ είναι συνάρτηση μόνο του $x$ τότε διαφορική εξίσωση \eqref{eq:exact:1} έχει ολοκληρωτικό παράγοντα τη συνάρτηση
+\begin{equation}
+\mu(x)=e^{\dintt{P(x)\d x}}
+\end{equation}
+\end{bAlist}
+\begin{Paradeigma}{Ολοκληρωτικός παράγοντας $\mu=\mu(x)$}
+\[\left(..\right)\]
+\end{Paradeigma}
+\begin{bAlist}[resume]
+\item \bmath{$\mu=\mu(y)$}\\
+Ομοίως με την προηγούμενη περίπτωση, αν ο ολοκληρωτικός παράγοντας εξαρτάται μόνο από τη μεταβλητή $y$ τότε η \eqref{eq:exact:7} γίνεται Σ.Δ.Ε. ως προς $y$ και είναι
+\begin{gather*}
+-\frac{\mu'}{\mu}=\frac{M_y-N_x}{M}\Leftrightarrow
+\ln{\mu}=\int{\frac{N_x-M_y}{M}\d y}\Leftrightarrow\\
+\mu(y)=e^{\dintt{Q(y)\d y}}
+\end{gather*}
+όπου $Q(y)=\frac{N_x-My}{M}$. Το αντίστοιχο συμπέρασμα για το ζητούμενο ολοκληρωτικό παράγοντα είναι: Εάν η παράσταση $\frac{N_x-M_y}{M}$ είναι συνάρτηση μόνο του $y$ τότε η διαφορική εξίσωση \eqref{eq:exact:1} έχει ολοκληρωτικό παράγοντα τη συνάρτηση
+\begin{equation}
+\mu(y)=e^{\dintt{Q(y)\d y}}
+\end{equation}
+\item 
+\end{bAlist}
 \section{Ομογενείς διαφορικές εξισώσεις}
 \lipsum[1]
 \section{Γραμμικές διαφορικές εξισώσεις}
