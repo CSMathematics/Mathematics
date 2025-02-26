@@ -4,7 +4,7 @@
 \usepackage{alphabeta}
 \usepackage[T1]{fontenc}
 \RequirePackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
-\usepackage{nimbusserif,multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,mathimatika}
+\usepackage{nimbusserif,multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,mathimatika,tabularray}
 \let\myBbbk\Bbbk
 \let\Bbbk\relax
 \usepackage[amsbb]{mtpro2}
@@ -87,6 +87,29 @@ ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
 
 \newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
 \AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
 
 \definecolor{titlecolor}{HTML}{cd0f00}
 
@@ -229,7 +252,7 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 
 \begin{document}
 \begin{center}
-\includegraphics[width=0.4\linewidth]{/home/spyros/texmf/tex/latex/local/frontisthrio/Logotypo-Filomatheia_1}\\
+%\includegraphics[width=0.4\linewidth]{/home/spyros/texmf/tex/latex/local/frontisthrio/Logotypo-Filomatheia_1}\\
 \vspace{-1mm}
 {\faIcon{map-marker-alt}} : Ιακώβου Πολυλά 24 - \ Πεζόδρομος\,\,|\,\,{\faIcon{phone-alt}} : 26610 20144\,\,|\,\, {\faIcon{mobile-alt}} : 6932327283 - 6955058444\\
 \rule{14.7cm}{.1mm}\\
@@ -271,25 +294,31 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 \subsection{Πράξεις συνόλων}
 \begin{enumerate}[resume]
 \item Πράξεις μεταξύ συνόλων
+\begin{multicols}{2}
 \begin{alist}
 \item Ένωση : $ A\cup B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ ή } x\in B\right.\right\rbrace $
 \item Τομή : $ A\cap B=\left\lbrace x\in\varOmega\left| x\in A \textrm{ και } x\in B\right.\right\rbrace $
 \item Συμπλήρωμα : $ A'=\left\lbrace x\in\varOmega\left| x\notin A\right.\right\rbrace $
 \item Διαφορά : $ A-B=\left\lbrace x\in\varOmega\left| x\in A\textrm{ και }x\notin B\right. \right\rbrace $
 \end{alist}
+\end{multicols}
 \end{enumerate}
 \section{Πραγματικοί αριθμοί}
 \subsection{Πράξεις πραγματικών αριθμών}
 \begin{enumerate}
 \item Δύναμη πραγματικού αριθμού: $ a\cdot a\cdot\ldots a=a^\nu $. Ο $ a $ λέγεται \textbf{βάση} και ο $ \nu $ \textbf{εκθέτης}.
 \item Ιδιότητες δυνάμεων : 
-\begin{multicols}{2}
+\begin{multicols}{3}
 \begin{alist}
+\item $a^1=a$
+\item $a^0=1,\ a\neq 0$
+\item $a^{-\nu}=\dfrac{1}{a^{\nu}}$
 \item $a^{\nu}\cdot a^{\mu}=a^{\nu+\mu}$
 \item $a^{\nu}:a^{\mu}=a^{\nu-\mu}$
 \item $(a\cdot \beta)^{\nu}=a^{\nu}\cdot \beta^{\nu}$
 \item $\left(\dfrac{a}{\beta}\right)^{\nu}=\dfrac{a^{\nu}}{\beta^{\nu}}$
 \item $(a^{\nu})^{\mu}=a^{\nu\cdot\mu}$
+\item $\left(\dfrac{a}{\beta}\right)^{-\nu}=\left(\dfrac{\beta}{a}\right)^{\nu}$
 \end{alist}
 \end{multicols}
 \item \textbf{Ταυτότητα:} Μια ισότητα που περιέχει μεταβλητές και επαληθεύεται για κάθε τιμή των μεταβλητών.
@@ -306,9 +335,85 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 \end{multicols}
 \end{enumerate}
 \subsection{Διάταξη}
+\begin{enumerate}[resume]
+\item Είδη διαστημάτων
+\begin{center}
+\begin{mytblr}{rows={m}}
+Διάστημα & Ανισότητα & Σχήμα & Περιγραφή \\ 
+$ [a,\beta] $ & $ a\leq x\leq\beta $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+\Axonas{0}{3}
+\Akro{k}{.7}
+\Akro{k}{2.3}
+\end{tikzpicture} & Κλειστό $ a,\beta $ \\ 
+$ (a,\beta) $ & $ a< x<\beta $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+\Axonas{0}{3}
+\Akro{a}{.7}
+\Akro{a}{2.3}
+\end{tikzpicture} & Ανοιχτό $ a,\beta $\\
+$ [a,\beta) $ & $ a\leq x<\beta $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+\Axonas{0}{3}
+\Akro{k}{.7}
+\Akro{a}{2.3}
+\end{tikzpicture} & Κλειστό $a$ ανοιχτό $\beta$\\
+$ (a,\beta] $ & $ a< x\leq\beta $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\Diasthma{a}{ \beta }{.7}{2.3}{.3}{red!30}
+\Axonas{0}{3}
+\Akro{a}{.7}
+\Akro{k}{2.3}
+\end{tikzpicture} & Ανοιχτό $a$ κλειστό $\beta$ \\
+$ [a,+\infty) $ & $ x\geq a $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\Xapeiro{a}{.7}{3}{.3}{red!30}
+\Axonas{0}{3}
+\Akro{k}{.7}
+\end{tikzpicture} & Κλειστό $a$ συν άπειρο \\
+$ (a,+\infty) $ & $ x>a $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\Xapeiro{a}{.7}{3}{.3}{red!30}
+\Axonas{0}{3}
+\Akro{a}{.7}
+\end{tikzpicture} & Ανοιχτό $a$ συν άπειρο \\
+$ (-\infty,a] $ & $ x\leq a $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\ApeiroX{a}{2.3}{0}{.35}{red!30}
+\Axonas{0}{3}
+\Akro{k}{2.3}
+\end{tikzpicture} & Μείον άπειρο $a$ κλειστό \\
+$ (-\infty,a) $ & $ x<a $ & \begin{tikzpicture}
+\tkzDefPoint(0,.57){A}
+\ApeiroX{a}{2.3}{0}{.35}{red!30}
+\Axonas{0}{3}
+\Akro{a}{2.3}
+\end{tikzpicture} & Μείον άπειρο $a$ ανοιχτό 
+\end{mytblr}
+\end{center}
+\item Μήκος διαστήματος $[a,\beta]\ :\ \mu=\beta-a$
+\item Κέντρο διαστήματος $[a,\beta]\ :\ x_0=\dfrac{a+\beta}{2}$
+\item Ακτίνα διαστήματος $[a,\beta]\ :\ \rho=\dfrac{\beta-a}{2}$
+\end{enumerate}
 \subsection{Απόλυτη τιμή}
-\begin{enumerate}
-\item Απόλυτη τιμή πραγματικού αριθμού $a$ : $|a|$.
+\begin{enumerate}[resume]
+\item Απόλυτη τιμή πραγματικού αριθμού $a$ : $|a|: $ η απόστασή του από το $0$.
+\item Ιδιότητες απόλυτων τιμών
+\begin{multicols}{2}
+\begin{alist}
+\item $|a|\geq 0$ για κάθε $a\in\mathbb{R}$
+\item $-|a|\leq a\leq |a|$
+\item $|a|^2=a^2$
+\item $|a\cdot\beta|=|a|\cdot|\beta|$
+\item $\left|\dfrac{a}{\beta}\right|=\dfrac{|a|}{|\beta|}$
+\item $\left||a|-|\beta|\right|\leq|a+\beta|\leq |a|+|\beta|$
+\item $|x|+|y|=0\Leftrightarrow x=y=0$
+\end{alist}
+\end{multicols}
+\item Απόσταση δύο αριθμών $a,\beta : d(a,\beta)=|a-\beta|$
 \end{enumerate}
 \subsection{Ρίζες}
 \begin{enumerate}[resume]
@@ -318,26 +423,110 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 \item Ο αριθμός $ x $ ονομάζεται \textbf{υπόριζο}.
 \item Δεν ορίζεται ρίζα αρνητικού αριθμού.
 \end{itemize}
+\item Ιδιότητες ριζών
+\begin{multicols}{2}
+\begin{alist}
+\item $ \left(\sqrt{x}\;\right)^2=x\;\;,\;\; x\geq0  $
+\item  $ \sqrt{x^2}=|x|\;\;,\;\; x\in\mathbb{R} $
+\item $ \sqrt{x\cdot y}=\!\sqrt{x}\cdot\!\sqrt{y}\;\;,\;\; x,y\geq0 $
+\item $ \sqrt{\dfrac{x}{y}}\;=\dfrac{\sqrt{x}}{\sqrt{y}}\;\;,\;\; x\geq0\textrm{ και }y>0 $
+\item $ \sqrt{x\pm y}\neq\!\sqrt{x}\pm\!\sqrt{y}\;\;,\;\; x,y\geq0 $
+\item $ \left(\sqrt[\nu]{x}\;\right)^\nu=x\;\;,\;\; x\geq0  $ 
+\item $ \sqrt[\nu]{x^\nu}=\begin{cases}
+|x|&  ,x\in\mathbb{R}\textrm{ αν }\nu\textrm{ άρτιος}\\x&  ,x\geq0\textrm{ αν } \nu\textrm{ περιττός}\end{cases} $
+\item $ \sqrt[\nu]{x\cdot y}=\!\sqrt[\nu]{x}\cdot\!\sqrt[\nu]{y}\;\;,\;\; x,y\geq0 $ 
+\item $ \sqrt[\nu]{\dfrac{x}{y}}\;=\dfrac{\sqrt[\nu]{x}}{\sqrt[\nu]{y}}\;\;,\;\; x\geq0\textrm{ και }y>0 $
+\item $ \sqrt[\nu]{x\pm y}\neq\!\sqrt[\nu]{x}\pm\!\sqrt[\nu]{y}\;\;,\;\; x,y\geq0 $
+% \item $ \sqrt[\mu]{\!\sqrt[\nu]{x}}=\!\sqrt[\nu\cdot\mu]{x}\;\;,\;\; x\geq0 $ 
+\item $ \sqrt[\nu]{x^\nu\cdot y}=x\!\sqrt[\nu]{y}\;\;,\;\; x,y\geq0  $ 
+% \item $ \sqrt[\mu\cdot\rho]{x^{\nu\cdot\rho}}=\!\sqrt[\mu]{x^{\nu}}\;\;,\;\; x\geq0 $ 
+\item $ \sqrt[\nu]{x_1\cdot x_2\cdot\ldots\cdot x_\nu}=\!\sqrt[\nu]{x_1}\cdot\!\sqrt[\nu]{x_2}\cdot\ldots\cdot\!\sqrt[\nu]{x_\nu} $\\όπου $ x_1,x_2,\ldots x_\nu\geq0 $ και $ \nu\in\mathbb{N} $.
+%\item $ \sqrt[\mu_1]{\!\sqrt[\mu_2]{\mbox{}^{\ddots}\sqrt[\mu_{\nu}]{x}}}\;\;\;=\sqrt[\mu_1\cdot\mu_2\cdot\ldots\cdot\mu_\nu]{x}$\\με $ x\geq0 $ και $ \mu_1,\mu_2,\ldots,\mu_\nu\in\mathbb{N} $.
+\end{alist}
+\end{multicols}
 \end{enumerate}
 \section{Εξισώσεις}
+\begin{multicols}{2}
 \subsection{Εξισώσεις 1ου βαθμού}
 \begin{enumerate}
 \item Εξίσωση 1ου βαθμού : $ax+\beta$
+\item Εξισώσεις με απόλυτες τιμές.
+\begin{alist}[leftmargin=-2mm]
+\item $|A(x)|=\theta\Leftrightarrow A(x)=\pm\theta$
+\item $|A(x)|=|B(x)|\Leftrightarrow A(x)=\pm B(x)$
+\item $|A(x)|=B(x)\Leftrightarrow A(x)=\pm B(x)\, $ με $B(x)\geq 0$
+\end{alist}
 \end{enumerate}
 \subsection{Εξισώσεις της μορφής \bmath{$x^{\nu}=a$}}
+\begin{mytblr}{}
+ & $a>0$ & $a<0$\\
+$\nu:$ άρτιος & $x=\pm\sqrt[\nu]{a}$ & Αδύνατη \\
+$\nu:$ περιττός & $x=\sqrt[\nu]{a}$ & $x=-\sqrt[\nu]{|a|}$ 
+\end{mytblr}
+\end{multicols}
 \subsection{Εξισώσεις 2ου βαθμού}
 \begin{enumerate}
 \item Εξίσωση 2ου βαθμού : $ax^2+\beta x+\gamma=0$ με $a\neq 0$
 \item Τύποι \eng{Vieta} : $S=x_1+x_2=\dfrac{\beta}{a}$ και $P=x_1\cdot x_2=\dfrac{\gamma}{a}$ όπου $x_1,x_2$ οι ρίζες της εξίσωσης.
+\item Τύπος εξίσωσης 2ου βαθμού με λύσεις $x_1,x_2 : x^2-Sx+P=0$.
 \end{enumerate}
 \section{Ανισώσεις}
 \subsection{Ανισώσεις 1ου βαθμού}
 \begin{enumerate}
 \item Ανίσωση 1ου βαθμού : $ax+\beta\gtrless0\ $.
+\item Ανισώσεις με απόλυτες τιμές
+\begin{itemize}
+\item $|A(x)|<\theta\Leftrightarrow -\theta<A(x)<\theta$.
+\item $|A(x)|>\theta\Leftrightarrow A(x)<-\theta$ ή $A(x)>\theta$.
+\end{itemize}
 \end{enumerate}
 \subsection{Ανισώσεις 2ου βαθμού}
 \begin{enumerate}
 \item Ανίσωση 2ου βαθμού : $ax^2+\beta x+\gamma\gtrless0$ με $a\neq 0$.
+\item Παραγοντοποίηση τριωνύμου
+\begin{itemize}[itemsep=0mm]
+\item Αν $ \varDelta>0 $ τότε $ ax^2+\beta x+\gamma=a(x-x_1)(x-x_2) $ όπου $ x_1,x_2 $ είναι οι ρίζες του τριωνύμου.
+\item Αν $ \varDelta=0  $ τότε $ ax^2+\beta x+\gamma=a\left(x-x_0\right)^2=a\left(x+\frac{\beta}{2a}\right)^2 $ όπου $ x_0 $ είναι η διπλή ρίζα του τριωνύμου.
+\item Αν $ \varDelta<0 $ τότε δεν παραγοντοποιείται.
+\end{itemize}
+\item Πίνακες προσήμων τριωνύμου $ax^2+\beta x+\gamma$
+\begin{center}
+\begin{tikzpicture}
+\node[yshift=3mm,xshift=5.5cm] (0,0) {$\Delta>0\to x_1,x_2:$ ρίζες};
+\tikzset{t style/.style = {style = dashed}}
+\tkzTabInit[color,lgt=3,espcl=2,colorC = red!40,
+colorL = red!20,
+colorV = red!40]%
+{$x$ / .8,$ax^2+\beta x+\gamma$ /1.2}%
+{$-\infty$,$x_1$,$x_2$,$+\infty$}%
+\tkzTabLine{ , \genfrac{}{}{0pt}{0}{\text{Ομόσημο}}{ \text{του } a}, z
+, \genfrac{}{}{0pt}{0}{\text{Ετερόσημο}}{ \text{του } a}, z
+, \genfrac{}{}{0pt}{0}{\text{Ομόσημο}}{ \text{του } a}, }
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\node[yshift=3mm,xshift=4.5cm] (0,0) {$\Delta=0\to x_0:$ διπλή ρίζα};
+\tikzset{t style/.style = {style = dashed}}
+\tkzTabInit[color,lgt=3,espcl=2,colorC = red!40,
+colorL = red!20,
+colorV = red!40]%
+{$x$ / .8,$ax^2+\beta x+\gamma$ /1.2}%
+{$-\infty$,$x_0$,$+\infty$}%
+\tkzTabLine{ , \genfrac{}{}{0pt}{0}{\text{Ομόσημο}}{ \text{του } a}, z
+, \genfrac{}{}{0pt}{0}{\text{Ομόσημο}}{ \text{του } a}, }
+\end{tikzpicture}\quad
+\begin{tikzpicture}
+\node[yshift=3mm,xshift=4cm] (0,0) {$\Delta<0\to$ Καμία ρίζα};
+\tikzset{t style/.style = {style = dashed}}
+\tkzTabInit[color,lgt=3,espcl=3.4,colorC = red!40,
+colorL = red!20,
+colorV = red!40]%
+{$x$ / .8,$ax^2+\beta x+\gamma$ /1.2}%
+{$-\infty$,$+\infty$}%
+\tkzTabLine{, \genfrac{}{}{0pt}{0}{\text{Ομόσημο}}{ \text{του } a}, }
+\end{tikzpicture}
+\end{center}
 \end{enumerate}
 \section{Ακολουθίες}
 \subsection{Η έννοια της ακολουθίας}
@@ -345,13 +534,17 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 \begin{enumerate}
 \item Αριθμητική πρόοδος : $a_{\nu+1}=a_{\nu}+\omega\ ,\ \nu\in\mathbb{N}^*$.
 \item Γενικός τύπος αριθμητικής προόδου : $a_{\nu}=a_1+(\nu-1)\cdot\omega$
-\item Διαφορά αριθμητικής προόδου : $\omega$
+\item Διαφορά αριθμητικής προόδου : $\omega=a_{\nu+1}-a_{\nu}$.
+\item Οι $a,\beta,\gamma$ είναι διαδοχικοί όροι αριθμητικής προόδου $\Leftrightarrow \beta=\dfrac{a+\gamma}{2}$. \\Ο $\beta$ λέγεται αριθμητικός μέσος των $a,\gamma$.
+\item Άθροισμα $\nu$ πρώτων όρων αριθμητικής προόδου : $S_{\nu}=\dfrac{\nu}{2}\left(a_1+a_{\nu}\right)$ ή $S_{\nu}=\dfrac{\nu}{2}\left[a_1+(\nu-1)\omega\right]$
 \end{enumerate}
 \subsection{Γεωμετρική πρόοδος}
 \begin{enumerate}[resume]
 \item Γεωμετρική πρόοδος : $a_{\nu+1}=\lambda\cdot a_{\nu}\ ,\ \nu\in\mathbb{N}^*$.
 \item Γενικός τύπος γεωμετρικής προόδου : $a_{\nu}=a_1\cdot\lambda^{\nu+1}$
-\item Λόγος γεωμετρικής προόδου : $\lambda\neq 0$.
+\item Λόγος γεωμετρικής προόδου : $\lambda=\dfrac{a_{\nu+1}}{a_{\nu}}\neq 0$.
+\item Οι $a,\beta,\gamma$ είναι διαδοχικοί όροι γεωμετρικής προόδου $\Leftrightarrow \beta^2=a\gamma$. \\Αν $a,\gamma>0$ ο $\beta=\sqrt{a\gamma}$ λέγεται γεωμετρικός μέσος των $a,\gamma$.
+\item Άθροισμα $\nu$ πρώτων όρων αριθμητικής προόδου : $S_{\nu}=a_1\dfrac{\lambda^{\nu}-1}{\lambda-1}$
 \end{enumerate}
 \section{Συναρτήσεις}
 \subsection{Η έννοια της συνάρτησης}
