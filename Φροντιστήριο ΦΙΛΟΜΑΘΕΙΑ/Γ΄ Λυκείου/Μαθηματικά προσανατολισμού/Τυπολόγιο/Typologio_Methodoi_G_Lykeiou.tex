@@ -158,36 +158,6 @@ ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
 \definecolor{ggreen}{HTML}{9BBB59}
 \definecolor{ppurple}{HTML}{9F4C7C}
 
-\makeatletter
-\usetikzlibrary{patterns}
-\tikzstyle{chart}=[
-legend label/.style={font={\scriptsize},anchor=west,align=left},
-legend box/.style={rectangle, draw, minimum size=5pt},
-axis/.style={black,semithick,->},
-axis label/.style={anchor=east,font={\tiny}},
-]
-
-\tikzstyle{bar chart}=[
-chart,
-bar width/.code={
-\pgfmathparse{##1/2}
-\global\let\bar@w\pgfmathresult
-},
-bar/.style={very thick, draw=white},
-bar label/.style={font={\bf\small},anchor=north},
-bar value/.style={font={\footnotesize}},
-bar width=.75,
-]
-
-\tikzstyle{pie chart}=[
-chart,
-slice/.style={line cap=round, line join=round,thick,draw=white},
-pie title/.style={font={\bf}},
-slice type/.style 2 args={
-##1/.style={fill=##2},
-values of ##1/.style={}
-}
-]
 
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{foreground}
@@ -272,7 +242,6 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 }%
 }
 \makeatother
-
 
 %-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
 \newcounter{parathrhsh}[section]
@@ -361,7 +330,6 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
   hline{2} = {.7mm}, % midrule  
 }
 
-
 \DeclareRobustCommand{\officialeuro}{%
   \ifmmode\expandafter\text\fi
   {\fontencoding{U}\fontfamily{eurosym}\selectfont e}}
@@ -371,10 +339,14 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
 {}{0em}%
 {{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut{{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}}\strut}}}[\vskip -.2\baselineskip{}]
 \setlength{\parindent}{0pt}
+
+\newcommand{\bhmata}{\textcolor{red!80!black}{\kerkissans{{\large \textbf{Βήματα}\\\vspace{-7mm}}}}}
 \newlist{bhma}{enumerate}{3}
-\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=1cm,itemindent=1cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\setlist[bhma]{label=\bf{\textcolor{red!80!black}{\kerkissans{\arabic*\textsuperscript{o}\ :}}},leftmargin=0.9cm,itemindent=0cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+
+\newcommand{\tropoi}{\textcolor{red!80!black}{\kerkissans{{\large \textbf{Τρόποι}\\\vspace{-7mm}}}}}
 \newlist{tropos}{enumerate}{3}
-\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemsep=0mm,itemindent=2cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\setlist[tropos]{label=\bf{\textcolor{black}{\kerkissans{\arabic*\textsuperscript{oς} Τρόπος\ :}}},leftmargin=0cm,itemsep=0mm,itemindent=2.1cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
 \newcommand{\en}[1]{{\selectlanguage{english}#1\selectlanguage{greek}}}
 \newlist{periptwsh}{enumerate}{3}
 \setlist[periptwsh]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Περίπτωση :},leftmargin=0cm,itemsep=0mm,itemindent=2.8cm,ref=\bf{\arabic*\textsuperscript{oς}\;Περίπτωση}}
@@ -437,7 +409,8 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
 \section{Όρια - Συνέχεια}
 \subsection{Σύνθεση συναρτήσεων}
 \begin{askhsh}{Εύρεση σύνθεσης}
-Για να οριστεί η συνάρτηση $ f\circ g $ πρέπει να βρούμε το πεδίο ορισμού της και τον τύπο της.
+Για να οριστεί η συνάρτηση $ f\circ g $ πρέπει να βρούμε το πεδίο ορισμού της και τον τύπο της.\\
+\bhmata
 \begin{bhma}
 \item Για το πεδίο ορισμού ισχύουν οι σχέσεις
 \[ x\in D_g\ \ \textrm{ και }\ \ g(x)\in D_f \]
@@ -500,9 +473,8 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 \end{alist}
 \subsection{Συνάρτηση \bmath{$ 1-1 $} - Αντίστροφη}
 \begin{askhsh}{Συνάρτηση $ 1-1 $}
-Υπάρχουν οι εξής τρόποι για να αποδείξουμε ότι μια συνάρτηση $ f:D_f\to\mathbb{R} $ είναι $ 1-1 $.
-\begin{tropos}
-\item Αποδεικνύοντας ότι η $ f $ είναι γνησίως μονότονη στο $ D_f $. (Ο τρόπος αυτός ενδείκνυται όταν το πεδίο ορισμού της $ f $ είναι ένα διάστημα.)
+\tropoi\begin{tropos}
+\item Αποδεικνύουμε ότι η $ f $ είναι γνησίως μονότονη στο $ D_f $. (Ο τρόπος αυτός ενδείκνυται όταν το πεδίο ορισμού της $ f $ είναι ένα διάστημα.)
 \item Με τη βοήθεια του ορισμού της $ 1-1 $ συνάρτησης
 \[ \textrm{Για κάθε }x_1,x_2\in D_f \ \ : \ \  f(x_1)=f(x_2)\Rightarrow x_1=x_2 \]
 (Ο τρόπος αυτός ενδείκνυται για συναρτήσεις με πεδίο ορισμού ένωση διαστημάτων, αρκεί ο τύπος να επιτρέπει την επίλυση της εξίσωσης.)
@@ -512,32 +484,54 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 \end{tropos}
 \end{askhsh}
 \begin{askhsh}{Εύρεση αντίστροφης συνάρτησης}
-\begin{bhma}
+\bhmata\begin{bhma}
+\item Δείχνουμε ότι η $f$ είναι $1-1$.
 \item Εύρεση συνόλου τιμών της $ f $ με τη βοήθεια μονοτονίας.
 \item Επίλυση της εξίσωσης $ y=f(x) $ ως προς $ x $ με $ x\in D_f $.
 \end{bhma}
 \end{askhsh}
-\subsection{Όρια}
-Οι απροσδιόριστες μορφές που μπορεί να έχει ένα όριο είναι οι ακόλουθες :
-\begin{alist}
-\item Μορφή κλάσματος : $ \dfrac{0}{0} $ και $ \dfrac{\pm\infty}{\pm\infty} $
-\item Μορφή γινομένου : $ 0\cdot(\pm\infty) $
-\item Μορφή δύναμης : $ 0^0,1^{\pm\infty},(\pm\infty)^0 $
-\item Μορφή αθροίσματος : $ \infty-\infty $
-\end{alist}
-Θα μελετήσουμε επίσης τη μορφή $ \frac{a}{0} $.\\\\
-\begin{askhsh}{Όρια με απροσδιοριστία $ \frac{0}{0} $}
-\begin{alist}
-\begin{multicols}{2}
-\item Με ρητή συνάρτηση
+\Paradeigma{Εύρεση αντίστροφης}
+\bmath{Δίνεται η συνάρτηση $f(x)=\ln{(x-2)-\ln{(5-x)}}$. Να δείξετε ότι η $f$ είναι αντιστρέψιμη και να ορίσετε τη συνάρτηση $f^{-1}$.}\\\\
+\lysh
+Η $f$ ορίζεται όταν
+\[
+x-2>0\Rightarrow x>2\ \text{και}\ 5-x>0\Rightarrow x<5
+\]
+άρα $D_f=(2,5)$. Για κάθε $x\in(2,5)$ είναι:
+\[ f'(x)=\left[\ln{(x-2)-\ln{(5-x)}}\right]'=\frac{(x-2)'}{x-2}-\frac{(5-x)'}{5-x}=\frac{1}{x-2}+\frac{1}{5-x}>0 \]
+επομένως η $f$ είναι γνησίως αύξουσα στο $(2,5)$, άρα και $1-1$ οπότε αντιστρέφεται. Η $f^{-1}$ έχει πεδίο ορισμού
+\[ D_{f^{-1}}=f(D_f)=f((2,5))\stackrel{f\nearrow}{=}\left(\lim\limits_{x\to2^+}{f(x)},\lim\limits_{x\to5^-}{f(x)}\right) \]
+\begin{itemize}
+\item $\lim\limits_{x\to2^+}{f(x)}=\lim\limits_{x\to2^+}{\left(\ln{(x-2)}-\ln{(5-x)}\right)}=-\infty-\ln{3}=-\infty$.
+\item $\lim\limits_{x\to5^-}{f(x)}=\lim\limits_{x\to5^-}{\left(\ln{(x-2)}-\ln{(5-x)}\right)}=\ln{3}-(-\infty)=+\infty$.
+\end{itemize}
+οπότε $D_{f^{-1}}=\mathbb{R}$. Για την εύρεση του τύπου έχουμε $y=f(x)\Leftrightarrow x=f^{-1}(y)$. Είναι λοιπόν
+\begin{align*}
+y=f(x)&\Leftrightarrow y=\ln{(x-2)}-\ln{(5-x)}\Leftrightarrow y=\ln{\frac{x-2}{5-x}}\Leftrightarrow\\
+&\Leftrightarrow e^y=\frac{x-2}{5-x}\Leftrightarrow e^y(5-x)=x-2\Leftrightarrow\\
+&\Leftrightarrow 5e^y-xe^y=x-2\Leftrightarrow x+xe^y=5e^y+2\Leftrightarrow\\
+&\Leftrightarrow x\left(e^y+1\right)=5e^y+2\Leftrightarrow x=\frac{5e^y+2}{e^y+1}\Leftrightarrow f^{-1}(y)=\frac{5e^y+2}{e^y+1}
+\end{align*}
+άρα η αντίστροφη της $f$ είναι $f^{-1}(x)=\frac{5e^x+2}{e^x+1}\ ,\ D_{f^{-1}}=\mathbb{R}$.
+\subsection{Όρια μορφής \bmath{$\frac{0}{0}$}}
+\begin{askhsh}{Όριο $ \frac{0}{0} $ ρητής}
+Αν ένα όριο $\lim\limits_{x\to x_0}{\frac{P(x)}{Q(x)}}$, όπου $P(x),Q(x)$ πολυώνυμα, έχει μορφή $\frac{0}{0}$ τότε εργαζόμαστε ως εξής:
 \begin{tropos}
-\item Παραγοντοποίηση
-\item Κανόνας \en{De L'Hospital}
+\item \kerkissans{\textbf{Παραγοντοποίηση}}
+\\\bhmata\begin{bhma}
+\item Παραγοντοποιούμε αριθμητή και παρονομαστή.
+\item Απλοποιούμε τις παραστάσεις $x-x_0$ και αντικαθιστούμε όπου $x$ το $x_0$.
+\end{bhma}
+\item \kerkissans{\textbf{Κανόνας \en{De L'Hospital}}}\\
+Εφαρμόζουμε τον κανόνα \en{De L'Hospital} όσες φορές χρειαστεί έως ότου φύγει η απροσδιοριστία.
 \end{tropos}
-\item Με ρίζες :\\Πολλαπλασιασμός με συζυγείς παραστάσεις.
-\end{multicols}
-\item Με απόλυτες τιμές
-\begin{bhma}
+
+\end{askhsh}
+\begin{askhsh}{Όριο $ \frac{0}{0} $ άρρητης}
+Πολλαπλασιασμός με συζυγείς παραστάσεις.
+\end{askhsh}
+\begin{askhsh}{Όριο $ \frac{0}{0} $ ρητής με απόλυτες τιμές}
+\bhmata\begin{bhma}
 \item Υπολογίζω τα όρια των παραστάσεων μέσα στις απόλυτες τιμές.
 \item Διώχνω τις απόλυτες τιμές με τον παρακάτω κανόνα
 \begin{gather*}
@@ -547,50 +541,62 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 Αν κάποια απόλυτη τιμή μηδενίζεται στο $ x_0 $ τότε υπολογίζω πλευρικά όρια.
 \item Υπολογίζω όριο ρητής $ \frac{0}{0} $
 \end{bhma}
-\item Με τριγωνομετρικές παραστάσεις
+\end{askhsh}
+\begin{askhsh}{Όριο $ \frac{0}{0} $ με τριγωνομετρικές παραστάσεις}
 \begin{tropos}
 \item Κατασκευάζω και χρησιμοποιώ τριγωνομετρικές ταυτότητες.
 \item Κατασκευάζω με πράξεις κάποιο βασικό τριγωνομετρικό όριο, αρκεί όταν $ x\to x_0 $ να μηδενίζεται η γωνία του τριγωνομετρικού αριθμού.
 \item Κανόνας \en{De L' Hospital}. (Χρειάζεται προσοχή εδώ γιατί μπορεί η εφαρμογή του κανόνα να με οδηγήσει σε δυσκολότερο όριο.)
 \end{tropos}
-\item Με εκθετικές, λογαριθμικές και συνδυασμό αυτών : Κανόνας \eng{De L' Hospital}
-\end{alist}
 \end{askhsh}
-\begin{askhsh}{Όρια με απροσδιοριστία $ \frac{\infty}{\infty} $}
-\begin{alist}
-\item Με ρητή συνάρτηση όταν $ x\to\infty $ υπολογίζουμε το όριο του κλάσματος μόνο με τους μεγιστοβάθμιους όρους.
-\item Με ρίζες : Μέθοδος κοινού παράγοντα.
-\item Διάφορες συναρτήσεις : Κανόνας \en{De L' Hospital}
-\end{alist}
+\begin{askhsh}{Όριο $ \frac{0}{0} $ με εκθετικές, λογαριθμικές και συνδυασμό αυτών}
+Εφαρμογή του κανόνα \eng{De L' Hospital}.
 \end{askhsh}
-\begin{askhsh}{Όρια με απροσδιοριστία $ 0\cdot(\pm\infty) $}
-\begin{bhma}
+\subsection{{Όρια με απροσδιοριστία $ \frac{\pm\infty}{\pm\infty} $}}
+\begin{askhsh}{Όρια $ \frac{\pm\infty}{\pm\infty} $ ρητής}
+Με ρητή συνάρτηση όταν $ x\to\pm\infty $ υπολογίζουμε το όριο του κλάσματος μόνο με τους μεγιστοβάθμιους όρους.
+\end{askhsh}
+\begin{askhsh}{Όρια $ \frac{\pm\infty}{\pm\infty} $ με ρίζες}
+Μέθοδος κοινού παράγοντα ή συζυγείς παραστάσεις.
+\end{askhsh}
+\begin{askhsh}{Όρια $ \frac{\pm\infty}{\pm\infty} $ Διάφορες συναρτήσεις}
+ Κανόνας \en{De L' Hospital}
+\end{askhsh}
+\subsection{Όρια με απροσδιοριστία \bmath{$ 0\cdot(\pm\infty) $}}
+\begin{askhsh}{Όρια $ 0\cdot(\pm\infty) $ - Γενική μέθοδος}
+\bhmata\begin{bhma}
 \item Γράφουμε το γινόμενο με μορφή σύνθετου κλάσματος ως εξής
 \[ \lim_{x\to x_0}{\left(f(x)\cdot g(x)\right)}=\lim_{x\to x_0}{\dfrac{f(x)}{\frac{1}{g(x)}}}\ \ \textrm{ή}\ \ \lim_{x\to x_0}{\dfrac{g(x)}{\frac{1}{f(x)}}} \]
-\item Το όριο παίρνει τη μορφή $ \dfrac{0}{0} $ ή $ \dfrac{\infty}{\infty} $ οπότε εφαρμόζουμε κανόνα \en{De L' Hospital}
+\item Το όριο παίρνει τη μορφή $ \dfrac{0}{0} $ ή $ \dfrac{\pm\infty}{\pm\infty} $ οπότε εφαρμόζουμε κανόνα \en{De L' Hospital}
 \end{bhma}
 \end{askhsh}
 \begin{askhsh}{Όρια με απροσδιοριστία $ 0^0,1^{\pm\infty},(\pm\infty)^0 $}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Χρησιμοποιούμε τον παρακάτω κανόνα
 \[ \lim_{x\to x_0}{f(x)^{g(x)}}=\lim_{x\to x_0}{e^{\ln{f(x)^{g(x)}}}}=\lim_{x\to x_0}{e^{g(x)\cdot\ln{f(x)}}} \]
 \item Υπολογίζουμε το όριο του εκθέτη το οποίο έχει απροσδιοριστία $ 0\cdot(\pm\infty) $. Στη συνέχεια με αντικατάσταση υπολογίζουμε το αρχικό όριο.
 \end{bhma}
 \end{askhsh}
-\begin{askhsh}{Όρια με απροσδιοριστία $ \infty-\infty $}
-Για τον υπολογισμό ορίου $ \lim\limits_{x\to x_0}{(f(x)-g(x))} $ με απροσδιοριστία $ \infty-\infty $ ακολουθούμε έναν από τους παρακάτω τρόπους:
-\begin{tropos}
+\subsection{Όρια με απροσδιοριστία \bmath{$ +\infty-\infty $}}
+\begin{askhsh}{Όρια $ +\infty-\infty $ - Γενική μέθοδος}
+\bhmata
+\begin{bhma}
 \item Βγάζουμε κοινό παράγοντα μια από τις δύο συναρτήσεις.
-\[ \lim_{x\to x_0}{(f(x)-g(x))}=\lim_{x\to x_0}{f(x)\left[1-\frac{g(x)}{f(x)}\right]} \]
-Στη συνέχεια υπολογίζουμε το όριο του κλάσματος $ \frac{g(x)}{f(x)} $ με μορφή $ \infty-\infty $.
-\item Αν οι $ f(x),g(x) $ είναι κλάσματα, τα κάνουμε ομώνυμα.
-\item Σχηματίζουμε διαφορά λογαρίθμων και χρησιμοποιούμε την ιδιότητα
+\[ \lim_{x\to x_0}{(f(x)-g(x))}=\lim_{x\to x_0}{\left[f(x)\left(1-\frac{g(x)}{f(x)}\right)\right]} \]
+\item Στη συνέχεια υπολογίζουμε το όριο του κλάσματος $ \frac{g(x)}{f(x)} $ με μορφή $ \frac{\pm\infty}{\pm\infty} $.
+\item Επιστρέφουμε στο αρχικό όριο αντικαθιστώντας.
+\end{bhma}
+\end{askhsh}
+\begin{askhsh}{Όρια $ +\infty-\infty $ - Κλάσματα}
+Αν στο όριο $\lim_{x\to x_0}{(f(x)-g(x))}$ οι συναρτήσεις $ f(x),g(x) $ είναι κλάσματα τότε τα κάνουμε ομώνυμα και οδηγούμαστε σε μία από τις μορφές $\frac{0}{0}$,$\frac{\pm\infty}{\pm\infty}$ ή $\frac{a}{0}$.
+\end{askhsh}
+\begin{askhsh}{Όρια $ +\infty-\infty $ - Διαφορά λογαρίθμων}
+Σχηματίζουμε διαφορά λογαρίθμων και χρησιμοποιούμε την ιδιότητα
 \[ \ln{a}-\ln{\beta}=\ln{\frac{a}{\beta}} \]
-Στη συνέχεια υπολογίζουμε το όριο του κλάσματος.
-\end{tropos}
+Στη συνέχεια υπολογίζουμε το όριο του κλάσματος το οποίο έχει απροσδιοριστία $\frac{\pm\infty}{\pm\infty}$.
 \end{askhsh}
 \begin{askhsh}{Όρια της μορφής $ \frac{a}{0} $}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Παραγοντοποιούμε τον παρονομαστή.
 \item Γράφουμε σε ξεχωριστό κλάσμα τον παράγοντα που μηδενίζεται.
 \item Αν αυτός ο παράγοντας έχει σταθερό πρόσημο τότε προχωράμε στον υπολογισμό. Αν όχι υπολογίζουμε πλευρικά όρια.
@@ -598,13 +604,13 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 \end{askhsh}
 \begin{askhsh}{Όρια με τριγωνομετρικές συναρτήσεις $ \hm{f(x)},\syn{f(x)} $ - Μηδενική επί φραγμένη}
 Αν το όριο περιέχει σύνθετες τριγωνομετρικές συναρτήσεις με γωνία $ f(x) $ και $ \lim\limits_{x\to x_0}{f(x)}=\pm\infty $ τότε
-\begin{bhma}
+\\\bhmata\begin{bhma}
 \item Γράφουμε τη συνάρτηση μέσα στο όριο ως γινόμενο συναρτήσεων. 
 \item Κλείνουμε τη συνάρτηση του ορίου σε απόλυτη τιμή και σχηματίζουμε διπλή ανισότητα ώστε να εφαρμοστεί κριτήριο παρεμβολής.
 \end{bhma}
 \end{askhsh}
 \begin{askhsh}{Γνωστό όριο που περιέχει την $ f(x) $ - Βοηθητική συνάρτηση}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Θέτουμε $ g(x) $ τη συνάρτηση του ορίου και λύνουμε ως προς $ f(x) $.
 \item Υπολογίζουμε το όριο της $ f $ στο $ x_0 $.
 \end{bhma}
@@ -616,15 +622,23 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 \section{Διαφορικός λογισμός}
 \subsection{Εφαπτομένη}
 \begin{askhsh}{Εύρεση εφαπτομένης με γνωστό σημείο επαφής}
-\begin{bhma}
-\item Πεδίο ορισμού, παράγωγος $ f' $ και θέτουμε όπου $ x=x_0 $ ώστε να βρεθούν οι αριθμοί $ x_0,f(x_0) $ και $ f'(x_0) $.
+\bhmata\begin{bhma}
+\item Πεδίο ορισμού, παράγωγος $ f' $ και θέτουμε όπου $ x=x_0 $ ώστε να βρεθούν οι αριθμοί $ f(x_0) $ και $ f'(x_0) $.
 \item Γράφουμε την εξίσωση της ευθείας
 \[ y-f(x_0)=f'(x_0)(x-x_0) \]
 και αντικαθιστώντας λύνουμε ως προς $ y $.
 \end{bhma}
 \end{askhsh}
+\Paradeigma{Εφαπτομένη - Γνωστό σημείο επαφής}
+\bmath{Δίνεται η συνάρτηση $f(x)=\frac{e^x}{x-1}$. Να βρεθεί η εξίσωση της εφαπτόμενης ευθείας της $C_f$ στο σημείο
+\begin{multicols}{2}
+\begin{alist}
+\item $M(0,f(0))$
+\item με τεταγμένη $e^2$.
+\end{alist}
+\end{multicols}}
 \begin{askhsh}{Εύρεση εφαπτομένης με γνωστή κλίση λ}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Πεδίο ορισμού και $ f' $.
 \item Θεωρούμε σημείο επαφής $ M(x_0,f(x_0)) $ και θέτουμε το σ.δ. της εφαπτομένης να ισούται με τη δοσμένη κλίση $ \lambda $.
 \[ f(x_0)=\lambda \]
@@ -643,7 +657,7 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 \end{bhma}
 \end{askhsh}
 \begin{askhsh}{Εφαπτομένη που διέρχεται από εξωτερικό σημείο $ P(a,\beta) $}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Πεδίο ορισμού και $ f' $.
 \item Θεωρούμε σημείο επαφής $ M(x_0,f(x_0)) $ και γράφουμε τον τύπο της ευθείας.
 \item Αντικαθιστούμε $ f(x_0) $ και $ f'(x_0) $ στην εξίσωση.
@@ -660,52 +674,74 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 
 
 \subsection{Μονοτονία - Ακρότατα}
-\begin{askhsh}{Εύρεση μονοτονίας}
-\begin{bhma}
-\item Πεδίο ορισμού της $ f $ και έλεγχος συνέχειας
+\begin{askhsh}{Μονοτονία - Ακρότατα - Σύνολο τιμών - Πλήθος ριζών}
+\bhmata\begin{bhma}
+\item Πεδίο ορισμού της $ f $ και έλεγχος συνέχειας.
 \item Παράγωγος $ f' $.
 \item Υπολογίζουμε τις ρίζες και τα πρόσημα της $ f' $ με έναν από τους παρακάτω τρόπους :
-\begin{itemize}
+\begin{itemize}[leftmargin=5mm]
 \item Λύνοντας την εξίσωση $ f(x)=0 $  και τις ανισώσεις $ f(x)>0 $ και $ f(x)<0 $.
-\item Με επιλογή τιμής σε κάθε διάστημα που χωρίζουν οι ρίζες το πεδίο ορισμού. Οι ρίζες βρίσκονται και εδώ λύνοντας την εξίσωση $ f(x)=0 $.
+\item Με επιλογή τιμής σε κάθε διάστημα που χωρίζουν οι ρίζες το πεδίο ορισμού.
 \item Παραγωγίζοντας δεύτερη ή ακόμα και τρίτη φορά. Με τη μονοτονία κάθε παραγώγου βρίσκουμε τα πρόσημά της ώσπου να φτάσουμε στη μονοτονία της $ f $. Οι ρίζες βρίσκονται με δοκιμές.
 \end{itemize}
-\item Σχεδιάζουμε πίνακα με τα πρόσημα της παραγώγου και τη μονοτονία της $ f $. (Συμπληρώνουμε αν χρειαστεί και επιπλέον γραμμές για τις ανώτερης τάξης παραγώγους που βρήκαμε.)
-\item\mbox{}\\\vspace{-7mm}
-\begin{center}
-\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-\hline
-\rule[-2ex]{0pt}{5.5ex} \textbf{Για εύρεση μονοτονίας} & \textbf{Για εύρεση ακροτάτων} & \textbf{Για εύρεση συνόλου τιμών} \\
-\hline
-\rule[-2ex]{0pt}{5.5ex} Αναφέρουμε το είδος της μονοτονίας σε κάθε διάστημα ξεχωριστά. & Ελέγχουμε για ακρότατα στα κρίσιμα σημεία και στα κλειστά άκρα του πεδίου ορισμού & Βρίσκουμε τις εικόνες των διαστημάτων μονοτονίας και τις ενώνουμε \\
-\hline
-\end{tabular}
-\end{center}
-\item Για την εύρεση του πλήθους ριζών της συνάρτησης, ελέγχουμε αν το $ 0 $ ανήκει στην εικόνα κάθε διαστήματος. Αναλυτικά
+\item Πίνακας μονοτονίας και ακροτάτων.
+\item Μονοτονία - Ακρότατα - Σύνολο τιμών - Πλήθος ριζών\\\vspace{-7mm}
+\begin{itemize}[leftmargin=5mm]
+\item \textbf{Για εύρεση μονοτονίας} αναφέρουμε το είδος της μονοτονίας σε κάθε διάστημα ξεχωριστά. 
+\item \textbf{Για εύρεση ακροτάτων} ελέγχουμε για ακρότατα στα κρίσιμα σημεία και στα κλειστά άκρα του πεδίου ορισμού 
+\item \textbf{Για εύρεση συνόλου τιμών} βρίσκουμε τις εικόνες των διαστημάτων μονοτονίας και τις ενώνουμε.
+\item \textbf{Για την εύρεση του πλήθους ριζών της συνάρτησης} ελέγχουμε αν το $ 0 $ ανήκει στην εικόνα κάθε διαστήματος. Αναλυτικά
 \[ 0\in f(\Delta_1)\Rightarrow \textrm{Υπάρχει }x_0 : f(x_0)=0 \]
 Η ρίζα αυτή είναι μοναδική μέσα στο κάθε διάστημα γιατί η $ f $ είναι γνησίως μονότονη.
+\end{itemize}
 \end{bhma}
 \end{askhsh}
 \subsection{Κυρτότητα και σημεία καμπής}
 \begin{askhsh}{Εύρεση κυρτότητας - σημείων καμπής}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Πεδίο ορισμού και έλεγχος συνέχειας.
 \item Υπολογίζουμε την δεύτερη παράγωγο $ f'' $.
 \item Βρίσκουμε ρίζες και πρόσημα της $ f'' $ με τους τρόπους που περιγράψαμε στη μονοτονία.
 \item Σχηματίζουμε πίνακα με τα πρόσημα της $ f'' $ και την κυρτότητα της $ f $.
-\item \mbox{}\\\vspace{-7mm}
-\begin{center}
-\begin{mytblr}{p{7cm}p{7cm}}
-\textbf{Για εύρεση κυρτότητας} & \textbf{Για εύρεση σημείων καμπής} \\
-Αναφέρουμε το είδος της κυρτότητας σε κάθε διάστημα ξεχωριστά. & Ελέγχουμε για σημεία καμπής στα σημεία που αλλάζει η κυρτότητα αρκεί η $ f $ να είναι μια φορά παραγωγίσιμη στα σημεία αυτά.
-\end{mytblr}
-\end{center}
+\item Κυρτότητα - Σημεία καμπής\\\vspace{-7mm}
+\begin{itemize}[leftmargin=5mm]
+\item \textbf{Για εύρεση κυρτότητας} αναφέρουμε το είδος της κυρτότητας σε κάθε διάστημα ξεχωριστά.
+\item \textbf{Για εύρεση σημείων καμπής} ελέγχουμε για σημεία καμπής στα σημεία που αλλάζει η κυρτότητα αρκεί η $ f $ να είναι μια φορά παραγωγίσιμη στα σημεία αυτά.
+\end{itemize}
 \end{bhma}
 \end{askhsh}
 \noindent
-\Paradeigma{}
+\Paradeigma{Δίνεται η συνάρτηση $f(x)=\frac{2x}{x^2+1}$. Μελετήστε την συνάρτηση $f$ ως προς την κυρτότητα και τα σημεία καμπής.}\\
+\lysh
+Η συνάρτηση $f$ ορίζεται στο $D_f=\mathbb{R}$ καθώς $x^2+1\neq 0$ για κάθε $x\in\mathbb{R}$ και είναι συνεχής ως ρητή. Για κάθε $x\in\mathbb{R}$ είναι
+\begin{align*}
+f'(x)&=\left(\frac{2x}{x^2+1}\right)'=\frac{(2x)'\left(x^2+1\right)-2x\left(x^2+1\right)'}{\left(x^2+1\right)^2}=\\
+&=\frac{2\left(x^2+1\right)-2x\cdot 2x}{\left(x^2+1\right)^2}=\frac{2x^2+2-4x^2}{\left(x^2+1\right)^2}=\frac{2-2x^2}{\left(x^2+1\right)^2}\ \ \text{ και}\\
+f''(x)&=\left[\frac{2-2x^2}{\left(x^2+1\right)^2}\right]'=\frac{\left(2-2x^2\right)'\left(x^2+1\right)^2-\left(2-2x^2\right)\left[\left(x^2+1\right)^2\right]'}{\left(x^2+1\right)^4}=\\&=\frac{-4x\left(x^2+1\right)^2-\left(2-2x^2\right)2\left(x^2+1\right)\left(x^2+1\right)'}{\left(x^2+1\right)^4}=\frac{\left(x^2+1\right)\left[-4x\left(x^2+1\right)-4x\left(2-2x^2\right)\right]}{\left(x^2+1\right)^4}=\\
+&=\frac{-4x^3-4x-8x+8x^3}{\left(x^2+1\right)^3}=\frac{4x^3-12x}{\left(x^2+1\right)^3}
+\end{align*}
+Έχουμε λοιπόν
+\begin{itemize}
+\item $f''(x)=0\Rightarrow \dfrac{4x^3-12x}{\left(x^2+1\right)^3}=0\Rightarrow 4x^3-12x=0\Rightarrow x=0\ \text{ή}\ x=\pm\sqrt{3}$.
+\item $f''(x)>0\Rightarrow \dfrac{4x^3-12x}{\left(x^2+1\right)^3}>0\Rightarrow 4x^3-12x>0\Rightarrow x\in(-\sqrt{3},0)\cup(\sqrt{3},+\infty)$.
+\item $f''(x)<0\Rightarrow \dfrac{4x^3-12x}{\left(x^2+1\right)^3}<0\Rightarrow 4x^3-12x<0\Rightarrow x\in(-\infty,-\sqrt{3})\cup(0,\sqrt{3})$.
+\end{itemize}
+Στον παρακάτω πίνακα βλέπουμε τα πρόσημα της $f''$ καθώς και την κυρτότητα και τα σημεία καμπής της $f$.
+\wrapl{0mm}{7}{7cm}{-5mm}{
+\begin{tikzpicture}
+\tikzset{t style/.style = {style = dashed}}
+\tikzset{z style/.style = {fill=white,inner sep=.2mm}}
+\tkzTabInit[color,lgt=2,espcl=1,colorC = red7,
+colorL = red9,
+colorV = red7]%
+{$x$ / .8,$f''(x)$ /0.8,$f(x)$/0.8}%
+{$-\infty$,$-\sqrt{3}$,$0$,$\sqrt{3}$,$+\infty$}%
+\tkzTabLine{ , -, z, +,z ,- ,z,+, }
+\tkzTabLine{ , \curvearrowright, z, \rotatebox[origin= c]{180}{$\curvearrowleft$},t ,\curvearrowright,t ,\rotatebox[origin= c]{180}{$\curvearrowleft$}, }
+\end{tikzpicture}
+}{Η συνάρτηση $f$ είναι κυρτή στα διαστήματα $[-\sqrt{3},0]$ και $[\sqrt{3},+\infty)$ και κοίλη στα διαστήματα $(-\infty,-\sqrt{3}]$ και $[0,\sqrt{3}]$. Η $C_f$ έχει σημεία καμπής τα $A(-\sqrt{3},f(-\sqrt{3}))=A\left(-\sqrt{3},-\frac{\sqrt{3}}{2}\right)$, $B(0,f(0))=B(0,0)$ και $\varGamma(\sqrt{3},f(\sqrt{3}))=\varGamma\left(\sqrt{3},\frac{\sqrt{3}}{2}\right)$.}\\
 \begin{askhsh}{Κυρτότητα και εφαπτομένες - Απόδειξη ανισότητας}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Μελετάμε τη συνάρτηση ως προς την κυρτότητα.
 \item Βρίσκουμε την εξίσωση της εφαπτομένης στο σημείο που ζητάει ή σε κάποιο σημαντικό σημείο. Αυτή θα έχει τη μορφή $ y=ax+\beta $
 \item Χρησιμοποιούμε μια από τις παρακάτω σχέσεις
@@ -716,21 +752,21 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 
 \subsection{Ασύμπτωτες}
 \begin{askhsh}{Κατακόρυφες ασύμπτωτες}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Πεδίο ορισμού της $ f $.
 \item Υπολογισμός κάποιου πλευρικού ορίου στα σημεία $ x_0 $ που είναι ανοικτά άκρα του πεδίου ορισμού της $ f $ ή στα σημεία που δεν είναι συνεχής η συνάρτηση.
 \item Αν κάποιο πλευρικό όριο ισούται με $ \pm\infty $ τότε η ευθεία $ x=x_0 $ είναι κατακόρυφη ασύμπτωτη της $ C_f $.
 \end{bhma}
 \end{askhsh}
 \begin{askhsh}{Οριζόντια ασύμπτωτη}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Όριο της $ f $ στο $ +\infty $ ή $ -\infty $ εφόσον ορίζεται η $ f $ σε διάστημα που περιέχει $ \pm\infty $.
 \item Αν $ \lim\limits_{x\to \pm\infty}{f(x)}=l $ τότε η ευθεία $ y=l $ είναι οριζόντια ασύμπτωτη της $ C_f $ στο $ \pm\infty $.
 \end{bhma}
 \end{askhsh}
 
 \begin{askhsh}{Πλάγια ασύμπτωτη}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Εφόσον ορίζεται η $ f $ σε διάστημα που περιέχει $ \pm\infty $ υπολογίζουμε τα παρακάτω όρια.
 \[ \lim_{x\to +\infty}{\frac{f(x)}{x}}=\lambda\ \ ,\ \ \lim_{x\to +\infty}{(f(x)-\lambda x)}=\beta \]
 και αντίστοιχα στο $ -\infty $.
@@ -738,7 +774,7 @@ f(x)\in D_g&\Rightarrow \dfrac{1}{x-2}\in[2,+\infty)\Rightarrow \dfrac{1}{x-1}\g
 \end{bhma}
 \end{askhsh}
 \begin{askhsh}{Ασύμπτωτες γενικά}
-\begin{bhma}
+\bhmata\begin{bhma}
 \item Αναζητούμε για κατακόρυφες ασύμπτωτες στα σημεία που αναφέραμε.
 \item Ανάμεσα σε πλάγιες και οριζόντιες ασύμπτωτες, ξεκινάμε με τις πλάγιες και από το συντελεστή διεύθυνσης $ \lambda $ θα εξαρτηθεί αν η ευθεία είναι πλάγια ή οριζόντια. Ακολουθούμε το παρακάτω διάγραμμα:
 \end{bhma}
@@ -799,7 +835,7 @@ f(x_0)=g(x_0)\\f'(x_0)=g'(x_0)
 \subsection{Λύση εξισώσεων - ανισώσεων + Ύπαρξη λύσης}
 \begin{askhsh}{Ύπαρξη ρίζας εξίσωσης}
 Μπορούμε να δείξουμε ότι μια εξίσωση της μορφής $ f(x)=a $ έχει μια τουλάχιστον ρίζα με έναν από τους παρακάτω τρόπους:
-\begin{tropos}
+\\\tropoi\begin{tropos}
 \item Με θεώρημα \en{Bolzano}
 \item Με θεώρημα ενδιάμεσων τιμών.
 \item Με σύνολο τιμών : Αν $ a\in f(D_f) $ τότε υπάρχει $ x_0\in D_f $ ώστε $ f(x_0)=a $.
@@ -812,7 +848,7 @@ f(x_0)=g(x_0)\\f'(x_0)=g'(x_0)
 \end{askhsh}
 \begin{askhsh}{Εξίσωση που έχει το πολύ μια ρίζα}
 Για να δείξουμε ότι μια εξίσωση έχει το πολύ μια ρίζα έχουμε τους τρόπους
-\begin{tropos}
+\\\tropoi\begin{tropos}
 \item Αποδεικνύουμε ότι η συνάρτηση είναι γνησίως μονότονη άρα και $ 1-1 $.
 \item Υποθέτουμε ότι υπάρχουν τουλάχιστον $ 2 $ ρίζες $ x_1,x_2 $ και εφαρμόζοντας θεώρημα \en{Rolle} στο διάστημα $ [x_1,x_2] $ καταλήγουμε σε άτοπο.
 \end{tropos}
