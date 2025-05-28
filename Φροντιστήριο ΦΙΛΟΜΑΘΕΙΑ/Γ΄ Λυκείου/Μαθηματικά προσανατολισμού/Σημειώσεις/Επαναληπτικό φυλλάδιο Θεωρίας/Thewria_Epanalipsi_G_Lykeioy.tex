@@ -1,0 +1,1185 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\setlength{\parindent}{0pt}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\kerkissans{Century Gothic Bold}
+\usepackage[outer=1.50cm, inner=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{tikzmark}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\newcommand{\eng}{\selectlanguage{english}}
+\newcommand{\gr}{\selectlanguage{greek}}
+\usepackage{mathimatika}
+%\usepackage[usenames,dvipsnames,cmyk,table,x11names]{xcolor}
+\def\xrwma{red!80!black}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{orange}{HTML}{ff7300}
+
+\newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\newcommand{\subsup}{
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt}
+}
+\makeatother}
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+\usepackage{etoolbox,hhline,moreenum}
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+
+\makeatletter
+\renewcommand{\anw@print}{}
+\renewcommand{\anw@true}{}
+\renewcommand{\anw@false}{}
+\makeatother
+
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{label=\alph*.}
+\UseTblrLibrary{counter}
+
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+
+\definecolor{titlecolor}{HTML}{cd0f00}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+{%
+\bgroup
+\setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+\setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+\ul{#1}%
+\egroup
+}
+\newcommand*\SectionNumberBox[1]
+{%
+\colorbox{red!80!black}
+{%
+\makebox[2em][c]
+{%
+\color{white}%
+\strut
+\csname the#1\endcsname
+}%
+}%
+\TitleUnderline{\ \ \ }%
+}
+\titleformat{\section}
+{\Large\fontfamily{maksf}\selectfont}%
+{\colorbox{\xrwma}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[80pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesection ο Κεφάλαιο}}}}%
+}}}%
+{0pt}%
+{\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ \kerkissans{\textbf{#1}}\ }}}
+
+\titleformat{\subsection}[hang]
+{\large\bfseries\fontfamily{maksf}\selectfont}%
+{\colorbox{red!80!black}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[30pt]{% height, width
+\color{white}{\kerkissans{\thesubsection}}}%
+}}}%
+{0pt}%
+{
+%\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ 
+\ \textbf{#1}\ }
+%}}
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\titleformat{\part}[display]
+{\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{red!80!black}{ \kerkissans{ #1}}}
+\titlespacing*{\part} 
+{0pt}{0pt}{0pt}
+
+\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\newcommand{\pie}[4][]{
+\begin{scope}[#1]
+\pgfmathsetmacro{\curA}{90}
+\pgfmathsetmacro{\r}{1}
+\def\c{(0,0)}
+\node[pie title] at (90:1.3) {#2};
+\foreach \v/\s/\l in{#3}{
+\pgfmathsetmacro{\deltaA}{\v/#4*360}
+\pgfmathsetmacro{\nextA}{\curA + \deltaA}
+\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+
+\path[slice,\s] \c
+-- +(\curA:\r)
+arc (\curA:\nextA:\r)
+-- cycle;
+\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+
+\begin{pgfonlayer}{foreground}
+\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
+\end{pgfonlayer}
+
+\global\let\curA\nextA
+}
+\end{scope}
+}
+
+\newcommand{\legend}[2][]{
+\begin{scope}[#1]
+\path
+\foreach \n/\s in {#2}
+{
+++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
+}
+;
+\end{scope}
+}
+\definecolor{a}{cmyk}{0,1,1,0.05}
+\definecolor{b}{cmyk}{0,.8,.8,.15}
+\definecolor{c}{cmyk}{0,.8,.8,.0}
+\definecolor{d}{cmyk}{0,.7,.7,0}
+\definecolor{e}{cmyk}{0,.5,.5,0}
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+
+\fancyhf{}
+\newcommand{\myleftmark}{\leftmark}
+\renewcommand{\myleftmark}{{\large Φυλλάδιο Θεωρίας Μαθηματικών}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\sectionmark}[1]{\markboth{\large Κεφάλαιο \thesection\ -\ #1}{} }
+
+\makeatletter% so we can use macros with @ in their names
+\ifthenelse{\boolean{@twoside}}{%
+%\fancyhead[LE,RO]{%
+%\begin{tikzpicture}[overlay, remember picture]%
+%    \fill[\xrwma] (current page.north west) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north west)+(0,-.5in)$) -- cycle;
+%    \node[anchor=north west, text=white, font=\Large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+%\fill[black] (current page.north east) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north east)+(0,-.5in)$) -- cycle;
+%\node[anchor=north east, text=white, font=\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark}}};
+%\end{tikzpicture}
+%}
+\fancyhead[LE]{
+\begin{tikzpicture}[overlay, remember picture]%
+%    \fill[black] (current page.north west) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north west)+(0,-.5in)$) -- cycle;
+    \node[anchor=north west, text=red4, font=\large, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\thepage\ $\lvert$ \leftmark}}};
+%\fill[\xrwma] (current page.north east) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north east)+(0,-.5in)$) -- cycle;
+\node[anchor=north east, text=black, font=\large, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\end{tikzpicture}
+}%
+\fancyhead[RO]{
+\begin{tikzpicture}[overlay, remember picture]%
+%    \fill[\xrwma] (current page.north west) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north west)+(0,-.5in)$) -- cycle;
+    \node[anchor=north west, text=red4, font=\large, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+%\fill[black] (current page.north east) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north east)+(0,-.5in)$) -- cycle;
+\node[anchor=north east, text=black, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark\ $ \lvert $\ \thepage}}};
+\end{tikzpicture}
+}%
+}
+\makeatother
+
+%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
+\newcounter{parathrhsh}[section]
+\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
+\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση\hspace{2mm}\theparathrhsh}}}}{}
+
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+
+%----------- ΠΑΡΑΤΗΡΗΣΗ------------------
+\newenvironment{parat}[1]
+{\begin{tcolorbox}[toptitle=1mm,
+bottomtitle=1mm,title=\Parathrhsh,
+breakable,
+enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white},
+colback=red!5!white,
+boxrule=0.1pt,
+colframe=red!80!black,
+fonttitle=\bfseries,width=#1]}
+{\end{tcolorbox}}
+%-----------------------------------------
+
+%----------- ΑΣΚΗΣΗ ------------------
+\newcommand\thema{A}
+
+\newcounter{askhsh}[section]
+\renewcommand{\theaskhsh}{\arabic{askhsh}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}{\textbf{\textcolor{\xrwma}{\faPenSquare\ \  \large \kerkissans{\textbf{\theaskhshο\hspace{2mm}Θέμα}}}}}\hspace{0mm}}{}
+
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\kerkissans{\large{\textcolor{\xrwma}{\thema.\arabic*}}}},itemsep=0mm,leftmargin=0.8cm}
+%------------------------------------
+\newenvironment{askhsh}[1]
+{\begin{tcolorbox}[title=\Askhsh\kerkissans{\textbf{\large{  #1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=\xrwma]
+\renewcommand{\thema}{#1}}
+{\end{tcolorbox}}
+%-----------------------------------------
+
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[section]
+\renewcommand{\theparadeigma}{\kerkissans{\arabic{paradeigma}}}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\kerkissans{\bmath{\textcolor{red!80!black}{\faPlay\large \ \ Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}  #1}}\\}{}
+%-----------------------------------
+
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{\textcolor{\xrwma}{\kerkissans{\noindent\faCheck\ \textbf{ΛΥΣΗ}}}\\}
+%------------------------------------
+
+%-------- ΠΡΟΣΟΧΗ -----------------
+\newcounter{prosoxi}[section]
+\renewcommand{\theprosoxi}{\arabic{prosoxi}}  
+\newcommand{\Prosoxi}[1]{\refstepcounter{prosoxi}{\faExclamationTriangle\ \ \ \textbf{Προσοχή\hspace{2mm}\thesection.\theprosoxi}}}{}
+
+%----------- ΠΡΟΣΟΧΗ------------------
+\newenvironment{prosoxi}[1]
+{\begin{tcolorbox}[title=\Prosoxi,
+breakable,
+enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white},
+colback=red!5!white,
+boxrule=0.1pt,
+colframe=red!80!black,
+fonttitle=\bfseries,width=#1]}
+{\end{tcolorbox}}
+%-----------------------------------------
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=red9,fg=black,ht=8mm},
+ row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+
+\DeclareRobustCommand{\officialeuro}{%
+  \ifmmode\expandafter\text\fi
+  {\fontencoding{U}\fontfamily{eurosym}\selectfont e}}
+
+\titleformat{\paragraph}
+{\normalfont\large}%
+{}{0em}%
+{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut{{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}}\strut}}}[\vskip -.2\baselineskip{}]
+\setlength{\parindent}{0pt}
+
+\newcommand{\bhmata}{\textcolor{red!80!black}{\kerkissans{{\large \textbf{Βήματα}\\\vspace{-7mm}}}}}
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf{\textcolor{red!80!black}{\kerkissans{\arabic*\textsuperscript{o}\ :}}},leftmargin=0.9cm,itemindent=0cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+
+\newcommand{\tropoi}{\textcolor{red!80!black}{\kerkissans{{\large \textbf{Τρόποι}\\\vspace{-7mm}}}}}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf{\textcolor{black}{\kerkissans{\arabic*\textsuperscript{oς} Τρόπος\ :}}},leftmargin=0cm,itemsep=0mm,itemindent=2.1cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\en}[1]{{\selectlanguage{english}#1\selectlanguage{greek}}}
+\newlist{periptwsh}{enumerate}{3}
+\setlist[periptwsh]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Περίπτωση :},leftmargin=0cm,itemsep=0mm,itemindent=2.8cm,ref=\bf{\arabic*\textsuperscript{oς}\;Περίπτωση}}
+%---------- Θεώρημα --------------
+\newcounter{Thewrhmabox}[section]
+\renewcommand{\theThewrhmabox}{\arabic{Thewrhmabox}}
+\newenvironment{Thewrhmabox}[2][\linewidth]
+{\refstepcounter{Thewrhmabox}
+\begin{tcolorbox}[breakable,
+enhanced standard,
+boxrule=0.7pt,titlerule=-.2pt,
+width=\linewidth,
+title style={color=white},
+overlay unbroken and first={
+\path[left color=\xrwma,right color=\xrwma!50,draw=black]
+([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+},
+fonttitle=\bfseries,
+before=\par\medskip\noindent,
+after=\par\medskip,
+toptitle=3pt,
+top=11pt,topsep at break=-5pt,
+colback=white,title={\kerkissans{\large Θεώρημα \theThewrhmabox}} : {\textcolor{black}{\kerkissans{#1}}}]}
+{\end{tcolorbox}}
+%------------------------------------------
+
+%---------- Θεώρημα --------------
+\newcounter{Orismosbox}[section]
+\renewcommand{\theOrismosbox}{\arabic{Orismosbox}}
+\newenvironment{Orismosbox}[2][\linewidth]
+{\refstepcounter{Orismosbox}
+\begin{tcolorbox}[breakable,
+enhanced standard,
+boxrule=0.7pt,titlerule=-.2pt,
+width=\linewidth,
+title style={color=white},
+overlay unbroken and first={
+\path[left color=orange3,right color=\xrwma!50,draw=black]
+([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+},
+fonttitle=\bfseries,
+before=\par\medskip\noindent,
+after=\par\medskip,
+toptitle=3pt,
+top=11pt,topsep at break=-5pt,
+colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\textcolor{black}{\kerkissans{#1}}}]}
+{\end{tcolorbox}}
+%------------------------------------------
+
+
+
+
+\begin{document}
+\NineColors{saturation=high}
+\pagestyle{plain}
+\begin{center}
+\includegraphics[width=0.4\linewidth]{/usr/local/texlive/texmf-local/tex/latex/local/frontisthrio/Logo.jpg}\\
+\vspace{-1mm}
+\textcolor{black}{{\faIcon{map-marker-alt}} : Ιακώβου Πολυλά 24 - \ Πεζόδρομος\,\,|\,\,{\faIcon{phone-alt}} : 26610 20144\,\,|\,\, {\faIcon{mobile-alt}} : 6932327283 - 6955058444\\
+\rule{14.7cm}{.1mm}\\
+\vspace{2mm}
+{\kerkissans{\bmath{\today}}}}\\
+\vspace{3cm}
+{\Huge \kerkissans{\textbf{Μαθηματικά Γ' Λυκείου}}}\\
+\vspace*{1cm}
+{\LARGE \kerkissans{\textbf{ΟΡΙΣΜΟΙ - ΑΠΟΔΕΙΞΕΙΣ}\\[2mm]\textbf{ΑΝΤΙΠΑΡΑΔΕΙΓΜΑΤΑ - ΒΑΣΙΚΕΣ ΠΡΟΤΑΣΕΙΣ}\\[2mm]\textbf{ΕΡΩΤΗΣΕΙΣ ΣΩΣΤΟ ΛΑΘΟΣ}}}
+\vspace*{3cm}\\
+\begin{tikzpicture}[domain=0:9,x=1cm,y=2cm]
+\tkzInit[xmin=-1,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-1.5,0) -- coordinate (x axis mid) (10,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (-.8,-.2) -- (-.8,2.1) node[above,fill=white] {{\footnotesize $ y $}};
+
+\foreach \x/\y in {.5/0,1.6/1,2.7/2,3.4/3,4.6/4,5.5/5,6.4/6,7.7/7,8.5/8}{
+\foreach \t in \y{
+\draw[fill=\xrwma!20] (\y,0) rectangle (\y+1,{\x*sin(\x r)/5+.5});
+\draw[dashed] (\x,0)--(\x,{\x*sin(\x r)/5+.5});}}
+\foreach \x/\y in {0.5/1,1.6/2,2.7/3,8.5/\nu}{
+\node at (\x,-.2) {\scriptsize $ \xi_\y $};}
+\node at (4.6,.2) {\scriptsize $\xi_\kappa $};
+\node at (5.5,.2) {\scriptsize $\xi_{\kappa+1} $};
+\node at (-.2,-.15) {\scriptsize $ a=x_0 $};
+\node at (1,-.15) {\scriptsize $ x_1 $};
+\node at (2,-.15) {\scriptsize $ x_2 $};
+\node at (9.3,-.15) {\scriptsize $ \beta=x_\nu $};
+\node at (8,-.15) {\scriptsize $ x_{\nu-1} $};
+\node at (5.8,1) {$  y=f(x) $};
+\node at (2.8,1.5) {$  \displaystyle{\int_{a}^{\beta}f(x)\mathrm{d}x=\lim_{\nu\rightarrow\infty}\PARENS{\sum_{\kappa=1}^{\nu}f(\xi_\kappa)\varDelta x} }$};
+\draw[samples=200,line width=.4mm,\xrwma] plot ({\x},{\x*sin(deg(\x))/5+.5});
+\tkzText(6.5,-.15){$ \undercbrace{\rule{9mm}{0mm}}_{\varDelta x} $}
+\end{tikzpicture}\\
+\vspace*{\fill}
+Φρόνιμος Σπύρος
+\end{center}
+\pagenumbering{gobble}
+\newpage
+\null
+\newpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\newpage
+\section{Ορισμοί}
+\begin{Orismosbox}{Πραγματική Συνάρτηση}
+Πραγματική συνάρτηση με πεδίο ορισμού ένα σύνολο $ A $ είναι μια διαδικασία (αντιστοίχηση) με την οποία \textbf{κάθε} στοιχείο $ x\in A $ αντιστοιχεί σε \textbf{ένα μόνο} πραγματικό αριθμό $ y\in\mathbb{R} $. Το $ y $ λέγεται \textbf{τιμή} της συνάρτησης $ f $ στο $ x $ και συμβολίζεται $ f(x) $.
+\begin{center}
+\centering
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!30] (4.1,0) ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.6);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4,.2){B}
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[right](B){{\footnotesize $ y $}}
+\tkzText(0,1.8){$ A $}
+\tkzText(4,1.8){$ B $}
+\tkzText(2,1.45){$ f $}
+\draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
+\end{tikzpicture}
+\end{center}
+\end{Orismosbox}
+\begin{Orismosbox}{Σύνολο τιμών}
+Σύνολο τιμών μιας συνάρτησης $ f $ με πεδίο ορισμού $ A $ λέγεται το σύνολο που περιέχει όλες τις τιμές $ f(x) $ της συνάρτησης για κάθε  $ x\in A $. Συμβολίζεται με $ f(A) $ και είναι
+\[ f(A)=\{y\in\mathbb{R}:y=f(x)\ \textrm{για κάθε}\ x\in A\} \]
+\end{Orismosbox}
+\begin{Orismosbox}{Γραφική παράσταση}
+Γραφική παράσταση μιας συνάρτησης $ f $ με πεδίο ορισμού ένα σύνολο $ A $ ονομάζεται το σύνολο των σημείων της μορφής $ M(x,f(x)) $ για κάθε $ x\in A $. Συμβολίζεται με $ C_f $
+\[ C_f=\{M(x,y):y=f(x)\ \textrm{για κάθε}\ x\in A\} \]
+\end{Orismosbox}
+\begin{Orismosbox}{Ίσες συναρτήσεις με κοινό πεδίο ορισμού}
+Δύο συναρτήσεις $ f,g $ που έχουν το ίδιο πεδίο ορισμού $ A $ ονομάζονται ίσες δηλαδή $ f=g $ όταν ισχύει $ f(x)=g(x) $ για κάθε $ x\in A $.\\\\
+\end{Orismosbox}
+\begin{Orismosbox}{Ίσες συναρτήσεις με διαφορετικά πεδία ορισμού}
+Δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A,B $ αντίστοιχα, ονομάζονται ίσες δηλαδή $ f=g $ όταν ισχύει $ f(x)=g(x) $ για κάθε $ x\in A\cap B $. Αν $ A\cap B=\varnothing $ τότε δεν είναι ίσες.\\\\
+\end{Orismosbox}
+\begin{Orismosbox}{Πράξεις μεταξύ συναρτήσεων}
+Δίνονται δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A,B $ αντίστοιχα. 
+\begin{enumerate}
+\item Η συνάρτηση $ f+g $ του αθροίσματος των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ f(x)+g(x) $ και πεδίο ορισμού $ D_{f+g}=A\cap B $.
+\item Η συνάρτηση $ f-g $ της διαφοράς των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ f(x)-g(x) $ και πεδίο ορισμού $ D_{f-g}=A\cap B $.
+\item Η συνάρτηση $ f\cdot g $ του γινομένου των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ f(x)\cdot g(x) $ και πεδίο ορισμού $ D_{f\cdot g}=A\cap B $.
+\item Η συνάρτηση $ \frac{f}{g} $ του πηλίκου των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ \frac{f(x)}{g(x)} $ και πεδίο ορισμού $ D_{\frac{f}{g}}=\{x\in A\cap B:g(x)\neq 0\} $.
+\end{enumerate}
+Αν $ A\cap B=\varnothing $ τότε οι παραπάνω συναρτήσεις δεν ορίζονται.\\\\
+\end{Orismosbox}
+\begin{Orismosbox}{Σύνθεση συναρτήσεων}
+Αν $f, g$ είναι δύο συναρτήσεις με πεδίο ορισμού $Α, Β$ αντιστοίχως, τότε ονομάζουμε \bmath{σύνθεση της $f$ με την $g$}, και τη συμβολίζουμε με $g\circ f$, τη συνάρτηση με τύπο
+\[ (g\circ f)(x)=g(f(x))\]
+Το πεδίο ορισμού της $g\circ f$ αποτελείται από όλα τα στοιχεία x του πεδίου ορισμού της $f$ για τα οποία το $f(x)$ ανήκει στο πεδίο ορισμού της g. Δηλαδή είναι το σύνολο
+\[ D_{g\circ f}=\{x\in\mathbb{R}| x\in A\ \textrm{ και }\ f(x)\in B\} \]
+Είναι φανερό ότι η $g\circ f$ ορίζεται αν $A_1\neq\varnothing$, δηλαδή αν $f(A)∩B\neq\varnothing$.
+\begin{center}
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\begin{scope}
+\draw[clip](4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!30] (5,0) ellipse (1cm and 1.5cm);
+\end{scope}
+\draw (5,0) ellipse (1cm and 1.5cm);
+\draw (9,0) ellipse (1cm and 1.5cm);
+\draw (-.1,0)[fill=\xrwma!30] ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.95);
+\draw[-latex] (4.5,.2) arc (140:40:2.95);
+\draw[-latex] (0,.2) arc (140:40:5.9);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4.5,.15){B}
+\tkzDefPoint(9,.15){C}
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[below](B){{\footnotesize $ f(x) $}}
+\tkzLabelPoint[below](C){{\footnotesize $ g(f(x)) $}}
+\tkzText(0,1.8){\footnotesize$ A $}
+\tkzText(3.8,1.8){\footnotesize$ f(A) $}
+\tkzText(5.2,1.8){\footnotesize$ B $}
+\tkzText(2.4,1.55){\footnotesize$ f $}
+\tkzText(6.4,1.55){\footnotesize$ g $}
+\tkzText(4.5,2.55){\footnotesize$ g\circ f $}
+\tkzText(9,1.8){\footnotesize$ g(B) $}
+\draw[-latex] (4.5,-0.8) -- (3.2,-1.9) node[anchor=east] {\footnotesize $ f\left( A \right)\cap B  $};
+\draw[-latex] (0,-.5) -- (-.8,-1.7) node[anchor=east,xshift=1mm] {\footnotesize $ D_{g\circ f}  $};
+\end{tikzpicture}
+\end{center}
+Για να ορίζεται η συνάρτηση $ g\circ f $ θα πρέπει να ισχύει $ f(A)\cap B\neq\varnothing $.\\\\
+(Αντίστοιχα ορίζεται και η σύνθεση $ f\circ g $ με πεδίο ορισμού το $ D_{f\circ g}=\{x\in\mathbb{R}|x\in B\ \ \textrm{και}\ \ g(x)\in A\} $ και τύπο $ (f\circ g)(x)=f(g(x)) $.)\\\\
+\end{Orismosbox}
+\begin{Orismosbox}{Γνησίως μονότονη συνάρτηση}
+Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \Delta $ του πεδίου ορισμού της και έστω $ x_1,x_2 $ δύο στοιχεία του $ \Delta $. Η $ f $ θα ονομάζεται
+\begin{enumerate}
+\item γνησίως αύξουσα στο $\Delta $ αν για κάθε $ x_1,x_2\in\Delta $ με $ x_1<x_2 $ ισχύει $ f(x_1)<f(x_2) $:
+\[ x_1<x_2\Rightarrow f(x_1)<f(x_2) \]
+\item γνησίως φθίνουσα στο $\Delta $ αν για κάθε $ x_1,x_2\in\Delta $ με $ x_1<x_2 $ ισχύει $ f(x_1)>f(x_2) $:
+\[ x_1<x_2\Rightarrow f(x_1)>f(x_2) \]
+\end{enumerate}
+Η $ f $ σε κάθε περίπτωση λέγεται \textbf{γνησίως μονότονη}.\\\\
+\end{Orismosbox}
+\begin{Orismosbox}{Ολικά ακρότατα}
+Έστω μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ και έστω $ x_0\in A $. Η $ f $ θα λέμε ότι παρουσιάζει
+\begin{enumerate}
+\item ολικό μέγιστο στο $ x_0 $ το $ f(x_0) $ όταν 
+\[ f(x)\leq f(x_0)\ \ \textrm{για κάθε}\ \ x\in A \]
+\item ολικό ελάχιστο στο $ x_0 $ το $ f(x_0) $ όταν 
+\[ f(x)\geq f(x_0)\ \ \textrm{για κάθε}\ \ x\in A \]
+Το ολικό μέγιστο και ολικό ελάχιστο μιας συνάρτησης ονομάζονται \textbf{ολικά ακρότατα}. Το $ x_0 $ λέγεται \textbf{θέση} ακρότατου.
+\end{enumerate}
+\end{Orismosbox}
+\begin{Orismosbox}{Συνάρτηση $ 1-1 $}
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ ονομάζεται $ 1-1 $ εάν κάθε στοιχείο $ x\in A $ του πεδίου ορισμού αντιστοιχεί μέσω της συνάρτησης, σε μοναδική τιμή $ f(x) $ του συνόλου τιμών της. Για κάθε ζεύγος αριθμών $ x_1,x_2\in A $ του πεδίου ορισμού της $ f $ θα ισχύει \[ x_1\neq x_2\Rightarrow f(x_1)\neq f(x_2) \]
+\end{Orismosbox}
+\begin{Orismosbox}{Αντίστροφη συνάρτηση}
+Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ με σύνολο τιμών $ f(A) $. Η συνάρτηση με την οποία κάθε $ y\in f(A) $ αντιστοιχεί σε ένα \textbf{μοναδικό} $ x\in A $ για το οποίο ισχύει $ f(x)=y $, λέγεται αντίστροφη συνάρτηση της $ f $.
+\begin{center}
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!50] (4.1,0) ellipse (.6cm and 1.1cm);
+\draw[latex-] (0,.2) arc (140:40:2.6);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4,.2){B}
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[right](B){{\footnotesize $ y $}}
+\tkzText(0,1.8){$ A $}
+\tkzText(4,1.8){$ B $}
+\tkzText(2,1.45){$ f^{-1} $}
+\draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
+\end{tikzpicture}
+\end{center}
+\begin{itemize}[itemsep=0mm]
+\item Συμβολίζεται με $ f^{-1} $ και είναι $ f^{-1}:f(A)\to A $.
+\item Το πεδίο ορισμού της $ f^{-1} $ είναι το σύνολο τιμών $ f(A) $ της $ f $, ενώ το σύνολο τιμών της $ f^{-1} $ είναι το πεδίο ορισμού $ A $ της $ f $.
+\item Ισχύει ότι $ x=f^{-1}(y) $ για κάθε $ y\in f(A) $.
+\end{itemize}
+\end{Orismosbox}
+\begin{Orismosbox}{Συνέχεια συνάρτησης σε σημείο}
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν το όριο της στο $ x_0 $ είναι ίσο με την τιμή της στο σημείο αυτό. Δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+\end{Orismosbox}
+\begin{Orismosbox}{Συνέχεια συνάρτησης σε σύνολο}
+\begin{enumerate}
+\item Μια συνάρτηση $ f $ θα λέμε ότι είναι \textbf{συνεχής} εάν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.
+\item Μια συνάρτηση $ f $ θα λέγεται συνεχής σε ένα \textbf{ανοιχτό} διάστημα $ (a,\beta) $ εάν είναι συνεχής σε κάθε σημείο του διαστήματος.
+\item Μια συνάρτηση $ f $ θα λέγεται συνεχής σε ένα \textbf{κλειστό} διάστημα $ [a,\beta] $ εάν είναι συνεχής σε κάθε σημείο του ανοιχτού διαστήματος και επιπλέον ισχύει
+\[ \lim_{x\to a^+}{f(x)}=f(a)\ \ \textrm{και}\ \ \lim_{x\to\beta^-}{f(x)}=f(\beta) \]
+\end{enumerate}
+\end{Orismosbox}
+\begin{Orismosbox}{Παράγωγος σε σημείο}
+Μια συνάρτηση $ f $ λέγεται \textbf{παραγωγίσιμη} σε ένα σημείο $ x_0 $ του πεδίου ορισμού της αν το όριο
+\[ \lim_{x\rightarrow x_0}{\frac{f(x)-f(x_0)}{x-x_0}} \]
+υπάρχει και είναι πραγματικός αριθμός. Το όριο αυτό ονομάζεται \textbf{παράγωγος} της $ f $ στο $ x_0 $ και συμβολίζεται $ f'(x_0) $.\\\\
+\end{Orismosbox}
+\begin{Orismosbox}{Παραγωγίσιμη συνάρτηση}
+\vspace{-7mm}
+\begin{enumerate}
+\item Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη στο \textbf{πεδίο ορισμού} της ή απλά παραγωγίσιμη, όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in D_f $.
+\item Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη σε ένα \textbf{ανοικτό} διάστημα $ (a,\beta) $ του πεδίου ορισμού της όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in(a,\beta) $.
+\item Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη σε ένα \textbf{κλειστό} διάστημα $ [a,\beta] $ του πεδίου ορισμού της όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in(a,\beta) $ και επιπλέον ισχύει
+\[ \lim_{x\to a^+}{\frac{f(x)-f(a)}{x-a}}\in\mathbb{R}\ \ \textrm{ και }\ \ \lim_{x\to \beta^-}{\frac{f(x)-f(\beta)}{x-\beta}}\in\mathbb{R} \]
+\end{enumerate}
+\end{Orismosbox}
+\begin{Orismosbox}{Πρώτη παράγωγος}
+Έστω μια συνάρτηση $ f:Α\to\mathbb{R} $ και έστω $ A_1 $ το σύνολο των σημείων $ x\in A $ για τα οποία η $ f $ είναι παραγωγίσιμη. Η συνάρτηση με την οποία κάθε $ x\in A_1 $ αντιστοιχεί στο $ f'(x) $ ονομάζεται \textbf{πρώτη παράγωγος} της $ f $ η απλά \textbf{παράγωγος} της $ f $. Συμβολίζεται με $ f' $.
+\end{Orismosbox}
+\begin{Orismosbox}{Δεύτερη παράγωγος}
+Έστω $ A_1 $  το σύνολο των σημείων για τα οποία η $ f $ είναι παραγωγίσιμη. Αν υποθέσουμε ότι το $ A_1 $ είναι διάστημα ή ένωση διαστημάτων τότε η παράγωγος της $ f' $, αν υπάρχει, λέγεται δεύτερη παράγωγος της $ f $ και συμβολίζεται με $ f'' $. Επαγωγικά ορίζεται και η $ \nu- $οστή παράγωγος της $ f $ και συμβολίζεται με $ f^{(\nu)} $. Δηλαδή
+\[ f^{(\nu)}=\left[f^{(\nu-1)}\right]' \]
+\end{Orismosbox}
+\begin{Orismosbox}{Ρυθμός μεταβολής}
+Αν δύο μεταβλητά μεγέθη  $ x , y $ συνδέονται με τη σχέση $ y = f(x) $ , όταν  $ f  $ είναι μια συνάρτηση παραγωγίσιμη στο $ x_0 $, τότε ονομάζουμε \textbf{ρυθμό μεταβολής} του $ y $ ως προς το $ x $ στο σημείο  $ x_0 $ την παράγωγο $ f '(x_0) $.
+\end{Orismosbox}
+\begin{Orismosbox}{Τοπικό μέγιστο}
+Μια συνάρτηση $ f $, με πεδίο ορισμού $ A $, θα λέμε ότι παρουσιάζει τοπικό μέγιστο στο $ x_0\in A $ όταν υπάρχει $ \delta>0 $ τέτοιο ώστε
+\[ f(x)\leq f(x_0), \ \ \textrm{για κάθε }x\in A\cap(x_0-\delta,x_0+\delta) \]
+Το $ x_0 $ λέγεται \textbf{θέση} η σημείο τοπικού μέγιστου, ενώ το $ f(x_0) $ τοπικό μέγιστο της $ f $.
+\end{Orismosbox}
+\begin{Orismosbox}{Τοπικό ελάχιστο}
+Μια συνάρτηση $ f $, με πεδίο ορισμού $ A $, θα λέμε ότι παρουσιάζει τοπικό ελάχιστο στο $ x_0\in A $ όταν υπάρχει $ \delta>0 $ τέτοιο ώστε
+\[ f(x)\geq f(x_0), \ \ \textrm{για κάθε }x\in A\cap(x_0-\delta,x_0+\delta) \]
+Το $ x_0 $ λέγεται \textbf{θέση} η σημείο τοπικού ελάχιστου, ενώ το $ f(x_0) $ τοπικό ελάχιστο της $ f $.
+\end{Orismosbox}
+\begin{Orismosbox}{Τοπικά ακρότατα}
+Τα τοπικά ελάχιστα και τα τοπικά μέγιστα της $ f $ ονομάζονται τοπικά ακρότατα της $ f $.
+\end{Orismosbox}
+\begin{Orismosbox}{Κυρτή συνάρτηση}
+Μια συνάρτηση $ f $ λέμε ότι στρέφει τα κοίλα προς τα άνω ή είναι κυρτή στο $ \Delta $, αν η $ f' $ είναι γνησίως αύξουσα στο $ \Delta $.
+\end{Orismosbox}
+\begin{Orismosbox}{Κοίλη συνάρτηση}
+Μια συνάρτηση $ f $ λέμε ότι στρέφει τα κοίλα προς τα κάτω ή είναι κοίλη στο $ \Delta $, αν η $ f' $ είναι γνησίως φθίνουσα στο $ \Delta $.
+\end{Orismosbox}
+\begin{Orismosbox}{Σημείο καμπής}
+Έστω μια συνάρτηση $ f $ παραγωγίσιμη σε ένα διάστημα $ (a,\beta) $, με εξαίρεση ίσως ένα σημείο $ x_0 $. Αν:
+\begin{itemize}[itemsep=0mm]
+\item η $ f $ είναι κυρτή στο $ (a,x_0) $ και κοίλη στο $ (x_0,\beta) $ η αντιστρόφως και
+\item η $ C_f $ έχει εφαπτομένη στο $ A(x_0,f(x_0)) $
+\end{itemize}
+τότε το σημείο $ A(x_0,f(x_0)) $ λέγεται \textbf{σημείο καμπής} της $ C_f $.
+\end{Orismosbox}
+\begin{Orismosbox}{Κατακόρυφη ασύμπτωτη}
+Αν ένα τουλάχιστον από τα όρια $ \lim\limits_{x\to x_0^-}{f(x)},\lim\limits_{x\to x_0^+}{f(x)} $ ισούται με $ \pm\infty $ τότε η ευθεία $ x=x_0 $ λέγεται \textbf{κατακόρυφη ασύμπτωτη} της $ C_f $.
+\end{Orismosbox}
+\begin{Orismosbox}{Οριζόντια ασύμπτωτη}
+Αν $ \lim\limits_{x\to +\infty}{f(x)}=l $ (αντιστοίχως $ \lim\limits_{x\to -\infty}{f(x)}=l $) τότε η ευθεία $ y=l $ λέγεται \textbf{οριζόντια ασύμπτωτη} της $ C_f $ στο $ +\infty $ (αντίστοιχα στο $ -\infty $).
+\end{Orismosbox}
+\begin{Orismosbox}{Πλάγια ασύμπτωτη}
+Η ευθεία $ y=\lambda x+\beta $ λέγεται ασύμπτωτη της $ C_f $ στο $ +\infty $ (αντιστοίχως στο $ -\infty $) αν και μόνο αν
+\[ \lim\limits_{x\to +\infty}{[f(x)-(\lambda x+\beta)]=0} \]
+αντίστοιχα στο $ -\infty $ αν 
+\[ \lim_{x\to -\infty}{[f(x)-(\lambda x+\beta)]=0} \]
+\begin{itemize}[itemsep=0mm]
+\item Αν $ \lambda=0 $ η ασύμπτωτη είναι οριζόντια.
+\item Αν $ \lambda\neq 0 $ η ασύμπτωτη είναι πλάγια.
+\end{itemize}
+\end{Orismosbox}
+\begin{Orismosbox}{Αρχική συνάρτηση}
+Αρχική συνάρτηση ή παράγουσα μιας συνάρτησης $f$ σε ένα διάστημα $\varDelta$ του πεδίου ορισμού της, ονομάζεται κάθε παραγωγίσιμη συνάρτηση $F$ για την οποία ισχύει
+\[ F'(x)=f(x)\ \ ,\ \ \text{για κάθε }x\in\varDelta \]
+
+\newpage
+\section{Αποδείξεις - Διατυπώσεις Θεωρημάτων}
+%# Database File : Analysh-Th-Grafikes_Par_Cf_Cf-1
+%@ Database source: Mathematics
+\begin{Thewrhmabox}[Συμμετρία $ C_f $ και $ C_{f^{-1}} $]{9cm}
+\bmath{Να αποδείξετε ότι οι γραφικές παραστάσεις $ C_f $ και $ C_{f^{-1}} $ των συναρτήσεων $ f $ και $ f^{-1} $ είναι συμμετρικές ως προς την ευθεία $ y=x $ που διχοτομεί τις γωνίες $ x\hat{O}y $ και $ x'\hat{O}y' $.}\\
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Έστω μια συνάρτηση $ f $ η οποία είναι $ 1-1 $ άρα και αντιστρέψιμη. Θα ισχύει γι αυτήν ότι
+\[ f(x)=y\Rightarrow x=f^{-1}(y) \]
+Αν θεωρήσουμε ένα σημείο $ M(a,\beta) $ που ανήκει στη γραφική παράσταση της $ f $ τότε
+\[ f(a)=\beta\Rightarrow a=f^{-1}(\beta) \]
+κάτι που σημαίνει ότι το σημείο $ M'(\beta,a) $ ανήκει στη γραφική παράσταση της $ f^{-1} $. Τα σημεία όμως $ M $ και $ M' $ είναι συμμετρικά ως προς της ευθεία $ y=x $ που διχοτομεί τις γωνίες $ x\hat{O}y $ και $ x;\hat{O}y' $. Άρα οι $ C_f $ και $ C_{f^{-1}} $ είναι συμμετρικές ως προς την ευθεία αυτή.
+%# End of file Analysh-Th-Grafikes_Par_Cf_Cf-1
+
+%# Database File : Analysh-Th-Grafikes_Par_Cf_Cf-1----
+\begin{Thewrhmabox}[Όριο πολυωνυμικής συνάρτησης - Σελ. 167]{6cm}
+\bmath{Δίνεται ένα πολυώνυμο $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ και $ x_0\in\mathbb{R} $. Να αποδείξετε ότι $ {\displaystyle{\lim_{x\to x_0}{P(x)}=P(x_0)}} $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Έστω πολυώνυμο $ P(x)=a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0 $ και $ x_0\in\mathbb{R} $. Σύμφωνα με τις ιδιότητες των ορίων έχουμε ότι:
+\begin{align*}
+\lim_{x\to x_0}{P(x)}&=\lim_{x\to x_0}{\left( a_\nu x^\nu+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0\right) }=\\
+&=\lim_{x\to x_0}{a_\nu x^\nu}+\lim_{x\to x_0}{a_{\nu-1}x^{\nu-1}}+\ldots+\lim_{x\to x_0}{a_1x}+\lim_{x\to x_0}{a_0}=\\
+&=a_\nu\lim_{x\to x_0}{x^\nu}+a_{\nu-1}\lim_{x\to x_0}{x^{\nu-1}}+\ldots+a_1\lim_{x\to x_0}{x}+\lim_{x\to x_0}{a_0}=\\
+&=a_\nu x_0^\nu+a_{\nu-1}x_0^{\nu-1}+\ldots+a_1x_0+a_0=P(x_0)
+\end{align*}
+Άρα ισχύει $ {\displaystyle\lim_{x\to x_0}{P(x)}=P(x_0)} $.
+\begin{Thewrhmabox}[Όριο ρητής συνάρτησης - Σελ. 167]{7.5cm}
+\bmath{Αν $ f:A\to\mathbb{R} $ με $ f(x)=\dfrac{P(x)}{Q(x)} $ είναι μια ρητή συνάρτηση και $ x_0\in A $, να αποδείξετε ότι $ {\displaystyle{\lim_{x\to x_0}{\dfrac{P(x)}{Q(x)}}=\dfrac{P(x_0)}{Q(x_0)}}} $ εφόσον $ Q(x_0)\neq0 $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Έστω $ f(x)=\dfrac{P(x)}{Q(x)} $ μια ρητή συνάρτηση όπου $ P(x),Q(x) $ είναι πολυώνυμα και έστω $ x_0\in\mathbb{R} $ τέτοιο ώστε $ Q(x_0)\neq0 $. Σύμφωνα με το προηγούμενο θεώρημα προκύπτει ότι:
+\[ \lim_{x\to x_0}{f(x)}=\lim_{x\to x_0}{\dfrac{P(x)}{Q(x)}}=\dfrac{\displaystyle\lim_{x\to x_0}{P(x)}}{\displaystyle\lim_{x\to x_0}{Q(x)}}=\dfrac{P(x_0)}{Q(x_0)} \]
+Επομένως ισχύει $ {\displaystyle\lim_{x\to x_0}{\dfrac{P(x)}{Q(x)}}=\dfrac{P(x_0)}{Q(x_0)}} $.
+
+\begin{Thewrhmabox}[\textbf{\large Διατύπωση 1} \textbf{Θεώρημα Bolzano - Σελ. 192}]{6cm}
+\bmath{Να διατυπώσετε το θεώρημα Bolzano και να δώσετε τη γεωμετρική ερμηνεία του.}
+\end{Thewrhmabox}
+\textbf{ΑΠΑΝΤΗΣΗ}
+\begin{alist}
+\item \textbf{Θεώρημα}\\
+Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
+\begin{alist}
+\item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
+\item $f(a)\cdot f(\beta)<0$
+\end{alist}
+τότε θα υπάρχει τουλάχιστον ένας αριθμός $ x_0\in(a,\beta) $ έτσι ώστε να ισχύει $ f(x_0)=0 $.
+\item \textbf{Γεωμετρική ερμηνεία}\\
+\wrapr{-5mm}{7}{5cm}{-10mm}{\begin{tikzpicture}[scale=.7,domain=-.6:3.32,y=.5cm]
+\tkzInit[xmin=-.5,xmax=7,ymin=-4.5,ymax=1.2,ystep=1]
+\draw[-latex] (-2,0) -- coordinate (x axis mid) (4.5,0) node[right,fill=white] {{\small $ x $}};
+\draw[-latex] (-1,-2.7) -- (-1,4.4) node[above,fill=white] {{\small $ y $}};
+\draw (-.25,.5mm) -- (-.25,-.5mm) node[anchor=north west,fill=white] {{\small $ x_1 $}};
+\draw (1.45,.5mm) -- (1.45,-.5mm) node[anchor=north east,fill=white] {{\small $ x_2 $}};
+\draw (2.8,.5mm) -- (2.8,-.5mm) node[anchor=north west,fill=white] {{\small $ x_3 $}};
+\clip (-.7,-3) rectangle (5,4);
+\draw[samples=100,line width=.5mm,draw=\xrwma] plot function{x**3-4*x**2+3*x+1};
+\tkzDefPoint(-.6,-2.5){A}
+\tkzDrawPoint[size=3,fill=\xrwma](A)
+\tkzDefPoint(3.32,3.5){B}
+\tkzDrawPoint[size=3,fill=\xrwma](B)
+\tkzText(2.2,3.4){{\footnotesize $ f(\beta)>0 $}}
+\tkzText(0.5,-2.4){{\footnotesize $ f(a)<0 $}}
+\end{tikzpicture}}{
+Για μια συνεχή συνάρτηση $f$ στο διάστημα $ [a,\beta] $ η συνθήκη $ f(a)\cdot f(\beta)<0 $ σημαίνει ότι οι τιμές αυτές θα είναι ετερόσημες οπότε τα σημεία $ A(a,f(a)) $ και $ B(\beta,f(\beta)) $ θα βρίσκονται εκατέρωθεν του άξονα $ x'x $. Αυτό σημαίνει ότι η γραφική παράσταση $C_f$, λόγω της συνέχειας, θα τέμνει τον άξονα σε τουλάχιστον ένα σημείο με τετμημένη $x_0\in(a,\beta)$.}
+\end{alist}
+\begin{Thewrhmabox}[Θεώρημα ενδιάμεσων τιμών - Σελ. 194]{7cm}
+\textbf{Να διατυπώσετε και να αποδείξετε το θεώρημα ενδιάμεσων τιμών.}
+\end{Thewrhmabox}
+\textbf{ΘΕΩΡΗΜΑ}\\
+Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
+\begin{alist}
+\item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
+\item $f(a)\neq f(\beta)$
+\end{alist}
+τότε υπάρχει τουλάχιστον ένα $ x_0\in(a,\beta) $ ώστε για κάθε αριθμό $ \eta $ μεταξύ των $ f(a),f(\beta) $ να ισχύει $ f(x_0)=\eta $.\\\\
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θεωρούμε τη συνάρτηση $ g(x)=f(x)-\eta $ με $ x\in[a,\beta] $ και $ \eta $ είναι ένας πραγματικός αριθμός τέτοιος ώστε να ισχύει $ f(a)<\eta<f(\beta) $\footnote{Μπορούμε ισοδύναμα να θεωρήσουμε $ f(\beta)<\eta<f(a) $}. Γι αυτήν θα ισχύει ότι:
+\begin{alist}
+\item είναι συνεχής στο διάστημα $ [a,\beta] $ και επιπλέον
+\item $ g(a)=f(a)-\eta<0 $ και $ g(\beta)=f(\beta)-\eta>0 $ άρα παίρνουμε $ g(a)\cdot g(\beta)<0 $.
+\end{alist}
+Σύμφωνα λοιπόν με το θεώρημα Bolzano θα υπάρχει τουλάχιστον ένα $ x_0\in(a,\beta) $ ώστε να ισχύει \[ g(x_0)=0\Rightarrow f(x_0)-\eta=0\Rightarrow f(x_0)=\eta \]
+\begin{Thewrhmabox}[Παραγωγίσιμη \bmath{$ \Rightarrow $} Συνεχής - Σελ. 217]{7cm}
+\textbf{Να αποδείξετε ότι αν μια συνάρτηση f είναι παραγωγίσιμη σ’ ένα σημείο \bmath{$ x_0 $} τότε είναι και συνεχής στο σημείο αυτό. }
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θεωρούμε τη συνάρτηση $ f:A\to\mathbb{R} $ η οποία είναι παραγωγίσιμη σε ένα σημείο $ x_0\in A $. Για κάθε $ x\neq x_0 $ έχουμε ότι:
+\begin{align*}
+f(x)-f(x_0)&=\dfrac{f(x)-f(x_0)}{x-x_0}\cdot (x-x_0)\Rightarrow\\
+\lim_{x\to x_0}{\left( f(x)-f(x_0)\right) }&=\lim_{x\to x_0}{\left[
+\dfrac{f(x)-f(x_0)}{x-x_0}\cdot (x-x_0)\right]}=\\
+&=\lim_{x\to x_0}{
+\dfrac{f(x)-f(x_0)}{x-x_0}}\cdot \lim_{x\to x_0}{(x-x_0)}\\
+&=f'(x_0)\cdot 0
+\end{align*}
+Οπότε παίρνουμε $ {\displaystyle \lim_{x\to x_0}{\left( f(x)-f(x_0)\right) }=0\Rightarrow \lim_{x\to x_0}{f(x)}=f(x_0)} $ άρα η $ f $ είναι συνεχής στο $ x_0 $.
+\begin{Thewrhmabox}[Παράγωγος σταθερής συνάρτησης. - Σελ 223]{6cm}
+\textbf{Να αποδείξετε ότι \bmath{$ (c)'=0 $}.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Έστω $ f(x)=c $ μια σταθερή συνάρτηση και $ x_0\in\mathbb{R} $. Για κάθε $ x\neq x_0 $ θα έχουμε ότι:
+\[ \dfrac{f(x)-f(x_0)}{x-x_0}=\dfrac{c-c}{x-x_0}=0 \]
+Επομένως παίρνοντας το όριο της παραγώγου θα είναι:
+\[ f'(x_0)=\lim_{x\to x_0}{\dfrac{f(x)-f(x_0)}{x-x_0}}=\lim_{x\to x_0}{0}=0 \]
+Άρα προκύπτει ότι $ (c)'=0 $.
+\begin{Thewrhmabox}[Παράγωγος ταυτοτικής συνάρτησης. - Σελ. 223]{6cm}
+\bmath{Να αποδείξετε ότι $ (x)'=1 $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θεωρούμε την ταυτοτική συνάρτηση $ f(x)=x $ και $ x_0\in\mathbb{R} $. Για κάθε $ x\neq x_0 $ ισχύει ότι:
+\[ \frac{f(x)-f(x_0)}{x-x_0}=\frac{x-x_0}{x-x_0}=1 \]
+Επομένως η παράγωγος της $ f $ στο $ x_0 $ θα είναι:
+\[ f'(x_0)=\lim_{x\to x_0}{\frac{f(x)-f(x_0)}{x-x_0}}=\lim_{x\to x_0}{1}=1 \]
+Έτσι για κάθε $ x $ θα ισχύει ότι $ (x)'=1 $.
+\begin{Thewrhmabox}[Παράγωγος δύναμης - Σελ. 224]{8cm}
+\bmath{Να αποδείξετε ότι $ \left(x^\nu\right)'=\nu x^{\nu-1} $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Δίνεται η συνάρτηση $ f(x)=x^\nu $ με $ \nu\in\mathbb{N}-\{0,1\} $ και έστω $ x_0\in\mathbb{R} $. Για κάθε $ x\neq x_0 $ θα έχουμε:
+\begin{align*}
+\dfrac{f(x)-f(x_0)}{x-x_0}=\dfrac{x^\nu-x_0^\nu}{x-x_0}&=\dfrac{(x-x_0)\left(x^{\nu-1}+x^{\nu-2}x_0+\ldots+xx_0^{\nu-2}+x_0^{\nu-1} \right) }{x-x_0}=\\
+&=x^{\nu-1}+x^{\nu-2}x_0+\ldots+xx_0^{\nu-2}+x_0^{\nu-1}
+\end{align*}
+Παίρνοντας λοιπόν το όριο της παραγώγου θα έχουμε:
+\begin{align*}
+f'(x_0)=\lim_{x\to x_0}{\dfrac{f(x)-f(x_0)}{x-x_0}}&=\lim_{x\to x_0}{\left( x^{\nu-1}+x^{\nu-2}x_0+\ldots+xx_0^{\nu-2}+x_0^{\nu-1}\right) }=\\
+&=x_0^{\nu-1}+x_0^{\nu-1}+\ldots+x_0^{\nu-1}+x_0^{\nu-1}=\nu\cdot x_0^{\nu-1}
+\end{align*}
+Έτσι η παράγωγος της $ f $, για κάθε $ x\in D_f $ θα είναι $ \left( x^\nu\right)'=\nu x^{\nu-1} $.
+\begin{Thewrhmabox}[Παράγωγος άρρητης συνάρτησης. - Σελ. 224]{6cm}
+\textbf{Να αποδείξετε ότι \bmath{$ \left(\sqrt{x}\right)'=\dfrac{1}{2\sqrt{x}} $}.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θεωρούμε τη συνάρτηση $ f(x)=\sqrt{x} $ με $ x\geq 0 $ και $ x_0\in\mathbb{R} $. 
+Εξετάζουμε αν η $ f $ είναι παγαγωγίσιμη στο $ 0 $.
+\[ \lim_{x\to 0^+}\frac{f(x)-f(x_0)}{x-x_0}=\lim_{x\to 0^+}{\frac{\sqrt{x}-\sqrt{0}}{x-0}}=\lim_{x\to 0^+}{\frac{\sqrt{x}}{x}}=
+\lim_{x\to 0^+}{\frac{1}{\sqrt{x}}}=+\infty \]
+άρα η $ f $ δεν είναι παραγωγίσιμη στο $ 0 $.
+Στη συνέχεια για κάθε $ x\neq x_0>0 $ θα ισχύει ότι:
+\[ \frac{f(x)-f(x_0)}{x-x_0}=\dfrac{\sqrt{x}-\sqrt{x_0}}{x-x_0}=\dfrac{\left(\sqrt{x}-\sqrt{x_0}\right)\left(\sqrt{x}+\sqrt{x_0} \right) }{(x-x_0)\left( \sqrt{x}+\sqrt{x_0}\right)}=\dfrac{x-x_0}{(x-x_0)\left( \sqrt{x}+\sqrt{x_0}\right)}=\dfrac{1}{ \sqrt{x}+\sqrt{x_0}} \]
+Άρα θα έχουμε ότι
+\[ \lim_{x\to x_0}{\dfrac{f(x)-f(x_0)}{x-x_0}}=\lim_{x\to x_0}{\dfrac{1}{\sqrt{x}+\sqrt{x_0}}}=\dfrac{1}{2\sqrt{x_0}} \]
+Επομένως για κάθε $ x>0 $ η συνάρτηση $ f $ είναι παραγωγίσιμη με $ f'(x)=\left( \sqrt{x}\right)'=\dfrac{1}{2\sqrt{x}} $. 
+\begin{Thewrhmabox}[Παράγωγος αθροίσματος. - Σελ. 229]{7cm}
+\bmath{Αν οι συναρτήσεις $ f,g $ είναι παραγωγίσιμες στο $ x_0 $, τότε η συνάρτηση $ f+g $ είναι παραγωγίσιμη στο $ x_0 $ και ισχύει:
+\[ (f+g)'(x_0)=f'(x_0)+g'(x_0) \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Δίνονται οι συναρτήσεις $ f,g $ και $ x_0\in\mathbb{R} $. Ορίζουμε τη συνάρτηση $ S=f+g $ και για κάθε $ x\neq x_0 $ θα έχουμε:
+\begin{align*}
+\frac{S(x)-S(x_0)}{x-x_0}&=\dfrac{(f+g)(x)-(f+g)(x_0)}{x-x_0}=\\
+&=\dfrac{f(x)+g(x)-f(x_0)-g(x_0)}{x-x_0}=\dfrac{f(x)-f(x_0)}{x-x_0}+\dfrac{g(x)-g(x_0)}{x-x_0}
+\end{align*}
+Έτσι για την παράγωγο της συνάρτησης $ S $ θα έχουμε ότι:
+\[ S'(x_0)=(f+g)'(x_0)=\lim_{x\to x_0}{\dfrac{f(x)-f(x_0)}{x-x_0}}+\lim_{x\to x_0}{\dfrac{g(x)-g(x_0)}{x-x_0}}=f'(x_0)+g'(x_0) \]
+Επομένως η παράγωγος της συνάρτησης $ f+g $ στο $ x_0 $ θα είναι η $ (f+g)'(x_0)=f'(x_0)+g'(x_0) $.
+\begin{Thewrhmabox}[Παράγωγος γινομένου - Σελ. ]{7cm}
+\bmath{Αν οι συναρτήσεις $ f,g $ είναι παραγωγίσιμες στο $ x_0 $, τότε η συνάρτηση $ f\cdot g $ είναι παραγωγίσιμη στο $ x_0 $ και ισχύει:
+\[ (f\cdot g)'(x_0)=f'(x_0)g(x_0)+f(x_0)g'(x_0) \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+\begin{Thewrhmabox}[Παράγωγος γινομένου τριών συναρτήσεων - Σελ. 229]{4cm}
+\bmath{Να αποδείξετε ότι η παράγωγος της συνάρτησης $ f(x)\cdot g(x)\cdot h(x) $ του γινομένου τριών παραγωγίσιμων συναρτήσεων ισούται με
+\[ [f(x)\cdot g(x)\cdot h(x)]'=f'(x)\cdot g(x)\cdot h(x)+f(x)\cdot g'(x)\cdot h(x)+f(x)\cdot g(x)\cdot h'(x) \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Χρησιμοποιούμε τον κανόνα παραγώγισης γινομένου δύο συναρτήσεων και έχουμε ότι:
+\begin{align*}
+[(f(x)\cdot g(x))\cdot h(x)]'&=(f(x)\cdot g(x))'\cdot h(x)+(f(x)\cdot g(x))\cdot h'(x)=\\
+&=[f'(x)\cdot g(x)+f(x)\cdot g'(x)]\cdot h(x)+f(x)\cdot g(x)\cdot h'(x)=\\
+&=f'(x)\cdot g(x)\cdot h(x)+f(x)\cdot g'(x)\cdot h(x)+f(x)\cdot g(x)\cdot h'(x)
+\end{align*}
+\begin{Thewrhmabox}[Παράγωγος δύναμης με αρνητικό εκθέτη - Σελ. 231-232]{4cm}
+\bmath{Να αποδείξετε ότι η συνάρτηση $ f(x)=x^{-\nu} $
+είναι παραγωγίσιμη στο $ \mathbb{R}^* $ και ισχύει $ f'(x)=-\nu x^{-\nu-1} $, δηλαδή
+\[ \left(x^{-\nu} \right)'=-\nu x^{-\nu-1} \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Σύμφωνα με τον κανόνα παραγώγισης πηλίκου δύο συναρτήσεων θα έχουμε για κάθε $ x\neq0 $ ότι:
+\[ f'(x)=\left(x^{-\nu} \right)'=\left(\frac{1}{x^{\nu}} \right)'=\frac{(1)'\cdot x^{\nu}-1\cdot \left( x^{\nu}\right)'}{x^{2\nu}}=\frac{-\nu x^{\nu-1}}{x^{2\nu}}=-\nu x^{-\nu-1} \]
+\begin{Thewrhmabox}[Παράγωγος εφαπτομένης - Σελ. 232]{7cm}
+\bmath{Να αποδείξετε ότι η συνάρτηση $ f(x)=\ef{x} $ είναι παραγωγίσιμη στο σύνολο $ A=\{x\in\mathbb{R}|\syn{x}\neq 0\} $ και ισχύει $ f'(x)=\dfrac{1}{\syn^2{x}} $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Γνωρίζουμε ότι για κάθε $ x\in A $ ισχύει $ \ef{x}=\dfrac{\hm{x}}{\syn{x}} $. Έτσι, σύμφωνα με τον κανόνα παραγώγισης πηλίκου θα έχουμε για κάθε $ x\in A $ ότι
+\begin{align*}
+f'(x)&=(\ef{x})'=\left( \dfrac{\hm{x}}{\syn{x}}\right)'=\\&=\dfrac{(\hm{x})'\cdot\syn{x}-\hm{x}\cdot(\syn{x})'}{\syn^2{x}}=\dfrac{\syn^2{x}+\hm^2{x}}{\syn^2{x}}=\dfrac{1}{\syn^2{x}}
+\end{align*}
+\begin{Thewrhmabox}[Παράγωγος συνεφαπτομένης - Σελ. 232]{6cm}
+\bmath{Να αποδείξετε ότι η συνάρτηση $ f(x)=\syf{x} $ είναι παραγωγίσιμη στο σύνολο $ A=\{x\in\mathbb{R}|\hm{x}\neq 0\} $ και ισχύει $ f'(x)=-\dfrac{1}{\hm^2{x}} $.}
+\end{Thewrhmabox}\
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Γνωρίζουμε ότι για κάθε $ x\in A $ ισχύει $ \syf{x}=\dfrac{\syn{x}}{\hm{x}} $. Έτσι, σύμφωνα με τον κανόνα παραγώγισης πηλίκου θα έχουμε για κάθε $ x\in A $ ότι
+\begin{align*}
+f'(x)&=(\syf{x})'=\left( \dfrac{\syn{x}}{\hm{x}}\right)'=\dfrac{(\syn{x})'\cdot\hm{x}-\syn{x}\cdot(\hm{x})'}{\hm^2{x}}=\dfrac{-\hm^2{x}-\syn^2{x}}{\hm^2{x}}=-\dfrac{1}{\hm^2{x}}
+\end{align*}
+\begin{Thewrhmabox}[Παράγωγος δύναμης με μη ακέραιο εκθέτη - Σελ. 234]{4cm}
+\bmath{Να αποδείξετε ότι η συνάρτηση $ f(x)=x^a $ με $ a\in\mathbb{R}-\mathbb{Z} $ είναι παραγωγίσιμη στο $ (0,+\infty) $ με $ f'(x)=ax^{a-1} $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Η αρχική συνάρτηση έχει πεδίο ορισμού το διάστημα $ (0,+\infty) $ και για κάθε $ x\in(0,+\infty) $, μετασχηματίζεται ως εξής:
+\[ f(x)=x^a=e^{\ln{x^a}}=e^{a\ln{x}} \]
+Οπότε η παράγωγός της θα ισούται με
+\[ f'(x)=\left( e^{a\ln{x}}\right)'=e^{a\ln{x}}\cdot(a\ln{x})'=e^{a\ln{x}}\cdot\dfrac{a}{x}=a\dfrac{x^{a}}{x}=ax^{a-1} \]
+\begin{Thewrhmabox}[Παράγωγος εκθετικής συνάρτησης - Σελ. 234-235]{5cm}
+\bmath{Να αποδείξετε ότι η εκθετική συνάρτηση $ f(x)=a^x $ με $ 0<a\neq 1 $ είναι παραγωγίσιμη στο $ \mathbb{R} $ με $ f'(x)=a^x\cdot\ln{a} $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Το πεδίο ορισμού της συνάρτησης είναι το $ \mathbb{R} $ ενώ η συνάρτηση μπορεί να γραφτεί στη μορφή
+\[ f(x)=a^x=e^{\ln{a^x}}=e^{x\ln{a}} \]
+Έτσι, για κάθε $ x\in\mathbb{R} $ θα έχουμε ότι
+\[ f'(x)=\left(a^x\right)'=\left( e^{x\ln{a}}\right)'=e^{x\ln{a}}\cdot(x\ln{a})'=a^x\cdot\ln{a} \]
+\begin{Thewrhmabox}[Παράγωγος λογαρίθμου - Σελ. 235]{7cm}
+\bmath{Δίνεται η συνάρτηση $ f(x)=\ln{|x|} $ με πεδίο ορισμού το $ \mathbb{R}^* $. Να δείξετε ότι η $ f $ είναι παραγωγίσιμη στο $ \mathbb{R}^* $ με $ f'(x)=\dfrac{1}{x} $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Διακρίνουμε τις εξής περιπτώσεις:
+\begin{alist}
+\item Αν $ x>0 $ τότε $ f(x)=\ln{|x|}=\ln{x} $ επομένως παίρνουμε $ f'(x)=(\ln{x})'=\dfrac{1}{x} $ για κάθε $ x\in(0,+\infty) $.
+\item Αν $ x<0 $ τότε η $ f $ γίνεται $ f(x)=\ln{|x|}=\ln{(-x)} $ και άρα η παράγωγός της, για κάθε $ x\in(-\infty,0) $ θα ισούται με 
+\[ f'(x)=(\ln{(-x)})'=\dfrac{1}{-x}\cdot(-x)'=-\dfrac{1}{x}\cdot(-1)=\dfrac{1}{x} \]
+\end{alist}
+Επομένως σε κάθε περίπτωση για κάθε $ x\in\mathbb{R}^* $ ισχύει $ f'(x)=\dfrac{1}{x} $.
+\begin{Thewrhmabox}[Θεώρημα Rolle - Σελ. 246]{9cm}
+\textbf{Να διατυπώσετε και να δώσετε τη γεωμετρική ερμηνεία του θεωρήματος Rolle.}
+\end{Thewrhmabox}
+\textbf{ΑΠΑΝΤΗΣΗ}
+\begin{alist}
+\item \textbf{Θεώρημα}\\
+Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $. Αν η $ f $ είναι
+\begin{alist}
+\item συνεχής στο διάστημα $ [a,\beta] $,
+\item παραγωγίσιμη στο διάστημα $ (a,\beta) $ και ισχύει
+\item $ f(a)=f(\beta) $
+\end{alist}
+τότε υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώστε $ f'(\xi)=0 $.
+\item \textbf{Γεωμετρική ερμηνεία}\\
+\wrapr{-5mm}{5}{6.7cm}{-27mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=4.3,
+ymin=-.5,ymax=3.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=.5:3.5]{(x-.5)*(x-2)*(x-3.5)+1.7};
+\draw[dashed] (axis cs:1.13,0) node[anchor=north]{\scriptsize $\xi_1$}--(axis cs:1.13,2.999);
+\draw[dashed] (axis cs:2.866,0) node[anchor=north]{\scriptsize $\xi_2$}--(axis cs:2.866,.4);
+\end{axis}
+\draw (.63,3.499)--(2.63,3.499);
+\draw (2.366,.9)--(4.366,.9);
+\draw[dashed] (.5,2.2) node[left]{\footnotesize$f(a)=f(\beta)$}--(4,2.2);
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](1.63,3.499)
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](3.366,.9)
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](1,2.2)
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](4,2.2)
+\node[fill=white,inner sep=.2mm] at(1.3,1.9){\footnotesize$A(a,f(a))$};
+\node at(4,2.5){\footnotesize$B(\beta,f(\beta))$};
+\node at(1.63,3.77){\footnotesize$f'(\xi_1)=0$};
+\node at(4.5,1.2){\footnotesize$f'(\xi_2)=0$};
+\node at(0.2,0.2){$O$};
+\end{tikzpicture}}{
+Αν εφαρμόζεται το θεώρημα Rolle στο $ [a,\beta] $ τότε υπάρχει τουλάχιστον ένας αριθμός $ \xi\in(a,\beta) $ ώστε η εφαπτόμενη ευθεία της $ C_f $ στο σημείο $ Α\left( \xi,f(\xi)\right) $ να είναι παράλληλη με τον άξονα $ x'x $.}
+\end{alist}\mbox{}\\
+\begin{Thewrhmabox}[Θεώρημα μέσης τιμής - Σελ. 246-247]{7cm}
+\textbf{Να διατυπώσετε και να δώσετε τη γεωμετρική ερμηνεία του Θ.Μ.Τ.}
+\end{Thewrhmabox}
+\textbf{ΑΠΑΝΤΗΣΗ}
+\begin{alist}
+\wrapr{-12mm}{18}{5.5cm}{-4mm}{\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=4.3,
+ymin=-.5,ymax=3.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[domain=.5497:1.9497]{.6888*(x-1.2497)+2.02};
+\addplot[domain=2.05:3.45]{.6888*(x-2.75)+1.3718};
+\addplot[grafikh parastash,\xrwma,domain=.7:3.3]{(x-1)*(x-2)*(x-3)+1.7};
+\draw[dashed] (axis cs:1.2497,0) node[anchor=north]{\scriptsize $\xi_1$}--(axis cs:1.2497,2.02);
+\draw[dashed] (axis cs:2.75,0) node[anchor=north]{\scriptsize $\xi_2$}--(axis cs:2.75,1.3718);
+\draw[dashed] (axis cs:.7,.803) --(axis cs:3.3,2.597);
+\end{axis}
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](1.7497,2.52)
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](3.25,1.8718)
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](1.2,1.303)
+\tkzDrawPoint[size=3,fill=\xrwma,color=\xrwma](3.8,3.097)
+\node[fill=white,inner sep=.2mm] at(1.3,1){\footnotesize$A(a,f(a))$};
+\node at(4.7,3.1){\footnotesize$B(\beta,f(\beta))$};
+\node at(2.9,3.8){\footnotesize$f'(\xi_1)=f'(\xi_2)=\dfrac{f(\beta)-f(a)}{\beta-a}$};
+\node at(0.2,0.2){$O$};
+\node[fill=white,inner sep=.2mm] at(1.5,2.9){\footnotesize$M(\xi_1,f(\xi_1))$};
+\node at(4.2,1.7){\footnotesize$N(\xi_2,f(\xi_2))$};
+\end{tikzpicture}}{
+\item \textbf{Θεώρημα}\\
+Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $. Αν αυτή είναι
+\begin{alist}
+\item συνεχής στο διάστημα $ [a,\beta] $ και
+\item παραγωγίσιμη στο διάστημα $ (a,\beta) $
+\end{alist}
+τότε υπάρχει ένα τουλάχιστον $ \xi\in(a,\beta) $ έτσι ώστε}
+\[ f'(\xi)=\dfrac{f(\beta)-f(a)}{\beta-a} \]
+\item \textbf{Γεωμετρική ερμηνεία}\\
+Αν για τη συνάρτηση $ f $ εφαρμόζεται το Θ.Μ.Τ. στο διάστημα $ [a,\beta] $, τότε η εφαπτόμενη ευθεία στο σημείο $ M(\xi,f(\xi)) $ είναι παράλληλη με το ευθύγραμμο τμήμα $ AB $ που ενώνει τα σημεία $ A(a,f(a)) $ και $ B(\beta,f(\beta)) $ στα άκρα του διαστήματος.
+\end{alist}
+\begin{Thewrhmabox}[Συνέπειες του Θ.Μ.Τ. 1 - Σελ. 251]{7.5cm}
+\bmath{Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $. Να αποδείξετε ότι αν
+\begin{alist}
+\item η $ f $ είναι συνεχής στο $ \varDelta $ και ισχύει
+\item $ f'(x)=0 $ σε κάθε \emph{εσωτερικό} σημείο του διαστήματος
+\end{alist}
+τότε η $ f $ είναι σταθερή σε όλο το διάστημα $ \varDelta $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θα δείξουμε ότι για οποιαδήποτε $ x_1,x_2\in\varDelta $ ισχύει $ f(x_1)=f(x_2) $. Διακρίνουμε τις εξής περιπτώσεις:
+\begin{alist}
+\item Αν $ x_1=x_2 $ τότε $ f(x_1)=f(x_2) $.
+\item Αν $ x_2\neq x_2 $ θεωρούμε ότι είναι $ x_1<x_2 $ και εφαρμόζοντας το Θ.Μ.Τ. στο διάστημα $ [x_1,x_2] $ έχουμε ότι
+\begin{alist}
+\item Η $ f $ είναι συνεχής στο διάστημα $ [x_1,x_2] $ και
+\item παραγωγίσιμη στο διάστημα $ (x_1,x_2) $.
+\end{alist}
+Έτσι θα υπάρχει τουλάχιστον ένα $ \xi\in(x_1,x_2) $ ώστε να ισχύει:
+\[ f'(\xi)=\dfrac{f(x_2)-f(x_1)}{x_2-x_1} \]
+Γνωρίζουμε όμως από την υπόθεση ότι για κάθε εσωτερικό σημείο $ x\in\varDelta $ ισχύει $ f'(x)=0 $ οπότε και $ f'(\xi)=0 $. Άρα παίρνουμε ότι
+\[ f'(\xi)=0\Rightarrow \dfrac{f(x_2)-f(x_1)}{x_2-x_1}=0\Rightarrow f(x_2)-f(x_1)=0\Rightarrow f(x_1)=f(x_2) \]
+\end{alist}
+Ομοίως και για $ x_1>x_2 $ καταλήγουμε στο ίδιο συμπέρασμα οπότε σε κάθε περίπτωση η $ f $ είναι σταθερή σε όλο το διάστημα $ \varDelta $.
+\begin{Thewrhmabox}[Συνέπειες του Θ.Μ.Τ. 2 - Σελ. 251]{7.5cm}
+\bmath{Δίνονται δύο συναρτήσεις $ f,g $ ορισμένες σε ένα διάστημα $ \varDelta $. Να αποδείξετε ότι αν
+\begin{alist}
+\item οι συναρτήσεις $ f,g $ είναι συνεχείς στο διάστημα $ \varDelta $ και
+\item $ f'(x)=g'(x) $ σε κάθε \emph{εσωτερικό} σημείο του $ \varDelta $
+\end{alist}
+τότε υπάρχει σταθερά $ c $ τέτοια ώστε να ισχύει $ f(x)=g(x)+c $ για κάθε $ x\in\varDelta $.}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Ορίζουμε τη συνάρτηση $ h=f-g $ με $ h(x)=f(x)-g(x) $ για κάθε $ x\in\varDelta $. Γι αυτήν θα ισχύει 
+\[ h'(x)=f'(x)-g'(x)=0 \]
+σε κάθε εσωτερικό σημείο του διαστήματος $ \varDelta $. Έτσι η $ h $ θα είναι σταθερή άρα θα υπάρχει σταθερά $ c $ τέτοια ώστε για κάθε $ x\in\varDelta $ να ισχύει
+\[ h(x)=c\Rightarrow f(x)-g(x)=c\Rightarrow f(x)=g(x)+c \] 
+\begin{Thewrhmabox}[Κριτήριο μονοτονίας συνάρτησης - Σελ. 253]{6cm}
+\bmath{Έστω μια συνάρτηση $ f $ η οποία είναι συνεχής σε ένα διάστημα $ \varDelta $. Να αποδείξετε ότι αν
+\begin{alist}
+\item αν ισχύει $ f'(x)>0 $ σε κάθε \textit{εσωτερικό} σημείο του διαστήματος, τότε η $ f $ είναι γνησίως αύξουσα σε όλο το $ \varDelta $.
+\item αν ισχύει $ f'(x)<0 $ σε κάθε \textit{εσωτερικό} σημείο του διαστήματος, τότε η $ f $ είναι γνησίως φθίνουσα σε όλο το $ \varDelta $.
+\end{alist}}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Εργαζόμαστε για την περίπτωση $ f'(x)>0 $ και ομοίως αποδεικνύεται και για $ f'(x)<0 $. Θεωρούμε δύο οποιαδήποτε $ x_1,x_2\in\varDelta $ με $ x_1<x_2 $. Εφαρμόζοντας το Θ.Μ.Τ. για τη συνάρτηση $ f $ στο διάστημα $ [x_1,x_2] $ έχουμε
+\begin{itemize}
+\item η $ f $ είναι συνεχής στο διάστημα $ [x_1,x_2] $ και
+\item παραγωγίσιμη στο διάστημα $ (x_1,x_2) $
+\end{itemize}
+οπότε θα υπάρχει $ \xi\in(x_1,x_2) $ τέτοιο ώστε να ισχύει
+\[ f'(\xi)=\dfrac{(x_2)-f(x_1)}{x_2-x_1} \]
+Σύμφωνα όμως με την υπόθεση έχουμε $ f'(x)>0 $ για κάθε εσωτερικό σημείο του $ \varDelta $ άρα προκύπτει
+\[ f'(\xi)>0\Rightarrow \dfrac{f(x_2)-f(x_1)}{x_2-x_1}>0\xRightarrow{x_1<x_2} f(x_1)<f(x_2) \]
+Επομένως η $ f $ είναι γνησίως αύξουσα στο διάστημα $ \varDelta $.
+\begin{Thewrhmabox}[Θεώρημα Fermat - Σελ. 260]{8.5cm}
+\bmath{Να αποδείξετε το θεώρημα του Fermat:\\
+Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $. Αν
+\begin{alist}
+\item $ x_0 $ είναι ένα \textit{εσωτερικό} σημείο του $ \varDelta $
+\item η $ f $ παρουσιάζει τοπικό ακρότατο στο $ x_0 $ και
+\item είναι παραγωγίσιμη στο $ x_0 $ τότε
+\end{alist}
+\[ f'(x_0)=0 \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θεωρούμε ότι η $ f $ παρουσιάζει στο $ x_0 $ τοπικό μέγιστο. Θα υπάρχει έτσι ένας θετικός αριθμός $ \delta>0 $ ώστε για κάθε $ x\in(x_0-\delta,x_0+\delta) $ να ισχύει $ f(x_0)\geq f(x) $. Επίσης η $ f $ είναι παραγωγίσιμη στο $ x_0 $ οπότε
+\[ f'(x_0)=\lim_{x\to x_0}{\dfrac{f(x)-f(x_0)}{x-x_0}} \]
+Εξετάζουμε τις εξής περιπτώσεις:
+\begin{alist}
+\item Αν $ x<x_0\Rightarrow x-x_0<0 $ τότε από την τελευταία σχέση παίρνουμε ότι
+\begin{equation}\label{f1}
+\dfrac{f(x)-f(x_0)}{x-x_0}\geq 0\Rightarrow f'(x_0)\geq 0
+\end{equation}
+\item Αν $ x>x_0\Rightarrow x-x_0>0 $ τότε παίρνουμε ομοίως ότι
+\begin{equation}\label{f2}
+\dfrac{f(x)-f(x_0)}{x-x_0}\leq 0\Rightarrow f'(x_0)\leq 0 
+\end{equation}
+\end{alist}
+Συνδυάζοντας τις σχέσεις \eqref{f1} και \eqref{f2} καταλήγουμε στο συμπέρασμα ότι $ f'(x_0)=0 $. Εργαζόμαστε αναλόγως και για την περίπτωση όπου η $ f $ παρουσιάζει τοπικό ελάχιστο στο $ x_0 $.
+\begin{Thewrhmabox}[Κριτήριο τοπικών ακρότατων - Σελ. 262]{6cm}
+\bmath{Δίνεται μια συνάρτηση $ f $ η οποία είναι παραγωγίσιμη σ’ ένα διάστημα $ (a,\beta) $, με
+εξαίρεση ίσως ένα σημείο του $ x_0 $, στο οποίο όμως είναι συνεχής. Να αποδείξετε ότι
+\begin{alist}
+\item αν $ f'(x)>0 $ για κάθε $ x\in(a,x_0) $ και $ f'(x)<0 $ για κάθε $ x\in(x_0,\beta) $ τότε η $ f $ παρουσιάζει τοπικό μέγιστο στο $ x_0 $.
+\item αν $ f'(x)<0 $ για κάθε $ x\in(a,x_0) $ και $ f'(x)>0 $ για κάθε $ x\in(x_0,\beta) $ τότε η $ f $ παρουσιάζει τοπικό ελάχιστο στο $ x_0 $.
+\item αν η $ f' $ διατηρεί το πρόσημό της σε κάθε $ x\in(a,x_0)\cup(x_0,\beta) $ τότε είναι γνησίως μονότονη στο $ (a,\beta) $ και δεν παρουσιάζει τοπικό ακρότατο στο $ x_0 $.
+\end{alist}}
+\end{Thewrhmabox}\mbox{}\\
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}
+\begin{alist}
+\item Γνωρίζουμε ότι $ f'(x)>0 $ για κάθε $ x\in(a,x_0] $. Σύμφωνα με το κριτήριο μονοτονίας η $ f $ θα είναι γνησίως αύξουσα στο $ (a,x_0] $. Έτσι για κάθε $ x\in(a,x_0] $ θα ισχύει
+\[ x\leq x_0\xRightarrow{f\Auxousa}f(x)\leq f(x_0) \]
+Επίσης από το γεγονός ότι $ f'(x)<0 $ για κάθε $ x\in[x_0,\beta) $ παίρνουμε ότι $ f $ θα είναι γνησίως φθίνουσα στο $ [x_0,\beta) $. Άρα προκύπτει
+\[ x\geq x_0\xRightarrow{f\Fthinousa}f(x)\leq f(x_0) \]
+Έτσι σε κάθε περίπτωση για κάθε $ x\in(a,\beta) $ παίρνουμε ότι $ f(x)\leq f(x_0) $ άρα η $ f $ παρουσιάζει τοπικό μέγιστο στο $ x_0 $.
+\item Εργαζόμαστε όπως προηγουμένως.
+\item Θεωρούμε ότι ισχύει $ f'(x)>0 $ για κάθε $ x\in(a,x_0)\cup(x_0,\beta) $. Έτσι η συνάρτηση $ f $ θα είναι αύξουσα σε καθένα από τα διαστήματα $ (a,x_0] $ και $ [x_0,\beta) $ οπότε 
+\[ \textrm{για }\ x_1<x_0<x_2\Rightarrow f(x_1)<f(x_0)<f(x_2) \]
+άρα η $ f $ δεν παρουσιάζει ακρότατο στο $ x_0 $. Θα αποδείξουμε τώρα ότι η συνάρτηση είναι γνησίως αύξουσα σε όλο το διάστημα $ (a,\beta) $. Διακρίνουμε τις εξής περιπτώσεις:
+\begin{itemize}
+\item Αν $ x_1,x_2\in(a,x_0] $ με $ x_1<x_2 $ τότε προκύπτει $ f(x_1)<f(x_2) $ αφού η $ f $ είναι γνησίως αύξουσα στο διάστημα αυτό.
+\item Ομοίως αν $ x_1,x_2\in[x_0,\beta) $ με $ x_1<x_2 $ τότε προκύπτει επίσης $ f(x_1)<f(x_2) $.
+\item Τέλος αποδείξαμε προηγουμένως ότι $ x_1<x_0<x_2\Rightarrow f(x_1)<f(x_0)<f(x_2) $.
+\end{itemize}
+Έτσι σε κάθε περίπτωση ισχύει $ x_1<x_2\Rightarrow f(x_1)<f(x_2) $ άρα η $ f $ είναι γνησίως αύξουσα σε όλο το διάστημα $ (a,\beta) $. Εργαζόμαστε αναλόγως και για $ f'(x)<0 $.
+\end{alist}
+\begin{Thewrhmabox}[Αρχική συνάρτηση - Σελ. 304]{8.5cm}
+\bmath{Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $ και έστω $ F $ μια παράγουσα της $ f $ στο $ \varDelta $. Να αποδείξετε ότι
+\begin{alist}
+\item όλες οι συναρτήσεις της μορφής \[ G(x)=F(x)+c \] είναι παράγουσες της $ f $ στο $ \varDelta $ και ότι
+\item κάθε άλλη παράγουσα $ G $ της $ f $ στο $ \varDelta $ παίρνει τη μορφή \[ G(x)=F(x)+c \]
+για κάθε $ x\in\varDelta $, με $ c\in\mathbb{R} $.
+\end{alist}}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}
+\begin{alist}
+\item Για να είναι η $ G $ παράγουσα της $ f $ στο διάστημα $ \varDelta $ θα πρέπει να ισχύει $ G'(x)=f(x) $ για κάθε $ x\in\varDelta $. Έχουμε λοιπόν
+\[ G'(x)=(F(x)+c)'=F'(x)+(c)'=f(x)\ \ ,\ \ x\in\varDelta \]
+\item Έστω $ G $ μια άλλη παράγουσα της $ f $ στο διάστημα $ \varDelta $. Θα ισχύει γι αυτήν ότι $ G'(x)=f(x) $. Από την υπόθεση γνωρίζουμε επίσης ότι $ F'(x)=f(x) $ άρα παίρνουμε $ G'(x)=F'(x) $ οπότε θα υπάρχει σταθερά $ c $ ώστε
+\[ G'(x)=F'(x)\Rightarrow G(x)=F(x)+c \]
+σύμφωνα με το πόρισμα του Θ.Μ.Τ.
+\end{alist}
+\begin{Thewrhmabox}[Θεμελιώδες θεώρημα ολοκληρωτικού λογισμού - Σελ. 334-335]{3cm}
+\bmath{Δίνεται μια συνάρτηση $ f $ η οποία είναι συνεχής σε ένα διάστημα $ [a,\beta] $. Να αποδείξετε ότι αν $ G $ είναι μια παράγουσα της $ f $ στο διάστημα $ [a,\beta] $ τότε ισχύει
+\[ \int_{a}^{\beta}{f(x)}\d x=G(\beta)-G(a) \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Σύμφωνα με το θεώρημα της αρχικής συνάρτησης, η $ F(x)=\int_{a}^{x}{f(x)\d x} $ είναι μια αρχική συνάρτηση της $ f $  στο $ [a,\beta] $. Έτσι κάθε άλλη παράγουσα της γράφεται ως $ G(x)=F(x)+c $. Θέτοντας όπου $ x=a $ παίρνουμε:
+\[ G(a)=F(a)+c\Rightarrow G(a)=\int_{a}^{a}{f(x)\d x}+c\Rightarrow c=G(a) \]
+Θέτοντας επίσης όπου $ x=\beta $ προκύπτει ότι:
+\[ G(\beta)=F(\beta)+c\Rightarrow G(\beta)=\int_{a}^{\beta}{f(x)\d x}+G(a)\Rightarrow \int_{a}^{\beta}{f(x)\d x}=G(\beta)-G(a) \]
+\begin{Thewrhmabox}[Εμβαδόν χωρίου μεταξύ γραφικών παραστάσεων 1 - Σελ. 343]{3cm}
+\bmath{Δίνονται δύο συναρτήσεις $ f,g $ ορισμένες σε ένα διάστημα $ [a,\beta] $ τέτοιες ώστε
+\begin{alist}
+\item $ f(x)\geq g(x) $ για κάθε $ x\in[a,\beta] $ και
+\item $ f,g $ μη αρνητικές στο $ [a,\beta] $.
+\end{alist}
+Να αποδείξετε ότι το εμβαδόν του χωρίου $ \varOmega $ μεταξύ των γραφικών παραστάσεων $ C_f,C_g $ και των ευθειών $ x=a,x=\beta $ δίνεται από τον τύπο
+\[ E(\varOmega)=\int_{a}^{\beta}{(f(x)-g(x))\d x} \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+\wrapr{-5mm}{9}{4.5cm}{-5mm}{\begin{tikzpicture} 
+\begin{axis}[aks_on,belh ar,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},xmin=-.5,xmax=4,ymin=-.5,ymax=3,x=1cm,y=1cm]
+\addplot[domain=.5:3.4,fill=\xrwma!20] {-0.2*x^2+x+.7}\closedcycle;
+\addplot[domain=.5:3.4,fill=\xrwma!10] {0.2*x^2-.7*x+1}\closedcycle;
+\addplot[domain=.5:3.4,grafikh parastash] {-0.2*x^2+x+.7};
+\addplot[domain=.5:3.4,grafikh parastash] {0.2*x^2-.7*x+1};
+\node at (axis cs:.7,2){$\varOmega$};
+\node at (axis cs:2,1){$\varOmega_1$};
+\node at (axis cs:2.8,0.3){$\varOmega_2$};
+\node at (axis cs:-.2,-.22){$O$};
+\node at (axis cs:2.5,2.2){$C_f$};
+\node at (axis cs:3.7,1){$C_g$};
+\draw[-latex](axis cs:.9,1.9)--(axis cs:2,1.5);
+\node at(axis cs:.5,-.2){\footnotesize$a$};
+\node at(axis cs:3.4,-.2){\footnotesize$\beta$};
+\end{axis}
+\end{tikzpicture} }{
+Γνωρίζουμε ότι το εμβαδόν των χωρίων $ \varOmega_1,\varOmega_2 $ μεταξύ της $ C_f $ και αντίστοιχα της $ C_g $, του άξονα $ x'x $ και των ευθειών $ x=a,x=\beta $ ομοίως και για την $ C_g $ είναι 
+\[ E(\varOmega_1)=\int_{a}^{\beta}{f(x)\d x}\ \ ,\ \ E(\varOmega_2)=\int_{a}^{\beta}{g(x)\d x} \]
+Έτσι το ζητούμενο εμβαδόν του χωρίου $ \varOmega $ θα είναι
+\begin{align*}
+E(\varOmega)&=E(\varOmega_1)-E(\varOmega_2)=\\&=\int_{a}^{\beta}{f(x)\d x}-\int_{a}^{\beta}{g(x)\d x}=\int_{a}^{\beta}{(f(x)-g(x))\d x}
+\end{align*}}
+\begin{Thewrhmabox}[Εμβαδόν χωρίου μεταξύ γραφικών παραστάσεων 2 - Σελ. 344]{3cm}
+\bmath{Δίνονται δύο συναρτήσεις $ f,g $ ορισμένες σε ένα διάστημα $ [a,\beta] $ τέτοιες ώστε $ f(x)\geq g(x) $ για κάθε $ x\in[a,\beta] $. Να αποδείξετε ότι το εμβαδόν του χωρίου $ \varOmega $ μεταξύ των γραφικών παραστάσεων $ C_f,C_g $ και των ευθειών $ x=a,x=\beta $ δίνεται από τον τύπο
+\[ E(\varOmega)=\int_{a}^{\beta}{(f(x)-g(x))\d x} \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Για τις συνεχείς συναρτήσεις $ f,g $ θα υπάρχει ένας θετικός αριθμός $ c $ τέτοιος ώστε να ισχύει \[ f(x)+c\geq g(x)+c\geq0. \] Επομένως, το εμβαδόν του χωρίου $ \varOmega $ μεταξύ των γραφικών παραστάσεων των $ f(x)+c,g(x)+c $ από $ x=a $ έως $ x=\beta $ θα είναι:
+\[ E(\varOmega)=\int_{a}^{\beta}{[(f(x)+c)-(g(x)+c)]\d x}=\int_{a}^{\beta}{[f(x)+c-g(x)-c]\d x}=\int_{a}^{\beta}{(f(x)-g(x))\d x} \]
+\begin{Thewrhmabox}[Εμβαδόν χωρίου από αρνητική συνάρτηση - Σελ. 344]{4.5cm}
+\bmath{Δίνεται συναρτήση $ g $ ορισμένη σε ένα διάστημα $ [a,\beta] $ τέτοια ώστε $ g(x)\leq 0 $ για κάθε $ x\in[a,\beta] $. Να αποδείξετε ότι το εμβαδόν του χωρίου $ \varOmega $ μεταξύ της $ C_g $, του άξονα $ x'x $ και των ευθειών $ x=a,x=\beta $ δίνεται από τον τύπο
+\[ E(\varOmega)=-\int_{a}^{\beta}{g(x)) \d x} \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+Θεωρούμε τη μηδενική συνάρτηση $ f(x)=0 $ για κάθε $ x\in[a,\beta] $ παίρνουμε ότι το εμβαδόν του χωρίου μεταξύ των $ C_f,C_g $ και των ευθειών $ x=a,x=\beta $ θα είναι:
+\[ E(\varOmega)=\int_{a}^{\beta}{(f(x)-g(x))\d x}=\int_{a}^{\beta}{(0-g(x))\d x}=-\int_{a}^{\beta}{g(x)\d x} \]
+\begin{Thewrhmabox}[Εμβαδόν χωρίου μεταξύ γραφικών παραστάσεων 3 - Σελ. 344-345]{2.5cm}
+\bmath{Δίνονται δύο συναρτήσεις $ f,g $ ορισμένες σε ένα διάστημα $ [a,\beta] $. Να αποδείξετε ότι το εμβαδόν του χωρίου $ \varOmega $ μεταξύ των γραφικών παραστάσεων $ C_f,C_g $ και των ευθειών $ x=a,x=\beta $ δίνεται από τον τύπο
+\[ E(\varOmega)=\int_{a}^{\beta}{|f(x)-g(x)|\d x} \]}
+\end{Thewrhmabox}
+\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+\wrapr{-5mm}{7}{4.3cm}{-14mm}{\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},xmin=-1,xmax=7,ymin=-1,ymax=6,x=.5cm,y=.5cm]
+\addplot[name path=F,grafikh parastash,domain={0.7:5}] {0.5(x - 3.5)^2 + x - 3};
+\addplot[name path=G,grafikh parastash,domain={0.7:5}] {-0.7*(x - 2)^2+ x+1};
+\addplot[color=\xrwma!20]fill between[of=F and G, soft clip={domain=.5:5}];
+\node at (axis cs:.7,2.3){$\varOmega_1$};
+\node at (axis cs:3,2.15){$\varOmega_2$};
+\node at (axis cs:5,2.){$\varOmega_3$};
+\node at (axis cs:1.4,5){$ C_f $};
+\node at (axis cs:1.4,.7){$ C_g $};
+\node at (axis cs:-.4,-.4){$ O $};
+\draw (axis cs:.7,.2)--(axis cs:.7,-.2)node[yshift=-2mm]{\footnotesize$a$};
+\draw[dashed] (axis cs:1.537,2.388)--(axis cs:1.537,-.2)node[yshift=-2mm]{\footnotesize$\gamma$};
+\draw[dashed] (axis cs:4.227,1.755422022)--(axis cs:4.227,-.2)node[yshift=-2mm]{\footnotesize$\delta$};
+\draw (axis cs:5,.2)--(axis cs:5,-.2)node[yshift=-2mm]{\footnotesize$\beta$};
+\end{axis}
+\end{tikzpicture}}{
+Η διαφορά $ f(x)-g(x) $ δεν έχει σταθερό πρόσημο. Θεωρούμε ότι μηδενίζεται σε δύο εσωτερικά σημεία $ \gamma,\delta $ του διαστήματος $ [a,\beta] $. Το εμβαδόν του χωρίου $ \varOmega $ θα ισούται με το άθροισμα των εμβαδών των χωρίων $ \varOmega_1,\varOmega_2,\varOmega_3 $ μεταξύ των $ C_f,C_g $ και των ευθειών $ x=a,x=\gamma,x=\delta,x=\beta $.
+\begin{align*}
+E(\varOmega)&=E(\varOmega_1)+E(\varOmega_2)+E(\varOmega_3)=\\
+&=\int_{a}^{\gamma}{(f(x)-g(x))\d x}+\int_{\gamma}^{\delta}{(g(x)-f(x))\d x}+\int_{\delta}^{\beta}{(f(x)-g(x))\d x}=\\
+&=\int_{a}^{\gamma}{|f(x)-g(x)|\d x}+\int_{\gamma}^{\delta}{|f(x)-g(x)|\d x}+\int_{\delta}^{\beta}{|f(x)-g(x)|\d x}=\int_{a}^{\beta}{|f(x)-g(x)|\d x}
+\end{align*}}
+\newpage
+\end{document}
+
+
+
