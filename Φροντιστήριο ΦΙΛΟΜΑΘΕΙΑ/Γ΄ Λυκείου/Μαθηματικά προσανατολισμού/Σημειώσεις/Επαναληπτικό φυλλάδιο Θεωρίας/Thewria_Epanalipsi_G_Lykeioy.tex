@@ -13,6 +13,7 @@
 \usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{fillbetween}
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{tikzmark}
 \let\myBbbk\Bbbk
@@ -152,7 +153,7 @@
 \titlespacing*{\part} 
 {0pt}{0pt}{0pt}
 
-\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
+%\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
 \definecolor{bblue}{HTML}{4F81BD}
 \definecolor{rred}{HTML}{C0504D}
 \definecolor{ggreen}{HTML}{9BBB59}
@@ -163,42 +164,6 @@
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
 
-\newcommand{\pie}[4][]{
-\begin{scope}[#1]
-\pgfmathsetmacro{\curA}{90}
-\pgfmathsetmacro{\r}{1}
-\def\c{(0,0)}
-\node[pie title] at (90:1.3) {#2};
-\foreach \v/\s/\l in{#3}{
-\pgfmathsetmacro{\deltaA}{\v/#4*360}
-\pgfmathsetmacro{\nextA}{\curA + \deltaA}
-\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
-
-\path[slice,\s] \c
--- +(\curA:\r)
-arc (\curA:\nextA:\r)
--- cycle;
-\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
-
-\begin{pgfonlayer}{foreground}
-\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
-\end{pgfonlayer}
-
-\global\let\curA\nextA
-}
-\end{scope}
-}
-
-\newcommand{\legend}[2][]{
-\begin{scope}[#1]
-\path
-\foreach \n/\s in {#2}
-{
-++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
-}
-;
-\end{scope}
-}
 \definecolor{a}{cmyk}{0,1,1,0.05}
 \definecolor{b}{cmyk}{0,.8,.8,.15}
 \definecolor{c}{cmyk}{0,.8,.8,.0}
@@ -367,7 +332,7 @@ boxrule=0.7pt,titlerule=-.2pt,
 width=\linewidth,
 title style={color=white},
 overlay unbroken and first={
-\path[left color=\xrwma,right color=\xrwma!50,draw=black]
+\path[left color=\xrwma,right color=white,draw=black]
 ([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
 },
 fonttitle=\bfseries,
@@ -375,34 +340,61 @@ before=\par\medskip\noindent,
 after=\par\medskip,
 toptitle=3pt,
 top=11pt,topsep at break=-5pt,
-colback=white,title={\kerkissans{\large Θεώρημα \theThewrhmabox}} : {\textcolor{black}{\kerkissans{#1}}}]}
+colback=white,title={\kerkissans{\faStop\ \ \large Θεώρημα \theThewrhmabox}} : {\textcolor{black}{\kerkissans{#1}}}]}
 {\end{tcolorbox}}
 %------------------------------------------
 
 %---------- Θεώρημα --------------
-\newcounter{Orismosbox}[section]
-\renewcommand{\theOrismosbox}{\arabic{Orismosbox}}
-\newenvironment{Orismosbox}[2][\linewidth]
-{\refstepcounter{Orismosbox}
-\begin{tcolorbox}[breakable,
+%\newcounter{Orismosbox}[section]
+%\renewcommand{\theOrismosbox}{\arabic{Orismosbox}}
+%\newenvironment{Orismosbox}[2][\linewidth]
+%{\refstepcounter{Orismosbox}
+%\begin{tcolorbox}[breakable,
+%enhanced standard,
+%boxrule=0.7pt,titlerule=-.2pt,
+%width=\linewidth,
+%title style={color=white},
+%overlay unbroken and first={
+%\path[left color=\xrwma,right color=white,draw=black]
+%([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+%},
+%fonttitle=\bfseries,
+%before=\par\medskip\noindent,
+%after=\par\medskip,
+%toptitle=3pt,
+%top=11pt,topsep at break=-5pt,
+%colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\textcolor{black}{\kerkissans{#1}}}]}
+%{\end{tcolorbox}}
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\arabic{orismos}}
+\newcommand{\orism}{\refstepcounter{orismos}{\bf\kerkissans{\textcolor{\xrwma}{\faBook\ \ \large{Ορισμός}\hspace{2mm}\theorismos}}}\hspace{1mm}}{}
+
+\newenvironment{Orismosbox}[1]
+{\begin{tcolorbox}[title=\orism:\ \  {\bf{\large\kerkissans{#1}}},
+breakable,
 enhanced standard,
-boxrule=0.7pt,titlerule=-.2pt,
-width=\linewidth,
-title style={color=white},
-overlay unbroken and first={
-\path[left color=orange3,right color=\xrwma!50,draw=black]
-([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
-},
-fonttitle=\bfseries,
-before=\par\medskip\noindent,
-after=\par\medskip,
-toptitle=3pt,
-top=11pt,topsep at break=-5pt,
-colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\textcolor{black}{\kerkissans{#1}}}]}
+titlerule=-.2pt,
+toprule=0pt, 
+rightrule=0pt, 
+bottomrule=0pt,
+colback=white,
+opacityfill=0,
+left=2mm,
+top=1mm,
+bottom=0mm,
+boxrule=0pt,
+colframe=white,
+borderline west={1.5mm}{0pt}{\xrwma},
+leftrule=2mm,
+sharp corners,
+coltitle=black]}
 {\end{tcolorbox}}
 %------------------------------------------
+\newcommand{\apanthsh}{{\kerkissans{\textbf{ΑΠΑΝΤΗΣΗ}}}\\}
 
-
+\newcounter{idiothta}[section]
+\renewcommand{\theidiothta}{\arabic{idiothta}}
+\newcommand{\idiothta}[1]{\refstepcounter{idiothta}{\bf\kerkissans{\textcolor{\xrwma}{\faPlay\ \ \ \large{Ιδιότητα}\hspace{2mm}\theidiothta\ :\ }}}\hspace{1mm}{\bf\kerkissans{#1}}}{}
 
 
 \begin{document}
@@ -454,8 +446,11 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \pagenumbering{arabic}
 \newpage
 \section{Ορισμοί}
+
 \begin{Orismosbox}{Πραγματική Συνάρτηση}
-Πραγματική συνάρτηση με πεδίο ορισμού ένα σύνολο $ A $ είναι μια διαδικασία (αντιστοίχηση) με την οποία \textbf{κάθε} στοιχείο $ x\in A $ αντιστοιχεί σε \textbf{ένα μόνο} πραγματικό αριθμό $ y\in\mathbb{R} $. Το $ y $ λέγεται \textbf{τιμή} της συνάρτησης $ f $ στο $ x $ και συμβολίζεται $ f(x) $.
+Τι ονομάζουμε πραγματική συνάρτηση με πεδίο ορισμού το σύνολο $A$;
+\end{Orismosbox}\apanthsh
+Πραγματική συνάρτηση με πεδίο ορισμού ένα σύνολο $ A $ είναι μια διαδικασία (κανόνα) $f$ με την οποία \textbf{κάθε} στοιχείο $ x\in A $ αντιστοιχεί σε \textbf{ένα μόνο} πραγματικό αριθμό $ y\in\mathbb{R} $. Το $ y $ λέγεται \textbf{τιμή} της συνάρτησης $ f $ στο $ x $ και συμβολίζεται $ f(x) $.
 \begin{center}
 \centering
 \begin{tikzpicture}[scale=.6]
@@ -474,22 +469,32 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
 \end{tikzpicture}
 \end{center}
-\end{Orismosbox}
 \begin{Orismosbox}{Σύνολο τιμών}
+Τι ονομάζεται σύνολο τιμών μιας πραγματικής συνάρτησης $f$ με πεδίο ορισμού $A$;
+\end{Orismosbox}
+\apanthsh
 Σύνολο τιμών μιας συνάρτησης $ f $ με πεδίο ορισμού $ A $ λέγεται το σύνολο που περιέχει όλες τις τιμές $ f(x) $ της συνάρτησης για κάθε  $ x\in A $. Συμβολίζεται με $ f(A) $ και είναι
 \[ f(A)=\{y\in\mathbb{R}:y=f(x)\ \textrm{για κάθε}\ x\in A\} \]
-\end{Orismosbox}
 \begin{Orismosbox}{Γραφική παράσταση}
-Γραφική παράσταση μιας συνάρτησης $ f $ με πεδίο ορισμού ένα σύνολο $ A $ ονομάζεται το σύνολο των σημείων της μορφής $ M(x,f(x)) $ για κάθε $ x\in A $. Συμβολίζεται με $ C_f $
+Τι ονομάζεται γραφική παράσταση μιας συνάρτησης $f$;
+\end{Orismosbox}
+\apanthsh
+Έστω $f$ μια συνάρτηση με πεδίο ορισμού $A$ και $Oxy$ ένα σύστημα συντεταγμένων στο επίπεδο. Το σύνολο των σημείων $M(x, y)$ για τα οποία ισχύει $y = f(x)$, δηλαδή το σύνολο των σημείων $M(x, f(x)), x\in A$, λέγεται γραφική παράσταση της $f$ και συμβολίζεται συνήθως με $C_f$.
+%Γραφική παράσταση μιας συνάρτησης $ f $ με πεδίο ορισμού ένα σύνολο $ A $ ονομάζεται το σύνολο των σημείων της μορφής $ M(x,f(x)) $ για κάθε $ x\in A $. Συμβολίζεται με $ C_f $
 \[ C_f=\{M(x,y):y=f(x)\ \textrm{για κάθε}\ x\in A\} \]
-\end{Orismosbox}
-\begin{Orismosbox}{Ίσες συναρτήσεις με κοινό πεδίο ορισμού}
-Δύο συναρτήσεις $ f,g $ που έχουν το ίδιο πεδίο ορισμού $ A $ ονομάζονται ίσες δηλαδή $ f=g $ όταν ισχύει $ f(x)=g(x) $ για κάθε $ x\in A $.\\\\
-\end{Orismosbox}
-\begin{Orismosbox}{Ίσες συναρτήσεις με διαφορετικά πεδία ορισμού}
-Δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A,B $ αντίστοιχα, ονομάζονται ίσες δηλαδή $ f=g $ όταν ισχύει $ f(x)=g(x) $ για κάθε $ x\in A\cap B $. Αν $ A\cap B=\varnothing $ τότε δεν είναι ίσες.\\\\
-\end{Orismosbox}
+\begin{Orismosbox}{Ίσες συναρτήσεις}
+Πότε δύο συναρτήσεις $f,g$ ονομάζονται ίσες;
+\end{Orismosbox}\apanthsh
+Δύο συναρτήσεις $ f,g $ λέγονται ίσες όταν
+\begin{itemize}
+\item έχουν το ίδιο πεδίο ορισμού $ A $ και
+\item ισχύει $ f(x)=g(x) $ για κάθε $ x\in A $.
+\end{itemize}
+Για να δηλώσουμε ότι δύο συναρτήσεις είναι ίσες γράφουμε $ f=g $.
 \begin{Orismosbox}{Πράξεις μεταξύ συναρτήσεων}
+Έστω συναρτήσεις $ f,g $ με πεδία ορισμού $ A,B $ αντίστοιχα. Πως ορίζονται οι συναρτήσεις $f+g, f-g,f\cdot g$ και $\frac{f}{g}$;
+\end{Orismosbox}
+\apanthsh
 Δίνονται δύο συναρτήσεις $ f,g $ με πεδία ορισμού $ A,B $ αντίστοιχα. 
 \begin{enumerate}
 \item Η συνάρτηση $ f+g $ του αθροίσματος των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ f(x)+g(x) $ και πεδίο ορισμού $ D_{f+g}=A\cap B $.
@@ -497,10 +502,13 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \item Η συνάρτηση $ f\cdot g $ του γινομένου των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ f(x)\cdot g(x) $ και πεδίο ορισμού $ D_{f\cdot g}=A\cap B $.
 \item Η συνάρτηση $ \frac{f}{g} $ του πηλίκου των δύο συναρτήσεων ορίζεται ως η συνάρτηση με τύπο $ \frac{f(x)}{g(x)} $ και πεδίο ορισμού $ D_{\frac{f}{g}}=\{x\in A\cap B:g(x)\neq 0\} $.
 \end{enumerate}
-Αν $ A\cap B=\varnothing $ τότε οι παραπάνω συναρτήσεις δεν ορίζονται.\\\\
-\end{Orismosbox}
+Αν $ A\cap B=\varnothing $ τότε οι παραπάνω συναρτήσεις δεν ορίζονται.
 \begin{Orismosbox}{Σύνθεση συναρτήσεων}
-Αν $f, g$ είναι δύο συναρτήσεις με πεδίο ορισμού $Α, Β$ αντιστοίχως, τότε ονομάζουμε \bmath{σύνθεση της $f$ με την $g$}, και τη συμβολίζουμε με $g\circ f$, τη συνάρτηση με τύπο
+Έστω δύο συναρτήσεις $f, g$ με πεδία ορισμού $A,B$ αντίστοιχα. Τι ονομάζουμε σύνθεση της
+$f$ με την $g$;
+\end{Orismosbox}
+\apanthsh
+Αν $f, g$ είναι δύο συναρτήσεις με πεδίο ορισμού $A,B$ αντιστοίχως, τότε ονομάζουμε \bmath{σύνθεση της $f$ με την $g$}, και τη συμβολίζουμε με $g\circ f$, τη συνάρτηση με τύπο
 \[ (g\circ f)(x)=g(f(x))\]
 Το πεδίο ορισμού της $g\circ f$ αποτελείται από όλα τα στοιχεία x του πεδίου ορισμού της $f$ για τα οποία το $f(x)$ ανήκει στο πεδίο ορισμού της g. Δηλαδή είναι το σύνολο
 \[ D_{g\circ f}=\{x\in\mathbb{R}| x\in A\ \textrm{ και }\ f(x)\in B\} \]
@@ -539,31 +547,39 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \end{center}
 Για να ορίζεται η συνάρτηση $ g\circ f $ θα πρέπει να ισχύει $ f(A)\cap B\neq\varnothing $.\\\\
 (Αντίστοιχα ορίζεται και η σύνθεση $ f\circ g $ με πεδίο ορισμού το $ D_{f\circ g}=\{x\in\mathbb{R}|x\in B\ \ \textrm{και}\ \ g(x)\in A\} $ και τύπο $ (f\circ g)(x)=f(g(x)) $.)\\\\
-\end{Orismosbox}
-\begin{Orismosbox}{Γνησίως μονότονη συνάρτηση}
-Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \Delta $ του πεδίου ορισμού της και έστω $ x_1,x_2 $ δύο στοιχεία του $ \Delta $. Η $ f $ θα ονομάζεται
-\begin{enumerate}
-\item γνησίως αύξουσα στο $\Delta $ αν για κάθε $ x_1,x_2\in\Delta $ με $ x_1<x_2 $ ισχύει $ f(x_1)<f(x_2) $:
+\begin{Orismosbox}{Γνησίως αύξουσα συνάρτηση}
+Πότε μία συνάρτηση $f$ ονομάζεται γνησίως αύξουσα σε ένα διάστημα του πεδίου ορισμού της;
+\end{Orismosbox}\apanthsh
+Έστω μια συνάρτηση $ f $ και $ \Delta $ ένα διάστημα του πεδίου ορισμού της. Η $ f $ θα ονομάζεται γνησίως αύξουσα στο $\Delta $ αν για κάθε $ x_1,x_2\in\Delta $ με $ x_1<x_2 $ ισχύει $ f(x_1)<f(x_2) $:
 \[ x_1<x_2\Rightarrow f(x_1)<f(x_2) \]
-\item γνησίως φθίνουσα στο $\Delta $ αν για κάθε $ x_1,x_2\in\Delta $ με $ x_1<x_2 $ ισχύει $ f(x_1)>f(x_2) $:
+\begin{Orismosbox}{Γνησίως φθίνουσα συνάρτηση}
+Πότε μία συνάρτηση $f$ ονομάζεται γνησίως φθίνουσα σε ένα διάστημα του πεδίου ορισμού της;
+\end{Orismosbox}\apanthsh
+Έστω μια συνάρτηση $ f $ και $ \Delta $ ένα διάστημα του πεδίου ορισμού της. Η $ f $ θα ονομάζεται γνησίως φθίνουσα στο $\Delta $ αν για κάθε $ x_1,x_2\in\Delta $ με $ x_1<x_2 $ ισχύει $ f(x_1)>f(x_2) $:
 \[ x_1<x_2\Rightarrow f(x_1)>f(x_2) \]
-\end{enumerate}
-Η $ f $ σε κάθε περίπτωση λέγεται \textbf{γνησίως μονότονη}.\\\\
+Η $ f $ σε κάθε περίπτωση λέγεται \textbf{γνησίως μονότονη}.
+\begin{Orismosbox}{Ολικό μέγιστο}
+Έστω μια συνάρτηση $f$ με πεδίο ορισμού $A$. Τι ονομάζεται τοπικό μέγιστο της $f$;
 \end{Orismosbox}
-\begin{Orismosbox}{Ολικά ακρότατα}
-Έστω μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ και έστω $ x_0\in A $. Η $ f $ θα λέμε ότι παρουσιάζει
-\begin{enumerate}
-\item ολικό μέγιστο στο $ x_0 $ το $ f(x_0) $ όταν 
+\apanthsh
+Μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ θα λέμε ότι παρουσιάζει ολικό μέγιστο στο $ x_0 $ το $ f(x_0) $ όταν 
 \[ f(x)\leq f(x_0)\ \ \textrm{για κάθε}\ \ x\in A \]
-\item ολικό ελάχιστο στο $ x_0 $ το $ f(x_0) $ όταν 
+\begin{Orismosbox}{Ολικό ελάχιστο}
+Έστω μια συνάρτηση $f$ με πεδίο ορισμού $A$. Τι ονομάζεται τοπικό ελάχιστο της $f$;
+\end{Orismosbox}
+\apanthsh
+Μια συνάρτηση $ f $ με πεδίο ορισμού ένα σύνολο $ A $ θα λέμε ότι παρουσιάζει ολικό ελάχιστο στο $ x_0 $ το $ f(x_0) $ όταν 
 \[ f(x)\geq f(x_0)\ \ \textrm{για κάθε}\ \ x\in A \]
 Το ολικό μέγιστο και ολικό ελάχιστο μιας συνάρτησης ονομάζονται \textbf{ολικά ακρότατα}. Το $ x_0 $ λέγεται \textbf{θέση} ακρότατου.
-\end{enumerate}
-\end{Orismosbox}
 \begin{Orismosbox}{Συνάρτηση $ 1-1 $}
-Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ ονομάζεται $ 1-1 $ εάν κάθε στοιχείο $ x\in A $ του πεδίου ορισμού αντιστοιχεί μέσω της συνάρτησης, σε μοναδική τιμή $ f(x) $ του συνόλου τιμών της. Για κάθε ζεύγος αριθμών $ x_1,x_2\in A $ του πεδίου ορισμού της $ f $ θα ισχύει \[ x_1\neq x_2\Rightarrow f(x_1)\neq f(x_2) \]
+Πότε μια συνάρτηση $f$ με πεδίο ορισμού $A$ ονομάζεται συνάρτηση $1-1$;
 \end{Orismosbox}
+\apanthsh
+Μια συνάρτηση $ f:A\rightarrow\mathbb{R} $ ονομάζεται $ 1-1 $ εάν για κάθε ζεύγος αριθμών $ x_1,x_2\in A $ του πεδίου ορισμού της $ f $ ισχύει \[ x_1\neq x_2\Rightarrow f(x_1)\neq f(x_2) \]
 \begin{Orismosbox}{Αντίστροφη συνάρτηση}
+Έστω $ f:A\to\mathbb{R} $ μια συνάρτηση μία $1-1$ συνάρτηση. Πώς ορίζεται η αντίστροφη συνάρτηση $f^{-1}$ της $f$;
+\end{Orismosbox}
+\apanthsh
 Έστω μια συνάρτηση $ f:A\to\mathbb{R} $ με σύνολο τιμών $ f(A) $. Η συνάρτηση με την οποία κάθε $ y\in f(A) $ αντιστοιχεί σε ένα \textbf{μοναδικό} $ x\in A $ για το οποίο ισχύει $ f(x)=y $, λέγεται αντίστροφη συνάρτηση της $ f $.
 \begin{center}
 \begin{tikzpicture}[scale=.6]
@@ -587,76 +603,133 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \item Το πεδίο ορισμού της $ f^{-1} $ είναι το σύνολο τιμών $ f(A) $ της $ f $, ενώ το σύνολο τιμών της $ f^{-1} $ είναι το πεδίο ορισμού $ A $ της $ f $.
 \item Ισχύει ότι $ x=f^{-1}(y) $ για κάθε $ y\in f(A) $.
 \end{itemize}
+\begin{Orismosbox}{Συνεχής συνάρτηση σε σημείο}
+Πότε μια συνάρτηση $f$ ονομάζεται συνεχής σε ένα σημείο $x_0$ του πεδίου ορισμού της;
 \end{Orismosbox}
-\begin{Orismosbox}{Συνέχεια συνάρτησης σε σημείο}
-Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν το όριο της στο $ x_0 $ είναι ίσο με την τιμή της στο σημείο αυτό. Δηλαδή \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+\apanthsh
+Μια συνάρτηση $ f $ ονομάζεται συνεχής σε ένα σημείο $ x_0 $ του πεδίου ορισμού της όταν  \[ \lim_{x\rightarrow x_0}{f(x)}=f(x_0) \]
+\begin{Orismosbox}{Συνεχής συνάρτηση}
+Πότε μια συνάρτηση $f$ ονομάζεται συνεχής;
 \end{Orismosbox}
-\begin{Orismosbox}{Συνέχεια συνάρτησης σε σύνολο}
+\apanthsh
+Μια συνάρτηση $ f $ θα λέμε ότι είναι \textbf{συνεχής}, εάν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.
+\begin{Orismosbox}{Συνεχής συνάρτηση σε διάστημα}
+Πότε μια συνάρτηση $f$ ονομάζεται συνεχής σε ένα 
+\begin{multicols}{2}
 \begin{enumerate}
-\item Μια συνάρτηση $ f $ θα λέμε ότι είναι \textbf{συνεχής} εάν είναι συνεχής σε κάθε σημείο του πεδίου ορισμού της.
+\item ανοικτό διάστημα $(a,\beta)$;
+\item κλειστό διάστημα $[a,\beta]$;
+\end{enumerate}
+\end{multicols}
+\end{Orismosbox}
+\apanthsh
+\vspace{-7mm}
+\begin{enumerate}
 \item Μια συνάρτηση $ f $ θα λέγεται συνεχής σε ένα \textbf{ανοιχτό} διάστημα $ (a,\beta) $ εάν είναι συνεχής σε κάθε σημείο του διαστήματος.
 \item Μια συνάρτηση $ f $ θα λέγεται συνεχής σε ένα \textbf{κλειστό} διάστημα $ [a,\beta] $ εάν είναι συνεχής σε κάθε σημείο του ανοιχτού διαστήματος και επιπλέον ισχύει
 \[ \lim_{x\to a^+}{f(x)}=f(a)\ \ \textrm{και}\ \ \lim_{x\to\beta^-}{f(x)}=f(\beta) \]
 \end{enumerate}
-\end{Orismosbox}
 \begin{Orismosbox}{Παράγωγος σε σημείο}
+Πότε μια συνάρτηση $f$ ονομάζεται παραγωγίσιμη σε ένα σημείο $x_0$ του πεδίου ορισμού της;
+\end{Orismosbox}
+\apanthsh
 Μια συνάρτηση $ f $ λέγεται \textbf{παραγωγίσιμη} σε ένα σημείο $ x_0 $ του πεδίου ορισμού της αν το όριο
 \[ \lim_{x\rightarrow x_0}{\frac{f(x)-f(x_0)}{x-x_0}} \]
-υπάρχει και είναι πραγματικός αριθμός. Το όριο αυτό ονομάζεται \textbf{παράγωγος} της $ f $ στο $ x_0 $ και συμβολίζεται $ f'(x_0) $.\\\\
-\end{Orismosbox}
+υπάρχει και είναι πραγματικός αριθμός. Το όριο αυτό ονομάζεται \textbf{παράγωγος} της $ f $ στο $ x_0 $ και συμβολίζεται $ f'(x_0) $.
 \begin{Orismosbox}{Παραγωγίσιμη συνάρτηση}
+Πότε μια συνάρτηση $f$, με πεδίο ορισμού $A$, λέγεται παραγωγίσιμη;
+\end{Orismosbox}
+\apanthsh
+Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη στο \textbf{πεδίο ορισμού} της ή απλά παραγωγίσιμη, όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in D_f $.
+\begin{Orismosbox}{Παραγωγίσιμη συνάρτηση σε διάστημα}
+Πότε μια συνάρτηση $f$ λέγεται παραγωγίσιμη σε ένα
+\begin{multicols}{2}
+\begin{enumerate}
+\item ανοικτό διάστημα $(a,\beta)$;
+\item κλειστό διάστημα $[a,\beta]$;
+\end{enumerate}
+\end{multicols}
+\end{Orismosbox}
+\apanthsh
 \vspace{-7mm}
 \begin{enumerate}
-\item Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη στο \textbf{πεδίο ορισμού} της ή απλά παραγωγίσιμη, όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in D_f $.
 \item Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη σε ένα \textbf{ανοικτό} διάστημα $ (a,\beta) $ του πεδίου ορισμού της όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in(a,\beta) $.
 \item Μια συνάρτηση $ f $ θα λέγεται παραγωγίσιμη σε ένα \textbf{κλειστό} διάστημα $ [a,\beta] $ του πεδίου ορισμού της όταν είναι παραγωγίσιμη σε κάθε σημείο $ x_0\in(a,\beta) $ και επιπλέον ισχύει
 \[ \lim_{x\to a^+}{\frac{f(x)-f(a)}{x-a}}\in\mathbb{R}\ \ \textrm{ και }\ \ \lim_{x\to \beta^-}{\frac{f(x)-f(\beta)}{x-\beta}}\in\mathbb{R} \]
 \end{enumerate}
-\end{Orismosbox}
 \begin{Orismosbox}{Πρώτη παράγωγος}
-Έστω μια συνάρτηση $ f:Α\to\mathbb{R} $ και έστω $ A_1 $ το σύνολο των σημείων $ x\in A $ για τα οποία η $ f $ είναι παραγωγίσιμη. Η συνάρτηση με την οποία κάθε $ x\in A_1 $ αντιστοιχεί στο $ f'(x) $ ονομάζεται \textbf{πρώτη παράγωγος} της $ f $ η απλά \textbf{παράγωγος} της $ f $. Συμβολίζεται με $ f' $.
+Έστω μια συνάρτηση $f$ ορισμένη σε ένα σύνολο $A$. Τι ονομάζεται πρώτη παράγωγος της $f$;
 \end{Orismosbox}
+\apanthsh
+Έστω μια συνάρτηση $ f:Α\to\mathbb{R} $ και έστω $ A_1 $ το σύνολο των σημείων $ x\in A $ για τα οποία η $ f $ είναι παραγωγίσιμη. Η συνάρτηση με την οποία κάθε $ x\in A_1 $ αντιστοιχεί στο $ f'(x) $ ονομάζεται \textbf{πρώτη παράγωγος} της $ f $ η απλά \textbf{παράγωγος} της $ f $. Συμβολίζεται με $ f' $.
 \begin{Orismosbox}{Δεύτερη παράγωγος}
+Έστω μια συνάρτηση $f$ με πεδίο ορισμού $A$. Τι ονομάζεται δεύτερη παράγωγος της $f$. Πως ορίζεται η $\nu-$οστή παράγωγος της $f$;
+\end{Orismosbox}
+\apanthsh
 Έστω $ A_1 $  το σύνολο των σημείων για τα οποία η $ f $ είναι παραγωγίσιμη. Αν υποθέσουμε ότι το $ A_1 $ είναι διάστημα ή ένωση διαστημάτων τότε η παράγωγος της $ f' $, αν υπάρχει, λέγεται δεύτερη παράγωγος της $ f $ και συμβολίζεται με $ f'' $. Επαγωγικά ορίζεται και η $ \nu- $οστή παράγωγος της $ f $ και συμβολίζεται με $ f^{(\nu)} $. Δηλαδή
 \[ f^{(\nu)}=\left[f^{(\nu-1)}\right]' \]
-\end{Orismosbox}
 \begin{Orismosbox}{Ρυθμός μεταβολής}
-Αν δύο μεταβλητά μεγέθη  $ x , y $ συνδέονται με τη σχέση $ y = f(x) $ , όταν  $ f  $ είναι μια συνάρτηση παραγωγίσιμη στο $ x_0 $, τότε ονομάζουμε \textbf{ρυθμό μεταβολής} του $ y $ ως προς το $ x $ στο σημείο  $ x_0 $ την παράγωγο $ f '(x_0) $.
+Τι ονομάζουμε ρυθμό μεταβολής ενός ποσού $ y=f(x) $ ως προς ένα ποσό $ x $ σε ένα σημείο $ x_0 $;
 \end{Orismosbox}
+\apanthsh
+Αν δύο μεταβλητά μεγέθη  $ x , y $ συνδέονται με τη σχέση $ y = f(x) $ , όταν  $ f  $ είναι μια συνάρτηση παραγωγίσιμη στο $ x_0 $, τότε ονομάζουμε \textbf{ρυθμό μεταβολής} του $ y $ ως προς το $ x $ στο σημείο  $ x_0 $ την παράγωγο $ f '(x_0) $.
 \begin{Orismosbox}{Τοπικό μέγιστο}
+Πότε μια συνάρτηση $f$ με πεδίο ορισμού $A$ παρουσιάζει τοπικό μέγιστο σε ένα σημείο $x_0\in A$;
+\end{Orismosbox}
+\apanthsh
 Μια συνάρτηση $ f $, με πεδίο ορισμού $ A $, θα λέμε ότι παρουσιάζει τοπικό μέγιστο στο $ x_0\in A $ όταν υπάρχει $ \delta>0 $ τέτοιο ώστε
 \[ f(x)\leq f(x_0), \ \ \textrm{για κάθε }x\in A\cap(x_0-\delta,x_0+\delta) \]
 Το $ x_0 $ λέγεται \textbf{θέση} η σημείο τοπικού μέγιστου, ενώ το $ f(x_0) $ τοπικό μέγιστο της $ f $.
-\end{Orismosbox}
 \begin{Orismosbox}{Τοπικό ελάχιστο}
+Πότε μια συνάρτηση $f$ με πεδίο ορισμού $A$ παρουσιάζει τοπικό ελάχιστο σε ένα σημείο $x_0\in A$;
+\end{Orismosbox}
+\apanthsh
 Μια συνάρτηση $ f $, με πεδίο ορισμού $ A $, θα λέμε ότι παρουσιάζει τοπικό ελάχιστο στο $ x_0\in A $ όταν υπάρχει $ \delta>0 $ τέτοιο ώστε
 \[ f(x)\geq f(x_0), \ \ \textrm{για κάθε }x\in A\cap(x_0-\delta,x_0+\delta) \]
 Το $ x_0 $ λέγεται \textbf{θέση} η σημείο τοπικού ελάχιστου, ενώ το $ f(x_0) $ τοπικό ελάχιστο της $ f $.
-\end{Orismosbox}
 \begin{Orismosbox}{Τοπικά ακρότατα}
+Τι ονομάζουμε τοπικά ακρότατα μιας συνάρτησης $f$;
+\end{Orismosbox}
+\apanthsh
 Τα τοπικά ελάχιστα και τα τοπικά μέγιστα της $ f $ ονομάζονται τοπικά ακρότατα της $ f $.
-\end{Orismosbox}
 \begin{Orismosbox}{Κυρτή συνάρτηση}
+Έστω μια συνάρτηση $f$ συνεχής σε ένα διάστημα $\Delta$ και παραγωγίσιμη στο εσωτερικό του
+$\Delta$ . Πότε λέμε οτι η συνάρτηση $f$ στρέφει τα κοίλα προς τα πάνω ή είναι κυρτή στο $\Delta$;
+\end{Orismosbox}
+\apanthsh
 Μια συνάρτηση $ f $ λέμε ότι στρέφει τα κοίλα προς τα άνω ή είναι κυρτή στο $ \Delta $, αν η $ f' $ είναι γνησίως αύξουσα στο $ \Delta $.
-\end{Orismosbox}
 \begin{Orismosbox}{Κοίλη συνάρτηση}
-Μια συνάρτηση $ f $ λέμε ότι στρέφει τα κοίλα προς τα κάτω ή είναι κοίλη στο $ \Delta $, αν η $ f' $ είναι γνησίως φθίνουσα στο $ \Delta $.
+Έστω μια συνάρτηση $f$ συνεχής σε ένα διάστημα $\Delta$ και παραγωγίσιμη στο εσωτερικό του
+$\Delta$ . Πότε λέμε οτι η συνάρτηση $f$ στρέφει τα κοίλα προς τα κάτω ή είναι κοίλη στο $\Delta$;
 \end{Orismosbox}
+\apanthsh
+Μια συνάρτηση $ f $ λέμε ότι στρέφει τα κοίλα προς τα κάτω ή είναι κοίλη στο $ \Delta $, αν η $ f' $ είναι γνησίως φθίνουσα στο $ \Delta $.
 \begin{Orismosbox}{Σημείο καμπής}
+Έστω μια συνάρτηση $f$ παραγωγίσιμη σ΄ ένα διάστημα $(a,\beta)$, με εξαίρεση ίσως ένα σημείο
+του $x_0$. Πότε το σημείο $A(x_0,f(x_0))$ λέγεται σημείο καμπής της γραφικής παράστασης της
+$f$;
+\end{Orismosbox}
+\apanthsh
 Έστω μια συνάρτηση $ f $ παραγωγίσιμη σε ένα διάστημα $ (a,\beta) $, με εξαίρεση ίσως ένα σημείο $ x_0 $. Αν:
 \begin{itemize}[itemsep=0mm]
 \item η $ f $ είναι κυρτή στο $ (a,x_0) $ και κοίλη στο $ (x_0,\beta) $ η αντιστρόφως και
 \item η $ C_f $ έχει εφαπτομένη στο $ A(x_0,f(x_0)) $
 \end{itemize}
 τότε το σημείο $ A(x_0,f(x_0)) $ λέγεται \textbf{σημείο καμπής} της $ C_f $.
-\end{Orismosbox}
 \begin{Orismosbox}{Κατακόρυφη ασύμπτωτη}
+Πότε η ευθεία $x=x_0$ ονομάζεται κατακόρυφη ασύμπτωτη της γραφικής παράστασης μιας συνάρτησης $f$;
+\end{Orismosbox}
+\apanthsh
 Αν ένα τουλάχιστον από τα όρια $ \lim\limits_{x\to x_0^-}{f(x)},\lim\limits_{x\to x_0^+}{f(x)} $ ισούται με $ \pm\infty $ τότε η ευθεία $ x=x_0 $ λέγεται \textbf{κατακόρυφη ασύμπτωτη} της $ C_f $.
-\end{Orismosbox}
 \begin{Orismosbox}{Οριζόντια ασύμπτωτη}
-Αν $ \lim\limits_{x\to +\infty}{f(x)}=l $ (αντιστοίχως $ \lim\limits_{x\to -\infty}{f(x)}=l $) τότε η ευθεία $ y=l $ λέγεται \textbf{οριζόντια ασύμπτωτη} της $ C_f $ στο $ +\infty $ (αντίστοιχα στο $ -\infty $).
+Πότε η ευθεία $y=y_0$ ονομάζεται οριζόντια ασύμπτωτη της γραφικής παράστασης μιας συνάρτησης $f$;
 \end{Orismosbox}
+\apanthsh
+Αν $ \lim\limits_{x\to +\infty}{f(x)}=l $ (αντιστοίχως $ \lim\limits_{x\to -\infty}{f(x)}=l $) τότε η ευθεία $ y=l $ λέγεται \textbf{οριζόντια ασύμπτωτη} της $ C_f $ στο $ +\infty $ (αντίστοιχα στο $ -\infty $).
 \begin{Orismosbox}{Πλάγια ασύμπτωτη}
+Πότε η ευθεία $y=\lambda x+\beta$ ονομάζεται ασύμπτωτη της γραφικής παράστασης μιας συνάρτησης $f$;
+\end{Orismosbox}
+\apanthsh
 Η ευθεία $ y=\lambda x+\beta $ λέγεται ασύμπτωτη της $ C_f $ στο $ +\infty $ (αντιστοίχως στο $ -\infty $) αν και μόνο αν
 \[ \lim\limits_{x\to +\infty}{[f(x)-(\lambda x+\beta)]=0} \]
 αντίστοιχα στο $ -\infty $ αν 
@@ -665,13 +738,15 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \item Αν $ \lambda=0 $ η ασύμπτωτη είναι οριζόντια.
 \item Αν $ \lambda\neq 0 $ η ασύμπτωτη είναι πλάγια.
 \end{itemize}
-\end{Orismosbox}
 \begin{Orismosbox}{Αρχική συνάρτηση}
+Έστω μια συνεχής συνάρτηση $f$ ορισμένη σε ένα διάστημα $\Delta$. Τι ονομάζεται αρχική συνάρτηση ή παράγουσα της $f$ στο $\Delta$;
+\end{Orismosbox}
+\apanthsh
 Αρχική συνάρτηση ή παράγουσα μιας συνάρτησης $f$ σε ένα διάστημα $\varDelta$ του πεδίου ορισμού της, ονομάζεται κάθε παραγωγίσιμη συνάρτηση $F$ για την οποία ισχύει
 \[ F'(x)=f(x)\ \ ,\ \ \text{για κάθε }x\in\varDelta \]
-
 \newpage
 \section{Αποδείξεις - Διατυπώσεις Θεωρημάτων}
+
 %# Database File : Analysh-Th-Grafikes_Par_Cf_Cf-1
 %@ Database source: Mathematics
 \begin{Thewrhmabox}[Συμμετρία $ C_f $ και $ C_{f^{-1}} $]{9cm}
@@ -710,13 +785,13 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \bmath{Να διατυπώσετε το θεώρημα Bolzano και να δώσετε τη γεωμετρική ερμηνεία του.}
 \end{Thewrhmabox}
 \textbf{ΑΠΑΝΤΗΣΗ}
-\begin{alist}
+\begin{enumerate}
 \item \textbf{Θεώρημα}\\
 Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
-\begin{alist}
+\begin{itemize}
 \item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
 \item $f(a)\cdot f(\beta)<0$
-\end{alist}
+\end{itemize}
 τότε θα υπάρχει τουλάχιστον ένας αριθμός $ x_0\in(a,\beta) $ έτσι ώστε να ισχύει $ f(x_0)=0 $.
 \item \textbf{Γεωμετρική ερμηνεία}\\
 \wrapr{-5mm}{7}{5cm}{-10mm}{\begin{tikzpicture}[scale=.7,domain=-.6:3.32,y=.5cm]
@@ -736,23 +811,23 @@ colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\text
 \tkzText(0.5,-2.4){{\footnotesize $ f(a)<0 $}}
 \end{tikzpicture}}{
 Για μια συνεχή συνάρτηση $f$ στο διάστημα $ [a,\beta] $ η συνθήκη $ f(a)\cdot f(\beta)<0 $ σημαίνει ότι οι τιμές αυτές θα είναι ετερόσημες οπότε τα σημεία $ A(a,f(a)) $ και $ B(\beta,f(\beta)) $ θα βρίσκονται εκατέρωθεν του άξονα $ x'x $. Αυτό σημαίνει ότι η γραφική παράσταση $C_f$, λόγω της συνέχειας, θα τέμνει τον άξονα σε τουλάχιστον ένα σημείο με τετμημένη $x_0\in(a,\beta)$.}
-\end{alist}
+\end{enumerate}
 \begin{Thewrhmabox}[Θεώρημα ενδιάμεσων τιμών - Σελ. 194]{7cm}
 \textbf{Να διατυπώσετε και να αποδείξετε το θεώρημα ενδιάμεσων τιμών.}
 \end{Thewrhmabox}
 \textbf{ΘΕΩΡΗΜΑ}\\
 Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
-\begin{alist}
+\begin{itemize}
 \item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
 \item $f(a)\neq f(\beta)$
-\end{alist}
+\end{itemize}
 τότε υπάρχει τουλάχιστον ένα $ x_0\in(a,\beta) $ ώστε για κάθε αριθμό $ \eta $ μεταξύ των $ f(a),f(\beta) $ να ισχύει $ f(x_0)=\eta $.\\\\
 \textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
 Θεωρούμε τη συνάρτηση $ g(x)=f(x)-\eta $ με $ x\in[a,\beta] $ και $ \eta $ είναι ένας πραγματικός αριθμός τέτοιος ώστε να ισχύει $ f(a)<\eta<f(\beta) $\footnote{Μπορούμε ισοδύναμα να θεωρήσουμε $ f(\beta)<\eta<f(a) $}. Γι αυτήν θα ισχύει ότι:
-\begin{alist}
+\begin{itemize}
 \item είναι συνεχής στο διάστημα $ [a,\beta] $ και επιπλέον
 \item $ g(a)=f(a)-\eta<0 $ και $ g(\beta)=f(\beta)-\eta>0 $ άρα παίρνουμε $ g(a)\cdot g(\beta)<0 $.
-\end{alist}
+\end{itemize}
 Σύμφωνα λοιπόν με το θεώρημα Bolzano θα υπάρχει τουλάχιστον ένα $ x_0\in(a,\beta) $ ώστε να ισχύει \[ g(x_0)=0\Rightarrow f(x_0)-\eta=0\Rightarrow f(x_0)=\eta \]
 \begin{Thewrhmabox}[Παραγωγίσιμη \bmath{$ \Rightarrow $} Συνεχής - Σελ. 217]{7cm}
 \textbf{Να αποδείξετε ότι αν μια συνάρτηση f είναι παραγωγίσιμη σ’ ένα σημείο \bmath{$ x_0 $} τότε είναι και συνεχής στο σημείο αυτό. }
@@ -899,14 +974,14 @@ f'(x)&=(\syf{x})'=\left( \dfrac{\syn{x}}{\hm{x}}\right)'=\dfrac{(\syn{x})'\cdot\
 \textbf{Να διατυπώσετε και να δώσετε τη γεωμετρική ερμηνεία του θεωρήματος Rolle.}
 \end{Thewrhmabox}
 \textbf{ΑΠΑΝΤΗΣΗ}
-\begin{alist}
+\begin{enumerate}
 \item \textbf{Θεώρημα}\\
 Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $. Αν η $ f $ είναι
-\begin{alist}
+\begin{itemize}
 \item συνεχής στο διάστημα $ [a,\beta] $,
 \item παραγωγίσιμη στο διάστημα $ (a,\beta) $ και ισχύει
 \item $ f(a)=f(\beta) $
-\end{alist}
+\end{itemize}
 τότε υπάρχει τουλάχιστον ένα $ \xi\in(a,\beta) $ ώστε $ f'(\xi)=0 $.
 \item \textbf{Γεωμετρική ερμηνεία}\\
 \wrapr{-5mm}{5}{6.7cm}{-27mm}{\begin{tikzpicture}
@@ -931,12 +1006,12 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \node at(0.2,0.2){$O$};
 \end{tikzpicture}}{
 Αν εφαρμόζεται το θεώρημα Rolle στο $ [a,\beta] $ τότε υπάρχει τουλάχιστον ένας αριθμός $ \xi\in(a,\beta) $ ώστε η εφαπτόμενη ευθεία της $ C_f $ στο σημείο $ Α\left( \xi,f(\xi)\right) $ να είναι παράλληλη με τον άξονα $ x'x $.}
-\end{alist}\mbox{}\\
+\end{enumerate}\mbox{}\\
 \begin{Thewrhmabox}[Θεώρημα μέσης τιμής - Σελ. 246-247]{7cm}
 \textbf{Να διατυπώσετε και να δώσετε τη γεωμετρική ερμηνεία του Θ.Μ.Τ.}
 \end{Thewrhmabox}
 \textbf{ΑΠΑΝΤΗΣΗ}
-\begin{alist}
+\begin{enumerate}
 \wrapr{-12mm}{18}{5.5cm}{-4mm}{\begin{tikzpicture}
 \begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=4.3,
 ymin=-.5,ymax=3.5,ticks=none,xlabel={\footnotesize $ x $},
@@ -961,21 +1036,21 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \end{tikzpicture}}{
 \item \textbf{Θεώρημα}\\
 Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $. Αν αυτή είναι
-\begin{alist}
+\begin{itemize}
 \item συνεχής στο διάστημα $ [a,\beta] $ και
 \item παραγωγίσιμη στο διάστημα $ (a,\beta) $
-\end{alist}
+\end{itemize}
 τότε υπάρχει ένα τουλάχιστον $ \xi\in(a,\beta) $ έτσι ώστε}
 \[ f'(\xi)=\dfrac{f(\beta)-f(a)}{\beta-a} \]
 \item \textbf{Γεωμετρική ερμηνεία}\\
 Αν για τη συνάρτηση $ f $ εφαρμόζεται το Θ.Μ.Τ. στο διάστημα $ [a,\beta] $, τότε η εφαπτόμενη ευθεία στο σημείο $ M(\xi,f(\xi)) $ είναι παράλληλη με το ευθύγραμμο τμήμα $ AB $ που ενώνει τα σημεία $ A(a,f(a)) $ και $ B(\beta,f(\beta)) $ στα άκρα του διαστήματος.
-\end{alist}
+\end{enumerate}
 \begin{Thewrhmabox}[Συνέπειες του Θ.Μ.Τ. 1 - Σελ. 251]{7.5cm}
 \bmath{Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $. Να αποδείξετε ότι αν
-\begin{alist}
+\begin{itemize}
 \item η $ f $ είναι συνεχής στο $ \varDelta $ και ισχύει
 \item $ f'(x)=0 $ σε κάθε \emph{εσωτερικό} σημείο του διαστήματος
-\end{alist}
+\end{itemize}
 τότε η $ f $ είναι σταθερή σε όλο το διάστημα $ \varDelta $.}
 \end{Thewrhmabox}
 \textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
@@ -983,10 +1058,10 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \begin{alist}
 \item Αν $ x_1=x_2 $ τότε $ f(x_1)=f(x_2) $.
 \item Αν $ x_2\neq x_2 $ θεωρούμε ότι είναι $ x_1<x_2 $ και εφαρμόζοντας το Θ.Μ.Τ. στο διάστημα $ [x_1,x_2] $ έχουμε ότι
-\begin{alist}
+\begin{itemize}
 \item Η $ f $ είναι συνεχής στο διάστημα $ [x_1,x_2] $ και
 \item παραγωγίσιμη στο διάστημα $ (x_1,x_2) $.
-\end{alist}
+\end{itemize}
 Έτσι θα υπάρχει τουλάχιστον ένα $ \xi\in(x_1,x_2) $ ώστε να ισχύει:
 \[ f'(\xi)=\dfrac{f(x_2)-f(x_1)}{x_2-x_1} \]
 Γνωρίζουμε όμως από την υπόθεση ότι για κάθε εσωτερικό σημείο $ x\in\varDelta $ ισχύει $ f'(x)=0 $ οπότε και $ f'(\xi)=0 $. Άρα παίρνουμε ότι
@@ -995,10 +1070,10 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 Ομοίως και για $ x_1>x_2 $ καταλήγουμε στο ίδιο συμπέρασμα οπότε σε κάθε περίπτωση η $ f $ είναι σταθερή σε όλο το διάστημα $ \varDelta $.
 \begin{Thewrhmabox}[Συνέπειες του Θ.Μ.Τ. 2 - Σελ. 251]{7.5cm}
 \bmath{Δίνονται δύο συναρτήσεις $ f,g $ ορισμένες σε ένα διάστημα $ \varDelta $. Να αποδείξετε ότι αν
-\begin{alist}
+\begin{itemize}
 \item οι συναρτήσεις $ f,g $ είναι συνεχείς στο διάστημα $ \varDelta $ και
 \item $ f'(x)=g'(x) $ σε κάθε \emph{εσωτερικό} σημείο του $ \varDelta $
-\end{alist}
+\end{itemize}
 τότε υπάρχει σταθερά $ c $ τέτοια ώστε να ισχύει $ f(x)=g(x)+c $ για κάθε $ x\in\varDelta $.}
 \end{Thewrhmabox}
 \textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
@@ -1027,11 +1102,11 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \begin{Thewrhmabox}[Θεώρημα Fermat - Σελ. 260]{8.5cm}
 \bmath{Να αποδείξετε το θεώρημα του Fermat:\\
 Έστω μια συνάρτηση $ f $ ορισμένη σε ένα διάστημα $ \varDelta $. Αν
-\begin{alist}
+\begin{itemize}
 \item $ x_0 $ είναι ένα \textit{εσωτερικό} σημείο του $ \varDelta $
 \item η $ f $ παρουσιάζει τοπικό ακρότατο στο $ x_0 $ και
 \item είναι παραγωγίσιμη στο $ x_0 $ τότε
-\end{alist}
+\end{itemize}
 \[ f'(x_0)=0 \]}
 \end{Thewrhmabox}
 \textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
@@ -1061,9 +1136,9 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}
 \begin{alist}
 \item Γνωρίζουμε ότι $ f'(x)>0 $ για κάθε $ x\in(a,x_0] $. Σύμφωνα με το κριτήριο μονοτονίας η $ f $ θα είναι γνησίως αύξουσα στο $ (a,x_0] $. Έτσι για κάθε $ x\in(a,x_0] $ θα ισχύει
-\[ x\leq x_0\xRightarrow{f\Auxousa}f(x)\leq f(x_0) \]
+\[ x\leq x_0\xRightarrow{f\nearrow}f(x)\leq f(x_0) \]
 Επίσης από το γεγονός ότι $ f'(x)<0 $ για κάθε $ x\in[x_0,\beta) $ παίρνουμε ότι $ f $ θα είναι γνησίως φθίνουσα στο $ [x_0,\beta) $. Άρα προκύπτει
-\[ x\geq x_0\xRightarrow{f\Fthinousa}f(x)\leq f(x_0) \]
+\[ x\geq x_0\xRightarrow{f\searrow}f(x)\leq f(x_0) \]
 Έτσι σε κάθε περίπτωση για κάθε $ x\in(a,\beta) $ παίρνουμε ότι $ f(x)\leq f(x_0) $ άρα η $ f $ παρουσιάζει τοπικό μέγιστο στο $ x_0 $.
 \item Εργαζόμαστε όπως προηγουμένως.
 \item Θεωρούμε ότι ισχύει $ f'(x)>0 $ για κάθε $ x\in(a,x_0)\cup(x_0,\beta) $. Έτσι η συνάρτηση $ f $ θα είναι αύξουσα σε καθένα από τα διαστήματα $ (a,x_0] $ και $ [x_0,\beta) $ οπότε 
@@ -1103,10 +1178,10 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \[ G(\beta)=F(\beta)+c\Rightarrow G(\beta)=\int_{a}^{\beta}{f(x)\d x}+G(a)\Rightarrow \int_{a}^{\beta}{f(x)\d x}=G(\beta)-G(a) \]
 \begin{Thewrhmabox}[Εμβαδόν χωρίου μεταξύ γραφικών παραστάσεων 1 - Σελ. 343]{3cm}
 \bmath{Δίνονται δύο συναρτήσεις $ f,g $ ορισμένες σε ένα διάστημα $ [a,\beta] $ τέτοιες ώστε
-\begin{alist}
+\begin{itemize}
 \item $ f(x)\geq g(x) $ για κάθε $ x\in[a,\beta] $ και
 \item $ f,g $ μη αρνητικές στο $ [a,\beta] $.
-\end{alist}
+\end{itemize}
 Να αποδείξετε ότι το εμβαδόν του χωρίου $ \varOmega $ μεταξύ των γραφικών παραστάσεων $ C_f,C_g $ και των ευθειών $ x=a,x=\beta $ δίνεται από τον τύπο
 \[ E(\varOmega)=\int_{a}^{\beta}{(f(x)-g(x))\d x} \]}
 \end{Thewrhmabox}
@@ -1179,6 +1254,29 @@ E(\varOmega)&=E(\varOmega_1)+E(\varOmega_2)+E(\varOmega_3)=\\
 &=\int_{a}^{\gamma}{|f(x)-g(x)|\d x}+\int_{\gamma}^{\delta}{|f(x)-g(x)|\d x}+\int_{\delta}^{\beta}{|f(x)-g(x)|\d x}=\int_{a}^{\beta}{|f(x)-g(x)|\d x}
 \end{align*}}
 \newpage
+\section{Ιδιότητες}
+\idiothta{Όρια}
+\begin{enumerate}
+\item  $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\pm g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\pm\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\pm l_2 $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left( k\cdot f(x)\right) }=k\cdot\displaystyle{\lim_{x\rightarrow x_0}f(x)}=k\cdot l_1\;\;,\;\; k\in\mathbb{R} $ 
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\cdot g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\cdot\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\cdot l_2 $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\left(\dfrac{ f(x)} {g(x)}\right)=\dfrac{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}{\displaystyle{\lim_{x\rightarrow x_0}g(x)}}}=\frac{l_1}{l_2}\;\;,\;\;l_2\neq0 $
+\item $ \displaystyle{\lim_{x\rightarrow x_0}|f(x)|}=\left| \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right|=|l_1|  $ 
+\item $ \displaystyle{\lim_{x\rightarrow x_0}\!\!\sqrt[\kappa]{f(x)}}=\!\sqrt[\kappa]{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}\;\;=\!\!\sqrt[\kappa]{l_1}\;\;,\;\;l_1\geq0 $ 
+\item $ \displaystyle{\lim_{x\rightarrow x_0}f^\nu(x)}=\left( \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right)^\nu=l_1^\nu  $
+\end{enumerate}
+
+
+\newpage
+\section{Προτάσεις χωρίς απόδειξη}
+\newpage
+\section{Προτάσεις με απόδειξη}
+\newpage
+\section{Αντιπαραδείγματα}
+\newpage
+\section{Ερωτήσεις Σωστό - Λάθος}
+\newpage
+\section{Τυπολόγιο - Πίνακες}
 \end{document}
 
 
