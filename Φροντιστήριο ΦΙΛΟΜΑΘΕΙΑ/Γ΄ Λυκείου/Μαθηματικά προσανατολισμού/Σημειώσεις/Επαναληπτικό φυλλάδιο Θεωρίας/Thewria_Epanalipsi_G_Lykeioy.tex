@@ -27,7 +27,11 @@
 \def\xrwma{red!80!black}
 \definecolor{steelblue}{cmyk}{.7,.278,0,.294}
 \definecolor{doc}{cmyk}{1,0.455,0,0.569}
-\definecolor{orange}{HTML}{ff7300}
+\definecolor{check}{HTML}{8bdd28}
+\definecolor{error}{HTML}{ee1313}
+
+\newcommand{\true}{\textcolor{check}{\faCheck}{\kerkissans{\ \ Αληθές}}}
+\newcommand{\false}{\textcolor{error}{\faTimes}{\kerkissans{\ \ Ψευδές}}}
 
 \newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
 \DeclareMathSizes{6}{6}{3.8}{2.7}
@@ -208,28 +212,6 @@ x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
 }
 \makeatother
 
-%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
-\newcounter{parathrhsh}[section]
-\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
-\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση\hspace{2mm}\theparathrhsh}}}}{}
-
-\newcommand{\tss}[1]{\textsuperscript{#1}}
-\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
-
-%----------- ΠΑΡΑΤΗΡΗΣΗ------------------
-\newenvironment{parat}[1]
-{\begin{tcolorbox}[toptitle=1mm,
-bottomtitle=1mm,title=\Parathrhsh,
-breakable,
-enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
-{black!50!white},
-colback=red!5!white,
-boxrule=0.1pt,
-colframe=red!80!black,
-fonttitle=\bfseries,width=#1]}
-{\end{tcolorbox}}
-%-----------------------------------------
-
 %----------- ΑΣΚΗΣΗ ------------------
 \newcommand\thema{A}
 
@@ -260,24 +242,6 @@ colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,c
 \newcommand{\lysh}{\textcolor{\xrwma}{\kerkissans{\noindent\faCheck\ \textbf{ΛΥΣΗ}}}\\}
 %------------------------------------
 
-%-------- ΠΡΟΣΟΧΗ -----------------
-\newcounter{prosoxi}[section]
-\renewcommand{\theprosoxi}{\arabic{prosoxi}}  
-\newcommand{\Prosoxi}[1]{\refstepcounter{prosoxi}{\faExclamationTriangle\ \ \ \textbf{Προσοχή\hspace{2mm}\thesection.\theprosoxi}}}{}
-
-%----------- ΠΡΟΣΟΧΗ------------------
-\newenvironment{prosoxi}[1]
-{\begin{tcolorbox}[title=\Prosoxi,
-breakable,
-enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
-{black!50!white},
-colback=red!5!white,
-boxrule=0.1pt,
-colframe=red!80!black,
-fonttitle=\bfseries,width=#1]}
-{\end{tcolorbox}}
-%-----------------------------------------
-
 \DeclareTblrTemplate{caption}{nocaptemplate}{}
 \DeclareTblrTemplate{capcont}{nocaptemplate}{}
 \DeclareTblrTemplate{contfoot}{nocaptemplate}{}
@@ -297,7 +261,7 @@ rowspec={t{7mm}},columns = {c},
   row{odd} = {bg=red9,fg=black,ht=8mm},
  row{even} = {bg=red7,fg=black,ht=8mm},
 hlines={white},vlines={white},
-row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+row{1} = {bg=red4, fg=white, font=\large\kerkissans},rowhead = 1,
   hline{2} = {.7mm}, % midrule  
 }
 
@@ -332,7 +296,7 @@ boxrule=0.7pt,titlerule=-.2pt,
 width=\linewidth,
 title style={color=white},
 overlay unbroken and first={
-\path[left color=\xrwma,right color=white,draw=black]
+\path[left color=\xrwma,right color=\xrwma!70!white]
 ([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
 },
 fonttitle=\bfseries,
@@ -344,27 +308,6 @@ colback=white,title={\kerkissans{\faStop\ \ \large Θεώρημα \theThewrhmabo
 {\end{tcolorbox}}
 %------------------------------------------
 
-%---------- Θεώρημα --------------
-%\newcounter{Orismosbox}[section]
-%\renewcommand{\theOrismosbox}{\arabic{Orismosbox}}
-%\newenvironment{Orismosbox}[2][\linewidth]
-%{\refstepcounter{Orismosbox}
-%\begin{tcolorbox}[breakable,
-%enhanced standard,
-%boxrule=0.7pt,titlerule=-.2pt,
-%width=\linewidth,
-%title style={color=white},
-%overlay unbroken and first={
-%\path[left color=\xrwma,right color=white,draw=black]
-%([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
-%},
-%fonttitle=\bfseries,
-%before=\par\medskip\noindent,
-%after=\par\medskip,
-%toptitle=3pt,
-%top=11pt,topsep at break=-5pt,
-%colback=white,title={\kerkissans{\large Ορισμός \theOrismosbox}} : {\textcolor{black}{\kerkissans{#1}}}]}
-%{\end{tcolorbox}}
 \newcounter{orismos}[section]
 \renewcommand{\theorismos}{\arabic{orismos}}
 \newcommand{\orism}{\refstepcounter{orismos}{\bf\kerkissans{\textcolor{\xrwma}{\faBook\ \ \large{Ορισμός}\hspace{2mm}\theorismos}}}\hspace{1mm}}{}
@@ -392,9 +335,53 @@ coltitle=black]}
 %------------------------------------------
 \newcommand{\apanthsh}{{\kerkissans{\textbf{ΑΠΑΝΤΗΣΗ}}}\\}
 
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
 \newcounter{idiothta}[section]
 \renewcommand{\theidiothta}{\arabic{idiothta}}
-\newcommand{\idiothta}[1]{\refstepcounter{idiothta}{\bf\kerkissans{\textcolor{\xrwma}{\faPlay\ \ \ \large{Ιδιότητα}\hspace{2mm}\theidiothta\ :\ }}}\hspace{1mm}{\bf\kerkissans{#1}}}{}
+\newcommand{\idiothta}[1]{\refstepcounter{idiothta}{\bf\kerkissans{\textcolor{\xrwma}{\faPlay\ \ \ \large{Ιδιότητα}\hspace{2mm}\theidiothta\ :\ }}}\hspace{1mm}{\bf\kerkissans{#1}}\\}{}
+
+\newcounter{protashxa}[section]
+\renewcommand{\theprotashxa}{\arabic{protashxa}}
+\newcommand{\protashxa}[1]{\refstepcounter{protashxa}{\colorbox{red!80!black}{%
+\raisebox{0pt}[10pt][3pt]{\makebox[70pt]{% height, width
+\color{white}{\faEdit\ \kerkissans{Πρόταση \theprotashxa}}}}%
+}\ \ \kerkissans{#1}\\[2mm]}}
+
+\newcounter{antiparadeigma}[section]
+\renewcommand{\theantiparadeigma}{\arabic{antiparadeigma}}
+\newcommand{\antiparad}{\refstepcounter{antiparadeigma}{\bf\kerkissans{\textcolor{white}{\faCheckSquare\ \ \large{Αντιπαράδειγμα}\hspace{2mm}\theantiparadeigma}}}\hspace{1mm}}{}
+
+\newenvironment{Αntiparadeigmabox}[1]
+{\begin{tcolorbox}[title=\antiparad\textcolor{white}{:\ \  {\bf{\large\kerkissans{#1}}}},
+breakable,
+enhanced standard,
+bottomrule=0pt,
+colback=white,
+left=2mm,
+top=1mm,
+bottom=1mm,
+colframe=red!70!black,
+borderline={1pt}{0pt}{\xrwma},
+sharp corners,
+coltitle=black]}
+{\end{tcolorbox}}
+
+\newcommand{\protash}[1]{{\kerkissans{\textcolor{\xrwma}{\faBook\hspace{2mm}\Large{#1}}}\\}}{}
+
+
+\newcommand{\theor}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=\xrwma,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{1}}};}\ {\kerkissans{ Θεώρημα: #1\\}}}
+
+\newcommand{\antistr}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=orange!90!black,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{2}}};}\ {\kerkissans{ Αντίστροφο: #1\\}}}
+
+\newcommand{\aath}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=\xrwma,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{3}}};}\ {\kerkissans{ Αντιθετοαντίστροφο του 1: #1\\}}}
+
+\newcommand{\aaa}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=orange!90!black,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{4}}};}\ {\kerkissans{ Αντιθετοαντίστροφο του 2: #1\\}}}
 
 
 \begin{document}
@@ -450,7 +437,7 @@ coltitle=black]}
 \begin{Orismosbox}{Πραγματική Συνάρτηση}
 Τι ονομάζουμε πραγματική συνάρτηση με πεδίο ορισμού το σύνολο $A$;
 \end{Orismosbox}\apanthsh
-Πραγματική συνάρτηση με πεδίο ορισμού ένα σύνολο $ A $ είναι μια διαδικασία (κανόνα) $f$ με την οποία \textbf{κάθε} στοιχείο $ x\in A $ αντιστοιχεί σε \textbf{ένα μόνο} πραγματικό αριθμό $ y\in\mathbb{R} $. Το $ y $ λέγεται \textbf{τιμή} της συνάρτησης $ f $ στο $ x $ και συμβολίζεται $ f(x) $.
+Πραγματική συνάρτηση με πεδίο ορισμού ένα σύνολο $ A $ είναι μια διαδικασία (κανόνας) $f$ με την οποία \textbf{κάθε} στοιχείο $ x\in A $ αντιστοιχεί σε \textbf{ένα μόνο} πραγματικό αριθμό $ y\in\mathbb{R} $. Το $ y $ λέγεται \textbf{τιμή} της συνάρτησης $ f $ στο $ x $ και συμβολίζεται $ f(x) $.
 \begin{center}
 \centering
 \begin{tikzpicture}[scale=.6]
@@ -598,11 +585,6 @@ $f$ με την $g$;
 \draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
 \end{tikzpicture}
 \end{center}
-\begin{itemize}[itemsep=0mm]
-\item Συμβολίζεται με $ f^{-1} $ και είναι $ f^{-1}:f(A)\to A $.
-\item Το πεδίο ορισμού της $ f^{-1} $ είναι το σύνολο τιμών $ f(A) $ της $ f $, ενώ το σύνολο τιμών της $ f^{-1} $ είναι το πεδίο ορισμού $ A $ της $ f $.
-\item Ισχύει ότι $ x=f^{-1}(y) $ για κάθε $ y\in f(A) $.
-\end{itemize}
 \begin{Orismosbox}{Συνεχής συνάρτηση σε σημείο}
 Πότε μια συνάρτηση $f$ ονομάζεται συνεχής σε ένα σημείο $x_0$ του πεδίου ορισμού της;
 \end{Orismosbox}
@@ -784,7 +766,7 @@ $f$;
 \begin{Thewrhmabox}[\textbf{\large Διατύπωση 1} \textbf{Θεώρημα Bolzano - Σελ. 192}]{6cm}
 \bmath{Να διατυπώσετε το θεώρημα Bolzano και να δώσετε τη γεωμετρική ερμηνεία του.}
 \end{Thewrhmabox}
-\textbf{ΑΠΑΝΤΗΣΗ}
+{\kerkissans{ΑΠΑΝΤΗΣΗ}}
 \begin{enumerate}
 \item \textbf{Θεώρημα}\\
 Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
@@ -815,14 +797,14 @@ $f$;
 \begin{Thewrhmabox}[Θεώρημα ενδιάμεσων τιμών - Σελ. 194]{7cm}
 \textbf{Να διατυπώσετε και να αποδείξετε το θεώρημα ενδιάμεσων τιμών.}
 \end{Thewrhmabox}
-\textbf{ΘΕΩΡΗΜΑ}\\
+{\kerkissans{ΘΕΩΡΗΜΑ}}\\
 Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
 \begin{itemize}
 \item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
 \item $f(a)\neq f(\beta)$
 \end{itemize}
 τότε υπάρχει τουλάχιστον ένα $ x_0\in(a,\beta) $ ώστε για κάθε αριθμό $ \eta $ μεταξύ των $ f(a),f(\beta) $ να ισχύει $ f(x_0)=\eta $.\\\\
-\textbf{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
+{\kerkissans{ΑΠΟΔΕΙΞΗ}}\\
 Θεωρούμε τη συνάρτηση $ g(x)=f(x)-\eta $ με $ x\in[a,\beta] $ και $ \eta $ είναι ένας πραγματικός αριθμός τέτοιος ώστε να ισχύει $ f(a)<\eta<f(\beta) $\footnote{Μπορούμε ισοδύναμα να θεωρήσουμε $ f(\beta)<\eta<f(a) $}. Γι αυτήν θα ισχύει ότι:
 \begin{itemize}
 \item είναι συνεχής στο διάστημα $ [a,\beta] $ και επιπλέον
@@ -973,7 +955,7 @@ f'(x)&=(\syf{x})'=\left( \dfrac{\syn{x}}{\hm{x}}\right)'=\dfrac{(\syn{x})'\cdot\
 \begin{Thewrhmabox}[Θεώρημα Rolle - Σελ. 246]{9cm}
 \textbf{Να διατυπώσετε και να δώσετε τη γεωμετρική ερμηνεία του θεωρήματος Rolle.}
 \end{Thewrhmabox}
-\textbf{ΑΠΑΝΤΗΣΗ}
+{\kerkissans{ΑΠΑΝΤΗΣΗ}}
 \begin{enumerate}
 \item \textbf{Θεώρημα}\\
 Δίνεται μια συνάρτηση $ f $ ορισμένη σε ένα κλειστό διάστημα $ [a,\beta] $. Αν η $ f $ είναι
@@ -1010,7 +992,7 @@ ylabel={\footnotesize $ y $},belh ar,clip=false]
 \begin{Thewrhmabox}[Θεώρημα μέσης τιμής - Σελ. 246-247]{7cm}
 \textbf{Να διατυπώσετε και να δώσετε τη γεωμετρική ερμηνεία του Θ.Μ.Τ.}
 \end{Thewrhmabox}
-\textbf{ΑΠΑΝΤΗΣΗ}
+{\kerkissans{ΑΠΑΝΤΗΣΗ}}
 \begin{enumerate}
 \wrapr{-12mm}{18}{5.5cm}{-4mm}{\begin{tikzpicture}
 \begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=4.3,
@@ -1255,7 +1237,20 @@ E(\varOmega)&=E(\varOmega_1)+E(\varOmega_2)+E(\varOmega_3)=\\
 \end{align*}}
 \newpage
 \section{Ιδιότητες}
+\idiothta{Αντίστροφη συνάρτηση}
+Έστω $f:A\to\mathbb{R}$ μια $1-1$ συνάρτηση. Για την αντίστροφη συνάρτηση $f^{-1}$ ισχύουν τα εξής:
+\begin{itemize}[itemsep=0mm]
+\item Το πεδίο ορισμού της $ f^{-1} $ είναι το σύνολο τιμών $ f(A) $ της $ f $.
+\item Το σύνολο τιμών της $ f^{-1} $ είναι το πεδίο ορισμού $ A $ της $ f $.
+\item Ισχύει ότι $ y=f(x)\Leftrightarrow x=f^{-1}(y) $ για κάθε $x\in A$ και $ y\in f(A) $.
+\item $f^{-1}(f(x))=x$ για κάθε $x\in A$.
+\item $f(f^{-1}(y))=y$ για κάθε $y\in f(A)$.
+\end{itemize}
+\idiothta{Πλευρικά Όρια}
+Το όριο $\lim\limits_{x\to x_0}{f(x)}$ \textbf{υπάρχει} αν και μόνο αν τα πλευρικά όρια της $f$ το $x_0$ είναι ίσα.
+\[ \lim\limits_{x\to x_0}{f(x)}=l\Leftrightarrow\lim_{x\rightarrow x_0^+}{f(x)}=\lim_{x\rightarrow x_0^-}{f(x)}=l \]
 \idiothta{Όρια}
+Δίνονται συναρτήσεις $f.g$ με πεδία ορισμού $A,B$ αντίστοιχα και $x_0\in A\cap B$. Αν υπάρχουν τα όρια $\lim\limits_{x\to x_0}{f(x)}=l_1$ και $\lim\limits_{x\to x_0}{g(x)}=l_2$ τότε ισχύουν οι παρακάτω ιδιότητες:
 \begin{enumerate}
 \item  $ \displaystyle{\lim_{x\rightarrow x_0}\left( f(x)\pm g(x)\right)=\displaystyle{\lim_{x\rightarrow x_0}f(x)}\pm\displaystyle{\lim_{x\rightarrow x_0}g(x)}}=l_1\pm l_2 $
 \item $ \displaystyle{\lim_{x\rightarrow x_0}\left( k\cdot f(x)\right) }=k\cdot\displaystyle{\lim_{x\rightarrow x_0}f(x)}=k\cdot l_1\;\;,\;\; k\in\mathbb{R} $ 
@@ -1265,18 +1260,228 @@ E(\varOmega)&=E(\varOmega_1)+E(\varOmega_2)+E(\varOmega_3)=\\
 \item $ \displaystyle{\lim_{x\rightarrow x_0}\!\!\sqrt[\kappa]{f(x)}}=\!\sqrt[\kappa]{\displaystyle{\lim_{x\rightarrow x_0}f(x)}}\;\;=\!\!\sqrt[\kappa]{l_1}\;\;,\;\;l_1\geq0 $ 
 \item $ \displaystyle{\lim_{x\rightarrow x_0}f^\nu(x)}=\left( \displaystyle{\lim_{x\rightarrow x_0}f(x)}\right)^\nu=l_1^\nu  $
 \end{enumerate}
-
-
+\idiothta{Βασικά τριγωνομετρικά όρια}
+\vspace{-5mm}
+\begin{multicols}{2}
+\begin{alist}
+\item $\lim\limits_{x\to 0}{\dfrac{\hm{x}}{x}}=1$
+\item $\lim\limits_{x\to 0}{\dfrac{\syn{x}-1}{x}}=0$
+\end{alist}
+\end{multicols}
+\idiothta{Μη πεπερασμένο όριο}
+\begin{enumerate}
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=+\infty$ τότε $f(x)>0$ κοντά στο $x_0$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=-\infty$ τότε $f(x)<0$ κοντά στο $x_0$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=+\infty$ τότε $\lim\limits_{x\to x_0}{(-f(x))}=-\infty$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=-\infty$ τότε $\lim\limits_{x\to x_0}{(-f(x))}=+\infty$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=\pm\infty$ τότε $\lim\limits_{x\to x_0}{\frac{1}{f(x)}}=0$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=\pm\infty$ τότε $\lim\limits_{x\to x_0}{|f(x)|}=+\infty$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=+\infty$ τότε $\lim\limits_{x\to x_0}{\sqrt[\nu]{f(x)}}=+\infty$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=0$ και $f(x)>0$ κοντά στο $x_0$ τότε $\lim\limits_{x\to x_0}{\frac{1}{f(x)}}=+\infty$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=0$ και $f(x)<0$ κοντά στο $x_0$ τότε $\lim\limits_{x\to x_0}{\frac{1}{f(x)}}=-\infty$.
+\item $\lim\limits_{x\to 0}{\frac{1}{x^2}}=+\infty$ και γενικά $\lim\limits_{x\to 0}{\frac{1}{x^{2\nu}}}=0$, όπου $\nu\in\mathbb{N}$.
+\item Αν $\nu\in\mathbb{N}$ τότε τα όρια $\lim\limits_{x\to 0}{\frac{1}{x^{2\nu+1}}}$ δεν υπάρχουν.
+\end{enumerate}
 \newpage
-\section{Προτάσεις χωρίς απόδειξη}
+ \section{Προτάσεις χωρίς απόδειξη}
+\protashxa{Συνάρτηση \bmath{$1-1$}}
+Μια συνάρτηση $f:A\to\mathbb{R}$ είναι συνάρτηση $1-1$, αν και μόνο αν για οποιαδήποτε $x_1,x_2\in A$ ισχύει η συνεπαγωγή:
+\[f(x_1)=f(x_2)\Rightarrow x_1=x_2\]
+\protashxa{Βασικές ανισότητες}
+\vspace{-5mm}
+\begin{enumerate}
+\item Για κάθε $x\in\mathbb{R}$ ισχύει $|\hm{x}|\leq |x|$. Η ισότητα ισχύει μόνο για $x=0$. Ειδικότερα έχουμε:
+\begin{multicols}{3}
+\begin{alist}
+\item $|\hm{x}|<|x|$ για κάθε $x\neq 0$
+\item $\hm{x}<x$, για κάθε $x>0$
+\item $\hm{x}>x$, για κάθε $x<0$
+\end{alist}
+\end{multicols}
+\item Για κάθε $x\in\mathbb{R}$ ισχύει $e^x\geq x+1$. Η ισότητα ισχύει μόνο για $x=0$
+\item Για κάθε $x>0$ ισχύει $\ln{x}\leq x-1$. Η ισότητα ισχύει μόνο για $x=1$.
+\end{enumerate}
+\protashxa{Όρια και διάταξη}
+\vspace{-5mm}
+\begin{itemize}
+\item Αν $\lim\limits_{x\to x_0}{f(x)}>0$ τότε $f(x)>0$ κοντά στο $x_0$.
+\item Αν $\lim\limits_{x\to x_0}{f(x)}<0$ τότε $f(x)<0$ κοντά στο $x_0$.
+\end{itemize}
+\protashxa{Όρια και διάταξη 2}
+Αν οι συναρτήσεις $f,g$ έχουν όριο στο $x_0$ και ισχύει
+\begin{itemize}
+\item $f(x)\leq g(x)$ κοντά στο $x_0$, τότε $\lim\limits_{x\to x_0}{f(x)}\leq\lim\limits_{x\to x_0}{g(x)}$.
+\item $f(x)\geq g(x)$ κοντά στο $x_0$, τότε $\lim\limits_{x\to x_0}{f(x)}\geq\lim\limits_{x\to x_0}{g(x)}$.
+\end{itemize}
+\protashxa{Όρια και διάταξη 3}
+\vspace{-5mm}
+\begin{itemize}
+\item Αν $\lim\limits_{x\to +\infty}{f(x)}>0$ (ή $<0$) τότε $f(x)>0$ (αντίστοιχα $<0$) για κάθε $x\in(a,+\infty)$ για κάποιο $a\in\mathbb{R}$.
+\item Αν $\lim\limits_{x\to -\infty}{f(x)}>0$ (ή $<0$) τότε $f(x)>0$ (αντίστοιχα $<0$) για κάθε $x\in(-\infty,a)$ για κάποιο $a\in\mathbb{R}$.
+\end{itemize}
+\protashxa{Όρια και διάταξη 4}
+Έστω δύο συναρτήσεις $f,g$ για τις οποίες ισχύει $f(x)\leq g(x)$ κοντά στο $x_0\in\mathbb{R}\cup\{\pm\infty\}$
+\begin{itemize}
+\item Αν $\lim\limits_{x\to x_0}{f(x)}=+\infty$ τότε $\lim\limits_{x\to x_0}{g(x)}=+\infty$.
+\item Αν $\lim\limits_{x\to x_0}{g(x)}=-\infty$ τότε $\lim\limits_{x\to x_0}{f(x)}=\infty$.
+\end{itemize}
+\protashxa{Κριτήριο παρεμβολής}
+Έστω οι συναρτήσεις $f, g, h$. Αν
+\begin{itemize}
+\item $h(x)\leq f(x)\leq g(x)$ κοντά στο $x_0$ και
+\item $\lim\limits_{x\to x_0}{h(x)}=\lim\limits_{x\to x_0}{g(x)}=l$
+\end{itemize}
+τότε $\lim\limits_{x\to x_0}{f(x)}=l$.\\\\
+\protashxa{Όριο πολυωνυμικής στο άπειρο}
+Έστω πολυωνυμική συνάρτηση $f(x)=a_{\nu}x^{\nu}+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0$ με $a_{\nu}\neq 0$. Ισχύει ότι
+\[\lim_{x\to\pm\infty}{f(x)}=\lim_{x\to\pm\infty}{\left(a_{\nu}x^{\nu}\right)}\]
+\protashxa{Όριο ρητής στο άπειρο}
+Έστω ρητή συνάρτηση $f(x)=\dfrac{a_{\nu}x^{\nu}+a_{\nu-1}x^{\nu-1}+\ldots+a_1x+a_0}{\beta_{\mu}x^{\mu}+\beta_{\mu-1}x^{\mu-1}+\ldots+\beta_1x+\beta_0}$ με $a_{\nu}\neq 0$ με $a_{\nu},\beta_{\mu}\neq 0$. Ισχύει ότι
+\[\lim_{x\to\pm\infty}{f(x)}=\lim_{x\to\pm\infty}{\frac{a_{\nu}x^{\nu}}{\beta_{\mu}x^{\mu}}}\]
+\protashxa{Εικόνα διαστήματος}
+Η εικόνα $f(\Delta)$ ενός διαστήματος $\Delta$ μέσω μιας συνεχούς και μη σταθερής συνάρτησης $f$ είναι διάστημα.\\\\
+\protashxa{Θεώρημα Μέγιστης και Ελάχιστης Τιμής}
+Αν $f$ είναι συνεχής συνάρτηση στο $[a,\beta]$ , τότε η $f$ παίρνει στο $[a,\beta]$ μια μέγιστη τιμή $M$ και μια ελάχιστη τιμή $m$. Δηλαδή, υπάρχουν $x_1,x_2\in[a,\beta]$ τέτοια, ώστε, αν $m = f(x_1)$ και $M = f(x_2)$ , να ισχύει
+\[ m\leq f(x)\leq M\ \ ,\ \ \text{για κάθε } x\in[a,\beta] \]
+
 \newpage
 \section{Προτάσεις με απόδειξη}
 \newpage
 \section{Αντιπαραδείγματα}
+\begin{Αntiparadeigmabox}{Θέση ολικού μεγίστου}
+Θεωρήστε τον παρακάτω ισχυρισμό:\\
+\textbf{\textit{Κάθε συνάρτηση \bmath{$f:\mathbb{R}\to\mathbb{R}$} η οποία παρουσιάζει ολικό μέγιστο, έχει μια μόνο θέση ολικού μεγίστου.}}
+\begin{alist}
+\item Να χαρακτηρίσετε την παραπάνω πρόταση αληθή ( Α ) ή ψευδή ( Ψ ).
+\item Να αιτιολογήσετε την απάντησή σας στο ερώτημα α.
+\end{alist}
+\end{Αntiparadeigmabox}
+\apanthsh
+\vspace{-7mm}
+\begin{alist}
+\item Ψευδής
+\item Η συνάρτηση $f(x)=\hm{x}\ ,\ x\in\mathbb{R}$ έχει μέγιστη τιμή το $1$ στις θέσεις $x=2\kappa\pi+\frac{\pi}{2}$, με $\kappa\in\mathbb{Z}$.
+\end{alist}
 \newpage
 \section{Ερωτήσεις Σωστό - Λάθος}
+\paragraph{Βασικές έννοιες για τις προτάσεις}
+Μια πρόταση στα μαθηματικά συμβολίζεται συνήθως με κεφαλαίο γράμμα π.χ. $A,B,\ldots$. Για παράδειγμα η 
+\begin{center}
+$A$: \textit{Ο αριθμός $3$ είναι ακέραιος}
+\end{center}
+αποτελεί μια μαθηματική πρόταση. Ένα θεώρημα στα μαθηματικά αποτελείται από δύο προτάσεις, την \textbf{υπόθεση} $A$ και το \textbf{συμπέρασμα} $B$, που συνδέονται με την πράξη της συνεπαγωγής. Έχει δηλαδή τη μορφή
+\[ A\Rightarrow B \]
+και έχει το νόημα ότι \bmath{αν ισχύει η $A$ τότε ισχύει η $B$}. Για τις προτάσεις ισχύουν τα εξής:
+\begin{itemize}
+\item Κάθε πρόταση μπορεί να θεωρηθεί ως μεταβλητή και η μεταβλητή αυτή παίρνει δύο τιμές: \textbf{Αληθής} (\textcolor{check}{\faCheck}) και \textbf{Ψευδής} (\textcolor{error}{\faTimes}).
+\item Η πράξη της \textbf{άρνησης} στις προτάσεις, μας δίνει το αντίθετο μιας πρότασης, συμβολίζεται με $\neg$ και μετατρέπει μια πρόταση από αληθή σε ψευδή και αντίστροφα. Για παράδειγμα 
+\begin{center}
+$\neg A$: \textit{Ο αριθμός $3$ \textbf{δεν} είναι ακέραιος}.
+\end{center}
+\item Το \textbf{αντίστροφο} μιας συνεπαγωγής $A\Rightarrow B$ γράφεται είτε $A\Leftarrow B$ είτε $B\Rightarrow A$.
+\item Για μια συνεπαγωγή $A\Rightarrow B$, ο συνδυασμός της άρνησης και του αντιστρόφου ονομάζεται \textbf{αντιθετοαντίστροφη} συνεπαγωγή και συμβολίζεται $\neg B\Rightarrow\neg A$. Έχει την έννοια του \bmath{αν δεν ισχύει το συμπέρασμα $B$ τότε δεν ισχύει και η υπόθεση $A$}.
+\item Η \textbf{διπλή συνεπαγωγή}, ή αλλιώς \textbf{ισοδυναμία}, συμβολίζεται $\Leftrightarrow$ και δηλώνει ότι ισχύει και το ορθό $A\Rightarrow B$ και το αντίστροφο $A\Leftarrow B$. Όταν δύο προτάσεις $A,B$ είναι ισοδύναμες τότε είναι είτε και οι δύο αληθείς είτε και οι δύο ψευδείς.
+\end{itemize}
+\paragraph{Θεωρήματα Γ' Λυκείου}
+Θα χρησιμοποιήσουμε τώρα όσα αναφέραμε στα θεωρήματα και τι προτάσεις των μαθηματικών προσανατολισμού της Γ' Λυκείου. Ο γενικός σκοπός μας είναι να διατυπώσουμε για κάθε θεώρημα,  τις εξής $4$ «μορφές» που μπορεί να πάρει και να τις μελετήσουμε ως προς την ισχύ:
+\begin{center}
+\begin{mytblr}{}
+\circled{1}: Θεώρημα & \SetCell{orange!90!black}\circled{2}: Αντίστροφο & \circled{3}: Αντιθετοαντίστροφο του \circled{1} & \SetCell{orange!90!black}\circled{4}: Αντιθετοαντίστροφο του \circled{2}\\
+$A\Rightarrow B$ & \SetCell{orange!50!white} $B\Rightarrow A$ & $\neg B\Rightarrow \neg A$ & \SetCell{orange!50!white}$\neg A\Rightarrow\neg B$
+\end{mytblr}
+\end{center}
+Θα χρησιμοποιήσουμε επίσης τον εξής σημαντικό κανόνα:
+\begin{center}
+\textbf{Κάθε συνεπαγωγή είναι ισοδύναμη με την αντιθετοαντίστροφή της}
+\end{center}
+ο οποίος μας δίνει τα ακόλουθα συμπεράσματα:
+\begin{center}
+\circled{1}$\Leftrightarrow$\circled{3}\ \ \text{και}\ \ \circled{2}$\Leftrightarrow$\circled{4}
+\end{center}
+\newpage
+\protash{Θεώρημα Bolzano}\\
+\theor{\true}
+Θεωρούμε μια συνάρτηση $f$ ορισμένη σε ένα κλειστό διάστημα $[a,\beta]$. Αν
+\begin{itemize}
+\item η $f$ συνεχής στο κλειστό διάστημα $[a,\beta]$ και 
+\item $f(a)\cdot f(\beta)<0$
+\end{itemize}
+τότε θα υπάρχει τουλάχιστον ένας αριθμός $ x_0\in(a,\beta) $ έτσι ώστε να ισχύει $ f(x_0)=0 $.\\\\
+\antistr{\false}
+{\kerkissans 1η μορφή:} Έστω συνάρτηση $f$ ορισμένη σε κλειστό διάστημα $[a,\beta]$. Αν η $f$ είναι συνεχής στο κλειστό διάστημα $[a,\beta]$ και ισχύει $ f(x_0)=0 $ για κάποιο $x_0\in[a,\beta]$ τότε:
+$f(a)\cdot f(\beta)<0$.\\\\
+\aath{\true}
+\aaa{\false}
 \newpage
 \section{Τυπολόγιο - Πίνακες}
+\begin{center}
+\begin{mytblr}{}
+Πράξη & Μορφή\\
+Πηλίκο & $\dfrac{0}{0},\dfrac{\pm\infty}{\pm\infty}$\\
+Γινόμενο & $0\cdot(\pm\infty)$\\
+Άθροισμα & $+\infty-\infty$\\
+Δύναμη & $0^0,1^{\pm\infty},(\pm\infty)^0$
+\end{mytblr}
+\end{center}
+\begin{mytblr}{cell{1}{2-Z}={white}}
+Όριο Αθροίσματος & & & & & &\\
+$\lim\limits_{x\to x_0}{f(x)}=$ & $a\in\mathbb{R}$ & $a\in\mathbb{R}$ & $+\infty$ & $+\infty$ & $-\infty$ & $-\infty$ \\
+$\lim\limits_{x\to x_0}{g(x)}=$ & $+\infty$ & $-\infty$ & $+\infty$ & $-\infty$ & $+\infty$ & $-\infty$ \\
+$\lim\limits_{x\to x_0}{(f(x)+g(x))}=$ & $+\infty$ & $-\infty$ & $+\infty$ & \SetCell{gray7};  & \SetCell{gray7}; & $-\infty$
+\end{mytblr}\\
+\begin{mytblr}{cell{1}{2-Z}={white}}
+Όριο Γινομένου & & & & & & & & & &\\
+$\lim\limits_{x\to x_0}{f(x)}=$ & $a>0$ & $a<0$ & $a>0$ & $a<0$ & $0$ & $0$ & $+\infty$ & $+\infty$ & $-\infty$ & $-\infty$ \\
+$\lim\limits_{x\to x_0}{g(x)}=$ & $+\infty$ & $+\infty$ & $-\infty$ & $-\infty$ & $+\infty$ & $-\infty$ & $+\infty$ & $-\infty$ & $+\infty$ & $-\infty$ \\
+$\lim\limits_{x\to x_0}{(f(x)\cdot g(x))}=$ & $+\infty$ & $-\infty$ & $-\infty$ & $+\infty$ & \SetCell{gray7};  & \SetCell{gray7}; & $+\infty$ & $-\infty$ & $-\infty$ & $+\infty$
+\end{mytblr}\\
+\begin{mytblr}{rowhead = 2,row{1-2} = {red4,fg={white}},row{2}={font=\bf},cell{1-2}{3-5} = {orange!90!black},cell{even[4-Z]}{3-5} = {orange!70!white},cell{odd[3-Z]}{3-5} = {orange!30!white}}
+\SetCell[c=2]{c} ΑΠΛΕΣ & & \SetCell[c=3]{c} ΣΥΝΘΕΤΕΣ & &  \\ 
+Συνάρτηση $ f $& Παράγωγος $ f' $ & Συνάρτηση $ g\circ f $ & Παράγωγος $ \left( g\circ f \right)' $ & Λεκτική περιγραφή \\ 
+$ c $ & $ 0 $ &  & & \\ 
+$ x $ & $ 1 $ &  & & \\ 
+$ x^\nu $ & $ \nu x^{\nu-1} $ & $ f^\nu(x) $ & $ \nu f^{\nu-1}(x)\cdot f'(x) $ & $ \nu(\text{βάση})^{\nu-1}(\text{βαση})' $\\ 
+$ \dfrac{1}{x} $ & $ -\dfrac{1}{x^2} $ & $ \dfrac{1}{f(x)} $ & $ -\dfrac{f'(x)}{f^2(x)} $ &$ -\dfrac{(\text{Παρονομαστής})'}{\text{Παρονομαστής}^2} $ \\ 
+$ \sqrt{x} $ & $ \dfrac{1}{2\!\sqrt{x}} $ & $ \sqrt{f(x)} $ & $ \dfrac{f'(x)}{2\!\sqrt{f(x)}} $ & $ \dfrac{(\text{Υπόριζο})'}{2\cdot\text{Ρίζα}} $ \\ 
+$ \hm{x} $ & $ \syn{x} $ & $ \hm{f(x)} $ & $ \syn{f(x)}\cdot f'(x) $ & $ \syn{(\text{Γωνία})\cdot(\text{Γωνία})'} $\\ 
+$ \syn{x} $ & $ -\hm{x} $ & $ \syn{f(x)} $ & $ -\hm{f(x)}\cdot f'(x) $ &$ -\hm{(\text{Γωνία})\cdot(\text{Γωνία})'} $ \\ 
+$ \ef{x} $ & $ \dfrac{1}{\syn^2{x}} $ & $ \ef{f(x)} $ & $ \dfrac{f'(x)}{\syn^2{f(x)}} $ & $ \dfrac{(\text{Γωνία})'}{\syn^2{(\text{Γωνία})}} $ \\ 
+$ \syf{x} $ & $ -\dfrac{1}{\hm^2{x}} $ & $ \syf{f(x)} $ & $ -\dfrac{f'(x)}{\hm^2{f(x)}} $ & $ -\dfrac{(\text{Γωνία})'}{\hm^2{(\text{Γωνία})}} $ \\ 
+$ a^x $ & $ a^x\ln{a} $ & $ a^{f(x)} $ & $ a^{f(x)}\ln{a}\cdot f'(x) $ & $ a^{\text{Εκθέτης}}\cdot\ln{a}\cdot(\text{Εκθέτης})' $ \\ 
+$ e^x $ & $ e^x $ & $ e^{f(x)} $ & $ e^{f(x)}\cdot f'(x) $ & $ e^{\text{Εκθέτης}}\cdot(\text{Εκθέτης})' $ \\ 
+$ \ln{|x|} $ & $ \dfrac{1}{x} $ & $ \ln{|f(x)|} $ & $ \dfrac{f'(x)}{f(x)} $ & $ \dfrac{(\text{Παράσταση})'}{\text{Παράσταση}} $
+\end{mytblr}\\
+\begin{mytblr}{cell{1}{3}={orange!90!black},cell{even[2-Z]}{3} = {orange!70!white},cell{odd[3-Z]}{3} = {orange!30!white},column{3}={8.7cm},row{2-Z} = {10.7mm}}
+Συνάρτηση & Παράγουσα & Ορισμένο ολοκλήρωμα\\
+$c$ & $cx$ & $\displaystyle\int_{a}^{\beta}{c\mathrm{d}x}=[cx]_{a}^{\beta}=c(\beta-a)$\\
+$x$ & $\dfrac{x^2}{2}$ & $\displaystyle\int_{a}^{\beta}{x\mathrm{d}x}=\left[\dfrac{x^2}{2}\right]_{a}^{\beta}=\dfrac{\beta^2}{2}-\dfrac{a^2}{2}$  \\
+$x^{\nu}$ & $\dfrac{x^{\nu+1}}{\nu+1}$ & $\displaystyle\int_{a}^{\beta}{x^{\nu}\mathrm{d}x}=\left[\dfrac{x^{\nu+1}}{\nu+1}\right]_{a}^{\beta}=\dfrac{\beta^{\nu+1}}{\nu+1}-\dfrac{a^{\nu+1}}{\nu+1}$\\
+$\dfrac{1}{2\sqrt{x}}$ & $\sqrt{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{2\sqrt{x}}\mathrm{d}x}=\left[\sqrt{x}\right]_{a}^{\beta}=\sqrt{\beta}-\sqrt{a}$ \\
+$\sqrt[\nu]{x^{\mu}}$ & $\dfrac{x^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}$ & $\displaystyle\int_{a}^{\beta}{\sqrt[\nu]{x^{\nu}}\mathrm{d}x}=\left[\dfrac{x^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}\right]_{a}^{\beta}=\dfrac{\beta^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}-\dfrac{a^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}$ \\
+$\dfrac{1}{x^2}$ & $-\dfrac{1}{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{x^2}\mathrm{d}x}=\left[-\dfrac{1}{x}\right]_{a}^{\beta}=-\dfrac{1}{\beta}+\dfrac{1}{a}$ \\
+$\hm{x}$ & $-\syn{x}$ & $\displaystyle\int_{a}^{\beta}{\hm{x}\mathrm{d}x}=\left[-\syn{x}\right]_{a}^{\beta}=-\syn{\beta}+\syn{a}$ \\
+$\syn{x}$ & $\hm{x}$ & $\displaystyle\int_{a}^{\beta}{\syn{x}\mathrm{d}x}=\left[\hm{x}\right]_{a}^{\beta}=\hm{\beta}-\hm{a}$  \\
+$\dfrac{1}{\syn^2{x}}$ & $\ef{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{\syn^2{x}}\mathrm{d}x}=\left[\ef{x}\right]_{a}^{\beta}=\ef{\beta}-\ef{a}$\\
+$\dfrac{1}{\hm^2{x}}$ & $\syf{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{\hm^2{x}}\mathrm{d}x}=\left[-\syf{x}\right]_{a}^{\beta}=-\syf{\beta}+\syf{a}$\\
+$e^x$ & $e^x$ & $\displaystyle\int_{a}^{\beta}{e^x\mathrm{d}x}=\left[e^{x}\right]_{a}^{\beta}=e^{\beta}-e^{a}$ \\
+$a^x$ & $\dfrac{a^x}{\ln{a}}$ & $\displaystyle\int_{a}^{\beta}{{\mu}^x\mathrm{d}x}=\left[\frac{{\mu}^x}{\ln{\mu}}\right]_{a}^{\beta}=\frac{{\mu}^{\beta}}{\ln{\mu}}-\frac{\mu^{a}}{\ln{\mu}}$  \\
+$\dfrac{1}{x}$ & $\ln{|x|}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{x}\mathrm{d}x}=\left[\ln{|x|}\right]_{a}^{\beta}=\ln|\beta|-\ln{|a|}$
+\end{mytblr}
+\newpage
+\begin{mytblr}{row{2-Z} = {10.7mm}}
+Συνάρτηση & Παράγουσα\\
+$f^{\nu}(x)\cdot f'(x)$ & $\dfrac{f^{\nu+1}(x)}{\nu+1}$\\
+$f(x)\cdot f'(x)$ & $\dfrac{f^2(x)}{2}$\\
+$\dfrac{f'(x)}{2\sqrt{f(x)}}$ & $\sqrt{f(x)}$\\
+$\dfrac{f'(x)}{f^2(x)}$ & $-\dfrac{1}{f(x)}$\\
+$\hm{f(x)}\cdot f'(x)$ & $-\syn{f(x)}$\\
+$\syn{f(x)}$ & $\hm{f(x)}$\\
+$\dfrac{f'(x)}{\syn^2{f(x)}}$ & $\ef{f(x)}$\\
+$\dfrac{f'(x)}{\hm^2{f(x)}}$ & $\syf{f(x)}$\\
+$e^{f(x)}\cdot f'(x)$ & $e^{f(x)}$\\
+$a^{f(x)}\cdot f'(x)$ & $\dfrac{a^{f(x)}}{\ln{a}}$\\
+$\dfrac{f'(x)}{f(x)}$ & $\ln{f(x)}$
+\end{mytblr}
 \end{document}
 
 
