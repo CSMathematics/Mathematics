@@ -1,6 +1,7 @@
 \documentclass[a3paper]{article}
 \usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
 \usepackage[utf8]{inputenc}
+\usepackage[greek]{babel}
 \usepackage{nimbusserif}
 \usepackage[T1]{fontenc}
 \usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
@@ -30,7 +31,7 @@
 %----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
 \usepackage{calculator}
 %----------------------------
-
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
 
 \begin{document}
 \begin{center}
@@ -52,7 +53,7 @@
 }
 \foreach \s in {0,10,20,...,620}{
 \draw (\s/628*360:7.7)--(\s/628*360:7);
-\node at (\s/628*360:8){\pgfmathparse{0.01*\s}% Evaluate the expression
+\node at (\s/628*360:8){\large\pgfmathparse{0.01*\s}% Evaluate the expression
 \pgfmathprintnumber[    % Print the result
 fixed,
 fixed zerofill,
@@ -76,28 +77,31 @@ precision=1
 315/\dfrac{7\pi}{4},
 330/\dfrac{11\pi}{6},
 360/2\pi}
-{\draw (\gwnia:9.2) node {{ \Large$\xtext$}};
+{\draw (\gwnia:9.2) node {{ \LARGE$\xtext$}};
 \draw(\gwnia:8.7)--(\gwnia:8.3);}
 \foreach \d/\s in {0/3,30/2,60/1,90/12,120/11,150/10,180/9,210/8,240/7,270/6,300/5,330/4}{
-\draw (\d:5.4)--(\d:5);
-\node at (\d:4.5){\huge$\s$};
-\draw (\d:4.5) circle (.5);
+\draw[thick] (\d:5.5)--(\d:5.2);
+\fill[cyan7] (\d:4.7) circle (.55);
+\node at (\d:4.7){\textcolor{white}{\huge\kerkissans{\textbf{\s}}}};
 }
 \foreach \d in {0,10,20,...,350}{
 \draw[pl] (\d:7)--(\d:6.4);
-\node at (\d:5.9){\large$\d\degree$};
+\node at (\d:5.9){\Large$\d\degree$};
 }
 \foreach \d in {0,5,10,...,355}{
 \draw[pl] (\d:7)--(\d:6.6);
 }
-
-\foreach \d in {-3.5,-3,...,3.5}{
-\draw (\d,-.1)--(\d,0.1);
-\draw (-.1,\d)--(0.1,\d);
-}
-\draw (-4,0) -- (4,0);
-\draw (0,4) -- (0,-4);
-\draw[thick] (0,0) circle (10);
+\fill (0,0) circle(.2);
+%\foreach \d in {-3.5,-3,...,3.5}{
+%\draw (\d,-.1)--(\d,0.1);
+%\draw (-.1,\d)--(0.1,\d);
+%}
+%\draw (-4,0) -- (4,0);
+%\draw (0,4) -- (0,-4);
+\draw[line width=1mm,cyan7] (0,0) circle (10.3);
+%\node[fill=white] at (0,-1.4){{\large ΦΡΟΝΤΙΣΤΗΡΙΟ ΜΕΣΗΣ ΕΚΠΑΙΔΕΥΣΗΣ}};
+%\node[fill=white] at (0,-1.9){\LARGE ΦΙΛΟΜΑΘΕΙΑ};
+\node at (0,0.2){\includegraphics[width=0.3\linewidth]{"logo_full"}};
 \end{tikzpicture}
 \end{center}
 \pagenumbering{gobble}
