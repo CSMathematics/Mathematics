@@ -30,6 +30,31 @@
 \let\Bbbk\relax
 \usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
 \usepackage{mathimatika,venndiagram,tkz-euclide,diffcoeff,mathtools}
+\allowdisplaybreaks
+
+\providecommand\PARENS[1]{\left(#1\right)}
+
+\makeatletter
+\newsavebox{\mtp@matrixbox}
+
+% robust pmatrix (δουλεύει και μέσα σε align, gather, ...)
+\renewenvironment{pmatrix}{%
+  \matrix@check\pmatrix
+  \setbox\mtp@matrixbox=\hbox\bgroup$\begin{matrix}%
+}{%
+  \end{matrix}$\egroup
+  \PARENS{\copy\mtp@matrixbox}%
+}
+
+% και για pmatrix* (mathtools)
+\renewenvironment{pmatrix*}[1][c]{%
+  \matrix@check\pmatrix
+  \setbox\mtp@matrixbox=\hbox\bgroup$\begin{matrix*}[#1]%
+}{%
+  \end{matrix*}$\egroup
+  \PARENS{\copy\mtp@matrixbox}%
+}
+\makeatother
 
 \DeclareMathSizes{10.95}{10.95}{7}{5}
 \DeclareMathSizes{6}{6}{3.8}{2.7}
@@ -50,6 +75,9 @@
 \fontdimen14\textfont2=4.5pt
 \fontdimen13\textfont2=4.5pt}
 \makeatother
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\diag}{diag}
 %----------------------------------------------------------------------
 
 %----------------- Γραφικά και σχήματα --------------------------------
@@ -193,8 +221,9 @@ width=#1]}
 
 \newenvironment{Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{magenta!70!black}{\textbf{\large \faPlay\ \ \titlefont{Παράδειγμα}\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}} {\titlefont{#1}}\\\bfseries\boldmath}{\mbox{}\newline\lysh\mbox{}\newline}
 
-% ΣΤΥΛ ΛΥΣΗΣ 
-\newcommand{\lysh}{\textcolor{cyan!80!black}{\titlefont{\faCheck\ ΛΥΣΗ}}}
+% ΣΤΥΛ ΛΥΣΗΣ - ΑΠΟΔΕΙΞΗΣ
+\newcommand{\lysh}{\textcolor{maincolor!80!black}{\titlefont{\faCheck\ ΛΥΣΗ}}}
+\newcommand{\apodeiksi}{\textcolor{secondarycolor!80!black}{\titlefont{\faPen\ \textbf{ΑΠΟΔΕΙΞΗ}\\}}}
 
 % ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ ΤΙΤΛΟΣ 
 \newcommand{\Lymena}{\begin{center}
@@ -225,6 +254,59 @@ width=#1]}
 
 \newcounter{protasi}[chapter]
 \renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+% Κάρτα πληροφοριών με φωτογραφία
+\newcommand{\Info}[5]{
+\begin{tcolorbox}[
+    enhanced,
+    width=5.5cm,
+    arc=2mm,
+    colback=white,
+    colframe=black,
+    boxrule=0pt,
+    bottom=0pt, top=0pt, left=0pt, right=0pt,
+	enhanced standard,
+	fuzzy shadow={2mm}{-2mm}{0mm}{0.4mm}{black!50!white},
+	boxsep=0mm
+]
+
+% --- Εικόνα χωρίς καθόλου περιθώρια ---
+\begin{tikzpicture}
+\node[
+    inner sep=0pt,
+    outer sep=0pt,
+    rounded corners=2mm,
+    clip
+] {\includegraphics[width=\linewidth,height=4cm]{#5}};
+\end{tikzpicture}
+
+% --- Κείμενο ---
+\begin{tcolorbox}[
+    colback=white,
+    boxrule=0pt,
+    top=2mm,bottom=0mm,left=3mm,right=3mm,
+    sharp corners=all
+]
+    \begin{center}
+    {\bfseries\LARGE \titlefont{#1}} \\[4pt]
+	{\color{secondarycolor!80!black} \titlefont{#2}}
+	\end{center}
+    {\small #3}
+\end{tcolorbox}
+
+% --- Κάτω μπάρα ---
+\begin{tcolorbox}[
+    colback=maincolor!90!black,
+    colupper=white,
+    boxrule=0pt,
+    bottom=3pt,top=3pt,left=2mm,right=2mm,
+    rounded corners=south,
+	sharp corners=north,
+    arc=2mm
+]
+\titlefont{#4}
+\end{tcolorbox}
+\end{tcolorbox}}
 %---------------------------------------------------------------------------
 
 %------------------ Λίστες ------------------------------------
@@ -286,6 +368,27 @@ hline{2} = {.7mm}, % midrule
 %-------------------------------------------------------------------
 
 %-------------- Περιεχόμνα ------------------------------------------
+\usepackage{sidenotes}  % <-- To place content in the margin
+\usepackage{etoc}       % <-- ΑΛΛΑΓΗ: Αντικαταστάθηκε το minitoc με το etoc
+\etocsettocdepth{1}
+% --- Etoc Setup ---
+% Το etoc είναι πιο σύγχρονο και συνήθως χρειάζεται μόνο 2 μεταγλωττίσεις.
+% Προσαρμόζουμε την εμφάνιση του τοπικού πίνακα περιεχομένων.
+\etocsetstyle{section}{}{}{\hspace{2mm}
+\makebox[0pt][r]{\textcolor{secondarycolor!80!black}{\faStop}\ \ 
+\titlefont{\textbf{\etocnumber}}\hspace{1em}}%
+\titlefont{\etocname}\par}{}
+
+\etocsettocstyle {
+\noindent\titlefont{\large \textbf{\hspace{2mm}\contentsname\ \ κεφαλαίου}}\par
+                  \thispagestyle{empty}%
+                  \noindent{\color{maincolor}\textbf{\dotfill}}\par\vspace{1ex}%
+                  \leftskip1.5cm\parindent0pt\def\TEMP{0}}{}
+\etocsetstyle{subsection}
+  {}
+  {\etocnumber.\enspace}
+  {}
+  {}
 \contentsmargin{0cm}
 \titlecontents{part}[-1pc]
 {\addvspace{10pt}%
@@ -328,7 +431,43 @@ hline{2} = {.7mm}, % midrule
 \end{tikzpicture}}%
 \@starttoc{toc}}
 \makeatother
-%---------------------------------------------------------------
+%-------------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ-------------------------------------------------
+
+% ΔΙΟΡΘΩΣΗ: Νέες εντολές για τη διαχείριση της εικόνας του κεφαλαίου
+\newcommand{\chapterimagefile}{example-image-b} % Ορίζουμε μια προεπιλεγμένη εικόνα
+\newcommand{\setchapterimage}[1]{\renewcommand{\chapterimagefile}{#1}} % Εντολή για την αλλαγή της εικόνας
+
+\definecolor{chapterbg}{HTML}{125e6c}
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{\normalfont\huge }
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north, inner sep=0pt, name=headerimage,outer sep=0pt] at (current page.north) {
+        \includegraphics[width=\paperwidth, trim={0 0pt 0 0}, clip]{\chapterimagefile}
+    };
+    \node[
+        name=chnumber,fill=maincolor!50!black, opacity=0.7,text=white,anchor=north west,outer sep=0pt,
+        rotate=90,font=\sffamily\bfseries,minimum height=1.5cm,minimum width=3.5cm,inner sep=20pt
+    ] at (headerimage.south west) {\titlefont{Κεφάλαιο {\Huge \thechapter}} };
+    \node[
+        name=chtitle,anchor=north west,fill=maincolor!50!black,outer sep=0pt,
+        minimum width=\paperwidth-2cm,
+        minimum height=2.5cm,text=white,font=\sffamily\bfseries
+    ] at (chnumber.south west) {\titlefont{
+\begin{minipage}{\paperwidth-4cm}
+##1
+\end{minipage}
+}};
+\fill[maincolor!30!black,anchor=north] (headerimage.south west) rectangle (chtitle.south west);
+    \fill[cyan,anchor=north] (chtitle.north west) rectangle ($(chtitle.north east)+(0,3mm)$);
+\end{tikzpicture}
+\vspace{9cm}
+}
+%\titlespacing*{\chapter}{0pt}{20pt}{100pt}
+}
+\apptocmd{\mainmatter}{\fancychapter}{}{}
 
 \titleformat{\section}{\Large}{\titlefont{\textbf{\thesection}}}{10pt}{\Large\titlefont{\textbf{#1}}}
 
@@ -344,6 +483,29 @@ hline{2} = {.7mm}, % midrule
 \newcommand{\tss}[1]{\textsuperscript{#1}}
 \newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
 
+% --- Command for the Sidenote TOC ---
+% ΑΛΛΑΓΗ: Η εντολή χρησιμοποιεί πλέον την εντολή \localtableofcontents του etoc
+\usepackage{tikzpagenodes,eso-pic}
+\newcommand{\chaptertoc}{%
+\AddToShipoutPictureFG*{%
+    \begin{tikzpicture}[overlay]
+      % Βρίσκουμε τις πάνω και κάτω δεξιά γωνίες του κυρίως κειμένου
+      \coordinate (NE) at ($(current page text area.north east)+(-59mm,-14.5cm)$);
+      \coordinate (SE) at ($(current page text area.south east)+(-59mm,0)$);
+      % Σχεδιάζουμε τη γραμμή ανάμεσα στο κείμενο και το περιθώριο
+      \draw[magenta!80!black] ([xshift=0.5\marginparsep]NE) -- ([xshift=0.5\marginparsep]SE);
+    \end{tikzpicture}%
+  }%
+  \marginpar{%
+\vspace*{8mm}
+    \begin{minipage}{\dimexpr\marginparwidth+4mm}
+    \begin{flushleft}
+\localtableofcontents
+\end{flushleft}
+    \end{minipage}%
+  }%
+}
+
 
 \begin{document}
 \pagestyle{empty}
@@ -353,7 +515,9 @@ hline{2} = {.7mm}, % midrule
 \restoregeometry % restores the geometry
 \mainmatter
 \pagestyle{fancy}
+\setchapterimage{./images/9.png}
 \chapter{Εισαγωγή}
+\chaptertoc
 \section{Βασικές έννοιες}
 ...\\
 Σε μια διαφορική εξίσωση ο σκοπός είναι η εύρεση μιας άγνωστης συνάρτησης $y$, μίας ή περισσοτέρων μεταβλητών.
@@ -468,7 +632,9 @@ F\left(x,y,y',\ldots,y^{(\nu)}\right)=0
 \end{alist}
 \end{adjustwidth}}
 \full{\alyta}
+\setchapterimage{./images/10.png}
 \chapter{Διαφορικές εξισώσεις 1\tss{ης} τάξης}
+\chaptertoc
 \section{Εξισώσεις χωριζομένων μεταβλητών}
 Το όνομά τους υποδεικνύει και τη δομή τους. Είναι τέτοια ώστε να μπορέσουμε να διαχωρίσουμε στα δύο μέλη της εξίσωσης την ανεξάρτητη μεταβλητή $x$ από την εξαρτημένη $y$. Οι διαφορικές εξισώσεις χωριζομένων μεταβλητών είναι από τις πιο απλές, στην επίλυσή τους, που θα συναντήσουμε. Αν η εξίσωση είναι γραμμένη στην επιλύσιμη μορφή της, η εύρεση της λύσης γίνεται με άμεση ολοκλήρωση.
 \begin{Orismos}{Εξίσωση χωριζομένων μεταβλητών}
@@ -1360,7 +1526,9 @@ z(x)=e^{-\dintt{p(x)\d x}}\left(c-\int{a(x)e^{\dintt{p(x)\d x}}\d x}\right)
 \subsection{Εξίσωση \eng{Clairaut}}
 \subsection{Νόμοι \eng{Kepler}}
 \section{Αντικατάσταση}
+\setchapterimage{./images/3.png}
 \chapter{Διαφορικές εξισώσεις 2ης τάξης}
+\chaptertoc
 \section{Γραμμικές εξισώσεις με σταθερούς συντελεστές}
 \section{Εξίσωση \eng{Euler}}
 \section{Υποβιβασμός τάξης}
@@ -1371,8 +1539,11 @@ z(x)=e^{-\dintt{p(x)\d x}}\left(c-\int{a(x)e^{\dintt{p(x)\d x}}\d x}\right)
 \section{Μη ομογενείς εξισώσεις}
 \section{Μέθοδος \eng{Lagrange}}
 \section{Δυναμοσειρές}
+\setchapterimage{./images/11.jpeg}
 \chapter{Γραμμικές διαφορικές εξισώσεις}
+\chaptertoc
 \section{Ομογενείς εξισώσεις}
+\lipsum[1-3]
 \section{Γραμμική ανεξαρτησία - Ορίζουσα \eng{Wronski}}
 \section{Βασικά σύνολα λύσεων}
 \section{Υποβιβασμός τάξης}
@@ -1394,8 +1565,11 @@ z(x)=e^{-\dintt{p(x)\d x}}\left(c-\int{a(x)e^{\dintt{p(x)\d x}}\d x}\right)
 \section{Μέθοδος προσδιορισμού συντελεστών}
 \section{Προβλήματα αρχικών και συνοριακών τιμών}
 \section{\eng{Sturm - Liouville}}
+\setchapterimage{./images/15.png}
 \chapter{Συστήματα διαφορικών εξισώσεων}
+\chaptertoc
 \section{Ομογενή γραμμικά συστήματα}
+\lipsum[1-3]
 \section{Πίνακες λύσεων - Τύπος \eng{Jacobi}}
 \section{Στοιχεία γραμμικής άλγεβρας - Ανάλυση πινάκων}
 \section{Βασικοί πίνακες - Σύνολα λύσεων}
