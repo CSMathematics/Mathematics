@@ -1,10 +1,29 @@
 \documentclass[11pt,a4paper,twoside]{book}
 \usepackage[english,greek]{babel}
-\usepackage[utf8]{inputenc}
 %------------------ Γραμματοσειρές -------------------------------------
-\usepackage{nimbusserif}% Βασικό font : 
-\usepackage[T1]{fontenc}
-\newcommand{\titlefont}[1]{{\fontfamily{maksf}\selectfont #1}}
+%\usepackage{nimbusserif}% Βασικό font : 
+%\usepackage[T1]{fontenc}
+%\newcommand{\titlefont}[1]{{\fontfamily{maksf}\selectfont #1}}
+\usepackage[no-math]{fontspec}
+\usepackage{xgreek}
+\usepackage{parskip}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\titlefont{Century Gothic Bold}
+\defaultfontfeatures{Ligatures=TeX}
+% Ορίζουμε τις "οικογένειες" γραμματοσειρών
+\newfontfamily\notoserif{Noto Serif}
+\newfontfamily\urwgothic{URW Gothic}
+
+% Ορίζουμε εντολές που τις χρησιμοποιούν με το σωστό μέγεθος
+\newcommand{\kefalaio}[1]{{\notoserif\bfseries\fontsize{36}{42}\selectfont #1}}
+\newcommand{\ArKef}[1]{{\notoserif\bfseries\itshape\fontsize{72}{80}\selectfont #1}}
+\newcommand{\OnKef}[1]{{\notoserif\fontsize{40}{46}\selectfont #1}}
+\newcommand{\OnPar}[1]{{\notoserif\bfseries\fontsize{18}{22}\selectfont #1}}
+\newcommand{\onoma}[1]{{\urwgothic\bfseries\normalsize #1}} % 11pt είναι το \normalsize
+\newcommand{\Askhseis}[1]{{\urwgothic\bfseries\fontsize{16}{19}\selectfont #1}}
+\newfontfamily\scfont{Nimbus Roman}
 %-----------------------------------------------------------------------
 
 %------------------- Διάφορα ---------------------------------------------
@@ -14,8 +33,14 @@
 %--------------------------------------------------------------------------
 
 %------------------- Γεωμετρία - Στύλ ----------------------------------
-\usepackage[inner=1.5cm, top=3cm, bottom=2cm]{geometry}
-\geometry{textwidth=12cm,marginparsep=5mm,marginparwidth=5.5cm}
+\usepackage[
+    inner=1.5cm,
+    top=3cm,
+    bottom=2cm,
+    textwidth=12cm,
+    marginparsep=5mm,
+    marginparwidth=5.5cm
+]{geometry}
 \newcommand{\full}[1]{\begin{mdframed}[outermargin=\dimexpr-\marginparwidth-\marginparsep\relax,innerleftmargin=0mm,innerrightmargin=0mm,hidealllines=true]
 #1
 \end{mdframed}}
@@ -29,7 +54,7 @@
 \let\myBbbk\Bbbk
 \let\Bbbk\relax
 \usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
-\usepackage{mathimatika,venndiagram,tkz-euclide,diffcoeff,mathtools}
+\usepackage{mathimatika,venndiagram,diffcoeff,mathtools}
 \allowdisplaybreaks
 
 \providecommand\PARENS[1]{\left(#1\right)}
@@ -84,8 +109,10 @@
 \usepackage{graphicx,tikz,pgfplots,tkz-euclide}
 \usetikzlibrary{shadows,calc,fadings}
 \tikzset{>=latex}
-\tikzstyle{l3}=[line width=0.3mm]
-\tikzstyle{l4}=[line width=0.4mm]
+\tikzset{
+    l3/.style={line width=0.3mm},
+    l4/.style={line width=0.4mm}
+}
 \tikzset{labelbox/.style args={#1}{align=center,draw=#1,fill=#1!30!white,rectangle,rounded corners=1,font=\tiny\linespread{0.8}\selectfont}}
 \tkzSetUpPoint[size=2.8,fill=white]
 \pgfplotsset{compat=newest}
@@ -368,7 +395,6 @@ hline{2} = {.7mm}, % midrule
 %-------------------------------------------------------------------
 
 %-------------- Περιεχόμνα ------------------------------------------
-\usepackage{sidenotes}  % <-- To place content in the margin
 \usepackage{etoc}       % <-- ΑΛΛΑΓΗ: Αντικαταστάθηκε το minitoc με το etoc
 \etocsettocdepth{1}
 % --- Etoc Setup ---
@@ -380,7 +406,7 @@ hline{2} = {.7mm}, % midrule
 \titlefont{\etocname}\par}{}
 
 \etocsettocstyle {
-\noindent\titlefont{\large \textbf{\hspace{2mm}\contentsname\ \ κεφαλαίου}}\par
+\noindent\titlefont{\Large \textbf{\hspace{2mm}Περιεχόμενα\ \ κεφαλαίου}}\par
                   \thispagestyle{empty}%
                   \noindent{\color{maincolor}\textbf{\dotfill}}\par\vspace{1ex}%
                   \leftskip1.5cm\parindent0pt\def\TEMP{0}}{}

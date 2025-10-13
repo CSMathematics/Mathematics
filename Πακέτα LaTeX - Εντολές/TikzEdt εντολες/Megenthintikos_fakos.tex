@@ -1,0 +1,47 @@
+\documentclass[11pt]{standalone} % use larger type; default would be 10pt
+\usepackage{amsmath}
+\usepackage{tikz,mtpro2}
+\usepackage{tkz-euclide}
+\usetkzobj{all} %% om allerhande objecten te gebruiken zoals gradenboog...
+
+\usepackage{pgfplots}
+\pgfplotsset{width=7cm,compat=1.8}
+\usepgfplotslibrary{statistics}
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+ xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=7,fill=white]
+\def\xrwma{cyan!80!black}
+\usetikzlibrary{spy}
+\usetikzlibrary{calc,intersections,through,backgrounds,snakes}
+\begin{document}
+\def\ee{100}
+\begin{tikzpicture}[spy using outlines=
+	{circle, magnification=6, connect spies}]
+\draw[xstep=.5,ystep=0.5,gray!30,thin] (0.5,0.6) grid (5,5.4);
+\fill[\xrwma,opacity=0.2] (.6,.5) rectangle (0.8,5.5); 
+\begin{axis}[x=5cm,y=2.5cm,aks_on,xmin=-.1,xmax=1,
+ymin=-.2,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,xtick={
+0.2,0.4,0.6,0.8,1},ytick={
+0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2}]
+\addplot[grafikh parastash,domain=0.0001:1,samples=400]{2/(x+1)-2*exp(-\ee*x)};
+\addplot[black,domain=0.0001:1]{2/(x+1)};
+\addplot[dashed,domain=0.0001:1,samples=200]{2-2*exp(-\ee*x)};
+\coordinate (spypoint) at (axis cs:.05,1.87);
+\coordinate (magnifyglass) at (axis cs:0.6,0.7);
+\node at (axis cs:-.5,-0.1) {\footnotesize$O$};
+\end{axis}
+\node at(3,6){$ y(x)=\frac{2}{1+x}-2e^{-\frac{x}{\epsilon}} $};
+\node at(3,6.5){$ \epsilon=0.01 $};
+\draw[\xrwma] (4,-.3)--(4.5,-.3)node[right,black]{$ y_u(x) $};
+\draw (0,-.3)--(.5,-.3)node[right,black]{$ y_0(x) $};
+\draw[dashed] (2,-.3)--(2.5,-.3)node[right,black]{$ y_i(x) $};
+\spy [\xrwma, size=3cm] on (spypoint)
+   in node[fill=white] at (magnifyglass);
+\end{tikzpicture}
+\end{document}
