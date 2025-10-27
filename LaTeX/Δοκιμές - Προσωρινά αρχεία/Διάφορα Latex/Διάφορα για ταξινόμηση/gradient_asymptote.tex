@@ -1,0 +1,32 @@
+\documentclass[a3paper]{article}
+\usepackage[inline]{asymptote}
+\usepackage{lmodern}
+
+\begin{document}
+\begin{figure}
+\begin{asy}
+texpreamble("\usepackage{mtpro2}");
+import graph3;
+size(7.5cm,0);
+real f(pair z) {return -exp(-abs(z)^2);}
+currentprojection=perspective(4,5,4);
+limits(O,2.25(1,1,1));
+xaxis3(Label("$x$",1),blue,arrow=Arrow3);
+yaxis3(Label("$y$",1),blue,arrow=Arrow3);
+zaxis3(Label("$z$",1),blue,arrow=Arrow3);
+draw(surface(f,(-2,-2),(2,2),nx=20,Spline),
+     lightgray,meshpen=black+thick(),nolight);
+dot(Label("$O$",align=Z+X),(0,0,0),red);
+\end{asy}
+\caption{Demonstration of the blind spot}
+\end{figure}
+\end{document}
+
+% To process it with `latexmk`, create file `latexmkrc`:
+% 
+%     sub asy {return system("asy '$_[0]'");}
+%     add_cus_dep("asy","eps",0,"asy");
+%     add_cus_dep("asy","pdf",0,"asy");
+%     add_cus_dep("asy","tex",0,"asy");
+% 
+% and run `latexmk -pdf lusion.tex`.

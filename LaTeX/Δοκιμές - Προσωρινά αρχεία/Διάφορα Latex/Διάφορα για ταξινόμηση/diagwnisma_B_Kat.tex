@@ -1,0 +1,170 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage{tikz,tkz-euclide}
+\usepackage{enumitem}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=3.00cm]{geometry}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \Alph*},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\Alph{themai}.\arabic*}},itemsep=0mm,leftmargin=0.8cm}
+\newcommand{\monades}[1]{
+\hspace*{\fill}
+\textbf{\textit{Μονάδες #1}}}
+\newcommand{\kaliepityxia}{\vfill
+\begin{flushright}
+Καλή Επιτυχία!
+\end{flushright}}
+
+\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt 
+}
+\makeatother
+\newcommand{\swstolathos}{Να χαρακτηρίσετε τις παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ).}
+\newcommand{\swstolathosd}{Να χαρακτηρίσετε τις παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ). Στη συνέχεια να διορθώσετε τις προτάσεις που είναι λανθασμένες γράφοντας τη σωστή απάντηση.}
+\newcommand{\swstolathospan}{Να χαρακτηρίσετε καθεμία από τις παρακάτω προτάσεις ως \textbf{Σωστή} ή \textbf{Λανθασμένη}.}
+
+
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Διαγώνισμα}}\\
+\textbf{Μαθηματικά Προσανατολισμού Β΄ Λυκείου}\\
+\textbf{Έννοια διανύσματος - Πρόσθεση - Πολλαπλασιασμός αριθμού με διάνυσμα}
+\end{center}
+\begin{thema}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Να αναφέρετε με ποιους τρόπους γίνεται η πρόσθεση δύο διανυσμάτων και να σχεδιάσετε και το αντίστοιχο σχήμα για κάθε τρόπο.\\\monades{0.5}
+\item Να γράψετε τρεις από τις ιδιότητες του πολλαπλασιασμού ανάμεσα σε πραγματικό αριθμό και διάνυσμα.\monades{1}
+\item Ποιά είναι τα στοιχεία ενός διανύσματος;\monades{0.5}
+\item Ποια διανύσματα λέγονται ομόρροπα και ποια αντίθετα;\monades{1}
+\item \swstolathos
+\begin{alist}
+\item Αν ισχύει $ \overrightarrow{AB}=\overrightarrow{\varGamma\varDelta} $ τότε τα διανύσματα $ \overrightarrow{AB} $ και $ \overrightarrow{\varGamma\varDelta} $ είναι παράλληλα.
+\item Αν ισχύει $ \overrightarrow{A\varDelta}=\overrightarrow{B\varGamma} $ τότε το τετράπλευρο $ AB\varGamma\varDelta $ είναι παραλληλόγραμμο.
+\item Αν ισχύει $ \vec{a}=-3\vec{\beta} $ τότε τα διανύσματα $ \vec{a} $ και $ \vec{\beta} $ είναι ομόρροπα.
+\item Ο γεωμετρικός τόπος των σημείων $ M $ για τα οποία ισχύει η ισότητα $ |\overrightarrow{MA}|=2 $ είναι κύκλος με κέντρο το σημείο $ A $ με ακτίνα $ 2 $.
+\item Από την ισότητα $ |\overrightarrow{AB}|=|\overrightarrow{A\varGamma}| $ προκύπτει ότι τα σημεία $ A,B $ και $ \varGamma $ είναι συνευθειακά.
+\end{alist}\monades{2}
+\end{erwthma}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Αν ισχύει $ \overrightarrow{A\varDelta}-\overrightarrow{Z\varGamma}=\overrightarrow{BE}+\overrightarrow{B \varDelta}-\overrightarrow{ZE} $ να αποδείξετε ότι το $ \varGamma $ είναι μέσο του ευθυγράμμου τμήματος $ AB $.\monades{1.5}
+\item Να αποδείξετε ότι για οποιαδήποτε σημεία $ A,B,\varGamma,\varDelta $ ισχύει ότι : $ 4 \overrightarrow{AB}+3 \overrightarrow{A\varGamma}=4 \overrightarrow{\varDelta B}+3 \overrightarrow{\varDelta \varGamma}-7 \overrightarrow{\varDelta A} $.\monades{2}
+\item Αν ισχύει ότι: $ 3 \overrightarrow{B\varDelta}-\overrightarrow{\varGamma A}=3 \overrightarrow{B \varGamma}-\overrightarrow{\varDelta B} $ να αποδείξετε ότι $ \overrightarrow{AB}\updownarrows\overrightarrow{\varGamma\varDelta} $.\monades{1.5}
+\end{erwthma}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Αν ισχύει $ 2 \overrightarrow{A\varLambda}+3 \overrightarrow{B\varLambda}+2 \overrightarrow{MB}=\overrightarrow{AK}+\overrightarrow{AM}+\overrightarrow{BK} $ να αποδείξετε ότι τα διανύσματα $ \overrightarrow{K\varLambda} $ και $ \overrightarrow{M\varLambda} $ είναι αντίρροπα.\monades{2}
+\item Δίνεται τρίγωνο $ AB\varGamma $ και τα σημεία $ \varDelta,E $ του επιπέδου του τέτοια ώστε : $ \overrightarrow{A\varDelta}=5 \overrightarrow{A B}+8 \overrightarrow{A \varGamma} $ και $ \overrightarrow{A E}=3 \overrightarrow{AB}+10 \overrightarrow{A \varGamma} $. Να αποδειχθεί ότι : $ \overrightarrow{\varDelta E}\parallel \overleftrightarrow{B\varGamma} $.\monades{2}
+\item Αν ισχύουν $ |\vec{a}|=3,|\vec{\beta}|=2 $ και $ |\vec{a}+\vec{\beta}|\geq 5 $ ,να αποδείξετε ότι τα διανύσματα $ \vec{a},\vec{\beta} $ είναι ομόρροπα.\monades{1}
+\end{erwthma}
+\item\mbox{}\\\vspace{-7mm}
+\begin{erwthma}
+\item Δίνονται σημεία $ A,B,\varGamma,\varDelta,E $ για τα οποία ισχύει ότι : $ 5 \overrightarrow{A \varDelta}-3 \overrightarrow{AE}-4 \overrightarrow{\varDelta \varGamma}=4 \overrightarrow{EB}-\overrightarrow{E \varGamma}+9 \overrightarrow{BA} $. Να αποδείξετε ότι τα σημεία $ A,B,\varGamma $ είναι συνευθειακά.\monades{1.5}
+\item Να αποδείξετε ότι αν: $ (a+4) \overrightarrow{KA}+5 \overrightarrow{KB}=(a+9) \overrightarrow{K \varGamma} $, όπου $ a\in\mathbb{R} $, τότε τα σημεία $ A,B,\varGamma $ είναι συνευθειακά.\monades{1.5}
+\item Έστω παραλληλόγραμμο $ AB\varGamma\varDelta $ και $ K $ το κέντρο του. Αν $ M $ είναι το μέσο του $ K\varGamma $, να αποδείξετε ότι $ \overrightarrow{\mathrm{AB}}+\overrightarrow{A\varDelta}=4 \overrightarrow{AM}-2 \overrightarrow{\mathrm{A\varGamma}} $.\monades{2}
+\end{erwthma}
+\end{thema}
+\begin{flushright}
+Διάρκεια διαγωνίσματος 2 ώρες.
+\end{flushright}
+\kaliepityxia
+\end{document}
+
+
+

@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage{xintfrac}
+\usepackage{xinttools}
+\usepackage{array} 
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\catcode`_ 11
+\makeatletter
+
+\newcount\MAT_cnta
+\newcount\MAT_cntb
+\newcount\MAT_cntc
+\newcount\MAT_cntd
+\newcount\MAT_cnte
+
+% Usage: \MATset\myMatrix{semi-colon separated rows of comma separated values}
+% example.
+% \MATset\MatrixA { 1/3 , 1/4, 1/5 ; 
+%                   1/6 , 1/7 , 1/8 ; 
+%                   1/9 , 1/10 , 1/11 ; }
+
+\def\MATset {\def\MAT_xintin {\xintRaw}\MATset_ }%
+
+\def\MATset_ #1#2{%
+    \def\MATset_name{#1}%
+    \edef\MAT_tmpa {#2}%
+    \MAT_cnta \xint_c_ % sets \MAT_cnta to zero
+    \expandafter\MATset_a 
+    \romannumeral0\expandafter\xintzapspaces\expandafter{\MAT_tmpa};!;%
+}%
+\def\MATset_a {\futurelet\XINT_token\MATset_b }%
+\def\MATset_b #1;{\def\MAT_tmpa{#1}%
+                  \ifx\XINT_token;\expandafter\MATset_w
+                  \else
+                  \ifx\XINT_token!%
+                          \expandafter\expandafter\expandafter\MATset_x
+                     \else
+                          \expandafter\expandafter\expandafter\MATset_c
+                  \fi\fi }%
+\def\MATset_w !;{\MATset_x }%
+\def\MATset_x {\expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {I}\expandafter\endcsname
+  \expandafter {\the\MAT_cnta }%
+               \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {J}\expandafter\endcsname 
+  \expandafter {\the\MAT_cntb }%
+  \expandafter\edef \MATset_name [##1]%
+     {\noexpand\csname MAT@\expandafter\string\MATset_name 
+               \noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+%
+\def\MAT_in #1,#2,{\xint_bye #2\xint_gobble_iv\xint_bye
+                   {\the\numexpr #1}{\the\numexpr #2}\xint_gobble_iii 
+                   {\xintZapSpaces{#1}}}%
+%
+\def\MATset_c {\advance\MAT_cnta \xint_c_i % row count ++
+               \MAT_cntb \xint_c_ % column count initially zero
+               \expandafter\MATset_d\romannumeral0\expandafter
+               \xintzapspaces\expandafter {\MAT_tmpa},!,}%
+\def\MATset_d {\futurelet\XINT_token\MATset_e }%
+\def\MATset_e #1,{\ifx\XINT_token!\expandafter\MATset_a
+  \else
+      \advance\MAT_cntb \xint_c_i
+      \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name 
+            {\the\MAT_cnta}{\the\MAT_cntb}\expandafter\endcsname
+  \expandafter{\romannumeral-`0\MAT_xintin{\xintZapSpacesB{#1}}}%
+  \expandafter\MATset_d\fi
+}%
+
+\def\MATlet #1#2{%
+    \edef\MAT@seqI{\xintSeq {1}{#2[I]}}%
+    \edef\MAT@seqJ{\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in {\MAT@seqI}
+    \do{\xintFor* ##2 in {\MAT@seqJ}
+        \do{\expandafter\let
+     \csname MAT@\string#1{##1}{##2}\expandafter\endcsname
+     \csname MAT@\string#2{##1}{##2}\endcsname
+     }}%
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#2[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+\def\MATrowreduce #1{%
+  \begingroup
+    \edef\MATrr@rows{#1[I]}%
+    \edef\MATrr@cols{#1[J]}%
+    \def\MATrr@pivrow {0}%
+    \def\MATrr@pivcol {0}%
+    \MATlet\@U #1%
+    \let\MATrr@ifcontinue\iftrue
+Ξεκινάμε την απαλοιφή του πίνακα:
+\MATrrdisplaymatrix\@U
+    \xintloop
+       \edef\MATrr@pivrow{\the\numexpr\MATrr@pivrow+\xint_c_i}%
+       \edef\MATrr@pivcol{\the\numexpr\MATrr@pivcol+\xint_c_i}%
+       \MATrr@dopiv
+    \MATrr@ifcontinue
+    \repeat
+Τέλος. Η τάξη του πίνακα είναι  \the\numexpr\MATrr@pivrow-\xint_c_i.\par
+  \endgroup
+}
+
+\def\MATrr@done {\let\MATrr@ifcontinue\iffalse}
+
+\def\MATrr@dopiv{%
+    \let\MATrr@row\MATrr@pivrow
+    \let\MATrr@col\MATrr@pivcol
+    \ifnum\MATrr@row>\MATrr@rows\relax
+        \MATrr@done
+    \else
+        \ifnum\MATrr@col>\MATrr@cols\relax
+            \MATrr@done
+        \else
+            \expandafter\expandafter\expandafter\MATrr@dopiv@i
+        \fi
+    \fi
+}
+
+\def\MATrr@dopiv@i{%
+    \edef\MATrr@piv@value{\@U[\MATrr@row,\MATrr@pivcol]}%
+    \xintifZero{\MATrr@piv@value}
+        \MATrr@dopiv@steprow
+        \MATrr@dopiv@ii
+}
+
+\def\MATrr@dopiv@steprow{%
+     \ifnum\MATrr@row=\MATrr@rows\relax
+         \let\MATrr@row\MATrr@pivrow
+\par Δεν βρέθηκε οδηγός στη στήλη \MATrr@pivcol.\par
+         \expandafter\MATrr@dopiv@stepcol
+     \else
+         \edef\MATrr@row{\the\numexpr\MATrr@row+\xint_c_i}%
+         \expandafter\MATrr@dopiv@i
+     \fi
+}
+
+\def\MATrr@dopiv@stepcol{%
+     \ifnum\MATrr@pivcol=\MATrr@cols\relax
+         \MATrr@done
+     \else
+         \edef\MATrr@pivcol{\the\numexpr\MATrr@pivcol+\xint_c_i}%
+         \expandafter\MATrr@dopiv@i
+     \fi
+}
+
+\def\MATrr@dopiv@ii{%
+    \ifnum\MATrr@pivrow=\MATrr@rows\relax
+      \edef\MATrr@pivrow{\the\numexpr\MATrr@pivrow+\xint_c_i}\MATrr@done
+    \else
+      \expandafter\MATrr@dopiv@iii
+    \fi
+}
+
+\def\MATrr@dopiv@iii{%
+Χρησιμοποιώντας τον οδηγό με τιμή  \MATrrprintonevalue{\MATrr@piv@value}
+στη γραμμή \MATrr@row\space και στήλη \MATrr@pivcol.\par
+    \ifnum\MATrr@row>\MATrr@pivrow\relax
+Εναλλάσσουμε τη γραμμή \MATrr@row\space με τη γραμμή \MATrr@pivrow.\par
+      \MAT_cntb=\MATrr@pivcol\relax
+      \xintloop
+         \expandafter\let\expandafter\MAT@tmp
+         \csname MAT@\string\@U{\MATrr@row}{\the\MAT_cntb}\endcsname
+         \expandafter\let
+         \csname MAT@\string\@U{\MATrr@row}{\the\MAT_cntb}\expandafter\endcsname
+         \csname MAT@\string\@U{\MATrr@pivrow}{\the\MAT_cntb}\endcsname
+         \expandafter\let
+         \csname MAT@\string\@U{\MATrr@pivrow}{\the\MAT_cntb}\endcsname
+         \MAT@tmp
+      \ifnum\MATrr@cols>\MAT_cntb
+         \advance\MAT_cntb\xint_c_i
+      \repeat
+\MATrrdisplaymatrix\@U\par
+    \fi
+    \MAT_cntc\MATrr@pivrow
+    \xintloop
+      \advance\MAT_cntc\xint_c_i
+      \edef\MATrr@entry{\@U[\MAT_cntc,\MATrr@pivcol]}%
+      \xintifZero\MATrr@entry
+     {}%
+     {\edef\MATrr@ratio{\xintIrr{\xintDiv{\MATrr@entry}{\MATrr@piv@value}}[0]}%
+Αφαιρούμε από τη γραμμή \the\MAT_cntc\space τη γραμμή του οδηγού πολλαπλασιασμένη με 
+\MATrrprintonevalue{\MATrr@ratio}.\par
+      \@namedef{MAT@\string\@U{\the\MAT_cntc}{\MATrr@pivcol}}{0[0]}%
+      \MAT_cntd\MATrr@pivcol\relax
+      \xintloop
+      \advance\MAT_cntd\xint_c_i
+      \unless\ifnum\MATrr@cols<\MAT_cntd
+        \expandafter\edef
+        \csname MAT@\string\@U{\the\MAT_cntc}{\the\MAT_cntd}\endcsname
+          {\xintIrr{%
+           \xintSub{\@U[\MAT_cntc,\MAT_cntd]}
+                   {\xintMul{\MATrr@ratio}{\@U[\MATrr@pivrow,\MAT_cntd]}}%
+           }[0]}%
+      \repeat
+      }%
+    \unless\ifnum\MATrr@rows=\MAT_cntc
+    \repeat
+\MATrrdisplaymatrix\@U
+}
+
+\def\MATrrprintonevalue{\xintPRaw}
+\def\MATrrdisplaymatrix #1{\[\MATdisplay#1\]}%
+
+%% MATH MODE MATRIX DISPLAY
+
+\makeatother
+
+\newcommand\MATdisplay [1][1.25]{\MATdisplaywith [#1]{\MATdisplayone}}
+\def\MATdisplayone {\xintSignedFrac}
+
+\newcolumntype\MATdisplaycoltype {c}
+\newcolumntype\MATdisplaypreamble [1]{@{}*{#1[J]}\MATdisplaycoltype@{}}
+
+\newcommand\MATdisplaywith [3][1.25]
+   {\left(\def\arraystretch{#1}%
+    \begin{array}{\MATdisplaypreamble {#3}}
+         \xintListWithSep {\\}
+       {\xintApply { \MAT_display_row {#2}#3}{\xintSeq {1}{#3[I]}}}
+    \end{array}\right)%
+}%
+
+\def\MAT_display_row #1#2#3{%
+    \xintListWithSep {&}
+     {\xintApply{ \MAT_display_one {#1}#2{#3}}{\xintSeq {1}{#2[J]}}}%
+}%
+
+\def\MAT_display_one #1#2#3#4{#1{#2[#3,#4]}}%
+
+\catcode`_ 8   
+
+\begin{document}
+\MATset\MatrixA {
+ 3, 1, -2, 5;
+ -6, 2, 8, 3;
+ -3, -5, 2, 7;
+ 3, 2, 0, -4;
+}
+
+\MATrowreduce\MatrixA
+
+\end{document}

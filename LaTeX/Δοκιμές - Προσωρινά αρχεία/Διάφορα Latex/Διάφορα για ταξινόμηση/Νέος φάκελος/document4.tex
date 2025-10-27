@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{amsmath,mtpro2}
+\usepackage{pythontex,graphicx}
+
+\begin{document}
+\begin{pycode}
+from sympy import *
+var("x, y")
+functions = [x**2 + 3*x - 4,x**2 - x - 2,x**2 + 3*x - 10,x**2 -2*x - 3]
+print(r"\begin{align*}")
+for f in functions:
+	myeq = Eq(f)
+	s=solve(myeq,dict=True)
+	print(latex(myeq) + "\hspace{3mm}&x=" + latex(s[0][x])+ "\ \ and\ \ x="+latex(s[1][x]) + r"\\")
+print(r"\end{align*}")
+\end{pycode}
+\begin{pylabcode}[plotsession]
+rc('text', usetex=True)
+rc('font', **{'family':'serif', 'serif':['Times']})
+rc('font', size=10.0)
+rc('legend', fontsize=10.0)
+x = linspace(0, 3*pi)
+figure(figsize=(3.25,2))
+plot(x, sin(x), label='$\sin(x)$')
+plot(x, sin(x)**2, label='$\sin^2(x)$',
+linestyle='dashed')
+xlabel(r'$x$-axis')
+ylabel(r'$y$-axis')
+xticks(arange(0, 4*pi, pi), ('$0$',
+'$\pi$', '$2\pi$', '$3\pi$'))
+axis([0, 3*pi, -1, 1])
+legend(loc='lower right')
+savefig('myplot.pdf', bbox_inches='tight')
+\end{pylabcode}
+\begin{figure}
+\centering
+\includegraphics{myplot}
+\caption{\label{fig:matplotlib} A plot
+created with PythonTeX.}
+\end{figure}
+\end{document}

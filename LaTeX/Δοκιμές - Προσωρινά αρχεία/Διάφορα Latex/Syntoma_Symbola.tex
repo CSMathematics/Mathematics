@@ -1,0 +1,271 @@
+\documentclass{article}
+
+%\usepackage{latexsym}
+% * because of \gg, \ll, \subseteq, \supseteq, \sqsubseteq, \sqsupseteq
+% * not needed if amsmath is loaded
+
+\usepackage{amsmath}% because of \dots
+
+\makeatletter
+% LaTeX's \@ifnextchar gobbles spaces, therefore
+% \msh@ifnextchar is defined that keeps spaces
+\newcommand*{\msh@ifnextchar}[3]{%
+  \def\msh@temp{\msh@@ifnextchar{#1}{#2}{#3}}%
+  \futurelet\msh@token\msh@temp
+}
+\newcommand*{\msh@@ifnextchar}[1]{%
+  \ifx\msh@token#1%
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+
+% <<
+% <>
+% <=
+% <==
+% <=>
+% <--
+% <->
+% >>
+% >=
+% -->
+% -+
+% +-
+% ...
+% ==
+% =.
+% ==>
+% =(
+% =)
+% =[
+% =]
+
+% Commands that take the original meanings of the special characters
+\mathchardef\msh@code@less=\mathcode`\<\relax
+\mathchardef\msh@code@greater=\mathcode`\>\relax
+\mathchardef\msh@code@minus=\mathcode`\-\relax
+\mathchardef\msh@code@plus=\mathcode`\+\relax
+\mathchardef\msh@code@equal=\mathcode`\=\relax
+\mathchardef\msh@code@dot=\mathcode`\.\relax
+
+% Macro \resetmathshorthands resets the original meaning of the
+% special characters by resetting their \mathcode values
+\@ifdefinable{\resetmathshorthands}{%
+  \edef\resetmathshorthands{%
+    \mathcode\number`\<=\msh@code@less
+    \mathcode\number`\>=\msh@code@greater
+    \mathcode\number`\-=\msh@code@minus
+    \mathcode\number`\+=\msh@code@plus
+    \mathcode\number`\.=\msh@code@dot
+    \mathcode\number`\==\msh@code@equal
+  }%
+}
+
+% Macro \setmathshorthands activates and defines the special
+% characters
+\begingroup
+  \catcode`\<=\active
+  \catcode`\>=\active
+  \catcode`\-=\active
+  \catcode`\+=\active
+  \catcode`\.=\active
+  \catcode`\==\active
+  \edef={\string=}%
+  \@ifdefinable{\setmathshorthands}{%
+    \xdef\setmathshorthands{%
+      \mathcode\number`\<="8000 %
+      \mathcode\number`\>="8000 %
+      \mathcode\number`\-="8000 %
+      \mathcode\number`\+="8000 %
+      \mathcode\number`\.="8000 %
+      \mathcode\number`\=="8000 %
+      \let\noexpand<\noexpand\msh@less
+      \let\noexpand>\noexpand\msh@greater
+      \let\noexpand-\noexpand\msh@minus
+      \let\noexpand+\noexpand\msh@plus
+      \let\noexpand.\noexpand\msh@dot
+      \let\noexpand=\noexpand\msh@equal
+    }%
+  }%
+\endgroup
+
+% The parsers for the math shorthands follow:
+
+% <<
+% <>
+% <=
+% <==
+% <=>
+% <--
+% <->
+\newcommand*{\msh@less}{%
+  \msh@ifnextchar<{%
+    \ll\@gobble
+  }{%
+    \msh@ifnextchar>{%
+      \neq\@gobble
+    }{%
+      \msh@ifnextchar={%
+        \expandafter\msh@less@equal\@gobble
+      }{%
+        \msh@ifnextchar-{%
+          \expandafter\msh@less@minus\@gobble
+        }{%
+          \msh@code@less
+        }%
+      }%
+    }%
+  }%
+}
+\newcommand*{\msh@less@equal}{%
+  \msh@ifnextchar={%
+    \Leftarrow\@gobble
+  }{%
+    \msh@ifnextchar>{%
+      \Leftrightarrow\@gobble
+    }{%
+      \leq
+    }%
+  }%
+}
+\newcommand*{\msh@less@minus}{%
+  \msh@ifnextchar-{%
+    \leftarrow\@gobble
+  }{%
+    \msh@ifnextchar>{%
+      \leftrightarrow\@gobble
+    }{%
+      \msh@code@less\msh@code@minus
+    }%
+  }%
+}
+
+% >>
+% >=
+\newcommand*{\msh@greater}{%
+  \msh@ifnextchar>{%
+    \gg\@gobble
+  }{%
+    \msh@ifnextchar={%
+      \geq\@gobble
+    }{%
+      \msh@code@greater
+    }%
+  }%
+}
+
+% -->
+% -+
+\newcommand*{\msh@minus}{%
+  \msh@ifnextchar-{%
+    \expandafter\msh@minus@minus\@gobble
+  }{%
+    \msh@ifnextchar+{%
+      \mp\@gobble
+    }{%
+      \msh@code@minus
+    }%
+  }%
+}
+\newcommand*{\msh@minus@minus}{%
+  \msh@ifnextchar>{%
+    \rightarrow\@gobble
+  }{%
+    \msh@code@minus\msh@code@minus
+  }%
+}
+
+% +-
+\newcommand*{\msh@plus}{%
+  \msh@ifnextchar-{%
+    \pm\@gobble
+  }{%
+    \msh@code@plus
+  }%
+}
+
+% ...
+\newcommand*{\msh@dot}{%
+  \msh@ifnextchar.{%
+    \expandafter\msh@dot@dot\@gobble
+  }{%
+    \msh@code@dot
+  }%
+}
+\newcommand*{\msh@dot@dot}{%
+  \msh@ifnextchar.{%
+    \expandafter\msh@dot@dot@dot\@gobble
+  }{%
+    \msh@code@dot
+    \msh@code@dot
+  }%
+}
+\newcommand*{\msh@dot@dot@dot}{%
+  % remove space after "...", because a space would
+  % disturb \dots' auto-positioning feature.
+  \expandafter\dots\romannumeral-`\x
+}
+
+% ==
+% =.
+% ==>
+% =(
+% =)
+% =[
+% =]
+\newcommand*{\msh@equal}{%
+  \msh@ifnextchar={%
+    \expandafter\msh@equal@equal\@gobble
+  }{%
+    \msh@ifnextchar.{%
+      \doteq\@gobble
+    }{%
+      \msh@ifnextchar({%
+        \subseteq\@gobble
+      }{%
+        \msh@ifnextchar){%
+          \supseteq\@gobble
+        }{%
+          \msh@ifnextchar[{%
+            \sqsubseteq\@gobble
+          }{%
+            \msh@ifnextchar]{%
+              \sqsupseteq\@gobble
+            }{%
+              \msh@code@equal
+            }%
+          }%
+        }%
+      }%
+    }%
+  }%
+}
+\newcommand*{\msh@equal@equal}{%
+  \msh@ifnextchar>{%
+    \Rightarrow\@gobble
+  }{%
+    \equiv
+  }%
+}
+\makeatother
+
+% Activate math shorthands in the math modes
+\everymath{\setmathshorthands}
+\everydisplay{\setmathshorthands}
+
+\begin{document}
+\centering
+\newcommand*{\test}[1]{%
+  $#1$%
+  \[#1\]%
+}
+\test{a << b < c <= d >= e > f >> g}
+\test{a <> b = c =. d == e}
+\test{a <== b <-- c <-> d <=> e --> f ==> g}
+\test{a +- b = -(-a -+ +b)}
+\test{a,..., z <> a +...+ z}
+\test{a =( b =) c =[ e =] f}
+\[ a=(\beta\ ,\ a<>t \]
+\end{document}

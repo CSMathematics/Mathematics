@@ -1,0 +1,257 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+\setlist[itemize]{itemsep=0mm}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\usepackage{hhline}
+\usepackage{multicol,multirow}
+\usepackage{wrap-rl,mathimatika,tkz-tab}
+\usepackage{tikzpagenodes}
+\usetkzobj{all}
+\usepackage{tikz,tkz-euclide}
+\usetikzlibrary{calc}
+\usepackage{eso-pic}
+\usepackage{comment}
+\usepackage{venndiagram}
+\usepackage{longtable,gensymb}
+\makeatletter
+\usetikzlibrary{patterns}
+\tikzstyle{chart}=[
+legend label/.style={font={\scriptsize},anchor=west,align=left},
+legend box/.style={rectangle, draw, minimum size=5pt},
+axis/.style={black,semithick,->},
+axis label/.style={anchor=east,font={\tiny}},
+]
+
+\tikzstyle{bar chart}=[
+chart,
+bar width/.code={
+\pgfmathparse{##1/2}
+\global\let\bar@w\pgfmathresult
+},
+bar/.style={very thick, draw=white},
+bar label/.style={font={\bf\small},anchor=north},
+bar value/.style={font={\footnotesize}},
+bar width=.75,
+]
+
+\tikzstyle{pie chart}=[
+chart,
+slice/.style={line cap=round, line join=round,thick,draw=white},
+pie title/.style={font={\bf}},
+slice type/.style 2 args={
+##1/.style={fill=##2},
+values of ##1/.style={}
+}
+]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\newcommand{\pie}[3][]{
+\begin{scope}[#1]
+\pgfmathsetmacro{\curA}{90}
+\pgfmathsetmacro{\r}{1}
+\def\c{(0,0)}
+\node[pie title] at (90:1.3) {#2};
+\foreach \v/\s/\l in{#3}{
+\pgfmathsetmacro{\deltaA}{\v/100*360}
+\pgfmathsetmacro{\nextA}{\curA + \deltaA}
+\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+
+\path[slice,\s] \c
+-- +(\curA:\r)
+arc (\curA:\nextA:\r)
+-- cycle;
+\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+
+\begin{pgfonlayer}{foreground}
+\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
+\end{pgfonlayer}
+
+\global\let\curA\nextA
+}
+\end{scope}
+}
+
+\newcommand{\legend}[2][]{
+\begin{scope}[#1]
+\path
+\foreach \n/\s in {#2}
+{
+++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
+}
+;
+\end{scope}
+}
+\definecolor{a}{cmyk}{0,1,1,0.05}
+\definecolor{b}{cmyk}{0,.8,.8,.15}
+\definecolor{c}{cmyk}{0,.8,.8,0.05}
+\definecolor{d}{cmyk}{0,.7,.7,0}
+\definecolor{e}{cmyk}{0,.5,.5,0}
+\usepackage{filecontents}
+\usepackage{pgfplots, pgfplotstable,mathimatika}
+\usepgfplotslibrary{statistics}
+
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\usepackage[group-separator={.}]{siunitx}
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\begin{document}
+\begin{tikzpicture}
+[
+pie chart,
+slice type={comet}{a},
+slice type={legno}{b},
+slice type={coltello}{d},
+slice type={sedia}{c},
+slice type={caffe}{e},
+pie values/.style={font={\small}},
+scale=2
+]
+
+\pie[values of coltello/.style={pos=1.1}]{Κυκλικό Διάγραμμα}{40/comet/a_1=\v\%,27/legno/a_2,14/sedia/a_3,11/coltello/a_4,8/caffe/a_5}
+
+
+\legend[shift={(0cm,-1cm)}]{{Άλγεβρα}/comet, {Wood and furniture (Livenza)}/legno, {Knife (Maniago)}/coltello}
+\legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
+
+\end{tikzpicture}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,ybar,enlarge x limits=0.25,bar width=1pt,ymin=0,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,,anchor=center},title={\textbf{Διάγραμμα}},height=5cm,width=7cm,symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $,$\ldots$,$ x_\kappa $},
+xtick = data]
+\addplot
+[draw=c,fill=c] 
+coordinates
+{($ x_1 $,20) ($ x_2 $,17) ($ x_3 $,15) ($\ldots$,23) ($ x_\kappa $,19)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,width=8cm,
+height=5cm,xmin=-1,xmax=13,
+ymin=0, ymax=7,ybar interval,xticklabel={[\pgfmathprintnumber\tick--\pgfmathprintnumber\nexttick ]}],
+\addplot+[hist={bins=4, data max=12,data min=0},draw=black,fill=\xrwma]
+table[row sep=\\,y index=0] {
+data\\
+1\\ 2\\ 1\\ 5\\ 4\\ 10\\ 4\\ 5\\ 7\\ 10\\ 9\\ 8\\ 9\\ 9\\ 11\\
+};
+%\addplot[sharp plot]coordinates{(1.5,3) (4.5,4) (7.5,2) (10.5,6)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,
+width  = 0.5*\textwidth,
+height = 5cm,
+major x tick style = transparent,
+ybar=2*\pgflinewidth,
+bar width=20pt,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-1mm,,anchor=center},
+ymajorgrids = true,
+symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.25,
+ymin=0,
+legend cell align=left,
+legend style={at={(1,1.05)},anchor=south east,
+column sep=1ex}]
+\addplot[style={rred,fill=rred,mark=none}]
+coordinates {($ x_1 $, 5.0) ($ x_2 $,3.0) ($ x_3 $,4.0)};
+\addplot[style={\xrwma,fill=\xrwma,mark=none}]
+coordinates {($ x_1 $, 4.0) ($ x_2 $,5.0) ($ x_3 $,3.0)};
+\legend{Δείγμα Α,Δείγμα Β,TreeScore $>3$,TreeScore $>4$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[axis lines=left,belh ar,ymajorgrids = true,enlarge x limits=0.2,height=5cm,width=8cm,ymin=0,symbolic x coords={$ x_1 $,$ x_2 $,$ x_3 $,$ \ldots. $,$ \ldots $,$ x_\kappa $},
+xtick = data,ylabel={\footnotesize \rotatebox{-90}{$ \nu_i $}},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=4mm,yshift=5mm, anchor=center},ylabel style={at={(current axis.above origin)},xshift=3mm,yshift=-3mm,anchor=center}]
+\addplot
+[draw=\xrwma,pl] 
+coordinates
+{($ x_1 $,5) ($ x_2 $,8) ($ x_3 $,7) ($ \ldots. $,7.5) ($ \ldots $,10) ($ x_\kappa $,9)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\mathchardef\NumMathCodeDot=\mathcode`\. %
+\mathchardef\NumMathCodeComma=315 % \mathord, not \mathpunct
+
+\newif\ifnumcomma
+
+\def\num#1{%
+  \leavevmode
+  \begingroup
+    \ifnumcomma
+      \mathcode`\.=\NumMathCodeComma
+      \mathcode`\,=\NumMathCodeComma
+    \else
+      \mathcode`\.=\NumMathCodeDot
+      \mathcode`\,=\NumMathCodeDot
+    \fi
+    \ifmmode
+      #1%
+    \else
+      \mathsurround=0pt %
+      $#1$%
+    \fi
+  \endgroup
+}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,
+  no markers, domain=0:8, samples=200,
+  axis lines*=left, xlabel=$x$, ylabel=$y$,
+  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, width=9cm,
+  xtick={1,2,3,4,5,6,7}, ytick=\empty,
+  enlargelimits=false, clip=false, axis on top]
+  \addplot [very thick,red!80!black] {gauss(4,1)};
+\end{axis}
+
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,ymajorgrids = true,height=5cm,width=8cm,xmajorgrids = true,enlarge x limits=0.2,bar width=1pt,ylabel={\footnotesize $ \nu_i $},xlabel={\footnotesize $ x_i $},xlabel style={at={(current axis.right of origin)},xshift=1mm, anchor=center},ylabel style={at={(current axis.above origin)},yshift=1mm,anchor=center},ymin=0]
+\addplot
+[draw=\xrwma,pl] 
+coordinates
+{(2010,5) (2011,4) (2012,8) (2013,7) (2014,12)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{document}

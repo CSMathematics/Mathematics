@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage{amsmath,mtpro2}
+\usepackage{pythontex,graphicx}
+
+\begin{document}
+\begin{sympycode}
+from sympy import *
+var("x, y")
+f = x + sin(x*y)
+step1 = Integral(f, x, y)
+step2 = Integral(Integral(f, x).doit(), y)
+step3 = step2.doit()
+\end{sympycode}
+\begin{align*}
+\sympy{step1} &= \sympy{step2} \\
+&= \sympy{step3}
+\end{align*}
+\end{document}

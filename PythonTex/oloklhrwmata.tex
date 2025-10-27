@@ -1,0 +1,130 @@
+\documentclass[11pt,a3paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1cm, right=1cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,pythontex}
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{{\large\theaskhsh.}\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\titlespacing{\paragraph}{0mm}{2mm}{2mm}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+
+\begin{document}
+\twocolumn[{
+\centering
+\kerkissans{{\huge Ολοκληρώματα}\\\vspace{3mm} {\Large ΤΥΠΟΛΟΓΙΟ}}\vspace{5mm}}]
+\paragraph{Πολυωνυμικές συναρτήσεις}
+\begin{sympycode}
+from sympy import *
+from re import sub
+from sympy.assumptions.assume import global_assumptions
+
+x = symbols('x',real=True)
+a = symbols('a', real=True)
+c = symbols('c',positive=True,real=True)
+b = symbols('\\beta', real=True)
+n = symbols('\\nu', positive=True, real=True)
+
+BasicFunctions = ['c','x','x**n','a*x+b','(x+a)**2','(x+a)**n']
+
+for func in BasicFunctions:
+	myint = 'Integral(' + func + ', x)'
+	print('\\askhsh \\eng{$\\displaystyle'+latex(eval(myint)) + '=' +
+	latex(eval(myint+'.doit()')) + '+c$}\\\\\\\\')
+\end{sympycode}
+\paragraph{Ρητές συναρτήσεις}
+\begin{sympycode}
+from sympy import *
+from re import sub
+from sympy.assumptions.assume import global_assumptions
+
+x = symbols('x',real=True)
+a = symbols('a',positive=True,real=True)
+b = symbols('\\beta', real=True)
+n = symbols('\\nu', positive=True, real=True)
+BasicFunctions = ['1/x','1/(a*x+b)','1/(a*x+b)**2','1/((x+a)*(x+b))','x/(a*x+b)','1/(x**2+1)','1/(x**2+a**2)','x/(x**2+a**2)','x**2/(x**2+a**2)','1/(x**2-1)','1/(x**2-a**2)','x**3/(x**2-1)','sqrt(x)','sqrt(1-x**2)','1/sqrt(a*x+b)']
+
+for func in BasicFunctions:
+	myint = 'Integral(' + func + ', x)'
+	print('\\askhsh \\eng{$\\displaystyle'+latex(eval(myint)) + '=' +
+	latex(simplify(eval(myint+'.doit()'))) + '+c$}\\\\\\\\')
+\end{sympycode}
+\paragraph{Τριγωνομετρικές συναρτήσεις}
+\begin{sympycode}
+from sympy import *
+from re import sub
+from sympy.assumptions.assume import global_assumptions
+
+x = symbols('x',real=True)
+a = symbols('a',positive=True,real=True)
+b = symbols('\\beta', real=True)
+n = symbols('\\nu', positive=True, real=True)
+
+BasicFunctions = ['sin(x)', 'cos(x)','tan(x)','cot(x)','1/(cos(x)**2)','1/(sin(x))**2','sinh(x)','cosh(x)','tanh(x)','coth(x)','sin(a*x)','cos(a*x)','tan(a*x)','cot(a*x)','sin(x)**2','cos(x)**2','sin(x)*cos(x)','sinh(x)*cosh(x)','1/sin(x)','1/cos(x)','1/sin(x)**2','1/cos(x)**2','x*sin(x)']
+
+for func in BasicFunctions:
+	myint = 'Integral(' + func + ', x)'
+	print('\\askhsh \\eng{$\\displaystyle'+latex(eval(myint)) + '=' +
+	latex(trigsimp(eval(myint+'.doit()'))) + '+c$}\\\\\\\\')
+\end{sympycode}
+
+\paragraph{Εκθετικές - Λογαριθμικές συναρτήσεις}
+\begin{sympycode}
+from sympy import *
+from re import sub
+from sympy.assumptions.assume import global_assumptions
+
+x = symbols('x',real=True)
+a = symbols('a',positive=True,real=True)
+b = symbols('\\beta', real=True)
+n = symbols('\\nu', positive=True, real=True)
+
+BasicFunctions = ['exp(x)','exp(a*x)','log(x)','log(a*x)','exp(a*x+b)','x*exp(x)','x**2*exp(x)','x*log(x)','x**2*log(x)','exp(x)/x','log(x)/x','exp(x)*sin(x)','exp(x)*cos(x)']
+
+for func in BasicFunctions:
+	myint = 'Integral(' + func + ', x)'
+	print('\\askhsh \\eng{$\\displaystyle'+latex(eval(myint)) + '=' +
+	latex(simplify(eval(myint+'.doit()'))) + '+c$}\\\\\\\\')
+\end{sympycode}
+\end{document}

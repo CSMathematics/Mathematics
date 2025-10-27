@@ -1,0 +1,56 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,shmeiwseis]{askhsh-ebdomadas-web}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\xroma{red!70!black}
+\begin{document}
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+\clearpage
+\titlos{Κωνικές Τομές}{Μαθηματικά κατεύθυνσης Β΄ Λυκείου}
+\Askhsh{Κωνικές τομές - Ελλειψη}
+Η αίθουσα όπερας του θεάτρου San Carlos στη Λισαβόνα της Πορτογαλίας έχει ελλειπτικό σχήμα (ελλειπτικός κύλινδρος). Αυτό έχει σαν συνέπεια οι θέσεις που βρίσκονται στο ίδιο ύψος να ανήκουν στην ίδια καμπύλη έλλειψης.
+\begin{center}
+	\begin{tikzpicture}[scale=.8]
+	\pgfmathsetmacro{\a}{3}
+	\pgfmathsetmacro{\b}{2}
+	\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+	\begin{scope}
+	\clip (-2.8,-2.5) rectangle (3.7,2.5);
+	\draw (0,0) ellipse (1.22*\a cm and 1.24*\b cm);
+	\end{scope}
+	\draw (0,0) ellipse (\a cm and \b cm);
+	\node (E') at (-\c,0){};
+	\node (E) at (\c,0){};
+	\tkzLabelPoint[left,xshift=-1mm](E){{\footnotesize Βασιλιάς}}
+	\tkzLabelPoint[right,xshift=1mm](E'){{\footnotesize Σκηνή}}
+	\draw[dashed]  (-3.5,1) rectangle (-2,-1);
+	\draw[dashed]  (2,0.5) rectangle (2.5,-0.5);
+	\node (M) at ($(0,0)+(80:3 and 2)$) {};
+	\tkzDrawSegments[pl,red!70!black](E',M M,E)
+	\tkzLabelPoint[above,xshift=-.5mm,yshift=-.7mm](M){M}
+	\tkzDrawPoints(E,E',M)
+	\foreach \x in {0,15,30,45,60,75,90,105,120,135,-15,-30,-45,-60,-75,-90,-105,-120,-135}{
+		\node[draw,minimum width=8pt,
+		circle,text=white,inner sep=0pt,outer sep=0pt] at ($(0,0)+(\x:3.3 and 2.25)$) {};}
+	\node[rotate={36}]at (-.4,1){{\footnotesize Ήχος}};
+	\draw[|-|] (-3,-3) -- (3,-3);
+	\draw[|-|] (4,2) -- (4,-2);
+	\node at (0,-3.3) {$50m$};
+	\node at (4.7,0) {$30m$};
+	\end{tikzpicture}
+\end{center}
+Μια απ' αυτές τις ελλείψεις βρίσκεται στο ύψος της σκηνής και του βασιλικού μπαλκονιού. Είναι κατασκευασμένη με τέτοιο τρόπο ώστε η μια εστία της να βρίσκεται στο κέντρο της σκηνής ενώ στην άλλη εστία της βρίσκονται οι βασιλικές θέσεις. Έτσι ο βασιλιάς έχει το προνόμιο να δέχεται τον ήχο αυτούσιο και κρυστάλλινο κατευθείαν στ αυτιά του. Οι διαστάσεις της αίθουσας είναι $ 50m $ και $ 30m $ όπως φαίνονται στο σχήμα.
+\begin{rlist}
+	\item Ποιά είναι η απόσταση που διανύει ο ήχος που ανακλάται πάνω στους τοίχους της αίθουσας και καταλήγει στο βασιλιά;
+	\item Να βρεθεί η εξίσωση της έλλειψης που ορίζουν οι τοίχοι της αίθουσας στο ύψος της σκηνής.
+	\item Ποιά είναι η εκκεντρότητα αυτής της έλλειψης;
+	\item Σε πόση απόσταση βρίσκεται ο βασιλιάς από το κέντρο της σκηνής;
+\end{rlist}
+\end{document}

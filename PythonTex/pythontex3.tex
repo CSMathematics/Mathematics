@@ -1,0 +1,117 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{amsmath}
+\usepackage{tikz,pgfplots}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl,pythontex}
+
+
+\begin{document}
+\begin{sympycode}
+#Import libs
+from sympy import *
+from sympy import Function, dsolve, pprint
+from sympy.abc import x
+f = Function('f')
+import sympy as sp
+
+#Deffinitions of symbols
+x = symbols('x')
+t = symbols('t')
+y = symbols('y')
+n = symbols('n', integer=True)
+f = Function('f')
+g = Function('g')
+
+# Integrals
+int1=Integral(t**2,(t,0,x))
+int2=Integral(log(x),x)
+int3=Integral(sin(t),(t,x,x**3))
+int4=integrate(log(x**2+1),(x,-1,1))
+int5=integrate(tan(x),x)
+
+
+
+#Step Solution
+g = log(x*y)
+step1 = Integral(g, x, y)
+step2 = Integral(Integral(g, x).doit(), y)
+step3 = step2.doit()
+
+#Summation
+sum1 = Sum(1/n**2,(n,1,oo))
+
+#Equations
+eq1=Eq(x**3-4*x**2+5*x-2)
+sol1=solve(eq1,dict=true)
+eq2=Eq(x**2-5*x+4)
+sol2=solve(eq2,dict=true)
+eq3=Eq(x**3-x**2+3*x-10)
+sol3=solve(eq3,dict=true)
+print(latex(eq3,mode='inline'),r"$ \Rightarrow $")
+for i,p in enumerate(sol3):
+	print(r"$ x= $",latex(p[x],mode='inline'),", ")
+
+#System of equations
+equation1 = Eq(2*x-5*y,-1)
+equation2 = Eq(3*x+4*y,10)
+system = Matrix(([2,-5,-1],[3,4,10]))
+solution = solve_linear_system(system,x,y,dict=True)
+
+#Trigonometric equations
+sineq = Eq(asin(x/2)-pi/3)
+pytex.set_sympy_latex('display',
+inv_trig_style='power')
+pytex.set_sympy_latex('text',
+inv_trig_style='full')
+
+#Differential equations
+deq=Eq(f(x).diff(x, 2) -3*f(x).diff(x)+2*f(x),cos(x))
+dsolution=dsolve(deq, f(x),hint='nth_linear_constant_coeff_undetermined_coefficients')
+
+#Residues
+res=residue(-pi*cot(pi*x)/(x**2+1), x, I)+residue(-pi*cot(pi*x)/(x**2+1), x, -I)
+
+#Products
+p=Product(1-1/n**2,(n,2,16))
+
+# Matrix
+M=Matrix([[1,2],[-3,-1]])
+M1=Matrix([[1,2,0],[-3,4,1]])
+\end{sympycode}
+\[ \sympy{int1}=\sympy{int1.doit()} \]
+\[ \sympy{sum1}=\sympy{sum1.doit()} \]
+The solutions of the equation $ \sympy{eq2} $ are $ x=\sympy{sol2[0][x]} $ and $ x=\sympy{sol2[1][x]} $.\\
+The integral is equal to \[ \sympy{int2}=\sympy{int2.doit()} \]
+\[ \sum_{n=1}^{\infty}{\frac{1}{n^2+1}}=\sympy{res} \]
+\[ x^3-4x^2+5x-2=0\Rightarrow x=\sympy{sol1[0][x]},x=\sympy{sol1[1][x]} \]
+\[ \int_{x}^{x^3}{\sin{t}\d t}=\sympy{int3.doit()} \]
+\[ \int_{-1}^{1}{\log{\left(x^2+1\right)}\d x}=\sympy{int4} \]
+\begin{align*}
+\sympy{step1} &= \sympy{step2} \\
+&= \sympy{step3}
+\end{align*}
+Inline: $\sympy{sineq}$
+Equation: \[ \sympy{sineq}\Rightarrow x=\sympy{solve(sineq,dict=true)[0][x]} \]
+\[ \sum_{n=1}^{\infty}\frac{1}{n^2}=\sympy{sum1.doit()} \]
+The solution of the differential equation
+\[ \sympy{deq} \]
+is
+\[ \sympy{expand(dsolution)} \]
+\[ \int_{-1}^{1}{\tan{(x)}\d x}=\sympy{int5} \]
+\[ \int_{1}^{2}{\sympy{int2.doit()}\d x}=\sympy{integrate(int2,(x,1,2))} \]
+\[ 3^3=\sympy{3**3} \]
+\[ \systeme{\sympy{equation1},\sympy{equation2}}\Rightarrow \ \ x=\sympy{solution[x]}\ \ \textrm{and}\ \ y=\sympy{solution[y]} \]
+\[ \sum_{k=1}^{10}{\frac{1}{n^2}}=\sympy{Sum(1/n**2,(n,1,10)).doit()} \]
+\[ x^2-4x+3=0\Rightarrow x=\sympy{solve(Eq(x**2-4*x+3),dict=true)[1][x]} \]
+\[ \int_{-2}^{2}{\frac{x^2}{x^2+1}\d x}=\left.\sympy{integrate(x**2/(x**2+1),x)}\right|_{-2}^{2}=\sympy{integrate(x**2/(x**2+1),(x,-2,2))} \]
+\[ \int_{-1}^{1}{x^2\d x}=\frac{x^3}{3} \]
+\[ \cos{(2x)}=1\Rightarrow x=\sympy{solve(Eq(cos(2*x)),dict=true)[0][x]}\ \ \textrm{and}\ \ x=\sympy{solve(Eq(cos(2*x)),dict=true)[1][x]} \]
+\[ \det{M}=\det{\sympy{M}}=\sympy{M.det()} \]
+\[ \sympy{M1.nullspace()[0]} \]
+\[ \sympy{M1.T},M^2=\sympy{M}^2=\sympy{M**2} \]
+\[ \int_{-1}^{1}{\frac{x}{x^2-1}\d x}= \]
+\[ \sum_{k=1}^{\infty}{\sympy{M*M1}} \]
+\end{document}
+
+
+

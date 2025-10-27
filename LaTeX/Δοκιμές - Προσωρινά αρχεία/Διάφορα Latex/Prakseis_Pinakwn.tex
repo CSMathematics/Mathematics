@@ -1,0 +1,1385 @@
+\documentclass[a4paper]{article}
+\usepackage{geometry}
+\usepackage{xintfrac}
+\usepackage{xparse}
+\usepackage{amsmath}
+\usepackage{environ}
+\RequirePackage{array} 
+% november 8-11, 2013
+\catcode`_ 11
+
+% update 2017/03/23, because some macros stopped being defined by later
+% versions of xint... 
+
+% A. xintfrac stopped loading xinttools at 1.1 (2014/10/28)
+\usepackage{xinttools}
+
+% B. \XINTinFloatSum got removed at 1.1a (2014/11/07)
+
+% \lverb|1.09a: quick write-up, for use by \xintfloatexpr, will need to be
+% thought through  again. Renamed (and slightly modified) in 1.09h. Should be
+% extended for optional precision. Should be rewritten for optimization. |
+\def\XINTinFloatSum   {\romannumeral0\XINTinfloatsum }%
+\def\XINTinfloatsum #1{\expandafter\XINT_floatsum_a\romannumeral-`0#1\relax }%
+\def\XINT_floatsum_a #1{\expandafter\XINT_floatsum_b
+                        \romannumeral0\XINTinfloat[\XINTdigits]{#1}\Z }%
+\def\XINT_floatsum_b #1\Z #2%
+           {\expandafter\XINT_floatsum_c\romannumeral-`0#2\Z {#1}\Z}%
+\def\XINT_floatsum_c #1%
+           {\xint_gob_til_relax #1\XINT_floatsum_e\relax\XINT_floatsum_d #1}%
+\def\XINT_floatsum_d #1\Z
+           {\expandafter\XINT_floatsum_b\romannumeral0\XINTinfloatadd {#1}}%
+\def\XINT_floatsum_e #1\Z #2\Z { #2}%
+
+% C. \XINT_Abs got removed at 1.2i (2016/12/13)
+\def\XINT_Abs #1{\romannumeral0\XINT_abs #1}%
+% end of update
+
+\makeatletter
+
+\let\MAT_xintfloatsum\XINTinFloatSum
+
+\newcount\MAT_cnta
+\newcount\MAT_cntb
+\newcount\MAT_cntc
+\newcount\MAT_cntd
+\newcount\MAT_cnte
+
+\def\MATset      {\def\MAT_xintin {\xintRaw}\MATset_ }%
+\def\MATfloatset {\def\MAT_xintin {\XINTinFloat [\XINTdigits]}\MATset_ }%
+
+\def\MATset_ #1#2{%
+    \def\MATset_name{#1}%
+    \edef\MAT_tmpa {#2}%
+    \MAT_cnta \xint_c_ % sets \MAT_cnta to zero
+    \expandafter\MATset_a 
+    \romannumeral0\expandafter\xintzapspaces\expandafter{\MAT_tmpa};!;%
+}%
+\def\MATset_a {\futurelet\XINT_token\MATset_b }%
+\def\MATset_b #1;{\def\MAT_tmpa{#1}%
+                  \ifx\XINT_token;\expandafter\MATset_w
+                  \else
+                  \ifx\XINT_token!%
+                          \expandafter\expandafter\expandafter\MATset_x
+                     \else
+                          \expandafter\expandafter\expandafter\MATset_c
+                  \fi\fi }%
+\def\MATset_w !;{\MATset_x }%
+\def\MATset_x {\expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {I}\expandafter\endcsname
+  \expandafter {\the\MAT_cnta }%
+               \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {J}\expandafter\endcsname 
+  \expandafter {\the\MAT_cntb }%
+  \expandafter\edef \MATset_name [##1]%
+     {\noexpand\csname MAT@\expandafter\string\MATset_name 
+               \noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+%
+\def\MAT_in #1,#2,{\xint_bye #2\xint_gobble_iv\xint_bye
+                   {\the\numexpr #1}{\the\numexpr #2}\xint_gobble_iii 
+                   {\xintZapSpaces{#1}}}%
+%
+\def\MATset_c {\advance\MAT_cnta \xint_c_i % row count ++
+               \MAT_cntb \xint_c_ % column count intially zero
+               \expandafter\MATset_d\romannumeral0\expandafter
+               \xintzapspaces\expandafter {\MAT_tmpa},!,}%
+\def\MATset_d {\futurelet\XINT_token\MATset_e }%
+\def\MATset_e #1,{\ifx\XINT_token!\expandafter\MATset_a
+  \else
+      \advance\MAT_cntb \xint_c_i
+      \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name 
+            {\the\MAT_cnta}{\the\MAT_cntb}\expandafter\endcsname
+  \expandafter{\romannumeral-`0\MAT_xintin{\xintZapSpacesB{#1}}}%
+  \expandafter\MATset_d\fi
+}%
+
+% \MATdef
+
+\def\MATdef      {\def\MAT_xintin {\xintRaw}%
+                  \MATdef_ }%
+\def\MATfloatdef {\def\MAT_xintin {\XINTinFloat [\XINTdigits]}%
+                  \MATdef_ }%
+
+% #3 should be a replacement text with #1 and #2 for horizontal and vertical
+% indices, which can be expanded to its final result inside an \edef, and this
+% result must be parsable by the xint macros. 
+
+% WARNING! version of NOV 10 defined only square matrices, this one of NOV 11
+% defines *rectangular matrices and has one more argument*
+
+\def\MATdef_ #1#2#3#4{%
+    \MAT_cnta #2\relax
+    \MAT_cntb #3\relax
+    \def\MAT_tmpa ##1##2{#4}%
+    \MAT_cntc \xint_c_i % =1
+    \xintloop
+      {\expandafter\def\expandafter\MAT_tmpc\expandafter 
+                           {\expandafter{\the\MAT_cntc}}%
+       \MAT_cntd \xint_c_i %=1
+       \xintloop
+         \expandafter\def\expandafter\MAT_tmpd\expandafter 
+                            {\expandafter{\the\MAT_cntd}}%
+         \edef\MAT_tmpb {\expandafter\expandafter\expandafter\MAT_tmpa 
+                         \expandafter\MAT_tmpc\MAT_tmpd}%
+         \expandafter\def
+         \csname MAT@\string#1\MAT_tmpc\MAT_tmpd\expandafter\endcsname 
+         \expandafter {\romannumeral-`0\MAT_xintin 
+                 {\expandafter\xintZapSpacesB\expandafter{\MAT_tmpb}}}%
+       \ifnum\MAT_cntd<\MAT_cntb
+         \advance\MAT_cntd \xint_c_i
+       \repeat
+     \ifnum\MAT_cntc<\MAT_cnta
+        \advance\MAT_cntc \xint_c_i
+    }\repeat
+    \expandafter\def
+    \csname MAT@\string#1{I}\expandafter\endcsname\expandafter {\the\MAT_cnta}%
+    \expandafter\def
+    \csname MAT@\string#1{J}\expandafter\endcsname\expandafter {\the\MAT_cntb}%
+    \edef #1[##1]%
+       {\noexpand\csname 
+         MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% \MATsetentry
+\def\MATsetentry      {\def\MAT_xintin {\xintRaw}%
+                       \MATsetentry_ }%
+\def\MATfloatsetentry {\def\MAT_xintin 
+                             {\XINTinFloat [\XINTdigits]}%
+                       \MATsetentry_ }%
+
+\def\MATsetentry_ #1#2#3{%
+    \edef\MAT_tmpa {#3}%
+    \expandafter\def
+    \csname MAT@\string#1\MAT_in #2,\xint_bye,\expandafter\endcsname\expandafter
+    {\romannumeral-`0\MAT_xintin 
+     {\expandafter\xintZapSpaces\expandafter{\MAT_tmpa}}}%
+}%
+
+
+% NOTA BENE
+% use of \xintFor is for ease of coding. In an official package, I would use
+% special loops for optimal efficiency (the \xintFor is a general tool which has
+% safeguards against situations which do not arise here, like groups suddenly
+% closing)
+
+% 10 november:
+% Current version has already replaced use of \xintFor by \xintloop in a number
+% of places, notably for the computation of inverses and determinants.
+
+% but I leave \xintFor in a number of macros.
+% Improvements from using less \edef's in various places
+
+\def\MATrelax #1{%
+    \toks2 \expandafter {\romannumeral-`0\xintSeq {1}{#1[I]}}%
+    \toks4 \expandafter {\romannumeral-`0\xintSeq {1}{#1[J]}}%
+    \xintFor* ##1 in {\the\toks2 }
+    \do{\xintFor* ##2 in {\the\toks4 }
+        \do{\expandafter\let\csname MAT@\string#1{##1}{##2}\endcsname\relax }}%
+  \expandafter\let\csname MAT@\string#1{I}\endcsname \relax
+  \expandafter\let\csname MAT@\string#1{J}\endcsname \relax
+  \let #1\relax
+}%
+
+\def\MATlet #1#2{%
+    \toks2 \expandafter {\romannumeral-`0\xintSeq {1}{#2[I]}}%
+    \toks4 \expandafter {\romannumeral-`0\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in {\the\toks2 }
+    \do{\xintFor* ##2 in {\the\toks4 }
+        \do{\expandafter\let
+     \csname MAT@\string#1{##1}{##2}\expandafter\endcsname
+     \csname MAT@\string#2{##1}{##2}\endcsname
+     }}%
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#2[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% \MATapply
+% argument #1 is \macro or \macro {arg1}..{argn} where \macro is a macro with
+% n+1 arguments.
+
+\def\MATapply #1#2{%
+    \toks2 \expandafter {\romannumeral-`0\xintSeq {1}{#2[I]}}%
+    \toks4 \expandafter {\romannumeral-`0\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in {\the\toks2 }
+    \do{\xintFor* ##2 in {\the\toks4 }
+        \do
+        {\toks@ {#1}%
+         \expandafter\edef
+        \csname MAT@\string#2{##1}{##2}\expandafter\expandafter\expandafter
+        \endcsname\expandafter\expandafter\expandafter
+        {\expandafter\the\expandafter\toks@\expandafter
+             {\romannumeral-`0\csname MAT@\string#2{##1}{##2}\endcsname }}%
+        }%
+    }%
+}%
+
+% TRANSPOSE
+% Code rewritten to illustrate how one can proceed with \xintloop and counts
+% rather than \xintFor. 
+\def\MATtranspose #1#2{%
+    \MAT_cnta #2[I]\relax
+    \MAT_cntb #2[J]\relax
+    \MAT_cntd \xint_c_i
+    \xintloop {%
+      \toks0 \expandafter{\the\MAT_cntd}%
+      \MAT_cnte \xint_c_i
+      \xintloop
+         \toks2 \expandafter{\the\MAT_cnte}%
+         \expandafter\let
+         \csname MAT@_tmp{\the\toks2}{\the\toks0}\expandafter\endcsname
+         \csname MAT@\string#2{\the\toks0}{\the\toks2}\endcsname 
+         \ifnum \MAT_cnte < \MAT_cntb \advance\MAT_cnte \xint_c_i
+      \repeat
+      \ifnum \MAT_cntd < \MAT_cnta \advance\MAT_cntd \xint_c_i
+    }\repeat
+    \MAT_cntd \xint_c_i
+    \xintloop {%
+      \toks0 \expandafter{\the\MAT_cntd}%
+      \MAT_cnte \xint_c_i
+      \xintloop
+         \toks2 \expandafter{\the\MAT_cnte}%
+         \expandafter\let
+         \csname MAT@\string#1{\the\toks0}{\the\toks2}\expandafter\endcsname
+         \csname MAT@_tmp{\the\toks0}{\the\toks2}\endcsname 
+         \ifnum \MAT_cnte < \MAT_cnta \advance\MAT_cnte \xint_c_i
+      \repeat
+      \ifnum \MAT_cntd < \MAT_cntb \advance\MAT_cntd \xint_c_i
+    }\repeat
+  \expandafter\def\csname MAT@\string#1{I}\expandafter\endcsname
+         \expandafter {\the\MAT_cntb }%
+  \expandafter\def\csname MAT@\string#1{J}\expandafter\endcsname
+         \expandafter {\the\MAT_cnta }%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% SCALAR MULTIPLICATION
+
+\def\MATsmul {\def\MAT_xintin {\xintRaw}%
+              \def\MAT_MUL {\xintMul}%
+              \MATsmul_ }%
+\def\MATfloatsmul {\def\MAT_xintin {\XINTinFloat [\XINTdigits]}%
+                   \def\MAT_MUL {\XINTinFloatMul}%
+                   \MATsmul_ }%
+\def\MATsmul_ #1#2#3{%
+    \edef\MAT_tmpa {#2}%
+    \expandafter\def\expandafter\MAT_tmpa\expandafter
+    {\romannumeral-`0\MAT_xintin 
+      {\expandafter\xintZapSpaces\expandafter{\MAT_tmpa}}}%
+    \toks0 \expandafter {\romannumeral-`0\xintSeq {1}{#3[I]}}%
+    \toks2 \expandafter {\romannumeral-`0\xintSeq {1}{#3[J]}}%
+    \xintFor* ##1 in {\the\toks0 }
+    \do{\xintFor* ##2 in {\the\toks2 }
+         \do{\expandafter
+             \def\csname MAT@\string#1{##1}{##2}\expandafter\endcsname 
+             \expandafter{\romannumeral-`0\MAT_MUL\MAT_tmpa {#3[##1,##2]}}%
+        }%
+      }%
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#3[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#3[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% ADDITION
+
+\def\MATadd {\def\MAT_ADD ##1##2{\xintIrr {\xintAdd {##1}{##2}}[0]}%
+             \MATadd_ }%
+
+\def\MATfloatadd {\def\MAT_ADD {\XINTinFloatAdd }\MATadd_ }%
+
+\def\MATadd_ #1#2#3{%
+    \edef\MAT_tmpa {\xintSeq {1}{#2[I]}}%
+    \edef\MAT_tmpb {\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in \MAT_tmpa
+    \do{\xintFor* ##2 in \MAT_tmpb
+         \do{\expandafter\def\csname MAT@_tmp{##1}{##2}\expandafter\endcsname 
+             \expandafter{\romannumeral-`0\MAT_ADD {#2[##1,##2]}{#3[##1,##2]}}%
+         }%
+      }%
+   \xintFor* ##1 in \MAT_tmpa
+   \do{\xintFor* ##2 in \MAT_tmpb
+        \do{\expandafter\let
+            \csname MAT@\string#1{##1}{##2}\expandafter\endcsname 
+            \csname MAT@_tmp{##1}{##2}\endcsname 
+           }%
+       }%   
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#2[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+       MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% MULTIPLICATION
+
+\def\MATmul {\def\MAT_MUL    {\xintMul }%
+             \def\MAT_SUM ##1{\xintIrr {\xintSum {##1}}[0]}%
+             \MATmul_ }%
+
+\def\MATfloatmul  {\def\MAT_MUL {\XINTinFloatMul}%
+                   \def\MAT_SUM {\MAT_xintfloatsum}%
+                   \MATmul_ }%
+
+\def\MATmul_ #1#2#3{%
+    \edef\MAT_tmpa {\xintSeq {1}{#2[I]}}%
+    \edef\MAT_tmpb {\xintSeq {1}{#3[J]}}%
+    \edef\MAT_tmpc {\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in \MAT_tmpa
+    \do{\xintFor* ##2 in \MAT_tmpb
+         \do{%
+            \def\MAT_tmpd ####1{\MAT_MUL {#2[##1,####1]}{#3[####1,##2]}}%
+            \expandafter
+                \def\csname MAT@_tmp{##1}{##2}\expandafter\endcsname 
+            \expandafter
+            {\romannumeral-`0\MAT_SUM{\xintApply\MAT_tmpd\MAT_tmpc}}%
+         }%
+      }%
+   \xintFor* ##1 in \MAT_tmpa
+   \do{\xintFor* ##2 in \MAT_tmpb
+        \do{\expandafter\let
+            \csname MAT@\string#1{##1}{##2}\expandafter\endcsname 
+            \csname MAT@_tmp{##1}{##2}\endcsname 
+           }%
+       }%   
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#3[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% IDENTITY MATRIX
+\def\MATid      {\def\MAT_tmpf{/1}\MAT_id }%
+\def\MATfloatid {\def\MAT_tmpf{}\MAT_id }%
+\def\MAT_id #1#2{%
+    \MAT_cntc #2\relax
+    \MAT_cnta \xint_c_i % 1
+    \xintloop
+      {\expandafter\def\expandafter\MAT_tmpa \expandafter{\the\MAT_cnta}%
+       \MAT_cntb \xint_c_i % 1
+       \xintloop
+         \expandafter\edef
+         \csname MAT@\string#1{\MAT_tmpa}{\the\MAT_cntb}\endcsname 
+           {\ifnum\MAT_cntb=\MAT_cnta 1\else 0\fi \MAT_tmpf[0]}%
+       \ifnum\MAT_cntb<\MAT_cntc
+         \advance\MAT_cntb \xint_c_i
+       \repeat
+     \ifnum\MAT_cnta<\MAT_cntc
+        \advance\MAT_cnta \xint_c_i
+    }\repeat
+    \expandafter\def\csname MAT@\string#1{I}\expandafter\endcsname
+            \expandafter {\the\MAT_cntc}%
+    \expandafter\def\csname MAT@\string#1{J}\expandafter\endcsname 
+            \expandafter {\the\MAT_cntc}%
+    \edef #1[##1]%
+       {\noexpand\csname 
+         MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% INVERSES AND DETERMINANTS
+
+\def\MATinv {\def\MATinvordet_Ia{\MATinv_Ia}%
+             \def\MATinvordet_II{\MATinv_II}%
+             \MATinvordet }
+
+\def\MATdet {\def\MAT_det {1/1[0]}% initial value
+             \def\MATinvordet_Ia{\MATdet_Ia}%
+             \def\MATinvordet_II{\edef\MAT_det{\xintIrr{\MAT_det}[0]}%
+                                 \MATdet_end}%
+             \MATinvordet }
+
+\def\MATfloatinv {\def\MATinvordet_Ia{\MATinv_Ia}%
+             \def\MATinvordet_II{\MATinv_II}%
+             \MATfloatinvordet }
+
+\def\MATfloatdet {\def\MAT_det {1[0]}% initial value
+            \def\MATinvordet_Ia{\MATdet_Ia}%
+            \def\MATinvordet_II{\edef\MAT_det{\xintFloat{\MAT_det}}\MATdet_end}%
+            \MATfloatinvordet }
+
+\def\MATandinverse #1{\def\MAT_name {#1}\MATinv_II }%
+
+\def\MATinvordet #1#2{%
+    \def\MAT_ZERO {0/1[0]}%
+    \def\MAT_DIV ##1##2{\xintIrr{\xintDiv {##1}{##2}}}%
+    \def\MAT_SUB ##1##2{\xintIrr{\xintSub {##1}{##2}}}%
+    \def\MAT_MUL {\xintMul }%
+    \MATid \MAT_invN {#2[I]}%
+    \MATlet\MAT_invM  #2%
+    \def\MAT_name {#1}%
+    % \MAT_cntc is the size of the matrix. Will NOT be changed in subroutines.
+    \MAT_cntc  #2[I]\relax
+    \MAT_cnta \xint_c_i
+    \MATinvordet_I 
+}%
+\def\MATfloatinvordet #1#2{%
+    \def\MAT_ZERO {0.e0}%
+    \def\MAT_DIV {\XINTinFloatDiv }%
+    \def\MAT_SUB {\XINTinFloatSub }%
+    \def\MAT_MUL {\XINTinFloatMul }%
+    \MATfloatid \MAT_invN {#2[I]}%
+    \MATlet\MAT_invM  #2%
+    \def\MAT_name {#1}%
+    % \MAT_cntc is the size of the matrix. Will NOT be changed in subroutines.
+    \MAT_cntc  #2[I]\relax
+    \MAT_cnta \xint_c_i
+    \MATinvordet_I 
+}%
+\def\MATinvordet_I {\ifnum\MAT_cnta>\MAT_cntc 
+                    \expandafter\MATinvordet_II
+               \else\expandafter\MATinvordet_Ia
+               \fi }%
+
+\def\MATinv_II {\ifnum\MAT_cnta=\xint_c_i 
+                     \expandafter\MATinv_end
+                \else\expandafter\MATinv_IIa
+                \fi }%
+\def\MATinv_end {\expandafter\MATlet\MAT_name\MAT_invN }%
+\def\MATdet_end {\expandafter\let\MAT_name\MAT_det }
+
+\catcode`! 11
+\def\MATinv_Ia {%    
+    \MAT_cntb \MAT_cnta\relax
+    \xintloop
+       \xintifZero {\MAT_invM [\MAT_cntb,\MAT_cnta]}
+       {\advance\MAT_cntb \xint_c_i 
+        \ifnum\MAT_cntb>\MAT_cntc \MATinv_!\MATinvordet_I\fi
+        \iftrue}
+       {\iffalse}%
+    \repeat
+    \MATinv_Ipivot
+    \ifnum\MAT_cntb>\MAT_cnta \MATinv_exc\fi
+    \advance\MAT_cnta \xint_c_i
+    \MATinvordet_I
+}%
+\def\MATdet_Ia {%    
+    \MAT_cntb \MAT_cnta\relax
+    \xintloop
+       \xintifZero {\MAT_invM [\MAT_cntb,\MAT_cnta]}
+       {\advance\MAT_cntb \xint_c_i 
+        \ifnum\MAT_cntb>\MAT_cntc \MATdet_!\MATinvordet_I\fi
+        \iftrue}
+       {\iffalse}%
+    \repeat
+    \MATinv_Ipivot
+    \ifodd\numexpr\MAT_cntb-\MAT_cnta\relax
+          \edef\MAT_det{\xintOpp {\MAT_det}}%
+    \fi
+    \edef\MAT_det {\MAT_MUL {\MAT_pivot}{\MAT_det}}% 
+    \ifnum\MAT_cntb>\MAT_cnta \MATinv_exc\fi
+    \advance\MAT_cnta \xint_c_i
+    \MATinvordet_I
+}%
+\def\MATinv_! #1\fi{\fi 
+                   \xintbreakloopanddo
+                   {NOT INVERTIBLE \on@line\typeout{NOT INVERTIBLE \on@line}%
+                   \MATinv_end \def\MAT_tmpa ##1#1{}\MAT_tmpa }%
+                   }%
+\def\MATdet_! #1\fi{\fi 
+                   \xintbreakloopanddo
+                   {\edef\MAT_det{\MAT_ZERO}%
+                    \MATdet_end \def\MAT_tmpa ##1#1{}\MAT_tmpa }%
+                   }%
+\catcode`! 12
+
+\def\MATinv_IIa {%
+    \advance\MAT_cnta -\xint_c_i 
+    \MATinv_IIpivot
+    \MATinv_II
+}%
+
+\def\MATinv_exc {%
+% we optimize as we only need to do in M the indices > \MAT_cnta
+% and in N the indices at most \MAT_cntb
+    \toks0 \expandafter{\the\MAT_cnta}%
+    \toks2 \expandafter{\the\MAT_cntb}%
+% first we do in matrix M, column indices > "a"
+    \MAT_cntd \MAT_cnta
+    \xintloop
+    \ifnum \MAT_cntd<\MAT_cntc
+      \advance \MAT_cntd \xint_c_i
+      \toks4 \expandafter{\the\MAT_cntd}%
+      \expandafter\def\expandafter\MAT_tmpd\expandafter
+        {\csname MAT@\string\MAT_invM{\the\toks0}{\the\toks4}\endcsname }%
+      \expandafter\def\expandafter\MAT_tmpe\expandafter
+        {\csname MAT@\string\MAT_invM{\the\toks2}{\the\toks4}\endcsname }%
+      \expandafter\let\expandafter\MAT_tmpc\MAT_tmpd
+      \expandafter\expandafter\expandafter\let\expandafter\MAT_tmpd\MAT_tmpe
+      \expandafter\let\MAT_tmpe\MAT_tmpc
+    \repeat
+% Then we do in matrix N, column indices <= "b"
+    \MAT_cntd \xint_c_i % 1
+    \xintloop
+      \toks4 \expandafter{\the\MAT_cntd}%
+      \expandafter\def\expandafter\MAT_tmpd\expandafter
+        {\csname MAT@\string\MAT_invN{\the\toks0}{\the\toks4}\endcsname }%
+      \expandafter\def\expandafter\MAT_tmpe\expandafter
+        {\csname MAT@\string\MAT_invN{\the\toks2}{\the\toks4}\endcsname }%
+      \expandafter\let\expandafter\MAT_tmpc\MAT_tmpd
+      \expandafter\expandafter\expandafter\let\expandafter\MAT_tmpd\MAT_tmpe
+      \expandafter\let\MAT_tmpe\MAT_tmpc
+    \ifnum \MAT_cntd<\MAT_cntb
+        \advance\MAT_cntd \xint_c_i
+    \repeat
+}%
+
+\def\MATinv_Ipivot {%
+% does pivot simplification on both matrices M and N
+% pivot is from matrice M at location (cntb,cnta)
+    \expandafter\def\expandafter\MAT_tmpa\expandafter {\the\MAT_cnta}%
+    \expandafter\def\expandafter\MAT_tmpb\expandafter {\the\MAT_cntb}%
+    \expandafter\let\expandafter\MAT_pivot
+    \csname MAT@\string\MAT_invM{\the\MAT_cntb}{\the\MAT_cnta}\endcsname 
+    \MAT_cntd \MAT_cnta 
+    \xintloop
+      \ifnum\MAT_cntd<\MAT_cntc
+      \advance\MAT_cntd\xint_c_i
+    % divide in M all entries to the right of the pivot by pivot 
+     \expandafter\def\expandafter\MAT_tmpd\expandafter {\the\MAT_cntd}%
+     \expandafter
+          \edef\csname MAT@\string\MAT_invM{\MAT_tmpb}{\MAT_tmpd}\endcsname
+     {\MAT_DIV{\csname MAT@\string\MAT_invM{\MAT_tmpb}{\MAT_tmpd}\endcsname }
+              {\MAT_pivot}}%
+    \repeat
+    \MAT_cntd \xint_c_i
+    \xintloop
+    % divide in N all elements on the "b" row with column indices at most
+    % equal to "b" by the pivot value
+    \edef\MAT_tmpd {\the\MAT_cntd}
+     \expandafter
+          \edef\csname MAT@\string\MAT_invN{\MAT_tmpb}{\MAT_tmpd}\endcsname
+     {\MAT_DIV{\csname MAT@\string\MAT_invN{\MAT_tmpb}{\MAT_tmpd}\endcsname }%
+              {\MAT_pivot}%
+      }%
+    \ifnum\MAT_cntd<\MAT_cntb
+    \advance\MAT_cntd \xint_c_i
+    \repeat
+  % we now will simplify the next rows, in both matrices M and N
+  % Again we don't have to do all entries: >a in M and <= b in N
+    \MAT_cntd \MAT_cntb % will be increased by 1, row index
+    \xintloop
+    {% will not create a group!
+    \ifnum\MAT_cntd<\MAT_cntc 
+    \advance\MAT_cntd \xint_c_i % we start with the "b+1" row
+    % We are working with row \cntd
+    \edef\MAT_tmpd {\the\MAT_cntd}%
+    % we need the (\cntd, \cnta) entry
+    \edef\MAT_tmpf 
+        {\csname MAT@\string\MAT_invM{\MAT_tmpd}{\MAT_tmpa}\endcsname }%
+    % We now multiply by tmpf the cntb row and subtract it from the cntd row
+    % this sets to zero the (cntd,cnta) entry:
+    % in matrix M, only need to look at columns to the right
+    \MAT_cnte\MAT_cnta % necessarily cnta< size of M, as cnta<= cntb<cntd
+    \advance\MAT_cnte \xint_c_i 
+    \xintloop
+        \edef\MAT_tmpe {\the\MAT_cnte}%
+        \expandafter
+        \edef\csname MAT@\string\MAT_invM{\MAT_tmpd}{\MAT_tmpe}\endcsname 
+        {\MAT_SUB{\csname MAT@\string\MAT_invM{\MAT_tmpd}{\MAT_tmpe}\endcsname }
+           {\MAT_MUL \MAT_tmpf
+            {\csname MAT@\string\MAT_invM{\MAT_tmpb}{\MAT_tmpe}\endcsname }}%
+         }%
+    \ifnum\MAT_cnte<\MAT_cntc
+        \advance\MAT_cnte \xint_c_i
+    \repeat% end of subloop for matrix M, row "d", columns "e>=a"
+    % we now do the row "d" in matrix N, columns "e<=b"
+    \MAT_cnte \xint_c_i
+    \xintloop
+        \edef\MAT_tmpe {\the\MAT_cnte}%
+        \expandafter
+        \edef\csname MAT@\string\MAT_invN{\MAT_tmpd}{\MAT_tmpe}\endcsname 
+        {\MAT_SUB{\csname MAT@\string\MAT_invN{\MAT_tmpd}{\MAT_tmpe}\endcsname }
+           {\MAT_MUL \MAT_tmpf
+            {\csname MAT@\string\MAT_invN{\MAT_tmpb}{\MAT_tmpe}\endcsname }}%
+         }%
+    \ifnum\MAT_cnte<\MAT_cntb
+      \advance\MAT_cnte \xint_c_i
+    \repeat% end of subloop for matrix N, row "d"
+   }\repeat 
+}% 
+
+\def\MATinv_IIpivot {%
+% does pivot simplification on matrices M and N
+% M is now upper triangular with 1's on the diagonal
+% pivot = 1 is in the \MAT_cnta row. We simplify rows above.
+% There is no need to keep track of the computations for M itself
+% Only need to read M data and modify rows of N accordingly
+    \expandafter\def\expandafter\MAT_tmpa\expandafter {\the\MAT_cnta}%
+    \MAT_cntb \MAT_cnta
+    \xintloop
+    {% will not create a group!
+    \ifnum\MAT_cntb>\xint_c_i 
+       \advance\MAT_cntb -\xint_c_i 
+    \expandafter\def\expandafter\MAT_tmpb\expandafter {\the\MAT_cntb}%
+    \expandafter\let\expandafter\MAT_tmpf 
+        \csname MAT@\string\MAT_invM{\MAT_tmpb}{\MAT_tmpa}\endcsname
+    \MAT_cntd\xint_c_i 
+    \xintloop
+        \expandafter\def\expandafter\MAT_tmpd\expandafter {\the\MAT_cntd}%
+        \expandafter
+        \edef\csname MAT@\string\MAT_invN{\MAT_tmpb}{\MAT_tmpd}\endcsname 
+        {\MAT_SUB
+           {\csname MAT@\string\MAT_invN{\MAT_tmpb}{\MAT_tmpd}\endcsname }
+           {\MAT_MUL \MAT_tmpf
+            {\csname MAT@\string\MAT_invN{\MAT_tmpa}{\MAT_tmpd}\endcsname }}%
+         }%
+    \ifnum\MAT_cntd<\MAT_cntc
+       \advance\MAT_cntd \xint_c_i
+    \repeat
+   }\repeat
+}% 
+
+
+% DISPLAYING MACROS
+\makeatother
+
+\def\MATraw {\MATrawwith {\MATrawone}}%
+
+\def\MATrawone {\xintPRaw}%
+
+\def\MATrawwith #1#2{%
+     \xintListWithSep {; }%
+     {\xintApply { \MAT_raw_row {#1}#2}{\xintSeq {1}{#2[I]}}}%
+}%
+\def\MAT_raw_row #1#2#3{%
+    \xintListWithSep {, }%
+    {\xintApply { \MAT_raw_one {#1}#2{#3}}{\xintSeq {1}{#2[J]}}}%
+}%
+\def\MAT_raw_one #1#2#3#4{#1{#2[#3,#4]}}%
+
+%% MATH MODE DISPLAYING
+
+\newcommand\MATdisplay [1][1.25]{\MATdisplaywith [#1]{\MATdisplayone}}
+
+\def\MATdisplayone {\xintSignedFrac}
+
+\newcolumntype\MATdisplaycoltype {c}
+\newcolumntype\MATdisplaypreamble [1]{@{}*{#1[J]}\MATdisplaycoltype@{}}
+
+\newcommand\MATdisplaywith [3][1.25]
+   {\left(\def\arraystretch{#1}%
+    \begin{array}{\MATdisplaypreamble {#3}}
+         \xintListWithSep {\\}
+       {\xintApply { \MAT_display_row {#2}#3}{\xintSeq {1}{#3[I]}}}
+    \end{array}\right)%
+}%
+
+\def\MAT_display_row #1#2#3{%
+    \xintListWithSep {&}
+     {\xintApply{ \MAT_display_one {#1}#2{#3}}{\xintSeq {1}{#2[J]}}}%
+}%
+
+\def\MAT_display_one #1#2#3#4{#1{#2[#3,#4]}}%
+
+\def\MATminus     {\expandafter\MAT_minus_a\romannumeral-`0}%
+\def\MAT_minus_a  {\futurelet\XINT_token\MAT_minus_b }%
+\def\MAT_minus_b  {\ifx\XINT_token-\else\phantom{-}\fi }%
+
+%\usepackage {siunitx}
+\usepackage {numprint}
+
+\newcommand{\MATfloatdisplay}[1][\XINTdigits]
+           {\MATfloatdisplaywith [#1]{\MATfloatone}}%
+
+\def\MATfloatone #1{\expandafter\MAT_flone\romannumeral-`0#1!}%
+
+\def\MAT_flone #1.#2e#3!{%
+    \xintSgnFork{\xintiiSgn{\XINT_Abs #3}}%
+    {}{#1.#2}{#1.#2\times 10^{#3}}}%
+
+\newcommand{\MATfloatdisplaywith}[3][\XINTdigits]
+   {\left(\edef\MAT_tmpa{#1}%
+    \begin{array}{\MATdisplaypreamble{#3}}
+     \xintListWithSep {\\}
+       {\xintApply { \MAT_fldisplay_row {#2}#3}{\xintSeq {1}{#3[I]}}}%
+    \end{array}\right)}%
+
+\def\MAT_fldisplay_row #1#2#3{%
+    \xintListWithSep {&}
+     {\xintApply{ \MAT_fldisplay_one {#1}#2{#3}}{\xintSeq {1}{#2[J]}}}}%
+
+\def\MAT_fldisplay_one #1#2#3#4{#1{\xintFloat [\MAT_tmpa]{#2[#3,#4]}}}%
+
+\catcode`_ 8   
+
+
+\ExplSyntaxOn
+\NewEnviron{pmatrixT}
+ {
+  \marine_transpose:V \BODY
+ }
+
+\int_new:N \l_marine_transpose_row_int
+\int_new:N \l_marine_transpose_col_int
+\seq_new:N \l_marine_transpose_rows_seq
+\seq_new:N \l_marine_transpose_arow_seq
+\prop_new:N \l_marine_transpose_matrix_prop
+\tl_new:N \l_marine_transpose_last_tl
+\tl_new:N \l_marine_transpose_body_tl
+
+\cs_new_protected:Nn \marine_transpose:n
+ {
+  \seq_set_split:Nnn \l_marine_transpose_rows_seq { \\ } { #1 }
+  \int_zero:N \l_marine_transpose_row_int
+  \prop_clear:N \l_marine_transpose_matrix_prop
+  \seq_map_inline:Nn \l_marine_transpose_rows_seq
+   {
+    \int_incr:N \l_marine_transpose_row_int
+    \int_zero:N \l_marine_transpose_col_int
+    \seq_set_split:Nnn \l_marine_transpose_arow_seq { & } { ##1 }
+    \seq_map_inline:Nn \l_marine_transpose_arow_seq
+     {
+      \int_incr:N \l_marine_transpose_col_int
+      \prop_put:Nxn \l_marine_transpose_matrix_prop
+       {
+        \int_to_arabic:n { \l_marine_transpose_row_int }
+        ,
+        \int_to_arabic:n { \l_marine_transpose_col_int }
+       }
+       { ####1 }
+     }
+   }
+   \tl_clear:N \l_marine_transpose_body_tl
+   \int_step_inline:nnnn { 1 } { 1 } { \l_marine_transpose_col_int }
+    {
+     \int_step_inline:nnnn { 1 } { 1 } { \l_marine_transpose_row_int }
+      {
+       \tl_put_right:Nx \l_marine_transpose_body_tl
+        {
+         \prop_item:Nn \l_marine_transpose_matrix_prop { ####1,##1 }
+         \int_compare:nF { ####1 = \l_marine_transpose_row_int } { & }
+        }
+      }
+     \tl_put_right:Nn \l_marine_transpose_body_tl { \\ }
+    }
+   \begin{pmatrix}
+   \l_marine_transpose_body_tl
+   \end{pmatrix}
+ }
+\cs_generate_variant:Nn \marine_transpose:n { V }
+\cs_generate_variant:Nn \prop_put:Nnn { Nx }
+\ExplSyntaxOff
+
+
+\catcode`_ 11
+\makeatletter
+
+\newcount\MAT_cnta
+\newcount\MAT_cntb
+\newcount\MAT_cntc
+\newcount\MAT_cntd
+\newcount\MAT_cnte
+
+% Usage: \MATset\myMatrix{semi-colon separated rows of comma separated values}
+% example.
+% \MATset\MatrixA { 1/3 , 1/4, 1/5 ; 
+%                   1/6 , 1/7 , 1/8 ; 
+%                   1/9 , 1/10 , 1/11 ; }
+
+\def\MATset {\def\MAT_xintin {\xintRaw}\MATset_ }%
+
+\def\MATset_ #1#2{%
+    \def\MATset_name{#1}%
+    \edef\MAT_tmpa {#2}%
+    \MAT_cnta \xint_c_ % sets \MAT_cnta to zero
+    \expandafter\MATset_a 
+    \romannumeral0\expandafter\xintzapspaces\expandafter{\MAT_tmpa};!;%
+}%
+\def\MATset_a {\futurelet\XINT_token\MATset_b }%
+\def\MATset_b #1;{\def\MAT_tmpa{#1}%
+                  \ifx\XINT_token;\expandafter\MATset_w
+                  \else
+                  \ifx\XINT_token!%
+                          \expandafter\expandafter\expandafter\MATset_x
+                     \else
+                          \expandafter\expandafter\expandafter\MATset_c
+                  \fi\fi }%
+\def\MATset_w !;{\MATset_x }%
+\def\MATset_x {\expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {I}\expandafter\endcsname
+  \expandafter {\the\MAT_cnta }%
+               \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {J}\expandafter\endcsname 
+  \expandafter {\the\MAT_cntb }%
+  \expandafter\edef \MATset_name [##1]%
+     {\noexpand\csname MAT@\expandafter\string\MATset_name 
+               \noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+%
+\def\MAT_in #1,#2,{\xint_bye #2\xint_gobble_iv\xint_bye
+                   {\the\numexpr #1}{\the\numexpr #2}\xint_gobble_iii 
+                   {\xintZapSpaces{#1}}}%
+%
+\def\MATset_c {\advance\MAT_cnta \xint_c_i % row count ++
+               \MAT_cntb \xint_c_ % column count initially zero
+               \expandafter\MATset_d\romannumeral0\expandafter
+               \xintzapspaces\expandafter {\MAT_tmpa},!,}%
+\def\MATset_d {\futurelet\XINT_token\MATset_e }%
+\def\MATset_e #1,{\ifx\XINT_token!\expandafter\MATset_a
+  \else
+      \advance\MAT_cntb \xint_c_i
+      \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name 
+            {\the\MAT_cnta}{\the\MAT_cntb}\expandafter\endcsname
+  \expandafter{\romannumeral-`0\MAT_xintin{\xintZapSpacesB{#1}}}%
+  \expandafter\MATset_d\fi
+}%
+
+\def\MATlet #1#2{%
+    \edef\MAT@seqI{\xintSeq {1}{#2[I]}}%
+    \edef\MAT@seqJ{\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in {\MAT@seqI}
+    \do{\xintFor* ##2 in {\MAT@seqJ}
+        \do{\expandafter\let
+     \csname MAT@\string#1{##1}{##2}\expandafter\endcsname
+     \csname MAT@\string#2{##1}{##2}\endcsname
+     }}%
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#2[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+\def\MATrowreduce #1{%
+  \begingroup
+    \edef\MATrr@rows{#1[I]}%
+    \edef\MATrr@cols{#1[J]}%
+    \def\MATrr@pivrow {0}%
+    \def\MATrr@pivcol {0}%
+    \MATlet\@U #1%
+    \let\MATrr@ifcontinue\iftrue
+Starting the reduction.
+\MATrrdisplaymatrix\@U
+    \xintloop
+       \edef\MATrr@pivrow{\the\numexpr\MATrr@pivrow+\xint_c_i}%
+       \edef\MATrr@pivcol{\the\numexpr\MATrr@pivcol+\xint_c_i}%
+       \MATrr@dopiv
+    \MATrr@ifcontinue
+    \repeat
+Done. The rank of the matrix is \the\numexpr\MATrr@pivrow-\xint_c_i.\par
+  \endgroup
+}
+
+\def\MATrr@done {\let\MATrr@ifcontinue\iffalse}
+
+\def\MATrr@dopiv{%
+    \let\MATrr@row\MATrr@pivrow
+    \let\MATrr@col\MATrr@pivcol
+    \ifnum\MATrr@row>\MATrr@rows\relax
+        \MATrr@done
+    \else
+        \ifnum\MATrr@col>\MATrr@cols\relax
+            \MATrr@done
+        \else
+            \expandafter\expandafter\expandafter\MATrr@dopiv@i
+        \fi
+    \fi
+}
+
+\def\MATrr@dopiv@i{%
+    \edef\MATrr@piv@value{\@U[\MATrr@row,\MATrr@pivcol]}%
+    \xintifZero{\MATrr@piv@value}
+        \MATrr@dopiv@steprow
+        \MATrr@dopiv@ii
+}
+
+\def\MATrr@dopiv@steprow{%
+     \ifnum\MATrr@row=\MATrr@rows\relax
+         \let\MATrr@row\MATrr@pivrow
+\par No pivot found in column \MATrr@pivcol.\par
+         \expandafter\MATrr@dopiv@stepcol
+     \else
+         \edef\MATrr@row{\the\numexpr\MATrr@row+\xint_c_i}%
+         \expandafter\MATrr@dopiv@i
+     \fi
+}
+
+\def\MATrr@dopiv@stepcol{%
+     \ifnum\MATrr@pivcol=\MATrr@cols\relax
+         \MATrr@done
+     \else
+         \edef\MATrr@pivcol{\the\numexpr\MATrr@pivcol+\xint_c_i}%
+         \expandafter\MATrr@dopiv@i
+     \fi
+}
+
+\def\MATrr@dopiv@ii{%
+    \ifnum\MATrr@pivrow=\MATrr@rows\relax
+      \edef\MATrr@pivrow{\the\numexpr\MATrr@pivrow+\xint_c_i}\MATrr@done
+    \else
+      \expandafter\MATrr@dopiv@iii
+    \fi
+}
+
+\def\MATrr@dopiv@iii{%
+Now using the pivot with value \MATrrprintonevalue{\MATrr@piv@value}
+at row \MATrr@row\space and column \MATrr@pivcol.\par
+    \ifnum\MATrr@row>\MATrr@pivrow\relax
+Exchange of row \MATrr@row\space with row \MATrr@pivrow.\par
+      \MAT_cntb=\MATrr@pivcol\relax
+      \xintloop
+         \expandafter\let\expandafter\MAT@tmp
+         \csname MAT@\string\@U{\MATrr@row}{\the\MAT_cntb}\endcsname
+         \expandafter\let
+         \csname MAT@\string\@U{\MATrr@row}{\the\MAT_cntb}\expandafter\endcsname
+         \csname MAT@\string\@U{\MATrr@pivrow}{\the\MAT_cntb}\endcsname
+         \expandafter\let
+         \csname MAT@\string\@U{\MATrr@pivrow}{\the\MAT_cntb}\endcsname
+         \MAT@tmp
+      \ifnum\MATrr@cols>\MAT_cntb
+         \advance\MAT_cntb\xint_c_i
+      \repeat
+\MATrrdisplaymatrix\@U\par
+    \fi
+    \MAT_cntc\MATrr@pivrow
+    \xintloop
+      \advance\MAT_cntc\xint_c_i
+      \edef\MATrr@entry{\@U[\MAT_cntc,\MATrr@pivcol]}%
+      \xintifZero\MATrr@entry
+     {}%
+     {\edef\MATrr@ratio{\xintIrr{\xintDiv{\MATrr@entry}{\MATrr@piv@value}}[0]}%
+Subtract from row \the\MAT_cntc\space the pivot row multiplied by
+\MATrrprintonevalue{\MATrr@ratio}.\par
+      \@namedef{MAT@\string\@U{\the\MAT_cntc}{\MATrr@pivcol}}{0[0]}%
+      \MAT_cntd\MATrr@pivcol\relax
+      \xintloop
+      \advance\MAT_cntd\xint_c_i
+      \unless\ifnum\MATrr@cols<\MAT_cntd
+        \expandafter\edef
+        \csname MAT@\string\@U{\the\MAT_cntc}{\the\MAT_cntd}\endcsname
+          {\xintIrr{%
+           \xintSub{\@U[\MAT_cntc,\MAT_cntd]}
+                   {\xintMul{\MATrr@ratio}{\@U[\MATrr@pivrow,\MAT_cntd]}}%
+           }[0]}%
+      \repeat
+      }%
+    \unless\ifnum\MATrr@rows=\MAT_cntc
+    \repeat
+\MATrrdisplaymatrix\@U
+}
+
+\def\MATrrprintonevalue{\xintPRaw}
+\def\MATrrdisplaymatrix #1{\[\MATdisplay#1\]}%
+
+%% MATH MODE MATRIX DISPLAY
+
+\makeatother
+
+
+
+\catcode`_ 8 
+
+\catcode`_ 11
+\makeatletter
+
+\newwrite\MATout
+\immediate\openout\MATout=\jobname.pluqout\relax
+
+% (the typeout format is for input in Maple for example)
+\def\MATtypeout {\MATtypeoutwith {\MATtypeoutone}}%
+\def\MATtypeoutone #1{\xintPRaw{\xintRawWithZeros{#1}}}% (lacking an \xintPRawWithZeros)
+\def\MATtypeoutwith #1#2#3{%
+     \edef\I{\xintSeq {1}{#3[I]}}% indices for rows
+     \edef\J{\xintSeq {1}{#3[J]}}% indices for columns
+     \immediate\write\MATout{#2:=Matrix([[%
+       \xintListWithSep {], [}{\xintApply { \MAT_typeout_row {#1}#3}{\I}}%
+    ]]);}%
+}%
+\def\MAT_typeout_row #1#2#3{%
+    \xintListWithSep {, }{\xintApply { \MAT_typeout_one {#1}#2{#3}}{\J}}%
+}%
+\def\MAT_typeout_one #1#2#3#4{#1{#2[#3,#4]}}%
+
+% we don't need all of them
+\newcount\MAT_cnta
+\newcount\MAT_cntb
+\newcount\MAT_cntc
+\newcount\MAT_cntd
+\newcount\MAT_cnte
+
+% Usage: \MATset\myMatrix{semi-colon separated rows of comma separated values}
+% example.
+% \MATset\MatrixA { 1/3 , 1/4, 1/5 ; 
+%                   1/6 , 1/7 , 1/8 ; 
+%                   1/9 , 1/10 , 1/11 ; }
+% The final semi-colon is optional.
+
+% We indeed focus here on manipulating matrices with rational entries, the
+% code at https://tex.stackexchange.com/a/143035/4686 has the set-up for
+% floating point numbers too (in an arbitrary, user decided precision).
+
+\def\MATset {\def\MAT_xintin {\xintRaw}\MATset_ }%
+
+\def\MATset_ #1#2{%
+    \def\MATset_name{#1}%
+    \edef\MAT_tmpa {#2}%
+    \MAT_cnta \xint_c_ % sets \MAT_cnta to zero
+    \expandafter\MATset_a 
+    \romannumeral0\expandafter\xintzapspaces\expandafter{\MAT_tmpa};!;%
+}%
+\def\MATset_a {\futurelet\XINT_token\MATset_b }%
+\def\MATset_b #1;{\def\MAT_tmpa{#1}%
+                  \ifx\XINT_token;\expandafter\MATset_w
+                  \else
+                  \ifx\XINT_token!%
+                          \expandafter\expandafter\expandafter\MATset_x
+                     \else
+                          \expandafter\expandafter\expandafter\MATset_c
+                  \fi\fi }%
+\def\MATset_w !;{\MATset_x }%
+\def\MATset_x {\expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {I}\expandafter\endcsname
+  \expandafter {\the\MAT_cnta }%
+               \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {J}\expandafter\endcsname 
+  \expandafter {\the\MAT_cntb }%
+  \expandafter\edef \MATset_name [##1]%
+     {\noexpand\csname MAT@\expandafter\string\MATset_name 
+               \noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+% a bit convoluted, no comments.
+\def\MAT_in #1,#2,{\xint_bye #2\xint_gobble_iv\xint_bye
+                   {\the\numexpr #1}{\the\numexpr #2}\xint_gobble_iii 
+                   {\xintZapSpaces{#1}}}%
+\def\MATset_c {\advance\MAT_cnta \xint_c_i % row count ++
+               \MAT_cntb \xint_c_ % column count initially zero
+               \expandafter\MATset_d\romannumeral0\expandafter
+               \xintzapspaces\expandafter {\MAT_tmpa},!,}%
+\def\MATset_d {\futurelet\XINT_token\MATset_e }%
+\def\MATset_e #1,{\ifx\XINT_token!\expandafter\MATset_a
+  \else
+      \advance\MAT_cntb \xint_c_i
+      \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name 
+            {\the\MAT_cnta}{\the\MAT_cntb}\expandafter\endcsname
+  \expandafter{\romannumeral-`0\MAT_xintin{\xintZapSpacesB{#1}}}%
+  \expandafter\MATset_d\fi
+}%
+
+% removed \toks2 et \toks4 usage from https://tex.stackexchange.com/a/143035/4686
+\def\MATlet #1#2{%
+    \edef\MAT@seqI{\xintSeq {1}{#2[I]}}%
+    \edef\MAT@seqJ{\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in {\MAT@seqI}
+    \do{\xintFor* ##2 in {\MAT@seqJ}
+        \do{\expandafter\let
+     \csname MAT@\string#1{##1}{##2}\expandafter\endcsname
+     \csname MAT@\string#2{##1}{##2}\endcsname
+     }}%
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#2[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% We need identity matrices.
+% again copied as is from https://tex.stackexchange.com/a/143035/4686
+% IDENTITY MATRIX
+% usage \MATid\foo{37} defines a 37 times 37 identity matrix.
+\def\MATid {\def\MAT_tmpf{/1}\MAT_id }%
+%\def\MATfloatid {\def\MAT_tmpf{}\MAT_id }%
+% This identity matrix insists on coefficients written internally
+% 0[0] or 1[0], this is a remnant of
+% https://tex.stackexchange.com/a/143035/4686 whose aim is is minuscule
+% optimization when these numbers are involved in computations done by
+% the xintfrac macros.
+\def\MAT_id #1#2{%
+    \MAT_cntc #2\relax
+    \MAT_cnta \xint_c_i % 1
+    \xintloop
+      {\expandafter\def\expandafter\MAT_tmpa \expandafter{\the\MAT_cnta}%
+       \MAT_cntb \xint_c_i % 1
+       \xintloop
+         \expandafter\edef
+         \csname MAT@\string#1{\MAT_tmpa}{\the\MAT_cntb}\endcsname 
+           {\ifnum\MAT_cntb=\MAT_cnta 1\else 0\fi \MAT_tmpf[0]}%
+       \ifnum\MAT_cntb<\MAT_cntc
+         \advance\MAT_cntb \xint_c_i
+       \repeat
+     \ifnum\MAT_cnta<\MAT_cntc
+        \advance\MAT_cnta \xint_c_i
+    }\repeat
+    \expandafter\def\csname MAT@\string#1{I}\expandafter\endcsname
+            \expandafter {\the\MAT_cntc}%
+    \expandafter\def\csname MAT@\string#1{J}\expandafter\endcsname 
+            \expandafter {\the\MAT_cntc}%
+    \edef #1[##1]%
+       {\noexpand\csname 
+         MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% EXCHANGING ROWS OR COLUMNS OF A GIVEN MATRIX
+\def\MATexchangecol #1#2#3{%
+    \MAT_cnta=#3[I]\relax
+    \MAT_cntb=\xint_c_i % 1
+    \xintloop
+       \expandafter\let\expandafter\MAT@tmp
+       \csname MAT@\string#3{\the\MAT_cntb}{#1}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{\the\MAT_cntb}{#1}\expandafter\endcsname
+       \csname MAT@\string#3{\the\MAT_cntb}{#2}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{\the\MAT_cntb}{#2}\endcsname
+       \MAT@tmp
+    \ifnum\MAT_cntb<\MAT_cnta
+       \advance\MAT_cntb\xint_c_i
+    \repeat
+}%
+% perhaps only columns "to the right" actually need exchange in usage of this
+\def\MATexchangerow #1#2#3{%
+    \MAT_cnta=#3[J]\relax
+    \MAT_cntb=\xint_c_i % 1
+    \xintloop
+       \expandafter\let\expandafter\MAT@tmp
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\expandafter\endcsname
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \MAT@tmp
+    \ifnum\MAT_cntb<\MAT_cnta
+       \advance\MAT_cntb\xint_c_i
+    \repeat
+}%
+\def\MATexchangerowspecial #1#2#3{%#1>#2, only columns <#2 need update
+    \MAT_cnta=#2\relax
+    \MAT_cntb=\xint_c_ % 0
+    \xintloop
+    \advance\MAT_cntb\xint_c_i
+    \ifnum\MAT_cntb<\MAT_cnta
+       \expandafter\let\expandafter\MAT@tmp
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\expandafter\endcsname
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \MAT@tmp
+    \repeat
+}%
+
+
+% Usage:
+% \MATpluq\A (\A previously defined by \MATset)
+% Effect: sets \P, \L, \U, \Q, to matrices in the sense of \MATset,
+% so that "A=PLUQ" and it writes all matrices out
+% to some file. See initial answer about row reduction for typesetting
+% in document.
+% The code is a simple adaptation of this initial answer. Now I use \MATpluq
+% prefix.
+\def\MATpluq #1{%
+%  \begingroup
+    \MATlet\@U#1%
+    \edef\MATpluq@rows{\@U[I]}% nb of rows
+    \edef\MATpluq@cols{\@U[J]}% nb of columns.
+    \MATid\@P\MATpluq@rows
+    \MATid\@L\MATpluq@rows
+    \MATid\@Q\MATpluq@cols
+    \def\MATpluq@pivrow {0}%
+    \def\MATpluq@pivcol {0}%
+    %\edef\MATpluq@name {\string#1}%
+    \let\MATpluq@ifcontinue\iftrue
+%  Starting the reduction.
+    \MATtypeout{^^JA}#1%
+\[A = \MATdisplay\@U\]
+    \xintloop
+% Nota Bene: in the PLUQ reduction, the pivots are anyhow organized
+% along the main diagonal so pivrow and pivcol will be kept in sync over
+% the execution of the algorithm but we use two variables nevertheless.
+       \edef\MATpluq@pivrow{\the\numexpr\MATpluq@pivrow+\xint_c_i}%
+       \edef\MATpluq@pivcol{\the\numexpr\MATpluq@pivcol+\xint_c_i}%
+       \MATpluq@dopiv
+    \MATpluq@ifcontinue
+    \repeat
+%  Done. The rank of the matrix is \the\numexpr\MATpluq@pivrow-\xint_c_i.\par
+%  \endgroup
+    \MATtypeout{P}\@P
+    \MATtypeout{L}\@L
+    \MATtypeout{U}\@U
+    \MATtypeout{Q}\@Q
+\[ P = \MATdisplay\@P\]
+\[ L = \MATdisplay\@L\qquad U = \MATdisplay\@U\]
+\[ Q = \MATdisplay\@Q\]
+}
+
+\def\MATpluq@done {\let\MATpluq@ifcontinue\iffalse}
+
+% Remark on algorithm: I hesitated about doing column permutations first,
+% rather than row permutations with the idea to recognize faster an entirely
+% vanishing row, so that we can put it at the end and ignore it entirely, in
+% effect reducing the number of rows by one, and possibly making algorithm
+% faster. But for simplicity I just keep algorithm close to the one as in my
+% initial answer. We only have to keep track in \P, \L, \Q of the needed
+% operations.
+
+\def\MATpluq@dopiv{%
+    \let\MATpluq@row\MATpluq@pivrow
+    \let\MATpluq@col\MATpluq@pivcol
+    \ifnum\MATpluq@row>\MATpluq@rows\relax
+        \MATpluq@done
+    \else
+        \ifnum\MATpluq@col>\MATpluq@cols\relax
+            \MATpluq@done
+        \else
+            \expandafter\expandafter\expandafter\MATpluq@dopiv@i
+        \fi
+    \fi
+}
+
+\def\MATpluq@dopiv@i{%
+    \edef\MATpluq@piv@value{\@U[\MATpluq@row,\MATpluq@col]}%
+    \xintifZero{\MATpluq@piv@value}
+        \MATpluq@dopiv@steprow
+        \MATpluq@dopiv@ii
+}
+
+\def\MATpluq@dopiv@steprow{%
+     \ifnum\MATpluq@row=\MATpluq@rows\relax
+         \par No pivot found in column \MATpluq@col.\par
+         \let\MATpluq@row\MATpluq@pivrow
+         \expandafter\MATpluq@dopiv@stepcol
+     \else
+         \edef\MATpluq@row{\the\numexpr\MATpluq@row+\xint_c_i}%
+         \expandafter\MATpluq@dopiv@i
+     \fi
+}
+
+\def\MATpluq@dopiv@stepcol{%
+     \ifnum\MATpluq@col=\MATpluq@cols\relax
+         \MATpluq@done
+     \else
+         \edef\MATpluq@col{\the\numexpr\MATpluq@col+\xint_c_i}%
+         \expandafter\MATpluq@dopiv@i
+     \fi
+}
+
+% found a pivot
+\def\MATpluq@dopiv@ii{%
+Pivot \MATpluqprintonevalue{\MATpluq@piv@value} at \MATpluq@row, \MATpluq@col.\par
+    \ifnum\MATpluq@col>\MATpluq@pivcol\relax
+Exchange of columns \MATpluq@pivcol\space and \MATpluq@col.\par
+      \MATexchangerow{\MATpluq@col}{\MATpluq@pivcol}\@Q
+      \MATexchangecol{\MATpluq@col}{\MATpluq@pivcol}\@U
+\[U = \MATdisplay\@U\qquad Q = \MATdisplay\@Q\]
+    \fi
+    \ifnum\MATpluq@pivrow=\MATpluq@rows\relax
+      \edef\MATpluq@pivrow{\the\numexpr\MATpluq@pivrow+\xint_c_i}%
+      \MATpluq@done
+    \else
+      \expandafter\MATpluq@dopiv@iii
+    \fi
+}
+
+\def\MATpluq@dopiv@iii{%
+    \ifnum\MATpluq@row>\MATpluq@pivrow\relax
+Exchange of rows \MATpluq@pivrow\space and \MATpluq@row.\par
+      \MATexchangecol{\MATpluq@row}{\MATpluq@pivrow}\@P
+      \MATexchangerow{\MATpluq@row}{\MATpluq@pivrow}\@U
+      \MATexchangerowspecial{\MATpluq@row}{\MATpluq@pivrow}\@L
+\[L = \MATdisplay\@L\qquad U = \MATdisplay\@U\]
+\[P = \MATdisplay\@P\]
+    \fi
+    \MAT_cntc\MATpluq@pivrow\relax% we are guaranteed < nb of rows
+    \xintloop
+      \advance\MAT_cntc\xint_c_i 
+      \edef\MATpluq@entry{\@U[\MAT_cntc,\MATpluq@pivcol]}%
+      \xintifZero\MATpluq@entry
+     {% nothing to do, the L coeff is already set to zero
+     }%
+     {\edef\MATpluq@ratio
+         {\xintIrr{\xintDiv{\MATpluq@entry}{\MATpluq@piv@value}}[0]}%
+      \expandafter\let
+      \csname MAT@\string\@L{\the\MAT_cntc}{\MATpluq@pivcol}\endcsname
+      \MATpluq@ratio
+Subtract from row \the\MAT_cntc\space the pivot row multiplied by
+\MATpluqprintonevalue{\MATpluq@ratio}.\par
+      \@namedef{MAT@\string\@U{\the\MAT_cntc}{\MATpluq@pivcol}}{0[0]}%
+      \MAT_cntd\MATpluq@pivcol\relax
+      \xintloop
+      \advance\MAT_cntd\xint_c_i
+      \unless\ifnum\MATpluq@cols<\MAT_cntd
+        \expandafter\edef
+        \csname MAT@\string\@U{\the\MAT_cntc}{\the\MAT_cntd}\endcsname
+          {\xintIrr{%
+           \xintSub{\@U[\MAT_cntc,\MAT_cntd]}
+                   {\xintMul{\MATpluq@ratio}{\@U[\MATpluq@pivrow,\MAT_cntd]}}%
+           }[0]}%
+      \repeat
+      }%
+    \unless\ifnum\MATpluq@rows=\MAT_cntc
+    \repeat
+\[L = \MATdisplay\@L\qquad U = \MATdisplay\@U\]
+}
+
+\def\MATpluqprintonevalue{\xintPRaw}
+%\def\MATpluqdisplay#1{\[\MATdisplay#1\]}%
+
+%% MATH MODE MATRIX DISPLAY
+
+\makeatother
+\catcode`_ 8  
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\begin{document}
+\MATset\A {1,2,-1;
+		   -2,0,4;
+		    3,1,5;}
+\MATinv\B\A
+\MATmul\C\B\A
+\MATdet\Det\A
+\[ \MATdisplay\A\ \ ,\ \ \MATdisplay \B\ \ ,\ \ \MATdisplay \C\ \ ,\ \ \MATdisplay \A^3 \]
+\[ \det\MATdisplay\A=\MATdisplayone \Det \]
+\[
+\begin{pmatrix}
+  3 & 2 & -1\\
+  4 & 0 & -3\\
+  -2 & 1 & 7
+\end{pmatrix}^T
+=
+\begin{pmatrixT}
+  3 & 2 & -1\\
+  4 & 0 & -3\\
+  -2 & 1 & 7
+\end{pmatrixT}
+\]
+\newpage
+\MATset\MatrixC {
+ 3, 1, -7, 2, 4;
+ -9, -4, -8, -2, 1;
+ -6, -3, -15, 3, 0;
+ 2, -3, 7, 3, 2;
+ 4, -6, 14, 6, 4;
+}
+
+\MATrowreduce\MatrixC
+\newpage
+\MATset\MatrixA { 1/3 , 1/4, 1/5 ; 
+                  1/6 , 1/7 , 1/8 ; 
+                  1/9 , 1/10 , 1/11 ; }
+\MATpluq\MatrixA\textbf{}
+\newpage
+\[ \begin{amatrix}{2}
+  1 & 2 & 3\\
+  4 & 5 & 9\\
+  1 & 2 & 3\\
+  4 & 5 & 9
+\end{amatrix}\ \ ,\ \ \begin{pmatrix}
+   1 & 2 & 3 \\  a & b & c\\
+1 & 3 & 5\\ 2 & 4 & 3
+ \end{pmatrix} \]
+\end{document}

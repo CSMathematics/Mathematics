@@ -1,0 +1,115 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,
+%mathimatika,
+gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+%--------- BOLD Μαθηματικά
+\newcommand{\bmath}[1]{\textbf{\boldmath{#1}}}
+
+%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
+\newcommand{\hm}[1]{\textrm{ημ}#1}
+\newcommand{\syn}[1]{\textrm{συν}#1}
+\newcommand{\ef}[1]{\textrm{εφ}#1}
+\newcommand{\syf}[1]{\textrm{σφ}#1}
+%--------------------------------------------
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=red9,fg=black,ht=8mm},
+ row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\normalfont}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{gather*}
+e^{\pi i}+1=0\\
+e^{ix}=\cos{x}+i\sin{x}\\
+i=\sqrt{-1}\\
+x_{1,2}=-\left(\frac{p}{2}\right)\pm\sqrt{\left(\frac{\pi}{2}\right)^2-q}\\
+A=\pi r^2\\
+E=hf\\
+V=\frac{4}{3}\pi r^3\\
+a^2+b^2=c^2\\
+a^{\phi(n)}\equiv 1|n\\
+\vec{F}=m\vec{a}\\
+E=mc^2\\
+E=mgh\\
+K\equiv \left(k^e\right)^d\\
+-\frac{\hbar^2}{2 m} \Delta \psi+V \psi=E \psi=i \hbar \frac{\partial}{\partial t} \psi\\
+\sum_{k=0}^{\infty}{q^k}=\frac{1}{1-q}\\
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \cdot \mathrm{d} x \mathrm{~d} y \mathrm{~d} z=\int_0^{\infty} \int_0^{2 \pi} \int_0^\pi \cdot r^2 \sin \vartheta \mathrm{d} \vartheta \mathrm{d} \varphi \mathrm{d} r\\
+\mathcal{F}\{f\}(\omega)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \mathrm{~d} t\\
+\forall x \forall y[\forall z(z \in x \Leftrightarrow z \in y) \Rightarrow x=y]\\
+(p \rightarrow(q \rightarrow r)) \rightarrow((p \rightarrow q) \rightarrow(p \rightarrow r))\\
+C=B\log{\left(1+\frac{S}{N}\right)}\\
+\nabla\times H=\frac{\partial D}{\partial t}+j\\
+\nabla\times E=-\frac{\partial B}{\partial t}\\
+\nabla\cdot D=p\\
+\nabla\cdot B=0
+\end{gather*}
+\end{document}

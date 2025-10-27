@@ -1,0 +1,734 @@
+\RequirePackage{expl3}
+\ProvidesExplPackage{csmLinAlg}{2025-10-21}{1.0}{Linear Algebra package written in LaTeX3}
+
+\ExplSyntaxOn
+%=========================================================================
+%	Βασικές μεταβλητές
+\seq_new:N \l__csm_matrix_rows_seq
+\seq_new:N \l__csm_matrix_row_seq
+\int_new:N \l__csm_matrix_rows_int
+\int_new:N \l__csm_matrix_columns_int
+\tl_new:N \l__matrixstyle_tl
+
+\int_new:N \l_A_rows
+\int_new:N \l_A_columns
+\int_new:N \l_B_rows
+\int_new:N \l_B_columns
+
+\int_new:N \A_linIndex
+\int_new:N \B_linIndex
+\int_new:N \C_linIndex
+\fp_new:N \cij_sum
+
+\int_new:N \l__columns_int
+\int_new:N \l_old_rows
+\int_new:N \l_old_columns
+
+\fp_new:N \l_trace_sum
+
+\int_new:N \l_rows_int
+\int_new:N \l_k_int
+\tl_new:N \l_temp_A_tl
+\tl_new:N \l_temp_R_tl
+
+\int_new:N \l_det_int
+\int_new:N \l_tmpd_int
+%=========================================================================
+
+%=========================================================================
+%	ΟΡΙΣΜΟΣ ΠΙΝΑΚΑ
+%=========================================================================
+\NewDocumentCommand{\csmDefinematrix}{mmmm}
+ {% #1 = matrix name, #2 = rows, #3 = columns, #4 = entries
+  \csm_matrix_define:nnnn {#1} {#2} {#3} {#4}
+ }
+
+\cs_new_protected:Nn \csm_matrix_define:nnnn
+ {
+  % check whether the number of entries is correct
+  \int_compare:nTF { #2*#3 == \clist_count:n {#4} }
+   {% match!
+    % store the number of rows and columns
+    \cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {rows} {#2}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {columns} {#3}
+    \prop_gput:cne { g_csm_matrix_#1_prop } {entries} { \int_eval:n {#2*#3} }
+    % allocate the array and store the entries
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+    	\fparray_new:cn { g_csm_matrix_#1_fparray } { \clist_count:n {#4} }
+	}
+    \int_step_inline:nn { \clist_count:n {#4} }
+     {
+      \fparray_gset:cnn { g_csm_matrix_#1_fparray } {##1} { \clist_item:nn {#4} {##1} }
+     }
+   }
+   {% no match!
+    \msg_error:nnx {mymatrix}{dimension-mismatch}
+     {
+      The~matrix~#1~of~size~#2 x #3~requires~\int_eval:n{#2*#3}~elements,~
+      but~\clist_count:n{#4}~were~given.
+     }
+   }
+ }
+%=========================================================================
+
+%=========================================================================
+
+%=========================================================================
+\cs_new_protected:Nn \matrixCopy:nn
+{
+% #1 = C (Προορισμός), #2 = A (Πηγή)
+
+    % 1. Διαγραφή παλιού πίνακα προορισμού (αν υπάρχει)
+%    \prop_gremove:cn { g_csm_matrix_#1_prop } { rows }
+%    \fparray_gremove:cn { g_csm_matrix_#1_fparray }
+
+    % 2. Δημιουργία νέων δομών για τον προορισμό
+    \cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+
+    % 3. Αντιγραφή των ιδιοτήτων (rows, columns, entries)
+
+    % n (Διάσταση): Χρήση l_tmpa_int για το n
+    \int_set:Nn \l_tmpa_int { \prop_item:cn { g_csm_matrix_#2_prop } {rows} }
+
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {rows} { \l_tmpa_int }
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {columns} { \l_tmpa_int } % Υποθέτουμε τετραγωνικό
+
+    % total_entries (n*n): Χρήση l_tmpb_int
+    \int_set:Nn \l_tmpb_int { \int_eval:n { \l_tmpa_int * \l_tmpa_int } }
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {entries} { \l_tmpb_int }
+
+    % 4. Δημιουργία και Αντιγραφή του Fparray
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+    	\fparray_new:cn { g_csm_matrix_#1_fparray } { \l_tmpb_int }
+	}
+
+    % 5. Βρόχος για την αντιγραφή των στοιχείων (1-based indexing)
+    \int_step_inline:nn { \l_tmpb_int }
+    {
+        % Ανάκτηση του στοιχείου από την πηγή (#2)
+        \fp_set:Nn \l_tmpa_fp { \fparray_item_to_tl:cn { g_csm_matrix_#2_fparray } { ##1 } }
+
+        % Θέση του στοιχείου στον προορισμό (#1)
+        \fparray_gset:cnn { g_csm_matrix_#1_fparray } { ##1 } {\l_tmpa_fp}
+    }
+%$\printmatrix{#1}$
+}
+
+\NewDocumentCommand{\csmMatrixCopy}{mm}
+{
+	\matrixCopy:nn{#1}{#2}
+}
+%=========================================================================
+
+%=========================================================================
+%	ΠΡΟΒΟΛΗ ΠΙΝΑΚΑ
+%=========================================================================
+\keys_define:nn {matrixStyle}
+{
+	style .tl_set:N = \l__matrixstyle_tl,
+  	style .initial:n = { pmatrix },
+	style .choices:nn = { pmatrix,bmatrix,vmatrix,Bmatrix,Vmatrix,matrix } { \tl_set:Nn \l__matrixstyle_tl {#1} },
+}
+
+\cs_new_protected:Nn \csm_matrix_print:n
+ {
+  \seq_clear:N \l__csm_matrix_rows_seq
+  \int_set:Nn \l__csm_matrix_columns_int { \prop_item:cn { g_csm_matrix_#1_prop } {columns} }
+  \int_step_inline:nn { \prop_item:cn { g_csm_matrix_#1_prop } {rows} }
+   {
+    \seq_clear:N \l__csm_matrix_row_seq
+    \int_step_inline:nn { \l__csm_matrix_columns_int }
+     {
+      \seq_put_right:Ne \l__csm_matrix_row_seq
+       {
+        \fparray_item_to_tl:cn { g_csm_matrix_#1_fparray }
+         { (##1-1)*\l__csm_matrix_columns_int + ####1 }
+       }
+     }
+    \seq_put_right:Ne \l__csm_matrix_rows_seq { \seq_use:Nn \l__csm_matrix_row_seq { & } }
+   }
+  \begin{\l__matrixstyle_tl}
+  \seq_use:Nn \l__csm_matrix_rows_seq { \\ }
+  \end{\l__matrixstyle_tl}
+ }
+
+\NewDocumentCommand{\printmatrix}{O{}m}
+ {% #1 = matrix name
+	\keys_set:nn { matrixStyle } {#1}
+  	\csm_matrix_print:n {#2}
+ }
+%=========================================================================
+
+%=========================================================================
+%	ΠΡΟΣΘΕΣΗ - ΑΦΑΙΡΕΣΗ - ΓΡΑΜΜΙΚΟΣ ΣΥΝΔΥΑΣΜΟΣ
+%=========================================================================
+\NewDocumentCommand{\csmMatrixLinComb}{mO{1}mO{1}m}
+ {% #1 = linear combination
+  % #2 = coefficient for the first summand
+  % #3 = first summand
+  % #4 = coefficient for the second summand
+  % #5 = second summand
+  \csm_matrix_lc:nnnnn {#1} {#2} {#3} {#4} {#5}
+ }
+\NewDocumentCommand{\csmMatrixSum}{mm}
+ {% #1 = sum
+  % #2 = list of matrices
+  \csm_matrix_sum:nn {#1} {#2}
+ }
+
+\cs_new_protected:Nn \csm_matrix_lc:nnnnn
+ {
+  \bool_lazy_and:nnTF
+   {
+    \int_compare_p:nNn
+     { \prop_item:cn { g_csm_matrix_#3_prop } {rows} }
+     =
+     { \prop_item:cn { g_csm_matrix_#5_prop } {rows} }
+   }
+   {
+    \int_compare_p:nNn
+     { \prop_item:cn { g_csm_matrix_#3_prop } {columns} }
+     =
+     { \prop_item:cn { g_csm_matrix_#5_prop } {columns} }
+   }
+   {
+    \__csm_matrix_lc:nnnnn {#1} {#2} {#3} {#4} {#5}
+   }
+   {% mismatch
+    \msg_error:nnx {mymatrix}{sum-mismatch}
+     {
+      The~matrix~sizes~don't~match
+     }
+   }
+ }
+
+\cs_new_protected:Nn \__csm_matrix_lc:nnnnn
+ {
+  \cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+  \prop_gset_eq:cc { g_csm_matrix_#1_prop } { g_csm_matrix_#3_prop }
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+    	\fparray_new:cn { g_csm_matrix_#1_fparray } { \fparray_count:c { g_csm_matrix_#3_fparray}}
+	}
+  \int_step_inline:nn { \fparray_count:c { g_csm_matrix_#3_fparray } }
+   {
+    \fparray_gset:cnn { g_csm_matrix_#1_fparray } {##1}
+     {
+      (#2)*(\fparray_item:cn { g_csm_matrix_#3_fparray } {##1})
+      +
+      (#4)*(\fparray_item:cn { g_csm_matrix_#5_fparray } {##1})
+     }
+   }
+ }
+
+\cs_new_protected:Nn \csm_matrix_sum:nn
+ {
+  \cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+  \prop_gset_eq:cc { g_csm_matrix_#1_prop } { g_csm_matrix_ \clist_item:nn {#2}{1} _prop }
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+    	\fparray_new:cn { g_csm_matrix_#1_fparray }
+	   {
+	    \prop_item:cn { g_csm_matrix_ \clist_item:nn {#2}{1} _prop } {entries}
+	   }
+	}
+
+  \int_step_inline:nn { \fparray_count:c { g_csm_matrix_#1_fparray } }
+   {
+    \cs_set:Nn \__csm_matrix_do_sum:n
+     {
+      + \fparray_item:cn { g_csm_matrix_####1_fparray } {##1}
+     }
+    \fparray_gset:cnn { g_csm_matrix_#1_fparray } {##1}
+     {
+      0 \clist_map_function:nN {#2} \__csm_matrix_do_sum:n
+     }
+   }
+ }
+
+\NewDocumentCommand{\csmMatrixSub}{ m m m }
+{
+	\csmMatrixLinComb{#1}{#2}[-1]{#3}
+}
+
+%=========================================================================
+
+
+%=========================================================================
+%	Square Matrix check
+%=========================================================================
+\cs_new:Nn \isSquare:n
+{
+	\int_set:Nn \l_A_rows { \prop_item:cn { g_csm_matrix_#1_prop } {rows} } % m γραμμές
+  	\int_set:Nn \l_A_columns { \prop_item:cn { g_csm_matrix_#1_prop } {columns} } % n στηλες
+
+	\if_int_compare:w \l_A_rows = \l_A_columns
+	Square
+	 \else: not~square
+	\fi:
+}
+
+\NewDocumentCommand{\csmIsMatrixSquare}{m}
+{
+	\isSquare:n {#1}
+}
+%=========================================================================
+
+
+%=========================================================================
+%	Get - Set Matrix Item
+%=========================================================================
+\cs_new:Nn \matrixGetItem:nnn
+{
+	\int_set:Nn \l__columns_int { \prop_item:cn { g_csm_matrix_#1_prop } {columns} }
+    \fparray_item_to_tl:cn { g_csm_matrix_#1_fparray }{\int_eval:n {(#2-1)*\l__columns_int+#3}}
+}
+
+\NewDocumentCommand{\csmMatrixGetItem}{ m m m }
+{
+	\matrixGetItem:nnn {#1}{#2}{#3}
+}
+%=========================================================================
+
+%=========================================================================
+%	ΑΝΑΣΤΡΟΦΟΣ ΠΙΝΑΚΑΣ
+%=========================================================================
+\cs_new_protected:Nn \transposeMatrix:nn
+{
+	\int_set:Nn \l_old_rows { \prop_item:cn { g_csm_matrix_#2_prop } {rows} }
+  	\int_set:Nn \l_old_columns { \prop_item:cn { g_csm_matrix_#2_prop } {columns} }
+
+	\cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {rows} {\l_old_columns}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {columns} {\l_old_rows}
+    \prop_gput:cne { g_csm_matrix_#1_prop } {entries} { \int_eval:n { \l_old_rows*\l__csm_matrix_columns_int} }
+    % allocate the array and store the entries
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+    	\fparray_new:cn { g_csm_matrix_#1_fparray } { \int_eval:n { \l_old_rows*\l_old_columns} }
+	}
+
+
+  	\int_step_inline:nn { \l_old_columns }
+   	{
+		\int_step_inline:nn { \l_old_rows }
+	    {
+			\fparray_gset:cnn { g_csm_matrix_#1_fparray } { \int_eval:n {(##1-1)*\l_old_rows + ####1 }} { \fparray_item_to_tl:cn { g_csm_matrix_#2_fparray }
+	        { \int_eval:n {(####1-1)*\l_old_columns + ##1 }} }
+     	}
+   	}
+}
+
+\NewDocumentCommand{\csmTransposeMatrix}{ m m }
+{
+	\transposeMatrix:nn {#1}{#2}
+}
+%=========================================================================
+
+%=========================================================================
+%	MATRIX MULTIPLICATION
+%	#1: Product  C (m x n)
+%	#2: 		 A (m x p)
+%	#3			 B (q x n)    - πρέπει p=q
+%=========================================================================
+\cs_new_protected:Nn \matrixMultiplication:nnn
+{
+	\int_set:Nn \l_A_rows { \prop_item:cn { g_csm_matrix_#2_prop } {rows} } % m γραμμές
+  	\int_set:Nn \l_A_columns { \prop_item:cn { g_csm_matrix_#2_prop } {columns} } % p στηλες
+
+	\int_set:Nn \l_B_rows { \prop_item:cn { g_csm_matrix_#3_prop } {rows} } % q γραμμές
+  	\int_set:Nn \l_B_columns { \prop_item:cn { g_csm_matrix_#3_prop } {columns} } % n στηλες
+
+	\cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {rows} {\l_A_rows}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {columns} {\l_B_columns}
+    \prop_gput:cne { g_csm_matrix_#1_prop } {entries} { \int_eval:n { \l_A_rows*\l_B_columns } }
+    % allocate the array and store the entries
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+    	\fparray_new:cn { g_csm_matrix_#1_fparray } { \int_eval:n { \l_A_rows*\l_B_columns } }
+	}
+
+	\int_step_inline:nn {\l_A_rows} % i=1,...,m
+	{
+		\int_step_inline:nn {\l_B_columns} % j=1,...,n
+		{
+			\fp_zero:N \cij_sum
+			\int_set:Nn \C_linIndex {(##1-1)*\l_B_columns+####1}
+			\int_step_inline:nn {\l_A_columns} % k=1,...,p
+			{
+				\int_set:Nn \A_linIndex {(##1-1)*\l_A_columns+########1}
+				\int_set:Nn \B_linIndex {(########1-1)*\l_B_columns+####1}
+				\fp_add:Nn \cij_sum
+					{
+						\fp_eval:n
+						{
+						\fparray_item_to_tl:cn { g_csm_matrix_#2_fparray }{ \A_linIndex }*
+						\fparray_item_to_tl:cn { g_csm_matrix_#3_fparray }{ \B_linIndex }
+						}
+					}
+			}
+			\fparray_gset:cnn { g_csm_matrix_#1_fparray } {\C_linIndex} {\cij_sum}
+		}
+	}
+}
+
+\NewDocumentCommand{\csmMatrixMultiplication}{ m m m }
+{
+	\matrixMultiplication:nnn {#1}{#2}{#3}
+}
+%=========================================================================
+
+%=========================================================================
+%	Matrix Trace
+%=========================================================================
+\cs_new_protected:Nn \trace:n
+{
+	\int_set:Nn \l_A_rows { \prop_item:cn { g_csm_matrix_#1_prop } {rows} } % m γραμμές
+  	\int_set:Nn \l_A_columns { \prop_item:cn { g_csm_matrix_#1_prop } {columns} } % p στηλες
+
+	\int_step_inline:nn {\l_A_rows}
+	{
+		\fp_add:Nn \l_trace_sum {
+    	\fparray_item_to_tl:cn { g_csm_matrix_#1_fparray }{\int_eval:n {(##1-1)*\l_A_rows+##1}}}
+	}
+	\fp_use:N \l_trace_sum
+}
+
+\NewDocumentCommand{\csmMatrixTrace}{m}
+{
+	\trace:n {#1}
+}
+%=========================================================================
+
+%=========================================================================
+%	Identity Matrix
+%=========================================================================
+\cs_new_protected:Nn \matrixIdentity:nn
+{
+    % #1 = Όνομα πίνακα, #2 = Διάσταση (n)
+%    \int_new:N \l__n_int
+    \int_set:Nn \l_tmpa_int { #2 }
+%
+%    % Δημιουργία του πίνακα
+	\cs_if_exist:cTF { g_csm_matrix_#1_prop }{}
+  	{
+    	\prop_new:c { g_csm_matrix_#1_prop }
+	}
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {rows} { \l_tmpa_int }
+    \prop_gput:cnn { g_csm_matrix_#1_prop } {columns} { \l_tmpa_int }
+%
+	\cs_if_exist:cTF { g_csm_matrix_#1_fparray }{}
+  	{
+		\fparray_new:cn { g_csm_matrix_#1_fparray } { \int_eval:n { \l_tmpa_int * \l_tmpa_int } }
+	}
+%
+%    % Γέμισμα με 0.0, εκτός της διαγωνίου (που είναι 1.0)
+    \int_step_inline:nn {\int_eval:n { \l_tmpa_int * \l_tmpa_int } }
+    {
+        \fparray_gset:cnn { g_csm_matrix_#1_fparray } { ##1 } { 0.0 }
+    }
+%
+%    % Θέτουμε 1.0 στη διαγώνιο
+    \int_step_inline:nn { \l_tmpa_int }
+    {
+%        % Ο δείκτης kC για το A[i][i] σε 1-based indexing είναι (i-1)*n + i
+        \int_set:Nn \l_tmpb_int { (##1 - 1) * \l_tmpa_int + ##1 }
+        \fparray_gset:cnn { g_csm_matrix_#1_fparray } { \l_tmpb_int } { 1.0 }
+    }
+}
+
+\NewDocumentCommand{\csmMatrixIdentity}{mm}
+{
+	\matrixIdentity:nn {#1}{#2}
+}
+%=========================================================================
+
+%=========================================================================
+%	Matrix Power
+%=========================================================================
+\cs_new_protected:Nn \matrixPower:nnn
+{
+% #1 = C (Αποτέλεσμα), #2 = A (Βάση), #3 = k (Εκθέτης)
+    % 1. Αρχικοποίηση Μεταβλητών και Μεταφορά Δεδομένων
+    % n (Διάσταση): Χρήση l_tmpa_int για το n
+    \int_set:Nn \l_tmpa_int { \prop_item:cn { g_csm_matrix_#2_prop } {rows} }
+    % k (Εκθέτης): Χρήση της l_k_int (υποθέτουμε ότι έχει δηλωθεί μία φορά)
+    \int_set:Nn \l_k_int { #3 }
+
+    % 2. Δημιουργία Προσωρινών Ονομάτων
+    % Χρησιμοποιούμε l_tmpa_tl, l_tmpb_tl για τα ονόματα των βοηθητικών πινάκων
+    \tl_set:Nn \l_temp_A_tl { matrix_power_base_aux }   % Base
+    \tl_set:Nn \l_temp_R_tl { matrix_power_result_aux } % Result
+
+    % 3. Αρχικοποίηση Αποτελέσματος (Result = I)
+    \matrixIdentity:nn { \l_temp_R_tl } { \l_tmpa_int } % Χρήση l_tmpa_int (n)
+
+    % Αντιγραφή της βάσης A σε έναν προσωρινό πίνακα (Base = A)
+    \matrixCopy:nn { \l_temp_A_tl } { #2 }
+    \tl_set:Nn \l_tmpc_tl { matrix_power_int_product_aux } % Χρήση l_tmpc_tl για το όνομα του γινομένου
+    % 4. Matrix Exponentiation Loop (Όσο k > 0)
+    \group_begin:
+    \int_until_do:nNnn { \l_k_int } = {0}
+    {
+%        % 4.1. Έλεγχος για ΜΟΝΟ ΕΚΘΕΤΗ (k & 1)
+        \int_compare:nNnTF { \int_mod:nn {\l_k_int}{2} } = { 1 }
+        {
+%            % Result = Result * Base
+            \matrixMultiplication:nnn { \l_tmpc_tl } { \l_temp_R_tl } { \l_temp_A_tl }
+%
+%            % Αντιγράφουμε το γινόμενο πίσω στο Result: Result = temp_product
+            \matrixCopy:nn { \l_temp_R_tl } { \l_tmpc_tl }
+
+		\int_set:Nn \l_k_int { \l_k_int - 1 }
+
+        }{
+%        % 4.2. Τετραγωνισμός της Βάσης (Base = Base * Base)
+        \tl_set:Nn \l_tmpc_tl { matrix_power_product_aux }
+        \matrixMultiplication:nnn { \l_tmpc_tl } { \l_temp_A_tl } { \l_temp_A_tl }
+%
+%        % Αντιγραφή του τετραγωνισμένου πίνακα πίσω στο Base: Base = temp_product
+        \matrixCopy:nn { \l_temp_A_tl } { \l_tmpc_tl }
+
+%
+%        % 4.3. Διαίρεση του k με το 2 (k >>= 1)
+        \int_set:Nn \l_k_int { \l_k_int / 2 }
+		}
+    }
+    \group_end:
+% 5. Τελική Αντιγραφή
+    \matrixCopy:nn { #1 } { \l_temp_R_tl }
+
+    % 6. Καθαρισμός
+    % ... (Ο καθαρισμός παραμένει σωστός) ...
+}
+
+\NewDocumentCommand{\csmMatrixPower}{mmm}
+{
+	\matrixPower:nnn{#1}{#2}{#3}
+}
+
+%=========================================================================
+%	DETERMINANT
+%=========================================================================
+% Νέο μήνυμα σφάλματος
+\msg_new:nnn {mymatrix}{not-square} {Matrix~'#1'~is~not~square.~Determinant~is~undefined.}
+
+% --- Μεταβλητές εργασίας ---
+\int_new:N \l_csm_matrix_n_int            % Διάσταση n του n x n πίνακα
+\int_new:N \l_csm_matrix_max_row_int     % Δείκτης γραμμής για τον οδηγό
+\fp_new:N \l_csm_matrix_det_fp           % Η τρέχουσα τιμή της ορίζουσας
+\fp_new:N \l_csm_matrix_sign_fp          % Το πρόσημο (από τις εναλλαγές)
+\fp_new:N \l_csm_matrix_max_fp           % Μέγιστος οδηγός (pivot)
+\fp_new:N \l_csm_matrix_pivot_fp         % Τρέχων οδηγός
+\fp_new:N \l_csm_matrix_factor_fp        % Ο πολλαπλασιαστής για την απαλοιφή
+
+% --- Βοηθητικές Συναρτήσεις ---
+% \__csm_matrix_get:Nnnn { <array> } { <n> } { <i> } { <j> }
+% Επιστρέφει την τιμή A[i, j] από τον 1D fparray
+% <n> = αριθμός στηλών
+\cs_new:Nn \__csm_matrix_get:Nnnn
+ {
+  \fparray_item:Nn #1 { \int_eval:n { (#3 - 1) * #2 + #4 } }
+ }
+
+% \__csm_matrix_set:NnnnF { <array> } { <n> } { <i> } { <j> } { <value> }
+% Θέτει την τιμή A[i, j] = <value> στον 1D fparray
+\cs_new_protected:Nn \__csm_matrix_set:NnnnF
+ {
+  \fparray_gset:Nnn #1 { \int_eval:n { (#3 - 1) * #2 + #4 } } {#5}
+ }
+
+% --- Κύρια Συνάρτηση Ορίζουσας ---
+
+% \csm_matrix_determinant:nN { <matrix_name> } { <result_tl> }
+% Υπολογίζει την ορίζουσα του πίνακα <matrix_name>
+% και αποθηκεύει το αποτέλεσμα (fp) στην <result_tl>
+\cs_new_protected:Nn \matrix_determinant:n
+ {
+  % 1. Λήψη διαστάσεων και έλεγχος αν είναι τετραγωνικός
+	\int_set:Nn \l_tmpa_int { \prop_item:cn { g_csm_matrix_#1_prop } {rows} }
+	\int_set:Nn \l_tmpb_int { \prop_item:cn { g_csm_matrix_#1_prop } {columns} }
+  \tl_new:c {l_det #1 _int}
+%
+  \int_compare:nNnTF {\l_tmpa_int} = {\l_tmpb_int}
+   { % Είναι τετραγωνικός, αποθήκευσε τη διάσταση n
+    \int_set_eq:NN \l_csm_matrix_n_int \l_tmpa_int
+   }
+   { % Δεν είναι τετραγωνικός
+    \msg_error:nnn {mymatrix}{not-square} {#1}
+    \tl_set:cn {l_det#1 _tl} {Undefined}
+    \prg_return_false: % Έξοδος από τη συνάρτηση
+   }
+%
+  % Ειδική περίπτωση: Πίνακας 1x1
+  \int_compare:nNnTF {\l_csm_matrix_n_int} = {1}
+    {
+      \tl_set:cx {l_det#1 _tl} { \fparray_item:cn { g_csm_matrix_#1_fparray } { 1 } }
+      \prg_return_true: % Έξοδος
+    }
+    {} % Δεν είναι 1x1, συνέχεια
+%
+  % 2. Δημιουργία τοπικού, "αναλώσιμου" αντιγράφου του πίνακα
+
+	\int_set:Nn \l_tmpa_int {\l_csm_matrix_n_int*\l_csm_matrix_n_int}
+	\cs_if_exist:NTF \l_csm_matrix_copy_fparray{}
+  	{
+  		\fparray_new:Nn \l_csm_matrix_copy_fparray { \l_csm_matrix_n_int*\l_csm_matrix_n_int }
+	}
+
+  \int_step_inline:nn { \l_tmpa_int }
+   {
+    \fparray_gset:Nnn \l_csm_matrix_copy_fparray {##1}
+     { \fparray_item:cn { g_csm_matrix_#1_fparray } {##1} }
+   }
+%
+%  % 3. Αρχικοποίηση ορίζουσας και προσήμου
+  \fp_set:Nn \l_csm_matrix_det_fp { 1.0 }
+  \fp_set:Nn \l_csm_matrix_sign_fp { 1.0 }
+%
+  % 4. Βρόχος Απαλοιφής Gauss (για j = 1 έως n-1)
+%  \prg_block_clear_new:N \__csm_matrix_gauss_loop % Δημιουργία "break" σημείου
+  \int_step_variable:nNn { \l_csm_matrix_n_int - 1 } \l_tmpa_int % \l_tmpa_int = j (στήλη οδηγός)
+   {
+    % 4a. Εύρεση οδηγού (μερική οδήγηση)
+    % Βρες τη γραμμή i >= j με το μέγιστο |A[i, j]|
+    \fp_set:Nn \l_csm_matrix_max_fp
+     {
+      \fp_abs:n { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpa_int \l_tmpa_int } % |A[j, j]|
+     }
+    \int_set:Nn \l_csm_matrix_max_row_int { \l_tmpa_int } % j
+
+    \int_step_variable:nnNn { \l_tmpa_int + 1 } { \l_csm_matrix_n_int } \l_tmpb_int % \l_tmpb_int = i (γραμμή προς έλεγχο)
+     {
+      \fp_set:Nn \l_csm_matrix_pivot_fp
+       {
+        \fp_abs:n { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpb_int \l_tmpa_int } % |A[i, j]|
+       }
+      \fp_compare:nNnTF \l_csm_matrix_pivot_fp > \l_csm_matrix_max_fp
+       { % Βρέθηκε νέο μέγιστο
+        \fp_set_eq:NN \l_csm_matrix_max_fp \l_csm_matrix_pivot_fp
+        \int_set_eq:NN \l_csm_matrix_max_row_int \l_tmpb_int % Αποθήκευση γραμμής i
+       }
+       {} % Όχι νέο μέγιστο
+     } % τέλος βρόχου i
+
+    % 4b. Έλεγχος για ιδιόμορφο πίνακα (singular)
+    % Χρησιμοποιούμε μικρό όριο (epsilon) αντί για 0.0 για αριθμητική σταθερότητα
+    \fp_compare:nNnTF \l_csm_matrix_max_fp < { 1e-18 }
+     { % Ο πίνακας είναι ιδιόμορφος, ορίζουσα = 0
+      \fp_set:Nn \l_csm_matrix_det_fp { 0.0 }
+      \prg_block_break:N \__csm_matrix_gauss_loop % Έξοδος από τον κύριο βρόχο (j)
+     }
+     { % Ο πίνακας δεν είναι ιδιόμορφος, συνέχεια
+%      % 4c. Εναλλαγή γραμμών (αν χρειάζεται)
+      \int_compare:nNnTF {\l_csm_matrix_max_row_int} = {\l_tmpa_int} % if max_row != j
+		{} % Δεν χρειάζεται εναλλαγή
+		{
+%         Εναλλαγή γραμμής j (l_tmpa_int) με γραμμή max_row (l_csm_matrix_max_row_int)
+        \int_step_variable:nnNn { 1 } { \l_csm_matrix_n_int } \l_tmpd_int % \l_tmpd_int = l (στήλη)
+         {
+          % tmp = A[j, l]
+          \fp_set:Nn \l_tmpa_fp { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpa_int \l_tmpd_int }
+          % A[j, l] = A[max_row, l]
+          \__csm_matrix_set:NnnnF \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpa_int \l_tmpd_int
+           { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_csm_matrix_max_row_int \l_tmpd_int }
+          % A[max_row, l] = tmp
+          \__csm_matrix_set:NnnnF \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_csm_matrix_max_row_int \l_tmpd_int { \l_tmpa_fp }
+         }
+%        % Αλλαγή προσήμου ορίζουσας
+        \fp_set:Nn \l_csm_matrix_sign_fp { -1.0 }
+       }
+%
+      % 4d. Απαλοιφή (Μηδενισμός στοιχείων κάτω από τον οδηγό)
+      \int_step_variable:nnNn { \l_tmpa_int + 1 } { \l_csm_matrix_n_int } \l_tmpc_int % \l_tmpc_int = k (γραμμή προς απαλοιφή)
+       {
+        % Υπολογισμός παράγοντα: factor = A[k, j] / A[j, j]
+        \fp_gset:Nn \l_csm_matrix_factor_fp
+         {
+          \fp_eval:n {
+           { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpc_int \l_tmpa_int } /
+           { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpa_int \l_tmpa_int } % A[j, j]
+         }
+		}
+
+        % Για αριθμητική ακρίβεια, θέτουμε ρητά το A[k, j] = 0
+        \__csm_matrix_set:NnnnF \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpc_int \l_tmpa_int { 0.0 }
+
+        % Ενημέρωση των υπόλοιπων στοιχείων της γραμμής k
+        % Βρόχος για στήλες l = j+1 έως n
+        \int_step_variable:nnNn { \l_tmpa_int + 1 } { \l_csm_matrix_n_int } \l_tmpd_int
+         {
+          % A[k, l] = A[k, l] - factor * A[j, l]
+
+          % val = A[k, l]
+          \fp_gset:Nn \l_tmpa_fp { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpc_int \l_tmpd_int }
+
+          % sub_val = factor * A[j, l]
+          \fp_gset:Nn \l_tmpb_fp
+           {
+            \fp_eval:n {\l_csm_matrix_factor_fp *
+             { \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpa_int \l_tmpd_int }}
+           }
+%
+          % new_val = val - sub_val
+          \fp_gset:Nn \l_tmpa_fp {\fp_eval:n {\l_tmpa_fp-\l_tmpb_fp}}
+%
+%          % Θέσε A[k, l] = new_val
+          \__csm_matrix_set:NnnnF \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpc_int \l_tmpd_int { \l_tmpa_fp }
+         } % τέλος βρόχου l
+       } % τέλος βρόχου k
+%     } % τέλος ελέγχου if singular
+   } % τέλος κύριου βρόχου j (\__csm_matrix_gauss_loop)
+%
+%  % 5. Υπολογισμός τελικής ορίζουσας
+  \fp_compare:nNnTF \l_csm_matrix_det_fp = { 0.0 }
+   { % Ιδιόμορφος πίνακας, η ορίζουσα είναι ήδη 0
+    \tl_set:cn {l_det#1 _tl} { 1.0 }
+   }
+   { % Μη-ιδιόμορφος: Γινόμενο διαγωνίων * πρόσημο
+    \fp_set_eq:NN \l_csm_matrix_det_fp \l_csm_matrix_sign_fp % Ξεκίνα με το πρόσημο
+    \int_step_variable:nnNn { 1 } { \l_csm_matrix_n_int } \l_tmpa_int % i = 1 έως n
+     {
+%      % det = det * A[i, i]
+      \fp_gset:Nn \l_csm_matrix_det_fp
+		{\fp_eval:n \l_csm_matrix_det_fp*{ \__csm_matrix_get:Nnnn \l_csm_matrix_copy_fparray \l_csm_matrix_n_int \l_tmpa_int \l_tmpa_int }
+		}
+     }
+%    % Αποθήκευση αποτελέσματος στην tl
+
+%	\tl_use:c {l_det#1 _tl}
+	}
+   }
+	\fp_use:N \l_csm_matrix_det_fp
+ }
+
+\NewDocumentCommand{\csmDeterminant}{m}
+{
+	\matrix_determinant:n {#1}
+}
+
+
+%=========================================================================
+\ExplSyntaxOff

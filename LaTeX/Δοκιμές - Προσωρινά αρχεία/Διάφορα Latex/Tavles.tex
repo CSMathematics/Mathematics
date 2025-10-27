@@ -1,0 +1,120 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{txfontsb}
+\usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{hhline}
+\renewcommand{\thepart}{\arabic{part}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{systeme,regexpatch}
+\makeatletter
+% change the definition of \sysdelim not to store `\left` and `\right`
+\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
+\sysdelim\{. % reinitialize
+
+% patch the internal command to use
+% \LEFTRIGHT<left delim><right delim>{<system>}
+% instead of \left<left delim<system>\right<right delim>
+\regexpatchcmd\SYS@systeme@iii
+{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
+{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
+{}{}
+\def\SYS@MT@LEFTRIGHT{%
+	\expandafter\expandafter\expandafter\LEFTRIGHT
+	\expandafter\SYS@delim@left\SYS@delim@right}
+\makeatother
+\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
+			\times#1\\\\ \times#2
+		\end{matrix}}}
+\begin{document}
+	\section*{\LARGE ΠΡΟΒΛΗΜΑ ΜΕ ΣΑΝΙΔΕΣ}
+	\begin{center}
+		{\normalsize  \bf\today}
+	\end{center}
+	\paragraph{\large ΛΥΣΗ}\mbox{}\\
+Από την εκφώνηση του προβλήματος παρατηρούμε οτι :\\
+Αυτό που ζητάει το πρόβλημα είναι ο αριθμός των μικρών πακέτων, δηλαδή των πακέτων με τις 4 σανίδες, και ο αριθμός των μεγάλων πακέτων, αυτών με τις 6 σανίδες.\\Αυτό σημαίνει οτι έχουμε να υπολογίσουμε 2 άγνωστους αριθμούς.\\\\Εαν θα έπρεπε να υπολογίζουμε 1 άγνωστο αριθμό τότε θα κατασκευάζαμε 1 εξίσωση που να τον περιέχει και λύνοντας την να τον βρούμε. Έτσι και εδώ θα πρέπει να κατασκευάσουμε 2 εξισώσεις μιας και 2 είναι και το πλήθος των άγνωστων αριθμών και συνδυαζοντας τες να βρούμε μοναδική λύση γι αυτούς.
+
+\begin{enumerate}[label=\bf\textit{\underline{\arabic*\textsuperscript{o}\;Βήμα} :}]
+	\item Συμβολίζουμε τους άγνωστους αριθμούς με μεταβλητές : \begin{gather}
+	 x\;:\;\textrm{Το πλήθος των μικρών πακέτων με τις 4 σανίδες}\\
+	 y\;:\;\textrm{Το πλήθος των μεγάλων πακέτων με τις 6 σανίδες}
+	 \end{gather}
+\item Κατασκευάζουμε τις 2 εξισώσεις, χρησιμοποιώντας τα δεδομένα του προβλήματος.
+\begin{enumerate}[label=\textit{\arabic*\textsuperscript{o}\;στοιχείο :}]
+	\item Όλα τα πακέτα μαζί θα πρέπει να είναι 40. Άρα η πρόταση αυτή με συμβολισμό θα γραφτεί  \begin{equation}
+	x+y=40
+	\end{equation} 
+	\item Όλες οι σανίδες είναι 210. Αναλυτικά θα έχουμε : 
+	\begin{itemize}
+		\item Ένα μικρό πακέτο έχει 4 σανίδες οπότε $ x $ μικρά πακέτα θα έχουν $ 4\cdot x $ σανίδες.
+		\item Ένα μεγάλο πακέτο έχει 6 σανίδες οπότε $ x $ μικρά πακέτα θα έχουν $ 6\cdot y $ σανίδες.
+	\end{itemize}
+	Επομένως θα ισχύει η ισότητα \begin{equation}
+	4x+6y=210
+	\end{equation} 
+\end{enumerate}
+\item Ο συνδυασμός 2 εξισώσεων με 2 άγνωστους ονομάζεται σύστημα. Συνδυάζοντας λοιπόν τις ισότητες (3) και (4) προκύπτει το σύστημα \begin{equation}
+\systeme[xy]{4x+6y=210,x+y=40}
+\end{equation}
+Λύνοντας το σύστημα (5) θα φτάσουμε στο ζητούμενο. Έχουμε λοιπόν : 
+\begin{enumerate}[label=\textit{\arabic*\textsuperscript{oς}\;τρόπος :}]
+	\item Μέθοδος των αντίθετων συντελεστών\\
+	Στη μέθοδο αυτή προσπαθούμε με με πολλαπλασιασμό και στις 2 εξισώσεις να φτιάξουμε αντίθετους συντελεστές για κάποια μεταβλητή (οι αριθμοί που είναι μπροστά από τις μεταβλητές $ x,y $) ώστε αν τις προσθέσουμε να φύγουν.
+	\begin{center}
+		\begin{tabular}{lcr}
+			$ \sysdelim\{|\systeme[xy]{4x+6y=210,x+y=40}\synt{1}{(-4)}\Rightarrow $ & $ \sysdelim\{.\systeme[xy]{4x+6y=210,-4x-4y=-160} $  &  \\ 
+			\hhline{~-~}& $\hspace{.9cm}2y=50 $ & $ \Rightarrow y=25$\\
+		\end{tabular}
+	\end{center}
+Οπότε ο αριθμός των μεγάλων πακέτων με τις 6 σανίδες θα είναι 25.\\Τον αριθμό που βρήκαμε τον αντικαθιστούμε στην πιο απλή εξίσωση του αρχικού συστήματος (5) η οποία είναι η 2η και υπολογίζουμε και το $ x $.
+\begin{equation}
+\textrm{Για }y=25\Rightarrow x+25=40\Rightarrow x=40-25\Rightarrow x=15
+\end{equation}
+Άρα ο αριθμός των μικρών πακέτων θα είναι 15.
+\newpage
+\noindent
+\item Μέθοδος της αντικατάστασης\\
+Με τη μέθοδο αυτή προσπαθούμε μια εξίσωση του συστήματος που έχει 2 άγνωστους, να τη μετατρέψουμε σε εξίσωση με έναν άγνωστο κάνοντας αντικατάσταση. Έχουμε λοιπόν το αρχικό σύστημα :
+
+\begin{equation}
+\systeme[xy]{4x+6y=210,x+y=40}
+\end{equation}
+από το οποίο επιλέγουμε την πιο απλή εξίσωση για να λύσουμε ως προς έναν άγνωστο. Δηλαδή επιλέγοντας την 2η εξίσωση του συστήματος έχουμε: \begin{equation}
+x+y=40\Rightarrow x=40-y
+\end{equation}
+Οτι βρήκαμε το αντικαθιστούμε στην άλλη εξίσωση οπότε θα προκύψει
+\begin{gather}
+4x+6y=210\Rightarrow 4\left( 40-y\right)+6y=210\Rightarrow 160-4y+6y=210\Rightarrow \nonumber\\6y-4y=210-160\Rightarrow 2y=50\Rightarrow y=25
+\end{gather}
+Επομένως βρίσκουμε και μ αυτόν τον τρόπο 25 μεγάλα πακέτα. Εαν αντικαταστήσουμε την τιμή του $ y $ σε οποιαδήποτε εξίσωση του συστήματος (5) έχουμε :
+\begin{equation}
+x+y=40\Rightarrow x+25=40\Rightarrow x=40-25\Rightarrow x=15
+\end{equation}
+Έχουμε λοιπόν ξανά 15 μικρά πακέτα των 4 σανίδων.
+\end{enumerate}
+\end{enumerate}
+\end{document}

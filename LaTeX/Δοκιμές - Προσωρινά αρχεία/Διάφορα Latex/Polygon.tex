@@ -1,0 +1,18 @@
+\newcommand\polygon[5][]
+{\pgfmathsetmacro{\angle}{360/#2}
+    \pgfmathsetmacro{\startangle}{-90 + \angle/2}
+    \begin{scope}[#1]
+        \foreach \i in {1,2,...,#2}
+        {\pgfmathsetmacro{\x}{\startangle + \angle*\i}
+          \draw[#5] (\x:#3) --  (\x + \angle:#3) -- cycle;}
+        \foreach \i in {1,2,...,#2}
+        {\pgfmathsetmacro{\x}{\startangle + \angle*\i}
+          \tkzDefPoint(\x:#3){A_#2}
+          \tkzDrawPoint(A_#2)}
+          \foreach [count=\i] \j in {#4}{
+          \pgfmathsetmacro{\x}{\startangle - \angle*\i}
+            \node[anchor=center] at (\x:#3+.3) {\j};}\end{scope}}
+\begin{tikzpicture}
+\draw[pl] (0,0) circle (1);
+\polygon{6}{1}{$E$,$Z$,$A$,$B$,$\varGamma$,$\varDelta$}{pl}
+\end{tikzpicture}

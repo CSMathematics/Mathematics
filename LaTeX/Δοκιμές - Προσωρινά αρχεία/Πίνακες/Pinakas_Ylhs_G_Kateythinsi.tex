@@ -1,0 +1,538 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Tinos Bold}]{Nimbus Roman}
+\newfontfamily\scfont{Alegreya SC}
+\font\OnPar="URW Gothic-Demi" at 10pt
+\font\mymath="MyMathSymbols" at 10pt
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[most]{tcolorbox}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox,hyperref}
+\hypersetup{hidelinks}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem,longtable}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\let\Bbbk\relax
+\usepackage{enumitem}
+\usepackage{lipsum}
+\let\Bbbk\relax
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=\Large$\square$}
+
+\tikzset{>=latex}
+\newtcolorbox{mybox}[2][]{colback=white,
+colframe=red!75!black,fonttitle=\Large\bfseries,
+colbacktitle=red!20!white,coltitle=black,enhanced,breakable,sharp corners,boxrule=0.3mm,center title,boxsep=3mm,top=1mm,subtitle style={fonttitle=\normalsize\bfseries},
+title=#2,#1}
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.2pt}
+\tcbset{mysubtitle/.style={subtitle style={fontupper={\OnPar\color{black}},top=0pt,colback={white},boxrule=1pt},top=0pt}}
+
+\newtcolorbox{myleftbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-3mm,left=5mm,bottom=1mm,left skip=0mm,colbacktitle=white,colback=white,#1,sharp corners,grow to left by=0.68cm,titlerule=0.2mm,fonttitle=\OnPar}
+
+\newtcolorbox{myrightbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-2mm,left skip=6mm,bottom=1mm,colbacktitle=white,colback=white,#1,leftrule=0.2mm,sharp corners,right skip=0mm,titlerule=0.2mm,fonttitle=\OnPar}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{
+\color{lightgray}{}
+}
+\fancyhead[R]{
+\color{gray} Μαθηματικά Προσανανατολισμού - Β΄ Λυκείου\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage
+}
+\fancyhead[L]{
+\color{gray}\leftmark
+}
+\fancypagestyle{plain}{%
+\fancyhf{}%
+\fancyhead[R]{\leftmark\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage}%
+}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\myitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faEdit}\ \Large$\square$]}
+\newcommand{\myplusitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faExclamationTriangle}\ \Large$\square$]}
+
+\newlist{arithmisi}{enumerate}{2}
+\setlist[arithmisi]{itemsep=0mm,label=\textcolor{\xrwma}{\large{\thesection}.\arabic*}}
+
+\newcommand{\eksigisi}{
+\begin{flushright}
+\vfill
+\faEdit: Σημαντική άσκηση\\
+\faExclamationTriangle: Άσκηση αυξημένης δυσκολίας
+\end{flushright}}
+
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+\usepackage{capt-of}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\ekthetesdeiktes
+
+\begin{document}
+\section{Η έννοια της συνάρτησης}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Συνάρτηση
+\item Πεδίο ορισμού
+\item Τιμή συνάρτησης
+\item Σύνολο τιμών
+\item Ανεξάρτητη - εξαρτημένη μεταβλητή
+\item Συνάρτηση πολλαπλού τύπου
+\item Είδη συναρτήσεων
+\item Γραφική παράσταση συνάρτησης
+\item Άρτια - περιττή συνάρτηση
+\item Περιοδική συνάρτηση
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Μετατόπιση γραφικής παράστασης
+\item Γραφικές παραστάσεις $ -f(x), f(-x),$ $|f(x)| $
+\item Σημεία γραφικής παράστασης
+\item Σημεία τομής με τους άξονες
+\item Σχετική θέση με τον άξονα $ x'x $
+\item Σημεία τομής - σχετική θέση γραφικών παραστάσεων
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση πεδίου ορισμού
+\myitem Εύρεση τιμών συνάρτησης
+\item Γραφικές παραστάσεις βασικών συναρτήσεων
+\item Εύρεση στοιχείων από γραφική παράσταση
+\item Μετατόπιση γραφικής παράστασης
+\item Άρτιες και περιττές συναρτήσεις
+\item Σημεία τομής με άξονες
+\item Σχετική θέση με τον άξονα $ x'x $
+\item Σημεία τομής δύο γραφικών παραστάσεων
+\item Σχετική θέση δύο γραφικών παραστάσεων
+\item Χάραξη γραφικής παράστασης
+\end{todolist}
+\end{multicols}
+\setlength{\columnseprule}{0pt}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\begin{multicols}{2}
+\item Συνάρτηση : $ f $
+\item Πεδίο ορισμού της συνάρτησης $ f $ : $ D_f $
+\item $ x : $ ανεξάρτητη μεταβλητή και $ y: $ εξαρτημένη μεταβλητή
+\item Τύπος συνάρτησης $ y=f(x) $
+\end{multicols}
+\item Σύνολο τιμών : $ f(D_f)=\{y\in\mathbb{R}: y=f(x)\ ,\ x\in D_f\}$
+\item Γραφική παράσταση συνάρτησης : $ C_f=\{ (x,y): y=f(x)\ ,\ x\in D_f \}$
+\begin{multicols}{2}
+\item Άρτια συνάρτηση
+\begin{itemize}[leftmargin=4mm]
+\item Για κάθε $ x\in D_f\Rightarrow -x\in D_f $
+\item $ f(-x)=f(x) $ για κάθε $ x\in D_f $
+\end{itemize}
+\item Περιττή συνάρτηση
+\begin{itemize}[leftmargin=3mm]
+\item Για κάθε $ x\in D_f\Rightarrow -x\in D_f $
+\item $ f(-x)=-f(x) $ για κάθε $ x\in D_f $
+\end{itemize}
+\end{multicols}
+\item Περιοδική συνάρτηση
+\begin{itemize}[leftmargin=3mm]
+\item Για κάθε $ x\in D_f\Rightarrow x+T\in D_f $ και $ x-T\in D_f $
+\item $ f(x)=f(x+T)=f(x-T) $ για κάθε $ x\in D_f $
+\end{itemize}
+\begin{multicols}{2}
+\item Κατακόρυφη μετατόπιση $ g(x)=f(x)\pm c $
+\item Οριζόντια μετατόπιση $ g(x)=f(x\pm c) $
+\end{multicols}
+\item Το σημείο $ A(a,\beta) $ ανήκει στη $ C_f \Leftrightarrow f(a)=\beta$
+\item Σημεία τομής της $ C_f $ με τον άξονα
+\begin{itemize}[leftmargin=4mm]
+\item $ x'x : A(\rho,0)$ όπου $ \rho : $ ρίζα της εξίσωσης $ f(x)=0 $
+\item $ y'y : A(0,f(0))$ αρκεί να ισχύει $ 0\in D_f $
+\end{itemize}
+\item Σχετική θέση της $ C_f $ με τον άξονα $ x'x $
+\begin{itemize}[leftmargin=4mm]
+\item Η $ C_f $ βρίσκεται πάνω από τον $ x'x \Leftrightarrow f(x)>0$
+\item Η $ C_f $ βρίσκεται κάτω από τον $ x'x \Leftrightarrow f(x)<0$
+\end{itemize}
+\item Σημεία τομής των $ C_f,C_g $ :$ A(\rho,0) $ όπου $ \rho $ είναι ρίζα της εξίσωσης $ f(x)=g(x) $
+\item Σχετική θέση της $ C_f $ με τη $ C_g $
+\begin{itemize}[leftmargin=4mm]
+\item Η $ C_f $ βρίσκεται πάνω από τη $ C_g \Leftrightarrow f(x)>g(x)$
+\item Η $ C_f $ βρίσκεται κάτω από τη $ C_g \Leftrightarrow f(x)<g(x)$
+\end{itemize}
+\end{enumerate}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{ccc}
+\hline \rule[-2ex]{0pt}{5.5ex}\textbf{Είδος} & \textbf{Τύπος} & \textbf{Πεδίο Ορισμού} \\ 
+\hhline{===} \rule[-2ex]{0pt}{5.5ex} \textbf{Πολυωνυμική} & $ f(x)=a_\nu x^\nu+\ldots+a_1x+a_0 $ & $ D_f=\mathbb{R} $ \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Ρητή} & $ f(x)=\dfrac{P(x)}{Q(x)} $ & $ D_f=\left\lbrace\left.  x\in\mathbb{R}\right| Q(x)\neq0\right\rbrace $  \\
+\rule[-2ex]{0pt}{5.5ex} \textbf{Άρρητη} & $ f(x)=\sqrt{A(x)} $ & $ D_f=\left\lbrace\left. x\in\mathbb{R}\right| A(x)\geq0\right\rbrace $ \\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{5}{*}{\textbf{Τριγωνομετρική}} & $ f(x)=\hm{x}\;\;,\;\;\syn{x} $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\ef{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi+\frac{\pi}{2}\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\rule[-2ex]{0pt}{5.5ex}  & $ f(x)=\syf{x} $ & $ D_f=\left\lbrace\left.x\in\mathbb{R}\right| x\neq\kappa\pi\;,\;\kappa\in\mathbb{Z}\right\rbrace $ \\ 
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{3}{*}{\textbf{Εκθετική}} & $ f(x)=a^x\;\;,\;\;0<a\neq1 $ & $ D_f=\mathbb{R} $ \\ 
+\rule[-2ex]{0pt}{5.5ex} & $ f(x)=A(x)^{B(x)} $ & $ D_f=\{x\in\mathbb{R}| A(x)>0\} $\\
+\hhline{~--}\rule[-2ex]{0pt}{5.5ex} \multirow{3}{*}{\textbf{Λογαριθμική}} & $ f(x)=\log{x}\;\;,\;\;\ln{x} $ & $ D_f=(0,+\infty) $ \\ 
+\rule[-2ex]{0pt}{5.5ex} & $ f(x)=\log_{a}{A(x)} $ & $ D_f=\{x\in\mathbb{R}| A(x)>0\} $\\
+\hline 
+\end{tabular}\captionof{table}{Βασικά είδη συναρτήσεων και πεδία ορισμού}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[scale=.6]
+\draw(0,0) ellipse (1cm and 1.5cm);
+\draw(4,0) ellipse (1cm and 1.5cm);
+\draw[fill=\xrwma!30] (4.1,0) ellipse (.6cm and 1.1cm);
+\draw[-latex] (0,.2) arc (140:40:2.6);
+\tkzDefPoint(0,.2){A}
+\tkzDefPoint(4,.2){B}
+\tkzDrawPoints(A,B)
+\tkzLabelPoint[left](A){{\footnotesize $ x $}}
+\tkzLabelPoint[right](B){{\footnotesize $ y $}}
+\tkzText(0,1.8){$ A $}
+\tkzText(4,1.8){$ B $}
+\tkzText(2,1.45){$ f $}
+\draw[-latex] (3.5,0) -- (2.7,-1) node[anchor=north east] {\footnotesize $ f\left( A \right)  $};
+\end{tikzpicture}\captionof{figure}{Ορισμός συνάρτησης}
+\end{center}
+\begin{center}
+\begin{tabular}{p{5cm}p{5cm}p{5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=3.7,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.5:3.5]{1.5};
+\end{axis}
+\node at (2,2.3){$ f(x)=c $};
+\node at(0.2,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση σταθερής συνάρτησης} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=3.7,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=.5:3.2]{x-1};
+\end{axis}
+\node at (2,2.7){$ f(x)=ax+\beta $};
+\node at(2,2){$ a>0 $};
+\node at(0.2,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση πολυωνυμικής συνάρτησης 1ου βαθμού με θετική κλίση} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=3.7,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-.2:2.7]{-x+2.2};
+\end{axis}
+\node at (2.3,2.7){$ f(x)=ax+\beta $};
+\node at(2.3,2){$ a<0 $};
+\node at(0.2,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση πολυωνυμικής συνάρτησης 1ου βαθμού με αρνητική κλίση} \\
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=3.7,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0:3.5]{sqrt(x)};
+\end{axis}
+\node at (2,2.5){$ f(x)=\sqrt{x} $};
+\node at(0.2,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ \sqrt{x} $} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-2.2,xmax=2.4,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1.5:1.5]{x^2};
+\end{axis}
+\node[fill=white,inner sep=0.2mm] at (2.3,2.5){$ f(x)=ax^2$};
+\node[fill=white,inner sep=0.2mm] at(2.3,2){$ a>0 $};
+\node at(1.9,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της πολυωνυμικής συνάρτησης 2ου βαθμού $ ax^2 $ με $ a>0 $} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-2.2,xmax=2.2,ymin=-2.5,ymax=0.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1.5:1.5]{-x^2};
+\end{axis}
+\node[fill=white,inner sep=0.2mm] at (2.3,1.3){$ f(x)=ax^2 $};
+\node[fill=white,inner sep=0.2mm] at(2.3,0.8){$ a<0 $};
+\node at(2,2.7){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της πολυωνυμικής συνάρτησης 2ου βαθμού $ ax^2 $ με $ a<0 $}
+\end{tabular}
+\begin{tabular}{p{5cm}p{5cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=3.7,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0.3:3.7]{(x-2)^2-0.5};
+\end{axis}
+\node at (2,2.5){$ f(x)=\sqrt{x} $};
+\node at(0.2,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ \sqrt{x} $} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=1cm,aks_on,xmin=-.5,xmax=4,ymin=-.5,ymax=2.5,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0.3:3.7]{-(x-2)^2+2.3};
+\end{axis}
+\node[fill=white,inner sep=0.2mm] at (2.3,3){$ f(x)=ax^2$};
+\node[fill=white,inner sep=0.2mm] at(2.3,2.3){$ a>0 $};
+\node at(1.9,0.2){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της πολυωνυμικής συνάρτησης 2ου βαθμού $ ax^2 $ με $ a>0 $} 
+\end{tabular}
+\begin{tabular}{p{6cm}p{6cm}}
+\begin{tikzpicture}
+\begin{axis}[x=1cm,y=0.7cm,aks_on,xmin=-2.2,xmax=2.4,ymin=-3,ymax=3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1.4:1.4]{x^3};
+\end{axis}
+\node[fill=white,inner sep=0.2mm] at (2.3,1){$ f(x)=ax^2 $};
+\node[fill=white,inner sep=0.2mm] at(2.3,0.5){$ a<0 $};
+\node at(2,2.7){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της πολυωνυμικής συνάρτησης 2ου βαθμού $ ax^2 $ με $ a<0 $} & \begin{tikzpicture}
+\begin{axis}[x=1cm,y=0.7cm,aks_on,xmin=-2.2,xmax=2.4,ymin=-3,ymax=3,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=-1.4:1.4]{-x^3};
+\end{axis}
+\node[fill=white,inner sep=0.2mm] at (2.3,1){$ f(x)=ax^2 $};
+\node[fill=white,inner sep=0.2mm] at(2.3,0.5){$ a<0 $};
+\node at(2,2.7){$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της πολυωνυμικής συνάρτησης 2ου βαθμού $ ax^2 $ με $ a<0 $} \\
+\end{tabular}
+\begin{tabular}{p{7cm}p{7cm}}
+\begin{tikzpicture}
+\draw[shift={(2.8mm,3.5mm)},style=help lines, xstep=0.5497cm,ystep=0.297cm,black!10] (0,0) grid (5.5,2.38);
+\begin{axis}[x=.7cm,y=.7cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$
+},ytick={-1.7,-.85,0.85,1.7},yticklabels={$-1$,$-0.5$,$0.5$,$1$},aks_on,xmin=-.4,xmax=8.5,
+ymin=-2.2,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0:2*pi]{1.7*sin(deg(x))};
+\addplot[grafikh parastash,domain=2*pi:2.5*pi,dashed]{1.7*sin(deg(x))};
+\end{axis}
+\node at (0.0951,1.344) {\footnotesize$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=\hm{x} $} &
+\begin{tikzpicture}
+\draw[shift={(2.8mm,3.5mm)},style=help lines, xstep=0.5497cm,ystep=0.297cm,black!10] (0,0) grid (5.5,2.38);
+\begin{axis}[x=.7cm,y=.7cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$
+},ytick={-1.7,-.85,0.85,1.7},yticklabels={$-1$,$-0.5$,$0.5$,$1$},aks_on,xmin=-.4,xmax=8.5,
+ymin=-2.2,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0:2*pi]{1.7*cos(deg(x))};
+\addplot[grafikh parastash,domain=2*pi:2.5*pi,dashed]{1.7*cos(deg(x))};
+\end{axis}
+\node at (0.0951,1.344) {\footnotesize$O$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=\syn{x} $}\\
+\begin{tikzpicture}
+\draw[shift={(1.175mm,0mm)},style=help lines, xstep=0.589cm,ystep=0.25cm,black!10] (0,0.25) grid (5.9,3.75);
+\begin{axis}[x=.75cm,y=.5cm,xtick={
+-3.14159, -1.5708,1.5708, 3.14159, 4.7123889},
+xticklabels={$-\pi$, $-\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$,$\frac{3\pi}{2}$},ytick={-3,-2,-1,1,2,3},aks_on,xmin=-3.3,xmax=5.4,
+ymin=-4,ymax=4,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\begin{scope}
+\clip (axis cs:-3.14,-4) rectangle (axis cs:2*pi,4);
+\addplot[grafikh parastash,domain=-0.5*pi:0.5*pi]{tan(deg(x))};
+\addplot[grafikh parastash,domain=0.5*pi:1.5*pi,dashed]{tan(deg(x))};
+\addplot[grafikh parastash,domain=-1.5*pi:-.5*pi,dashed]{tan(deg(x))};
+\draw[dashed] (axis cs:-0.5*pi,-4)--(axis cs:-0.5*pi,4);
+\draw[dashed] (axis cs:0.5*pi,-4)--(axis cs:0.5*pi,4);
+\draw[dashed] (axis cs:1.5*pi,-4)--(axis cs:1.5*pi,4);
+\end{scope}
+\node[fill=white,inner sep=.2mm] at (axis cs:-.3,-.4) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=\ef{x} $} & \begin{tikzpicture}
+\draw[shift={(1.175mm,0mm)},style=help lines, xstep=0.589cm,ystep=0.25cm,black!10] (0,0.25) grid (5.9,3.75);
+\begin{axis}[x=.75cm,y=.5cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$
+},ytick={-3,-2,-1,1,2,3},aks_on,xmin=-3.3,xmax=5.7,
+ymin=-4,ymax=4,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\begin{scope}
+\clip (axis cs:-3.14,-4) rectangle (axis cs:2*pi,4);
+\addplot[grafikh parastash,domain=0:pi]{cot(deg(x))};
+\addplot[grafikh parastash,domain=pi:3*pi/2,dashed]{cot(deg(x))};
+\addplot[grafikh parastash,domain=-pi:0,dashed]{cot(deg(x))};
+\draw[dashed] (axis cs:-pi,-4)--(axis cs:-pi,4);
+\draw[dashed] (axis cs:pi,-4)--(axis cs:pi,4);
+\end{scope}
+\node[fill=white,inner sep=.2mm] at (axis cs:-.3,-.4) {\footnotesize$O$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=\syf{x} $}
+\end{tabular}
+\begin{tabular}{p{7cm}p{7cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-5,xmax=3,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-5,0) rectangle (axis cs:3,3.7);
+\addplot[grafikh parastash,domain=-5:2.7]{1.8^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(3.5,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above left,yshift=-1mm](A){$ (0,1) $}
+\node at (5,0.7) {\footnotesize$a>1$};
+\node at (4.5,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Γραφική οαράσταση της συνάρτησης $ f(x)=a^x $ με $ a>1 $}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-3,xmax=5,
+ymin=-.5,ymax=4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,0) rectangle (axis cs:5,3.7);
+\addplot[grafikh parastash,domain=-2.7:5.7]{0.55^x};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\tkzDefPoint(-.8,1){B}
+\tkzDefPoint(2.1,1.05){A}
+\tkzDrawPoint[fill=black](A)
+\tkzLabelPoint[above right,yshift=-1mm](A){$ (0,1) $}
+\node at (1.2,0.7) {\footnotesize$0<a<1$};
+\node at (1.2,2.5) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=a^x $ με $ 0<a<1 $}
+\end{tabular}
+\begin{tabular}{p{6cm}p{6.2cm}}
+\begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{log2(x)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,0.7) {\footnotesize$a>1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=\xrwma](A)
+\tkzLabelPoint[below right](A){$ A(0,1) $}
+\node at (.8,.4) {\footnotesize$C_f$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=\log_{a}{x} $ με $ a>1 $}	& \begin{tikzpicture}
+\begin{axis}[x=.7cm,y=.7cm,aks_on,xmin=-.5,xmax=5,
+ymin=-3,ymax=3.4,ticks=none,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar]
+\begin{scope}
+\clip (axis cs:-3,-3) rectangle (axis cs:4.7,3);
+\addplot[grafikh parastash,domain=-2.7:4.7]{ln(x)/ln(.5)};
+\end{scope}
+\node at (axis cs:-.3,-0.3) {\footnotesize$O$};
+\end{axis}
+\node at (2,3.3) {\footnotesize$0<a<1$};
+\tkzDefPoint(-.5,1){B}
+\tkzDefPoint(1.05,2.1){A}
+\tkzDrawPoint[fill=\xrwma](A)
+\tkzLabelPoint[above right](A){$ A(0,1) $}
+\node at (.8,4) {\footnotesize$C_g$};
+\end{tikzpicture}\captionof{figure}{Γραφική παράσταση της συνάρτησης $ f(x)=\log_{a}{x} $ με $ 0<a<1 $}
+\end{tabular}
+\begin{tabular}{p{5cm}cp{6.5cm}}
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$}
+,xmin=-2,xmax=2.,ymin=-1,ymax=3,x=1cm,y=1cm]
+\addplot[clip=false,domain=-1.8:1.8,grafikh parastash]{x^2-.7};
+\addplot[domain=-1.8:1.8,pl,samples=200]{x^2};
+\addplot[domain=-1.5:1.5,grafikh parastash]{x^2+.7};
+\draw[pl,-latex] (axis cs:.5,.25) -- (axis cs:.5,.95);
+\draw[pl,-latex] (axis cs:.5,.25) -- (axis cs:.5,-.45);
+\draw[pl,-latex] (axis cs:-.5,.25) -- (axis cs:-.5,-.45);
+\draw[pl,-latex] (axis cs:-.5,.25) -- (axis cs:-.5,.95);
+\node at (axis cs:-.25,.5) {\footnotesize$+c$};
+\node at (axis cs:-.25,-.25) {\footnotesize$-c$};
+\node at (axis cs:.25,.5) {\footnotesize$+c$};
+\node at (axis cs:.25,-.25) {\footnotesize$-c$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Κατακόρυφη μετατόπιση γραφικης παράστασης} & & \begin{tikzpicture}
+\begin{axis}[clip=false,aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$}
+,xmin=-2,xmax=4.2,ymin=-1,ymax=3,x=1cm,y=1cm]
+\addplot[domain=-1.8:1.8,grafikh parastash]{x^2-.7};
+\addplot[domain=-.8:2.8,pl,samples=200]{(x-1)^2-.7};
+\addplot[domain=.2:3.8,grafikh parastash]{(x-2)^2-.7};
+\draw[pl,-latex] (axis cs:2,.3) -- (axis cs:3,.3);
+\draw[pl,-latex] (axis cs:2.5,1.55) -- (axis cs:3.5,1.55);
+\draw[pl,-latex] (axis cs:0,.3) -- (axis cs:-1,.3);
+\draw[pl,-latex] (axis cs:-.5,1.55) -- (axis cs:-1.5,1.55);
+\node at (axis cs:-.5,.5) {\footnotesize$+c$};
+\node at (axis cs:3,1.7) {\footnotesize$-c$};
+\node at (axis cs:2.5,.5) {\footnotesize$-c$};
+\node at (axis cs:-1,1.7) {\footnotesize$+c$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Οριζόντια μετατόπιση γραφικης παράστασης}
+\end{tabular} 
+\end{center}
+\end{mybox}
+\newpage
+\end{document}

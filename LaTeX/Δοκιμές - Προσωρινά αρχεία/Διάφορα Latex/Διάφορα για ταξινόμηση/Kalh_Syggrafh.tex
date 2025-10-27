@@ -1,0 +1,165 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{cyan!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide,tkz-tab}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%-----------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox,cancel}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\makeatletter
+\xpatchcmd{\tkzTabLine}
+{\node at (Z\thetkz@cnt@impair\thetkz@cnt@lg){$0$};} % search
+{\node[fill=white,inner sep=.5mm] at (Z\thetkz@cnt@impair\thetkz@cnt@lg){$0$};} % replace
+{}{}
+\makeatother
+
+\begin{document}
+\begin{center}
+{\Large \textbf{Συμβουλές για καλή παρουσίαση ασκήσεων}}
+\end{center}
+\begin{center}
+\begin{tabular}{p{8cm}|p{8cm}}
+\textbf{\textcolor{green}{\faIcon{check}} \hspace{5mm} Τι είναι καλό να κάνουμε} & \textbf{\textcolor{red}{\faIcon{times}} \hspace{5mm} Τι πρέπει να αποφεύγουμε} \\ 
+\hhline{==}
+\begin{enumerate}
+\item Τα λάθη είναι αναπόφευκτα. Όμως αν η πρώτη προσπάθεια γίνει στο πρόχειρο, θα λιγοστέψουν αρκετά, έως και τελείως.
+\item Κάθε βήμα καλό είναι να μπαίνει σε ξεχωριστή γραμμή.
+\item Γράφουμε πάνω στις γραμμές του τετραδίου.
+\item Τα κλάσματα πρέπει να πιάνουν 2 γραμμές τετραδίου. Επιπλέον η γραμμή του κλάσματος μπαίνει στην ίδια ευθεία με τα σύμβολα των πράξεων και το $ = $.
+\item Η άσκηση πρέπει να έχει μια λογική σειρά γι αυτό και κάθε βήμα γράφεται \textbf{μετά} το προηγούμενο.
+\item  Οι σημαντικοί μαθηματικοί τύποι και οι εξισώσεις είναι καλό να γράφονται σε ξεχωριστή γραμμή και αν γίνεται στο κέντρο.
+\item Κάθε βήμα χρειάζεται μια μικρή περιγραφή. Λίγες λέξεις που δείχνουν
+\begin{enumerate}
+\item τι παριστάνουν οι τύποι
+\item το επόμενο βήμα
+\item ένα συμπέρασμα που έχουμε βγάλει
+\end{enumerate}
+\item Είναι απαραίτητο να γνωρίζουμε καλά την ερμηνεία των μαθηματικών συμβόλων όσο καλά γνωρίζουμε τη φυσική μας γλώσσα. Αυτό, για να αποφεύγουμε εκφράσεις όπως
+\[ x=\frac{10}{5}\Rightarrow 2 \]
+\item Στις εξετάσεις, δίπλα σε κάθε θέμα - ερώτημα γράφουμε τον αριθμό του.
+\end{enumerate} & \begin{enumerate}
+\item Δεν γράφουμε πάνω στα γραμμένα.
+\item Αποφεύγουμε να γράφουμε όπου βρούμε χώρο χωρίς μια λογική σειρά.
+\item Καλό είναι να μην στριμώχνουμε τα κλάσματα σε μια γραμμή.
+\item Αποφεύγουμε να ξεκινάμε προτάσεις στη μέση της σελίδας.
+\item Δεν παραλείπουμε πράξεις και τύπους που ανήκουν στην ύλη της χρονιάς. Όσο εύκολο ή αυτονόητο κι αν είναι κάποιο βήμα, το γράφουμε παρουσιάζοντας και τους τύπους και τις πράξεις. Σ' αυτά εξεταζόμαστε.
+\item Αποφεύγουμε να μουτζουρώνουμε τα λάθη. Ένας καλός τρόπος να σβήσουμε είναι $ \framebox[1cm]{\xcancel{3-2=8}} $.
+\item Στη λύση μιας εξίσωσης - ανίσωσης ή υπολογισμό μιας παράστασης, δεν γράφουμε όλα τα βήματα κολλητά στην ίδια γραμμή γιατί υπάρχει κίνδυνος
+\begin{enumerate}
+\item να μην ξεχωρίζουν μεταξύ τους
+\item να μπερδέψουμε 1\tss{ο} και 2\tss{ο} μέλος.
+\end{enumerate}
+\item Δεν κρατάμε πρόχειρο και καθαρό στο ίδιο τετράδιο ή στην ίδια σελίδα.
+\end{enumerate}
+\end{tabular} 
+\end{center}
+\newpage
+\noindent
+\textbf{\large \textcolor{orange}{\faIcon{play}}\ \  Παράδειγμα}\\
+\bmath{Να βρεθούν οι λύσεις της ανίσωσης
+\[ x^2-4x+3\geq 0 \]}
+\textbf{\large \textcolor{cyan}{\faIcon{pen}}\ \  Λύση}\\
+Οι συντελεστές του τριωνύμου είναι οι $ a=1,\beta=-4 $ και $ \gamma=3 $. Υπολογίζουμε τη διακρίνουσα του, η οποία θα ισούται με
+\begin{gather*}
+\varDelta=\beta^2-4a\gamma=(-4)^2-4\cdot 1\cdot 3=16-12=4
+\end{gather*}
+άρα οι ρίζες του τριωνύμου θα είναι 
+\[ x_{1,2}=\frac{-\beta\pm\sqrt{\varDelta}}{2a}=\frac{-(-4)\pm \sqrt{4}}{2}=\frac{4\pm 2}{2} \]
+δηλαδή
+\[ x_1=\frac{4+2}{2}=\frac{6}{2}=3\ \ \textrm{και}\ \ x_2=\frac{4-2}{2}=\frac{2}{2}=1 \]
+Σχηματίζουμε στη συνέχεια τον πίνακα προσήμων
+\begin{center}
+\begin{tikzpicture}
+\tikzset{t style/.style = {style = dashed}}
+\tkzTabInit[color,lgt=2.7,espcl=1.7,colorC = \xrwma!30,
+colorL = \xrwma!10,
+colorV = \xrwma!30]%
+{$x$ / .8,$ x^2-4x+3 $ /1.2}
+{$-\infty$,$1$,$3$,$+\infty$}
+\tkzTabLine{ ,+, z, -, z, +, }
+\end{tikzpicture}
+\end{center}
+επομένως, όπως βλέπουμε, η ανίσωση επαληθεύεται για κάθε $ x\in (-\infty,1]\cup[3,+\infty) $.\\\\
+\textbf{\large \textcolor{orange}{\faIcon{play}}\ \  Παράδειγμα}\\
+\bmath{Να λυθεί το παρακάτω σύστημα με τη μέθοδο της αντικατάστασης
+\[ \systeme{2x+3y=5,x-4y=-3} \]}
+\textbf{\large \textcolor{cyan}{\faIcon{pen}}\ \  Λύση}\\
+Παρατηρούμε ότι η 2\tss{η} εξίσωση είναι εύκολο να λυθεί ως προς $ x $ οπότε έχουμε
+\begin{equation}\label{par:meth_ant1}
+\systeme{2x+3y=5,x-4y=-3}\Rightarrow x=4y-3
+\end{equation}
+Αντικαθιστώντας το αποτέλεσμα της σχέσης \eqref{par:meth_ant1} στην 1\tss{η} εξίσωση προκύπτει :
+\begin{align}
+2x+3y=5&\Rightarrow 2(4y-3)+3y=5\nonumber\\&\Rightarrow 8y-6+3y=5\nonumber\\&\Rightarrow 8y+3y=5+6\nonumber\\&\Rightarrow 11y=11\Rightarrow y=1\label{par:meth_ant2}
+\end{align}
+Τη λύση της εξίσωσης \eqref{par:meth_ant2} την αντικαθιστούμε στην \eqref{par:meth_ant1} για να υπολογίσουμε τον άγνωστο $ x $
+\[ x=4y-3=4\cdot1-3=4-3=1 \]
+Επομένως η λύση του συστήματος θα είναι η $ (x,y)=(1,1) $.
+\end{document}
+
+
+

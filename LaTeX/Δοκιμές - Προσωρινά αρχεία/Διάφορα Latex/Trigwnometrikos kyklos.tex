@@ -1,0 +1,148 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{psfrag}
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+ \usepackage{txfontsb}
+ \let\myBbbk\Bbbk
+ \let\Bbbk\relax
+ \usepackage[lite]{mtpro2}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\usepackage{tikz}
+\usepackage{tkz-euclide,tkz-fct}
+\usepackage{wrapfig}
+\usetkzobj{all}
+\usepackage{calc}
+\usepackage{pst-plot}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\ypogrammisi}[1]{\underline{\smash{#1}}}
+
+\renewcommand{\thepart}{\arabic{part}}
+\definecolor{steelblue}{cmyk}{1,0,0,0}
+\definecolor{royalblue}{RGB}{65,105,255}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{tikz}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\usepackage{tkz-euclide}
+\usepackage{hhline}
+\usepackage{graphicx}
+\sectionfont{\centering}
+\usetikzlibrary{fadings}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{pst-func}
+\usepackage{pst-3dplot}
+\usepackage{pst-solides3d}
+\begin{document}
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+\clearpage
+\begin{tabular}{cc}
+\multicolumn{2}{c}{{\Large \textbf{Τριγωνομετρικός Κύκλος}}}\\
+\begin{tikzpicture}[>=latex,scale=2.7]
+\fill[fill=steelblue!50] (0,0) -- (.2,0) arc (0:60:.2) -- cycle;
+  %axis
+   \draw[->] (-1.2,0) -- coordinate (x axis mid) (1.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+  \foreach \x in {-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1}
+    	\draw (\x,.5pt) -- (\x,-.5pt)
+    	node[anchor=north] {{\tiny \x}};
+    \foreach \y in {-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1}
+   	\draw (.5pt,\y) -- (-.5pt,\y)
+     node[anchor=east] {{\tiny \y}};
+     \draw[->] (0,-1.2) -- (0,1.5) node[above,fill=white] {{\footnotesize $ y $}};
+ \draw[-] (1,-1.2) -- (1,1.8);
+ \draw[-] (-1.2,1) -- (1.2,1);
+ \draw[-,draw=cyan,thick] (0,1) -- (1.732/3,1);
+ \draw[-,draw=cyan,thick] (1,0) -- (1,1.732);
+\draw[-,dashed] (-.7,-1.732*0.7) -- (1,1.732);
+\draw circle (1);
+\coordinate (A) at (60:1);
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(cos(pi/3),0){B}
+\tkzDefPoint(0,sin(pi/3)){C}
+\tkzDefPoint(1,tan(pi/3)){D}
+\tkzDefPoint(cot(pi/3),1){E}
+\tkzDefPoint(1,0){F}
+\tkzDefPoint(0,1){G}
+\tkzDrawSegment[draw=steelblue](O,A)
+\tkzDrawSegments[thin,dashed](A,B A,C)
+\tkzText(0,1.75){{\scriptsize Αξονας Ημιτόνων}}
+\tkzText(1.6,-.12){{\scriptsize Αξονας}}
+\tkzText(1.6,-.23){{\scriptsize Συνημιτόνων}}
+\tkzText(-1,1.2){{\scriptsize Αξονας}}
+\tkzText(-.78,1.1){{\scriptsize Συνεφαπτομένων}}
+\tkzText(1.21,-.9){{\scriptsize Αξονας}}
+\tkzText(1.36,-1){{\scriptsize Εφαπτομένων}}
+\tkzText(-.5,-1.1){{\scriptsize $ \delta $}}
+\tkzDrawSegment[thick,cyan](O,B)
+\tkzDrawSegment[thick,cyan](O,C)
+\tkzDrawPoints[size=4](O,A,B,C,D,E,F,G)
+\tkzText(-.3,.43){{{\scriptsize \textrm{ημ}$ \omega $}}$\LEFTRIGHT\{.{ \rule{0pt}{22mm} } $}
+\tkzText(.25,-.25){$ \undercbrace{\rule{10mm}{0mm}}_{{\scriptsize \textrm{συν}\omega}} $}
+\tkzText(1.2,.87){$\LEFTRIGHT.\}{ \rule{0pt}{44mm} } ${{\scriptsize \textrm{εφ}$ \omega $}}}
+\tkzText(.3,1.1){$ \overcbrace{\rule{13mm}{0mm}}^{{\scriptsize \textrm{σφ}\omega}} $}
+\tkzText(.25,.15){$ \omega $}
+\tkzLabelPoint[below left](O){{\tiny $ O $}}
+\tkzLabelPoint[above=1mm,right](A){{\tiny $ M $}}
+\tkzLabelPoint[above right](B){{\tiny $ M_1 $}}
+\tkzLabelPoint[above=1mm, left](C){{\tiny $ M_2 $}}
+\tkzLabelPoint[left](D){{\tiny $ K $}}
+\tkzLabelPoint[above](E){{\tiny $ \varLambda $}}
+\tkzLabelPoint[below right](F){{\tiny $ A $}}
+\tkzLabelPoint[above left](G){{\tiny $ B $}}
+\draw [->,draw=steelblue] (.984*.9,.173*.9) arc (10:45:.9);
+\draw [->,draw=steelblue] (.984*.9,-.173*.9) arc (-10:-45:.9);
+\tkzText(.72,.35){$ + $}
+\tkzText(.72,-.35){$ - $}
+\tkzText(.35,.45){$ \rho $}
+\tkzText(-1,.9){{\scriptsize $ \varepsilon_2 $}}
+\tkzText(.9,-1){{\scriptsize $ \varepsilon_1 $}}
+\end{tikzpicture} & \begin{tikzpicture}[>=latex,scale=2.7]
+\fill[fill=steelblue!50] (0,0) -- (.2,0) arc (0:45:.2) -- cycle;
+        %axis
+        \draw[->] (-1.2,0) -- (1.5,0) node[right,fill=white] {{\footnotesize $ x $}};
+        \draw[->] (0,-1.2) -- (0,1.5) node[above,fill=white] {{\footnotesize $ y $}};
+       
+ \foreach \gwnia/\xtext in {
+            30/\frac{\pi}{6},
+            45/\frac{\pi}{4},
+            60/\frac{\pi}{3},
+            90/\frac{\pi}{2},
+            120/\frac{2\pi}{3},
+            135/\frac{3\pi}{4},
+            150/\frac{5\pi}{6},
+            180/\pi,
+            210/\frac{7\pi}{6},
+            240/\frac{4\pi}{3},
+            270/\frac{3\pi}{2},
+            300/\frac{5\pi}{3},
+            330/\frac{11\pi}{6},
+            360/2\pi}
+                \draw (\gwnia:0.85cm) node[fill=white] {{\scriptsize $\xtext$}};
+\tkzDefPoint(0,0){O}
+\coordinate (A) at (45:1);
+\tkzDrawSegment[draw=steelblue](O,A)
+\foreach \gwnia in {0,30,45,60,90,120,135,150,180,210,240,270,300,330}{
+\coordinate (P) at (\gwnia:1);
+\draw (\gwnia:1.2cm) node[fill=white] {{\scriptsize $\gwnia^\circ$}};
+\fill[black] (P) circle (.5pt);};
+\draw circle (1);
+\tkzText(.25,.1){$ \omega $}
+\end{tikzpicture}
+\end{tabular}
+\clearpage
+\end{document}

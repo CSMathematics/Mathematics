@@ -1,0 +1,158 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome5}
+\newfontfamily{\FA}{fontawesome.otf}
+\xroma{cyan!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl,pythontex}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+
+\begin{document}
+\titlos{Τάξη - Μάθημα}{Κεφάλαιο}{Παράγραφος}
+\[ \int_{0}^{x}{t^2\d t}=\frac{x^3}{3} \]
+\[ \sum_{n=1}^{\infty}{\frac{1}{n^2+1}}=\frac{\pi^2}{12} \]
+\begin{sympycode}
+from sympy import *
+x = symbols('x')
+s=Eq(x**2-3*x+2)
+sl=solve(s,dict=true)
+\end{sympycode}
+Οι λύσεις της εξίσωσης $ \sympy{s} $ είναι $ x=\sympy{sl[0][x]} $ και $ x=\sympy{sl[1][x]} $.\\
+\begin{sympycode}
+i=Integral(log(x),x)
+\end{sympycode}
+Το ολοκλήρωμα ισούται με \[ \sympy{i}=\sympy{i.doit()} \]
+\[ \int_{1}^{2}{x^2\d x}=\left.\frac{x^3}{3}\right|_{1}^{2}=\frac{8}{3}-\frac{1}{3}=\frac{7}{3} \]
+\begin{sympycode}
+i=Integral(log(x),x)
+\end{sympycode}
+Το ολοκλήρωμα ισούται με \[ \sympy{i}=\sympy{i.doit()} \]
+\begin{sympycode}
+from sympy import Symbol, residue, cot, I
+x = Symbol("x")
+a=residue(-pi*cot(pi*x)/(x**2+1), x, I)+residue(-pi*cot(pi*x)/(x**2+1), x, -I)
+\end{sympycode}
+\[ \sum_{n=1}^{\infty}{\frac{1}{n^2+1}}=\sympy{a} \]
+\begin{sympycode}
+eq1=Eq(x**3-4*x**2+5*x-2)
+sol1=solve(eq1,dict=true)
+i1=Integral(sin(t),(t,x,x**3))
+i2=integrate(log(x**2+1),(x,-1,1))
+p=Product(1-1/n**2,(n,2,16))
+\end{sympycode}
+\[ x^3-4x^2+5x-2=0\Rightarrow x=\sympy{sol1[0][x]},x=\sympy{sol1[1][x]} \]
+\[ \sum_{k=1}^{\infty}{\frac{1}{k^2+1}}=\frac{\pi}{\tanh{(\pi)}} \]
+\[ \int_{-1}^{-1}{x^2\d x}=\left.\frac{x^3}{3}\right|_{-1}^{1}=\frac{2}{3} \]
+\[ \int_{x}^{x^3}{\sin{t}\d t}=\sympy{i1.doit()} \]
+\[ \int_{-1}^{1}{\log{\left(x^2+1\right)}\d x}=\sympy{i2} \]
+\[ \sum_{k=1}^{\infty}{\frac{1}{k^4+1}}=\frac{\pi}{\sinh{(\pi)}} \]
+\begin{sympycode}
+f = log(x*y)
+step1 = Integral(f, x, y)
+step2 = Integral(Integral(f, x).doit(), y)
+step3 = step2.doit()
+sum1 = Sum(1/n**2,(n,1,oo))
+\end{sympycode}
+\begin{align*}
+\sympy{step1} &= \sympy{step2} \\
+&= \sympy{step3}
+\end{align*}
+
+\[ \int_{-\infty}^{\infty}{\frac{1}{x^4+1}\d x}=\frac{\pi}{2} \]
+
+\begin{sympycode}
+x = symbols('x')
+sineq = Eq(asin(x/2)-pi/3)
+pytex.set_sympy_latex('display',
+inv_trig_style='power')
+pytex.set_sympy_latex('text',
+inv_trig_style='full')
+\end{sympycode}
+Inline: $\sympy{sineq}$
+Equation: \[ \sympy{sineq}\Rightarrow x=\sympy{solve(sineq,dict=true)[0][x]} \]
+\[ \sum_{n=1}^{\infty}\frac{1}{n^2}=\sympy{sum1.doit()} \]
+\[ \int_{-1}^{1}{\cos{(x)}\d x}+\sum_{k=1}^{\infty}{\frac{(-1)^k}{k^2}}=\frac{\pi^2}{12} \]
+\begin{sympycode}
+from sympy import Function, dsolve, pprint
+from sympy.abc import x
+f = Function('f')
+eq=Eq(f(x).diff(x, 2) -3*f(x).diff(x)+2*f(x),cos(x))
+solution=dsolve(eq, f(x),hint='nth_linear_constant_coeff_undetermined_coefficients')
+int3=integrate(tan(x),x)
+\end{sympycode}
+\[ y''-3y'+2y=\cos{x} \]
+είναι
+\[ \sympy{eq} \]
+\[ \sympy{expand(solution)} \]
+\[ \int_{-1}^{1}{\tan{(x)}\d x}=\sympy{int3} \]
+\[ \sum_{n=1}^{\infty}{\frac{1}{n^2}} \]
+\[ \int_{-1}^{1}{x^2\d x}=\left.\frac{x^3}{3}\right|_{-1}^{1}=\frac{1}{3}-\left(-\frac{1}{3}\right)=\frac{2}{3} \]
+\end{document}
+
+
+

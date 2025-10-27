@@ -1,0 +1,26 @@
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+
+\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,y=9cm,
+  no markers, domain=0:7.7,xmax=8, samples=200,
+  axis lines*=left, xlabel=$x$, ylabel=$y$,
+  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, width=9cm,xticklabels={$ \bar{x}-3s $,$ \bar{x}-2s $,$ \bar{x}-s $,$ \bar{x} $,$ \bar{x}+s $,$ \bar{x}+2s $,$ \bar{x}+3s $},xmajorgrids = true,
+  xtick={1,2,3,4,5,6,7},ymax=.45,
+  enlargelimits=false, clip=false, axis on top]
+  \addplot [fill=cyan!20, draw=none, domain=0:7] {gauss(4,1)} \closedcycle;
+  \addplot [very thick,cyan!80!black] {gauss(4,1)};
+\end{axis}
+\node at (4.2,1.2) {\scriptsize$34\%$};
+\node at (3.2,1.2) {\scriptsize$34\%$};
+\node at (2.3,0.5) {\scriptsize$16.5\%$};
+\node at (5.1,0.5) {\scriptsize$16.5\%$};
+\node at (6,0.4) {\scriptsize$2.35\%$};
+\node at (1.4,0.4) {\scriptsize$2.35\%$};
+\node at (0.5,0.2) {\scriptsize$0.15\%$};
+\node at (7,0.2) {\scriptsize$0.15\%$};
+\end{tikzpicture}

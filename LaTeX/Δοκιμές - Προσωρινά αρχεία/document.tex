@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\usepackage{pgfplotstable}
+\usepackage{longtable}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{txfontsb}
+\pgfplotstableset{
+    % helpers
+    @create function/.style={
+        create on use/#1/.style={
+            create col/expr=#1(\thisrow{left})}},
+    @secure header/.style={
+        columns/#1/.append style={
+            column name=\multicolumn{1}{c}{#1}}},
+    @set columns to siunitx type 1/.style={
+        columns/#1/.append style={
+            string type,
+            column type={S[table-format=1.4]}}},
+    @set columns to siunitx type 2/.style={
+        columns/#1/.append style={
+            string type,
+            string replace={inf}{\multicolumn{1}{c}{$\infty$}},
+            column type={S[table-format=2.4]}}},
+    @set columns to siunitx type 3/.style={
+        columns/#1/.append style={
+            string type,
+            string replace={inf}{\multicolumn{1}{c}{$\infty$}},
+            column type={S[table-format=2.3]}}},
+    @set columns to basic style/.style={
+        columns/#1/.append style={
+            column type={r<{\si{\degree}}}}},
+    @set empty header/.style={
+        columns/#1/.append style={
+            column name={\multicolumn{1}{c}{}}}},
+    %
+    % the left and right columns
+    create on use/left/.style={
+        create col/expr=\pgfplotstablerow},
+    create on use/right/.style={
+        create col/expr={90-\thisrow{left}}},
+    %
+    % Let's start: the functions
+    @create function/.list={sin,cos,tan,cot,cosec,sec},
+    % The longtable setup
+    begin table=\begin{longtable},
+    end table=\end{longtable},
+    every head row/.append style={
+        before row=\toprule,
+        after row=%
+        \midrule \endhead
+        \midrule
+        \multicolumn{1}{c}{} & {cos} & {sin} & {cot} & {tan} & {csc} & {sec} & \multicolumn{1}{r}{\dots}\\ \bottomrule
+        \endfoot
+        \midrule
+        \multicolumn{1}{c}{} & {cos} & {sin} & {cot} & {tan} & {csc} & {sec} & \multicolumn{1}{r}{} \\ \bottomrule
+        \endlastfoot},
+    every odd row/.style={before row={\rowcolor[gray]{.9}}},
+}
+\pgfplotstablenew[
+    columns={left,sin,cos,tan,cot,sec,cosec,right},
+    ]{91}\myTable
+\begin{document}
+\sisetup{scientific-notation = fixed, fixed-exponent = 0, table-auto-round=true}
+\pgfplotstabletypeset[
+    % the column types
+    @set columns to siunitx type 1/.list={sin,cos},
+    @set columns to siunitx type 2=tan,
+    @set columns to siunitx type 3/.list={cot,sec,cosec},
+    @set columns to basic style/.list={left,right},
+    % setup for the headers
+    @secure header/.list={sin,cos,tan,cot,sec},
+    @set empty header/.list={left,right},
+    columns/cosec/.append style={column name={\multicolumn{1}{c}{csc}}},
+]\myTable
+\end{document}

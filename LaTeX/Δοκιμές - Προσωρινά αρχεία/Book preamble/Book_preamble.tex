@@ -1,0 +1,682 @@
+\documentclass[a4paper,twoside,11pt]{book}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\defaultfontfeatures{Ligatures=TeX}
+\font\kefalaio="Noto Serif Bold" at 36pt
+\font\ArKef="Noto Serif Bold Italic" at 72pt
+\font\OnKef="Noto Serif" at 40pt
+\font\OnPar="Noto Serif Bold" at 18pt
+\font\onoma="URWGothic-Demi" at 11pt
+\font\Askhseis="URWGothic-Demi" at 16pt
+\newfontfamily\scfont{Nimbus Roman}
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[inner=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\geometry{textwidth=12cm,marginparsep=5mm,marginparwidth=5cm}
+\usepackage{sidenotes}
+\usepackage{amsmath}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage{makeidx}
+\usepackage{longtable,varwidth}
+\usepackage[usenames,dvipsnames,cmyk,table,x11names]{xcolor}
+\definecolor{kefalaio}{cmyk}{0.74,0,0.1,0.47}
+\definecolor{portokali}{cmyk}{0,0.54,1,0.08}
+\usepackage{float}
+\usepackage{subfig}
+\def\xrwma{cyan!70!black}
+\def\xrwmath{cyan}
+\usepackage{etoolbox}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+\makeindex
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetikzlibrary{fadings}
+\usepackage{wrap-rl}
+%\usetkzobj{all}
+\usepackage{calc}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage{cleveref}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{olivedrab}{cmyk}{0.25,0,0.75,0.44}
+\usepackage{capt-of}
+\usepackage{titletoc}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol,adjmulticol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx,longtable}
+\usepackage{siunitx}
+\tikzset{>=latex}
+\makeatletter
+\pretocmd{\@part}{\gdef\parttitle{#1}}{}{}
+\pretocmd{\@spart}{\gdef\parttitle{#1}}{}{}
+\makeatother
+\usepackage[titletoc]{appendix}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\it\thesection\ #1}}
+\makeatletter% so we can use macros with @ in their names
+\fancyheadoffset{0cm}
+% Set the header/footer width to be the body text block plus the margin
+% note area.
+\newlength{\overhanglength}
+\AtBeginDocument{%
+% Calculate the amount to extend the running heads
+\setlength{\overhanglength}{\marginparwidth}
+\addtolength{\overhanglength}{\marginparsep}
+
+% Set the running head offsets to the overhang length calculated above
+\ifthenelse{\NOT\boolean{@mparswitch}\AND\boolean{@twoside}}
+{\fancyhfoffset[RE,RO]{\overhanglength}}% asymmetric
+{\fancyhfoffset[LE,RO]{\overhanglength}}% symmetric
+}
+% The running heads/feet don't have rules
+\renewcommand{\headrulewidth}{\iftopfloat{0pt}{.5pt}}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhf{} % clear any existing header and footer fields
+% adjust the formatting code to suit your tastes here
+\ifthenelse{\boolean{@twoside}}{%
+\fancyhead[LE]{\thepage\ $ \cdot $\ \leftmark}%
+\fancyhead[RO]{\rightmark\ $ \cdot $\ \thepage}%
+}{%
+\fancyhead[LE,RO]{\rightmark\quad\thepage}%
+}
+\makeatother
+
+\usepackage[most]{tcolorbox}
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large \onoma{Ορισμός}\hspace{2mm}\theorismos}}}}}\hspace{1mm}}{}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos:\ \  {\textcolor{black}{\MakeUppercase{\onoma#1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,opacityfill=0,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=\xrwma]}
+{\end{tcolorbox}}
+%-----------------------------------------
+
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}{\refstepcounter{thewrhma}{\textbf{\textcolor{LimeGreen!70!black}{{\large \onoma{Θεώρη}μα\hspace{2mm}\thethewrhma}}\hspace{1mm}}}}{}
+
+%----------- ΘΕΩΡΗΜΑ------------------
+\newenvironment{thewrhma}[1]
+{\begin{tcolorbox}[title=\Thewrhma\ \ :\ \  {\textcolor{black}{\MakeUppercase{\onoma#1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{LimeGreen!70!black},leftrule=2mm,sharp corners,coltitle=LimeGreen!70!black]}
+{\end{tcolorbox}}
+%-----------------------------------------
+
+%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
+\newcounter{parathrhsh}[section]
+\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
+\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\faExclamationTriangle\ \ -\ \ Παρατήρηση\hspace{2mm}\theparathrhsh}}}{}
+
+%----------- ΠΑΡΑΤΗΡΗΣΗ------------------
+\newenvironment{parat}[1]
+{\begin{tcolorbox}[title=\Parathrhsh,
+breakable,
+enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white},
+colback=red!5!white,
+boxrule=0.1pt,
+colframe=red!80!black,
+fonttitle=\bfseries,width=#1]}
+{\end{tcolorbox}}
+%-----------------------------------------
+
+\newcounter{porisma}[chapter]
+\renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\newcounter{protasi}[chapter]
+\renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
+
+\usepackage{venndiagram,mathimatika,eurosym}
+%-------- ΣΤΥΛ ΚΕΦΑΛΑΙΟΥ ---------
+\newcommand*\chapterlabel{}
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{
+\normalfont\Huge}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-9cm] at (current page.north west)
+{\begin{tikzpicture}[remember picture, overlay]
+%\node[inner sep=0pt] at ($(current page.north) +			(2cm,-0.8in)$) {\includegraphics[width=21cm]{s}};
+\node[anchor=west,xshift=.1\paperwidth,yshift=.14\paperheight,rectangle]
+{{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{kefalaio}{Κεφάλαιο}}}}};
+\node[anchor=west,xshift=.09\paperwidth,yshift=.08\paperheight,rectangle] {\fontsize{44}{20} {\color{black}{{\textcolor{kefalaio}{\contour{white}{\scfont\textsc{##1}}}}}}};
+\fill[fill=black] (15.2,2) rectangle (17.8,4.7);
+\node[anchor=west,xshift=.74\paperwidth,yshift=.11\paperheight,rectangle]
+{{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{white}{\contour{black}{\thechapter}}}}}};
+\end{tikzpicture}};
+\end{tikzpicture}}
+\titlespacing*{\chapter}{0pt}{20pt}{100pt}}
+%------------------------------------------------
+\usepackage[outline]{contour}
+\newcommand{\regularchapter}{%
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge##1}
+\titlespacing*{\chapter}
+{0pt}{-20pt}{90pt}}
+\apptocmd{\mainmatter}{\fancychapter}{}{}
+\apptocmd{\backmatter}{\regularchapter}{}{}
+\apptocmd{\frontmatter}{\regularchapter}{}{}
+\titlespacing*{\section}
+{0pt}{30pt}{0pt}
+\usepackage{booktabs,colortbl}
+\usepackage{hhline}
+\DeclareRobustCommand{\perthousand}{%
+\ifmmode
+\text{\textperthousand}%
+\else
+\textperthousand
+\fi}
+
+\contentsmargin{0cm}
+\titlecontents{part}[-1pc]
+{\addvspace{10pt}%
+\bf\Large ΜΕΡΟΣ\quad }%
+{}
+{}
+{\;\dotfill}%
+%------------------------------------------
+\titlecontents{chapter}[0pc]
+{\addvspace{30pt}%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=black,draw=black] (-.3,.5) rectangle (3.7,1.1); %
+\pgftext[left,x=0cm,y=0.75cm]{\color{white}\sc\Large\bfseries Κεφάλαιο\ \thecontentslabel};%
+\end{tikzpicture}\large\sc}%
+{}
+{}
+{\hspace*{-2.3em}\hfill\normalsize Σελίδα \thecontentspage}%
+\titlecontents{section}[2.4pc]
+{\addvspace{1pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\;\dotfill\;\small \thecontentspage}
+[]
+\titlecontents*{subsection}[4pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+\chapter*{%
+\vspace*{-20\p@}%
+\begin{tikzpicture}[remember picture, overlay]%
+\pgftext[right,x=12cm,y=0.2cm]{\Huge\sc\bfseries \contentsname};%
+\draw[fill=black,draw=black] (9.5,-.75) rectangle (12.5,1);%
+\clip (9.5,-.75) rectangle (15,1);
+\pgftext[right,x=12cm,y=0.2cm]{\color{white}\Huge\bfseries \contentsname};%
+\end{tikzpicture}}%
+\@starttoc{toc}}
+\makeatother
+
+\usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\usepackage{textcomp}
+
+\titleformat{\section}
+{\normalfont\Large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\itshape{\LARGE{\fcolorbox{cyan}{cyan}{\textcolor{white}{\thesection}}~\textcolor{cyan}{#1}}}\strut}}}[\vskip 0\baselineskip{\color{cyan}\titlerule[1pt]}]
+\titlespacing*{\section}{0pt}{0pt}{30pt}
+
+\titleformat{\subsection}
+{\normalfont\large\bf}%
+{}{0em}%
+{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut\itshape{{\textcolor{magenta!70!black}{\faSquare\ \ \onoma{\MakeUppercase{#1}}}}}\strut}}}[\vskip 0\baselineskip{}]
+\titlespacing*{\section}{0pt}{0pt}{30pt}
+
+\newcommand{\methodologia}{\begin{center}
+{\large \textbf{ΜΕΘΟΔΟΛΟΓΙΑ}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
+\newcommand{\orismoi}{\begin{center}
+\vspace{-3mm}{\large \textbf{\textcolor{\xrwma}{ΟΡΙΣΜΟΙ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=cyan!80!black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=cyan!80!black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\newcommand{\thewrhmata}{\begin{center}
+{\large \textbf{\textcolor{\xrwmath}{ΘΕΩΡΗΜΑΤΑ - ΠΟΡΙΣΜΑΤΑ - ΠΡΟΤΑΣΕΙΣ\\ΚΡΙΤΗΡΙΑ - ΙΔΙΟΤΗΤΕΣ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=\xrwmath,] (-5cm,0) rectangle (0,.2mm);
+\shade[left color=\xrwmath, right color=white,] (0,0) rectangle (5cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize},skip=0pt]{caption}
+
+\usepackage{calc,capt-of,hhline,comment}
+\makeatletter
+\patchcmd{\@caption}{\csname fnum@#1\endcsname:
+\ignorespaces#3}{\Centering
+\csname fnum@#1\endcsname\ifblank{#3}{}{: \ignorespaces#3}}{}{}
+\makeatother 
+
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
+\DeclareRobustCommand{\frac}[3][0pt]{%
+{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+%----------------------------------------
+\usepackage{microtype,changepage}
+\usepackage{float}
+\usepackage{lipsum}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[chapter]
+\renewcommand{\theparadeigma}{\bf\onoma{\thechapter.\arabic{paradeigma}}} 
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{magenta!70!black}{\textbf{{\large \faPlay\ \ \onoma{Παράδειγμα}\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}}} \MakeUppercase{\onoma{#1}}\\}{}
+%-----------------------------------
+
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{\textcolor{cyan!80!black}{\onoma{\faCheck\ ΛΥΣΗ}}}
+%------------------------------------
+
+%------ ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ ΤΙΤΛΟΣ ---------
+\newcommand{\Lymena}{\begin{center}
+\begin{tikzpicture}
+\path[left color=cyan!70!black,right color=cyan!80!black,middle color=cyan!80!white] (-7cm,-.6cm) rectangle (6.5cm,.6cm);
+\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}}};  
+\end{tikzpicture}
+\end{center}}
+%--------------------------------------
+
+%--------- ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ ΤΙΤΛΟΣ ----------
+\newcommand{\Alyta}{
+\begin{tikzpicture}
+\path[left color=cyan!70!black,right color=cyan!80!black,middle color=cyan!70!white] (-.3cm,.7cm) --(-.3cm,-.5cm) -- (7.9cm,-.5cm) -- (8.7cm,.63cm) -- (17.2cm,.63cm) -- (17.2cm,.7cm)-- cycle;
+\node at (3.8cm,.1) {\LARGE \textcolor{white}{\textbf{\faPenSquare\ \ \rule{.5mm}{5mm}\ \ {\Askhseis{ΑΣΚΗΣΕΙΣ - ΠΡΟΒΛΗΜΑΤΑ}}}}};
+\end{tikzpicture}\mbox{}\\}
+%--------------------------------------------
+
+%\newcommand{\newgeometria}{
+%\newgeometry{inner=2.00cm, top=3.00cm, bottom=2.00cm,outer=1.50cm,textwidth=17.5cm,
+%marginparsep=0mm,
+%marginparwidth=0cm}
+%\fancyhfoffset[LE,RO]{0cm}}
+%
+%\newcommand{\restoregeometia}{
+%\restoregeometry
+%\fancyhfoffset[LE,RO]{\overhanglength}}
+
+\newcommand{\full}[1]{\begin{mdframed}[outermargin=\dimexpr-\marginparwidth-\marginparsep\relax,innerleftmargin=0mm,innerrightmargin=0mm,hidealllines=true]
+#1
+\end{mdframed}}
+
+%\newcommand{\fulltc}[1]{\begin{tcolorbox}[enhanced,breakable, colback=white, colframe=white, check odd page, toggle left and right, grow to right by=\marginparwidth+\marginparsep, toggle enlargement=evenpage]
+%#1
+%\end{tcolorbox}}
+
+\newcommand{\fulltwoc}[1]{\begin{adjmulticols}{2}{0cm}{\dimexpr-\marginparwidth-\marginparsep\relax}
+#1
+\end{adjmulticols}}
+
+\usetikzlibrary{shadows,calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,theorems,breakable}
+%---------- ΜΕΘΟΔΟΣ --------------
+\newcounter{Methodos}[chapter]
+\renewcommand{\theMethodos}{\thechapter.\arabic{Methodos}}
+\newenvironment{Methodos}[2][\linewidth]
+{\refstepcounter{Methodos}
+\begin{tcolorbox}[breakable,
+enhanced standard,
+boxrule=0.7pt,titlerule=-.2pt,drop fuzzy shadow southeast=black!50,
+width=\linewidth,
+title style={color=white},
+overlay unbroken and first={
+\path[left color=cyan!70!black,right color=cyan,draw=black]
+([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;},fonttitle=\bfseries,
+before=\par\medskip\noindent,
+after=\par\medskip,
+toptitle=3pt,
+top=11pt,topsep at break=-5pt,
+colback=white,title={\large Μέθοδος \theMethodos} : {\textcolor{black}{\MakeUppercase{#1}}}]}
+{\end{tcolorbox}}
+%------------------------------------------
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.5cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+%----ΣΤΥΛ ΑΣΚΗΣΗΣ ----------
+\newcounter{askhsh}[chapter]
+\renewcommand{\theaskhsh}{\bf{\textit{{\Large{\thechapter}}.\arabic{askhsh}}}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}\textcolor{magenta!70!black}{{\theaskhsh}\hspace{2mm}}}{}
+%---------------------------
+
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%------------------------------------------
+\setlength{\parindent}{0pt}
+\setlist[itemize]{itemsep=0mm}
+\tkzSetUpPoint[size=2.8,fill=white]
+\newcommand{\twocolkentro}[1]{
+\twocolumn[
+\begin{@twocolumnfalse}
+#1
+\end{@twocolumnfalse}]}
+\newcommand{\bcc}[1]{
+\begin{center}
+{\color{\xrwma}{\rule{1cm}{.4pt}}\raisebox{-2.5mm}{\rule{.4pt}{5mm}}}\hspace{1em}\raisebox{-.65ex}{\begin{varwidth}{\dimexpr0.7\textwidth-2em\relax}\centering{\textbf{\textcolor{\xrwma}{\large\scfont\textsc{#1}}}}\end{varwidth}}\hspace*{1em}{\color{\xrwma}{\raisebox{-2.5mm}{\rule{.4pt}{5mm}}\hrulefill}}
+\end{center}}
+
+\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt 
+}
+\makeatother
+\newcommand{\bsc}[1]{\textbf{\scfont\textsc{ #1}}}
+
+
+
+\begin{document}
+\pagestyle{empty}
+\frontmatter
+\tableofcontents
+\restoregeometry % restores the geometry
+\mainmatter
+\pagestyle{fancy}
+\part{ΔΙΑΦΟΡΙΚΕΣ ΕΞΙΣΩΣΕΙΣ ΚΑΙ ΔΙΑΦΟΡΙΚΑ ΣΥΣΤΗΜΑΤΑ. ΠΡΟΒΛΗΜΑΤΑ ΑΡΧΙΚΩΝ ΤΙΜΩΝ. ΥΠΑΡΞΗ ΚΑΙ ΜΟΝΟΣΗΜΑΝΤΟ ΛΥΣΕΩΝ}
+
+\chapter{ΔΙΑΦΟΡΙΚΕΣ ΕΞΙΣΩΣΕΙΣ ΚΑΙ ΔΙΑΦΟΡΙΚΑ ΣΥΣΤΗΜΑΤΑ. ΠΡΟΒΛΗΜΑΤΑ ΑΡΧΙΚΩΝ ΤΙΜΩΝ}
+
+Στο Κεφάλαιο αυτό θα γίνει μια εισαγωγή στις διαφορικές εξισώσεις, τα διαφορικά συστήματα και τα προβλήματα αρχικών τιμών (εδάφιο 1) και θα μελετηθεί το πρόβλημα της ύπαρξης και του μονοσήμαντου λύσεων προβλημάτων αρχικών τιμών (εδάφιο 2).
+
+\section{ΔΙΑΦΟΡΙΚΕΣ ΕΞΙΣΩΣΕΙΣ ΚΑΙ ΔΙΑΦΟΡΙΚΑ ΣΥΣΤΗΜΑΤΑ. ΠΡΟΒΛΗΜΑΤΑ ΑΡΧΙΚΩΝ ΤΙΜΩΝ}
+
+Στο εδάφιο αυτό θα εισαγάγουμε τις έννοιες της διαφορικής εξίσωσης, του διαφορικού συστήματος και του προβλήματος αρχικών τιμών.
+
+\subsection{Διαφορικές εξισώσεις και διαφορικά συστήματα. Προβλήματα αρχικών τιμών}
+
+Ας είναι $f$ μια $n$-διάστατη διανυσματική συνάρτηση ορισμένη σ' ένα υποσύνολο $D$ του καρτεσιανού χώρου της πραγματικής ευθείας με τον χώρο των $n$-διάστατων διανυσμάτων. Μια εξίσωση της μορφής
+\begin{equation}
+    y' = f(x,y),
+\end{equation}
+όπου $y' = \frac{d}{dx}y$, λέμε ότι είναι μια $n$-διάστατη διανυσματική διαφορική εξίσωση με άγνωστη συνάρτηση την $y$ και ανεξάρτητη μεταβλητή την $x$. Αν $n=1$, τότε λέμε ότι η (1) είναι μια (βαθμωτή) διαφορική εξίσωση πρώτης τάξης. Ας είναι $I$ ένα διάστημα της πραγματικής ευθείας. Μια $n$-διάστατη διανυσματική συνάρτηση $y$ λέγεται λύση της διαφορικής εξίσωσης (1) στο διάστημα $I$ αν και μόνο αν η $y$ είναι παραγωγίσιμη στο $I$ και επιπλέον για όλα τα $x \in I$ είναι $(x,y(x)) \in D$ και $y'(x) = f(x,y(x))$. Επίσης, αν $x_0 \in I$ και $(x_0,y_0) \in D$, τότε μια λύση $y$ της (1) στο διάστημα $I$ τέτοια ώστε να πληροί την αρχική συνθήκη
+\begin{equation}
+    y(x_0) = y_0
+\end{equation}
+λέμε ότι είναι μια λύση στο $I$ του προβλήματος αρχικών τιμών (1)-(2).
+
+Ας είναι τώρα $f_1, \dots, f_n$ $n$ συναρτήσεις ορισμένες σ' ένα υποσύνολο $D$ του καρτεσιανού χώρου της πραγματικής ευθείας με τον χώρο των $n$-διάστατων διανυσμάτων. Ένα σύστημα της μορφής
+\begin{equation}
+    \begin{cases}
+        y_1' = f_1(x,y_1, \dots, y_n) \\
+        \vdots \\
+        y_n' = f_n(x,y_1, \dots, y_n)
+    \end{cases}
+\end{equation}
+θα λέμε ότι είναι ένα $n$-διάστατο διαφορικό σύστημα με άγνωστες συναρτήσεις τις $y_1, \dots, y_n$ και ανεξάρτητη μεταβλητή $x$. Επίσης, θα λέμε ότι το διαφορικό σύστημα (3) είναι πρώτης τάξης. Ας είναι $I$ ένα διάστημα. Μια $n$-άδα συναρτήσεων $y_1, \dots, y_n$ λέγεται λύση στο $I$ του διαφορικού συστήματος (3) αν και μόνο αν οι συναρτήσεις $y_1, \dots, y_n$ είναι παραγωγίσιμες στο $I$ και για όλα τα $x \in I$ είναι $(x,y_1(x), \dots, y_n(x)) \in D$ και
+\[
+    y_k'(x) = f_k(x,y_1(x), \dots, y_n(x)) \quad (k=1,\dots,n).
+\]
+Ακόμα, αν $(x_0,y_{10}, \dots, y_{n0}) \in D$ και $x_0 \in I$, τότε μια λύση στο διάστημα $I$ του διαφορικού συστήματος (3) που πληροί την αρχική συνθήκη
+\begin{equation}
+    y_1(x_0)=y_{10}, \dots, y_n(x_0)=y_{n0}
+\end{equation}
+θα λέγεται λύση στο $I$ του προβλήματος αρχικών τιμών (3)-(4). Αν θέσουμε
+\[
+    y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}, \quad \text{και} \quad f = \begin{pmatrix} f_1 \\ \vdots \\ f_n \end{pmatrix},
+\]
+τότε το διαφορικό σύστημα (3) παίρνει τη μορφή
+\begin{equation*} \label{eq:3prime}
+    y' = f(x,y), \tag{3'}
+\end{equation*}
+Επίσης, θέτοντας
+\[
+    y_0 = \begin{pmatrix} y_{10} \\ \vdots \\ y_{n0} \end{pmatrix},
+\]
+η αρχική συνθήκη (4) γράφεται
+\begin{equation*} \label{eq:4prime}
+    y(x_0) = y_0. \tag{4'}
+\end{equation*}
+Έτσι, κάθε $n$-διάστατο διαφορικό σύστημα μπορεί να γραφεί στη μορφή μιας $n$-διάστατης διανυσματικής διαφορικής εξίσωσης. Επίσης, ένα πρόβλημα αρχικών τιμών για ένα $n$-διάστατο διαφορικό σύστημα γράφεται στη μορφή ενός προβλήματος αρχικών τιμών για μια $n$-διάστατη διανυσματική διαφορική εξίσωση.
+
+Μια ενδιαφέρουσα ειδική μορφή $n$-διάστατων διαφορικών συστημάτων είναι τα γραμμικά διαφορικά συστήματα
+\begin{equation}
+    \begin{cases}
+        y_1' = a_{11}y_1 + \dots + a_{1n}y_n + b_1 \\
+        \vdots \\
+        y_n' = a_{n1}y_1 + \dots + a_{nn}y_n + b_n
+    \end{cases}
+\end{equation}
+όπου $a_{ij}$ $(i,j=1,\dots,n)$ και $b_i$ $(i=1,\dots,n)$ είναι συναρτήσεις ορισμένες σ' ένα διάστημα $I$ της πραγματικής ευθείας. Θέτοντας
+\[
+    y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}, \quad A = \begin{pmatrix} a_{11} & \dots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} & \dots & a_{nn} \end{pmatrix}, \quad \text{και} \quad b = \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix},
+\]
+το γραμμικό διαφορικό σύστημα γράφεται
+\begin{equation*} \label{eq:5prime}
+    y' = Ay+b. \tag{5'}
+\end{equation*}
+Επίσης, αν $x_0 \in I$ και $y_{10}, \dots, y_{n0}$ είναι σταθερές, το πρόβλημα αρχικών τιμών (5)-(4) γράφεται (5')-(4') για
+\[
+    y_0 = \begin{pmatrix} y_{10} \\ \vdots \\ y_{n0} \end{pmatrix}.
+\]
+
+Ας θεωρήσουμε μια συνάρτηση $f$ ορισμένη σ' ένα υποσύνολο $D$ του καρτεσιανού χώρου της πραγματικής ευθείας με τον χώρο των $n$-διάστατων διανυσμάτων. Τότε μια εξίσωση της μορφής
+\begin{equation}
+    y^{(n)} = f(x,y,y', \dots, y^{(n-1)}),
+\end{equation}
+όπου $y^{(k)} = \frac{d^k}{dx^k}$ $(k=1, \dots, n)$, θα λέμε ότι είναι μια (βαθμωτή) διαφορική εξίσωση $n$-τάξης. Η $y$ είναι η άγνωστη συνάρτηση αυτής και $x$ είναι η ανεξάρτητη μεταβλητή της. Ας είναι $I$ ένα διάστημα. Μια συνάρτηση στο $I$ που έχει παράγωγο και είναι τέτοια ώστε για κάθε $x \in I$
+$(x, y(x), y'(x), \dots, y^{(n-1)}(x)) \in D$ και $y^{(n)}(x) = f(x, y(x), y'(x), \dots, y^{(n-1)}(x))$
+θα λέμε ότι είναι μια λύση στο $I$ της διαφορικής εξίσωσης (6). Αν $(x_0, y_0, \dots, y_{n0}^{(n-1)}) \in D$ με $x_0 \in I$, μια λύση $y$ της (6) στο $I$ που πληροί τις αρχικές συνθήκες
+\begin{equation}
+    y(x_0)=y_0, y'(x_0)=y_{20}, \dots, y^{(n-1)}(x_0)=y_{n0}
+\end{equation}
+θα λέμε ότι είναι μια λύση στο $I$ του προβλήματος αρχικών τιμών (6)-(7).
+
+Αν θέσουμε $y=y_1, y'=y_2, \dots, y^{(n-1)}=y_n$, τότε η διαφορική εξίσωση (6) ανάγεται στο $n$-διάστατο διαφορικό σύστημα
+\begin{equation*} \label{eq:6prime}
+    \begin{cases}
+        y_1' = y_2 \\
+        \vdots \\
+        y_{n-1}' = y_n \\
+        y_n' = f(x,y_1, \dots, y_n)
+    \end{cases} \tag{6'}
+\end{equation*}
+και οι αρχικές συνθήκες (7) ανάγονται στην αρχική συνθήκη
+\begin{equation*} \label{eq:7prime}
+    y_1(x_0)=y_{10}, \dots, y_n(x_0)=y_{n0} \tag{7'}
+\end{equation*}
+για το διαφορικό σύστημα (6'). Το διαφορικό σύστημα (6') μπορεί να γραφεί ως μια $n$-διάστατη διανυσματική διαφορική εξίσωση. Τελικά, η $n$-τάξης διαφορική εξίσωση (6) ανάγεται σε μια $n$-διάστατη διανυσματική διαφορική εξίσωση και το πρόβλημα αρχικών τιμών (6)-(7) μπορεί ν' αναχθεί σ' ένα πρόβλημα αρχικών τιμών για μια $n$-διάστατη διανυσματική διαφορική εξίσωση.
+
+Μια ενδιαφέρουσα ειδική κατηγορία διαφορικών εξισώσεων $n$-τάξης είναι οι γραμμικές διαφορικές εξισώσεις $n$-τάξης της μορφής
+\begin{equation}
+    a_n y^{(n)} + a_{n-1} y^{(n-1)} + \dots + a_1 y' + a_0 y = B,
+\end{equation}
+όπου $a_i$ ($i=0,1,\dots,n$), $n$ και $b$ είναι συναρτήσεις ορισμένες σ' ένα διάστημα $I$ και $a_n(x) \neq 0$ για όλα τα $x \in I$. Αν $x_0 \in I$ και $y_{10}, \dots, y_{n0}$ είναι τυχούσες σταθερές, τότε μπορούμε να θεωρήσουμε το πρόβλημα αρχικών τιμών (8)-(7). Θέτοντας
+\[
+    y = \begin{pmatrix} y \\ y' \\ \vdots \\ y^{(n-1)} \end{pmatrix}, \quad B = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ b \end{pmatrix}, \quad A = \begin{pmatrix} 0 & 1 & 0 & \dots & 0 \\ 0 & 0 & 1 & \dots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \dots & 1 \\ -\frac{a_0}{a_n} & -\frac{a_1}{a_n} & -\frac{a_2}{a_n} & \dots & -\frac{a_{n-1}}{a_n} \end{pmatrix}.
+\]
+η γραμμική διαφορική εξίσωση (8) ανάγεται στο γραμμικό διαφορικό σύστημα
+\begin{equation*} \label{eq:8prime}
+    Y' = AY+B \tag{8'}
+\end{equation*}
+και οι αρχικές συνθήκες (7) μπορούν να γραφούν υπό τη μορφή μιας αρχικής συνθήκης για το γραμμικό διαφορικό σύστημα (8'), δηλαδή
+\begin{equation*} \label{eq:7primeprime}
+    Y(x_0) = Y_0, \tag{7''}
+\end{equation*}
+όπου
+\[
+    Y_0 = \begin{pmatrix} y_{10} \\ \vdots \\ y_{n0} \end{pmatrix}.
+\]
+
+\subsection{Παραδείγματα}
+
+\begin{Paradeigma}{Κάθενα απ' τα παρακάτω προβλήματα αρχικών τιμών να γραφεί ως ένα πρόβλημα αρχικών τιμών για μια διανυσματική διαφορική εξίσωση:}
+\begin{rlist}
+    \item $y''=y_2^2-1, \ y_2'=x+y_1^2; \ y_1(0)=1, \ y_2(0)=-2.$
+    \item $y_1'' = 5y_1+e^x y_2, \ y_2' = xy_1+y_2'^2+\sin x; y_1(0)=1, \ y_1'(0)=7, \ y_2(0)=-1.$
+    \item $e^x y''' - 7x(y')^2 + y^3 + \cos x = 0; \ y(0)=y'(0)=1, \ y''(0)=-2.$
+    \item $y_1' = y_1+y_3, \ y_2' = e^x y_1 + y_2 - (\sin x)y_3, \ y_3' = y_1; \ y_1(1)=0, \ y_2(1)=2, \ y_3(1)=7.$
+    \item $(x^2+1)y'' - 5xy' + x^2 y = e^x, \ y(2)=0, \ y'(2)=1, \ y''(2)=-3.$
+    \item $y_1''-y_1=0, \ y_2'+xy_1'-y_2=e^x; \ y_1(0)=y_1'(0)=1, \ y_2(0)=7, \ y_2'(0)=3.$
+    \item $y_1''+y_1=e^{-x}, \ y_2'-5y_2+y_3', \ y_3'-y_3=y_2; \ y_1(0)=y_1'(0)=1, \ y_2(0)=y_3(0)=2.$
+\end{rlist}
+\end{Paradeigma}
+
+\begin{Paradeigma}{(i) θέτοντας}
+\begin{rlist}
+    \item 
+\[
+    Y = \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix}, \quad Y_0 = \begin{pmatrix} 1 \\ -2 \end{pmatrix} \quad \text{και} \quad f(x,Y) = \begin{pmatrix} Y_2^2+1 \\ x+Y_1^2 \end{pmatrix},
+\]
+παίρνουμε το πρόβλημα αρχικών τιμών
+\[
+    y' = f(x,y), \ y(0)=y_0.
+\]
+    \item θέτουμε $y_1=u_1, \ y_1'=u_2$ και $y_2=u_3$, οπότε το πρόβλημα αρχικών τιμών μετασχηματίζεται στο
+\[
+    u_1'=u_2, \ u_2'=5u_1+e^x u_3, \ u_3'=xu_1+u_2^2+\sin x; \ u_1(0)=1, \ u_2(0)=7, \ u_3(0)=-1,
+\]
+το οποίο μπορεί να γραφεί ως εξής
+\[
+    u' = f(x,u), \ u(0)=u_0
+\]
+αρκεί να θέσουμε
+\[
+    u = \begin{pmatrix} u_1 \\ u_2 \\ u_3 \end{pmatrix}, \ u_0 = \begin{pmatrix} 1 \\ 7 \\ -1 \end{pmatrix} \quad \text{και} \quad f(x,u) = \begin{pmatrix} u_2 \\ 5u_1+e^x u_3 \\ xu_1+u_2^2+\sin x \end{pmatrix}.
+\]
+    \item θέτουμε $y=Y_1, \ y'=Y_2, \ y''=Y_3$ και παίρνουμε
+\[
+    Y_1' = Y_2, \ Y_2' = Y_3, \ Y_3' = \frac{1}{e^x} (-\cos x - y_1^3 + 7xy_2^2); \ Y_1(0)=Y_2(0)=1, \ Y_3(0)=-2
+\]
+οπότε έχουμε
+\[
+    Y' = f(x,Y); \ Y(0)=Y_0
+\]
+με
+\[
+    Y = \begin{pmatrix} Y_1 \\ Y_2 \\ Y_3 \end{pmatrix} = \begin{pmatrix} y \\ y' \\ y'' \end{pmatrix}, \quad Y_0 = \begin{pmatrix} 1 \\ 1 \\ -2 \end{pmatrix} \quad \text{και} \quad f(x,Y) = \begin{pmatrix} Y_2 \\ Y_3 \\ \frac{1}{e^x}(-\cos x - Y_1^3+7xY_2^2) \end{pmatrix}.
+\]
+    \item Για
+\[
+    Y = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}, \quad Y_0 = \begin{pmatrix} 0 \\ 2 \\ 7 \end{pmatrix} \quad \text{και} \quad A(x) = \begin{pmatrix} 1 & 0 & 1 \\ e^x & 1 & -\sin x \\ 1 & 0 & 0 \end{pmatrix}
+\]
+παίρνουμε το πρόβλημα αρχικών τιμών
+\[
+    Y' = A(x)Y; \ Y(1)=Y_0.
+\]
+    \item Αυτό γράφεται
+\[
+    Y' = A(x)Y+B(x); Y(2)=Y_0,
+\]
+όπου
+\[
+    Y = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} = \begin{pmatrix} y \\ y' \\ y'' \end{pmatrix}, \quad Y_0 = \begin{pmatrix} 0 \\ 1 \\ -3 \end{pmatrix}, \quad A(x) = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ \frac{-5x^2}{x^2+1} & \frac{-5x}{x^2+1} & 0 \end{pmatrix} \quad \text{και}
+\]
+\[
+    B(x) = \begin{pmatrix} 0 \\ 0 \\ \frac{e^x}{x^2+1} \end{pmatrix}.
+\]
+    \item θέτουμε $Y_1=u_1, Y_1'=u_2, Y_2=u_3, Y_2'=u_4$, οπότε
+\[
+    u_1'=u_2, \ u_2'=u_1, \ u_3'=u_4, \ u_4'=-xu_2+u_3+e^x; \ u_1(0)=u_2(0)=1, \ u_3(0)=7, \ u_4(0)=3.
+\]
+Αυτό γράφεται
+\[
+    u' = A(x)u+b(x); \ u(0)=u_0,
+\]
+όπου
+\[
+    u = \begin{pmatrix} u_1 \\ u_2 \\ u_3 \\ u_4 \end{pmatrix}, \ u_0 = \begin{pmatrix} 1 \\ 1 \\ 7 \\ 3 \end{pmatrix}, \ A(x) = \begin{pmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & -x \end{pmatrix} \quad \text{και} \quad b(x) = \begin{pmatrix} 0 \\ 0 \\ 0 \\ e^x \end{pmatrix}.
+\]
+    \item Για $y_1=u_1, y_1'=u_2, y_2=u_3, y_3=u_4$, παίρνουμε
+\[
+    u_1'=u_2, \ u_2'=-u_1+e^{-x}, \ u_3'=5u_3+u_4, \ u_4'=-u_3; \ u_1(0)=u_2(0)=1, \ u_3(0)=u_4(0)=2
+\]
+ή ακόμα
+\[
+    u' = Au+b(x); \ u(0)=u_0,
+\]
+όπου
+\[
+    u = \begin{pmatrix} u_1 \\ u_2 \\ u_3 \\ u_4 \end{pmatrix}, \ u_0 = \begin{pmatrix} 1 \\ 1 \\ 2 \\ 2 \end{pmatrix}, \ A = \begin{pmatrix} 0 & 1 & 0 & 0 \\ -1 & 0 & 0 & 0 \\ 0 & 0 & 5 & 1 \\ 0 & 0 & -1 & 0 \end{pmatrix} \quad \text{και} \quad b(x) = \begin{pmatrix} 0 \\ e^{-x} \\ 0 \\ 0 \end{pmatrix}.
+\]
+\end{rlist}
+\end{Paradeigma}
+
+\begin{Paradeigma}{Ν' αποδειχθεί ότι:}
+\begin{rlist}
+    \item Το πρόβλημα αρχικών τιμών
+\end{rlist}
+\end{Paradeigma}
+
+
+
+\end{document}

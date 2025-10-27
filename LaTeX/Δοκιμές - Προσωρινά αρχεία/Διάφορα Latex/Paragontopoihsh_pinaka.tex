@@ -1,0 +1,449 @@
+\documentclass[twoside,nofonts,internet]{askhseis}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage{fontawesome}
+\newfontfamily{\FA}{fontawesome.otf}
+\usepackage{xintfrac}
+\usepackage{xinttools}
+\usepackage{array} 
+% \usepackage {siunitx}
+% \usepackage {numprint}
+
+\catcode`_ 11
+\makeatletter
+
+\newwrite\MATout
+\immediate\openout\MATout=\jobname.pluqout\relax
+
+% (the typeout format is for input in Maple for example)
+\def\MATtypeout {\MATtypeoutwith {\MATtypeoutone}}%
+\def\MATtypeoutone #1{\xintPRaw{\xintRawWithZeros{#1}}}% (lacking an \xintPRawWithZeros)
+\def\MATtypeoutwith #1#2#3{%
+     \edef\I{\xintSeq {1}{#3[I]}}% indices for rows
+     \edef\J{\xintSeq {1}{#3[J]}}% indices for columns
+     \immediate\write\MATout{#2:=Matrix([[%
+       \xintListWithSep {], [}{\xintApply { \MAT_typeout_row {#1}#3}{\I}}%
+    ]]);}%
+}%
+\def\MAT_typeout_row #1#2#3{%
+    \xintListWithSep {, }{\xintApply { \MAT_typeout_one {#1}#2{#3}}{\J}}%
+}%
+\def\MAT_typeout_one #1#2#3#4{#1{#2[#3,#4]}}%
+
+% we don't need all of them
+\newcount\MAT_cnta
+\newcount\MAT_cntb
+\newcount\MAT_cntc
+\newcount\MAT_cntd
+\newcount\MAT_cnte
+
+% Usage: \MATset\myMatrix{semi-colon separated rows of comma separated values}
+% example.
+% \MATset\MatrixA { 1/3 , 1/4, 1/5 ; 
+%                   1/6 , 1/7 , 1/8 ; 
+%                   1/9 , 1/10 , 1/11 ; }
+% The final semi-colon is optional.
+
+% We indeed focus here on manipulating matrices with rational entries, the
+% code at http://tex.stackexchange.com/a/143035/4686 has the set-up for
+% floating point numbers too (in an arbitrary, user decided precision).
+
+\def\MATset {\def\MAT_xintin {\xintRaw}\MATset_ }%
+
+\def\MATset_ #1#2{%
+    \def\MATset_name{#1}%
+    \edef\MAT_tmpa {#2}%
+    \MAT_cnta \xint_c_ % sets \MAT_cnta to zero
+    \expandafter\MATset_a 
+    \romannumeral0\expandafter\xintzapspaces\expandafter{\MAT_tmpa};!;%
+}%
+\def\MATset_a {\futurelet\XINT_token\MATset_b }%
+\def\MATset_b #1;{\def\MAT_tmpa{#1}%
+                  \ifx\XINT_token;\expandafter\MATset_w
+                  \else
+                  \ifx\XINT_token!%
+                          \expandafter\expandafter\expandafter\MATset_x
+                     \else
+                          \expandafter\expandafter\expandafter\MATset_c
+                  \fi\fi }%
+\def\MATset_w !;{\MATset_x }%
+\def\MATset_x {\expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {I}\expandafter\endcsname
+  \expandafter {\the\MAT_cnta }%
+               \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name {J}\expandafter\endcsname 
+  \expandafter {\the\MAT_cntb }%
+  \expandafter\edef \MATset_name [##1]%
+     {\noexpand\csname MAT@\expandafter\string\MATset_name 
+               \noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+% a bit convoluted, no comments.
+\def\MAT_in #1,#2,{\xint_bye #2\xint_gobble_iv\xint_bye
+                   {\the\numexpr #1}{\the\numexpr #2}\xint_gobble_iii 
+                   {\xintZapSpaces{#1}}}%
+\def\MATset_c {\advance\MAT_cnta \xint_c_i % row count ++
+               \MAT_cntb \xint_c_ % column count initially zero
+               \expandafter\MATset_d\romannumeral0\expandafter
+               \xintzapspaces\expandafter {\MAT_tmpa},!,}%
+\def\MATset_d {\futurelet\XINT_token\MATset_e }%
+\def\MATset_e #1,{\ifx\XINT_token!\expandafter\MATset_a
+  \else
+      \advance\MAT_cntb \xint_c_i
+      \expandafter\def
+  \csname MAT@\expandafter\string\MATset_name 
+            {\the\MAT_cnta}{\the\MAT_cntb}\expandafter\endcsname
+  \expandafter{\romannumeral-`0\MAT_xintin{\xintZapSpacesB{#1}}}%
+  \expandafter\MATset_d\fi
+}%
+
+% removed \toks2 et \toks4 usage from http://tex.stackexchange.com/a/143035/4686
+\def\MATlet #1#2{%
+    \edef\MAT@seqI{\xintSeq {1}{#2[I]}}%
+    \edef\MAT@seqJ{\xintSeq {1}{#2[J]}}%
+    \xintFor* ##1 in {\MAT@seqI}
+    \do{\xintFor* ##2 in {\MAT@seqJ}
+        \do{\expandafter\let
+     \csname MAT@\string#1{##1}{##2}\expandafter\endcsname
+     \csname MAT@\string#2{##1}{##2}\endcsname
+     }}%
+  \expandafter\edef\csname MAT@\string#1{I}\endcsname {#2[I]}%
+  \expandafter\edef\csname MAT@\string#1{J}\endcsname {#2[J]}%
+  \edef #1[##1]%
+     {\noexpand\csname 
+      MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% We need identity matrices.
+% again copied as is from http://tex.stackexchange.com/a/143035/4686
+% IDENTITY MATRIX
+% usage \MATid\foo{37} defines a 37 times 37 identity matrix.
+\def\MATid {\def\MAT_tmpf{/1}\MAT_id }%
+%\def\MATfloatid {\def\MAT_tmpf{}\MAT_id }%
+% This identity matrix insists on coefficients written internally
+% 0[0] or 1[0], this is a remnant of
+% http://tex.stackexchange.com/a/143035/4686 whose aim is is minuscule
+% optimization when these numbers are involved in computations done by
+% the xintfrac macros.
+\def\MAT_id #1#2{%
+    \MAT_cntc #2\relax
+    \MAT_cnta \xint_c_i % 1
+    \xintloop
+      {\expandafter\def\expandafter\MAT_tmpa \expandafter{\the\MAT_cnta}%
+       \MAT_cntb \xint_c_i % 1
+       \xintloop
+         \expandafter\edef
+         \csname MAT@\string#1{\MAT_tmpa}{\the\MAT_cntb}\endcsname 
+           {\ifnum\MAT_cntb=\MAT_cnta 1\else 0\fi \MAT_tmpf[0]}%
+       \ifnum\MAT_cntb<\MAT_cntc
+         \advance\MAT_cntb \xint_c_i
+       \repeat
+     \ifnum\MAT_cnta<\MAT_cntc
+        \advance\MAT_cnta \xint_c_i
+    }\repeat
+    \expandafter\def\csname MAT@\string#1{I}\expandafter\endcsname
+            \expandafter {\the\MAT_cntc}%
+    \expandafter\def\csname MAT@\string#1{J}\expandafter\endcsname 
+            \expandafter {\the\MAT_cntc}%
+    \edef #1[##1]%
+       {\noexpand\csname 
+         MAT@\string#1\noexpand\MAT_in ##1,\noexpand\xint_bye,\endcsname }%
+}%
+
+% EXCHANGING ROWS OR COLUMNS OF A GIVEN MATRIX
+\def\MATexchangecol #1#2#3{%
+    \MAT_cnta=#3[I]\relax
+    \MAT_cntb=\xint_c_i % 1
+    \xintloop
+       \expandafter\let\expandafter\MAT@tmp
+       \csname MAT@\string#3{\the\MAT_cntb}{#1}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{\the\MAT_cntb}{#1}\expandafter\endcsname
+       \csname MAT@\string#3{\the\MAT_cntb}{#2}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{\the\MAT_cntb}{#2}\endcsname
+       \MAT@tmp
+    \ifnum\MAT_cntb<\MAT_cnta
+       \advance\MAT_cntb\xint_c_i
+    \repeat
+}%
+% perhaps only columns "to the right" actually need exchange in usage of this
+\def\MATexchangerow #1#2#3{%
+    \MAT_cnta=#3[J]\relax
+    \MAT_cntb=\xint_c_i % 1
+    \xintloop
+       \expandafter\let\expandafter\MAT@tmp
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\expandafter\endcsname
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \MAT@tmp
+    \ifnum\MAT_cntb<\MAT_cnta
+       \advance\MAT_cntb\xint_c_i
+    \repeat
+}%
+\def\MATexchangerowspecial #1#2#3{%#1>#2, only columns <#2 need update
+    \MAT_cnta=#2\relax
+    \MAT_cntb=\xint_c_ % 0
+    \xintloop
+    \advance\MAT_cntb\xint_c_i
+    \ifnum\MAT_cntb<\MAT_cnta
+       \expandafter\let\expandafter\MAT@tmp
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#1}{\the\MAT_cntb}\expandafter\endcsname
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \expandafter\let
+       \csname MAT@\string#3{#2}{\the\MAT_cntb}\endcsname
+       \MAT@tmp
+    \repeat
+}%
+
+
+% Usage:
+% \MATpluq\A (\A previously defined by \MATset)
+% Effect: sets \P, \L, \U, \Q, to matrices in the sense of \MATset,
+% so that "A=PLUQ" and it writes all matrices out
+% to some file. See initial answer about row reduction for typesetting
+% in document.
+% The code is a simple adaptation of this initial answer. Now I use \MATpluq
+% prefix.
+\def\MATpluq #1{%
+%  \begingroup
+    \MATlet\@U#1%
+    \edef\MATpluq@rows{\@U[I]}% nb of rows
+    \edef\MATpluq@cols{\@U[J]}% nb of columns.
+    \MATid\@P\MATpluq@rows
+    \MATid\@L\MATpluq@rows
+    \MATid\@Q\MATpluq@cols
+    \def\MATpluq@pivrow {0}%
+    \def\MATpluq@pivcol {0}%
+    %\edef\MATpluq@name {\string#1}%
+    \let\MATpluq@ifcontinue\iftrue
+%  Starting the reduction.
+    \MATtypeout{^^JA}#1%
+\[A = \MATdisplay\@U\]
+    \xintloop
+% Nota Bene: in the PLUQ reduction, the pivots are anyhow organized
+% along the main diagonal so pivrow and pivcol will be kept in sync over
+% the execution of the algorithm but we use two variables nevertheless.
+       \edef\MATpluq@pivrow{\the\numexpr\MATpluq@pivrow+\xint_c_i}%
+       \edef\MATpluq@pivcol{\the\numexpr\MATpluq@pivcol+\xint_c_i}%
+       \MATpluq@dopiv
+    \MATpluq@ifcontinue
+    \repeat
+%  Done. The rank of the matrix is \the\numexpr\MATpluq@pivrow-\xint_c_i.\par
+%  \endgroup
+    \MATtypeout{P}\@P
+    \MATtypeout{L}\@L
+    \MATtypeout{U}\@U
+    \MATtypeout{Q}\@Q
+\[ P = \MATdisplay\@P\]
+\[ L = \MATdisplay\@L\qquad U = \MATdisplay\@U\]
+\[ Q = \MATdisplay\@Q\]
+}
+
+\def\MATpluq@done {\let\MATpluq@ifcontinue\iffalse}
+
+% Remark on algorithm: I hesitated about doing column permutations first,
+% rather than row permutations with the idea to recognize faster an entirely
+% vanishing row, so that we can put it at the end and ignore it entirely, in
+% effect reducing the number of rows by one, and possibly making algorithm
+% faster. But for simplicity I just keep algorithm close to the one as in my
+% initial answer. We only have to keep track in \P, \L, \Q of the needed
+% operations.
+
+\def\MATpluq@dopiv{%
+    \let\MATpluq@row\MATpluq@pivrow
+    \let\MATpluq@col\MATpluq@pivcol
+    \ifnum\MATpluq@row>\MATpluq@rows\relax
+        \MATpluq@done
+    \else
+        \ifnum\MATpluq@col>\MATpluq@cols\relax
+            \MATpluq@done
+        \else
+            \expandafter\expandafter\expandafter\MATpluq@dopiv@i
+        \fi
+    \fi
+}
+
+\def\MATpluq@dopiv@i{%
+    \edef\MATpluq@piv@value{\@U[\MATpluq@row,\MATpluq@col]}%
+    \xintifZero{\MATpluq@piv@value}
+        \MATpluq@dopiv@steprow
+        \MATpluq@dopiv@ii
+}
+
+\def\MATpluq@dopiv@steprow{%
+     \ifnum\MATpluq@row=\MATpluq@rows\relax
+         \par Δε βρέθηκε οδηγός στη στήλη \MATpluq@col.\par
+         \let\MATpluq@row\MATpluq@pivrow
+         \expandafter\MATpluq@dopiv@stepcol
+     \else
+         \edef\MATpluq@row{\the\numexpr\MATpluq@row+\xint_c_i}%
+         \expandafter\MATpluq@dopiv@i
+     \fi
+}
+
+\def\MATpluq@dopiv@stepcol{%
+     \ifnum\MATpluq@col=\MATpluq@cols\relax
+         \MATpluq@done
+     \else
+         \edef\MATpluq@col{\the\numexpr\MATpluq@col+\xint_c_i}%
+         \expandafter\MATpluq@dopiv@i
+     \fi
+}
+
+% found a pivot
+\def\MATpluq@dopiv@ii{%
+Ο οδηγός στη θέση \MATpluq@row, \MATpluq@col\ είναι \MATpluqprintonevalue{\MATpluq@piv@value}.\par
+    \ifnum\MATpluq@col>\MATpluq@pivcol\relax
+Exchange of columns \MATpluq@pivcol\space and \MATpluq@col.\par
+      \MATexchangerow{\MATpluq@col}{\MATpluq@pivcol}\@Q
+      \MATexchangecol{\MATpluq@col}{\MATpluq@pivcol}\@U
+\[U = \MATdisplay\@U\qquad Q = \MATdisplay\@Q\]
+    \fi
+    \ifnum\MATpluq@pivrow=\MATpluq@rows\relax
+      \edef\MATpluq@pivrow{\the\numexpr\MATpluq@pivrow+\xint_c_i}%
+      \MATpluq@done
+    \else
+      \expandafter\MATpluq@dopiv@iii
+    \fi
+}
+
+\def\MATpluq@dopiv@iii{%
+    \ifnum\MATpluq@row>\MATpluq@pivrow\relax
+Εναλλάσουμε τις γραμμές \MATpluq@pivrow\space και \MATpluq@row.\par
+      \MATexchangecol{\MATpluq@row}{\MATpluq@pivrow}\@P
+      \MATexchangerow{\MATpluq@row}{\MATpluq@pivrow}\@U
+      \MATexchangerowspecial{\MATpluq@row}{\MATpluq@pivrow}\@L
+\[L = \MATdisplay\@L\qquad U = \MATdisplay\@U\]
+\[P = \MATdisplay\@P\]
+    \fi
+    \MAT_cntc\MATpluq@pivrow\relax% we are guaranteed < nb of rows
+    \xintloop
+      \advance\MAT_cntc\xint_c_i 
+      \edef\MATpluq@entry{\@U[\MAT_cntc,\MATpluq@pivcol]}%
+      \xintifZero\MATpluq@entry
+     {% nothing to do, the L coeff is already set to zero
+     }%
+     {\edef\MATpluq@ratio
+         {\xintIrr{\xintDiv{\MATpluq@entry}{\MATpluq@piv@value}}[0]}%
+      \expandafter\let
+      \csname MAT@\string\@L{\the\MAT_cntc}{\MATpluq@pivcol}\endcsname
+      \MATpluq@ratio
+Αφαιρούμε από τη γραμμή \the\MAT_cntc\space, τη γραμμή του οδηγού πολλαπλασιασμένη με 
+\MATpluqprintonevalue{\MATpluq@ratio}.\par
+      \@namedef{MAT@\string\@U{\the\MAT_cntc}{\MATpluq@pivcol}}{0[0]}%
+      \MAT_cntd\MATpluq@pivcol\relax
+      \xintloop
+      \advance\MAT_cntd\xint_c_i
+      \unless\ifnum\MATpluq@cols<\MAT_cntd
+        \expandafter\edef
+        \csname MAT@\string\@U{\the\MAT_cntc}{\the\MAT_cntd}\endcsname
+          {\xintIrr{%
+           \xintSub{\@U[\MAT_cntc,\MAT_cntd]}
+                   {\xintMul{\MATpluq@ratio}{\@U[\MATpluq@pivrow,\MAT_cntd]}}%
+           }[0]}%
+      \repeat
+      }%
+    \unless\ifnum\MATpluq@rows=\MAT_cntc
+    \repeat
+\[L = \MATdisplay\@L\qquad U = \MATdisplay\@U\]
+}
+
+\def\MATpluqprintonevalue{\xintPRaw}
+%\def\MATpluqdisplay#1{\[\MATdisplay#1\]}%
+
+%% MATH MODE MATRIX DISPLAY
+
+\makeatother
+
+\newcommand\MATdisplay [1][1.25]{\MATdisplaywith [#1]{\MATdisplayone}}
+\def\MATdisplayone {\xintSignedFrac}
+\newcolumntype\MATdisplaycoltype {c}
+\newcolumntype\MATdisplaypreamble [1]{@{}*{#1[J]}\MATdisplaycoltype@{}}
+\newcommand\MATdisplaywith [3][1.25]
+   {\left(\def\arraystretch{#1}%
+    \begin{array}{\MATdisplaypreamble {#3}}
+         \xintListWithSep {\\}
+       {\xintApply { \MAT_display_row {#2}#3}{\xintSeq {1}{#3[I]}}}
+    \end{array}\right)%
+}%
+\def\MAT_display_row #1#2#3{%
+    \xintListWithSep {&}
+     {\xintApply{ \MAT_display_one {#1}#2{#3}}{\xintSeq {1}{#2[J]}}}%
+}%
+\def\MAT_display_one #1#2#3#4{#1{#2[#3,#4]}}%
+
+\catcode`_ 8   
+
+\begin{document}\pagestyle{empty}
+\MATset\MatrixA { 3 ,-1, 5 ; 
+                  6 ,2 ,8 ; 
+                  -9, 1, 5 ; }
+
+\MATpluq\MatrixA
+
+See pluqout file.\clearpage
+
+\MATset\A {
+3, -7, 5, 0, 1, 0, 1;
+-9, -8, -2, 9, -1, 9, -4;
+4, 6, 0, -1, -2, -1, -3;
+-5, 2, -6, 7, 8, 7, 8;
+-1, -2, -1, -3, 4, 6, 0;
+7, 8, 7, 8, -5, 2, -6;
+}
+
+\MATpluq\A
+
+See pluqout file.\clearpage
+
+\MATset\A {
+2, 0, 3, 0;
+1, 0, 0, 0;
+0, 0, 4, 0;
+0, 2, 0, 1;
+}
+
+\MATpluq\A
+
+See pluqout file.\clearpage
+
+\MATset\MatrixB {
+ 3, 1, -7, 5, 0, 9, -9, 7, -5;
+ -9, -4, -8, -2, 9, 2, 8, -6, -8;
+ 4, -3, 6, 0, -1, 5, -4, -3, 4;
+ -5, 8, 2, -6, 7, -1, 1, -7, 0;
+ 3, 6, -2, -1, 8, -2, -6, 7, -7;
+ 4, 6, 3, -9, 1, -5, 0, 5, -3;
+}
+
+\MATpluq\MatrixB
+
+See pluqout file.\clearpage
+
+\MATset\MatrixC {
+  3,  1,  -7,   5,  0,  9, -9,  7,  -5;
+ -9, -4,  22, -14,  9,  2,  7, -6,  -8;
+ -6, -3,  15,  -9,  9, 11, -2,  1, -13;
+ -5,  8,   2, -18,  7, -1,  8, -7,   0;
+  4,  6, -14,   2,  1, -5,  6,  5,  -3;
+-11,  5,  17, -27, 16, 10,  6, -6, -13;
+}
+
+\MATpluq\MatrixC
+
+See pluqout file for the matrices in Maple format.\clearpage
+
+\immediate\closeout\MATout
+\end{document}

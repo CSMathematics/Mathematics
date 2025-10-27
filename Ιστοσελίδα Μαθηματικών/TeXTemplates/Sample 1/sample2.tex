@@ -1,0 +1,288 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[no-math,cm-default]{fontspec}
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+\let\calcSQRT\SQRT
+%----------------------------
+\usepackage[amsbb,lite]{mtpro2}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\usepackage{amsmath}
+\RequirePackage[left=3.00cm, right=3.00cm, top=2.00cm, bottom=3.00cm]{geometry}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Times New Roman Bold}]{Times New Roman}
+
+\font\Smallcaps="Linux Libertine O C" at 14pt
+
+\def\xroma#1{\textcolor{red!70!black}{#1}}
+
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+ xlabel style={at={(current axis.right of origin)},xshift=1.5ex, anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+
+\pgfkeys{/pgfplots/grafikh parastash/.style={\xrwma,line width=.4mm,samples=200}}
+
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+
+\pgfplotsset{compat=newest}
+
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\tkzSetUpPoint[size=7,fill=white]
+\def\xrwma{red!80!black}
+%------------- ΔΙΑΦΟΡΑ ----------
+\usepackage{etoolbox}
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{systeme}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+
+
+%------- Αρίθμιση με ελληνικά γράμματα ----------
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\usepackage{ntheorem}
+\newtheorem{theorem}{Θεώρημα}
+\usepackage{amsmath}
+\DeclareMathOperator{\Res}{Res}
+\theoremstyle{definition}
+\newtheorem{definition}{Ορισμός}
+\AtBeginDocument{\renewcommand*{\d}{\mathop{\kern0pt\mathrm{d}}\!{}}}
+
+\newcommand{\bmath}[1]{\textbf{\boldmath{#1}}}
+
+
+%----------- ΔΙΟΡΘΩΣΗ ΣΤΟ ΜΕΓΕΘΟΣ ΚΑΙ ΣΤΗ ΘΕΣΗ ΤΩΝ ΕΚΘΕΤΩΝ ΚΑΙ ΔΕΙΚΤΩΝ ---------------------
+\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt 
+}
+\makeatother
+%-------------------------------------
+
+\begin{document}
+\begin{center}
+{\textbf{\Smallcaps{\xroma{Μαθηματικες Παραστασεις}}}}
+\end{center}
+Οι δυνατότητές του \LaTeX\  φαίνονται ιδιαίτερα στη δημιουργία μαθηματικών παραστάσεων. 
+\begin{gather*}
+\sqrt{x^2+3x+2}\qquad \sum_{n=1}^{\infty}{\frac{(x-x_0)^n}{n!}}\qquad \int{e^{x^2}}\d x\qquad \prod_{k=1}^{n}{(1-k)^k }\\
+\lim_{n\to\infty}{\left(1+\frac{1}{n}\right)^n}\qquad \limsup_{n\to\infty}{A_n}=\bigcap_{n=1}^{+\infty}{\bigcup_{k=n}^{+\infty}{A_k}}\qquad \mathcal{F}\{u(x)\}(\xi)=\int_{-\infty}^{\infty}{u(x)e^{i\xi x}\d x}
+\end{gather*}
+\textbf{Math Times Professional 2} 
+\[ \sum \]
+\begin{enumerate}
+\item Αυτόματη αρίθμηση εξισώσεων ανάλογα με το κεφάλαιο ή την ενότητα.
+\begin{equation}\label{euler}
+e^{i\pi}+1=0
+\end{equation}
+\begin{equation}\label{ein}
+E=mc^2
+\end{equation}
+\item Στοίχιση μαθηματικών εκφράσεων. 
+\begin{align*}
+P(U_1)-P\left(\bigcap_{n=1}^{\infty}{U_n} \right) &=P\left( U_1\backslash \bigcap_{n=1}^{\infty}{U_n}\right)=\\
+&=P\left[\bigcup_{n=1}^{\infty}{\left( U_n\backslash U_{n+1}\right) }\right]=\\
+&=\sum_{n=1}^{\infty}{\left[P(U_n)-P(U_{n+1}) \right] }=P(U_1)-\lim_{n\to\infty}{P(U_{n})}
+\end{align*}
+\item Αλλαγή γραμμών σε μεγάλου μήκους μαθηματικές παραστάσεις.
+\begin{multline*}
+a_{100}x^{100}+a_{99}x^{99}+a_{98}x^{98}+a_{97}x^{97}+a_{96}x^{96}+\ldots\\\ldots +a_{55}x^{55}+a_{54}x^{54}+a_{53}x^{53}+a_{52}x^{52}+\ldots\\\ldots+a_{4}x^{4}+a_{3}x^{3}+a_{2}x^{2}+a_{1}x+a_{0}
+\end{multline*}
+\end{enumerate}
+\newpage
+\begin{center}
+{\Large Σχήματα}
+\end{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[pl] (-0.5,1.2) node(A){} -- (-1.5,-0.5) node(B){} 
+-- (1.5,-0.5) node(C){}--cycle;
+\tkzMarkAngle[size=4mm](B,A,C)
+\tkzMarkAngle[size=4mm](A,C,B)
+\tkzMarkAngle[size=4mm](C,B,A)
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\node at (-1.25,0.5) {$\gamma$};
+\node at (.75,0.5) {$\beta$};
+\node at (0,-0.75) {$a$};
+\end{tikzpicture}\qquad\begin{tikzpicture}
+\clip (-0.4,-0.2) rectangle (4.4,3);
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(1,2.5){A}
+\tkzDefCircle[in](A,B,C)
+\tkzGetPoint{I} \tkzGetLength{rIN}
+\tkzMarkAngle[size=.58,mark=|||](A,C,I)
+\tkzMarkAngle[size=.52,mark=|||](I,C,B)
+\tkzMarkAngle[size=.4,mark=||](C,B,I)
+\tkzMarkAngle[size=.45,,mark=||](I,B,A)
+\tkzMarkAngle[size=.38,mark=|](B,A,I)
+\tkzMarkAngle[size=.43,mark=|](I,A,C)
+\draw[red!80!black,pl](I) circle (\rIN pt);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\tkzLabelPoint[below left,xshift=1.5mm](I){$I$}
+\tkzDrawBisector(B,A,C)
+\tkzDrawBisector(C,B,A)
+\tkzDrawBisector(A,C,B)
+\tkzDrawPoints(A,B,C,I)
+\end{tikzpicture}\\\begin{tikzpicture}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){C}
+\tkzDefPoint(.7,1.3){A}
+\tkzDrawLine[add=1.4 and 1.4](A,B)
+\tkzDrawLine[add=.8 and 1](A,C)
+\tkzDrawLine[add=.9 and .7](C,B)
+\tkzDefLine[bisector](B,A,C) \tkzGetPoint{a}
+\tkzDefLine[bisector out](B,A,C) \tkzGetPoint{b}
+\tkzDefLine[bisector](A,C,B) \tkzGetPoint{c}
+\tkzDefLine[bisector out](A,C,B) \tkzGetPoint{d}
+\tkzDefLine[bisector](C,B,A) \tkzGetPoint{e}
+\tkzDefLine[bisector out](C,B,A) \tkzGetPoint{f}
+\tkzInterLL(A,a)(B,f) \tkzGetPoint{k}
+\tkzInterLL(C,c)(B,f) \tkzGetPoint{l}
+\tkzInterLL(B,e)(A,b) \tkzGetPoint{m}
+\tkzDefPointBy[symmetry=center B](A) \tkzGetPoint{s}
+\tkzDefPointBy[symmetry=center C](A) \tkzGetPoint{t}
+\tkzMarkAngle[size=.29](B,A,k)
+\tkzMarkAngle[size=.35](k,A,C)
+\tkzMarkAngle[size=.3](k,B,C)
+\tkzMarkAngle[size=.24](s,B,k)
+\tkzMarkAngle[size=.25](B,C,k)
+\tkzMarkAngle[size=.29](k,C,t)
+\draw (k)--(l)--(m)--cycle;
+\draw (A)--(k);
+\draw (B)--(m);
+\draw (C)--(l);
+\draw[pl](A)--(B)--(C)--cycle;
+\tkzDrawPoints(A,B,C,k,l,m)
+\tkzDefPointBy[projection=onto C--B](k) \tkzGetPoint{F}
+\tkzDrawCircle[color=cyan!80!black,pl](k,F)
+\tkzDefPointBy[projection=onto A--B](l) \tkzGetPoint{G}
+\tkzDrawCircle[color=cyan!80!black,pl](l,G)
+\tkzDefPointBy[projection=onto C--A](m) \tkzGetPoint{H}
+\tkzDrawCircle[color=cyan!80!black,pl](m,H)
+\tkzLabelPoint[above,yshift=1.2mm](A){$A$}
+\tkzLabelPoint[below left,xshift=-1mm](B){$B$}
+\tkzLabelPoint[below right,xshift=2.2mm,yshift=.5mm](C){$\varGamma$}
+\tkzLabelPoint[below](k){$I_a$}
+\tkzLabelPoint[left](l){$I_\gamma$}
+\tkzLabelPoint[right](m){$I_\beta$}
+\end{tikzpicture}\qquad\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$}
+,xmin=-2,xmax=2.,ymin=-1,ymax=3,x=1cm,y=1cm]
+\addplot[clip=false,domain=-1.8:1.8,grafikh parastash,orange!90!black]{x^2-.7};
+\addplot[domain=-1.8:1.8,pl,samples=200]{x^2};
+\addplot[domain=-1.5:1.5,grafikh parastash,magenta!90!black]{x^2+.7};
+\draw[pl,-latex] (axis cs:.5,.25) -- (axis cs:.5,.95);
+\draw[pl,-latex] (axis cs:.5,.25) -- (axis cs:.5,-.45);
+\draw[pl,-latex] (axis cs:-.5,.25) -- (axis cs:-.5,-.45);
+\draw[pl,-latex] (axis cs:-.5,.25) -- (axis cs:-.5,.95);
+\node at (axis cs:-.25,.5) {\footnotesize$+c$};
+\node at (axis cs:-.25,-.25) {\footnotesize$-c$};
+\node at (axis cs:.25,.5) {\footnotesize$+c$};
+\node at (axis cs:.25,-.25) {\footnotesize$-c$};
+\end{axis}
+\end{tikzpicture}\\\begin{tikzpicture}
+\draw[shift={(2.8mm,3.5mm)},style=help lines, xstep=0.5497cm,ystep=0.297cm,black!10] (0,0) grid (8.796,2.38);
+\begin{axis}[x=.7cm,y=.7cm,xtick={
+-6.28318, -4.7123889, -3.14159, -1.5708,
+1.5708, 3.14159, 4.7123889, 6.28318,7.854,9.424,10.995,12.564},
+xticklabels={
+$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $\frac{\pi}{2}$,
+$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$,$\frac{5\pi}{2}$,$3\pi$,$\frac{7\pi}{2}$,$4\pi$
+},ytick={-1.7,-.85,0.85,1.7},yticklabels={$-1$,$-0.5$,$0.5$,$1$},aks_on,xmin=-.4,xmax=13.2,
+ymin=-2.2,ymax=2.2,xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},belh ar,clip=false]
+\addplot[grafikh parastash,domain=0:2*pi]{1.7*sin(deg(x))};
+\addplot[grafikh parastash,domain=2*pi:4*pi,dashed]{1.7*sin(deg(x))};
+\end{axis}
+\node at (0.0951,1.344) {\footnotesize$O$};
+\end{tikzpicture}\\\begin{tikzpicture}[domain=0:9,x=1cm,y=2cm]
+\tkzInit[xmin=-1,xmax=7,ymin=-.5,ymax=1.2,ystep=1]
+\draw[-latex] (-1.5,0) -- coordinate (x axis mid) (10,0) node[right,fill=white] {{\footnotesize $ x $}};
+\draw[-latex] (-.8,-.2) -- (-.8,2.1) node[above,fill=white] {{\footnotesize $ y $}};
+
+\foreach \x/\y in {.5/0,1.6/1,2.7/2,3.4/3,4.6/4,5.5/5,6.4/6,7.7/7,8.5/8}{
+\foreach \t in \y{
+\draw[fill=green!15!yellow!80!black!20] (\y,0) rectangle (\y+1,{\x*sin(\x r)/5+.5});
+\draw[dashed] (\x,0)--(\x,{\x*sin(\x r)/5+.5});}}
+\foreach \x/\y in {0.5/1,1.6/2,2.7/3,8.5/\nu}{
+\node at (\x,-.2) {\scriptsize $ \xi_\y $};}
+\node at (4.6,.2) {\scriptsize $\xi_\kappa $};
+\node at (5.5,.2) {\scriptsize $\xi_{\kappa+1} $};
+\node at (-.2,-.15) {\scriptsize $ a=x_0 $};
+\node at (1,-.15) {\scriptsize $ x_1 $};
+\node at (2,-.15) {\scriptsize $ x_2 $};
+\node at (9.3,-.15) {\scriptsize $ \beta=x_\nu $};
+\node at (8,-.15) {\scriptsize $ x_{\nu-1} $};
+\node at (5.8,1) {$  y=f(x) $};
+\node at (2.8,1.5) {$  \displaystyle{\int_{a}^{\beta}f(x)\mathrm{d}x=\lim_{\nu\rightarrow\infty}\PARENS{\sum_{\kappa=1}^{\nu}f(\xi_\kappa)\varDelta x} }$};
+\draw[samples=200,line width=.4mm,green!10!yellow!50!black] plot ({\x},{\x*sin(deg(\x))/5+.5});
+\tkzText(6.5,-.15){$ \undercbrace{\rule{9mm}{0mm}}_{\varDelta x} $}
+\end{tikzpicture}
+\newpage
+\begin{center}
+{\Large Ορισμοί - Θεωρήματα}
+\end{center}
+\begin{definition}[Σειρά Fourier]
+Έστω $ E $ ο χώρος των κατά τμήματα συνεχών συναρτήσεων με πεδίο ορισμού το $ [-\pi,\pi] $ και $ f\in E $.H ακόλουθη σειρά ονομάζεται \textbf{σειρά Fourier} της $ f $ και δίνεται από τη σχέση
+\[ f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}{(a_n\cos{(nx)}+b_n\sin{(nx)})} \]
+όπου $ a_n,b_n $ με $ n=1,2,\ldots $ είναι οι συντελεστές Fourier και δίνονται από τους τύπους:
+\[ a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}{f(x)\cos{(nx)}}d x\ \ \textrm{και}\ \ b_n=\frac{1}{\pi}\int_{-\pi}^{\pi}{f(x)\sin{(nx)}}d x \]
+\end{definition}
+
+\begin{theorem}[Θεώρημα ολοκληρωτικών υπολοίπων]
+Έστω $ f $ είναι ολόμορφη πάνω και στο εσωτερικό μιας απλής κλειστής θετικά προσανατολισμένης τμηματικά λείας καμπύλης $ \gamma $ με εξαίρεση ένα πεπερασμένο πλήθος απομονωμένων ανωμάλων σημείων $ z_1,z_2\ldots,z_n $ στο εσωτερικό της $ \gamma $. Τότε
+\[
+  \frac{1}{2\pi i}\oint_\gamma\! f(z)dz = \sum_{k=1}^n\Res(f;z_k)\,.
+\]
+\end{theorem}
+
+\begin{theorem}[Θεώρημα απόκλισης του Gauss]
+Έστω $ \Omega $ ένα υποσύνολο του $ \mathbb{R}^3 $ κλειστό και φραγμένο με κατά τμήματα $ C^2 $ σύνορο $ \partial\Omega $. Τότε αν η $ f $ με πεδίο τιμών το $ \mathbb{R}^3 $ είναι $ C^1 $ συνάρτηση στο $ \Omega $ τότε ισχύει (αλλαγή)
+\[
+ \iiint_{\Omega}{\nabla f(x,y,z)dxdydz}=\oiint_{\partial\Omega}{f(x,y,z)\cdot n(x,y,z)d\sigma}
+\]
+\end{theorem}
+
+\end{document}

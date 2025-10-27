@@ -1,0 +1,1556 @@
+\documentclass[twoside,nofonts,internet,math,spyros]{frontisthrio}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{amsmath}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Tinos Bold}]{Nimbus Roman}
+\newfontfamily\scfont{Alegreya SC}
+\font\OnPar="URW Gothic-Demi" at 10pt
+\font\mymath="MyMathSymbols" at 10pt
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
+\usepackage[most]{tcolorbox}
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz,pgfplots}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\tkzSetUpPoint[size=7,fill=white]
+%-----------------------
+\usepackage{calc,tcolorbox,hyperref}
+\hypersetup{hidelinks}
+\tcbuselibrary{skins,theorems,breakable}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem,longtable}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+%\usepackage{calculator}
+%----------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+\let\Bbbk\relax
+\usepackage{enumitem}
+\usepackage{lipsum}
+\let\Bbbk\relax
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=\Large$\square$}
+
+\tikzset{>=latex}
+\newtcolorbox{mybox}[2][]{colback=white,
+colframe=red!75!black,fonttitle=\Large\bfseries,
+colbacktitle=red!20!white,coltitle=black,enhanced,breakable,sharp corners,boxrule=0.3mm,center title,boxsep=3mm,top=1mm,subtitle style={fonttitle=\normalsize\bfseries},
+title=#2,#1}
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.2pt}
+\tcbset{mysubtitle/.style={subtitle style={fontupper={\OnPar\color{black}},top=0pt,colback={white},boxrule=1pt},top=0pt}}
+
+\newtcolorbox{myleftbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-3mm,left=5mm,bottom=1mm,left skip=0mm,colbacktitle=white,colback=white,#1,sharp corners,grow to left by=0.68cm,titlerule=0.2mm,fonttitle=\OnPar}
+
+\newtcolorbox{myrightbox}[2][]{nobeforeafter, title=#2,boxrule=0pt,colframe=black,coltitle=black,right=-2mm,left skip=6mm,bottom=1mm,colbacktitle=white,colback=white,#1,leftrule=0.2mm,sharp corners,right skip=0mm,titlerule=0.2mm,fonttitle=\OnPar}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{
+\color{lightgray}{}
+}
+\fancyhead[R]{
+\color{gray} Μαθηματικά Προσανανατολισμού - Β΄ Λυκείου\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage
+}
+\fancyhead[L]{
+\color{gray}\leftmark
+}
+\fancypagestyle{plain}{%
+\fancyhf{}%
+\fancyhead[R]{\leftmark\hspace{1em}\color{lightgray}{\vline}\hspace{1em}\color{gray}\thepage}%
+}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\myitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faEdit}\ \Large$\square$]}
+\newcommand{\myplusitem}{\stepcounter{enumi}\item[\raisebox{0.5mm}{\faExclamationTriangle}\ \Large$\square$]}
+
+\newlist{arithmisi}{enumerate}{2}
+\setlist[arithmisi]{itemsep=0mm,label=\textcolor{\xrwma}{\large{\thesection}.\arabic*}}
+
+\newcommand{\eksigisi}{
+\begin{flushright}
+\vfill
+\faEdit: Σημαντική άσκηση\\
+\faExclamationTriangle: Άσκηση αυξημένης δυσκολίας
+\end{flushright}}
+
+\usepackage[labelfont={footnotesize,it,bf},font={footnotesize}]{caption}
+\usepackage{capt-of}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\ekthetesdeiktes
+
+\begin{document}
+\section{Η έννοια του διανύσματος}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{multicols}{2}
+\begin{arithmisi}[itemsep=0mm]
+\item Διάνυσμα
+\item Αρχή και πέρας
+\item Στοιχεία διανύσματος: Μέτρο - διεύθυνση - φορά
+\item Φορέας διανύσματος
+\item Μηδενικό  - Μοναδιαίο διάνυσμα
+\item Παράλληλα διανύσματα
+\item Ομόρροπα διανύσματα
+\item Αντίρροπα διανύσματα
+\item Ίσα διανύσματα
+\item Αντίθετα διανύσματα
+\end{arithmisi}
+\end{multicols}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση παράλληλων διανυσμάτων
+\item Εύρεση ομόρροπων και αντίρροπων διανυσμάτων
+\item Εύρεση ίσων και αντίθετων διανυσμάτων
+\item Υπολογισμός γωνίας διανυσμάτων
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Διάνυσμα $\vec{a}$ ή $\DianysmaBelos{AB}$
+\item Μέτρο διανύσματος $|\vec{a}|, |\DianysmaBelos{AB}|$
+\item Μηδενικό διάνυσμα : $\vec{a}=\vec{0}$
+\item Μοναδιαίο διάνυσμα : $|\vec{a}|=1$
+\item Ομόρροπα διανύσματα : $\DianysmaBelos{a}\upuparrows \DianysmaBelos{\beta}$
+\item Αντίρροπα διανύσματα : $\DianysmaBelos{a}\updownarrows \DianysmaBelos{\beta}$
+\item Γωνία διανυσμάτων :\\
+$\theta=\GwniaDianysmatwn{a}{\beta},\ \theta\in[0,\pi]$
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+\eksigisi
+\newpage
+\section{Πρόσθεση διανυσμάτων}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Πρόσθεση διαδοχικών διανυσμάτων
+\item Κανόνας παραλληλογράμμου
+\item Αφαίρεση διανυσμάτων
+\item Διάνυσμα θέσης
+\item Σημείο αναφοράς
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Ιδιότητες πρόσθεσης
+\item Διαφορά διανυσματικών ακτίνων
+\item Μέτρο αθροίσματος - Τριγωνική ανισότητα
+\item Κριτήριο ομόρροπων και αντίρροπων διανυσμάτων
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Πρόσθεση και αφαίρεση διαδοχικών διανυσμάτων
+\myitem Πρόσθεση και αφαίρεση διανυσμάτων με κανόνα παραλληλογράμμου
+\myitem Απόδειξη διανυσματικής ισότητας
+\item Απόδειξη ότι δύο σημεία ταυτίζονται
+\item Μέσο ευθύγραμμου τμήματος
+\myitem Απόδειξη ότι ένα τετράπλευρο είναι παραλληλόγραμμο
+\item Προσδιορισμός σημείου
+\myitem Τριγωνική ανισότητα
+\item Κριτήριο ομόρροπων και αντίρροπων διανυσμάτων
+\item Γεωμετρικοί τόποι
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Πρόσθεση διανυσμάτων $\vec{a}+\vec{\beta}$
+\item Αφαίρεση διανυσμάτων : $\vec{a}-\vec{\beta}$
+\item Διάνυσμα θέσης σημείου $ M $: $ \DianysmaBelos{OM} $
+όπου $O$ σημείο αναφοράς.
+\item Τριγωνική ανισότητα:\\$\left||\vec{a}|-|\vec{\beta}|\right|\leq\left|\vec{a}+\vec{\beta}\right|\leq |\vec{a}|+|\vec{\beta}|$
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{p{4.5cm}p{4.5cm}}
+\begin{tikzpicture}
+\Dianysma[color=black]{0,0}{2.7,.5}{E}{Z}
+\Dianysma{0,0}{1.5,1}{A}{B}
+\Dianysma{1.5,1}{2.7,.5}{C}{D}
+\tkzLabelPoint[above](A){$O$}
+\tkzLabelPoint[above](B){$A$}
+\tkzLabelPoint[right](D){$B$}
+\node at (.7,.77){$\vec{a}$};
+\node at (2.2,1.04){$\vec{\beta}$};
+\node at (1.4,-.05){$\vec{a}+\vec{\beta}$};
+\node at (1,1.8){$\vec{a}+\vec{\beta}=\overrightarrow{OA}+\overrightarrow{AB}=\overrightarrow{OB}$};
+\end{tikzpicture}\captionof{figure}{Άθροισμα διαδοχικών διανυσμάτων} &
+\begin{tikzpicture}
+\Dianysma[color=black]{0,0}{3.4,1.5}{E}{Z}
+\Dianysma{0,0}{1,1.5}{A}{B}
+\Dianysma{0,0}{2.4,0}{C}{D}
+\draw[dashed] (2.4,0)--(3.4,1.5);
+\draw[dashed] (1,1.5)--(3.4,1.5);
+\tkzLabelPoint[left](A){$O$}
+\tkzLabelPoint[above](B){$A$}
+\tkzLabelPoint[right](D){$B$}
+\tkzLabelPoint[right,yshift=1mm](Z){$M$}
+\node at (.2,.77){$\vec{a}$};
+\node at (1.2,-.33){$\vec{\beta}$};
+\node[rotate=23.8] at (1.4,.9){$\vec{a}+\vec{\beta}$};
+\node at (1.9,2.1){$\vec{a}+\vec{\beta}=\overrightarrow{OA}+\overrightarrow{OB}=\overrightarrow{OM}$};
+\end{tikzpicture}\captionof{figure}{Κανόνας παραλληλογράμμου}
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\Dianysma[color=black]{0,0}{2.7,.5}{E}{Z}
+\Dianysma{0,0}{1.5,1}{A}{B}
+\Dianysma{1.5,1}{2.7,.5}{C}{D}
+\tkzLabelPoint[above](A){$O$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[right](D){$A$}
+\node at (.7,.77){$\vec{a}$};
+\node at (2.2,1.04){$-\vec{\beta}$};
+\node at (1.4,-.05){$\vec{a}-\vec{\beta}$};
+\node at (4,-1){$\vec{a}-\vec{\beta}=\vec{a}+\left( -\vec{\beta}\right)$};
+\Dianysma[color=black]{7.4,0}{6,1.5}{O}{P}
+\Dianysma{5,0}{6,1.5}{K}{L}
+\Dianysma{5,0}{7.4,0}{M}{N}
+\draw[dashed] (7.4,0)--(8.4,1.5);
+\draw[dashed] (6,1.5)--(8.4,1.5)node[xshift=2mm,yshift=2mm](S){$M$};
+\tkzLabelPoint[left](K){$O$}
+\tkzLabelPoint[above](L){$A$}
+\tkzLabelPoint[right](N){$B$}
+\node at (5.2,.77){$\vec{a}$};
+\node at (6.2,-.33){$\vec{\beta}$};
+\node[rotate=-49] at (7.1,.77){$\vec{a}-\vec{\beta}$};
+\end{tikzpicture}\captionof{figure}{Διαφορά διαδοχικών διανυσμάτων - Κανόνας παραλληλογράμμου}
+\end{center}
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη}  \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} Αντιμεταθετική & $ \vec{a}+\vec{\beta}=\vec{\beta}+\vec{a} $  \\ 
+\rule[-2ex]{0pt}{5.5ex} Προσεταιριστική & $ \vec{a}+\left( \vec{\beta}+\vec{\gamma}\right) =\left( \vec{a}+\vec{\beta}\right) +\vec{\gamma} $  \\ 
+\rule[-2ex]{0pt}{5.5ex} Ουδέτερο στοιχείο & $ \vec{a}+\vec{0}=\vec{a} $  \\ 
+\rule[-2ex]{0pt}{5.5ex} Αντίθετα διανύσματα & $ \vec{a}+(-\vec{a})=\vec{0} $  \\
+\hline 
+\end{tabular}\captionof{table}{Ιδιότητες πρόσθεσης διανυσμάτων}\end{center}
+\end{mybox}
+
+\newpage
+\section{Γινόμενο αριθμού με διάνυσμα}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Γινόμενο αριθμού με διάνυσμα
+\item Γραμμικός συνδυασμός διανυσμάτων
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Ιδιότητες γινομένου
+\item Συνθήκη παραλληλίας
+\item Διανυσματική ακτίνα μέσου
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Απόδειξη - Έλεγχος παραλληλίας διανυσμάτων
+\myitem Απόδειξη διανυσματικής ισότητας
+\item Συνθήκη παραλληλίας διανυσμάτων
+\item Συνευθειακά σημεία
+\myitem Διανυσματική ακτίνα μέσου
+\item Προσδιορισμός αριθμού
+\myitem Γραμμικός συνδυασμός
+\item Γεωμετρικοί τόποι
+\item Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=4mm]
+\item Γινόμενο αριθμού με διάνυσμα: $\lambda \vec{a}$
+\item Συνθήκη παραλληλίας: $\vec{a}\parallel\vec{\beta}\Leftrightarrow \vec{a}=\lambda\vec{\beta}$
+\item $\vec{a}\upuparrows\vec{\beta}\Leftrightarrow \vec{a}=\lambda\vec{\beta}\ \ \textrm{και}\ \ \lambda>0$
+\item $\vec{a}\updownarrows\vec{\beta}\Leftrightarrow \vec{a}=\lambda\vec{\beta}\ \ \textrm{και}\ \ \lambda<0$
+\item Διανυσματική ακτίνα μέσου: $\DianysmaBelos{OM}=\frac{\DianysmaBelos{OA}+\DianysmaBelos{OB}}{2}$
+\item Γραμμικός συνδυασμός: $\vec{\gamma}=\lambda\vec{a}+\mu\vec{\beta}$
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5ex} Επιμεριστική (ως προς αριθμό) & $ \lambda\left( \vec{a}\pm\vec{\beta}\right)=\lambda\vec{a}\pm\lambda\vec{\beta} $ \\ 
+\rule[-2ex]{0pt}{4.5ex} Επιμεριστική (ως προς διάνυσμα) & $ \left( \lambda\pm\mu\right)\vec{a}=\lambda\vec{a}\pm\mu\vec{a} $ \\
+\rule[-2ex]{0pt}{4ex} Προσεταιριστική & $ \lambda\left( \mu\vec{a}\right)=\left( \lambda\mu\right)\vec{a} $ \\ 
+\rule[-2ex]{0pt}{4ex} Μηδενικό γινόμενο & $ \lambda\vec{a}=\vec{0}\Leftrightarrow \lambda=0 \ \textrm{ή}\ \vec{a}=\vec{0} $ \\ 
+\rule[-2ex]{0pt}{4ex} Πρόσημο γινομένου & $ \left( -\lambda\vec{a}\right)=(-\lambda)\vec{a}=-\left( \lambda\vec{a}\right)  $ \\ 
+\rule[-2ex]{0pt}{4ex} Νόμος διαγραφής (ως προς διάνυσμα) & Αν $ \lambda\vec{a}=\mu\vec{a} $ και $ \vec{a}\neq0 $ τότε $ \lambda=\mu $ \\ 
+\rule[-2ex]{0pt}{4ex} Νόμος διαγραφής (ως προς αριθμό) & Αν $ \lambda\vec{a}=\lambda\vec{\beta} $ και $ \lambda\neq0 $ τότε $ \vec{a}=\vec{\beta} $\\ 
+\hline 
+\end{longtable}\captionof{table}{Ιδιότητες γινομένου αριθμού με διάνυσμα}
+\end{center} 
+\end{mybox}
+
+\newpage
+\section{Συντεταγμένες διανύσματος}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Συντεταγμένες διανύσματος
+\item Συντελεστής διεύθυνσης διανύσματος
+\item Ορίζουσα διανυσμάτων
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Ίσα διανύσματα
+\item Οριζόντια - Κατακόρυφα διανύσματα
+\item Συντεταγμένες γραμμικού συνδυασμού
+\item Συντεταγμένες μέσου τμήματος
+\item Συντεταγμένες διανύσματος με γνωστά άκρα
+\item Συνθήκες παραλληλίας διανυσμάτων
+\item Μέτρο διανύσματος
+\item Απόσταση σημείων
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Ίσα διανύσματα
+\item Οριζόντια - Κατακόρυφα διανύσματα
+\myitem Συντεταγμένες αθροίσματος - Γινομένου - Γραμμικού συνδυασμού διανυσμάτων
+\myitem Συντεταγμένες μέσου τμήματος
+\myitem Υπολογισμός διανύσματος με γνωστά άκρα
+\myitem Παράλληλα διανύσματα
+\myitem Υπολογισμός συντελεστή διεύθυνσης διανύσματος
+\myitem Υπολογισμός μέτρου διανύσματος
+\myitem Υπολογισμός απόστασης σημείων
+\item Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Συντεταγμένες διανύσματος: $\vec{a}=(x,y)$
+\item Συντελεστής διεύθυνσης: $\lambda=\frac{y}{x}$
+\item Ίσα διανύσματα:\\
+$\vec{a}=\vec{\beta}\Rightarrow x_1=x_2\ \ \textrm{και}\ \ y_1=y_2$
+\item Ορίζουσα διανυσμάτων:\\$\det(\vec{a},\vec{\beta})=\begin{vmatrix}
+x_1 & y_1 \\
+x_2 & y_2
+\end{vmatrix}=x_1y_2-x_2y_1$
+\item Συντεταγμένες μέσου:\\$x_M=\frac{x_A+x_B}{2}$ και $y_M=\frac{y_A+y_B}{2}$
+\item Διάνυσμα με γνωστά άκρα:\\
+$\DianysmaBelos{AB}=(x_B-x_A,y_B-y_A)$
+\item Παράλληλα διανύσματα:
+\begin{rlist}
+\item $\vec{a}\parallel\vec{\beta}\Leftrightarrow \lambda_{\vec{a}}=\lambda_{\vec{\beta}}$
+\item $\vec{a}\parallel\vec{\beta}\Leftrightarrow \det(\vec{a},\vec{\beta})=0$
+\end{rlist}
+\item Μέτρο διανύσματος: $|\vec{a}|=\sqrt{x^2+y^2}$
+\item Απόσταση μεταξύ σημείων:\\
+$AB=|\DianysmaBelos{AB}|=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$
+\end{enumerate}
+\end{multicols}
+\newpage
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{cc}
+\hline \rule[-2ex]{0pt}{5.5ex} \textbf{Πράξη} & \textbf{Συντεταγμένες} \\ 
+\hhline{==} \rule[-2ex]{0pt}{5.5ex} Άθροισμα & $ \vec{a}+\vec{\beta}=(x_1,y_1)+(x_2,y_2)=(x_1+x_2,y_1+y_2) $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Πολλαπλασιασμός & $ \lambda\vec{a}=\lambda(x_1,y_1)=(\lambda x_1,\lambda y_1) $ \\ 
+\rule[-2ex]{0pt}{5.5ex} Γραμμικός συνδυασμός & $ \lambda\vec{a}+\mu\vec{\beta}=\lambda(x_1,y_1)+\mu(x_2,y_2)=(\lambda x_1+\mu x_2,\lambda y_1+\mu y_2) $ \\ 
+\hline 
+\end{tabular}\captionof{table}{Πράξεις μεταξύ διανυσμάτων και συντεταγμένες}
+\end{center} 
+\end{mybox}
+
+\newpage
+\section{Εσωτερικό γινόμενο}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Εσωτερικό γινόμενο διανυσμάτων
+\item Εσωτερικό γινόμενο - Αναλυτικός τύπος
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Ιδιότητες εσωτερικού γινομένου
+\item Συνθήκη καθετότητας διανυσμάτων
+\item Συνημίτονο γωνίας διανυσμάτων
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Υπολογισμός εσωτερικού γινομένου
+\myitem Έλεγχος καθετότητας διανυσμάτων
+\item Μέτρο γραμμικού συνδυασμού
+\item Γραμμικός συνδυασμός ίσος με μηδέν
+\myitem Υπολογισμός γωνίας - συνημιτόνου γωνίας διανυσμάτων
+\item Γεωμετρικοί τόποι
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Εσωτερικό γινόμενο: \\$\vec{a}\cdot\vec{\beta}=|\vec{a}||\vec{\beta}|\syn{\GwniaDianysmatwn{a}{\beta}}$
+\item Αναλυτικός τύπος γινομένου:\\$\vec{a}\cdot\vec{\beta}=x_1x_2+y_1y_2$
+\item Συνημίτονο γωνίας διανυσμάτων:\\$ \syn{\theta}=\dfrac{\vec{a}\cdot\vec{\beta}}{|\vec{a}||\vec{\beta}|}=\dfrac{x_1x_2+y_1y_2}{\sqrt{x_1^2+y_1^2}\sqrt{x_2^2+y_2^2}} $
+\item Κάθετα διανύσματα:\\Αν $ \vec{a}\bot\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=0 $ και $ \lambda_{\vec{a}}\lambda_{\vec{\beta}}=-1 $
+\end{enumerate}
+\end{multicols}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{longtable}{cc}
+\hline \rule[-2ex]{0pt}{5ex} \textbf{Ιδιότητα} & \textbf{Συνθήκη} \\ 
+\hhline{==}  \rule[-2ex]{0pt}{5ex} \textbf{Ομόρροπα διανύσματα} & Αν $ \vec{a}\upuparrows\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=|\vec{a}|\cdot|\vec{\beta}| $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Αντίρροπα διανύσματα} & Αν $ \vec{a}\updownarrows\vec{\beta}\Leftrightarrow \vec{a}\cdot\vec{\beta}=-|\vec{a}|\cdot|\vec{\beta}| $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Τετράγωνο διανύσματος} & $ \vec{a}^2=|\vec{a}|^2 $ \\ 
+\rule[-2ex]{0pt}{5ex} \textbf{Αντιμεταθετική} & $ \vec{a}\cdot\vec{\beta}=\vec{\beta}\cdot\vec{a} $ \\
+\rule[-2ex]{0pt}{5ex} \textbf{Προσεταιριστική} & $ \mu(\vec{a}\cdot\vec{\beta})=(\mu\vec{\beta})\cdot\vec{a} $ \\
+\rule[-2ex]{0pt}{5ex} \textbf{Επιμεριστική} & $ \vec{a}\cdot\left( \vec{\beta}+\vec{\gamma}\right) =\vec{a}\cdot\vec{\beta}+\vec{a}\cdot\vec{\gamma} $ \\
+\hline 
+\end{longtable}\captionof{table}{Ιδιότητες εσωτερικού γινομένου}
+\end{center} 
+\end{mybox}
+\newpage
+\section{Εξίσωση ευθείας}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση γραμμής
+\item Γωνία ευθείας
+\item Συντελεστής διεύθυνσης ευθείας
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση ευθείας - Είδη ευθειών
+\item Συντελεστής διεύθυνσης ευθείας που διέρχεται από δύο σημεία.
+\item Συνθήκες παραλληλίας και καθετότητας ευθειών
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\item  Εξίσωση γραμμής
+\myitem Γωνία - Συντελεστής διεύθυνσης
+\item Συντελεστής διεύθυνσης με δύο γνωστά σημεία της ευθείας
+\myitem Εξίσωση ευθείας
+\begin{todolist}
+\item με σημείο και συντελεστή
+\item με γνωστά δύο σημεία της
+\end{todolist}
+\myitem Συνθήκες για παράλληλες και κάθετες ευθείες
+\myitem Κοινά σημεία ευθειών - Σημεία τομής με άξονες
+\myitem Σημείο που ανήκει σε ευθεία
+\item Ευθεία με γνωστό συντελεστή και ιδιότητα
+\item Ευθεία με γνωστό σημείο και ιδιότητα
+\myitem Στοιχεία τριγώνου
+\myplusitem Γεωμετρικοί τόποι
+\myitem Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Γωνία ευθείας $ 0\degree\leq\omega< 180\degree $
+\item Οριζόντια ευθεία $ \varepsilon\parallel x'x\Leftrightarrow \omega=0\degree $
+\item Κατακόρυφη ευθεία: $ \varepsilon\parallel y'y\Leftrightarrow \omega=90\degree $
+\item Πλάγια ευθεία $ 0\degree<\omega<180\degree $
+\item Συντελεστής διεύθυνσης: $ \lambda=\ef{\omega} $
+\item Συντελεστής ευθείας με δύο σημεία:\\
+$ \lambda_{AB}=\dfrac{y_2-y_1}{x_2-x_1} $
+\item Εξίσωση ευθείας: $ y-y_0=\lambda(x-x_0) $
+\item Εξίσωση οριζόντιας ευθείας: $ y=y_0 $
+\item Εξίσωση κατακόρυφης ευθείας: $ x=x_0 $
+\item Ευθεία που διέρχεται από το $ O(0,0) $ :\\$ y=\lambda x $
+\item Παράλληλες ευθείες: $ \varepsilon_1\parallel\varepsilon_2\Leftrightarrow \lambda_1=\lambda_2 $
+\item Κάθετες ευθείς: $ \varepsilon_1\bot\varepsilon_2\Leftrightarrow \lambda_1\lambda_2=-1 $
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+
+\newpage
+\section{Γενική μορφή εξίσωση ευθείας}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Γενική εξίσωση ευθείας
+\item Παράλληλο και κάθετο διάνυσμα με ευθεία $Ax+By+\varGamma=0\ ,\ A\neq 0,B\neq 0$
+\end{arithmisi}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Έλεγχος αν μια εξίσωση παριστάνει ευθεία.
+\item Ευθείες που διέρχονται από το ίδιο σημείο
+\item Σχετική θέση ευθειών
+\myitem Παράλληλες και κάθετες ευθείες με τη χρήση του παράλληλου ή κάθετου διανύσματος.
+\myitem Γωνία δύο ευθειών
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Γενική εξίσωση ευθείας:\\$Ax+By+\varGamma=0\ ,\ A\neq 0\ \textrm{ή}\ B\neq 0$
+\item Συντελεστής διεύθυνσης:  $\lambda=-\frac{A}{B}$
+\item Διάνυσμα παράλληλο στην ευθεία:\\ $\vec{\delta}=(B,-A) $ ή $\vec{\delta}=(-B,A) $
+\item Διάνυσμα κάθετο στην ευθεία:\\$\vec{n}=(A,B)$ ή $\vec{n}=(-A,-B)$
+\item Συνημίτονο γωνίας δύο ευθειών $\varepsilon_1,\varepsilon_2 $:\\$\syn{\GwniaDianysmatwn{\delta_1}{\delta_2}}=\frac{\vec{\delta_1}\cdot \vec{\delta_2}}{|\vec{\delta_1}||\vec{\delta_2}|}$ όπου $\vec{\delta_1}\parallel\varepsilon_1$ και $\vec{\delta_2}\parallel\varepsilon_2$
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+
+\newpage
+\section{Απόσταση σημείου από ευθεία - Εμβαδόν τριγώνου}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=1,raster equal height]
+\begin{myleftbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Απόσταση σημείου από ευθεία
+\item Απόσταση μεταξύ παράλληλων ευθειών
+\item Εμβαδόν τριγώνου
+\end{arithmisi}
+\end{myleftbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Απόσταση σημείου από ευθεία
+\myitem Απόσταση μεταξύ παράλληλων ευθειών
+\myitem Εμβαδόν τριγώνου
+\item Μεσοπαράλληλη δύο παράλληλων ευθειών
+\item Διχοτόμος γωνίας
+\myplusitem Προσδιορισμός εξίσωσης ευθείας
+\item Γεωμετρικός τόπος
+\item Ελάχιστη απόσταση σημείου ευθείας από σταθερό σημείο
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0mm]
+\item Απόσταση σημείου $ M(x_0,y_0) $ από ευθεία $ Ax+By+\varGamma=0 $:\\$ d(M,\varepsilon)=\dfrac{|Ax_0+By_0+\varGamma|}{\sqrt{A^2+B^2}} $
+\item Απόσταση μεταξύ παράλληλων ευθειών $\varepsilon_1: y=\lambda x+\beta_1$ και $\varepsilon_2: y=\lambda x+\beta_2$: $d(\varepsilon_1,\varepsilon_2)=\dfrac{|\beta_1-\beta_2|}{\sqrt{1+\lambda^2}}$
+\item Εμβαδόν τριγώνου $AB\varGamma$:\\$(AB\varGamma)=\frac{1}{2}\left|\det(\DianysmaBelos{AB},\DianysmaBelos{A\varGamma})\right|=0$
+\end{enumerate}
+\end{multicols}
+\end{mybox}
+
+\newpage
+\section{Κύκλος}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση κύκλου
+\item Μοναδιαίος κύκλος
+\item Εφαπτομένη κύκλου
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση κύκλου με κέντρο την αρχή των αξόνων
+\item Εξίσωση κύκλου με κέντρο $K(x_0,y_0)$
+\item Η εξίσωση $x^2+y^2+Ax+By+\varGamma=0$
+\item Εξίσωση εφαπτομένης
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εξίσωση κύκλου με κέντρο $O(0,0)$
+\myitem Εξίσωση κύκλου με κέντρο $K(x_0,y_0)$
+\item Σχετική θέση σημείου και κύκλου
+\myitem Η εξίσωση $x^2+y^2+Ax+By+\varGamma=0$
+\item Περιγεγραμμένος κύκλος
+\item Σχετική θέση ευθείας και κύκλου
+\item Γεωμετρικές εφαρμογές
+\item Κύκλος που εφάπτεται με τους άξονες.
+\myitem Εξίσωση εφαπτομένης κύκλου με κέντρο $O(0,0)$
+\myitem Εξίσωση εφαπτομένης κύκλου με κέντρο $K(x_0,y_0)$ και
+\begin{todolist}[itemsep=0mm,leftmargin=5mm]
+\item σημείο επαφής $A(x_1,y_1)$
+\item γνωστό συντελεστή διεύθυνσης $\lambda$
+\item γνωστό εξωτερικό σημείο $M(x_0,y_0)$
+\end{todolist}
+\item Σχετική θέση κύκλων - Κοινές εφαπτομένες κύκλων
+\myplusitem Γεωμετρικοί τόποι
+\myplusitem Ελάχιστη και μέγιστη απόσταση
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols*}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Εξίσωση κύκλου με κέντρο $O(0,0)$:\\ $x^2+y^2=\rho^2$
+\item Εξίσωση κύκλου με κέντρο $K(x_0,y_0)$:\\ $(x-x_0)^2+(y-y_0)^2=\rho^2$
+\item Γενική εξίσωση κύκλου:\\
+$x^2+y^2+Ax+By+\varGamma=0$
+\begin{alist}
+\item αν $ A^2+B^2-4\varGamma>0 $ η εξίσωση παριστάνει κύκλο με κέντρο $K\left(-\frac{A}{2},-\frac{B}{2}\right)$ και ακτίνα $\rho=\frac{\sqrt{A^2+B^2-4\varGamma}}{2}$
+\item αν $ A^2+B^2-4\varGamma=0 $ η εξίσωση παριστάνει σημείο $K\left(-\frac{A}{2},-\frac{B}{2}\right)$
+\item αν $ A^2+B^2-4\varGamma>0 $ η εξίσωση δεν αντιστοιχεί σε σημείο
+\end{alist}
+\item Εξίσωση εφαπτομένης κύκλου με κέντρο $O(0,0)$:\\
+$xx_1+yy_1=\rho^2$
+\item Εξίσωση εφαπτομένης κύκλου με κέντρο $K(x_0,y_0)$:
+\[\DianysmaBelos{AM}\cdot \DianysmaBelos{AK}=0\] 
+όπου $M(x,y)$ σημείο της ευθείας και $A(x_1,y_1)$ το σημείο επαφής 
+\end{enumerate}
+\end{multicols*}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{p{5cm}cp{5.5cm}}
+\begin{tikzpicture}
+\begin{axis}[xmin=-2.2,xmax=2.2,ymin=-2.2,ymax=2.2,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:1,1.24);
+\coordinate (B) at (axis cs:0,1.6);
+\coordinate (C) at (axis cs:1.6,0);
+\coordinate (D) at (axis cs:0,-1.6);
+\coordinate (E) at (axis cs:-1.6,0);
+\node at(axis cs:.7,.6){\footnotesize$\rho$};
+\end{axis}
+\draw[pl,\xrwma] (O) circle (1.6);
+\draw[pl] (A)--(O);
+\tkzDrawPoints(A,O,B,C,D,E)
+\tkzLabelPoint[right,yshift=2mm](A){\footnotesize$M(x,y)$}
+\tkzLabelPoint[below left](O){\footnotesize$O$}
+\tkzLabelPoint[above,xshift=-1.4mm](B){\footnotesize$B(0,\rho)$}
+\tkzLabelPoint[below,fill=white,inner sep=.1mm,yshift=-1mm](C){\footnotesize$A(\rho,0)$}
+\tkzLabelPoint[below,xshift=-.7mm](D){\footnotesize$\varDelta(0,-\rho)$}
+\tkzLabelPoint[below,fill=white,inner sep=.1mm,yshift=-1mm](E){\footnotesize$\varGamma(-\rho,0)$}
+\node[fill=white,inner sep=0.3mm] at (2.2,1.3){\footnotesize$x^2+y^2=\rho^2$};
+\end{tikzpicture}\captionof{figure}{Κύκλος με κέντρο $ O(0,0) $}
+ &  &  \begin{tikzpicture}
+ \begin{axis}[xmin=-.7,xmax=3.4,ymin=-.7,ymax=3.7,x=1cm,y=1cm, ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+ aks_on,belh ar]
+ \coordinate (O) at (axis cs:1,1);
+ \coordinate (A) at (axis cs:2,2.24);
+ \node at(axis cs:1.2,1.7){\footnotesize$\rho$};
+ \end{axis}
+ \draw[pl,\xrwma] (O) circle (1.6);
+ \draw[pl] (A)--(O);
+ \tkzDrawPoints(A,O)
+ \tkzLabelPoint[above,xshift=4mm](A){\footnotesize$M(x,y)$}
+ \tkzLabelPoint[below](O){\footnotesize$K(x_0,y_0)$}
+ \node[fill=white,inner sep=.1mm] at (2.2,3.8){\footnotesize$(x-x_0)^2+(y-y_0)^2=\rho^2$};
+ \tkzLabelPoint[below left](0.7,.7){\footnotesize$O$}
+ \end{tikzpicture}\captionof{figure}{Κύκλος με κέντρο $ K(x_0,y_0) $}\\
+\begin{tikzpicture}
+\begin{axis}[xmin=-2.2,xmax=2.2,ymin=-1.8,ymax=2.2,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:-1,1);
+\coordinate (M) at (axis cs:-1.5,.5);
+\node at(axis cs:-.3,.6){\footnotesize$\rho$};
+\addplot[domain=-2.2:2,pl,\xrwma] {x+2};
+\end{axis}
+\tkzMarkRightAngle[size=.2](M,A,O)
+\draw[pl] (O) circle (1.4142);
+\draw[pl] (A)--(O);
+\tkzDrawPoints(A,O)
+\tkzLabelPoint[left,yshift=2mm](A){\footnotesize$A(x_1,y_1)$}
+\tkzLabelPoint[below left](O){\footnotesize$O$}
+\node[fill=white, inner sep=0.2mm] at (2.2,1){$ xx_1+yy_1=\rho^2 $};
+\end{tikzpicture}\captionof{figure}{Εφαπτομένη κύκου με κέντρο $ O(0,0) $} & &  \begin{tikzpicture}
+\begin{axis}[xmin=-.5,xmax=4.2,ymin=-.5,ymax=3.2,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\coordinate (O) at (axis cs:2.5,1);
+\coordinate (A) at (axis cs:1.5,2);
+\coordinate (M) at (axis cs:.5,1);
+\node at(axis cs:2.2,1.6){\footnotesize$\rho$};
+\addplot[domain=-.3:3,pl,\xrwma] {(x-2.5)+3};
+\end{axis}
+\tkzMarkRightAngle[size=.2](M,A,O)
+\draw[pl] (O) circle (1.4142);
+\draw[pl] (A)--(O);
+\draw[\xrwma,-latex,plm] (A)--(M);
+\draw[-latex,plm] (A)--(O);
+\tkzDrawPoints(A,O,M)
+\tkzLabelPoint[left,yshift=2.3mm,fill=white,inner sep=0.2mm](A){\footnotesize$A(x_1,y_1)$}
+\tkzLabelPoint[below](O){\footnotesize$K(x_0,y_0)$}
+\tkzLabelPoint[above left,fill=white,inner sep=0.3mm,xshift=-1mm](M){\footnotesize$M(x,y)$}
+\node at (4.5,3.5){$ \DianysmaBelos{AM}\cdot\DianysmaBelos{AK}=0 $};
+\end{tikzpicture}\captionof{figure}{Εφαπτομένη κύκλου με κέντρο $ K(x_0,y_0) $}
+\end{tabular} 
+\end{center}
+\end{mybox}
+
+\newpage
+\section{Παραβολή}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Ορισμός παραβολής
+\item Εστία παραβολής
+\item Άξονας παραβολής
+\item Διευθετούσα παραβολής
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση παραβολής με άξονα $x'x'$ και $y'y'$
+\item Εξίσωση εφαπτομένης παραβολής
+\item Ανακλαστική ιδιότητα παραβολής
+\item Γεωμετρικοί τόποι
+\item Γεωμετρικές εφαρμογές
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση στοιχείων παραβολής (Εξίσωση, εστία, διευθετούσα, παράμετρος $p$)
+\myitem Εξίσωση εφαπτομένης
+\item Προσδιορισμός σημείων
+\item Κοινές εφαπτ. κύκλου και παραβολής
+\item Ανακλαστική ιδιότητα παραβολής
+\item Σχετική θέση παραβολής και ευθείας
+\myplusitem Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols*}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Παραβολή με εστία στον άξονα $x'x$
+\begin{alist}
+\item Εξίσωση: $y^2=2px$
+\item Εστία: $E\left(\frac{p}{2},0\right)$
+\item Διευθετούσα: $x=-\frac{p}{2}$
+\end{alist}
+\item Παραβολή με εστία στον άξονα $y'y$
+\begin{alist}
+\item Εξίσωση: $x^2=2py$
+\item Εστία: $E\left(0,\frac{p}{2}\right)$
+\item Διευθετούσα: $y=-\frac{p}{2}$
+\end{alist}
+\item Εξίσωση εφαπτομένης παραβολής στο σημείο $A(x_1,y_1)$
+\begin{alist}
+\item και άξονα $x'x$: $yy_1=p(x+x_1)$
+\item και άξονα $y'y$: $xx_1=p(y+y_1)$
+\end{alist}
+\end{enumerate}
+\end{multicols*}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{p{4.8cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2.2,xmax=2.7,ymin=-1.,ymax=3.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma] {x^2};
+\addplot [domain=-2:2] {-0.25};
+\coordinate (M) at (axis cs:1.2, 1.44);
+\coordinate (E) at (axis cs:0, .25);
+\coordinate (P) at (axis cs:1.2, -.25);
+\coordinate (O) at (axis cs:0, 0);
+\draw[plm] (E) -- (M) -- (P);
+\tkzLabelPoint[above left, xshift=-.7ex,fill=white,inner sep=.2mm](E){$E\left(0, \frac{p}{2}\right)$}
+\tkzLabelPoint[right](M){$M(x,y)$}
+\tkzLabelPoint[below](P){$P$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\end{axis}
+\node at (0,.75){\footnotesize$\delta$};
+\tkzDrawPoints(E,M,O,P)
+\node at (1,4.5){$x^2=2py$};
+\end{tikzpicture}\captionof{figure}{Παραβολή με εστία στον άξονα $ y'y $} & \hspace{.3cm} & \begin{tikzpicture}
+\begin{axis}[
+xmin=-1,xmax=3.5,ymin=-2.,ymax=2.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\addplot [grafikh parastash,domain=0:2.9,\xrwma] {sqrt(x)};
+\addplot [grafikh parastash,domain=0:2.9,\xrwma] {-sqrt(x)};
+\coordinate (M) at (axis cs:2, 1.4142);
+\coordinate (E) at (axis cs:.25,0);
+\coordinate (P) at (axis cs:-.25, 1.4142);
+\coordinate (O) at (axis cs:0, 0);
+\draw[plm] (E) -- (M) -- (P);
+\tkzLabelPoint[below right, yshift=-1mm,xshift=1.5mm,fill=white,inner sep=.1mm](E)
+{$E\left(\frac{p}{2},0\right)$}
+\tkzLabelPoint[above left=.1mm](M){$M(x,y)$}
+\tkzLabelPoint[left](P){$P$}
+\end{axis}
+\node at (0.5,.4){\footnotesize$\delta$};
+\draw (0.75,4.2) -- (0.75,0.3);
+\tkzDrawPoints(E,M,O,P)
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\node at (2.2,4.5){$y^2=2px$};
+\end{tikzpicture}\captionof{figure}{Παραβολή με εστία στον άξονα $ x'x$}  \\ 
+\end{tabular}
+\begin{tabular}{p{4.8cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-1,ymax=3,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\addplot [grafikh parastash,black,domain=-1.5:1.5] {x^2};
+\addplot [domain=-1.7:1.7,\xrwma,pl] {2.4*x-1.44};
+\coordinate (M) at (axis cs:1.2, 1.44);
+\coordinate (E) at (axis cs:0, .25);
+\coordinate (O) at (axis cs:0, 0);
+\tkzLabelPoint[above left, xshift=-.7ex,fill=white,inner sep=.2mm](E){$E$}
+\tkzLabelPoint[left,fill=white,inner sep=.1mm,xshift=-1mm](M){$A(x_1,y_1)$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\node at (axis cs:1.8,2.3){$\varepsilon$};
+\end{axis}
+\tkzDrawPoints(E,M)
+\end{tikzpicture}\captionof{figure}{Εφαπτομένη παραβολής στο σημείο $ A(x_1,y_1) $} & &
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-1.2,xmax=3.5,ymin=-2.,ymax=2.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\addplot [grafikh parastash,domain=0:2.9] {sqrt(x)};
+\addplot [grafikh parastash,domain=0:2.9] {-sqrt(x)};
+\addplot[domain=-1.2:3] {0.5*x+0.5};
+\addplot[domain=.3:2.4,grafikh parastash,\xrwma] {-2*x+3};
+\coordinate (M) at (axis cs:1,1);
+\coordinate (E) at (axis cs:.25,0);
+\coordinate (P) at (axis cs:3,1);
+\coordinate (O) at (axis cs:0, 0);
+\draw[pl] (E) -- (M) -- (P);
+\tkzLabelPoint[below right, yshift=-1mm,xshift=1.5mm,fill=white,inner sep=.1mm](E)
+{$E\left(\frac{p}{2},0\right)$}
+\tkzLabelPoint[left,xshift=-2mm,yshift=1mm](M){$M(x,y)$}
+\end{axis}
+\tkzDrawPoints(E,M,O)
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\node at (3.8,4){$\varepsilon$};
+\node at (4.4,3){$x$};
+\node at (2,4){$\zeta$};
+\draw (M)+(233:.33cm) arc (233:297:.33cm);
+\draw (M)+(297:.39cm) arc (297:360:.39cm);
+\node at (2.2,2.4){$\varphi_1$};
+\node at (2.9,2.7){$\varphi_2$};
+\end{tikzpicture}\captionof{figure}{Ανακλαστική ιδιότητα παραβολής} \\
+\end{tabular}
+\end{center}
+\end{mybox}
+
+
+\newpage
+\section{Έλλειψη}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Ορισμός έλλειψης
+\item Εστίες έλλειψης
+\item Άξονες έλλειψης
+\item Κορυφές έλλειψης
+\item Εκκεντρότητα
+\item Εστιακή απόσταση
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση έλλειψης με μεγάλο άξονα $x'x'$ και $y'y'$
+\item Εξίσωση εφαπτομένης έλλειψης
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση στοιχείων έλλειψης (εξίσωση, παράμετροι, εστίες, άξονες, κορυφές)
+\item Υπολογισμός εκκεντρότητας - συμπεράσματα
+\item Εφαπτομένες έλλειψης
+\item Ανακλαστική ιδιότητα έλλειψης
+\item Γεωμετρικοί τόποι
+\item Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols*}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Παράμετροι $ a,\beta,\gamma\ \ (a>\gamma) $:
+\begin{rlist}
+\item Μήκος μεγάλου άξονα: $ AA'=2a $.
+\item Μήκος μικρού άξονα: $ BB'=2\beta $.
+\item Εστιακή απόσταση: $ EE'=2\gamma $.
+\item $ \beta=\sqrt{a^2-\gamma^2} $
+\end{rlist}
+\item Έλλειψη με εστίες στον άξονα $x'x$
+\begin{alist}
+\item Εξίσωση: $\frac{x^2}{a}+\frac{y^2}{\beta^2}=1$
+\item Εστίες: $E\left(\gamma,0\right)$ και $ E'(-\gamma,0) $
+\end{alist}
+\item Έλλειψη με εστίες στον άξονα $y'y$
+\begin{alist}
+\item Εξίσωση: $\frac{y^2}{a}+\frac{x^2}{\beta^2}=1$
+\item Εστίες: $E\left(0,\gamma\right)$ και $ E'(0,-\gamma) $
+\end{alist}
+\item Εξίσωση εφαπτομένης έλλειψης στο σημείο $A(x_1,y_1)$
+\begin{alist}[leftmargin=5mm]
+\item και εστίες στον άξονα $x'x$: $\frac{xx_1}{a^2}+\frac{yy_1}{\beta^2}=1$
+\item και εστίες στον άξονα $y'y$: $\frac{yy_1}{a^2}+\frac{xx_1}{\beta^2}=1$
+\end{alist}
+\item Εκκεντρότητα $ \varepsilon=\frac{\gamma}{a}<1 $
+\end{enumerate}
+\end{multicols*}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{p{6cm}cp{3.3cm}}
+\begin{tikzpicture}
+\begin{axis}[xmin=-4,xmax=4.2,ymin=-2.5,ymax=2.8,x=.7cm,y=.7cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\end{axis}
+\draw[pl,\xrwma] (2.8,1.75) ellipse (2.5cm and 1.6cm);
+\pgfmathsetmacro{\a}{2.5}
+\pgfmathsetmacro{\b}{1.6}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\tkzDefPoint(2.8-0.7*c,1.75){E'}
+\tkzDefPoint(2.8+0.7*c,1.75){E}
+\node (M) at ($(2.8,1.75)+(65:2.5 and 1.6)$) {};
+\node (N) at ($(2.8,1.75)+(245:2.5 and 1.6)$) {};
+\tkzDrawSegments(M,N)
+\tkzDrawSegments[plm](E,M M,E')
+\tkzLabelPoint[above right](E){$E$}
+\tkzLabelPoint[above right=-.9mm](M){$M(x,y)$}
+\tkzLabelPoint[above](E'){$E'$}
+\node[below] at (E) {\footnotesize$(\gamma,0)$};
+\node[below] at (E') {\footnotesize$(-\gamma,0)$};
+\node (A') at ($(2.8,1.75)+(180:2.5 and 1.6)$) {};
+\node (A) at ($(2.8,1.75)+(0:2.5 and 1.6)$) {};
+\node (B) at ($(2.8,1.75)+(90:2.5 and 1.6)$) {};
+\node (B') at ($(2.8,1.75)+(270:2.5 and 1.6)$) {};
+\tkzDrawPoints[size=7,fill=white](E,E',M,N,A,A',B,B')
+\tkzLabelPoint[above,xshift=2.2mm](A){$A$}
+\tkzLabelPoint[above,xshift=-2.2mm](A'){$A'$}
+\tkzLabelPoints[right=1mm,fill=white,inner sep=.2mm](B,B')
+\tkzLabelPoints[below left=1mm,fill=white,inner sep=.2mm](N)
+\node at (2.8,4.5) {$\frac{x^2}{a^2}+\frac{y^2}{\beta^2}=1$};
+\node[fill=white,inner sep=.2mm] at (2.6,1.55) {$O$};
+\end{tikzpicture}\captionof{figure}{Έλλειψη με εστέις στον άξονα $ x'x $}  & \hspace{1cm} & \begin{tikzpicture}
+\begin{axis}[xmin=-2,xmax=2.2,ymin=-2.5,ymax=2.8,x=.7cm,y=.7cm,
+ticks=none,xlabel={\scriptsize $ x $},ylabel={\scriptsize $ y $},
+aks_on,belh ar]
+\end{axis}
+\draw[pl,\xrwma] (1.4,1.75) ellipse (0.9cm and 1.6cm);
+\pgfmathsetmacro{\a}{1.6}
+\pgfmathsetmacro{\b}{0.9}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\tkzDefPoint(1.4,1.75-0.7*c){E'}
+\tkzDefPoint(1.4,1.75+0.7*c){E}
+\node (M) at ($(1.4,1.75)+(25:0.9 and 1.6)$) {};
+\tkzDrawSegments[plm](E,M M,E')
+\tkzLabelPoint[left=1mm,fill=white,inner sep=.3mm](E'){\footnotesize $E'(0,-\gamma)$}
+\tkzLabelPoint[above right=-.9mm](M){$M(x,y)$}
+\tkzLabelPoint[left=1mm,fill=white,inner sep=.3mm](E){\footnotesize $E(0,\gamma)$}
+\node (A') at ($(1.4,1.75)+(180:0.9 and 1.6)$) {};
+\node (A) at ($(1.4,1.75)+(0:0.9 and 1.6)$) {};
+\node (B) at ($(1.4,1.75)+(90:0.9 and 1.6)$) {};
+\node (B') at ($(1.4,1.75)+(270:0.9 and 1.6)$) {};
+\tkzDrawPoints[size=7,fill=white](E,E',M,A,A',B,B')
+\tkzLabelPoint[below right](A){$A$}
+\tkzLabelPoint[below left](A'){$A'$}
+\tkzLabelPoint[right=1mm,fill=white,inner sep=.3mm](B){$B$}
+\tkzLabelPoint[right=1mm,fill=white,inner sep=.3mm](B'){$B'$}
+\node at (1.4,4.5) {$\frac{y^2}{a^2}+\frac{x^2}{\beta^2}=1$};
+\node at (1.2,1.55) {$O$};
+\end{tikzpicture}\captionof{figure}{Έλλειψη με εστίες στον άξονα $ y'y $}  \\ 
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{p{4.5cm}cp{4.5cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[xmin=-2,xmax=2.2,ymin=-1.6,ymax=1.8,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\pgfmathsetmacro{\a}{1.8}
+\pgfmathsetmacro{\b}{1.2}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\draw[pl](axis cs:0,0) ellipse (\a cm and \b cm);
+\addplot [domain=-.5:2.8,\xrwma,pl] {-.43*x+1.43};
+\coordinate (E) at (axis cs:\c, 0);
+\coordinate (E') at (axis cs:-\c, 0);
+\node (A) at (axis cs:1,.99) {};
+\node at (axis cs:-.7,1.5){$\varepsilon$};
+\end{axis}
+\tkzLabelPoint[above](E){$E$}
+\tkzLabelPoint[above right=-.9mm](A){$A(x_1,y_1)$}
+\tkzLabelPoint[above](E'){$E'$}
+\tkzDrawPoints[size=7,fill=white](E,E',A)
+\node at (1.74,1.4) {$O$};
+\end{tikzpicture}\captionof{figure}{Εφαπτομένη έλλειψης στο σημείο $ A(x_1,y_1) $}  & &\begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-1.5,ymax=1.7,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{1.7}
+\pgfmathsetmacro{\b}{1.3}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\draw[\xrwma!30,pl] (axis cs:0,0) ellipse (\a cm and \b cm);
+\draw[\xrwma!50,pl] (axis cs:0,0) ellipse (\a cm and 0.75*\b cm);
+\draw[\xrwma!70,pl] (axis cs:0,0) ellipse (\a cm and 0.5*\b cm);
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\tkzLabelPoint[below](E){\footnotesize$E$}
+\tkzLabelPoint[below](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\end{axis}
+\draw[fill=\xrwma!30] (0.1,4) circle (.07) node[right]{\scriptsize{$\varepsilon=0.64$}};
+\draw[fill=\xrwma!50] (1.5,4) circle (.07) node[right]{\scriptsize{$\varepsilon=0.81$}};
+\draw[fill=\xrwma!70] (3,4) circle (.07) node[right]{\scriptsize{$\varepsilon=0.92$}};
+\tkzDrawPoints(E,E')
+\end{tikzpicture}\captionof{figure}{Εκκεντρότητα} 	&  & \begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-1.5,ymax=1.7,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,]
+\pgfmathsetmacro{\a}{1.7}
+\pgfmathsetmacro{\b}{1.3}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\draw[pl] (axis cs:0,0) ellipse (\a cm and \b cm);
+\draw[pl] (axis cs:0,0) ellipse (0.8*\a cm and 0.8*\b cm);
+\draw[pl] (axis cs:0,0) ellipse (0.6*\a cm and 0.6*\b cm);
+\draw[pl] (axis cs:0,0) ellipse (0.4*\a cm and 0.4*\b cm);
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Όμοιες ελλείψεις}  \\ 
+\end{tabular} 
+\begin{tabular}{p{5cm}cp{1cm}p{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[xmin=-2,xmax=2.2,ymin=-1.5,ymax=1.8,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\pgfmathsetmacro{\a}{1.8}
+\pgfmathsetmacro{\b}{1.2}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\draw[pl](axis cs:0,0) ellipse (\a cm and \b cm);
+\coordinate (E) at (axis cs:\c, 0);
+\coordinate (E') at (axis cs:-\c, 0);
+\node (A) at (axis cs:1,.99) {};
+\node (B) at (axis cs:-1,.99) {};
+\node (C) at (axis cs:-1,-.99) {};
+\node (D) at (axis cs:1,-.99) {};
+\end{axis}
+\tkzDrawSegments(A,B B,C C,D D,A A,C B,D)
+\tkzLabelPoint[above](E){$E$}
+\tkzLabelPoint[above right=-.9mm](A){$M(x,y)$}
+\tkzLabelPoint[above left=-.9mm](B){$M_1(-x,y)$}
+\tkzLabelPoint[below left=-.9mm](C){$M_2(-x,-y)$}
+\tkzLabelPoint[below right=-.9mm](D){$M_3(x,-y)$}
+\tkzLabelPoint[above](E'){$E'$}
+\tkzDrawPoints[size=7,fill=white](E,E',A,B,C,D)
+\node[fill=white,inner sep=.2mm] at (1.74,1.3) {$O$};
+\end{tikzpicture}\captionof{figure}{Συμμετρικά σημεία πάνω σε έλλειψη} 
+ &&& \begin{tikzpicture}
+\begin{axis}[xmin=-2,xmax=2.2,ymin=-1.55,ymax=1.8,x=1cm,y=1cm,
+ticks=none,xlabel={\footnotesize $ x $},ylabel={\footnotesize $ y $},
+aks_on,belh ar]
+\pgfmathsetmacro{\a}{1.8}
+\pgfmathsetmacro{\b}{1.2}
+\pgfmathsetmacro{\c}{sqrt(\a^2 - \b^2)}
+\draw[pl](axis cs:0,0) ellipse (\a cm and \b cm);
+\addplot [domain=-.5:2.8] {-.43*x+1.43};
+\addplot [domain=.25:1.3,\xrwma,pl] {2.32*x-1.325};
+\coordinate (E) at (axis cs:\c, 0);
+\coordinate (E') at (axis cs:-\c, 0);
+\node (A) at (axis cs:1,.99) {};
+\node at (axis cs:-.7,1.5){$\varepsilon$};
+\node at (axis cs:.55,-.8){$\zeta$};
+\end{axis}
+\draw (A)+(204:.33cm) arc (204:247:.33cm);
+\draw (A)+(247:.37cm) arc (247:290:.37cm);
+\tkzDrawSegments(E,A A,E')
+\tkzLabelPoint[above right,xshift=-1.3mm](E){$E$}
+\tkzLabelPoint[above right,yshift=-2mm](A){$M(x,y)$}
+\tkzLabelPoint[above](E'){$E'$}
+\tkzDrawPoints[size=7,fill=white](E,E',A)
+\node at (1.74,1.35) {$O$};
+\end{tikzpicture}\captionof{figure}{Ανακλαστική ιδιότητα έλλειψης}  \\ 
+\end{tabular} 
+\end{center}
+\end{mybox}
+
+\newpage
+\section{Υπερβολή}
+\begin{flushright}
+\faCalendar* Ημερομηνία: .......................
+\end{flushright}
+\begin{mybox}[mysubtitle]{Πίνακας Ύλης}
+\begin{tcbraster}[raster columns=2,raster equal height]
+\begin{myleftbox}{Ορισμοί - Βασικές έννοιες\ \ \faBook}
+\begin{arithmisi}[itemsep=0mm]
+\item Ορισμός υπερβολής
+\item Εστίες υπερβολής
+\item Άξονες υπερβολής
+\item Κορυφές υπερβολής
+\item Εκκεντρότητα
+\item Εστιακή απόσταση
+\end{arithmisi}
+\end{myleftbox}
+\begin{myrightbox}{Θεωρήματα - Ιδιότητες\ \ \faTools}
+\begin{arithmisi}[itemsep=0mm]
+\item Εξίσωση υπερβολής με μεγάλο άξονα $x'x'$ και $y'y'$
+\item Εξίσωση εφαπτομένης υπερβολής
+\end{arithmisi}
+\end{myrightbox}
+\end{tcbraster}
+\tcbsubtitle{Είδη ασκήσεων - Τι πρέπει να γνωρίζω\ \ \faPen}
+\begin{multicols}{2}
+\begin{todolist}[itemsep=0mm]
+\myitem Εύρεση στοιχείων υπερβολής (Εξίσωση, παράμετροι, εστίες, κορυφές, άξονας)
+\item Ασύμπτωτες υπερβολής
+\item Υπολογισμός εκκεντρότητας - συμπεράσματα
+\item Εξίσωση εφαπτομένης υπερβολής
+\item Ανακλαστική ιδιότητα υπερβολής
+\item Γεωμετρικοί τόποι
+\item Γεωμετρικές εφαρμογές
+\end{todolist}
+\end{multicols}
+\tcbsubtitle{Τυπολόγιο - Συμβολισμοί\ \ \faFile*}
+\begin{multicols*}{2}
+\begin{enumerate}[itemsep=0mm,leftmargin=5mm]
+\item Παράμετροι $ a,\beta,\gamma\ \ (a<\gamma) $:
+\begin{alist}
+\item Μήκος άξονα: $ AA'=2a $.
+\item Εστιακή απόσταση: $ EE'=2\gamma $.
+\item $ \beta=\sqrt{\gamma^2-a^2} $
+\end{alist}
+\item Εστίες στον άξονα $ x'x $
+\begin{alist}[leftmargin=5mm]
+\item Εξίσωση:\quad $ \frac{x^2}{a^2}-\frac{y^2}{\beta^2}=1 $.
+\item Εστίες:\quad $ E\left(\gamma,0 \right), E'(-\gamma,0) $.
+\item Ασύμπτωτες ευθείες:\\ $ y=\frac{\beta}{a}x,\ y=-\frac{\beta}{a}x $.
+\end{alist}
+\item Εστίες στον άξονα $ y'y $
+\begin{alist}[leftmargin=5mm]
+\item Εξίσωση:\quad $ \frac{y^2}{a^2}-\frac{x^2}{\beta^2}=1 $.
+\item Εστίες:\quad $ E\left(0,\gamma\right), E'(0,-\gamma) $.
+\item Ασύμπτωτες ευθείες:\\ $ y=\frac{a}{\beta}x,\ y=-\frac{a}{\beta}x $.
+\end{alist}
+\item Εξίσωση εφαπτομένης υπερβολής στο $ A(x_1,y_1) $
+\begin{alist}[leftmargin=5mm]
+\item και εστίες στον άξονα $ x'x $: $ \frac{xx_1}{a^2}-\frac{yy_1}{\beta^2}=1 $
+\item και εστίες στον άξονα $ y'y $: $ \frac{yy_1}{a^2}-\frac{xx_1}{\beta^2}=1 $
+\end{alist}
+\item Εκκεντρότητα:\quad $ \varepsilon=\frac{\gamma}{a}>1 $.
+\end{enumerate}
+\end{multicols*}
+\tcbsubtitle{Πίνακες - Σχήματα\ \ \faTable\ - \faChartLine}
+\begin{center}
+\begin{tabular}{p{4.5cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2.2,xmax=2.5,ymin=-2.4,ymax=2.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*cosh(x)}, {.7*sinh(x)});
+%\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*sinh(x)}, {.7*cosh(x)});
+%\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*sinh(x)}, {-.7*cosh(x)});
+\coordinate (M) at (axis cs:1.08,0.82);
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:.7, 0);
+\coordinate (A') at (axis cs:-.7, 0);
+\draw[plm,black] (E) -- (M) -- (E');
+\tkzLabelPoint[below right](E){\footnotesize$E\left(\gamma,0\right)$}
+\tkzLabelPoint[right](M){$M(x,y)$}
+\tkzLabelPoint[below left,xshift=2mm](E'){\footnotesize$E'\left(-\gamma,0\right)$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[above right=1mm,fill=white,inner sep=.4mm](A'){$A'$}
+\end{axis}
+\tkzDrawPoints(E,M,E',A,A')
+\node[fill=white,inner sep=.2mm] at (2.2,4){$\frac{x^2}{a^2}-\frac{y^2}{\beta^2}=1$};
+\end{tikzpicture}\captionof{figure}{Υπερβολή με εστίες στον άξονα $ x'x $}  & \hspace{1cm} & \begin{tikzpicture}
+\begin{axis}[
+xmin=-2.2,xmax=2.5,ymin=-2.4,ymax=2.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+%\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*cosh(x)}, {.7*sinh(x)});
+%\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*sinh(x)}, {.7*cosh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*sinh(x)}, {-.7*cosh(x)});
+\coordinate (M) at (axis cs:0.82,1.08);
+\coordinate (E) at (axis cs:0,\c);
+\coordinate (E') at (axis cs:0,-\c);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:0, 0.7);
+\coordinate (A') at (axis cs:0, -0.7);
+\draw[plm] (E) -- (M) -- (E');
+\tkzLabelPoint[above,fill=white,yshift=2mm,inner sep=.1mm](E){\footnotesize$E\left(0,\gamma\right)$}
+\tkzLabelPoint[below right,xshift=-.5mm,yshift=.2mm](M){$M(x,y)$}
+\tkzLabelPoint[below,fill=white,yshift=-2mm,inner sep=.1mm](E'){\footnotesize$E'\left(0,-\gamma\right)$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[left=1mm,fill=white,inner sep=.2mm](A){$A$}
+\tkzLabelPoint[left=1mm,fill=white,inner sep=.2mm](A'){$A'$}
+\end{axis}
+\tkzDrawPoints(E,M,E',A,A')
+\node[fill=white,inner sep=.2mm] at (0.5,2.8){$\frac{y^2}{a^2}-\frac{x^2}{\beta^2}=1$};
+\end{tikzpicture}\captionof{figure}{Υπερβολή με εστίες στον άξονα $ y'y $} \\ 
+\end{tabular}
+\begin{tabular}{p{4.5cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2.2,xmax=2.5,ymin=-2.4,ymax=2.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [domain=-2:2]{-\x};
+\addplot [domain=-2:2]{\x};
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (B) at (axis cs:\a, \b);
+\coordinate (A) at (axis cs:-\a, \b);
+\coordinate (D) at (axis cs:-\a, -\b);
+\coordinate (C) at (axis cs:\a, -\b);
+\draw (A)--(B)--(C)--(D)--cycle;
+\tkzLabelPoint[below right](E){\footnotesize$E$}
+\tkzLabelPoint[below left](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\varGamma$}
+\tkzLabelPoint[below](D){$\varDelta$}
+\node at (axis cs:-1,2.1){$ y=-\frac{\beta}{a}x $};
+\node at (axis cs:1,2.1){$ y=\frac{\beta}{a}x $};
+\end{axis}
+\tkzDrawPoints(E,E')
+\end{tikzpicture}\captionof{figure}{Ασύμπτωτες υπερβολής με εστίες στον άξονα $ x'x $ - Ορθογώνιο βάσης} & \hspace{.5cm} & \begin{tikzpicture}
+\begin{axis}[
+xmin=-2.2,xmax=2.5,ymin=-2.4,ymax=2.5,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [domain=-2:2]{-\x};
+\addplot [domain=-2:2]{\x};
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*sinh(x)}, {.7*cosh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*sinh(x)}, {-.7*cosh(x)});
+\coordinate (E) at (axis cs:0,\c);
+\coordinate (E') at (axis cs:0,-\c);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (B) at (axis cs:\a, \b);
+\coordinate (A) at (axis cs:-\a, \b);
+\coordinate (D) at (axis cs:-\a, -\b);
+\coordinate (C) at (axis cs:\a, -\b);
+\draw (A)--(B)--(C)--(D)--cycle;
+\tkzLabelPoint[above,fill=white,yshift=2mm,inner sep=.1mm](E){\footnotesize$E$}
+\tkzLabelPoint[below,fill=white,yshift=-2mm,inner sep=.1mm](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[left](D){$\varDelta$}
+\tkzLabelPoint[right](C){$\varGamma$}
+\end{axis}
+\tkzDrawPoints(E,E')
+\node at (4,3.3){$ y=\frac{a}{\beta}x $};
+\node at (.3,3.3){$ y=-\frac{a}{\beta}x $};
+\end{tikzpicture}\captionof{figure}{Ασύμπτωτες υπερβολής με εστίες στον άξονα $ y'y $ - Ορθογώνιο βάσης} \\ 
+\end{tabular}
+\begin{tabular}{p{4.5cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-1.8,ymax=2.2,x=.9cm,y=.9cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,black,domain=-1.5:1.5] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,black,domain=-1.5:1.5] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [domain=-.5:1.8,\xrwma,pl] {1.317*x-0.6};
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:1.08,.82);
+\tkzLabelPoint[below right](E){\footnotesize$E$}
+\tkzLabelPoint[below left](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[left,fill=white,inner sep=.2mm,xshift=-1.8mm](A){$A(x_1,y_1)$}
+\node at (axis cs: 1.7,2){$\varepsilon$};
+\end{axis}
+\tkzDrawPoints(E,E',A)
+\end{tikzpicture}\captionof{figure}{Εφαπτομένη υπερβολής στο σημείο $ A(x_1,y_1) $} & \hspace{.5cm} & \begin{tikzpicture}
+\begin{axis}[
+xmin=-2.2,xmax=2.4,ymin=-1.8,ymax=2,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma!30] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma!30] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma!50] ({.7*cosh(x)}, {.5*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma!50] ({-.7*cosh(x)}, {.5*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma!70] ({.7*cosh(x)}, {.3*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7,\xrwma!70] ({-.7*cosh(x)}, {.3*sinh(x)});
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\tkzLabelPoint[below right](E){\footnotesize$E$}
+\tkzLabelPoint[below left](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\end{axis}
+\draw[fill=\xrwma!30] (.3,3.4) circle (.07) node[right,fill=white,inner sep=.2mm,xshift=1mm]{\scriptsize{$\varepsilon=\sqrt{2}$}};
+\draw[fill=\xrwma!50] (1.8,3.4) circle (.07) node[right,fill=white,inner sep=.2mm,xshift=1mm]{\scriptsize{$\varepsilon=1.23$}};
+\draw[fill=\xrwma!70] (3.3,3.4) circle (.07) node[right,fill=white,inner sep=.2mm,xshift=1mm]{\scriptsize{$\varepsilon=1.09$}};
+\tkzDrawPoints(E,E')
+\end{tikzpicture}\captionof{figure}{Εκκεντρότητα}  \\ 
+\end{tabular}
+\begin{tabular}{p{4.5cm}cp{4.5cm}}
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-2.,ymax=2.2,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*sinh(x)}, {.7*cosh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*sinh(x)}, {-.7*cosh(x)});
+\addplot [domain=-2:2]{-\x};
+\addplot [domain=-2:2]{\x};
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (F) at (axis cs:0,\c);
+\coordinate (F') at (axis cs:0,-\c);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (B) at (axis cs:\a, \b);
+\coordinate (A) at (axis cs:-\a, \b);
+\coordinate (D) at (axis cs:-\a, -\b);
+\coordinate (C) at (axis cs:\a, -\b);
+\draw (A)--(B)--(C)--(D)--cycle;
+\tkzLabelPoint[below right](E){\footnotesize$E_1$}
+\tkzLabelPoint[below left](E'){\footnotesize$E_1'$}
+\tkzLabelPoint[above,fill=white,inner sep=.2mm,yshift=1mm](F){\footnotesize$E_2$}
+\tkzLabelPoint[below,fill=white,inner sep=.2mm,yshift=-1mm](F'){\footnotesize$E_2'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[above left,fill=white,inner sep=.1mm](A){\footnotesize$A$}
+\tkzLabelPoint[above right,fill=white,inner sep=.1mm](B){\footnotesize$B$}
+\tkzLabelPoint[below right,fill=white,inner sep=.1mm](C){\footnotesize$\varGamma$}
+\tkzLabelPoint[below left,fill=white,inner sep=.1mm](D){\footnotesize$\varDelta$}
+\end{axis}
+\tkzDrawPoints(E,E',F,F')
+\end{tikzpicture}\captionof{figure}{Συζυγείς υπερβολές}	&  & \begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-2.,ymax=2.2,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [domain=-2:2]{-\x};
+\addplot [domain=-2:2]{\x};
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (B) at (axis cs:\a, \b);
+\coordinate (C) at (axis cs:\a, -\b);
+\tkzLabelPoint[below right](E){\footnotesize$E$}
+\tkzLabelPoint[below left](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\node[fill=white,inner sep=.2mm] at (axis cs:0,1.7){$ x^2-y^2=a^2 $};
+\end{axis}
+\tkzMarkRightAngle(C,O,B)
+\tkzDrawPoints(E,E')
+\end{tikzpicture}\captionof{figure}{Ισοσκελής υπερβολή} \\ 
+\end{tabular} 
+\begin{tabular}{p{5cm}cp{5cm}} 
+\begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-2,ymax=2.2,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,black,domain=-1.5:1.5] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,black,domain=-1.5:1.5] ({-.7*cosh(x)}, {.7*sinh(x)});
+\addplot [domain=-.5:1.8,\xrwma,pl] {1.317*x-0.6};
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (A) at (axis cs:1.08,.82);
+\tkzLabelPoint[below right](E){\footnotesize$E$}
+\tkzLabelPoint[below left](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[left,fill=white,inner sep=.2mm,xshift=-1.7mm,yshift=2mm](A){$A(x_1,y_1)$}
+\node at (axis cs: .5,.33){{\footnotesize $\varphi_1$}};
+\node[fill=white,inner sep=.2mm] at (axis cs: .8,.07){{\footnotesize $\varphi_2$}};
+\node at (axis cs: 1.7,2){$\varepsilon$};
+\end{axis}
+\draw[pl] (E) -- (A)--(E');
+\draw (A)+(201.6:.5) arc (201.6:232:.5);
+\draw (A)+(232:.6) arc (232:263.67:.6);
+\tkzDrawPoints(E,E',A)
+\end{tikzpicture}\captionof{figure}{Ανακλαστική ιδιότητα}
+& & \begin{tikzpicture}
+\begin{axis}[
+xmin=-2,xmax=2.2,ymin=-2.,ymax=2.2,x=1cm,y=1cm,ticks=none,xlabel={$ x $},
+ylabel={$ y $},aks_on,belh ar,
+%scale only axis,unit vector ratio={2 1},
+]
+\pgfmathsetmacro{\a}{.7}
+\pgfmathsetmacro{\b}{.7}
+\pgfmathsetmacro{\c}{sqrt(\a^2 + \b^2)}
+\addplot [grafikh parastash,domain=-1.7:1.7] ({.7*cosh(x)}, {.7*sinh(x)});
+\addplot [grafikh parastash,domain=-1.7:1.7] ({-.7*cosh(x)}, {.7*sinh(x)});
+\coordinate (E) at (axis cs:\c,0);
+\coordinate (E') at (axis cs:-\c,0);
+\coordinate (O) at (axis cs:0, 0);
+\coordinate (B) at (axis cs:-1,.714);
+\coordinate (A) at (axis cs:1,.714);
+\coordinate (D) at (axis cs:1,-.714);
+\coordinate (C) at (axis cs:-1,-.714);
+\draw (A)--(B)--(C)--(D)--cycle;
+\tkzLabelPoint[below right](E){\footnotesize$E$}
+\tkzLabelPoint[below left](E'){\footnotesize$E'$}
+\tkzLabelPoint[below left=1mm,fill=white,inner sep=.2mm](O){$O$}
+\tkzLabelPoint[above,fill=white,inner sep=.3mm,yshift=1mm](A){\footnotesize$M$}
+\tkzLabelPoint[above,fill=white,inner sep=.3mm,yshift=1mm](B){\footnotesize$M_1$}
+\tkzLabelPoint[below,fill=white,inner sep=.3mm,yshift=-1mm](C){\footnotesize$M_2$}
+\tkzLabelPoint[below,fill=white,inner sep=.3mm,yshift=-1mm](D){\footnotesize$M_3$}
+\end{axis}
+\tkzDrawPoints(E,E',F,F',A,B,C,D)
+\end{tikzpicture}\captionof{figure}{Συμετρικά σημεία πάνω σε υπερβολή} \\ 
+\end{tabular}
+\end{center}
+\end{mybox}
+
+\end{document}

@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{amsmath,mtpro2}
+\usepackage{pythontex,graphicx,tikz}
+
+\begin{document}
+\begin{pycode}
+from sympy import *
+var("x, y")
+binomials = []
+for m in range(2, 6):
+	binomials.append((x + y)**m)
+print(r"\begin{align*}")
+for expr in binomials:
+	print(r"%s &= %s\\" % (latex(expr), latex(expand(expr))))
+print(r"\end{align*}")
+\end{pycode}
+
+text
+\begin{pycode}
+functions = [sin(x), cos(x), log(x),x**3*exp(x)]
+print(r"\begin{align*}")
+for f in functions:
+	d = Integral(f, x)
+	print(latex(d) + "&=" + latex(d.doit()) + r"\\")
+print(r"\end{align*}")
+\end{pycode}
+
+
+\begin{sympycode}
+m = Matrix([[1,1], [0,1]])
+\end{sympycode}
+The matrix in inline is small: $\sympy{m}$
+The matrix in an equation is of normal size:
+\[ \sympy{m} \]
+\begin{tikzpicture}
+\draw (1,1)--(3,4);
+\end{tikzpicture}
+\end{document}

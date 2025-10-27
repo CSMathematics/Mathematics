@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,
+%mathimatika,
+gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage{xparse,mathimatika}
+
+% Define the Riemann Sum command
+\NewDocumentCommand{\drawRiemannSum}{mmmm}{
+    % Calculate rectangle width
+    \pgfmathsetmacro{\dx}{(#4 - #3)/#2}
+
+    % Draw rectangles (left Riemann sum)
+    \foreach \i in {0,...,\numexpr#2-1} {
+      \pgfmathsetmacro{\xleft}{#3 + \i * \dx}
+      \addplot [
+           ybar,
+           bar width=\dx,
+           fill=red!10,
+           draw=black,
+         ] coordinates {(\xleft + \dx/2, {#1})};
+    }
+}
+
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[width=6.5cm,height=7cm,
+xmin=-5,xmax=5,
+ymin=-3,ymax=3,
+xtick={-5,-3,...,5},
+ytick={-3,-2,...,3},
+xlabel={\footnotesize $ x $},
+ylabel={\footnotesize $ y $},
+belh ar,aks_on,
+restrict y to domain=-20:20,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+minor tick num=4]
+\drawRiemannSum{4*x/(x^2+1)}{25}{-3}{3}
+\addplot[thick, red!80!black,line width=0.4mm, domain=-4:4,samples=200] {4*x/(x^2+1)};
+\end{axis}
+\end{tikzpicture}
+
+
+\end{document}

@@ -1,0 +1,111 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{amsmath}
+\usepackage{tikz,pgfplots}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl,pythontex}
+
+
+\begin{document}
+\begin{sympycode}
+from sympy import *
+x = symbols('x')
+t = symbols('t')
+y = symbols('y')
+k=Integral(t**2,(t,0,x))
+\end{sympycode}
+\[ \sympy{k}=\sympy{k.doit()} \]
+\begin{sympycode}
+n = symbols('n', integer=True)
+d=Sum(1/(n**2),(n,1,oo))
+\end{sympycode}
+\[ \sympy{d}=\sympy{d.doit()} \]
+\begin{sympycode}
+s=Eq(x,x**2-5*x+4)
+sl=solve(s,dict=true)
+\end{sympycode}
+The solutions of the equation $ \sympy{s} $ are $ x=\sympy{sl[0][x]} $ and $ x=\sympy{sl[1][x]} $.\\
+\begin{sympycode}
+i=Integral(log(x),x)
+\end{sympycode}
+The integral is equal to \[ \sympy{i}=\sympy{i.doit()} \]
+\begin{sympycode}
+from sympy import Symbol, residue, cot, I
+x = Symbol("x")
+a=residue(-pi*cot(pi*x)/(x**2+1), x, I)+residue(-pi*cot(pi*x)/(x**2+1), x, -I)
+\end{sympycode}
+\[ \sum_{n=1}^{\infty}{\frac{1}{n^2+1}}=\sympy{a} \]
+\begin{sympycode}
+eq1=Eq(x**3-4*x**2+5*x-2,0)
+sol1=solve(eq1,dict=true)
+i1=Integral(sin(t),(t,x,x**3))
+i2=integrate(log(x**2+1),(x,-1,1))
+p=Product(1-1/n**2,(n,2,16))
+\end{sympycode}
+\[ x^3-4x^2+5x-2=0\Rightarrow x=\sympy{sol1[0][x]},x=\sympy{sol1[1][x]} \]
+\[ \int_{x}^{x^3}{\sin{t}\d t}=\sympy{i1.doit()} \]
+\[ \int_{-1}^{1}{\log{\left(x^2+1\right)}\d x}=\sympy{i2} \]
+\begin{sympycode}
+f = log(x*y)
+step1 = Integral(f, x, y)
+step2 = Integral(Integral(f, x).doit(), y)
+step3 = step2.doit()
+sum1 = Sum(1/n**2,(n,1,oo))
+\end{sympycode}
+\begin{align*}
+\sympy{step1} &= \sympy{step2} \\
+&= \sympy{step3}
+\end{align*}
+\begin{sympycode}
+x = symbols('x')
+sineq = Eq(asin(x/2)-pi/3,0)
+pytex.set_sympy_latex('display',
+inv_trig_style='power')
+pytex.set_sympy_latex('text',
+inv_trig_style='full')
+\end{sympycode}
+Inline: $\sympy{sineq}$
+Equation: \[ \sympy{sineq}\Rightarrow x=\sympy{solve(sineq,dict=true)[0][x]} \]
+\[ \sum_{n=1}^{\infty}\frac{1}{n^2}=\sympy{sum1.doit()} \]
+\begin{sympycode}
+from sympy import Function, dsolve, pprint
+from sympy.abc import x
+f = Function('f')
+eq=Eq(f(x).diff(x, 2) -3*f(x).diff(x)+2*f(x),cos(x))
+solution=dsolve(eq, f(x),hint='nth_linear_constant_coeff_undetermined_coefficients')
+int3=integrate(tan(x),x)
+\end{sympycode}
+The solution of the differential equation
+\[ \sympy{eq} \]
+is
+\[ \sympy{expand(solution)} \]
+\[ \int_{-1}^{1}{\tan{(x)}\d x}=\sympy{int3} \]
+\[ \int_{1}^{2}{\sympy{i.doit()}\d x}=\sympy{integrate(i,(x,1,2))} \]
+\[ 3^3=\sympy{3**3} \]
+\begin{sympycode}
+from sympy import *
+import sympy as sp
+x,y=sp.symbols("x,y")
+equation1 = Eq(2*x-5*y,-1)
+equation2 = Eq(3*x+4*y,10)
+system = Matrix(([2,-5,-1],[3,4,10]))
+solution = solve_linear_system(system,x,y,dict=True)
+n=symbols("n")
+\end{sympycode}
+\[ \systeme{\sympy{equation1},\sympy{equation2}}\Rightarrow \ \ x=\sympy{solution[x]}\ \ \textrm{and}\ \ y=\sympy{solution[y]} \]
+\[ \sum_{n=1}^{\infty}{\frac{1}{n^2}} \]
+\[ \sum_{k=1}^{10}{\frac{1}{n^2}}=\sympy{Sum(1/n**2,(n,1,10)).doit()} \]
+\[ x^2-4x+3=0\Rightarrow x=\sympy{solve(Eq(x**2-4*x+3,0),dict=true)[1][x]} \]
+\begin{sympycode}
+eq3=Eq(x**3-x**2+3*x-10,0)
+sol3=solve(eq3,dict=true)
+print(latex(eq3,mode='inline'),r"$ \Rightarrow $")
+for i,n in enumerate(sol3):
+	print(r"$ x= $",latex(n[x],mode='inline'),", ")
+\end{sympycode}
+\[ \int_{-2}^{2}{\frac{x^2}{x^2+1}\d x}=\left.\sympy{integrate(x**2/(x**2+1),x)}\right|_{-2}^{2}=\sympy{integrate(x**2/(x**2+1),(x,-2,2))} \]
+\[ \int_{-1}^{1}{x^2\d x}=\frac{x^3}{3} \]
+\[ \cos{(2x)}=1\Rightarrow x=\sympy{solve(Eq(cos(2*x),1),dict=true)[0][x]}\ \ \textrm{and}\ \ x=\sympy{solve(Eq(cos(2*x),1),dict=true)[1][x]} \]
+\end{document}
+
+
+
