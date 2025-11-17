@@ -1,0 +1,309 @@
+% !TEX program = lualatex
+
+% ----------------------------------------------------
+% ΠΡΟΟΙΜΙΟ: Ρύθμιση για LuaLaTeX και Ελληνικά/Γραμματοσειρών
+% ----------------------------------------------------
+\documentclass[11pt, a4paper]{article}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+% Ενεργοποιεί προηγμένες δυνατότητες γραμματοσειρών (απαραίτητο για LuaLaTeX)
+\usepackage{fontspec} 
+
+% Χρήση του πακέτου babel για υποστήριξη Ελληνικών
+\usepackage[greek, english]{babel}
+
+% Ορίζουμε την κύρια γραμματοσειρά (Noto Sans είναι διαθέσιμη στο περιβάλλον)
+\babelfont{rm}{Minion Pro} 
+\babelprovide[import, onchar=ids fonts]{greek}
+\babelprovide[import, onchar=ids fonts]{english}
+
+% Ρυθμίσεις σελίδας
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+% Πακέτο για εύκολη εισαγωγή μεγαλύτερων μπλοκ κώδικα Lua
+\usepackage{luacode} 
+\usepackage{booktabs} % Για καλύτερες γραμμές στον πίνακα
+\usepackage{xcolor}   % ΝΕΟ: Προσθήκη για έγχρωμο κείμενο
+
+\title{Εκμάθηση Lua: Το Πρώτο μου Έγγραφο LuaLaTeX}
+\author{Gemini (LLM)}
+\date{\today}
+
+% ----------------------------------------------------
+% ΚΩΔΙΚΑΣ LUA: Ορισμός Συναρτήσεων (Εκτελείται μία φορά στο προοίμιο)
+% ----------------------------------------------------
+% Το περιβάλλον luacode* είναι ιδανικό για να ορίζουμε συναρτήσεις Lua
+% που μπορούμε να καλέσουμε αργότερα μέσα στο κείμενο.
+\begin{luacode*}
+    -- Η συνάρτηση Lua
+    function greet_lua()
+        -- Εκτυπώνει ένα μήνυμα στην κονσόλα (όχι στο PDF)
+        -- Αυτό είναι χρήσιμο για debugging!
+        tex.sprint("--- Η Lua εκτελείται! ---") 
+        
+        -- Επιστρέφει μια συμβολοσειρά (string) που θα τυπωθεί στο PDF
+        return "Γεια σου, κόσμε, από τη Lua!"
+    end
+
+    -- Συνάρτηση υπολογισμού αθροίσματος
+    function calculate_sum(a, b)
+        local sum = a + b
+        -- Επιστρέφει το αποτέλεσμα πίσω στο TeX
+        return sum
+    end
+    
+    -- ΝΕΑ ΣΥΝΑΡΤΗΣΗ: Υπολογισμός όγκου κύβου
+    function calculate_volume(side_str)
+        -- Η τιμή έρχεται ως string (συμβολοσειρά) από το LaTeX.
+        -- Πρέπει να τη μετατρέψουμε σε αριθμό για υπολογισμό.
+        local side = tonumber(side_str)
+        
+        -- Υπολογισμός: πλευρά * πλευρά * πλευρά
+        local volume = side ^ 3 
+        
+        -- Επιστρέφουμε το αποτέλεσμα
+        return volume
+    end
+
+    -- Συνάρτηση για τη δημιουργία ενός πίνακα (table)
+    function generate_multiplication_table(n)
+        -- Ξεκινάει τον κώδικα πίνακα του TeX
+        tex.print("\\begin{center}")
+        tex.print("\\begin{tabular}{ccc}\\toprule")
+        tex.print("Αριθμός & $\\times$ & Αποτέλεσμα \\\\ \\midrule")
+
+        -- Βρόχος Lua
+        for i = 1, n do
+            local result = i * 7
+            -- Επιστρέφει κάθε γραμμή του πίνακα στο TeX
+            tex.print(string.format("%d & 7 & %d \\\\", i, result))
+        end
+        
+        -- Τερματίζει τον κώδικα πίνακα του TeX
+        tex.print("\\bottomrule\\end{tabular}")
+        tex.print("\\end{center}")
+    end
+
+	-- Δημιουργία λίστας
+    function generate_list(num_items)
+        -- Ξεκινάει το περιβάλλον enumerate (αριθμημένη λίστα)
+        tex.print("\\begin{enumerate}") 
+        
+        -- Βρόχος Lua για τη δημιουργία των στοιχείων
+        for i = 1, num_items do
+            -- ΔΙΟΡΘΩΣΗ: Αφαιρέθηκε το λανθασμένο '\' πριν το '%d'. 
+            -- Το '%d' είναι ο format specifier της Lua.
+            tex.print(string.format("\\item Αυτό είναι το στοιχείο νούμερο %d, δημιουργημένο από τη Lua.", i))
+        end
+
+        -- Κλείνει το περιβάλλον enumerate
+        tex.print("\\end{enumerate}")
+    end
+
+    -- ------------------------------------------------------------------
+    -- ΝΕΟ ΒΗΜΑ: Δημιουργία πίνακα δεδομένων από Lua table
+    -- ------------------------------------------------------------------
+
+    -- Δημιουργούμε έναν Lua table (αντίστοιχο του array/dictionary)
+    -- Αυτά είναι τα δεδομένα μας
+    data_products = {
+        { item = "Laptop", price = 1200.00, stock = 15 },
+        { item = "Monitor", price = 350.50, stock = 40 },
+        { item = "Mouse", price = 25.99, stock = 120 },
+    }
+
+    -- Συνάρτηση που παίρνει τον πίνακα Lua, υπολογίζει τα σύνολα και δημιουργεί κώδικα LaTeX
+    function generate_data_table(products)
+        local grand_total = 0 -- Αρχικοποίηση μεταβλητής για το γενικό σύνολο
+        
+        tex.print("\\begin{center}")
+        -- Ορισμός στηλών: |l|r|r|r| (Προϊόν, Τιμή, Απόθεμα, Συνολική Αξία)
+        tex.print("\\begin{tabular}{|l|r|r|r|}\\toprule")
+        tex.print("Προϊόν & Τιμή (€) & Απόθεμα & Συνολική Αξία (€) \\\\ \\midrule")
+
+        -- Βρόχος για επανάληψη σε κάθε στοιχείο του πίνακα (table)
+        for _, product in ipairs(products) do
+            local item_total = product.price * product.stock -- Υπολογισμός συνολικής αξίας ανά είδος
+            grand_total = grand_total + item_total -- Άθροισμα στο γενικό σύνολο
+
+            tex.print(string.format(
+                "%s & %.2f & %d & %.2f \\\\", -- Τώρα με 4 στήλες
+                product.item,
+                product.price,
+                product.stock,
+                item_total
+            ))
+        end
+        
+        -- Προσθήκη οριζόντιας γραμμής και της γραμμής του γενικού συνόλου
+        tex.print("\\midrule") 
+        tex.print(string.format(
+            "\\multicolumn{3}{|r|}{\\textbf{ΓΕΝΙΚΟ ΣΥΝΟΛΟ ΑΞΙΑΣ:}} & \\textbf{%.2f} \\\\ \\bottomrule",
+            grand_total
+        ))
+
+        -- Τερματίζει τον κώδικα πίνακα του TeX
+        tex.print("\\end{tabular}")
+        tex.print("\\end{center}")
+    end
+
+	-- ------------------------------------------------------------------
+    -- 7. Δυναμική Δημιουργία Κειμένου με Συνθήκες (Conditionals)
+    -- ------------------------------------------------------------------
+
+    -- Global μεταβλητή για τον έλεγχο της λειτουργίας Draft (Πρόχειρο)
+    is_draft_mode = false 
+
+    -- Συνάρτηση που τυπώνει κείμενο μόνο αν το is_draft_mode είναι true
+    function print_draft_status()
+        if is_draft_mode == true then
+            -- Χρησιμοποιούμε κώδικα LaTeX για να τυπώσουμε κόκκινο, έντονο κείμενο
+            tex.print("\\textbf{\\color{red}ΑΥΤΟ ΕΙΝΑΙ ΠΡΟΧΕΙΡΟ (DRAFT) ΕΓΓΡΑΦΟ.}")
+            tex.print(" Παρακαλούμε μην το διανείμετε.")
+        else
+            tex.print("\\textbf{\\color{green!50!black}Αυτό είναι το τελικό έγγραφο.}")
+        end
+    end
+
+
+	-- ------------------------------------------------------------------
+    -- 9. Προηγμένα Μαθηματικά και Τριγωνομετρία
+    -- ------------------------------------------------------------------
+
+    -- Συνάρτηση που υπολογίζει μια σύνθετη συνάρτηση: f(x) = x^3 - 5x + sin(pi * x / 4)
+    function calculate_polynomial_and_trig(x_str)
+        local x = tonumber(x_str)
+        
+        -- Χρήση της βιβλιοθήκης math της Lua (pow, sin, pi)
+        -- f(x) = x^3 - 5x + sin(pi * x / 4)
+        local result = math.pow(x, 3) - (5 * x) + math.sin(math.pi * x / 4)
+        
+        -- Επιστρέφουμε το αποτέλεσμα στρογγυλοποιημένο σε 4 δεκαδικά ψηφία
+        return string.format("%.4f", result)
+    end
+
+	function circlre_volume(r_fl)
+		local r = tonumber(r_fl)
+		local rs = r^2
+		local area = 3.14*r^2
+		tex.print(string.format("Το εμβαδόν του κύκλου με ακτίνα $\\rho=%d$, είναι $ E=\\pi\\rho^2=3{,}14\\cdot %d^2=3{,}14\\cdot %d=$",
+		r_fl,r_fl,rs))
+		tex.print(area)
+	end
+\end{luacode*}
+
+% ----------------------------------------------------
+% ΣΩΜΑ ΕΓΓΡΑΦΟΥ
+% ----------------------------------------------------
+\begin{document}
+
+\maketitle
+
+\section{Εισαγωγή στην Ενσωμάτωση της Lua}
+
+Η \texttt{LuaLaTeX} μας επιτρέπει να ενσωματώσουμε κώδικα \texttt{Lua} (\textbf{L}ua \textbf{U}sing \textbf{A}utomated) απευθείας στο έγγραφο \texttt{LaTeX}. Αυτό είναι απίστευτα ισχυρό για αυτοματισμούς, σύνθετους υπολογισμούς και δυναμική δημιουργία περιεχομένου.
+
+\subsection{1. Εκτύπωση Κειμένου (Inline Execution)}
+
+Ο πιο απλός τρόπος για να εκτελέσετε κώδικα Lua είναι μέσω της εντολής \texttt{\textbackslash directlua}.
+
+\noindent Το μήνυμα που δημιουργήθηκε από τη Lua είναι: 
+\directlua{
+    tex.print("Επιτυχία! Το LuaLaTeX λειτουργεί.")
+}
+
+\subsection{2. Κλήση Ορισμένης Συνάρτησης}
+
+Έχουμε ορίσει τη συνάρτηση \texttt{greet\_lua()} στο προοίμιο. Την καλούμε τώρα και τυπώνουμε το αποτέλεσμα.
+
+\noindent Η κλήση της συνάρτησης επιστρέφει: \directlua{
+    tex.print(greet_lua())
+}
+\smallskip
+
+\noindent Παρατηρήστε ότι το "Η Lua εκτελείται!" εμφανίζεται μόνο στην κονσόλα (terminal) κατά τη μεταγλώττιση, όχι στο τελικό PDF.
+
+\subsection{3. Υπολογισμοί και Δυναμικό Περιεχόμενο}
+
+Η Lua είναι ιδανική για υπολογισμούς.
+
+\subsubsection{3.1. Υπολογισμός Αθροίσματος}
+
+Ας υπολογίσουμε το άθροισμα $150 + 233$.
+
+\noindent Το αποτέλεσμα του υπολογισμού είναι: \textbf{\directlua{
+    local num1 = 150
+    local num2 = 233
+    local result = calculate_sum(num1, num2) 
+    tex.print(result)
+}}.
+\par\smallskip 
+\noindent Επιβεβαίωση: $150 + 233 = 383$.
+
+\subsubsection{3.2. Πέρασμα Μεταβλητής από TeX σε Lua}
+
+Αυτό είναι ένα κρίσιμο βήμα. Ορίζουμε μια μεταβλητή στο TeX (μια μακροεντολή) και περνάμε την τιμή της στη Lua για υπολογισμό.
+
+\def\CubeSide{8} % Ορίζουμε την πλευρά του κύβου: 8 μονάδες
+
+\noindent Για έναν κύβο με πλευρά \texttt{\textbackslash CubeSide} = $\mathbf{\CubeSide}$ μονάδες:
+
+\noindent Ο όγκος ($\mathbf{V=a^3}$) υπολογίζεται από τη Lua και είναι: \textbf{\directlua{
+    local volume = calculate_volume("\CubeSide")
+    tex.print(volume)
+}}%
+\par\smallskip
+\noindent Επιβεβαίωση: $8 \times 8 \times 8 = 512$ κυβικές μονάδες. 
+
+\subsection{4. Δημιουργία Δομών TeX από Lua (Πίνακας)}
+
+Η πραγματική δύναμη της Lua φαίνεται όταν δημιουργεί ολόκληρες δομές \texttt{LaTeX}, όπως πίνακες, λίστες ή ολόκληρες ενότητες, βασισμένες σε λογική.
+
+Ας δημιουργήσουμε τον πίνακα πολλαπλασιασμού του 7, χρησιμοποιώντας έναν βρόχο \texttt{for} στη Lua. Θα δημιουργήσουμε γραμμές για τους αριθμούς 1 έως 5.
+
+\directlua{
+    generate_multiplication_table(5)
+}
+
+\section{Επόμενα Βήματα}
+
+Τώρα που είδατε τις βασικές δυνατότητες, μπορείτε να αρχίσετε να πειραματίζεστε με:
+\begin{itemize}
+    \item Πολυπλοκότερους βρόχους και δομές ελέγχου στη Lua.
+    \item Χειρισμό strings (συμβολοσειρών) και πινάκων (tables) της Lua.
+    \item Χρήση των βιβλιοθηκών του \texttt{luatex} όπως \texttt{luatexbase} και \texttt{lfs} (Lua File System) για λειτουργίες αρχείων.
+\end{itemize}
+\directlua{generate_list(4)}
+
+\section{Δυναμική Δημιουργία Πίνακα από Δεδομένα Lua (Tables)}
+
+Η Lua χρησιμοποιεί δομές \texttt{table} (πίνακες) για την αποθήκευση συνόλων δεδομένων (lists, arrays, dictionaries). Αυτό είναι ιδανικό για να διαχωρίσουμε τη λογική των δεδομένων από την παρουσίαση του \LaTeX.
+
+\noindent Παρακάτω, η Lua δημιουργεί έναν πλήρη πίνακα \texttt{LaTeX} διαβάζοντας δεδομένα από τον εσωτερικό \texttt{data\_products} table.
+
+\directlua{
+    generate_data_table(data_products)
+}
+
+\section{7. Δυναμική Δημιουργία Κειμένου με Συνθήκες (Conditionals)}
+
+Η Lua μπορεί να χρησιμοποιήσει δομές ελέγχου (\texttt{if/then/else}) για να αποφασίσει τι κώδικα \texttt{LaTeX} θα τυπώσει. Αυτό είναι ιδανικό για την αυτόματη προσθήκη υδατογραφημάτων, διαφορετικών κεφαλίδων ή σημειώσεων, ανάλογα με τις μεταβλητές που ορίζονται στη Lua.
+
+\noindent Η μεταβλητή \texttt{is\_draft\_mode} έχει οριστεί ως \texttt{true} στον κώδικα Lua. Ας δούμε την έξοδο:
+
+\directlua{
+    print_draft_status()
+}
+
+\section{9. Προηγμένα Μαθηματικά και Τριγωνομετρία}
+
+Η Lua περιλαμβάνει μια ισχυρή βιβλιοθήκη \texttt{math} που επιτρέπει σύνθετους υπολογισμούς. Αυτό είναι ιδανικό για την ενσωμάτωση αποτελεσμάτων από αλγορίθμους, εξισώσεις ή φυσικές σταθερές απευθείας στο έγγραφό σας.
+
+\noindent Θεωρούμε τη συνάρτηση:
+$$f(x) = x^3 - 5x + \sin\left(\frac{\pi x}{4}\right)$$
+\def\XValue{3.5} Για $\mathbf{x = \XValue}$:
+\noindent Το $f(\XValue)$ είναι ίσο με: $\mathbf{\directlua{
+    tex.print(calculate_polynomial_and_trig("\XValue"))
+}}$.
+\section{Εμβαδόν κύκλου}
+\directlua{circlre_volume(9)}
+\end{document}

@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm,a4paper]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\lysh}{\textcolor{black}{\textbf{\faCheck\ \ ΛΥΣΗ}}}
+\renewcommand{\textstigma}{\textsigma\texttau}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textcolor{black}{\kerkissans{Ορισμός\hspace{2mm}\theorismos}}\;:\;}{}}}
+
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos {\textcolor{black}{\kerkissans{#1}}},breakable,bottomtitle=-1.5mm,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{black},leftrule=2mm,sharp corners,coltitle=black]}
+{\end{tcolorbox}}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=cyan!20!white!80,fg=black,ht=8mm},
+ row{even} = {bg=cyan!70!gray!50,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=cyan!70!black, fg=white, font=\Large\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+
+\begin{document}
+\pagenumbering{gobble}
+\usetikzlibrary{calc}
+\tikzset{curveinscope/.style={every path/.style={draw=black, text=black}}}
+%\textbf{ΜΗΚΟΣ}\mbox{}\\\vspace{2mm}
+%\begin{mytblr}{ccc}
+%{Μονάδα Μέτρησης} & {Σχέσεις μεταξύ μονάδων μέτρησης} \\ 
+%\textbf{Χιλιόμετρο} $ (km) $ & $ 1km=1000m $ \\  
+% \textbf{Μέτρο} $ (m) $ & $ 1m=10dm=100cm=1000mm $ \\ 
+% \textbf{Δεκατόμετρο} $ (dm) $ & $ \frac{1}{10}m=1dm=10cm=100mm $ \\ 
+% \textbf{Εκατοστόμετρο} $ (cm) $ & $ \frac{1}{100}m=\frac{1}{10}dm=1cm=10mm $ \\ 
+% \textbf{Χιλιοστόμετρο} $ (mm) $ & $ \frac{1}{1000}m=\frac{1}{100}dm=\frac{1}{10}cm=1mm $ \\ 
+% 
+%\end{mytblr}
+%
+%Στο διάγραμμα φαίνονται οι σχέσεις μεταξύ των μονάδων μέτρησης και ο τρόπος με τον οποίο μετατρέπουμε μια ποσότητα από τη μια μονάδα μέτρησης στην άλλη :
+%\begin{center}
+%\begin{tikzpicture}[box/.style={minimum height=.8cm,draw,rounded corners,text width=1.5cm,align=center,fill=cyan9,draw=blue4}]
+%\node[box] (km) {{ $ km $}};
+%\node[box,right=1cm of km] (m) {{ $ m $}};
+%\node[box,right=.7cm of m] (dm) {{ $ dm $}};
+%\node[box,right=.7cm of dm] (cm) {{ $ cm $}};
+%\node[box,right=.7cm of cm] (mm) {{ $ mm $}};
+%\draw[-latex] (km.10) -- (m.170) node[anchor=south east] {{\scriptsize $ \cdot1000 $}};
+%\draw[-latex] (m.10) -- (dm.170) node[anchor=south east] {{\scriptsize $ \cdot10 $}};
+%\draw[-latex] (dm.10) -- (cm.170) node[anchor=south east] {{\scriptsize $ \cdot10 $}};
+%\draw[-latex] (cm.10) -- (mm.170) node[anchor=south east] {{\scriptsize $ \cdot10 $}};
+%\draw[latex-] (km.350) -- (m.190) node[anchor=north east] {{\scriptsize $ :1000 $}};
+%\draw[latex-] (m.350) -- (dm.190) node[anchor=north east] {{\scriptsize $ :10 $}};
+%\draw[latex-] (dm.350) -- (cm.190) node[anchor=north east] {{\scriptsize $ :10 $}};
+%\draw[latex-] (cm.350) -- (mm.190) node[anchor=north east] {{\scriptsize $ :10 $}};
+%\end{tikzpicture}
+%\textbf{ ΕΠΙΦΑΝΕΙΑ}\\\vspace{2mm}
+%\begin{mytblr}{ccc}
+%{Μονάδα Μέτρησης} & {Σχέσεις μεταξύ μονάδων μέτρησης} \\ 
+%\textbf{Τ.Χιλιόμετρο} $ (km^2) $ & $ 1km^2=1000\textrm{ στρ.}=10^6m^2 $ \\ 
+% \textbf{Στρέμμα} $ (\textrm{στρ.}) $ & $ \frac{1}{1000}km^2=1\textrm{ στρ.}=1000m^2 $ \\
+% \textbf{Τ.Μέτρο} $ (m^2) $ & $ 1m^2=100dm^2=10^4cm^2=10^6mm^2 $ \\ 
+% \textbf{Τ.Δεκατόμετρο} $ (dm^2) $ & $ \frac{1}{100}m^2=1dm^2=100cm^2=10^4mm^2 $ \\ 
+% \textbf{Τ.Εκατοστόμετρο} $ (cm^2) $ & $ \frac{1}{10^4}m^2=\frac{1}{100}dm^2=1cm^2=100mm^2 $ \\ 
+% \textbf{Τ.Χιλιοστόμετρο} $ (mm^2) $ & $ \frac{1}{10^6}m^2=\frac{1}{10^4}dm^2=\frac{1}{100}cm^2=1mm^2 $ \\  
+%\end{mytblr}
+%\end{center}
+%Οι σχέσεις μεταξύ των μονάδων μέτρησης επιφάνειας και ο τρόπος με τον οποίο μετατρέπουμε μια ποσότητα από μια μονάδα μέτρησης σε άλλη φαίνονται στο διάγραμμα :\vspace{-1mm}
+\begin{center}
+\begin{tikzpicture}[box/.style={minimum height=1cm,draw,rounded corners,text width=1.2cm,align=center}]
+\node[box] (km) {{ $ km^2 $}};
+\node[box,right=1cm of km] (st) {{ στρ.}};
+\node[box,right=1cm of st] (m) {{ $ m^2 $}};
+\node[box,right=.7cm of m] (dm) {{ $ dm^2 $}};
+\node[box,right=.7cm of dm] (cm) {{ $ cm^2 $}};
+\node[box,right=.7cm of cm] (mm) {{ $ mm^2 $}};
+\draw[-latex] ($(km.north east)!1/3!(km.south east)$) -- ($(st.north west)!1/3!(st.south west)$) node[anchor=south east] {{\scriptsize $ \cdot1000 $}};
+\draw[-latex] ($(st.north east)!1/3!(st.south east)$) -- ($(m.north west)!1/3!(m.south west)$) node[anchor=south east] {{\scriptsize $ \cdot1000 $}};
+\draw[-latex] ($(m.north east)!1/3!(m.south east)$) -- ($(dm.north west)!1/3!(dm.south west)$) node[anchor=south east] {{\scriptsize $ \cdot100 $}};
+\draw[-latex] ($(dm.north east)!1/3!(dm.south east)$) -- ($(cm.north west)!1/3!(cm.south west)$) node[anchor=south east] {{\scriptsize $ \cdot100 $}};
+\draw[-latex] ($(cm.north east)!1/3!(cm.south east)$) -- ($(mm.north west)!1/3!(mm.south west)$) node[anchor=south east] {{\scriptsize $ \cdot100 $}};
+\draw[latex-] ($(km.north east)!2/3!(km.south east)$) -- ($(st.north west)!2/3!(st.south west)$) node[anchor=north east] {{\scriptsize $ :1000 $}};
+\draw[latex-] ($(st.north east)!2/3!(st.south east)$) -- ($(m.north west)!2/3!(m.south west)$) node[anchor=north east] {{\scriptsize $ :1000 $}};
+\draw[latex-] ($(m.north east)!2/3!(m.south east)$) -- ($(dm.north west)!2/3!(dm.south west)$) node[anchor=north east] {{\scriptsize $ :100 $}};
+\draw[latex-] ($(dm.north east)!2/3!(dm.south east)$) -- ($(cm.north west)!2/3!(cm.south west)$) node[anchor=north east] {{\scriptsize $ :100 $}};
+\draw[latex-] ($(cm.north east)!2/3!(cm.south east)$) -- ($(mm.north west)!2/3!(mm.south west)$) node[anchor=north east] {{\scriptsize $ :100 $}};
+\end{tikzpicture}
+\end{center}
+
+\end{document}

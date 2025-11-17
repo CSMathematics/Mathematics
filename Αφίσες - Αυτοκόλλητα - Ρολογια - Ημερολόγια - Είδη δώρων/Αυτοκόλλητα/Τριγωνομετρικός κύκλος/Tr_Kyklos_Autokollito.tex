@@ -1,0 +1,250 @@
+\documentclass[11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm,a4paper]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\lysh}{\textcolor{black}{\textbf{\faCheck\ \ ΛΥΣΗ}}}
+\renewcommand{\textstigma}{\textsigma\texttau}
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\thesection.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textcolor{black}{\kerkissans{Ορισμός\hspace{2mm}\theorismos}}\;:\;}{}}}
+
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos {\textcolor{black}{\kerkissans{#1}}},breakable,bottomtitle=-1.5mm,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{black},leftrule=2mm,sharp corners,coltitle=black]}
+{\end{tcolorbox}}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=cyan!20!white!80,fg=black,ht=8mm},
+ row{even} = {bg=cyan!70!gray!50,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=cyan!70!black, fg=white, font=\Large\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+
+\begin{document}
+\pagenumbering{gobble}
+\usetikzlibrary{calc}
+\tikzset{curveinscope/.style={every path/.style={draw=black, text=black}}}
+%\begin{tikzpicture}[curveinscope,scale=0.95]
+%\draw[line width=.7mm] (0,0) circle(7);
+%\foreach \s in {0,1,2,...,359}{
+%\draw (\s:6.7)--(\s:7);
+%}
+%
+%\foreach \s in {0,1,2,...,627}{
+%\draw (\s/628*360:7.3)--(\s/628*360:7);
+%}
+%\foreach \s in {0,5,10,...,625}{
+%\draw (\s/628*360:7.5)--(\s/628*360:7);
+%}
+%\foreach \s in {0,10,20,...,620}{
+%\draw (\s/628*360:7.7)--(\s/628*360:7);
+%\node at (\s/628*360:8){\pgfmathparse{0.01*\s}% Evaluate the expression
+%\pgfmathprintnumber[    % Print the result
+%fixed,
+%fixed zerofill,
+%precision=1
+%]{\pgfmathresult}};
+%}
+%\foreach \gwnia/\xtext in {
+%30/\dfrac{\pi}{6},
+%45/\dfrac{\pi}{4},
+%60/\dfrac{\pi}{3},
+%90/\dfrac{\pi}{2},
+%120/\dfrac{2\pi}{3},
+%135/\dfrac{3\pi}{4},
+%150/\dfrac{5\pi}{6},
+%180/\pi,
+%210/\dfrac{7\pi}{6},
+%225/\dfrac{5\pi}{4},
+%240/\dfrac{4\pi}{3},
+%270/\dfrac{3\pi}{2},
+%300/\dfrac{5\pi}{3},
+%315/\dfrac{7\pi}{4},
+%330/\dfrac{11\pi}{6},
+%360/2\pi}
+%{\draw (\gwnia:9.2) node {\textcolor{magenta4}{ $\xtext$}};
+%\draw(\gwnia:8.7)--(\gwnia:8.3);}
+%\draw[pl,-latex,black] (5,0.5) arc (5.7106:40:5.0249);
+%\draw[pl,-latex,black] (5,-0.5) arc (-5.7106:-40:5.0249);
+%\foreach \d in {0,10,20,...,350}{
+%\draw[pl] (\d:7)--(\d:6.4);
+%\node at (\d:5.9){\large$\d\degree$};
+%}
+%\foreach \d in {0,5,10,...,355}{
+%\draw[pl] (\d:7)--(\d:6.6);
+%}
+%\node at (4,2) {$+$};
+%\node at (4,-2) {$-$};
+%\foreach \d in {-0.8,-0.6,-0.4,-0.2,0.2,0.4,0.6,0.8}{
+%\draw (\d*5,-.1)node[yshift=-3mm]{$\d$}--(\d*5,0.1);
+%\draw (-.1,\d*5)node[xshift=-5mm]{$\d$}--(0.1,\d*5);
+%}
+%\foreach \d in {-4.5,-3.5,...,4.5}{
+%\draw (\d,-.07)--(\d,0.07);
+%\draw (-.07,\d)--(0.07,\d);
+%}
+%\foreach \d in {-4.4,-4.3,...,4.4}{
+%\draw (\d,-.04)--(\d,0.04);
+%\draw (-.04,\d)--(0.04,\d);
+%}
+%\draw (-5,0) -- (5,0);
+%\draw (0,5) -- (0,-5);
+%\node at (2,3.1) {\begin{tcolorbox}[standard jigsaw,width=2.9cm,halign=center,colback=magenta7,colframe=magenta5,opacityback=0.5]
+%\kerkissans{1ο Τεταρτ.}
+%\end{tcolorbox}};
+%\node at (2,2.2){$ \hm{x}>0 $};
+%\node at (2,1.7){$ \syn{x}>0 $};
+%\node at (2,1.2){$ \ef{x}>0 $};
+%\node at (2,.7){$ \syf{x}>0 $};
+%
+%\node at (-2,2.2){$ \hm{x}>0 $};
+%\node at (-2,1.7){$ \syn{x}<0 $};
+%\node at (-2,1.2){$ \ef{x}<0 $};
+%\node at (-2,.7){$ \syf{x}<0 $};
+%
+%\node at (-2,-2.5){$ \syf{x}>0 $};
+%\node at (-2,-2){$ \ef{x}>0 $};
+%\node at (-2,-1.5){$ \syn{x}<0 $};
+%\node at (-2,-1){$ \hm{x}<0 $};
+%
+%\node at (2,-2.5){$ \syf{x}<0 $};
+%\node at (2,-2){$ \ef{x}<0 $};
+%\node at (2,-1.5){$ \syn{x}>0 $};
+%\node at (2,-1){$ \hm{x}<0 $};
+%\node at (-2,3.1) {\begin{tcolorbox}[standard jigsaw,width=2.9cm,halign=center,colback=magenta7,colframe=magenta5,opacityback=0.5]
+%\kerkissans{2ο Τεταρτ.}
+%\end{tcolorbox}};
+%\node at (-2,-3.5) {\begin{tcolorbox}[standard jigsaw,width=2.9cm,halign=center,colback=magenta7,colframe=magenta5,opacityback=0.5]
+%\kerkissans{3ο Τεταρτ.}
+%\end{tcolorbox}};
+%\node at (2,-3.5) {\begin{tcolorbox}[standard jigsaw,width=2.9cm,halign=center,colback=magenta7,colframe=magenta5,opacityback=0.5]
+%\kerkissans{4ο Τεταρτ.}
+%\end{tcolorbox}};
+%\end{tikzpicture}
+%\begin{tikzpicture}[>=latex,scale=4]
+%\fill[fill=magenta!50] (0,0) -- (.2,0) arc (0:60:.2) -- cycle;
+%%axis
+%\draw[->] (-1.2,0) -- coordinate (x axis mid) (1.5,0) node[right,fill=white] {{ $ x $}};
+%\foreach \x in {-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1}
+%\draw (\x,.5pt) -- (\x,-.5pt)
+%node[anchor=north] {{ \x}};
+%\foreach \y in {-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1}
+%\draw (.5pt,\y) -- (-.5pt,\y)
+%node[anchor=east] {{ \y}};
+%\draw[->] (0,-1.2) -- (0,1.5) node[above,fill=white] {{ $ y $}};
+%\draw[-] (1,-1.2) -- (1,1.8);
+%\draw[-] (-1.2,1) -- (1.2,1);
+%\draw[-,thick] (0,1) -- (1.732/3,1);
+%\draw[-,thick] (1,0) -- (1,1.732);
+%\draw[-,dashed] (-.7,-1.732*0.7) -- (1,1.732);
+%\draw circle (1);
+%\coordinate (A) at (60:1);
+%\tkzDefPoint(0,0){O}
+%\tkzDefPoint(cos(pi/3),0){B}
+%\tkzDefPoint(0,sin(pi/3)){C}
+%\tkzDefPoint(1,tan(pi/3)){D}
+%\tkzDefPoint(cot(pi/3),1){E}
+%\tkzDefPoint(1,0){F}
+%\tkzDefPoint(0,1){G}
+%\tkzDrawSegment(O,A)
+%\tkzDrawSegments[thin,dashed](A,B A,C)
+%\tkzText(0,1.75){{ Άξονας Ημιτόνων}}
+%\tkzText(1.6,-.12){{ Άξονας}}
+%\tkzText(1.6,-.23){{ Συνημιτόνων}}
+%\tkzText(-1,1.22){{ Άξονας}}
+%\tkzText(-.8,1.1){{ Συνεφαπτομένων}}
+%\tkzText(1.23,-.87){{ Άξονας}}
+%\tkzText(1.37,-1){{ Εφαπτομένων}}
+%\tkzText(-.5,-1.1){{ $ \delta $}}
+%\tkzDrawSegment[thick](O,B)
+%\tkzDrawSegment[thick](O,C)
+%\tkzDrawPoints[fill=white](O,A,B,C,D,E,F,G)
+%\tkzText(-.4,.43){{ \textrm{ημ}$ \omega $}$\LEFTRIGHT\{.{ \rule{0pt}{28mm} } $}
+%\tkzText(.25,-.25){$ \undercbrace{\rule{18mm}{0mm}}_{{ \textrm{συν}\omega}} $}
+%\tkzText(1.2,.87){$\LEFTRIGHT.\}{ \rule{0pt}{70mm} } ${{ \textrm{εφ}$ \omega $}}}
+%\tkzText(.3,1.12){$ \overcbrace{\rule{20mm}{0mm}}^{{ \textrm{σφ}\omega}} $}
+%\tkzText(.25,.15){$ \omega $}
+%\tkzLabelPoint[below left,xshift=.5mm,yshift=.5mm](O){{ $ O $}}
+%\tkzLabelPoint[above=1mm,right](A){{ $ M $}}
+%\tkzLabelPoint[above right](B){{ $ M_1 $}}
+%\tkzLabelPoint[above=1mm, left](C){{ $ M_2 $}}
+%\tkzLabelPoint[left](D){{ $ K $}}
+%\tkzLabelPoint[above](E){{ $ \varLambda $}}
+%\tkzLabelPoint[below right](F){{ $ A $}}
+%\tkzLabelPoint[above left](G){{ $ B $}}
+%\draw [->] (.984*.9,.173*.9) arc (10:45:.9);
+%\draw [->] (.984*.9,-.173*.9) arc (-10:-45:.9);
+%\tkzText(.72,.35){$ + $}
+%\tkzText(.72,-.35){$ - $}
+%\tkzText(.35,.45){$ \rho $}
+%\tkzText(-1,.9){{ $ \varepsilon_2 $}}
+%\tkzText(.9,-1){{ $ \varepsilon_1 $}}
+%\end{tikzpicture}
+\begin{tikzpicture}
+\node at (0,0) {\begin{tcolorbox}[standard jigsaw,width=3.9cm,halign=center,colback=cyan7,colframe=cyan5,opacityback=0.5]
+\kerkissans{Άξονας ημιτότων}
+\end{tcolorbox}};
+\node at (0,2) {\begin{tcolorbox}[standard jigsaw,width=3.1cm,halign=center,colback=cyan7,colframe=cyan5,opacityback=0.5]
+\kerkissans{Άξονας\\συνημιτόνων}
+\end{tcolorbox}};
+\node at (0,4) {\begin{tcolorbox}[standard jigsaw,width=3.3cm,halign=center,colback=cyan7,colframe=cyan5,opacityback=0.5]
+\kerkissans{Άξονας εφαπτομένων}
+\end{tcolorbox}};
+\node at (0,6) {\begin{tcolorbox}[standard jigsaw,width=3.9cm,halign=center,colback=cyan7,colframe=cyan5,opacityback=0.5]
+\kerkissans{Άξονας συνεφαπτομένων}
+\end{tcolorbox}};
+\end{tikzpicture}
+\end{document}
