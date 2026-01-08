@@ -1,0 +1,291 @@
+\documentclass[internet]{diag-xelatex}
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\usepackage[no-math,cm-default]{fontspec}
+\usepackage{xunicode}
+\usepackage{xgreek}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb]{mtpro2}
+\xroma{cyan}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%---------------------------------
+\makeatletter
+\renewcommand*{\@alph}[1]{%
+  \ifcase#1\or a\or b\or γ\or
+    δ\or ε\or ζ\or η\or θ\or ι\or κ\or
+    λ\or μ\or ν\or ξ\or ο\or π\or ρ\or σ\or
+    τ\or υ\or φ\or χ\or ψ\or
+    ω\else\@ctrerr\fi
+}
+\renewcommand*{\@Alph}[1]{%
+  \ifcase#1\or Α\or Β\or Γ\or
+    Δ\or Ε\or Ζ\or Η\or Θ\or Ι\or Κ\or
+    Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or Ρ\or Σ\or
+    Τ\or Υ\or Φ\or Χ\or Ψ\or
+    Ω\else\@ctrerr\fi
+}
+\makeatother
+%--------------------------------
+
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\newcommand{\lysh}{\textbf{\textcolor{\xrwma}{ΛΥΣΗ}}}
+\newcommand{\D}[3]{\frac{\partial^2 #1}{\partial #2^2}(#2_0,#3_0)\frac{\partial^2 #1}{\partial #3^2}(#2_0,#3_0)-\left(\frac{\partial^2#1}{\partial#2\partial#3}(#2_0,#3_0)\right)^2 }
+
+\begin{document}
+\begin{center}
+{\Huge \textcolor{\xrwma}{\textbf{Μαθηματικά ΙΙ}}}\mbox{}\\
+\vspace{5mm}
+{\LARGE \textbf{Λυμένα Θέματα}}
+\vspace{1cm}
+\end{center}
+\begin{center}
+\textbf{{\Large Ιανουάριος 2007}}
+\end{center}
+\begin{thema}[start=2]
+\item \begin{rlist}
+\item Να βρεθούν τα ακρότατα της συνάρτησης $ f(x,y)=x^2-2x+2y^3+3y^2-12y+43 $.
+\item Να δείξετε ότι η συνάρτηση $ f(x,t)=\tan(2x-2t) $ είναι λύση της εξίσωσης 
+\[ f_{xx}-f_{tt}=0 \]
+\end{rlist}
+\lysh\vspace{-5mm}
+\begin{rlist}[leftmargin=4mm]
+\item Υπολογίζουμε τις μερικές παραγώγους $ f_x=\frac{\partial f}{\partial x} $ και $ f_y=\frac{\partial f}{\partial y} $ ώστε να λύσουμε το σύστημα $ \ccases{\frac{\partial f}{\partial x}=0\\\frac{\partial f}{\partial y}=0} $.
+Έχουμε λοιπόν $ \frac{\partial f}{\partial x}=2x-2 $ και $ \frac{\partial f}{\partial y}=6y^2+6y-12 $. Έτσι οι εξισώσεις του συστήματος θα είναι :
+\[ \ccases{2x-2=0\Rightarrow 2x=2\Rightarrow x=1\\
+6y^2+6y-12=0\xRightarrow{\div 6} y^2+y-2=0\Rightarrow y=-2 \textrm{ και }y=1} \]
+Συνδυάζοντας τη λύση για τη μεταβλητή $ x $ με τις λύσεις για το $ y $ παίρνουμε τα σημεία $ A(1,-2) $ και $ B(1,1) $. Για να εξετάσουμε αν τα σημεία αυτά αποτελούν τοπικά ακρότατα θα υπολογίσουμε τις ποσότητες 
+\[ \frac{\partial^2f}{\partial x^2}(x_0,y_0)\ ,\ \frac{\partial^2f}{\partial y^2}(x_0,y_0)\ \textrm{και }D=\D{f}{x}{y} \]
+Έχουμε λοιπόν $ \frac{\partial^2f}{\partial x^2}=2 $ , $ \frac{\partial^2f}{\partial y^2}=12y+6 $ και $ \frac{\partial^2f}{\partial x\partial y}=0 $ οπότε θέτοντας όπου $ (x_0,y_0) $ τις συντεταγμένες των σημείων $ A,B $ θα έχουμε :
+\begin{itemize}
+\item Για $ (x_0,y_0)=(1,-2) $ τότε $ \frac{\partial^2f}{\partial x^2}(1,-2)=2 $ , $ \frac{\partial^2f}{\partial y^2}(1,-2)=12\cdot(-2)+6=-18 $ και $ D=2\cdot(-18)-0=-36<0 $. Έτσι σύμφωνα με το κριτήριο τοπικών ακρότατων (Σελ. 54-55) αφού η ποσότητα $ D $ είναι αρνητική τότε το σημείο $ A(1,-2) $ δεν είναι τοπικό ακρότατο.
+\item Για $ (x_0,y_0)=(1,1) $ τότε $ \frac{\partial^2f}{\partial x^2}(1,1)=2 $ , $ \frac{\partial^2f}{\partial y^2}(1,1)=12\cdot1+6=18 $ και $ D=2\cdot18-0=36>0 $. Έτσι σύμφωνα με το κριτήριο τοπικών ακρότατων αφού η ποσότητα $ D $ είναι θετική και επίσης $ \frac{\partial^2f}{\partial x^2}(1,-2)>0 $ τότε το σημείο $ A(1,1) $ αποτελεί τοπικό ελάχιστο.
+\end{itemize} 
+\item Για να είναι η συνάρτηση $ f(x,t)=\tan(2x-2t) $ λύση της εξίσωσης $ f_{xx}-f_{tt}=0 $ θα πρέπει να την επαληθεύει. Υπολογίζουμε τις παραγώγους $ f_{xx}$ και $f_{tt} $ και θα έχουμε
+\[ f_x=\frac{1}{\cos^2(2x-2t)}(2x-2t)'=\frac{2}{\cos^2(2x-2t)}\Rightarrow f_{xx}=\frac{-8\sin{(2x-2t)}}{\cos^3(2x-2t)} \]
+Ομοίως θα ισχύει 
+\[ f_τ=\frac{1}{\cos^2(2x-2t)}(2x-2t)'=\frac{-2}{\cos^2(2x-2t)}\Rightarrow f_{xx}=\frac{8\sin{(2x-2t)}}{\cos^3(2x-2t)} \]
+Με αντικατάσταση λοιπόν των δύο παραγώγων στην εξίσωση θα έχουμε :
+\[ f_{xx}-f_{tt}=0\Rightarrow \frac{-8\sin{(2x-2t)}}{\cos^3(2x-2t)}+\frac{8\sin{(2x-2t)}}{\cos^3(2x-2t)}=0\Rightarrow 0=0 \]
+\end{rlist}
+\newpage
+\item Να υπολογιστεί το διπλό ολοκλήρωμα
+\[ \iint_C{e^{x^2+y^2}dA} \]
+όπου $ C $ είναι ο κύκλος με κέντρο το σημείο $ O(0,0) $ και ακτίνα $ 1 $.\\\\
+\lysh\\
+Για το ολοκλήρωμα αυτό θα χρειαστεί να γίνει μετασχηματισμός δηλαδή αλλαγή μεταβλητών. Θα αντικαταστίσουμε τις καρτεσιανές συντεταγμένες με πολικές συντεταγμένες θέτοντας \[ x=\rho\cdot\cos{\theta}\ ,\ y=\rho\cdot\sin{\theta} \]
+Υπολογίζουμε την Ιακωβιανή ορίζουσα $ \frac{D(x,y)}{D(\rho,\theta)} $ του μετασχηματισμού και θα έχουμε :
+\[ \frac{D(x,y)}{D(\rho,\theta)}=\begin{vmatrix}
+\cos{\theta} & -\rho\sin{\theta}\\
+\sin{\theta} & \rho\cos{\theta}
+\end{vmatrix}=\rho\cos^2{\theta}+\rho\sin^2{\theta}=\rho \]
+Επίσης θα έχουμε $ x^2+y^2=\rho^2\cos^2{\theta}+\rho^2\sin^2{\theta}=\rho^2 $. Ο κύκλος $ C=\{(x,y)/0\leq x^2+y^2\leq 1\} $ θα γραφτεί :
+\[ C^{*}=\{(\rho,\theta)/0\leq \rho\leq 1\textrm{ και } 0\leq\theta\leq 2\pi\} \]
+Έτσι το αρχικό ολοκλήρωμα θα γίνει
+\begin{gather*}
+\iint_C{e^{x^2+y^2}dA}=\iint_{C^{*}}{e^{\rho^2}\rho dA}=\int_{0}^{2\pi}{\int_{0}^{1}{e^{\rho^2}\rho\  d\rho}d\theta}=\int_{0}^{2\pi}{\left.\frac{e^{\rho^2}}{2} \right|_{0}^{1} d\theta}=\\
+=\int_{0}^{2\pi}{\frac{e}{2} d\theta}=\left. \frac{e\theta}{2}\right|_{0}^{2\pi}=e\pi
+\end{gather*}
+\item Να βρεθεί το κέντρο βάρους μάζας που ισοκατανέμεται στο τρίγωνο που ορίζεται από τις ευθείες $ y=x+1,y=0,x+y=1 $ και της οποίας η πυκνότητα δίνεται από τη συνάρτηση $ \delta(x,y)=c $ όπου $ c\in\mathbb{R} $.\\\\
+\lysh\\
+\wrapr{-5mm}{7}{4.4cm}{-5mm}{\begin{tikzpicture}
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$},xmin=-1.5,xmax=2.2,ymin=-1,ymax=2.2,x=1cm,y=1cm]
+\fill[cyan,opacity=.3] (axis cs:1,0)--(axis cs:-1,0)--(axis cs:0,1)--cycle;
+\addplot[domain=-1.2:.3,grafikh parastash]{x+1};
+\addplot[domain=-.3:1.2,grafikh parastash]{1-x};
+\addplot[domain=-1.2:1.2,grafikh parastash]{0};
+\end{axis}
+\node at (1.8,2) {$\varGamma$};
+\node at (2.7,1.2) {$A$};
+\node at (0.3,1.2) {$B$};
+\node at (2.5,2.5) {\footnotesize$y=x+1$};
+\node at (.5,2.5) {\footnotesize$y=1-x$};
+\end{tikzpicture}}{
+Το τρίγωνο που σχηματίζεται από τις ευθείες $ y=x+1,y=0 $ και $ x+y=1 $ έχει κορυφές τα σημεία $ A(1,0),B(-1,0) $ και $ \varGamma(0,1) $. Τα σημεία τομής των τριών ευθειών προκύπτουν λύνοντας τα παρακάτω συστήματα :
+\begin{gather*}
+\systeme{y=x+1,y=0}\Rightarrow x=-1\qquad \systeme{y=0,x+y=1}\Rightarrow x=1\\ \ccases{y=x+1\\x+y=1}\Rightarrow x+x+1=1\Rightarrow 2x=0\Rightarrow x=0\Rightarrow y=1
+\end{gather*}}
+Ο κατακόρυφος άξονας χωρίζει το τρίγωνο σε δύο περιοχές, δεξιά και αριστερά του. Θα υπολογίσουμε αρχικά το ολοκλήρωμα που μας δίνει τη μάζα του σχήματος αυτού με τη βοήθεια της πυκνότητας διασπώντας το για κάθε περιοχή ξεχωριστά. Θα έχουμε
+\begin{gather*}
+ M=\iint_{D}{\delta(x,y)dA}=\int_{-1}^{0}\int_{0}^{x+1}{c\,dydx}+\int_{0}^{1}\int_{0}^{1-x}{c\,dydx}=\\
+\int_{-1}^{0}{\left.cy \right|_{0}^{x+1}}dx+\int_{0}^{1}{\left.cy \right|_{0}^{1-x}dx }=
+\int_{-1}^{0}{c(x+1)}dx+\int_{0}^{1}{c(1-x)dx}=\\
+\left.\frac{cx^2}{2}+cx \right|_{-1}^{0}+\left.cx-\frac{cx^2}{2} \right|_{0}^{1}=c  
+\end{gather*}
+Επομένως οι συντεταγμένες $ \left( \bar{x},\bar{y}\right)  $ του κέντρου βάρους θα είναι 
+\begin{gather*}
+ \bar{x}=\frac{1}{M}\iint_{D}{x\delta(x,y)dA}=\frac{1}{c}\iint_{D}{xcdA}=\iint_{D}{xdA}=\int_{-1}^{0}\int_{0}^{x+1}{xdydx}+\int_{0}^{1}\int_{0}^{1-x}{xdydx}=\\
+\int_{-1}^{0}{\left. xy\right|_{0}^{x+1}dx}+\int_{0}^{1}{\left. xy\right|_{0}^{1-x}dx}=\int_{-1}^{0}{x(x+1)dx}+\int_{0}^{1}{x(1-x)dx}=\\
+\left.\frac{x^3}{3}+\frac{x^2}{2} \right|_{-1}^{0}+\left.\frac{x^2}{2}-\frac{x^3}{3} \right|_{0}^{1}=0
+\end{gather*}
+Ομοίως θα έχουμε $ \bar{y}=\frac{1}{M}\iint_{D}{y\delta(x,y)dA}=\frac{1}{3} $. Έτσι το κέντρο βάρους του τριγώνου θα είναι το σημείο $ M\left( 0,\frac{1}{3}\right)  $.\\
+\item Να λυθούν οι διαφορικές εξισώσεις
+\begin{rlist}
+\item $ xy'=y+x $ με $ y(1)=1 $.
+\item $ y'''-y''-y'+y=0 $ με $ y(0)=0,y'(0)=1,y''(0)=1 $.
+\end{rlist}
+\lysh
+\begin{rlist}
+\item Η εξίσωση $ xy'=y+x $ γράφεται στη μορφή $ xy'-y=x\Rightarrow y'-\frac{1}{x}y=1 $ οπότε πρόκειται για μια γραμμική διαφορική εξίσωσης 1\tss{ης} τάξης. Η γενική λύση της θα είναι
+\[ y(x)=e^{-\int{-\frac{1}{x}dx}}\left[c+\int{1\cdot e^{\int{-\frac{1}{x}dx}}dx} \right]=e^{\ln{x}}\left[c+\int{e^{-\ln{x}}dx} \right]=x\left(c+ \int \frac{1}{x}dx\right)=x\left(c-\frac{1}{x^2} \right)  \]
+Από την αρχική συνθήκη της εξίσωσης έχουμε ότι $ y(1)=1 $ και έτσι θέτοντας όπου $ x=1 $ θα ισχύει
+\[ y(1)=1\Rightarrow c-\frac{1}{1^2}=1\Rightarrow c-1=1\Rightarrow c=0 \]
+Άρα η ειδική λύση της εξίσωσης θα είναι η $ y(x)=x\left(1-\frac{1}{x^2} \right)  $.
+\item Η εξίσωση $ y'''-y''-y'+y=0 $ αποτελεί μια γραμμική ομογενή διαφορική εξίσωση 3\tss{ης} τάξης. Η χαρακτηριστική εξίσωση και οι λύσεις αυτής θα είναι 
+\begin{gather*}
+\rho^3-\rho^2-\rho+1=0\Rightarrow \rho^2(\rho-1)-(\rho-1)=0\Rightarrow \left(\rho^2-1\right)(\rho-1)=0\Rightarrow\\
+(\rho+1)(\rho-1)^2=0\Rightarrow \rho=-1\textrm{ ή }\rho=1 \textrm{ (διπλή)}
+\end{gather*}
+Για $ \rho=-1 $ η ειδική λύση θα είναι $ y_1(x)=c_1e^{-x} $. Για $ \rho=1 $ με πολλαπλότητα $ 2 $ η ειδική λύση θα είναι $ y_2(x)=\left( c_2+c_3x\right) e^{x} $. Έτσι η γενική λύση θα είναι η 
+\[ y(x)=c_1e^{-x}+c_2e^{x}+c_3xe^{x} \]
+Για να χρησιμοποιήσουμε τις αρχικές συνθήκες του προβλήματος θα πρέπει να υπολογιστούν οι $ y'(x) $ και $ y''(x) $. Έτσι θα έχουμε
+\begin{gather*}
+y'(x)=-c_1e^{-x}+c_2e^{x}+c_3e^{x}+c_3xe^{x}\\
+y''(x)=c_1e^{-x}+c_2e^{x}+2c_3e^{x}+c_3xe^{x}
+\end{gather*}
+\begin{itemize}
+\item Για $ x=0 $ θα ισχύει $ y(0)=0\Rightarrow c_1e^{0}+c_2e^{0}+c_3\cdot 0e^{0}=0\Rightarrow c_1+c_2=0 $.
+\item $ y'(0)=1\Rightarrow -c_1e^{0}+c_2e^{0}+c_3e^{0}+c_3\cdot0e^{0}=1\Rightarrow -c_1+c_2+c_3=1$
+\item $ y''(0)=1\Rightarrow c_1e^{0}+c_2e^{0}+2c_3e^{0}+c_3\cdot0e^{0}=1\Rightarrow c_1+c_2+2c_3=1 $
+\end{itemize}
+Έτσι σχηματίζεται το $ 3\times3 $ γραμμικό σύστημα εξισώσεων 
+\[
+\syssubstitute{.,{a}{c_1}{b}{c_2}{d}{c_3}}
+ \systeme{a+b=0,-a+b+d=1,a+b+2d=1}\Rightarrow (c_1,c_2,c_3)=\left(-\frac{1}{4},\frac{1}{4},\frac{1}{2} \right)  \]
+Έτσι η λύση του προβλήματος θα είναι η $ y(x)=-\frac{e^{-x}}{4}+\frac{e^{x}}{4}+\frac{xe^{x}}{2} $
+\end{rlist}
+\end{thema}
+\newpage
+\begin{center}
+\textbf{{\Large Ιούνιος 2007}}
+\end{center}
+\begin{thema}[start=2]
+\item \begin{rlist}
+\item Να βρεθούν το πεδίο ορισμού και τα ακρότατα της συνάρτησης $ f(x,y)=e^x\left( x^2+y^2\right) $.
+\item Να δείξετε ότι η συνάρτηση $ f(x,y)=2\log{\left( x^2+y^2\right)} $ είναι λύση της εξίσωσης $ f_{xx}+f_{yy}=0 $.
+\end{rlist}
+\lysh
+\begin{rlist}
+\item Η συνάρτηση $ f(x,y)=e^x\left( x^2+y^2\right) $ έχει πεδίο ορισμού το $ D_f=\mathbb{R}^2 $.γΙα να βρεθούν τα ακρότατα της συνάρτησης θα πρέπει να υπολογίσουμε τις παραγώγους $ f_x $ και $ f_y $ και να λύσουμε το σύστημα $ \ccases{\frac{\partial f}{\partial x}=0\\\frac{\partial f}{\partial y}=0} $.
+\[ f_x=e^x\left( x^2+y^2\right)+e^x\cdot 2x\ \textrm{ και }\ f_y=2ye^x \]
+Θα έχουμε λοιπόν το σύστημα
+\[ \ccases{\frac{\partial f}{\partial x}=0\\\frac{\partial f}{\partial y}=0}\!\!\!\Rightarrow
+\ccases{e^x\left( x^2+y^2\right)+e^x\cdot 2x=0\\2ye^x=0}\!\!\!\Rightarrow
+\ccases{x^2+y^2+2x=0\\y=0}\!\!\!\Rightarrow x=0\textrm{ ή }x=-2 \] 
+Τα σημεία που προκύπτουν από τη λύση του συστήματος είναι $ O(0,0) $ και $ A(-2,0) $. Για να εξετάσουμε αν τα σημεία αυτά αποτελούν ακρόατατα της συνάρτησης θα υπολογίσουμε τις ποσότητες 
+\[ \frac{\partial^2f}{\partial x^2}(x_0,y_0)\ ,\ \frac{\partial^2f}{\partial y^2}(x_0,y_0)\ \textrm{και }D=\D{f}{x}{y} \]
+Θα έχουμε λοιπόν $ \frac{\partial^2f}{\partial x^2}=e^x\left( x^2+y^2\right)+e^x\cdot 4x+2e^x $ , $ \frac{\partial^2f}{\partial y^2}=2e^x $ και $ \frac{\partial^2f}{\partial x\partial y}=2ye^x $.
+\begin{itemize}
+\item Για $ (x_0,y_0)=(0,0) $ έχουμε $ \frac{\partial^2f}{\partial x^2}(0,0)=e^0\left( 0^2+0^2\right)+e^0\cdot 4\cdot0+2e^0=2 $ , $ \frac{\partial^2f}{\partial y^2}(0,0)=2e^0=2 $ και $ \frac{\partial^2f}{\partial x\partial y}(0,0)=2\cdot0e^0=0 $ άρα
+\[ D=2\cdot2-0=4>0 \]
+Από τη στιγμή που η ποσότητα $ D $ είναι θετική και επιπλέον ισχύει $ \frac{\partial^2f}{\partial x^2}(0,0)=2>2 $ καταλήγουμε στο συμπέρασμα ότι το σημείο $ O(0,0) $ είναι τοπικό ελάχιστο της συνάρτησης. 
+\item Εργαζόμαστε ομοίως και για το σημείο $ A(-2,0) $ και βρίσκουμε ότι $ D<0 $ κάτι που σημαίνει ότι δεν μπορούμε να γνωρίζουμε αν το σημείο αποτελεί τοπικό ακρότατο.
+\end{itemize}
+\item Θέλουμε η συνάρτηση να επαληθεύει τη διαφορική εξίσωση οπότε υπολογίζουμε τις δύο μερικές παραγώγους 2\tss{ης} τάξης. Θα έχουμε
+\[ f_{x}=\frac{2}{x^2+y^2}\cdot2x=\frac{4x}{x^2+y^2}\Rightarrow f_{xx}=\frac{4y^2-4x^2}{\left(x^2+y^2 \right)^2 } \]
+Ομοίως θα έχουμε
+\[ f_{y}=\frac{2}{x^2+y^2}\cdot2y=\frac{4y}{x^2+y^2}\Rightarrow f_{yy}=\frac{4x^2-4y^2}{\left(x^2+y^2 \right)^2 } \]
+Έτσι αντικαθιστώντας τα παραπάνω στη διαφορική εξίσωση θα έχουμε
+\[ f_{xx}+f_{yy}=0\Rightarrow \frac{4y^2-4x^2}{\left(x^2+y^2 \right)^2 }+\frac{4x^2-4y^2}{\left(x^2+y^2 \right)^2 }=0\Rightarrow\frac{4y^2-4x^2+4x^2-4y^2}{\left(x^2+y^2 \right)^2 }=0 \]
+\end{rlist}
+\item Να υπολογιστεί το διπλό ολοκλήρωμα
+\[ \iint_{R}{\frac{\cos{\sqrt{x^2+y^2}}}{\sqrt{x^2+y^2}}} \]
+όπου $ R $ είναι ο δακτύλιος που περικλύεται ανάμεσα στον κύκλο με κέντρο το $ O(0,0) $ και ακτίνα $ 1 $ και τον κύκλο με κέντρο το $ O(0,0) $ και ακτίνα $ 2 $. Οι εξισώσεις των πολικών-καρτεσιανών συντεταγμένων είναι οι
+\[ x=\rho\cos{\theta}\ ,\ y=\rho\sin{\theta} \]
+\lysh\\
+\wrapr{-5mm}{12}{5.1cm}{-5mm}{\begin{tikzpicture}
+\draw[fill=\xrwma!40] (2.2,2.2) circle (2);
+\draw[fill=white] (2.2,2.2) circle (1);
+\begin{axis}[aks_on,belh ar,xlabel={\footnotesize$x$},ylabel={\footnotesize$y$},xmin=-2.2,xmax=2.4,ymin=-2.2,ymax=2.4,x=1cm,y=1cm,xtick = {-2,-1,0,1,2},ytick = {-2,-1,0,1,2}]
+\end{axis}
+\end{tikzpicture}}{
+Με το μετασχηματισμό θα αντικαταστήσουμε τις καρτεσιανές συντεταγμένες με πολικές. Η Ιακωβιανή ορίζουσα του μετασχηματισμού θα είναι :
+\[ \frac{D(x,y)}{D(\rho,\theta)}=\begin{vmatrix}
+\cos{\theta} & -\rho\sin{\theta}\\
+\sin{\theta} & \rho\cos{\theta}
+\end{vmatrix}=\rho\cos^2{\theta}+\rho\sin^2{\theta}=\rho \]
+Επίσης θα έχουμε \[ x^2+y^2=\rho^2\cos^2{\theta}+\rho^2\sin^2{\theta}=\rho^2\left( \cos^2{\theta}+\sin^2{\theta}\right)=\rho^2 \]  Ο δακτύλιος $ R=\{(x,y)/1\leq x^2+y^2\leq 2\} $ με το μετασχηματισμό θα πάρει τη μορφή
+\[ R^*=\{(\rho,\theta)/1\leq \rho \leq 2\textrm{ και }0\leq\theta\leq 2\pi\} \]}
+Έτσι το αρχικό ολοκλήρωμα θα γίνει
+\begin{align*}
+\iint_{R}{\frac{\cos{\sqrt{x^2+y^2}}}{\sqrt{x^2+y^2}}}&=\iint_{R^*}{\frac{\cos{\sqrt{\rho^2}}}{\sqrt{\rho^2}}}=\int_{0}^{2\pi}{\int_{1}^{2}{\frac{\cos{\rho}}{\rho}\cdot\rho}\ d\rho d\theta}=\\
+&=\int_{0}^{2\pi}{\int_{1}^{2}{\cos{\rho}}\ d\rho d\theta}=
+\int_{0}^{2\pi}{\left. \sin\rho\right|_{1}^{2}\ d\theta}=\int_{0}^{2\pi}{(\sin 2-\sin 1)\ d\theta}=\\
+&=\left. \theta(\sin 2-\sin 1)\right|_{0}^{2\pi}=2\pi(\sin 2-\sin 1)
+\end{align*}
+\item Να βρεθεί το κέντρο βάρους μάζας που κατανέμεται στο τρίγωνο που ορίζεται από τις ευθείες $ y=0, x=1 $ και $ y=x $ και της οποίας η πυκνότητα δίνεται από τη συνάρτηση $ \delta(x,y)=2 $.\\\\
+\lysh\\
+\end{thema}
+\end{document}

@@ -1,0 +1,232 @@
+\PassOptionsToPackage{no-math,cm-default}{fontspec}
+\documentclass[twoside,nofonts,internet,shmeiwseis]{thewria}
+\usepackage{amsmath}
+\usepackage{xgreek}
+\let\hbar\relax
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\scfont{GFS Artemisia}
+\font\icon = "Webdings"
+\usepackage[amsbb,subscriptcorrection,zswash,mtphrb]{mtpro2}
+\usepackage{tikz,pgfplots}
+\tkzSetUpPoint[size=7,fill=white]
+\xroma{red!70!black}
+%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usetkzobj{all}
+%-----------------------
+\usepackage{calc}
+\usepackage{hhline}
+\usepackage[explicit]{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[decimalsymbol=comma]{siunitx}
+\usetikzlibrary{backgrounds}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\setlist[enumerate]{label=\bf{\large \arabic*.}}
+\usepackage{adjustbox}
+\usepackage{mathimatika,gensymb,eurosym,wrap-rl}
+\usepackage{systeme,regexpatch}
+%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
+\usepackage{mathtools}
+%----------------------
+%-------- ΠΙΝΑΚΕΣ ---------
+\usepackage{booktabs}
+%----------------------
+%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
+\usepackage{calculator}
+%----------------------------
+%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
+\usepackage{array}
+\newcommand\diag[5]{%
+\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
+$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
+\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
+\draw[line cap=round] (box.north west) -- (box.south east);
+\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
+\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
+\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
+%---------------------------------
+%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
+\newcommand{\orag}[3]{\node at (#1)
+{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
+\newcommand{\kag}[3]{\node at (#1)
+{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
+\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
+{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
+%-----------------------------------------
+%------------------------------------------
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+%---------- ΛΙΣΤΕΣ ----------------------
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{brlist}{enumerate}{3}
+\setlist[brlist]{itemsep=0mm,label=\bf\roman*.}
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+% Αν μπει το bhma μεσα σε tropo τότε
+%\begin{bhma}[leftmargin=.7cm]
+\tkzSetUpPoint[size=7,fill=white]
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+\usepackage{etoolbox}
+\makeatletter
+\renewrobustcmd{\anw@true}{\let\ifanw@\iffalse}
+\renewrobustcmd{\anw@false}{\let\ifanw@\iffalse}\anw@false
+\newrobustcmd{\noanw@true}{\let\ifnoanw@\iffalse}
+\newrobustcmd{\noanw@false}{\let\ifnoanw@\iffalse}\noanw@false
+\renewrobustcmd{\anw@print}{\ifanw@\ifnoanw@\else\numer@lsign\fi\fi}
+\makeatother
+
+\begin{document}
+\begin{center}
+{\large \textbf{ΣΕΠΤΕΜΒΡΗΣ 2013}}
+\end{center}
+\textbf{ΘΕΜΑ 3}
+\begin{alist}
+\item Να βρεθεί ο μετασχηματισμός Laplace της συνάρτησης
+\[ f(t)=e^{-2t}\left(5\sin{(-2t)}-\cos{(9t)} \right)  \]
+\item Να βρεθεί ο αντίστροφος μετασχηματισμός Laplace της συνάρτησης
+\[ F(s)=\frac{6s^2-50s+92}{(s-2)(s-3)(s-4)} \]
+\end{alist}
+\textbf{ΛΥΣΗ}
+\begin{alist}
+\item Για τη συνάρτηση $ f $, πριν υπολογίσουμε το μετασχηματισμό, θα έχουμε:
+\[ f(t)=e^{-2t}\left(5\sin{(-2t)}-\cos{(9t)} \right)=5e^{-2t}\sin{(-2t)}-e^{-2t}\cos{(9t)} \]
+Έτσι ο μετασχηματισμός θα είναι:
+\begin{align*}
+\mathcal{L}(f(t))&=5\mathcal{L}\left(e^{-2t}\sin{(-2t)} \right)-\mathcal{L}\left( e^{-2t}\cos{(9t)}\right) =\\
+&=5\cdot\dfrac{-2}{(s+2)^2+(-2)^2}-\frac{s+2}{(s+2)^2+9^2}=-\dfrac{10}{(s+2)^2+4}-\frac{s+2}{(s+2)^2+81}
+\end{align*}
+\item Για να υπολογίσουμε τον αντίστροφο μετασχηματισμό Laplace της συνάρτησης $ F(s) $ γράφουμε το αρχικό κλάσμα ως άθροισμα ετερώνυμων κλασμάτων:
+\begin{gather}
+\frac{6s^2-50s+92}{(s-2)(s-3)(s-4)}=\frac{A}{s-2}+\frac{B}{s-3}+\frac{\varGamma}{s-4}\Rightarrow\nonumber\\
+6s^2-50s+92=A(s-3)(s-4)+B(s-2)(s-4)+\varGamma(s-2)(s-3)\label{1}
+\end{gather}
+Θέτοντας στη σχέση \eqref{1} όπου $ s=2 $ παίρνουμε:
+\begin{gather*} 6\cdot2^2-50\cdot2+92=A(2-3)(2-4)+B(2-2)(2-4)+\varGamma(2-2)(2-3)\Rightarrow\\
+2A=16\Rightarrow A=8
+\end{gather*}
+Ομοίως αν θέσουμε όπου $ s=3 $ βρίσκουμε $ B=4 $ και για $ s=4 $ παίρνουμε $ \varGamma=-6 $. Έτσι το αρχικό κλάσμα θα γραφτεί:
+\[ \frac{6s^2-50s+92}{(s-2)(s-3)(s-4)}=\frac{8}{s-2}+\frac{4}{s-3}-\frac{6}{s-4} \]
+Εφαρμόζουμε τον αντίστροφο μετασχηματισμό Laplace και θα έχουμε:
+\begin{align*}
+\mathcal{L}^{-1}\left( \frac{6s^2-50s+92}{(s-2)(s-3)(s-4)}\right) &=\mathcal{L}^{-1}\left( \frac{8}{s-2}\right) +\mathcal{L}^{-1}\left( \frac{4}{s-3}\right) -\mathcal{L}^{-1}\left( \frac{6}{s-4}\right)=\\
+&=8e^{2t}+4e^{3t}-6e^{4t}
+\end{align*}
+\end{alist}
+\textbf{ΘΕΜΑ 4}\\
+Να λυθεί η διαφορική εξίσωση 
+\[ y''+4y'+5y=10e^t \]
+με $ y(0)=1 $ και $ y'(0)=2 $.\\\\
+\textbf{ΛΥΣΗ}\\
+Εφαρμόζουμε το μετασχηματισμό Laplace σε κάθε μέλος της εξίσωσης:
+\begin{gather*}
+\mathcal{L}\left( y''+4y'+5y\right) =\mathcal{L}\left( 10e^t\right)\Rightarrow \mathcal{L}(y'')+4\mathcal{L}(y')+5\mathcal{L}(y)=10\mathcal{L}(e^t)\Rightarrow\\
+s^2F(s)-sy(0)-y'(0)+4\left( sF(s)-y(0)\right) +5F(s)=10\cdot\frac{1}{s-1}\Rightarrow\\
+F(s)\left(s^2+4s+5\right)-s-2-4=\frac{10}{s-1}\Rightarrow\\
+F(s)\left(s^2+4s+5\right)=\frac{10}{s-1}+s+6\Rightarrow
+F(s)\left(s^2+4s+5\right)=\frac{s^2+5s+4}{s-1}\Rightarrow\\
+F(s)=\frac{s^2+5s+4}{(s-1)\left(s^2+4s+5\right)}
+\end{gather*}
+Πριν εφαρμόσουμε τον αντίστροφο μετασχηματισμό Laplace αναλύουμε το τελευταίο κλάσμα σε απλά κλάσματα:
+\begin{gather*}
+\frac{s^2+5s+4}{(s-1)\left(s^2+4s+5\right)}=\frac{A}{s-1}+\frac{Bs+\varGamma}{s^2+4s+5}\Rightarrow\\
+s^2+5s+4=A(s^2+4s+5)+(Bs+\varGamma)(s-1)\Rightarrow\\
+s^2+5s+4=As^2+4As+5A+Bs^2-Bs+\varGamma s-\varGamma\Rightarrow\\
+s^2+5s+4=s^2(A+B)+s(4A-B+\varGamma)+5A-\varGamma
+\end{gather*}
+Για να είναι ίσα τα δύο πολυώνυμα θα πρέπει οι συντελεστές των ομοβάθμιων όρων να είναι ίσοι. Προκύπτει έτσι το παρακάτω σύστημα:
+\begin{gather*}
+\systeme[AB\varGamma]{A+B=1,4A-B+\varGamma=5,5A-\varGamma=4}\ \ \Rightarrow A=1-B\xRightarrow{\textrm{2η και 3η}}\ccases{4(1-B)-B+\varGamma=5\\5(1-B)-\varGamma=4}\Rightarrow\\
+\systeme[B\varGamma]{-5B+\varGamma=1,-5B-\varGamma=-1}\Rightarrow B=0 \textrm{ και }\varGamma=1 \Rightarrow A=1
+\end{gather*}
+Άρα το αρχικό κλάσμα θα γίνει:
+\[ \frac{s^2+5s+4}{(s-1)\left(s^2+4s+5\right)}=\frac{1}{s-1}+\frac{1}{s^2+4s+5} \]
+Ο παρονομαστής του δεύτερου κλάσματος είναι τριώνυμο με αρνητική διακρίνουσα οπότε θα γραφτεί στη μορφή $ s^2+4s+5=(s+2)^2+1 $. Eφαρμόζοντας τώρα τον αντίστροφο μετασχηματισμό Laplace υπολογίζουμε τη λύση της διαφορικής εξίσωσης:
+\begin{align*}
+y(t)=\mathcal{L}^{-1}\left( \frac{s^2+5s+4}{(s-1)\left(s^2+4s+5\right)}\right) &=\mathcal{L}^{-1}\left( \frac{1}{s-1}\right) +\mathcal{L}^{-1}\left( \frac{1}{(s+2)^2+1}\right)=e^t+e^{-2t}\sin{t}
+\end{align*}
+\newpage
+\noindent
+\begin{center}
+{\large \textbf{ΦΕΒΡΟΥΑΡΙΟΣ 2012}}
+\end{center}
+\textbf{ΘΕΜΑ 3}
+\begin{alist}
+\item Να βρεθεί ο μετασχηματισμός Laplace της συνάρτησης
+\[ f(t)=e^{-3t}\left(\sin{(5t)}+3\cos{(3t)} \right)  \]
+\item Να βρεθεί ο αντίστροφος μετασχηματισμός Laplace της συνάρτησης
+\[ F(s)=\frac{s-2}{s^3-3s+2} \]
+\end{alist}
+\textbf{ΛΥΣΗ}
+\begin{alist}
+\item Η συνάρτηση $ f $ γράφεται αναλυτικά ως εξής:
+\[ f(t)=e^{-3t}\left(\sin{(5t)}+3\cos{(3t)} \right)=e^{-3t}\sin{(5t)}+3e^{-3t}\cos{(3t)} \]
+Εφαρμόζουμε σ' αυτήν το μετασχηματισμό Laplace και θα έχουμε:
+\begin{align*}
+\mathcal{L}(f(t))&=\mathcal{L}\left( e^{-3t}\sin{(5t)}\right) +3\mathcal{L}\left( e^{-3t}\cos{(3t)}\right)=\\
+&=\frac{5}{(s+3)^2+5^2}+3\cdot\frac{s+3}{(s+3)^2+3^2}=\frac{5}{(s+3)^2+25}+\frac{3s+9}{(s+3)^2+9}
+\end{align*}
+\item Αρχικά γράφουμε το κλάσμα ως άθροισμα απλών κλασμάτων. Για να γίνει αυτό θα πρέπει να παραγοντοποιηθεί ο παρονομαστής $ s^3-3s+2 $:
+\begin{gather*}
+s^3-3s+2=s^3-s-2s+2=s\left(s^2-1 \right)-2(s-1)=s\left(s-1 \right)(s+1)-2(s-1)=\\
+(s-1)\left[ s(s+1)-2\right]=(s-1)(s^2+s-2)=(s-1)(s-1)(s+2)=(s-1)^2(s+2)
+\end{gather*}
+Για το αρχικό κλάσμα λοιπόν θα ισχύει:
+\begin{gather*}
+\frac{s-2}{(s-1)^2(s+2)}=\frac{A}{s-1}+\frac{B}{(s-1)^2}+\frac{\varGamma}{s+2}\Rightarrow\\
+s-2=A(s-1)(s+2)+B(s+2)+\varGamma(s-1)^2\Rightarrow\\
+s-2=As^2+As-2A+Bs+2B+\varGamma s^2-2\varGamma s+\varGamma
+\end{gather*}
+Από την τελευταία σχέση παίρνουμε το σύστημα:
+\begin{gather*}
+\systeme[AB\varGamma]{A+\varGamma=0,A+B-2\varGamma=1,-2A+2B+\varGamma=-2}\ \ \Rightarrow A=-\varGamma\xRightarrow{\textrm{2η και 3η}}\ccases{-\varGamma+B-2\varGamma=1\\-2(-\varGamma)+2B+\varGamma=-2}\Rightarrow\\
+\systeme[B\varGamma]{B-3\varGamma=1,2B+3\varGamma=-2}\Rightarrow B=-\frac{1}{3} \textrm{ και }\varGamma=-\frac{4}{9} \Rightarrow A=\frac{4}{9}
+\end{gather*}
+Έτσι γράφοντας το κλάσμα ως άθροισμα απλών κλασμάτων και εφαρμόζοντας στη συνέχεια τον αντίστροφο μετασχηματισμό Laplace θα έχουμε:
+\begin{align*}
+\frac{s-2}{(s-1)^2(s+2)}&=\frac{\frac{4}{9}}{s-1}+\frac{-\frac{1}{3}}{(s-1)^2}+\frac{-\frac{4}{9}}{s+2}\Rightarrow\\
+\mathcal{L}^{-1}\left( \frac{s-2}{(s-1)^2(s+2)}\right) &=\frac{4}{9}\mathcal{L}^{-1}\left( \frac{1}{s-1}\right)-\frac{1}{3}\mathcal{L}^{-1}\left( \frac{1}{(s-1)^2}\right)-\frac{4}{9}\mathcal{L}^{-1}\left( \frac{1}{s+2}\right)=\\
+&=\frac{4}{9}e^t-\frac{1}{3}te^t-\frac{4}{9}e^{-2t}
+\end{align*}
+\end{alist}
+\textbf{ΘΕΜΑ 4}\\
+Να λυθεί η διαφορική εξίσωση
+\[ \frac{d^3y}{dt^3}+\frac{dy}{dt}=0 \]
+με $ y(0)=y'(0)=0 $ και $ y''(0)=1 $.\\\\
+\textbf{ΛΥΣΗ}\\
+Εφαρμόζουμε το μετασχηματισμό Laplace στη διαφορική εξίσωση και θα προκύψει:
+\begin{gather*}
+\mathcal{L}\left( \frac{d^3y}{dt^3}+\frac{dy}{dt}\right)=\mathcal{L}(0)\Rightarrow\mathcal{L}\left( \frac{d^3y}{dt^3}\right) +\mathcal{L}\left( \frac{dy}{dt}\right)=0\Rightarrow\\
+s^3F(s)-s^2y(0)-sy'(0)-y''(0)+sF(s)-y(0)=0\Rightarrow\\
+s^3F(s)-1+sF(s)=0\Rightarrow F(s)\left( s^3+s\right)=1\Rightarrow F(s)=\frac{1}{s^3+s}=\frac{1}{s\left(s^2+1\right)}
+\end{gather*}
+Γράφουμε το τελευταίο κλάσμα ως άθροισμα απλών κλασμάτων:
+\begin{gather*}
+\frac{1}{s\left( s^2+1\right) }=\frac{A}{s}+\frac{Bs+\varGamma}{s^2+1}\Rightarrow\nonumber
+1=A\left( s^2+1\right)+(Bs+\varGamma)s\Rightarrow\\
+1=As^2+A+Bs^2+\varGamma s
+\end{gather*}
+Από την τελευταία σχέση παίρνουμε το παρακάτω σύστημα:
+\[ \systeme[AB\varGamma]{A+B=0,\varGamma=0,A=1}\ \ \Rightarrow A=1,\ B=-1,\ \varGamma=0 \]
+Έτσι γράφουμε το αρχικό κλάσμα ως άθροισμα των δύο κλασμάτων και στη συνέχεια εφαρμόζουμε τον αντίστροφο μετασχηματισμό Laplace ώστε να βρούμε τη λύση του προβλήματος αρχικών τιμών.
+\begin{align*}
+\frac{1}{s(s-1)(s+1)}&=\frac{1}{s}-\frac{s}{s^2+1}\Rightarrow\\
+y(t)=\mathcal{L}^{-1}\left( \frac{1}{s\left( s^2+1\right) }\right)&=\mathcal{L}^{-1}\left( \frac{1}{s}\right)-\mathcal{L}^{-1}\left( \frac{s}{s^2+1}\right)=1-\cos{t}
+\end{align*}
+\end{document}

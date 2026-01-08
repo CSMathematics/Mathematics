@@ -1,0 +1,149 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage{nimbusserif}
+%\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Minion Pro}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+%\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\newfontfamily{\kerkissans}{Century Gothic Bold}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{{\large\theaskhsh.}\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\titlespacing{\paragraph}{0mm}{2mm}{2mm}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\section*{Άσκηση 2: Πιθανότητες (Binomial \& Poisson)}
+
+\subsection*{Ι. Ακυρώσεις Τουριστών (Διωνυμική Κατανομή)}
+
+Σε μια εκδρομή συμμετέχουν $n=12$ τουρίστες. Η πιθανότητα ένας τουρίστας να ακυρώσει την κράτησή του είναι σταθερή: $p = 15\% = 0.15$.
+Η πιθανότητα να μη ακυρώσει είναι $q = 1 - p = 1 - 0.15 = 0.85$.
+Το πλήθος των ακυρώσεων $X$ ακολουθεί ${Διωνυμική Κατανομή}$ $\mathcal{B}(n, p)$, δηλαδή $\mathcal{B}(12, 0.15)$.
+Η συνάρτηση πιθανότητας είναι:
+$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k} = \binom{12}{k} (0.15)^k (0.85)^{12-k}$$
+
+\subsubsection*{$\alpha$) Πιθανότητα κανένας τουρίστας να μην ακυρώσει ($X=12$)}
+Ζητείται η πιθανότητα ${κανένας να μην ακυρώσει}$. Αυτό σημαίνει ότι ${όλοι οι 12}$ (δηλαδή $k=12$) $\textbf{συμμετέχουν}$. Άρα, $X$ είναι το πλήθος των ακυρώσεων, οπότε $X=0$.
+Πρέπει να βρούμε την πιθανότητα να υπάρξουν $k=0$ ακυρώσεις:
+$$P(X=0) = \binom{12}{0} (0.15)^0 (0.85)^{12-0} = 1 \cdot 1 \cdot (0.85)^{12} = 0.1422=14.22\%$$.
+\subsubsection*{$\beta$) Πιθανότητα ακριβώς 2 τουρίστες να ακυρώσουν ($X=2$)}
+Ζητείται η πιθανότητα να έχουμε $k=2$ ακυρώσεις:
+\begin{align*}
+P(X=2) &= \binom{12}{2} (0.15)^2 (0.85)^{12-2} = \frac{12!}{2!(12-2)!} \cdot (0.15)^2 \cdot (0.85)^{10} =\\&= \frac{12 \cdot 11}{2} \cdot (0.0225) \cdot (0.1969) = 66 \cdot 0.00443 = 0.2924=29.24\%
+\end{align*}
+\subsubsection*{$\gamma$) Πιθανότητα τουλάχιστον 1 τουρίστας να ακυρώσει ($X \ge 1$)}
+Η πιθανότητα ${τουλάχιστον 1}$ τουρίστας να ακυρώσει είναι ίση με το ${συμπληρωματικό}$ του ενδεχομένου ${κανένας να μη ακυρώσει}$ ($X=0$):
+$$P(X \ge 1) = 1 - P(X < 1) = 1 - P(X=0)$$
+Χρησιμοποιούμε το αποτέλεσμα από το $\alpha$):
+$$P(X \ge 1) = 1 - 0.1422= 0.8578=85.78\%$$
+\subsection*{II. Αφίξεις Τουριστών σε Μουσείο (Κατανομή Poisson)}
+
+Οι αφίξεις τουριστών ανά ώρα ακολουθούν $\textbf{Κατανομή Poisson}$ με μέσο ρυθμό άφιξης $\lambda = 7$ τουρίστες ανά ώρα.
+Η συνάρτηση πιθανότητας για την κατανομή Poisson είναι:
+$$P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} \quad \text{όπου } \lambda=7$$
+\subsubsection*{$\alpha$) Πιθανότητα να φτάσουν ακριβώς 5 τουρίστες σε μία ώρα ($X=5$)}
+Ζητείται η πιθανότητα να φτάσουν $k=5$ τουρίστες:
+$$P(X=5) = \frac{7^5 e^{-7}}{5!} = \frac{16807 \cdot e^{-7}}{120} = \frac{16807 \cdot 0.0009119}{120} = \frac{15.3379}{120}= 0.1278=12.78\%$$.
+
+\subsubsection*{$\beta$) Πιθανότητα να φτάσουν το πολύ 3 τουρίστες σε μία ώρα ($X \le 3$)}
+Ζητείται η πιθανότητα να φτάσουν $k=0$ ή $k=1$ ή $k=2$ ή $k=3$ τουρίστες:
+$$P(X \le 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)$$
+
+\begin{itemize}
+    \item $P(X=0) = \frac{7^0 e^{-7}}{0!} = e^{-7} = 0.0009119$
+    \item $P(X=1) = \frac{7^1 e^{-7}}{1!} = 7 e^{-7} = 0.006383$
+    \item $P(X=2) = \frac{7^2 e^{-7}}{2!} = \frac{49}{2} e^{-7} = 24.5 \cdot 0.0009119 = 0.022342$
+    \item $P(X=3) = \frac{7^3 e^{-7}}{3!} = \frac{343}{6} e^{-7} = 57.167 \cdot 0.0009119 = 0.052136$
+\end{itemize}
+$$P(X \le 3) = 0.00091 + 0.00638 + 0.02234 + 0.05214 = 0.08177=8.18\%$$
+\subsubsection*{$\gamma$) Πιθανότητα να φτάσουν τουλάχιστον 8 τουρίστες σε μία ώρα ($X \ge 8$)}
+Η πιθανότητα $\textbf{τουλάχιστον 8}$ τουρίστες είναι το $\textbf{συμπληρωματικό}$ του ενδεχομένου να φτάσουν $\textbf{το πολύ 7}$ τουρίστες:
+$$P(X \ge 8) = 1 - P(X \le 7)$$
+Αν χρησιμοποιήσουμε τους τύπους, πρέπει να υπολογίσουμε τα $P(X=4), P(X=5), P(X=6), P(X=7)$ και να τα προσθέσουμε στα $P(X \le 3) = 0.08177$.
+
+\begin{itemize}
+    \item $P(X=4) = \frac{7^4 e^{-7}}{4!} = 0.09123$
+    \item $P(X=5) = \frac{7^5 e^{-7}}{5!} = 0.12771$ (από το $\alpha$)
+    \item $P(X=6) = \frac{7^6 e^{-7}}{6!} = 0.14900$
+    \item $P(X=7) = \frac{7^7 e^{-7}}{7!} = 0.14900$
+\end{itemize}
+\begin{align*}
+P(X \le 7) &= P(X \le 3) + P(X=4) + P(X=5) + P(X=6) + P(X=7)=\\
+&= 0.08177 + 0.09123 + 0.12771 + 0.14900 + 0.14900= 0.59871
+\end{align*}
+
+Τελικά:
+$$P(X \ge 8) = 1 - P(X \le 7) = 1 - 0.59871 = 0.40129=40.13\%$$
+
+
+
+\end{document}

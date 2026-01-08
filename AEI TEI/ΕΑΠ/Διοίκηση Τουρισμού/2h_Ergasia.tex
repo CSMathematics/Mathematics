@@ -1,0 +1,270 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,hhline}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\kerkissans{\Large{ΑΣΚΗΣΗ \theaskhsh.\\}}\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\titlespacing{\paragraph}{0mm}{2mm}{2mm}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\askhsh\vspace{-5mm}
+\begin{Alist}
+\item
+Έστω $K_1$ το κεφάλαιο που επενδύεται στο Πρόγραμμα 1 και $K_2$ το κεφάλαιο που επενδύεται στο Πρόγραμμα 2. Ισχύει ότι
+\begin{equation}
+K_1 + K_2 = 50.000
+\end{equation}
+Επίσης ο τύπος για τον υπολογισμό του κεφαλαίου ύστερα από ανατοκισμό αρχικού κεφαλαίου $K_o$ μετά από $n$ έτη είναι
+\[ K=K_0\left(1+0{,}05\right)^n=K_0\cdot 1{,}05^n \]
+Έτσι το κεφάλαιο $K_1$ ύστερα από $6$ χρόνια ανατοκισμού θα είναι $K_1\cdot 1{,}05^6$ και αντίστοιχα το κεφάλαιο $K_2$ μετά από $3$ χρόνια θα είναι $K_2\cdot 1{,}05^3$. Απαιτούμε λοιπόν να ισχύει
+    \begin{equation}
+        K_1 \cdot 1,05^6 = K_2 \cdot 1,05^3
+    \end{equation}
+Διαιρούμε και τα δύο μέλη της εξίσωσης (2) με το $1,05^3$:
+$$K_1 \cdot \frac{1,05^6}{1{,}05^3} = K_2\Rightarrow K_1 \cdot 1{,}05^3 = K_2$$
+Αντικαθιστούμε την παραπάνω σχέση στην εξίσωση (1):
+\begin{gather*}
+K_1+Κ_2 = 50.000\Rightarrow K_1+K_1\cdot 1{,}05^3=50.000\Rightarrow
+K_1 \cdot 1,157625 + K_1 = 50.000\Rightarrow\\
+K_1 \cdot 2,157625 = 50.000\Rightarrow\\
+K_1 = \frac{50.000}{2,157625}\Rightarrow\\
+K_1 = 23.173,63 \text{ ευρώ}
+\end{gather*}
+Άρα από την εξίσωση (1) παίρνουμε
+$$K_2 = 50.000 - K_1$$
+$$K_2 = 50.000 - 23.173,63$$
+$$K_2 = 26.826,37 \text{ ευρώ}$$
+Το κεφάλαιο που πρέπει να επενδυθεί σε κάθε πρόγραμμα είναι:
+\begin{itemize}
+    \item {Πρόγραμμα 1} (6 χρόνια): ${23.173,63}$ ευρώ
+    \item {Πρόγραμμα 2} (3 χρόνια): ${26.826,37}$ ευρώ
+\end{itemize}
+\item Η εταιρεία \eng{Mediterraneo Cruises \& Adventures} επενδύει:
+\begin{itemize}
+    \item Αρχικό Κεφάλαιο ($K$): $150.000€$
+    \item Τελικό Ποσό ($T$): $197.730€$
+    \item Χρόνος Επένδυσης ($t$): $5$ χρόνια
+    \item Συχνότητα Ανατοκισμού ($m$): $2$ (εξαμηνιαία)
+    \item Συνολικός αριθμός περιόδων ανατοκισμού ($n$): $t \cdot m = 5 \cdot 2 = 10$
+\end{itemize}
+
+Ο τύπος του σύνθετου τόκου είναι:
+$$T = K \cdot (1 + r)^n$$
+όπου $r$ είναι το επιτόκιο της περιόδου ανατοκισμού (εξαμηνιαίο επιτόκιο). Αντικαθιστούμε τις τιμές στον τύπο:
+\begin{gather*}
+197.730 = 150.000 \cdot (1 + r)^{10}
+\Rightarrow\frac{197.730}{150.000} = (1 + r)^{10}\Rightarrow\\
+1,3182 = (1 + r)^{10}\Rightarrow 1+r=\sqrt[10]{1{,}3182}\Rightarrow r=\sqrt[10]{1{,}3182}-1=1{,}028-1=0{,}028=2{,}8\%
+\end{gather*}
+Το ονομαστικό ετήσιο επιτόκιο ($R$) σχετίζεται με το εξαμηνιαίο ($r$) και τη συχνότητα ανατοκισμού ($m$) ως εξής:
+$$R = r \cdot m = 0,028 \cdot 2 = 0,056 = 5,6\%$$
+
+\item 
+\begin{itemize}
+    \item Στόχος Κεφαλαίου (Τελικό Ποσό $T$): $480.000€$
+    \item Αρχικό Κεφάλαιο ($K$): $340.000€$
+    \item Χρόνος Επένδυσης ($t$): $6$ χρόνια
+    \item Προτεινόμενο Επιτόκιο ($r$): $5\% = 0,05$ (ετήσιος ανατοκισμός)
+\end{itemize}
+
+Χρησιμοποιούμε τον τύπο του σύνθετου τόκου για ετήσιο ανατοκισμό:
+$$T = K \cdot (1 + r)^t$$
+
+Υπολογίζουμε το τελικό ποσό με το προτεινόμενο επιτόκιο:
+$$T= 340.000 \cdot (1 + 0,05)^6= 340.000 \cdot 1{,}05^6 = 340.000 \cdot 1,340096 = 455.632,64\text{\texteuro}$$
+
+άρα $455.632,64$\texteuro  $< 480.000$\texteuro, οπότε \textbf{δεν} θα συγκεντρωθεί το απαιτούμενο ποσό με επιτόκιο $5\%$. Αναζητούμε το επιτόκιο ($r$) που θα οδηγήσει σε τελικό ποσό $T = 480.000€$:
+\begin{gather*}
+T = K \cdot (1 + r)^t\Rightarrow\\
+480.000 = 340.000 \cdot (1 + r)^6\Rightarrow\\
+\frac{480.000}{340.000} = (1 + r)^6\Rightarrow\\
+\frac{48}{34} = 1,411765 = (1 + r)^6\Rightarrow\\
+1 + r = \sqrt[6]{1,411765}\Rightarrow\\
+1 + r = 1,059639\Rightarrow r = 1,059639 - 1\Rightarrow\\
+r = 0,059639= 5,96
+\end{gather*}
+Με το προτεινόμενο ετήσιο επιτόκιο 5\%, το τελικό ποσό είναι περίπου ${455.632,64}$, το οποίο δεν επαρκεί. Το ετήσιο επιτόκιο που θα απαιτούνταν για να επιτευχθεί ο στόχος των $480.000$ είναι περίπου ${5,96\%}$.
+\end{Alist}
+\askhsh\vspace{-5mm}
+\begin{Alist}
+\item 
+Για τα ομαδοποιημένα δεδομένα, υπολογίζουμε τα κέντρα κλάσεων ($m_i$) και το άθροισμα $\sum m_i f_i$:
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Κλάση & $f_i$ & $m_i$ & $m_i \cdot f_i$ & $F_i$\\
+\hhline{=====} $[50, 100)$ & $5$ & $75$ & $375$ & $5$ \\
+$[100, 150)$ & 11 & 125 & 1.375 & 16 \\
+$[150, 200)$ & 10 & 175 & 1.750 & 26 \\
+$[200, 250]$ & 4 & 225 & 900 & 30 \\
+\hline
+\textbf{Σύνολο} & $n=30$ & & $\sum m_i f_i = 4.400$ & \\
+\hline
+\end{tabular}
+\end{center}
+\begin{rlist}
+\item Η μέση τιμή του δείγματος θα ισούται με
+\[\bar{x} = \frac{\sum m_i f_i}{n} = \frac{4.400}{30}= 146,67 \text{ ευρώ}\]
+\item Στη στήλη $F_i$ ξεπερνάμε 1η φορά το $\frac{n}{2}=\frac{50}{2}=25$ στην 2η γραμμή άρα η κλάση διαμέσου είναι η 2η: $[100, 150)$ με κάτω άκρο $L_2=100$, πλάτος $\delta=50$, συχνότητα $f_2=11$ και αθροιστική συχνότητα για την προηγούμενη κλάση $F_{1}=5$.
+\begin{gather*}
+\text{Διάμεσος} = L + \frac{\delta}{f_i} \cdot \left(\frac{n}{2} - F_{i-1}\right)= 100 + \frac{50}{11} \cdot \left(15-5\right) = 100 + \cdot \frac{50}{11}\cdot 10 = 145,45 \text{ ευρώ}
+\end{gather*}
+
+\item Η επικρατούσα κλάση είναι η $[100, 150)$ με τη μεγαλύτερη συχνότητα ($f_i=11$) άρα:
+$$\tau_0=L_{\tau_0}+\delta\dfrac{\Delta_1}{\Delta_1+\Delta_2} = 100+50\cdot\dfrac{11-5}{11-5+11-10}=100+50\cdot\frac{6}{7}=142{,}85 \text{ ευρώ.}$$
+\item Υπολογίζουμε τη διασπορά $s^2$, χρησιμοποιώντας $\bar{x} = 146,67$:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$m_i$ & $f_i$ & $f_i(m_i - \bar{x})^2$ \\
+\hhline{===}
+75 & 5 & $5 \cdot (75 - 146,67)^2 = 25.682,95$ \\
+\hline
+125 & 11 & $11 \cdot (125 - 146,67)^2 = 5.165,60$ \\
+\hline
+175 & 10 & $10 \cdot (175 - 146,67)^2 = 8.025,90$ \\
+\hline
+225 & 4 & $4 \cdot (225 - 146,67)^2 = 24.542,36$ \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Σύνολο ($\sum f_i(m_i - \bar{x})^2$)}} & $\mathbf{63.416,81}$ \\
+\hline
+\end{tabular}
+\end{center}
+Η διασπορά $s^2$ για το δείγμα είναι:
+$$s^2 = \frac{\sum f_i(m_i - \bar{x})^2}{n-1} = \frac{63.416,81}{29} = 2.186,78$$
+άρα η τυπική απόκλιση $s$ είναι:
+$$s = \sqrt{s^2} = \sqrt{2.186,78}= 46,76 \text{ ευρώ}$$
+\item Ο συντελεστής μεταβολής του δείγματος είναι:
+$$CV_A = \frac{s_A}{\bar{x}_A} \cdot 100\% = \frac{46,76}{146,67} \cdot 100\% = 31,88\%$$
+\end{rlist}
+\item Για τη σύγκριση της σχετικής διασποράς θα συγκρίνουμε τους συντελεστές μεταβλητότητας των δύο δειγμάτων. Γνωρίζουμε για το δεύτερο δείγμα ότι: $\sum_{i=1}^{30} m_i = 4.968$, $\sum_{i=1}^{30} (m_i - \bar{x})^2 = 61.037,25$, $N=30$.
+\begin{itemize}
+    \item {Μέση Τιμή ($\bar{x}_B$):}
+    $$\bar{x}_B = \frac{4.968}{30} = {165,60 \text{ ευρώ}}$$
+    \item {Τυπική Απόκλιση ($s_B$):}
+    $$s_B^2 = \frac{\sum (m_i - \bar{x})^2}{N-1} = \frac{61.037,25}{29} = 2.104,73$$
+    $$s_B = \sqrt{2.104,73} = {45,88 \text{ ευρώ}}$$
+    \item {Συντελεστής Μεταβλητότητας ($CV_B$):}
+    $$CV_B = \frac{s_B}{\bar{x}_B} \cdot 100\% = \frac{45,88}{165,60} \cdot 100\%$$
+    $${CV_B = 27,70\%}$$
+\end{itemize}
+Επειδή $CV_A > CV_B$, η {Περιοχή A} εμφανίζει {μεγαλύτερη σχετική διασπορά} (μεγαλύτερη ανομοιογένεια) στις τιμές των δωματίων, αναλογικά με τη μέση τιμή τους, σε σύγκριση με την Περιοχή Β.
+\end{Alist}
+\askhsh\vspace{-5mm}
+\begin{Alist}
+\item 
+Η κανονική κατανομή που ακολουθούν τα έσοδα του γραφείου έχει: $\mu = 50.000€$ και $\sigma = 5.000€$. Η τυποποιημένη μεταβλητή είναι $Z = \frac{X - \mu}{\sigma}$.
+\begin{rlist}
+\item Για $X=60.000$ παίρνουμε $Z=\frac{60.000-50.000}{5.000}=\frac{10.000}{5.000}=2$ έτσι η ζητούμενη πιθανότητα είναι
+$$P(X > 60.000) = P(Z > 2) = 1 - P(Z \le 2) = 1 - 0,9772= 0,0228=2{,}28\%$$
+
+\item Για $X=45.000$ παίρνουμε $Z=\frac{45.000-50.000}{5.000}=\frac{-5.000}{5.000}=-1$ έτσι η ζητούμενη πιθανότητα είναι
+$$P(X < 45.000) =  P(Z < -1) = 0,1587=15{,}87\%$$
+
+\item Ομοίως για $X=47.000$ και $55.000$ έχουμε αντίστοιχα $Z=\frac{47.000-50.000}{5.000}=\frac{-3.000}{5.000}=-0{,}6$ και $Z=\frac{55.000-50.000}{5.000}=\frac{5.000}{5.000}=1$. Έτσι η ζητούμενη πιθανότητα θα είναι
+\begin{align*}
+P(47.000 < X < 55.000) &= P(-0,6 < Z < 1) = P(Z < 1) - P(Z < -0,6)=\\&= 0,8413- 0,2743= 0,5670=56{,}7\%
+\end{align*}
+
+\item 
+Ζητείται η τιμή $x$ τέτοια ώστε $P(X < x) = 0,05$.
+Από τον πίνακα της κανονικής κατανομής, η τιμή $Z$ για την οποία $P(Z < z) = 0,05$ είναι: $z=-1,645$ έτσι για εύρεση του $x$ έχουμε:
+$$z = \frac{x - \mu}{\sigma} \implies x = \mu + z \cdot \sigma$$
+$$x = 50.000 + (-1,645) \cdot 5.000$$
+$$x = 50.000 - 8.225 = 41.775 \text{ ευρώ}$$
+\end{rlist}
+\item Έστω $X, Y, Z$ τα ενδεχόμενα διαμονής στα ξενοδοχεία και $I$ το ενδεχόμενο ικανοποίησης.
+Γνωρίζουμε ότι
+\begin{itemize}
+    \item $P(X) = 0,50$, $P(Y) = 0,30$, $P(Z) = 0,20$
+    \item $P(I \mid X) = 0,90$, $P(I \mid Y) = 0,70$, $P(I \mid Z) = 0,60$
+\end{itemize}
+\begin{rlist}
+\item 
+
+Η πιθανότητα ένας τυχαίος πελάτης να είναι ικανοποιημένος είναι:
+$$P(I) = P(I \mid X) P(X) + P(I \mid Y) P(Y) + P(I \mid Z) P(Z)$$
+$$P(I) = (0,90 \cdot 0,50) + (0,70 \cdot 0,30) + (0,60 \cdot 0,20)$$
+$$P(I) = 0,45 + 0,21 + 0,12 = 0,78$$
+\item Η πιθανότητα ένας ικανοποιημένος πελάτης να έχει μείνει στο ξενοδοχείο $X$ είναι:
+$$P(X \mid I) = \frac{P(I \mid X) P(X)}{P(I)}$$
+$$P(X \mid I) = \frac{0,90 \cdot 0,50}{0,78} = \frac{0,45}{0,78} = 0,5769$$
+\item Η πιθανότητα ένας πελάτης που μένει στο ξενοδοχείο $Z$ να μην είναι ικανοποιημένος είναι: 
+\[P(I' \mid Z) = 1 - P(I \mid Z) = 1 - 0,60 = 0,40.\]
+Υπολογίζουμε την πιθανότητα ένας πελάτης οποιουδήποτε ξενοδοχείου να μην είναι ικανοποιημένος: $P(I')$:
+$$P(I') = 1 - P(I) = 1 - 0,78 = 0,22$$
+Έτσι από τον τύπο του \eng{Bayes} παίρνουμε.
+$$P(Z \mid I') = \frac{P(I' \mid Z) P(Z)}{P(I')} = \frac{0,40 \cdot 0,20}{0,22} = \frac{0,08}{0,22}= 0,3636$$
+\end{rlist}
+\end{Alist}
+\end{document}

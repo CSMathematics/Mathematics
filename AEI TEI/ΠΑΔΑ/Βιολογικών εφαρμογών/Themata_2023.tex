@@ -1,0 +1,655 @@
+\documentclass[a4paper,12pt,twoside]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}% For Greek language support
+\usepackage{amsmath}      % For advanced math environments
+\usepackage{amssymb}    
+\usepackage[english,greek]{babel}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[outer=1.50cm, inner=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype,mathimatika}
+\usetikzlibrary{arrows.meta}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{tikzmark}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[curlybraces,amsbb,mtphrb]{mtpro2}  % For setting page margins
+
+\newcommand{\en}[1]{{\selectlanguage{english}#1\selectlanguage{greek}}}
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
+
+% --- Document ---
+\begin{document}
+
+\section*{\kerkissans{ΘΕΜΑ 1: Ανάλυση Θερμοκρασίας Μεταλλικής Πλάκας}}
+
+\noindent
+Η θερμοκρασία T μιας μεταλλικής πλάκας δίνεται (σε $^\circ$\en{C}) από τη συνάρτηση:
+\[ T(x, y) = e^y (\sin x + \sin y) \]
+
+\subsection*{\kerkissans{Λύση}}
+
+\textbf{Βήμα 1: Υπολογισμός της Κλίσης (\en{Gradient}) της T}
+
+\noindent
+Για να αναλύσουμε τη μεταβολή της θερμοκρασίας, πρώτα υπολογίζουμε τις μερικές παραγώγους της $T$ ως προς $x$ και $y$:
+\[
+\frac{\partial T}{\partial x} = \frac{\partial}{\partial x} [e^y (\sin x + \sin y)] = e^y \cos x
+\]
+\[
+\frac{\partial T}{\partial y} = \frac{\partial}{\partial y} [e^y (\sin x + \sin y)] = e^y(\sin x + \sin y) + e^y(\cos y) = e^y(\sin x + \sin y + \cos y)
+\]
+
+\noindent
+Το διάνυσμα της κλίσης (\en{gradient vector}) $\nabla T$ είναι:
+\[
+\nabla T(x, y) = \frac{\partial T}{\partial x} \vec{i} + \frac{\partial T}{\partial y} \vec{j} = (e^y \cos x)\vec{i} + [e^y(\sin x + \sin y + \cos y)]\vec{j}
+\]
+\noindent
+\textbf{Βήμα 2: Υπολογισμός της Κλίσης στο Σημείο $(0,0)$}
+
+\noindent
+Αντικαθιστούμε $x=0$ και $y=0$ στην παραπάνω εξίσωση για να βρούμε την κλίση στο συγκεκριμένο σημείο:
+\[
+\nabla T(0, 0) = (e^0 \cos 0)\vec{i} + [e^0(\sin 0 + \sin 0 + \cos 0)]\vec{j}
+\]
+\[
+\nabla T(0, 0) = (1 \cdot 1)\vec{i} + [1(0 + 0 + 1)]\vec{j}
+\]
+\[
+\nabla T(0, 0) = 1\vec{i} + 1\vec{j}=\langle 1, 1 \rangle
+\]
+
+\noindent
+Με την κλίση στο σημείο $(0,0)$ υπολογισμένη, μπορούμε να απαντήσουμε στα ερωτήματα.
+
+\hrulefill
+\vspace{1em}
+
+\begin{enumerate}
+    \item[\textbf{α)}] \textbf{Ρυθμός μεταβολής κατά μήκος του διανύσματος $\vec{v} = -3\vec{i} + 4\vec{j}$}
+
+    \noindent
+    Ο ρυθμός μεταβολής (κατευθυνόμενη παράγωγος) απαιτεί το μοναδιαίο διάνυσμα $\vec{u}$ στην κατεύθυνση του $\vec{v}$.
+    
+    \noindent
+    Το μέτρο του $\vec{v}$ είναι:
+    \[ |\vec{v}| = \sqrt{(-3)^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \]
+    
+    \noindent
+    Το μοναδιαίο διάνυσμα είναι:
+    \[ \vec{u} = \frac{\vec{v}}{|\vec{v}|} = \frac{-3\vec{i} + 4\vec{j}}{5} = -\frac{3}{5}\vec{i} + \frac{4}{5}\vec{j} = \left\langle -\frac{3}{5}, \frac{4}{5} \right\rangle \]
+    
+    \noindent
+    Ο ρυθμός μεταβολής της T στο (0,0) κατά την κατεύθυνση του $\vec{u}$ είναι το εσωτερικό γινόμενο της κλίσης με το μοναδιαίο διάνυσμα:
+    \[ D_{\vec{u}}T(0,0) = \nabla T(0,0) \cdot \vec{u} \]
+    \[ D_{\vec{u}}T(0,0) = \langle 1, 1 \rangle \cdot \left\langle -\frac{3}{5}, \frac{4}{5} \right\rangle = (1)\left(-\frac{3}{5}\right) + (1)\left(\frac{4}{5}\right) = -\frac{3}{5} + \frac{4}{5} = \frac{1}{5} \]
+    \textbf{Απάντηση:} Ο ρυθμός μεταβολής είναι $\frac{1}{5} \, ^\circ\text{\en{C}}/\text{μονάδα μήκους}$.
+
+    \item[\textbf{β)}] \textbf{Κατεύθυνση μέγιστης αύξησης και μέγιστης ελάττωσης}
+
+    \noindent
+    Η θερμοκρασία T αυξάνεται ταχύτερα στην κατεύθυνση του διανύσματος της κλίσης $\nabla T(0,0)$.
+    \[ \textbf{Κατεύθυνση μέγιστης αύξησης: } \nabla T(0,0) = \vec{i} + \vec{j} \]
+    
+    \noindent
+    Η θερμοκρασία T ελαττώνεται ταχύτερα στην αντίθετη κατεύθυνση από το διάνυσμα της κλίσης.
+    \[ \textbf{Κατεύθυνση μέγιστης ελάττωσης: } -\nabla T(0,0) = -(\vec{i} + \vec{j}) = -\vec{i} - \vec{j} \]
+
+    \item[\textbf{γ)}] \textbf{Κατεύθυνση όπου η θερμοκρασία παραμένει σταθερή}
+
+    \noindent
+    Η θερμοκρασία παραμένει σταθερή (μηδενικός ρυθμός μεταβολής) στις κατευθύνσεις που είναι κάθετες στο διάνυσμα της κλίσης. Ένα διάνυσμα $\vec{w} = a\vec{i} + b\vec{j}$ είναι κάθετο στο $\nabla T(0,0) = \vec{i} + \vec{j}$ αν το εσωτερικό τους γινόμενο είναι μηδέν:
+    \[ \nabla T(0,0) \cdot \vec{w} = 0 \implies \langle 1, 1 \rangle \cdot \langle a, b \rangle = 1a + 1b = a + b = 0 \implies b = -a \]
+    \noindent
+    \textbf{Απάντηση:} Οι κατευθύνσεις είναι αυτές που ορίζονται από τα διανύσματα $\vec{i} - \vec{j}$ και $-\vec{i} + \vec{j}$.
+
+    \item[\textbf{δ)}] \textbf{Μέγιστος ρυθμός μεταβολής}
+
+    \noindent
+    Ο μέγιστος ρυθμός μεταβολής της T, σε απόλυτη τιμή, ισούται με το μέτρο του διανύσματος της κλίσης στο σημείο (0,0).
+    \[ |\nabla T(0,0)| = |\vec{i} + \vec{j}| = \sqrt{1^2 + 1^2} = \sqrt{2} \]
+    \textbf{Απάντηση:} Ο μέγιστος ρυθμός μεταβολής είναι $\sqrt{2} \, ^\circ\text{\en{C}}/\text{μονάδα μήκους}$.
+
+\end{enumerate}
+
+\section*{\kerkissans{ΘΕΜΑ 2: Ανάλυση Συνάρτησης και Εύρεση Ακροτάτων}}
+
+\subsection*{A) Ανάλυση της συνάρτησης $f(x,y)$}
+\noindent
+Δίνεται η συνάρτηση:
+\[
+f(x, y) = 
+\begin{cases} 
+\frac{(x-y)^2}{x^2 + y^2} & \text{αν } (x, y) \neq (0, 0) \\
+0 & \text{αν } (x, y) = (0, 0) 
+\end{cases}
+\]
+
+\begin{enumerate}[label=\roman*.]
+    \item \textbf{Εξέταση της συνέχειας στο (0,0)}
+    
+    \noindent
+    Για να είναι η συνάρτηση συνεχής στο (0,0), πρέπει το όριο $\lim_{(x,y) \to (0,0)} f(x, y)$ να υπάρχει και να ισούται με $f(0,0)=0$. Εξετάζουμε το όριο κατά μήκος διαφορετικών διαδρομών.
+    
+    \noindent
+    \textit{Κατά μήκος της ευθείας $y=x$:}
+    \[
+    \lim_{x \to 0} f(x, x) = \lim_{x \to 0} \frac{(x-x)^2}{x^2 + x^2} = \lim_{x \to 0} \frac{0}{2x^2} = 0
+    \]
+    
+    \noindent
+    \textit{Κατά μήκος της ευθείας $y=0$:}
+    \[
+    \lim_{x \to 0} f(x, 0) = \lim_{x \to 0} \frac{(x-0)^2}{x^2 + 0^2} = \lim_{x \to 0} \frac{x^2}{x^2} = 1
+    \]
+    
+    \noindent
+    \textbf{Συμπέρασμα:} Επειδή τα όρια κατά μήκος διαφορετικών διαδρομών είναι διαφορετικά ($0 \neq 1$), το όριο της συνάρτησης στο (0,0) δεν υπάρχει. Άρα, η συνάρτηση \textbf{δεν είναι συνεχής} στο (0,0).
+
+    \item \textbf{Ύπαρξη μερικών παραγώγων στο (0,0)}
+    
+    \noindent
+    Υπολογίζουμε τις μερικές παραγώγους χρησιμοποιώντας τον ορισμό:
+    \[
+    \frac{\partial f}{\partial x}(0,0) = \lim_{h \to 0} \frac{f(h, 0) - f(0,0)}{h} = \lim_{h \to 0} \frac{\frac{(h-0)^2}{h^2+0^2} - 0}{h} = \lim_{h \to 0} \frac{1}{h}
+    \]
+    Το παραπάνω όριο δεν υπάρχει (απειρίζεται).
+    
+    \[
+    \frac{\partial f}{\partial y}(0,0) = \lim_{k \to 0} \frac{f(0, k) - f(0,0)}{k} = \lim_{k \to 0} \frac{\frac{(0-k)^2}{0^2+k^2} - 0}{k} = \lim_{k \to 0} \frac{1}{k}
+    \]
+    Το παραπάνω όριο επίσης δεν υπάρχει.
+    
+    \noindent
+    \textbf{Συμπέρασμα:} Η συνάρτηση \textbf{δεν έχει μερικές παραγώγους} στο σημείο (0,0).
+
+    \item \textbf{Ύπαρξη κατευθυνόμενης παραγώγου στο (0,0)}
+    
+    \noindent
+    Μια συνάρτηση που δεν είναι συνεχής σε ένα σημείο, δεν μπορεί να είναι διαφορίσιμη σε αυτό το σημείο. Η ύπαρξη όλων των κατευθυνόμενων παραγώγων είναι ισχυρότερη συνθήκη από την ύπαρξη των μερικών παραγώγων. Εφόσον οι μερικές παράγωγοι δεν υπάρχουν, η συνάρτηση δεν είναι διαφορίσιμη. Εξετάζοντας τον ορισμό της κατευθυνόμενης παραγώγου για ένα τυχαίο μοναδιαίο διάνυσμα $\vec{u} = \langle u_1, u_2 \rangle$:
+    \begin{align*}
+    D_{\vec{u}}f(0,0) &= \lim_{h \to 0} \frac{f(hu_1, hu_2) - f(0,0)}{h} \\
+    &= \lim_{h \to 0} \frac{1}{h} \left( \frac{(hu_1 - hu_2)^2}{(hu_1)^2 + (hu_2)^2} \right) \\
+    &= \lim_{h \to 0} \frac{1}{h} \left( \frac{h^2(u_1 - u_2)^2}{h^2(u_1^2 + u_2^2)} \right) \\
+    &= (u_1 - u_2)^2 \lim_{h \to 0} \frac{1}{h}
+    \end{align*}
+    Το όριο αυτό δεν υπάρχει, εκτός από την ειδική περίπτωση όπου $u_1 = u_2$.
+    
+    \noindent
+    \textbf{Συμπέρασμα:} Η συνάρτηση \textbf{δεν έχει κατευθυνόμενη παράγωγο} στο (0,0) για μια τυχαία κατεύθυνση.
+\end{enumerate}
+
+\hrulefill
+\vspace{1em}
+
+\subsection*{B) Εύρεση ακροτάτων υπό συνθήκη}
+\noindent
+Αναζητούμε τα ακρότατα της συνάρτησης $f(x, y, z) = x - 2y + 2z$ υπό τη συνθήκη $g(x, y, z) = x^2 + y^2 + z^2 - 9 = 0$. Θα χρησιμοποιήσουμε τη μέθοδο των πολλαπλασιαστών \en{Lagrange}.
+
+\noindent
+\textbf{Βήμα 1: Ορισμός του συστήματος εξισώσεων}\\
+\noindent
+Το σύστημα εξισώσεων είναι $\nabla f = \lambda \nabla g$ και $g=0$.
+\[
+\nabla f = \langle 1, -2, 2 \rangle \quad \text{και} \quad \nabla g = \langle 2x, 2y, 2z \rangle
+\]
+Το σύστημα γίνεται:
+\begin{align*}
+1 &= \lambda(2x) \\
+-2 &= \lambda(2y) \\
+2 &= \lambda(2z) \\
+x^2 + y^2 + z^2 &= 9
+\end{align*}
+
+\noindent
+\textbf{Βήμα 2: Επίλυση του συστήματος}\\
+\noindent
+Από τις τρεις πρώτες εξισώσεις (με $\lambda \neq 0$) λύνουμε ως προς $x, y, z$:
+\[
+x = \frac{1}{2\lambda}, \quad y = -\frac{1}{\lambda}, \quad z = \frac{1}{\lambda}
+\]
+Αντικαθιστούμε στην εξίσωση της συνθήκης:
+\[
+\left(\frac{1}{2\lambda}\right)^2 + \left(-\frac{1}{\lambda}\right)^2 + \left(\frac{1}{\lambda}\right)^2 = 9
+\]
+\[
+\frac{1}{4\lambda^2} + \frac{1}{\lambda^2} + \frac{1}{\lambda^2} = 9 \implies \frac{1 + 4 + 4}{4\lambda^2} = 9 \implies \frac{9}{4\lambda^2} = 9
+\]
+\[
+4\lambda^2 = 1 \implies \lambda^2 = \frac{1}{4} \implies \lambda = \pm \frac{1}{2}
+\]
+
+\noindent
+\textbf{Βήμα 3: Εύρεση των κρίσιμων σημείων}
+\begin{itemize}
+    \item Για $\lambda = \frac{1}{2}$: \quad $x=1, \quad y=-2, \quad z=2$. \quad \textbf{Σημείο $P_1(1, -2, 2)$}
+    \item Για $\lambda = -\frac{1}{2}$: \quad $x=-1, \quad y=2, \quad z=-2$. \quad \textbf{Σημείο $P_2(-1, 2, -2)$}
+\end{itemize}
+
+\noindent
+\textbf{Βήμα 4: Υπολογισμός των ακροτάτων}\\
+\noindent
+Υπολογίζουμε την τιμή της $f$ στα σημεία που βρήκαμε:
+\[
+f(1, -2, 2) = 1 - 2(-2) + 2(2) = 1 + 4 + 4 = 9
+\]
+\[
+f(-1, 2, -2) = -1 - 2(2) + 2(-2) = -1 - 4 - 4 = -9
+\]
+
+\noindent
+\textbf{Συμπέρασμα:}
+\begin{itemize}
+    \item Το \textbf{μέγιστο} της συνάρτησης είναι \textbf{9} και εμφανίζεται στο σημείο \textbf{(1, -2, 2)}.
+    \item Το \textbf{ελάχιστο} της συνάρτησης είναι \textbf{-9} και εμφανίζεται στο σημείο \textbf{(-1, 2, -2)}.
+\end{itemize}
+
+\section*{\kerkissans{ΘΕΜΑ 3: Υπολογισμός Μάζας Καμπύλης και Διπλού Ολοκληρώματος}}
+
+\subsection*{A) Υπολογισμός μάζας και μέσης πυκνότητας}
+\noindent
+Δίνεται η συνάρτηση γραμμικής πυκνότητας μάζας $f(x, y, z) = 2xy + \sqrt{z}$ και η καμπύλη του χώρου με παραμετρικές εξισώσεις:
+\[ x(t) = \cos t, \quad y(t) = \sin t, \quad z(t) = t, \quad 0 \le t \le \pi \]
+Το διάνυσμα θέσης της καμπύλης είναι $\vec{r}(t) = \langle \cos t, \sin t, t \rangle$.\\\\
+\noindent
+\textbf{Βήμα 1: Υπολογισμός του στοιχείου μήκους τόξου $ds$}\\
+\noindent
+Πρώτα, βρίσκουμε την παράγωγο του διανύσματος θέσης:
+\[ \vec{r}'(t) = \langle -\sin t, \cos t, 1 \rangle \]
+Στη συνέχεια, υπολογίζουμε το μέτρο της παραγώγου:
+\[ |\vec{r}'(t)| = \sqrt{(-\sin t)^2 + (\cos t)^2 + 1^2} = \sqrt{\sin^2 t + \cos^2 t + 1} = \sqrt{1 + 1} = \sqrt{2} \]
+Το στοιχείο μήκους τόξου είναι $ds = |\vec{r}'(t)| dt = \sqrt{2} dt$.
+
+\noindent
+\textbf{Βήμα 2: Υπολογισμός της μάζας της καμπύλης (M)}\\
+\noindent
+Η μάζα δίνεται από το επικαμπύλιο ολοκλήρωμα $M = \int_C f(x, y, z) ds$. Αντικαθιστούμε τις παραμετρικές εξισώσεις στην $f$:
+\[ f(\vec{r}(t)) = 2(\cos t)(\sin t) + \sqrt{t} = \sin(2t) + \sqrt{t} \]
+Το ολοκλήρωμα για τη μάζα γίνεται:
+\begin{align*}
+M &= \int_0^\pi f(\vec{r}(t)) |\vec{r}'(t)| dt = \int_0^\pi (\sin(2t) + \sqrt{t}) \sqrt{2} dt \\
+&= \sqrt{2} \int_0^\pi (\sin(2t) + t^{1/2}) dt \\
+&= \sqrt{2} \left[ -\frac{1}{2}\cos(2t) + \frac{2}{3}t^{3/2} \right]_0^\pi \\
+&= \sqrt{2} \left[ \left(-\frac{1}{2}\cos(2\pi) + \frac{2}{3}\pi^{3/2}\right) - \left(-\frac{1}{2}\cos(0) + 0\right) \right] \\
+&= \sqrt{2} \left[ \left(-\frac{1}{2} + \frac{2}{3}\pi^{3/2}\right) - \left(-\frac{1}{2}\right) \right] = \sqrt{2} \left(\frac{2}{3}\pi^{3/2}\right) = \frac{2\sqrt{2}}{3}\pi\sqrt{\pi}
+\end{align*}
+
+\noindent
+\textbf{Βήμα 3: Υπολογισμός της μέσης πυκνότητας μάζας}\\
+\noindent
+Η μέση πυκνότητα είναι ο λόγος της συνολικής μάζας (M) προς το συνολικό μήκος (L) της καμπύλης.
+\[ L = \int_0^\pi ds = \int_0^\pi \sqrt{2} dt = \sqrt{2} [t]_0^\pi = \pi\sqrt{2} \]
+Η μέση πυκνότητα είναι:
+\[ \bar{\rho} = \frac{M}{L} = \frac{\frac{2\sqrt{2}}{3}\pi^{3/2}}{\pi\sqrt{2}} = \frac{2}{3}\pi^{1/2} = \frac{2\sqrt{\pi}}{3} \]
+
+\hrulefill
+\vspace{1em}
+
+\subsection*{B) Υπολογισμός ολοκληρώματος}
+\noindent
+Να υπολογιστεί το ολοκλήρωμα:
+\[ I = \int_0^2 \int_0^{\sqrt{4-x^2}} \frac{1}{\sqrt{4 - x^2 - y^2}} dy dx \]
+
+\noindent
+\textbf{Βήμα 1: Αναγνώριση της περιοχής ολοκλήρωσης}\\
+\noindent
+Τα όρια ολοκλήρωσης είναι $0 \le x \le 2$ και $0 \le y \le \sqrt{4-x^2}$. Η συνθήκη $y = \sqrt{4-x^2}$ αντιστοιχεί σε $x^2+y^2=4$. Η περιοχή είναι το τεταρτημόριο του κύκλου με ακτίνα 2 στο πρώτο τεταρτημόριο.
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Draw axes
+    \draw[-latex, thick] (-0.5, 0) -- (2.5, 0) node[right] {$x$};
+    \draw[-latex, thick] (0, -0.5) -- (0, 2.5) node[above] {$y$};
+
+    % Shade the region of integration
+    \fill[blue!20] (0,0) -- (2,0) arc (0:90:2) -- cycle;
+    
+    % Draw the arc
+    \draw[thick] (2,0) arc (0:90:2);
+
+    % Add ticks and labels
+    \draw (2,0.1) -- (2,-0.1) node[below] {$2$};
+    \draw (0.1,2) -- (-0.1,2) node[left] {$2$};
+    \node at (0,0) [below left] {$O$};
+    
+    % Label the region
+    \node at (1,1) {$R$};
+\end{tikzpicture}
+\end{center}
+\noindent
+\textbf{Βήμα 2: Μετατροπή σε πολικές συντεταγμένες}\\
+\noindent
+Η μετατροπή σε πολικές συντεταγμένες είναι η καταλληλότερη μέθοδος.
+\[ x = r\cos\theta, \quad y = r\sin\theta, \quad x^2+y^2=r^2, \quad dy dx = r dr d\theta \]
+Τα νέα όρια είναι $0 \le r \le 2$ και $0 \le \theta \le \pi/2$.
+Η υπό ολοκλήρωση συνάρτηση γίνεται:
+\[ \frac{1}{\sqrt{4 - (x^2 + y^2)}} = \frac{1}{\sqrt{4 - r^2}} \]
+Το ολοκλήρωμα μετασχηματίζεται σε:
+\[ I = \int_0^{\pi/2} \int_0^2 \frac{1}{\sqrt{4 - r^2}} \cdot r dr d\theta \]
+
+\noindent
+\textbf{Βήμα 3: Υπολογισμός του ολοκληρώματος}
+\noindent
+Πρώτα υπολογίζουμε το εσωτερικό ολοκλήρωμα ως προς $r$:
+\[ \int_0^2 \frac{r}{\sqrt{4 - r^2}} dr \]
+Χρησιμοποιούμε αντικατάσταση: $u = 4 - r^2$, $du = -2r dr \implies r dr = -\frac{1}{2} du$.
+Όταν $r=0$, $u=4$. Όταν $r=2$, $u=0$.
+\[ \int_4^0 \frac{1}{\sqrt{u}} \left(-\frac{1}{2} du\right) = \frac{1}{2} \int_0^4 u^{-1/2} du = \frac{1}{2} [2\sqrt{u}]_0^4 = [\sqrt{u}]_0^4 = \sqrt{4} - 0 = 2 \]
+Στη συνέχεια, υπολογίζουμε το εξωτερικό ολοκλήρωμα ως προς $\theta$:
+\[ I = \int_0^{\pi/2} 2 d\theta = [2\theta]_0^{\pi/2} = 2\left(\frac{\pi}{2}\right) - 0 = \pi \]
+
+\section*{\kerkissans{ΘΕΜΑ 4: Πεπλεγμένη Παραγώγιση και Κανόνας Αλυσίδας}}
+
+\subsection*{A) Υπολογισμός πεπλεγμένης παραγώγου}
+\noindent
+Δίνεται η εξίσωση $x + x^3 y^2 + y \sin x = 1$, η οποία ορίζει πεπλεγμένα το $y$ σαν συνάρτηση του $x$. Για να υπολογίσουμε την παράγωγο $y' = dy/dx$, παραγωγίζουμε και τα δύο μέλη της εξίσωσης ως προς $x$, θεωρώντας το $y$ ως συνάρτηση του $x$.
+
+\noindent
+\textbf{Βήμα 1: Παραγώγιση της εξίσωσης ως προς $x$}
+\[
+\frac{d}{dx}(x + x^3 y^2 + y \sin x) = \frac{d}{dx}(1)
+\]
+Εφαρμόζουμε τους κανόνες παραγώγισης (κανόνας αθροίσματος, κανόνας γινομένου) σε κάθε όρο:
+\begin{itemize}
+    \item $\frac{d}{dx}(x) = 1$
+    \item $\frac{d}{dx}(x^3 y^2) = (\frac{d}{dx}x^3)y^2 + x^3(\frac{d}{dx}y^2) = 3x^2 y^2 + x^3(2y \frac{dy}{dx}) = 3x^2 y^2 + 2x^3 y y'$
+    \item $\frac{d}{dx}(y \sin x) = (\frac{d}{dx}y)\sin x + y(\frac{d}{dx}\sin x) = \frac{dy}{dx}\sin x + y \cos x = y' \sin x + y \cos x$
+    \item $\frac{d}{dx}(1) = 0$
+\end{itemize}
+
+\noindent
+\textbf{Βήμα 2: Επίλυση ως προς $y'$}\\
+\noindent
+Συνδυάζοντας τα παραπάνω, η παραγωγισμένη εξίσωση είναι:
+\[
+1 + 3x^2 y^2 + 2x^3 y y' + y' \sin x + y \cos x = 0
+\]
+Ομαδοποιούμε τους όρους που περιέχουν το $y'$:
+\[
+y'(2x^3 y + \sin x) = -1 - 3x^2 y^2 - y \cos x
+\]
+Λύνουμε ως προς $y'$:
+\[
+y' = \frac{-1 - 3x^2 y^2 - y \cos x}{2x^3 y + \sin x} = - \frac{1 + 3x^2 y^2 + y \cos x}{2x^3 y + \sin x}
+\]
+
+\hrulefill
+\vspace{1em}
+
+\subsection*{B) Επαλήθευση εξίσωσης με τον κανόνα της αλυσίδας}
+\noindent
+Δίνεται η συνάρτηση $z = y f(x^2 - y^2)$. Θέλουμε να δείξουμε ότι ικανοποιεί την εξίσωση:
+\[ \frac{1}{x} \frac{\partial z}{\partial x} + \frac{1}{y} \frac{\partial z}{\partial y} = \frac{z}{y^2} \]
+Θέτουμε $u = x^2 - y^2$, οπότε $z = y f(u)$.
+
+\noindent
+\textbf{Βήμα 1: Υπολογισμός της μερικής παραγώγου $\frac{\partial z}{\partial x}$}\\
+\noindent
+Χρησιμοποιούμε τον κανόνα της αλυσίδας. Το $y$ είναι σταθερό ως προς $x$.
+\[
+\frac{\partial z}{\partial x} = y \frac{\partial}{\partial x}f(u) = y \cdot \frac{df}{du} \cdot \frac{\partial u}{\partial x}
+\]
+Επειδή $\frac{\partial u}{\partial x} = 2x$, έχουμε:
+\[
+\frac{\partial z}{\partial x} = y \cdot f'(u) \cdot (2x) = 2xy f'(x^2 - y^2)
+\]
+
+\noindent
+\textbf{Βήμα 2: Υπολογισμός της μερικής παραγώγου $\frac{\partial z}{\partial y}$}\\
+\noindent
+Εδώ, το $y$ εμφανίζεται τόσο ως παράγοντας όσο και μέσα στη συνάρτηση $f$. Χρησιμοποιούμε τον κανόνα του γινομένου και τον κανόνα της αλυσίδας.
+\[
+\frac{\partial z}{\partial y} = \frac{\partial}{\partial y}(y) \cdot f(u) + y \cdot \frac{\partial}{\partial y}f(u) = 1 \cdot f(u) + y \cdot \frac{df}{du} \cdot \frac{\partial u}{\partial y}
+\]
+Επειδή $\frac{\partial u}{\partial y} = -2y$, έχουμε:
+\[
+\frac{\partial z}{\partial y} = f(u) + y \cdot f'(u) \cdot (-2y) = f(x^2 - y^2) - 2y^2 f'(x^2 - y^2)
+\]
+
+\noindent
+\textbf{Βήμα 3: Αντικατάσταση στην εξίσωση}\\
+\noindent
+Αντικαθιστούμε τις μερικές παραγώγους στο αριστερό μέλος της εξίσωσης:
+\begin{align*}
+\text{Αριστερό Μέλος} &= \frac{1}{x} \frac{\partial z}{\partial x} + \frac{1}{y} \frac{\partial z}{\partial y} \\
+&= \frac{1}{x} [2xy f'(x^2 - y^2)] + \frac{1}{y} [f(x^2 - y^2) - 2y^2 f'(x^2 - y^2)] \\
+&= 2y f'(x^2 - y^2) + \frac{f(x^2 - y^2)}{y} - \frac{2y^2 f'(x^2 - y^2)}{y} \\
+&= 2y f'(x^2 - y^2) + \frac{f(x^2 - y^2)}{y} - 2y f'(x^2 - y^2) \\
+&= \frac{f(x^2 - y^2)}{y}
+\end{align*}
+Τώρα, υπολογίζουμε το δεξί μέλος της εξίσωσης:
+\[
+\text{Δεξί Μέλος} = \frac{z}{y^2} = \frac{y f(x^2 - y^2)}{y^2} = \frac{f(x^2 - y^2)}{y}
+\]
+
+
+\section*{ΘΕΜΑ 5: Υπολογισμός Ροής και Θεώρημα Απόκλισης}
+
+\noindent
+Δίνεται το διανυσματικό πεδίο $\vec{F}(x, y) = x^2 y \vec{i} + xy^2 \vec{j}$ και το τετράγωνο $D$ με κορυφές O(0,0), A(1,0), B(1,1) και Γ(0,1). Το σύνορο του τετραγώνου, $\partial D$, αποτελείται από τα ευθύγραμμα τμήματα $C_1$ (OA), $C_2$ (AB), $C_3$ (BΓ) και $C_4$ (ΓΟ).
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Draw axes
+    \draw[-latex, thick] (-0.2, 0) -- (1.5, 0) node[right] {$x$};
+    \draw[-latex, thick] (0, -0.2) -- (0, 1.5) node[above] {$y$};
+
+    % Shade the region
+    \fill[blue!10] (0,0) rectangle (1,1);
+    
+    % Draw the boundary path with arrows
+    \draw[-latex, ultra thick, blue] (0,0) -- (0.5,0) node[below, midway] {$C_1$};
+    \draw[ultra thick, blue] (0.5,0) -- (1,0);
+    \draw[-latex, ultra thick, blue] (1,0) -- (1,0.5) node[right, midway] {$C_2$};
+    \draw[ultra thick, blue] (1,0.5) -- (1,1);
+    \draw[-latex, ultra thick, blue] (1,1) -- (0.5,1) node[above, midway] {$C_3$};
+    \draw[ultra thick, blue] (0.5,1) -- (0,1);
+    \draw[-latex, ultra thick, blue] (0,1) -- (0,0.5) node[left, midway] {$C_4$};
+    \draw[ultra thick, blue] (0,0.5) -- (0,0);
+
+    % Label vertices
+    \node at (0,0) [below left] {O(0,0)};
+    \node at (1,0) [below right] {A(1,0)};
+    \node at (1,1) [above right] {B(1,1)};
+    \node at (0,1) [above left] {Γ(0,1)};
+    
+    % Label the region
+    \node at (0.5,0.5) {$D$};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{α) Υπολογισμός της ροής με παραμετροποίηση}
+Για τον υπολογισμό της ροής του $\vec{F}$ κατά μήκος του συνόρου $\partial D$ , θα παραμετρήσουμε κάθε πλευρά του τετραγώνου και θα χρησιμοποιήσουμε τον τύπο \[ \Phi = \oint_{\partial D} M \, dy - N \, dx\]
+
+\noindent\textbf{Κατά μήκος $C_1$ (από $O(0,0)$ προς $A(1,0)$):}
+\begin{itemize}
+    \item Έχουμε $x = t \Rightarrow \d x=\d t$ και $y = 0 \Rightarrow \d y = 0$, για $0 \le t \le 1$.
+    \item Το πεδίο πάνω στην καμπύλη είναι $\vec{F}(t, 0) = \langle t^2 \cdot 0, t \cdot 0^2 \rangle = \langle 0, 0 \rangle$.
+    \item Άρα $M=0$ και $N=0$.
+    \item Η ροή είναι: $\Phi_1 = \int_0^1 (0 \cdot 0 - 0 \cdot 1) dt = 0$.
+\end{itemize}
+
+\noindent\textbf{Κατά μήκος $C_2$ (από $A(1,0)$ προς $B(1,1)$):}
+\begin{itemize}
+    \item Έχουμε $x = 1 \Rightarrow \d x = 0$ και $y = t \Rightarrow \d y = \d t$, για $0 \le t \le 1$.
+    \item Το πεδίο πάνω στην καμπύλη είναι $\vec{F}(1, t) = \langle 1^2 \cdot t, 1 \cdot t^2 \rangle = \langle t, t^2 \rangle$.
+    \item Άρα $M=t$ και $N=t^2$.
+    \item Η ροή είναι: $\Phi_2 = \int_0^1 (t \cdot 1 - t^2 \cdot 0) dt = \int_0^1 t \, dt = \left[\frac{1}{2}t^2\right]_0^1 = \frac{1}{2}$.
+\end{itemize}
+
+\noindent\textbf{Κατά μήκος $C_3$ (από $B(1,1)$ προς $\varGamma(0,1)$):}
+\begin{itemize}
+    \item Έχουμε $x = t \Rightarrow \d x = \d t$ και $y = 1 \Rightarrow \d y = 0$, για $0 \le t \le 1$ με $t:1\to 0$.
+    \item Το πεδίο πάνω στην καμπύλη είναι $\vec{F}(t, 1) = \langle t^2 \cdot 1, t \cdot 1^2 \rangle = \langle t^2, t \rangle$.
+    \item Άρα $M=t^2$ και $N=t$.
+    \item Η ροή είναι: $\Phi_3 = \int_1^0 (t^2 \cdot 0 - t \cdot 1) dt = \int_1^0 -t \, dt = \left[-\frac{t^2}{2}\right]_1^0 = 0 - \left(-\frac{1}{2}\right) = \frac{1}{2}$.
+\end{itemize}
+
+\noindent\textbf{Κατά μήκος $C_4$ (από $\varGamma(0,1)$ προς $O(0,0)$):}
+\begin{itemize}
+    \item Έχουμε $x = 0 \Rightarrow \d x = 0$ και $y = t \Rightarrow \d y = 1$ , για $0 \le t \le 1$ με $t:1\to 0$.
+    \item Το πεδίο πάνω στην καμπύλη είναι $\vec{F}(0, t) = \langle 0^2 \cdot t, 0 \cdot t^2 \rangle = \langle 0, 0 \rangle$.
+    \item Άρα $M=0$ και $N=0$.
+    \item Η ροή είναι: $\Phi_4 = \int_1^0 (0 \cdot 1 - 0 \cdot 0) dt = 0$.
+\end{itemize}
+
+\noindent\textbf{Συνολική Ροή:}
+\[ \Phi = 0 + \frac{1}{2} + \frac{1}{2} + 0 = 1 \]
+
+\subsection*{β) Επαλήθευση με το Θεώρημα Απόκλισης}
+Το θεώρημα απόκλισης (τύπος της ροής) στο επίπεδο δηλώνει:
+\[ \oint_{\partial D} \vec{F} \cdot \hat{n} \, ds = \iint_D \left(\frac{\partial M}{\partial x} + \frac{\partial N}{\partial y}\right) dA \]
+όπου $\vec{F} = M\vec{i} + N\vec{j}$.
+\noindent\\
+\textbf{Βήμα 1: Υπολογισμός της απόκλισης}\\
+Έχουμε $M = x^2 y$ και $N = xy^2$. Η απόκλιση θα είναι:
+\[ \nabla \cdot \vec{F} = \frac{\partial}{\partial x}(x^2 y) + \frac{\partial}{\partial y}(xy^2) = 2xy + 2xy = 4xy \]
+
+\noindent
+\textbf{Βήμα 2: Υπολογισμός του διπλού ολοκληρώματος}
+\[ \iint_D 4xy \, dA = \int_0^1 \int_0^1 4xy \, dx dy \]
+\[ = \int_0^1 \left[ 2x^2 y \right]_{x=0}^{x=1} dy = \int_0^1 2y \, dy = \left[ y^2 \right]_0^1 = 1^2 - 0^2 = 1 \]
+
+\noindent
+\textbf{Συμπέρασμα:}
+Τα αποτελέσματα και από τις δύο μεθόδους είναι ίσα με 1, επομένως το θεώρημα της απόκλισης επαληθεύεται.
+\newpage
+Η έννοια της ροής (\en{flux}) είναι θεμελιώδης στη φυσική και τα μαθηματικά και περιγράφει τη «διέλευση» ή τη «ροή» μιας ποσότητας μέσα από μια επιφάνεια ή μια καμπύλη.
+
+\section{Φυσική Ερμηνεία (Η Διαισθητική Προσέγγιση)}
+
+Φανταστείτε ένα ποτάμι που ρέει. Το νερό κινείται με μια συγκεκριμένη ταχύτητα και κατεύθυνση σε κάθε σημείο. Αυτή η κίνηση περιγράφεται από ένα \textbf{διανυσματικό πεδίο} (όπως το $\vec{F}$ στην άσκηση). Τώρα, φανταστείτε ότι τοποθετείτε μια απόχη (μια νοητή γραμμή ή επιφάνεια) μέσα στο ποτάμι. Η \textbf{ροή} είναι απλώς η \textbf{ποσότητα του νερού που περνάει μέσα από την απόχη ανά μονάδα χρόνου}.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Draw the river flow (vector field)
+    \foreach \y in {0.25, 0.75, 1.25, 1.75} {
+        \draw[-{Stealth[length=3mm]}, blue!60] (-1, \y) -- (3, \y);
+    }
+    \node[blue!60] at (3.5, 1) {Ροή νερού};
+    
+    % Draw the net (απόχη) perpendicular to the flow
+    \draw[ultra thick, red] (1, 0) -- (1, 2) node[above, black] {Κάθετη απόχη};
+    \node[red, anchor=west] at (1.1, 1.5) {Μέγιστη ροή};
+
+    % Draw the net parallel to the flow
+    \begin{scope}[xshift=2.5cm, yshift=-0.5cm]
+        \draw[ultra thick, green!50!black] (1, 1.25) -- (2.5, 1.25) node[right, black] {Παράλληλη απόχη};
+        \node[green!50!black, anchor=north] at (1.75, 1.15) {Μηδενική ροή};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+Τι επηρεάζει αυτή την ποσότητα;
+\begin{itemize}
+    \item \textbf{Η ταχύτητα του νερού ($\vec{F}$):} Αν το ποτάμι ρέει πιο γρήγορα, περισσότερο νερό θα περάσει από την απόχη.
+    \item \textbf{Ο προσανατολισμός της απόχης ($\hat{n}$):}
+    \begin{itemize}
+        \item Αν κρατάτε την απόχη \textbf{κάθετα} στη ροή του νερού, θα πιάσετε τη μέγιστη ποσότητα νερού.
+        \item Αν την κρατάτε \textbf{παράλληλα} με τη ροή, σχεδόν καθόλου νερό δεν θα περάσει μέσα από αυτήν.
+    \end{itemize}
+\end{itemize}
+Σε μια κλειστή καμπύλη (όπως ένα τετράγωνο), η ροή που υπολογίζουμε είναι η \textbf{καθαρή ποσότητα} του «ρευστού» $\vec{F}$ που βγαίνει προς τα έξω από την περιοχή.
+\begin{itemize}
+    \item \textbf{Θετική Ροή:} Περισσότερο «ρευστό» βγαίνει από την περιοχή παρά μπαίνει.
+    \item \textbf{Αρνητική Ροή:} Περισσότερο «ρευστό» μπαίνει στην περιοχή παρά βγαίνει.
+    \item \textbf{Μηδενική Ροή:} Όσο «ρευστό» μπαίνει, άλλο τόσο βγαίνει.
+\end{itemize}
+
+\section{Μαθηματική Ερμηνεία (Η Τυπική Προσέγγιση)}
+Στα μαθηματικά, η ροή ενός διανυσματικού πεδίου $\vec{F}$ μέσα από μια καμπύλη $\partial D$ ορίζεται από το επικαμπύλιο ολοκλήρωμα:
+\[ \Phi = \oint_{\partial D} \vec{F} \cdot \hat{n} \, ds \]
+Ας αναλύσουμε τον τύπο:
+\begin{itemize}
+    \item $\vec{F}$: Είναι το διανυσματικό πεδίο (π.χ., πεδίο ταχυτήτων ρευστού, ηλεκτρικό πεδίο).
+    \item $\hat{n}$: Είναι το \textbf{κάθετο μοναδιαίο διάνυσμα} στην καμπύλη, το οποίο «κοιτάζει» πάντα προς τα έξω από την περιοχή.
+    \item $\vec{F} \cdot \hat{n}$: Αυτό είναι το εσωτερικό γινόμενο. Υπολογίζει τη \textbf{συνιστώσα του πεδίου $\vec{F}$ που είναι κάθετη στην καμπύλη}. Με άλλα λόγια, μετράει πόσο από το πεδίο «διαπερνά» την καμπύλη.
+    \item $\oint ds$: Αυτό είναι το ολοκλήρωμα κατά μήκος ολόκληρης της κλειστής καμπύλης. «Αθροίζει» τη συμβολή της ροής από κάθε μικροσκοπικό κομμάτι της καμπύλης.
+\end{itemize}
+
+\subsection*{Σύνδεση με το Θεώρημα Απόκλισης}
+Το Θεώρημα Απόκλισης συνδέει τη ροή που περνάει από το \textbf{σύνορο} μιας περιοχής με αυτό που συμβαίνει \textbf{μέσα} στην περιοχή.
+\[ \underbrace{\oint_{\partial D} \vec{F} \cdot \hat{n} \, ds}_{\substack{\text{Συνολική ροή προς τα έξω} \\ \text{από το σύνορο}}} = \underbrace{\iint_D (\nabla \cdot \vec{F}) \, dA}_{\substack{\text{Άθροισμα όλων των «πηγών»} \\ \text{μέσα στην περιοχή}}} \]
+Η ποσότητα $\nabla \cdot \vec{F}$ (η \textbf{απόκλιση} του πεδίου) μετράει σε κάθε σημείο αν το σημείο αυτό λειτουργεί ως «πηγή» (θετική απόκλιση, το πεδίο «αναβλύζει») ή ως «καταβόθρα» (αρνητική απόκλιση, το πεδίο «απορροφάται»). Το θεώρημα λέει ότι αν αθροίσεις όλες τις πηγές και τις καταβόθρες μέσα σε μια περιοχή, το αποτέλεσμα θα είναι ακριβώς ίσο με την καθαρή ποσότητα που βγαίνει από το σύνορό της.
+
+\begin{center}
+\begin{tikzpicture}
+    % Region D
+    \draw[thick, fill=blue!10] (0,0) ellipse (2.5cm and 1.8cm);
+    \node at (0,0) {$D$};
+    \node at (2, 1.3) {$\partial D$};
+
+    % A source
+    \node[circle, fill=red, inner sep=1.5pt] at (-1, 0.5) {};
+    \node[above] at (-3, 0.5) {Πηγή};
+    \foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
+        \draw[-{Stealth[length=2mm]}, red] (-1, 0.5) -- ++(\angle:0.8);
+    }
+    \node[red] at (-1, -0.7) {$\nabla \cdot \vec{F} > 0$};
+
+    % A sink
+    \node[circle, fill=blue, inner sep=1.5pt] at (1.2, -0.7) {};
+    \node[below] at (3.2, -0.7) {Καταβόθρα};
+    \foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
+        \draw[{Stealth[length=2mm]}-, blue] (1.2, -0.7) -- ++(\angle:0.8);
+    }
+    \node[blue] at (1.2, 0.4) {$\nabla \cdot \vec{F} < 0$};
+\end{tikzpicture}
+\end{center}
+\newpage
+Η έννοια της απόκλισης ενός διανυσματικού πεδίου σε ένα σημείο, περιγράφει πόσο το πεδίο «επεκτείνεται» ή «συρρικνώνεται» ακριβώς σε αυτό το σημείο. Είναι, κατά μία έννοια, η τοπική μέτρηση της τάσης του πεδίου να δημιουργεί ροή προς τα έξω ή προς τα μέσα.
+
+\section{Φυσική Ερμηνεία (Η Διαισθητική Προσέγγιση)}
+
+Φανταστείτε ξανά τη ροή του νερού. Η απόκλιση σε ένα σημείο του νερού μετράει αν αυτό το σημείο λειτουργεί σαν \textbf{πηγή} ή σαν \textbf{καταβόθρα}.
+
+\begin{itemize}
+    \item \textbf{Θετική Απόκλιση ($\nabla \cdot \vec{F} > 0$):} Το σημείο είναι μια \textbf{πηγή}. Φανταστείτε ένα μικροσκοπικό ακροφύσιο ποτίσματος κρυμμένο σε αυτό το σημείο, από το οποίο αναβλύζει νερό προς όλες τις κατευθύνσεις. Η ύλη «αποκλίνει» από αυτό το σημείο.
+    
+    \item \textbf{Αρνητική Απόκλιση ($\nabla \cdot \vec{F} < 0$):} Το σημείο είναι μια \textbf{καταβόθρα}. Φανταστείτε ένα μικροσκοπικό σιφόνι που ρουφάει το νερό. Η ύλη «συγκλίνει» προς αυτό το σημείο.
+    
+    \item \textbf{Μηδενική Απόκλιση ($\nabla \cdot \vec{F} = 0$):} Το σημείο δεν είναι ούτε πηγή ούτε καταβόθρα. Το ρευστό απλώς διέρχεται από αυτό το σημείο χωρίς να «παράγεται» ή να «καταναλώνεται». Ένα τέτοιο πεδίο ονομάζεται \textbf{ασυμπίεστο} (\en{solenoidal}). Η ροή ενός ποταμού σε ένα σημείο χωρίς πηγές είναι ένα καλό παράδειγμα.
+\end{itemize}
+
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Positive Divergence (Source)
+    \node at (0, 2) {Θετική Απόκλιση (Πηγή)};
+    \node[circle, fill=red, inner sep=1.5pt] at (0, 0.8) {};
+    \foreach \angle in {0, 45, ..., 315} {
+        \draw[-{Stealth[length=2mm]}, red] (0, 0.8) -- ++(\angle:1);
+    }
+
+    % Negative Divergence (Sink)
+    \node at (4, -.7) {Αρνητική Απόκλιση (Καταβόθρα)};
+    \node[circle, fill=blue, inner sep=1.5pt] at (4, 0.8) {};
+    \foreach \angle in {0, 45, ..., 315} {
+        \draw[{Stealth[length=2mm]}-, blue] (4, 0.8) -- ++(\angle:1);
+    }
+
+    % Zero Divergence (Incompressible)
+    \node at (8, 2) {Μηδενική Απόκλιση (Ασυμπίεστο)};
+    \foreach \y in {0, 0.5, 1, 1.5} {
+        \draw[-{Stealth[length=2mm]}, gray] (7, \y) -- (9, \y);
+    }
+\end{tikzpicture}
+\end{center}
+
+\section{Μαθηματική Ερμηνεία (Η Τυπική Προσέγγιση)}
+Η απόκλιση είναι ένας τελεστής που δέχεται ένα διανυσματικό πεδίο και επιστρέφει ένα βαθμωτό (αριθμητικό) πεδίο. Ορίζεται ως το εσωτερικό γινόμενο του τελεστή ανάδελτα ($\nabla$) με το διανυσματικό πεδίο $\vec{F}$.
+
+Για ένα διανυσματικό πεδίο στις 3 διαστάσεις, $\vec{F}(x,y,z) = M(x,y,z)\vec{i} + N(x,y,z)\vec{j} + P(x,y,z)\vec{k}$, η απόκλιση είναι:
+\[ \nabla \cdot \vec{F} = \frac{\partial M}{\partial x} + \frac{\partial N}{\partial y} + \frac{\partial P}{\partial z} \]
+Ας αναλύσουμε τι σημαίνει κάθε όρος:
+\begin{itemize}
+    \item $\frac{\partial M}{\partial x}$: Μετράει πόσο γρήγορα αλλάζει η $x$-συνιστώσα του πεδίου καθώς κινούμαστε στην $x$-κατεύθυνση. Αν είναι θετική, σημαίνει ότι το πεδίο «ξεχειλώνει» οριζόντια.
+    \item $\frac{\partial N}{\partial y}$: Μετράει πόσο γρήγορα αλλάζει η $y$-συνιστώσα του πεδίου καθώς κινούμαστε στην $y$-κατεύθυνση. Αν είναι θετική, σημαίνει ότι το πεδίο «ξεχειλώνει» κάθετα.
+    \item $\frac{\partial P}{\partial z}$: Αντίστοιχα για την κατεύθυνση $z$.
+\end{itemize}
+
+Η \textbf{απόκλιση είναι το άθροισμα} αυτών των ρυθμών μεταβολής. Μας δίνει τη συνολική, καθαρή τάση του πεδίου να επεκτείνεται (αν το άθροισμα είναι θετικό) ή να συρρικνώνεται (αν το άθροισμα είναι αρνητικό) σε ένα συγκεκριμένο σημείο. Είναι δηλαδή ένα μέτρο της «επεκτασιμότητας» του πεδίου.
+
+\end{document}

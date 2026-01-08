@@ -1,0 +1,208 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{{\large\theaskhsh.}\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\titlespacing{\paragraph}{0mm}{2mm}{2mm}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+% Custom environment for theorems/definitions
+\newenvironment{criterion}
+    {\vspace{10pt}\noindent\textbf{Θεώρημα/Κριτήριο:}\itshape}
+    {\vspace{10pt}}
+
+\begin{document}
+\section{Το Θεώρημα Μονοτονίας και Φράγματος}
+
+Αυτό είναι το πιο θεμελιώδες κριτήριο για να δείξουμε ότι υπάρχει όριο, ακόμα κι αν δεν ξέρουμε την τιμή του.
+
+\begin{criterion}
+Κάθε ακολουθία που είναι \textbf{μονότονη} και \textbf{φραγμένη}, συγκλίνει οπωσδήποτε σε πραγματικό αριθμό.
+\end{criterion}
+
+\begin{itemize}
+    \item \textbf{Αύξουσα ($\nearrow$) + Άνω Φραγμένη} $\Rightarrow$ Συγκλίνει στο \eng{Supremum} της.
+    \item \textbf{Φθίνουσα ($\searrow$) + Κάτω Φραγμένη} $\Rightarrow$ Συγκλίνει στο \eng{Infimum} της.
+\end{itemize}
+
+\textbf{Πότε το χρησιμοποιούμε:} Όταν ο τύπος είναι αναδρομικός (π.χ. $a_{n+1} = \sqrt{2 + a_n}$) και δεν μπορούμε να βρούμε το όριο απευθείας.
+
+\subsection*{Παράδειγμα}
+Έστω η αναδρομική ακολουθία $a_1 = \sqrt{2}$ και $a_{n+1} = \sqrt{2 + a_n}$.
+
+\begin{enumerate}
+    \item \textbf{Μονοτονία:} Αποδεικνύεται (με επαγωγή) ότι $a_{n+1} > a_n$, άρα είναι αύξουσα.
+    \item \textbf{Φράγμα:} Αποδεικνύεται ότι $a_n < 2$ για κάθε $n$, άρα είναι άνω φραγμένη.
+    \item \textbf{Συμπέρασμα:} Συγκλίνει σε έναν αριθμό $\ell$. Λύνοντας την εξίσωση ορίου $\ell = \sqrt{2+\ell}$, βρίσκουμε $\ell=2$.
+\end{enumerate}
+
+\section{Κριτήριο Παρεμβολής}
+
+Το γνωστό και ως «Θεώρημα Σάντουιτς».
+
+\begin{criterion}
+Αν έχουμε τρεις ακολουθίες $b_n \le a_n \le c_n$ και ισχύει ότι:
+\[ \lim_{n \to \infty} b_n = \ell \quad \text{και} \quad \lim_{n \to \infty} c_n = \ell \]
+Τότε υποχρεωτικά και η μεσαία ακολουθία συγκλίνει στο ίδιο όριο: $\lim_{n \to \infty} a_n = \ell$.
+\end{criterion}
+
+\subsection*{Παράδειγμα}
+Έστω $a_n = \frac{\sin n}{n}$.
+
+\begin{enumerate}
+    \item Γνωρίζουμε ότι $-1 \le \sin n \le 1$.
+    \item Διαιρούμε με $n$: $-\frac{1}{n} \le \frac{\sin n}{n} \le \frac{1}{n}$.
+    \item Τα άκρα τείνουν στο 0: $\lim (-\frac{1}{n}) = 0$ και $\lim (\frac{1}{n}) = 0$.
+    \item \textbf{Συμπέρασμα:} Από το κριτήριο παρεμβολής, $\lim a_n = 0$.
+\end{enumerate}
+
+\section{Κριτήριο Λόγου (\eng{D'Alembert})}
+
+Πολύ χρήσιμο όταν η ακολουθία έχει παραγοντικά ($n!$) ή δυνάμεις ($a^n$).
+
+\begin{criterion}
+Εξετάζουμε το όριο του λόγου δύο διαδοχικών όρων:
+\[ \ell = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| \]
+\begin{itemize}
+    \item Αν $\ell < 1$, η ακολουθία συγκλίνει στο \textbf{0}.
+    \item Αν $\ell > 1$, η ακολουθία αποκλίνει στο άπειρο.
+    \item Αν $\ell = 1$, το κριτήριο δεν δίνει συμπέρασμα (χρειάζεται άλλη μέθοδος).
+\end{itemize}
+\end{criterion}
+
+\subsection*{Παράδειγμα}
+Έστω $a_n = \frac{2^n}{n!}$.
+
+\begin{enumerate}
+    \item Υπολογίζουμε τον λόγο:
+    \[ \frac{a_{n+1}}{a_n} = \frac{2^{n+1}}{(n+1)!} \cdot \frac{n!}{2^n} = \frac{2 \cdot 2^n \cdot n!}{(n+1) \cdot n! \cdot 2^n} = \frac{2}{n+1} \]
+    \item Παίρνουμε το όριο: $\lim \frac{2}{n+1} = 0$.
+    \item Επειδή $\ell = 0 < 1$, η ακολουθία συγκλίνει στο \textbf{0}.
+\end{enumerate}
+
+\section{Κριτήριο Ρίζας (\eng{Cauchy})}
+
+Χρήσιμο όταν ολόκληρη η ακολουθία είναι υψωμένη στην $n$-οστή δύναμη.
+
+\begin{criterion}
+Εξετάζουμε το όριο της $n$-οστής ρίζας:
+\[ \ell = \lim_{n \to \infty} \sqrt[n]{|a_n|} \]
+\begin{itemize}
+    \item Αν $\ell < 1$, η ακολουθία συγκλίνει στο \textbf{0}.
+    \item Αν $\ell > 1$, η ακολουθία αποκλίνει στο άπειρο.
+    \item Αν $\ell = 1$, το κριτήριο δεν δίνει συμπέρασμα.
+\end{itemize}
+\end{criterion}
+
+\subsection*{Παράδειγμα}
+Έστω $a_n = \left( \frac{2n+1}{3n+5} \right)^n$.
+
+\begin{enumerate}
+    \item Παίρνουμε την $n$-οστή ρίζα: $\sqrt[n]{a_n} = \frac{2n+1}{3n+5}$.
+    \item Υπολογίζουμε το όριο: $\lim \frac{2n+1}{3n+5} = \frac{2}{3}$.
+    \item Επειδή $\ell = 2/3 < 1$, η ακολουθία συγκλίνει στο \textbf{0}.
+\end{enumerate}
+
+\section{Βασικές Πράξεις Ορίων (Άλγεβρα Ορίων)}
+
+Αν $\lim a_n = A$ και $\lim b_n = B$, τότε:
+\begin{itemize}
+    \item \textbf{Άθροισμα:} $\lim (a_n + b_n) = A + B$
+    \item \textbf{Γινόμενο:} $\lim (a_n \cdot b_n) = A \cdot B$
+    \item \textbf{Πηλίκο:} $\lim \frac{a_n}{b_n} = \frac{A}{B}$ (εφόσον $B \ne 0$)
+    \item \textbf{Απόλυτη Τιμή:} $|\lim a_n| = \lim |a_n|$ (Προσοχή: το αντίστροφο ισχύει μόνο αν το όριο είναι 0).
+\end{itemize}
+
+\subsection*{Παράδειγμα}
+Έστω $a_n = \frac{3n^2 + 1}{2n^2 - n}$.
+
+\begin{enumerate}
+    \item Βγάζουμε κοινό παράγοντα το $n^2$: $\frac{n^2(3 + 1/n^2)}{n^2(2 - 1/n)}$.
+    \item Απλοποιούμε: $\frac{3 + 1/n^2}{2 - 1/n}$.
+    \item Τα $1/n^2$ και $1/n$ πάνε στο 0.
+    \item Το όριο είναι $3/2$.
+\end{enumerate}
+
+\section{Χρήσιμα «Εργαλεία» \& Γνωστά Όρια}
+
+Να θυμάσαι πάντα αυτά τα βασικά όρια:
+\begin{enumerate}
+    \item $\lim_{n \to \infty} \frac{1}{n^k} = 0$ (για $k > 0$)
+    \item $\lim_{n \to \infty} \sqrt[n]{n} = 1$
+    \item $\lim_{n \to \infty} \sqrt[n]{a} = 1$ (για $a > 0$)
+    \item $\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e$
+    \item Αν $|a| < 1$, τότε $\lim_{n \to \infty} a^n = 0$ (Γεωμετρική πρόοδος).
+\end{enumerate}
+
+\subsection*{Παράδειγμα (για το $e$)}
+Έστω $a_n = \left(1 + \frac{1}{n}\right)^{2n}$.
+Μπορούμε να το γράψουμε ως $\left[ \left(1 + \frac{1}{n}\right)^n \right]^2$.
+Επειδή η βάση τείνει στο $e$, το όριο είναι $e^2$.
+
+
+\end{document}

@@ -1,14 +1,24 @@
 \documentclass[11pt,a4paper,twocolumn]{article}
 \usepackage[english,greek]{babel}
-\usepackage[utf8]{inputenc}
 \usepackage{nimbusserif}
 \usepackage[T1]{fontenc}
 \usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
-\usepackage{amsmath}
+
+% Basic Math & Formatting
+\usepackage{amsmath,mathtools}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx}
+\usepackage{gensymb,venndiagram,hhline,longtable}
+\usepackage{tkz-euclide,fontawesome5,eurosym}
+\usepackage{tcolorbox,tabularray}
+
+% Custom User Package (Load before mtpro2 typeset)
+\usepackage{mathimatika}
+
+% Fonts & Conflicts (mtpro2 must be loaded late to override fonts correctly)
 \let\myBbbk\Bbbk
 \let\Bbbk\relax
 \usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
-\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,mathtools}
+
 \usepackage[explicit]{titlesec}
 \tcbuselibrary{skins,theorems,breakable}
 \newlist{rlist}{enumerate}{3}
@@ -79,6 +89,13 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
 \kerkissans{{\huge Ορισμένο ολοκλήρωμα}\\\vspace{3mm} {\Large ΑΣΚΗΣΕΙΣ}}\vspace{5mm}}]
 \section{Ιδιότητες ολοκληρωμάτων}
 \askhsh
+Να υπολογίσετε τα παρακάτω ολοκληρώματα χρησιμοποιώντας τις ιδιότητες:
+\begin{alist}
+\item Αν $\displaystyle\int_{1}^{5}f(x)\d x=7$ και $\displaystyle\int_{1}^{2}f(x)\d x=3$, να βρεθεί το $\displaystyle\int_{2}^{5}f(x)\d x$.
+\item Αν $\displaystyle\int_{1}^{2}f(x)\d x=4$ και $\displaystyle\int_{1}^{2}g(x)\d x=-2$, να υπολογίσετε το $\displaystyle\int_{1}^{2}(2f(x)-3g(x))\d x$.
+\item Να αποδείξετε ότι $\displaystyle\int_{-1}^{1} x^3 \syn{x} \d x = 0$ (χωρίς υπολογισμό).
+\item Να συγκρίνετε τα ολοκληρώματα $I = \displaystyle\int_0^1 x^2 \d x$ και $J = \displaystyle\int_0^1 x^3 \d x$.
+\end{alist}
 \section{Υπολογισμός απλών ολοκληρωμάτων}
 %\paragraph{Απλά ολοκληρώματα}
 \askhsh Υπολογίστε τα παρακάτω ολοκληρώματα.
@@ -155,10 +172,18 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
 \item $\displaystyle\int_{-1}^{1}{(xe^x+e^x)\d x}$
 \item $\displaystyle\int_{1}^{e}{(\ln{x}+1)\d x}$
 \item $\displaystyle\int_{0}^{\frac{\pi}{2}}{(x\syn{x}+\hm{x})\d x}$
-\item $\displaystyle\int_{-2}^{2}{()\d x}$
+\item $\displaystyle\int_{0}^{1}{(e^x+xe^x)\d x}$ % Replacing empty item with (x e^x)' form
 \end{alist}
 \paragraph{Σύνθετες συναρτήσεις}
-\askhsh
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα (Σύνθετες μορφές):
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} \dfrac{2x}{x^2+1} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \hm^3{x} \syn{x} \d x$
+\item $\displaystyle\int_{0}^{\pi} e^{\hm{x}} \syn{x} \d x$
+\item $\displaystyle\int_{0}^{1} \sqrt{2x+1} \d x$
+\end{alist}
+\end{multicols}
 \section{Παραγοντική ολοκλήρωση}
 \paragraph{Η συνάρτηση $P(x)\cdot e^{ax}$}
 \askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα
@@ -185,16 +210,489 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
 \end{alist}
 \end{multicols}
 \paragraph{Η συνάρτηση $P(x)\cdot \ln{ax}$}
-\paragraph{Η συνάρτηση $e^{ax}\cdot \hm{(\beta x)}$ ή $e^{ax}\cdot \syn{(\beta x)}$}
-\section{Μέθοδος αντικατάστασης}
-\section{Εμβαδόν επίπεδου χωρίου}
-\paragraph{Χωρίο μεταξύ $C_f,x'x,x=a,x=\beta$}
-\askhsh Δίνεται η συνάρτηση $f(x)=x^2-3x-4$.
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα:
+\begin{multicols}{2}
 \begin{alist}
-\item Να λύσετε την εξίσωση $f(x)=0$.
-\item Να βρείτε το εμβαδόν του χωρίου που βρίσκεται μεταξύ της γραφικής παράστασης της $f$, τον άξονα $x'x$ και τις ευθείες $x=-2$ και $x=5$.
+\item $\displaystyle\int_{1}^{e} \ln{x} \d x$
+\item $\displaystyle\int_{1}^{e} x^2 \ln{x} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{\ln{x}}{x^2} \d x$
+\item $\displaystyle\int_{1}^{e} (x+1)\ln(2x) \d x$
 \end{alist}
-\askhsh Δίνεται η συνάρτηση $f(x)=(x-2)e^x$
-\paragraph{Χωρίο μεταξύ $C_f,x'x$}
-\paragraph{Χωρίο μεταξύ $C_f,x'x,x=a$}
+\end{multicols}
+\paragraph{Η συνάρτηση $e^{ax}\cdot \hm{(\beta x)}$ ή $e^{ax}\cdot \syn{(\beta x)}$}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα:
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{\pi} e^x \hm{x} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} e^{2x} \syn{x} \d x$
+\item $\displaystyle\int_{0}^{1} x e^{-x} \d x$
+\item $\displaystyle\int_{0}^{\pi} x \hm{x} \d x$
+\end{alist}
+\end{multicols}
+\section{Μέθοδος αντικατάστασης}
+
+\paragraph{Ολοκληρώματα της μορφής $\displaystyle\int (kx+\lambda)^\nu \d x$}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα:
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} (2x+1)^5 \d x$
+\item $\displaystyle\int_{0}^{2} (3-x)^4 \d x$
+\item $\displaystyle\int_{-1}^{0} (4x+2)^{3} \d x$
+\item $\displaystyle\int_{0}^{1} (x+3)^6 \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα:
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{1}^{2} \dfrac{1}{(2x-1)^3} \d x$
+\item $\displaystyle\int_{0}^{2} \dfrac{1}{\sqrt{3x+2}} \d x$
+\item $\displaystyle\int_{0}^{1} (5x+1)^{-2} \d x$
+\item $\displaystyle\int_{-1}^{0} \dfrac{4}{(1-x)^5} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα (Συνδυαστικά):
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} x(x-1)^5 \d x$
+\item $\displaystyle\int_{0}^{3} x \sqrt{x+1} \d x$
+\item $\displaystyle\int_{0}^{1} \dfrac{x}{(2x+1)^3} \d x$
+\item $\displaystyle\int_{1}^{2} x(2x-3)^4 \d x$
+\end{alist}
+\end{multicols}
+
+\paragraph{Ολοκληρώματα με ριζικά $\sqrt[\nu]{g(x)}$}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα:
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} 2x\sqrt{x^2+1} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \syn{x} \sqrt{\hm{x}} \d x$
+\item $\displaystyle\int_{0}^{\ln 3} e^x \sqrt{e^x+1} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{1}{x}\sqrt{\ln x} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{1}^{4} \dfrac{1}{1+\sqrt{x}} \d x$
+\item $\displaystyle\int_{0}^{3} x\sqrt{x+1} \d x$
+\item $\displaystyle\int_{1}^{4} \dfrac{1}{x(1+\sqrt{x})} \d x$
+\item $\displaystyle\int_{1}^{4} \dfrac{e^{\sqrt{x}}}{\sqrt{x}} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{\pi/2} \hm^3{x} \sqrt{\syn{x}} \d x$
+\item $\displaystyle\int_{0}^{1} x^3 \sqrt{x^2+1} \d x$
+\item $\displaystyle\int_{0}^{1/2} \dfrac{x^3}{\sqrt{1-x^2}} \d x$
+\item $\displaystyle\int_{0}^{4} x \sqrt{16-x^2} \d x$
+\end{alist}
+\end{multicols}
+
+\paragraph{Λογαριθμικά ολοκληρώματα}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{1}^{e} \dfrac{\ln x}{x} \d x$
+\item $\displaystyle\int_{e}^{e^2} \dfrac{1}{x \ln x} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{\ln^2 x}{x} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{\sqrt{\ln x}}{x} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{1}^{e} \dfrac{\syn(\ln x)}{x} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{e^{\ln x}}{x} \d x$
+\item $\displaystyle\int_{e}^{e^2} \dfrac{1}{x(\ln^2 x + 1)} \d x$
+\item $\displaystyle\int_{e}^{e^e} \dfrac{\ln(\ln x)}{x} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{1}^{e} \dfrac{1+ \ln x}{x} \d x$
+\item $\displaystyle\int_{e}^{e^2} \dfrac{1}{x \ln x \sqrt{\ln x}} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{\hm(\ln x)}{x} \d x$
+\item $\displaystyle\int_{1}^{e} \dfrac{(\ln x + 1)^2}{x} \d x$
+\end{alist}
+\end{multicols}
+
+\paragraph{Εκθετικά ολοκληρώματα}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} x e^{x^2} \d x$
+\item $\displaystyle\int_{0}^{\pi} \syn{x} e^{\hm{x}} \d x$
+\item $\displaystyle\int_{1}^{2} \dfrac{e^{1/x}}{x^2} \d x$
+\item $\displaystyle\int_{0}^{1} e^x e^{e^x} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{\ln 2} \dfrac{e^x}{1+e^x} \d x$
+\item $\displaystyle\int_{0}^{\ln 2} \dfrac{e^x}{(1+e^x)^2} \d x$
+\item $\displaystyle\int_{0}^{1} \dfrac{1}{e^x+1} \d x$
+\item $\displaystyle\int_{0}^{\ln 2} \dfrac{e^{2x}}{1+e^x} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{1}^{4} \dfrac{e^{\sqrt{x}}}{\sqrt{x}} \d x$
+\item $\displaystyle\int_{0}^{\ln 3} e^x \sqrt{1+e^x} \d x$
+\item $\displaystyle\int_{0}^{\ln 2} \dfrac{e^x}{\sqrt{e^x+1}} \d x$
+\item $\displaystyle\int_{0}^{1} \dfrac{e^x}{1+e^{2x}} \d x$
+\end{alist}
+\end{multicols}
+
+\paragraph{Τριγωνομετρικά ολοκληρώματα $\hm^\nu{x} \cdot \syn^\mu{x}$}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{\pi/2} \hm^2{x}\cdot \syn{x} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \syn^3{x} \cdot\hm{x} \d x$
+\item $\displaystyle\int_{0}^{\pi} \hm^5{x} \cdot\syn{x} \d x$
+\item $\displaystyle\int_{0}^{\pi/4} \dfrac{\hm{x}}{\syn^3{x}} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{\pi} \hm^3{x} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \syn^5{x} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \hm^3{x} \syn^2{x} \d x$
+\item $\displaystyle\int_{0}^{\pi/4} \varepsilon\phi^3{x} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{alist}
+\item $\displaystyle\int_{0}^{\pi/2} \hm{2x} e^{\hm^2{x}} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \hm{x} \syn{x} \sqrt{1+\hm^2{x}} \d x$
+\item $\displaystyle\int_{0}^{\pi/4} (1+\varepsilon\phi{x})^3 \dfrac{1}{\syn^2{x}} \d x$
+\item $\displaystyle\int_{0}^{\pi/3} \dfrac{\hm{x}}{(1+\syn{x})^2} \d x$
+\end{alist}
+
+\paragraph{Τριγωνομετρικές αντικαταστάσεις (Ειδικές μορφές)}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} \dfrac{1}{1+x^2} \d x$
+\item $\displaystyle\int_{0}^{1} \dfrac{x}{1+x^4} \d x$
+\item $\displaystyle\int_{0}^{\ln 2} \dfrac{e^x}{1+e^{2x}} \d x$
+\item $\displaystyle\int_{0}^{1/2} \dfrac{1}{\sqrt{1-x^2}} \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{alist}
+\item $\displaystyle\int_{0}^{1} \dfrac{1}{(1+x^2)^2} \d x$
+\item $\displaystyle\int_{0}^{1} \sqrt{1-x^2} \d x$
+\item $\displaystyle\int_{0}^{2} \sqrt{4-x^2} \d x$
+\item $\displaystyle\int_{0}^{2} \dfrac{1}{(4+x^2)\sqrt{4+x^2}} \d x$
+\end{alist}
+
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{0}^{\pi/3} \dfrac{1}{\syn{x}} \d x$
+\item $\displaystyle\int_{0}^{\pi/2} \dfrac{1}{1+\hm{x}} \d x$
+\item $\displaystyle\int_{0}^{1} x^2\sqrt{1-x^2} \d x$
+\item $\displaystyle\int_{0}^{\sqrt{3}} \dfrac{x^2}{\sqrt{1+x^2}} \d x$
+\end{alist}
+\end{multicols}
+
+\paragraph{Άρτια και Περιττή συνάρτηση}
+\askhsh Να υπολογίσετε τα παρακάτω ολοκληρώματα (εκμεταλλευόμενοι τη συμμετρία).
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{-1}^{1} x^4 \hm{x} \d x$
+\item $\displaystyle\int_{-\pi}^{\pi} \hm^7{x} \d x$
+\item $\displaystyle\int_{-1}^{1} x^2 e^{|x|} \hm{x} \d x$
+\item $\displaystyle\int_{-2}^{2} \ln\left(\dfrac{2-x}{2+x}\right) \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα ολοκληρώματα.
+\begin{multicols}{2}
+\begin{alist}
+\item $\displaystyle\int_{-2}^{2} x^2 \d x$
+\item $\displaystyle\int_{-\pi/2}^{\pi/2} \syn{x} \d x$
+\item $\displaystyle\int_{-1}^{1} |x| \d x$
+\item $\displaystyle\int_{-a}^{a} (x^3+x^5) \d x$
+\end{alist}
+\end{multicols}
+
+\askhsh Να υπολογίσετε τα ολοκληρώματα.
+\begin{alist}
+\item $\displaystyle\int_{-1}^{1} (x^3+2x^2) \d x$
+\item $\displaystyle\int_{-1}^{1} \dfrac{\hm{x}+1}{x^2+1} \d x$
+\item $\displaystyle\int_{-\pi}^{\pi} (\hm{x} + \syn{x}) \d x$
+\item $\displaystyle\int_{-1}^{1} (e^x + e^{-x}) x \d x$
+\end{alist}
+
+\paragraph{Ολοκληρώματα με αντίστροφη συνάρτηση}
+\askhsh
+\begin{alist}
+\item Να αποδείξετε ότι \[\int_{a}^{b} f(x) \d x + \int_{f(a)}^{f(b)} f^{-1}(x) \d x = b f(b) - a f(a)\] για $f(x)=x^2, x \in [1, 2]$.
+\item Να υπολογίσετε το $\displaystyle\int_{1}^{e} \ln{x} \d x$.
+\end{alist}
+\askhsh
+\begin{alist}
+\item Έστω συνάρτηση $f: [0, 1] \to [0, 2]$ παραγωγίσιμη με $f'(x)>0$, $f(0)=0, f(1)=2$. Αν $\int_{0}^{1} f(x) \d x = \dfrac{1}{3}$, να υπολογίσετε το $\int_{0}^{2} f^{-1}(x) \d x$.
+\item Έστω $f(x)=e^x+x$. Να υπολογίσετε το $\displaystyle\int_{1}^{1+e} f^{-1}(x) \d x$.
+\end{alist}
+\section{Εμβαδόν επίπεδου χωρίου}
+
+\paragraph{Χωρίο μεταξύ $C_f,x'x,x=a,x=\beta$}
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$, τον άξονα $x'x$ και τις ευθείες $x=a, x=\beta$ όταν:
+
+\begin{alist}
+\item $f(x)=x^2-4, \; x \in [0, 3]$
+\item $f(x)=x^3-1, \; x \in [0, 2]$
+\item $f(x)=x^2-3x+2, \; x \in [0, 4]$
+\item $f(x)=-x^2+2x, \; x \in [-1, 2]$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$, τον άξονα $x'x$ και τις ευθείες $x=a, x=\beta$ όταν:
+
+\begin{alist}
+\item $f(x)=\sqrt{x}, \; x \in [1, 4]$
+\item $f(x)=\dfrac{1}{x}, \; x \in [1, e]$
+\item $f(x)=\sqrt{x+1}, \; x \in [0, 3]$
+\item $f(x)=\dfrac{1}{x^2}, \; x \in [1, 2]$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$, τον άξονα $x'x$ και τις ευθείες $x=a, x=\beta$ όταν:
+\begin{alist}
+\item $f(x)=e^x, \; x \in [0, 1]$
+\item $f(x)=\ln{x}, \; x \in [1, e^2]$
+\item $f(x)=\hm{x}, \; x \in [0, \pi]$
+\item $f(x)=e^{-x}, \; x \in [0, \ln{3}]$
+\end{alist}
+\paragraph{Χωρίο μεταξύ $C_f,x'x$ (Τα όρια προκύπτουν από τις ρίζες)}
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$ και τον άξονα $x'x$ όταν:
+\begin{multicols}{2}
+\begin{alist}
+\item $f(x)=x^2-1$
+\item $f(x)=4-x^2$
+\item $f(x)=x^2-5x+6$
+\item $f(x)=-x^2+4x-3$
+\end{alist}
+\end{multicols}
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$ και τον άξονα $x'x$ όταν:
+\begin{alist}
+\item $f(x)=x^3-x$
+\item $f(x)=x(x-1)(x-2)$
+\item $f(x)=x^3-4x$
+\item $f(x)=-x^3+3x^2-2x$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$ και τον άξονα $x'x$ όταν:
+\begin{alist}
+\item $f(x)=\hm{x}, \; x \in [0, 2\pi]$
+\item $f(x)=\syn{x}, \; x \in [0, \pi]$
+\item $f(x)=e^x-1, \; x \in [-1, 1]$
+\item $f(x)=x^2-2|x|$
+\end{alist}
+
+\paragraph{Χωρίο μεταξύ $C_f,x'x,x=a$ (Το άλλο όριο είναι σημείο τομής)}
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από την $C_f$, τον άξονα $x'x$ και την ευθεία $x=a$ όταν:
+\begin{alist}
+\item $f(x)=\sqrt{x}, \; x=4$ (και $x'x$)
+\item $f(x)=e^x, \; x=1, \; x'x$ και άξονα $y'y$
+\item $f(x)=x^2+1, \; x=2$ και άξονα $y'y$
+\item $f(x)=\ln{x}, \; x=e$ και τον άξονα $x'x$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από την $C_f$, τον άξονα $x'x$ και την δοθείσα ευθεία:
+\begin{alist}
+\item $f(x)=1/x, \; x=e$ και ευθεία $x=1$
+\item $f(x)=-x^2+2, \; x=0$ (στο 1ο τεταρτημόριο)
+\item $f(x)=\sqrt{x-1}, \; x=5$
+\item $f(x)=e^{-x}, \; x=-1$ και άξονα $y'y$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου μεταξύ:
+\begin{alist}
+\item $f(x)=x^3$ και $x=2$ ($x \ge 0$)
+\item $f(x)=(x-1)^2$ και $x=3$ (από κορυφή)
+\item $f(x)=1/(x+1)$ και $x=1$ και άξονα $y'y$
+\item $f(x)=\hm{x}$ και $x=\pi/2$ (από $0$)
+\end{alist}
+
+\paragraph{Χωρίο μεταξύ $C_f,C_g$ και $x=a, x=\beta$}
+\askhsh Να βρείτε το εμβαδόν του χωρίου μεταξύ των $C_f, C_g$ στις δοθείσες περιοχές:
+\begin{alist}
+\item $f(x)=x^2, \; g(x)=x+2, \; x \in [0, 1]$
+\item $f(x)=x^2, \; g(x)=x^3, \; x \in [0, 1]$
+\item $f(x)=x^2+1, \; g(x)=x, \; x \in [0, 2]$
+\item $f(x)=4-x^2, \; g(x)=x+2, \; x \in [-2, 0]$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου μεταξύ των $C_f, C_g$ στα διαστήματα:
+\begin{alist}
+\item $f(x)=1/x, \; g(x)=x, \; x \in [1, 2]$
+\item $f(x)=\sqrt{x}, \; g(x)=x/2, \; x \in [0, 4]$
+\item $f(x)=e^x, \; g(x)=e^{-x}, \; x \in [0, 1]$
+\item $f(x)=\ln{x}, \; g(x)=0, \; x \in [1, e]$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου μεταξύ των $C_f, C_g$:
+\begin{alist}
+\item $f(x)=\hm{x}, \; g(x)=\syn{x}, \; x \in [0, \pi/2]$
+\item $f(x)=e^x, \; g(x)=1, \; x \in [0, 1]$
+\item $f(x)=2x, \; g(x)=x^2, \; x \in [1, 3]$
+\item $f(x)=x^2, \; g(x)=1/x, \; x \in [1, 2]$
+\end{alist}
+\paragraph{Χωρίο μεταξύ $C_f,C_g$ (Τα όρια βρίσκονται από τα σημεία τομής)}
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τις γραφικές παραστάσεις των συναρτήσεων:
+\begin{alist}
+\item $f(x)=x^2$ και $g(x)=x+2$
+\item $f(x)=x^2$ και $g(x)=2x$
+\item $f(x)=x^2$ και $g(x)=x$
+\item $f(x)=x^2-1$ και $g(x)=1-x^2$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τις $C_f, C_g$:
+\begin{alist}
+\item $f(x)=x^3$ και $g(x)=x$
+\item $f(x)=x^3$ και $g(x)=x^2$
+\item $f(x)=\sqrt{x}$ και $g(x)=x^2$
+\item $f(x)=x^3-x+1$ και $g(x)=x+1$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τις $C_f, C_g$:
+\begin{alist}
+\item $f(x)=\hm{x}, \; g(x)=\syn{x}, \; x \in [0, \pi]$
+\item $f(x)=e^x, \; g(x)=e, \; x'y$
+\item $f(x)=x^2, \; g(x)=2-x^2$
+\item $f(x)=x^3-3x+2, \; g(x)=x+2$
+\end{alist}
+
+\paragraph{Χωρίο μεταξύ $C_f,C_g,x=a$}
+\askhsh Να βρείτε το εμβαδόν του χωρίου που περικλείεται από τις $C_f, C_g$ και την ευθεία $x=a$:
+\begin{alist}
+\item $f(x)=1/x, \; g(x)=x, \; x=2$
+\item $f(x)=e^x, \; g(x)=e^{-x}, \; x=1$
+\item $f(x)=\sqrt{x}, \; g(x)=x, \; x=4$
+\item $f(x)=x^2, \; g(x)=1/x, \; x=3$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου μεταξύ $C_f, C_g$  και την ευθεία $x=a$:
+\begin{alist}
+\item $f(x)=e^x, \; g(x)=1, \; x=1$
+\item $f(x)=\ln{x}, \; g(x)=1, \; x=e^2$
+\item $f(x)=x^2-1, \; g(x)=x+1, \; x=0$ (δεξιά του άξονα)
+\item $f(x)=x^3, \; g(x)=8, \; x=0$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου που ορίζεται από τις καμπύλες και την εφαπτομένη:
+\begin{alist}
+\item $f(x)=x^2$, εφαπτομένη στο $(1,1)$ και άξονα $y'y$
+\item $f(x)=-x^2+2x$, εφαπτομένη στο $(2,0)$ και άξονα $y'y$
+\item $f(x)=\sqrt{x}$, εφαπτομένη στο $(1,1)$ και άξονα $x'x$
+\item $f(x)=e^x$, εφαπτομένη στο $(0,1)$ και ευθεία $x=1$
+\end{alist}
+
+\paragraph{Χωρίο μεταξύ τριών γραμμών ($C_f, C_g, C_h$)}
+\askhsh Να υπολογίσετε το εμβαδόν του χωρίου που περικλείεται από τις γραμμές:
+\begin{alist}
+\item $y=x-2, \; y=\sqrt{x}$ και $x'x$
+\item $y=x+2, \; y=x^2$ και $x'x$ ($x>0$)
+\item $y=1/x, \; y=x, \; y=2$ (στο 1ο τεταρτημόριο)
+\item $y=e^x, \; y=e^{-x}$ και $y=e$
+\end{alist}
+
+\askhsh Να βρείτε το εμβαδόν του χωρίου μεταξύ των ευθειών (τριγώνων):
+\begin{alist}
+\item $y=x, \; y=2x$ και $x=2$
+\item $y=x+1, \; y=-x+1$ και $y=0$
+\item $y=x, \; y=3x$ και $y=3$
+\item $y=x-1, \; y=-x+3$ και $y=0$
+\end{alist}
+
+\askhsh Να υπολογίσετε το εμβαδόν του χωρίου που περικλείεται από:
+\begin{alist}
+\item $y=\ln{x}, \; x=e$ και τον άξονα $x'x$
+\item $y=e^x, \; y=e, \; x=0$
+\item $y=\sqrt{x}, \; y=x-2, \; x=0$
+\item $y=1/x, \; y=x^2, \; y=4$ (στο 1ο τεταρτημόριο)
+\end{alist}
+
+\paragraph{Παράμετροι και ισότητα εμβαδών}
+\askhsh Δίνεται η συνάρτηση $f(x)=x^2, \; x \in [0, 2]$.
+\begin{alist}
+\item Να βρείτε την εφαπτομένη της $C_f$ στο σημείο της με τετμημένη $x_0=1$.
+\item Να υπολογίσετε το εμβαδόν $E$ του χωρίου που περικλείεται από την $C_f$, τον άξονα $x'x$ και την ευθεία $x=2$.
+\item Να βρείτε την τιμή του $\lambda \in (0, 2)$ ώστε η ευθεία $x=\lambda$ να χωρίζει το εμβαδόν $E$ σε δύο ίσα μέρη.
+\item Για την τιμή του $\lambda$ που βρήκατε, να εξετάσετε αν η ευθεία $y=f(\lambda)$ χωρίζει επίσης το $E$ σε δύο ίσα μέρη.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x)=\hm{x}, \; x \in [0, \pi]$.
+\begin{alist}
+\item Να μελετήσετε την $f$ ως προς τη μονοτονία και τα ακρότατα.
+\item Να υπολογίσετε το εμβαδόν $\Omega$ του χωρίου που ορίζεται από την $C_f$ και τον άξονα $x'x$.
+\item Να βρείτε την ευθεία $x=a$, με $a \in (0, \pi)$, που χωρίζει το χωρίο $\Omega$ σε δύο ισεμβαδικά μέρη.
+\item Να υπολογίσετε το εμβαδόν του χωρίου που περικλείεται από την $C_f$ και το ευθύγραμμο τμήμα που ενώνει τα σημεία $O(0,0)$ και $A(\pi, 0)$.
+\end{alist}
+
+\askhsh Θεωρούμε το χωρίο $\Omega$ που περικλείεται από τη γραφική παράσταση της $f(x)=x^2$ και την ευθεία $y=4$.
+\begin{alist}
+\item Να σχεδιάσετε πρόχειρα το χωρίο $\Omega$.
+\item Να υπολογίσετε το εμβαδόν του χωρίου $\Omega$.
+\item Να βρείτε τον αριθμό $b \in (0, 4)$ ώστε η ευθεία $y=b$ να χωρίζει το χωρίο $\Omega$ σε δύο ισεμβαδικά μέρη.
+\item Να βρείτε το εμβαδόν του τριγώνου που σχηματίζεται από την κορυφή της παραβολής και τα σημεία τομής της με την ευθεία $y=4$.
+\end{alist}
+
+\askhsh Δίνονται οι συναρτήσεις $f(x)=\lambda x^2$ με $\lambda > 0$ και $g(x)=x$.
+\begin{alist}
+\item Να βρείτε τα σημεία τομής $O(0,0)$ και $A$ των γραφικών παραστάσεων των δύο συναρτήσεων.
+\item Να αποδείξετε ότι η $f$ είναι κυρτή.
+\item Να εκφράσετε το εμβαδόν $E(\lambda)$ του χωρίου που περικλείεται από τις $C_f$ και $C_g$ ως συνάρτηση του $\lambda$.
+\item Να βρείτε την τιμή του $\lambda$ ώστε να ισχύει $E(\lambda)=\frac{1}{6}$.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x)=x^2+\lambda$, όπου $\lambda \in \mathbb{R}$.
+\begin{alist}
+\item Να βρείτε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο $A(1, f(1))$.
+\item Αν η εφαπτομένη διέρχεται από την αρχή των αξόνων, να δείξετε ότι $\lambda=1$.
+\item Για $\lambda=1$, να υπολογίσετε το εμβαδόν του χωρίου μεταξύ της $C_f$, του άξονα $x'x$ και των ευθειών $x=0$ και $x=1$.
+\item Να βρείτε την τιμή του $\lambda$ ώστε το εμβαδόν μεταξύ της $C_f$, του άξονα $x'x$ και των ευθειών $x=0, x=1$ να είναι ίσο με $\frac{4}{3}$.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x)=e^x$.
+\begin{alist}
+\item Να αποδείξετε ότι η $f$ είναι γνησίως αύξουσα και κυρτή.
+\item Να βρείτε την εφαπτομένη της $C_f$ στο σημείο με τετμημένη $x_0=0$.
+\item Να υπολογίσετε το εμβαδόν $E(k)$ του χωρίου που περικλείεται από την $C_f$, τον άξονα $x'x$, τον άξονα $y'y$ και την ευθεία $x=k$, όπου $k>0$.
+\item Να βρείτε την τιμή του $k$ ώστε να ισχύει $E(k) = e^2-1$.
+\end{alist}
+
+\askhsh Δίνεται η οικογένεια συναρτήσεων \[f_\lambda(x) = e^{-\lambda x}\] με $\lambda > 0$.
+\begin{alist}
+\item Να μελετήσετε την $f_\lambda$ ως προς τη μονοτονία.
+\item Να υπολογίσετε το εμβαδόν $E(\lambda)$ του χωρίου που περικλείεται από την $C_{f_\lambda}$, τους άξονες και την ευθεία $x=\frac{1}{\lambda}$.
+\item Να αποδείξετε ότι το εμβαδόν $E(\lambda)$ είναι σταθερό (ανεξάρτητο του $\lambda$).
+\item Να υπολογίσετε το όριο $\displaystyle\lim_{k \to +\infty} \int_0^k f_\lambda(x) \d x$.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x)=3x^2$.
+\begin{alist}
+\item Να βρείτε την παράγουσα $F$ της $f$ για την οποία ισχύει $F(1)=2$.
+\item Να βρείτε τη μέση τιμή $\bar{f}$ της συνάρτησης στο διάστημα $[0, k]$, με $k>0$.
+\item Να βρείτε το εμβαδόν $E_k$ του χωρίου μεταξύ της $C_f$ και του άξονα $x'x$ στο διάστημα $[0, k]$.
+\item Να βρείτε την τιμή του $k$ για την οποία η μέση τιμή της $f$ στο $[0, k]$ ισούται με το αριθμητικό μέτρο του εμβαδού $E_k$.
+\end{alist}
 \end{document}
