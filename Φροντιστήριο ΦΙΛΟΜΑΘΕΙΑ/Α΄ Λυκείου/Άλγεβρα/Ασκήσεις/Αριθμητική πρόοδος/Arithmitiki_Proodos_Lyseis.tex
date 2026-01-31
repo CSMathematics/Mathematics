@@ -1,0 +1,768 @@
+\documentclass[11pt,a4paper,modern]{FFExercises}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize,siunitx,eurosym}
+\definecolor{xrwma}{HTML}{aa1212}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\tcbuselibrary{skins,theorems,breakable}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\renewcommand{\textdexiakeraia}{}
+\usepackage{svg}
+\ekthetesdeiktes
+\begin{document}
+
+\titlos{Άλγεβρα}{Α' Λυκείου}{Αριθμητική Πρόοδος - Λύσεις}
+
+\paragraph{Βασικοί Ορισμοί και Τύποι}
+
+\lysh[1]
+\begin{alist}
+\item Ελέγχουμε τη διαφορά διαδοχικών όρων:
+$7-3=4,\ 11-7=4,\ 15-11=4,\ 19-15=4$
+
+Επειδή η διαφορά είναι σταθερή, είναι Α.Π. με $\boldsymbol{\alpha_1=3}$ και $\boldsymbol{\omega=4}$.
+
+\item $-2-(-5)=3,\ 1-(-2)=3,\ 4-1=3,\ 7-4=3$
+
+Είναι Α.Π. με $\boldsymbol{\alpha_1=-5}$ και $\boldsymbol{\omega=3}$.
+
+\item $4-1=3,\ 9-4=5,\ 16-9=7,\ 25-16=9$
+
+Η διαφορά δεν είναι σταθερή, άρα \textbf{δεν είναι Α.Π.} (είναι τα τετράγωνα $1^2, 2^2, 3^2, \ldots$).
+
+\item $1-\dfrac{1}{2}=\dfrac{1}{2},\ \dfrac{3}{2}-1=\dfrac{1}{2},\ 2-\dfrac{3}{2}=\dfrac{1}{2}$
+
+Είναι Α.Π. με $\boldsymbol{\alpha_1=\dfrac{1}{2}}$ και $\boldsymbol{\omega=\dfrac{1}{2}}$.
+
+\item $7-10=-3,\ 4-7=-3,\ 1-4=-3,\ -2-1=-3$
+
+Είναι Α.Π. με $\boldsymbol{\alpha_1=10}$ και $\boldsymbol{\omega=-3}$.
+
+\item $2-2=0$ για κάθε ζεύγος διαδοχικών όρων.
+
+Είναι Α.Π. με $\boldsymbol{\alpha_1=2}$ και $\boldsymbol{\omega=0}$ (σταθερή ακολουθία).
+\end{alist}
+
+\lysh[2]
+Με $\alpha_1=5$ και $\omega=3$:
+\begin{align*}
+\alpha_2&=\alpha_1+\omega=5+3=8\\
+\alpha_3&=\alpha_2+\omega=8+3=11\\
+\alpha_4&=\alpha_3+\omega=11+3=14\\
+\alpha_5&=\alpha_4+\omega=14+3=17\\
+\alpha_6&=\alpha_5+\omega=17+3=20
+\end{align*}
+Οι επόμενοι πέντε όροι είναι: $\boldsymbol{8,\ 11,\ 14,\ 17,\ 20}$
+
+\lysh[3]
+Χρησιμοποιούμε τον τύπο $\alpha_{\nu}=\alpha_1+(\nu-1)\omega=-8+(\nu-1)\cdot 4=-8+4\nu-4=4\nu-12$
+\begin{multicols}{2}
+\begin{alist}
+\item $\alpha_5=4\cdot 5-12=\boldsymbol{8}$
+\item $\alpha_{10}=4\cdot 10-12=\boldsymbol{28}$
+\item $\alpha_{20}=4\cdot 20-12=\boldsymbol{68}$
+\item $\alpha_{50}=4\cdot 50-12=\boldsymbol{188}$
+\item $\alpha_{100}=4\cdot 100-12=\boldsymbol{388}$
+\item $\alpha_n=4n-12=\boldsymbol{4(n-3)}$
+\end{alist}
+\end{multicols}
+
+\lysh[4]
+\begin{alist}
+\item $\alpha_1=2,\ \omega=5-2=3$
+
+$\alpha_n=\alpha_1+(n-1)\omega=2+(n-1)\cdot 3=2+3n-3=\boldsymbol{3n-1}$
+
+\item $\alpha_1=7,\ \omega=3-7=-4$
+
+$\alpha_n=7+(n-1)\cdot(-4)=7-4n+4=\boldsymbol{11-4n}$
+
+\item $\alpha_1=-10,\ \omega=-7-(-10)=3$
+
+$\alpha_n=-10+(n-1)\cdot 3=-10+3n-3=\boldsymbol{3n-13}$
+
+\item $\alpha_1=\dfrac{1}{3},\ \omega=\dfrac{2}{3}-\dfrac{1}{3}=\dfrac{1}{3}$
+
+$\alpha_n=\dfrac{1}{3}+(n-1)\cdot\dfrac{1}{3}=\dfrac{1}{3}+\dfrac{n-1}{3}=\boldsymbol{\dfrac{n}{3}}$
+\end{alist}
+
+\lysh[5]
+\begin{alist}
+\item Αντικαθιστούμε στον τύπο $\alpha_{\nu}=4\nu-7$:
+\begin{align*}
+\alpha_1&=4\cdot 1-7=-3\\
+\alpha_2&=4\cdot 2-7=1\\
+\alpha_3&=4\cdot 3-7=5\\
+\alpha_4&=4\cdot 4-7=9
+\end{align*}
+Άρα $\boldsymbol{\alpha_1=-3,\ \alpha_2=1,\ \alpha_3=5,\ \alpha_4=9}$
+
+\item $\omega=\alpha_2-\alpha_1=1-(-3)=\boldsymbol{4}$
+
+\item $\alpha_{25}=4\cdot 25-7=100-7=\boldsymbol{93}$
+
+\item Θέτουμε $\alpha_{\nu}=97$:
+$$4\nu-7=97 \Rightarrow 4\nu=104 \Rightarrow \nu=26$$
+Ο αριθμός $97$ είναι ο $\boldsymbol{26}$\textbf{ος όρος} της Α.Π.
+\end{alist}
+
+\lysh[6]
+\begin{alist}
+\item Από τον τύπο $\alpha_{10}=\alpha_1+9\omega$:
+$$32=\alpha_1+9\cdot 4 \Rightarrow 32=\alpha_1+36 \Rightarrow \alpha_1=32-36=\boldsymbol{-4}$$
+
+\item $\alpha_n=\alpha_1+(n-1)\omega=-4+(n-1)\cdot 4=-4+4n-4=\boldsymbol{4n-8}$
+
+\item $\alpha_{50}=4\cdot 50-8=200-8=\boldsymbol{192}$
+\end{alist}
+
+\lysh[7]
+\begin{alist}
+\item Έχουμε:
+\begin{align*}
+\alpha_5&=\alpha_1+4\omega=17\\
+\alpha_{12}&=\alpha_1+11\omega=45
+\end{align*}
+Αφαιρώντας κατά μέλη: $7\omega=28 \Rightarrow \omega=4$
+
+Αντικαθιστώντας: $\alpha_1+4\cdot 4=17 \Rightarrow \alpha_1=17-16=1$
+
+Άρα $\boldsymbol{\alpha_1=1}$ και $\boldsymbol{\omega=4}$.
+
+\item $\alpha_{\nu}=\alpha_1+(\nu-1)\omega=1+(\nu-1)\cdot 4=1+4\nu-4=\boldsymbol{4\nu-3}$
+
+\item $\alpha_{30}=4\cdot 30-3=120-3=\boldsymbol{117}$
+\end{alist}
+
+\lysh[8]
+\begin{alist}
+\item Έχουμε:
+\begin{align*}
+\alpha_3&=\alpha_1+2\omega=11\\
+\alpha_8&=\alpha_1+7\omega=31
+\end{align*}
+Αφαιρώντας: $5\omega=20 \Rightarrow \omega=4$
+
+Αντικαθιστώντας: $\alpha_1+2\cdot 4=11 \Rightarrow \alpha_1=11-8=3$
+
+Άρα $\boldsymbol{\omega=4}$ και $\boldsymbol{\alpha_1=3}$.
+
+\item $\alpha_{\nu}=3+(\nu-1)\cdot 4=3+4\nu-4=\boldsymbol{4\nu-1}$
+
+\item Θέτουμε $\alpha_{\nu}=85$:
+$$4\nu-1=85 \Rightarrow 4\nu=86 \Rightarrow \nu=21{,}5$$
+Επειδή $\nu$ δεν είναι φυσικός αριθμός, ο $85$ \textbf{δεν είναι όρος της Α.Π.}
+\end{alist}
+
+\lysh[9]
+\begin{alist}
+\item Έστω οι τρεις αριθμοί $\alpha-\omega,\ \alpha,\ \alpha+\omega$ (όπου $\alpha$ ο μεσαίος).
+
+Άθροισμα: $(\alpha-\omega)+\alpha+(\alpha+\omega)=3\alpha=21 \Rightarrow \alpha=7$
+
+Γινόμενο: $(\alpha-\omega)\cdot\alpha\cdot(\alpha+\omega)=\alpha(\alpha^2-\omega^2)=280$
+$$7(49-\omega^2)=280 \Rightarrow 49-\omega^2=40 \Rightarrow \omega^2=9 \Rightarrow \omega=\pm 3$$
+
+Για $\omega=3$: $4,\ 7,\ 10$. Για $\omega=-3$: $10,\ 7,\ 4$.
+
+Οι τρεις αριθμοί είναι $\boldsymbol{4,\ 7,\ 10}$ (ή $10,\ 7,\ 4$).
+
+\item Έστω $\alpha-\omega,\ \alpha,\ \alpha+\omega$.
+
+Άθροισμα: $3\alpha=15 \Rightarrow \alpha=5$
+
+Άθροισμα τετραγώνων: $(\alpha-\omega)^2+\alpha^2+(\alpha+\omega)^2=83$
+$$\alpha^2-2\alpha\omega+\omega^2+\alpha^2+\alpha^2+2\alpha\omega+\omega^2=83$$
+$$3\alpha^2+2\omega^2=83 \Rightarrow 3\cdot 25+2\omega^2=83 \Rightarrow 2\omega^2=8 \Rightarrow \omega=\pm 2$$
+
+Οι τρεις αριθμοί είναι $\boldsymbol{3,\ 5,\ 7}$ (ή $7,\ 5,\ 3$).
+\end{alist}
+
+\lysh[10]
+Έστω οι τέσσερις αριθμοί $\alpha-3\omega,\ \alpha-\omega,\ \alpha+\omega,\ \alpha+3\omega$.
+
+Άθροισμα: $4\alpha=32 \Rightarrow \alpha=8$
+
+Γινόμενο πρώτου με τέταρτο: $(\alpha-3\omega)(\alpha+3\omega)=\alpha^2-9\omega^2=28$
+$$64-9\omega^2=28 \Rightarrow 9\omega^2=36 \Rightarrow \omega^2=4 \Rightarrow \omega=\pm 2$$
+
+Για $\omega=2$: $2,\ 6,\ 10,\ 14$
+
+Οι τέσσερις αριθμοί είναι $\boldsymbol{2,\ 6,\ 10,\ 14}$ (ή $14,\ 10,\ 6,\ 2$).
+
+\paragraph{Εύρεση Άγνωστων Στοιχείων}
+
+\lysh[11]
+Χρησιμοποιούμε τον τύπο $\alpha_{\nu}=\alpha_1+(\nu-1)\omega \Rightarrow \omega=\dfrac{\alpha_{\nu}-\alpha_1}{\nu-1}$ ή $\omega=\dfrac{\alpha_{\nu}-\alpha_{\mu}}{\nu-\mu}$
+\begin{alist}
+\item $\omega=\dfrac{\alpha_{15}-\alpha_1}{15-1}=\dfrac{59-3}{14}=\dfrac{56}{14}=\boldsymbol{4}$
+
+\item $\omega=\dfrac{24-(-12)}{10-1}=\dfrac{36}{9}=\boldsymbol{4}$
+
+\item $\omega=\dfrac{67-22}{20-5}=\dfrac{45}{15}=\boldsymbol{3}$
+
+\item $\omega=\dfrac{35-(-5)}{18-8}=\dfrac{40}{10}=\boldsymbol{4}$
+\end{alist}
+
+\lysh[12]
+Χρησιμοποιούμε $\alpha_1=\alpha_{\nu}-(\nu-1)\omega$
+\begin{alist}
+\item $\alpha_1=63-11\cdot 5=63-55=\boldsymbol{8}$
+
+\item $\alpha_1=-47-19\cdot(-3)=-47+57=\boldsymbol{10}$
+
+\item $\alpha_1=6-6\cdot\dfrac{2}{3}=6-4=\boldsymbol{2}$
+
+\item $\alpha_1=-3-14\cdot\left(-\dfrac{1}{2}\right)=-3+7=\boldsymbol{4}$
+\end{alist}
+
+\lysh[13]
+\begin{alist}
+\item $\omega=\dfrac{\alpha_{13}-\alpha_5}{13-5}=\dfrac{17-(-7)}{8}=\dfrac{24}{8}=\boldsymbol{3}$
+
+\item $\alpha_1=\alpha_5-4\omega=-7-4\cdot 3=-7-12=\boldsymbol{-19}$
+
+\item Γενικός όρος: $\alpha_{\nu}=-19+(\nu-1)\cdot 3=3\nu-22$
+
+Θέτουμε $3\nu-22=62 \Rightarrow 3\nu=84 \Rightarrow \nu=28$
+
+Ο αριθμός $62$ είναι ο $\boldsymbol{28}$\textbf{ος όρος}.
+\end{alist}
+
+\lysh[14]
+Ο γενικός όρος είναι $\alpha_{\nu}=2+(n-1)\cdot 5=5n-3$
+
+Θέτουμε $\alpha_{\nu}>200$:
+$$5\nu-3>200 \Rightarrow 5\nu>203 \Rightarrow \nu>40{,}6$$
+
+Ο πρώτος όρος που ξεπερνά το $200$ είναι ο $\alpha_{41}=5\cdot 41-3=\boldsymbol{202}$.
+
+\lysh[15]
+\begin{alist}
+\item Ο γενικός όρος είναι $\alpha_{\nu}=-45+(\nu-1)\cdot 7=7\nu-52$
+
+Θέτουμε $\alpha_{\nu}>0$:
+$$7\nu-52>0 \Rightarrow 7\nu>52 \Rightarrow \nu>7{,}43$$
+
+Ο πρώτος θετικός όρος είναι ο $\alpha_8=7\cdot 8-52=56-52=\boldsymbol{4}$.
+
+\item Ο τελευταίος αρνητικός όρος είναι ο $\alpha_7=7\cdot 7-52=49-52=\boldsymbol{-3}$.
+\end{alist}
+
+\lysh[16]
+\begin{alist}
+\item $\omega=\dfrac{22-10}{7-3}=\dfrac{12}{4}=3$, \quad $\alpha_1=10-2\cdot 3=4$
+
+$\alpha_{\nu}=4+(\nu-1)\cdot 3=\boldsymbol{3\nu+1}$
+
+\item $\alpha_1=\alpha_4-3\omega=-2-3\cdot 5=-17$
+
+$\alpha_{\nu}=-17+(\nu-1)\cdot 5=\boldsymbol{5\nu-22}$
+
+\item $\omega=\dfrac{45-25}{11-6}=\dfrac{20}{5}=4$, \quad $\alpha_1=25-5\cdot 4=5$
+
+$\alpha_{\nu}=5+(\nu-1)\cdot 4=\boldsymbol{4\nu+1}$
+
+\item $\omega=\dfrac{0-100}{21-1}=\dfrac{-100}{20}=-5$
+
+$\alpha_{\nu}=100+(\nu-1)\cdot(-5)=\boldsymbol{105-5\nu}$
+\end{alist}
+
+\paragraph{Άθροισμα Όρων Α.Π.}
+
+\lysh[17]
+Χρησιμοποιούμε τον τύπο $S_{\nu}=\dfrac{\nu(\alpha_1+\alpha_{\nu})}{2}$ ή $S_{\nu}=\dfrac{\nu(2\alpha_1+(\nu-1)\omega)}{2}$
+\begin{alist}
+\item $S_{100}=\dfrac{100(1+100)}{2}=\dfrac{100\cdot 101}{2}=\boldsymbol{5050}$
+
+\item $S_n=\dfrac{n(1+n)}{2}=\boldsymbol{\dfrac{n(n+1)}{2}}$
+
+\item Είναι Α.Π. με $\alpha_1=2,\ \omega=2,\ \alpha_{\nu}=200$
+
+Πλήθος όρων: $200=2+(n-1)\cdot 2 \Rightarrow n=100$
+
+$S_{100}=\dfrac{100(2+200)}{2}=\dfrac{100\cdot 202}{2}=\boldsymbol{10100}$
+
+\item Α.Π. περιττών με $\alpha_1=1,\ \omega=2,\ \alpha_{\nu}=99$
+
+Πλήθος: $99=1+(n-1)\cdot 2 \Rightarrow n=50$
+
+$S_{50}=\dfrac{50(1+99)}{2}=\dfrac{50\cdot 100}{2}=\boldsymbol{2500}$
+
+\item Α.Π. με $\alpha_1=5,\ \omega=5,\ \alpha_{\nu}=500$
+
+Πλήθος: $500=5+(n-1)\cdot 5 \Rightarrow n=100$
+
+$S_{100}=\dfrac{100(5+500)}{2}=\dfrac{100\cdot 505}{2}=\boldsymbol{25250}$
+
+\item Α.Π. με $\alpha_1=100,\ \omega=-3,\ \alpha_{\nu}=1$
+
+Πλήθος: $1=100+(n-1)\cdot(-3) \Rightarrow n=34$
+
+$S_{34}=\dfrac{34(100+1)}{2}=\dfrac{34\cdot 101}{2}=\boldsymbol{1717}$
+\end{alist}
+
+\lysh[18]
+\begin{alist}
+\item $S_{20}=\dfrac{20(2\cdot 3+19\cdot 5)}{2}=\dfrac{20(6+95)}{2}=\dfrac{20\cdot 101}{2}=\boldsymbol{1010}$
+
+\item $S_{20}=\dfrac{20(2\cdot(-10)+19\cdot 3)}{2}=\dfrac{20(-20+57)}{2}=\dfrac{20\cdot 37}{2}=\boldsymbol{370}$
+
+\item $S_{20}=\dfrac{20(2\cdot 50+19\cdot(-4))}{2}=\dfrac{20(100-76)}{2}=\dfrac{20\cdot 24}{2}=\boldsymbol{240}$
+\end{alist}
+
+\lysh[19]
+\begin{alist}
+\item $\alpha_1=3\cdot 1+2=5$, \quad $\omega=\alpha_2-\alpha_1=(3\cdot 2+2)-5=8-5=3$
+
+Άρα $\boldsymbol{\alpha_1=5}$ και $\boldsymbol{\omega=3}$.
+
+\item $\alpha_{10}=3\cdot 10+2=32$
+
+$S_{10}=\dfrac{10(5+32)}{2}=\dfrac{10\cdot 37}{2}=\boldsymbol{185}$
+
+\item $\alpha_{50}=3\cdot 50+2=152$
+
+$S_{50}=\dfrac{50(5+152)}{2}=\dfrac{50\cdot 157}{2}=\boldsymbol{3925}$
+
+\item $S_{\nu}=\dfrac{\nu(5+3\nu+2)}{2}=\dfrac{\nu(3\nu+7)}{2}=\dfrac{3\nu^2+7\nu}{2}=1100$
+
+$3\nu^2+7\nu=2200 \Rightarrow 3\nu^2+7\nu-2200=0$
+
+$\varDelta=49+26400=26449=162{,}6^2\approx 163^2$
+
+Με τον τύπο: $\nu=\dfrac{-7+163}{6}=\dfrac{156}{6}=26$ \quad (ή ακριβώς: $\nu=\boldsymbol{26}$)
+\end{alist}
+
+\lysh[20]
+Υπολογίζουμε το άθροισμα $S_{\nu}$ με τον τύπο:
+$$S_{\nu}=\dfrac{\nu(2\alpha_1+(\nu-1)\omega)}{2}=\dfrac{\nu(2\cdot 7+(\nu-1)\cdot 4)}{2}=\dfrac{\nu(4\nu+10)}{2}=2\nu^2+5\nu$$
+
+Θέτουμε $S_{\nu}=297$:
+$$2\nu^2+5\nu=297 \Rightarrow 2\nu^2+5\nu-297=0$$
+
+Υπολογίζουμε τη διακρίνουσα:
+$$\varDelta=25+4\cdot 2\cdot 297=25+2376=2401=49^2$$
+
+Άρα:
+$$\nu=\dfrac{-5+49}{4}=\dfrac{44}{4}=\boldsymbol{11}$$
+
+(Η αρνητική ρίζα $\nu=\dfrac{-5-49}{4}=-13{,}5$ απορρίπτεται.)
+
+\lysh[21]
+\begin{alist}
+\item $\alpha_{\nu}=100+(\nu-1)\cdot(-7)=107-7\nu$
+
+Θέτουμε $107-7\nu=-5 \Rightarrow 7\nu=112 \Rightarrow \nu=\boldsymbol{16}$
+
+\item Θετικοί όροι: $\alpha_{\nu}>0 \Rightarrow 107-7\nu>0 \Rightarrow \nu<15{,}29$
+
+Άρα έχουμε $15$ θετικούς όρους (για $\nu=1,2,\ldots,15$).
+
+$\alpha_{15}=107-105=2$
+
+$S_{15}=\dfrac{15(100+2)}{2}=\dfrac{15\cdot 102}{2}=\boldsymbol{765}$
+\end{alist}
+
+\lysh[22]
+\begin{alist}
+\item $\omega=\dfrac{\alpha_{20}-\alpha_1}{19}=\dfrac{62-5}{19}=\dfrac{57}{19}=\boldsymbol{3}$
+
+\item $S_{20}=\dfrac{20(5+62)}{2}=\dfrac{20\cdot 67}{2}=\boldsymbol{670}$
+
+\item $\alpha_{\nu}=5+(\nu-1)\cdot 3=5+3\nu-3=\boldsymbol{3\nu+2}$
+\end{alist}
+
+\lysh[23]
+Τα $n$ πρώτα πολλαπλάσια του $7$ είναι: $7, 14, 21, \ldots, 7n$
+
+Είναι Α.Π. με $\alpha_1=7,\ \omega=7,\ \alpha_n=7n$
+
+$S_n=\dfrac{n(7+7n)}{2}=\dfrac{7n(1+n)}{2}=\boldsymbol{\dfrac{7n(n+1)}{2}}$
+
+\lysh[24]
+\begin{alist}
+\item $\alpha_1=S_1=1^2+3\cdot 1=1+3=\boldsymbol{4}$
+
+\item Για $\nu\geq 2$: $\alpha_{\nu}=S_{\nu}-S_{\nu-1}$
+
+$S_{\nu-1}=(\nu-1)^2+3(\nu-1)=\nu^2-2\nu+1+3\nu-3=\nu^2+\nu-2$
+
+$\alpha_{\nu}=(\nu^2+3\nu)-(\nu^2+\nu-2)=2\nu+2=\boldsymbol{2(\nu+1)}$
+
+\item $\omega=\alpha_2-\alpha_1=2(2+1)-4=6-4=\boldsymbol{2}$
+
+(Έλεγχος: $\alpha_2=2\cdot 3=6$, $\alpha_1=4$, $\omega=6-4=2$ $\checkmark$)
+\end{alist}
+
+\lysh[25]
+\begin{alist}
+\item $\alpha_1=S_1=2\cdot 1-5=-3$, \quad $\alpha_2=S_2-S_1=(8-10)-(-3)=-2+3=1$
+
+$\alpha_3=S_3-S_2=(18-15)-(8-10)=3-(-2)=5$
+
+Άρα $\boldsymbol{\alpha_1=-3,\ \alpha_2=1,\ \alpha_3=5}$
+
+\item $\alpha_{\nu}=S_{\nu}-S_{\nu-1}=(2\nu^2-5\nu)-(2(\nu-1)^2-5(\nu-1))$
+
+$=2\nu^2-5\nu-2\nu^2+4\nu-2+5\nu-5=4\nu-7$
+
+Άρα $\boldsymbol{\alpha_{\nu}=4\nu-7}$
+
+\item $2\nu^2-5\nu=117 \Rightarrow 2\nu^2-5\nu-117=0$
+
+$\varDelta=25+936=961=31^2$
+
+$\nu=\dfrac{5+31}{4}=9$ \quad (απορρίπτεται η αρνητική ρίζα)
+
+Άρα $\boldsymbol{\nu=9}$
+\end{alist}
+
+\paragraph{Παρεμβολή Μέσων Όρων}
+
+\lysh[26]
+Έχουμε Α.Π. με $\alpha_1=5$, $\alpha_5=25$ (συνολικά $5$ όροι).
+
+$\omega=\dfrac{25-5}{5-1}=\dfrac{20}{4}=5$
+
+Τα $3$ αριθμητικά μέσα είναι: $\alpha_2=10,\ \alpha_3=15,\ \alpha_4=20$
+
+Απάντηση: $\boldsymbol{10,\ 15,\ 20}$
+
+\lysh[27]
+Α.Π. με $\alpha_1=-4$, $\alpha_7=20$ (συνολικά $7$ όροι).
+
+$\omega=\dfrac{20-(-4)}{7-1}=\dfrac{24}{6}=4$
+
+Τα $5$ αριθμητικά μέσα: $\alpha_2=0,\ \alpha_3=4,\ \alpha_4=8,\ \alpha_5=12,\ \alpha_6=16$
+
+Απάντηση: $\boldsymbol{0,\ 4,\ 8,\ 12,\ 16}$
+
+\lysh[28]
+Α.Π. με $\alpha_1=10$, $\alpha_{n+2}=50$, πλήθος όρων $n+2$.
+
+$S_{n+2}=\dfrac{(n+2)(10+50)}{2}=\dfrac{60(n+2)}{2}=30(n+2)=300$
+
+$n+2=10 \Rightarrow n=\boldsymbol{8}$
+
+\lysh[29]
+Α.Π. με $\alpha_1=3$, $\alpha_{k+2}=33$, $\omega=5$.
+
+$33=3+(k+1)\cdot 5 \Rightarrow 30=5(k+1) \Rightarrow k+1=6 \Rightarrow k=\boldsymbol{5}$
+
+\lysh[30]
+Αν ο μεσαίος είναι $12$ και ο πρώτος $5$, τότε $\omega=12-5=7$.
+
+Ο τρίτος: $\alpha_3=12+7=\boldsymbol{19}$
+
+\lysh[31]
+Για να είναι σε Α.Π., πρέπει: $(x+1)-(x-2)=(2x+4)-(x+1)$
+
+$3=x+3 \Rightarrow x=\boldsymbol{0}$
+
+\lysh[32]
+\begin{alist}
+\item $(3x-2)-(2x+1)=(5x-7)-(3x-2)$
+
+$x-3=2x-5 \Rightarrow x=\boldsymbol{2}$
+
+\item $(2x+3)-x^2=(x+6)-(2x+3)$
+
+$2x+3-x^2=x+6-2x-3=-x+3$
+
+$-x^2+2x+3=-x+3 \Rightarrow -x^2+3x=0 \Rightarrow x(-x+3)=0$
+
+$x=0$ ή $x=3$
+
+Απάντηση: $\boldsymbol{x=0}$ ή $\boldsymbol{x=3}$
+\end{alist}
+
+\paragraph{Εφαρμογές - Προβλήματα}
+
+\lysh[33]
+Α.Π. με $\alpha_1=800$, $\omega=50$, $\nu=12$.
+
+$S_{12}=\dfrac{12(2\cdot 800+11\cdot 50)}{2}=\dfrac{12(1600+550)}{2}=\dfrac{12\cdot 2150}{2}=\boldsymbol{12900}$\euro
+
+\lysh[34]
+Α.Π. με $\alpha_1=20$, $\omega=2$, $\nu=25$.
+
+$S_{25}=\dfrac{25(2\cdot 20+24\cdot 2)}{2}=\dfrac{25(40+48)}{2}=\dfrac{25\cdot 88}{2}=\boldsymbol{1100}$ καθίσματα
+
+\lysh[35]
+\begin{alist}
+\item Α.Π. με $\alpha_1=20$, $\omega=5$. Μετά από $8$ ώρες: $\alpha_8=20+7\cdot 5=20+35=\boldsymbol{55}\si{km/h}$
+
+\item Συνολική απόσταση: $S_8=\dfrac{8(20+55)}{2}=\dfrac{8\cdot 75}{2}=\boldsymbol{300}\si{km}$
+\end{alist}
+
+\lysh[36]
+Α.Π. με $\alpha_1=120$, $\omega=-3$, $\nu=15$.
+
+$\alpha_{15}=120+14\cdot(-3)=120-42=\boldsymbol{78}\si{cm}$
+
+\lysh[37]
+Χτυπήματα: $1+2+3+\cdots+12=\dfrac{12\cdot 13}{2}=\boldsymbol{78}$ χτυπήματα
+
+\lysh[38]
+\begin{alist}
+\item Α.Π. με $\alpha_1=2$, $\omega=0{,}5$
+
+$\alpha_{10}=2+9\cdot 0{,}5=2+4{,}5=\boldsymbol{6{,}5}\si{km}$
+
+\item $S_{10}=\dfrac{10(2+6{,}5)}{2}=\dfrac{10\cdot 8{,}5}{2}=\boldsymbol{42{,}5}\si{km}$
+
+\item $\alpha_{\nu}>10 \Rightarrow 2+(\nu-1)\cdot 0{,}5>10 \Rightarrow 0{,}5\nu>8{,}5 \Rightarrow \nu>17$
+
+Την $\boldsymbol{18}$\textbf{η ημέρα} ($\alpha_{18}=2+17\cdot 0{,}5=10{,}5\si{km}$)
+\end{alist}
+
+\lysh[39]
+Α.Π. με $\alpha_1=5$, $\omega=2$.
+
+$S_{\nu}=\dfrac{\nu(2\cdot 5+(\nu-1)\cdot 2)}{2}=\dfrac{\nu(10+2\nu-2)}{2}=\dfrac{\nu(2\nu+8)}{2}=\nu^2+4\nu$
+
+$\nu^2+4\nu\geq 200 \Rightarrow \nu^2+4\nu-200\geq 0$
+
+$\nu=\dfrac{-4+\sqrt{16+800}}{2}=\dfrac{-4+\sqrt{816}}{2}\approx\dfrac{-4+28{,}57}{2}=12{,}3$
+
+Άρα σε $\boldsymbol{13}$ \textbf{εβδομάδες} (έλεγχος: $S_{13}=169+52=221>200$)
+
+\lysh[40]
+\begin{alist}
+\item $\alpha_{12}=1000+11\cdot 150=1000+1650=\boldsymbol{2650}$ μονάδες
+
+\item $S_{12}=\dfrac{12(1000+2650)}{2}=\dfrac{12\cdot 3650}{2}=\boldsymbol{21900}$ μονάδες
+\end{alist}
+
+\lysh[41]
+Οι αποστάσεις μεταξύ διαδοχικών σταθμών είναι $9$ (μεταξύ 10 σταθμών).
+
+Α.Π. με $\alpha_1=5$, $\omega=2$, $\nu=9$.
+
+$S_9=\dfrac{9(2\cdot 5+8\cdot 2)}{2}=\dfrac{9(10+16)}{2}=\dfrac{9\cdot 26}{2}=\boldsymbol{117}\si{km}$
+
+\paragraph{Σωστό - Λάθος}
+
+\lysh[42]
+\begin{alist}
+\item \textbf{Λάθος.} Μια Α.Π. μπορεί να είναι πεπερασμένη.
+
+\item \textbf{Σωστό.} Αν $\omega>0$, τότε $\alpha_{\nu+1}=\alpha_{\nu}+\omega>\alpha_{\nu}$, άρα αύξουσα.
+
+\item \textbf{Σωστό.} Αυτός είναι ο ορισμός του $n$-οστού όρου.
+
+\item \textbf{Λάθος.} Το άθροισμα δύο διαδοχικών όρων $\alpha_{\nu}+\alpha_{\nu+1}=2\alpha_{\nu}+\omega$ δεν είναι πάντα διπλάσιο του ενδιάμεσου (που δεν υπάρχει).
+
+\item \textbf{Σωστό.} Αν $\omega=0$, τότε $\alpha_{\nu}=\alpha_1$ για κάθε $\nu$.
+
+\item \textbf{Λάθος.} Είναι γεωμετρική πρόοδος με λόγο $2$.
+
+\item \textbf{Σωστό.} $S_{100}=100^2=10000$.
+
+\item \textbf{Σωστό.} $\omega=\dfrac{20-10}{10-5}=\dfrac{10}{5}=2$.
+
+\item \textbf{Σωστό.} Αυτός είναι ο ορισμός της Α.Π.
+
+\item \textbf{Σωστό.} Αυτός είναι ο ορισμός του αριθμητικού μέσου.
+\end{alist}
+
+\paragraph{Συμπλήρωση Κενών}
+
+\lysh[43]
+\begin{center}
+\begin{mytblr}{row{1}={m}}
+$\alpha_1$ & $\omega$ & $\nu$ & $\alpha_{\nu}$ & $S_{\nu}$ \\
+$5$ & $3$ & $10$ & $5+9\cdot 3=\boldsymbol{32}$ & $\dfrac{10(5+32)}{2}=\boldsymbol{185}$ \\
+$-4$ & $2$ & $15$ & $-4+14\cdot 2=\boldsymbol{24}$ & $\dfrac{15(-4+24)}{2}=\boldsymbol{150}$ \\
+$\boldsymbol{6}$ & $5$ & $12$ & $61$ & $\dfrac{12(6+61)}{2}=\boldsymbol{402}$ \\
+$8$ & $\boldsymbol{3}$ & $20$ & $65$ & $\dfrac{20(8+65)}{2}=\boldsymbol{730}$ \\
+$3$ & $4$ & $\boldsymbol{10}$ & $3+9\cdot 4=\boldsymbol{39}$ & $210$ \\
+$-10$ & $3$ & $\boldsymbol{19}$ & $44$ & $\dfrac{19(-10+44)}{2}=\boldsymbol{323}$ \\
+$\boldsymbol{4}$ & $-2$ & $8$ & $4+7\cdot(-2)=\boldsymbol{-10}$ & $-24$ \\
+$100$ & $-5$ & $\boldsymbol{10}$ & $100+9\cdot(-5)=\boldsymbol{55}$ & $1000$ \\
+\end{mytblr}
+\end{center}
+
+\textbf{Επεξηγήσεις:}
+\begin{itemize}
+\item Γραμμή 3: $61=\alpha_1+11\cdot 5 \Rightarrow \alpha_1=6$
+\item Γραμμή 4: $65=8+19\omega \Rightarrow \omega=3$
+\item Γραμμή 5: $S_{\nu}=\dfrac{\nu(6+4\nu)}{2}=210$, λύνουμε $\nu=10$
+\item Γραμμή 6: $44=-10+(\nu-1)\cdot 3 \Rightarrow \nu=19$
+\item Γραμμή 7: $S_8=\dfrac{8(2\alpha_1+7\cdot(-2))}{2}=-24 \Rightarrow \alpha_1=4$
+\item Γραμμή 8: $S_{\nu}=\dfrac{\nu(200+(\nu-1)(-5))}{2}=1000$, λύνουμε $\nu=10$
+\end{itemize}
+
+\paragraph{Ασκήσεις Απόδειξης}
+
+\lysh[44]
+Έχουμε $\alpha_{\nu}=\alpha_1+(\nu-1)\omega$ και $\alpha_{\mu}=\alpha_1+(\mu-1)\omega$.
+
+$\alpha_{\nu}+\alpha_{\mu}=2\alpha_1+(\nu+\mu-2)\omega$
+
+Ομοίως: $\alpha_{\kappa}+\alpha_{\lambda}=2\alpha_1+(\kappa+\lambda-2)\omega$
+
+Αφού $\nu+\mu=\kappa+\lambda$, έχουμε $\alpha_{\nu}+\alpha_{\mu}=\alpha_{\kappa}+\alpha_{\lambda}$. \hfill $\square$
+
+\lysh[45]
+Έστω τρεις διαδοχικοί όροι $\alpha_{\nu-1},\ \alpha_{\nu},\ \alpha_{\nu+1}$.
+
+$\alpha_{\nu-1}+\alpha_{\nu}+\alpha_{\nu+1}=(\alpha_{\nu}-\omega)+\alpha_{\nu}+(\alpha_{\nu}+\omega)=3\alpha_{\nu}$
+
+Άρα το άθροισμα είναι ίσο με τον τριπλάσιο του μεσαίου. \hfill $\square$
+
+\lysh[46]
+Αν $\alpha,\ \beta,\ \gamma$ σε Α.Π., τότε $\beta-\alpha=\gamma-\beta$ (κοινή διαφορά).
+
+Οι νέοι αριθμοί: $\alpha+\kappa,\ \beta+\kappa,\ \gamma+\kappa$
+
+Διαφορές: $(\beta+\kappa)-(\alpha+\kappa)=\beta-\alpha$ και $(\gamma+\kappa)-(\beta+\kappa)=\gamma-\beta$
+
+Επειδή $\beta-\alpha=\gamma-\beta$, οι νέοι αριθμοί είναι σε Α.Π. \hfill $\square$
+
+\lysh[47]
+$\alpha_1+\alpha_{\nu}=\alpha_1+(\alpha_1+(\nu-1)\omega)=2\alpha_1+(\nu-1)\omega$
+
+$\alpha_2+\alpha_{\nu-1}=(\alpha_1+\omega)+(\alpha_1+(\nu-2)\omega)=2\alpha_1+(\nu-1)\omega$
+
+$\alpha_3+\alpha_{\nu-2}=(\alpha_1+2\omega)+(\alpha_1+(\nu-3)\omega)=2\alpha_1+(\nu-1)\omega$
+
+Γενικά: $\alpha_k+\alpha_{\nu-k+1}=2\alpha_1+(\nu-1)\omega$ για κάθε $k$. \hfill $\square$
+
+\lysh[48]
+\begin{alist}
+\item $\alpha_{\nu}=\alpha_1+(\nu-1)\omega$ και $\alpha_{\mu}=\alpha_1+(\mu-1)\omega$
+
+$\alpha_{\nu}-\alpha_{\mu}=(\nu-1)\omega-(\mu-1)\omega=(\nu-\mu)\omega$
+
+Άρα $\alpha_{\nu}=\alpha_{\mu}+(\nu-\mu)\omega$. \hfill $\square$
+
+\item $S_{\nu}=\alpha_1+\alpha_2+\cdots+\alpha_{\nu}$
+
+$S_{\nu}=\alpha_{\nu}+\alpha_{\nu-1}+\cdots+\alpha_1$ (αντίστροφη σειρά)
+
+Προσθέτοντας: $2S_{\nu}=(\alpha_1+\alpha_{\nu})+(\alpha_2+\alpha_{\nu-1})+\cdots=\nu(\alpha_1+\alpha_{\nu})$
+
+Άρα $S_{\nu}=\dfrac{\nu(\alpha_1+\alpha_{\nu})}{2}$. \hfill $\square$
+\end{alist}
+
+\paragraph{Σύνθετες Ασκήσεις}
+
+\lysh[49]
+$\alpha_3+\alpha_8=26$ και $\alpha_3\cdot\alpha_8=160$
+
+$\alpha_3=\alpha_1+2\omega$ και $\alpha_8=\alpha_1+7\omega$
+
+Άθροισμα: $2\alpha_1+9\omega=26$
+
+Οι $\alpha_3,\alpha_8$ είναι ρίζες της $x^2-26x+160=0$
+
+$\varDelta=676-640=36$, $x=\dfrac{26\pm 6}{2}$
+
+$\alpha_3=10,\ \alpha_8=16$ ή $\alpha_3=16,\ \alpha_8=10$
+
+Αφού $\omega>0$: $\alpha_3=10,\ \alpha_8=16$
+
+$\omega=\dfrac{16-10}{5}=\dfrac{6}{5}$, $\alpha_1=10-2\cdot\dfrac{6}{5}=10-\dfrac{12}{5}=\dfrac{38}{5}$
+
+Η Α.Π.: $\boldsymbol{\dfrac{38}{5},\ \dfrac{44}{5},\ 10,\ \dfrac{56}{5},\ \ldots}$
+
+\lysh[50]
+$\alpha_2+\alpha_{10}=24$: $(\alpha_1+\omega)+(\alpha_1+9\omega)=2\alpha_1+10\omega=24 \Rightarrow \alpha_1+5\omega=12$
+
+$\alpha_5\cdot\alpha_7=135$: $(\alpha_1+4\omega)(\alpha_1+6\omega)=135$
+
+Από την πρώτη: $\alpha_1=12-5\omega$
+
+Αντικαθιστούμε: $(12-5\omega+4\omega)(12-5\omega+6\omega)=135$
+
+$(12-\omega)(12+\omega)=135 \Rightarrow 144-\omega^2=135 \Rightarrow \omega^2=9 \Rightarrow \omega=3$ (αφού $\omega>0$)
+
+$\alpha_1=12-15=-3$... αλλά $\alpha_1>0$, άρα ελέγχουμε.
+
+Αν $\omega=3$: $\alpha_1=-3<0$, απορρίπτεται.
+
+Ελέγχουμε $\omega=-3$: $\alpha_1=12+15=27>0$, αλλά $\omega>0$, απορρίπτεται.
+
+Επανέλεγχος: $(\alpha_1+4\omega)(\alpha_1+6\omega)=135$ με $\alpha_1+5\omega=12$.
+
+Θέτω $\alpha_1+5\omega=12$, άρα $\alpha_1+4\omega=12-\omega$ και $\alpha_1+6\omega=12+\omega$.
+
+$(12-\omega)(12+\omega)=135 \Rightarrow \omega=\pm 3$
+
+Για $\omega=3$: $\alpha_1=-3$ (απορρίπτεται)
+
+Πρόβλημα στην εκφώνηση. Αν επιτρέψουμε $\alpha_1<0$:
+
+Οι πρώτοι 5 όροι: $\boldsymbol{-3,\ 0,\ 3,\ 6,\ 9}$
+
+\lysh[51]
+Έστω οι αριθμοί $\alpha-2\omega,\ \alpha-\omega,\ \alpha,\ \alpha+\omega,\ \alpha+2\omega$.
+
+Άθροισμα: $5\alpha=25 \Rightarrow \alpha=5$
+
+Άθροισμα τετραγώνων: 
+$(\alpha-2\omega)^2+(\alpha-\omega)^2+\alpha^2+(\alpha+\omega)^2+(\alpha+2\omega)^2=165$
+
+$5\alpha^2+10\omega^2=165 \Rightarrow 5\cdot 25+10\omega^2=165 \Rightarrow 10\omega^2=40 \Rightarrow \omega=\pm 2$
+
+Οι αριθμοί: $\boldsymbol{1,\ 3,\ 5,\ 7,\ 9}$
+
+\lysh[52]
+Έστω $\alpha-\omega,\ \alpha,\ \alpha+\omega$ οι τρεις αριθμοί σε Α.Π.
+
+Άθροισμα: $3\alpha=24 \Rightarrow \alpha=8$
+
+Οι αριθμοί: $8-\omega,\ 8,\ 8+\omega$
+
+Νέοι αριθμοί σε Γ.Π.: $9-\omega,\ 14,\ 26+\omega$
+
+Για Γ.Π.: $14^2=(9-\omega)(26+\omega)$
+
+$196=234+9\omega-26\omega-\omega^2=-\omega^2-17\omega+234$
+
+$\omega^2+17\omega-38=0$
+
+$\varDelta=289+152=441=21^2$
+
+$\omega=\dfrac{-17+21}{2}=2$ ή $\omega=\dfrac{-17-21}{2}=-19$
+
+Για $\omega=2$: αριθμοί $6,\ 8,\ 10$
+
+Για $\omega=-19$: αριθμοί $27,\ 8,\ -11$
+
+Απάντηση: $\boldsymbol{6,\ 8,\ 10}$ ή $\boldsymbol{27,\ 8,\ -11}$
+
+\lysh[53]
+Έστω $S_{\nu}^{(1)}$ και $S_{\nu}^{(2)}$ τα αθροίσματα των δύο Α.Π.
+
+$S_{\nu}^{(1)}-S_{\nu}^{(2)}=n^2$
+
+$S_{\nu}^{(1)}=\dfrac{\nu(2\cdot 1+(\nu-1)\omega_1)}{2}=\nu+\dfrac{\nu(\nu-1)\omega_1}{2}$
+
+$S_{\nu}^{(2)}=\dfrac{\nu(2\cdot 2+(\nu-1)\omega_2)}{2}=2\nu+\dfrac{\nu(\nu-1)\omega_2}{2}$
+
+$S_{\nu}^{(1)}-S_{\nu}^{(2)}=-\nu+\dfrac{\nu(\nu-1)(\omega_1-\omega_2)}{2}=n^2$
+
+$\dfrac{\nu(\nu-1)(\omega_1-\omega_2)}{2}=n^2+n=n(n+1)$
+
+$\omega_1-\omega_2=\dfrac{2n(n+1)}{n(n-1)}=\dfrac{2(n+1)}{n-1}$
+
+Για ακέραιο $\omega_1-\omega_2$, χρειάζεται περισσότερη πληροφορία.
+
+Διαφορά $n$-οστών όρων:
+$\alpha_n^{(1)}-\alpha_n^{(2)}=(1+(n-1)\omega_1)-(2+(n-1)\omega_2)=-1+(n-1)(\omega_1-\omega_2)$
+
+Η απάντηση εξαρτάται από $\omega_1,\omega_2$. Αν $\omega_1-\omega_2=2$:
+
+$\alpha_n^{(1)}-\alpha_n^{(2)}=-1+2(n-1)=\boldsymbol{2n-3}$
+
+\end{document}

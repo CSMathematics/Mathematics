@@ -1,0 +1,316 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[left=1.50cm, right=1.50cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize}
+\definecolor{xrwma}{HTML}{3d93cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usepackage[explicit]{titlesec}
+\tcbuselibrary{skins,theorems,breakable}
+\newlist{rlist}{enumerate}{3}
+\setlist[rlist]{itemsep=0mm,label=\roman*.}
+\newlist{alist}{enumerate}{3}
+\setlist[alist]{itemsep=0mm,label=\alph*.}
+\newlist{balist}{enumerate}{3}
+\setlist[balist]{itemsep=0mm,label=\bf\alph*.}
+\newlist{Alist}{enumerate}{3}
+\setlist[Alist]{itemsep=0mm,label=\Alph*.}
+\newlist{bAlist}{enumerate}{3}
+\setlist[bAlist]{itemsep=0mm,label=\bf\Alph*.}
+\newlist{askhseis}{enumerate}{3}
+\setlist[askhseis]{label={\Large\thesection}.\arabic*.}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\newlist{thema}{enumerate}{3}
+\setlist[thema]{label=\bf\large{ΘΕΜΑ \textcolor{black}{\Alph*}},itemsep=0mm,leftmargin=0cm,itemindent=18mm}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\large{\textcolor{black}{\Alph{themai}.\arabic*}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont \textbf{#1}}}
+\renewcommand{\textdexiakeraia}{}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+\SetTblrTemplate{caption}{nocaptemplate}{}
+\SetTblrTemplate{capcont}{nocaptemplate}{}
+\SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=red2}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+width = 0.85\linewidth,
+row{odd} = {bg=red9,fg=black,ht=8mm},
+row{even} = {bg=red7,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=xrwma, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+hline{2} = {.7mm}, % midrule  
+}
+\newcounter{askhsh}
+\setcounter{askhsh}{1}
+\newcommand{\askhsh}{\large\theaskhsh.\ \addtocounter{askhsh}{1}}
+
+\titleformat{\section}{\Large}{\kerkissans{\thesection}}{10pt}{\Large\kerkissans{#1}}
+
+\setlength{\columnsep}{5mm}
+\titleformat{\paragraph}
+{\large}%
+{}{0em}%
+{\textcolor{xrwma}{\faSquare\ \ \kerkissans{\bmath{#1}}}}
+\setlength{\parindent}{0pt}
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\begin{document}
+\twocolumn[{
+\begin{tikzpicture}[overlay,remember picture]
+\fill[xrwma]($(current page.north west)$)--($(current page.north west)+(2cm,0)$)--($(current page.north west)+(2cm,-2.4cm)$)--($(current page.north west)+(-2cm,-2.4cm)$)--cycle;
+\node (fig1) at ($(current page.north west)+(1cm,-1.2cm)$)
+{\includegraphics[width=0.07\linewidth]{/home/spyros/Μαθηματικά/Φροντιστήριο ΦΙΛΟΜΑΘΕΙΑ/Βαθμοί - Φυλλάδιο ύλης - Διάφορα/Λογότυπα/logo.png}};
+\node[gray2] at ($(0,0)+(-2.4cm,1.5cm)$) {\kerkissans{Φ\,ΡΟΝΤΙΣΤΗΡΙΟ ΜΕΣΗΣ ΕΚΠΑΙΔΕΥΣΗΣ}};
+\node[xrwma] at ($(0,0)+(-2.4cm,.9cm)$) {\kerkissans{\huge {\fontsize{28}{33.6}\selectfont Φ\,ΙΛΟΜΑΘΕΙΑ}}};
+\draw[gray4] (-5.2,.4)--(.4,.4);
+\node at ($(0,0)+(-2.4cm,0cm)$) {\textcolor{xrwma}{\faMapMarker*} Ιακώβου Πολυλά 24, Πεζόδρομος};
+\node (title) at ($(current page.north east)+(-3.5cm,-.7cm)$){\textcolor{gray2}{ \kerkissans{\LARGE Φ\,ΥΛΛΑΔΙΟ ΑΣΚΗΣΕΩΝ}}};
+\node[below=of title.east,anchor=east,yshift=3mm] (mob) {\textcolor{xrwma}{\faPhone*} 26610 20144 - \textcolor{xrwma}{\faMobile*\ \faTelegram\ \faViber} 693 232 7283};
+\node[below=of mob.east,anchor=east,yshift=4mm] (fb) {\textcolor{xrwma}{\faFacebook} Φροντιστήριο Φιλομάθεια - \textcolor{xrwma}{\faInstagram}\ {\eng{front\_filomatheia}}};
+\end{tikzpicture}
+\vspace{17mm}\mbox{}\\
+\centering
+\kerkissans{{\huge Μαθηματικά προσανατολισμού - Γ' Λυκείου}\\\vspace{2mm} {\LARGE Ολοκληρώματα και Ανισότητες}}\\\vspace{4mm}{\kerkissans{\today}}\\\vspace{3mm}}]
+
+\paragraph{Θετικότητα Συνάρτησης και Ολοκλήρωμα}
+
+\askhsh Δίνεται η συνάρτηση $f(x)=x^2-4x+3, \ x \in \mathbb{R}$.
+\begin{alist}
+\item Να βρείτε τις ρίζες και το πρόσημο της $f$.
+\item Να εξετάσετε αν ισχύει $\displaystyle \int_1^3 f(x) dx < 0$.
+\item Να βρείτε το εμβαδό του χωρίου που περικλείεται από τη $C_f$ και τον άξονα $x'x$.
+\end{alist}
+
+\askhsh Έστω συνεχής συνάρτηση $f:[0,1]\to\mathbb{R}$ με $f(x) \ge 2x$.
+\begin{alist}
+\item Να δείξετε ότι $f(x) - 2x \ge 0$.
+\item Να αποδείξετε ότι $\displaystyle \int_0^1 f(x) dx \ge 1$.
+\item Αν επιπλέον $\displaystyle \int_0^1 f(x) dx = 1$, να δείξετε ότι $f(x)=2x$.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $g(x) = e^x - x - 1$.
+\begin{alist}
+\item Να μελετήσετε την $g$ ως προς τη μονοτονία και τα ακρότατα.
+\item Να δείξετε ότι $e^x \ge x+1$ για κάθε $x \in \mathbb{R}$.
+\item Να δείξετε ότι $\displaystyle \int_0^1 e^x dx > \frac{3}{2}$.
+\end{alist}
+
+\askhsh Θεωρούμε συνάρτηση $f$ συνεχής στο $[a,b]$ με $f(x) > 0$ για κάθε $x \in [a,b]$.
+\begin{alist}
+\item Να εξηγήσετε γιατί $\displaystyle \int_a^b f(x) dx > 0$.
+\item Έστω $F$ μια αρχική της $f$. Να δείξετε ότι η $F$ είναι γνησίως αύξουσα.
+\item Να λύσετε την ανίσωση $F(x) > F(a)$.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x) = \frac{1}{x} - \frac{1}{x+1}, \ x>0$.
+\begin{alist}
+\item Να δείξετε ότι $f(x) > 0$ για κάθε $x>0$.
+\item Να υπολογίσετε το $I = \displaystyle \int_1^2 f(x) dx$.
+\item Να δείξετε ότι $\displaystyle \ln\frac{4}{3} > 0$ χρησιμοποιώντας τα παραπάνω.
+\end{alist}
+
+\askhsh Έστω $f:[0, \pi] \to \mathbb{R}$ με $f(x) = \hm x$.
+\begin{alist}
+\item Να βρείτε το πρόσημο της $f$ στο $[0, \pi]$.
+\item Να συγκρίνετε τις τιμές $I = \displaystyle \int_0^{\pi} \hm x dx$ και $J = \displaystyle \int_{\pi}^{2\pi} \hm x dx$.
+\item Να δείξετε ότι $\displaystyle \int_0^{2\pi} |\hm x| dx > 0$.
+\end{alist}
+
+\askhsh Δίνεται κυρτή συνάρτηση $f:\mathbb{R} \to \mathbb{R}$ με ελάχιστο στο $x_0=1$ το $f(1)=2$.
+\begin{alist}
+\item Να βρείτε την εφαπτομένη της $C_f$ στο $x_0=1$.
+\item Να αποδείξετε ότι $f(x) \ge 2$.
+\item Να δείξετε ότι $\displaystyle \int_0^3 f(x) dx \ge 6$.
+\end{alist}
+
+\paragraph{Σύγκριση Συναρτήσεων (Μονοτονία Ολοκληρώματος)}
+
+\askhsh Θεωρούμε τις συναρτήσεις $f(x)=x^2$ και $g(x)=x^3$ στο διάστημα $[0,1]$.
+\begin{alist}
+\item Να συγκρίνετε τις $f, g$ στο $[0,1]$.
+\item Να συγκρίνετε τα ολοκληρώματα $\displaystyle \int_0^1 x^2 dx$ και $\displaystyle \int_0^1 x^3 dx$.
+\item Να επιβεβαιώσετε το συμπέρασμα υπολογίζοντας τα ολοκληρώματα.
+\end{alist}
+
+\askhsh Δίνονται οι συναρτήσεις $f(x) = \ln x$ και $g(x) = x-1$.
+\begin{alist}
+\item Με χρήση παραγώγων να δείξετε ότι $\ln x \le x-1$ για κάθε $x>0$.
+\item Να δείξετε ότι $\displaystyle \int_1^e \ln x dx < \int_1^e (x-1) dx$.
+\item Να υπολογίσετε τη διαφορά των δύο ολοκληρωμάτων.
+\end{alist}
+
+\askhsh 
+\begin{alist}
+\item Να αποδείξετε ότι $\hm x < x$ για κάθε $x \in (0, \pi/2]$.
+\item Να δείξετε ότι $\displaystyle \int_0^{\pi/2} \hm x dx < \frac{\pi^2}{8}$.
+\item Να βρείτε το λάθος στον ισχυρισμό $\int_0^{\pi/2} \hm x dx = \pi^2/8$.
+\end{alist}
+
+\askhsh Έστω $f, g$ συνεχείς στο $[a,b]$ με $f(x) \ge g(x)$ για κάθε $x \in [a,b]$.
+\begin{alist}
+\item Να ορίσετε τη συνάρτηση $h(x) = f(x) - g(x)$. Τι πρόσημο έχει;
+\item Να δείξετε ότι $\int_a^b h(x) dx \ge 0$.
+\item Να συμπεράνετε ότι $\int_a^b f(x) dx \ge \int_a^b g(x) dx$.
+\end{alist}
+
+\askhsh Δίνεται η ανισότητα $e^x \ge 1+x+\frac{x^2}{2}$ για $x \ge 0$.
+\begin{alist}
+\item Να αποδείξετε την ανισότητα με διαδοχικές ολοκληρώσεις ξεκινώντας από $e^t \ge 1$.
+\item Να δείξετε ότι \[\displaystyle \int_0^1 e^x dx > \int_0^1 \left(1+x+\frac{x^2}{2}\right) dx.\]
+\item Να βρείτε κάτω φράγμα για τον αριθμό $e$ με ακρίβεια.
+\end{alist}
+
+\askhsh Έστω $I_n = \displaystyle \int_0^1 x^n e^x dx$.
+\begin{alist}
+\item Να συγκρίνετε τα $x^n$ και $x^{n+1}$ στο $[0,1]$.
+\item Να δείξετε ότι $x^n e^x \ge x^{n+1} e^x$.
+\item Να αποδείξετε ότι η ακολουθία $I_n$ είναι φθίνουσα, δηλαδή $I_n \ge I_{n+1}$.
+\end{alist}
+
+\askhsh 
+\begin{alist}
+\item Να δείξετε ότι $\sqrt{1+x^2} \ge x$ για κάθε $x \in \mathbb{R}$.
+\item Να βρείτε το πρόσημο της $h(x) = \sqrt{1+x^2} - x$.
+\item Να αποδείξετε ότι $\displaystyle \int_0^1 \sqrt{1+x^2} dx > \frac{1}{2}$.
+\end{alist}
+
+\paragraph{Διπλή Ανισότητα}
+
+\askhsh Δίνεται η συνάρτηση $f(x) = x^2+1$ στο $[-1, 2]$.
+\begin{alist}
+\item Να βρείτε την ελάχιστη ($m$) και μέγιστη τιμή ($M$) της $f$ στο $[-1, 2]$.
+\item Να υπολογίσετε το μήκος του διαστήματος $\beta - \alpha$.
+\item Να επιβεβαιώσετε ότι $m(2-(-1)) \le \int_{-1}^2 f(x) dx \le M(2-(-1))$.
+\end{alist}
+
+\askhsh Θεωρούμε το ολοκλήρωμα $I = \displaystyle \int_0^1 e^{-x^2} dx$.
+\begin{alist}
+\item Να βρείτε τη μονοτονία της συνάρτησης $f(x) = e^{-x^2}$ στο $[0,1]$.
+\item Να βρείτε τις τιμές $m, M$ της $f$.
+\item Να αποδείξετε ότι $1/e \le I \le 1$.
+\end{alist}
+
+\askhsh Δίνεται $f$ συνεχής στο $[1, 4]$ με $2 \le f(x) \le 5$.
+\begin{alist}
+\item Να βρείτε φράγματα για το ολοκλήρωμα $\int_1^4 f(x) dx$.
+\item Αν επιπλέον $\int_1^4 f(x) dx = 15$, τι συμπεραίνετε για την $f$;
+\item Αν $\int_1^4 f(x) dx = 6$, τι συμπεραίνετε;
+\end{alist}
+
+\askhsh 
+\begin{alist}
+\item Να βρείτε την ελάχιστη και μέγιστη τιμή της $f(x) = \frac{1}{1+x^2}$ στο $[0, 1]$.
+\item Να δείξετε ότι $ \frac{1}{2} \le \int_0^1 \frac{1}{1+x^2} dx \le 1$.
+\item Γνωρίζοντας ότι $\int_0^1 \frac{1}{1+x^2} dx = \frac{\pi}{4}$, να δείξετε ότι $2 \le \pi \le 4$.
+\end{alist}
+
+\askhsh Έστω $f(x) = \sqrt{4-x^2}$.
+\begin{alist}
+\item Να βρείτε το πεδίο ορισμού και το σύνολο τιμών της $f$.
+\item Να εκτιμήσετε την τιμή του $\displaystyle \int_{-2}^2 \sqrt{4-x^2} dx$ μέσω της ανισότητας $m(\beta-\alpha) \le I \le M(\beta-\alpha)$.
+\item Ποια είναι η ακριβής γεωμετρική τιμή του ολοκληρώματος;
+\end{alist}
+
+\askhsh
+\begin{alist}
+\item Να δείξετε ότι για $x \in [0, \frac{\pi}{4}]$, ισχύει $\frac{\sqrt{2}}{2} \le \cos x \le 1$.
+\item Να αποδείξετε ότι $\frac{\pi\sqrt{2}}{8} \le \int_0^{\pi/4} \cos x dx \le \frac{\pi}{4}$.
+\item Να ελέγξετε την ακρίβεια της εκτίμησης υπολογίζοντας το ολοκλήρωμα.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x) = \frac{1}{x+2}, \ x \in [0, 1]$.
+\begin{alist}
+\item Να μελετήσετε την $f$ ως προς τη μονοτονία στο $[0, 1]$.
+\item Να βρείτε την ελάχιστη και μέγιστη τιμή της $f$ στο διάστημα αυτό.
+\item Να δείξετε ότι $\frac{1}{3} \le \displaystyle \int_0^1 \frac{1}{x+2} dx \le \frac{1}{2}$.
+\end{alist}
+
+\askhsh Θεωρούμε τη συνάρτηση $f(x) = x e^x$ στο διάστημα $[0, 1]$.
+\begin{alist}
+\item Να βρείτε το σύνολο τιμών της $f$ στο $[0, 1]$.
+\item Να εφαρμόσετε την ανισότητα $m(\beta-\alpha) \le \int_\alpha^\beta f(x) dx \le M(\beta-\alpha)$.
+\item Να ελέγξετε την ακρίβεια της εκτίμησης υπολογίζοντας το ολοκλήρωμα.
+\end{alist}
+
+\askhsh Δίνεται η συνάρτηση $f(x) = \hm x + \cos x, \ x \in [0, \frac{\pi}{2}]$.
+\begin{alist}
+\item Να βρείτε τα ακρότατα της $f$ στο διάστημα αυτό.
+\item Να δείξετε ότι $\displaystyle \int_0^{\pi/2} (\hm x + \cos x) dx \le \frac{\pi\sqrt{2}}{2}$.
+\item Ποιο είναι το κάτω φράγμα που δίνει η ανισότητα; Είναι κοντά στην πραγματική τιμή;
+\end{alist}
+
+\paragraph{Μηδενικό Ολοκλήρωμα Θετικής Συνάρτησης}
+
+\askhsh Έστω συνεχής συνάρτηση $f(x) \ge 0$ στο $[a,b]$ και $\int_a^b f(x) dx = 0$.
+\begin{alist}
+\item Αν υπήρχε $x_0$ ώστε $f(x_0) > 0$, τι θα συνέβαινε στο ολοκλήρωμα;
+\item Να δικαιολογήσετε γιατί υποχρεωτικά $f(x) = 0$ για κάθε $x \in [a,b]$.
+\item Ισχύει το αντίστροφο;
+\end{alist}
+
+\askhsh Δίνεται συνεχής συνάρτηση $f$ τέτοια ώστε $\int_a^b f^2(x) dx = 0$.
+\begin{alist}
+\item Να παρατηρήσετε ότι $g(x) = f^2(x) \ge 0$.
+\item Να εφαρμόσετε την ιδιότητα του μηδενικού ολοκληρώματος.
+\item Να δείξετε ότι $f(x) = 0$ για κάθε $x \in [a,b]$.
+\end{alist}
+
+\askhsh Δίνεται η εξίσωση $\int_0^1 (f(x) - e^x)^2 dx = 0$.
+\begin{alist}
+\item Να αναπτύξετε την υπό ολοκλήρωση συνάρτηση.
+\item Να προσδιορίσετε τη συνάρτηση $f(x)$.
+\item Ποια είναι η τιμή του $\int_0^1 f(x) dx$;
+\end{alist}
+
+\askhsh Θεωρούμε τη συνάρτηση $f(x) = |x-1| + |x-2|$.
+\begin{alist}
+\item Να βρείτε το ελάχιστο της $f$.
+\item Να λύσετε την εξίσωση $\int_0^3 (|x-1| + |x-2| - k) dx = 0$ ως προς $k$. 
+\item (Τροποποίηση για την ιδιότητα): Αν $\int_0^3 |g(x)| dx = 0$, να δείξετε ότι $g(x)=0$.
+\end{alist}
+
+\askhsh Δίνεται ότι $\int_0^1 (f^2(x) - 2f(x) + 1) dx = 0$.
+\begin{alist}
+\item Να γράψετε την παράσταση ως τέλειο τετράγωνο στο ολοκλήρωμα.
+\item Να βρείτε τον τύπο της $f$.
+\item Αν $f(x) = c$, ποιο είναι το $c$;
+\end{alist}
+
+\askhsh Έστω $f, g$ συνεχείς με $f(x) \ge g(x)$ και $\int_a^b f(x) dx = \int_a^b g(x) dx$.
+\begin{alist}
+\item Να θεωρήσετε τη διαφορά $\phi(x) = f(x) - g(x)$.
+\item Να δείξετε ότι $\phi(x) \ge 0$ και $\int_a^b \phi(x) dx = 0$.
+\item Να συμπεράνετε ότι $f(x) = g(x)$ για κάθε $x \in [a, b]$.
+\end{alist}
+
+\askhsh Δίνονται $f, g$ συνεχείς στο $[a,b]$. Αν ισχύει $\int_a^b (f(x) - g(x))^2 dx + \int_a^b (f(x) - x)^2 dx = 0$:
+\begin{alist}
+\item Να δείξετε ότι $\int_a^b (f(x)-x)^2 dx = 0$.
+\item Να βρείτε την $f(x)$.
+\item Να βρείτε την $g(x)$.
+\end{alist}
+
+\end{document}

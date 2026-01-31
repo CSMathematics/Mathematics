@@ -1,300 +1,178 @@
-\PassOptionsToPackage{no-math,cm-default}{fontspec}
-\documentclass[twoside,nofonts,internet]{askhseis}
+\documentclass[11pt,a4paper,modern]{FFExercises}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath}
-\usepackage{xgreek}
-\let\hbar\relax
-\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
-\newfontfamily\scfont{GFS Artemisia}
-\font\icon = "Webdings"
-\usepackage[amsbb]{mtpro2}
-\usepackage{tikz,pgfplots}
-\tkzSetUpPoint[size=7,fill=white]
-\xroma{red!70!black}
-%------TIKZ - ΣΧΗΜΑΤΑ - ΓΡΑΦΙΚΕΣ ΠΑΡΑΣΤΑΣΕΙΣ ----
-\usepackage{tikz}
-\usepackage{tkz-euclide}
-\usetkzobj{all}
-\usepackage[framemethod=TikZ]{mdframed}
-\usetikzlibrary{decorations.pathreplacing}
-\usepackage{pgfplots}
-\usetkzobj{all}
-%-----------------------
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[amsbb,subscriptcorrection,zswash,mtpcal,mtphrb,mtpfrak]{mtpro2}
+\usepackage{graphicx,multicol,multirow,enumitem,tabularx,mathimatika,gensymb,venndiagram,hhline,longtable,tkz-euclide,fontawesome5,eurosym,tcolorbox,tabularray,tikzpagenodes,relsize}
+\definecolor{xrwma}{HTML}{aa1292}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\tcbuselibrary{skins,theorems,breakable}
+\renewcommand{\textstigma}{\textsigma\texttau}
+\renewcommand{\textdexiakeraia}{}
 
-%-----ΕΙΚΟΝΑ ΔΙΠΛΑ ΑΠΟ ΚΕΙΜΕΝΟ-------
-\usepackage{wrapfig}
-\newenvironment{WrapText1}[3][r]
-{\wrapfigure[#2]{#1}{#3}}
-{\endwrapfigure}
-
-\newenvironment{WrapText2}[3][l]
-{\wrapfigure[#2]{#1}{#3}}
-{\endwrapfigure}
-
-\newcommand{\wrapr}[6]{
-\begin{minipage}{\linewidth}\mbox{}\\
-\vspace{#1}
-\begin{WrapText1}{#2}{#3}
-\vspace{#4}#5\end{WrapText1}#6
-\end{minipage}}
-
-\newcommand{\wrapl}[6]{
-\begin{minipage}{\linewidth}\mbox{}\\
-\vspace{#1}
-\begin{WrapText2}{#2}{#3}
-\vspace{#4}#5\end{WrapText2}#6
-\end{minipage}}
-%-------------------------------------------
-
-\usepackage{calc}
-\usepackage{hhline}
-\renewcommand{\thepart}{\arabic{part}}
-
-\usepackage[explicit]{titlesec}
-\usepackage{graphicx}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage{enumitem}
-\usepackage{tabularx}
-\usepackage[decimalsymbol=comma]{siunitx}
-\usetikzlibrary{backgrounds}
-\usepackage{sectsty}
-\sectionfont{\centering}
-\usepackage{enumitem}
-\setlist[enumerate]{label=\bf{\large \textcolor{\xrwma}{\arabic*.}}}
-\usepackage{adjustbox}
-%--------- ΑΓΓΛΙΚΟ ΚΕΙΜΕΝΟ --------------
-\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
-%----------------------------------------
-%------- ΣΥΣΤΗΜΑ -------------------
-\usepackage{systeme,regexpatch}
-\makeatletter
-% change the definition of \sysdelim not to store `\left` and `\right`
-\def\sysdelim#1#2{\def\SYS@delim@left{#1}\def\SYS@delim@right{#2}}
-\sysdelim\{. % reinitialize
-
-% patch the internal command to use
-% \LEFTRIGHT<left delim><right delim>{<system>}
-% instead of \left<left delim<system>\right<right delim>
-\regexpatchcmd\SYS@systeme@iii
-{\cB.\c{SYS@delim@left}(.*)\c{SYS@delim@right}\cE.}
-{\c{SYS@MT@LEFTRIGHT}\cB\{\1\cE\}}
-{}{}
-\def\SYS@MT@LEFTRIGHT{%
-\expandafter\expandafter\expandafter\LEFTRIGHT
-\expandafter\SYS@delim@left\SYS@delim@right}
-\makeatother
-\newcommand{\synt}[2]{{\scriptsize \begin{matrix}
-\times#1\\\\ \times#2
-\end{matrix}}}
-%----------------------------------------
-%------ ΜΗΚΟΣ ΓΡΑΜΜΗΣ ΚΛΑΣΜΑΤΟΣ ---------
-\DeclareRobustCommand{\frac}[3][0pt]{%
-{\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
-%----------------------------------------
-%-------- ΜΑΘΗΜΑΤΙΚΑ ΕΡΓΑΛΕΙΑ ---------
-\usepackage{mathtools}
-%----------------------
-
-%-------- ΠΙΝΑΚΕΣ ---------
-\usepackage{booktabs}
-%----------------------
-%----- ΥΠΟΛΟΓΙΣΤΗΣ ----------
-\usepackage{calculator}
-%----------------------------
-%------ ΔΙΑΓΩΝΙΟ ΣΕ ΠΙΝΑΚΑ -------
-\usepackage{array}
-\newcommand\diag[5]{%
-\multicolumn{1}{|m{#2}|}{\hskip-\tabcolsep
-$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,outer sep=0]
-\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
-\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
-minimum  height=\baselineskip+#3-\pgflinewidth] (box) {};
-\draw[line cap=round] (box.north west) -- (box.south east);
-\node[anchor=south west,align=left,inner sep=#1] at (box.south west) {#4};
-\node[anchor=north east,align=right,inner sep=#1] at (box.north east) {#5};
-\end{tikzpicture}}\rule{0pt}{.71\baselineskip+#3-\pgflinewidth}$\hskip-\tabcolsep}}
-%---------------------------------
-
-%---- ΟΡΙΖΟΝΤΙΟ - ΚΑΤΑΚΟΡΥΦΟ - ΠΛΑΓΙΟ ΑΓΚΙΣΤΡΟ ------
-\newcommand{\orag}[3]{\node at (#1)
-{$ \overcbrace{\rule{#2mm}{0mm}}^{{\scriptsize #3}} $};}
-
-\newcommand{\kag}[3]{\node at (#1)
-{$ \undercbrace{\rule{#2mm}{0mm}}_{{\scriptsize #3}} $};}
-
-\newcommand{\Pag}[4]{\node[rotate=#1] at (#2)
-{$ \overcbrace{\rule{#3mm}{0mm}}^{{\rotatebox{-#1}{\scriptsize$#4$}}}$};}
-%-----------------------------------------
-
-%-------- ΤΡΙΓΩΝΟΜΕΤΡΙΚΟΙ ΑΡΙΘΜΟΙ -----------
-\newcommand{\hm}[1]{\textrm{ημ}#1}
-\newcommand{\syn}[1]{\textrm{συν}#1}
-\newcommand{\ef}[1]{\textrm{εφ}#1}
-\newcommand{\syf}[1]{\textrm{σφ}#1}
-%--------------------------------------------
-
-%--------- ΠΟΣΟΣΤΟ ΤΟΙΣ ΧΙΛΙΟΙΣ ------------
-\DeclareRobustCommand{\perthousand}{%
-\ifmmode
-\text{\textperthousand}%
-\else
-\textperthousand
-\fi}
-%------------------------------------------
-
-%------------------------------------------
-\usepackage{extarrows}
-\newcommand{\eq}[1]{\xlongequal{#1}}
-\newcommand{\eqq}[2]{\xlongequal[#2]{#1}}
-\DeclareMathOperator*{\Eq}{=}
-%------------------------------------------
-%------ ΌΡΙΣΜΑ ----------
-\newcommand{\Arg}[8]{
-\draw[-latex] (#7,#8)-- ++(#1:#2) node[right=#5]{\footnotesize$#4$};
-\draw[fill=black!#6] (#7+0.3+#3,#8) arc (0:#1:0.3+#3) -- (#7,#8);}
-%------------------------
-
-
-
-%--------- ΑΝΙΣΩΣΕΙΣ -------
-\tikzset{
-thickest/.style={line width=1mm,steelblue},
-a/.style={decoration={markings,
-mark=at position #1 with {\fill[white,draw=black,thin] circle (3pt);}},postaction={decorate}},
-k/.style={decoration={markings,
-mark=at position #1 with {\fill[black] circle (3pt);}},postaction={decorate}},
-}
-%--------- ΔΙΑΣΤΗΜΑ ------------
-\newcommand{\diasthma}[7]{
-\foreach \x in {#3,#4}
-\draw (\x,#7+.2) -- (\x,#7-.2);
-\node[anchor=north,fill=white] at (#3,#7)[below=1mm] {$ #1 $};
-\node[anchor=north,fill=white] at (#4,#7)[below=1mm] {$ #2 $};
-\draw [#5=0,#6=1,thickest] (#3,#7)--(#4,#7);
-}
-%--------- ΑΞΟΝΑΣ ------------------
-\newcommand{\axonas}[3]{
-\draw[-latex] (#1,#3) -- (#2,#3)node[below]{$x$};
-}
-%--------- ΚΑΤΩ ΑΚΡΟ ------------------
-\newcommand{\Xapeiro}[5]{
-\draw (#2,#5+.2) -- (#2,#5-.2);
-\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
-\draw [#4=0,thickest] (#2,#5)--(#3-.3,#5);
-}
-%--------- ΠΑΝΩ ΑΚΡΟ ------------------
-\newcommand{\apeiroX}[5]{
-\draw (#2,#5+.2) -- (#2,#5-.2);
-\node[anchor=north,fill=white] at (#2,#5)[below=1mm] {$ #1 $};
-\draw [#4=0,thickest] (#2,#5)--(#3+.3,#5);
-}
-%----- ΔΙΑΚΕΚΟΜΜΕΝΕΣ ΓΡΑΜΜΕΣ ------
-\newcommand{\oria}[3]{\draw [dashed] (#1,#2)--(#1,#3);}
-%--------------------------------------
-\newcommand{\tss}[1]{\textsuperscript{#1}}
-\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
-%---------- ΛΙΣΤΕΣ ----------------------
-\newlist{bhma}{enumerate}{3}
-\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=0cm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
-\newlist{tropos}{enumerate}{3}
-\setlist[tropos]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Τρόπος :},leftmargin=0cm,itemindent=2.3cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
-% Αν μπει το bhma μεσα σε tropo τότε
-%\begin{bhma}[leftmargin=.7cm]
-\tkzSetUpPoint[size=7,fill=white]
-\tikzstyle{pl}=[line width=0.3mm]
-\tikzstyle{plm}=[line width=0.4mm]
-
-
-
-
+\ekthetesdeiktes
 \begin{document}
+
 \titlos{Μαθηματικά Γ΄ Γυμνασίου}{Αλγεβρικές Παραστάσεις}{Ε.Κ.Π. - Μ.Κ.Δ. Αλγεβρικών Παραστάσεων}
-\thewria
-\begin{multicols}{2}
-\begin{enumerate}
-\item \textbf{Ερωτήσεις Θεωρίας}\\
+
+\paragraph{Ερωτήσεις Θεωρίας}
+
+\askhsh
 Να απαντήσετε στις παρακάτω ερωτήσεις.
-\vspace{-2mm}
-\begin{rlist}
-\item Τι ονομάζουμε Ε.Κ.Π. δύο ή περισσότερων αλγεβρικών παραστάσεων;
-\item Τι ονομάζουμε Μ.Κ.Δ. δύο ή περισσότερων αλγεβρικών παραστάσεων;
-\item Με ποιόν κανόνα υπολογίζουμε Ε.Κ.Π. δύο ή περισσότερων αλγεβρικών παραστάσεων;
-\item Με ποιόν κανόνα υπολογίζουμε Μ.Κ.Δ. δύο ή περισσότερων αλγεβρικών παραστάσεων;
-\end{rlist}
-\item \textbf{Πολλαπλής Επιλογής}\\
+\begin{enumerate}[label=\roman*.]
+    \item Τι ονομάζουμε Ε.Κ.Π. δύο ή περισσότερων αλγεβρικών παραστάσεων;
+    \item Τι ονομάζουμε Μ.Κ.Δ. δύο ή περισσότερων αλγεβρικών παραστάσεων;
+    \item Με ποιόν κανόνα υπολογίζουμε Ε.Κ.Π. δύο ή περισσότερων αλγεβρικών παραστάσεων;
+    \item Με ποιόν κανόνα υπολογίζουμε Μ.Κ.Δ. δύο ή περισσότερων αλγεβρικών παραστάσεων;
+\end{enumerate}
+
+\askhsh
+Να χαρακτηρίσετε τις παρακάτω προτάσεις ως Σωστές (Σ) ή Λανθασμένες (Λ).
+\begin{enumerate}[label=\roman*.]
+    \item Το Ε.Κ.Π. δύο πολυωνύμων διαιρείται ακριβώς και από τα δύο πολυώνυμα.
+    \item Ο Μ.Κ.Δ. περιέχει μόνο τους κοινούς παράγοντες με το μεγαλύτερο εκθέτη.
+    \item Αν το πολυώνυμο $A$ διαιρεί το $B$, τότε Ε.Κ.Π.$(A, B) = B$.
+    \item Το γινόμενο δύο πολυωνύμων ισούται πάντα με το γινόμενο του Ε.Κ.Π. επί τον Μ.Κ.Δ. τους (για μονώνυμα/ακέραιες εκφράσεις).
+\end{enumerate}
+
+\askhsh
+Συμπληρώστε τα κενά στις παρακάτω προτάσεις:
+\begin{enumerate}[label=\roman*.]
+    \item Αν δύο πολυώνυμα δεν έχουν κοινό παράγοντα (εκτός της μονάδας), τότε ο Μ.Κ.Δ. τους είναι το \dots
+    \item Για να βρούμε το Ε.Κ.Π. αλγεβρικών παραστάσεων που έχουν αναλυθεί σε γινόμενο πρώτων παραγόντων, παίρνουμε τους \dots και τους \dots παράγοντες με τον \dots εκθέτη.
+\end{enumerate}
+
+\paragraph{Ερωτήσεις Πολλαπλής Επιλογής}
+
+
+\askhsh
 Να επιλέξετε το πολυώνυμο το οποίο αποτελεί το Ε.Κ.Π. των αλγεβρικών παραστάσεων $ 4x^2(x-1)^3 $ και $ 8x^3(x-1) $
-\begin{multicols}{2}
-\begin{rlist}
-\item $ 4x^3(x-1) $
-\item $ 8x^2(x-1)^2 $
-\item $ 8x^3(x-1)^2 $
-\item $ 4x^2(x-1) $
-\end{rlist}
-\end{multicols}
-\item \textbf{Πολλαπλής Επιλογής}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ 4x^3(x-1) $
+    \item $ 8x^2(x-1)^2 $
+    \item $ 8x^3(x-1)^3 $
+    \item $ 4x^2(x-1) $
+\end{enumerate}
+
+\askhsh
 Να επιλέξετε το πολυώνυμο το οποίο αποτελεί το Μ.Κ.Δ. των αλγεβρικών παραστάσεων $ 5x^2(x-2)^3 $ και $ 4x(x-2)^2 $
-\begin{multicols}{2}
-\begin{rlist}
-\item $ 4x^3(x-2) $
-\item $ x(x-2)^2 $
-\item $ 5x^3(x-2)^2 $
-\item $ 20x^2(x-2)^3 $
-\end{rlist}
-\end{multicols}
+\begin{enumerate}[label=\roman*.]
+    \item $ 4x^3(x-2) $
+    \item $ x(x-2)^2 $
+    \item $ 5x^3(x-2)^2 $
+    \item $ 20x^2(x-2)^3 $
 \end{enumerate}
-\end{multicols}
-\askhseis
-\begin{multicols*}{2}
-\begin{enumerate}
-\item \textbf{Ε.Κ.Π. - Μ.Κ.Δ. Μονωνύμων}\\
+
+\askhsh
+Το Ε.Κ.Π. των μονωνύμων $6x^2y^3$ και $-4x^3y^2z$ είναι:
+\begin{enumerate}[label=\roman*.]
+    \item $ -12x^3y^3z $
+    \item $ 12x^3y^3z $
+    \item $ 24x^3y^3z $
+    \item $ 12x^2y^2 $
+\end{enumerate}
+
+\askhsh
+Ο Μ.Κ.Δ. των παραστάσεων $(x-1)^2$ και $x^2-1$ είναι:
+\begin{enumerate}[label=\roman*.]
+    \item $ x-1 $
+    \item $ x+1 $
+    \item $ (x-1)^2 $
+    \item $ x^2-1 $
+\end{enumerate}
+
+\paragraph{Ε.Κ.Π. - Μ.Κ.Δ. Μονωνύμων}
+
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π. και ο Μ.Κ.Δ. των παρακάτω μονωνύμων.
-\begin{rlist}
-\item $ 3x^2\ ,\ 9x^3\ ,\ 6x^4 $
-\item $ 2x^4y^2\ ,\ 8x^3y^2z^5\ ,\ 4y^3z^4 $
-\item $ 12x^4y^2\ ,\ 36yz^4\ ,\ 24x^5z^2 $
-\end{rlist}
-\item \textbf{Ε.Κ.Π. - Μ.Κ.Δ. Μονωνύμων}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ 3x^2\ ,\ 9x^3\ ,\ 6x^4 $
+    \item $ 2x^4y^2\ ,\ 8x^3y^2z^5\ ,\ 4y^3z^4 $
+    \item $ 12x^4y^2\ ,\ 36yz^4\ ,\ 24x^5z^2 $
+\end{enumerate}
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π. και ο Μ.Κ.Δ. των παρακάτω μονωνύμων.
-\begin{rlist}
-\item $ 30x^4y^5\ ,\ 45y^5z^7\ ,\ 50x^3z^4 $
-\item $ 200w^5z^7\ ,\ 250z^2v^4\ ,\ 150w^7 $
-\item $ 180a^2r^4\ ,\ 210r^3s^5\ ,\ 150a^5s^3 $
-\end{rlist}
-\item \textbf{Ε.Κ.Π. - Μ.Κ.Δ. Πολυωνύμων}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ 30x^4y^5\ ,\ 45y^5z^7\ ,\ 50x^3z^4 $
+    \item $ 200w^5z^7\ ,\ 250z^2v^4\ ,\ 150w^7 $
+    \item $ 180a^2r^4\ ,\ 210r^3s^5\ ,\ 150a^5s^3 $
+\end{enumerate}
+
+\askhsh
+Να βρείτε το Ε.Κ.Π. των μονωνύμων:
+\begin{enumerate}[label=\roman*.]
+    \item $ 12a^2\beta^3\ ,\ 20a^3\beta\gamma^2\ ,\ 15a\beta^4\gamma $
+    \item $ 8x^5y^2\ ,\ 12x^3y^4z\ ,\ 4x^4z^2 $
+\end{enumerate}
+
+\askhsh
+Να βρείτε τον Μ.Κ.Δ. των μονωνύμων:
+\begin{enumerate}[label=\roman*.]
+    \item $ 36x^3y^2\omega\ ,\ 24x^2y^4\ ,\ 48x^4y\omega^3 $
+    \item $ 14a^2\beta^3\ ,\ 21a^3\beta\ ,\ 35a\beta^4 $
+\end{enumerate}
+
+\paragraph{Ε.Κ.Π. - Μ.Κ.Δ. Πολυωνύμων}
+
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π. και ο Μ.Κ.Δ. των παρακάτω πολυωνύμων.
-\begin{rlist}
-\item $ 2x(x-2)\ ,\ (x-2)^2\ ,\ 3x(x-2) $
-\item $ 4x^2(x+2)\ ,\ 3x(x+2)^3\ ,\ 6x^4 $
-\item $ 5(x-4)(x+4)^2\ ,\ 3(x+4)^4\ ,\ 4(2x+8) $
-\end{rlist}
-\item \textbf{Ε.Κ.Π. - Μ.Κ.Δ. Πολυωνύμων}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ 2x(x-2)\ ,\ (x-2)^2\ ,\ 3x(x-2) $
+    \item $ 4x^2(x+2)\ ,\ 3x(x+2)^3\ ,\ 6x^4 $
+    \item $ 5(x-4)(x+4)^2\ ,\ 3(x+4)^4\ ,\ 4(2x+8) $
+\end{enumerate}
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π. και ο Μ.Κ.Δ. των παρακάτω πολυωνύμων.
-\begin{rlist}
-\item $ x^2+x\ ,\ x^2-1\ ,\ x^3-x $
-\item $ 3x-6\ ,\ 4-2x\ ,\ x^2-2x $
-\item $ x^2-9\ ,\ 3x+9\ ,\ 4x^2+12x $
-\end{rlist}
-\item \textbf{Ε.Κ.Π. - Μ.Κ.Δ. Πολυωνύμων}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ x^2+x\ ,\ x^2-1\ ,\ x^3-x $
+    \item $ 3x-6\ ,\ 4-2x\ ,\ x^2-2x $
+    \item $ x^2-9\ ,\ 3x+9\ ,\ 4x^2+12x $
+\end{enumerate}
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π. και ο Μ.Κ.Δ. των παρακάτω πολυωνύμων.
-\begin{rlist}
-\item $ x^2-2x+1\ ,\ 3x^2-9x\ ,\ 9-x^2 $
-\item $ 2x^2-8x-x+4\ ,\ 4x^2-4x+1\ ,\ x^2-4x $
-\item $ 3x^3-12x\ ,\ x^3-4x^2+4x\ ,\ 12x-24 $
-\end{rlist}
-\item \textbf{Ε.Κ.Π. - Μ.Κ.Δ. Πολυωνύμων}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ x^2-2x+1\ ,\ 3x^2-9x\ ,\ 9-x^2 $
+    \item $ 2x^2-8x-x+4\ ,\ 4x^2-4x+1\ ,\ x^2-4x $
+    \item $ 3x^3-12x\ ,\ x^3-4x^2+4x\ ,\ 12x-24 $
+\end{enumerate}
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π. και ο Μ.Κ.Δ. των παρακάτω πολυωνύμων.
-\begin{rlist}
-\item $ y^3-2y^2\ ,\ y^2-3y+2\ ,\ y^2-4y+4 $
-\item $ 5z^2-125 \ ,\ z^2-10z+25\ ,\ z^2-7z+10 $
-\item $ 2r^3-18r\ ,\ 4r^2+4r-8\ ,\ 27-3r^2 $
-\end{rlist}
-\item \textbf{Ε.Κ.Π. Πολυωνύμων}\\
+\begin{enumerate}[label=\roman*.]
+    \item $ y^3-2y^2\ ,\ y^2-3y+2\ ,\ y^2-4y+4 $
+    \item $ 5z^2-125 \ ,\ z^2-10z+25\ ,\ z^2-7z+10 $
+    \item $ 2r^3-18r\ ,\ 4r^2+4r-8\ ,\ 27-3r^2 $
+\end{enumerate}
+
+\askhsh
 Να υπολογιστεί το Ε.Κ.Π και ο Μ.Κ.Δ. των παρακάτω πολυωνύμων.
-\begin{rlist}
-\item $ 20x^4-320\ ,\ 25x^3-100x^2+100x\ ,\\ 40x^5+160x^3 $
-\item $ 45-5x^2\ ,\ 50x^3-150x^2+200x-600 \ ,\\30x-90 $
-\end{rlist}
+\begin{enumerate}[label=\roman*.]
+    \item $ 20x^4-320\ ,\ 25x^3-100x^2+100x\ ,\\ 40x^5+160x^3 $
+    \item $ 45-5x^2\ ,\ 50x^3-150x^2+200x-600 \ ,\\30x-90 $
 \end{enumerate}
-\end{multicols*}
+
+\askhsh
+Να βρείτε το Ε.Κ.Π. και τον Μ.Κ.Δ. των παραστάσεων (αφού τις παραγοντοποιήσετε):
+\begin{enumerate}[label=\roman*.]
+    \item $ 3x^2 - 12\ ,\ x^2 - 4x + 4\ ,\ x^2 - 4 $
+    \item $ a^3 - a\ ,\ a^2 + a\ ,\ a^3 + a^2 $
+\end{enumerate}
+
+\askhsh
+Να υπολογίσετε το Ε.Κ.Π. και τον Μ.Κ.Δ. των πολυωνύμων:
+\begin{enumerate}[label=\roman*.]
+    \item $ x^3 - 2x^2 - 9x + 18\ ,\ x^2 - 5x + 6\ ,\ x^2 - 4x + 4 $
+    \item $ x^2 - y^2\ ,\ x^2 - 2xy + y^2\ ,\ x^3 - xy^2 $
+\end{enumerate}
+
 \end{document}
