@@ -1,0 +1,64 @@
+\Askhsh{34332}{2}
+\begin{ylh}{1}
+    \item 3.4. 3ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.6. Εφαρμογές στα τρίγωνα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34332.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα δίνονται τα ισοσκελή τρίγωνα ΑΒΓ και ΕΓΔ με $ΑΒ = Α\Gamma = Ε\Gamma = Ε\Delta$, όπου Δ είναι το μέσο της ΑΓ και $Β\Gamma = \frac{ΑΒ}{2}$. Έστω Ζ το σημείο στο οποίο η προέκταση της ΕΔ προς το Δ τέμνει την ΑΒ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item τα τρίγωνα ΑΒΓ και ΓΔΕ είναι ίσα, \monades{12}
+
+\item το σημείο Ζ είναι το μέσο της ΑΒ. \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+% BC = AB/2. Let's make BC=2, AB=AC=4.
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(2,0){C}
+\tkzDefTriangle[two angles = 75 and 75](B,C) \tkzGetPoint{A} % wait, if AB=4, BC=2. Base is 2, legs 4.
+% actually we can construct it exactly
+\tkzInterCC[R](B,4)(C,4) \tkzGetPoints{A}{A2}
+
+\tkzDefMidPoint(A,C) \tkzGetPoint{D}
+
+% Triangle CDE is isosceles with EC=ED=AC=4.
+% E is some point such that EC=ED=4.
+% Wait: "ΕΓΔ με AB=AC=EΓ=EΔ". So EC=ED=4. D is midpoint, so CD=2.
+% We have triangle CDE with base CD=2, legs EC=ED=4.
+% Since AC=4 and CD=2, this is similar to ABC!
+% Actually, it is "τα ισοσκελή τρίγωνα ΑΒΓ και ΕΓΔ".
+% Where does E lie? Usually on the opposite side of AC or something. Let's place E.
+\tkzInterCC[R](C,4)(D,4) \tkzGetPoints{E_alt}{E} % E to the right
+
+% Extension of ED towards D intersects AB at Z.
+\tkzInterLL(E,D)(A,B) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (E)--(C)--(D)--cycle;
+\draw[l3] (E)--(Z);
+\draw[l3] (A)--(B); % AZB line
+
+\tkzDrawPoints(A,B,C,D,E,Z)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[right](D){$\Delta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+
+\tkzMarkSegments[mark=s|](A,B A,C E,C E,D)
+\tkzMarkSegments[mark=s||](A,D D,C B,C) % since AD=DC=2, BC=2
+\end{tikzpicture}
+\end{center}
+\end{alist}

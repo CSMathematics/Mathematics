@@ -1,0 +1,43 @@
+\Askhsh{20865}{2}
+\begin{ylh}{1}
+    \item 3.3 Η Έλλειψη.
+\end{ylh}
+Δίνονται οι ελλείψεις $C_1: x^2 + 4y^2 = 4$, $C_2: \frac{x^2}{16} + \frac{y^2}{4} = 1$ και οι γραφικές τους παραστάσεις στο παρακάτω σχήμα.
+
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -5, xmax = 5,
+    ymin = -3, ymax = 3,
+    xtick = {-4,-2,0,2,4},
+    ytick = {-2,-1,0,1,2},
+    samples = 100,
+    width = 10cm, height = 7cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    clip = false,
+]
+    % Ellipse C1 (green)
+    % x^2/4 + y^2/1 = 1  => y = +- sqrt(1 - x^2/4)
+    \addplot[very thick, thirdcolor, domain=-2:2] {sqrt(1 - (x^2)/4)};
+    \addplot[very thick, thirdcolor, domain=-2:2] {-sqrt(1 - (x^2)/4)};
+    \node[thirdcolor, above right] at (axis cs:0.7, 0.3) {$C_1$};
+    
+    % Ellipse C2 (blue)
+    % x^2/16 + y^2/4 = 1 => y = +- sqrt(4 - x^2/4)
+    \addplot[very thick, maincolor, domain=-4:4] {sqrt(4 - (x^2)/4)};
+    \addplot[very thick, maincolor, domain=-4:4] {-sqrt(4 - (x^2)/4)};
+    \node[maincolor, above right] at (axis cs:2.5, 1.5) {$C_2$};
+
+    % Origin label 'o'
+    \node[below left] at (axis cs:0,0) {o};
+\end{axis}
+\end{tikzpicture}
+
+\begin{alist}
+\item Να βρείτε τα μήκη των αξόνων και τις εστίες των δύο ελλείψεων. \monades{14}
+\item Από το σχήμα φαίνεται ότι οι δύο ελλείψεις έχουν την ίδια εκκεντρότητα. Να αποδείξετε ότι αυτό είναι αληθές. \monades{11}
+\end{alist}

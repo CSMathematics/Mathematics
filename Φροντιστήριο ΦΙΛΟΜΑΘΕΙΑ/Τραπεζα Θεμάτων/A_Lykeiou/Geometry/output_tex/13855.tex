@@ -1,0 +1,65 @@
+\Askhsh{13855}{4}
+\begin{ylh}{1}
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.2. Παραλληλόγραμμα
+    \item 5.3. Ορθογώνιο
+    \item 5.6. Εφαρμογές στα τρίγωνα
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 13855.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται ορθογώνιο τρίγωνο ΑΒΓ με $\widehat{Α}$=90\textsuperscript{ο}. Από το μέσο Δ της πλευράς ΒΓ φέρουμε παράλληλη προς την πλευρά ΑΓ που τέμνει την πλευρά ΑΒ στο σημείο Ε. Αν επιπλέον γνωρίζουμε ότι Ε$\widehat{\Delta}$Γ=120\textsuperscript{ο}, τότε:
+
+\begin{alist}
+\item Να υπολογίσετε το μέτρο της γωνία Δ$\widehat{\Gamma}$Α. \monades{5}
+
+\item Να αποδείξετε ότι το τρίγωνο ΑΔΓ είναι ισόπλευρο. \monades{8}
+
+\item Προεκτείνουμε την πλευρά ΑΓ προς το Γ κατά τμήμα ΓΖ=ΑΓ και την πλευρά ΒΓ προς το Γ κατά τμήμα ΓΗ=$\frac{Β\Gamma}{2}$. Να αποδείξετε ότι Α$\widehat{Η}$Ζ=90\textsuperscript{ο}. \monades{12}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(0,-4.5){B}
+% Angle EDC = 120 means Angle C = 60, since DE || AC.
+% Wait, DE || AC. If angle C is 60, then angle B is 30.
+\tkzDefPoint(2.598,0){C} % A=90, B=30, C=60 => AB=4.5, AC=2.598
+
+\tkzDefMidPoint(B,C) \tkzGetPoint{D}
+\tkzDefLine[parallel=through D](A,C) \tkzGetPoint{E_dir}
+\tkzInterLL(D,E_dir)(A,B) \tkzGetPoint{E}
+
+\tkzDefPointBy[symmetry=center C](A) \tkzGetPoint{Z}
+\tkzDefPointOnLine[pos=-0.5](C,B) \tkzGetPoint{H}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (D)--(E);
+\draw[l3] (A)--(D);
+\draw[l3, dashed] (C)--(Z);
+\draw[l3, dashed] (C)--(H);
+\draw[l3, dashed] (A)--(H);
+\draw[l3, dashed] (H)--(Z);
+
+\tkzDrawPoints(A,B,C,D,E,Z,H)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[above left](C){$\Gamma$}
+\tkzLabelPoint[below right](D){$\Delta$}
+\tkzLabelPoint[left](E){$E$}
+\tkzLabelPoint[right](Z){$Z$}
+\tkzLabelPoint[above right](H){$H$}
+
+\tkzMarkSegments[mark=s|](C,D D,B H,C)
+\tkzMarkSegments[mark=s||](A,C C,Z)
+\tkzMarkAngle[size=0.4,mark=none](C,D,E)
+\tkzLabelAngle[pos=0.6](C,D,E){$120^\circ$}
+\tkzMarkRightAngle(C,A,B)
+\end{tikzpicture}
+\end{center}
+\end{alist}

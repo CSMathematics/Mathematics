@@ -1,0 +1,65 @@
+\Askhsh{25234_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [ΛΥΣΗ]
+\end{ylh}
+\begin{wrapfigure}[24]{r}{7cm} % Number of lines and width adjusted for the figure to wrap around text.
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x'$}, % As specified in the image
+    ylabel = {$y'$}, % As specified in the image
+    xmin = -0.5, xmax = 1.5,
+    ymin = -0.5, ymax = 0.5,
+    xtick = {-0.4, 0, 1, 1.4},
+    ytick = {-0.4, 0, 0.4},
+    grid = none,
+    samples = 100,
+    width = 6cm, height = 5cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    clip = false % Allow labels/nodes outside the axis limits
+]
+    % Plot C_f (blue curve) - using f(x) = -x^3 + x to match properties and visual shape
+    \addplot[very thick, maincolor, domain=-0.5:1.5] {-x^3 + x};
+    \node[maincolor, right] at (axis cs:0.7,0.3) {$C_f$};
+
+    % Plot C_g (red line) - using g(x) = 1/2(x-1) as derived from the text
+    \addplot[very thick, secondarycolor, domain=-0.5:1.5] {0.5*(x-1)};
+    \node[secondarycolor, above left] at (axis cs:1.2,0.1) {$C_g$};
+
+    % Points O and A (filled black circles as in image)
+    \node[below left] at (axis cs:0,0) {O};
+    \node[below right] at (axis cs:1,0) {A};
+    \filldraw[black] (axis cs:0,0) circle (1.5pt); % Point O
+    \filldraw[black] (axis cs:1,0) circle (1.5pt); % Point A
+
+    % Point 'a' on x-axis and vertical line to C_f
+    \def\vala{-0.25} % Arbitrary value for 'a' to match position in image
+    \coordinate (point_a_on_x) at (axis cs:\vala,0);
+    \coordinate (point_a_on_f) at (axis cs:\vala, -\vala^3 + \vala);
+    \draw[dashed] (point_a_on_x) -- (point_a_on_f); % Dashed line (not thick)
+    \filldraw[maincolor] (point_a_on_f) circle (1.5pt); % Blue dot on C_f
+    \node[above] at (point_a_on_x) {$a$}; % Label 'a' on x-axis
+    \draw[black,fill=black,opacity=0.5] (point_a_on_x) rectangle ($ (point_a_on_x) + (0.08,0.08) $); % Right angle symbol (black, opacity 0.5)
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+\OnPar{ΛΥΣΗ}
+\begin{alist}
+    \item α. Από το σχήμα διαπιστώνουμε ότι $g(1) = 0$ και $g(x) < 0$ για $x$ κοντά στο $1$ από αριστερά,
+    ενώ $\lim_{x \to 1^-} g(x) = g(1)$, καθώς η $g$ είναι συνεχής στο $1$ ως πολυωνυμική.
+
+    Ώστε $\lim_{x \to 1^-} \frac{1}{g(x)} = -\infty.$
+    Εναλλακτικά, έχουμε
+    \[ \lim_{x \to 1^-} \frac{1}{g(x)} = \lim_{x \to 1^-} \frac{1}{\frac{1}{2}(x-1)} = 2 \cdot \lim_{x \to 1^-} \left(\frac{1}{x-1}\right) = -\infty, \]
+    αφού $\lim_{x \to 1^-} (x-1) = 0$ και $x - 1 < 0$ για $x$ κοντά στο $1$ από αριστερά.
+
+    \item β. Γνωρίζουμε ότι η $f$ είναι παραγωγίσιμη στο μηδέν, άρα:
+    \[ \difff{f}{}{}{}(0) = \lim_{x \to 0} \frac{f(x)-f(0)}{x-0} = \lim_{x \to 0} \frac{f(x)-0}{x} = \lim_{x \to 0} \frac{f(x)}{x} = 1. \]
+
+    \item γ. Παρατηρούμε ότι $\lim_{x \to 0^-} f(x) = f(0) = 0$, ενώ $f(x) < 0$ για $x$ κοντά στο μηδέν από
+    αριστερά. Επομένως $\lim_{x \to 0^-} \frac{1}{f(x)} = -\infty.$
+    Επίσης $\lim_{x \to 0^-} g(x) = \lim_{x \to 0^-} \left[\frac{1}{2}(x - 1)\right] = -\frac{1}{2} < 0.$
+    Έτσι, το ζητούμενο όριο είναι ίσο με $\lim_{x \to 0^-} \frac{1}{f(x)} \cdot \lim_{x \to 0^-} g(x) = +\infty.$
+\end{alist}

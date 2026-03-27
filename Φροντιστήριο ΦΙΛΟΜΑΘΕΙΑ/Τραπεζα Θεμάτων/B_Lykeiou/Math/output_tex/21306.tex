@@ -1,0 +1,43 @@
+\Askhsh{21306}{2}
+\begin{ylh}{1}
+    \item 3.2 Η Παραβολή.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6.5cm} % Εύλογη εκτίμηση για τον αριθμό γραμμών και το πλάτος
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xmin = -3.5, xmax = 4.5,
+            ymin = -5.5, ymax = 6.5,
+            xtick = {-3,-2,-1,0,1,2,3,4},
+            ytick = {-5,-4,-3,-2,-1,0,1,2,3,4,5,6},
+            grid = none,
+            samples = 100,
+            width = 6.5cm, height = 7cm,
+            tick label style = {font=\scriptsize},
+        ]
+            % Παραβολή y^2 = 8x => y = +-sqrt(8x)
+            \addplot[very thick, black, domain=0:4.1] {sqrt(8*x)};
+            \addplot[very thick, black, domain=0:4.1] {-sqrt(8*x)};
+
+            % Σημείο A (3, 2*sqrt(6))
+            \coordinate (A_point) at (3,{2*sqrt(6)});
+            \fill (A_point) circle (1.5pt);
+            \node[above left, inner sep=1.5pt] at (A_point) {A}; % Θέση ετικέτας A
+
+            % Διακεκομμένη γραμμή από το A στον άξονα x
+            \draw[dashed, gray] (A_point) -- (3,0);
+            
+            % Σημείο E (2,0)
+            \fill (2,0) circle (1.5pt);
+            \node[above right, inner sep=1.5pt] at (axis cs:2,0) {E}; % Θέση ετικέτας E
+        \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+Σε καρτεσιανό επίπεδο $Oxy$ δίνεται η παραβολή με άξονα συμμετρίας τον $x'x$, κορυφή $O(0,0)$ και εστία $E(2,0)$, όπως στο παρακάτω σχήμα. Το σημείο $A$ της παραβολής έχει τετμημένη $3$ και βρίσκεται στο πρώτο τεταρτημόριο του $Oxy$.
+
+\begin{alist}
+    \item Να αποδείξετε ότι η εξίσωση της παραβολής είναι $y^2 = 8x$ και ότι $A(3, 2\sqrt{6})$. \monades{10}
+    \item Να σχεδιάσετε τη διευθετούσα $(\delta)$ της παραβολής και να γράψετε την εξίσωσή της. \monades{06}
+    \item Να βρείτε την εξίσωση της εφαπτομένης $(\epsilon)$ της παραβολής στο σημείο $A$. \monades{09}
+\end{alist}

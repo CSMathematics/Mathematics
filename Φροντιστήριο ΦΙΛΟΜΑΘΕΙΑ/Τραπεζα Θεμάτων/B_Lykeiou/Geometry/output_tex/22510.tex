@@ -1,0 +1,54 @@
+\Askhsh{22510}{4}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμπα σχήματα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6.0cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(3,0){r_point} % Define a point for radius
+        \tkzDrawCircle(O,r_point)
+
+        % Define points A, B, Γ for an acute triangle
+        % and their diametrically opposite points Δ, E, Z
+        \tkzDefPointBy[rotation=center O angle 90](r_point) \tkzGetPoint{A}
+        \tkzDefPointBy[rotation=center O angle 210](r_point) \tkzGetPoint{B}
+        \tkzDefPointBy[rotation=center O angle 330](r_point) \tkzGetPoint{G} % Gamma
+
+        % Diametrically opposite points
+        \tkzDefPointBy[rotation=center O angle -90](r_point) \tkzGetPoint{D} % Delta (opposite A)
+        \tkzDefPointBy[rotation=center O angle -210](r_point) \tkzGetPoint{E} % Epsilon (opposite B)
+        \tkzDefPointBy[rotation=center O angle -330](r_point) \tkzGetPoint{Z} % Zeta (opposite Γ)
+
+        % Draw triangle AΒΓ
+        \tkzDrawSegments(A,B B,G G,A)
+
+        % Draw diameters AΔ, BE, ΓZ
+        \tkzDrawSegments(A,D B,E G,Z)
+
+        % Draw the sides of the hexagon AZBΔΓE
+        \tkzDrawSegments(A,Z Z,B B,D D,G G,E E,A)
+
+        % Draw radii from O to all points
+        \tkzDrawSegments(O,A O,B O,G O,D O,E O,Z)
+
+        % Draw points and labels
+        \tkzDrawPoints(O,A,B,G,D,E,Z)
+        \tkzLabelPoint[below left](O){O}
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[left](Z){Z}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below](D){$\Delta$}
+        \tkzLabelPoint[right](G){$\Gamma$}
+        \tkzLabelPoint[above right](E){E}
+
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Δίνεται οξυγώνιο τρίγωνο ΑΒΓ εγγεγραμμένο σε κύκλο κέντρου Ο. Θεωρούμε τις διαμέτρους ΑΔ, ΒΕ και ΓΖ. Να αποδείξετε ότι:
+\begin{alist}
+    \item $(\text{ΑΟΒ}) = (\text{ΒΟΔ})$ και $(\text{ΑΟΓ}) = (\text{ΔΟΓ})$ \monades{8}
+    \item $(\text{ΒΔΓ}) = (\text{ΑΟΒ}) + (\text{ΑΟΓ}) - (\text{ΒΟΓ})$ \monades{8}
+    \item $(\text{ΑΖΒΔΓΕ}) = 2(\text{ΑΒΓ})$ \monades{9}
+\end{alist}

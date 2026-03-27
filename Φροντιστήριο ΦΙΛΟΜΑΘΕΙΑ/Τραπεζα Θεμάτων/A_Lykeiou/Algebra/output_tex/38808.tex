@@ -1,0 +1,94 @@
+% --- Άσκηση 38808 (38808.tex) ---
+\Askhsh{38808}{4}
+\begin{ylh}{2}
+    \item 3.1. Εξισώσεις 1ου Βαθμού
+    \item 6.3. Η Συνάρτηση $f(x)=ax+\beta$
+\end{ylh}
+
+Οι σεισμοί μπορούν να προκαλέσουν τεράστιες ζημιές, συμπεριλαμβανομένης της απώλειας ανθρώπινων ζωών, και έτσι είναι ένας σημαντικός τομέας μελέτης. Ο προσδιορισμός της θέσης του επίκεντρου ενός σεισμού (δηλαδή του σημείου της επιφάνειας της γης που απέχει τη μικρότερη απόσταση από το πραγματικό κέντρο του σεισμού) είναι χρήσιμος για την πρόβλεψη ζημιών και της συμπεριφοράς μελλοντικών σεισμών. Μια τεχνική για να προσδιοριστεί το επίκεντρο περιλαμβάνει τον υπολογισμό της απόστασής του από έναν σεισμογράφο. Αυτό μπορεί να γίνει με τη μελέτη των διαφορετικών κυμάτων που παράγονται από τον σεισμό (σεισμικά κύματα).
+
+Αυτοί οι τύποι κυμάτων περιλαμβάνουν τα κύματα $P$ (πρωτεύοντα κύματα) και τα κύματα $S$ (δευτερεύοντα κύματα). Από μια σεισμική δόνηση ξεκινούν ταυτόχρονα τόσο τα κύματα $P$ όσο και τα κύματα $S$. Τα κύματα $P$ ταξιδεύουν πιο γρήγορα κοντά στην επιφάνεια της γης από τα κύματα $S$.
+
+\begin{alist}
+\item Ποιο από τα παρακάτω γραφήματα περιγράφει τις πληροφορίες που αφορούν τα κύματα $P$ και $S$; Να αιτιολογήσετε την απάντησή σας.
+
+\begin{center}
+\begin{tabular}{ccc}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = {χρόνος $t$ (sec)},
+    ylabel = {απόσταση $y$ (km)},
+    xmin = 0, xmax = 65,
+    ymin = 0, ymax = 450,
+    xtick = {10,20,30,40,50,60},
+    ytick = {100,200,300,400},
+    grid = both,
+    grid style = {gray!30},
+    width = 5.5cm, height = 5cm,
+    tick label style = {font=\scriptsize},
+    title = {\small Α.},
+]
+    \addplot[very thick, maincolor, domain=0:60] {7.6*x};
+    \addplot[very thick, secondarycolor, domain=0:60] {4.5*x};
+    \node[maincolor] at (axis cs:50,400) {\small $(P)$};
+    \node[secondarycolor] at (axis cs:55,280) {\small $(S)$};
+\end{axis}
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = {χρόνος $t$ (sec)},
+    ylabel = {απόσταση $y$ (km)},
+    xmin = 0, xmax = 65,
+    ymin = 0, ymax = 450,
+    xtick = {10,20,30,40,50,60},
+    ytick = {100,200,300,400},
+    grid = both,
+    grid style = {gray!30},
+    width = 5.5cm, height = 5cm,
+    tick label style = {font=\scriptsize},
+    title = {\small Β.},
+]
+    \addplot[very thick, maincolor, domain=0:60] {4.5*x};
+    \addplot[very thick, secondarycolor, domain=0:60] {7.6*x};
+    \node[maincolor] at (axis cs:50,250) {\small $(P)$};
+    \node[secondarycolor] at (axis cs:45,400) {\small $(S)$};
+\end{axis}
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = {χρόνος $t$ (sec)},
+    ylabel = {απόσταση $y$ (km)},
+    xmin = 0, xmax = 65,
+    ymin = 0, ymax = 450,
+    xtick = {10,20,30,40,50,60},
+    ytick = {100,200,300,400},
+    grid = both,
+    grid style = {gray!30},
+    width = 5.5cm, height = 5cm,
+    tick label style = {font=\scriptsize},
+    title = {\small Γ.},
+]
+    \addplot[very thick, maincolor, domain=0:60] {7.6*x + 80};
+    \addplot[very thick, secondarycolor, domain=0:60] {4.5*x};
+    \node[maincolor] at (axis cs:40,400) {\small $(P)$};
+    \node[secondarycolor] at (axis cs:55,280) {\small $(S)$};
+\end{axis}
+\end{tikzpicture}
+\end{tabular}\captionof{figure}{Άσκηση 38808}
+\end{center}
+
+\monades{8}
+\item Κοντά σε έναν σεισμογράφο τα κύματα $P$ ταξιδεύουν με ταχύτητα $7{,}6\ km/s$ και τα κύματα $S$ με ταχύτητα $4{,}5\ km/s$. Το κύμα $P$ φτάνει στο σεισμογράφο $19\ sec$ (δευτερόλεπτα) πριν από το κύμα $S$. Ο σεισμογράφος απέχει από το επίκεντρο του σεισμού απόσταση $d$ και $t_{P}$ είναι ο χρόνος που χρειάζεται το κύμα $P$, για να φτάσει από το επίκεντρο του σεισμού στον σεισμογράφο. Να βρείτε:
+
+\begin{rlist}
+\item Τις εξισώσεις των ευθειών $(P)$ και $(S)$ που αναπαριστούν την κίνηση των κυμάτων $P$ και $S$ αντίστοιχα.
+\monades{8}
+\item Τον χρόνο που χρειάζεται το κάθε κύμα, για να φτάσει από το επίκεντρο του σεισμού στον σεισμογράφο, και την απόσταση $d$ του σεισμογράφου από το επίκεντρο του σεισμού.
+\monades{9}
+\end{rlist}
+\end{alist}

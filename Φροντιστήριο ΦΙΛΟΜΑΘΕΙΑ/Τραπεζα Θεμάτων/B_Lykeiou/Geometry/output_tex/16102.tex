@@ -1,0 +1,50 @@
+\Askhsh{16102}{2}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[6]{r}{6cm} % Περίπου 6 γραμμές κειμένου τυλίγονται δεξιά του σχήματος.
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Ορισμός κορυφών παραλληλογράμμου
+    \tkzDefPoint(0,2){A}
+    \tkzDefPoint(4,2){B}
+    \tkzDefPoint(3,-1){G} % Γ
+    \tkzDefPoint(-1,-1){D} % Δ
+
+    % Ορισμός του κέντρου O (μέσον των διαγωνίων)
+    \tkzDefMidPoint(B,D) \tkzGetPoint{O}
+
+    % Ορισμός του σημείου E στην πλευρά AB (κοντά στο A, όχι μέσον)
+    \tkzDefPointWith[linear,K=0.25](A,B) \tkzGetPoint{E}
+
+    % Ορισμός του σημείου Z στην πλευρά ΓΔ, συγγραμμικό με E και O, και συμμετρικό του E ως προς το O
+    \tkzDefPointBy[homothety=center O ratio -1](E) \tkzGetPoint{Z}
+
+    % Σχεδίαση του παραλληλογράμμου
+    \tkzDrawPolygon(A,B,G,D)
+
+    % Σχεδίαση της διαγωνίου BΔ
+    \tkzDrawSegment(B,D)
+
+    % Σχεδίαση του ευθυγράμμου τμήματος EZ
+    \tkzDrawSegment(E,Z)
+
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(A,B,G,D,E,Z,O)
+
+    % Ετικέτες σημείων
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[below right](G){$\Gamma$}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[above](E){E}
+    \tkzLabelPoint[below](Z){Z}
+    \tkzLabelPoint[left](O){O}
+\end{tikzpicture}
+\end{wrapfigure}
+Θεωρούμε παραλληλόγραμμο ΑΒΓΔ. Από το κέντρο Ο φέρουμε ευθεία η οποία τέμνει τις πλευρές ΑΒ και ΓΔ στα σημεία Ε και Ζ όπως φαίνεται στο σχήμα. Να αποδείξετε ότι:
+\begin{alist}
+    \item $(\Delta OZ) = (BOE)$. \monades{10}
+    \item $(\Delta OEA) = (B\Gamma ZO)$. \monades{15}
+\end{alist}

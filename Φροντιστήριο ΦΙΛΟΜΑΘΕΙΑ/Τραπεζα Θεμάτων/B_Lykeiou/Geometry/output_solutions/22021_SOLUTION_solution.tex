@@ -1,0 +1,59 @@
+\Askhsh{22021_SOLUTION}{1}
+\begin{ylh}{1}
+    \item[Γεωμετρία, Εμβαδά]
+\end{ylh}
+\begin{wrapfigure}[14]{r}{6cm}
+\centering
+\vspace{-1.5em}
+\begin{tikzpicture}[scale=1.1, every node/.style={font=\small}]
+    % Ορισμός σημείων
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(3.5,0){B}
+    \tkzDefPoint(0,3.5){G} % Γ
+    \tkzDefMidPoint(B,G)\tkzGetPoint{O}
+
+    % Υπολογισμός ακτίνων για τη σχεδίαση της διαδρομής
+    \tkzCalcLength(O,B)\tkzGetValue{rSemi}
+    \tkzCalcLength(A,B)\tkzGetValue{rQuarter}
+    \coordinate (B_coord) at (3.5,0);
+    \coordinate (G_coord) at (0,3.5);
+
+    % Γέμισμα μηνίσκου (μ) με γκρι χρώμα
+    % Διαδρομή: Από Β στο Γ μέσω ημικυκλίου, και πίσω στο Β μέσω τεταρτοκυκλίου
+    \fill[gray!40] (B_coord) arc (-45:135:\rSemi pt) -- (G_coord) arc (90:0:\rQuarter pt) -- cycle;
+
+    % Σχεδίαση περιγραμμάτων
+    \tkzDrawSegment[thick](A,B)
+    \tkzDrawSegment[thick](A,G)
+    \tkzDrawArc[thick,semicircle](O,G)(B)
+    \tkzDrawArc[thick](A,G)(B)
+
+    % Σύμβολα και σημάνσεις
+    \tkzMarkRightAngle[size=0.4, thick](B,A,G)
+    \tkzMarkSegment[mark=|, thick](A,B)
+    \tkzMarkSegment[mark=|, thick](A,G)
+    \tkzMarkSegment[mark=||, thick](B,G)
+
+    % Ετικέτες σημείων
+    \tkzLabelPoint[below left](A){Α}
+    \tkzLabelPoint[below right](B){Β}
+    \tkzLabelPoint[above left](G){Γ}
+
+    % Ετικέτες μηκών ρ
+    \node[below,yshift=-1pt] at ($(O)!0.5!(B)$) {$\rho$};
+    \node[below,yshift=-1pt] at ($(O)!0.5!(G)$) {$\rho$};
+
+    % Ετικέτες περιοχών
+    % Χρήση συντεταγμένων για ακριβή τοποθέτηση
+    \node at (1.75, 3.8){$\mu$};
+    \node at (2.2, 2.2){$\tau$};
+    \node at (1.2, 1.2){$\Delta$};
+\end{tikzpicture}
+\end{wrapfigure}
+Στο διπλανό σχήμα, το τρίγωνο ΑΒΓ είναι ορθογώνιο και ισοσκελές με $\hat{A}=90^\circ$ και υποτείνουσα $ΒΓ=2\rho$. Κατασκευάζουμε το ημικύκλιο με διάμετρο τη ΒΓ και το τεταρτοκύκλιο με κέντρο το Α και ακτίνα $R=AB$. Η γραμμοσκιασμένη περιοχή $(\mu)$ ονομάζεται μηνίσκος.
+
+\begin{alist}
+    \item Να αποδείξετε ότι οι κάθετες πλευρές του τριγώνου έχουν μήκος $AB = A\Gamma = \rho\sqrt{2}$. \monades{7}
+    \item Να υπολογίσετε, συναρτήσει του $\rho$, το εμβαδόν $(\mu)$ του μηνίσκου. \monades{9}
+    \item Να αποδείξετε ότι το εμβαδόν του μηνίσκου $(\mu)$ είναι ίσο με το εμβαδόν του τριγώνου ΑΒΓ. \monades{9}
+\end{alist}

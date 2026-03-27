@@ -1,0 +1,74 @@
+\Askhsh{22568_SOLUTION}{1}
+\begin{ylh}{1}
+	\item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[17]{r}{7cm}
+\centering
+\begin{tikzpicture}[scale=0.45]
+    % Define points on the horizontal axis
+    \tkzDefPoint(-10,0){D}
+    \tkzDefPoint(0,0){L}
+    \tkzDefPoint(10,0){K}
+
+    % Define the two main circles based on text
+    % C1: Center L, Radius 10
+    % C2: Center K, Radius 6
+    \tkzDefCircle[center=L,point=D](C1)
+    \tkzDefCircle[R,center=K,radius=6](C2)
+
+    % Define point A
+    % A is on C1 and its distance from K is 8
+    \tkzDefCircle[R,center=K,radius=8](C_A_helper)
+    \tkzInterCC(C1,C_A_helper) \tkzGetPoints{A}{A_prime}
+
+    % Define point Gamma (tangency point)
+    % Gamma is on C2 and angle KGA is 90 degrees.
+    % This means Gamma is on the circle with diameter KA.
+    \tkzDefMidPoint(K,A) \tkzGetPoint{M_KA}
+    \tkzDefCircle[center=M_KA,point=A](C_G_helper)
+    \tkzInterCC(C2,C_G_helper) \tkzGetPoints{G}{G_prime}
+
+    % Define the line through A and Gamma
+    \tkzDefLine(A,G)(tangentLine)
+
+    % Define point B
+    % B is the other intersection of the line and circle C1
+    \tkzInterLC(A,G)(L,D) \tkzGetPoints{A}{B}
+
+    % Draw elements
+    \tkzDrawCircle(L,D)
+    \tkzDrawCircle(K,G)
+
+    % Draw lines and segments
+    \tkzDrawSegment(D,K)
+    \tkzDrawSegment(B,G)
+    \tkzDrawSegment[dashed,color=maincolor](K,A)
+    \tkzDrawSegment[dashed,color=maincolor](K,B)
+    \tkzDrawSegment[dashed,color=maincolor](A,D)
+    \tkzDrawSegment[dashed,color=secondarycolor](A,G)
+    \tkzDrawSegment(K,G)
+
+    % Draw points
+    \tkzDrawPoints(A,B,D,G,K,L)
+
+    % Labels
+    \tkzLabelPoint[below](D){$\Delta$}
+    \tkzLabelPoint[below](L){$\Lambda$}
+    \tkzLabelPoint[below right](K){K}
+    \tkzLabelPoint[above right](A){A}
+    \tkzLabelPoint[above right](G){$\Gamma$}
+    \tkzLabelPoint[above left](B){B}
+
+    % Mark right angles
+    \tkzMarkRightAngle[size=0.4,fill=green!20](K,G,A)
+    \tkzMarkRightAngle[size=0.4,fill=green!20](K,A,D)
+    \tkzMarkRightAngle[size=0.4,fill=green!20](K,B,D)
+\end{tikzpicture}
+\end{wrapfigure}
+α)
+\begin{rlist}
+\item Οι γωνίες $\widehat{ΚΒ\Gamma}$ και $\widehat{Κ\Delta A}$ είναι εγγεγραμμένες γωνίες του κύκλου $(\Lambda,R)$ που βαίνουν στο ίδιο τόξο ΚΑ, άρα είναι ίσες. Η ευθεία ΓΒ είναι εφαπτομένη του κύκλου $(Κ,\rho)$ στο σημείο του Γ, επομένως η γωνία $\widehat{Κ\Gamma Β}$ είναι ορθή. Η ΚΔ είναι διάμετρος του κύκλου $(\Lambda,R)$ και η γωνία $\widehat{ΚΑ\Delta}$ είναι εγγεγραμμένη που βαίνει σε ημικύκλιο, άρα είναι ορθή.
+Τα τρίγωνα $Κ\Gamma Β$ και $ΚΑ\Delta$ έχουν $\widehat{Κ\Gamma Β}= \widehat{ΚΑ\Delta}$ (ορθές) και $\widehat{ΚΒ\Gamma}= \widehat{Κ\Delta A}$, επομένως έχοντας δύο γωνίες ίσες μία προς μία, είναι όμοια.
+\item Η ΚΔ είναι διάμετρος του κύκλου $(\Lambda,R)$, άρα $Κ\Delta=2 \cdot R=20$ και η ΚΓ είναι ακτίνα του κύκλου $(Κ,\rho)$, άρα $Κ\Gamma=\rho=6$. Εφόσον τα τρίγωνα $Κ\Gamma Β$ και $ΚΑ\Delta$ είναι όμοια, έχουν τις πλευρές τους ανάλογες, δηλαδή $\frac{Κ\Gamma}{ΚΑ}=\frac{ΚΒ}{Κ\Delta}=\frac{\Gamma Β}{Α\Delta}$. Από την ισότητα $\frac{Κ\Gamma}{ΚΑ}=\frac{ΚΒ}{Κ\Delta}$ έχουμε ότι $\frac{6}{ΚΑ}=\frac{ΚΒ}{20}$ ή $ΚΑ \cdot ΚΒ=120$.
+\end{rlist}
+β) Αφού είναι $ΚΒ=15$ και $ΚΑ \cdot ΚΒ=120$ τότε $15 \cdot ΚΑ=120$, άρα $ΚΑ=8$. Εφαρμόζοντας το πυθαγόρειο θεώρημα στο τρίγωνο $ΚΑ\Gamma$ έχουμε $Κ\Gamma^2+\Gamma Α^2=ΚΑ^2$ ή $36+ \Gamma Α^2=64$ ή $\Gamma Α^2=28$ ή $\Gamma Α=\sqrt{28}=2\sqrt{7}$. Το εμβαδόν του ορθογωνίου τριγώνου $Α\Gamma Κ$ είναι $(Α\Gamma Κ)=\frac{Κ\Gamma \cdot Α\Gamma}{2}=\frac{6 \cdot 2\sqrt{7}}{2}=6\sqrt{7}$.

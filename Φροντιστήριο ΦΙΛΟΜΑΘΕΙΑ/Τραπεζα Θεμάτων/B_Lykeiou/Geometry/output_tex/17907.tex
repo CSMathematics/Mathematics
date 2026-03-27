@@ -1,0 +1,74 @@
+\Askhsh{17907}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[24]{r}{7cm}
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Define triangle vertices
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,4){Ga} % Gamma
+        \tkzDefPoint(3,0){B}
+
+        % Define vertices for square AΓΘΙ (Area E)
+        \tkzDefPoint(-4,4){Th} % Theta
+        \tkzDefPoint(-4,0){I}
+
+        % Define vertices for square ABHZ (Area E1)
+        \tkzDefPoint(3,-3){H}
+        \tkzDefPoint(0,-3){Z}
+
+        % Define vertices for square BΓΔΡ (Area E2)
+        % Using the coordinates calculated assuming A=(0,0), Ga=(0,4), B=(3,0)
+        \tkzDefPoint(4,7){D} % Delta
+        \tkzDefPoint(7,3){P} % Rho
+
+        % Draw the main triangle
+        \tkzDrawPolygon[line width=1pt](A,B,Ga)
+
+        % Draw the squares
+        \tkzDrawPolygon[line width=1pt](A,Ga,Th,I)
+        \tkzDrawPolygon[line width=1pt](A,B,H,Z)
+        \tkzDrawPolygon[line width=1pt](B,Ga,D,P)
+
+        % Draw points
+        \tkzDrawPoints(A,B,Ga,D,H,I,P,Th,Z)
+
+        % Labels for points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[below right](B){B}
+        \tkzLabelPoint[above left](Ga){$\Gamma$}
+        \tkzLabelPoint[above](D){$\Delta$}
+        \tkzLabelPoint[below](H){H}
+        \tkzLabelPoint[left](I){I}
+        \tkzLabelPoint[right](P){P}
+        \tkzLabelPoint[above left](Th){$\Theta$}
+        \tkzLabelPoint[below left](Z){Z}
+
+        % Labels for areas E, E1, E2
+        % Calculate centers of squares for area labels
+        \tkzDefMidPoint(A,Th) \tkzGetPoint{M_ATh}
+        \tkzDefMidPoint(Ga,I) \tkzGetPoint{M_GaI}
+        \tkzDefMidPoint(M_ATh,M_GaI) \tkzGetPoint{C_E}
+        \tkzLabelPoint(C_E){E}
+
+        \tkzDefMidPoint(A,H) \tkzGetPoint{M_AH}
+        \tkzDefMidPoint(B,Z) \tkzGetPoint{M_BZ}
+        \tkzDefMidPoint(M_AH,M_BZ) \tkzGetPoint{C_E1}
+        \tkzLabelPoint(C_E1){$E_1$}
+
+        \tkzDefMidPoint(Ga,P) \tkzGetPoint{M_GaP}
+        \tkzDefMidPoint(B,D) \tkzGetPoint{M_BD}
+        \tkzDefMidPoint(M_GaP,M_BD) \tkzGetPoint{C_E2}
+        \tkzLabelPoint(C_E2){$E_2$}
+
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο ΑΒΓ. Με πλευρές τις ΑΒ, ΑΓ, ΒΓ κατασκευάζουμε εξωτερικά του τριγώνου ΑΒΓ, τα τετράγωνα ΑΒΗΖ, ΑΓΘΙ, ΒΓΔΡ. Έστω $E$, $E_1$, $E_2$, τα εμβαδά των τετραγώνων ΑΓΘΙ, ΑΒΗΖ, ΒΓΔΡ αντίστοιχα. Αν ισχύουν οι ισότητες $E_1 = 4E$, $E_2 = 5E$ τότε:
+\begin{alist}
+    \item να αποδείξετε ότι το τρίγωνο ΑΒΓ είναι ορθογώνιο με ορθή τη γωνία A. \monades{9}
+    \item να αποδείξετε ότι τα εμβαδά των τριγώνων ΑΒΓ, ΑΙΖ, ΒΗΔ, ΓΡΘ είναι ίσα. \monades{9}
+    \item αν η $A\Gamma=1$ να υπολογίσετε το εμβαδόν του πολυγώνου ΖΗΔΡΘΙ. \monades{7}
+\end{alist}

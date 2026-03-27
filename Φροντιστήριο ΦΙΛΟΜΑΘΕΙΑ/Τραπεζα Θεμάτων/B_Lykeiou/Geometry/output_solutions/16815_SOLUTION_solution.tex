@@ -1,0 +1,89 @@
+\Askhsh{16815_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία]
+\end{ylh}
+\begin{wrapfigure}[30]{r}{9cm}
+\begin{tikzpicture}[scale=0.9]
+    % Define points based on geometric properties derived from the solution
+    % A, B, G, D form the trapezoid with AD || BG
+    % K on AD
+    % Z is midpoint of GD and KTh
+    % B, G, Th are collinear
+    % ABThK is a parallelogram
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(10,0){D}
+    \tkzDefPoint(2,5){B}
+    \tkzDefPoint(7,5){G} % Gamma
+    \tkzDefPoint(7.5,0){K}
+    \tkzDefPoint(8.5,2.5){Z}
+    \tkzDefPoint(9.5,5){Th} % Theta
+
+    % Points E, H on AB
+    \tkzDefPointWith[linear,K=0.3](A,B) \tkzGetPoint{E} % E is roughly at 30% of AB from A
+    \tkzDefPointWith[linear,K=0.6](A,B) \tkzGetPoint{H} % H is roughly at 60% of AB from A
+
+    % Draw trapezoid ABΓΔ
+    \tkzDrawSegments(A,B B,G G,D D,A)
+
+    % Draw segment HZ
+    \tkzDrawSegment(H,Z)
+
+    % Draw dashed segments ΓΘ and KΘ
+    \tkzDrawSegments[dashed](G,Th K,Th)
+
+    % Draw points
+    \tkzDrawPoints(A,B,G,D,E,H,Z,K,Th)
+
+    % Right angle symbol at H, formed by segments AH and HZ
+    % (Note: Geometrically, for the chosen coordinates, this might not be exactly 90 degrees,
+    % but it is drawn as such in the original image.)
+    \tkzMarkRightAngle(A,H,Z)
+
+    % Labels for points
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[above left](B){B}
+    \tkzLabelPoint[below right](D){$\Delta$}
+    \tkzLabelPoint[left](E){E}
+    \tkzLabelPoint[left](H){H}
+    \tkzLabelPoint[below](K){K}
+    \tkzLabelPoint[above right](G){$\Gamma$}
+    \tkzLabelPoint[below left](Z){Z}
+    \tkzLabelPoint[above right](Th){$\Theta$}
+
+\end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Τα τρίγωνα $\Gamma\Theta\text{Z}$ και $\text{KZ}\Delta$ είναι ίσα γιατί έχουν
+    \[
+    \text{ΓZ} = \text{Z}\Delta \quad \text{αφού Z μέσο της } \text{Γ}\Delta
+    \]
+    \[
+    \widehat{\Gamma\text{Z}\Theta} = \widehat{\text{KZ}\Delta} \quad \text{ως κατακορυφήν γωνίες}
+    \]
+    \[
+    \widehat{\text{Z}\Gamma\Theta} = \widehat{\text{Z}\Delta\text{K}} \quad \text{ως εντός εναλλάξ γωνίες}
+    \]
+    Άρα $(\Gamma\Theta\text{Z}) = (\text{KZ}\Delta)$ και συνεπώς
+    \[
+    (\text{AB}\Gamma\Delta) = (\text{AB}\Gamma\text{ZK}) + (\text{KZ}\Delta) = (\text{AB}\Gamma\text{ZK}) + (\Gamma\Theta\text{Z}) = (\text{AB}\Theta\text{K})
+    \]
+
+    \item Το $\text{AB}\Theta\text{K}$ είναι παραλληλόγραμμο με $(\text{AB}\Theta\text{K}) = \text{AB} \cdot \text{HZ}$
+    Από α) είναι $(\text{AB}\Gamma\Delta) = (\text{AB}\Theta\text{K})$
+    Άρα $(\text{AB}\Gamma\Delta) = \text{AB} \cdot \text{HZ}$
+
+    \item Για το τραπέζιο $\text{AB}\Gamma\Delta$ ισχύει $(\text{AB}\Gamma\Delta) = \frac{(\text{A}\Delta+\text{B}\Gamma)\cdot \text{υ}}{2}$
+    Από β) είναι $(\text{AB}\Gamma\Delta) = \text{AB} \cdot \text{HZ}$
+    Άρα
+    \[
+    \frac{(\text{A}\Delta+\text{B}\Gamma)\cdot \text{υ}}{2} = \text{AB} \cdot \text{HZ} \Rightarrow \text{υ} = \frac{2 \cdot \text{AB} \cdot \text{HZ}}{\text{A}\Delta+\text{B}\Gamma}
+    \]
+
+    \item Φέρνουμε τη διαγώνιο $\text{BK}$ του παραλληλογράμμου $\text{AB}\Theta\text{K}$.
+    Τα τρίγωνα $\text{ABK}$ και $\text{B}\Theta\text{K}$ είναι ίσα οπότε $(\text{ABK})=(\text{B}\Theta\text{K})$
+    Επιπλέον $(\text{ABK})+(\text{B}\Theta\text{K}) = (\text{AB}\Theta\text{K})$ συνεπώς $(\text{ABK}) = \frac{1}{2}(\text{AB}\Theta\text{K}) .$
+    Η $\text{KE}$ είναι διάμεσος του $\text{ABK}$ συνεπώς $(\text{AEK}) = \frac{1}{2}(\text{ABK}) .$
+    Άρα $(\text{AEK}) = \frac{1}{4}(\text{AB}\Theta\text{K})$
+    Όμως από α) είναι $(\text{AB}\Gamma\Delta) = (\text{AB}\Theta\text{K})$
+    Συνεπώς $(\text{AEK}) = \frac{1}{4}(\text{AB}\Gamma\Delta)$
+\end{alist}

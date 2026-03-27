@@ -1,0 +1,99 @@
+\Askhsh{36837_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Συναρτήσεις - Ολοκληρώματα]
+\end{ylh}
+
+\begin{wrapfigure}[30]{r}{0.5\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -2.5, xmax = 4.5,
+    ymin = -3, ymax = 6.5,
+    xtick = {-2,-1,0,1,2,3,4},
+    ytick = {-2,-1,0,1,2,3,4,5,6},
+    grid = both,
+    grid style = {gray!30},
+    samples = 2, % For piecewise linear function, 2 samples per segment are enough.
+    domain = -2:3,
+    width = \linewidth,
+    height = 0.9\linewidth,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    clip = false, % Allows labels outside the axis box
+]
+    % Plot the function f(x)
+    % Segment 1: from (-2,-2) to (-1,0) (y = 2x+4)
+    \addplot[very thick, maincolor, domain=-2:-1] {2*x + 4};
+    % Segment 2: from (-1,0) to (0,1) (y = x+1)
+    \addplot[very thick, maincolor, domain=-1:0] {x + 1};
+    % Segment 3: from (0,1) to (3,5) (y = (4/3)x+1)
+    \addplot[very thick, maincolor, domain=0:3] {(4/3)*x + 1} node[above right, xshift=1em] {$C_f$};
+
+    % Draw dashed lines for specific x-values
+    \draw[dashed, secondarycolor] (axis cs:-2,0) -- (axis cs:-2,-2);
+    \draw[dashed, secondarycolor] (axis cs:-1,0) -- (axis cs:-1,-0.5) node[below] {\scriptsize $-1$};
+    \draw[dashed, secondarycolor] (axis cs:0,0) -- (axis cs:0,1);
+    \draw[dashed, secondarycolor] (axis cs:3,0) -- (axis cs:3,5);
+
+    % Draw dashed lines for specific y-values
+    \draw[dashed, secondarycolor] (axis cs:0,1) -- (axis cs:0.5,1) node[left] {\scriptsize $1$};
+    \draw[dashed, secondarycolor] (axis cs:0,5) -- (axis cs:3,5) node[left] {\scriptsize $5$};
+    \draw[dashed, secondarycolor] (axis cs:0,-2) -- (axis cs:-2,-2) node[above left] {\scriptsize $-2$};
+    \draw[dashed, secondarycolor] (axis cs:3,0) node[below] {\scriptsize $3$};
+
+    % Labels for points
+    \node[above right, maincolor] at (axis cs:-2,-2) {B};
+    \node[below, maincolor] at (axis cs:-1,0) {$\Gamma$};
+    \node[below left, maincolor] at (axis cs:0,0) {O};
+    \node[left, maincolor] at (axis cs:0,1) {A};
+    \node[above right, maincolor] at (axis cs:3,5) {$\Lambda$};
+    \node[below, maincolor] at (axis cs:3,0) {$\Delta$};
+    \node[below, maincolor] at (axis cs:-2,0) {$\Theta$};
+
+    % Shading
+    % Triangle ΓΒΘ (from -2 to -1, below x-axis)
+    \addplot[fill=maincolor!30, draw=none, opacity=0.7] coordinates {(-2,0) (-2,-2) (-1,0)};
+    % Triangle ΟΓΑ (from -1 to 0, above x-axis)
+    \addplot[fill=maincolor!30, draw=none, opacity=0.7] coordinates {(-1,0) (0,1) (0,0)};
+    % Trapezoid ΟΑΛΔ (from 0 to 3, above x-axis)
+    \addplot[fill=maincolor!30, draw=none, opacity=0.7] coordinates {(0,0) (0,1) (3,5) (3,0)};
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\OnPar{ΛΥΣΗ}
+\begin{alist}
+    \item[α)]
+    \begin{rlist}
+        \item Στο διάστημα $[-2,-1]$ η γραφική παράσταση της $f$ βρίσκεται κάτω από τον άξονα $x'x$. Άρα το εμβαδόν του χωρίου που σχηματίζει η $C_f$ με τον άξονα $x'x$ και τις κατακόρυφες ευθείες $x=-2$ και $x=-1$ είναι το ολοκλήρωμα $\int_{-2}^{-1} |f(x)|dx = -\int_{-2}^{-1} f(x)dx$. Το εμβαδόν όμως του χωρίου αυτού ισούται επίσης με το εμβαδόν του τριγώνου $\Gamma{\rm B}\Theta$.
+
+        Για το τρίγωνο $\Gamma{\rm B}\Theta$ έχουμε ότι $\Gamma{\rm B} = |-1 - (-2)| = 1$ και ${\rm B}\Theta = |-2 - 0| = 2$.
+        Άρα ${\rm E}(\Gamma{\rm B}\Theta) = \frac{1}{2} \cdot \Gamma{\rm B} \cdot {\rm B}\Theta = \frac{1}{2} \cdot 1 \cdot 2 = 1$. Επομένως:
+        \[
+            -\int_{-2}^{-1} f(x)dx = 1 \iff \int_{-2}^{-1} f(x)dx = -1
+        \]
+
+        \item Στο διάστημα $[-1,0]$ η γραφική παράσταση της $f$ βρίσκεται πάνω από τον άξονα $x'x$, οπότε το ολοκλήρωμα $\int_{-1}^{0} f(x)dx$ θα ισούται με το εμβαδόν του τριγώνου ${\rm O}\Gamma{\rm A}$.
+
+        ${\rm O}\Gamma{\rm A}$. Είναι ${\rm O}\Gamma = |-1 - 0| = 1$ και ${\rm O}{\rm A} = 2$. Άρα
+        \[
+            \int_{-1}^{0} f(x)dx = \frac{1}{2} \cdot {\rm O}\Gamma \cdot {\rm O}{\rm A} = \frac{1}{2} \cdot 1 \cdot 1 = 1
+        \]
+
+        \item Στο διάστημα $[0,3]$ η γραφική παράσταση της $f$ βρίσκεται πάνω από τον άξονα $x'x$, οπότε το ολοκλήρωμα $\int_{0}^{3} f(x)dx$ θα ισούται με το εμβαδόν του τραπεζίου ${\rm O}{\rm A}\Lambda\Delta$.
+
+        Είναι ${\rm O}{\rm A} = 2$, $\Lambda\Delta = 5 - 0 = 5$ και ${\rm O}\Delta = 3$. Άρα
+        \[
+            \int_{0}^{3} f(x)dx = \frac{{\rm O}{\rm A} + \Lambda\Delta}{2} \cdot {\rm O}\Delta = \frac{2+5}{2} \cdot 3 = \frac{21}{2}
+        \]
+    \end{rlist}
+    \item[β)] Το εμβαδόν του χωρίου που περικλείεται από την γραφική παράσταση της $f$, τον άξονα $x'x$ και τις κατακόρυφες ευθείες $x=-2$ και $x=3$ είναι το $\int_{-2}^{3} |f(x)|dx$. Σύμφωνα με το α) ερώτημα θα ισούται με το άθροισμα των εμβαδών των τριγώνων $\Gamma{\rm B}\Theta$, ${\rm O}\Gamma{\rm A}$ και του τραπεζίου ${\rm O}{\rm A}\Lambda\Delta$. Άρα:
+    \[
+        \int_{-2}^{3} |f(x)|dx = -\int_{-2}^{-1} f(x)dx + \int_{-1}^{0} f(x)dx + \int_{0}^{3} f(x)dx = 1+1+\frac{21}{2} = \frac{25}{2} \tau.\mu.
+    \]
+\end{alist}

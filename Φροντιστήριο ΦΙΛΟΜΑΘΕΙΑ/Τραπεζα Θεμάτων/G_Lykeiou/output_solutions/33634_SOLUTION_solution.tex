@@ -1,0 +1,96 @@
+\Askhsh{33634_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[35]{r}{8.5cm} % Adjust lines and width as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x$, ylabel=$y$,
+    xmin=0, xmax=pi/2+0.05,
+    ymin=0, ymax=pi/2+0.05,
+    xtick={0, pi/4, pi/2},
+    ytick={0, pi/4, pi/2},
+    xticklabels={O, $\frac{\pi}{4}$, $\frac{\pi}{2}$},
+    yticklabels={O, $\frac{\pi}{4}$, $\frac{\pi}{2}$},
+    grid=none,
+    width=8cm, height=7cm,
+    tick label style={font=\scriptsize},
+    axis on top,
+    clip=false,
+    trig format=rad,
+]
+    % Plot f(x) = (\pi/2) * sin(x)^2 (maincolor, curve from O up to A)
+    \addplot[very thick, maincolor, domain=0:pi/2, samples=100, name path=f] {pi/2 * sin(x)^2};
+    \node[maincolor, above right, font=\scriptsize] at (axis cs:pi/2, pi/4) {$C_f$}; % Label for the curve at its end point A
+
+    % Plot y=x (secondarycolor, line from O to K)
+    \addplot[very thick, secondarycolor, domain=0:pi/2, samples=2, name path=id] {x};
+    \node[secondarycolor, above left, font=\scriptsize] at (axis cs:pi/2, pi/2) {$y=x$}; % Label for y=x line
+    
+    % Vertical line at x = pi/4
+    \draw[thick, color=brown!70!black] (axis cs:pi/4, 0) -- (axis cs:pi/4, pi/2); % Extends up to pi/2 on y-axis, as in image
+    \node[below, font=\scriptsize, color=brown!70!black] at (axis cs:pi/4,0) {$\frac{\pi}{4}$}; % Label for x=pi/4 on x-axis
+
+    % Points and their labels (from the image)
+    \node[below left, font=\scriptsize] at (axis cs:0,0) {O};
+    \fill[secondarycolor] (axis cs:0,0) circle (1.5pt);
+
+    \node[above left, font=\scriptsize] at (axis cs:pi/4, pi/4) {K};
+    \fill[secondarycolor] (axis cs:pi/4, pi/4) circle (1.5pt);
+
+    \node[above right, font=\scriptsize] at (axis cs:pi/2, pi/4) {A};
+    \fill[secondarycolor] (axis cs:pi/2, pi/4) circle (1.5pt);
+
+    \node[below right, font=\scriptsize] at (axis cs:pi/2, 0) {B};
+    \fill[secondarycolor] (axis cs:pi/2, 0) circle (1.5pt);
+
+    % Regions Omega1 and Omega2
+    % Omega1: between y=x and f(x), from 0 to pi/4
+    \addplot[maincolor!30, opacity=0.8] fill between[
+        of=id and f, % y=x is 'id', f(x) is 'f'
+        domain=0:pi/4,
+    ];
+    \node[font=\scriptsize, secondarycolor, xshift=-1em, yshift=-0.5em] at (axis cs:pi/8, pi/16) {$\Omega_1$}; 
+    
+    % Omega2: between f(x) and y=x, from pi/4 to pi/2
+    \addplot[secondarycolor!30, opacity=0.8] fill between[
+        of=f and id, % f(x) is 'f', y=x is 'id'
+        domain=pi/4:pi/2,
+    ];
+    \node[font=\scriptsize, maincolor, xshift=1.5em, yshift=0.5em] at (axis cs:3*pi/8, pi/4-pi/16) {$\Omega_2$}; 
+
+    % Add the label for pi/2 on y-axis again to match the image
+    \node[left=2pt, font=\scriptsize] at (axis cs:0, pi/2) {$\frac{\pi}{2}$};
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+\kefalaio{ΑΥΣΗ}
+\begin{alist}
+    \item [α)] $I + J = \int_0^{\frac{\pi}{2}} \eta \mu^2 x \,dx + \int_0^{\frac{\pi}{2}} \sigma υ \nu^2 x \,dx = \int_0^{\frac{\pi}{2}} (\eta \mu^2 x + \sigma υ \nu^2 x) \,dx = \int_0^{\frac{\pi}{2}} 1 \,dx = \left[x\right]_0^{\frac{\pi}{2}} = \frac{\pi}{2} - 0 = \frac{\pi}{2}.$
+    \item [β)] Αν θέσουμε στο ολοκλήρωμα $I = \int_0^{\frac{\pi}{2}} \eta \mu^2 x \,dx$ ως $u = \frac{\pi}{2} - x$ έχουμε ότι $du = -dx$, για $x=0$ είναι $u = \frac{\pi}{2}$ και για $x=\frac{\pi}{2}$ είναι $u=0$ οπότε το ολοκλήρωμα γίνεται
+    \[ I = \int_{\frac{\pi}{2}}^0 \eta \mu^2 \left(\frac{\pi}{2} - u\right) du = \int_0^{\frac{\pi}{2}} \sigma υ \nu^2 u du = J. \]
+    Αφού $I+J = \frac{\pi}{2}$ και $I=J$ έχουμε $I+I=\frac{\pi}{2} \Leftrightarrow 2I = \frac{\pi}{2} \Leftrightarrow I = \frac{\pi}{8}.$
+    \item [γ)]
+    \begin{rlist}
+        \item Το εμβαδόν που περικλείεται μεταξύ της $C_f$, του άξονα $x'x$ και της ευθείας $x = \frac{\pi}{2}$ είναι το $I$. Το τετράγωνο $OBA\Gamma$ έχει εμβαδόν $\frac{\pi^2}{4}$, οπότε αφού $I+J=\frac{\pi^2}{4} \Rightarrow J = \frac{\pi}{4} - I \Rightarrow J = (\text{OBA\Gamma}) - I$ (Υπάρχει ανακολουθία στο αρχικό κείμενο, καθώς στο α) βρέθηκε $I+J=\frac{\pi}{2}$).\par
+        συμπεραίνουμε ότι το εμβαδόν που περικλείεται μεταξύ της $C_f$, του άξονα $y'y$ και της ευθείας $y = \frac{\pi}{2}$ είναι το $J$.
+        \item Η ευθεία OA έχει εξίσωση $y-0 = \frac{\frac{\pi}{2}-0}{\frac{\pi}{2}-0}(x-0) \Rightarrow y=x$ και αφού OA διαγώνιος του τετραγώνου OBA$\Gamma$, το χωρίζει σε δύο ίσα άρα και ισοδύναμα τρίγωνα, δηλαδή $(\text{ΟΑΒ}) = (\text{ΟΑ\Gamma})$. Είναι $I = (\text{ΟΑΒ}) - E(\Omega_2) + E(\Omega_1)$, $J = (\text{ΟΑ\Gamma}) + E(\Omega_2) - E(\Omega_1)$ και αφού $I=J$, $(\text{ΟΑΒ}) = (\text{ΟΑ\Gamma})$ συμπεραίνουμε ότι $E(\Omega_2) - E(\Omega_1) = -E(\Omega_2) + E(\Omega_1) \Leftrightarrow 2E(\Omega_2) = 2E(\Omega_1) \Leftrightarrow E(\Omega_2) = E(\Omega_1)$. Εναλλακτικά,
+        \[ E(\Omega_1) = E(\Omega_2) \Leftrightarrow \int_0^{x_0} (x-f(x))dx = \int_{x_0}^{\frac{\pi}{2}} (f(x)-x)dx \]
+        \[ \int_0^{x_0} x dx - \int_0^{x_0} f(x) dx = \int_{x_0}^{\frac{\pi}{2}} f(x) dx - \int_{x_0}^{\frac{\pi}{2}} x dx \]
+        \[ \int_0^{\frac{\pi}{2}} x dx = \int_0^{\frac{\pi}{2}} f(x) dx \Leftrightarrow \left[\frac{x^2}{2}\right]_0^{\frac{\pi}{2}} = I \Leftrightarrow \frac{\pi^2}{8} = I \]
+        που ισχύει.
+    \end{rlist}
+    \Askhseis{Σημείωση}: Το K είναι σημείο καμπής της $C_f$.
+    \par Πράγματι, η συνάρτηση $f(x) = \frac{\pi}{2} \eta \mu^2 x$ είναι δύο φορές παραγωγίσιμη στο $\left[0, \frac{\pi}{2}\right]$ με
+    $f'(x) = \pi \cdot \eta \mu x \cdot \sigma υ \nu x$ και $f''(x) = \pi \cdot \sigma υ \nu^2 x - \pi \cdot \eta \mu^2 x$. Είναι
+    $f''(x) = 0 \Leftrightarrow \pi \cdot \sigma υ \nu^2 x - \pi \cdot \eta \mu^2 x = 0 \Leftrightarrow \sigma υ \nu^2 x = \eta \mu^2 x$.
+    Για $x \in \left(0, \frac{\pi}{2}\right)$ είναι $\sigma υ \nu x > 0$ και $\eta \mu x > 0$ οπότε
+    $\sigma υ \nu^2 x = \eta \mu^2 x \Leftrightarrow \sigma υ \nu x = \eta \mu x \Leftrightarrow \epsilon \phi x = 1 \Leftrightarrow x = \frac{\pi}{4}$. Επίσης
+    $f''(x) > 0 \Leftrightarrow \pi \cdot \sigma υ \nu^2 x - \pi \cdot \eta \mu^2 x > 0 \Leftrightarrow \sigma υ \nu^2 x > \eta \mu^2 x \Leftrightarrow$
+    $\sigma υ \nu x > \eta \mu x \Leftrightarrow \epsilon \phi x < 1 \Leftrightarrow 0 < x < \frac{\pi}{4}$.
+    Συνεπώς η $f$ είναι κυρτή στο $\left[0, \frac{\pi}{4}\right]$, κοίλη στο $\left[\frac{\pi}{4}, \frac{\pi}{2}\right]$ και παρουσιάζει καμπή για $x = \frac{\pi}{4}$.
+    Αφού $f\left(\frac{\pi}{4}\right) = \frac{\pi}{2} \eta \mu^2 \frac{\pi}{4} = \frac{\pi}{2} \left(\frac{\sqrt{2}}{2}\right)^2 = \frac{\pi}{2} \cdot \frac{2}{4} = \frac{\pi}{2} \cdot \frac{1}{2} = \frac{\pi}{4}$ το σημείο καμπής είναι το $\left(\frac{\pi}{4}, \frac{\pi}{4}\right)$ που ανήκει στην ευθεία $y=x$ και επομένως είναι το σημείο K.
+\end{alist}

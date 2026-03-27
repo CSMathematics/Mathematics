@@ -1,0 +1,58 @@
+\Askhsh{22151}{4}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6cm}
+\begin{tikzpicture}[scale=1]
+    % Define the center and radii values
+    \tkzDefPoint(0,0){A}
+    \def\rhoValue{2}   % AΔ
+    \def\rValue{3}     % AB = AE
+    \def\RValue{4.5}   % AΓ
+
+    % Define points based on the radii and two rays
+    % Ray A-Δ-B (on x-axis for simplicity)
+    \tkzDefPoint(\rhoValue,0){D} % Delta
+    \tkzDefPoint(\rValue,0){B}
+
+    % Ray A-E-Γ (at an angle, e.g., 135 degrees from x-axis)
+    \tkzDefPoint(\rValue*cos(135), \rValue*sin(135)){E}
+    \tkzDefPoint(\RValue*cos(135), \RValue*sin(135)){G} % Gamma
+
+    % Draw the shaded region (outer ring)
+    \tkzFillCircle[color=gray!30](A,\RValue)
+    \tkzFillCircle[color=white](A,\rValue)
+
+    % Draw the circles' borders
+    \tkzDrawCircle[R,line width=0.8pt,color=blue!70!black](A,\rhoValue) % Innermost
+    \tkzDrawCircle[R,line width=0.8pt,color=gray!70!black](A,\rValue)    % Middle
+    \tkzDrawCircle[R,line width=0.8pt,color=gray!70!black](A,\RValue)    % Outermost
+
+    % Draw the segments connecting the points
+    \tkzDrawSegment[line width=0.8pt](D,E)
+    \tkzDrawSegment[line width=0.8pt](B,G)
+    \tkzDrawSegments[line width=0.8pt](A,B A,G) % Sides of triangle AΓB
+
+    % Draw points
+    \tkzDrawPoints(A,D,B,E,G)
+
+    % Label points
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelPoint[below](B){B}
+    \tkzLabelPoint[above left](E){E}
+    \tkzLabelPoint[below left](G){$\Gamma$}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο $\text{AB}\Gamma$ με $\text{AB} < \text{A}\Gamma$. Στην πλευρά $\text{AB}$ παίρνουμε σημείο $\Delta$ και στην πλευρά $\text{A}\Gamma$ σημείο $\text{E}$ ώστε $\text{AE} = \text{AB}$. Με κέντρο το σημείο $\text{A}$ και ακτίνες $\rho = \text{A}\Delta$, $r = \text{AB} = \text{AE}$ και $R = \text{A}\Gamma$ γράφουμε τρεις ομόκεντρους κύκλους $(\text{A}, \rho)$, $(\text{A}, r)$ και $(\text{A}, R)$ όπως στο σχήμα. Έστω $E_{E\Gamma}$ το εμβαδόν του σκιασμένου δακτυλίου μεταξύ των κύκλων $(\text{A}, r)$ και $(\text{A}, R)$, $E_{\Delta B}$ το εμβαδόν του δακτυλίου μεταξύ των κύκλων $(\text{A}, \rho)$ και $(\text{A}, r)$, $E_{AE}$ το εμβαδόν του κύκλου $(\text{A}, r)$ και $E_{A\Delta}$ το εμβαδόν του κύκλου $(\text{A}, \rho)$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+  \begin{rlist}
+  \item \[ \frac{E_{E\Gamma}}{E_{AE}} = \frac{R^2-r^2}{r^2} \] \monades{10}
+  \item \[ \frac{E_{\Delta B}}{E_{A\Delta}} = \frac{r^2-\rho^2}{\rho^2} \] \monades{07}
+  \end{rlist}
+\item Αν επιπλέον οι $\Delta \text{E}$ και $\text{B}\Gamma$ είναι παράλληλες, να αποδείξετε ότι:
+  \[ \frac{E_{E\Gamma}}{E_{AE}} = \frac{E_{\Delta B}}{E_{A\Delta}} \] \monades{08}
+\end{alist}

@@ -1,0 +1,55 @@
+\Askhsh{34777}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34777.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται ισοσκελές τρίγωνο ΑΒΓ (ΑΒ = ΑΓ) και το ύψος του ΑΜ. Φέρουμε ημιευθεία Γx κάθετη στη ΒΓ, προς το ημιεπίπεδο που δεν ανήκει το Α, και παίρνουμε σε αυτήν τμήμα ΓΔ = ΑΒ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item η γωνία Δ$\widehat{Α}$Γ είναι ίση με τη γωνία Γ$\widehat{\Delta}$Α, \monades{12}
+
+\item ΓΔ // ΑΜ, \monades{6}
+
+\item η ΑΔ είναι διχοτόμος της γωνίας Μ$\widehat{Α}$Γ. \monades{7}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefTriangle[two angles = 70 and 70](B,C) \tkzGetPoint{A}
+\tkzDefMidPoint(B,C) \tkzGetPoint{M}
+
+\tkzDefPointBy[homothety=center C ratio 1](B) \tkzGetPoint{temp}
+\tkzDefPointBy[rotation=center C angle -90](temp) \tkzGetPoint{D_dir}
+\tkzCalcLength(A,B)\tkzGetLength{rAB}
+\tkzInterLC[R](C,D_dir)(C,\rAB) \tkzGetPoints{D}{D_alt}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(M);
+\draw[l3] (C)--(D);
+\draw[l3] (A)--(D);
+
+\tkzDrawPoints(A,B,C,D,M)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[below](M){$M$}
+\tkzLabelPoint[below](D){$\Delta$}
+
+\tkzMarkRightAngle(A,M,C)
+\tkzMarkRightAngle(B,C,D)
+\tkzMarkSegments[mark=s|](A,B A,C C,D)
+\end{tikzpicture}
+\end{center}
+\end{alist}

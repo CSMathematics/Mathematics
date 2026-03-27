@@ -1,0 +1,59 @@
+\Askhsh{36338}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 3.14. Σχετικές θέσεις ευθείας και κύκλου
+    \item 3.15. Εφαπτόμενα τμήματα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 36338.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνονται δύο ομόκεντροι κύκλοι με κέντρο Ο και ακτίνες ρ και R (ρ\textless R). Οι χορδές ΔΓ και ΖΕ του κύκλου (Ο,R) εφάπτονται του κύκλου (Ο, ρ) στα σημεία Α και Β αντίστοιχα.
+
+\begin{alist}
+\item Να αποδείξετε ότι ΔΓ=ΖΕ. \monades{12}
+
+\item Αν οι ΔΓ και ΖΕ προεκτεινόμενες τέμνονται στο σημείο Κ, να αποδείξετε ότι το τρίγωνο ΚΕΓ είναι ισοσκελές. \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDrawCircle[R](O,1.5)
+\tkzDrawCircle[R](O,2.5)
+
+\tkzDefPoint(1.5,0){A}
+\tkzDefLine[orthogonal=through A](O,A) \tkzGetPoint{chord1_dir}
+\tkzInterLC(A,chord1_dir)(O,A) \tkzGetPoints{dummy}{dummy} % Not useful.
+% Chord DG tangent at A.
+\tkzCircleR(O,2.5) \tkzGetPoint{dummy_R}
+\tkzInterLC(A,chord1_dir)(O,dummy_R) \tkzGetPoints{Delta}{Gamma}
+
+\tkzDefPointBy[rotation=center O angle 70](A) \tkzGetPoint{B}
+\tkzDefLine[orthogonal=through B](O,B) \tkzGetPoint{chord2_dir}
+\tkzInterLC(B,chord2_dir)(O,dummy_R) \tkzGetPoints{Z}{E}
+
+\draw[l3] (Delta)--(Gamma);
+\draw[l3] (Z)--(E);
+\tkzInterLL(Delta,Gamma)(Z,E) \tkzGetPoint{K}
+\draw[l3, dashed] (Gamma)--(K)--(E);
+
+\tkzDrawPoints(O,A,B,Delta,Gamma,Z,E,K)
+\tkzLabelPoint[below](O){$O$}
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[above](Delta){$\Delta$}
+\tkzLabelPoint[below](Gamma){$\Gamma$}
+\tkzLabelPoint[left](Z){$Z$}
+\tkzLabelPoint[above right](E){$E$}
+\tkzLabelPoint[right](K){$K$}
+
+\tkzMarkRightAngle(O,A,Delta)
+\tkzMarkRightAngle(O,B,Z)
+\end{tikzpicture}
+\end{center}
+\end{alist}

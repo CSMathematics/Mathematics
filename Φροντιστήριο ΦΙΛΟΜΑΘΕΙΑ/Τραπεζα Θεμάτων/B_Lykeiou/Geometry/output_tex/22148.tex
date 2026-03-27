@@ -1,0 +1,87 @@
+\Askhsh{22148}{4}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Define points to match the visual representation and conditions
+    % A is the top vertex, G bottom-left, B bottom-right.
+    % Line through Z-A-E-G. A is between Z and E. E is between A and G.
+    \tkzDefPoint(0,4){A}
+    \tkzDefPoint(-2,0){G} % Gamma
+    \tkzDefPoint(2,0){B} % Beta
+    
+    % E is on segment AG (side GA).
+    % Condition AΓ = 3AE from part (a) implies AE = 1/3 AΓ (length).
+    % E is between A and G, so vector AE = (1/3) * vector AG.
+    % Vector AG = G - A = (-2,0) - (0,4) = (-2,-4).
+    % E = A + (1/3)*Vector AG = (0,4) + (-2/3, -4/3) = (-2/3, 8/3).
+    \tkzDefPoint(-2/3,8/3){E}
+    
+    % Z is on the extension AX of side GA such that AZ = AE.
+    % The diagram shows Z-A-E-G order, meaning A is between Z and E.
+    % Thus, vector AZ = -vector AE.
+    % Vector AE = E - A = (-2/3, 8/3) - (0,4) = (-2/3, -4/3).
+    % Vector AZ = (2/3, 4/3).
+    % Z = A + Vector AZ = (0,4) + (2/3, 4/3) = (2/3, 16/3).
+    \tkzDefPoint(2/3,16/3){Z}
+
+    % D is on AB, and ED is parallel to GB.
+    % Line GB is horizontal (y=0). So ED must be horizontal, meaning D has the same y-coordinate as E (y_E = 8/3).
+    % Line AB: A(0,4), B(2,0). Slope = (0-4)/(2-0) = -2. Equation: y - 0 = -2(x - 2) => y = -2x + 4.
+    % For D: 8/3 = -2x_D + 4 => -2x_D = 8/3 - 12/3 = -4/3 => x_D = 2/3.
+    % So D = (2/3, 8/3).
+    \tkzDefPoint(2/3,8/3){D}
+    
+    % Draw triangle ABG (ΑΒΓ)
+    \tkzDrawPolygon(A,B,G)
+    
+    % Draw segment ED (ΕΔ)
+    \tkzDrawSegment(E,D)
+    
+    % Draw segment ZD (ΖΔ)
+    \tkzDrawSegment(Z,D)
+    
+    % Draw the line G-A-X, extending beyond Z for the label X
+    % Define a point X_point on the line extending beyond Z
+    \tkzDefPoint(1, 19/3){X_point} % Adjusted X_point for better label placement
+    \tkzDrawLine(G,X_point) % This draws the line passing through G, E, A, Z, X_point
+    
+    % Mark equal segments AZ and AE (indicated by tick marks in the original image)
+    \tkzMarkSegments[mark=s|,size=3pt](Z,A A,E)
+    
+    % Mark angles 1 and 2 at A
+    \tkzMarkAngle[arc=l,size=0.5cm,fill=gray!20](E,A,D)
+    \tkzLabelAngle[pos=0.7](E,A,D){1}
+    \tkzMarkAngle[arc=l,size=0.5cm,fill=gray!20](D,A,Z)
+    \tkzLabelAngle[pos=0.7](D,A,Z){2}
+    
+    % Labels for points
+    \tkzLabelPoint[above right](A){A}
+    \tkzLabelPoint[below right](B){B}
+    \tkzLabelPoint[below left](G){$\Gamma$}
+    \tkzLabelPoint[left](E){E}
+    \tkzLabelPoint[right](D){$\Delta$}
+    \tkzLabelPoint[above left](Z){Z}
+    \tkzLabelPoint[above right](X_point){X} % Label for the line extension.
+    
+    % Draw points
+    \tkzDrawPoints(A,B,G,E,Z,D)
+\end{tikzpicture}
+\caption*{Σχήμα}
+\end{wrapfigure}
+ΘΕΜΑ 4
+
+Έστω E σημείο στην πλευρά ΓΑ του τριγώνου ΑΒΓ. Από το E φέρνουμε παράλληλη στην πλευρά ΒΓ του ΑΒΓ η οποία τέμνει την πλευρά ΑΒ στο σημείο Δ και παίρνουμε σημείο Z στην προέκταση ΑX της πλευράς ΓΑ του τριγώνου ΑΒΓ ώστε να είναι ΑZ = ΑΕ, όπως στο σχήμα.
+
+\begin{alist}
+\item Έστω $A\Gamma = 3AE$. Να αποδείξετε ότι:
+    \begin{rlist}
+    \item Το εμβαδόν του τριγώνου ΑΔΕ είναι ίσο με το $\frac{1}{9}$ του εμβαδού του τριγώνου ΑΒΓ. \monades{07}
+    \item Το εμβαδόν του τριγώνου ΔΕΖ είναι ίσο με τα $\frac{2}{9}$ του εμβαδού του τριγώνου ΑΒΓ. \monades{10}
+    \end{rlist}
+\item Αν το εμβαδόν του ΔΕΖ είναι ίσο με το $\frac{1}{2}$ του εμβαδού του ΑΒΓ, να υπολογίσετε το λόγο $\frac{AE}{A\Gamma}$. \monades{08}
+\end{alist}

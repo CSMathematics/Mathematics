@@ -1,0 +1,62 @@
+\Askhsh{22154}{4}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6cm} % [lines]{position}{width}
+    \centering
+    \begin{tikzpicture}[scale=0.75]
+        % Define center A
+        \tkzDefPoint(0,0){A}
+
+        % Define radii for visualization purposes (e.g., 2, 3, 4 for rho1, rho2, rho3)
+        \def\rhoone{2}
+        \def\rhotwo{3}
+        \def\rhothree{4}
+
+        % Shading for E_ΕΓ (between rho2 and rho3). The image shows this as gray.
+        \fill[gray!30] (A) circle (\rhothree cm);
+        \fill[white] (A) circle (\rhotwo cm);
+
+        % Draw the circles (from innermost to outermost)
+        % Innermost circle (A, rho1)
+        \tkzDrawCircle[R,line width=0.8pt,maincolor!70](A,\rhoone cm)
+        % Middle circle (A, rho2)
+        \tkzDrawCircle[R,line width=0.8pt,secondarycolor!70](A,\rhotwo cm)
+        % Outermost circle (A, rho3)
+        \tkzDrawCircle[R,line width=0.8pt,gray!70](A,\rhothree cm)
+
+        % Define points on the circles (angles chosen to roughly match the image)
+        % Delta on (A, rho1)
+        \tkzDefPoint(-100:\rhoone){D}
+        % B and E on (A, rho2)
+        \tkzDefPoint(140:\rhotwo){B}
+        \tkzDefPoint(-120:\rhotwo){E}
+        % Gamma on (A, rho3)
+        \tkzDefPoint(120:\rhothree){C}
+
+        % Draw segments (radii and chords)
+        \tkzDrawSegments[line width=0.8pt](A,D A,E A,B A,C) % Radii
+        \tkzDrawSegments[line width=0.8pt](D,E B,C E,C B,D) % Chords/triangle sides
+
+        % Draw points
+        \tkzDrawPoints(A,D,E,B,C)
+
+        % Labels
+        \tkzLabelPoint[above right](A){A}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[below](E){E}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below left](C){$\Gamma$}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνονται τα τρίγωνα ΑΒΓ και ΑΔΕ, που η κοινή κορυφή τους Α βρίσκεται στο κέντρο τριών ομόκεντρων κύκλων $(A, \rho_1)$, $(A, \rho_2)$ και $(A, \rho_3)$, η κορυφή Γ βρίσκεται στον κύκλο $(A, \rho_3)$, οι κορυφές Β και Ε στον κύκλο $(A, \rho_2)$ και η κορυφή Δ στον κύκλο $(A, \rho_1)$, όπως στο σχήμα, με $\rho_1 < \rho_2 < \rho_3$. Ονομάζουμε $E_{ΕΓ}$ το εμβαδόν του σκιασμένου δακτυλίου μεταξύ των κύκλων $(A, \rho_2)$ και $(A, \rho_3)$, $E_1$ το εμβαδόν του κύκλου $(A, \rho_1)$, $E_2$ το εμβαδόν του κύκλου $(A, \rho_2)$ και $E_3$ το εμβαδόν του κύκλου $(A, \rho_3)$.
+\begin{alist}
+\item Αν $\frac{E_{ΕΓ}}{E_2} = \frac{7}{9}$, να αποδείξετε ότι:
+\begin{rlist}
+    \item $\frac{\rho_2}{\rho_3} = \frac{3}{4}$. \monades{07}
+    \item $\frac{E_2}{E_3} = \frac{9}{16}$. \monades{05}
+    \item Αν επιπλέον οι ΔΕ και ΒΓ είναι παράλληλες να αποδείξετε ότι $\frac{\rho_1}{\rho_2} = \frac{3}{4}$. \monades{08}
+\end{rlist}
+\item Αν $E_{ΕΓ} = E_2$ και επιπλέον οι ΔΕ και ΒΓ είναι παράλληλες, να αποδείξετε ότι $E_{\Delta Β} = E_1$, όπου $E_{\Delta Β}$ είναι το εμβαδόν του δακτυλίου μεταξύ των κύκλων $(A, \rho_1)$ και $(A, \rho_2)$. \monades{05}
+\end{alist}

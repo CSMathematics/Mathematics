@@ -1,0 +1,52 @@
+\Askhsh{36118}{2}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.6. Άθροισμα γωνιών τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 36118.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα, οι $A\Delta$ και $BE$ είναι παράλληλες. Επιπλέον ισχύουν $A\Delta=A\Gamma$, $BE=B\Gamma$ και $\widehat{A} = 70^{\circ}$.
+
+\begin{alist}
+\item Να υπολογίσετε τις γωνίες των τριγώνων $A\Delta\Gamma$ και $B\Gamma E$. \monades{16}
+\item Να αποδείξετε ότι $\Delta\widehat{\Gamma}E = 90^{\circ}$. \monades{9}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPointBy[rotation=center A angle 70](B) \tkzGetPoint{A_dir}
+\tkzDefLine[parallel=through A](A,A_dir) \tkzGetPoint{AD_dir}
+\tkzDefLine[parallel=through B](A,A_dir) \tkzGetPoint{BE_dir}
+
+\tkzDefPoint(1.5,2.5){C} % Assuming C is generic? No, AC=AD.
+% It's easier to just pick G (gamma) and then construct D and E on parallel lines.
+\tkzDefPoint(1.2,1.8){Gamma}
+\tkzDrawCircle(A,Gamma) % AD = AG
+\tkzInterLC(A,AD_dir)(A,Gamma) \tkzGetPoints{Delta}{Delta_alt}
+\tkzDrawCircle(B,Gamma) % BE = BG
+\tkzInterLC(B,BE_dir)(B,Gamma) \tkzGetPoints{E}{E_alt}
+
+\draw[l3] (A)--(Delta);
+\draw[l3] (B)--(E);
+\draw[l3] (Delta)--(Gamma)--(E);
+\draw[l3] (A)--(Gamma)--(B);
+
+\tkzDrawPoints(A,B,Gamma,Delta,E)
+\tkzLabelPoint[below](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[right](Gamma){$\Gamma$}
+\tkzLabelPoint[above left](Delta){$\Delta$}
+\tkzLabelPoint[above left](E){$E$}
+
+\tkzMarkSegments[mark=s|](A,Delta A,Gamma)
+\tkzMarkSegments[mark=s||](B,E B,Gamma)
+\end{tikzpicture}
+\end{center}
+\end{alist}

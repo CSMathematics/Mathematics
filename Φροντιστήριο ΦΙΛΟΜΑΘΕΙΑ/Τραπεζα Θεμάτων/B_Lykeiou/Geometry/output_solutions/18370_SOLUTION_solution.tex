@@ -1,0 +1,106 @@
+\Askhsh{18370_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5.5cm} % The [9] indicates the number of lines the text should wrap around. Adjust as needed.
+\centering
+\begin{tikzpicture}[scale=0.6]
+    % Define the center O and radius R
+    \tkzDefPoint(0,0){O}
+    \def\R{4} % Let R be 4 units for drawing purposes
+    \tkzDefPoint(-\R,0){A} % Point A
+    \tkzDefPoint(\R,0){B} % Point B
+    
+    % Define point M such that MA is perpendicular to AB
+    % Let M be at (-R, y_M). From the text and similar triangles, M is above A.
+    % Let's pick a reasonable y_M for visual representation.
+    \tkzDefPoint(-\R,3){M} 
+    
+    % Draw the diameter AB
+    \tkzDrawSegment(A,B)
+    
+    % Draw the semicircle above the diameter
+    \tkzDrawArc[delta=10](O,A)(B) 
+    
+    % Calculate point Gamma for tangency (visually approximate if exact calculation is complex for drawing)
+    % For M(-R, y_M) and circle x^2+y^2=R^2, the tangent point Gamma(x_G, y_G) satisfies:
+    % (x_G - (-R)) * x_G + (y_G - y_M) * y_G = 0 => x_G^2 + R x_G + y_G^2 - y_M y_G = 0
+    % Since x_G^2 + y_G^2 = R^2, we get R^2 + R x_G - y_M y_G = 0 => y_M y_G = R^2 + R x_G
+    % If R=4 and M=(-4,3), then 3y_G = 16 + 4x_G => y_G = (16+4x_G)/3.
+    % Substitute into x_G^2+y_G^2=16: x_G^2 + ((16+4x_G)/3)^2 = 16
+    % 9x_G^2 + (256 + 128x_G + 16x_G^2) = 144
+    % 25x_G^2 + 128x_G + 112 = 0
+    % Using quadratic formula: x_G = (-128 +- sqrt(128^2 - 4*25*112))/(2*25) = (-128 +- sqrt(16384 - 11200))/50
+    % x_G = (-128 +- sqrt(5184))/50 = (-128 +- 72)/50
+    % x_G1 = (-128+72)/50 = -56/50 = -1.12
+    % x_G2 = (-128-72)/50 = -200/50 = -4 (This corresponds to A, which is not the tangent point shown)
+    % For x_G = -1.12, y_G = (16 + 4*(-1.12))/3 = (16 - 4.48)/3 = 11.52/3 = 3.84
+    \tkzDefPoint(-1.12,3.84){G} % Point Gamma
+    
+    % Draw segment MA
+    \tkzDrawSegment(M,A)
+    
+    % Draw segment MG (tangent)
+    \tkzDrawSegment(M,G)
+    
+    % Draw radius OG
+    \tkzDrawSegment(O,G)
+    
+    % Label points
+    \tkzLabelPoint[below](O){O}
+    \tkzLabelPoint[left](A){A}
+    \tkzLabelPoint[right](B){B}
+    \tkzLabelPoint[above left](M){M}
+    \tkzLabelPoint[above right](G){$\Gamma$}
+    
+    % Mark right angles
+    \tkzMarkRightAngle[fill=lightgray,size=0.3](M,A,O) % Angle at A, implying MA perpendicular to AB
+    \tkzMarkRightAngle[fill=lightgray,size=0.3](M,G,O) % Angle at Gamma, as MG is tangent
+    
+\end{tikzpicture}
+\caption*{Σχήμα} % Optional caption
+\end{wrapfigure}
+
+\kefalaio{ΛΥΣΗ}
+\begin{alist}
+    \item
+    Το εφαπτόμενο τμήμα $M\Gamma$ είναι κάθετο στην ακτίνα $O\Gamma$.
+    Εφαρμόζουμε το πυθαγόρειο θεώρημα στο τρίγωνο $MO\Gamma$:
+    \[ OM^2 = O\Gamma^2 + M\Gamma^2 \]
+    $MO = MB + BO = 2\rho + \rho = 3\rho$.
+    $M\Gamma^2 = MO^2 - O\Gamma^2 = (3\rho)^2 - \rho^2 = 9\rho^2 - \rho^2 = 8\rho^2$.
+    άρα $M\Gamma = \sqrt{8\rho^2} = 2\sqrt{2}\rho$.
+
+    \item
+    \begin{rlist}
+        \item Τα τρίγωνα $OM\Gamma$ και $A\Delta M$ είναι όμοια γιατί έχουν δύο γωνίες τους ίσες μία προς μία αντίστοιχα: $ \hat{A} = \hat{\Gamma} = 90^\circ $ και την γωνία $ \hat{M} $ κοινή. Επομένως οι ομόλογες πλευρές τους θα είναι ανάλογες:
+        \begin{tabular}{|c|c|c|}
+        \hline
+        \multicolumn{3}{|c|}{Ίσες γωνίες} \\
+        \hline
+        $ \hat{A} = \hat{\Gamma} $ & $ \hat{M} $ κοινή & $ \hat{\Delta} = \hat{O} $ \\
+        \hline
+        \end{tabular}
+
+        \begin{tabular}{|l|l|}
+        \hline
+        Απέναντι πλευρά στο τρίγωνο $OM\Gamma$ & Απέναντι πλευρά στο τρίγωνο $A\Delta M$ \\
+        \hline
+        $O\Gamma$ & $A\Delta$ \\
+        $M\Gamma$ & $AM$ \\
+        $OM$ & $M\Delta$ \\
+        \hline
+        \end{tabular}
+        \item Δείξαμε ότι τα τρίγωνα $A\Delta M$ και $OM\Gamma$ είναι όμοια, επομένως ο λόγος των εμβαδών τους ισούται με το τετράγωνο του λόγου ομοιότητάς τους.
+        \[ \frac{(A\Delta M)}{(OM\Gamma)} = \left(\frac{A\Delta}{O\Gamma}\right)^2 = \left(\frac{M\Delta}{OM}\right)^2 = \left(\frac{AM}{M\Gamma}\right)^2 \quad (1) \]
+        $OM = MB + BO = \lambda\rho + \rho = (\lambda+1)\rho$.
+        Εφαρμόζουμε το πυθαγόρειο θεώρημα στο τρίγωνο $M O \Gamma$:
+        $OM^2 = O\Gamma^2 + M\Gamma^2$, άρα
+        $M\Gamma^2 = OM^2 - O\Gamma^2 = ((\lambda+1)\rho)^2 - \rho^2 = (\lambda^2+2\lambda+1)\rho^2 - \rho^2 = (\lambda^2+2\lambda)\rho^2$.
+        $AM = 2\rho + \lambda\rho = (\lambda+2)\rho$.
+        Η (1) γίνεται
+        \[ \frac{(A\Delta M)}{(OM\Gamma)} = \left(\frac{AM}{M\Gamma}\right)^2 = \frac{((\lambda+2)\rho)^2}{(\lambda^2+2\lambda)\rho^2} = \frac{(\lambda+2)^2\rho^2}{\lambda(\lambda+2)\rho^2} = \frac{\lambda+2}{\lambda} \]
+        Αφού $(\text{ΑΔΜ}) = 9(\text{ΜΟΓ})$ θα έχουμε $\frac{(A\Delta M)}{(OM\Gamma)} = \frac{9(OM\Gamma)}{(OM\Gamma)} = 9$ και επομένως $\frac{\lambda+2}{\lambda} = 9$ ή
+        $\lambda+2 = 9\lambda$, ή $8\lambda=2$, άρα $\lambda = \frac{1}{4}$.
+    \end{rlist}
+\end{alist}

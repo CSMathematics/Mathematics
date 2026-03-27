@@ -1,0 +1,82 @@
+\Askhsh{18558_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[12]{r}{8.5cm} % Adjust number of lines to wrap and figure width as needed
+    \centering
+    \begin{tikzpicture}[scale=0.45] % Scale to fit in wrapfigure
+        % Draw the grid. The visual grid extends from x=0 to x=18 and y=0 to y=10.
+        \draw[step=1, gray!50, thin] (0,0) grid (18,10);
+
+        % Define points based on observed grid coordinates (bottom-left of entire grid as (0,0))
+        \tkzDefPoint(5,3){A}
+        \tkzDefPoint(5,5){B}
+        \tkzDefPoint(8,5){G} % Gamma
+        \tkzDefPoint(8,10){D} % Delta
+        \tkzDefPoint(18,5){E}
+        \tkzDefPoint(13,5){Z}
+        \tkzDefPoint(10,0){H}
+        \tkzDefPoint(8,0){Th} % Theta (labeled O in image, but text refers to KHΘI)
+        \tkzDefPoint(8,3){I}
+        \tkzDefPoint(10,3){K}
+
+        % Draw the outer contour of the region (ABΓΔEZHΘI) - solid thick lines
+        \tkzDrawSegments[thick](A,B B,G G,D D,E E,Z Z,K K,H H,Th Th,I I,A)
+        
+        % Draw dashed internal segments as seen in the image
+        \tkzDrawSegments[dashed,thick](G,Z K,I)
+
+        % Draw points
+        \tkzDrawPoints[fill=black](A,B,G,D,E,Z,H,Th,I,K)
+
+        % Labels for points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[left](B){B}
+        \tkzLabelPoint[below](G){$\Gamma$}
+        \tkzLabelPoint[above right](D){$\Delta$}
+        \tkzLabelPoint[below right](E){E}
+        \tkzLabelPoint[below](Z){Z}
+        \tkzLabelPoint[below](H){H}
+        \tkzLabelPoint[below left](Th){O} % Label as O as it appears in the image
+        \tkzLabelPoint[above right](I){I}
+        \tkzLabelPoint[below right](K){K}
+
+        % Small square for unit reference
+        \tkzDefPoint(2,7){s1}
+        \tkzDefPoint(3,7){s2}
+        \tkzDefPoint(3,8){s3}
+        \tkzDefPoint(2,8){s4}
+        \tkzDrawPolygon[thick](s1,s2,s3,s4)
+        \tkzLabelSegment[below](s1,s2){1} % Label '1' below the bottom segment
+        \tkzLabelSegment[left](s1,s4){1} % Label '1' left of the left segment
+        \tkzMarkRightAngle(s4,s1,s2)
+        \tkzMarkRightAngle(s1,s2,s3)
+        \tkzMarkRightAngle(s2,s3,s4)
+        \tkzMarkRightAngle(s3,s4,s1)
+        
+        % Mark right angle for triangle DGE (at G)
+        \tkzMarkRightAngle(D,G,E)
+        
+        % Mark right angles for the polygon KHΘI (based on its visual appearance as a rectangle)
+        \tkzMarkRightAngle(K,H,Th)
+        \tkzMarkRightAngle(H,Th,I)
+        \tkzMarkRightAngle(Th,I,K)
+        \tkzMarkRightAngle(I,K,H)
+
+        % Mark right angle for BZKA (at B, as AB is vertical and BZ is horizontal)
+        \tkzMarkRightAngle(A,B,Z)
+    \end{tikzpicture}
+\end{wrapfigure}
+ΛΥΣΗ
+
+\begin{alist}
+    \item % α)
+    Φέροντας το τμήμα $\Gamma\text{Z}$, το τρίγωνο $\Delta\Gamma\text{E}$ είναι ορθογώνιο με $\Delta\Gamma=5$ και $\Gamma\text{E}=12$. Εφαρμόζοντας Πυθαγόρειο θεώρημα έχουμε:
+    \[ \Delta\text{E}^2 = \Delta\Gamma^2 + \Gamma\text{E}^2 \text{ ή } \Delta\text{E}^2 = 5^2 + 12^2 \text{ ή } \Delta\text{E}^2 = 25+144 \text{ ή } \Delta\text{E}^2=169, \text{ άρα } \Delta\text{E}=13. \]
+    \item % β)
+    Το χωρίο αποτελείται από το ορθογώνιο τρίγωνο $\Delta\Gamma\text{E}$, το ορθογώνιο $\text{BZKA}$ και το τετράγωνο $\text{KH}\Theta\text{I}$. Υπολογίζουμε τα εμβαδά τους ξεχωριστά.
+    \[ (\Delta\Gamma\text{E}) = \frac{1}{2} \cdot \Gamma\text{E} \cdot \Delta\Gamma = \frac{1}{2} \cdot 12 \cdot 5 = 30 \text{ τ.μ.} \]
+    \[ (\text{BZKA}) = \text{BZ} \cdot \text{AB} = 7 \cdot 4 = 28 \text{ τ.μ.} \]
+    \[ (\text{KH}\Theta\text{I}) = 3^2 = 9 \text{ τ.μ.} \]
+    Άρα $(\text{AB}\Gamma\Delta\text{EZH}\Theta\text{I}) = (\Delta\Gamma\text{E}) + (\text{BZKA}) + (\text{KH}\Theta\text{I}) = 30 + 28 + 9 = 67 \text{ τ.μ.} \]
+\end{alist}

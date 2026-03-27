@@ -1,0 +1,85 @@
+\Askhsh{27031}{4}
+\begin{ylh}{1}
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.4 Ρυθμός μεταβολής
+    \item 3.7 Εμβαδόν επιπέδου χωρίου.
+\end{ylh}
+\begin{wrapfigure}[24]{r}{7cm} % Adjust line wrap number and width as needed
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -4.5, xmax = 0.5,
+        ymin = -1, ymax = 10,
+        xtick = {-4,-3,-2,-1,0},
+        ytick = {0,1,2,3,4,5,6,7,8,9,10},
+        grid = none, % No grid in the original image
+        axis line style = {->}, % Arrows at the end of axes
+        xlabel style={at={(current axis.right of origin)},anchor=north east},
+        ylabel style={at={(current axis.above origin)},anchor=south east},
+        tick label style = {font=\scriptsize},
+        declare function={f(\x) = -1/3*\x^3;}, % Define f(x)
+    ]
+        % Plot the curve f(x) = -1/3 x^3
+        \addplot[very thick, maincolor, domain=-4:0, samples=100] {f(x)};
+        \node[maincolor, above right, xshift=5pt, yshift=5pt] at (axis cs:0,0) {$y = -\frac{1}{3}x^3$};
+
+        % Define a specific alpha for visualization, e.g., alpha = -3
+        \pgfmathsetmacro{\alphaVal}{-3}
+        \pgfmathsetmacro{\yA}{-1/3 * (\alphaVal)^3} % f(\alphaVal) = -1/3 * (-3)^3 = 9
+        \pgfmathsetmacro{\xM}{2/3 * \alphaVal} % M's x-coordinate is 2\alpha/3 = 2/3 * (-3) = -2
+
+        % Point A
+        \coordinate (A_point) at (axis cs:\alphaVal, \yA); % A(-3, 9)
+        \node[above left, xshift=-2pt, yshift=-2pt] at (A_point) {$A\left(\alpha, -\frac{\alpha^3}{3}\right)$};
+        \fill (A_point) circle (1.5pt);
+
+        % Tangent line from A to M
+        % Calculate tangent slope at alpha: f'(\alpha) = -\alpha^2 = -(-3)^2 = -9
+        % Tangent line equation: y - yA = slopeA * (x - xA)
+        % For plotting: y = slopeA * (x - xA) + yA
+        \pgfmathsetmacro{\slopeA}{-(\alphaVal)^2}
+        \addplot[thick, secondarycolor, domain=\xM:\alphaVal, samples=2] {\slopeA*(x-\alphaVal) + \yA}; % Plot tangent segment
+        
+        % Vertical dashed line from A to B (projection on x-axis)
+        \coordinate (B_point) at (axis cs:\alphaVal, 0); % B(-3, 0)
+        \draw[dashed] (A_point) -- (B_point);
+        \fill (B_point) circle (1.5pt);
+        \node[below, yshift=-2pt] at (B_point) {$B$};
+
+        % Point M (x-intercept of the tangent)
+        \coordinate (M_point) at (axis cs:\xM, 0); % M(-2, 0)
+        \fill (M_point) circle (1.5pt);
+        \node[below, yshift=-2pt] at (M_point) {$M$};
+
+        % Origin O
+        \coordinate (O_point) at (axis cs:0,0);
+        \fill (O_point) circle (1.5pt);
+        \node[below right, xshift=2pt, yshift=-2pt] at (O_point) {$O$};
+        
+        % "Ακτή" label below the x-axis
+        \node[below, yshift=-5pt] at (axis cs:-1,0) {Ακτή};
+
+        % Arrows representing the light beam, as shown in the original image.
+        % Arrow coming down to A
+        \draw[thick, ->, maincolor] (axis cs:\alphaVal, \yA+1.5) -- (A_point);
+        % Arrow along the tangent (light beam originating from A, pointing towards M)
+        \draw[thick, ->, maincolor] (A_point) -- (M_point);
+
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Δίνεται η συνάρτηση $f(x) = -\frac{1}{3}x^3$, με $x \in (-\infty, 0]$ και τυχαίο σημείο $A\left(\alpha, -\frac{\alpha^3}{3}\right)$ με $\alpha < 0$ της γραφικής της παράστασης.
+
+\begin{alist}
+\item Να βρείτε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο $A$. \monades{06}
+\item
+    \begin{rlist}
+    \item Ένα περιπολικό $A$ κινείται κατά μήκος της καμπύλης $y = -\frac{1}{3}x^3$, $x \le 0$ πλησιάζοντας την ακτή και ο προβολέας του φωτίζει κατευθείαν εμπρός (όπως φαίνεται στο σχήμα). Αν ο ρυθμός μεταβολής της τετμημένης του περιπολικού δίνεται από τον τύπο $\alpha'(t) = -\alpha(t)$, να βρείτε το ρυθμό μεταβολής της τετμημένης του σημείου $M$ της ακτής, στο οποίο πέφτουν τα φώτα του προβολέα τη χρονική στιγμή $t_0$, κατά την οποία το περιπολικό έχει τετμημένη $-3$. \monades{08}
+    \item Να ερμηνεύσετε το πρόσημο του ρυθμού μεταβολής της τετμημένης του σημείου $M$. \monades{02}
+    \end{rlist}
+\item Να βρείτε το εμβαδόν του χωρίου $\Omega$, που περικλείεται από την γραφική παράσταση της συνάρτησης $f$, τον άξονα $x'x$ και την εφαπτομένη της $C_f$ στο σημείο της με τετμημένη $-3$. \monades{09}
+\end{alist}

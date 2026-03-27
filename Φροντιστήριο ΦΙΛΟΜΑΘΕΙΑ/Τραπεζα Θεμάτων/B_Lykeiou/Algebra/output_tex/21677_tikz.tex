@@ -1,0 +1,20 @@
+\begin{tikzpicture}[xscale=0.25, yscale=0.06]
+    % Axes
+    \draw[->, thick] (-2,0) -- (45,0) node[right] {$t$ (εβδομάδες)};
+    \draw[->, thick] (0,-10) -- (0,120) node[above] {$P(t)$ \%};
+    
+    % Function P(t) = 40 + 60e^{-0.7t}
+    \draw[ultra thick, blue, domain=0:40, samples=100] plot (\x, {40 + 60*exp(-0.7*\x)});
+    
+    % Asymptote and Intercept
+    \draw[dashed, red] (0,40) -- (42,40) node[right] {$y=40$};
+    \filldraw (0,100) circle (8pt) node[left] {$100$};
+    \node[left] at (0,40) {$40$};
+    
+    % Ticks
+    \foreach \t in {10,20,30,40} \draw (\t, 2) -- (\t, -2) node[below] {\tiny \t};
+    
+    % Origin
+    \node[below left] at (0,0) {$0$};
+
+\end{tikzpicture}

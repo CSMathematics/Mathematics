@@ -1,0 +1,74 @@
+\Askhsh{22099}{4}
+\begin{ylh}{1}
+    \item 11.1. Ορισμός κανονικού πολυγώνου
+    \item 11.2. Ιδιότητες και στοιχεία κανονικών πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6cm} % Adjust number of lines and width as needed
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define vertices of the regular pentagon, with AB roughly horizontal at the bottom
+        % Using R=3 for example
+        \tkzDefPoint(-2.85,-0.93){A} % Alpha
+        \tkzDefPoint(2.85,-0.93){B} % Beta
+        \tkzDefPoint(1.76,2.43){G} % Gamma
+        \tkzDefPoint(0,3){D} % Delta
+        \tkzDefPoint(-1.76,2.43){E} % Epsilon
+
+        % Define point M slightly off-center as in the image
+        \tkzDefPoint(0.3, 0.5){M}
+
+        % Define projections M_i onto the sides using tkz-euclide's projection command
+        \tkzDefPointOnLine[projection=onto A--B](M) \tkzGetPoint{M1}
+        \tkzDefPointOnLine[projection=onto B--G](M) \tkzGetPoint{M2}
+        \tkzDefPointOnLine[projection=onto G--D](M) \tkzGetPoint{M3}
+        \tkzDefPointOnLine[projection=onto D--E](M) \tkzGetPoint{M4}
+        \tkzDefPointOnLine[projection=onto E--A](M) \tkzGetPoint{M5}
+
+        % Draw the pentagon
+        \tkzDrawPolygon(A,B,G,D,E)
+
+        % Draw dashed segments from M to vertices
+        \tkzDrawSegments[dashed](M,A M,B M,G M,D M,E)
+
+        % Draw dashed segments from M to M_i (perpendiculars)
+        \tkzDrawSegments[dashed](M,M1 M,M2 M,M3 M,M4 M,M5)
+
+        % Mark right angles
+        \tkzMarkRightAngle(M,M1,A)
+        \tkzMarkRightAngle(M,M2,B)
+        \tkzMarkRightAngle(M,M3,G)
+        \tkzMarkRightAngle(M,M4,D)
+        \tkzMarkRightAngle(M,M5,E)
+
+        % Draw points (vertices and M, M_i)
+        \tkzDrawPoints(A,B,G,D,E,M,M1,M2,M3,M4,M5)
+
+        % Labels for vertices and M
+        \tkzLabelPoint[below](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[right](G){$\Gamma$}
+        \tkzLabelPoint[above](D){$\Delta$}
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[above left](M){M}
+
+        % Labels for M_i points
+        \tkzLabelPoint[below](M1){M$_1$}
+        \tkzLabelPoint[below right](M2){M$_2$}
+        \tkzLabelPoint[above right](M3){M$_3$}
+        \tkzLabelPoint[above left](M4){M$_4$}
+        \tkzLabelPoint[below left](M5){M$_5$}
+
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται κανονικό πεντάγωνο ΑΒΓΔΕ και σημείο $M$ στο εσωτερικό του. Έστω $M_1, M_2, M_3, M_4, M_5$ οι προβολές του σημείου $M$ στις πλευρές $AB, B\Gamma, \Gamma\Delta, \Delta E, EA$ αντίστοιχα.
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item $(ABM) = \frac{1}{2} \cdot \lambda_5 \cdot MM_1$, όπου $\lambda_5$ είναι η πλευρά του κανονικού πενταγώνου. \monades{6}
+        \item $(ΑΒΓΔΕ) = \frac{1}{2} \cdot \lambda_5 \cdot (MM_1 + MM_2 + MM_3 + MM_4 + MM_5)$. \monades{7}
+        \item $MM_1 + MM_2 + MM_3 + MM_4 + MM_5 = 5\alpha_5$, όπου $\alpha_5$ είναι το απόστημα του κανονικού πενταγώνου. \monades{7}
+    \end{rlist}
+    \item Ένας μαθητής διατύπωσε τον ισχυρισμό: «Αν $M$ είναι ένα εσωτερικό σημείο ενός κανονικού $\nu$-γώνου $A_1A_2...A_\nu$ και $M_1, M_2,..., M_\nu$ είναι οι προβολές του σημείου $M$ στις πλευρές $A_1A_2, A_2A_3,...,A_\nu A_1$ αντίστοιχα, τότε
+    \[ MM_1 + MM_2 + \cdots + MM_\nu = \nu\alpha_\nu, \]
+    όπου $\alpha_\nu$ είναι το απόστημα του κανονικού $\nu$-γώνου». Να αποδείξετε ότι ο ισχυρισμός του μαθητή είναι σωστός. \monades{5}
+\end{alist}

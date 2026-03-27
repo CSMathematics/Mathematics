@@ -1,0 +1,44 @@
+\Askhsh{21120}{2}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή
+    \item 8.1. Όμοια ευθύγραμμα σχήματα
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[5]{r}{5cm} % Wrap for 5 lines on the right, with a width of 5cm
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Ορισμός των κορυφών του τριγώνου ΑΒΓ
+        \tkzDefPoint(0,4){A}
+        \tkzDefPoint(-2.5,0){B}
+        \tkzDefPoint(2.5,0){G} % Χρήση G για το Γ
+        
+        % Ορισμός των σημείων Δ και Ε μέσω ομοιοθεσίας κέντρου Α και λόγου 1/sqrt(2)
+        % Αυτό εξασφαλίζει ότι ΔΕ || ΒΓ και τον λόγο ομοιότητας AΔ/AB = 1/sqrt(2)
+        \tkzDefPointBy[homothety=center A ratio {1/sqrt(2)}](B) \tkzGetPoint{D} % Δέλτα
+        \tkzDefPointBy[homothety=center A ratio {1/sqrt(2)}](G) \tkzGetPoint{E} % Έψιλον
+        
+        % Σχεδίαση των τμημάτων του τριγώνου και του ΔΕ
+        \tkzDrawSegments(A,B A,G B,G D,E)
+        
+        % Ετικέτες των σημείων
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints(A,B,G,D,E)
+    \end{tikzpicture}
+\end{wrapfigure}
+Έστω τρίγωνο $AB\Gamma$ με $AB = \sqrt{2}$. Από σημείο $\Delta$ της πλευράς $AB$ ώστε $A\Delta = 1$, φέρνουμε παράλληλη στη $B\Gamma$ η οποία τέμνει την $A\Gamma$ στο σημείο $E$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+    \begin{rlist}
+    \item τα τρίγωνα $A\Delta E$ και $AB\Gamma$ είναι όμοια και να γράψετε τον λόγο ομοιότητας,
+    \item το εμβαδόν του τριγώνου $A\Delta E$ είναι το μισό του εμβαδού του τριγώνου $AB\Gamma$. \monades{18}
+    \end{rlist}
+\item Αν το εμβαδόν του τριγώνου $AB\Gamma$ είναι $2$, να βρείτε τα εμβαδά του τριγώνου $A\Delta E$ και του τραπεζίου $B\Gamma E\Delta$. \monades{7}
+\end{alist}

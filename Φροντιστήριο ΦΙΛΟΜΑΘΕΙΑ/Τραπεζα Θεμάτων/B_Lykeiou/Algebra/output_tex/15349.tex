@@ -1,0 +1,47 @@
+% ===================================================================
+%  Αρχείο: 15349_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται η γραφική παράσταση $C_{f}$ της συνάρτησης $\ f$ με πεδίο ορισμού το $\mathbb{R}$, όπως φαίνεται στο σχήμα.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=latex]
+    \draw[very thin, color=gray!30] (-3.5,-2.5) grid (3.5,3.5);
+    \draw[->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+    \draw[->] (0,-2.5) -- (0,3.5) node[above] {$y$};
+    
+    \foreach \x in {-3,-2,-1,1,2,3}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {-2,-1,1,2,3}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % W-shape function graph (roughly y = 1/4 * x^4 - x^2)
+    % Roots at -2, 0, 2
+    % Minima at +/- sqrt(2) approx +/- 1.414, value is -1
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=-2.35:2.35] plot (\x, {0.25*\x*\x*\x*\x - \x*\x});
+    
+    % Points A(-sqrt(2), -1) and B(sqrt(2), -1)
+    \draw[dashed, thick] (-1.414, 0) -- (-1.414, -1) -- (0, -1);
+    \draw[dashed, thick] (1.414, 0) -- (1.414, -1) -- (0, -1);
+    \filldraw (-1.414, -1) circle (1.5pt) node[below left] {$A$};
+    \filldraw (1.414, -1) circle (1.5pt) node[below right] {$B$};
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να αιτιολογήσετε γιατί η συνάρτηση είναι άρτια.
+
+\monades{7}
+
+\item Αν γνωρίζετε ότι τα σημεία Α$\left( - \sqrt{2}, - 1 \right)$ και $Β$($\sqrt{2}, - 1)$ ανήκουν στη γραφική παράσταση της $f$ να βρείτε τα διαστήματα μονοτονίας της συνάρτησης $f$.
+
+\monades{8}
+
+\item Να λύσετε γραφικά την εξίσωση $f(x) = 0.$
+
+\monades{10}
+\end{alist}

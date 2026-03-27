@@ -1,0 +1,64 @@
+\Askhsh{13845}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.16. Σχετικές θέσεις δυο κύκλων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.2. Παραλληλόγραμμα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 13845.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Οι κύκλοι (Κ,R), (Λ,ρ) εφάπτονται εξωτερικά στο σημείο Α. Φέρουμε τυχαία ευθεία η οποία διέρχεται από το Α και δεν περνάει από τα κέντρα των κύκλων, τέμνει τους κύκλους αντίστοιχα στα σημεία Β και Γ. Φέρουμε τις εφαπτόμενες (ε) και (δ) στα σημεία Β και Γ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item $Κ\widehat{Β}Α$ = $\Lambda\widehat{\Gamma}Α$. \monades{8}
+
+\item (ε) // (δ). \monades{10}
+
+\item Να εξετάσετε σε ποια περίπτωση το τετράπλευρο ΚΓΛΒ θα είναι
+
+παραλληλόγραμμο; Να αιτιολογήσετε την απάντηση σας. \monades{7}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){K}
+\tkzDefPoint(5,0){L}
+\tkzDefPoint(3,0){A}
+
+\tkzDrawCircle(K,A)
+\tkzDrawCircle(L,A)
+
+\tkzDefPoint(1.5, 2.598){B} % B is on circle K (R=3: dx=1.5, dy=2.598 => 1.5^2+2.598^2=9)
+% BA determines \Gamma
+\tkzInterLC(B,A)(L,A) \tkzGetPoints{Gamma_temp}{Gamma} % Intersection with circle (L, \rho=2)
+
+\tkzDefTangent[at=B](K) \tkzGetPoint{e_dir}
+\tkzDefTangent[at=Gamma](L) \tkzGetPoint{d_dir}
+
+\draw[l3] ($(B)-0.5*(e_dir)$)--($(B)+0.5*(e_dir)$) node[right] {$\varepsilon$};
+\draw[l3] ($(Gamma)-0.5*(d_dir)$)--($(Gamma)+0.5*(d_dir)$) node[left] {$\delta$};
+
+\draw[l3] (B)--(Gamma);
+\draw[l3, dashed] (K)--(B);
+\draw[l3, dashed] (L)--(Gamma);
+\draw[l3, dashed] (K)--(L);
+
+\tkzDrawPoints(K,L,A,B,Gamma)
+\tkzLabelPoint[below](K){$K$}
+\tkzLabelPoint[below](L){$\Lambda$}
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below right](Gamma){$\Gamma$}
+
+\tkzMarkRightAngle(K,B,e_dir)
+\tkzMarkRightAngle(L,Gamma,d_dir)
+\end{tikzpicture}
+\end{center}
+\end{alist}

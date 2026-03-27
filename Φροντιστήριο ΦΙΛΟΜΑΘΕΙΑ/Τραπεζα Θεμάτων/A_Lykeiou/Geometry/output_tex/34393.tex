@@ -1,0 +1,59 @@
+\Askhsh{34393}{2}
+\begin{ylh}{1}
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.1 Εισαγωγή
+    \item 5.2. Παραλληλόγραμμα
+    \item 5.6. Εφαρμογές στα τρίγωνα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34393.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Σε παραλληλόγραμμο ΑΒΓΔ, προεκτείνουμε την πλευρά ΔΑ (προς το Α) κατά τμήμα ΑΗ=ΔΑ. Φέρουμε τη διχοτόμο της γωνίας $\widehat{\Delta}$, η οποία τέμνει την ΑΒ στο σημείο Ζ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item το τρίγωνο ΑΔΖ είναι ισοσκελές, \monades{12}
+
+\item το τρίγωνο ΔΖΗ είναι ορθογώνιο με ορθή τη γωνία $\widehat{Ζ}$. \monades{13}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefPoint(1.5,3){A}
+
+% D is C + A - B
+\tkzDefPointBy[translation=from B to A](C) \tkzGetPoint{D}
+
+% Extend DA towards A by AH=DA. So H = A + A - D
+\tkzDefPointBy[translation=from D to A](A) \tkzGetPoint{H}
+
+% Bisector of angle D (angle ADC)
+\tkzDefLine[bisector](A,D,C) \tkzGetPoint{bis_dir}
+\tkzInterLL(D,bis_dir)(A,B) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--(D)--cycle;
+\draw[l3] (A)--(H);
+\draw[l3] (D)--(Z);
+\draw[l3] (H)--(Z);
+
+\tkzDrawPoints(A,B,C,D,H,Z)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below right](C){$\Gamma$}
+\tkzLabelPoint[above right](D){$\Delta$}
+\tkzLabelPoint[left](H){$H$}
+\tkzLabelPoint[left](Z){$Z$}
+
+\tkzMarkSegments[mark=s|](A,D A,H)
+\tkzMarkAngles[size=0.6,mark=none](A,D,Z Z,D,C)
+\tkzMarkRightAngle(H,Z,D)
+\end{tikzpicture}
+\end{center}
+\end{alist}

@@ -1,0 +1,88 @@
+\Askhsh{14533_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Διαδρομές, Πυθαγόρειο Θεώρημα]
+\end{ylh}
+\begin{wrapfigure}[18]{r}{7cm} % Adjusted width for better diagram fit
+    \centering
+    \begin{tikzpicture}[scale=0.75] % Adjusted scale
+        % Define coordinates based on the problem's first diagram and inferred lengths.
+        % A=(0,0)
+        % B=(0,3) (3 Km)
+        % From Z_ref-Delta=10Km and implied rectangle BGammaDeltaZ_ref -> B-Gamma = 10Km
+        % Gamma=(10,3)
+        % Delta is 4 Km North of Gamma. So Delta=(10,7)
+        % E is 10 Km East of Delta. So E=(20,7)
+        % Final Z is 14 Km East of E. So Z_final=(34,7)
+        % The top-left Z reference point (Z_ref) is (0,7)
+        
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (0,3);
+        \coordinate (Gamma) at (10,3);
+        \coordinate (Delta) at (10,7);
+        \coordinate (E) at (20,7);
+        \coordinate (Zfinal) at (34,7);
+        \coordinate (Zref) at (0,7);
+        
+        % Additional coordinates for dashed lines (Pythagorean construction for A-Zfinal implied)
+        \coordinate (A_proj_Zfinal_x) at (34,0); % Point directly below Zfinal, at A's height
+        
+        % Draw path segments (solid lines, maincolor)
+        \tkzDrawSegment[line width=1.5pt,maincolor](A,B)
+        \tkzDrawSegment[line width=1.5pt,maincolor](B,Gamma)
+        \tkzDrawSegment[line width=1.5pt,maincolor](Gamma,Delta)
+        \tkzDrawSegment[line width=1.5pt,maincolor](Delta,E)
+        \tkzDrawSegment[line width=1.5pt,maincolor](E,Zfinal)
+        
+        % Draw dashed lines for reference/construction (secondarycolor)
+        \tkzDrawSegment[dashed,secondarycolor](Zref,Delta) % Z-Delta 10Km (dashed in diagram)
+        \tkzDrawSegment[dashed](A,A_proj_Zfinal_x) % Horizontal dashed line from A to x_Zfinal
+        \tkzDrawSegment[dashed](A_proj_Zfinal_x,Zfinal) % Vertical dashed line from x_Zfinal at A's height to Zfinal
+        
+        % Red arrow for direct distance A-E (asked in a.ii.)
+        \tkzDrawSegment[line width=1.5pt,secondarycolor,->](A,E)
+        
+        % Labels for points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below](Gamma){$\Gamma$}
+        \tkzLabelPoint[above left](Delta){$\Delta$}
+        \tkzLabelPoint[above right](E){E}
+        \tkzLabelPoint[above right](Zfinal){Z} % This is the final Z of the path
+        \tkzLabelPoint[above left](Zref){Z} % This is the reference Z for the 10Km dashed line
+        
+        % Labels for distances
+        \tkzLabelSegment[left,pos=0.5](A,B){3 Km}
+        \tkzLabelSegment[left,pos=0.5](Gamma,Delta){4 Km}
+        \tkzLabelSegment[above,pos=0.5](Zref,Delta){10 Km} % Dashed Z-Delta label
+        \tkzLabelSegment[above,pos=0.5](Delta,E){10 Km} % Path Delta-E label
+        \tkzLabelSegment[above,pos=0.5](E,Zfinal){14 Km} % Path E-Z label
+        
+        % Draw right angle symbols for Pythagorean theorem context
+        \tkzMarkRightAngle(A,A_proj_Zfinal_x,Zfinal) % Right angle at (x_Zfinal, y_A) for triangle A - (x_Zfinal, y_A) - Z_final
+        
+        % Compass rose (shifted far right from the main diagram)
+        \begin{scope}[shift={(35, 3)}] % Positioned to match the relative placement in the image
+            \tkzDefPoint(0,0){Center}
+            \tkzDefPoint(0,1){North}
+            \tkzDefPoint(1,0){East}
+            \tkzDefPoint(0,-1){South}
+            \tkzDefPoint(-1,0){West}
+            \tkzDrawPolygon[secondarycolor,fill=secondarycolor!20](Center,North,East)
+            \tkzDrawPolygon[secondarycolor,fill=secondarycolor!20](Center,South,West)
+            \tkzDrawSegments[secondarycolor,line width=0.8pt](North,South East,West)
+            \tkzLabelPoint[above](North){N}
+            \tkzLabelPoint[right](East){E}
+            \tkzLabelPoint[below](South){S}
+            \tkzLabelPoint[left](West){W}
+        \end{scope}
+    \end{tikzpicture}
+\end{wrapfigure}
+Ένα κινητό ξεκινά από το σημείο Α του σχήματος και κινείται ακολουθώντας τη διαδρομή ΑΒΓΔΕ.
+\begin{alist}
+    \item Να υπολογίσετε:
+    \begin{rlist}
+        \item το συνολικό μήκος της διαδρομής ΑΒΓΔΕ. \monades{7}
+        \item τη μετατόπιση του κινητού από το σημείο Α στο σημείο Ε. \monades{7}
+    \end{rlist}
+    \item Αν ένα δεύτερο κινητό ξεκίνησε από το σημείο Ε και κινούμενο σε ευθεία γραμμή έφτασε στο σημείο Α και η κίνηση του ήταν ίση με τη μετατόπιση του πρώτου κινητού, να εξετάσετε αν το δεύτερο κινητό πέρασε από το σημείο Γ. \monades{11}
+\end{alist}

@@ -1,0 +1,54 @@
+\Askhsh{37823}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.4. 3ο Κριτήριο ισότητας τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 37823.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται οξυγώνιο ισοσκελές τρίγωνο $ΑΒ\Gamma$ ($A\Gamma = B\Gamma$). Η μεσοκάθετη $\varepsilon$ της $A\Gamma$ τέμνει την προέκταση της $AB$ (προς το μέρος του $B$) στο σημείο $M$ και την $A\Gamma$ στο $Z$. Στην προέκταση της $M\Gamma$ (προς το μέρος του $\Gamma$) παίρνουμε σημείο $E$ τέτοιο ώστε $\Gamma E = BM$.
+
+\begin{alist}
+\item Να δείξετε ότι το τρίγωνο $AM\Gamma$ είναι ισοσκελές. \monades{8}
+\item Να δειχτεί ότι τα τρίγωνα $A\Gamma E$ και $\Gamma BM$ είναι ίσα. \monades{10}
+\item Να δειχτεί ότι το τρίγωνο $AME$ είναι ισοσκελές. \monades{7}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(3,0){B}
+% AC=BC. Let C(1.5, y).
+\tkzDefPoint(1.5,4){C}
+\tkzDefMidPoint(A,C) \tkzGetPoint{Z}
+\tkzDefLine[orthogonal=through Z](A,C) \tkzGetPoint{eps_dir}
+\tkzInterLL(A,B)(Z,eps_dir) \tkzGetPoint{M}
+\tkzDefPointBy[homothety=center G ratio -1.4](M) \tkzGetPoint{E_dummy}
+\tkzCalcLength(B,M)\tkzGetLength{rBM}
+\tkzDefCircle[R](C,\rBM) \tkzGetPoint{circle_r}
+\tkzInterLC(M,C)(C,circle_r) \tkzGetPoints{E}{E_prime}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (B)--(M);
+\draw[l3] (A)--(M);
+\draw[l3] (M)--(E);
+\draw[l3] (A)--(E);
+\draw[l3, dashed] (Z)--(M);
+
+\tkzDrawPoints(A,B,C,Z,M,E)
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[above](C){$\Gamma$}
+\tkzLabelPoint[above left](Z){$Z$}
+\tkzLabelPoint[below right](M){$M$}
+\tkzLabelPoint[above right](E){$E$}
+
+\tkzMarkRightAngle(M,Z,A)
+\tkzMarkSegments[mark=s|](A,C B,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

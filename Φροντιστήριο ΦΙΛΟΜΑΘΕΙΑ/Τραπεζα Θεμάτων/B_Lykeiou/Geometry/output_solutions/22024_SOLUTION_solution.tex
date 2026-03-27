@@ -1,0 +1,63 @@
+\Askhsh{23118}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία Β' Λυκείου, Εμβαδά]
+\end{ylh}
+\begin{wrapfigure}[14]{r}{6.5cm}
+\centering
+\vspace{-2em} 
+\begin{tikzpicture}[scale=0.8, font=\small]
+    % Define points for the main diameter AB
+    \tkzDefPoint(-5,0){A}
+    \tkzDefPoint(5,0){B}
+
+    % Define Δ as the center of AB
+    \tkzDefMidPoint(A,B) \tkzGetPoint{D}
+
+    % Define a point M on AB. Let's place it left of the center to match the schema.
+    \tkzDefPoint(-2,0){M}
+
+    % Define Z and E as centers of the smaller semicircles
+    \tkzDefMidPoint(A,M) \tkzGetPoint{Z}
+    \tkzDefMidPoint(M,B) \tkzGetPoint{E}
+
+    % Define point Γ on the large semicircle, vertically above M
+    % Radius of large circle is 5. Equation x^2+y^2=25. M is at x=-2.
+    % (-2)^2+y^2=25 => y^2=21 => y=sqrt(21)
+    \tkzDefPoint(-2,{sqrt(21)}){G}
+
+    % Draw the semicircles
+    \tkzDrawSemiCircle(D,B) % Large semicircle
+    \tkzDrawSemiCircle(Z,M) % Semicircle on AM
+    \tkzDrawSemiCircle(E,B) % Semicircle on MB
+
+    % Draw the diameter
+    \tkzDrawSegment(A,B)
+
+    % Draw dashed lines for the triangle and the altitude
+    \tkzDrawSegments[dashed](A,G B,G M,G)
+
+    % Draw the dashed line from Γ to Δ, with point T on it
+    \tkzDrawSegment[dashed, color=secondarycolor](G,D)
+    \tkzDefPointOnSegment[pos=0.6](G,D)\tkzGetPoint{T}
+    \tkzLabelPoint[above right, xshift=-1mm, yshift=-1mm](T){T}
+
+    % Label all points
+    \tkzLabelPoints[below, font=\scriptsize](A,Z,M,E,B)
+    \tkzLabelPoint[below, font=\scriptsize](D){$\Delta$}
+    \tkzLabelPoint[above, font=\small](G){$\Gamma$}
+    
+    % Add the τ label
+    \node at (0.5,2.5) {$\tau$};
+
+    % Draw the points on the diameter and Γ
+    \tkzDrawPoints[size=2, fill=black](A,Z,M,D,E,B,G,T)
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ημικύκλιο κέντρου $\Delta$ και διαμέτρου $AB$. Θεωρούμε τυχαίο σημείο $M$ της διαμέτρου $AB$ και κατασκευάζουμε τα ημικύκλια με διαμέτρους $AM$ και $MB$, τα οποία βρίσκονται στο ίδιο ημιεπίπεδο με το αρχικό. Το καμπυλόγραμμο χωρίο που περικλείεται από τα τρία ημικύκλια (ονομάζεται άρβηλος και συμβολίζεται με $\tau$). Φέρουμε το κάθετο ευθύγραμμο τμήμα $M\Gamma$ στη διάμετρο $AB$, με το $\Gamma$ να είναι σημείο του μεγάλου ημικυκλίου.
+
+Αν οι ακτίνες των ημικυκλίων με διαμέτρους $AM$ και $MB$ είναι $\alpha$ και $\beta$ αντίστοιχα:
+\begin{alist}
+    \item Να αποδείξετε ότι το εμβαδόν του άρβηλου είναι $(\tau) = \pi \alpha \beta$. \monades{8}
+    \item Να αποδείξετε ότι το εμβαδόν του άρβηλου $(\tau)$ είναι ίσο με το εμβαδόν $E$ του κύκλου που έχει διάμετρο το τμήμα $M\Gamma$. \monades{9}
+    \item Να βρείτε τη θέση του σημείου $M$ ώστε το εμβαδόν $(\tau)$ να γίνεται μέγιστο. \monades{8}
+\end{alist}

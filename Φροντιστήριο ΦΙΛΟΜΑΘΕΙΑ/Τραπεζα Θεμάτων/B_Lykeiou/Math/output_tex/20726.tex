@@ -1,0 +1,86 @@
+\Askhsh{20726}{4}
+\begin{ylh}{1}
+    \item 3.3 Η Έλλειψη.
+\end{ylh}
+\begin{wrapfigure}[26]{r}{0.5\textwidth}
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            % Brown background
+            \path[fill=brown!40!orange, draw=brown!80!black, line width=1.5mm, rounded corners=3mm] (-2,-2) rectangle (2,2);
+            % Green circle
+            \tkzDefPoint(0,0){Center}
+            \tkzDrawCircle[R, fill=green!70!black](Center,1.5cm)
+            % Black and white dots
+            \tkzDefPoint(-0.5,0){BlackDot}
+            \tkzDefPoint(0.5,0){WhiteDot}
+            \tkzDrawPoints[color=black, size=4pt, fill=black](BlackDot)
+            \tkzDrawPoints[color=black, size=4pt, fill=white](WhiteDot)
+        \end{tikzpicture}
+        \caption*{\small Σχήμα 1}
+    \end{minipage}
+    \hfill % Space between figures
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.8]
+            % Define ellipse parameters based on problem: a=5, c=3 => b=4
+            \tkzDefPoint(0,0){O} % Center
+            \tkzDefPoint(5,0){A} % Semi-major axis point
+            \tkzDefPoint(0,4){B} % Semi-minor axis point
+            \tkzDefPoint(-3,0){E'} % Focus E'
+            \tkzDefPoint(3,0){E}  % Focus E
+            
+            % Draw ellipse
+            \tkzDrawEllipse[color=black](O,A)(B)
+            
+            % Define point M on the ellipse (using coordinates, e.g., M(4, 2.4))
+            \tkzDefPoint(4, 2.4){M}
+            
+            % Draw foci and M
+            \tkzDrawPoints(E,E',M)
+            \tkzLabelPoints(E,E')
+            \tkzLabelPoint[above left](M){M}
+            
+            % Draw focal segments
+            \tkzDrawSegments(M,E' M,E)
+            
+            % Draw tangent line at M
+            % Slope m = - (x_M * b^2) / (y_M * a^2)
+            % m = - (4 * 4^2) / (2.4 * 5^2) = - (4 * 16) / (2.4 * 25) = - 64 / 60 = -16/15
+            % y - 2.4 = (-16/15)(x - 4)
+            % Points for tangent: T1(3, 2.4 - (-16/15)*(-1)) = (3, 2.4 - 16/15) = (3, 1.333...)
+            % T2(5, 2.4 - (-16/15)*(1)) = (5, 2.4 + 16/15) = (5, 3.466...)
+            \tkzDefPoint(3, 1.333){T1}
+            \tkzDefPoint(5, 3.467){T2}
+            \tkzDrawLine[add=0.5 and 0.5, style=dashed](T1,T2) % tangent line
+            
+            % Draw incoming "pencil" ray
+            % For the reflection property, an incoming ray towards M from outside reflects to E.
+            % The incident ray is usually shown as a light source.
+            \tkzDefPoint(2.5, 3.9){P_in} % Arbitrary point for incoming ray source
+            \draw[thick, secondarycolor, -stealth] (P_in) -- (M); % Incoming ray (pencil)
+            
+            % Mark angles between focal rays and tangent
+            % Angle 1: between E'M and tangent. T1 is on the tangent.
+            \tkzMarkAngle[arc=ll,size=0.8cm,fill=maincolor!20,opacity=0.6](E',M,T1)
+            % Angle 2: between ME and tangent. T2 is on the tangent.
+            \tkzMarkAngle[arc=ll,size=0.8cm,fill=maincolor!20,opacity=0.6](E,M,T2)
+        \end{tikzpicture}
+        \caption*{\small Σχήμα 2}
+    \end{minipage}
+\end{wrapfigure}
+Ένας κατασκευαστής μπιλιάρδων θέλει να κατασκευάσει ένα ελλειπτικό μπιλιάρδο όπως αυτό του παρακάτω σχήματος (σχήμα 1). Το περίγραμμα του μπιλιάρδου είναι έλλειψη με εστίες τα σημεία $E(3,0)$ και $E'(-3,0)$. Η μοναδική τρύπα του μπιλιάρδου έχει σχήμα κύκλου (ο μαύρος κύκλος στο σχήμα 1) με κέντρο το σημείο $E'$. Για να σχεδιάσει ο κατασκευαστής το περίγραμμα του μπιλιάρδου πάνω σε μία ξύλινη επίπεδη επιφάνεια, τοποθέτησε στα σημεία $E$ και $E'$ δύο καρφιά στα οποία έδεσε τις άκρες ενός σχοινιού μήκους $10$ μονάδων μήκους. Στη συνέχεια με ένα μολύβι διατηρούσε το σχοινί τεντωμένο, ώστε αυτό, κατά την κίνησή του, να διαγράφει έλλειψη $C$ όπως φαίνεται στο παρακάτω (σχήμα 2).
+
+\begin{alist}
+    \item Να βρείτε τα μήκη του μεγάλου και του μικρού άξονα της έλλειψης $C$. \monades{10}
+    \item Να γράψετε την εξίσωση της έλλειψης $C$ και να βρείτε την εκκεντρότητά της. \monades{5}
+    \item Ένας παίκτης τοποθετεί μια άσπρη μπάλα (ο άσπρος κύκλος στο σχήμα 1) ακριβώς στο σημείο $E$. Σκοπεύει να χτυπήσει την άσπρη μπάλα ώστε αφού αυτή προσκρούσει πρώτα στο ελλειπτικό περίγραμμα του μπιλιάρδου, στη συνέχεια να πέσει στην τρύπα. Αν θεωρήσουμε ότι ο παίκτης θα χτυπήσει με όση δύναμη απαιτείται για να φτάσει η μπάλα στην τρύπα και το χτύπημα θα είναι στο κέντρο της μπάλας ώστε αυτή να κυλά χωρίς να περιστρέφεται, να βρείτε σε ποιο σημείο της έλλειψης $C$ πρέπει να σημαδέψει, ώστε με ένα μόνο χτύπημα η μπάλα να μπει στην τρύπα:
+    \begin{rlist}
+        \item μόνο στα άκρα του μεγάλου άξονα
+        \item μόνο στα άκρα του μικρού άξονα
+        \item μόνο στα άκρα του μικρού άξονα και στο ένα άκρο του μεγάλου άξονα
+        \item σε οποιοδήποτε σημείο της $C$ εκτός από το ένα άκρο του μεγάλου άξονα
+    \end{rlist}
+    Επιλέξτε τη μοναδική σωστή απαντήσεις αιτιολογώντας την απάντησή σας. \monades{10}
+\end{alist}

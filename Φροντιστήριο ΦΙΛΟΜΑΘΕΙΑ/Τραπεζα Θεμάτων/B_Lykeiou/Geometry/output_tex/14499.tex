@@ -1,0 +1,71 @@
+\Askhsh{14499}{4}
+\begin{ylh}{1}
+    \item 7.4. Ανάλογα ευθύγραμμα τμήματα - Αναλογίες
+    \item 7.7. Θεώρημα του Θαλή.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6.5cm} % Adjust number of lines as needed.
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define points A, B, M, Gamma based on the problem description
+        % B is origin for simplicity, M is midpoint of BGamma
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(3,0){M} % M is midpoint of BGamma, so BGamma = 6
+        \tkzDefPoint(6,0){G} % Gamma
+        \tkzDefPoint(2,4){A} % A is placed arbitrarily above BGamma
+        
+        % Draw the median AM
+        \tkzDrawSegment(A,M)
+        
+        % Define point E on BM. Let E be at (1,0) (between B and M)
+        \tkzDefPoint(1,0){E}
+        
+        % Calculate coordinates for D and Z based on the condition DEZ || AM
+        % Line AM: passes through A(2,4) and M(3,0). Slope = (0-4)/(3-2) = -4.
+        % Line DEZ: passes through E(1,0) and is parallel to AM. So its slope is -4.
+        % Equation of DEZ: y - 0 = -4(x - 1)  =>  y = -4x + 4
+        
+        % Point D is the intersection of line DEZ and line AB.
+        % Line AB: passes through B(0,0) and A(2,4). Slope = 4/2 = 2.
+        % Equation of AB: y = 2x
+        % Intersection D: 2x = -4x + 4  =>  6x = 4  =>  x_D = 2/3.  y_D = 2*(2/3) = 4/3.
+        \tkzDefPoint(0.66666, 1.33333){D} % Delta (approx. 2/3, 4/3)
+        
+        % Point Z is the intersection of line DEZ and the extension of GammaA.
+        % Line GammaA: passes through G(6,0) and A(2,4). Slope = (4-0)/(2-6) = 4/(-4) = -1.
+        % Equation of GammaA: y - 0 = -1(x - 6)  =>  y = -x + 6
+        % Intersection Z: -4x + 4 = -x + 6  =>  -3x = 2  =>  x_Z = -2/3.  y_Z = -(-2/3) + 6 = 2/3 + 18/3 = 20/3.
+        \tkzDefPoint(-0.66666, 6.66666){Z} % Zeta (approx. -2/3, 20/3)
+        
+        % Draw the line segment Delta-E-Z
+        \tkzDrawSegment(Z,D) % Draw Z-D to ensure Z-D-E are collinear
+        \tkzDrawSegment(D,E) % Draw D-E as part of the line segment
+        
+        % Draw triangle ABGamma
+        \tkzDrawPolygon(A,B,G)
+        
+        % Label points
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below](E){E}
+        \tkzLabelPoint[below](M){M}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[above left](Z){Z} % Adjust Z label position
+        
+        % Mark points
+        \tkzDrawPoints(A,B,G,M,E,D,Z)
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο $AB\Gamma$. Θεωρούμε $AM$ τη διάμεσό του και $E$ τυχαίο σημείο του τμήματος $BM$. Από το $E$ φέρουμε ευθεία παράλληλη στην $AM$ που τέμνει την πλευρά $AB$ στο $\Delta$ και την προέκταση της $\Gamma A$ στο $Z$.
+
+\begin{alist}
+\item Να συμπληρώσετε τα κενά στις παρακάτω ισότητες και να αιτιολογήσετε την επιλογή σας:
+    \begin{rlist}
+    \item $\frac{\Delta E}{\mathbf{AM}} = \frac{\mathbf{BE}}{BM} = \frac{B\Delta}{\mathbf{BA}}$ \\
+    Αιτιολόγηση: Εφαρμόζουμε το Θεώρημα του Θαλή στο τρίγωνο $BAM$ για την παράλληλη ευθεία $\Delta E$ προς την $AM$.
+    \item $\frac{\mathbf{EZ}}{AM} = \frac{\Gamma E}{\mathbf{\Gamma M}} = \frac{\mathbf{\Gamma Z}}{\Gamma A}$ \\
+    Αιτιολόγηση: Εφαρμόζουμε το Θεώρημα του Θαλή στα όμοια τρίγωνα $\Gamma EZ$ και $\Gamma AM$, καθώς η ευθεία $ZE$ είναι παράλληλη προς την $AM$.
+    \end{rlist}
+    \monades{12}
+\item Να αποδείξετε ότι $\Delta E + EZ = 2AM$ για οποιαδήποτε θέση του $E$ στο $BM$. \monades{13}
+\end{alist}

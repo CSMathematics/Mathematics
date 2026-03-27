@@ -1,0 +1,99 @@
+\lysh{35478}{4}
+
+\begin{alist}
+    \item Για να βρούμε τη διάμεσο $\delta$ θα αξιοποιήσουμε το ιστόγραμμα αθροιστικών σχετικών συχνοτήτων επί τοις εκατό. Εντοπίζουμε στον κατακόρυφο άξονα το $50\%$ και στη συνέχεια φέρνουμε παράλληλη προς τον οριζόντιο άξονα μέχρι να συναντήσουμε την πολυγωνική γραμμή, όταν συμβεί αυτό φέρνουμε παράλληλη προς τον κατακόρυφο άξονα και στο σημείο που συναντήσουμε τον οριζόντιο άξονα βρίσκεται η διάμεσος, έτσι λοιπόν βρίσκουμε ότι $\delta=25$.
+
+    \begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = box,
+        xlabel = {$\delta$},
+        ylabel = {$F_i\%$},
+        xmin = 0, xmax = 50,
+        ymin = 0, ymax = 105,
+        xtick = {5, 15, 25, 35, 45},
+        ytick = {0, 20, 50, 90, 100},
+        grid = none,
+        width = 10cm, height = 7cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        ybar interval,
+        bar width = 10,
+    ]
+        % Cumulative Histogram bars
+        \addplot[fill=maincolor!30, draw=maincolor, very thick] coordinates {
+            (5,0) (15,20) (25,50) (35,90) (45,100)
+        };
+        
+        % Cumulative Frequency Polygon (overlayed)
+        \addplot[maincolor, very thick, mark=*, mark size=1.5pt] coordinates {
+            (5,0)
+            (15,20)
+            (25,50)
+            (35,90)
+            (45,100)
+        };
+
+        % Median line
+        \draw[dashed, secondarycolor] (axis cs:0, 50) -- (axis cs:25, 50);
+        \draw[dashed, secondarycolor] (axis cs:25, 0) -- (axis cs:25, 50);
+        
+        % Labels F1%, F2%, F3% placed on the right side of the plot as in the image
+        \node[right, maincolor, font=\scriptsize] at (axis cs:47,20) {$F_1\% = 20\%$};
+        \node[right, maincolor, font=\scriptsize] at (axis cs:47,50) {$F_2\% = 50\%$};
+        \node[right, maincolor, font=\scriptsize] at (axis cs:47,90) {$F_3\% = 90\%$};
+        
+        % Origin label
+        \node[below left, font=\scriptsize] at (axis cs:0,0) {O};
+    \end{axis}
+    \end{tikzpicture}
+    \end{center}
+
+    \item
+    \begin{rlist}
+        \item Από το ιστόγραμμα αθροιστικών σχετικών συχνοτήτων επί τοις εκατό βλέπουμε ότι στις $2$ πρώτες κλάσεις υπάρχει το $50\%$ των παρατηρήσεων, συνεπώς στις $2$ τελευταίες θα υπάρχει το υπόλοιπο $50\%$ των παρατηρήσεων, δηλαδή το άθροισμα των συχνοτήτων στις $2$ πρώτες κλάσεις θα πρέπει να ισούται με το άθροισμα των συχνοτήτων στις $2$ τελευταίες άρα:
+        \[ \alpha+4+3\alpha-6 = 2\alpha+8+\alpha-2 \Leftrightarrow 4\alpha-2 = 3\alpha+6 \Leftrightarrow 4\alpha-3\alpha = 6+2 \Leftrightarrow \alpha=8. \]
+        \item η $1^{\eta}$ κλάση $[5,15)$ έχει κεντρική τιμή $\chi_1 = 10$ \\
+        η $2^{\eta}$ κλάση $[15,25)$ έχει κεντρική τιμή $\chi_2 = 20$ \\
+        η $3^{\eta}$ κλάση $[25,35)$ έχει κεντρική τιμή $\chi_3 = 30$ \\
+        η $4^{\eta}$ κλάση $[35,45)$ έχει κεντρική τιμή $\chi_4 = 40$
+    \end{rlist}
+
+Από το (βi) βρήκαμε ότι $\alpha=8$, άρα έχουμε:
+\begin{align*}
+    \nu_1 &= \alpha+4=8+4=12 \\
+    \nu_2 &= 3\alpha-6=3 \cdot 8-6=24-6=18 \\
+    \nu_3 &= 2\alpha+8=2 \cdot 8+8=16+8=24 \\
+    \nu_4 &= \alpha-2=8-2=6
+\end{align*}
+Επίσης: $N_1 = \nu_1 = 12$, $N_2 = N_1+\nu_2=12+18=30$, $N_3 = N_2+\nu_3=30+24=54$, $N_4 = N_3+\nu_4=54+6=60$.
+\\[1em]
+$f_1 = \frac{\nu_1}{N} = \frac{12}{60} = 0,2$ άρα $f_1\% = 20\%$ και $F_1\% = 20\%$ \\
+$f_2 = \frac{\nu_2}{N} = \frac{18}{60} = 0,3$ άρα $f_2\% = 30\%$ και $F_2\% = F_1\%+f_2\% = 20\%+30\% = 50\%$ \\
+$f_3 = \frac{\nu_3}{N} = \frac{24}{60} = 0,4$ άρα $f_3\% = 40\%$ και $F_3\% = F_2\%+f_3\% = 50\%+40\% = 90\%$ \\
+$f_4 = \frac{\nu_4}{N} = \frac{6}{60} = 0,1$ άρα $f_4\% = 10\%$ και $F_4\% = F_3\%+f_4\% = 90\%+10\% = 100\%$ \\
+Ο συμπληρωμένος πίνακας φαίνεται παρακάτω:
+
+\begin{center}
+\begin{mytblr}{}
+    
+    \textbf{Χρόνοι (λεπτά)} & \textbf{$x_i$} & \textbf{$\nu_i$} & \textbf{$f_i\%$} & \textbf{$N_i$} & \textbf{$F_i\%$}\\
+    
+    $[5,15)$ & $10$ & $12$ & $20$ & $12$ & $20$\\
+    
+    $[15,25)$ & $20$ & $18$ & $30$ & $30$ & $50$\\
+    
+    $[25,35)$ & $30$ & $24$ & $40$ & $54$ & $90$\\
+    
+    $[35,45)$ & $40$ & $6$ & $10$ & $60$ & $100$\\
+    
+    \textbf{Σύνολο} & & \cellcolor{gray!30}$60$ & \cellcolor{gray!30}$100$ & \cellcolor{gray!30}$60$ & \cellcolor{gray!30}$100$\\
+    
+\end{mytblr}
+\end{center}
+\end{alist}
+\vspace{6mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{6mm}
+

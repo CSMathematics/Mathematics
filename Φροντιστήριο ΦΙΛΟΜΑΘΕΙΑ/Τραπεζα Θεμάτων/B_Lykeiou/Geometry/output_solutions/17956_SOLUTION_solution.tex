@@ -1,0 +1,61 @@
+\Askhsh{17956_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\section*{\kefalaio{ΛΥΣΗ}}
+\begin{wrapfigure}[8]{r}{8cm}
+    \begin{tikzpicture}[scale=0.7]
+        % Define points
+        \tkzDefPoint(0,4){A}
+        \tkzDefPoint(-4,0){B}
+        \tkzDefPoint(4,0){G} % Gamma
+        \tkzDefPoint(1,0){D} % Delta
+
+        % Points K and L on B-D-G segment
+        \tkzDefMidPoint(B,D) \tkzGetPoint{K}
+        \tkzDefMidPoint(D,G) \tkzGetPoint{L} % Lambda
+
+        % Points E on AB and Z on AG such that AEΔZ is a parallelogram
+        % From calculations: E(-1.5, 2.5), Z(2.5, 1.5)
+        \tkzDefPoint(-1.5,2.5){E}
+        \tkzDefPoint(2.5,1.5){Z}
+
+        % Draw main triangle ABG
+        \tkzDrawPolygon(A,B,G)
+
+        % Draw solid segments EΔ and ΔZ (sides of parallelogram)
+        \tkzDrawSegments(E,D D,Z)
+
+        % Draw dashed segments (diagonals and medians)
+        \tkzDrawSegments[dashed](A,D E,Z E,K Z,L)
+
+        % Draw all points
+        \tkzDrawPoints(A,B,K,D,L,G,E,Z)
+
+        % Label points
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below](K){K}
+        \tkzLabelPoint[below](D){$\Delta$}
+        \tkzLabelPoint[below](L){$\Lambda$}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[above left](E){E}
+        \tkzLabelPoint[above right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Στο τρίγωνο \text{ΒΕΔ}, η \text{ΕΚ} είναι διάμεσος, οπότε τα τρίγωνα \text{ΒΕΚ} και \text{ΕΚΔ} έχουν ίσες βάσεις \text{ΒΚ} και \text{ΚΔ} και κοινό ύψος από το \text{Ε}. Επομένως τα εμβαδά τους θα είναι ίσα, δηλαδή $(\text{ΒΕΚ}) = (\text{ΕΚΔ})$.
+    Άρα
+    \[ (\text{ΕΚΔ}) = \frac{(\text{ΒΕΔ})}{2} \quad (1). \]
+    \item Το \text{ΑΕΔΖ} είναι παραλληλόγραμμο γιατί έχει τις απέναντι πλευρές του παράλληλες, αφού \text{ΔΖ}//\text{ΑΕ} και \text{ΔΕ}//\text{ΑΖ}. Η διαγώνιος \text{ΕΖ} του παραλληλογράμμου \text{ΑΕΔΖ} το χωρίζει σε δύο ίσα άρα και ισοδύναμα τρίγωνα, δηλαδή $(\text{ΕΖΔ}) = (\text{ΑΕΖ})$.
+    Επομένως,
+    \[ (\text{ΕΖΔ}) = \frac{(\text{ΑΕΔΖ})}{2} \quad (2). \]
+    \item Στο τρίγωνο \text{ΔΖΓ}, η \text{ΖΛ} είναι διάμεσος, οπότε τα τρίγωνα \text{ΔΖΛ} και \text{ΓΖΛ} έχουν ίσες βάσεις \text{ΔΛ} και \text{ΓΛ} και κοινό ύψος από το \text{Ζ}. Επομένως τα εμβαδά τους θα είναι ίσα, δηλαδή $(\text{ΔΖΛ}) = (\text{ΓΖΛ})$.
+    Άρα
+    \[ (\text{ΔΖΛ}) = \frac{(\text{ΔΖΓ})}{2} \quad (3). \]
+\end{alist}
+Προσθέτοντας κατά μέλη τις σχέσεις (1), (2), (3) έχουμε:
+\[ (\text{ΕΚΔ})+(\text{ΕΖΔ})+(\text{ΔΖΛ})=\frac{(\text{ΒΕΔ})}{2}+\frac{(\text{ΑΕΔΖ})}{2}+\frac{(\text{ΔΖΓ})}{2} \]
+Άρα:
+\[ (\text{ΚΕΖΛ}) = \frac{(\text{ΒΕΔ})+(\text{ΑΕΔΖ})+(\text{ΔΖΓ})}{2} = \frac{(\text{ΑΒΓ})}{2} \]
+Επομένως, το εμβαδόν του \text{ΚΕΖΛ} θα ισούται με το μισό του εμβαδού του τριγώνου \text{ΑΒΓ} ανεξάρτητα από τη θέση του σημείου \text{Δ} πάνω στη \text{ΒΓ}.

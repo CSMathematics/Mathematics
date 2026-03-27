@@ -1,0 +1,62 @@
+\Askhsh{13833}{2}
+\begin{ylh}{1}
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 5.2. Παραλληλόγραμμα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 13833.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα το ΓΔ είναι ύψος του τριγώνου ΑΒΓ, το ΕΗ είναι ύψος του τριγώνου ΑΒΕ και η ΒΑ είναι διάμεσος του τριγώνου ΒΕΓ.
+
+\begin{alist}
+\item Να αποδείξετε ότι τα τρίγωνα ΑΓΔ και ΑΕΗ είναι ίσα. \monades{10}
+
+\item Να αποδείξετε ότι ΑΗ=ΑΔ. \monades{5}
+
+\item Να αποδείξετε ότι το τετράπλευρο ΓΔΕΗ είναι παραλληλόγραμμο. \monades{10}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C} % \Gamma
+\tkzDefPoint(2,4){A}
+
+% "BA είναι διάμεσος του τριγώνου BEΓ", so A is the midpoint of EΓ
+\tkzDefPointBy[symmetry=center A](C) \tkzGetPoint{E}
+
+\tkzDefPointBy[projection=onto A--B](C) \tkzGetPoint{D}
+\tkzDefPointBy[projection=onto A--B](E) \tkzGetPoint{H}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(E);
+\draw[l3] (B)--(E);
+\draw[l3] (C)--(D);
+\draw[l3] (E)--(H);
+\draw[l3, dashed] (B)--(H); % Extending AB to H if needed
+\draw[l3, dashed] (B)--(D); % Extending AB to D if needed
+\draw[l3, dashed] (D)--(H); % For parallelogram CDHE
+
+% If H is on the extension of AB towards A, and D is on AB
+% Let's connect C to H and D to E to form the parallelogram.
+\draw[l3, dashed] (C)--(H);
+\draw[l3, dashed] (E)--(D);
+
+\tkzDrawPoints(A,B,C,E,D,H)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[below right](D){$\Delta$}
+\tkzLabelPoint[above left](H){$H$}
+
+\tkzMarkRightAngle(C,D,B)
+\tkzMarkRightAngle(E,H,A)
+\tkzMarkSegments[mark=s|](E,A A,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

@@ -1,0 +1,51 @@
+\Askhsh{22098_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[14]{r}{5cm}
+\centering
+\begin{tikzpicture}[scale=1.1]
+    \pgfmathsetmacro{\mypi}{pi}
+    % Define the rectangle corners to be to scale
+    \tkzDefPoint(0,0){D}
+    \tkzDefPoint(4,0){C}
+    \tkzDefPoint(4,\mypi){B}
+    \tkzDefPoint(0,\mypi){A}
+
+    % Draw the rectangle and mark right angles at corners
+    \tkzDrawPolygon(A,B,C,D)
+    \tkzMarkRightAngle[size=0.3](A,D,C)
+    \tkzMarkRightAngle[size=0.3](D,C,B)
+
+    % Label the vertices
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[below right](C){$\Gamma$}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    
+    % Define the midpoint M
+    \tkzDefMidPoint(A,B) \tkzGetPoint{M}
+    \tkzLabelPoint[above](M){M}
+    
+    % Draw the semicircle
+    \tkzDrawSemiCircle[solid, color=maincolor](M,B)
+    
+    % Draw the diagonal BD
+    \tkzDrawSegment(B,D)
+    
+    % Find and draw the intersection point E
+    \tkzInterLC(B,D)(M,B) \tkzGetPoints{E}{B}
+    \tkzDrawPoint[fill=black, size=2pt](E)
+    \tkzLabelPoint[below left, yshift=-2pt](E){E}
+    
+    % Add elements for question γ)
+    \tkzDrawSegment(M,E)
+    \tkzMarkAngle[size=0.4, color=secondarycolor](B,M,E)
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ορθογώνιο ΑΒΓΔ με πλευρές $ΑΒ = 4\alpha$ και $ΑΔ = \pi\alpha$, όπου $\alpha > 0$. Στο εσωτερικό του ορθογωνίου κατασκευάζουμε ημικύκλιο με διάμετρο την πλευρά ΑΒ. Η διαγώνιος ΒΔ τέμνει το ημικύκλιο στο σημείο Ε.
+\begin{alist}
+    \item Να αποδείξετε ότι το ημικύκλιο χωρίζει το ορθογώνιο ΑΒΓΔ σε δύο ισεμβαδικά χωρία. \monades{7}
+    \item Να υπολογίσετε τα μήκη των ευθυγράμμων τμημάτων ΒΕ και ΔΕ συναρτήσει του $\alpha$. \monades{9}
+    \item Αν Μ είναι το μέσο της πλευράς ΑΒ, να υπολογίσετε το συνημίτονο της γωνίας $\widehat{BME}$. \monades{9}
+\end{alist}

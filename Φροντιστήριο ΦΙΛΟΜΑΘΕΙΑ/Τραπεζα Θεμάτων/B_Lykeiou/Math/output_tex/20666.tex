@@ -1,0 +1,79 @@
+\Askhsh{20666}{4}
+\begin{ylh}{1}
+    \item 3.3 Η Έλλειψη.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Define major and minor axes parameters (scaled for drawing)
+        \pgfmathsetmacro{\a}{3} % scaled semi-major axis
+        \pgfmathsetmacro{\c}{0.05} % scaled focal distance
+        \pgfmathsetmacro{\b}{sqrt(\a*\a - \c*\c)} % scaled semi-minor axis
+
+        % Define points
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(-\c,0){H} % Sun focus (red)
+        \tkzDefPoint(\c,0){E} % Second focus (blue)
+        \tkzDefPoint(-\a,0){P} % Perihelion (green)
+        \tkzDefPoint(\a,0){A} % Aphelion (green)
+
+        % Point Gamma on the ellipse - chosen for visual representation
+        \pgfmathsetmacro{\xgamma}{1.2}
+        \pgfmathsetmacro{\ygamma}{\b * sqrt(1 - \xgamma^2/\a^2)}
+        \tkzDefPoint(\xgamma,\ygamma){G} % Gamma (black)
+
+        % Draw axes
+        \draw[->] (-\a-1.5,0) -- (\a+1.5,0) node[right] {$x'x$};
+        \draw[->] (0,-\b-1) -- (0,\b+1) node[above] {$y'y$};
+
+        % Draw the ellipse
+        \draw[black!70, very thick] (O) ellipse (\a cm and \b cm);
+
+        % Draw dashed lines from G to foci
+        \draw[dashed, thick, black!70] (G) -- (H);
+        \draw[dashed, thick, black!70] (G) -- (E);
+
+        % Draw tangent t't at G
+        % Slope of tangent at (x0, y0) on ellipse x^2/a^2 + y^2/b^2 = 1 is -(b^2 x0)/(a^2 y0)
+        \pgfmathsetmacro{\tangent_slope}{-(\b*\b * \xgamma) / (\a*\a * \ygamma)}
+        \pgfmathsetmacro{\tangent_offset}{\ygamma - \tangent_slope * \xgamma}
+
+        % Extend tangent line for labels t' and t
+        \pgfmathsetmacro{\tangent_left_x}{\xgamma-2.5}
+        \pgfmathsetmacro{\tangent_right_x}{\xgamma+2.5}
+        \draw[thick, black!70] (\tangent_left_x, {\tangent_slope*(\tangent_left_x) + \tangent_offset}) -- (\tangent_right_x, {\tangent_slope*(\tangent_right_x) + \tangent_offset});
+
+        % Label tangent points t' and t
+        \node[above left] at (\tangent_left_x, {\tangent_slope*(\tangent_left_x) + \tangent_offset}) {$t'$};
+        \node[above right] at (\tangent_right_x, {\tangent_slope*(\tangent_right_x) + \tangent_offset}) {$t$};
+
+        % Draw points with specified colors
+        \tkzDrawPoints[color=thirdcolor](P,A) % Green for P, A
+        \tkzDrawPoints[color=red](H) % Red for H
+        \tkzDrawPoints[color=blue](E) % Blue for E
+        \tkzDrawPoints[color=black](O,G) % Black for O, Gamma
+
+        % Label points
+        \tkzLabelPoint[below left](P){P}
+        \tkzLabelPoint[below right](A){A}
+        \tkzLabelPoint[below left](H){H}
+        \tkzLabelPoint[below right](E){E}
+        \tkzLabelPoint[above right](G){$\Gamma$}
+        \tkzLabelPoint[below left](O){O}
+
+        % Mark angles t'ΓH and tΓE (reflection property)
+        % Create auxiliary points on the tangent for angle marking
+        \tkzDefPoint(\tangent_left_x, {\tangent_slope*(\tangent_left_x) + \tangent_offset}){TL}
+        \tkzDefPoint(\tangent_right_x, {\tangent_slope*(\tangent_right_x) + \tangent_offset}){TR}
+        
+        \tkzMarkAngle[fill=secondarycolor!30, draw=secondarycolor, size=0.5cm](TL,G,H)
+        \tkzMarkAngle[fill=secondarycolor!30, draw=secondarycolor, size=0.5cm](E,G,TR) % Order for E,G,TR for correct arc direction
+    \end{tikzpicture}
+\end{wrapfigure}
+Η τροχιά της Γης γύρω από τον Ήλιο είναι μια έλλειψη με μία εστία τον Ήλιο. Η ελάχιστη απόσταση του κέντρου της Γης από το κέντρο του Ήλιου είναι $PH = 147,5$ εκατομμύρια Km και η μέγιστη $AH = 152,5$ εκατομμύρια Km. Στο σχήμα θεωρούμε ότι τα σημεία $H$ και $E$ είναι τα κέντρα του Ήλιου και της Γης αντίστοιχα. Θεωρούμε ορθογώνιο σύστημα αξόνων με αρχή το μέσο του $HE$ και $x'x$ τον μεγάλο άξονα της έλλειψης, ενώ ο άξονας $y'y$ είναι η μεσοκάθετος του $HE$.
+
+\begin{alist}
+\item Να αποδείξετε $(PA) = 300$ εκατομμύρια Km, $(HE) = 5$ εκατομμύρια Km και ότι η εκκεντρότητα της έλλειψης είναι $\varepsilon = \dfrac{1}{60}$. \monades{10}
+\item Για μια τυχαία θέση της Γης πάνω στην ελλειπτική τροχιά, να υπολογίσετε την περίμετρο του τριγώνου $H\Gamma E$. \monades{8}
+\item Αν ονομάσουμε $t't$ την εφαπτομένη ευθεία της έλλειψης στο $\Gamma$, να αποδείξετε ότι οι γωνίες $t'\hat{\Gamma}H$ και $t\hat{\Gamma}E$ είναι ίσες. \monades{7}
+\end{alist}

@@ -1,0 +1,75 @@
+\Askhsh{22244}{4}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+Ένας κηπουρός θέλει να ποτίσει το γκαζόν που έχει φυτέψει σε έναν τετράγωνο κήπο πλευράς 10 m. Για τον σκοπό αυτό χρησιμοποιεί μηχανισμούς ποτίσματος τους οποίους μπορεί να ρυθμίσει, ώστε να ποτίζουν έναν κυκλικό τομέα με συγκεκριμένη γωνία και ακτίνα.
+
+\begin{center}
+\begin{minipage}[b]{.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.4]
+        \tkzDefPoint(0,0){D}
+        \tkzDefPoint(10,0){C}
+        \tkzDefPoint(10,10){B}
+        \tkzDefPoint(0,10){A}
+        \tkzDrawPolygon[pattern=grid, pattern color=maincolor!30](A,B,C,D)
+        \begin{scope}
+            \tkzClipCircle(A,B)
+            \tkzFillSector[color=maincolor!80, opacity=0.7](C,D)(B)
+        \end{scope}
+        \tkzDrawPolygon(A,B,C,D)
+        \tkzDrawArc[color=maincolor, thick](A,B)(D)
+        \tkzDrawArc[color=maincolor, thick](C,D)(B)
+        \tkzDrawPoints(A,B,C,D)
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+    \end{{tikzpicture}
+    \centerline{Σχήμα 1}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.4]
+        \tkzDefPoint(0,0){D}
+        \tkzDefPoint(10,0){C}
+        \tkzDefPoint(10,10){B}
+        \tkzDefPoint(0,10){A}
+        \tkzDefPoint(5,10){Mab}
+        \tkzDefPoint(0,5){Mda}
+        \tkzDefPoint(10,5){Mbc}
+        \tkzDefPoint(5,0){Mcd}
+        \tkzFillSector[pattern=grid, pattern color=maincolor!30](A,Mab)(Mda)
+        \tkzFillSector[pattern=grid, pattern color=maincolor!30](B,Mbc)(Mab)
+        \tkzFillSector[pattern=grid, pattern color=maincolor!30](C,Mcd)(Mbc)
+        \tkzFillSector[pattern=grid, pattern color=maincolor!30](D,Mda)(Mcd)
+        \tkzDrawPolygon(A,B,C,D)
+        \tkzDrawArc[color=maincolor, thick](A,Mab)(Mda)
+        \tkzDrawArc[color=maincolor, thick](B,Mbc)(Mab)
+        \tkzDrawArc[color=maincolor, thick](C,Mcd)(Mbc)
+        \tkzDrawArc[color=maincolor, thick](D,Mda)(Mcd)
+        \tkzDrawPoints(A,B,C,D)
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+    \end{tikzpicture}
+    \centerline{Σχήμα 2}
+\end{minipage}
+\end{center}
+
+\begin{alist}
+    \item Ο κηπουρός τοποθετεί στις απέναντι κορυφές Α, Γ του τετράγωνου κήπου από έναν μηχανισμό, ώστε ο καθένας να ποτίζει ένα τεταρτοκύκλιο ακτίνας 10m, όπως φαίνεται στο Σχήμα 1. Να αποδείξετε ότι:
+    \begin{rlist}
+        \item το εμβαδόν της περιοχής που ποτίζει κάθε μηχανισμός είναι $25\pi \text{ m}^2$. \monades{4}
+        \item το εμβαδόν της περιοχής που ποτίζουν ταυτόχρονα και οι δύο μηχανισμοί είναι $50(\pi - 2) \text{ m}^2$. \monades{5}
+    \end{rlist}
+    \item Ο κηπουρός τοποθετεί στις τέσσερις κορυφές του τετράγωνου κήπου από έναν μηχανισμό, ώστε ο καθένας να ποτίζει ένα τεταρτοκύκλιο ακτίνας 5m, όπως φαίνεται στο Σχήμα 2.
+    \begin{rlist}
+        \item Να βρείτε το εμβαδόν της περιοχής που δεν ποτίζεται. \monades{8}
+        \item Για να μην μείνει απότιστη κάποια περιοχή του κήπου ο κηπουρός τοποθετεί έναν πέμπτο μηχανισμό ποτίσματος στο κέντρο του κήπου ο οποίος ποτίζει την περιοχή ενός κυκλικού δίσκου ακτίνας 5m. Να βρείτε το εμβαδόν του κήπου που ποτίζεται από δύο μηχανισμούς ταυτόχρονα και να το συγκρίνετε με την απάντηση που βρήκατε στο ερώτημα α). \monades{8}
+    \end{rlist}
+\end{alist}

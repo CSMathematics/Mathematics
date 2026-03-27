@@ -1,0 +1,54 @@
+\Askhsh{22375}{2}
+\begin{wrapfigure}[16]{r}{7cm}
+\centering
+\begin{tikzpicture}[scale=1.2]
+    \tkzDefPoint(0,0){C}
+    \tkzDefPoint(6,0){B}
+    \tkzDefPoint(2,4){A}
+    
+    % Point K on BC such that KB = 2KC
+    % Vector BC = B-C. K = C + 1/3 * (B-C)
+    \tkzDefPointWith[linear, K=1/3](C,B) \tkzGetPoint{K}
+
+    % Point L on AK such that LA = 2LK
+    % Vector AK = K-A. L = K + 1/3 * (A-K)
+    \tkzDefPointWith[linear, K=1/3](K,A) \tkzGetPoint{L}
+
+    % Draw polygons
+    \tkzDrawPolygon(A,B,C)
+    \tkzDrawSegment(A,K)
+    \tkzDrawSegment(B,L)
+    \tkzDrawSegment(C,L)
+
+    % Fill areas with some light color to distinguish them
+    \tkzFillPolygon[color=maincolor!10](A,L,C)
+    \tkzFillPolygon[color=secondarycolor!10](C,L,K)
+    \tkzFillPolygon[color=yellow!20](B,L,K)
+    \tkzFillPolygon[color=green!10](A,L,B)
+
+    % Labels for vertices
+    \tkzLabelPoints[above](A)
+    \tkzLabelPoints[below left](C)
+    \tkzLabelPoints[below right](B)
+    \tkzLabelPoints[below](K)
+    \tkzLabelPoint[left](L){$\Lambda$}
+
+    % Labels for areas
+    \node at ($(A)!.5!(L)!.5!(C)$) {$E_1$};
+    \node at ($(C)!.55!(L)!.55!(K)$) {$E_2$};
+    \node at ($(B)!.55!(L)!.55!(K)$) {$E_3$};
+    \node at ($(A)!.5!(L)!.5!(B)$) {$E_4$};
+
+    % Draw points
+    \tkzDrawPoints[size=3](A,B,C,K,L)
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο ΑΒΓ και σημείο Κ στην πλευρά του ΒΓ. Έστω Λ σημείο στο τμήμα ΑΚ. Συμβολίζουμε με $E_1$, $E_2$, $E_3$, $E_4$ τα εμβαδά των τριγώνων ΑΛΓ, ΓΛΚ, ΒΛΚ, ΑΛΒ αντίστοιχα.
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item $\frac{E_1}{E_2} = \frac{\Lambda A}{\Lambda K}$ και $\frac{E_4}{E_3} = \frac{\Lambda A}{\Lambda K}$ \monades{7}
+        \item $\frac{E_3}{E_2} = \frac{KB}{K\Gamma}$ \monades{6}
+    \end{rlist}
+    \item Αν $\Lambda A = 2\Lambda K$ και $KB=2K\Gamma$ και $E_1=10$ τετραγωνικές μονάδες, να υπολογίσετε το εμβαδόν του τριγώνου ΑΒΓ. \monades{12}
+\end{alist}

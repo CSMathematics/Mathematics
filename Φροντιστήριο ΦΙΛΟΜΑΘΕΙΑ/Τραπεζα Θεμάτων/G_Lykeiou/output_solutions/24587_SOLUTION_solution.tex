@@ -1,0 +1,169 @@
+\Askhsh{24587_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Διαφορικός Λογισμός - Λογαριθμικές Συναρτήσεις - Γεωμετρικές Εφαρμογές]
+\end{ylh}
+
+\begin{alist}
+    \item []
+    \begin{wrapfigure}[20]{r}{8cm}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -1, xmax = 6,
+        ymin = -2, ymax = 4,
+        xtick = {-1,1,2,3,4,5,6},
+        ytick = {-2,-1,1,2,3,4},
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 8cm, height = 5cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    ]
+        \addplot[very thick, maincolor, domain=-1:6] {x};
+        \node[maincolor, above right] at (axis cs:3,3) {$y=x$};
+
+        \addplot[very thick, secondarycolor, domain=0.01:6] {ln(x)};
+        \node[secondarycolor, below right] at (axis cs:4,1.5) {$y=\ln x$};
+    \end{axis}
+    \end{tikzpicture}
+    \end{wrapfigure}
+    Είναι $d(M, \varepsilon) = \sqrt{2}|x_0 - \ln x_0|$.
+    Αρκεί λοιπόν να αποδείξουμε ότι $x_0 - \ln x_0 > 0$.
+
+    \onoma{$1^{ος}$ τρόπος:}
+    Γνωρίζουμε ότι $x - \ln x \ge 0$ για κάθε $x > 0$, διότι χρησιμοποιώντας τις γραφικές παραστάσεις των συναρτήσεων $g(x) = x$ και $\varphi(x) = \ln x$, παρατηρούμε ότι η $C_g$ βρίσκεται επάνω από την $C_\varphi$.
+
+    \onoma{$2^{ος}$ τρόπος:}
+    Ως γνωστόν ότι $\ln x \le x - 1$ για κάθε $x > 0$.
+    Αλλά $x - 1 < x$ για κάθε $x \in \mathbb{R}$.
+    Άρα $\ln x < x$ για κάθε $x > 0 \Leftrightarrow x - \ln x > 0$ για κάθε $x > 0$.
+    Επομένως, είναι $d(M, \varepsilon) = \sqrt{2}(x_0 - \ln x_0)$.
+    \monades{}
+
+    \item []
+    \begin{rlist}
+        \item []
+        \begin{wrapfigure}[20]{r}{8cm}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = {$x$},
+            ylabel = {$y$},
+            xmin = -1, xmax = 7,
+            ymin = -4, ymax = 4,
+            xtick = {-1,1,2,3,4,5,6,7},
+            ytick = {-4,-3,-2,-1,1,2,3,4},
+            grid = both,
+            grid style = {gray!30},
+            samples = 100,
+            width = 8cm, height = 5cm,
+            tick label style = {font=\scriptsize},
+            every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+            every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        ]
+            % Line epsilon (y=x) - thick, black
+            \addplot[very thick, black, domain=-1:7] {x};
+            \node[black, above right] at (axis cs:5,4) {$\varepsilon$}; % Label epsilon
+
+            % Curve Cf (y=2ln(x)-x) - thick, maincolor (green)
+            \addplot[very thick, maincolor, domain=0.01:7] {2*ln(x) - x};
+            \node[maincolor, below right] at (axis cs:4,-2) {$C_f$}; % Label Cf
+
+            % Point M(1,-1) - secondarycolor dot
+            \addplot[only marks, mark=*, mark size=2pt, secondarycolor] coordinates {(1,-1)};
+            \node[secondarycolor, below left] at (axis cs:1,-1) {$M$}; % Label M
+
+            % Point d(0,0) - black dot
+            \addplot[only marks, mark=*, mark size=2pt, black] coordinates {(0,0)};
+            \node[black, below left] at (axis cs:0,0) {$d$}; % Label d
+
+            % Perpendicular line from M to d (dashed, secondarycolor)
+            \draw[secondarycolor, dashed, very thick] (axis cs:1,-1) -- (axis cs:0,0);
+
+            % Right angle symbol at d(0,0)
+            \begin{scope}[shift={(axis cs:0,0)}, rotate=45]
+                \draw[black] (0.1,0) -- (0.1,0.1) -- (0,0.1);
+            \end{scope}
+
+        \end{axis}
+        \end{tikzpicture}
+        \end{wrapfigure}
+        Θεωρούμε την συνάρτηση $d(x) = \sqrt{2}(x - \ln x), x > 0$. Η συνάρτηση $d$ είναι παραγωγίσιμη με $d'(x) = \sqrt{2}\left(1 - \frac{1}{x}\right) = \sqrt{2}\frac{x-1}{x}$, $x > 0$ και
+        \[
+        d'(x) = 0 \Leftrightarrow x - 1 = 0 \Leftrightarrow x = 1
+        \]
+        \[
+        d'(x) > 0 \Leftrightarrow x - 1 > 0 \Leftrightarrow x > 1
+        \]
+        \[
+        d'(x) < 0 \overset{x > 0}{\Leftrightarrow} x - 1 < 0 \Leftrightarrow x < 1
+        \]
+        Η $d$ είναι συνεχής στο διάστημα $(0,1]$, με $d'(x) < 0$ για κάθε $x \in (0,1)$. Άρα η $d$ είναι γνησίως φθίνουσα στο $(0,1]$.
+        Η $d$ είναι συνεχής στο διάστημα $[1,+\infty)$, με $d'(x) > 0$ για κάθε $x \in (1,+\infty)$. Άρα η $d$ είναι γνησίως αύξουσα στο $[1,+\infty)$.
+        Επομένως η συνάρτηση $d$ παρουσιάζει στο $x_0 = 1$ ολικό ελάχιστο.
+        Αλλά $f'(1) = -1$.
+        Έτσι, το σημείο της $C_f$ το οποίο απέχει την ελάχιστη απόσταση από την ευθεία με εξίσωση $y = x$, είναι το $M(1, -1)$.
+        \monades{}
+
+        \item Η ελάχιστη απόσταση του σημείου από την ευθεία είναι $d(1) = \sqrt{2}$.
+        \monades{}
+    \end{rlist}
+
+    \item []
+    \begin{wrapfigure}[20]{r}{8cm}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -1, xmax = 7,
+        ymin = -4, ymax = 4,
+        xtick = {-1,1,2,3,4,5,6,7},
+        ytick = {-4,-3,-2,-1,1,2,3,4},
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 8cm, height = 5cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    ]
+        % Line epsilon (y=x) - thick, black
+        \addplot[very thick, black, domain=-1:7] {x};
+        \node[black, above right] at (axis cs:5,4) {$\varepsilon$}; % Label epsilon
+
+        % Curve Cf (y=2ln(x)-x) - thick, maincolor (green)
+        \addplot[very thick, maincolor, domain=0.01:7] {2*ln(x) - x};
+        \node[maincolor, below right] at (axis cs:4,-2) {$C_f$}; % Label Cf
+
+        % Point M(1,-1) - secondarycolor dot
+        \addplot[only marks, mark=*, mark size=2pt, secondarycolor] coordinates {(1,-1)};
+        \node[secondarycolor, below left] at (axis cs:1,-1) {$M$}; % Label M
+
+        % Line zeta (y=x-2) - dashed, very thick, secondarycolor (red)
+        \addplot[dashed, very thick, secondarycolor, domain=-1:7] {x-2};
+        \node[secondarycolor, above right] at (axis cs:5,2.5) {$\zeta$}; % Label zeta
+    \end{axis}
+    \end{tikzpicture}
+    \end{wrapfigure}
+    Είναι $f'(x) = \frac{2}{x} - 1, x > 0$.
+    Έστω $x_1 \in (0, +\infty)$ η τετμημένη σημείου της $f$, στο οποίο η εφαπτομένη της $C_f$ είναι παράλληλη με την ευθεία $y = x$. Τότε έχουμε:
+    \[
+    f'(x_1) = 1 \Leftrightarrow \frac{2}{x_1} - 1 = 1 \Leftrightarrow \frac{2}{x_1} = 2 \Leftrightarrow x_1 = 1.
+    \]
+    Επιπλέον είναι $f(1) = -1$.
+    Η εφαπτομένη της $C_f$ στο σημείο $M(1,-1)$ είναι η ευθεία
+    \[
+    \zeta: y - f(1) = f'(1)(x - 1) \Leftrightarrow y + 1 = 1 \cdot (x - 1) \Leftrightarrow y = x - 2.
+    \]
+    Επομένως, η ευθεία $\zeta$ είναι η εφαπτομένη της $C_f$ στο σημείο $M(1,-1)$, η οποία είναι παράλληλη με την ευθεία $\varepsilon$.
+    Το σημείο $M(1,-1)$, είναι το ίδιο σημείο του ερωτήματος β)i.
+    \monades{}
+\end{alist}

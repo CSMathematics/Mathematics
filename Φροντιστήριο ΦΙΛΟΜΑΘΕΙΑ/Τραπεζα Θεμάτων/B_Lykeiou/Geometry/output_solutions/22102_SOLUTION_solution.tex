@@ -1,0 +1,51 @@
+\Askhsh{22102_SOLUTION}{1}
+\begin{ylh}{1}
+    \item Γεωμετρία: Όμοια τρίγωνα.
+\end{ylh}
+\begin{wrapfigure}[11]{r}{6.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Ορισμός σημείων
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(2.5,0){A}
+        \tkzDefPoint(7,0){G} % G for Gamma (Γ)
+        \tkzDefPoint(2.5,1.6){B}
+        % Το Δ βρίσκεται στην ευθεία OB και στην κάθετο στο Γ
+        \tkzInterLL(O,B)(G,tkzPoint(7,1)) \tkzGetPoint{D}
+        
+        % Σχεδίαση
+        \tkzDrawLine[add = 0 and 0.1, black!70](O,D) % Ηλιακή ακτίνα
+        \tkzDrawSegment[dashed](O,G) % Έδαφος
+        
+        % Μαθητής (ΑΒ)
+        \tkzDrawSegment[thick, maincolor](A,B) 
+        \tkzDrawCircle[maincolor, fill=maincolor!20](B, 0.15)
+
+        % Δέντρο (ΓΔ)
+        \tkzDrawSegment[line width=2pt, brown](G,D) % Κορμός
+        \tkzDefMidPoint(G,D) \tkzGetPoint{M}
+        \tkzDefShiftPoint[M](90:{\tkzDistance{G}{D}/2}) \tkzGetPoint{D_center}
+        \fill[green!40!black] (D_center) ellipse (1cm and 1.5cm);
+
+        % Ορθές γωνίες
+        \tkzMarkRightAngle[size=0.2](O,A,B)
+        \tkzMarkRightAngle[size=0.2](O,G,D)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoints[below](O,A)
+        \tkzLabelPoint[below](G){Γ}
+        \tkzLabelPoint[above left, maincolor](B){B}
+        \tkzLabelPoint[above, green!40!black](D){Δ}
+
+        % Ετικέτες διαστάσεων
+        \draw [decorate,decoration={brace,amplitude=4pt,mirror},yshift=-4pt] (0,0) -- (2.5,0) node [black,midway,yshift=-8pt] {\footnotesize 2 m};
+        \draw [decorate,decoration={brace,amplitude=4pt,mirror},yshift=-4pt] (2.5,0) -- (7,0) node [black,midway,yshift=-8pt] {\footnotesize 5 m};
+        \draw [decorate,decoration={brace,amplitude=4pt},xshift=4pt] (2.5,0) -- (2.5,1.6) node [black,midway,xshift=22pt] {\footnotesize 1,60 m};
+    \end{tikzpicture}
+\end{wrapfigure}
+Ένας μαθητής έχει ύψος ΑΒ = 1,60 m και στέκεται στη θέση Α, ενώ στη θέση Γ βρίσκεται ένα δέντρο, όπως φαίνεται στο παραπάνω σχήμα. Ο μαθητής και το δέντρο είναι κάθετοι στο έδαφος. Μια συγκεκριμένη χρονική στιγμή, η σκιά του μαθητή είναι το τμήμα ΟΑ μήκους 2 m και η απόσταση του μαθητή από το δέντρο είναι ΑΓ = 5 m. Η σκιά του δέντρου φτάνει επίσης στο σημείο Ο.
+
+\begin{alist}
+\item Να υπολογίσετε το ύψος ΓΔ του δέντρου. \monades{13}
+\item Καθώς ο ήλιος κινείται κατά τη διάρκεια της ημέρας, τα μήκη των σκιών αλλάζουν. Θα μπορούσε ο μαθητής να χρησιμοποιήσει την ίδια γεωμετρική μέθοδο για να μετρήσει το ύψος του δέντρου κάποια άλλη ώρα της ημέρας; Να αιτιολογήσετε την απάντησή σας. \monades{12}
+\end{alist}

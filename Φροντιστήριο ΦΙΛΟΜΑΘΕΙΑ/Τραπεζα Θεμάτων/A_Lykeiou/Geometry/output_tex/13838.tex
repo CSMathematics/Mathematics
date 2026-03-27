@@ -1,0 +1,64 @@
+\Askhsh{13838}{4}
+\begin{ylh}{1}
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.6. Εφαρμογές στα τρίγωνα
+    \item 5.10. Τραπέζιο
+    \item 5.11. Ισοσκελές τραπέζιο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 13838.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται ισοσκελές τρίγωνο ΑΒΓ (ΑΒ=ΑΓ), με Κ, Μ τα μέσα των πλευρών ΑΒ και ΑΓ αντίστοιχα. Η ευθεία που διέρχεται από τα σημεία Κ και Μ τέμνει τις εξωτερικές διχοτόμους των γωνιών Β και Γ στα σημεία Η και Ζ αντίστοιχα, όπως φαίνεται στο παρακάτω σχήμα.
+
+\begin{alist}
+\item Να αποδείξετε ότι το τετράπλευρο ΚΜΓΒ είναι ισοσκελές τραπέζιο. \monades{11}
+
+\item Να αποδείξετε ότι το τετράπλευρο ΒΓΖΗ είναι ισοσκελές τραπέζιο. \monades{14}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(2,4){A}
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDefMidPoint(A,C) \tkzGetPoint{M}
+
+\tkzDefLine[bisector out](A,B,C) \tkzGetPoint{extB}
+\tkzDefLine[bisector out](A,C,B) \tkzGetPoint{extC}
+
+% KM intersects external bisectors at H, Z
+\tkzInterLL(K,M)(B,extB) \tkzGetPoint{H_temp}
+\tkzInterLL(K,M)(C,extC) \tkzGetPoint{Z_temp}
+
+% Wait! "εξωτερικές διχοτόμους των γωνιών Β και Γ στα σημεία Η και Ζ", let's make sure H is near B and Z is near C.
+\tkzDefPointBy[projection=onto B--extB](K) \tkzGetPoint{H_verify} % Should just be intersecting lines.
+% Let's manually draw it to avoid messy intersection of parallel or diverging lines if defined wrong
+\tkzInterLL(K,M)(B,extB) \tkzGetPoint{H}
+\tkzInterLL(K,M)(C,extC) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (H)--(Z);
+\draw[l3] (B)--(H);
+\draw[l3] (C)--(Z);
+
+\tkzDefPointOnLine[pos=-0.5](B,A) \tkzGetPoint{Bx}
+\tkzDefPointOnLine[pos=-0.5](C,A) \tkzGetPoint{Cx}
+\draw[l3, ->] (B)--(Bx) node[left] {$x$};
+\draw[l3, ->] (C)--(Cx) node[right] {$y$};
+
+\tkzDrawPoints(A,B,C,K,M,H,Z)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[above left](K){$K$}
+\tkzLabelPoint[above right](M){$M$}
+\tkzLabelPoint[left](H){$H$}
+\tkzLabelPoint[right](Z){$Z$}
+\end{tikzpicture}
+\end{center}
+\end{alist}

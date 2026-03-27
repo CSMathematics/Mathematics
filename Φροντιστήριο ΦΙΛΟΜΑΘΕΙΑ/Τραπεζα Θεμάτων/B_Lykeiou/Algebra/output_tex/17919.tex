@@ -1,0 +1,41 @@
+% ===================================================================
+%  Αρχείο: 17919_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Στο παρακάτω σχήμα δίνεται τμήμα της γραφικής παράστασης της συνάρτησης $f(x) = \frac{1}{4}x^3 - x$, $x \in \mathbb{R}$ και η ευθεία που διέρχεται από τα σημεία $A\left(1, -\frac{3}{4}\right)$ και $B(4, -3)$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, >=latex]
+    \draw[very thin, color=gray!30] (-2.5,-3.5) grid (4.5,4.5);
+    \draw[->] (-2.5,0) -- (5,0) node[right] {$x$};
+    \draw[->] (0,-3.5) -- (0,5) node[above] {$y$};
+    
+    \foreach \x in {-2,-1,1,2,3,4}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {-3,-2,-1,1,2,3,4}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = 0.25*x^3 - x  for x >= 0
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=0:3.2] plot (\x, {0.25*\x*\x*\x - \x}) node[above right] {$C_f$};
+    
+    % Points A, B
+    \filldraw (1,-0.75) circle (1.5pt) node[above right] {$A$};
+    \filldraw (4,-3) circle (1.5pt) node[below left] {$B$};
+    
+    % Line AB: y = -0.75x
+    \draw[thick, red] (0,0) -- (4.2,-3.15);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να βρείτε την εξίσωση της ευθείας $AB$. \monades{6}
+\item \begin{rlist}
+\item Να αποδείξετε ότι $f(-x) = -f(x)$ για κάθε $x \in \mathbb{R}$. \monades{5}
+\item Να μεταφέρετε στην κόλλα σας το σχήμα και να συμπληρώσετε τη γραφική παράσταση της $f$ για $x < 0$. \monades{6}
+\end{rlist}
+\item Αν η ευθεία $AB$ έχει εξίσωση $y = -\frac{3}{4}x$, με χρήση του β) ερωτήματος ή με όποιον άλλο τρόπο θέλετε, να βρείτε τα κοινά σημεία της ευθείας με την γραφική παράσταση της $f$. \monades{8}
+\end{alist}

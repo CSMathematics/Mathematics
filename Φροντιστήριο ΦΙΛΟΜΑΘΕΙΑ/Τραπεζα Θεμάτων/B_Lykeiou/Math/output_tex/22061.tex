@@ -1,0 +1,91 @@
+\Askhsh{22061}{4}
+\begin{ylh}{1}
+    \item 1.4. Συντεταγμένες στο Επίπεδο
+    \item 2.1. Εξίσωση Ευθείας
+    \item 3.1 Ο Κύκλος.
+\end{ylh}
+\begin{wrapfigure}[19]{r}{7cm}
+    \centering
+    % Define alpha_val for plotting purposes (e.g., a=4 for clear visualization)
+    \def\alpha_val{4}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = {$x$},
+            ylabel = {$y$},
+            xmin = -0.5, xmax = \alpha_val+0.5,
+            ymin = -0.5, ymax = \alpha_val+0.5,
+            xtick = {0,\alpha_val},
+            ytick = {0,\alpha_val},
+            grid = none,
+            samples = 100,
+            width = 7cm, height = 7cm,
+            tick label style = {font=\scriptsize},
+            every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+            every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+            axis line style={-Stealth},
+            clip=false % Allows labels to go outside axis box
+        ]
+            % Define coordinates for the vertices of the square and other points
+            \coordinate (A) at (axis cs: 0,\alpha_val);
+            \coordinate (B) at (axis cs: 0,0);
+            \coordinate (G) at (axis cs: \alpha_val,0); % Gamma
+            \coordinate (D) at (axis cs: \alpha_val,\alpha_val); % Delta
+            % M is the midpoint of Gamma-Delta
+            \coordinate (M) at (axis cs: \alpha_val, \alpha_val/2);
+            % N is the intersection of AM and BN. Its coordinates are (2a/5, 4a/5)
+            \coordinate (N) at (axis cs: {2*\alpha_val/5}, {4*\alpha_val/5});
+
+            % Draw the square ABGD
+            \draw[black, very thick] (B) -- (G) -- (D) -- (A) -- cycle;
+
+            % Draw dashed lines for AM and BN
+            \draw[secondarycolor, dashed] (A) -- (M);
+            \draw[secondarycolor, dashed] (B) -- (N); % BN is shown as a dashed line from B to N
+
+            % Mark points as filled circles
+            \fill (A) circle (1.5pt);
+            \fill (B) circle (1.5pt);
+            \fill (G) circle (1.5pt);
+            \fill (D) circle (1.5pt);
+            \fill (M) circle (1.5pt);
+            \fill (N) circle (1.5pt);
+
+            % Labels for points
+            \node[above left, inner sep=1pt] at (A) {A$(0,\alpha)$};
+            \node[below left, inner sep=1pt] at (B) {B$(0,0)$};
+            \node[below right, inner sep=1pt] at (G) {$\Gamma(\alpha,0)$};
+            \node[above right, inner sep=1pt] at (D) {$\Delta(\alpha,\alpha)$};
+            \node[below right, inner sep=1pt] at (M) {M};
+            \node[above right, inner sep=1pt] at (N) {N};
+
+            % Draw the right angle symbol at N
+            % Calculate unit vectors along NM and NB directions for the right angle mark
+            % Vector from N towards M: (M_x - N_x, M_y - N_y) = (a - 2a/5, a/2 - 4a/5) = (3a/5, -3a/10)
+            % Unit vector is proportional to (2, -1) -> (2/sqrt(5), -1/sqrt(5))
+            % Vector from N towards B: (B_x - N_x, B_y - N_y) = (0 - 2a/5, 0 - 4a/5) = (-2a/5, -4a/5)
+            % Unit vector is proportional to (-1, -2) -> (-1/sqrt(5), -2/sqrt(5))
+            \pgfmathsetmacro{\smark_k}{0.15*\alpha_val/sqrt(5)} % Scale factor for the square sides
+
+            \draw[maincolor, line width=0.7pt, fill=maincolor!20]
+                % First point: N + s_mark_k * (2, -1)
+                ($(N) + (\smark_k * 2, \smark_k * -1)$)
+                % Second point: N + s_mark_k * (2, -1) + s_mark_k * (-1, -2)
+                -- ($(N) + (\smark_k * 2 + \smark_k * -1, \smark_k * -1 + \smark_k * -2)$)
+                % Third point: N + s_mark_k * (-1, -2)
+                -- ($(N) + (\smark_k * -1, \smark_k * -2)$);
+        \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Δίνεται τετράγωνο ΑΒΓΔ με μήκος πλευράς $\alpha$ ($\alpha > 0$) και κορυφές $A(0, \alpha)$, $B(0,0)$, $\Gamma(\alpha, 0)$ και $\Delta(\alpha, \alpha)$. Το $M$ είναι το μέσο της πλευράς $\Gamma\Delta$ και το τμήμα $BN$ είναι κάθετο στο τμήμα $AM$, όπως φαίνεται στο σχήμα.
+
+\begin{alist}
+    \item Να βρείτε τις εξισώσεις των ευθειών:
+    \begin{rlist}
+        \item AM \monades{5}
+        \item BN \monades{5}
+    \end{rlist}
+    \item Να βρείτε τις συντεταγμένες του σημείου Ν. \monades{5}
+    \item Να αποδείξετε ότι το σημείο Ν ανήκει σε κύκλο με κέντρο $\Gamma$ και ακτίνα ίση με $\alpha$. Να βρείτε την εξίσωση του κύκλου αυτού. \monades{10}
+\end{alist}

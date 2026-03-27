@@ -1,0 +1,23 @@
+\begin{tikzpicture}[scale=0.8]
+    % Grid
+    \draw[help lines, gray!30] (0,0) grid (8,10);
+    
+    % Axes
+    \draw[->, thick] (-0.5,0) -- (8.5,0) node[right] {$t \text{ ημέρες}$};
+    \draw[->, thick] (0,-0.5) -- (0,10.5) node[above] {$Q(t) \text{ (lt)}$};
+    
+    % Function Q(t) = 8 * 2^{-t/2}
+    \draw[ultra thick, blue, domain=0:7.5, samples=100] plot (\x, {8*2^(-\x/2)});
+    
+    % Key Points
+    \filldraw (0,8) circle (2.5pt) node[left] {$8$};
+    \foreach \t/\q in {2/4, 4/2} {
+        \filldraw (\t,\q) circle (2pt);
+        \draw[dashed] (\t,\q) -- (\t,0) node[below] {$\t$};
+        \draw[dashed] (\t,\q) -- (0,\q) node[left] {$\q$};
+    }
+    
+    % Origin
+    \node[below left] at (0,0) {$0$};
+
+\end{tikzpicture}

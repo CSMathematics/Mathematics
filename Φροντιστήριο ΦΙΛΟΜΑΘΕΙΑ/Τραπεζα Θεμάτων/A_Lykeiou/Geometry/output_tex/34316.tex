@@ -1,0 +1,73 @@
+\Askhsh{34316}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.4. 3ο Κριτήριο ισότητας τριγώνων
+    \item 3.14. Σχετικές θέσεις ευθείας και κύκλου
+    \item 4.8. Άθροισμα γωνιών κυρτού ν-γώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34316.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται κύκλος κέντρου Ο και διάμετρός του ΑΒ. Έστω Γ το μέσο ενός ημικυκλίου του, Δ τυχαίο σημείο του άλλου ημικυκλίου του και Α$\widehat{\Gamma}$Β = Α$\widehat{\Delta}$Β = 90\textsuperscript{0}. Στην προέκταση της ΔΒ προς το μέρος του Β θεωρούμε σημείο Ε ώστε ΒΕ = ΑΔ.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+
+\begin{alist}
+\item
+  οι γωνίες Γ$\widehat{Α}$Δ και Γ$\widehat{Β}$Ε είναι ίσες, \monades{6}
+\item
+  τα τρίγωνα ΑΔΓ και ΒΕΓ είναι ίσα, \monades{7}
+\item
+  η ΓΔ είναι κάθετη στην ΓΕ. \monades{6}
+
+\item Να αιτιολογήσετε γιατί, στην περίπτωση που το σημείο Δ είναι αντιδιαμετρικό του Γ, η ΓΕ είναι εφαπτόμενη του κύκλου. \monades{6}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(-2,0){A}
+\tkzDefPoint(2,0){B}
+\tkzDrawCircle(O,A)
+\tkzDefPoint(0,2){C} % C is midpoint of top semicircle
+
+% D is random point on bottom semicircle. Angle from A = -40 degrees (for example)
+\tkzDefPointBy[rotation=center O angle -50](B) \tkzGetPoint{D}
+
+% E is on extension of DB towards B, BE = AD.
+% Let's find length of AD.
+\tkzCalcLength(A,D) \tkzGetLength{rAD}
+% E is on line DB. Vector DB = B - D.
+% We extend past B by length \rAD.
+\tkzDefPointOnLine[pos=1.4](D,B) \tkzGetPoint{E_temp}
+% More precisely, use translation or calculation:
+\tkzDefPointBy[homothety=center B ratio \rAD/tkzLength(D,B)](E_temp) \tkzGetPoint{E_wrong} % no, this doesn't work usually.
+% Let's just draw E approximate or use compass
+\tkzInterLC[R](D,B)(B,\rAD pt) \tkzGetPoints{E}{E_in} % E is outside
+
+\draw[l3] (A)--(B);
+\draw[l3] (D)--(E);
+\draw[l3] (A)--(D);
+\draw[l3] (A)--(C);
+\draw[l3] (B)--(C);
+\draw[l3] (D)--(C);
+\draw[l3] (C)--(E);
+
+\tkzDrawPoints(O,A,B,C,D,E)
+\tkzLabelPoint[below](O){$O$}
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](C){$\Gamma$}
+\tkzLabelPoint[below left](D){$\Delta$}
+\tkzLabelPoint[above right](E){$E$}
+
+\tkzMarkSegments[mark=s|](A,D B,E)
+\end{tikzpicture}
+\end{center}
+\end{alist}
+\end{alist}

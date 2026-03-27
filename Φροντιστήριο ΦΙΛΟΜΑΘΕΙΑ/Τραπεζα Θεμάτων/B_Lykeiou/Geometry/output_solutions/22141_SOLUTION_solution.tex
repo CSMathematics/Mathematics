@@ -1,0 +1,62 @@
+\Askhsh{22141_SOLUTION}{1}
+\begin{ylh}{1}
+    \item[Γεωμετρία Β' Λυκείου]
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Define points by angle and radius from A
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(115:4){B}
+        \tkzDefPoint(35:4){Gamma}
+        % Define E, Delta on the extensions (opposite direction -> angle+180)
+        % A is the midpoint of BE and GammaDelta, since lambda=1/2 implies AE=2AB=8, AD=2AG=8
+        % The question implies AD=2AB, let's make it so. AD = 2 * AGamma = 8
+        \tkzDefPoint(115+180:8){E}
+        \tkzDefPoint(35+180:8){Delta}
+        % Z is the midpoint of AD
+        \tkzDefMidPoint(A,Delta)\tkzGetPoint{Z}
+
+        % Draw segments
+        \tkzDrawSegments[thick](B,E Gamma,Delta B,Gamma Delta,E)
+        \tkzDrawSegment[maincolor, thick](Gamma,Z)
+
+        % Mark equal segments based on image
+        \tkzMarkSegments[mark=|, size=2pt, color=black](A,B A,Gamma)
+        \tkzMarkSegments[mark=|, size=2pt, color=black](A,Z Z,Delta)
+        
+        % Label points
+        \tkzDrawPoints[size=3, fill=black](A,B,Gamma,Delta,E)
+        \t kzDrawPoint[size=3, fill=maincolor](Z)
+        
+        \tkzLabelPoint[above left, font=\small](A){A}
+        \tkzLabelPoint[above left, font=\small](B){B}
+        \tkzLabelPoint[above right, font=\small](Gamma){$\Gamma$}
+        \tkzLabelPoint[below right, font=\small](E){E}
+        \tkzLabelPoint[below left, font=\small](Delta){$\Delta$}
+        \tkzLabelPoint[right, color=maincolor, font=\small](Z){Z}
+
+        % Label lengths
+        \tkzLabelSegment[pos=0.5, above left, font=\small](A,B){4}
+        \tkzLabelSegment[pos=0.5, above, font=\small](B,Gamma){5}
+
+        % Angles phi and omega
+        \tkzMarkAngle[size=0.6](Gamma,A,B)
+        \tkzLabelAngle[pos=0.8](Gamma,A,B){$\phi$}
+        
+        \tkzMarkAngle[fill=maincolor!20, size=0.8](E,A,Gamma)
+        \tkzLabelAngle[pos=1.1, right=-2pt](E,A,Gamma){$\omega$}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται το παρακάτω σχήμα για το οποίο ισχύουν:
+\begin{itemize}
+    \item Τα σημεία Β, Α, Ε και Γ, Α, Δ είναι συνευθειακά.
+    \item Η πλευρά ΒΓ είναι παράλληλη στην ΔΕ (ΒΓ // ΔΕ).
+    \item ΑΒ = ΑΓ = 4 και ΒΓ = 5.
+\end{itemize}
+
+\begin{alist}
+    \item Να αποδείξετε ότι ο λόγος ομοιότητας του τριγώνου ΑΒΓ προς το τρίγωνο ΑΔΕ είναι $\lambda = \dfrac{1}{2}$. \monades{7}
+    \item Αν το εμβαδόν του τριγώνου ΑΒΓ είναι ίσο με 10, να βρείτε το εμβαδόν του τριγώνου ΑΔΕ. \monades{8}
+    \item Θεωρούμε σημείο Ζ της πλευράς ΑΔ τέτοιο, ώστε το εμβαδόν του τριγώνου ΑΒΖ να είναι ίσο με το εμβαδόν του τριγώνου ΑΒΓ. Να αποδείξετε ότι το σημείο Ζ είναι το μέσο του τμήματος ΑΔ. \monades{10}
+\end{alist}

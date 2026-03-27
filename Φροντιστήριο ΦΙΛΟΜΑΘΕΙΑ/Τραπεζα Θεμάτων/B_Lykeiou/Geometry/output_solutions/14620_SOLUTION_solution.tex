@@ -1,0 +1,51 @@
+\Askhsh{14620_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[24]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.6]
+        % Define points according to the image orientation and derived coordinates
+        % A = right angle vertex, bottom left (0,0)
+        % B = top vertex (0, 8*sqrt(5)) -> scaled to (0,8)
+        % Gamma = bottom right vertex (4*sqrt(5), 0) -> scaled to (4,0)
+        % Delta = foot of altitude from A to BGamma
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,8){B_scaled} % B coordinate scaled by 1/sqrt(5)
+        \tkzDefPoint(4,0){Gamma_scaled} % Gamma coordinate scaled by 1/sqrt(5)
+        
+        % Calculate Delta based on B_scaled and Gamma_scaled
+        % Original Delta = (16*sqrt(5)/5, 8*sqrt(5)/5)
+        % Scaled Delta = (16/5, 8/5) = (3.2, 1.6)
+        \tkzDefPoint(3.2,1.6){Delta_scaled}
+
+        % Draw segments of the triangle
+        \tkzDrawSegments(A,B_scaled A,Gamma_scaled B_scaled,Gamma_scaled)
+
+        % Draw the altitude
+        \tkzDrawSegment(A,Delta_scaled)
+
+        % Mark right angles
+        \tkzMarkRightAngle[size=0.2](Gamma_scaled,A,B_scaled) % Right angle at A
+        \tkzMarkRightAngle[size=0.2](A,Delta_scaled,Gamma_scaled) % Right angle at Delta
+
+        % Label points
+        \tkzLabelPoint[left](A){A}
+        \tkzLabelPoint[above](B_scaled){B}
+        \tkzLabelPoint[right](Gamma_scaled){$\Gamma$}
+        \tkzLabelPoint[above right](Delta_scaled){$\Delta$}
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Έστω $\Gamma\Delta=x$, τότε $B\Delta=20-x$ και επειδή
+    \[ A\Delta^2 = B\Delta \cdot \Delta\Gamma \Leftrightarrow 8^2 = (20 - x) \cdot x \]
+    \[ x^2 - 20x + 64 = 0 \]
+    ή
+    \[ x = 4 \text{ ή } x = 16 \]
+    Άρα $\Gamma\Delta=4$ και $B\Delta=16$. Η λύση $\Gamma\Delta=16$ και $B\Delta=4$ απορρίπτεται γιατί $B\Delta > \Gamma\Delta$.
+
+    \item $A\Gamma^2 = B\Gamma \cdot \Gamma\Delta$, άρα $A\Gamma^2 = 20 \cdot 4 = 80$
+    και $A\Gamma = \sqrt{80} = 4\sqrt{5}.$
+    Ομοίως $AB^2 = B\Gamma \cdot B\Delta = 16 \cdot 20 = 320$
+    και $AB = \sqrt{320} = 8\sqrt{5}$
+\end{alist}

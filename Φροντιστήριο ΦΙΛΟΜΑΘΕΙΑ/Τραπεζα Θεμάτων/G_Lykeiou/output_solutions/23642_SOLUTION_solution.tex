@@ -1,0 +1,98 @@
+\Askhsh{23642_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\begin{alist}
+\item [\textalpha)] Έστω $x_1, x_2 \in \mathbb{R}$ με $x_1 < x_2$. Τότε
+\[ \left\{ \begin{array}{l} x_1 < x_2 \\ x_1^3 < x_2^3 \end{array} \right. \Rightarrow x_1^3 + x_1 < x_2^3 + x_2 \Rightarrow x_1^3 + x_1 + 1 < x_2^3 + x_2 + 1 \Rightarrow f(x_1) < f(x_2) \]
+Επομένως, η $f$ είναι γνησίως αύξουσα στο πεδίο ορισμού της.\\
+Εναλλακτική απάντηση:\\
+Η συνάρτηση $f$ είναι παραγωγίσιμη στο $\mathbb{R}$, με $f'(x) = 3x^2 + 1 > 0$ για κάθε $x \in \mathbb{R}$. Επομένως, η $f$ είναι γνησίως αύξουσα στο πεδίο ορισμού της. \monades{X}
+\item [\textbeta)] Παρατηρούμε ότι και οι τρεις γραφικές παραστάσεις διέρχονται από το σημείο $A(0,1)$, το οποίο ανήκει στην γραφική παράσταση της συνάρτησης $f$, διότι $f(0) = 1$. Αλλά
+\begin{itemize}
+    \item Η συνάρτηση στο σχήμα 1 δεν μπορεί να αποτελεί την γραφική παράσταση της συνάρτησης $f$, διότι το πεδίο ορισμού της είναι το διάστημα $[0, +\infty)$.
+    \item Η συνάρτηση στο σχήμα 2 δεν μπορεί να αποτελεί την γραφική παράσταση της συνάρτησης $f$, διότι είναι γνησίως φθίνουσα στο $\mathbb{R}$.
+\end{itemize}
+Επομένως, η $f$ παριστάνεται γραφικά στο σχήμα 3. \monades{X}
+
+\item [\textgamma)]
+\begin{rlist}
+\item Ως γνωστόν, η γραφική παράσταση της $|f|$ αποτελείται από τα τμήματα της $C_f$ που βρίσκονται πάνω στον άξονα $x'x$, πάνω από τον άξονα $x'x$, καθώς επίσης και από τα συμμετρικά, ως προς τον άξονα $x'x$, των τμημάτων της $C_f$ που βρίσκονται κάτω από τον άξονα αυτών. Επομένως, είναι:
+
+\begin{wrapfigure}[15]{r}{8.5cm}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -3.5, xmax = 3.5,
+    ymin = -0.5, ymax = 7.5,
+    xtick = {-3,-2,-1,0,1,2,3},
+    ytick = {1,2,3,4,5,6,7},
+    grid = none,
+    width = 8cm,
+    height = 6cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south east},
+]
+    % Function f(x) = x^3 + x + 1. Approximate root is around -0.6823.
+    \pgfmathsetmacro{\root}{-0.6823}
+    
+    % Plot |f(x)| = |x^3 + x + 1|
+    \addplot[thick, maincolor, domain=-3:\root, samples=100] {- (x^3 + x + 1)};
+    \addplot[thick, maincolor, domain=\root:3, samples=100] {x^3 + x + 1};
+
+    % Label C_{|f|}
+    \node[maincolor, right] at (axis cs:1.8, 6.5) {$C_{|f|}$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+\item Έχουμε την εξίσωση $|f(x)| = 2023$.\\
+Ουσιαστικά, αναζητάμε το πλήθος των κοινών σημείων της $C_{|f|}$ και της οριζόντιας ευθείας $\varepsilon: y = 2023$. Παρατηρώντας την $C_{|f|}$, από το προηγούμενο ερώτημα, βλέπουμε ότι υπάρχουν δύο κοινά σημεία.
+
+\begin{wrapfigure}[15]{r}{8.5cm}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -2.5, xmax = 2.5,
+    ymin = -0.5, ymax = 3, % Adjusted ymax for visual representation of sketch
+    xtick = {}, % No xticks
+    ytick = {}, % No yticks
+    grid = none,
+    width = 8cm,
+    height = 6cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south east},
+]
+    % Function |f(x)| = |x^3 + x + 1|. Using scaled visual representation
+    \pgfmathsetmacro{\root}{-0.6823}
+    \addplot[thick, maincolor, domain=-1.5:\root, samples=100] {- (x^3 + x + 1)};
+    \addplot[thick, maincolor, domain=\root:1.5, samples=100] {x^3 + x + 1};
+
+    % Horizontal line y=2023 (visually at y=2 in this scaled sketch)
+    \addplot[very thick, red!80!black, dashed, domain=-2:2] {2};
+    \node[black] at (axis cs:0, 2.2) {2023}; % Label for the line
+    \node[red!80!black, below right] at (axis cs:1.8, 1.8) {$\varepsilon$}; % Label epsilon
+
+    % Intersection points (approximated visually based on the sketch for y=2)
+    \filldraw[secondarycolor] (axis cs: -1.21, 2) circle (2pt);
+    \filldraw[secondarycolor] (axis cs: 0.68, 2) circle (2pt);
+
+    % Label C_{|f|}
+    \node[maincolor, right] at (axis cs:1.3, 1.8) {$C_{|f|}$};
+    
+    % Origin O
+    \node[below left] at (axis cs:0,0) {O};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+\monades{X}
+\end{rlist}
+\end{alist}

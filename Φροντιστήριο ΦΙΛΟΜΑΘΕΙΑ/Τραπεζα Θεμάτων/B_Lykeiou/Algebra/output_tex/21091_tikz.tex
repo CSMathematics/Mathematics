@@ -1,0 +1,24 @@
+\begin{tikzpicture}[scale=0.8]
+    % Grid
+    \draw[very thin, lightgray!30] (-2,-1) grid (5,6);
+    
+    % Axes
+    \draw[->, thick] (-2.5,0) -- (5.5,0) node[right] {$x$};
+    \draw[->, thick] (0,-1.5) -- (0,6.5) node[above] {$y$};
+    
+    % Function y = 2^x
+    \draw[ultra thick, blue, domain=-2:2.5, samples=100] plot (\x, {2^(\x)});
+    
+    % Points
+    \foreach \x/\y in {0/1, 1/2, 2/4} {
+        \filldraw (0,0) -- (\x,0); % ensure ticks
+        \filldraw[black] (\x,\y) circle (2.5pt);
+        \draw[dashed] (\x,\y) -- (\x,0) node[below] {$\x$};
+        \draw[dashed] (\x,\y) -- (0,\y) node[left] {$\y$};
+    }
+    
+    % Labels
+    \node[below left] at (0,0) {$O$};
+    \node[above left] at (2.5,5.6) {$f(x)=2^x$};
+
+\end{tikzpicture}

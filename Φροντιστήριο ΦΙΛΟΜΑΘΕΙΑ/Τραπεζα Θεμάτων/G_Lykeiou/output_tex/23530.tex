@@ -1,0 +1,61 @@
+\Askhsh{23530}{2}
+\begin{ylh}{1}
+    \item 1.6 Μη πεπερασμένο όριο στο Χο
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.9 Ασύμπτωτες - Κανόνες De l’ Hospital.
+\end{ylh}
+\begin{wrapfigure}[19]{r}{0.6\textwidth} % Adjust number of lines (19) if text wrapping is not ideal
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -3.5, xmax = 4.5,
+    ymin = -4, ymax = 5,
+    xtick = {-3,-2,-1,0,1,2,3,4},
+    ytick = {-3,-2,-1,0,1,2,3,4,5},
+    grid = both,
+    grid style = {gray!30},
+    samples = 200, % More samples for smoother curves
+    width = 9cm, height = 7cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % Origin
+    \node[below left] at (axis cs:0,0) {O};
+
+    % Plot the function C_f (green in the original image -> thirdcolor)
+    % Assuming f(x) = x + e^{-x} based on the problem statements
+    \addplot[very thick, thirdcolor, domain=-3.5:4.5] {x + exp(-x)};
+    \node[thirdcolor, above right, xshift=-0.2cm, yshift=0.1cm] at (axis cs:0.5, 1.5) {$C_f$}; % Label C_f
+
+    % Plot the tangent (\epsilon) (blue in the original image -> maincolor)
+    % Passes through (0,0) and (-1, f(-1)) = (-1, e-1)
+    % Slope is (e-1)/(-1) = 1-e. Equation: y = (1-e)x
+    \addplot[very thick, maincolor, domain=-3.5:0.2] {(1-exp(1))*x}; % Use exp(1) for e
+    \node[maincolor, left, xshift=-0.1cm, yshift=0.2cm] at (axis cs:-2, 3.436) {$(\epsilon)$}; % Label (\epsilon)
+
+    % Plot the asymptote y=x (gray in the original image)
+    \addplot[very thick, gray, domain=-1:4.5] {x};
+    \node[gray, below right, xshift=0.1cm, yshift=-0.1cm] at (axis cs:3.5,3.5) {$y=x$}; % Label y=x
+
+    % Point A(-1, f(-1))
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(-1, 1.718)};
+    \node[above right] at (axis cs:-1, 1.718) {$A$}; % Label A
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση μιας παραγωγίσιμης στο $R$ συνάρτησης $f(x)$ για την οποία γνωρίζουμε τα εξής:
+\begin{itemize}
+    \item στο σημείο $A(-1, f(-1))$ της γραφικής παράστασης της $f$ έχει σχεδιασθεί η εφαπτομένη ευθεία $(\epsilon)$, η οποία διέρχεται από την αρχή των αξόνων.
+    \item η ευθεία $y=x$ είναι ασύμπτωτη της γραφικής παράστασης της $f(x)$ στο $+\infty$.
+\end{itemize}
+
+\begin{alist}
+    \item Αν γνωρίζουμε ότι $f(-1) = e - 1$, να αποδείξετε ότι το $f'(-1) = 1 - e$ και να βρείτε την εξίσωση της εφαπτομένης $(\epsilon)$. \monades{9}
+    \item Να αποδείξετε ότι $\lim_{x \to +\infty} \left(\frac{f(x)}{x}\right) = 1$ και $\lim_{x \to +\infty} (f(x) - x) = 0$. \monades{8}
+    \item Να υπολογίσετε το $\lim_{x \to +\infty} \frac{xf(x)-x^2}{f(x)}$. \monades{8}
+\end{alist}

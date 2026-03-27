@@ -1,0 +1,90 @@
+\Askhsh{36840}{2}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις
+    \item 1.6 Μη πεπερασμένο όριο στο Χο
+    \item 2.1 Η έννοια της παραγώγου.
+\end{ylh}
+\Askhseis{ΘΕΜΑ 2}
+
+Στο παρακάτω σχήμα δίνονται οι γραφικές παραστάσεις 2 παραγωγίσιμων συναρτήσεων των $f$ και $h$. Και οι 2 γραφικές παραστάσεις εφάπτονται του άξονα $x'x$ στο σημείο του $A(6,0)$. Γνωρίζουμε ότι η $f$ παίρνει θετικές τιμές κοντά στο 6 και η $h$ παίρνει αρνητικές τιμές αριστερά του 6 και θετικές τιμές δεξιά του 6.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=0, xmax=7.5,
+    ymin=-1.5, ymax=2.5,
+    xtick={1,2,3,4,5,6,7},
+    ytick={-1,1,2}, % Ο 0 δεν εμφανίζεται συνήθως στην αρχή των αξόνων
+    major tick style={draw=none}, % Αφαίρεση μικρών γραμμών από τα ticks στον άξονα
+    tick label style = {font=\scriptsize},
+    width=9cm, height=6cm,
+    axis line style={-stealth}, % Βέλη στους άξονες
+    clip=false, % Επιτρέπει τη σχεδίαση εκτός του ορίου του άξονα για ετικέτες/σημεία
+]
+    % Καμπύλη για f(x)
+    \addplot[smooth, very thick, maincolor, domain=2:7] coordinates {
+        (2, 1.8)
+        (3, 2.2)
+        (4, 1.6)
+        (5, 0.8)
+        (6, 0)
+        (7, 0.8)
+    };
+    \node[maincolor, above right] at (axis cs:3.5, 2.1) {$C_f$}; % Ετικέτα C_f
+
+    % Σημείο A και διακεκομμένες γραμμές για f(x)
+    \fill[black] (axis cs:6,0) circle (1.5pt); % Σημείο A
+    \node[above right] at (axis cs:6,0) {$A$}; % Ετικέτα A
+    
+    \draw[dotted, gray] (axis cs:2,0) -- (axis cs:2,1.8);
+    \fill[black] (axis cs:2,1.8) circle (1.5pt);
+    \draw[dotted, gray] (axis cs:7,0) -- (axis cs:7,0.8);
+    \fill[black] (axis cs:7,0.8) circle (1.5pt);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=0, xmax=7.5,
+    ymin=-2.5, ymax=2.5,
+    xtick={1,2,3,4,5,6,7},
+    ytick={-2,-1,1,2}, % Ο 0 δεν εμφανίζεται συνήθως στην αρχή των αξόνων
+    major tick style={draw=none}, % Αφαίρεση μικρών γραμμών από τα ticks στον άξονα
+    tick label style = {font=\scriptsize},
+    width=9cm, height=6cm,
+    axis line style={-stealth}, % Βέλη στους άξονες
+    clip=false,
+]
+    % Καμπύλη για h(x)
+    \addplot[smooth, very thick, secondarycolor, domain=5:7] coordinates {
+        (5, -1.8)
+        (6, 0)
+        (7, 2.0)
+    };
+    \node[secondarycolor, above left] at (axis cs:6.5, 1.2) {$C_h$}; % Ετικέτα C_h
+
+    % Σημείο A και διακεκομμένες γραμμές για h(x)
+    \fill[black] (axis cs:6,0) circle (1.5pt); % Σημείο A
+    \node[above right] at (axis cs:6,0) {$A$}; % Ετικέτα A
+    
+    \draw[dotted, gray] (axis cs:5,0) -- (axis cs:5,-1.8);
+    \fill[black] (axis cs:5,-1.8) circle (1.5pt);
+    \draw[dotted, gray] (axis cs:7,0) -- (axis cs:7,2.0);
+    \fill[black] (axis cs:7,2.0) circle (1.5pt);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+    \item Να βρείτε το πεδίο ορισμού κάθε μίας από τις συναρτήσεις $f$ και $h$. \monades{06}
+    \item Να βρείτε, αν υπάρχουν, τα παρακάτω όρια, δικαιολογώντας την απάντησή σας.
+    \begin{rlist}
+        \item $\displaystyle \lim_{x \to 6} \frac{1}{f(x)}$ \monades{07}
+        \item $\displaystyle \lim_{x \to 6} \frac{1}{h(x)}$ \monades{07}
+        \item $\displaystyle \lim_{x \to 6} \frac{f(x)}{x-6}$ \monades{05}
+    \end{rlist}
+\end{alist}

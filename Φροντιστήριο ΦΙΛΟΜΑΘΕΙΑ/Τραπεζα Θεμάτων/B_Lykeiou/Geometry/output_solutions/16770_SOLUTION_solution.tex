@@ -1,0 +1,82 @@
+\Askhsh{16770_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία - Ομοιότητα Τριγώνων - Εμβαδά]
+\end{ylh}
+\begin{wrapfigure}[24]{r}{6cm} % Ο αριθμός γραμμών και το πλάτος μπορεί να χρειαστούν προσαρμογή
+\begin{tikzpicture}[scale=0.9]
+    % Ορίζουμε το O ως την κορυφή
+    \tkzDefPoint(0,5){O}
+
+    % Ορίζουμε σημεία για να καθοδηγήσουμε τις ακτίνες
+    % Χρησιμοποιούμε σχετικές συντεταγμένες για σαφήνεια και συνοχή με την οπτική αναπαράσταση
+    \tkzDefPoint(-4,-0.5){left_guide}  % Σημείο για τον καθορισμό της αριστερής ακτίνας
+    \tkzDefPoint(4,-0.5){right_guide} % Σημείο για τον καθορισμό της δεξιάς ακτίνας
+    \tkzDefPoint(0,0){bottom_center} % Σημείο στην κεντρική ακτίνα
+
+    % Σχεδιάζουμε τις ακτίνες (γραμμές) και τις επισημαίνουμε
+    \tkzDrawLine(O,left_guide)  \tkzLabelLine[below left](O,left_guide){$\chi$}
+    \tkzDrawLine(O,right_guide) \tkzLabelLine[below right](O,right_guide){$\psi$}
+    \tkzDrawLine(O,bottom_center) \tkzLabelLine[below](O,bottom_center){$\delta$}
+
+    % Τοποθετούμε τα σημεία Α και Β στην κεντρική ακτίνα (δ)
+    % OA = 2 μονάδες, OB = 3 μονάδες (αποστάσεις από το O), οπότε OB/OA = 3/2
+    \tkzDefPoint(0,3){A} % Το Α απέχει 2 μονάδες από το O (y=5 έως y=3)
+    \tkzDefPoint(0,2){B} % Το B απέχει 3 μονάδες από το O (y=5 έως y=2)
+
+    % Τοποθετούμε τα σημεία Ε και Δ στις αντίστοιχες ακτίνες τους
+    % OE = 3/2 * OΔ για ομοιότητα (απόσταση από το O)
+    \tkzDefPointOnLine[at=2.5](O,right_guide) \tkzGetPoint{D} % Το OΔ απέχει 2.5 μονάδες από το O
+    \tkzDefPointOnLine[at=3.75](O,left_guide)  \tkzGetPoint{E} % Το OE = 1.5 * OΔ = 1.5 * 2.5 = 3.75 μονάδες από το O
+
+    % Σχεδιάζουμε τα τμήματα EB και AD
+    \tkzDrawSegment(E,B)
+    \tkzDrawSegment(A,D)
+
+    % Σχεδιάζουμε τα σημεία
+    \tkzDrawPoints(O,E,B,A,D)
+
+    % Επισημάνσεις για τα σημεία
+    \tkzLabelPoint[above](O){O}
+    \tkzLabelPoint[above left](E){E}
+    \tkzLabelPoint[left](B){B}
+    \tkzLabelPoint[right](A){A}
+    \tkzLabelPoint[above right](D){$\Delta$}
+
+    % Σημειώνουμε και επισημαίνουμε τις γωνίες E και Δ ως 70 μοίρες
+    % Γωνία OEB
+    \tkzMarkAngle[arc=ll, size=0.5cm, fill=thirdcolor!30](O,E,B)
+    \tkzLabelAngle[pos=0.7](O,E,B){$70^\circ$}
+
+    % Γωνία OΔA
+    \tkzMarkAngle[arc=ll, size=0.5cm, fill=thirdcolor!30](O,D,A)
+    \tkzLabelAngle[pos=0.7](O,D,A){$70^\circ$}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\noindent \OnPar{ΛΥΣΗ} % Χρησιμοποιούμε OnPar για τον τίτλο "ΛΥΣΗ"
+
+\begin{alist}
+    \item Τα τρίγωνα OEB και O$\Delta$A έχουν:
+    \[ \widehat{EOB} = \widehat{\Delta OA} \text{, επειδή η ΟΑ είναι διχοτόμος της γωνίας } \widehat{EO\Delta} \]
+    \[ \widehat{E} = \widehat{\Delta} = 70^\circ \]
+    Επομένως τα τρίγωνα είναι όμοια, γιατί έχουν δύο γωνίες τους ίσες μια προς μια αντίστοιχα. \monades{7}
+
+    \item Αφού τα δύο τρίγωνα είναι όμοια θα έχουν τις ομόλογες πλευρές τους ανάλογες. Οι ομόλογες πλευρές των δύο τριγώνων σημειώνονται στον ακόλουθο πίνακα:
+    \[
+    \begin{array}{|l|c|c|c|}
+        \hline
+        \text{Ίσες γωνίες} & \widehat{E} = \widehat{\Delta} & \widehat{EOB} = \widehat{\Delta OA} & \widehat{B} = \widehat{A} \\
+        \hline
+        \text{Απέναντι πλευρά στο τρίγωνο OEB} & OB & EB & OE \\
+        \hline
+        \text{Απέναντι πλευρά στο τρίγωνο O}\Delta\text{A} & OA & A\Delta & O\Delta \\
+        \hline
+    \end{array}
+    \]
+    Επομένως, θα είναι:
+    \[ \frac{OB}{OA} = \frac{EB}{A\Delta} = \frac{OE}{O\Delta} \] \monades{8}
+
+    \item Τα τρίγωνα OEB και O$\Delta$A είναι όμοια, οπότε ο λόγος των εμβαδών τους ισούται με το τετράγωνο του λόγου ομοιότητας, δηλαδή:
+    \[ \frac{\left(OEB\right)}{\left(O\Delta A\right)} = \PARENS{\frac{OB}{OA}}^2 . \]
+    Άρα $\frac{\left(OEB\right)}{28} = \PARENS{\frac{3}{2}}^2 = \frac{9}{4}$, δηλαδή $\left(OEB\right) = \frac{9}{4} \cdot 28 = 63$ τ.μ. \monades{10}
+\end{alist}

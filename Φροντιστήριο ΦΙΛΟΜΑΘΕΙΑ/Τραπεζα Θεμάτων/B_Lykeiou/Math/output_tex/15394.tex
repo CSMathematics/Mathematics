@@ -1,0 +1,61 @@
+\Askhsh{15394}{4}
+\begin{ylh}{1}
+    \item 2.1. Εξίσωση Ευθείας
+    \item 3.2 Η Παραβολή
+\end{ylh}
+\begin{wrapfigure}[20]{r}{0.6\textwidth} % [lines]{placement}{width}
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Ορισμός σημείων για ευκολία σχεδίασης
+    \coordinate (M) at (1,{2*sqrt(3)});
+    \coordinate (E) at (3,0);
+    \coordinate (B) at (-1,0);
+    \coordinate (H) at (-3,{2*sqrt(3)});
+    \coordinate (O) at (0,0);
+
+    % Άξονες
+    \draw[->, very thick] (-4.5,0) node[below] {$x'$} -- (4.5,0) node[below] {$x$};
+    \draw[->, very thick] (0,-1.5) node[left] {$y'$} -- (0,4.5) node[left] {$y$};
+
+    % Παραβολή (C): y^2 = 12x => y = +/- sqrt(12x)
+    \draw[thirdcolor, thick, smooth] plot[domain=0:3.5, samples=100] (\x, {sqrt(12*\x)});
+    \draw[thirdcolor, thick, smooth] plot[domain=0:3.5, samples=100] (\x, {-sqrt(12*\x)});
+    \node[thirdcolor, right] at (3.5, 2.5) {$(C): y^2 = 12x$};
+
+    % Εφαπτομένη (ε): y = sqrt(3)x + sqrt(3) (maincolor: μπλε)
+    \draw[maincolor, thick] (-2, {-sqrt(3)}) -- (2.5, {2.5*sqrt(3)+sqrt(3)}) node[above left, pos=0.8] {$(\varepsilon)$};
+
+    % Διευθετούσα (δ): x = -3 (secondarycolor: ματζέντα, σύμφωνα με την παλέτα)
+    \draw[secondarycolor, thick] (-3,-1.5) -- (-3,4.5) node[above left, xshift=-1mm] {$(\delta)$};
+
+    % Ευθεία t't μέσω του M παράλληλη στον x'x: y = 2*sqrt(3)
+    \draw[black, thick] (-4.5,{2*sqrt(3)}) node[left] {$t'$} -- (4.5,{2*sqrt(3)}) node[right] {$t$};
+
+    % Σημεία
+    \fill (M) circle (2pt) node[below right, xshift=1mm, yshift=-1mm] {M};
+    \fill (B) circle (2pt) node[below] {B};
+    \fill (H) circle (2pt) node[above left] {H};
+    \fill (E) circle (2pt) node[below right] {E};
+    \fill (O) circle (2pt) node[below left] {O}; % Αρχή των αξόνων
+
+    % Ευθύγραμμα τμήματα MH, ME (γκρι)
+    \draw[gray, thick] (M) -- (H);
+    \draw[gray, thick] (M) -- (E);
+
+    % Διχοτόμος γωνίας (ζ) (secondarycolor: ματζέντα, σύμφωνα με την παλέτα)
+    % Εξίσωση: y = (-1/sqrt(3))x + 7/sqrt(3)
+    \draw[secondarycolor, thick] (-1.5, {8.5/sqrt(3)}) -- (4.5, {2.5/sqrt(3)});
+    \node[secondarycolor, below right, xshift=1mm] at (4.5, {2.5/sqrt(3)}) {$(\zeta)$};
+
+    % Σήμανση γωνίας E M t (secondarycolor: ματζέντα, σύμφωνα με την παλέτα)
+    \draw[secondarycolor, thick, fill=secondarycolor!20, opacity=0.7] (M) ++(0:0.7cm) arc (0:-60:0.7cm) -- cycle;
+\end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα δίνεται η παραβολή $C: y^2 = 12x$ με εστία $E$ και η εφαπτομένη ευθεία $(\varepsilon)$ της $(C)$ στο σημείο της $M(1,2\sqrt{3})$, η οποία τέμνει τον άξονα $x'x$ στο σημείο $B$. Από το σημείο $M$ φέρνουμε ευθεία $t't$ παράλληλη προς τον άξονα $x'x$, η οποία τέμνει την διευθετούσα $(\delta)$ στο σημείο $H$.
+
+\begin{alist}
+\item Να αποδείξετε ότι η $(\varepsilon)$ έχει εξίσωση $y = \sqrt{3} \cdot x + \sqrt{3}$. \monades{6}
+\item Να βρείτε τις συντεταγμένες των σημείων B, H, E. \monades{6}
+\item Να αποδείξετε ότι το τετράπλευρο MEBH είναι ρόμβος. \monades{7}
+\item Να βρείτε την εξίσωση της ευθείας $(\zeta)$ η οποία διχοτομεί την γωνία $E\widehat{M}t$. \monades{6}
+\end{alist}

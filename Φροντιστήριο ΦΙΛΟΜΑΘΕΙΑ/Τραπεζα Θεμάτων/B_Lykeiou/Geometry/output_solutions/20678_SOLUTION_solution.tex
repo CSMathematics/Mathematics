@@ -1,0 +1,119 @@
+\Askhsh{20678_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[21]{r}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define outer rectangle ABCD (A,B,Γ,Δ from image)
+        % A: top-left, B: top-right, Γ: bottom-right, Δ: bottom-left
+        \tkzDefPoint(-4,3){A_outer} % A
+        \tkzDefPoint(4,3){B_outer} % B
+        \tkzDefPoint(4,-3){C_outer} % \Gamma
+        \tkzDefPoint(-4,-3){D_outer} % \Delta
+        
+        % Center O
+        \tkzDefPoint(0,0){O}
+        
+        % Define inner points A', B', Γ', Δ' on the sides as depicted
+        % A' on A_outer B_outer (top side)
+        % B' on B_outer C_outer (right side)
+        % Γ' on C_outer D_outer (bottom side)
+        % Δ' on D_outer A_outer (left side)
+        
+        % Example coordinates for A', B', Γ', Δ' to match visual placement
+        % A' closer to B_outer
+        \tkzDefPoint(2,3){Aprime}
+        % B' closer to C_outer
+        \tkzDefPoint(4,-1){Bprime}
+        % Γ' closer to D_outer
+        \tkzDefPoint(-2,-3){Cprime_inner}
+        % Δ' closer to A_outer
+        \tkzDefPoint(-4,1){Dprime_inner}
+        
+        % Draw outer rectangle
+        \tkzDrawPolygon[line width=0.8pt](A_outer,B_outer,C_outer,D_outer)
+        
+        % Draw inner quadrilateral (A'B'Γ'Δ')
+        \tkzDrawPolygon[line width=0.8pt](Aprime,Bprime,Cprime_inner,Dprime_inner)
+        
+        % Draw diagonals of inner quadrilateral
+        \tkzDrawSegment(Aprime,Cprime_inner)
+        \tkzDrawSegment(Bprime,Dprime_inner)
+        
+        % Labels for outer rectangle (A,B,Γ,Δ)
+        \tkzLabelPoint[above left](A_outer){A}
+        \tkzLabelPoint[above right](B_outer){B}
+        \tkzLabelPoint[below right](C_outer){$\Gamma$}
+        \tkzLabelPoint[below left](D_outer){$\Delta$}
+        
+        % Labels for inner points (A',B',Γ',Δ')
+        \tkzLabelPoint[above](Aprime){A'}
+        \tkzLabelPoint[right](Bprime){B'}
+        \tkzLabelPoint[below](Cprime_inner){$\Gamma'$}
+        \tkzLabelPoint[left](Dprime_inner){$\Delta'$}
+        
+        % Label for center O
+        \tkzLabelPoint[above left](O){O}
+        
+        % Draw points (filled circles)
+        \tkzDrawPoints[fill=black,size=3pt](A_outer,B_outer,C_outer,D_outer,Aprime,Bprime,Cprime_inner,Dprime_inner,O)
+        
+        % Add right angle marks at O (for A'C' and B'D') - the diagram shows this for each corner around O.
+        \tkzMarkRightAngle(Dprime_inner,O,Aprime)
+        \tkzMarkRightAngle(Aprime,O,Bprime)
+        \tkzMarkRightAngle(Bprime,O,Cprime_inner)
+        \tkzMarkRightAngle(Cprime_inner,O,Dprime_inner)
+        
+        % Add single tick marks on OA', OB', OC', OD'
+        \tkzMarkSegments[mark=s_1](O,Aprime O,Bprime O,Cprime_inner O,Dprime_inner)
+        
+    \end{tikzpicture}
+\end{wrapfigure}
+ΛΥΣΗ
+α) Αφού το ορθογώνιο $A'B'\Gamma'\Delta'$ έχει το μισό εμβαδόν από το ορθογώνιο $AB\Gamma\Delta$, θα είναι $(A'B'\Gamma'\Delta') = 2(A'B'\Gamma'\Delta')$.
+\[ \frac{(AB\Gamma\Delta)}{(A'B'\Gamma'\Delta')} = 2. \]
+Αν είναι $\lambda$ ο λόγος ομοιότητας του ορθογωνίου $AB\Gamma\Delta$ προς το ορθογώνιο $A'B'\Gamma'\Delta'$, τότε
+\[ \frac{(AB\Gamma\Delta)}{(A'B'\Gamma'\Delta')} = \lambda^2. \]
+Άρα $\lambda^2 = 2 \implies \lambda = \sqrt{2}$.
+
+\begin{alist}
+    \item [β)] Τα τρίγωνα $AB\Gamma$ και $A'B'\Gamma'$ έχουν $\hat{A_1} = \hat{A'_1}$ ως εντός εκτός και επί τα αυτά μέρη γωνίες των παραλλήλων $AB$, $A'B'$ που τέμνονται από την $A\Gamma$ και $\hat{B} = \hat{B'} = 90^\circ$. Επομένως τα δύο τρίγωνα είναι όμοια, γιατί έχουν δύο γωνίες τους ίσες μία προς μία.
+
+    \item [γ)]
+    \begin{rlist}
+        \item Από το ερώτημα α) έχουμε ότι ο λόγος ομοιότητας των δύο ορθογωνίων είναι $\lambda = \sqrt{2}$, δηλαδή $\frac{AB}{A'B'} = \sqrt{2}$.
+
+        Επιπλέον, από την ομοιότητα των τριγώνων $AB\Gamma$ και $A'B'\Gamma'$ έχουμε ότι $\frac{AB}{A'B'} = \frac{A\Gamma}{A'\Gamma'}$.
+
+        Επομένως $\frac{A\Gamma}{A'\Gamma'} = \sqrt{2}.$
+
+        Όμως $A\Gamma = 40$, άρα $\frac{40}{A'\Gamma'} = \sqrt{2}$ ή $A'\Gamma' = \frac{40}{\sqrt{2}} = \frac{40\sqrt{2}}{2} = 20\sqrt{2}$, δηλαδή η διαγώνιος της φωτογραφίας έχει μήκος $20\sqrt{2}$ cm.
+
+        \item Οι διαγώνιοι του ορθογωνίου $A'B'\Gamma'\Delta'$ έχουν το ίδιο μήκος και διχοτομούνται. Επομένως
+        \[ OA' = OB' = O\Gamma' = O\Delta' = \frac{A'\Gamma'}{2} = \frac{20\sqrt{2}}{2} = 10\sqrt{2}. \]
+    \end{rlist}
+\end{alist}
+Είναι $A'\widehat{O}B' = \Gamma'\widehat{O}\Delta' = 120^\circ$ ως κατακορυφήν. Για το εμβαδόν των τριγώνων $OA'B'$ και $O\Gamma'\Delta'$ ισχύει
+\[ (OA'B') = \frac{1}{2} OA' \cdot OB' \cdot \ημ 120^\circ = \frac{1}{2} \cdot 10\sqrt{2} \cdot 10\sqrt{2} \cdot \frac{\sqrt{3}}{2} = 50\sqrt{3}. \]
+και
+\[ (O\Gamma'\Delta') = \frac{1}{2} O\Gamma' \cdot O\Delta' \cdot \ημ 120^\circ = \frac{1}{2} \cdot 10\sqrt{2} \cdot 10\sqrt{2} \cdot \frac{\sqrt{3}}{2} = 50\sqrt{3}. \]
+Είναι $A'\widehat{O}\Delta' = B'\widehat{O}\Gamma' = 60^\circ$ ως παραπληρωματικές της $A'\widehat{O}B' = 120^\circ$.
+Για το εμβαδόν των τριγώνων $OA'\Delta'$ και $OB'\Gamma'$ ισχύει
+\[ (OA'\Delta') = \frac{1}{2} OA' \cdot O\Delta' \cdot \ημ 60^\circ = \frac{1}{2} \cdot 10\sqrt{2} \cdot 10\sqrt{2} \cdot \frac{\sqrt{3}}{2} = 50\sqrt{3}. \]
+\[ (OB'\Gamma') = \frac{1}{2} OB' \cdot O\Gamma' \cdot \ημ 60^\circ = \frac{1}{2} \cdot 10\sqrt{2} \cdot 10\sqrt{2} \cdot \frac{\sqrt{3}}{2} = 50\sqrt{3}. \]
+Το εμβαδόν της φωτογραφίας είναι
+\[ (A'B'\Gamma'\Delta') = (OA'B') + (O\Gamma'\Delta') + (OA'\Delta') + (OB'\Gamma') = 4 \cdot 50\sqrt{3} = 200\sqrt{3} \text{ cm}^2. \]
+
+2η λύση για το ερώτημα γ)ii.
+
+Το τρίγωνο $OA'\Delta'$ είναι ισοσκελές, αφού $OA' = O\Delta'$ ως μισά των ίσων διαγωνίων του ορθογωνίου $A'B'\Gamma'\Delta'$ και $A'\widehat{O}\Delta' = 60^\circ$. Άρα $O\Delta'A' = O\Delta'A' = (180^\circ - 60^\circ)/2 = 60^\circ$. Όμως η γωνία $B'\widehat{A}'\Delta'$ είναι ορθή, επομένως $O\widehat{A}'B' = 90^\circ - 60^\circ = 30^\circ$.
+Η γωνία $O\widehat{B}'\Gamma'$ του ορθογωνίου τριγώνου $A'B'\Gamma'$ ισούται με $30^\circ$, οπότε η απέναντι πλευρά $A'\Gamma'$ είναι το μισό της υποτείνουσας $A'\Gamma'$, δηλαδή $A'\Gamma' = \frac{A'\Gamma'}{2}$.
+$B'\Gamma' = \frac{A'\Gamma'}{2} = \frac{A'\Gamma'}{2} \cdot \sqrt{3} = \frac{A'\Gamma'}{2} \cdot \sqrt{3}$.
+
+Σύμφωνα με το Πυθαγόρειο θεώρημα στο ορθογώνιο τρίγωνο $A'B'\Gamma'$ έχουμε ότι
+\[ A'B'^2 = A'\Gamma'^2 - B'\Gamma'^2. \]
+Όμως $A'\Gamma' = 20\sqrt{2}$ και $B'\Gamma' = 10\sqrt{2}$, οπότε
+\[ A'B'^2 = (20\sqrt{2})^2 - (10\sqrt{2})^2 = (400 \cdot 2) - (100 \cdot 2) = 800 - 200 = 600 \text{ άρα } A'B' = \sqrt{600} = 10\sqrt{6}. \]
+Το εμβαδόν της φωτογραφίας είναι
+\[ (A'B'\Gamma'\Delta') = A'B' \cdot B'\Gamma' = 10\sqrt{6} \cdot 10\sqrt{2} = 100\sqrt{12} = 100 \cdot 2\sqrt{3} = 200\sqrt{3} \text{ cm}^2. \]

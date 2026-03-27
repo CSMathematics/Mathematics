@@ -1,0 +1,122 @@
+\Askhsh{33598_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+% Required for pgfplots with fillbetween
+\usepackage{pgfplots}
+\usetikzlibrary{intersections,fillbetween}
+\pgfplotsset{compat=1.18} % Set compat mode for pgfplots
+
+\begin{alist}
+\item Η συνάρτηση $f$ είναι γνησίως αύξουσα στο $[0,1]$ οπότε είναι αντιστρέψιμη και το πεδίο ορισμού της $f^{-1}$ είναι το σύνολο τιμών της $f$ δηλαδή το $[f(0), f(1)]$ δηλαδή το $[0,1]$.
+
+\begin{wrapfigure}[20]{r}{8.5cm} % Adjust height based on text and figure size
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -0.1, xmax = 1.1,
+        ymin = -0.1, ymax = 1.1,
+        xtick = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+        ytick = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 8cm, height = 8cm,
+        tick label style = {font=\scriptsize},
+    ]
+        \addplot[very thick, black, domain=-0.1:1.1] {x}; % y=x
+        \addplot[very thick, secondarycolor, domain=0:1] {x^2}; % Example f(x)
+        \addplot[very thick, secondarycolor, domain=0:1] {sqrt(x)}; % Example f^{-1}(x)
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+\item Η γραφική παράσταση της $f^{-1}$ είναι συμμετρική της γραφικής παράστασης της $f$ ως προς την ευθεία $y=x$ όπως φαίνεται στο παρακάτω σχήμα.
+
+\item Αν $\Omega_2$ το χωρίο που περικλείεται μεταξύ του άξονα $xx'$, της ευθείας $x=1$ και της γραφικής παράστασης της $f$, τότε όπως φαίνεται και στο παρακάτω σχήμα να αποδείξετε ότι $\int_0^1 f(x)dx = E(\Omega_2) < (ΟΑΒ) = \frac{(OA) \cdot (OB)}{2} = \frac{1}{2}$.
+\begin{wrapfigure}[25]{r}{8.5cm} % Adjust height
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -0.1, xmax = 1.1,
+        ymin = -0.1, ymax = 1.1,
+        xtick = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+        ytick = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 8cm, height = 8cm,
+        tick label style = {font=\scriptsize},
+    ]
+        \addplot[name path=diag, very thick, black, domain=-0.1:1.1] {x};
+        \addplot[name path=f, very thick, secondarycolor, domain=0:1] {x^2};
+        \addplot[very thick, secondarycolor, domain=0:1] {sqrt(x)}; % Keep for consistency if f^{-1} is part of the problem.
+
+        \addplot[name path=xaxis, draw=none, domain=0:1] {0}; % x-axis line for fillbetween
+        % Shading Omega_1 in the diagram (which the text calls Omega_2)
+        \addplot[fill=maincolor!30, draw=none, opacity=0.8] fill between[of=f and xaxis, soft clip={domain=0:1}]; 
+
+        \node[below left] at (axis cs:0,0) {O};
+        \node[below right] at (axis cs:1,0) {A};
+        \node[above right] at (axis cs:1,1) {B};
+        \node at (axis cs:0.5, 0.1) {$\Omega_1$}; % Label as shown in the diagram
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\item Αν $\Omega_2$ το χωρίο που περικλείεται μεταξύ του άξονα $xx'$, της ευθείας $x=1$ και της γραφικής παράστασης της $f$ και $\Omega_3$ το χωρίο που περικλείεται μεταξύ της ευθείας $y=x$ και της γραφικής παράστασης της $f$ και $\Omega_2$ το χωρίο που περικλείεται μεταξύ του άξονα $xx'$, της ευθείας $x=1$ και της γραφικής παράστασης της $f^{-1}$ όπως φαίνεται στο παρακάτω σχήμα τότε
+\begin{wrapfigure}[35]{r}{8.5cm} % Adjust height
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -0.1, xmax = 1.1,
+        ymin = -0.1, ymax = 1.1,
+        xtick = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+        ytick = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 8cm, height = 8cm,
+        tick label style = {font=\scriptsize},
+    ]
+        \addplot[name path=diag, very thick, black, domain=-0.1:1.1] {x};
+        \addplot[name path=f, very thick, secondarycolor, domain=0:1] {x^2};
+        \addplot[name path=finv, very thick, secondarycolor, domain=0:1] {sqrt(x)};
+
+        % Define paths for boundaries
+        \path[name path=xax_0_1] (axis cs:0,0) -- (axis cs:1,0); % x-axis from 0 to 1
+        \path[name path=yax_0_1] (axis cs:0,0) -- (axis cs:0,1); % y-axis from 0 to 1
+        \path[name path=y1_line] (axis cs:0,1) -- (axis cs:1,1); % line y=1 from x=0 to x=1
+
+        % Omega_1: between f(x), x-axis, x=1
+        \addplot[fill=maincolor!20, draw=none, opacity=0.8] fill between[of=f and xax_0_1, soft clip={domain=0:1}];
+        \node at (axis cs:0.5, 0.1) {$\Omega_1$};
+
+        % Omega_2: between y=x and f(x)
+        \addplot[fill=maincolor!20, draw=none, opacity=0.8] fill between[of=diag and f, soft clip={domain=0:1}];
+        \node at (axis cs:0.5, 0.3) {$\Omega_2$};
+
+        % Omega_3: between f^{-1}(x) and y=x
+        \addplot[fill=maincolor!20, draw=none, opacity=0.8] fill between[of=finv and diag, soft clip={domain=0:1}];
+        \node at (axis cs:0.3, 0.5) {$\Omega_3$};
+
+        % Omega_4: As depicted, area bounded by y=1, x=0, and f^{-1}(x). This is fill between y=1 line and f_inv curve.
+        \addplot[fill=maincolor!20, draw=none, opacity=0.8] fill between[of=y1_line and finv, soft clip={domain=0:1}];
+        \node at (axis cs:0.5, 0.8) {$\Omega_4$};
+
+        % Points
+        \node[below left] at (axis cs:0,0) {O};
+        \node[below right] at (axis cs:1,0) {A};
+        \node[above right] at (axis cs:1,1) {B};
+        \node[above left] at (axis cs:0,1) {$\Gamma$};
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{rlist}
+\item Να αποδείξετε ότι λόγω συμμετρίας $E(\Omega_1) = E(\Omega_4)$ οπότε $\int_0^1 f^{-1}(x)dx = E(\Omega_3) + E(\Omega_4) = (ΟΑΒ) - E(\Omega_1) = (ΟΑΒ) - E(\Omega_2) = 1 - \int_0^1 f(x)dx$.
+\item Να αποδείξετε ότι $E(\Omega_2) = (ΟΑΒ) - E(\Omega_1) = 1 - \int_0^1 f(x)dx$.
+\end{rlist}
+\end{alist}

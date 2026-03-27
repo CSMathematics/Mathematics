@@ -1,0 +1,44 @@
+\Askhsh{20672}{2}
+\begin{ylh}{1}
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα.
+\end{ylh}
+\begin{wrapfigure}[7]{r}{6cm}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(2,0){G} % Gamma
+    \tkzDefPoint(6,0){B}
+
+    \tkzDefPoint(3,0){O1} % Center of C1 (diameter AB)
+    \tkzDefPoint(4,0){O2} % Center of C2 (diameter GB)
+    \tkzDefPoint(1,0){O3} % Center of C3 (diameter AG)
+
+    % Fill the regions
+    \path[fill=maincolor!30] (A) arc (180:0:3cm) -- (B) -- cycle; % Semicircle C1
+    \path[fill=white] (G) arc (180:0:2cm) -- (B) -- cycle; % Semicircle C2 (to subtract)
+    \path[fill=maincolor!30] (A) arc (180:360:1cm) -- (G) -- cycle; % Semicircle C3 (to add)
+
+    % Draw the arcs to ensure borders are visible
+    \tkzDrawArc[color=black](O1,A)(B) % C1 arc
+    \tkzDrawArc[color=black](O2,G)(B) % C2 arc
+    \tkzDrawArc[color=black](O3,A)(G) % C3 arc
+
+    \tkzDrawSegment[dashed](A,B) % Diameter line
+
+    \tkzDrawPoints(A,G,B)
+
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[below](G){$\Gamma$}
+    \tkzLabelPoint[below right](B){B}
+
+    % Labels for semicircles
+    \node at (O1) [above=1cm] {$C_1$};
+    \node at (O2) [above=0.5cm] {$C_2$};
+    \node at (O3) [below=0.5cm] {$C_3$};
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ευθύγραμμο τμήμα $AB = 6$, και σημείο του $\Gamma$, ώστε $B\Gamma = 4$. Στο ίδιο ημιεπίπεδο που ορίζει η $AB$ σχεδιάζουμε τα ημικύκλια $C_1$ και $C_2$ με διαμέτρους $AB$ και $B\Gamma$ αντίστοιχα και στο άλλο ημιεπίπεδο σχεδιάζουμε ημικύκλιο $C_3$ με διάμετρο $A\Gamma$.
+\begin{alist}
+\item Να αποδείξετε ότι τα εμβαδά των ημικυκλίων $C_1$, $C_2$ και $C_3$ είναι $\frac{9\pi}{2}$, $2\pi$ και $\frac{\pi}{2}$ αντίστοιχα. \monades{15}
+\item Να βρείτε το εμβαδόν του σκιασμένου χωρίου. \monades{10}
+\end{alist}

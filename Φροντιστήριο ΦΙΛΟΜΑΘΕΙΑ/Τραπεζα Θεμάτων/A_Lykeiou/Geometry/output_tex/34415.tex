@@ -1,0 +1,61 @@
+\Askhsh{34415}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34415.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται ισοσκελές τρίγωνο ΑΒΓ (ΑΒ=ΑΓ). Οι διχοτόμοι των εξωτερικών γωνιών $\widehat{Β}$ και $\widehat{\Gamma}$ τέμνονται στο σημείο Μ και τα σημεία Κ και Λ είναι αντίστοιχα τα μέσα των πλευρών ΑΒ και ΑΓ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item το τρίγωνο ΒΜΓ είναι ισοσκελές με ΜΒ=ΜΓ, \monades{12}
+
+\item ΜΚ=ΜΛ. \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefTriangle[two angles = 70 and 70](B,C) \tkzGetPoint{A}
+
+% Exterior bisectors of B and C
+\tkzDefPointBy[homothety=center B ratio -0.5](C) \tkzGetPoint{X_B}
+\tkzDefPointBy[homothety=center C ratio -0.5](B) \tkzGetPoint{X_C}
+
+\tkzDefLine[bisector](A,B,X_B) \tkzGetPoint{bisBext}
+\tkzDefLine[bisector](X_C,C,A) \tkzGetPoint{bisCext}
+
+\tkzInterLL(B,bisBext)(C,bisCext) \tkzGetPoint{M}
+
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDefMidPoint(A,C) \tkzGetPoint{L}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (B)--(X_B);
+\draw[l3] (C)--(X_C);
+\draw[l3] (B)--(M)--(C);
+\draw[l3, dashed] (M)--(K);
+\draw[l3, dashed] (M)--(L);
+
+\tkzDrawPoints(A,B,C,M,K,L)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[below](M){$M$}
+\tkzLabelPoint[left](K){$K$}
+\tkzLabelPoint[right](L){$\Lambda$}
+
+\tkzMarkSegments[mark=s|](A,K K,B A,L L,C)
+\tkzMarkSegments[mark=s||](A,B A,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

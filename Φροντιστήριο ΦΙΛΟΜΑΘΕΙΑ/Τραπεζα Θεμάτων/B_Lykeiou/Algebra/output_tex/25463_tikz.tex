@@ -1,0 +1,30 @@
+\begin{tikzpicture}[scale=0.6]
+    % Grid
+    \draw[help lines, dashed, gray!50] (0,0) grid (12,12);
+    
+    % Axes
+    \draw[->, thick] (-0.5,0) -- (12.5,0) node[right] {$x$};
+    \draw[->, thick] (0,-0.5) -- (0,12.5) node[above] {$y$};
+    
+    % Function f(x) = 2 + 2*log2(x+1) -> ln(x+1)/ln(2)
+    \draw[ultra thick, blue, domain=0:11.5, samples=150] plot (\x, {2 + 2*ln(\x+1)/ln(2)}) node[right] {$f(x)$};
+    
+    % Function g(x) = 5 + 2*log2(x+1)
+    \draw[ultra thick, red, domain=0:10.5, samples=150] plot (\x, {5 + 2*ln(\x+1)/ln(2)}) node[above] {$g(x)$};
+    
+    % Key Points f(x)
+    \foreach \x/\y in {0/2, 1/4, 3/6, 7/8} {
+        \filldraw[blue] (\x,\y) circle (3pt);
+    }
+    
+    % Key Points g(x)
+    \foreach \x/\y in {0/5, 1/7, 3/9, 7/11} {
+        \filldraw[red] (\x,\y) circle (3pt);
+    }
+    
+    % Labels
+    \node[below left] at (0,0) {$0$};
+    \foreach \x in {1,...,11} \node[below] at (\x,0) {\scriptsize \x};
+    \foreach \y in {1,...,12} \node[left] at (0,\y) {\scriptsize \y};
+
+\end{tikzpicture}

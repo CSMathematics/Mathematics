@@ -1,0 +1,56 @@
+\Askhsh{22035}{2}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.1. Πολυγωνικά χωρία
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[10]{r}{2.8cm} % The height and width are estimates, adjust as necessary
+    \centering
+    \begin{tikzpicture}[scale=0.04]
+        % Ορισμός των κορυφών Α, Β, Γ
+        \tkzDefPoint(0,80){A} % Σημείο Α
+        \tkzDefPoint(60,80){B} % Σημείο Β
+        \tkzDefPoint(60,0){G}  % Σημείο Γ
+        
+        % Υπολογισμός του σημείου Δ
+        % Η διαγώνιος ΑΓ έχει μήκος sqrt((60-0)^2 + (0-80)^2) = sqrt(3600 + 6400) = sqrt(10000) = 100.
+        % Δεδομένου ότι ΑΔ = ΓΔ και η γωνία Δ είναι 60 μοίρες, το τρίγωνο ΑΔΓ είναι ισόπλευρο.
+        % Συνεπώς, ΑΔ = ΓΔ = ΑΓ = 100.
+        % Βρίσκουμε τις δύο τομές των κύκλων με κέντρα Α και Γ και ακτίνα 100.
+        \tkzInterCC(A,100)(G,100) \tkzGetPoints{D_up}{D_down}
+        \tkzLetPoint{D}{D_down} % Επιλέγουμε το κάτω σημείο για το Δ, όπως στο σχήμα
+        
+        % Σχεδίαση του πολυγώνου ΑΒΓΔ
+        \tkzDrawPolygon(A,B,G,D)
+        
+        % Σχεδίαση της διαγωνίου ΑΓ
+        \tkzDrawSegment(A,G)
+        
+        % Ετικέτες κορυφών
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        
+        % Ετικέτες μηκών πλευρών
+        \tkzLabelSegment[above](A,B){$60 \text{ m}$}
+        \tkzLabelSegment[right](B,G){$80 \text{ m}$}
+        
+        % Σήμανση ορθής γωνίας στο Β
+        \tkzMarkRightAngle(A,B,G)
+        
+        % Σήμανση γωνίας 60 μοιρών στο Δ
+        \tkzMarkAngle[arc=ll,size=1.2cm](G,D,A)
+        \tkzLabelAngle[pos=1.5](G,D,A){$60^\circ$}
+        
+        % Σήμανση ίσων πλευρών ΑΔ και ΓΔ
+        \tkzMarkSegments[mark=s|,size=4pt](A,D G,D)
+        
+    \end{tikzpicture}
+\end{wrapfigure}
+Το τετράπλευρο ΑΒΓΔ του σχήματος παριστάνει την κάτοψη ενός κτήματος με $AB = 60 \text{ m}$, $B\Gamma = 80 \text{ m}$, $\hat{\Delta} = 60^\circ$ και $\hat{B} = 90^\circ$ και $A\Delta = \Gamma\Delta$.
+\begin{alist}
+    \item Να υπολογίσετε το μήκος της διαγωνίου ΑΓ. \monades{09}
+    \item Να αιτιολογήσετε γιατί το τρίγωνο ΑΔΓ είναι ισόπλευρο. \monades{04}
+    \item Να υπολογίσετε το εμβαδόν των τριγώνων ΑΒΓ και ΑΔΓ. Πόσο είναι το συνολικό εμβαδόν του κτήματος; \monades{12}
+\end{alist}

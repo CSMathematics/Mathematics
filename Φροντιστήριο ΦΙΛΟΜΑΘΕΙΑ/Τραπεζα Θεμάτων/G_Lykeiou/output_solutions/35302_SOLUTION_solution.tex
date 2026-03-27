@@ -1,0 +1,95 @@
+\Askhsh{35302_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\begin{wrapfigure}[33]{r}{0.5\textwidth} % The number of lines to wrap, adjusted for content.
+    \centering
+    \vspace{-1.0em} % Adjust vertical spacing for the image to align nicely with text
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = {$x$},
+            ylabel = {$\Psi$}, % Greek Psi for y-axis
+            xmin = -1.5, xmax = 0.5,
+            ymin = -0.5, ymax = 2.5,
+            xtick = {-1, 0},
+            ytick = {1, 2},
+            grid = none,
+            samples = 100,
+            width = 0.48\textwidth, % Adjust width to fit wrapfigure
+            height = 0.45\textwidth, % Adjust height
+            tick label style = {font=\scriptsize},
+            every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+            every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+            clip=false, % Allow labels to extend beyond axis
+        ]
+            % Plot C3: f(x) = e^x (secondarycolor)
+            \addplot[domain=-1.5:0.1, smooth, very thick, secondarycolor, name path=C3plot] {exp(x)};
+            \node[secondarycolor, below left] at (axis cs:-1.2, {exp(-1.2)}) {$C_3$};
+
+            % Plot C1: y = x+1 (thirdcolor)
+            \addplot[domain=-1.5:0.5, smooth, very thick, thirdcolor, name path=C1plot] {x+1};
+            \node[thirdcolor, below right] at (axis cs:0.1, {0.1+1}) {$C_1$};
+
+            % Plot C2: h(x) = e^x+x+1 (maincolor)
+            \addplot[domain=-1.5:0.1, smooth, very thick, maincolor, name path=C2plot] {exp(x)+x+1};
+            \node[maincolor, above right] at (axis cs:-0.5, {exp(-0.5)-0.5+1}) {$C_2$};
+
+            % Plot C4: g(x) = e^x+1 (maincolor!70!black)
+            \addplot[domain=-1.5:0.1, smooth, very thick, maincolor!70!black, name path=C4plot] {exp(x)+1};
+            \node[maincolor!70!black, above left] at (axis cs:-1.2, {exp(-1.2)+1}) {$C_4$};
+
+            % Shaded region between C2 and C4 for x in [-1,0]
+            \addplot[fill=maincolor!30, opacity=0.5] fill between[of=C2plot and C4plot, softclip={domain=-1:0}];
+
+            % Points A, B, E
+            \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,2) (0,1) (-1,0)};
+            \node[above right] at (axis cs:0,2) {$A(0,2)$};
+            \node[below right] at (axis cs:0,1) {$B(0,1)$};
+            \node[below left] at (axis cs:-1,0) {$E(-1,0)$};
+        \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\OnPar{\textalpha)}
+\begin{rlist}
+    \item Η $h$ είναι συνεχής και δύο φορές παραγωγίσιμη στο $(-\infty,0]$ ως άθροισμα εκθετικής με πολυωνυμική.
+    \[ h'(x) = e^x + 1 > 0 \text{ για κάθε } x \le 0. \text{ Άρα η } h \text{ είναι γνησίως αύξουσα στο } (-\infty,0]. \]
+    \[ h''(x) = e^x > 0 \text{ για κάθε } x \le 0. \text{ Άρα η } h \text{ είναι κυρτή ή στρέφει τα κοίλα προς τα πάνω στο } (-\infty,0]. \]
+    \item Η $h$ είναι συνεχής και γνησίως αύξουσα στο $(-\infty,0]$, οπότε το σύνολο τιμών της είναι το $h((-\infty,0]) = \left(\lim_{x \to -\infty} h(x), h(0)\right] = (-\infty,2]$
+    γιατί
+    \[ \lim_{x \to -\infty} h(x) = \lim_{x \to -\infty} (e^x + x + 1) = -\infty, \text{ αφού } \lim_{x \to -\infty} e^x = 0 \text{ και } \lim_{x \to -\infty} (x+1) = -\infty \]
+    \[ h(0) = e^0 + 0 + 1 = 1 + 1 = 2. \]
+\end{rlist}
+
+\OnPar{\textbeta)}
+\begin{rlist}
+    \item Η γραφική παράσταση της $f(x) = e^x$ γνωρίζουμε ότι διέρχεται από το σημείο $B(0,1)$. Η $C_f$ δεν τέμνει τον άξονα $x'x$ και η $f$ είναι γνησίως αύξουσα στο $\mathbb{R}$, άρα και στο $(-\infty,0]$. Επομένως, η γραφική παράσταση $C_3$ είναι η γραφική παράσταση της $f(x) = e^x$.
+    \item Η γραφική παράσταση της $g(x) = e^x + 1$ προκύπτει από τη γραφική παράσταση της $f$ αν αυτή μετατοπιστεί κατά μία μονάδα προς τα πάνω. Ως εκ τούτου, η γραφική παράσταση $C_4$, είναι η γραφική παράσταση της $g(x) = e^x + 1$.
+    \item Οι γραφικές παραστάσεις που απομένουν είναι η $C_1$ και η $C_2$. Παρατηρούμε ότι: Το σημείο της $C_1$ με τετμημένη $x = -1$ έχει αρνητική τεταγμένη. Έχουμε όμως $h(-1) = e^{-1} - 1 + 1 = \frac{1}{e} > 0$. Επομένως το σημείο $(-1, h(-1))$ δεν ανήκει στη $C_1$, άρα η $C_1$ δεν είναι η γραφική παράσταση της $h$. Έχοντας αποκλείσει όλες τις άλλες δυνατότητες, η γραφική παράσταση της $h$ είναι η $C_2$.
+    \item Εναλλακτική λύση για την αντιστοίχιση της $C_2$ στη συνάρτηση $h$ και την απόρριψη της $C_1$\\
+    Η $C_1$ τέμνει τον άξονα $x'x$ σε ένα σημείο με τετμημένη μεγαλύτερη του $-1$, ενώ η $C_2$ τέμνει τον άξονα $x'x$ σε ένα σημείο με τετμημένη μικρότερη του $-1$. Οπότε, για να βρούμε ποια από τις καμπύλες $C_1$ ή $C_2$ είναι η γραφική παράσταση της $h$, αρκεί να εξετάσουμε αν η εξίσωση $h(x) = 0$ έχει ρίζα και να την συγκρίνουμε με το $-1$.
+    \[
+    \left\{
+    \begin{array}{l}
+    h(-2) = e^{-2} - 2 + 1 = \frac{1}{e^2} - 1 < 0 \\
+    h(-1) = e^{-1} - 1 + 1 = \frac{1}{e} > 0
+    \end{array}
+    \right.
+    \text{, οπότε από το θεώρημα Bolzano, }
+    \]
+    έχουμε ότι η $h(x) = 0$ έχει μία τουλάχιστον ρίζα στο $(-2,-1)$. Οπότε η $C_2$ είναι η γραφική παράσταση της $h$.
+\end{rlist}
+
+\OnPar{Τελικά:}
+\begin{rlist}
+    \item Η $C_2$ είναι η γραφική παράσταση της $h$,
+    \item η $C_3$ είναι η γραφική παράσταση της $f$ και
+    \item η $C_4$ είναι η γραφική παράσταση της $g$.
+    \item γ) Το εμβαδόν $E$ του χωρίου που περικλείεται μεταξύ των $C_3$ και $C_4$ και τις κατακόρυφες ευθείες $x=-1$ και $x=0$ ισούται με:
+    \[ E = \int_{-1}^{0} (g(x)-f(x))dx = \int_{-1}^{0} (e^x+1-e^x)dx = \int_{-1}^{0} 1dx = [x]_{-1}^{0} = 0 - (-1) = 1 \tau.\mu. \]
+    Το εμβαδόν $E_1$ του χωρίου που περικλείεται μεταξύ των $C_2$ και $C_3$ και τις κατακόρυφες ευθείες $x=-1$ και $x=0$ ισούται με:
+    \[ E_1 = \int_{-1}^{0} (h(x)-f(x))dx = \int_{-1}^{0} (e^x+x+1-e^x)dx = \int_{-1}^{0} (x+1)dx = \left[\frac{x^2}{2}+x\right]_{-1}^{0} = 0 - \left(\frac{1}{2}-1\right) = \frac{1}{2} \tau.\mu. \]
+    Άρα $E-E_1 = 1 - \frac{1}{2} = \frac{1}{2}$, δηλαδή η καμπύλη $C_2$ χωρίζει το χωρίο που περικλείεται από τις καμπύλες $C_3$ και $C_4$ και τις κατακόρυφες ευθείες $x=-1$ και $x=0$ σε δύο ισεμβαδικά χωρία, εμβαδού $\frac{1}{2} \tau.\mu.$ το καθένα.
+\end{rlist}

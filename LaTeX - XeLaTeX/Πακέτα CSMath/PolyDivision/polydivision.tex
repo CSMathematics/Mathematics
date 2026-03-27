@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{xparse}
+\usepackage{polynom}
+\usepackage[no-math]{fontspec}
+\usepackage{xgreek}
+\let\hbar\relax % Για συμβατότητα με το πακέτο mtpro2
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+
+\setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
+\newfontfamily\titlefont{Century Gothic Bold}
+\newfontfamily\scfont{Nimbus Roman}
+\newfontfamily\notoserif{Noto Serif}
+\newfontfamily\urwgothic{URW Gothic}
+\usepackage{mtpro2}
+% ΑΛΛΑΓΗ 1: Το style=D είναι η διάταξη που φαίνεται στην 1η εικόνα σου
+\polyset{style=D, div=:, vars=x}
+
+\ExplSyntaxOn
+
+\tl_new:N \l_my_dividend_tl
+\tl_new:N \l_my_divisor_tl
+\seq_new:N \l_my_coeff_seq
+\bool_new:N \l_my_first_term_bool
+
+\cs_new_protected:Npn \my_list_to_poly:nN #1#2
+  {
+    \seq_set_from_clist:Nn \l_my_coeff_seq {#1}
+    \tl_clear:N #2
+    \bool_set_true:N \l_my_first_term_bool
+    
+    \int_step_inline:nn { \seq_count:N \l_my_coeff_seq }
+      {
+        \tl_set:Nx \l_tmpa_tl { \seq_item:Nn \l_my_coeff_seq {##1} }
+        \int_set:Nn \l_tmpa_int { \seq_count:N \l_my_coeff_seq - ##1 }
+        
+        \int_compare:nNnF { \l_tmpa_tl } = { 0 }
+          {
+            % Διαχείριση προσήμου
+            \int_compare:nNnTF { \l_tmpa_tl } > { 0 }
+              {
+                \bool_if:NF \l_my_first_term_bool { \tl_put_right:Nn #2 { + } }
+              }
+              {
+                \int_compare:nNnTF { \l_tmpa_tl } = { -1 }
+                  {
+                    \int_compare:nNnF { \l_tmpa_int } = { 0 }
+                      { \tl_put_right:Nn #2 { - } }
+                  }
+                  { }
+              }
+
+            % Διαχείριση Συντελεστή
+            \int_compare:nNnTF { \l_tmpa_int } = { 0 }
+              { \tl_put_right:Nx #2 { \l_tmpa_tl } }
+              {
+                \int_compare:nNnF { \l_tmpa_tl } = { 1 }
+                  {
+                    \int_compare:nNnF { \l_tmpa_tl } = { -1 }
+                      { \tl_put_right:Nx #2 { \l_tmpa_tl } }
+                  }
+              }
+
+            % Διαχείριση x και δύναμης
+            \int_compare:nNnTF { \l_tmpa_int } = { 0 }
+              { }
+              {
+                \int_compare:nNnTF { \l_tmpa_int } = { 1 }
+                  { \tl_put_right:Nn #2 { x } }
+                  { \tl_put_right:Nx #2 { x^{\int_use:N \l_tmpa_int} } }
+              }
+            
+            \bool_set_false:N \l_my_first_term_bool
+          }
+      }
+  }
+
+\NewDocumentCommand{\polydivision}{ m m }
+  {
+    \my_list_to_poly:nN {#1} \l_my_dividend_tl
+    \my_list_to_poly:nN {#2} \l_my_divisor_tl
+    
+    % ΑΛΛΑΓΗ 2: Το \exp_args:NVV ξεπακετάρει τις μεταβλητές πριν τις δώσει στο polylongdiv
+    \exp_args:NVV \polylongdiv \l_my_dividend_tl \l_my_divisor_tl
+  }
+
+\ExplSyntaxOff
+
+\begin{document}
+
+% Δοκίμασε ακριβώς τις διαιρέσεις των εικόνων σου:
+\polydivision{1,-1,-1,2}{1,-1}
+
+\vspace{2cm}
+
+\polydivision{2,0,-1,1}{1,1}
+
+\end{document}

@@ -1,0 +1,55 @@
+\Askhsh{21102_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5cm} % Adjust number of lines (15) as needed
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός κορυφών τετραγώνου
+    % A(πάνω-αριστερά), B(κάτω-αριστερά), Γ(κάτω-δεξιά), Δ(πάνω-δεξιά)
+    \tkzDefPoint(0,4){A}
+    \tkzDefPoint(0,0){B}
+    \tkzDefPoint(4,0){C} % Gamma
+    \tkzDefPoint(4,4){D} % Delta
+
+    % Ε είναι το μέσο της πλευράς ΔΓ
+    \tkzDefMidPoint(D,C) \tkzGetPoint{E}
+
+    % Ζ είναι η προβολή του Ε πάνω στην ΑΓ
+    % Για σχεδίαση: Γραμμή ΑΓ: y = -x + 4 (αν πλευρά = 4)
+    % Γραμμή μέσω Ε(4,2) κάθετη στην ΑΓ: y-2 = 1(x-4) => y = x-2
+    % Τομή Ζ: -x+4 = x-2 => 2x=6 => x=3, y=1.
+    \tkzDefPoint(3,1){Z}
+
+    % Σχεδίαση του τετραγώνου
+    \tkzDrawPolygon(A,B,C,D)
+
+    % Σχεδίαση της διαγωνίου ΑΓ και του τμήματος ΑΕ
+    \tkzDrawSegment(A,C)
+    \tkzDrawSegment[maincolor](A,E)
+
+    % Σχεδίαση του ΕΖ (διακεκομμένη γραμμή) και σημείωση ορθής γωνίας
+    \tkzDrawSegment[dashed](E,Z)
+    \tkzMarkRightAngle(E,Z,A)
+
+    % Σημείωση γωνίας ΔΑΕ ως "1"
+    \tkzMarkAngle[arc=ll,size=0.4cm,pos=0.6,draw=secondarycolor,fill=secondarycolor!20](E,A,D)
+    \tkzLabelAngle[pos=0.8](E,A,D){$1$}
+
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(A,B,C,D,E,Z)
+
+    % Ετικέτες των σημείων
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](C){$\Gamma$}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelPoint[right](E){E}
+    \tkzLabelPoint[below right](Z){Z}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τετράγωνο ΑΒΓΔ πλευράς $\alpha$. Το σημείο Ε είναι το μέσο της πλευράς $\Delta\Gamma$. Φέρουμε τη διαγώνιο ΑΓ και το ευθύγραμμο τμήμα ΑΕ. Η προβολή του Ε πάνω στην ΑΓ είναι το σημείο Ζ.
+\begin{alist}
+    \item Να υπολογίσετε τα μήκη των ευθυγράμμων τμημάτων ΑΓ και ΑΕ. \monades{1}
+    \item Να υπολογίσετε το μήκος του ευθυγράμμου τμήματος ΑΖ. \monades{1}
+\end{alist}

@@ -1,0 +1,72 @@
+% ===================================================================
+%  Αρχείο: 12628_tikz.tex
+%  Premium Παράδειγμα με TikZ / PGFPlots
+% ===================================================================
+
+% --- Αρχή περιεχομένου ---
+
+\Askhsh ΘΕΜΑ 4 \textit{[12628]}
+
+Θεωρούμε τις συναρτήσεις $f(x) = x^{2} - x - 1$ και $g(x) = 3 - x$ των οποίων οι γραφικές παραστάσεις δίνονται στο παρακάτω σχήμα.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -4, xmax = 4.5,
+    ymin = -2, ymax = 7,
+    xtick = {-3,-2,-1,0,1,2,3,4},
+    ytick = {-1,0,1,2,3,4,5,6},
+    grid = both,
+    grid style = {dashed, gray!30},
+    domain = -2.5:3.5,
+    samples = 100,
+    legend pos = north west,
+    width=12cm, height=10cm,
+    tick label style={font=\small},
+    label style={font=\small},
+    every axis x label/.style={at={(current axis.right of origin)},anchor=north west},
+    every axis y label/.style={at={(current axis.above origin)},anchor=south east},
+]
+    % Συνάρτηση f(x) = x^2 - x - 1
+    \addplot [
+        very thick,
+        maincolor,
+    ] {x^2 - x - 1};
+    \addlegendentry{$f(x) = x^2 - x - 1$}
+
+    % Συνάρτηση g(x) = 3 - x
+    \addplot [
+        very thick,
+        secondarycolor,
+        domain = -3:4
+    ] {3 - x};
+    \addlegendentry{$g(x) = 3 - x$}
+
+    % Σημεία Τομής
+    \addplot[only marks, mark=*, mark size=2pt, black] coordinates {(-2,5) (2,1)};
+    
+    % Ετικέτες Σημείων (Ενδεικτικά)
+    \node[above left] at (axis cs:-2,5) {A};
+    \node[above right] at (axis cs:2,1) {B};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να βρείτε τις συντεταγμένες των σημείων Α, Β, Γ, Ζ.
+
+\monades{10}
+
+\item Να βρείτε τις τετμημένες των σημείων της γραφικής παράστασης της $y = f(x)$ που βρίσκονται πάνω από την γραφική παράσταση της $y = g(x)$
+
+\monades{6}
+
+\item Αποδείξτε ότι για οποιονδήποτε πραγματικό αριθμό $\alpha$, η απόσταση των αριθμών $f(\alpha)$ και $- \ g(\alpha)$ πάνω στον άξονα των πραγματικών αριθμών είναι τουλάχιστον 1.
+
+\monades{9}
+
+\end{alist}

@@ -1,0 +1,53 @@
+\begin{alist}
+\item Σωστή απάντηση είναι η (III), με βάση την παράγραφο 2.2.
+\item Από το σχήμα διαπιστώνουμε ότι η μικρότερη δυνατή τιμή της συνάρτησης $f(x)$ είναι ο αριθμός 1 και επιτυγχάνεται όταν $x = 3$.
+\item Παρατηρούμε ότι η $f(x)$ είναι γνησίως φθίνουσα στο διάστημα $(-\infty, 3]$ και γνησίως αύξουσα στο διάστημα $[3, +\infty)$.
+
+\begin{center}
+\begin{tikzpicture}[x=0.5cm,y=0.5cm,scale=0.9]
+\draw[step=0.5cm,green!40!white,very thin] (-7.2,-1.2) grid (20.5,13.5);
+\draw[->, thick] (-7.5,0) -- (20.8,0) node[above left] {$x$};
+\draw[->, thick] (0,-1.5) -- (0,13.8) node[below right] {$y$};
+\foreach \x/\xtext in {-7/-7,-6/-6,-5/-5,-4/-4,-3/-3,-2/-2,-1/-1,1/1,2/2,3/3,4/4,5/5,6/6,7/7,8/8,9/9,10/10,11/11,12/12,13/13,14/14,15/15,16/16,17/17,18/18,19/19,20/20} {
+  \draw (\x, 1pt) -- (\x, -1pt);
+  \node[anchor=north, font=\tiny] at (\x, 0) {\xtext};
+}
+\foreach \y/\ytext in {-1/-1,1/1,2/2,3/3,4/4,5/5,6/6,7/7,8/8,9/9,10/10,11/11,12/12,13/13} {
+  \draw (1pt, \y) -- (-1pt, \y);
+  \node[anchor=east, font=\tiny] at (0, \y) {\ytext};
+}
+\node[below left, font=\scriptsize, text=magenta] at (0,0) {$0$};
+\node[below right, font=\scriptsize, text=magenta] at (0,0) {$A$};
+\node[below, font=\scriptsize] at (0,-0.5) {$y'$};
+
+% The red curve g(x)
+\draw[red!80!white, thick, domain=-6.5:6.5, samples=100] plot (\x,{0.35*\x*\x});
+\node[black] at (-5.5, 9) {$g(x)$};
+
+% The blue curve f(x)
+\draw[blue!80!white, thick, domain=-3:9, samples=100] plot (\x,{0.35*(\x-3)*(\x-3)+1});
+\node[black] at (-2.5, 9) {$f(x)$};
+
+% Points and arrows for transformations
+% (-3, 3.15) on g -> (0, 4.15) on f
+\filldraw[magenta] (-3, 3.15) circle (1.5pt);
+\filldraw[green!50!black] (0, 4.15) circle (1.5pt);
+
+% (0,0) on g -> (3,1) on f
+\filldraw[magenta] (0,0) circle (1.5pt);
+\filldraw[blue] (3,1) circle (1.5pt);
+\draw[thick, ->, >=stealth, draw=black] (0,0) -- (3,0);
+\draw[thick, ->, >=stealth, draw=black] (3,0) -- (3,1) node[above, text=green!50!black, font=\scriptsize] {$B$};
+
+% (3, 3.15) on g -> (6, 4.15) on f
+\filldraw[magenta] (3, 3.15) circle (1.5pt);
+\filldraw[green!50!black] (6, 4.15) circle (1.5pt);
+\draw[thick, ->, >=stealth, draw=black] (3,3.15) -- (6,3.15);
+\draw[thick, ->, >=stealth, draw=black] (6,3.15) -- (6,4.15);
+
+% (-6, 12.6) on g -> (-3, 13.6) on f ...
+\filldraw[magenta] (-6, 12.6) circle (1.5pt);
+
+\end{tikzpicture}
+\end{center}
+\end{alist}

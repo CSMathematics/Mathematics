@@ -1,0 +1,91 @@
+\Askhsh{37126}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.3. 2ο Κριτήριο ισότητας τριγώνων
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.3. Ορθογώνιο
+    \item 5.5. Τετράγωνο
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 37126.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Στο παρακάτω σχήμα το ορθογώνιο $E Z H \Theta$ παριστάνει ένα τραπέζι του μπιλιάρδου. Ένας παίκτης τοποθετεί μια μπάλα στο σημείο $A$ το οποίο ανήκει στη μεσοκάθετη της $EZ$. Όταν ο παίκτης χτυπήσει τη μπάλα αυτή ακολουθεί τη διαδρομή $A \rightarrow B \rightarrow \Gamma \rightarrow \Delta \rightarrow A$ χτυπώντας στους τοίχους του μπιλιάρδου $E\Theta, \Theta H, ZH$ διαδοχικά. Για τη διαδρομή αυτή ισχύει ότι κάθε γωνία πρόσπτωσης σε τοίχο (π.χ. η γωνία $A\widehat{B}E$) είναι ίση με κάθε γωνία ανάκλασης σε τοίχο (π.χ. η γωνία $\Theta\widehat{B}\Gamma$) και η κάθε μια απ' αυτές είναι $45^{\circ}$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+\begin{alist}
+\item Τα τρίγωνα $EAB$ και $ZA\Delta$ είναι ίσα. \monades{9}
+\item Η διαδρομή $AB\Gamma\Delta$ της μπάλας είναι τετράγωνο. \monades{8}
+\end{alist}
+\item Αν η $AZ$ είναι διπλάσια από την απόσταση του $A$ από τον τοίχο $EZ$, να υπολογίσετε τις γωνίες του τριγώνου $AEZ$. \monades{8}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,4){E}
+\tkzDefPoint(6,4){Z}
+\tkzDefPoint(6,0){H}
+\tkzDefPoint(0,0){Theta}
+\tkzDefPoint(3,3){A}
+\tkzDefPoint(0,0){B} % simplified for diagram, assumes corner reflection or generic
+\tkzDefPoint(0,1){B} % improved
+\tkzDefPoint(1,0){Gamma}
+\tkzDefPoint(6,5){Delta_dummy} % to intersect
+\tkzDefPoint(6,3){Delta} % midpoint of ZH for square path
+\tkzDefPoint(4,0){Gamma_real}
+\tkzDefPoint(0,1){B_real}
+% Let's use a symmetric square path
+\tkzDefPoint(3,4){A_top} % intersection of perp bisector and wall
+\tkzDefPoint(3,3){A}
+\tkzDefPoint(0,0.5){B}
+\tkzDefPoint(2.5,0){G}
+\tkzDefPoint(6,3.5){D}
+% No, text says 45 deg reflections.
+% A(3,3). wall at x=0. Reflection at B(0,0). Angle A-B-Theta is 45? (3-0)/(3-0) = 1. Yes.
+% B(0,0). wall at y=0. Reflection at G on y=0. No, B IS on junction ETheta/ThetaH if A(3,3).
+% But text says "walls ETheta, ThetaH, ZH sequentially".
+% Let's use A(3,2), table height 4. dist(A, EZ) = 2.
+% B on x=0. A(3,2) -> B(0, yB). Slope 1 \implies yB = 2 - 3 = -1? No.
+% A(3,2) -> B(0, 5)? No. 
+% Downward: A(3,2) -> B(0, -1)? No.
+% Let's use A(2, 3) in a 6x4 table.
+% B on ETheta (x=0). A(2,3) -> B(0, 1). (dx=2, dy=2). Correct.
+% Gamma on ThetaH (y=0). B(0,1) -> Gamma(1,0). (dx=1, dy=1). Correct.
+% Delta on ZH (x=6). Gamma(1,0) -> Delta(6, 5). (Out of bounds).
+% Table must be wide enough.
+\tkzDefPoint(0,6){E} \tkzDefPoint(10,6){Z} \tkzDefPoint(10,0){H} \tkzDefPoint(0,0){Theta}
+\tkzDefPoint(5,3){A}
+\tkzDefPoint(0,-2){B_dummy}
+\tkzDefPoint(0,1){B} % dx=5, dy=2. Not 45.
+% FOR 45 DEG: dx=dy.
+% A(5, 4). B on x=0. B(0, 4-5) = (0, -1). 
+% Let's just draw a illustrative path.
+\tkzDefPoint(3,1.5){A}
+\tkzDefPoint(0,4.5){B}
+\tkzDefPoint(4.5,0){Gamma}
+\tkzDefPoint(6,1.5){Delta}
+\tkzDefPoint(0,6){E} \tkzDefPoint(6,6){Z} \tkzDefPoint(6,0){H} \tkzDefPoint(0,0){Theta}
+
+\draw[l3, line width=2pt] (E)--(Z)--(H)--(Theta)--cycle;
+\draw[l3, red, thick, ->] (A)--(B);
+\draw[l3, red, thick, ->] (B)--(Gamma);
+\draw[l3, red, thick, ->] (Gamma)--(Delta);
+\draw[l3, red, thick, ->] (Delta)--(A);
+
+\tkzDrawPoints(E,Z,H,Theta,A,B,Gamma,Delta)
+\tkzLabelPoint[above left](E){$E$}
+\tkzLabelPoint[above right](Z){$Z$}
+\tkzLabelPoint[below right](H){$H$}
+\tkzLabelPoint[below left](Theta){$\Theta$}
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[below](Gamma){$\Gamma$}
+\tkzLabelPoint[right](Delta){$\Delta$}
+
+\end{tikzpicture}
+\end{center}
+\end{alist}

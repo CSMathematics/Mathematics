@@ -1,0 +1,75 @@
+\Askhsh{14500_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[21]{r}{0.5\textwidth} % Adjust lines and width as needed
+\centering
+\begin{tikzpicture}[scale=0.8] % Increased scale slightly for better visibility
+    % Define a variable for R for drawing purposes. Let R=3.
+    \pgfmathsetmacro{\R_val}{3}
+    % Calculate rho based on the derived relation 2R = 3rho
+    \pgfmathsetmacro{\rho_val}{\R_val * 2 / 3}
+
+    % Define points
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(-\R_val,0){K}
+    \tkzDefPoint(\R_val,0){L} % Using L for Lambda for tkz-euclide
+    \tkzDefPoint(-2*\R_val,0){A}
+    \tkzDefPoint(2*\R_val,0){B}
+    \tkzDefPoint(0, {2*\R_val - \rho_val}){M} % M's y-coordinate is OM = 2R - rho
+
+    % Draw the horizontal line segment AB
+    \tkzDrawSegment[line width=1.5pt](A,B)
+
+    % Draw the three inner circles
+    \tkzDrawCircle[line width=1pt](K, \R_val cm) % Circle K with radius R
+    \tkzDrawCircle[line width=1pt](L, \R_val cm) % Circle L with radius R
+    \tkzDrawCircle[line width=1pt](M, \rho_val cm) % Circle M with radius rho
+
+    % Draw the large semi-circle (centered at O, radius 2R)
+    % The arc goes from A to B
+    \tkzDrawArc[line width=1pt](O,A)(B) % From A to B counter-clockwise
+
+    % Draw segments KM, LM and OM (the altitude)
+    \tkzDrawSegment[line width=1pt, secondarycolor](K,M)
+    \tkzDrawSegment[line width=1pt, secondarycolor](L,M)
+    \tkzDrawSegment[dashed, line width=0.8pt, secondarycolor](O,M)
+
+    % Mark the right angle at O in triangle OML
+    \tkzMarkRightAngle[fill=gray!20,size=0.3](M,O,L)
+
+    % Draw points
+    \tkzDrawPoints[fill=black, size=4pt](A,K,O,L,B,M)
+
+    % Labels
+    \tkzLabelPoint[left](A){A}
+    \tkzLabelPoint[below left](K){K}
+    \tkzLabelPoint[below=2pt](O){O}
+    \tkzLabelPoint[below right](L){$\Lambda$}
+    \tkzLabelPoint[right](B){B}
+    \tkzLabelPoint[above](M){M} % M's label is above M.
+
+\end{tikzpicture}
+\end{wrapfigure}
+
+\textbf{ΛΥΣΗ}
+
+\begin{alist}
+    \item % Corresponds to α)
+    1 $\rightarrow$ ii., 2 $\rightarrow$ iii., 3 $\rightarrow$ iv.
+
+    Δηλαδή $K\Lambda = 2R$ γιατί οι κύκλοι κέντρων $K$ και $\Lambda$ εφάπτονται εξωτερικά, οπότε η διάκεντρός τους ισούται με το άθροισμα των ακτινών τους. Ομοίως $\Lambda M = R+\rho$ γιατί οι κύκλοι κέντρων $\Lambda$ και $M$ εφάπτονται εξωτερικά. Τέλος $OM = 2R-\rho$ γιατί ο κύκλος κέντρου $O$ με τον κύκλο κέντρου $M$ εφάπτονται εσωτερικά, οπότε η διάκεντρός τους θα ισούται με τη διαφορά των ακτινών τους.
+
+    \item % Corresponds to β)
+    \begin{rlist}
+        \item Οι κύκλοι $(K,R)$ και $(M,\rho)$ εφάπτονται εξωτερικά, οπότε η διάκεντρός τους θα ισούται με το άθροισμα των ακτινών τους, δηλαδή $KM = R+\rho = \Lambda M$ από το ερώτημα $\alpha)$. Άρα το τρίγωνο $MK\Lambda$ έχει δύο πλευρές ίσες, οπότε είναι ισοσκελές με βάση την πλευρά $K\Lambda$. Το σημείο $O$ είναι το μέσο του τμήματος $K\Lambda$ γιατί $OK=O\Lambda=R$, επομένως το τμήμα $MO$ είναι διάμεσος της βάσης του ισοσκελούς τριγώνου, άρα είναι και ύψος, δηλαδή $OM \perp K\Lambda$.
+
+        \item Στο ορθογώνιο τρίγωνο $OM\Lambda$ με $\hat{\text{O}} = 90^\circ$ εφαρμόζοντας το Πυθαγόρειο Θεώρημα έχουμε:
+        \[ OM^2 + O\Lambda^2 = \Lambda M^2 \]
+        \[ (2R-\rho)^2 + R^2 = (R+\rho)^2 \]
+        \[ 4R^2 - 4R\rho + \rho^2 + R^2 = R^2 + 2R\rho + \rho^2 \]
+        \[ 4R^2 = 6R\rho \]
+        \[ 2R = 3\rho \]
+        \[ \rho = \frac{2R}{3} \]
+    \end{rlist}
+\end{alist}

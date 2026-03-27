@@ -1,0 +1,57 @@
+\Askhsh{16804_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γενικευμένο Πυθαγόρειο Θεώρημα, Προβολές]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6cm} % Προσαρμόστε τον αριθμό γραμμών [20] και το πλάτος {6cm} ανάλογα
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός σημείων με βάση τις ιδιότητες των πλευρών (AB=4, AC=6, BC=5)
+    % B=(0,0)
+    \tkzDefPoint(0,0){B}
+    % C=(5,0)
+    \tkzDefPoint(5,0){Gamma}
+    % A=(0.5, 3*sqrt(7)/2) - Υπολογισμένο από AB^2=16, AC^2=36, BC=5
+    \tkzDefPoint(0.5,{3*sqrt(7)/2}){A}
+
+    % Προβολή του A στην BΓ για το σημείο H
+    \tkzDefPointBy[projection=onto Gamma--B](A) \tkzGetPoint{H}
+    % Προβολή του B στην AΓ για το σημείο Θ
+    \tkzDefPointBy[projection=onto A--Gamma](B) \tkzGetPoint{Theta}
+
+    % Σχεδίαση του βασικού τριγώνου
+    \tkzDrawPolygon(A,B,Gamma)
+
+    % Σχεδίαση των υψών (διακεκομμένες γραμμές)
+    \tkzDrawSegment[dashed](A,H)
+    \tkzDrawSegment[dashed](B,Theta)
+
+    % Σήμανση ορθών γωνιών
+    \tkzMarkRightAngle(A,H,Gamma) % Γωνία στο H
+    \tkzMarkRightAngle(B,Theta,A) % Γωνία στο Θ
+
+    % Ετικέτες σημείων
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](Gamma){$\Gamma$}
+    \tkzLabelPoint[below](H){H}
+    \tkzLabelPoint[above right](Theta){$\Theta$}
+    \tkzLabelPoint[above](A){A}
+
+\end{tikzpicture}
+\end{wrapfigure}
+\noindent ΛΥΣΗ
+
+\begin{alist}
+    \item[α)]
+    \begin{rlist}
+        \item Η προβολή της πλευράς Β$\Gamma$ στην πλευρά Α$\Gamma$ είναι το τμήμα $\Theta\Gamma$.
+        \item Η προβολή της πλευράς ΑΒ στην πλευρά Β$\Gamma$ είναι το τμήμα ΒΗ.
+        \item Το τμήμα Η$\Gamma$ είναι η προβολή της πλευράς Α$\Gamma$ στην πλευρά Β$\Gamma$.
+        \item Το τμήμα Α$\Theta$ είναι η προβολή της πλευράς ΑΒ στην πλευρά Α$\Gamma$.
+        \item $A\Gamma^2 = AB^2 + B\Gamma^2 - 2 \cdot B\Gamma \cdot BH$.
+        \item $B\Gamma^2 = AB^2 + A\Gamma^2 - 2A\Gamma \cdot A\Theta$.
+    \end{rlist}
+    \item[β)] Το τμήμα Α$\Theta$ είναι η προβολή της πλευράς ΑΒ στην Α$\Gamma$, οπότε εφαρμόζοντας Γενικευμένο Πυθαγόρειο για την πλευρά Β$\Gamma$ έχουμε:
+    \begin{rlist}
+        \item $B\Gamma^2 = AB^2 + A\Gamma^2 - 2A\Gamma \cdot A\Theta$ ή $25 = 16 + 36 - 2 \cdot 6 \cdot A\Theta$, άρα $A\Theta = \frac{27}{12} = \frac{9}{4}$.
+    \end{rlist}
+\end{alist}

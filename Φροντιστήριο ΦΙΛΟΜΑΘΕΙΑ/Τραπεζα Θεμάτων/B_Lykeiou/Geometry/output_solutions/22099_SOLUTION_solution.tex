@@ -1,0 +1,117 @@
+\Askhsh{22099_SOLUTION}{1}
+\begin{ylh}{1}
+    \item[Κανονικά Πολύγωνα, Εμβαδά]
+\end{ylh}
+Δίνεται κανονικό ν-γωνο $A_1A_2...A_\nu$ με πλευρά μήκους $\lambda_\nu$ και απόστημα $\alpha_\nu$. Στο εσωτερικό του πολυγώνου θεωρούμε ένα σημείο M. Έστω $MM_1, MM_2, ..., MM_\nu$ οι κάθετες αποστάσεις του M από τις πλευρές $A_1A_2, A_2A_3, ..., A_\nu A_1$ αντίστοιχα.
+
+\begin{alist}
+    \item
+    \begin{wrapfigure}{r}{5.5cm}
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+            \tkzDefPoint(0,0){O} % Center
+            \tkzDefPoint(0.3, -0.2){M} % Arbitrary interior point
+            
+            % Define pentagon vertices (A on top)
+            \tkzDefPoint(90:2.5){A}
+            \tkzDefPoint(18:2.5){B}
+            \tkzDefPoint(-54:2.5){C}
+            \tkzDefPoint(-126:2.5){D}
+            \tkzDefPoint(-198:2.5){E}
+            
+            % Draw polygon
+            \tkzDrawPolygon[thick](A,B,C,D,E)
+            
+            % Segments from M to vertices
+            \tkzDrawSegments[secondarycolor](M,A M,B M,C M,D M,E)
+            
+            % Projections of M onto sides (M1 on AB, M2 on BC, etc.)
+            \tkzDefPointBy[projection=onto A--B](M)\tkzGetPoint{M1}
+            \tkzDefPointBy[projection=onto B--C](M)\tkzGetPoint{M2}
+            \tkzDefPointBy[projection=onto C--D](M)\tkzGetPoint{M3}
+            \tkzDefPointBy[projection=onto D--E](M)\tkzGetPoint{M4}
+            \tkzDefPointBy[projection=onto E--A](M)\tkzGetPoint{M5}
+            
+            % Draw perpendicular segments
+            \tkzDrawSegments[dashed](M,M1 M,M2 M,M3 M,M4 M,M5)
+            
+            % Mark right angles
+            \tkzMarkRightAngle(A,M1,M)
+            \tkzMarkRightAngle(B,M2,M)
+            \tkzMarkRightAngle(C,M3,M)
+            \tkzMarkRightAngle(D,M4,M)
+            \tkzMarkRightAngle(E,M5,M)
+            
+            % Label points
+            \tkzLabelPoint[above](A){A}
+            \tkzLabelPoint[above right](B){B}
+            \tkzLabelPoint[below right](C){$\Gamma$}
+            \tkzLabelPoint[below left](D){$\Delta$}
+            \tkzLabelPoint[above left](E){E}
+            \tkzLabelPoint[above left, yshift=-2pt](M){M}
+            
+            \tkzLabelPoint[above right,yshift=-2pt, xshift=2pt](M1){$M_1$}
+            \tkzLabelPoint[below right,yshift=4pt,xshift=2pt](M2){$M_2$}
+            \tkzLabelPoint[below, yshift=-1pt](M3){$M_3$}
+            \tkzLabelPoint[below left,yshift=4pt,xshift=-2pt](M4){$M_4$}
+            \tkzLabelPoint[above left,yshift=-2pt, xshift=-2pt](M5){$M_5$}
+        \end{tikzpicture}
+        \caption*{}
+    \end{wrapfigure}
+    Στην περίπτωση που το πολύγωνο είναι κανονικό πεντάγωνο ΑΒΓΔΕ με πλευρά $\lambda_5$ και απόστημα $\alpha_5$, να αποδείξετε ότι το άθροισμα των αποστάσεων του Μ από τις πλευρές του είναι σταθερό και ίσο με $5\alpha_5$, δηλαδή:
+    \[
+    MM_1 + MM_2 + MM_3 + MM_4 + MM_5 = 5\alpha_5
+    \]
+    όπου $M_1, M_2, M_3, M_4, M_5$ είναι οι προβολές του Μ στις πλευρές ΑΒ, ΒΓ, ΓΔ, ΔΕ, ΕΑ αντίστοιχα. \monades{13}
+
+    \item
+    \begin{wrapfigure}{r}{5.5cm}
+        \centering
+        \begin{tikzpicture}[scale=0.9, rotate=180/7]
+            \tkzDefPoint(0,0){O} % Center
+            \tkzDefPoint(0.5, 0.3){M} % Arbitrary interior point
+    
+            % Define heptagon vertices
+            \tkzDefRegPolygon[N=7,center=O,radius=2.5]
+            \tkzGetPoints{A1 A2 A3 A4 A5 A6 A7}
+            
+            % Draw polygon
+            \tkzDrawPolygon[thick](A1,A2,A3,A4,A5,A6,A7)
+            
+            % Dashed lines to vertices
+            \tkzDrawSegments[dashed](M,A1 M,A2 M,A3 M,A4 M,A5 M,A6 M,A7)
+            
+            % Projections
+            \tkzDefPointBy[projection=onto A1--A2](M)\tkzGetPoint{M1}
+            \tkzDefPointBy[projection=onto A2--A3](M)\tkzGetPoint{M2}
+            \tkzDefPointBy[projection=onto A7--A1](M)\tkzGetPoint{Mv} % M_nu
+            
+            % Draw perpendicular segments
+            \tkzDrawSegments[dashed](M,M1 M,M2 M,Mv)
+            
+            % Mark right angles
+            \tkzMarkRightAngle(A1,M1,M)
+            \tkzMarkRightAngle(A2,M2,M)
+            \tkzMarkRightAngle(A7,Mv,M)
+    
+            % Label points
+            \tkzLabelPoint[below](A1){$A_1$}
+            \tkzLabelPoint[below right](A2){$A_2$}
+            \tkzLabelPoint[above right](A3){$A_3$}
+            \tkzLabelPoint[above](A4){...}
+            \tkzLabelPoint[above left](A6){...}
+            \tkzLabelPoint[below left](A7){$A_\nu$}
+            \tkzLabelPoint[below, yshift=2pt](M){M}
+            
+            \tkzLabelPoint[below=1pt, xshift=4pt](M1){$M_1$}
+            \tkzLabelPoint[right=1pt](M2){$M_2$}
+            \tkzLabelPoint[left=1pt](Mv){$M_\nu$}
+        \end{tikzpicture}
+        \caption*{}
+    \end{wrapfigure}
+    Να γενικεύσετε το παραπάνω συμπέρασμα, αποδεικνύοντας ότι για οποιοδήποτε κανονικό ν-γωνο ισχύει:
+    \[
+    MM_1 + MM_2 + \dots + MM_\nu = \nu\alpha_\nu
+    \]
+    \monades{12}
+\end{alist}

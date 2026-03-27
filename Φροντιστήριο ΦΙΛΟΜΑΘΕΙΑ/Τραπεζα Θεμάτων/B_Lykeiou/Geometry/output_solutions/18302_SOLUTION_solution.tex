@@ -1,0 +1,54 @@
+\Askhsh{18302_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm}
+\begin{tikzpicture}[scale=0.7]
+    % Define point A as origin
+    \tkzDefPoint(0,0){A}
+
+    % Define point Delta (top-left)
+    \tkzDefPoint(-2,1){D} % Delta
+
+    % Define point Beta (bottom-right), collinear with D-A
+    % Slope from A to D is 1/(-2) = -0.5
+    % So B should be at (x, -0.5x) for x > 0. Let's pick (3, -1.5)
+    \tkzDefPoint(3,-1.5){B}
+
+    % Define point Epsilon (top-right)
+    \tkzDefPoint(2,2){E}
+
+    % Define point Gamma (bottom-left), collinear with E-A
+    % Slope from A to E is 2/2 = 1
+    % So G should be at (x, x) for x < 0. Let's pick (-3, -3)
+    \tkzDefPoint(-3,-3){G} % Gamma
+
+    % Draw the triangles
+    \tkzDrawPolygon[color=maincolor](A,D,E)
+    \tkzDrawPolygon[color=secondarycolor](A,B,G)
+
+    % Draw the lines connecting the points to show collinearity
+    \tkzDrawSegment[add=0.3 and 0.3](D,B) % Line through D, A, B
+    \tkzDrawSegment[add=0.3 and 0.3](E,G) % Line through E, A, G
+
+    % Label points
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[left](A){A}
+    \tkzLabelPoint[below right](B){B}
+    \tkzLabelPoint[above right](E){E}
+    \tkzLabelPoint[below left](G){$\Gamma$}
+
+\end{tikzpicture}
+\end{wrapfigure}
+\Askhseis{ΛΥΣΗ}
+
+\begin{alist}
+    \item Τα τρίγωνα ΑΔΕ και ΑΒΓ έχουν εμβαδόν τους ίσο με τον λόγο των γινομένων των πλευρών που περιέχουν τις γωνίες αυτές, δηλαδή:
+    \[ \frac{(\text{A}\Delta \text{E})}{(\text{AB}\Gamma)} = \frac{\frac{1}{2} A\Delta \cdot AE \sin(\widehat{\Delta AE})}{\frac{1}{2} AB \cdot A\Gamma \sin(\widehat{BA\Gamma})} = \frac{A\Delta \cdot AE}{AB \cdot A\Gamma} \]
+
+    \item Αν προεκτείνουμε τις πλευρές ΒΑ και ΓΑ κατά τμήματα είναι $A\Delta = \mu \cdot AB$ και $AE = \nu \cdot A\Gamma$ αντίστοιχα, όπου $\mu, \nu$ είναι θετικοί πραγματικοί αριθμοί, τότε θα έχουμε:
+    \[ \frac{(\text{A}\Delta \text{E})}{(\text{AB}\Gamma)} = \frac{A\Delta \cdot AE}{AB \cdot A\Gamma} = \mu \cdot \nu \]
+
+    \item Τα τρίγωνα ΑΔΕ και ΑΒΓ έχουν $\widehat{A\Delta E} = \widehat{BA\Gamma}$ (ως κατακορυφήν), οπότε θα είναι όμοια αν και μόνο αν έχουν τις προσκείμενες πλευρές σε αυτές τις γωνίες ανάλογες. Επομένως, θα πρέπει:
+    \[ \frac{A\Delta}{AB} = \frac{AE}{A\Gamma} \Leftrightarrow \frac{A\Delta}{AB} = \frac{AE}{A\Gamma} \quad \text{(1) ή} \quad \frac{A\Delta}{AE} = \frac{AB}{A\Gamma} \quad \text{(2)} \]
+\end{alist}

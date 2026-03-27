@@ -1,0 +1,76 @@
+\Askhsh{18870}{4}
+\begin{ylh}{1}
+    \item 3.2 Η Παραβολή.
+\end{ylh}
+\begin{wrapfigure}[30]{r}{0.5\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % Ορισμός σημείων
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (4,4);
+    \coordinate (B) at (-4,0); % Σημείο τομής της εφαπτομένης με τον άξονα x'x
+    \coordinate (M) at (1,0);  % Υποτιθέμενη εστία για την σχεδίαση της ανακλώμενης ακτίνας
+    \coordinate (K) at (6,0);  % Σημείο τομής της κάθετης AK με τον άξονα x'x
+
+    % Σχεδίαση αξόνων
+    \draw[->] (-5,0) -- (7,0) node[right] {$x$};
+    \draw[->] (0,-1) -- (0,5) node[above] {$y$};
+
+    % Σχεδίαση παραβολής y^2 = 4x  <=> x = y^2/4
+    \draw[thick, black] plot[domain=-4.5:4.5, samples=100] ({(\x)*(\x)/4}, {\x});
+
+    % Σχεδίαση εφαπτομένης (ε) - διέρχεται από τα A και B
+    \draw[very thick, maincolor] ($(B)!-0.5!(A)$) -- ($(A)!-0.5!(B)$) node[below left, xshift=-0.2cm, yshift=0.2cm] {$(\varepsilon)$};
+    
+    % Σχεδίαση προσπίπτουσας ακτίνας (ζ) - παράλληλη στον άξονα x'x, διέρχεται από το A
+    \draw[very thick, secondarycolor, ->] (7,4) -- (A);
+    \node[secondarycolor, right] at (7,4) {$(\zeta)$};
+
+    % Σχεδίαση ανακλώμενης ακτίνας - AM
+    \draw[very thick, secondarycolor, ->] (A) -- (M);
+
+    % Σχεδίαση ευθείας AK - διακεκομμένη
+    \draw[dashed, black] (A) -- (K);
+
+    % Σχεδίαση σημείων
+    \fill[maincolor] (A) circle (2.5pt) node[above left] {A};
+    \fill[maincolor] (B) circle (2.5pt) node[left] {B};
+    \fill[maincolor] (O) circle (2.5pt) node[below left] {O};
+    \fill[maincolor] (M) circle (2.5pt) node[below right] {M};
+    \fill[maincolor] (K) circle (2.5pt) node[below right] {K};
+
+    % Βοηθητικά σημεία για τη σήμανση γωνιών
+    \coordinate (IncRayPoint) at (5,4); % Σημείο στην προσπίπτουσα ακτίνα πριν το A
+    \coordinate (TangentPointRight) at ($(A) + (1, 0.5)$); % Σημείο στην εφαπτομένη δεξιά του A
+    \coordinate (TangentPointLeft) at ($(A) + (-1, -0.5)$); % Σημείο στην εφαπτομένη αριστερά του A
+
+    % Γωνία θ1: μεταξύ προσπίπτουσας ακτίνας και εφαπτομένης
+    \tkzMarkAngle[fill=maincolor!30, size=0.8cm, opacity=0.8](IncRayPoint, A, TangentPointRight)
+    \tkzLabelAngle[pos=1.1](IncRayPoint, A, TangentPointRight){$\theta_1$}
+
+    % Γωνία θ2: μεταξύ ανακλώμενης ακτίνας και εφαπτομένης
+    \tkzMarkAngle[fill=maincolor!30, size=0.8cm, opacity=0.8](M, A, TangentPointLeft)
+    \tkzLabelAngle[pos=1.1](M, A, TangentPointLeft){$\theta_2$}
+
+    % Γωνία θ3: μεταξύ άξονα x'x και εφαπτομένης
+    \tkzMarkAngle[fill=maincolor!30, size=0.8cm, opacity=0.8](O, B, A)
+    \tkzLabelAngle[pos=1.1](O, B, A){$\theta_3$}
+
+\end{tikzpicture}
+\caption{Γραφική παράσταση της παραβολής}
+\end{wrapfigure}
+
+Στο σχήμα φαίνεται η γραφική παράσταση της παραβολής με εξίσωση $y^2 = 4x$, η
+εφαπτομένη της $(\varepsilon)$ στο σημείο $A(4,4)$ και η $AK$ κάθετη στην $(\varepsilon)$. Μία φωτεινή ακτίνα $(\zeta)$,
+ακολουθώντας πορεία παράλληλη προς τον άξονα της παραβολής, προσπίπτουσα στο
+σημείο $A$ και ανακλώμενη πάνω στην καμπύλη (που αντιστοιχεί σε παραβολικό κάτοπτρο)
+διέρχεται από το σημείο $M$. Αν γνωρίζετε ότι η γωνία $\theta_1$ που σχηματίζει η προσπίπτουσα
+φωτεινή ακτίνα $(\zeta)$ με την $(\varepsilon)$ και η γωνία $\theta_2$ που σχηματίζει η ανακλώμενη φωτεινή ακτίνα
+$AM$ με την $(\varepsilon)$ είναι ίσες, τότε:
+\begin{alist}
+\item Να βρείτε την εστία και την διευθετούσα της παραβολής. \monades{06}
+\item Να βρείτε την εξίσωση της ευθείας $(\varepsilon)$ και το σημείο $B$ στο οποίο αυτή τέμνει τον άξονα
+$x'x$. \monades{06}
+\item Να αποδείξετε ότι το τρίγωνο $MAB$ είναι ισοσκελές. \monades{07}
+\item Να αποδείξετε ότι το σημείο $M$ ταυτίζεται με την εστία της παραβολής. \monades{06}
+\end{alist}

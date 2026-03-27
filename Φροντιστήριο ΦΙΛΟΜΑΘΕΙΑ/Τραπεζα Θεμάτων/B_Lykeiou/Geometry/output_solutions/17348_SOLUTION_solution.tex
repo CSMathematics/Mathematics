@@ -1,0 +1,73 @@
+\Askhsh{17348_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Define points for the rectangle ABDG
+        \tkzDefPoint(0,0){D} % Delta (bottom-left)
+        \tkzDefPoint(0,5){A} % (top-left)
+        \tkzDefPoint(6,5){B} % (top-right)
+        \tkzDefPoint(6,0){G} % Gamma (bottom-right)
+
+        % Define point E on BG (BC in the text) such that BE=2
+        \tkzDefPoint(6,3){E} % B is (6,5), G is (6,0), so E is (6, 5-2=3)
+
+        % Define point Z as the foot of the perpendicular from D to AE
+        % Calculated Z coordinates based on AD=5, AB=6, E=(6,3)
+        \tkzDefPoint(1.5,4.5){Z}
+
+        % Draw the rectangle
+        \tkzDrawPolygon[thick](A,B,G,D)
+
+        % Draw segments AE and DZ
+        \tkzDrawSegment[thick](A,E)
+        \tkzDrawSegment[thick](D,Z)
+
+        % Mark right angle at B (for triangle ABE)
+        \tkzMarkRightAngle[fill=maincolor!20,size=0.3](A,B,E)
+        % Mark right angle at Z (DZ perpendicular to AE)
+        \tkzMarkRightAngle[fill=maincolor!20,size=0.3](D,Z,A)
+
+        % Mark angles A1 and E1 (alternate interior angles)
+        % A1 is angle DAE
+        \tkzMarkAngle[fill=secondarycolor!20,size=0.4cm](D,A,E)
+        \tkzLabelAngle[pos=0.6](D,A,E){1}
+        % E1 is angle AEB
+        \tkzMarkAngle[fill=secondarycolor!20,size=0.4cm](A,E,B)
+        \tkzLabelAngle[pos=0.6](A,E,B){1}
+
+        % Draw points and labels
+        \tkzDrawPoints(A,B,G,D,E,Z)
+        \tkzLabelPoints[above left](A)
+        \tkzLabelPoints[above right](B)
+        \tkzLabelPoints[below right](G)
+        \tkzLabelPoints[below left](D)
+        \tkzLabelPoints[below right](E)
+        \tkzLabelPoint[above left](Z){Z} % Position adjusted slightly
+    \end{tikzpicture}
+\end{wrapfigure}
+\kefalaio{ΛΥΣΗ}
+\begin{alist}
+    \item[α)] Σύμφωνα με το Πυθαγόρειο θεώρημα στο ορθογώνιο τρίγωνο $ABE$ έχουμε ότι
+    \[ AE^2 = AB^2 + BE^2. \]
+    Από την υπόθεση έχουμε ότι $AB = 6, BE = 2,$ οπότε
+    \[ AE^2 = 6^2 + 2^2 \text{ ή } AE^2 = 40 \text{ ή } AE = 2\sqrt{10}. \]
+
+    \item[β)] Τα τρίγωνα $ABE$ και $\Delta ZA$ έχουν:
+    \begin{itemize}
+        \item $\hat{A}_1 = \hat{E}_1$ ως εντός εναλλάξ γωνίες των παραλλήλων $A\Delta, B\Gamma$ του ορθογωνίου $AB\Gamma\Delta$ που τέμνονται από την $AE.$
+        \item $\hat{B} = \hat{Z} = 90^\circ,$ γιατί από την υπόθεση έχουμε ότι το $AB\Gamma\Delta$ είναι ορθογώνιο και η $\Delta Z$ κάθετη στην $AE.$
+    \end{itemize}
+    Τα τρίγωνα $ABE$ και $\Delta ZA$ είναι όμοια, γιατί έχουν δύο γωνίες τους ίσες μία προς μία.
+    Επομένως θα ισχύει
+    \[ \frac{AB}{\Delta Z} = \frac{AE}{A\Delta} = \frac{BE}{AZ} \quad (1). \]
+
+    \item[γ)] Είναι $AB = 6, BE = 2$ και $AE = 2\sqrt{10},$ οπότε η $(1)$ γίνεται
+    \[ \frac{6}{\Delta Z} = \frac{2\sqrt{10}}{A\Delta} = \frac{2}{AZ} \quad (2). \]
+    Από τα δεδομένα έχουμε ότι $\Delta Z = ZE,$ έτσι η ισότητα $\frac{6}{\Delta Z} = \frac{2}{AZ}$ γίνεται $\frac{6}{ZE} = \frac{2}{AZ}$ και με ιδιότητα των αναλογιών προκύπτει ότι
+    \[ \frac{6}{ZE} = \frac{2}{AZ} = \frac{6+2}{ZE+AZ} = \frac{8}{AE} = \frac{8}{2\sqrt{10}} = \frac{4}{\sqrt{10}} \quad (3). \]
+    Από τις ισότητες $(2)$ και $(3)$ προκύπτει ότι
+    \[ \frac{2\sqrt{10}}{A\Delta} = \frac{4}{\sqrt{10}} \text{ ή } 4A\Delta = 2(\sqrt{10})^2 \text{ ή } A\Delta = 5. \]
+\end{alist}

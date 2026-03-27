@@ -1,0 +1,64 @@
+\Askhsh{17349_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Πυθαγόρειο θεώρημα, Εμβαδά τριγώνων]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm} % Adjust number of lines and width as needed
+    \begin{tikzpicture}[scale=0.8]
+        % Define coordinates for a general rectangle ABCD, and points E, H, Z
+        \tkzDefPoint(0,0){D} % Implicit Delta point from text
+        \tkzDefPoint(0,4){A} % A top-left (assuming AD length)
+        \tkzDefPoint(5,4){B} % B top-right (assuming AB length)
+        \tkzDefPoint(5,0){Gamma} % Gamma bottom-right
+        
+        % E on AD (e.g., at (0, 1.5) for visual representation)
+        \tkzDefPoint(0,1.5){E}
+        
+        % Z on BGamma (e.g., at (5, 1.5)), approximately same y-coordinate as E
+        \tkzDefPoint(5,1.5){Z}
+        
+        % H as midpoint of EZ for visual representation (e.g., at (2.5, 1.5))
+        \tkzDefMidPoint(E,Z) \tkzGetPoint{H}
+        
+        % Draw the rectangle boundary (A,B,Gamma,D)
+        \tkzDrawPolygon(A,B,Gamma,D)
+        
+        % Draw segments BE, EZ, ZH, HGamma, ZGamma
+        \tkzDrawSegments(B,E E,H H,Z Z,Gamma H,Gamma)
+        
+        % Label points
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](Gamma){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$} % Label implicit Delta point
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[below](H){H}
+        \tkzLabelPoint[right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+\textbf{ΛΥΣΗ}
+\begin{alist}
+    \item Σύμφωνα με το Πυθαγόρειο θεώρημα στο ορθογώνιο τρίγωνο ΑΒΕ έχουμε ότι
+    \[ ΒΕ^2 = ΑΒ^2 + ΑΕ^2. \]
+    Από την υπόθεση έχουμε ότι $ΑΒ = 3$, $ΑΕ = 4 - \sqrt{3}$, οπότε
+    \[ ΒΕ^2 = 3^2 + (4 - \sqrt{3})^2 = 9 + (16 - 8\sqrt{3} + 3) = 9 + 19 - 8\sqrt{3} = 28 - 8\sqrt{3}. \]
+    Επομένως $ΒΕ = \sqrt{28 - 8\sqrt{3}} = 2\sqrt{7} - \sqrt{3}$. \monades{X}
+
+    \item Είναι $ΔΕ = ΑΔ - ΑΕ = 3 - (4 - \sqrt{3}) = 3 - 4 + \sqrt{3} = \sqrt{3} - 1$.
+    Σύμφωνα με το Πυθαγόρειο θεώρημα στο ορθογώνιο τρίγωνο ΔΕΗ έχουμε ότι
+    $ΔΕ^2 + ΕΗ^2 = ΔΗ^2$. Όμως $ΔΗ = \sqrt{3}$ από τα δεδομένα και $ΔΕ = \sqrt{3} - 1$, οπότε
+    \[ ΕΗ^2 = (\sqrt{3})^2 - (\sqrt{3} - 1)^2 = 3 - (3 - 2\sqrt{3} + 1) = 3 - (4 - 2\sqrt{3}) = 3 - 4 + 2\sqrt{3} = 2\sqrt{3} - 1. \]
+    Επομένως $ΕΗ = \sqrt{2\sqrt{3} - 1}$. (1)
+    Από την ισότητα (1) και το ερώτημα α) προκύπτει ότι $ΒΕ = 2ΕΗ$. Από τα δεδομένα το τρίγωνο $ΒΕΖ$ είναι ισόπλευρο οπότε $ΕΖ = ΒΕ$. Επομένως $ΕΖ = 2ΕΗ$, δηλαδή το $Η$ είναι το μέσο της $ΕΖ$. \monades{X}
+
+    \item Το εμβαδόν του ζητούμενου χωρίου ισούται με τη διαφορά του εμβαδού του τριγώνου $BZH$ από το τρίγωνο $B\Gamma H$, δηλαδή $(BZH) - (B\Gamma H)$.
+    Το εμβαδόν του ισόπλευρου τριγώνου $ΒΕΖ$ ισούται με $2\sqrt{7} - \sqrt{3}$, επομένως
+    \[ (BEZ) = \frac{4(2\sqrt{7}-\sqrt{3})\sqrt{3}}{4} = (2\sqrt{7}-\sqrt{3})\sqrt{3} = 7\sqrt{3}-6. \]
+    επομένως $(BEZ) = 7\sqrt{3}-6$. (2)
+    Το σημείο $Η$ είναι το μέσο της ισόπλευρου τριγώνου $ΒΕΖ$, οπότε
+    \[ (BZH) = \frac{(BEZ)}{2} = \frac{7\sqrt{3}-6}{2}. \] (2)
+    Το εμβαδόν του ορθογώνιου τριγώνου $B\Gamma H$ είναι $(B\Gamma H) = \frac{B\Gamma \cdot \Gamma H}{2}$.
+    με $B\Gamma = 3$ και $ΓH = \Delta \Gamma - \Delta H = 3 - \sqrt{3}$.
+    \[ (B\Gamma H) = \frac{3(3-\sqrt{3})}{2} = \frac{9-3\sqrt{3}}{2}. \] (3)
+    Από τις ισότητες (2) και (3) προκύπτει ότι
+    \[ (BZH) - (B\Gamma H) = \frac{7\sqrt{3}-6}{2} - \frac{9-3\sqrt{3}}{2} = \frac{7\sqrt{3}-6-9+3\sqrt{3}}{2} = \frac{10\sqrt{3}-15}{2}. \]
+\end{alist}

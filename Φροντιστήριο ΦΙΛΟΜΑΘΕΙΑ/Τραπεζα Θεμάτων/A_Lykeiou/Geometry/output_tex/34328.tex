@@ -1,0 +1,78 @@
+\Askhsh{34328}{4}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.8. Άθροισμα γωνιών κυρτού ν-γώνου
+    \item 5.4. Ρόμβος
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34328.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ αριθμός
+
+Δίνεται τετράπλευρο με κορυφές σημεία Α, Β, Γ και Δ κύκλου (Ο, ρ), διαγώνιες ΑΓ και ΒΔ, με τη ΒΔ να διέρχεται από το κέντρο Ο του κύκλου, και με ίσες πλευρές τις ΑΒ και ΒΓ. Έστω ότι η κάθετη στη ΒΔ στο σημείο Ο τέμνει τις πλευρές ΑΔ και ΓΔ του τετράπλευρου ΑΒΓΔ στα σημεία Ε και Ζ αντίστοιχα, οι γωνίες του $\widehat{Α}$ και $\widehat{\Gamma}$ είναι ορθές και η γωνία του $\widehat{Β}$ είναι διπλάσια της γωνίας του $\widehat{\Delta}$.
+
+\begin{alist}
+\item Να υπολογίσετε τα μέτρα των γωνιών $\widehat{Β}$ και $\widehat{\Delta}$ του ΑΒΓΔ. \monades{6}
+
+\item Να αποδείξετε ότι:
+
+\begin{alist}
+\item
+  η διαγώνιος ΒΔ διχοτομεί τη γωνία $\widehat{\Delta}$ του ΑΒΓΔ, \monades{7}
+\item
+  το τετράπλευρο ΑΒΓΟ είναι ρόμβος, \monades{6}
+\item
+  το τετράπλευρο ΑΓΖΕ είναι τραπέζιο. \monades{6}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(2,0){D}
+\tkzDefPoint(-2,0){B}
+\tkzDrawCircle(O,D)
+
+% Angle B is 120, D is 60. AC is orthogonal to BD and bisects it? No, AB=BC.
+% Since ABCD is cyclic and AB=BC, B is on the perpendicular bisector of AC.
+% Wait, BD is diameter. So triangle DAB has A=90, triangle DCB has C=90.
+% Also AB=BC, so right triangles DAB and DCB are congruent.
+% So AD=CD.
+% Since Angle B = 2*Angle D. B+D = 180 => B=120, D=60.
+% In right triangle DAB, angle ABD = 60, angle ADB = 30.
+\tkzDefPointBy[rotation=center O angle 120](D) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle -120](D) \tkzGetPoint{C}
+
+% The perpendicular to BD at O intersects AD at E and CD at Z.
+\tkzDefLine[orthogonal=through O](B,D) \tkzGetPoint{perp_dir}
+\tkzInterLL(O,perp_dir)(A,D) \tkzGetPoint{E}
+\tkzInterLL(O,perp_dir)(C,D) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--(D)--cycle;
+\draw[l3] (B)--(D);
+\draw[l3] (A)--(C);
+\draw[l3] (E)--(Z);
+\draw[l3] (A)--(O);
+\draw[l3] (C)--(O);
+
+\tkzDrawPoints(O,A,B,C,D,E,Z)
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](D){$\Delta$}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[above](E){$E$}
+\tkzLabelPoint[below](Z){$Z$}
+\tkzLabelPoint[below left](O){$O$}
+
+\tkzMarkRightAngle(B,A,D)
+\tkzMarkRightAngle(B,C,D)
+\tkzMarkRightAngle(Z,O,D)
+\end{tikzpicture}
+\end{center}
+\end{alist}
+\end{alist}

@@ -1,0 +1,67 @@
+\Askhsh{22559}{2}
+\begin{ylh}{1}
+    \item 3.4 Η Υπερβολή.
+\end{ylh}
+\begin{wrapfigure}[14]{r}{8cm} % Estimated height of 14 lines
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -12, xmax = 12,
+    ymin = -8, ymax = 8,
+    xtick = {0}, % Only 0 on x-axis is explicitly labelled by number
+    ytick = {}, % No y-ticks needed as per image
+    grid = none, % No grid in the original image
+    samples = 100,
+    width = 8cm, height = 6cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % Hyperbola: x^2/64 - y^2/36 = 1 => y = +- (3/4)*sqrt(x^2-64)
+    % Plot both positive and negative y values for each branch
+    \addplot[very thick, secondarycolor, domain=8:12] {(3/4)*sqrt(x^2-64)};
+    \addplot[very thick, secondarycolor, domain=8:12] {-(3/4)*sqrt(x^2-64)};
+    \addplot[very thick, secondarycolor, domain=-12:-8] {(3/4)*sqrt(x^2-64)};
+    \addplot[very thick, secondarycolor, domain=-12:-8] {-(3/4)*sqrt(x^2-64)};
+
+    % Define coordinates for points
+    \coordinate (E_prime) at (axis cs:-10,0);
+    \coordinate (A_prime) at (axis cs:-8,0);
+    \coordinate (O_point) at (axis cs:0,0);
+    \coordinate (A_point) at (axis cs:8,0);
+    \coordinate (E_point) at (axis cs:10,0);
+    % Choose an arbitrary point M on the hyperbola (e.g., x=11, calculated y)
+    \pgfmathsetmacro{\M_y}{(3/4)*sqrt(11^2-64)} % Calculate y-coordinate for M
+    \coordinate (M_point) at (axis cs:11, \M_y); 
+    
+    % Plot points as filled black circles
+    \addplot[only marks, mark=*, mark options={fill=black, draw=black}, mark size=1.5pt] coordinates {(-10,0) (-8,0) (0,0) (8,0) (10,0) (11, \M_y)};
+
+    % Labels for points
+    \node[below] at (E_prime) {$E'$};
+    \node[below] at (A_prime) {$A'$};
+    \node[below left] at (O_point) {$O$}; % Adjusted position for O for clarity
+    \node[below] at (A_point) {$A$};
+    \node[below] at (E_point) {$E$};
+    \node[above right] at (M_point) {$M$};
+
+    % Draw segments ME' and ME
+    \draw[maincolor, line width=0.8pt] (E_prime) -- (M_point);
+    \draw[maincolor, line width=0.8pt] (E_point) -- (M_point);
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Η υπερβολή στο παρακάτω σχήμα έχει εστίες τα σημεία $E'(-10,0)$ και $E(10,0)$ και κορυφές τα σημεία $A'(-8,0)$ και $A(8,0)$.
+\begin{alist}
+    \item Να αποδείξετε ότι η υπερβολή έχει εξίσωση
+    \[ \frac{x^2}{64} - \frac{y^2}{36} = 1 \] \monades{12}
+    \item Έστω $M$ ένα σημείο της υπερβολής.
+    \begin{rlist}
+        \item Να αποδείξετε ότι $|(ME') - (ME)| = 16$. \monades{8}
+        \item Αν $(ME) = 9$, να βρείτε την απόσταση του σημείου $M$ από την εστία $E'$. \monades{5}
+    \end{rlist}
+\end{alist}

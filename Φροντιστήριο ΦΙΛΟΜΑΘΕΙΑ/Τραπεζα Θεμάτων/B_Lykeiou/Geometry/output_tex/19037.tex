@@ -1,0 +1,45 @@
+\Askhsh{19037}{3}
+\begin{ylh}{1}
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[7]{r}{6cm}
+    \begin{tikzpicture}[scale=0.8]
+        % Define points A, B, C for the main triangle
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(6,0){C}
+        \tkzDefPoint(2.5,5){A} 
+        
+        % Define points D, E, Z based on the given ratios
+        % Delta B = 1/5 AB => D is 1/5 from B towards A
+        \tkzDefPointWith[linear,K=1/5](B,A) \tkzGetPoint{D}
+        % EGamma = 1/4 BGamma => E is 3/4 from B towards C (since B E = B Gamma - E Gamma)
+        \tkzDefPointWith[linear,K=3/4](B,C) \tkzGetPoint{E}
+        % ZGamma = 1/2 AGamma => Z is 1/2 from A towards C (since A Z = A Gamma - Z Gamma)
+        \tkzDefPointWith[linear,K=1/2](A,C) \tkzGetPoint{Z}
+        
+        % Draw the main triangle ABC
+        \tkzDrawPolygon(A,B,C)
+        
+        % Draw the inner triangle DEZ
+        \tkzDrawPolygon(D,E,Z)
+        
+        % Draw points A, B, C, D, E, Z
+        \tkzDrawPoints(A,B,C,D,E,Z)
+        
+        % Labels for points
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[below](E){E}
+        \tkzLabelPoint[right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Θεωρούμε τρίγωνο ΑΒΓ και τα σημεία \(\Delta\), E, Z των πλευρών AB, B\(\Gamma\), A\(\Gamma\) αντίστοιχα τέτοια ώστε
+\[ \Delta B = \frac{1}{5} AB, \quad E\Gamma = \frac{1}{4} B\Gamma, \quad Z\Gamma = \frac{1}{2} A\Gamma \]
+\begin{alist}
+\item Να υπολογίσετε τους λόγους
+\[ \frac{(\Delta BE)}{(AB\Gamma)}, \quad \frac{(E\Gamma Z)}{(AB\Gamma)}, \quad \frac{(ZA\Delta)}{(AB\Gamma)} \] \monades{15}
+\item Αν είναι \( (AB\Gamma) = 120 \), να υπολογίσετε το εμβαδόν του τριγώνου \(\Delta EZ\). \monades{10}
+\end{alist}

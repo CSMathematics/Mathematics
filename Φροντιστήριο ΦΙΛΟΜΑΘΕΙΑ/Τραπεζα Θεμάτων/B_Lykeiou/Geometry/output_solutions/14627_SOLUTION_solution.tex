@@ -1,0 +1,51 @@
+\Askhsh{14627_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{7cm} % Adjust height if content flows into figure
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define points for the rectangle (A,B,Gamma,Delta)
+        % Let Delta be at (0,0) for ease of coordinate calculation
+        \tkzDefPoint(0,0){D} % \Delta
+        \tkzDefPoint(0,3){A} % A
+        \tkzDefPoint(4.2426,3){B} % B (3*sqrt(2) approx 4.2426)
+        \tkzDefPoint(4.2426,0){G} % \Gamma
+        
+        % Draw the rectangle sides
+        \tkzDrawSegments(A,B B,G G,D D,A)
+        
+        % Draw the diagonal Delta-B
+        \tkzDrawSegment(D,B)
+        
+        % Define points E and Z as projections onto the diagonal D,B
+        % E is the foot of the altitude from A to DB
+        \tkzDefPointBy[projection=onto line D,B](A) \tkzGetPoint{E}
+        % Z is the foot of the altitude from Gamma to DB
+        \tkzDefPointBy[projection=onto line D,B](G) \tkzGetPoint{Z}
+
+        % Draw the altitudes A-E and G-Z
+        \tkzDrawSegments(A,E G,Z)
+
+        % Draw points (blue filled for corners, black filled for E, Z as in image)
+        \tkzDrawPoints[color=maincolor,fill=maincolor,size=6pt](A,B,G,D) % size for visibility
+        \tkzDrawPoints[color=black,fill=black,size=4pt](E,Z) % size for visibility
+        
+        % Labels for points
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[below](E){E}
+        \tkzLabelPoint[above](Z){Z} % Position adjusted for Z
+    \end{tikzpicture}
+\end{wrapfigure}
+ΛΥΣΗ
+
+\begin{alist}
+    \item[α)] $B\Delta^2 = AB^2 + A\Delta^2$, άρα $B\Delta^2 = 27 \Leftrightarrow B\Delta = 3\sqrt{3}$
+    \item[β)] $A\Delta^2 = \Delta B \cdot \Delta E$, άρα $9 = 3\sqrt{3} \Delta E \Leftrightarrow \Delta E = \sqrt{3}$
+    
+    $B\Gamma^2 = B\Delta \cdot BZ$, άρα $9 = 3\sqrt{3} BZ \Leftrightarrow BZ = \sqrt{3}$
+    \item[γ)] Επειδή $EZ = B\Delta - \Delta E - BZ = 3\sqrt{3} - \sqrt{3} - \sqrt{3} = \sqrt{3}$, έχουμε $\Delta E = EZ = ZB$.
+\end{alist}

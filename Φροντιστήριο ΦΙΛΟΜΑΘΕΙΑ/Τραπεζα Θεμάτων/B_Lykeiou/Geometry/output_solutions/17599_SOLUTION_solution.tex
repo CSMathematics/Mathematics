@@ -1,0 +1,62 @@
+\lysh{17599_SOLUTION}{1}
+\noindent ΛΥΣΗ\\
+α) Το εμβαδόν του χωρίου $Χ_1$ θα υπολογιστεί, αν από το εμβαδόν του τετραγώνου ΑΒΓΔ αφαιρέσουμε το εμβαδόν του τεταρτοκυκλίου με κέντρο το σημείο Α και ακτίνα ΑΒ. Έχουμε: $(ΑΒΓΔ) = α \cdot α = α^2$ και $(ΑΒΔ) = \frac{\pi \cdot α^2 \cdot 90^ο}{360^ο} = \frac{\pi \cdot α^2}{4}$.
+\[
+(Χ_1) = (ΑΒΓΔ) - (ΑΒΔ) = α^2 - \frac{\pi \cdot α^2}{4} = \frac{α^2}{4} \cdot (4-\pi)
+\]
+β) Το εμβαδόν $Χ_2$ του ημικυκλίου με διάμετρο ΑΒ ισούται με:
+\[
+(Χ_2) = \frac{\pi \cdot \left(\frac{α}{2}\right)^2 \cdot 180^ο}{360^ο} = \frac{\pi \cdot α^2}{8}
+\]
+Το εμβαδόν $Χ_3$ θα υπολογισθεί αν από το εμβαδόν του τεταρτοκυκλίου αφαιρέσουμε το $Χ_2$ και θα έχουμε:
+\[
+Χ_3 = (ΑΒΔ) - Χ_2 = \frac{\pi \cdot α^2}{4} - \frac{\pi \cdot α^2}{8} = \frac{\pi \cdot α^2}{8} .
+\]
+γ) 
+\begin{align*}
+    Χ_2 - Χ_1 &= \frac{\pi \cdot α^2}{8} - \frac{α^2}{4} \cdot (4-\pi) = \frac{\pi \cdot α^2}{8} - \frac{2 \cdot α^2}{8} \cdot (4-\pi) = \frac{α^2}{8} \cdot [\pi - 2(4 - \pi)] = \\
+    &= \frac{α^2}{8} \cdot (\pi - 8 + 2 \pi) = \frac{α^2}{8} \cdot (3 \pi - 8) > 0
+\end{align*}
+που σημαίνει ότι ισχύει $Χ_2 > Χ_1$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \def\a{4}
+    % Define points
+    \tkzDefPoint(0,0){B}
+    \tkzDefPoint(0,\a){A}
+    \tkzDefPoint(\a,\a){D}
+    \tkzDefPoint(\a,0){G}
+    % Midpoint for semicircle
+    \tkzDefMidPoint(A,B) \tkzGetPoint{M}
+
+    % Fill areas
+    % X1 (beige)
+    \fill[secondarycolor!30] (G) -- (D) arc(0:-90:\a) -- (B) -- cycle;
+    % X2 (blue)
+    \fill[maincolor!60] (A) arc(90:-90:\a/2) -- cycle;
+    % X3 (green) using even-odd rule
+    \fill[olive!40, even odd rule] (A) -- (D) arc(0:-90:\a) -- (B) -- cycle
+                                   (A) arc(90:-90:\a/2) -- cycle;
+    
+    % Draw boundaries
+    \tkzDrawPolygon(A,B,G,D);
+    \tkzDrawArc[thick](A,D)(B);
+    \tkzDrawSemiCircle[thick](M,A);
+    
+    % Draw points
+    \tkzDrawPoints[fill=black](A,B,G,D)
+    
+    % Add labels
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](G){$\Gamma$}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelSegment[below](B,G){$\alpha$}
+    \tkzLabelSegment[left](A,B){$\alpha$}
+    \node at (0.8, 2) {$X_2$};
+    \node at (3.2, 0.8) {$X_1$};
+    \node at (2.2, 3) {$X_3$};
+\end{tikzpicture}
+\end{center}
+\lysh}

@@ -1,0 +1,75 @@
+\lysh{23209_SOLUTION}{1}
+α) Έστω $x_1, x_2 \in \Delta = (-\infty, 1]$ με $x_1 < x_2 \le 1$, άρα $x_1 - 1 < x_2 - 1 \le 0$, οπότε $(x_1 - 1)^2 > (x_2 - 1)^2$ άρα και $(x_1 - 1)^2 - 1 > (x_2 - 1)^2 - 1$, οπότε $f(x_1) > f(x_2)$ για κάθε $x_1, x_2 \in \Delta = (-\infty, 1]$ με $x_1 < x_2$.
+
+Χρησιμοποιήσαμε τις ιδιότητες:
+\[ a < \beta < 0 \Rightarrow -a > -\beta > 0 \Rightarrow (-a)^2 > (-\beta)^2 \Rightarrow a^2 > \beta^2. \]
+Εναλλακτικά, καθώς η $f$ είναι παραγωγίσιμη ως πολυωνυμική, έχουμε
+\[ f'(x) = 2(x - 1)(x - 1)' - (1)' = 2(x - 1) \cdot 1 - 0 = 2(x - 1) < 0 \]
+για κάθε $x \in (-\infty, 1)$.
+Αλλά η $f$ είναι συνεχής ως πολυωνυμική στο διάστημα $(-\infty, 1]$, άρα η $f$ θα είναι γνησίως φθίνουσα στο $(-\infty, 1]$.
+
+\medskip
+β) Επειδή η $f$ είναι συνεχής και γνησίως φθίνουσα στο $(-\infty, 1]$, για το σύνολο τιμών θα έχουμε:
+\[ f((-\infty, 1]) = [f(1), \lim_{x \to -\infty} f(x)) = [-1, +\infty), \]
+καθώς
+\[ \lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} (x^2 - 2x) = \lim_{x \to -\infty} x^2 = +\infty. \]
+
+\medskip
+γ) Αφού η συνάρτηση $f$ είναι γνησίως μονότονη, άρα θα είναι και «$1-1$», επομένως θα υπάρχει η συνάρτηση $f^{-1}$.
+Γνωρίζουμε ότι οι γραφικές παραστάσεις των συναρτήσεων $f$ και $f^{-1}$ είναι συμμετρικές ως προς την ευθεία $y = x$.
+Επίσης, το σύνολο τιμών της $f$ είναι το πεδίο ορισμού της συνάρτησης $f^{-1}$.
+Επομένως, με προσεκτική χάραξη, παίρνουμε το παρακάτω σχήμα.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {},
+    ylabel = {},
+    xmin = -4.5, xmax = 12.5,
+    ymin = -3.5, ymax = 12.5,
+    xtick = {-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12},
+    ytick = {-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12},
+    grid = both,
+    grid style = {green!40!black!20},
+    samples = 200,
+    width = 12cm, height = 12cm,
+    tick label style = {font=\scriptsize},
+    every axis plot/.append style={very thick},
+    clip=false,
+]
+    % f(x) = (x-1)^2 - 1
+    \addplot[maincolor, domain=-2.6:1] {(x-1)^2 - 1};
+    \node[maincolor, scale=2] at (axis cs:-1.5, 4.5) {$f$};
+
+    % f^-1(x) = 1 - sqrt(x+1)
+    \addplot[secondarycolor, domain=-1:12] {1-sqrt(x+1)};
+    \node[secondarycolor, scale=2] at (axis cs:3.5, -2.5) {$f^{-1}$};
+
+    % y = x
+    \addplot[dashed, darkgray, domain=-3.5:12] {x};
+    \node[black, below right, scale=1.2] at (axis cs:4,4) {$y=x$};
+
+    % Intersection point (0,0)
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,0)};
+
+    % Points on f
+    \addplot[only marks, mark=*, mark size=1.5pt, maincolor] coordinates {
+        (-0.8, 2.24)   % B
+        (-2, 8)        % E
+    };
+    \node[maincolor, above right] at (axis cs:-0.8, 2.24) {B};
+    \node[maincolor, left] at (axis cs:-2, 8) {E};
+
+    % Points on f^-1
+    \addplot[only marks, mark=*, mark size=1.5pt, secondarycolor] coordinates {
+        (1.5, -0.58) % A
+        (8, -2)      % Z
+    };
+    \node[secondarycolor, below right] at (axis cs:1.5, -0.58) {A};
+    \node[secondarycolor, below] at (axis cs:8, -2) {Z};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\endlysh

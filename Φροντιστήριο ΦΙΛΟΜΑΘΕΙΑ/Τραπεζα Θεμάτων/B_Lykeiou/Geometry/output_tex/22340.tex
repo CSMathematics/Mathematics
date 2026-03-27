@@ -1,0 +1,59 @@
+\Askhsh{22340}{4}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{8cm}
+    \begin{tikzpicture}[scale=0.85]
+        % Define points A, B, Gamma
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(7,0){G} % Gamma, shifted right for wider base
+        \tkzDefPoint(3.5,6){A} % A higher up
+
+        % Define K on BG (closer to G, as in the image)
+        \tkzDefPointWith[linear, K=0.7](B,G) \tkzGetPoint{K} % 0.7 from B to G
+
+        % Define O on AK such that AO = 3/4 AK
+        \tkzDefPointBy[homothety=center A ratio 0.75](K) \tkzGetPoint{O}
+
+        % Define line epsilon (ε) passing through O, intersecting AB at D and AG at E
+        % We need to ensure D, O, E are collinear.
+        % Choose a reference point for D on AB.
+        \tkzDefPointWith[linear, K=0.3](A,B) \tkzGetPoint{D} % D is 0.3 from A towards B (closer to A)
+
+        % E is the intersection of line DO and line AG
+        \tkzInterLL(D,O)(A,G) \tkzGetPoint{E}
+
+        % Draw the triangle ABC
+        \tkzDrawPolygon(A,B,G)
+        % Draw segment AK
+        \tkzDrawSegment(A,K)
+        % Draw line epsilon (ΔΟΕ)
+        \tkzDrawLine[add=0.3 and 0.3](D,E) % Extends line DE slightly beyond D and E
+        % Draw segments ΔK, KE
+        \tkzDrawSegments(D,K K,E)
+
+        % Draw points
+        \tkzDrawPoints[size=3pt,fill=black](A,B,G,K,O,D,E)
+
+        % Label points
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below](K){K}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[below left](O){O} % Adjusted label position for O
+        \tkzLabelLine[left,pos=0.1](D,E){$\varepsilon$} % Label line epsilon
+    \end{tikzpicture}
+\end{wrapfigure}
+Έστω τρίγωνο \text{ΑΒΓ} και το εσωτερικό σημείο \text{K} της πλευράς \text{ΒΓ}. Θεωρούμε σημείο \text{O} του ευθύγραμμου τμήματος \text{ΑK}, ώστε \text{ΑO} = $\frac{3}{4}$\text{ΑK}. Από το \text{O} φέρνουμε ευθεία $\varepsilon$ η οποία τέμνει τις πλευρές \text{ΑΒ} και \text{ΑΓ} στα σημεία \text{Δ} και \text{E} αντίστοιχα.
+\begin{alist}
+\item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item $(\text{ΑΟΔ}) = \frac{3}{4} (\text{ΑΚΔ})$, \monades{7}
+        \item $(\text{ΑΟE}) = \frac{3}{4} (\text{ΑΚE})$, \monades{7}
+        \item $(\text{ΔΔE}) = \frac{3}{4} (\text{ΔΔKE})$. \monades{7}
+    \end{rlist}
+\item Eίναι δυνατόν να ισχύει $(\text{ΑΔE}) = \frac{3}{4} (\text{ΑΒΓ})$; Να αιτιολογήσετε την απάντησή σας. \monades{4}
+\end{alist}

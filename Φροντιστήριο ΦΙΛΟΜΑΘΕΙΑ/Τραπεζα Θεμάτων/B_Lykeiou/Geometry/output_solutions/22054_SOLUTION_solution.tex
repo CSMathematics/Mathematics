@@ -1,0 +1,75 @@
+\Askhsh{22054_SOLUTION}{1}
+\begin{ylh}{1}
+    \item[ΛΥΣΗ]
+\end{ylh}
+
+\begin{wrapfigure}{r}{5.5cm}
+    \vspace{-1.5\baselineskip}
+    \centering
+    \begin{tikzpicture}[scale=1, font=\small]
+        \def\a{2}
+        % Define points
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,2*\a){B}
+        \tkzDefPoint(2*\a,2*\a){G} % Γ
+        \tkzDefPoint(2*\a,0){D} % Δ
+        \tkzDefPoint(\a,0){Th} % Θ
+        \tkzDefPoint(0,\a){E}
+        \tkzDefPoint(\a,2*\a){Z}
+        \tkzDefPoint(2*\a,\a){H}
+
+        % Fill the central shape
+        \tkzFillPolygon[gray!80](A,B,G,D)
+        \tkzFillSector[fill=white](A,E)(Th)
+        \tkzFillSector[fill=white](B,Z)(E)
+        \tkzFillSector[fill=white](G,H)(Z)
+        \tkzFillSector[fill=white](D,Th)(H)
+
+        % Draw the arcs of the astroid
+        \tkzDrawArc[thick](A,E)(Th)
+        \tkzDrawArc[thick](B,Z)(E)
+        \tkzDrawArc[thick](G,H)(Z)
+        \tkzDrawArc[thick](D,Th)(H)
+
+        % Draw the square border
+        \tkzDrawPolygon[thick](A,B,G,D)
+
+        % Draw points on the sides
+        \tkzDrawPoints[size=3,fill=black](A,B,G,D,E,Z,H,Th)
+
+        % Label points (corners and midpoints)
+        \tkzLabelPoint[below left,yshift=-2pt](A){A}
+        \tkzLabelPoint[above left,yshift=2pt](B){B}
+        \tkzLabelPoint[above right,yshift=2pt](G){$\Gamma$}
+        \tkzLabelPoint[below right,yshift=-2pt](D){$\Delta$}
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[above](Z){Z}
+        \tkzLabelPoint[right](H){H}
+        \tkzLabelPoint[below](Th){$\Theta$}
+
+        % Label lengths
+        \tkzLabelSegment[above,pos=0.5](B,Z){$\alpha$}
+        \tkzLabelSegment[above,pos=0.5](Z,G){$\alpha$}
+        \tkzLabelSegment[left,pos=0.5](A,E){$\alpha$}
+        \tkzLabelSegment[left,pos=0.5](E,B){$\alpha$}
+        \tkzLabelSegment[below,pos=0.5](A,Th){$\alpha$}
+        \tkzLabelSegment[below,pos=0.5](Th,D){$\alpha$}
+        \tkzLabelSegment[right,pos=0.5](D,H){$\alpha$}
+        \tkzLabelSegment[right,pos=0.5](H,G){$\alpha$}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\begin{alist}
+    \item Τα τόξα $\wideparen{ΘΕ}, \wideparen{ΕΖ}, \wideparen{ΖΗ}, \wideparen{ΗΘ}$ είναι τόξα ίσων κύκλων ακτίνας $\alpha$ και αντιστοιχούν σε ίσες επίκεντρες γωνίες $90^\circ$. Επομένως, οι κυκλικοί τομείς $Α\wideparen{ΘΕ}, Β\wideparen{ΕΖ}, Γ\wideparen{ΖΗ}, Δ\wideparen{ΗΘ}$ έχουν ο καθένας εμβαδόν
+    \[ (Α\wideparen{ΘΕ}) = (Β\wideparen{ΕΖ}) = (Γ\wideparen{ΖΗ}) = (Δ\wideparen{ΗΘ}) = \frac{\pi\alpha^2 90^\circ}{360^\circ} = \frac{\pi\alpha^2}{4} \]
+    
+    \item Το εμβαδόν του τετραγώνου είναι
+    \[ E_\tau = (2\alpha)^2 = 4\alpha^2 \]
+    Οπότε, το εμβαδόν του γραμμοσκιασμένου χωρίου είναι:
+    \[ E = E_\tau - 4(Α\wideparen{ΘΕ}) = 4\alpha^2 - 4\frac{\pi\alpha^2}{4} = 4\alpha^2 - \pi\alpha^2 = \alpha^2(4 - \pi) \]
+    
+    \item Το μήκος καθενός από τα ίσα τόξα $\wideparen{ΘΕ}, \wideparen{ΕΖ}, \wideparen{ΖΗ}, \wideparen{ΗΘ}$ είναι:
+    \[ \ell_{\wideparen{ΘΕ}} = \ell_{\wideparen{ΕΖ}} = \ell_{\wideparen{ΖΗ}} = \ell_{\wideparen{ΗΘ}} = \frac{\pi\alpha 90^\circ}{180^\circ} = \frac{\pi\alpha}{2} \]
+    Οπότε, η περίμετρος του γραμμοσκιασμένου καμπυλόγραμμου χωρίου είναι:
+    \[ L = 4\ell_{\wideparen{ΘΕ}} = 4\frac{\pi\alpha}{2} = 2\pi\alpha \]
+\end{alist}

@@ -1,0 +1,85 @@
+\lysh{12682}{4}
+
+\begin{alist}
+\item Λύνουμε την ανίσωση $f(x) < 0$. Είναι:
+
+\[f(x) < 0 \Leftrightarrow 1 - (x - 1)^2 < 0 \Leftrightarrow -(x - 1)^2 < -1 \Leftrightarrow (x - 1)^2 > 1\]
+
+\[\Leftrightarrow \sqrt{(x - 1)^2} > 1 \Leftrightarrow |x - 1| > 1 \Leftrightarrow x - 1 < -1 \text{ ή } x - 1 > 1\]
+
+\[\Leftrightarrow x < 0 \text{ ή } x > 2.\]
+
+Άρα $x \in (-\infty, 0) \cup (2, +\infty)$.
+
+\item Διακρίνουμε τις παρακάτω περιπτώσεις:
+
+\begin{rlist}
+\item Αν $x \ge 1$, τότε $x - 1 \ge 0$, οπότε $|x - 1| = x - 1$ και $g(x) = x - 1 + 2 = x + 1$
+\item Αν $x < 1$, τότε $x - 1 < 0$, οπότε $|x - 1| = -x + 1$ και $g(x) = -x + 1 + 2 = -x + 3$.
+\end{rlist}
+
+Άρα $g(x) = \begin{cases} x + 1, & x \ge 1 \\ -x + 3, & x < 1 \end{cases}$.
+
+Η γραφική παράσταση της συνάρτησης $g$ αποτελείται:
+\begin{rlist}
+\item από το τμήμα της ευθείας $y = x + 1$, όταν $x \ge 1$ για $x \in (1, +\infty)$, με πίνακα τιμών
+\begin{center}
+\begin{mytblr}{}
+
+$x$ & $y$ \\ 
+$1$ & $2$ \\ 
+$2$ & $3$ \\ 
+\end{mytblr}
+\end{center}
+\item από το τμήμα της ευθείας $y = -x + 3$, όταν $x < 1$ για $x \in (-\infty, 1)$, με πίνακα τιμών
+\begin{center}
+\begin{mytblr}{}
+
+$x$ & $y$ \\ 
+$1$ & $2$ \\ 
+$-2$ & $5$ \\ 
+\end{mytblr}
+\end{center}
+
+Συνεπώς στο παρακάτω σχήμα φαίνεται η γραφική παράσταση $C_g$.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=center,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3, xmax=4,
+    ymin=-1, ymax=6,
+    xtick={-2,1,2},
+    ytick={2,3,5},
+    ticklabel style={font=\footnotesize},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south west},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!20},
+    major grid style={line width=.2pt,draw=gray!50},
+    width=8cm,
+    height=8cm
+]
+\addplot[domain=1:3, thick, maincolor] {x + 1} node[below right, pos=1] {$y=x+1$};
+\addplot[domain=-3:1, thick, maincolor] {-x + 3} node[below left, pos=0] {$y=-x+3$};
+\addplot[mark=*, mark options={fill=black}, nodes near coords={$(1,2)$}, every node near coord/.append style={anchor=north}, only marks] coordinates {(1,2)};
+\addplot[mark=*, mark options={fill=black}, nodes near coords={$(2,3)$}, every node near coord/.append style={anchor=north west}, only marks] coordinates {(2,3)};
+\addplot[mark=*, mark options={fill=black}, nodes near coords={$(-2,5)$}, every node near coord/.append style={anchor=south west}, only marks] coordinates {(-2,5)};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Άσκηση 13317 - Γραφική παράσταση $C_g$}
+\end{center}
+\end{rlist}
+\item Είναι: $f(x) - g(x) = 1 - (x - 1)^2 - |x - 1| - 2 = -|x - 1|^2 - |x - 1| - 1$.
+Αν θέσουμε $|x - 1| = \omega$ τότε η παραπάνω διαφορά γράφεται $-\omega^2 - \omega - 1$ και είναι πάντα αρνητική, αφού είναι τριώνυμο του $\omega$, με $\alpha = -1 < 0$ και διακρίνουσα
+\[\Delta = (-1)^2 - 4(-1)(-1) = 1 - 4 = -3 < 0.\]
+
+Άρα για κάθε $x \in \mathbb{R}$ έχουμε $f(x) - g(x) < 0$, οπότε η γραφική παράσταση της f είναι κάτω από τη γραφική παράσταση της $g$.
+
+Εναλλακτική λύση:
+Ισχύουν $(x - 1)^2 \ge 0 \Leftrightarrow - (x - 1)^2 \le 0 \Leftrightarrow 1 - (x - 1)^2 \le 1 \Leftrightarrow f(x) \le 1$ με $x \in \mathbb{R}$ και
+$|x - 1| \ge 0 \Leftrightarrow |x - 1| + 2 \ge 2 \Leftrightarrow g(x) \ge 2$ με $x \in \mathbb{R}$
+
+Άρα $f(x) < g(x)$, οπότε η γραφική παράσταση της $f$ είναι κάτω από τη γραφική παράσταση της $g$.
+\end{alist}

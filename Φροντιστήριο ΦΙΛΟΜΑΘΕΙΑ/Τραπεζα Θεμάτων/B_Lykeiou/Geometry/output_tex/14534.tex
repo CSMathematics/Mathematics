@@ -1,0 +1,53 @@
+\Askhsh{14534}{2}
+\begin{ylh}{1}
+    \item 7.4. Ανάλογα ευθύγραμμα τμήματα - Αναλογίες
+    \item 7.7. Θεώρημα του Θαλή.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Ορισμός σημείων Α, Β, Γ
+        \tkzDefPoint(0,4){A}
+        \tkzDefPoint(-3,0){B}
+        \tkzDefPoint(6,0){C}
+        
+        % Το Μ είναι το μέσο της ΒΓ (διάμεσος ΑΜ)
+        \tkzDefMidPoint(B,C) \tkzGetPoint{M}
+        
+        % Το Ζ βρίσκεται στην ΑΜ ώστε ΑΖ/ΑΜ = 2/3
+        \tkzDefPointBy[homothety=center A ratio 2/3](M) \tkzGetPoint{Z}
+        
+        % Τα Δ και Ε βρίσκονται στις ΑΒ και ΑΓ αντίστοιχα, ώστε ΔΕ || ΒΓ
+        % Από την ομοιοθεσία με κέντρο Α και λόγο 2/3, τα Δ και Ε προκύπτουν
+        \tkzDefPointBy[homothety=center A ratio 2/3](B) \tkzGetPoint{D}
+        \tkzDefPointBy[homothety=center A ratio 2/3](C) \tkzGetPoint{E}
+
+        % Σχεδίαση του τριγώνου
+        \tkzDrawPolygon(A,B,C)
+        
+        % Σχεδίαση της διαμέσου ΑΜ (διακεκομμένη γραμμή)
+        \tkzDrawSegment[dashed, maincolor](A,M)
+        
+        % Σχεδίαση του ευθυγράμμου τμήματος ΔΕ
+        \tkzDrawSegment(D,E) 
+        
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints(A,B,C,M,Z,D,E)
+        
+        % Ετικέτες για τα σημεία
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below](M){M}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[below](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Θεωρούμε τρίγωνο $AB\Gamma$ με $AB=6$ και $A\Gamma=9$. $AM$ είναι η διάμεσος του τριγώνου και το σημείο $Z$ εσωτερικό στην $AM$ ώστε να σχηματίζει λόγο $\frac{AZ}{AM} = \frac{2}{3}$. Από το σημείο $Z$ φέρουμε ευθεία παράλληλη στην πλευρά $B\Gamma$, που τέμνει τις πλευρές $AB$ και $A\Gamma$ στα σημεία $\Delta$ και $E$ αντίστοιχα.
+
+\begin{alist}
+    \item Να αποδείξετε ότι : $\frac{A\Delta}{AB} = \frac{2}{3}$ και $\frac{AE}{E\Gamma} = 2$. \monades{15}
+    \item Να υπολογίσετε τα μήκη των τμημάτων $A\Delta$ και $E\Gamma$. \monades{10}
+\end{alist}

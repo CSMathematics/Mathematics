@@ -1,0 +1,38 @@
+% ===================================================================
+%  Αρχείο: 15644_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σύστημα συντεταγμένων έχουμε σχεδιάσει δύο γραφικές παραστάσεις $C_1$ και $C_2$ για $x \in [0, 2\pi]$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5, >=latex]
+    \draw[very thin, color=gray!30, xstep=pi/4, ystep=1] (-0.5,-1.5) grid (6.8,1.5);
+    \draw[->] (-0.5,0) -- (7,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.8) node[above] {$y$};
+    
+    \foreach \x/\xtext in {0.785/\frac{\pi}{4}, 1.571/\frac{\pi}{2}, 2.356/\frac{3\pi}{4}, 3.141/\pi, 3.927/\frac{5\pi}{4}, 4.712/\frac{3\pi}{2}, 5.498/\frac{7\pi}{4}, 6.283/2\pi}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {$\xtext$};
+    \foreach \y in {-1,1}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % C1 (cos x)
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=0:2*pi] plot (\x, {cos(deg(\x))}) node[right] {$C_1$};
+    
+    % C2 (sin x)
+    \draw[very thick, color=red!70!black, samples=100, smooth, domain=0:2*pi] plot (\x, {sin(deg(\x))}) node[right] {$C_2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Αν οι γραφικές παραστάσεις είναι των συναρτήσεων $f(x) = \sigma\upsilon\nu x$ και $g(x) = \eta\mu x$ για $x \in [0, 2\pi]$, ποια από τις $C_1$, $C_2$ είναι η γραφική παράσταση της $f(x) = \sigma\upsilon\nu x$ και ποια της $g(x) = \eta\mu x$; Να αιτιολογήσετε την απάντησή σας.
+
+\monades{10}
+
+\item Με την βοήθεια του σχήματος να λύσετε την εξίσωση $\eta\mu x = \sigma\upsilon\nu x$ στο διάστημα $[0, 2\pi]$.
+
+\monades{15}
+\end{alist}

@@ -1,0 +1,57 @@
+\Askhsh{27408}{4}
+\begin{ylh}{1}
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.7 Τοπικά ακρότατα συνάρτησης
+    \item 3.7 Εμβαδόν επιπέδου χωρίου.
+\end{ylh}
+\begin{wrapfigure}[17]{r}{0.45\textwidth}
+\def\xrectval{1.732} % Using sqrt(3) as a representative x value for drawing the rectangle
+\def\yrectval{6}     % f(sqrt(3)) = 9 - (sqrt(3))^2 = 9 - 3 = 6
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {}, % Custom labels below
+    ylabel = {}, % Custom labels below
+    xmin = -3.8, xmax = 3.8,
+    ymin = -1.2, ymax = 9.8,
+    xtick = {-3,-2,-1,1,2,3},
+    ytick = {1,2,3,4,5,6,7,8,9},
+    grid = none, % No grid in the original image
+    samples = 100,
+    width = 0.45\textwidth, height = 7cm,
+    tick label style = {font=\scriptsize},
+    axis line style={-stealth} % For arrows on axes
+]
+    % Parabola f(x) = 9 - x^2
+    \addplot[very thick, maincolor, domain=-3:3] {9-x^2};
+    \node[maincolor, right] at (axis cs:2.5, 5) {$f(x)=9-x^2$};
+
+    % Rectangle sides (using specific x_rect_val for drawing)
+    \draw[thick, black] (-\xrectval,0) -- (-\xrectval,\yrectval) -- (\xrectval,\yrectval) -- (\xrectval,0);
+
+    % Points (labeled with symbolic x)
+    \node[below] at (axis cs:\xrectval,0) {$A(x,0)$};
+    \node[below] at (axis cs:-\xrectval,0) {$\Delta(-x,0)$};
+    \node[above right] at (axis cs:\xrectval,\yrectval) {$B(x,f(x))$};
+    \node[above left] at (axis cs:-\xrectval,\yrectval) {$\Gamma(-x,f(-x))$};
+    
+    % Origin label
+    \node[below left] at (axis cs:0,0) {$O$};
+    
+    % Axis labels x, x', y, y'
+    \node[below] at (axis cs:-3.7,0) {$x'$};
+    \node[right] at (axis cs:3.7,0) {$x$};
+    \node[left] at (axis cs:0,-0.8) {$y'$};
+    \node[above] at (axis cs:0,9.5) {$y$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της συνάρτησης $f(x) = 9 - x^2$. Μεταξύ του γραφήματος της συνάρτησης και του οριζόντιου άξονα $x'x$ είναι εγγεγραμμένο το ορθογώνιο ΑΒΓΔ. Οι κορυφές $A(x,0)$ και $\Delta(-x,0)$ είναι σημεία του άξονα $x'x$, ενώ οι κορυφές $B(x,f(x))$ και $\Gamma(-x,f(-x))$ είναι σημεία της γραφικής παράστασης της συνάρτησης $f$.
+
+\begin{alist}
+\item Να αποδείξετε ότι το εμβαδό του ορθογωνίου ΑΒΓΔ ως συνάρτηση του $x \in [0,3]$ δίνεται από την συνάρτηση $E(x) = 18x - 2x^3$. \monades{6}
+\item Να μελετηθεί η συνάρτηση $E(x)$ ως προς την μονοτονία. \monades{6}
+\item Να υπολογίσετε τις διαστάσεις του ορθογωνίου ΑΒΓΔ, ώστε αυτό να έχει το μέγιστο εμβαδό, και να αποδείξετε ότι αυτό ισούται με $12\sqrt{3}$ τετραγωνικές μονάδες. \monades{6}
+\item Να υπολογίσετε το εμβαδό του χωρίου που περικλείεται από την γραφική παράσταση της συνάρτησης $f$, του άξονα $x'x$ και είναι εξωτερικό του ορθογωνίου ΑΒΓΔ όταν το εμβαδό του παίρνει την μέγιστη τιμή του. \monades{7}
+\end{alist}

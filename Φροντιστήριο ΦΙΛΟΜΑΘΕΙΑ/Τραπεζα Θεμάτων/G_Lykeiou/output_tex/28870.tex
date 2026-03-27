@@ -1,0 +1,70 @@
+\Askhsh{28870}{4}
+\begin{ylh}{1}
+    \item 2.5 Μονοτονία συνάρτησης
+    \item 2.4 Κρίσιμα σημεία, ακρότατα
+    \item 3.4 Ορισμένο ολοκλήρωμα
+\end{ylh}
+\begin{wrapfigure}[24]{r}{8cm}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {x},
+    ylabel = {y},
+    xmin = -3.5, xmax = 2.5,
+    ymin = -3, ymax = 7,
+    xtick = {-3, -1, 0, 2},
+    ytick = {},
+    grid = none,
+    width = 8cm, height = 7cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south east},
+    axis line style = {very thick},
+]
+    % C_f' label
+    \node[right] at (axis cs:-2.5, 4.5) {$C_f'$};
+
+    % Curve segment for x in [-3, -1)
+    % Approximation with coordinates
+    \draw[thick, maincolor] plot[smooth, tension=0.8] coordinates {(-3,6) (-2.5,0) (-2,0.5) (-1.5,1.5) (-1,2.5)};
+
+    % Line segment for x in (-1, 2] (based on visual slope -1 passing through (0,0))
+    \draw[thick, maincolor] (axis cs:-1,1) -- (axis cs:0,0) -- (axis cs:2,-2);
+    
+    % Points and circles
+    % Filled circle at x=-3
+    \node[draw, circle, inner sep=1.5pt, fill=black] at (axis cs:-3,6) {};
+    
+    % Filled circle for f'(-1)
+    \node[draw, circle, inner sep=1.5pt, fill=black] at (axis cs:-1,2.5) {};
+    
+    % Open circle for the limit of the curve from the left at x=-1
+    \node[draw, circle, inner sep=1.5pt, fill=white, thick, maincolor] at (axis cs:-1,2.5) {};
+    
+    % Open circle for the limit of the line segment from the right at x=-1
+    \node[draw, circle, inner sep=1.5pt, fill=white, thick, maincolor] at (axis cs:-1,1) {};
+    
+    % Origin O label
+    \node[below left] at (axis cs:0,0) {O};
+    
+    % Filled circle at x=2
+    \node[draw, circle, inner sep=1.5pt, fill=black] at (axis cs:2,-2) {};
+
+    % Dotted lines for x=-3, x=-1, x=2
+    \draw[dotted, thick] (axis cs:-3,0) -- (axis cs:-3,6);
+    \draw[dotted, thick] (axis cs:-1,0) -- (axis cs:-1,2.5);
+    \draw[dotted, thick] (axis cs:2,0) -- (axis cs:2,-2);
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται μία συνεχής συνάρτηση $f$ στο διάστημα $[-3,2]$, η οποία δεν είναι παραγωγίσιμη στο $-1$. Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της παραγώγου της $f$, η $C_f'$, που στο διάστημα $(-1,2]$ είναι ευθύγραμμο τμήμα.
+\begin{alist}
+    \item Να μελετήσετε τη συνάρτηση $f$ ως προς τη μονοτονία της. \monades{08}
+    \item Να βρείτε:
+    \begin{rlist}
+        \item Τα κρίσιμα σημεία της $f$, αν υπάρχουν, δικαιολογώντας την απάντησή σας. \monades{06}
+        \item Τις θέσεις τοπικών ακροτάτων και το είδος τους. \monades{05}
+    \end{rlist}
+    \item Αν η $f'$ είναι συνεχής στο $[0,2]$ και ισχύει ότι $\int_0^2 f'(x)dx = -4$, να υπολογίσετε την τιμή $f'(2)$. \monades{06}
+\end{alist}

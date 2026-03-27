@@ -1,0 +1,47 @@
+\begin{alist}
+\item Αν υπήρχε γωνία $x$ τέτοια ώστε $\eta\mu x = \sigma\upsilon\nu x = 0$, τότε από τη βασική τριγωνομετρική ταυτότητα $\eta\mu^2x + \sigma\upsilon\nu^2x = 1$ θα είχαμε $0 + 0 = 1$, το οποίο είναι άτοπο. Συνεπώς δεν υπάρχει γωνία $x$ τέτοια ώστε $\eta\mu x = \sigma\upsilon\nu x = 0$.
+
+\item Αν $\sigma\upsilon\nu x = 0$ τότε από την εξίσωση $\sqrt{3}\cdot\eta\mu x = 3\cdot\sigma\upsilon\nu x$ θα είχαμε και $\eta\mu x = 0$, το οποίο όμως όπως δείξαμε στο α) είναι άτοπο. Συνεπώς $\sigma\upsilon\nu x \neq 0$. \\
+Με $\sigma\upsilon\nu x \neq 0$ έχουμε ισοδύναμα
+\[\sqrt{3}\cdot\eta\mu x = 3\cdot\sigma\upsilon\nu x \Leftrightarrow \frac{\eta\mu x}{\sigma\upsilon\nu x} = \frac{3}{\sqrt{3}} \Leftrightarrow \varepsilon\varphi x = \sqrt{3} \Leftrightarrow \varepsilon\varphi x = \varepsilon\varphi\frac{\pi}{3}\]
+η οποία στο διάστημα $[0, 2\pi]$ έχει λύσεις τις $x = \dfrac{\pi}{3}$ και $x = \pi + \dfrac{\pi}{3} = \dfrac{4\pi}{3}$.
+
+\item Με βάση τον παρακάτω πίνακα τιμών
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x$ & $0$ & $\pi/2$ & $\pi$ & $3\pi/2$ & $2\pi$ \\ \hline
+$f(x) = \sqrt{3}\cdot\eta\mu x$ & $0$ & $\sqrt{3}$ & $0$ & $-\sqrt{3}$ & $0$ \\ \hline
+$g(x) = 3\cdot\sigma\upsilon\nu x$ & $3$ & $0$ & $-3$ & $0$ & $3$ \\ \hline
+\end{tabular}
+\end{center}
+οι ζητούμενες γραφικές παραστάσεις φαίνονται στο παρακάτω σχήμα.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-pi/2, xmax=5.5*pi/2,
+    ymin=-3.5, ymax=4.5,
+    xtick={-pi/2, 0, pi/2, pi, 3*pi/2, 2*pi, 5*pi/2},
+    xticklabels={$-\pi/2$, $0$, $\pi/2$, $\pi$, $3\pi/2$, $2\pi$, $5\pi/2$},
+    ytick={-3,-2,-1,1,2,3,4},
+    grid=both,
+    grid style={solid, gray!20},
+    thick,
+    samples=100
+]
+\addplot[domain=0:2*pi, maincolor, very thick] {sqrt(3)*sin(deg(x))} node[above left, pos=0.15] {$f$};
+\addplot[domain=0:2*pi, secondarycolor, very thick] {3*cos(deg(x))} node[above, pos=0.08] {$g$};
+\addplot[mark=*, fill=black] coordinates {(pi/3, 1.5)} node[above left] {A};
+\addplot[mark=*, fill=black] coordinates {(4*pi/3, -1.5)} node[below right] {B};
+\draw[dashed] (pi/3, 0) -- (pi/3, 1.5);
+\node[below] at (pi/3, 0) {$\dfrac{\pi}{3}$};
+\addplot[mark=*, fill=black] coordinates {(pi/3, 0)};
+\draw[dashed] (4*pi/3, 0) -- (4*pi/3, -1.5);
+\node[above] at (4*pi/3, 0) {$\dfrac{4\pi}{3}$};
+\addplot[mark=*, fill=black] coordinates {(4*pi/3, 0)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{alist}

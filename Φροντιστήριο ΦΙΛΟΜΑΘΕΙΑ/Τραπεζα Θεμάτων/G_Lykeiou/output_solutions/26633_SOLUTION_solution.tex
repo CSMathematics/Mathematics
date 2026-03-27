@@ -1,0 +1,59 @@
+\Askhsh{26633_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[9]{c}{0.4\textwidth} % [Number of lines to wrap around] {placement} {width}
+    \centering
+    \begin{tikzpicture}
+        % Dashed line at the top of the figure to mimic the original
+        \draw[dashed, very thick, maincolor] (-0.5, 2.5) -- (3.5, 2.5);
+
+        % Rectangle
+        % Dimensions: 3 units wide for x, 2 units high for y.
+        % Shifted downwards to accommodate the dashed line.
+        \draw (0, 0) rectangle (3, 2); % Rectangle corners at (0,0) and (3,2)
+        % Label x (bottom side)
+        \node[below] at (1.5, 0) {$x$};
+        % Label y (left side)
+        \node[left] at (0, 1) {$y$};
+        % Label y (right side)
+        \node[right] at (3, 1) {$y$};
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\begin{alist}
+    \item Έστω $x$ η άλλη διάσταση της ορθογώνιας περιοχής που έχουμε περιφράξει, με $x, y > 0$ ως μήκη. Από τα δεδομένα θα ισχύει:
+    \[ x+2y=400 \Leftrightarrow 2y=400-x \Leftrightarrow y=\frac{400-x}{2} \tag{2} \]
+    Λόγω της (1) είναι:
+    \[ \begin{dcases*} x > 0 \\ y > 0 \end{dcases*} \Leftrightarrow \begin{dcases*} x > 0 \\ \frac{400-x}{2} > 0 \end{dcases*} \Leftrightarrow \begin{dcases*} x > 0 \\ 400-x > 0 \end{dcases*} \Leftrightarrow \begin{dcases*} x > 0 \\ x < 400 \end{dcases*} \Leftrightarrow 0 < x < 400 \]
+    Το εμβαδό της ορθογώνιας περιοχής είναι: $E=x \cdot y$, η οποία λόγω της (2) γράφεται:
+    \[ E=x \cdot \frac{400-x}{2} = \frac{400x-x^2}{2} = 200x - \frac{1}{2}x^2 \text{ ή } E(x) = 200x - \frac{1}{2}x^2 \text{ με } 0 < x < 400 \]
+
+    \item Για $0 < x < 400$ η συνάρτηση $E(x)$ είναι παραγωγίσιμη με
+    \[ E'(x) = \left(200x - \frac{1}{2}x^2\right)' = 200-x \]
+    Επίσης $E'(x)=0 \Leftrightarrow 200-x=0 \Leftrightarrow x=200$ και
+    \[ \begin{dcases*} E'(x) > 0 \Leftrightarrow 200-x > 0 \Leftrightarrow x < 200 \\ E'(x) < 0 \Leftrightarrow 200-x < 0 \Leftrightarrow x > 200 \end{dcases*} \]
+    Οπότε:
+    \[
+    \begin{array}{|c|c|c|c|c|c|}
+    \hline
+    x & 0 & & 200 & & 400 \\
+    \hline
+    E'(x) & & + & 0 & - & \\
+    \hline
+    E(x) & & \nearrow & \text{O.M} & \searrow & \\
+    \hline
+    \end{array}
+    \]
+
+    \item Από τον παραπάνω πίνακα μεταβολών γίνεται φανερό ότι το εμβαδό $E(x)$ της περιφραγμένης περιοχής γίνεται μέγιστο για $x=200$ μέτρα.
+    Λόγω του ερωτήματος (β) η ζητούμενη μέγιστη τιμή του εμβαδού είναι:
+    \[ E(200) = 200 \cdot 200 - \frac{1}{2} \cdot 200^2 = 40000 - 20000 = 20000 \text{ τετραγωνικά μέτρα (ή } 20 \text{ στρέμματα)} \]
+
+    \item Λόγω του ερωτήματος (β) η συνάρτηση $E(x)$ είναι γνησίως αύξουσα στο διάστημα
+    \[ A = [0, 200] \text{ οπότε } E(A) = \left[\lim_{x \to 0} E(x), E(200)\right] \]
+    Όμως $\lim_{x \to 0} E(x) = \lim_{x \to 0} \left(200x - \frac{1}{2}x^2\right) = 0$ και $E(200) = 20000$.
+    Άρα $E(A) = [0, 20000]$ και $300\pi \in E(A)$ γιατί:
+    \[ 0 < \pi < 4 \Rightarrow 300 \cdot 0 < 300\pi < 300 \cdot 4 \Rightarrow 0 < 300\pi < 1200 < 20000 \]
+    Οπότε θα υπάρχει $x_0 \in (0, 200)$ έτσι ώστε: $E(x_0) = 300\pi$ και το $x_0$ αυτό είναι μοναδικό, λόγω της μονοτονίας της συνάρτησης $E$ στο διάστημα $(0, 200)$. Επομένως, ο ισχυρισμός του Ιάσονα είναι αληθής.
+\end{alist}

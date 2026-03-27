@@ -1,0 +1,81 @@
+\lysh{36812}{4}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -3.5, xmax = 5.5,
+    ymin = -0.5, ymax = 7.5,
+    xtick = {-3,-2,-1,0,1,2,3,4,5},
+    ytick = {1,2,3,4,5,6,7},
+    grid = both,
+    grid style = {gray!30},
+    samples = 100,
+    width = 10cm, height = 7cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % f(x) = x^2 (parabola)
+    \addplot[very thick, maincolor, domain=-2.7:2.7] {x^2} node[above right, pos=0.8] {$y=x^2$};
+    
+    % Point A(3,1)
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(3,1)};
+    \node[below right] at (axis cs:3,1) {$A$};
+
+    % Point M(x,x^2) - shown at (2,4) in the diagram for illustration
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(2,4)};
+    \node[above left] at (axis cs:2,4) {$M$};
+
+    % Line segment AM
+    \draw[very thick, black] (axis cs:2,4) -- (axis cs:3,1);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{alist}
+\item Για το τυχαίο σημείο $M$ της γραφικής παράστασης της συνάρτησης $f$ είναι:
+$M(x,y) = (x,x^2)$, $x \in \mathbb{R}$.
+
+Επομένως, η απόσταση $AM$, συναρτήσει του $x$, είναι:
+\[ AM = d(x) = \sqrt{(x-3)^2 + (x^2-1)^2} = \sqrt{x^2 - 6x + 9 + x^4 - 2x^2 + 1} = \sqrt{x^4 - x^2 - 6x + 10} \]
+\item 
+\begin{rlist}
+\item Είναι:
+\[ (x-1) \cdot (2x^2+2x+3) = 2x^3 + 2x^2 + 3x - 2x^2 - 2x - 3 = 2x^3 + x - 3 \]
+\item Η ελάχιστη απόσταση θα παρουσιαστεί όταν το υπόριζο $x^4 - x^2 - 6x + 9$, $x \in \mathbb{R}$, γίνει ελάχιστο.
+Θεωρούμε τη συνάρτηση $g(x) = x^4 - x^2 - 6x + 9$, $x \in \mathbb{R}$. Η συνάρτηση $g(x)$ είναι παραγωγίσιμη για $x \in \mathbb{R}$ με
+\[ g'(x) = (x^4 - x^2 - 6x + 9)' = 4x^3 - 2x - 6 = 2 \cdot (2x^3 + x - 3) \]
+\[ g'(x) = 0 \Leftrightarrow 2 \cdot (2x^3 + x - 3) = 0 \Leftrightarrow 2x^3 + x - 3 = 0 \]
+\[ \stackrel{(i)}{\Leftrightarrow} (x-1) \cdot (2x^2+2x+3) = 0 \]
+\[ \Leftrightarrow x-1=0 \text{ ή } 2x^2+2x+3=0 \]
+\[ \Leftrightarrow x=1 \]
+(Η εξίσωση $2x^2+2x+3=0$ είναι αδύνατη, αφού έχει διακρίνουσα $\Delta = -20 < 0$).
+
+Επομένως:
+$g'(x) > 0 \Leftrightarrow 2 \cdot (2x^3 + x - 3) > 0 \Leftrightarrow 2x^3 + x - 3 > 0$
+$\Leftrightarrow (x-1) \cdot (2x^2+2x+3) > 0 \Leftrightarrow x-1 > 0 \Leftrightarrow x > 1$
+(Το τριώνυμο $2x^2+2x+3$ είναι θετικό για κάθε $x \in \mathbb{R}$, αφού έχει διακρίνουσα $\Delta = -20 < 0$).
+$g'(x) < 0 \Leftrightarrow x < 1$
+
+Το πρόσημο της παραγώγου της συνάρτησης $g(x)$ φαίνονται στον ακόλουθο πίνακα:
+\begin{tikzpicture}
+\tikzset{arrow style/.style={maincolor,>->,>=latex'}}
+\tikzset{t style/.style = {style = dashed}}
+\tikzset{z style/.style = {fill=white,inner sep=.2mm}}
+\tkzTabInit[color,lgt=2,espcl=2.4,colorC = maincolor!50,colorL = maincolor!30,colorV = maincolor!50]%
+{$x$ / .8,$g'(x)$ /.8,$g(x)$/0.8}%
+{$-\infty$,$1$,$+\infty$}%
+\tkzTabLine{,-,z,+}%
+\tkzTabVar{_ / , 3 , / _}%
+\end{tikzpicture}
+
+Η συνάρτηση $g(x)$ είναι γνησίως φθίνουσα στο διάστημα $(-\infty, 1]$, αφού $g'(x) < 0$ για $x < 1$, και γνησίως αύξουσα στο διάστημα $[1, +\infty)$, αφού $g'(x) > 0$ για $x > 1$, και $g'(1) = 0$. Επομένως, η $g(x)$ παρουσιάζει ολικό ελάχιστο για $x=1$.
+Επομένως, η απόσταση $AM$ γίνεται ελάχιστη για το σημείο $M(1,1)$.
+\end{rlist}
+\item Η ελάχιστη απόσταση $AM$ ισούται με:
+\[ d(1) = \sqrt{1^4 + 1^2 - 6 \cdot 1 + 9} = \sqrt{1+1-6+9} = \sqrt{5} \]
+
+\end{alist}
+\vspace{6mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{6mm}
+

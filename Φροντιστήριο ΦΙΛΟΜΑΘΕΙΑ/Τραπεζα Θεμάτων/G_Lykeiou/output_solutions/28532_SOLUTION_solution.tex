@@ -1,0 +1,117 @@
+\Askhsh{28532_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\begin{wrapfigure}[24]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=2]
+        % Define points
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(180:1){A} % A at (-1,0)
+        \tkzDefPoint(0:1){B}   % B at (1,0)
+        % Define P at an angle. For visual representation, let's use angle 120 degrees from positive x-axis,
+        % meaning angle AOP is 60 degrees.
+        \tkzDefPoint(120:1){P} 
+        
+        % Draw circle
+        \tkzDrawCircle[R](O,1cm)
+        
+        % Draw segments (radii and diameter)
+        \tkzDrawSegment[gray](A,B) 
+        \tkzDrawSegment[gray](O,P)
+        \tkzDrawSegment[gray](O,A)
+        \tkzDrawSegment[gray](O,B)
+        
+        % Label lengths
+        \tkzLabelSegment[below left](O,A){1}
+        \tkzLabelSegment[below right](O,B){1}
+        \tkzLabelSegment[above left](O,P){1}
+        
+        % Draw arcs with arrows (bold)
+        \tkzDrawArc[arrows={-Stealth[length=2mm]}, line width=1.5pt, black](O,A,P)
+        \tkzDrawArc[arrows={-Stealth[length=2mm]}, line width=1.5pt, black](O,P,B)
+        
+        % Draw and label angle theta (AOP)
+        \tkzMarkAngle[fill=thirdcolor!20,size=0.3,opacity=0.5](P,O,A) 
+        \tkzLabelAngle[pos=0.4](P,O,A){$\theta$} 
+        
+        % Draw points with colors
+        \tkzDrawPoints(O)
+        \tkzDrawPoint[color=thirdcolor, fill=thirdcolor](A) 
+        \tkzDrawPoint[color=secondarycolor, fill=secondarycolor](B) 
+        \tkzDrawPoint[color=maincolor, fill=maincolor](P) 
+        
+        % Label points
+        \tkzLabelPoint[below](O){O}
+        \tkzLabelPoint[left](A){A}
+        \tkzLabelPoint[right](B){B}
+        \tkzLabelPoint[above](P){P}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Αρχικά, παρατηρούμε ότι η γωνία $\widehat{APB}$ είναι ορθή, αφού είναι εγγεγραμμένη σε ημικύκλιο και $P$ τυχαίο σημείο του τριγώνου $AOP$.
+Σε ημικύκλιο και $P$ τυχαίο σημείο του ημικυκλίου, οι σχέσεις $\Sigma_{AB} = \frac{(AP)}{(AB)}$, $\Sigma_{BP} = \frac{(BP)}{(AB)}$ και $\Sigma_{OP} = \frac{(OP)}{(AB)}$  ως εξωτερική στο ισοσκελές τρίγωνο $AOP$.
+
+Οπότε, η συνάρτηση $\Sigma=\frac{\left(AP\right)}{\left(AB\right)} = \cos\theta$.
+Επίσης, οι σχέσεις $\Sigma_{AP} = \cos^2\theta$, $\Sigma_{BP} = \sin^2\theta$, $\Sigma_{RB} = \frac{1}{2}$.
+
+Επίσης, για το μήκος του τόξου $PB$, έχουμε $\Sigma_{RB} = 2\theta \cdot 1 = 2\theta$.
+Οπότε, η σχέση $\Sigma_{AB} = \Sigma_{BP} + \Sigma_{RB}$ γίνεται $\cos\theta = \sin\theta + 2\theta$.
+Έστω $f(\theta) = \cos\theta - \sin\theta - 2\theta$.
+
+\begin{alist}
+    \item  Αρχικά, παρατηρούμε ότι η γωνία $\widehat{APB}$ είναι ορθή, αφού είναι εγγεγραμμένη σε ημικύκλιο και $P$ τυχαίο σημείο του τριγώνου $AOP$.
+    Σε ημικύκλιο, και $P$ τυχαίο σημείο του τριγώνου $AOP$.
+    \[ \Sigma_{AB} = \frac{(AP)}{(AB)} = \cos\theta, \quad \Sigma_{BP} = \frac{(BP)}{(AB)} = \sin\theta, \quad \Sigma_{OP} = \frac{(OP)}{(AB)} = \frac{1}{2} \]
+    Επίσης, για το μήκος του τόξου $PB$, έχουμε $\Sigma_{RB} = 2\theta \cdot 1 = 2\theta$.
+    Έστω $f(\theta) = \cos\theta - \sin\theta - 2\theta$.
+    Οπότε, $f'(\theta) = -\sin\theta - \cos\theta - 2$.
+    Παρατηρούμε ότι $f'(\theta) < 0$ για κάθε $\theta \in \left[0, \frac{\pi}{2}\right]$ (που είναι το διάστημα στο οποίο ορίζεται η συνάρτηση $f$).
+    Άρα, η συνάρτηση $f$ είναι γνησίως φθίνουσα στο $\left[0, \frac{\pi}{2}\right]$.
+    Επομένως, έχει το πολύ μία ρίζα στο διάστημα αυτό.
+    Για $\theta = 0$, $f(0) = \cos0 - \sin0 - 0 = 1 > 0$.
+    Για $\theta = \frac{\pi}{6}$, $f\left(\frac{\pi}{6}\right) = \cos\frac{\pi}{6} - \sin\frac{\pi}{6} - 2\frac{\pi}{6} = \frac{\sqrt{3}}{2} - \frac{1}{2} - \frac{\pi}{3} \approx 0.866 - 0.5 - 1.047 = -0.681 < 0$.
+    Άρα υπάρχει μοναδική ρίζα $\theta_0 \in \left(0, \frac{\pi}{6}\right)$.
+    \[
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $\theta$ & $0$ & $\frac{\pi}{6}$ & $\frac{\pi}{2}$ \\
+    \hline
+    $f'(\theta)$ & \tikzmark{fprime_0_start} & \tikzmark{fprime_pi6} & \tikzmark{fprime_pi2_end} \\
+    \hline
+    $f(\theta)$ & \tikzmark{f_0_start} & \tikzmark{f_pi6} & \tikzmark{f_pi2_end} \\
+    \hline
+    \end{tabular}
+    \tikz[remember picture,overlay]{
+        \node at ($(fprime_0_start)!0.5!(fprime_pi6)$) {\textcolor{secondarycolor}{$+$}};
+        \node at ($(fprime_pi6)!0.5!(fprime_pi2_end)$) {\textcolor{secondarycolor}{$-$}};
+        \node at ($(f_0_start)!0.5!(f_pi6)$) {\textcolor{secondarycolor}{$+$}};
+        \node (om_box) at (f_pi6.center) {\fbox{O.M.}};
+        \node at ($(f_pi6)!0.5!(f_pi2_end)$) {\textcolor{secondarycolor}{$-$}};
+        \draw[-{Stealth[length=2mm]}, maincolor] (fprime_pi6.south) -- (om_box.north);
+    }
+    \]
+
+    \item Καθώς η συνάρτηση $f$ είναι παραγωγίσιμη, έχουμε $f'(\theta) = (-\eta\mu\theta - \sigma\upsilon\nu\theta - 2) + 1$.
+    \[ f'(\theta) \ge 0 \implies 1 \ge 2\eta\mu\theta \iff \eta\mu\theta \le \frac{1}{2} \implies \theta \le \frac{\pi}{6} \]
+    αφού η συνάρτηση $y = \eta\mu x$ είναι γνησίως αύξουσα στο διάστημα $\left(0, \frac{\pi}{2}\right)$.
+    Έτσι, έχουμε τον παρακάτω πίνακα:
+    \[
+    \begin{array}{|c|ccccc|}
+    \hline
+    \theta & 0 &  & \frac{\pi}{6} &  & \frac{\pi}{2} \\
+    \hline
+    f'(\theta) &  & + &  & - & \\
+    \hline
+    f(\theta) &  & + &  & - & \\
+    \hline
+    \end{array}
+    \]
+
+    \item Η μέγιστη τιμή της είναι $f\left(\frac{\pi}{3}\right) = \left(2 \cdot \sigma\upsilon\nu\frac{\pi}{3} + \frac{\pi}{6}\right) = \frac{1}{3}\left(\sqrt{3} + \frac{\pi}{6}\right) = \frac{1}{6}\frac{\sqrt{3}+\pi}{3} = \frac{\sqrt{3}+\pi}{18}$.
+    Καθώς η $f$ είναι συνεχής στο $\left(0, \frac{\pi}{2}\right)$ και γνησίως αύξουσα στα $\left(0, \frac{\pi}{6}\right)$ και γνησίως φθίνουσα στο $\left[\frac{\pi}{6}, \frac{\pi}{2}\right]$, γνησίως φθίνουσα στα $\left[\frac{\pi}{6}, \frac{\pi}{2}\right]$ και γνησίως φθίνουσα στο $\left[\frac{\pi}{6}, \frac{\pi}{2}\right]$,
+    \[ \left(\lim_{\theta\to 0^+} f(\theta), f\left(\frac{\pi}{6}\right)\right] \cup \left[ \lim_{\theta\to \frac{\pi}{2}} f(\theta), f\left(\frac{\pi}{6}\right)\right] \]
+    \[ = \left( \frac{2\pi+6\sqrt{3}}{18}, \frac{2\pi+6\sqrt{3}}{18} \right] \cup \left( \frac{\pi+6\sqrt{3}}{18}, \frac{\pi+6\sqrt{3}}{18} \right] \]
+    διότι $0 < \frac{\pi}{6} < \frac{\pi}{2}$.
+\end{alist}

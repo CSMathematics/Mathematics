@@ -1,0 +1,77 @@
+\Askhsh{18173_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[19]{r}{7cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define points based on the problem conditions and visual representation
+        % Δ=(0,0), Γ=(6,0) so ΓΔ=6
+        \tkzDefPoint(0,0){D} % Delta
+        \tkzDefPoint(6,0){G} % Gamma
+        % K is midpoint of ΔΓ, so K=(3,0)
+        \tkzDefMidPoint(D,G) \tkzGetPoint{K}
+        
+        % ΓΔ = 2ΑΒ, so ΑΒ = 3.
+        % ΑΒΚΔ is a parallelogram. If D=(0,0), K=(3,0), then vector ΔΑ = vector ΚΒ.
+        % Let height be 4. So A=(xA, 4), B=(xB, 4).
+        % vector ΔΑ = (xA, 4). vector ΚΒ = (xB-3, 4).
+        % So xA = xB-3 => xB = xA+3. This means AB = xB-xA = 3, which is correct.
+        % Let xA=1. Then xB=4.
+        \tkzDefPoint(1,4){A}
+        \tkzDefPoint(4,4){B}
+        
+        % E is the projection of B on ΔΓ (the x-axis).
+        \tkzDefPointBy[projection=onto line D--G](B) \tkzGetPoint{E} % E=(4,0)
+        
+        % M is on AΔ. Let's place it closer to Δ as in the image.
+        % M = 1/4 A + 3/4 D
+        \tkzInterCC(A,D)(D,A) \tkzGetPoint{dummy}
+        \tkzDefPointWith[linear of = 0.25 and 0.75](A,D) \tkzGetPoint{M} % M is (0.25, 1)
+
+        % Draw the trapezoid ABΓΔ
+        \tkzDrawPolygon(A,B,G,D)
+
+        % Draw additional segments BK, MK
+        \tkzDrawSegments(B,K M,K)
+
+        % Shade triangle BMK
+        \tkzFillPolygon[secondarycolor!30](B,M,K)
+
+        % Draw altitude BE (dashed) and mark right angle
+        \tkzDrawSegment[dashed](B,E)
+        \tkzMarkRightAngle(B,E,G)
+
+        % Draw altitude MΘ of BMK (dashed) and mark right angle
+        % Θ is the foot of the perpendicular from M to BK.
+        \tkzDefPointOnLine[orthogonal through M](K,B) \tkzGetPoint{M_ortho}
+        \tkzInterLL(M,M_ortho)(K,B) \tkzGetPoint{Th} % Theta
+        \tkzDrawSegment[dashed](M,Th)
+        \tkzMarkRightAngle(M,Th,K)
+
+        % Draw points
+        \tkzDrawPoints(A,B,G,D,K,E,M,Th)
+
+        % Labels
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[below](K){K}
+        \tkzLabelPoint[below](E){E}
+        \tkzLabelPoint[left](M){M}
+        \tkzLabelPoint[below left](Th){$\Theta$}
+    \end{tikzpicture}
+\end{wrapfigure}
+α) Φέρουμε την ΒΚ. Επειδή $\Gamma\Delta = 2\text{ΑΒ}$ και Κ μέσο της $\Gamma\Delta$, θα έχουμε $\text{ΑΒ} = //\Delta\text{Κ}$, οπότε το $\text{ΑΒΚ}\Delta$ είναι παραλληλόγραμμο και $\text{ΒΚ}=//\text{Α}\Delta$.
+\begin{rlist}
+    \item Φέρουμε την ΒΕ κάθετη στην $\Gamma\Delta$. Τότε το ΒΕ είναι ύψος από την κορυφή Β του τριγώνου ΒΚ$\Gamma$ αλλά και του παραλληλογράμμου $\text{ΑΒΚ}\Delta$. $(\text{ΑΒΚ}\Delta) = \Delta\text{Κ} \cdot \text{ΒΕ}$ και $(\text{ΒΚ}\Gamma) = \frac{\text{Κ}\Gamma \cdot \text{ΒΕ}}{2}$.
+    Όμως επειδή το Κ είναι μέσο της $\Delta\Gamma$, έχουμε $\Delta\text{Κ} = \text{Κ}\Gamma$.
+    Έτσι έχουμε $(\text{ΒΚ}\Gamma) = \frac{\Delta\text{Κ} \cdot \text{ΒΕ}}{2} = \frac{(\text{ΑΒΚ}\Delta)}{2}$.
+    \item Φέρουμε το ύψος Μ$\Theta$ του τριγώνου ΒΜΚ.
+    Τότε θα έχουμε $(\text{ΒΜΚ}) = \frac{\text{ΒΚ} \cdot \text{Μ}\Theta}{2} = \frac{(\text{ΑΒΚ}\Delta)}{2}$. Από το i ερώτημα έχουμε ότι $(\text{ΒΚ}\Gamma) = \frac{(\text{ΑΒΚ}\Delta)}{2}$. Επομένως $(\text{ΒΚ}\Gamma) = (\text{ΒΜΚ})$.
+\end{rlist}
+β) Από το α.ii) έχουμε ότι $2(\text{ΒΜΚ}) = (\text{ΑΒΚ}\Delta)$ και $(\text{ΒΜΚ}) = (\text{ΒΚ}\Gamma)$.
+Προσθέτοντας κατά μέλη έχουμε $3(\text{ΒΜΚ})=(\text{ΑΒΚ}\Delta) + (\text{ΒΚ}\Gamma) = (\text{ΑΒΓ}\Delta)$,
+δηλαδή $\frac{(\text{ΑΒΓ}\Delta)}{(\text{ΒΜΚ})} = 3$.
+Άρα, η προς διερεύνηση πρόταση είναι σωστή. Ο λόγος των εμβαδών είναι σταθερός και ίσος με 3.

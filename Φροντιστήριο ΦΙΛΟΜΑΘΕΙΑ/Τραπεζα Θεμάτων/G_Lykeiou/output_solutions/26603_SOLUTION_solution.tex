@@ -1,0 +1,70 @@
+\Askhsh{26603_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Συναρτήσεις]
+\end{ylh}
+\begin{wrapfigure}[30]{r}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {x},
+        ylabel = {y},
+        xmin = -6.5, xmax = 3.5,
+        ymin = -1.5, ymax = 11.5,
+        xtick = {-6,-5,-4,-3,-2,-1,0,1,2,3},
+        ytick = {-1,0,1,2,3,4,5,6,7,8,9,10,11},
+        samples = 100,
+        width = 8cm, height = 7cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    ]
+        % Plot the first segment: y = -2x for x in [-5, 0]
+        \addplot[very thick, maincolor, domain=-5:0] {-2*x};
+        
+        % Plot the second segment: y = sqrt(3)x for x in (0, 3)
+        % Using 'mark=o' with 'mark at end' to indicate open circle at x=3
+        \addplot[very thick, maincolor, domain=0:3, mark options={draw=maincolor, fill=white, line width=0.5mm}, mark=o, mark at end] {sqrt(3)*x};
+        
+        % Plot points
+        % A(-5,10)
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(-5,10)};
+        \node[above left] at (axis cs:-5,10) {A};
+        
+        % B(0,10) - reference point on y-axis
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,10)};
+        \node[right] at (axis cs:0,10) {B};
+        
+        % Origin O(0,0) - just label
+        \node[below left] at (axis cs:0,0) {O};
+        
+        % Gamma (2, 2*sqrt(3))
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(2,{2*sqrt(3)})};
+        \node[above right] at (axis cs:2,{2*sqrt(3)}) {$\Gamma$};
+
+        % Label for Delta at x=-5 on x-axis
+        \node[below] at (axis cs:-5,0) {$\Delta$};
+
+        % Dashed lines for point A
+        \draw[dashed, gray] (axis cs:-5,0) -- (axis cs:-5,10);
+        \draw[dashed, gray] (axis cs:-5,10) -- (axis cs:0,10);
+        
+        % Dashed lines for point Gamma
+        \draw[dashed, gray] (axis cs:2,0) -- (axis cs:2,{2*sqrt(3)});
+        
+        % Dashed line for the open circle at x=3
+        \draw[dashed, gray] (axis cs:3,0) -- (axis cs:3,{3*sqrt(3)});
+        
+        % Angle 30 degrees from y-axis (as per image visual)
+        \draw[thirdcolor, thick] (axis cs:0,0) -- (axis cs:0,0.8) arc (90:60:0.8);
+        \node[thirdcolor] at (axis cs:0.3,0.7) {$30^\circ$};
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Το σύνολο των τετμημένων των σημείων της $\mathrm{C_f}$ αποτελεί το πεδίο ορισμού της συνάρτησης. Από τη γραφική παράσταση του σχήματος παρατηρούμε ότι το πεδίο ορισμού της συνάρτησης $\mathrm{f}$ είναι το διάστημα $[-5,3)$. Αντίστοιχα το σύνολο τιμών είναι το σύνολο των τεταγμένων των σημείων της $\mathrm{C_f}$, δηλαδή το κλειστό διάστημα $[0,10]$. \monades{X}
+    \item Για $x \in [-5,0]$, η γραφική παράσταση της $\mathrm{f}$ αποτελεί τμήμα που βρίσκεται πάνω στην ευθεία που διέρχεται από την αρχή των αξόνων και από το σημείο $\mathrm{A}(-5,10)$. Η ευθεία αυτή έχει εξίσωση της μορφής $y=ax$ και επειδή διέρχεται από το σημείο $\mathrm{A}(-5,10)$ θα ισχύει $10 = a(-5)$, οπότε $a=-2$.
+    Για $x \in (0,3)$, η γραφική παράσταση της $\mathrm{f}$ αποτελεί τμήμα που βρίσκεται πάνω στην ευθεία που διέρχεται από την αρχή των αξόνων και σχηματίζει με τον άξονα $x'x$ γωνία $60^\circ$. Η κλίση της ευθείας αυτής είναι ίση με $\text{εφ}60^\circ = \sqrt{3}$, οπότε η εξίσωση της είναι η $y=\sqrt{3}x$.
+    Άρα $f(x) = \begin{cases} -2x, & \text{όταν } x \in [-5,0] \\ \sqrt{3}x, & \text{όταν } x \in (0,3) \end{cases}$ \monades{X}
+    \item Η τετμημένη του σημείου $\Gamma$ είναι $2$. Για $x=2$ στον τύπο της συνάρτησης $y=\sqrt{3}x$ έχουμε, $y = \sqrt{3} \cdot 2 = 2\sqrt{3}$. Άρα $\Gamma(2, 2\sqrt{3})$. \monades{X}
+\end{alist}

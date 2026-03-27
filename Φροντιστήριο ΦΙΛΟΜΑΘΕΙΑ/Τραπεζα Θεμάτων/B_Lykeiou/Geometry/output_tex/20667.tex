@@ -1,0 +1,52 @@
+\Askhsh{20667}{2}
+\begin{ylh}{1}
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[10]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.5]
+        % Define points based on the diagram and given lengths
+        % Let Gamma be at the origin (0,0) for convenience
+        \tkzDefPoint(0,0){C} % Gamma
+        \tkzDefPoint(-8,0){B} % BGamma = 8, B is to the left of Gamma
+        \tkzDefPoint(-12,0){D} % DeltaB = 4, Delta is to the left of B
+        \tkzDefPoint(-4,6){A} % Arbitrary coordinates for A to form a triangle
+        
+        % E is the midpoint of AC
+        \tkzDefMidPoint(A,C) \tkzGetPoint{E} % E = ((-4+0)/2, (6+0)/2) = (-2,3)
+        
+        % Z is the intersection of AB and DE
+        % Calculation for Z:
+        % Line AB: A(-4,6), B(-8,0). Slope m_AB = (6-0)/(-4-(-8)) = 6/4 = 3/2. Eq: y-0 = (3/2)(x+8) => y = (3/2)x + 12
+        % Line DE: D(-12,0), E(-2,3). Slope m_DE = (3-0)/(-2-(-12)) = 3/10. Eq: y-0 = (3/10)(x+12) => y = (3/10)x + 36/10
+        % Intersection: (3/2)x + 12 = (3/10)x + 3.6
+        % Multiply by 10: 15x + 120 = 3x + 36
+        % 12x = -84 => x = -7
+        % y = (3/2)(-7) + 12 = -10.5 + 12 = 1.5
+        \tkzDefPoint(-7,1.5){Z} % Use the calculated point for Z
+        
+        % Draw segments
+        \tkzDrawSegment(D,C) % The line Delta-B-Gamma
+        \tkzDrawSegment(A,B) % Segment A-B
+        \tkzDrawSegment(A,C) % Segment A-Gamma
+        \tkzDrawSegment(D,E) % Segment Delta-E
+        
+        % Draw points
+        \tkzDrawPoints(A,B,C,D,E,Z)
+        
+        % Labels
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[above right](E){E}
+        \tkzLabelPoint[below](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα δίνεται τρίγωνο $\mathrm{AB}\Gamma$ με $\mathrm{B}\Gamma = 8$. Στην προέκταση της $\Gamma\mathrm{B}$ προς το $\mathrm{B}$ παίρνουμε σημείο $\Delta$, ώστε $\Delta\mathrm{B} = 4$ και $\mathrm{E}$ είναι το μέσο της $\mathrm{A}\Gamma$.
+\begin{alist}
+\item Να αποδείξετε ότι $(\mathrm{AB}\Gamma) = 4\mathrm{A}\Gamma \cdot \eta\mu\Gamma$. \monades{8}
+\item Να αποδείξετε ότι $(\Gamma\Delta\mathrm{E}) = 3\mathrm{A}\Gamma \cdot \eta\mu\Gamma$. \monades{9}
+\item Να υπολογίσετε τον λόγο των εμβαδών των τριγώνων $\mathrm{AB}\Gamma$ και $\Gamma\Delta\mathrm{E}$ και να βρείτε το εμβαδόν του τριγώνου $\mathrm{AB}\Gamma$, αν το εμβαδόν του τριγώνου $\Gamma\Delta\mathrm{E}$ είναι $12$ τ.μ. \monades{8}
+\end{alist}

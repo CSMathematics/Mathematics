@@ -1,0 +1,73 @@
+\Askhsh{21067}{2}
+\begin{ylh}{1}
+    \item 9.1. Ορθές προβολές
+    \item 9.2. Το Πυθαγόρειο θεώρημα.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{7cm} % Adjust number of lines and width as needed
+\begin{tikzpicture}[scale=0.6]
+    % Define initial points for triangle ABΓ
+    % A at origin (0,0)
+    % B along x-axis (5,0)
+    % Γ along y-axis (0,12)
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(5,0){B}
+    \tkzDefPoint(0,12){G} % Gamma
+
+    % Define D (Delta) such that Bx is perpendicular to BΓ at B, and BΔ = 3√3.
+    % Vector BΓ = (0-5, 12-0) = (-5, 12).
+    % A perpendicular vector (x,y) from B must satisfy -5x + 12y = 0.
+    % So, x = 12y/5.
+    % Length BΔ = sqrt(x^2 + y^2) = 3√3.
+    % (12y/5)^2 + y^2 = (3√3)^2
+    % 144y^2/25 + 25y^2/25 = 27
+    % 169y^2/25 = 27 => y^2 = 27*25/169 => y = ± sqrt(27)*5/13 = ± 3sqrt(3)*5/13 = ± 15sqrt(3)/13.
+    % If y = -15sqrt(3)/13 (to orient D below x-axis), then x = 12/5 * (-15sqrt(3)/13) = -36sqrt(3)/13.
+    % So, vector BΔ = (-36sqrt(3)/13, -15sqrt(3)/13).
+    % Point D = B + vector BΔ
+    % D = (5 - 36*sqrt(3)/13, 0 - 15*sqrt(3)/13)
+    \pgfmathsetmacro{\xdelta}{5 - 36*sqrt(3)/13}
+    \pgfmathsetmacro{\ydelta}{-15*sqrt(3)/13}
+    \tkzDefPoint(\xdelta,\ydelta){D}
+
+    % Draw segments of triangle ABΓ
+    \tkzDrawSegments[line width=0.5pt](A,B A,G G,B)
+    % Draw segments for triangle BΓΔ
+    \tkzDrawSegments[line width=0.5pt](B,D G,D)
+
+    % Draw the ray Bx (from B through D)
+    \tkzDefPointWith[linear of = 1.5](B,D) \tkzGetPoint{X_ext}
+    \tkzDrawSegment[line width=0.5pt](B,X_ext)
+
+    % Mark right angles
+    \tkzMarkRightAngle(G,A,B) % Angle A = 90
+    \tkzMarkRightAngle(G,B,D) % Angle GBD = 90 (Bx perpendicular to BΓ)
+
+    % Labels for points
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[below](B){B}
+    \tkzLabelPoint[above left](G){$\Gamma$}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[below left](X_ext){$x$} % Label for the ray
+
+    % Labels for segment lengths
+    \tkzLabelSegment[below](A,B){5}
+    \tkzLabelSegment[left](A,G){12}
+    \tkzLabelSegment[below left](B,D){$3\sqrt{3}$}
+    \tkzLabelSegment[left](G,D){14}
+
+    % Projection of B onto ΓΔ (point E)
+    \tkzDefPointBy[projection=onto line G--D](B) \tkzGetPoint{E}
+    \tkzDrawSegment[line width=0.5pt](B,E)
+    \tkzMarkRightAngle(B,E,D) % Right angle at E
+    \tkzLabelPoint[above right](E){E} % Position E label carefully
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ορθογώνιο τρίγωνο $\text{AB\Gamma}$ με $\hat{\text{A}} = 90^\circ$, $\text{A\Gamma} = 12$ και $\text{AB} = 5$.
+\begin{alist}
+    \item Να αποδείξετε ότι $\text{B\Gamma} = 13$. \monades{08}
+    \item Φέρουμε ημιευθεία $\text{B}x$ κάθετη στην $\text{B\Gamma}$ στο σημείο $\text{B}$ και παίρνουμε σε αυτή σημείο $\Delta$, τέτοιο ώστε $\Delta\Gamma = 14$, όπως φαίνεται στο σχήμα.
+    \begin{rlist}
+        \item Να αποδείξετε ότι $\text{B\Delta} = 3\sqrt{3}$. \monades{08}
+        \item Να υπολογίσετε την προβολή της $\text{B\Delta}$ στην $\Delta\Gamma$. \monades{09}
+    \end{rlist}
+\end{alist}

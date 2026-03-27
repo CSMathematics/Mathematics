@@ -1,0 +1,62 @@
+\Askhsh{22100}{4}
+\begin{ylh}{1}
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.85]
+        % Ορισμός σημείων
+        \tkzDefPoint(7,2){A}
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(1.5,5){C} % Γ
+        
+        % Σχεδίαση τριγώνου ΑΒΓ
+        \tkzDrawSegment(A,B)
+        \tkzDrawSegment(B,C)
+        \tkzDrawSegment(A,C)
+        
+        % Διχοτόμος ΑΕ της γωνίας Α
+        \tkzDefLine[bisector](B,A,C) \tkzGetPoint{e}
+        \tkzInterLC(A,e)(A,C) \tkzGetPoint{E_on_AC} % Point on AC for bisector visual length
+        \tkzDefPointWith[linear point,K=0.4](A,e) \tkzGetPoint{E_temp} % Point E along bisector for visual length
+        \tkzDefPointWith[linear point,K=0.6](A,e) \tkzGetPoint{E} % Actual E
+        
+        % Κάθετη από Β προς ΑΕ και σημεία Ζ, Δ
+        \tkzDefPointBy[projection=onto line A--E](B) \tkzGetPoint{Z}
+        \tkzDefLine(B,Z) \tkzGetPoint{lineBZ}
+        \tkzDefLine(A,C) \tkzGetPoint{lineAC}
+        \tkzInterLL(lineBZ,Z)(lineAC,C) \tkzGetPoint{D} % Δ
+        
+        % Σχεδίαση διακεκομμένων γραμμών
+        \tkzDrawSegment[dashed](A,E_temp)
+        \tkzDrawSegment[dashed](B,Z)
+        \tkzDrawSegment[dashed](Z,D)
+        
+        % Σχεδίαση της επέκτασης της πλευράς ΑΓ
+        \tkzDrawSegment[line width=1pt](C,D) % Extend AC to D (the segment CD is part of the line AC)
+        
+        % Σύμβολο ορθής γωνίας στο Z
+        \tkzMarkRightAngle[size=0.2](A,Z,B)
+        
+        % Ετικέτες σημείων
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[above left](C){$\Gamma$}
+        \tkzLabelPoint[above right](A){A}
+        \tkzLabelPoint[above left](E){E}
+        \tkzLabelPoint[below right](Z){Z}
+        \tkzLabelPoint[above](D){$\Delta$}
+        
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο ΑΒΓ με γωνίες $\hat{\text{A}} = 20^\circ$, $\hat{\text{B}} = 100^\circ$, και η διχοτόμος ΑΕ της γωνίας του $\hat{\text{A}}$. Από το Β φέρνουμε την κάθετη προς την ΑΕ και έστω Ζ, $\Delta$ τα σημεία τομής της καθέτου με τις ΑΕ, ΑΓ αντίστοιχα.
+
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item $\Gamma\hat{\text{B}}\Delta = \hat{\text{A}} = 20^\circ$ \monades{10}
+        \item Το τρίγωνο ΒΔΓ είναι όμοιο με το τρίγωνο ΑΒΓ, να γράφετε τα ζεύγη των ομόλογων πλευρών τους και να αιτιολογήσετε γιατί είναι αυτές οι πλευρές ομόλογες. \monades{10}
+    \end{rlist}
+    \item Να σχεδιάσετε εξωτερικά του τριγώνου ΑΒΓ δύο τετράπλευρα: ένα τετράγωνο με πλευρά την ΒΓ και ένα ορθογώνιο που η μία του πλευρά είναι η πλευρά ΑΓ του τριγώνου ΑΒΓ και η άλλη του πλευρά είναι ευθύγραμμο τμήμα ίσο με το ευθύγραμμο τμήμα Γ$\Delta$. Να εξετάσετε αν τα δυο τετράπλευρα, που σχεδιάσατε, έχουν ίσα εμβαδά. \monades{5}
+\end{alist}

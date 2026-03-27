@@ -1,0 +1,53 @@
+\Askhsh{22404}{4}
+\begin{ylh}{1}
+    \item 7.4. Ανάλογα ευθύγραμμα τμήματα - Αναλογίες
+    \item 7.6. Διαίρεση τμημάτων εσωτερικά και εξωτερικά ως προς δοσμένο λόγο
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm} % The [15] specifies the number of lines of text to be wrapped.
+\begin{tikzpicture}[scale=0.9] % scale adjusted for better fit
+    % Define points
+    % Gamma, M, B are collinear on the x-axis. M is between Gamma and B.
+    % MB/MGamma = 1/3 means MGamma = 3*MB. Let MB=1 unit.
+    % So, B=(7,0), M=(6,0), Gamma=(3,0)
+    \tkzDefPoint(3,0){Gamma} % Gamma
+    \tkzDefPoint(6,0){M}
+    \tkzDefPoint(7,0){B}
+    % A is a point not on GammaB.
+    \tkzDefPoint(3,4){A}
+    % N divides AM externally such that NA/NM = 1/4. This implies N, A, M are collinear in that order (N-A-M).
+    % From N-A-M, NA + AM = NM. So NA/(NA+AM) = 1/4 => 4NA = NA + AM => 3NA = AM => NA/AM = 1/3.
+    % If A=(3,4), M=(6,0), vector AM = (3,-4).
+    % Vector AN = -(1/3) * vector AM = -(1/3) * (3,-4) = (-1, 4/3).
+    % N = A + AN = (3,4) + (-1, 4/3) = (2, 4 + 4/3) = (2, 16/3).
+    \tkzDefPoint(2,16/3){N} 
+
+    % Draw segments (lines forming the triangles and connection lines)
+    \tkzDrawSegments(Gamma,B Gamma,A A,B A,M N,M N,Gamma N,B)
+
+    % Shade the specified triangles (NGA) and (AMB)
+    \tkzFillPolygon[fill=gray!30](N,Gamma,A) 
+    \tkzFillPolygon[fill=gray!30](A,M,B)     
+
+    % Draw points as filled circles
+    \tkzDrawPoints(Gamma,M,B,A,N)
+
+    % Labels for points
+    \tkzLabelPoint[below left](Gamma){$\Gamma$}
+    \tkzLabelPoint[below](M){M}
+    \tkzLabelPoint[below right](B){B}
+    \tkzLabelPoint[above](A){A} 
+    \tkzLabelPoint[above left](N){N}
+\end{tikzpicture}
+\end{wrapfigure}
+Το σημείο M διαιρεί εσωτερικά την πλευρά ΒΓ ενός τριγώνου ΑΒΓ σε λόγο $\frac{\text{MB}}{\text{M}\Gamma}$ και το σημείο N διαιρεί εξωτερικά το ευθύγραμμο τμήμα ΑΜ σε λόγο $\frac{\text{NA}}{\text{NM}}$.
+
+\begin{alist}
+    \item Έστω $\frac{\text{MB}}{\text{M}\Gamma} = \frac{1}{3}$ και $\frac{\text{NA}}{\text{NM}} = \frac{1}{4}$. Να αποδείξετε ότι:
+    \begin{rlist}
+        \item $\frac{\left(\text{AMB}\right)}{\left(\text{AM}\Gamma\right)} = \frac{1}{3}$ \monades{7}
+        \item $\frac{\text{NA}}{\text{AM}} = \frac{1}{3}$ \monades{6}
+        \item $\left(\text{AMB}\right) = \left(\text{AN}\Gamma\right)$ \monades{6}
+    \end{rlist}
+    \item Έστω $\frac{\text{MB}}{\text{M}\Gamma} = 1$ και $\left(\text{AMB}\right) = \left(\text{AN}\Gamma\right)$. Να βρείτε τον λόγο $\frac{\text{NA}}{\text{NM}}$ στον οποίο το σημείο Ν διαιρεί εξωτερικά το ευθύγραμμο τμήμα ΑΜ. \monades{6}
+\end{alist}

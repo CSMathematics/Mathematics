@@ -1,0 +1,63 @@
+\Askhsh{27318_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Συνέχεια, όρια συνάρτησης, σύνολο τιμών, πεδίο ορισμού]
+\end{ylh}
+\begin{wrapfigure}[19]{r}{10cm}
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -1, xmax = 15,
+        ymin = -2, ymax = 7,
+        xtick = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        ytick = {-1,0,1,2,3,4,5,6},
+        grid = both,
+        grid style = {gray!30},
+        width = 10cm, height = 7cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        axis line style={maincolor},
+        tick style={maincolor},
+    ]
+        % Main curve segments (approximated for smooth drawing)
+        % Segment 1: from (0,-1) to (4,0)
+        \addplot[thick, maincolor, smooth, domain=0:4] coordinates {(0,-1) (1,1) (2.5,0.5) (4,0)};
+        % Segment 2: from (4,2) to (9,4)
+        \addplot[thick, maincolor, smooth, domain=4:9] coordinates {(4,2) (5,3.5) (7.5,6) (8,6) (9,4)};
+        % Segment 3: from (9,4) to (14,4)
+        \addplot[thick, maincolor, smooth, domain=9:14] coordinates {(9,4) (10,3.5) (12,2.8) (14,4)};
+
+        % Explicit marks (circles)
+        % Filled circles
+        \addplot[only marks, mark=*, mark size=2.5pt, black] coordinates {
+            (0,-1)
+            (4,2)
+            (8,6)
+            (14,4)
+        };
+        % Open circles
+        \addplot[only marks, mark=o, mark size=2.5pt, black, fill=white] coordinates {
+            (4,0)
+            (9,4)
+        };
+        % Vertical dashed line at x=4 for discontinuity
+        \addplot[dashed, thick, gray] coordinates {(4,0) (4,2)};
+
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+\item α) Το σύνολο των τετμημένων των σημείων της $C_f$ αποτελεί το πεδίο ορισμού της συνάρτησης. Από τη γραφική παράσταση του σχήματος παρατηρούμε ότι το πεδίο ορισμού της συνάρτησης $f$ είναι το διάστημα $[0,14]$. Αντίστοιχα το σύνολο τιμών είναι το σύνολο των τεταγμένων των σημείων της $C_f$, δηλαδή το κλειστό διάστημα $[-1,6]$.
+\item β)
+    \begin{rlist}
+    \item $\lim_{x \to 0} f(x) = -1$
+    \item $\lim_{x \to 4^-} f(x) = 0$ και $\lim_{x \to 4^+} f(x) = 2$. Άρα δεν υπάρχει το $\lim_{x \to 4} f(x)$
+    \item $\lim_{x \to 9} f(x) = 4$
+    \item $\lim_{x \to 14} f(x) = 4$
+    \item $\lim_{x \to 6} \frac{1}{f(x)} = +\infty$ γιατί $\lim_{x \to 6} f(x) = 0$, αφού από την υπόθεση, η $f$ παίρνει Θετικές τιμές κοντά στο έξι και ο οριζόντιος άξονας εφάπτεται στην γραφική της παράσταση στο σημείο αυτό.
+    \end{rlist}
+\item γ) Από το προηγούμενο ερώτημα είδαμε ότι δεν υπάρχει το $\lim_{x \to 4} f(x)$ γιατί τα πλευρικά όρια στο 4 είναι διαφορετικά. Άρα η $f$ δεν είναι συνεχής στο 4.
+Επίσης ενώ το $\lim_{x \to 9} f(x)$ υπάρχει και είναι ίσο με 4, η αριθμητική τιμή της $f$ για $x=4$ είναι 2, δηλαδή $f(4)=2$. Επειδή $\lim_{x \to 9} f(x) \neq f(9)$, η $f$ δεν είναι συνεχής και στο 9. Σε όλα τα άλλα σημεία του πεδίου ορισμού της το όριο υπάρχει, είναι ίσο με την τιμή της συνάρτησης επομένως η συνάρτηση είναι συνεχής σε αυτά.
+\end{alist}

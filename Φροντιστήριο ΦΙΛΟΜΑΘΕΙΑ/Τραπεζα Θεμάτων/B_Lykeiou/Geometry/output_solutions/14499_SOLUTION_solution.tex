@@ -1,0 +1,62 @@
+\Askhsh{14499_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6cm}
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός σημείων με βάση την οπτική αναπαράσταση της εικόνας.
+    % Τα σημεία B, E, M, Γ βρίσκονται στην ίδια ευθεία (άξονας x).
+    % Έστω M η αρχή των αξόνων.
+    \tkzDefPoint(-4,0){B}
+    \tkzDefPoint(-2,0){E}
+    \tkzDefPoint(0,0){M}
+    \tkzDefPoint(4,0){G} % Γ
+    
+    % Τα σημεία Z, A, M είναι συνευθειακά. Έστω A το μέσον του ZM.
+    % Για να είναι ΔE || AM και ZB || ZΔ, επιλέγουμε το Z να είναι σε υψηλότερο σημείο και όχι στον άξονα y.
+    \tkzDefPoint(-1, 4.5){Z}
+    \tkzDefMidPoint(Z,M) \tkzGetPoint{A} % A είναι το μέσον του ZM
+    
+    % Τα σημεία Z, Δ, B είναι συνευθειακά. Έστω Δ το μέσον του ZB.
+    \tkzDefMidPoint(Z,B) \tkzGetPoint{D} % Δ είναι το μέσον του ZB
+    
+    % Σχεδίαση των κύριων ευθυγράμμων τμημάτων του σχήματος
+    \tkzDrawSegment(Z,B) % Ευθεία Z-Δ-B
+    \tkzDrawSegment(Z,G) % Ευθεία Z-Γ
+    \tkzDrawSegment(Z,M) % Ευθεία Z-A-M
+    \tkzDrawSegment(B,G) % Ευθεία B-E-M-Γ
+    
+    % Σχεδίαση των εσωτερικών τμημάτων
+    \tkzDrawSegment[maincolor, ultra thick](D,E) % Τμήμα ΔΕ
+    \tkzDrawSegment[secondarycolor, ultra thick](E,Z) % Τμήμα ΕΖ
+    \tkzDrawSegment[thirdcolor, ultra thick](A,M) % Τμήμα ΑΜ
+    
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(B,E,M,G,A,D,Z)
+    
+    % Ετικέτες σημείων
+    \tkzLabelPoint[below](B){B}
+    \tkzLabelPoint[below](E){E}
+    \tkzLabelPoint[below](M){M}
+    \tkzLabelPoint[below](G){$\Gamma$}
+    \tkzLabelPoint[above right](A){A}
+    \tkzLabelPoint[left](D){$\Delta$}
+    \tkzLabelPoint[above left](Z){Z}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\section*{ΛΥΣΗ}
+
+\begin{alist}
+    \item \begin{rlist}
+        \item Οι πλευρές $BE$ και $B\Delta$ του τριγώνου $B E \Delta$ ανήκουν στις πλευρές $BM$ και $BA$ αντίστοιχα, του τριγώνου $BMA$ και επιπλέον η τρίτη του πλευρά $\Delta E$ είναι παράλληλη στην τρίτη πλευρά $AM$ του τριγώνου $BMA$. Οπότε οι πλευρές του τριγώνου $B E \Delta$ είναι ανάλογες προς τις πλευρές του τριγώνου $BMA$.
+        \[ \text{Δηλαδή ισχύει: } \frac{\Delta E}{AM} = \frac{BE}{BM} = \frac{B\Delta}{BA} \quad (1). \]
+        \item Ομοίως οι πλευρές $\Gamma Z$ και $\Gamma E$ του τριγώνου $\Gamma Z E$ βρίσκονται στους φορείς των πλευρών $\Gamma A$ και $\Gamma M$ του τριγώνου $\Gamma A M$ και οι τρίτες τους πλευρές $EZ$ και $AM$ είναι παράλληλες. Οπότε τα τρίγωνα έχουν τις πλευρές τους ανάλογες, δηλαδή ισχύει:
+        \[ \frac{EZ}{AM} = \frac{\Gamma E}{\Gamma M} = \frac{\Gamma Z}{\Gamma A} \quad (2). \]
+    \end{rlist}
+    \item Από τις σχέσεις (1) και (2) του α) ερωτήματος έχουμε ότι $\frac{\Delta E}{AM} = \frac{BE}{BM}$ και $\frac{EZ}{AM} = \frac{\Gamma E}{\Gamma M}$. Επειδή το σημείο $M$ είναι το μέσο της πλευράς $B\Gamma$ τα τμήματα $BM$ και $\Gamma M$ είναι ίσα, οπότε οι προηγούμενες σχέσεις γράφονται: $\frac{\Delta E}{AM} = \frac{BE}{BM}$ και $\frac{EZ}{AM} = \frac{\Gamma E}{BM}$. Προσθέτοντας κατά μέλη έχουμε:
+    \[ \frac{\Delta E}{AM} + \frac{EZ}{AM} = \frac{BE}{BM} + \frac{\Gamma E}{BM} \]
+    \[ \text{, δηλαδή} \quad \frac{\Delta E+EZ}{AM} = \frac{BE+\Gamma E}{BM} \quad \Leftrightarrow \quad \frac{\Delta E+EZ}{AM} = \frac{B\Gamma}{BM} \]
+    \[ \Leftrightarrow \quad \frac{\Delta E+EZ}{AM} = \frac{2 \cdot BM}{BM} = 2. \]
+    Άρα $\frac{\Delta E+EZ}{AM} = 2$ ή $\Delta E+EZ=2AM$ για οποιαδήποτε θέση του $E$ στο $BM$.
+\end{alist}

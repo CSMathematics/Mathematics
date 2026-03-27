@@ -1,0 +1,51 @@
+\Askhsh{22067}{4}
+\begin{ylh}{1}
+    \item 2.1. Εξίσωση Ευθείας
+    \item 2.6. Απόσταση Σημείου από Ευθεία
+\end{ylh}
+\begin{wrapfigure}[15]{r}{7cm}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -4, xmax = 4,
+    ymin = -3, ymax = 3,
+    xtick = \empty,
+    ytick = \empty,
+    clip = false,
+    width = 7cm, height = 7cm,
+]
+    % Line ε: y = lambda x
+    % Using lambda = 0.7 for visualization
+    \pgfmathsetmacro{\lambdaVal}{0.7}
+    \addplot[thick, black, domain=-3.5:3.5] {\lambdaVal*x} node[pos=0.8, above left, inner sep=1pt] {$\varepsilon$};
+
+    % Bisector delta_1: y = lambda_1 x
+    % lambda_1 = lambda / (1 + sqrt(1 + lambda^2))
+    \pgfmathsetmacro{\lambdaOne}{\lambdaVal / (1 + sqrt(1 + \lambdaVal*\lambdaVal))}
+    \addplot[dotted, black, domain=-3.5:3.5] {\lambdaOne*x} node[pos=0.8, below right, inner sep=1pt] {$\delta_1$};
+
+    % Bisector delta_2: y = lambda_2 x
+    % lambda_2 = lambda / (1 - sqrt(1 + lambda^2))
+    \pgfmathsetmacro{\lambdaTwo}{\lambdaVal / (1 - sqrt(1 + \lambdaVal*\lambdaVal))}
+    \addplot[dotted, black, domain=-3.5:3.5] {\lambdaTwo*x} node[pos=0.2, above right, inner sep=1pt] {$\delta_2$}; % Placed in 2nd quadrant
+
+    % Manual labels O, x', x, y
+    \node[below left] at (axis cs:0,0) {$O$};
+    \node[below] at (axis cs:-3.7,0) {$x'$};
+    \node[below] at (axis cs:3.7,0) {$x$};
+    \node[left] at (axis cs:0,2.8) {$y$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+
+Θεωρούμε μία ευθεία $\varepsilon: y = \lambda x$ με θετική κλίση $\lambda$.
+
+\begin{alist}
+\item Αν $\delta_1$ είναι η διχοτόμος της οξείας γωνίας που σχηματίζει η ευθεία $\varepsilon$ με τον $x'x$ άξονα, τότε να αποδείξετε ότι η εξίσωση της διχοτόμου $\delta_1$ είναι:
+    \[ y = \lambda_1 x \quad \text{με} \quad \lambda_1 = \frac{\lambda}{1+\sqrt{1+\lambda^2}}. \] \monades{12}
+\item Αν $\delta_2$ είναι η διχοτόμος της αμβλείας γωνίας που σχηματίζει η ευθεία $\varepsilon$ με τον $x'x$ άξονα, τότε να αποδείξετε ότι η εξίσωση της διχοτόμου $\delta_2$ είναι:
+    \[ y = \lambda_2 x \quad \text{με} \quad \lambda_2 = \frac{\lambda}{1-\sqrt{1+\lambda^2}}. \] \monades{7}
+\item Αν $\lambda = 1$, να εφαρμόσετε τους τύπους του α) ερωτήματος για να αποδείξετε ότι:
+    \[ \varepsilon\varphi 22,5^\circ = \sqrt{2} - 1. \] \monades{6}
+\end{alist}

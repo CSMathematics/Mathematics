@@ -1,0 +1,48 @@
+% ===================================================================
+%  Αρχείο: 15288_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται η συνάρτηση $f(x) = 2\eta\mu(3x) + 1$, $x \in \mathbb{R}$.
+
+\begin{alist}
+\item Να βρείτε την περίοδο $T$, τη μέγιστη και την ελάχιστη τιμή της $f$.
+
+\monades{3}
+
+\item Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της συνάρτησης $g(x) = \alpha\eta\mu(\beta x) + \gamma$, με $\alpha, \beta, \gamma \in \mathbb{R}$, $\beta > 0$ και πεδίο ορισμού το $\mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, >=latex]
+    \draw[very thin, color=gray!30, xstep=pi/2, ystep=1] (-1.5,-2.5) grid (6.5,4.5);
+    \draw[->] (-1.5,0) -- (6.5,0) node[right] {$x$};
+    \draw[->] (0,-2.5) -- (0,4.5) node[above] {$y$};
+    
+    \foreach \x/\xtext in {1.571/\frac{\pi}{2}, 3.141/\pi, 4.712/\frac{3\pi}{2}, 6.283/2\pi}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {$\xtext$};
+    \foreach \y in {-2,-1,1,2,3,4}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % g(x) = -2*sin(x) + 1 (period 2pi, amplitude -2, vertical shift 1)
+    \draw[very thick, color=blue!70!black, samples=100, domain=-1:6.5] plot (\x, {-2*sin(deg(\x)) + 1});
+    
+    % Highlight max and min
+    \filldraw (0,1) circle (1.5pt);
+    \filldraw (1.571,-1) circle (1.5pt);
+    \filldraw (3.141,1) circle (1.5pt);
+    \filldraw (4.712,3) circle (1.5pt);
+    \filldraw (6.283,1) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+\item Με βάση το σχήμα, να βρείτε τους πραγματικούς αριθμούς $\alpha, \beta$ και $\gamma$. Να αιτιολογήσετε την απάντησή σας.
+
+\monades{12}
+
+\item Για $\alpha = -2, \beta = 1$ και $\gamma = 1$, να λύσετε την εξίσωση $f(x) = g(x)$ στο διάστημα $[0, \pi)$.
+
+\monades{10}
+\end{alist}

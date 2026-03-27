@@ -1,0 +1,60 @@
+\Askhsh{28534}{4}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις
+    \item 1.4 Όριο συνάρτησης στο $x_0$
+    \item 1.5 Ιδιότητες των ορίων
+    \item 1.6 Μη πεπερασμένο όριο στο $x_0$
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.7 Τοπικά ακρότατα συνάρτησης.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}
+    % Define points for the rectangle and semicircle
+    % A: top-right, B: top-left, Gamma: bottom-left, Delta: bottom-right
+    % Let x_draw be the radius of the semicircle (AK), y_draw be the height of the rectangle (A Delta)
+    \def\xdraw{2} % Example value for x
+    \def\ydraw{3} % Example value for y
+
+    \tkzDefPoint(-\xdraw,0){Gamma} % Bottom-left corner
+    \tkzDefPoint(\xdraw,0){Delta}  % Bottom-right corner
+    \tkzDefPoint(\xdraw,\ydraw){A} % Top-right corner
+    \tkzDefPoint(-\xdraw,\ydraw){B} % Top-left corner
+    \tkzDefPoint(0,\ydraw){K} % Midpoint of AB, center of semicircle diameter
+
+    % Draw the rectangle sides (red lines in the original image)
+    \tkzDrawSegments[line width=1pt, color=maincolor](Gamma,Delta Delta,A B,Gamma)
+    % The side AB is the diameter and forms the base of the semicircle, drawn dashed below.
+
+    % Draw right angles at the corners of the rectangle (green squares in the original image)
+    \tkzMarkRightAngle[fill=secondarycolor!30, size=0.2](B,A,Delta)    % Angle at A
+    \tkzMarkRightAngle[fill=secondarycolor!30, size=0.2](A,B,Gamma)    % Angle at B
+    \tkzMarkRightAngle[fill=secondarycolor!30, size=0.2](B,Gamma,Delta) % Angle at Gamma
+    \tkzMarkRightAngle[fill=secondarycolor!30, size=0.2](A,Delta,Gamma) % Angle at Delta
+
+    % Draw the semicircle arc (blue line in the original image)
+    \tkzDrawArc[line width=1pt, color=secondarycolor](K,A)(B) % Center K, start A, end B (counter-clockwise)
+
+    % Draw dashed line for the diameter AB (gray dashed line in the original image)
+    \tkzDrawSegment[line width=0.5pt, dashed, color=gray](B,A)
+
+    % Label points
+    \tkzLabelPoint[below left](Gamma){$\Gamma$}
+    \tkzLabelPoint[below right](Delta){$\Delta$}
+    \tkzLabelPoint[right](A){A}
+    \tkzLabelPoint[left](B){B}
+    \tkzLabelPoint[above left](K){K} 
+
+    % Add labels for x and y
+    \tkzLabelSegment[above](K,A){$x$} % Label AK as x
+    \tkzLabelSegment[right](Delta,A){$y$} % Label ADelta as y
+\end{tikzpicture}
+\end{wrapfigure}
+\Askhseis{ΘΕΜΑ 4}
+Θέλουμε να κατασκευάσουμε ένα παράθυρο σε μια εκκλησία, το οποίο να αποτελείται από έναν ημικυκλικό δίσκο και από ένα ορθογώνιο, όπως δείχνει το παρακάτω σχήμα. Η συνολική περίμετρος του παραθύρου θέλουμε να είναι σταθερή ίση με $4~m$, αλλά το συνολικό εμβαδό του παραθύρου να είναι το μεγαλύτερο δυνατό. Έστω ότι η ακτίνα του ημικυκλίου είναι $(AK) = x~m$ και το ύψος του ορθογωνίου είναι $(A\Delta) = y~m$. Ονομάζουμε $E(x)$ το συνολικό εμβαδόν του παραθύρου.
+\begin{alist}
+\item Να αποδείξετε ότι $y = -\frac{\pi+2}{2} \cdot x + 2$ και $E(x) = -\frac{\pi+4}{2} \cdot x^2 + 4x$, με $x \in \left(0, \frac{4}{\pi+2}\right)$. \monades{8}
+\item Να βρείτε την μέγιστη τιμή του συνολικού εμβαδού του παραθύρου. \monades{9}
+\item Ονομάζουμε $x_0$ την τιμή του $x$ που μεγιστοποιεί το εμβαδόν $E(x)$ και $E(x_0)$ το μέγιστο εμβαδό. Να υπολογίσετε το $\lim_{x\to x_0} \frac{\ln(E(x))}{E(x)-E(x_0)}$. \monades{8}
+\end{alist}

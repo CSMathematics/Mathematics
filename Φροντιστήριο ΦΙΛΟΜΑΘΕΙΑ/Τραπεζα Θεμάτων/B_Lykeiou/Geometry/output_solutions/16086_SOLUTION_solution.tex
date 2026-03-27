@@ -1,0 +1,112 @@
+\Askhsh{16086_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{0.5\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % Define y-coordinates for parallel lines, based on consistent ratios from Thales theorem
+    % Let y(epsilon_4) = 0 (where O is)
+    % Let d_24 be the vertical distance between epsilon_2 and epsilon_4
+    % Let d_34 be the vertical distance between epsilon_3 and epsilon_4
+    % Let d_12 be the vertical distance between epsilon_1 and epsilon_2
+    % From OA/ODelta = OB/OGamma = 4 => d_34/d_24 = 4. We set d_24 = 1 for calculation. Then d_34 = 4.
+    % From OGamma/GammaE = ODelta/DeltaZ = 1.5/4 = 3/8 => d_24/d_12 = 3/8. So d_12 = (8/3)*d_24 = 8/3.
+    % Y-coordinates (scaled to fit diagram): epsilon_3 at y=-4, epsilon_4 at y=0, epsilon_2 at y=1, epsilon_1 at y=1+8/3 = 11/3
+    \pgfmathsetmacro{\yepsilon3}{-4}
+    \pgfmathsetmacro{\yepsilon4}{0} % O is on this line
+    \pgfmathsetmacro{\yepsilon2}{1}
+    \pgfmathsetmacro{\yepsilon1}{11/3} % Approx 3.667
+
+    % Draw parallel lines
+    \tkzDefPoint(-14,\yepsilon1){_e1_left} \tkzDefPoint(14,\yepsilon1){_e1_right} \tkzDrawSegment(_e1_left,_e1_right)
+    \tkzDefPoint(-14,\yepsilon2){_e2_left} \tkzDefPoint(14,\yepsilon2){_e2_right} \tkzDrawSegment(_e2_left,_e2_right)
+    \tkzDefPoint(-14,\yepsilon4){_e4_left} \tkzDefPoint(14,\yepsilon4){_e4_right} \tkzDrawSegment[dashed](_e4_left,_e4_right)
+    \tkzDefPoint(-14,\yepsilon3){_e3_left} \tkzDefPoint(14,\yepsilon3){_e3_right} \tkzDrawSegment(_e3_left,_e3_right)
+
+    % Define O as the origin (0,0) for segment calculations
+    \tkzDefPoint(0,0){O}
+
+    % Calculate slope 'a' for right transversal (B,O,Gamma,E)
+    % OB=6, OGamma=1.5, GammaE=4
+    % OB = 6, yB = -4. From OB = sqrt((x_B-x_O)^2 + (y_B-y_O)^2) => 6 = sqrt((a*-4)^2 + (-4)^2)
+    % 36 = 16a^2 + 16 => 20 = 16a^2 => a^2 = 20/16 = 1.25 => a = sqrt(1.25)
+    \pgfmathsetmacro{\slopeR}{sqrt(1.25)}
+    \tkzDefPoint(\slopeR*\yepsilon3,\yepsilon3){B} % B is at y=-4, x = slopeR * y
+    \tkzDefPoint(\slopeR*\yepsilon2,\yepsilon2){Gamma} % Gamma is at y=1, x = slopeR * y
+    \tkzDefPoint(\slopeR*\yepsilon1,\yepsilon1){E} % E is at y=11/3, x = slopeR * y
+
+    % Calculate slope 'b' for left transversal (A,O,Delta,Z)
+    % OA=12, ODelta=3, DeltaZ=8
+    % OA = 12, yA = -4. From OA = sqrt((x_A-x_O)^2 + (y_A-y_O)^2) => 144 = 16b^2 + 16 => 128 = 16b^2 => b^2 = 8 => b = -sqrt(8) (for left side)
+    \pgfmathsetmacro{\slopeL}{-sqrt(8)}
+    \tkzDefPoint(\slopeL*\yepsilon3,\yepsilon3){A} % A is at y=-4, x = slopeL * y
+    \tkzDefPoint(\slopeL*\yepsilon2,\yepsilon2){Delta} % Delta is at y=1, x = slopeL * y
+    \tkzDefPoint(\slopeL*\yepsilon1,\yepsilon1){Z} % Z is at y=11/3, x = slopeL * y
+
+    % Draw transversals
+    \tkzDrawSegment(A,Z)
+    \tkzDrawSegment(B,E)
+
+    % Label parallel lines
+    \tkzLabelSegment[above left, xshift=-0.5cm](_e1_left,_e1_right){$\varepsilon_1$}
+    \tkzLabelSegment[above left, xshift=-0.5cm](_e2_left,_e2_right){$\varepsilon_2$}
+    \tkzLabelSegment[below left, xshift=-0.5cm](_e4_left,_e4_right){$\varepsilon_4$}
+    \tkzLabelSegment[below left, xshift=-0.5cm](_e3_left,_e3_right){$\varepsilon_3$}
+
+    % Draw points
+    \tkzDrawPoints(A,B,Gamma,Delta,E,Z,O)
+
+    % Label points
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[below right](B){B}
+    \tkzLabelPoint[left](Gamma){$\Gamma$}
+    \tkzLabelPoint[right](Delta){$\Delta$}
+    \tkzLabelPoint[above right](E){E}
+    \tkzLabelPoint[above left](Z){Z}
+    \tkzLabelPoint[below right](O){O}
+
+    % Label lengths
+    % Use tkzLabelSegment with the defined points, to ensure labels are centered on actual segments
+    \tkzLabelSegment[left, xshift=-2pt](Gamma,E){4}
+    \tkzLabelSegment[right, xshift=2pt](O,B){6}
+    \tkzLabelSegment[right, xshift=2pt](O,Delta){3}
+    \tkzLabelSegment[left, xshift=-2pt](O,A){12}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\textbf{ΛΥΣΗ}
+\begin{alist}
+\item Φέρνουμε $\varepsilon_4 // \varepsilon_2$ που διέρχεται από το Ο. Τότε από το θεώρημα του Θαλή για τις παράλληλες $\varepsilon_2, \varepsilon_4, \varepsilon_3$ που τέμνονται από τις ΓΒ και ΔΑ, έχουμε:
+\[\frac{\text{OA}}{\text{O}\Delta} = \frac{\text{OB}}{\text{O}\Gamma}\]
+επομένως $\frac{12}{3} = \frac{6}{\text{O}\Gamma}$, άρα $12 \cdot \text{O}\Gamma = 6 \cdot 3$ ή $\text{O}\Gamma = 1.5$.
+
+Από το θεώρημα του Θαλή για τις παράλληλες $\varepsilon_2, \varepsilon_4, \varepsilon_1$ που τέμνονται από τις ΟΕ και ΟΖ, έχουμε:
+\[\frac{\text{O}\Gamma}{\text{ΓΕ}} = \frac{\text{O}\Delta}{\Delta\text{Z}}\]
+επομένως $\frac{1,5}{4} = \frac{3}{\Delta\text{Z}}$, άρα $1,5 \cdot \Delta\text{Z} = 4 \cdot 3$ ή $\Delta\text{Z} = 8$.
+
+\item Τα τρίγωνα OEZ και OBA έχουν:
+\begin{itemize}
+    \item $\widehat{\text{EZO}} = \widehat{\text{BÂO}}$, ως εντός εναλλάξ των παραλλήλων ΕΖ και ΑΒ που τέμνονται από την ΖΑ.
+    \item $\widehat{\text{ZEO}} = \widehat{\text{AΒO}}$, ως εντός εναλλάξ των παραλλήλων ΕΖ και ΑΒ που τέμνονται από την ΕΒ.
+\end{itemize}
+Επομένως τα τρίγωνα είναι όμοια επειδή έχουν δύο γωνίες τους ίσες μία προς μία.
+
+\item Από την ομοιότητα των τριγώνων OEZ και OBA έχουμε:
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\rowcolor{secondarycolor!20}
+\multicolumn{1}{|c|}{} & \multicolumn{3}{c|}{Ίσες γωνίες} \\
+\cline{2-4}
+\rowcolor{secondarycolor!20}
+\multicolumn{1}{|c|}{} & $\widehat{\text{EZO}} = \widehat{\text{BÂO}}$ & $\widehat{\text{ZEO}} = \widehat{\text{AΒO}}$ & $\widehat{\text{EÔZ}} = \widehat{\text{BÔA}}$ \\
+\hline
+\rowcolor{secondarycolor!10}
+Απέναντι πλευρά στο τρίγωνο ΑΟΒ & OB & OA & AB \\
+\rowcolor{secondarycolor!10}
+Απέναντι πλευρά στο τρίγωνο ΖΟΕ & OE & OZ & EZ \\
+\hline
+\end{tabular}
+\end{center}
+\[\frac{\text{EZ}}{\text{AB}} = \frac{\text{OZ}}{\text{OA}} = \frac{\text{OE}}{\text{OB}} = \frac{\text{O}\Delta + \Delta\text{Z}}{\text{OA}} = \frac{3 + 8}{12} = \frac{11}{12}.\]
+\end{alist}

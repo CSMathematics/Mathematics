@@ -1,0 +1,55 @@
+\Askhsh{21979}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        % Define alpha for scaling in drawing
+        \pgfmathsetmacro{\alphaVal}{1.5}
+        % Points
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(-\alphaVal,0){B}
+        \tkzDefPoint(\alphaVal,0){G} % Gamma
+        \tkzDefPoint(0,{\alphaVal*sqrt(3)}){A}
+        \tkzDefPoint(-0.5*\alphaVal,{0.5*\alphaVal*sqrt(3)}){D} % Delta
+        \tkzDefPoint(0.5*\alphaVal,{0.5*\alphaVal*sqrt(3)}){E}
+
+        % Shading the triangle AΔE (brownish in original, using maincolor)
+        \tkzFillPolygon[fill=maincolor!70!black](A,D,E)
+
+        % Shading the circular segments (gray in original, using secondarycolor)
+        % Segment BΔ: chord BΔ and arc BΔ
+        \draw[fill=secondarycolor!70!white,draw=black,thick] (B) -- (D) arc (180:120:\alphaVal) -- cycle;
+        % Segment EΓ: chord EΓ and arc EΓ
+        \draw[fill=secondarycolor!70!white,draw=black,thick] (E) -- (G) arc (60:0:\alphaVal) -- cycle;
+
+        % Draw the outlines of the triangle
+        \tkzDrawSegment[thick](A,B)
+        \tkzDrawSegment[thick](A,G)
+        \tkzDrawSegment[thick](B,G) % Base of the triangle / diameter of semicircle
+
+        % Draw the arc ΔE, which is part of the semicircle
+        \draw[thick] (D) arc (120:60:\alphaVal);
+
+        % Draw points
+        \tkzDrawPoints(A,B,G,D,E,O)
+
+        % Labels
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[above left](D){$\Delta$}
+        \tkzLabelPoint[above right](E){E}
+        \tkzLabelPoint[below](O){O}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα, το τρίγωνο ΑΒΓ είναι ισόπλευρο, πλευράς $2\alpha$. Με διάμετρο τη ΒΓ γράφουμε ημικύκλιο, που τέμνει τις πλευρές ΑΒ, ΑΓ στα σημεία $\Delta,\text{E}$ αντίστοιχα.
+Αν Ο είναι το κέντρο του ημικυκλίου, να αποδείξετε ότι:
+\begin{alist}
+\item $\Delta\Gamma = \alpha\sqrt{3}$. \monades{8}
+\item το άθροισμα των εμβαδών των δύο κυκλικών τμημάτων που βρίσκονται στο εξωτερικό του τριγώνου ισούται με $E = \frac{(2\pi-3\sqrt{3})\alpha^2}{6}$. \monades{9}
+\item το εμβαδό του γραμμοσκιασμένου χωρίου που ορίζεται από τα ευθύγραμμα τμήματα $\text{A}\Delta, \text{AE}$ και το τόξο $\Delta\text{E}$ είναι: $E' = \frac{(3\sqrt{3}-\pi)\alpha^2}{6}$. \monades{8}
+\end{alist}

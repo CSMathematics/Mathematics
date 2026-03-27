@@ -1,0 +1,49 @@
+\Askhsh{32799}{2}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις
+    \item 1.8 Συνέχεια συνάρτησης
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.8 Κυρτότητα - Σημεία καμπής συνάρτησης.
+\end{ylh}
+\begin{wrapfigure}[21]{r}{0.5\textwidth} % The number 21 might need adjustment depending on the exact text length and font sizes.
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=none, % No default axes from pgfplots
+            xmin=-1.5, xmax=1.5,
+            ymin=-0.5, ymax=2.5,
+            clip=false, % Allow labels to go outside the plot area
+            width=0.45\textwidth,
+            height=8cm,
+            domain=-1:1, samples=100,
+        ]
+            % Manually draw axes and labels
+            \draw[->] (axis cs:-1.5,0) -- (axis cs:1.5,0) node[right] {$x$}; % X-axis
+            \draw[->] (axis cs:0,-0.5) -- (axis cs:0,2.5) node[above] {$y$}; % Y-axis
+            \node[below right] at (axis cs:0,0) {o}; % Origin label
+            \node[below left] at (axis cs:-1.5,0) {$x'$}; % Label for negative x-axis
+            \node[below right] at (axis cs:0,-0.5) {$y'$}; % Label for negative y-axis
+
+            % Plot the derivative f'(x)
+            % Assuming f'(x) is a parabola passing through (-1,1), (0,2), (1,1) => f'(x) = -x^2+2
+            \addplot[very thick, maincolor] {-x^2 + 2};
+
+            % Add the line y=2
+            \addplot[thick, black, domain=-1.5:1.5] {2};
+            \node[above left] at (axis cs:-0.5,2) {$y=2$};
+
+            % Mark points A, B, Gamma
+            \addplot[only marks, mark=*, mark size=2pt, black] coordinates {(-1,1) (1,1) (0,2)};
+            \node[below left] at (axis cs:-1,1) {A$(-1,1)$};
+            \node[below right] at (axis cs:1,1) {B$(1,1)$};
+            \node[above right] at (axis cs:0,2) {$\Gamma(0,2)$};
+        \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα φαίνεται η γραφική παράσταση της παραγώγου μιας συνάρτησης $f:[-1,1]\to \mathbb{R}$ και η ευθεία $y=2$. Αν η γραφική παράσταση της $f'$ διέρχεται από τα σημεία $A(-1,1)$, $B(1,1)$ και $\Gamma(0,2)$ τότε με βάση το παρακάτω σχήμα:
+\begin{alist}
+    \item Να εξηγήσετε γιατί ισχύει: $1 \le f'(x) \le 2$, για κάθε $x \in [-1,1]$. \monades{07}
+    \item Να μελετήσετε τη συνάρτηση $f$ ως προς τη μονοτονία. \monades{08}
+    \item Να μελετήσετε τη συνάρτηση $f$ ως προς τα κοίλα και τα σημεία καμπής. \monades{10}
+\end{alist}

@@ -1,0 +1,52 @@
+\Askhsh{21165}{2}
+\begin{ylh}{1}
+    \item 1.1. Η Έννοια του Διανύσματος
+    \item 1.2. Πρόσθεση και Αφαίρεση Διανυσμάτων.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{7cm} % Ο αριθμός [9] μπορεί να χρειαστεί προσαρμογή ανάλογα με το μήκος του κειμένου
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Ορισμός σημείων A, B, D για το παραλληλόγραμμο
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(4,0){B}
+        \tkzDefPoint(1.5,3){D}
+        % Ορισμός του σημείου Γ (C) χρησιμοποιώντας την ιδιότητα του παραλληλογράμμου
+        \tkzDefPointByVector[translation=from A to D](B){C}
+        
+        % Ορισμός του σημείου E: ΑΕ = -1/2 ΑΒ
+        \tkzDefPointByFct[pos = -0.5](A,B){E}
+
+        % Ορισμός του σημείου Z: AZ = 1/3 AD
+        \tkzDefPointByFct[pos = 0.3333](A,D){Z}
+
+        % Σχεδίαση των πλευρών του παραλληλογράμμου
+        \tkzDrawSegments[line width=0.8pt, maincolor](A,B B,C C,D D,A)
+        
+        % Σχεδίαση του ευθύγραμμου τμήματος E-A-B (E βρίσκεται στην προέκταση του BA)
+        \tkzDrawSegment[line width=0.8pt, maincolor](E,B)
+        % Σχεδίαση του ευθύγραμμου τμήματος A-Z-D (Z βρίσκεται πάνω στο AD)
+        \tkzDrawSegment[line width=0.8pt, maincolor](A,D)
+
+        % Σχεδίαση των εσωτερικών τμημάτων
+        \tkzDrawSegments[line width=0.8pt, maincolor](E,Z Z,C E,C)
+        
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints[size=3pt,fill=black](A,B,C,D,E,Z)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoint[below](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[above right](C){$\Gamma$}
+        \tkzLabelPoint[above left](D){$\Delta$}
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[above right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Θεωρούμε το παραλληλόγραμμο $AB\Gamma\Delta$ και έστω $\vec{AB} = \vec{a}$ και $\vec{A\Delta} = \vec{\beta}$. Τα σημεία $E$ και $Z$ είναι τέτοια ώστε $\vec{AE} = -\frac{1}{2}\vec{AB}$ και $\vec{AZ} = \frac{1}{3}\vec{A\Delta}$.
+
+\begin{alist}
+    \item Να αποδείξετε ότι: $\vec{EZ} = \frac{1}{2}\vec{a} + \frac{1}{3}\vec{\beta}$ και $\vec{Z\Gamma} = \vec{a} + \frac{2}{3}\vec{\beta}$. \monades{10}
+    \item Να αποδείξετε ότι: $\vec{Z\Gamma}=2\vec{EZ}$. \monades{9}
+    \item Να δείξετε ότι τα σημεία $Z$, $E$ και $\Gamma$ είναι συνευθειακά. \monades{6}
+\end{alist}

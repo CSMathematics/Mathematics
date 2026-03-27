@@ -1,0 +1,55 @@
+\Askhsh{22098}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 9.4. Γενίκευση του Πυθαγόρειου θεωρήματος
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5.5cm} % The [9] can be adjusted if the figure takes up more/less lines.
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % Define a scaling factor for 'a' to draw the figure with specific dimensions.
+    % We set \alpha = 1 for the drawing coordinates.
+    \pgfmathsetmacro{\drawingAlpha}{1} 
+
+    % Define points for the rectangle ABΓΔ based on the dimensions AB = 4\alpha, AΔ = \pi\alpha.
+    % We place Δ at the origin (0,0).
+    \tkzDefPoint(0, 0){D} % Point Δ (Delta)
+    \tkzDefPoint({4*\drawingAlpha}, 0){C} % Point Γ (Gamma)
+    \tkzDefPoint({4*\drawingAlpha}, {pi*\drawingAlpha}){B} % Point B
+    \tkzDefPoint(0, {pi*\drawingAlpha}){A} % Point A
+
+    % Define M as the midpoint of AB (the center of the semicircle).
+    \tkzDefMidPoint(A,B) \tkzGetPoint{M}
+
+    % Draw the rectangle ABΓΔ.
+    \tkzDrawPolygon(A,B,C,D)
+
+    % Draw the semicircle with diameter AB.
+    % The problem states it's "inside the rectangle", so the arc should be drawn downwards from AB.
+    % The center of the semicircle is M, and the radius is AB/2 = 2\alpha.
+    % We draw from B (angle 0 relative to M) to A (angle -180 relative to M) in a clockwise direction.
+    \draw (M) arc (0:-180:{2*\drawingAlpha});
+
+    % Draw points A, B, M, Δ, Γ.
+    \tkzDrawPoints(A,B,M,D,C)
+
+    % Label the points.
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[above](M){M}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[below right](C){$\Gamma$}
+\end{tikzpicture}
+\caption{Το ορθογώνιο ABΓΔ με το ημικύκλιο.}
+\end{wrapfigure}
+Στο παρακάτω σχήμα το ΑΒΓΔ είναι ορθογώνιο με $\text{AB} = 4\alpha$ και $\text{AΔ} = \pi\alpha$. Στο εσωτερικό του ορθογωνίου σχεδιάστηκε ημικύκλιο διαμέτρου ΑΒ.
+\begin{alist}
+    \item Να αποδείξετε ότι το ημικύκλιο χωρίζει το ορθογώνιο σε δύο ισεμβαδικά χωρία. \monades{8}
+    \item Αν η διαγώνιος ΒΔ τέμνει το ημικύκλιο στο σημείο Ε και Μ είναι το μέσο της ΑΒ,
+    \begin{rlist}
+        \item να αποδείξετε ότι $\text{AB}^2 = \text{BΔ} \cdot \text{BE}$ και $\text{AΔ}^2 = \text{BΔ} \cdot \text{ΔE}$. \monades{6}
+        \item να αποδείξετε ότι $\text{BE} = \dfrac{16\alpha}{\sqrt{16+\pi^2}}$ και $\text{ΔE} = \dfrac{\pi^2\alpha}{\sqrt{16+\pi^2}}$. \monades{6}
+        \item να υπολογίσετε το $\text{συν}\widehat{\text{BME}}$. \monades{5}
+    \end{rlist}
+\end{alist}

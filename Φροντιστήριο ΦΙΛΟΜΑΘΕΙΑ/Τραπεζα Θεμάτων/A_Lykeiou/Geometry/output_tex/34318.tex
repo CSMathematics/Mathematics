@@ -1,0 +1,71 @@
+\Askhsh{34318}{4}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.4. 3ο Κριτήριο ισότητας τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 3.14. Σχετικές θέσεις ευθείας και κύκλου
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34318.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Θεωρούμε κύκλο (Ο, ρ) και Ε το μέσο του τόξου του ΒΓ. Μια ευθεία (ε) εφάπτεται στον κύκλο στο Ε. Οι προεκτάσεις των ΟΒ, ΟΓ (προς το Β και το Γ αντίστοιχα) τέμνουν την ευθεία (ε) στα σημεία Ζ και Η αντίστοιχα.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+
+\begin{alist}
+\item
+  ΒΓ // (ε) \monades{9}
+\item
+  ΟΖ = ΟΗ \monades{9}
+
+\item Αν το σημείο Β είναι το μέσο του ΟΖ , να υπολογίσετε τις γωνίες του τριγώνου ΖΟΗ.
+
+\monades{7}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(0,-2){E} % E is at the bottom
+\tkzDrawCircle(O,E)
+
+% E is midpoint of arc BC. Angles BOE and EOC must be equal.
+\tkzDefPointBy[rotation=center O angle -40](E) \tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle 40](E) \tkzGetPoint{C}
+
+% Tangent at E
+\tkzDefLine[orthogonal=through E](O,E) \tkzGetPoint{tangent_dir}
+
+% Extents of OB and OC
+\tkzInterLL(E,tangent_dir)(O,B) \tkzGetPoint{Z}
+\tkzInterLL(E,tangent_dir)(O,C) \tkzGetPoint{H}
+
+\draw[l3] (B)--(C);
+\draw[l3] (O)--(Z);
+\draw[l3] (O)--(H);
+\draw[l3] (O)--(E);
+\draw[l3] (Z)--(H); % Tangent line segment
+
+\tkzDrawPoints(O,A,B,C,E,Z,H) % A doesn't exist but ok
+\tkzDrawPoints(O,B,C,E,Z,H)
+\tkzLabelPoint[above](O){$O$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[right](C){$\Gamma$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[below left](Z){$Z$}
+\tkzLabelPoint[below right](H){$H$}
+
+\tkzMarkRightAngle(O,E,H)
+\tkzMarkSegments[mark=s|](O,B O,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}
+\end{alist}

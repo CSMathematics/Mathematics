@@ -1,0 +1,23 @@
+\begin{tikzpicture}[scale=0.15]
+    % Grid
+    \draw[very thin, lightgray] (-25,-30) grid[step=5] (30,5);
+    
+    % Axes
+    \draw[->, thick] (-25,0) -- (30,0) node[right] {$x$};
+    \draw[->, thick] (0,-30) -- (0,5) node[above] {$y$};
+    
+    % Origin
+    \node[below left] at (0,0) {$O$};
+
+    % Function y = -x^2 / 20 (scaled to fit labels and logic)
+    % The original image shows a parabola opening down. 
+    % Based on the labels -30 to 45, it marks a physical/model scenario.
+    \draw[ultra thick, maincolor, domain=-20:25, samples=100] plot (\x, {-0.04*\x*\x});
+
+    % Ticks every 5
+    \foreach \x in {-20, -10, 10, 20, 30}
+        \draw (\x, 1) -- (\x, -1) node[below, font=\tiny] {$\x$};
+    \foreach \y in {-30, -20, -10,}
+        \draw (1, \y) -- (-1, \y) node[left, font=\tiny] {$\y$};
+
+\end{tikzpicture}

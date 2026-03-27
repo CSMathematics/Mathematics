@@ -1,0 +1,56 @@
+\Askhsh{18557_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία, Παραλληλόγραμμα, Τραπέζια, Εμβαδόν, Περίμετρος]
+\end{ylh}
+\begin{wrapfigure}[9]{r}{7cm} % Adjust number of lines and width as needed based on actual text flow
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός κορυφών τραπεζίου ΑΒΓΔ
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(7,0){B}
+    \tkzDefPoint(1.5,3){D} % Δέλτα
+    \tkzDefPoint(4.5,3){G} % Γάμμα
+
+    % Ορισμός σημείων Ε και Ζ στη βάση ΑΒ
+    % Για το παραλληλόγραμμο ΑΔΓΕ, πρέπει ΑΕ = ΔΓ. Μήκος ΔΓ = 4.5 - 1.5 = 3 μονάδες.
+    % Άρα Ε βρίσκεται στο (0 + 3, 0) = (3,0).
+    \tkzDefPoint(3,0){E}
+    % Για το παραλληλόγραμμο ΒΓΔΖ, πρέπει ΒΖ = ΔΓ. Μήκος ΔΓ = 3 μονάδες.
+    % Άρα Ζ βρίσκεται στο (7 - 3, 0) = (4,0).
+    \tkzDefPoint(4,0){Z}
+
+    % Σχεδίαση των πλευρών του τραπεζίου ΑΒΓΔ
+    \tkzDrawSegments(A,D D,G G,B B,A)
+
+    % Σχεδίαση των εσωτερικών τμημάτων ΔΕ και ΓΖ όπως φαίνονται στην εικόνα
+    \tkzDrawSegment(D,E)
+    \tkzDrawSegment(G,Z)
+
+    % Σχεδίαση του ύψους 'u' από το Δ στην ΑΒ
+    \tkzDefPointWith[projection](D,A,B){Dprime} % Dprime είναι το ίχνος της καθέτου από το Δ στην ΑΒ
+    \tkzDrawSegment[dashed](D,Dprime)
+    \tkzLabelSegment[left](D,Dprime){u}
+
+    % Ετικέτες σημείων
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[below right](B){B}
+    \tkzLabelPoint[above right](G){$\Gamma$}
+    \tkzLabelPoint[above left](D){$\Delta$}
+    \tkzLabelPoint[below](E){E}
+    \tkzLabelPoint[below](Z){Z}
+
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(A,B,G,D,E,Z)
+\end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+\item Τα τετράπλευρα ΑΔΓΕ και ΒΓΔΖ έχουν τις απέναντι πλευρές τους ανά δύο παράλληλες, άρα είναι παραλληλόγραμμα.
+Για τα εμβαδά τους έχουμε:
+\[ (\text{ΑΔΓΕ}) = \Delta\Gamma \cdot u \quad (1) \]
+όπου $u$ είναι το ύψος του τραπεζίου ή αλλιώς η απόσταση των βάσεών του.
+\[ (\text{ΒΓΔΖ}) = \Delta\Gamma \cdot u \quad (2) \]
+όπου $u$ είναι το ύψος του τραπεζίου.
+Από τις σχέσεις (1) και (2) προκύπτει ότι τα τετράπλευρα ΑΔΓΕ και ΒΓΔΖ είναι ισεμβαδικά.
+\item Το τετράπλευρο ΑΔΓΕ έχει περίμετρο $\Pi_1 = \text{ΑΔ} + \Delta\Gamma + \text{ΓΕ} + \text{ΕΑ}$, αλλά οι απέναντι πλευρές του είναι ίσες αφού είναι παραλληλόγραμμο, οπότε $\Pi_1 = 2 \cdot \text{ΑΔ} + 2 \cdot \Delta\Gamma$.
+Το τετράπλευρο ΒΓΔΖ είναι επίσης παραλληλόγραμμο οπότε έχει περίμετρο $\Pi_2 = \text{ΒΓ} + \Delta\Gamma + \text{ΔΖ} + \text{ΖΒ} = 2 \cdot \text{ΒΓ} + 2 \cdot \Delta\Gamma$.
+\item Από το ερώτημα α) έχουμε ότι τα τετράπλευρα ΑΔΓΕ και ΒΓΔΖ έχουν ίσα εμβαδά ανεξάρτητα από τη μορφή που έχει το αρχικό τραπέζιο. Για να έχουν και ίσες περιμέτρους θα πρέπει $\text{ΑΔ} = \text{ΒΓ}$, δηλαδή το αρχικό τραπέζιο να έχει τις μη παράλληλες πλευρές του ίσες, οπότε το τραπέζιο ΑΒΓΔ πρέπει να είναι ισοσκελές.
+\end{alist}

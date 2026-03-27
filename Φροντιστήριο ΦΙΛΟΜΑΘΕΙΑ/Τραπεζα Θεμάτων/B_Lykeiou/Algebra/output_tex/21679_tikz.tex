@@ -1,0 +1,25 @@
+\begin{tikzpicture}[xscale=0.15, yscale=0.08]
+    % Axes
+    \draw[->, thick] (-5,0) -- (70,0) node[right] {$t$ (min)};
+    \draw[->, thick] (0,-5) -- (0,90) node[above] {$T(t) ^\circ C$};
+    
+    % Function T(t) = 25 + 48e^{-0.03t}
+    \draw[ultra thick, orange, domain=0:60, samples=100] plot (\x, {25 + 48*exp(-0.03*\x)});
+    
+    % Environment Temperature Asymptote
+    \draw[dashed, red] (0,25) -- (65,25) node[right, font=\tiny] {$25^\circ C$};
+    \node[left] at (0,25) {$25$};
+    
+    % Fixed points
+    \filldraw (0,73) circle (10pt) node[left] {$73$};
+    \filldraw (10,61) circle (10pt);
+    \draw[dashed] (10,61) -- (10,0) node[below] {\tiny 10};
+    \draw[dashed] (10,61) -- (0,61) node[left] {\tiny 61};
+
+    % Domain limit
+    \draw (60, 2) -- (60, -2) node[below] {\tiny 60};
+    
+    % Origin
+    \node[below left] at (0,0) {$0$};
+
+\end{tikzpicture}

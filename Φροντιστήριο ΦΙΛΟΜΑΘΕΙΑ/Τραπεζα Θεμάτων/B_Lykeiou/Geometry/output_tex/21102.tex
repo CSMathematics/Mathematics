@@ -1,0 +1,63 @@
+\Askhsh{21102}{3}
+\begin{ylh}{1}
+    \item 9.1. Ορθές προβολές
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 9.4. Γενίκευση του Πυθαγόρειου θεωρήματος.
+\end{ylh}
+\begin{wrapfigure}[6]{r}{5.5cm}
+    \begin{tikzpicture}[scale=0.8]
+        % Ορισμός της πλευράς 'α' για τις συντεταγμένες
+        \def\a{4} % Ορίζουμε α=4 για ευκολία σχεδίασης
+        
+        % Ορισμός κορυφών τετραγώνου ΑΒΓΔ
+        % (Α top-left, Β bottom-left, Γ bottom-right, Δ top-right)
+        \tkzDefPoint(0,\a){A}
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(\a,0){G} % Γ (Gamma)
+        \tkzDefPoint(\a,\a){D} % Δ (Delta)
+        
+        % Ε είναι το μέσο της ΔΓ (πλευράς που βρίσκεται δεξιά)
+        \tkzDefMidPoint(D,G) \tkzGetPoint{E}
+        
+        % Σχεδίαση του τετραγώνου
+        \tkzDrawPolygon[line width=0.8pt](A,B,G,D)
+        
+        % Σχεδίαση της διαγωνίου ΑΓ (συμπαγής γραμμή)
+        \tkzDrawSegment[line width=0.8pt](A,G)
+        
+        % Σχεδίαση του τμήματος ΑΕ (διακεκομμένη γραμμή)
+        \tkzDrawSegment[line width=0.8pt,dashed](A,E)
+        
+        % Εύρεση του Z, της προβολής του E πάνω στην ΑΓ
+        \tkzDefLine[orthogonal through E](A,G)
+        \tkzGetPoint{eOrthogonal}
+        \tkzInterLL(A,G)(E,eOrthogonal) \tkzGetPoint{Z}
+        
+        % Σχεδίαση του τμήματος ΕΖ (συμπαγής γραμμή)
+        \tkzDrawSegment[line width=0.8pt](E,Z)
+        
+        % Σήμανση της ορθής γωνίας στο Z
+        \tkzMarkRightAngle[size=0.15](E,Z,G)
+        
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints[fill=black,size=3pt](A,B,G,D,E,Z)
+        
+        % Ετικέτες των σημείων
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[above right](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[below](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Δίνεται τετράγωνο ΑΒΓΔ πλευράς $\alpha$ και έστω Ε το μέσο της ΔΓ.
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item ΑΓ = $\alpha\sqrt{2}$. \monades{09}
+        \item ΑΕ = $\alpha\frac{\sqrt{5}}{2}$. \monades{09}
+    \end{rlist}
+    \item Να υπολογίσετε την προβολή του τμήματος ΑΕ στην ΑΓ. \monades{07}
+\end{alist}

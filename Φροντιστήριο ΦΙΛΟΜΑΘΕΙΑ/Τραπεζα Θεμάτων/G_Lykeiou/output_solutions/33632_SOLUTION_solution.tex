@@ -1,0 +1,55 @@
+\Askhsh{33632_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{0.6\textwidth} % Adjusted line count for wrapfigure
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -3.5, xmax = 3.5,
+    ymin = -1.5, ymax = 2.5,
+    xtick = {-3,-2,-1,0,1,2,3},
+    ytick = {-1,0,1,2},
+    xticklabel style={
+        /pgf/number format/assume math mode=true,
+        /pgf/number format/precision=0
+    },
+    yticklabel style={
+        /pgf/number format/assume math mode=true,
+        /pgf/number format/precision=0
+    },
+    tick label style = {font=\scriptsize},
+    samples = 100,
+    width = 9cm, height = 6cm,
+]
+    % Solid curve C_f
+    \addplot[very thick, maincolor, domain=-3:0, smooth] {exp(x)};
+    \addplot[very thick, maincolor, domain=0:2.5, smooth] {-x^2 + 1};
+
+    % Dotted guide lines
+    \addplot[dotted, gray, domain=-3:1, smooth] {exp(x)};
+    \addplot[dotted, gray, domain=-1.5:3, smooth] {-x^2 + 1};
+
+    % Labels
+    \node[above right, gray] at (axis cs:0.7, 2.0) {$y=e^x$};
+    \node[below left, gray] at (axis cs:-1.5, -0.5) {$y=-x^2+1$};
+    \node[below right, maincolor] at (axis cs:2.0, -0.7) {$C_f$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+ΛΥΣΗ
+
+\begin{alist}
+    \item[α)] Ισχύουν:
+    \[ \lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} (e^x) = 1 = f(0) \quad \text{και} \quad \lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} (-x^2 + 1) = 1 \]
+    οπότε $\lim_{x \to 0^-} f(x) = \lim_{x \to 0^+} f(x) = f(0)$, άρα η $f$ είναι συνεχής στο $x_o = 0$.
+    Η γραφική παράσταση της $f$ φαίνεται στο σχήμα που ακολουθεί.
+
+    \item[β)] Με $x$ κοντά στο $0$ και
+    \begin{itemize}
+        \item $x < 0$, έχουμε $\lim_{x \to 0^-} \frac{f(x)-f(0)}{x-0} = \lim_{x \to 0^-} \frac{e^x-1}{x} = \eval{\frac{de^x}{dx}}_{x=0} = 1$,
+        \item $x > 0$, έχουμε $\lim_{x \to 0^+} \frac{f(x)-f(0)}{x-0} = \lim_{x \to 0^+} \frac{-x^2+1-1}{x} = \lim_{x \to 0^+} \frac{-x^2}{x} = \lim_{x \to 0^+} x = 0$.
+    \end{itemize}
+    οπότε η $f$ δεν είναι παραγωγίσιμη στο $x_o=0$. Επομένως δεν ορίζεται εφαπτομένη της γραφικής παράστασης της $f$ στο σημείο $A(0, f(0))$.
+\end{alist}

@@ -1,0 +1,56 @@
+\Askhsh{14876}{2}
+\begin{ylh}{1}
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.2. Παραλληλόγραμμα
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 14876.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται παραλληλόγραμμο ΑΒΓΔ με γωνία $\widehat{A}$ = 120\textsuperscript{ο} και ΑΒ=2ΑΔ. Φέρουμε τη διχοτόμο της γωνίας Δ του παραλληλογράμμου, η οποία τέμνει την ΑΒ στο Ε, και στη συνέχεια το κάθετο τμήμα ΑΖ στη ΔΕ. Να αποδείξετε ότι:
+
+\begin{alist}
+\item γωνία Α$\widehat{\Delta}$Ε = 30\textsuperscript{ο} \monades{10}
+
+\item ΑΖ = $\frac{ΑΒ}{4}$ \monades{15}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){D}
+\tkzDefPoint(8,0){C}
+\tkzDefPoint(2, 3.464){A} % A=120 means ADC=60, AD=4 => dx=4cos60=2, dy=4sin60=3.464
+\tkzDefPointBy[translation=from D to C](A) \tkzGetPoint{B}
+% Wait, A=120 means DAB = 120. If AB is horizontal, then AD is at 120 degrees.
+% Let's keep AB=8, AD=4.
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(8,0){B}
+\tkzDefPointBy[rotation=center A angle 120](B) \tkzGetPoint{D_temp}
+\tkzDefPointOnLine[pos=0.5](A,D_temp) \tkzGetPoint{D}
+\tkzDefPointBy[translation=from A to D](B) \tkzGetPoint{C}
+
+\tkzDefLine[bisector](A,D,C) \tkzGetPoint{bis_dir}
+\tkzInterLL(D,bis_dir)(A,B) \tkzGetPoint{E}
+
+\tkzDefPointBy[projection=onto D--E](A) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--(D)--cycle;
+\draw[l3] (D)--(E);
+\draw[l3] (A)--(Z);
+
+\tkzDrawPoints(A,B,C,D,E,Z)
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above right](C){$\Gamma$}
+\tkzLabelPoint[above left](D){$\Delta$}
+\tkzLabelPoint[below](E){$E$}
+\tkzLabelPoint[right](Z){$Z$}
+
+\tkzMarkRightAngle(A,Z,D)
+\end{tikzpicture}
+\end{center}
+\end{alist}

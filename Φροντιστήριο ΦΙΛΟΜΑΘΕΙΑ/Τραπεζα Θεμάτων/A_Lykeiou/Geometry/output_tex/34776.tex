@@ -1,0 +1,59 @@
+\Askhsh{34776}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34776.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται ορθογώνιο τρίγωνο ΑΒΓ ($\widehat{Α}$ = 90\textsuperscript{ο}). Έστω Δ σημείο της πλευράς ΑΓ τέτοιο ώστε, η διχοτόμος ΔΕ της γωνίας Α$\widehat{\Delta}$Β να είναι παράλληλη στην πλευρά ΒΓ.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+\begin{rlist}
+\item $E\widehat{\Delta}B = \Delta\widehat{B}\Gamma$ και $E\widehat{\Delta}A = \widehat{\Gamma}$, \monades{8}
+\item το τρίγωνο $B\Delta\Gamma$ είναι ισοσκελές. \monades{8}
+\end{rlist}
+
+\item Αν είναι $A\widehat{\Delta}B = 60^{\circ}$, τότε να υπολογίσετε τη γωνία $\widehat{\Gamma}$. \monades{9}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(0,3){B}
+\tkzDefPoint(0,1.5){D} % dummy D
+
+\tkzDefLine[parallel=through D](B,C) \tkzGetPoint{line_DE}
+\tkzInterLL(D,line_DE)(A,B) \tkzGetPoint{E}
+
+% We need DE bisector of ADB? No, ADB is fixed by D.
+% If we want to DRAW the condition "DE bisector of ADB AND DE // BC":
+% This is only true for specific D.
+% E is intersection of DE and AB. 
+% For diagram purposes, we'll pick D such that it looks right.
+\tkzDefPoint(0,1.2){D}
+\tkzDefLine[parallel=through D](B,C) \tkzGetPoint{DE_dir}
+\tkzInterLL(D,DE_dir)(A,B) \tkzGetPoint{E}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (B)--(D);
+\draw[l3] (D)--(E);
+
+\tkzDrawPoints(A,B,C,D,E)
+\tkzLabelPoint[below left](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[left](D){$\Delta$}
+\tkzLabelPoint[above left](E){$E$}
+
+\tkzMarkRightAngle(B,A,C)
+\tkzMarkSegments[mark=s|](D,B D,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

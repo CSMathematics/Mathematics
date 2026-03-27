@@ -1,0 +1,70 @@
+\Askhsh{20684}{4}
+\begin{ylh}{1}
+    \item 3.1 Ο Κύκλος
+    \item 3.2 Η Παραβολή.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{8.5cm}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {}, % Custom labels below
+    ylabel = {}, % Custom labels below
+    xmin = -2.5, xmax = 4.5,
+    ymin = -4, ymax = 4,
+    xtick = {-1,0,1,3},
+    ytick = {},
+    grid = none,
+    width = 8cm, height = 7cm,
+    tick label style = {font=\scriptsize},
+    x axis line style={-stealth},
+    y axis line style={-stealth},
+]
+
+    % Ορισμός συντεταγμένων με βάση τις ιδιότητες του προβλήματος και τις τιμές του ερωτήματος (β)
+    \coordinate (O) at (0,0);
+    \coordinate (E) at (1,0); % Εστία της παραβολής C: y^2 = 4x (p=1)
+    \coordinate (A) at (3,{2*sqrt(3)}); % Σημείο A(xA, yA) με xA=3, yA=2*sqrt(3) (από β)
+    \coordinate (B) at (-1,{2*sqrt(3)}); % Προβολή του A στη διευθετούσα x=-1
+    \coordinate (G) at (-1,{-2*sqrt(3)}); % Σημείο Γ στη διευθετούσα, ώστε το E να είναι μέσο του ΑΓ
+
+    % Παραβολή C: y^2 = 4x  <=> x = y^2/4
+    \addplot[maincolor, thick, samples=100, domain=-3.5:4] ({x^2/4}, x);
+    \node[right, maincolor] at (axis cs:4.2, 2.5) {$C: y^2 = 4x$};
+
+    % Διευθετούσα (δ): x = -1
+    \addplot[red, very thick, samples=2, domain=ymin:ymax] (-1, x);
+    \node[left, red] at (axis cs:-1, 3.8) {$(\delta)$};
+
+    % Σχεδίαση τμημάτων για το τρίγωνο ABE και την ευθεία A-Γ
+    \draw[thirdcolor, thick] (A) -- (B);
+    \draw[thirdcolor, thick] (A) -- (E);
+    \draw[thirdcolor, thick] (B) -- (E);
+    \draw[black, thick] (A) -- (G);
+
+    % Σχεδίαση σημείων
+    \fill (O) circle (1.5pt) node[below left] {O};
+    \fill (E) circle (1.5pt) node[below right] {E};
+    \fill (A) circle (1.5pt) node[above right] {A};
+    \fill (B) circle (1.5pt) node[above left] {B};
+    \fill (G) circle (1.5pt) node[below left] {$\Gamma$};
+
+    % Προσαρμοσμένες ετικέτες αξόνων (x', x, y', y)
+    \node[left] at (axis cs:-2.5,0) {$x'$};
+    \node[right] at (axis cs:4.5,0) {$x$};
+    \node[below] at (axis cs:0,-4) {$y'$};
+    \node[above] at (axis cs:0,4) {$y$};
+
+    % Σήμανση ορθής γωνίας στο B (μεταξύ AB και διευθετούσας)
+    \draw[thirdcolor,fill=thirdcolor!20] ($(B)+(0.3,0)$) -- ($(B)+(0.3,-0.3)$) -- ($(B)+(0,-0.3)$);
+
+\end{axis}
+\end{tikzpicture}
+\caption*{\vspace{-1em}} % Για αποφυγή επιπλέον κενού κάτω από την εικόνα.
+\end{wrapfigure}
+Ένα σημείο $A(x_A, y_A)$ της παραβολής $C: y^2 = 4x$ με $x_A > 0$, $y_A > 0$, έχει την εξής ιδιότητα: η ημιευθεία $AE$ τέμνει την διευθετούσα $(\delta)$ στο σημείο $\Gamma$, έτσι όμως ώστε η εστία $E$ της παραβολής $C$, να είναι το μέσο του τμήματος $A\Gamma$. Επίσης, από το σημείο $A$ φέρνουμε κάθετη στην διευθετούσα $(\delta)$ και έστω $B$ το σημείο τομής, όπως δείχνει το παρακάτω σχήμα.
+
+\begin{alist}
+\item Να αποδείξετε ότι το τρίγωνο $ABE$ είναι ισόπλευρο. \monades{7}
+\item Να αποδείξετε ότι $x_A = 3$ και $y_A = 2\sqrt{3}$. \monades{10}
+\item Να βρείτε την εξίσωση του κύκλου που διέρχεται από τις κορυφές του τριγώνου $AB\Gamma$. \monades{8}
+\end{alist}

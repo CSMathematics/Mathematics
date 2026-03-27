@@ -1,0 +1,63 @@
+\Askhsh{21683}{4}
+\begin{ylh}{1}
+    \item 3.1 Ο Κύκλος.
+\end{ylh}
+\begin{wrapfigure}[16]{r}{7cm}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -0.3, xmax = 4.0, % Adjusted xmax to ensure K is visible
+    ymin = -0.3, ymax = 4.0, % Adjusted ymax to ensure Lambda is visible
+    xtick = \empty, % Remove default x-ticks
+    ytick = \empty, % Remove default y-ticks
+    xlabel = {}, % Hide x-axis label
+    ylabel = {}, % Hide y-axis label
+    clip=false, % Allow drawing and labels outside the axis limits
+    axis equal image, % Ensure the circle has a correct aspect ratio
+    width = 7cm, height = 7cm,
+]
+    % Draw the quarter circle x^2 + y^2 = 4 for x in [0,2]
+    \addplot[very thick, maincolor, domain=0:2, samples=100] {sqrt(4-x^2)};
+
+    % Label the origin O
+    \node[below left, inner sep=1pt] at (axis cs:0,0) {O};
+
+    % Points A=(2,0) and B=(0,2) on the circle and axes
+    \coordinate (A_pt) at (axis cs:2,0);
+    \coordinate (B_pt) at (axis cs:0,2);
+    \draw[fill=black] (A_pt) circle (1.5pt);
+    \draw[fill=black] (B_pt) circle (1.5pt);
+    \node[below, inner sep=1pt] at (A_pt) {A};
+    \node[left, inner sep=1pt] at (B_pt) {B};
+
+    % Illustrative point M(x1, y1) on the arc
+    % Using example values for visualization: x1=1.2, y1=sqrt(4-1.2^2)
+    \pgfmathsetmacro{\xoneval}{1.2}
+    \pgfmathsetmacro{\yoneval}{sqrt(4-\xoneval^2)}
+
+    \coordinate (M_pt) at (axis cs:\xoneval, \yoneval);
+    \draw[fill=black] (M_pt) circle (1.5pt);
+    \node[above right, inner sep=1pt] at (M_pt) {M};
+
+    % Draw the tangent line at M. Intercepts are K(4/x1, 0) and Lambda(0, 4/y1).
+    \coordinate (K_pt) at (axis cs:{4/\xoneval}, 0);
+    \coordinate (L_pt) at (axis cs:0, {4/\yoneval});
+    \draw[thin, black] (K_pt) -- (L_pt);
+
+    % Label K and Lambda (Λ)
+    \draw[fill=black] (K_pt) circle (1.5pt);
+    \draw[fill=black] (L_pt) circle (1.5pt);
+    \node[below, inner sep=1pt] at (K_pt) {K};
+    \node[left, inner sep=1pt] at (L_pt) {$\Lambda$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο διπλανό σχήμα φαίνεται το πρώτο τεταρτημόριο του κύκλου $x^2 + y^2 = 4$ και το τυχαίο σημείο του $M(x_1, y_1)$, $0 < x_1 < 2$ ανάμεσα στα A, B.
+
+\begin{alist}
+    \item Να βρείτε την εξίσωση της εφαπτομένης του στο M και τις συντεταγμένες των σημείων τομής της K, $\Lambda$ με τους άξονες. \monades{6}
+    \item Να αποδείξετε ότι το μήκος $d$ του τμήματος K$\Lambda$ είναι $d = \dfrac{8}{x_1 y_1}$. \monades{7}
+    \item Να βρείτε το μήκος $d_0$ του τμήματος K$\Lambda$ όταν $x_1 = \sqrt{2}$. \monades{5}
+    \item Να αποδείξετε ότι, όταν το M κινείται στο τεταρτοκύκλιο, τότε: $d \geq d_0$. \monades{7}
+\end{alist}

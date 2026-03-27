@@ -1,0 +1,65 @@
+\Askhsh{16135_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\begin{wrapfigure}[15]{r}{6cm} % Estimated 15 lines of text will wrap around the figure, width 6cm.
+\begin{tikzpicture}
+    % Ορισμός σημείων B, O, G (Γάμμα)
+    \tkzDefPoint(0,0){B}
+    \tkzDefPoint(5,0){O} % Υποθέτουμε διάμετρο BG = 10, άρα ακτίνα BO = OG = 5
+    \tkzDefPoint(10,0){G} % Γάμμα
+    
+    % Ορισμός σημείου A στο ημικύκλιο
+    % Για AD=4, DB=2, DG=8, το D είναι στο (2,0) και το A στο (2,4)
+    \tkzDefPoint(2,0){D}
+    \tkzDefPoint(2,4){A} 
+    
+    % Σχεδίαση του ημικυκλίου
+    \tkzDrawArc[maincolor, dashed](O,G)(B) % Τόξο από Γ σε B, με κέντρο O.
+    
+    % Σχεδίαση του τριγώνου ABG
+    \tkzDrawSegments[thick](A,B A,G B,G)
+    
+    % Σχεδίαση του ύψους AD
+    \tkzDrawSegment[thick](A,D)
+    
+    % Σχεδίαση του τμήματος AO (κόκκινο)
+    \tkzDrawSegment[secondarycolor, thick](A,O)
+    
+    % Σχεδίαση ορθών γωνιών
+    \tkzMarkRightAngle[fill=maincolor!20,size=0.2](A,D,G) % Η γωνία ADG είναι ορθή.
+    \tkzMarkRightAngle[fill=maincolor!20,size=0.2](B,A,G) % Η γωνία BAG είναι ορθή επειδή το A είναι στο ημικύκλιο με διάμετρο BG.
+    
+    % Ετικέτες
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](G){$\Gamma$}
+    \tkzLabelPoint[above](A){A}
+    \tkzLabelPoint[below](D){$\Delta$}
+    \tkzLabelPoint[below](O){O}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\textbf{ΛΥΣΗ}
+
+\begin{alist}
+    \item[α)] \begin{rlist}
+        \item Είναι $\Delta B = 2$ οπότε $\Delta \Gamma = B\Gamma - \Delta B = 10 - 2 = 8$. Όμως σε κάθε ορθογώνιο τρίγωνο, το τετράγωνο του ύψους του που αντιστοιχεί στην υποτείνουσα είναι ίσο με το γινόμενο των προβολών των κάθετων πλευρών του στην υποτείνουσα. Επομένως \[ A\Delta^2 = \Delta B \cdot \Delta \Gamma \quad \text{ή} \quad A\Delta^2 = 2 \cdot 8 \quad \text{ή} \quad A\Delta^2 = 16 \quad \text{ή} \quad A\Delta = 4. \]
+        \item Είναι $B\Gamma = 10$ και $A\Delta = 4$ οπότε το εμβαδόν του τριγώνου $AB\Gamma$ είναι \[ (AB\Gamma) = \frac{B\Gamma \cdot A\Delta}{2} \quad \text{ή} \quad (AB\Gamma) = \frac{10 \cdot 4}{2} \quad \text{ή} \quad (AB\Gamma) = 20. \]
+    \end{rlist}
+    \item[β)] \begin{rlist}
+        \item Καθώς το σημείο $A$ κινείται πάνω στο ημικύκλιο με διάμετρο την $B\Gamma$, η βάση του τριγώνου $AB\Gamma$ παραμένει σταθερή και ίση με $10$, ενώ το αντίστοιχο ύψος $A\Delta$ μεταβάλλεται. Επομένως μεταβάλλεται και το εμβαδόν του τριγώνου $AB\Gamma$, το οποίο θα είναι \[ (AB\Gamma) = \frac{B\Gamma \cdot A\Delta}{2} \quad \text{ή} \quad (AB\Gamma) = \frac{10 \cdot A\Delta}{2} \quad \text{ή} \quad (AB\Gamma) = 5A\Delta. \]
+        \item Έστω $O$ το κέντρο του κύκλου με διάμετρο την $B\Gamma$.
+    \end{rlist}
+\end{alist}
+
+\begin{itemize}
+    \item Το $A$ ανήκει στον κύκλο με κέντρο $O$ και ακτίνα $\frac{B\Gamma}{2} = 5$. Επομένως $OA = 5$ (1).
+    \item Το $\Delta$ είναι η προβολή του $A$ στη $B\Gamma$ και το $O$ σημείο της $B\Gamma$. Επομένως $A\Delta \le AO$ (2).
+    \item \begin{align*}
+        (AB\Gamma) &= 5A\Delta \quad \text{(από το β(i) )} \\
+                   &\le 5AO \quad \text{(από την (2) )} \\
+                   &= 25 \quad \text{(από την (1) )}
+    \end{align*}
+\end{itemize}
+Επομένως $(AB\Gamma) \le 25$, οπότε ο ισχυρισμός είναι αληθής.

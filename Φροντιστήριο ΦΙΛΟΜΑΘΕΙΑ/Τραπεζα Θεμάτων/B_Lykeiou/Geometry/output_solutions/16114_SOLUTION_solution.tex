@@ -1,0 +1,74 @@
+\Askhsh{16114_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Ορισμός κορυφών του κύριου τριγώνου ΑΒΓ
+        \tkzDefPoint(0,5){A}
+        \tkzDefPoint(-3,0){B}
+        \tkzDefPoint(3.5,0){G} % Για το Γ
+        
+        % Ορισμός σημείου Δ στην πλευρά ΑΒ
+        % Για οπτική αναπαράσταση, το Δ τοποθετείται περίπου στο 1/3 της ΑΒ από το Α
+        \tkzDefPointBy[homothety=center A ratio 0.33](B) \tkzGetPoint{D}
+        
+        % Ορισμός σημείου Ε στην πλευρά ΑΓ
+        % Για οπτική αναπαράσταση, το Ε τοποθετείται περίπου στο 3/4 της ΑΓ από το Α
+        \tkzDefPointBy[homothety=center A ratio 0.75](G) \tkzGetPoint{E}
+        
+        % Σχεδίαση του κύριου τριγώνου και του τμήματος ΔΕ
+        \tkzDrawPolygon(A,B,G)
+        \tkzDrawSegment(D,E)
+        
+        % Ορισμός των ποδών των υψών Ζ και Η
+        % Το Ζ είναι η προβολή του Ε πάνω στην ευθεία ΑΔ (η οποία είναι μέρος της ΑΒ)
+        \tkzDefPointWith[orthogonal projection = Z](E,A,D)
+        % Το Η είναι η προβολή του Γ πάνω στην ευθεία ΑΒ
+        \tkzDefPointWith[orthogonal projection = H](G,A,B)
+        
+        % Σχεδίαση των υψών ως διακεκομμένες γραμμές
+        \tkzDrawSegment[dashed](E,Z)
+        \tkzDrawSegment[dashed](G,H)
+        
+        % Σήμανση των ορθών γωνιών με τρίτο χρώμα (πράσινο)
+        % Για το ΕΖ κάθετο στην ΑΔ
+        \tkzMarkRightAngle[fill=thirdcolor, size=0.2](A,Z,E)
+        % Για το ΓΗ κάθετο στην ΑΒ
+        \tkzMarkRightAngle[fill=thirdcolor, size=0.2](A,H,G)
+        
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints(A,B,G,D,E,Z,H)
+        
+        % Ετικέτες των σημείων
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[left](Z){Z}
+        \tkzLabelPoint[left](H){H}
+    \end{tikzpicture}
+\end{wrapfigure}
+\noindent ΛΥΣΗ
+
+\begin{alist}
+    \item
+    \begin{rlist}
+        \item Τα τρίγωνα $\mathrm{A}\Delta\mathrm{E}$ και $\mathrm{AB}\Gamma$ έχουν την γωνία $\hat{\mathrm{A}}$ κοινή οπότε ο λόγος των εμβαδών τους θα ισούται με το λόγο των γινομένων των πλευρών που περιέχουν την γωνία.
+
+        Επίσης $\Gamma\mathrm{E} = \frac{1}{4} \mathrm{A}\Gamma$, οπότε $\mathrm{A}\mathrm{E} = \frac{3}{4} \mathrm{A}\Gamma$.
+        \[ \frac{(\mathrm{A}\Delta\mathrm{E})}{(\mathrm{AB}\Gamma)} = \frac{\mathrm{A}\Delta \cdot \mathrm{A}\mathrm{E}}{\mathrm{AB} \cdot \mathrm{A}\Gamma} = \frac{\mathrm{A}\Delta}{\mathrm{AB}} \cdot \frac{\mathrm{A}\mathrm{E}}{\mathrm{A}\Gamma} = \frac{1}{3} \cdot \frac{3}{4} = \frac{1}{4} \]
+        άρα $(\mathrm{AB}\Gamma) = 4(\mathrm{A}\Delta\mathrm{E})$.
+
+        \item Τα $\mathrm{EZ}$ και $\Gamma\mathrm{H}$ είναι ύψη των τριγώνων $\mathrm{A}\Delta\mathrm{E}$ και $\mathrm{AB}\Gamma$ αντίστοιχα.
+        \[ \frac{(\mathrm{A}\Delta\mathrm{E})}{(\mathrm{AB}\Gamma)} = \frac{\frac{1}{2} \mathrm{A}\Delta \cdot \mathrm{EZ}}{\frac{1}{2} \mathrm{AB} \cdot \Gamma\mathrm{H}} = \frac{\mathrm{A}\Delta}{\mathrm{AB}} \cdot \frac{\mathrm{EZ}}{\Gamma\mathrm{H}} = \frac{1}{3} \frac{\mathrm{EZ}}{\Gamma\mathrm{H}} \]
+        Επειδή όμως $\frac{(\mathrm{A}\Delta\mathrm{E})}{(\mathrm{AB}\Gamma)} = \frac{1}{4}$ από το ερώτημα (\textalpha), θα έχουμε
+        \[ \frac{1}{4} = \frac{1}{3} \cdot \frac{\mathrm{EZ}}{\Gamma\mathrm{H}} \Rightarrow \frac{\mathrm{EZ}}{\Gamma\mathrm{H}} = \frac{1}{4} \cdot \frac{3}{1} = \frac{3}{4} \]
+    \end{rlist}
+
+    \item Για να ισχύει $(\mathrm{AB}\Gamma) = 2(\mathrm{A}\Delta\mathrm{E})$ πρέπει $\frac{(\mathrm{A}\Delta\mathrm{E})}{(\mathrm{AB}\Gamma)} = \frac{1}{2}$. Σκεπτόμενοι ανάλογα με το πρώτο ερώτημα $\frac{(\mathrm{A}\Delta\mathrm{E})}{(\mathrm{AB}\Gamma)} = \frac{\mathrm{A}\Delta \cdot \mathrm{A}\mathrm{E}}{\mathrm{AB} \cdot \mathrm{A}\Gamma} = \frac{\mathrm{A}\Delta}{\mathrm{AB}} \cdot \frac{\mathrm{A}\mathrm{E}}{\mathrm{A}\Gamma} = \frac{1}{2}$ και επειδή ο λόγος $\frac{\mathrm{A}\mathrm{E}}{\mathrm{A}\Gamma} = \frac{3}{4}$ παραμένει σταθερός θα έχουμε
+    \[ \frac{\mathrm{A}\Delta}{\mathrm{AB}} \cdot \frac{3}{4} = \frac{1}{2} \Rightarrow \frac{\mathrm{A}\Delta}{\mathrm{AB}} = \frac{1}{2} : \frac{3}{4} = \frac{1}{2} \cdot \frac{4}{3} = \frac{2}{3} \]
+    $\Rightarrow \mathrm{A}\Delta = \frac{2}{3} \mathrm{AB}$.
+\end{alist}

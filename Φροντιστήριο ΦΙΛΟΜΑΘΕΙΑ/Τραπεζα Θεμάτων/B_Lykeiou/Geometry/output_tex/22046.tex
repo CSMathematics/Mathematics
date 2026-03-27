@@ -1,0 +1,47 @@
+\Askhsh{22046}{2}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 11.5. Μήκος τόξου.
+\end{ylh}
+\begin{wrapfigure}[11]{r}{5.5cm}
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % Ορισμός σημείων
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(1,0){Gamma} % Γ
+    \tkzDefPoint(2,0){B}
+    % Σημείο A: Τρίγωνο OAB είναι ορθογώνιο στο A. OA=R=1, OB=2R=2. Άρα η γωνία OBA=30°.
+    % Η γωνία BOA είναι 60°. Θέτουμε το Α στις συντεταγμένες (R*cos(60°), R*sin(60°))
+    \tkzDefPoint(0.5,{sqrt(3)/2}){A}
+
+    % Σχεδίαση κύκλου
+    \tkzDrawCircle[R](O,1 cm) % Κύκλος με κέντρο O και ακτίνα 1cm
+
+    % Σχεδίαση τμημάτων
+    \tkzDrawSegments(O,A A,B B,Gamma)
+    \tkzDrawSegment[thick](O,B) % Το OB είναι η προέκταση του OΓ
+
+    % Σημάνσεις
+    \tkzMarkSegments[mark=s|,size=3pt](O,Gamma Gamma,B O,A) % Σημειώνουμε OΓ, ΓB, OA ως ίσες (R=1)
+    \tkzLabelSegment[left](O,A){R=1} % Ετικέτα OA με R=1
+
+    % Ετικέτες σημείων
+    \tkzLabelPoint[left](O){O}
+    \tkzLabelPoint[right](B){B}
+    \tkzLabelPoint[below left](Gamma){$\Gamma$}
+    \tkzLabelPoint[above right](A){A}
+
+    % Σήμανση ορθής γωνίας στο A
+    \tkzMarkRightAngle(O,A,B)
+
+    % Σκιασμένη περιοχή: τμήματα AB, BΓ και τόξο AΓ
+    \fill[maincolor!30] (B) -- (A) arc (60:0:1cm) -- cycle;
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται κύκλος με κέντρο Ο και ακτίνα $R = 1$. Θεωρούμε ακτίνα Ο$\Gamma$ την οποία προεκτείνουμε κατά τμήμα $\Gamma \text{Β} = \text{Ο}\Gamma = R$ και το εφαπτόμενο τμήμα $\text{ΒΑ}$, όπως φαίνεται στο σχήμα.
+
+\begin{alist}
+\item Να αποδείξετε ότι $\text{Ο}\widehat{\text{Β}}\text{Α} = 30^{\circ}$. \monades{5}
+\item Να αποδείξετε ότι $\text{ΑΒ} = \sqrt{3}$. \monades{10}
+\item Να υπολογίσετε την περίμετρο του γραμμοσκιασμένου μικτόγραμμου τριγώνου $\text{ΑΒ}\Gamma$. \monades{10}
+\end{alist}

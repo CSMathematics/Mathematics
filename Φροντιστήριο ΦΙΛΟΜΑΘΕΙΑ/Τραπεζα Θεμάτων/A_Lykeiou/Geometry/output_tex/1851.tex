@@ -1,0 +1,57 @@
+\Askhsh{1851}{4}
+\begin{ylh}{1}
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 4.6. Άθροισμα γωνιών τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 1851.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Σε τρίγωνο $ABC$, η προέκταση της διχοτόμου της $\widehat{\Gamma}$ και της εξωτερικής γωνίας του $\widehat{B}$, τέμνονται στο Ε. Δίνεται ότι $A\widehat{B}E = 70^{\circ} = 2\Gamma\widehat{E}B$.
+
+
+\begin{alist}
+\item Να αποδείξετε ότι το τρίγωνο ΓΒΕ είναι ισοσκελές \monades{12}
+
+\item Να υπολογίσετε τις γωνίες του τριγώνου $ABC$. \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+% External bisector of B and internal of C meet at E.
+% E is an excenter. E = Ea usually.
+% Let's pick some angles. A=40, B=80, C=60.
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefTriangle[two angles = 80 and 60](B,C) \tkzGetPoint{A}
+
+% Internal bisector of C
+\tkzDefLine[bisector](B,C,A) \tkzGetPoint{bisC}
+
+% External bisector of B.
+% Extend CB past B to some point X.
+\tkzDefPointBy[homothety=center B ratio -0.5](C) \tkzGetPoint{X}
+\tkzDefLine[bisector](A,B,X) \tkzGetPoint{bisBext}
+
+\tkzInterLL(C,bisC)(B,bisBext) \tkzGetPoint{E}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (C)--(E);
+\draw[l3] (B)--(E);
+\draw[l3] (B)--(X);
+
+\tkzDrawPoints(A,B,C,E)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[right](E){$E$}
+
+\tkzMarkSegments[mark=s|](B,E B,C) % Problem says triangle GBE is isosceles.
+% Actually if B is externally bisected and C internally bisected, E is excenter.
+% GB=BE implies something about the angles.
+\end{tikzpicture}
+\end{center}
+\end{alist}

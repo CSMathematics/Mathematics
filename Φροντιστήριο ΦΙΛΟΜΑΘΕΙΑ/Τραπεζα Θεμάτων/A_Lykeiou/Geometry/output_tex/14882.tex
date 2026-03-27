@@ -1,0 +1,63 @@
+\Askhsh{14882}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.6. Εφαρμογές στα τρίγωνα
+    \item 5.10. Τραπέζιο
+    \item 5.11. Ισοσκελές τραπέζιο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 14882.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται ισόπλευρο τρίγωνο ΑΒΓ. Στην προέκταση της ΒΓ (προς το Γ) θεωρούμε τμήμα ΓΔ = ΒΓ. Αν Μ, Κ και Λ είναι τα μέσα των πλευρών ΒΓ, ΑΒ και ΑΔ αντίστοιχα τότε:
+
+\begin{alist}
+\item Να υπολογίσετε τις γωνίες του τριγώνου ΒΑΔ. \monades{7}
+
+\item Να αποδείξετε ότι:
+
+\begin{alist}
+\item
+  Το τετράπλευρο ΚΛΓΜ είναι ισοσκελές τραπέζιο με τη μεγάλη βάση διπλάσια από τη μικρή. \monades{8}
+\item
+  Το τρίγωνο ΚΜΛ είναι ορθογώνιο. \monades{10}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefTriangle[equilateral](B,C) \tkzGetPoint{A}
+\tkzDefPointBy[symmetry=center C](B) \tkzGetPoint{D} % C is midpoint of BD, so CD=BC and B-C-D collinear! Wait. "Στην προέκταση της ΒΓ (προς το Γ) θεωρούμε τμήμα ΓΔ = ΒΓ". Yes.
+\tkzDefPointOnLine[pos=2](B,C) \tkzGetPoint{D_alt} % Should be same as symmetry
+
+\tkzDefMidPoint(B,C) \tkzGetPoint{M}
+\tkzDefMidPoint(A,B) \tkzGetPoint{K}
+\tkzDefMidPoint(A,D_alt) \tkzGetPoint{L}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(D_alt);
+\draw[l3] (C)--(D_alt);
+\draw[l3] (K)--(L)--(C)--(M)--cycle;
+\draw[l3, dashed] (K)--(M);
+\draw[l3, dashed] (M)--(L);
+
+\tkzDrawPoints(A,B,C,D_alt,M,K,L)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[below right](D_alt){$\Delta$}
+\tkzLabelPoint[below](M){$M$}
+\tkzLabelPoint[above left](K){$K$}
+\tkzLabelPoint[above right](L){$\Lambda$}
+
+\tkzMarkSegments[mark=s|](A,B B,C C,A C,D_alt)
+\end{tikzpicture}
+\end{center}
+\end{alist}
+\end{alist}

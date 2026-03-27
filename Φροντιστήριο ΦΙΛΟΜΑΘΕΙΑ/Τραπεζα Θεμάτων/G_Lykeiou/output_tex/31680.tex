@@ -1,0 +1,72 @@
+\Askhsh{31680}{4}
+\begin{ylh}{1}
+    \item 1.3 Μονότονες συναρτήσεις - Αντίστροφη συνάρτηση
+    \item 1.5 Ιδιότητες των ορίων
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm} % Adjust [lines]{position}{width} as needed
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Define points for the billiard table rectangle
+    \tkzDefPoint(0,0){D} % Delta (bottom-left)
+    \tkzDefPoint(1.7,0){E} % Epsilon (bottom-right)
+    \tkzDefPoint(1.7,3.1){E_top} % Top-right corner
+    \tkzDefPoint(0,3.1){D_top} % Top-left corner
+
+    % Set alpha value for drawing, based on part b.i result (alpha = 1)
+    \pgfmathsetmacro{\alpha_val}{1.0}
+
+    % Define points A, B, Gamma
+    \tkzDefPoint(0,1.5){A}
+    % For B, x is a variable. For drawing, we use x=1.02, given in b).
+    \pgfmathsetmacro{\x_val}{1.02}
+    \tkzDefPoint(\x_val,0){B}
+    \tkzDefPoint(1.7,\alpha_val){G} % Gamma (on right edge, at height alpha from E)
+    
+    % Draw the billiard table perimeter
+    \tkzDrawSegments[thick](D,E E,E_top E_top,D_top D_top,D)
+    
+    % Draw the path A-B-Gamma
+    \tkzDrawSegments[thick,maincolor](A,B B,G)
+    
+    % Mark points
+    \tkzDrawPoints[fill=black,size=3pt](A,B,G)
+    
+    % Labels for points
+    \tkzLabelPoint[left](A){A}
+    \tkzLabelPoint[below](B){B}
+    \tkzLabelPoint[right](G){$\Gamma$}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[below right](E){E}
+
+    % Dimensions
+    % Vertical total height (3,1)
+    \draw[<->,thick] (E.east) -- (E_top.east) node[midway,right=2mm] {3,1};
+    % ADelta length (1,5)
+    \draw[<->,thick] (D.west) -- (A.west) node[midway,left=2mm] {1,5};
+    % GammaE length (alpha)
+    \draw[<->,thick] (E.east) -- (G.east) node[midway,right=2mm] {$\alpha$};
+
+    % DeltaB length (x)
+    \draw[<->,thick] (D.south) -- (B.south) node[midway,below=2mm] {$x$};
+    % DeltaE total length (1,7)
+    \draw[<->,thick] (D.south) -- (E.south) node[midway,below=7mm] {1,7}; 
+
+    % Right angle symbols at D and E (corners)
+    \tkzMarkRightAngle(D_top,D,E)
+    \tkzMarkRightAngle(D,E,E_top)
+\end{tikzpicture}
+\end{wrapfigure}
+
+ΕΝΑ ΓΑΛΛΙΚΟ ΜΠΙΛΙΑΡΔΟ έχει μήκος $3,1$ μέτρα και πλάτος $1,7$ μέτρα. Ένας παίκτης χτυπάει την άσπρη μπάλα με τέτοιο τρόπο ώστε αυτή να χτυπήσει πρώτα στο σημείο Α, μετά να κινηθεί ευθύγραμμα μέχρι το σημείο Β και από εκεί να συνεχίσει ευθύγραμμα μέχρι το σημείο $\Gamma$, όπως φαίνεται στο παρακάτω σχήμα. Δίνονται τα μήκη $\Delta B = x$, $\Delta E = 1,7$, $A\Delta = 1,5$, $\Gamma E = \alpha$ και $L = AB + B\Gamma$ που εκφράζονται σε μέτρα.
+
+\begin{alist}
+    \item Να αποδείξετε ότι $L = L(x) = \sqrt{x^2 + 2,25} + \sqrt{(1,7-x)^2 + \alpha^2}$, $x \in \left(0, \frac{17}{10}\right)$. \monades{07}
+    \item Δίνεται ακόμη ότι το $L$ γίνεται ελάχιστο μόνο όταν το $B$ απέχει $1,02$ μέτρα από το $\Delta$.
+    \begin{rlist}
+        \item Αν $L'(x) = \frac{x}{\sqrt{x^2 + 2,25}} - \frac{1,7-x}{\sqrt{(1,7-x)^2 + \alpha^2}}$, $x \in \left(0, \frac{17}{10}\right)$ να δείξετε ότι $\alpha = 1$. \monades{10}
+        \item Αν $L''(x) > 0$ για κάθε $x \in \left(0, \frac{17}{10}\right)$, να υπολογίσετε το όριο $\lim_{x \to 1,02} \frac{1}{L'(x)}$, εφόσον υπάρχει. \monades{08}
+    \end{rlist}
+\end{alist}

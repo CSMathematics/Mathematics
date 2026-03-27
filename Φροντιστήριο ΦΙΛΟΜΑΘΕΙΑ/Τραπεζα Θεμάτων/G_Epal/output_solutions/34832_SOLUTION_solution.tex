@@ -1,0 +1,79 @@
+\lysh{34832}{4}
+\begin{center}
+\begin{tikzpicture}
+    % Define vertices of the rectangle. Use arbitrary but visually similar dimensions.
+    \tkzDefPoint(0,3.5){A} % A top-left
+    \tkzDefPoint(4.5,3.5){B} % B top-right
+    \tkzDefPoint(4.5,0){G}  % G bottom-right
+    \tkzDefPoint(0,0){D}   % D bottom-left
+
+    % Draw the rectangle ABGD
+    \tkzDrawPolygon(A,B,G,D)
+
+    % Mark right angles
+    \tkzMarkRightAngle(D,A,B)
+    \tkzMarkRightAngle(A,B,G)
+    \tkzMarkRightAngle(B,G,D)
+    \tkzMarkRightAngle(G,D,A)
+
+    % Place points E and Z as shown in the diagram
+    % E is on AB, Z is on AD
+    % Visually, AE < AB and AZ < AD
+    \tkzDefPointBy[homothety=center A ratio 0.6](B) \tkzGetPoint{E_pt} % E for point
+    \tkzDefPointBy[homothety=center A ratio 0.7](D) \tkzGetPoint{Z_pt} % Z for point
+
+    % Draw the segment ZE
+    \tkzDrawSegment(Z_pt,E_pt)
+
+    % Add labels for the lengths as shown in the diagram
+    % Note: The diagram has 'x' for AB and 'x' for AE. This is confusing but reproduced.
+    \tkzLabelSegment[above](A,B){$x$}
+    \tkzLabelSegment[left](A,D){$z$} % AΔ is z
+
+    \tkzLabelSegment[above](A,E_pt){$x$} % AE is x
+    \tkzLabelSegment[left](A,Z_pt){$y$} % AZ is y
+
+    % Label vertices and points
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[below right](G){$\Gamma$}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[above right](E_pt){E}
+    \tkzLabelPoint[below left](Z_pt){Z}
+\end{tikzpicture}
+\end{center}
+\begin{alist}
+\item Είναι ΑΔ = ΒΓ = $x$ και ΑΒ = ΖΕ = ΔΓ = $y$. Έχουμε:
+\[ 2x + 3y = 200 \implies 3y = 200 - 2x \implies y = \frac{200 - 2x}{3} \]
+Το εμβαδόν του ορθογωνίου ΑΒΓΔ, συναρτήσει του $x$, είναι:
+\[ E(x) = x \cdot y = x \frac{200 - 2x}{3} = \frac{200x - 2x^2}{3} \]
+Πρέπει $x > 0$ και $y > 0$.
+\[ y > 0 \implies \frac{200 - 2x}{3} > 0 \implies 200 - 2x > 0 \implies 200 > 2x \implies x < 100 \]
+Επομένως, $0 < x < 100$.
+\item Η συνάρτηση $E(x)$ είναι παραγωγίσιμη για $x \in (0, 100)$ με
+\[ E'(x) = \left( \frac{200x - 2x^2}{3} \right)' = \frac{200 - 4x}{3} \]
+$E'(x) = 0 \implies \frac{200 - 4x}{3} = 0 \implies 200 - 4x = 0 \implies 4x = 200 \implies x = 50$
+
+Τα πρόσημα της παραγώγου και η μονοτονία της $E(x)$ φαίνονται στον ακόλουθο πίνακα:
+\begin{center}
+\begin{tikzpicture}
+\tikzset{arrow style/.style={maincolor,>->,>=latex'}}
+\tikzset{t style/.style = {style = dashed}}
+\tikzset{z style/.style = {fill=white,inner sep=.2mm}}
+\tkzTabInit[color,lgt=2,espcl=2.4,colorC = maincolor!50,colorL = maincolor!30,colorV = maincolor!50]%
+{$x$ / .8,$E'(x)$ /.8,$E(x)$/0.8}%
+{$0$,$50$,$100$}%
+\tkzTabLine{,+,z,-,}
+\tkzTabVar{+/ , -/}
+\end{tikzpicture}
+\end{center}
+Για τη συνάρτηση $E(x)$ ισχύουν $E'(x) > 0$ στο $(0, 50)$ και $E'(x) < 0$ στο $(50, 100)$. Τότε είναι:
+\[ E(50) = \frac{200 \cdot 50 - 2 \cdot 50^2}{3} = \frac{10000 - 2 \cdot 2500}{3} = \frac{10000 - 5000}{3} = \frac{5000}{3} \]
+Άρα, οι διαστάσεις του ορθογωνίου ΑΒΓΔ για τις οποίες το συνολικό εμβαδόν γίνεται μέγιστο είναι $x = 50$ m και $y = \frac{100}{3}$ m.
+Το μέγιστο εμβαδόν του ορθογωνίου ΑΒΓΔ ισούται με:
+\[ E(50) = \frac{200 \cdot 50 - 2 \cdot 50^2}{3} = \frac{10000 - 5000}{3} = \frac{5000}{3} \text{ m}^2 \]
+\end{alist}
+\vspace{6mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{6mm}
+

@@ -1,0 +1,79 @@
+\lysh{27408_SOLUTION}{1}
+α) Οι διαστάσεις του ορθογωνίου ΑΒΓΔ είναι:
+\[ \Delta\Gamma = 2x \text{ και } AB = f(x) = 9-x^2 \text{ με } x \in [0,3] \]
+Επομένως το εμβαδό του δίνεται από την συνάρτηση
+\[ E(x) = \text{ΑΒ} \cdot \text{ΓΔ} = 2x(9-x^2) = 18x - 2x^3, \quad x \in [0,3] \]
+
+β) Η συνάρτηση $E(x)$ είναι παραγωγίσιμη στο $[0,3]$ με
+\[ E'(x)=(18x-2x^3)' = 18-6x^2, \quad x \in [0,3] \]
+και μηδενίζεται για $x = \sqrt{3}$, αφού
+\[ E'(x)=0 \Leftrightarrow 18-6x^2=0 \Leftrightarrow x^2=3 \xrightarrow{x>0} x=\sqrt{3} \]
+το πρόσημο της παραγώγου της συνάρτησης $E(x)$ φαίνεται από τον παρακάτω πίνακα
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & 0 & & \sqrt{3} & & 3 \\
+\hline
+E'(x) & & + & 0 & - & \\
+\hline
+E(x) & & \nearrow & & \searrow & \\
+\hline
+\end{array}
+\]
+επειδή η συνάρτηση $E(x)$ είναι συνεχής στο $[0,3]$ από τον πίνακα έχουμε ότι είναι γνησίως αύξουσα στο $[0, \sqrt{3}]$ και γνησίως φθίνουσα στο $[\sqrt{3},3]$.
+
+γ) Το ορθογώνιο ΑΒΓΔ έχει μέγιστο εμβαδό στην θέση στην οποία η συνάρτηση του εμβαδού $E(x)$ παρουσιάζει ολικό μέγιστο, δηλαδή για $x = \sqrt{3}$. Τότε οι διαστάσεις του ορθογωνίου είναι:
+\[ \Delta\Gamma = 2x = 2\sqrt{3} \quad \text{και} \quad AB = f(\sqrt{3}) = 9 - (\sqrt{3})^2 = 6 \]
+οπότε η μέγιστη τιμή του εμβαδού είναι ίση με $\text{ΑΒ} \cdot \text{ΓΔ} = 6 \cdot 2\sqrt{3} = 12\sqrt{3}$.
+Εναλλακτικά: $E(\sqrt{3}) = 18\sqrt{3} - 2(\sqrt{3})^3 = 12\sqrt{3}$.
+
+δ) Η συνάρτηση $f(x)$ τέμνει τους άξονες στα σημεία $(3,0)$ και $(-3,0)$ αφού είναι
+\[ f(x)=0 \Leftrightarrow 9-x^2=0 \Leftrightarrow x^2=9 \Leftrightarrow x = \pm 3 \]
+Επιπλέον είναι $f(x) \geq 0$ για κάθε $x \in [-3,3]$, επομένως το ζητούμενο εμβαδό $E(\Omega)$ του χωρίου που περικλείεται από την γραφική παράσταση της συνάρτησης $f$, τον άξονα $x'x$ και είναι εξωτερικό του ορθογωνίου ΑΒΓΔ είναι λόγω και του ερωτήματος (γ):
+\begin{align*} E(\Omega) &= \int_{-3}^{3}|f(x)|dx - (\text{ΑΒΓΔ}) = \int_{-3}^{3}f(x)dx - (\text{ΑΒΓΔ}) = \int_{-3}^{3}(9-x^2)dx - 12\sqrt{3} = \left[9x-\frac{x^3}{3}\right]_{-3}^3 - 12\sqrt{3} = \\ &= \left(9\cdot3 - \frac{3^3}{3}\right) - \left(9\cdot(-3) - \frac{(-3)^3}{3}\right) - 12\sqrt{3} = 27-9+27-9-12\sqrt{3} = 36-12\sqrt{3} = 12(3-\sqrt{3}) \text{ τετρ. μον.} \end{align*}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-4.5, xmax=4.5,
+    ymin=-2.5, ymax=10.5,
+    xtick=\empty,
+    ytick=\empty,
+    xlabel={},
+    ylabel={},
+    clip=false
+]
+% Axis labels
+\node[below right] at (current axis.right of origin) {$x$};
+\node[below left] at (current axis.left of origin) {$x'$};
+\node[above left] at (current axis.above origin) {$y$};
+\node[below left, yshift=-10pt] at (current axis.below origin) {$y'$};
+\node[below left] at (axis cs:0,0) {$O$};
+
+% Generic 'x' value for the diagram
+\def\xval{2}
+
+% Shaded area under the curve
+\addplot[fill=secondarycolor!30, draw=none, domain=-3:3, samples=101] {9-x^2} \closedcycle;
+
+% Function plot
+\addplot[very thick, maincolor, domain=-3.2:3.2, samples=101] {9-x^2};
+\node[black, anchor=west] at (axis cs:2.1, 8) {$f(x) = 9-x^2$};
+
+% Rectangle sides
+\draw[black] (axis cs:-\xval, 0) -- (axis cs:-\xval, 9-\xval*\xval);
+\draw[black] (axis cs:\xval, 0) -- (axis cs:\xval, 9-\xval*\xval);
+\draw[black] (axis cs:-\xval, 9-\xval*\xval) -- (axis cs:\xval, 9-\xval*\xval);
+
+% Points on the rectangle and origin
+\fill (axis cs:-\xval, 0) circle (1.5pt) node[below] {$\Delta(-x, 0)$};
+\fill (axis cs:\xval, 0) circle (1.5pt) node[below] {$A(x, 0)$};
+\fill (axis cs:-\xval, 9-\xval*\xval) circle (1.5pt) node[above left] {$\Gamma(-x, f(-x))$};
+\fill (axis cs:\xval, 9-\xval*\xval) circle (1.5pt) node[above right] {$B(x, f(x))$};
+\fill (axis cs:0,0) circle (1.5pt);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\endlysh

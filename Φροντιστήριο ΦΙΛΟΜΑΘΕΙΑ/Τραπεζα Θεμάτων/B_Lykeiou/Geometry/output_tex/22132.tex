@@ -1,0 +1,71 @@
+\Askhsh{22132}{2}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{7cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Οι συντεταγμένες επιλέγονται ώστε να απεικονίζεται πιστά το σχήμα
+        % και να ικανοποιούν τις σχέσεις κολινότητας και παραλληλίας.
+        % Σημειώνεται ότι το ακριβές μήκος EZ=1.5 προκύπτει από τους υπολογισμούς
+        % της ομοιότητας, αλλά δεν είναι συμβατό με τυχαία επιλογή γωνιών
+        % και συντεταγμένων, παρά μόνο για μια συγκεκριμένη γεωμετρική διαμόρφωση.
+        % Εδώ γίνεται προσπάθεια να μοιάζει η εικόνα με την αρχική.
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(10,0){G} % Gamma
+        % A: AB=4, E: EA=1, B-A-E collinear.
+        % Επιλέγουμε σημείο A και E ώστε να ικανοποιούν τις συνθήκες μήκους και κολινότητας
+        \tkzDefPoint(2.4,3.2){A} % Επιλογή Α ώστε AB=4.
+        % E προκύπτει από A,B με EA=1.
+        % B=(0,0), A=(2.4,3.2) => AB = sqrt(2.4^2+3.2^2) = sqrt(5.76+10.24) = sqrt(16) = 4.
+        % E είναι στην προέκταση BA προς A, οπότε A είναι ανάμεσα σε B και E.
+        % Vector BE = Vector BA + Vector AE = Vector BA + (1/4) * Vector BA = (5/4) * Vector BA
+        % E = (5/4)A - (1/4)B = (5/4)*(2.4,3.2) - (1/4)*(0,0) = (3,4)
+        \tkzDefPoint(3,4){E}
+        
+        % D: ΔΓ=4, AΔ || BΓ.
+        % Επειδή ΑΔ || ΒΓ, τα A και Δ έχουν την ίδια y-συντεταγμένη.
+        % Επειδή το τραπέζιο είναι ισοσκελές, η προβολή του Α στην ΒΓ είναι ίση με την προβολή του Δ στη ΒΓ
+        % (με κατάλληλη σειρά). xA - xB = xG - xD
+        % 2.4 - 0 = 10 - xD => xD = 10 - 2.4 = 7.6.
+        \tkzDefPoint(7.6,3.2){D} % Delta
+
+        % Z: στην ΑΔ, και στην ΕΓ.
+        % E,Z,Γ είναι συγγραμμικά και EZ=1.5, ZΓ=6 (από τους υπολογισμούς)
+        % Z = (4/5)E + (1/5)Γ
+        % Z = (4/5)*(3,4) + (1/5)*(10,0) = (2.4, 3.2) + (2,0) = (4.4, 3.2)
+        % Έχει την ίδια y-συντεταγμένη με A και Δ, οπότε είναι στην AΔ.
+        \tkzDefPoint(4.4,3.2){Z}
+
+        % Σχεδίαση τμημάτων
+        \tkzDrawPolygon(A,B,G,D) % Τραπέζιο ABGD
+        \tkzDrawSegment(E,G) % Τμήμα EG
+        
+        % Σχεδίαση σημείων
+        \tkzDrawPoints(A,B,G,D,E,Z)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](D){$\Delta$}
+        \tkzLabelPoint[above](E){E}
+        \tkzLabelPoint[above right](Z){Z}
+
+        % Ετικέτες μηκών
+        \tkzLabelSegment[above](E,A){1}
+        \tkzLabelSegment[left](A,B){4}
+        \tkzLabelSegment[above left](E,Z){1.5}
+        \tkzLabelSegment[right](D,G){4}
+    \end{tikzpicture}
+\end{wrapfigure}
+\noindent\textsf{ΘΕΜΑ 2}
+\medskip
+Δίνεται ισοσκελές τραπέζιο $AB\Gamma\Delta$ με $AB = \Gamma\Delta = 4$ και με βάσεις $A\Delta$ και $B\Gamma$. Στην προέκταση
+της πλευράς $BA$ προς το $A$ παίρνουμε σημείο $E$, ώστε $EA = 1$. Το ευθύγραμμο τμήμα $E\Gamma$
+τέμνει την $A\Delta$ στο σημείο $Z$ και $EZ = 1.5$.
+\begin{alist}
+    \item Να αποδείξετε ότι $Z\Gamma = 1.5AB$.  \monades{10}
+    \item Να υπολογίσετε το μήκος του $Z\Gamma$.  \monades{05}
+    \item Αν επιπλέον $B\Gamma = 10$, να υπολογίσετε το μήκος της πλευράς $AZ$ του τριγώνου $EAZ$.  \monades{10}
+\end{alist}

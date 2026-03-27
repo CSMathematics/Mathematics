@@ -1,0 +1,45 @@
+\Askhsh{22260}{2}
+\begin{ylh}{1}
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου
+    \item 10.5. Λόγος εμβαδών τριγώνων
+\end{ylh}
+\begin{wrapfigure}[7]{r}{6cm}
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Ορισμός κορυφών του τριγώνου ΑΒΓ
+    \tkzDefPoint(0,3){A}
+    \tkzDefPoint(-4,0){B}
+    \tkzDefPoint(4,0){G} % Γ
+    
+    % Ορισμός σημείου Δ ως μέσον της ΑΓ
+    \tkzDefMidPoint(A,G) \tkzGetPoint{D}
+    
+    % Ορισμός σημείου Ε επί της ΒΓ ώστε ΓΕ = (2/3)ΓΒ
+    % Η εντολή tkzDefPointBy[division=P1,P2](factor) ορίζει ένα σημείο S τέτοιο ώστε P1S = factor * P1P2.
+    % Εδώ θέλουμε GE = (2/3)GB, οπότε το G είναι το αρχικό σημείο και το B το τελικό.
+    \tkzDefPointBy[division=G,B](2/3) \tkzGetPoint{E}
+
+    % Σχεδίαση του βασικού τριγώνου ΑΒΓ
+    \tkzDrawPolygon[very thick,maincolor!50!black](A,B,G)
+    
+    % Σχεδίαση και γέμισμα του τριγώνου ΓΔΕ
+    \tkzFillPolygon[fill=secondarycolor!30,draw=secondarycolor!70!black,line width=0.8pt](G,D,E)
+    \tkzDrawPolygon[secondarycolor!70!black,line width=0.8pt](G,D,E)
+
+    % Σημεία
+    \tkzDrawPoints[fill=black,size=6pt](A,B,G,D,E)
+    
+    % Ετικέτες σημείων
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](G){$\Gamma$}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelPoint[below](E){E}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται το τρίγωνο \text{AB}\Gamma του παρακάτω σχήματος, με $\text{AB}=4$, $\text{A}\Gamma=6$ και $\hat{\text{A}} = 150^\circ$. Αν το σημείο $\Delta$ είναι το μέσον της $\text{A}\Gamma$ και το $\text{E}$ είναι σημείο της \text{B}\Gamma ώστε $\text{ΓE} = \frac{2}{3}\text{ΓB}$, τότε να υπολογίσετε:
+\begin{alist}
+\item το εμβαδόν του τριγώνου \text{AB}\Gamma. Δίνεται $\text{ημ}150^\circ = \frac{1}{2}$. \monades{9}
+\item το λόγο $\frac{(\text{Γ}\Delta\text{E})}{(\text{AB}\Gamma)}$. \monades{9}
+\item το εμβαδόν του τριγώνου \text{Γ}\Delta\text{E}. \monades{7}
+\end{alist}

@@ -1,0 +1,68 @@
+\Askhsh{21067_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{8cm}
+    \centering
+    \begin{tikzpicture}[scale=0.65]
+        % Define points A, B, Gamma
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(5,0){B}
+        \tkzDefPoint(0,12){Gamma}
+        
+        % Calculate Delta based on B, Gamma and angle GammaBD = 90
+        % Vector B-Gamma = (-5, 12). A vector perpendicular is (12, 5).
+        % Length BD = 3*sqrt(3). Hypotenuse B-Gamma has length 13.
+        % Delta = B + (3*sqrt(3)/13) * (12, 5)
+        \tkzDefPoint(5 + 3*sqrt(3)*(12/13.0), 3*sqrt(3)*(5/13.0)){Delta}
+        
+        % Draw segments
+        \tkzDrawSegments(A,B A,Gamma B,Gamma B,Delta Gamma,Delta)
+
+        % Draw right angles
+        \tkzMarkRightAngle(Gamma,A,B)
+        \tkzMarkRightAngle(Gamma,B,Delta)
+
+        % Point E: foot of altitude from B to GammaDelta in triangle GammaBD
+        % Using projection:
+        \tkzDefLine[projected point=B onto Gamma--Delta](Gamma,Delta) \tkzGetPoint{E}
+        \tkzDrawSegment(B,E)
+        \tkzMarkRightAngle(B,E,Delta)
+
+        % Extend line from Delta for 'x'
+        \tkzDefPointWith[linear point,K=1.2](Gamma,Delta) \tkzGetPoint{D_ext}
+        \tkzDrawSegment(Delta,D_ext)
+        
+        % Labels for points
+        \tkzLabelPoints(A,B)
+        \tkzLabelPoint[above left](Gamma){$\Gamma$}
+        \tkzLabelPoint[below right](Delta){$\Delta$}
+        \tkzLabelPoint[below right](E){E}
+        \tkzLabelPoint[above right](D_ext){x}
+
+        % Labels for lengths
+        \tkzLabelSegment[left](A,Gamma){12}
+        \tkzLabelSegment[below](A,B){5}
+        \tkzLabelSegment[above right](Gamma,Delta){14}
+        \tkzLabelSegment[below left](B,Delta){$3\sqrt{3}$}
+
+        % Draw points
+        \tkzDrawPoints[fill=black](A,B,Gamma,Delta,E)
+    \end{tikzpicture}
+\end{wrapfigure}
+\onoma{ΛΥΣΗ}
+\begin{alist}
+    \item Εφαρμόζουμε το Πυθαγόρειο θεώρημα στο $AB\Gamma$. Έχουμε διαδοχικά:
+    \[ B\Gamma^2 = AB^2 + A\Gamma^2 \text{ ή } B\Gamma^2 = 5^2 + 12^2 = 25 + 144 = 169 \]
+    άρα $B\Gamma = \sqrt{169} = 13$.
+
+    \item
+    \begin{rlist}
+        \item Εφαρμόζουμε το Πυθαγόρειο θεώρημα στο $\Delta B\Gamma$. Έχουμε διαδοχικά:
+        \[ \Delta\Gamma^2 = B\Gamma^2 + B\Delta^2 \text{ ή } B\Delta^2 = \Delta\Gamma^2 - B\Gamma^2 = 14^2 - 13^2 = 196 - 169 = 27 \]
+        Άρα $B\Delta = \sqrt{27} = \sqrt{9 \cdot 3} = 3\sqrt{3}$.
+        \item Φέρνουμε την $BE$ κάθετη στην $\Delta\Gamma$, οπότε η προβολή του $B\Delta$ στην $\Delta\Gamma$ είναι η $\Delta E$.
+        Στο ορθογώνιο τρίγωνο $\Gamma B\Delta$ ισχύει ότι:
+        \[ B\Delta^2 = \Delta E \cdot \Delta\Gamma \text{ ή } (3\sqrt{3})^2 = \Delta E \cdot 14 \text{ ή } 27 = 14\Delta E \text{ ή } \Delta E = \frac{27}{14} \]
+    \end{rlist}
+\end{alist}

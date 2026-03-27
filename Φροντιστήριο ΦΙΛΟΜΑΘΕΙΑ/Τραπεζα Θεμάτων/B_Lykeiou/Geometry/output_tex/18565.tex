@@ -1,0 +1,76 @@
+\Askhsh{18565}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{7.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Ορισμός σημείων O και K
+        \tkzDefPoint(0,0){O} % Κέντρο του πρώτου κύκλου
+        % Για το τμήμα (α), OK = R + ΓΔ + ρ = 7 + 4 + 2 = 13.
+        \tkzDefPoint(13,0){K} % Κέντρο του δεύτερου κύκλου
+
+        % Ακτίνες
+        \def\R{7} % Ακτίνα του κύκλου (O,R)
+        \def\rho{2} % Ακτίνα του κύκλου (K,ρ)
+
+        % Υπολογισμός σημείων για τη σχεδίαση με βάση:
+        % ΟΕ = R - ρ = 7 - 2 = 5
+        % ΚΕ = AB = sqrt(OK^2 - OE^2) = sqrt(13^2 - 5^2) = 12
+        % Αν O=(0,0) και K=(13,0), τότε E=(x_E, y_E) είναι η λύση του συστήματος
+        % x_E^2 + y_E^2 = OE^2 = 5^2
+        % (x_E - 13)^2 + y_E^2 = KE^2 = 12^2
+        % Λύνοντας προκύπτει x_E = 25/13, y_E = 60/13.
+        \tkzDefPoint(25/13, 60/13){E}
+        % Το A βρίσκεται στην ευθεία OE και OA = R = 7. ΟΕ = 5. Οπότε A = (7/5)E
+        \tkzDefPoint(7/5*25/13, 7/5*60/13){A} % A = (35/13, 84/13)
+        % Το B βρίσκεται ώστε το ABKE να είναι ορθογώνιο. AB = KE. KB = AE = ρ.
+        % Οπότε vector(AB) = vector(KE)
+        % vector(KE) = (K_x - E_x, K_y - E_y) = (13 - 25/13, 0 - 60/13) = (144/13, -60/13)
+        % B = A + vector(KE) = (35/13 + 144/13, 84/13 - 60/13) = (179/13, 24/13)
+        \tkzDefPoint(179/13, 24/13){B}
+
+        % Σημεία Γ και Δ στη διάκεντρο OK
+        \tkzDefPoint(7,0){Gamma} % Γ = (R,0)
+        \tkzDefPoint(11,0){Delta} % Δ = (OK-ρ,0) = (13-2,0)
+
+        % Σχεδίαση κύκλων
+        \tkzDrawCircle[R](O,\R cm)
+        \tkzDrawCircle[R](K,\rho cm)
+
+        % Σχεδίαση τμημάτων
+        \tkzDrawSegment(O,K) % Διάκεντρος OK
+        \tkzDrawSegment(A,B) % Κοινή εφαπτομένη AB
+        \tkzDrawSegment[dashed](K,E) % KE (βοηθητική)
+        \tkzDrawSegment(O,A) % Ακτίνα OA
+        \tkzDrawSegment(K,B) % Ακτίνα KB
+        % Τα τμήματα OΓ και KΔ είναι μέρος της διακέντρου OK, αλλά τα σχεδιάζουμε για έμφαση
+        \tkzDrawSegment(O,Gamma)
+        \tkzDrawSegment(K,Delta)
+
+        % Σχεδίαση σημείων
+        \tkzDrawPoints(O,K,A,B,E,Gamma,Delta)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoint[below left](O){O}
+        \tkzLabelPoint[below right](K){K}
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[above right](E){E}
+        \tkzLabelPoint[below](Gamma){$\Gamma$}
+        \tkzLabelPoint[below](Delta){$\Delta$}
+
+        % Σήμανση ορθής γωνίας στο E
+        \tkzMarkRightAngle[fill=lightgray,opacity=0.3,size=0.2](O,E,K)
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνονται δύο κύκλοι με κέντρα $O$ και $K$. Ο κύκλος με κέντρο $O$ έχει ακτίνα $R=7$ ενώ ο κύκλος με κέντρο $K$ έχει ακτίνα $\rho=2$. Το τμήμα $AB$ είναι το κοινό εξωτερικό εφαπτόμενο τμήμα των δύο κύκλων και το τμήμα $KE$ είναι παράλληλο στο τμήμα $AB$ με $E$ σημείο του τμήματος $OA$. Η διάκεντρος $OK$ τέμνει τον κύκλο $(O,R)$ στο σημείο $\Gamma$ και τον κύκλο $(K,\rho)$ στο σημείο $\Delta$.
+\begin{alist}
+    \item Αν η θέση των δύο κύκλων είναι τέτοια ώστε, η απόσταση των σημείων $\Gamma$ και $\Delta$ είναι $\Gamma\Delta=4$, τότε:
+    \begin{rlist}
+        \item Να υπολογίσετε το μήκος του τμήματος $AB$.  \monades{10}
+        \item Να βρείτε το εμβαδόν του τετραπλεύρου $ABKO$.  \monades{07}
+    \end{rlist}
+    \item Ποια πρέπει να είναι η σχετική θέση των $2$ κύκλων, ώστε το εμβαδόν του $ABKE$ να ισούται με $4\sqrt{14}$ τ.μ.; \monades{08}
+\end{alist}

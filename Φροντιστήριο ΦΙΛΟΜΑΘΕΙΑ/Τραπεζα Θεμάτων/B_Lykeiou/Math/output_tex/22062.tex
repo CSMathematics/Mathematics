@@ -1,0 +1,66 @@
+\Askhsh{22062}{4}
+\begin{ylh}{1}
+    \item 2.3. Εμβαδόν Τριγώνου
+    \item 3.1 Ο Κύκλος.
+\end{ylh}
+\begin{wrapfigure}[22]{r}{9.5cm} % Adjusted lines and width for better fit
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -2.5, xmax = 8.5,
+        ymin = -2.5, ymax = 8.5,
+        xtick = {-1,0.5,2,4,6,8}, % Adjusted xticks to match visible labels and relevant points
+        ytick = {-1,0.5,2,4,6,8}, % Adjusted yticks
+        grid = none, % No grid in the original image
+        axis equal image, % To ensure circles look round
+        tick label style = {font=\scriptsize},
+        xlabel style={at={(current axis.right of origin)},anchor=north west},
+        ylabel style={at={(current axis.above origin)},anchor=south},
+        % Prevent automatic tick labels at 0,0 for x and y
+        xticklabel=\pgfkeys{/pgfplots/major tick label at 0/.try}\tick,
+        yticklabel=\pgfkeys{/pgfplots/major tick label at 0/.try}\tick,
+        every axis x label/.append style={yshift=5pt}, % Adjust x label position
+        every axis y label/.append style={xshift=-5pt}, % Adjust y label position
+    ]
+        % Line y=x
+        \addplot[dotted, thick, maincolor, domain=-2.5:8.5] {x};
+        \node[maincolor, above right, font=\tiny] at (axis cs:7,7) {$y=x$};
+
+        % Centers as dots on y=x
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(-1,-1) (0.5,0.5) (2,2) (4,4)};
+
+        % Circles C_lambda: center (lambda, lambda), radius |lambda|
+        % C_4: lambda=4
+        \addplot[thick, black, domain=0:360, samples=100] ({4 + 4*cos(x)}, {4 + 4*sin(x)});
+        \node[above left, xshift=-1mm, yshift=1mm] at (axis cs:4,8) {$C_4$}; % Label for C_4
+
+        % C_2: lambda=2
+        \addplot[thick, black, domain=0:360, samples=100] ({2 + 2*cos(x)}, {2 + 2*sin(x)});
+        \node[above left, xshift=-1mm, yshift=1mm] at (axis cs:2,4) {$C_2$}; % Label for C_2
+
+        % C_0.5: lambda=0.5
+        \addplot[thick, black, domain=0:360, samples=100] ({0.5 + 0.5*cos(x)}, {0.5 + 0.5*sin(x)});
+        \node[above left, xshift=-2mm, yshift=1mm, font=\scriptsize] at (axis cs:0.5,1) {$C_{0.5}$}; % Label for C_0.5, adjusted position and size
+
+        % C_-1: lambda=-1
+        \addplot[thick, black, domain=0:360, samples=100] ({-1 + abs(-1)*cos(x)}, {-1 + abs(-1)*sin(x)});
+        \node[below left, xshift=2mm, yshift=-1mm, font=\scriptsize] at (axis cs:-1,-2) {$C_{-1}$}; % Label for C_-1, adjusted position and size
+        
+        % Text label for the circles description below the graph as in the original
+        \node[anchor=south west, xshift=0.5cm, yshift=-3.5cm, text width=7.5cm, font=\small] at (current axis.south west) {Οι κύκλοι $C_\lambda$ για $\lambda=-1$, $\lambda=0.5$, $\lambda=2$, $\lambda=4$};
+
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Δίνεται η οικογένεια κύκλων $C_\lambda$: $(x - \lambda)^2 + (y - \lambda)^2 = \lambda^2$, με $\lambda \neq 0$.
+
+\begin{alist}
+\item Να βρείτε το κέντρο και την ακτίνα κάθε κύκλου $C_\lambda$, $\lambda \neq 0$. \monades{6}
+\item Να αποδείξετε ότι το κέντρο κάθε κύκλου $C_\lambda$ βρίσκεται στην ευθεία $y = x$. \monades{6}
+\item Να αποδείξετε ότι η ευθεία $x = 0$ εφάπτεται σε όλους τους κύκλους $C_\lambda$, $\lambda \neq 0$. Να εξηγήσετε με συντομία ότι το ίδιο συμβαίνει και για την ευθεία $y = 0$. \monades{6}
+\item Έστω $\alpha \neq 0$. Να αποδείξετε ότι η ευθεία $x = \alpha$ εφάπτεται σε έναν, και μόνο έναν, από τους κύκλους $C_\lambda$. Να εξηγήσετε με συντομία ότι το ίδιο συμβαίνει και για την ευθεία $y = \alpha$. \monades{7}
+\end{alist}

@@ -1,0 +1,59 @@
+\Askhsh{21101_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Τρίγωνα, Πυθαγόρειο Θεώρημα, Εμβαδόν Τριγώνου]
+\end{ylh}
+\begin{wrapfigure}[8]{r}{5cm} % Estimated 8 lines for a figure of ~3cm height
+    \centering
+    \begin{tikzpicture}[scale=2]
+        % Define points A, B, C
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,{sqrt(2)}){B} % AB = sqrt(2)
+        \tkzDefPoint(1,0){C} % AC = 1
+        
+        % Calculate point D (foot of the altitude from A to BC)
+        % For a right triangle at A=(0,0), B=(0,yB), C=(xC,0):
+        % x_D = (xC * yB^2) / (yB^2 + xC^2)
+        % y_D = (xC^2 * yB) / (yB^2 + xC^2)
+        % Here: xC=1, yB=sqrt(2)
+        % x_D = (1 * (sqrt(2))^2) / ((sqrt(2))^2 + 1^2) = 2 / (2 + 1) = 2/3
+        % y_D = (1^2 * sqrt(2)) / ((sqrt(2))^2 + 1^2) = sqrt(2) / (2 + 1) = sqrt(2)/3
+        \tkzDefPoint(2/3,{sqrt(2)/3}){D}
+        
+        % Draw the triangle ABC
+        \tkzDrawPolygon(A,B,C)
+        
+        % Draw the altitude AD
+        \tkzDrawSegment(A,D)
+        
+        % Mark right angles
+        \tkzMarkRightAngle[size=0.1](C,A,B) % Right angle at A
+        \tkzMarkRightAngle[size=0.1](A,D,C) % Right angle at D (altitude)
+        
+        % Label points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[above right](D){$\Delta$}
+        
+        % Draw points
+        \tkzDrawPoints(A,B,C,D)
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\noindent \textsf{\bfseries ΛΥΣΗ}
+
+\begin{alist}
+    \item Έχουμε:
+    \[ ΒΓ^2 = (\sqrt{3})^2 = 3 \]
+    \[ ΑΒ^2 + ΑΓ^2 = (\sqrt{2})^2 + 1^2 = 2 + 1 = 3 \]
+    Επομένως, είναι $ΒΓ^2 = ΑΒ^2 + ΑΓ^2$, άρα η γωνία που βρίσκεται απέναντι από την πλευρά ΒΓ είναι ορθή, δηλαδή $\hat{Α} = 90^\circ$.
+    
+    \item Το εμβαδόν του τριγώνου είναι
+    \[ (ΑΒΓ) = \frac{1}{2}ΑΒ \cdot ΑΓ = \frac{1}{2}\sqrt{2} \cdot 1 = \frac{1}{2}\sqrt{2} \]
+    
+    \item Φέρουμε το ύψος ΑΔ. Το εμβαδόν του τριγώνου μπορεί να δοθεί και από τον τύπο
+    \[ (ΑΒΓ) = \frac{1}{2} ΒΓ \cdot ΑΔ \]
+    Στο ερώτημα β) βρήκαμε ότι $(ΑΒΓ) = \frac{1}{2}\sqrt{2}$.
+    Έτσι έχουμε:
+    \[ \frac{1}{2}\sqrt{2} = \frac{1}{2}\sqrt{3} \cdot ΑΔ \quad \text{ή} \quad \sqrt{2} = \sqrt{3} \cdot ΑΔ \quad \text{ή} \quad ΑΔ = \frac{\sqrt{2}}{\sqrt{3}} = \frac{\sqrt{2}\sqrt{3}}{\sqrt{3}\sqrt{3}} = \frac{\sqrt{6}}{3} \]
+\end{alist}

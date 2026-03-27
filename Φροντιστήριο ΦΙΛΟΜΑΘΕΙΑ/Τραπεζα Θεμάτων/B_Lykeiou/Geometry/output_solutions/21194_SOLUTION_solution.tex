@@ -1,0 +1,72 @@
+\Askhsh{21194_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{7.5cm} % The [20] here means "allow 20 lines of text next to the figure". Adjust as needed.
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Define points using coordinates based on the analysis
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(1,0){H}
+        \tkzDefPoint(1,4){A}
+        \tkzDefPoint(4,0){M}
+        \tkzDefPoint(8,0){G} % Gamma
+        \tkzDefPoint(2,0){D} % Delta, midpoint of BM
+        \tkzDefPointBy[midpoint=A and M]{E} % Epsilon, midpoint of AM
+        \tkzGetPoint{E}
+        \tkzDefPoint(6,0){Z} % Zeta, M is midpoint of DZ because MZ = MD = 1/2 BM
+
+        % Draw lines
+        \tkzDrawSegment(A,B)
+        \tkzDrawSegment(A,G)
+        \tkzDrawSegment(B,G)
+        \tkzDrawSegment(A,M)
+        \tkzDrawSegment(D,E)
+        \tkzDrawSegment(E,Z)
+        \tkzDrawSegment[dashed](A,H)
+
+        % Draw right angle
+        \tkzMarkRightAngle(A,H,B)
+
+        % Labels for points
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below](H){H}
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below](D){$\Delta$}
+        \tkzLabelPoint[below](M){M}
+        \tkzLabelPoint[below](Z){Z}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[above right](E){E}
+
+        % Label for height 'u' (v in diagram)
+        \tkzLabelSegment[left](A,H){$\upsilon$}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+ΛΥΣΗ
+
+Έστω τρίγωνο \Alpha\Beta\Gamma, \Alpha M η διάμεσός του και \Epsilon το μέσο της \Alpha M, \Delta \Epsilon // \Alpha \Beta και \Epsilon Z // \Alpha \Gamma.
+
+\begin{alist}
+    \item Έστω $\Alpha H = \upsilon$ το κοινό ύψος των τριγώνων \Alpha M\Beta και \Alpha M\Gamma. Έχουμε
+    \[ (\Alpha M\Beta) = \frac{1}{2} \cdot B M \cdot \upsilon \quad \text{και} \quad (\Alpha M\Gamma) = \frac{1}{2} \cdot M \Gamma \cdot \upsilon \]
+    Η \Alpha M είναι διάμεσος του τριγώνου \Alpha\Beta\Gamma, επομένως $B M = M \Gamma$ και από τις παραπάνω σχέσεις έχουμε
+    \[ (\Alpha M\Beta) = (\Alpha M\Gamma). \]
+
+    \item Στο τρίγωνο \Alpha M\Beta το \Epsilon είναι το μέσο της \Alpha M και $\Epsilon \Delta // \Alpha \Beta$, επομένως και το \Delta είναι το μέσο της B M, άρα
+    \[ M \Delta = \frac{1}{2} \cdot B M \quad \text{και} \quad M \Epsilon = \frac{1}{2} \cdot \Alpha M \]
+    Από το (\alpha) ερώτημα έχουμε
+    \[ (\Alpha M\Beta) = (\Alpha M\Gamma) = \frac{1}{2} \cdot (\Alpha\Beta\Gamma) \]
+    Τα τρίγωνα M\Epsilon\Delta και \Alpha M\Beta έχουν την γωνία $\widehat{\Alpha M B}$ κοινή, επομένως
+    \[ \frac{(M\Epsilon\Delta)}{(\Alpha M\Beta)} = \frac{M\Epsilon \cdot M\Delta}{\Alpha M \cdot B M} = \frac{\frac{1}{2} \cdot \Alpha M \cdot \frac{1}{2} \cdot B M}{\Alpha M \cdot B M} = \frac{1}{4} \]
+    άρα
+    \[ (M\Epsilon\Delta) = \frac{1}{4} \cdot (\Alpha M\Beta) = \frac{1}{4} \cdot \frac{1}{2} \cdot (\Alpha\Beta\Gamma) = \frac{1}{8} \cdot (\Alpha\Beta\Gamma) \]
+
+    \item Από το (\alpha) ερώτημα είναι $(\Alpha M\Beta) = (\Alpha M\Gamma)$ (1), επιπλέον στο τρίγωνο \Delta\Epsilon Z είναι
+    \[ \Delta M = \frac{1}{2} \cdot B M = \frac{1}{2} \cdot M\Gamma = M Z \]
+    συνεπώς η \Epsilon M είναι διάμεσος του, άρα $(M\Epsilon\Delta) = (M\Epsilon Z)$ (2)
+    Αφαιρώντας τις σχέσεις (1) – (2) έχουμε:
+    \[ (\Alpha M\Beta) - (M\Epsilon\Delta) = (\Alpha M\Gamma) - (M\Epsilon Z) \]
+    ή
+    \[ (\Alpha\Beta\Gamma\Delta) = (\Alpha\Gamma Z\Epsilon) \]
+\end{alist}

@@ -1,0 +1,56 @@
+\Askhsh{22021}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[12]{r}{5.5cm} % 12 lines for text wrapping, right side, 5.5cm width
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός της πλευράς του ισοσκελούς ορθογωνίου τριγώνου.
+    % Έστω ΑΒ = ΑΓ = L. Τότε ΒΓ = L*sqrt(2).
+    % Δίνεται ΒΓ = 2ρ, άρα L*sqrt(2) = 2ρ => L = ρ*sqrt(2).
+    % Για τη σχεδίαση, ορίζουμε L=4 μονάδες. Αυτό σημαίνει ρ*sqrt(2)=4, άρα ρ=4/sqrt(2) = 2*sqrt(2).
+    \def\L{4} % Μήκος πλευρών ΑΒ = ΑΓ = 4 μονάδες
+    \pgfmathsetmacro{\Rsemi}{\L/sqrt(2)} % Ακτίνα ημικυκλίου = ρ = L/sqrt(2)
+    
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(0,\L){B}
+    \tkzDefPoint(\L,0){G} % Γ
+    
+    \tkzDefMidPoint(B,G) \tkzGetPoint{D} % Δ (κέντρο του ημικυκλίου)
+    
+    % Σχεδίαση του μηνίσκου (σκιασμένη περιοχή)
+    % Η περιοχή ορίζεται από το τόξο του ημικυκλίου (από Γ προς Β, εξωτερικά του τριγώνου)
+    % και το τόξο του κυκλικού τομέα (από Β προς Γ, εσωτερικά του τριγώνου).
+    % Το τόξο του ημικυκλίου έχει κέντρο Δ και ακτίνα \Rsemi.
+    % Οι γωνίες: σημείο Γ (L,0) από Δ (L/2,L/2) είναι (-45 μοίρες), σημείο Β (0,L) από Δ (L/2,L/2) είναι (135 μοίρες).
+    % Το τόξο του κυκλικού τομέα έχει κέντρο Α (0,0) και ακτίνα L.
+    % Οι γωνίες: σημείο Β (0,L) από Α είναι (90 μοίρες), σημείο Γ (L,0) από Α είναι (0 μοίρες).
+    \path[fill=maincolor!30, draw=maincolor, line width=1.5pt] 
+        (G) arc[start angle=-45, end angle=135, radius=\Rsemi cm] -- 
+        (B) arc[start angle=90, end angle=0, radius=\L cm] -- cycle;
+    
+    % Σχεδίαση των πλευρών του τριγώνου και των σημάνσεων πάνω από τη σκιασμένη περιοχή
+    \tkzDrawSegments[line width=1.5pt](A,B A,G)
+    \tkzDrawSegment[line width=1.5pt](B,G) % Υποτείνουσα ΒΓ
+    \tkzMarkRightAngle(G,A,B)
+    \tkzMarkSegments[mark=s||](A,B A,G) % ΑΒ = ΑΓ (ισοσκελές)
+    \tkzMarkSegments[mark=s||](B,D D,G) % ΒΔ = ΔΓ (το Δ είναι το μέσο της ΒΓ)
+    
+    % Ετικέτες σημείων
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[above left](B){B}
+    \tkzLabelPoint[below right](G){$\Gamma$}
+    \tkzLabelPoint[above right=2pt](D){$\Delta$}
+    
+    % Ετικέτα για τον μηνίσκο
+    \tkzText[right=1cm,below=1.0cm,font=\Large,maincolor](D){$\mu$}
+    
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ισοσκελές και ορθογώνιο τρίγωνο \(\text{AB}\Gamma\) με \(\hat{A} = 90^\circ\) και \(\text{B}\Gamma = 2\rho\). Με διάμετρο \(\text{B}\Gamma\) γράφουμε ημικύκλιο εξωτερικά του τριγώνου. Επίσης, γράφουμε τον κυκλικό τομέα \(\wideparen{\text{AB}\Gamma}\) με κέντρο το Α και ακτίνα \(\text{AB}\), όπως φαίνεται στο σχήμα.
+\begin{alist}
+\item Να αποδείξετε ότι \(\text{AB} = \rho\sqrt{2}\). \monades{10}
+\item Να υπολογίσετε το εμβαδόν του σχηματιζόμενου μηνίσκου \(\mu\) ως συνάρτηση του \(\rho\). \monades{10}
+\item Να συγκρίνετε το εμβαδόν του μηνίσκου \(\mu\) με το εμβαδόν του τριγώνου \(\text{AB}\Gamma\). Τι συμπέρασμα προκύπτει; \monades{05}
+\end{alist}

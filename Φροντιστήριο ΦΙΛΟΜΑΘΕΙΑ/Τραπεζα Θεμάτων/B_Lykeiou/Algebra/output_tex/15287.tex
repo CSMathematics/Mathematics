@@ -1,0 +1,46 @@
+% ===================================================================
+%  Αρχείο: 15287_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Στο παρακάτω σχήμα δίνεται η ευθεία $y = \alpha x$, $\alpha \in \mathbb{R}, x \in \mathbb{R}$ και η γραφική παράσταση της συνάρτησης $f(x) = \rho\eta\mu(\omega x)$, όπου $\omega > 0$, $\rho > 0$και $x \in \mathbb{R}$. Με βάση το σχήμα,
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, >=latex]
+    \draw[very thin, color=gray!30, xstep=pi/4, ystep=1] (-1,-3.5) grid (4,3.5);
+    \draw[->] (-1,0) -- (4.5,0) node[right] {$x$};
+    \draw[->] (0,-3.5) -- (0,3.5) node[above] {$y$};
+    
+    \foreach \x/\xtext in {0.785/\frac{\pi}{4}, 1.571/\frac{\pi}{2}, 2.356/\frac{3\pi}{4}, 3.141/\pi}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {$\xtext$};
+    \foreach \y in {-3,-2,-1,1,2,3}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = 3*sin(2x)
+    \draw[very thick, color=blue!70!black, samples=100, domain=0:pi+0.2] plot (\x, {3*sin(deg(2*\x))}) node[right] {$f$};
+    
+    % y = a*x line, (pi/4, 3) gives a = 12/pi approx 3.82
+    \draw[very thick, color=red!70!black, domain=-0.8:0.9] plot (\x, {12/pi * \x}) node[right] {$y=\alpha x$};
+    
+    % Intersection point (pi/4, 3)
+    \draw[dashed] (0.785,0) -- (0.785,3) -- (0,3);
+    \filldraw (0.785,3) circle (2pt) node[above right] {$E$};
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να δείξετε ότι $\rho = 3$ και $\omega = 2$.
+
+\monades{6}
+
+\item Να βρείτε τον πραγματικό αριθμό $\alpha$.
+
+\monades{9}
+
+\item Να βρείτε τις λύσεις της εξίσωσης $3\eta\mu(2x) - \frac{12}{\pi}x = 0$.
+
+\monades{10}
+\end{alist}

@@ -1,0 +1,55 @@
+% ===================================================================
+%  Αρχείο: 15112_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση μιας συνάρτησης $f$ με πεδίο ορισμού το διάστημα $[-2, 2]$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, >=latex]
+    \draw[very thin, color=gray!30] (-2.5,-2.5) grid (2.5,2.5);
+    \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+    
+    \foreach \x in {-2,-1,1,2}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {-2,-1,1,2}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % Cubic-like function curve
+    \draw[very thick, color=blue!70!black, samples=100, domain=-2:2] plot (\x, {-\x*\x*\x + 3*\x});
+    
+    % Points
+    \filldraw[fill=white] (-2,-2) circle (2pt);
+    \filldraw[fill=white] (2,2) circle (2pt);
+    \filldraw (-1,-2) circle (2pt) node[below] {$M_1$};
+    \filldraw (1,2) circle (2pt) node[above] {$M_2$};
+    % Wait, the subagent said local max at (-1, 2) and min at (1, -2).
+    % Let me re-check the curve based on subagent: "Local maximum at (-1, 2)... Local minimum at (1, -2)".
+    % That would be y = x^3 - 3x. Let's adjust plot.
+    \draw[very thick, color=blue!70!black, samples=100, domain=-2:2] plot (\x, {\x*\x*\x - 3*\x});
+    
+    % Re-adjust points based on "Local maximum at (-1, 2)... Local minimum at (1, -2)"
+    \filldraw (-1,2) circle (2pt);
+    \filldraw (1,-2) circle (2pt);
+    \filldraw[fill=white] (-2,-2) circle (2pt);
+    \filldraw[fill=white] (2,2) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να εξετάσετε αν η $f$ είναι άρτια ή περιττή και να αιτιολογήσετε την απάντησή σας.
+
+\monades{7}
+
+\item Να γράψετε τα διαστήματα στα οποία η $f$ είναι γνησίως αύξουσα.
+
+\monades{8}
+
+\item Να βρείτε τη μέγιστη και την ελάχιστη τιμή της $f$ καθώς και τις θέσεις των ακρότατων αυτών.
+
+\monades{10}
+\end{alist}

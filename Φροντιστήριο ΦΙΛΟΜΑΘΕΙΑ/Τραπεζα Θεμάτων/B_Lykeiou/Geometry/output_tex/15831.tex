@@ -1,0 +1,56 @@
+\Askhsh{15831}{2}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή.
+\end{ylh}
+\begin{wrapfigure}[5]{r}{7cm} % Ο αριθμός γραμμών και το πλάτος μπορούν να προσαρμοστούν
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % Ορισμός σημείων με συντεταγμένες για οπτική αναπαράσταση παρόμοια με το σχήμα
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(6,0){C}
+        \tkzDefPoint(2,5){A}
+
+        % Ορισμός του M ως μέσου του ΒΓ
+        \tkzDefMidPoint(B,C) \tkzGetPoint{M}
+
+        % Ορισμός του Δ ως μέσου του MB
+        \tkzDefMidPoint(B,M) \tkzGetPoint{D}
+
+        % Από το M φέρνουμε παράλληλη στην ΑΔ, που τέμνει την ΑΓ στο Ε.
+        \tkzDefPointBy[parallel=through M with initial point A](D) \tkzGetPoint{aux_par_AD}
+        \tkzInterLL(M,aux_par_AD)(A,C) \tkzGetPoint{E}
+
+        % Από το Ε φέρνουμε παράλληλη στην ΒΓ, που τέμνει την ΑΒ στο Ζ.
+        \tkzDefPointBy[parallel=through E with initial point B](C) \tkzGetPoint{aux_par_BC}
+        \tkzInterLL(E,aux_par_BC)(A,B) \tkzGetPoint{Z}
+
+        % Σχεδίαση του τριγώνου ΑΒΓ
+        \tkzDrawPolygon(A,B,C)
+
+        % Σχεδίαση των τμημάτων ΑΔ, ΜΕ (συμπαγείς γραμμές)
+        \tkzDrawSegment(A,D)
+        \tkzDrawSegment(M,E)
+
+        % Σχεδίαση των τμημάτων ΕΖ και ΕΔ (διακεκομμένες γραμμές)
+        \tkzDrawSegment[dashed](E,Z)
+        \tkzDrawSegment[dashed](E,D) % Αυτό το τμήμα υπάρχει στο αρχικό σχήμα
+
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints[fill=black,size=6pt](A,B,C,D,M,E,Z)
+
+        % Τοποθέτηση ετικετών
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below](D){$\Delta$}
+        \tkzLabelPoint[below](M){M}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[left](Z){Z}
+
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο τρίγωνο ΑΒΓ του παρακάτω σχήματος, το Μ είναι μέσο της πλευράς ΒΓ και το Δ είναι το μέσο του ΜΒ. Από το Μ φέρνουμε παράλληλη στην ΑΔ, που τέμνει την ΑΓ στο Ε. Από το Ε φέρνουμε παράλληλη στην ΒΓ, που τέμνει την ΑΒ στο Ζ. Να αποδείξετε ότι:
+\begin{alist}
+    \item $\dfrac{\text{EA}}{\text{E}\Gamma} = \dfrac{1}{2}$. \monades{15}
+    \item $\dfrac{\text{ZA}}{\text{ZB}} = \dfrac{1}{2}$. \monades{10}
+\end{alist}

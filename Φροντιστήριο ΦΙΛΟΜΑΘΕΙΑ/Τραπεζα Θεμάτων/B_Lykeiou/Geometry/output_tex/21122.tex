@@ -1,0 +1,56 @@
+\Askhsh{21122}{2}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 11.5. Μήκος τόξου.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5.5cm}
+    \begin{tikzpicture}[scale=1]
+        % Define points A, B, C based on the problem's geometric properties
+        % Let A be at the origin (0,0).
+        % AB lies on the y-axis and AC on the x-axis, as angle BAC is 90 degrees.
+        % We know AD=2 from part (a) (which we'll use for drawing purposes here)
+        % and AB = sqrt(BD * BC) = sqrt(1 * 5) = sqrt(5)
+        % and AC = sqrt(CD * BC) = sqrt(4 * 5) = sqrt(20) = 2*sqrt(5)
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,{sqrt(5)}){B}
+        \tkzDefPoint({2*sqrt(5)},0){C} % Using 2*sqrt(5) for AC length
+        
+        % Define points E and Z based on radius AD=2
+        \tkzDefPoint(0,2){E} % E is on AB, distance 2 from A
+        \tkzDefPoint(2,0){Z} % Z is on AC, distance 2 from A
+        
+        % Define D as the projection of A onto BC
+        \tkzDefPointWith[projection](A,B,C){D}
+
+        % Draw the triangle ABG
+        \tkzDrawSegments(A,B A,C B,C)
+
+        % Draw the altitude AD
+        \tkzDrawSegment(A,D)
+
+        % Mark right angles
+        \tkzMarkRightAngle[fill=maincolor!20,size=0.25](C,A,B) % Right angle at A
+        \tkzMarkRightAngle[fill=maincolor!20,size=0.25](A,D,C) % Right angle at D
+
+        % Draw the circular arc EDZ
+        % Center A, radius AD (which is 2), from E to Z.
+        % E is at (0,2), Z is at (2,0). So arc is from angle 90 to 0 (clockwise).
+        \tkzDrawArc[maincolor, thick](A,E)(Z)
+
+        % Draw points
+        \tkzDrawPoints(A,B,C,D,E,Z)
+
+        % Labels
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[above right](D){$\Delta$}
+        \tkzLabelPoint[above left](E){E}
+        \tkzLabelPoint[below right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο ορθογώνιο τρίγωνο $ΑΒΓ$ του σχήματος, το $Δ$ είναι η προβολή της κορυφής $Α$ στην υποτείνουσα $ΒΓ$ και είναι $ΒΔ = 1$ και $ΔΓ = 4$.
+\begin{alist}
+\item Να αποδείξετε ότι $ΑΔ = 2$. \monades{12}
+\item Με κέντρο το $Α$ και ακτίνα $ΑΔ$ γράφουμε κύκλο, ο οποίος τέμνει τις πλευρές $ΑΒ$ και $ΑΓ$, στα σημεία $E$ και $Z$ αντίστοιχα, όπως φαίνεται στο παρακάτω σχήμα. Να υπολογίσετε το μήκος του τόξου $\overset{\frown}{E\Delta Z}$. \monades{13}
+\end{alist}

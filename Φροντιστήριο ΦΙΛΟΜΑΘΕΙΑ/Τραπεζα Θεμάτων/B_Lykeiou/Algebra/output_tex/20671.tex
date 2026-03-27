@@ -1,0 +1,44 @@
+% ===================================================================
+%  Αρχείο: 20671_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της συνάρτησης $f(x) = x^2 + 1$ και η γραφική παράσταση μιας συνάρτησης $g(x)$ με $x \in \mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1, >=latex]
+    \draw[very thin, color=gray!30] (-2.5,-0.5) grid (4.5,5.5);
+    \draw[->] (-2.5,0) -- (5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,6) node[above] {$y$};
+    
+    \foreach \x in {-2,-1,1,2,3,4}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {1,2,3,4,5}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = x^2 + 1 (dashed)
+    \draw[very thick, color=blue!70!black, dashed, samples=100, smooth, domain=-2.1:2.1] plot (\x, {\x*\x + 1}) node[above right] {$C_f$};
+    
+    % g(x) = (x-2)^2 + 1 (solid)
+    \draw[very thick, color=red!70!black, samples=100, smooth, domain=-0.1:4.1] plot (\x, {(\x-2)*(\x-2) + 1}) node[above left] {$C_g$};
+    
+    % Minimums
+    \filldraw (0,1) circle (1.5pt);
+    \filldraw (2,1) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item \begin{rlist}
+\item Είναι η $f$ άρτια ή περιττή συνάρτηση; Να αιτιολογήσετε την απάντησή σας. \monades{7}
+\item Έχει η $f$ μέγιστη τιμή ή ελάχιστη; Να αιτιολογήσετε την απάντησή σας. \monades{7}
+\end{rlist}
+
+\item \begin{rlist}
+\item Με ποια μετατόπιση της γραφικής παράστασης της $f$ προέκυψε η γραφική παράσταση της $g$; \monades{7}
+\item Να βρείτε τον τύπο της συνάρτησης $g$. \monades{4}
+\end{rlist}
+\end{alist}

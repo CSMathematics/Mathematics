@@ -1,0 +1,49 @@
+\Askhsh{22565}{4}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή
+    \item 8.1. Όμοια ευθύγραμμα σχήματα
+    \item 8.2. Κριτήρια ομοιότητας.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6cm} % Προσαρμόστε το ύψος και το πλάτος ανάλογα με το κείμενο
+\centering
+\begin{tikzpicture}[scale=0.4] % Προσαρμόστε την κλίμακα για να χωρέσει το σχήμα
+    \tkzDefPoint(0,0){O}
+    % Ορισμός σημείων A και B με γωνίες και μήκη αναλογικά με 20 και 30
+    \tkzDefPoint(160:12){A} % Προσομοίωση OA=20 με μήκος 12 μονάδες
+    \tkzDefPoint(20:18){B}  % Προσομοίωση OB=30 με μήκος 18 μονάδες
+    
+    % Ορισμός σημείων Γ και Δ χρησιμοποιώντας τις αναλογίες 2/20=1/10 και 3/30=1/10
+    % Αναλογία 1/10 των προσομοιωμένων μηκών (12/10=1.2 και 18/10=1.8)
+    \tkzDefPointBy[homothety=center O ratio 0.1](A) \tkzGetPoint{G} % Γάμμα
+    \tkzDefPointBy[homothety=center O ratio 0.1](B) \tkzGetPoint{D} % Δέλτα
+
+    % Σχεδίαση των τριγώνων
+    \tkzDrawSegments(O,A O,B G,D A,B)
+    
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(O,A,B,G,D)
+    
+    % Ετικέτες
+    \tkzLabelPoint[below](O){O}
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[left](G){$\Gamma$}
+    \tkzLabelPoint[right](D){$\Delta$}
+    
+    % Προσθήκη του σκιασμένου κτίσματος
+    % Εύρεση του μέσου σημείου του AB για την τοποθέτηση του κουτιού
+    \tkzDefMidPoint(A,B) \tkzGetPoint{MidAB}
+    \node[fill=gray!30, draw=gray!70, minimum width=4.5cm, minimum height=2.2cm, line width=0.5pt] at (MidAB) {}; % Προσαρμόστε το μέγεθος
+\end{tikzpicture}
+\end{wrapfigure}
+Οι μαθητές θέλοντας να μετρήσουν την απόσταση των σημείων $A$ και $B$ στην αυλή του σχολείου τους μεταξύ των οποίων παρεμβάλλεται ένα κτίσμα και η απευθείας μέτρηση του μήκους $AB$ είναι αδύνατη, εργάστηκαν ως εξής. Στην αυλή τους επέλεξαν σημείο $O$ ώστε η μέτρηση των τμημάτων $OA$ και $OB$ να είναι εφικτή, όπως φαίνεται στο παρακάτω σχήμα. Μέτρησαν και βρήκαν $OA=20\text{m}$ και $OB=30\text{m}$. Στις $OA$ και $OB$ πήραν σημεία $\Gamma$ και $\Delta$ αντίστοιχα τέτοια ώστε $O\Gamma=2\text{m}$ και $O\Delta=3\text{m}$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+    \begin{rlist}
+    \item η $\Gamma\Delta$ είναι παράλληλη με την $AB$, \monades{8}
+    \item τα τρίγωνα $O\Gamma\Delta$ και $OAB$ είναι όμοια. \monades{7}
+    \end{rlist}
+\item Ένας από τους μαθητές υποστηρίζει ότι μπορούν να υπολογίσουν την απόσταση των σημείων $A$ και $B$ αν γνωρίζουν την απόσταση των δύο σημείων $\Gamma$ και $\Delta$.
+    Είναι ο ισχυρισμός του μαθητή αληθής; Να αιτιολογήσετε την απάντησή σας. \monades{10}
+\end{alist}

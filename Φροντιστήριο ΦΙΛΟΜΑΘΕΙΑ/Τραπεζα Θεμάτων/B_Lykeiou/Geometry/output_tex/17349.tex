@@ -1,0 +1,58 @@
+\Askhsh{17349}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{6cm}
+    \begin{tikzpicture}[scale=0.9]
+        % Define points of the square ABGD
+        % D = (0,0), C = (3,0), B = (3,3), A = (0,3)
+        \tkzDefPoint(0,0){D}
+        \tkzDefPoint(3,0){C}
+        \tkzDefPoint(3,3){B}
+        \tkzDefPoint(0,3){A}
+
+        % Define point E on AD
+        % AE = 4 - sqrt(3) => DE = 3 - (4 - sqrt(3)) = sqrt(3) - 1
+        \pgfmathsetmacro{\yE}{sqrt(3)-1}
+        \tkzDefPoint(0,\yE){E}
+
+        % Define point H on DG (which is the segment DC)
+        % DH = sqrt(3)
+        \pgfmathsetmacro{\xH}{sqrt(3)}
+        \tkzDefPoint(\xH,0){H}
+
+        % Define point Z such that E, H, Z are collinear and BEZ is equilateral
+        % From calculations, Z = (2*sqrt(3), 1-sqrt(3))
+        \pgfmathsetmacro{\xZ}{2*sqrt(3)}
+        \pgfmathsetmacro{\yZ}{1-sqrt(3)}
+        \tkzDefPoint(\xZ,\yZ){Z}
+
+        % Draw the square
+        \tkzDrawPolygon(A,B,C,D)
+
+        % Draw the segments BE, EZ, BZ
+        \tkzDrawSegments(B,E E,Z B,Z)
+
+        % Draw the segment connecting the intersection point H
+        \tkzDrawSegment(E,H) % E,H,Z are collinear, E-H-Z
+
+        % Draw points
+        \tkzDrawPoints(A,B,C,D,E,H,Z)
+
+        % Label points
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[below](H){H}
+        \tkzLabelPoint[below right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τετράγωνο $\text{AB}\Gamma\Delta$ πλευράς $3$ και σημείο $\text{E}$ της πλευράς $\text{A}\Delta$, ώστε $\text{AE} = 4 - \sqrt{3}$. Στο ημιεπίπεδο που ορίζουν η ευθεία $\text{BE}$ και το σημείο $\Gamma$ κατασκευάζουμε ισόπλευρο τρίγωνο $\text{BEZ}$. Οι $\Gamma\Delta$ και $\text{EZ}$ τέμνονται στο σημείο $\text{H}$ και $\Delta\text{H} = \sqrt{3}$.
+\begin{alist}
+    \item Να αποδείξετε ότι $\text{BE} = 2\sqrt{7 - 2\sqrt{3}}$. \monades{8}
+    \item Να αποδείξετε ότι το $\text{H}$ είναι το μέσο της $\text{EZ}$. \monades{8}
+    \item Να υπολογίσετε το εμβαδόν του χωρίου που βρίσκεται στο εσωτερικό του ισόπλευρου τριγώνου $\text{BEZ}$ και εξωτερικά του τετραγώνου $\text{AB}\Gamma\Delta$. \monades{9}
+\end{alist}

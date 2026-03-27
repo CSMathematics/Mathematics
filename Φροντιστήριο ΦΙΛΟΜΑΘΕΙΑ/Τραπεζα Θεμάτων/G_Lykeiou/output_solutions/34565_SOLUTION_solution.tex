@@ -1,0 +1,93 @@
+\Askhsh{34565_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\begin{wrapfigure}[24]{r}{8.5cm} % Adjust number of lines and width as needed
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -0.5, xmax = 9.5,
+        ymin = -0.5, ymax = 6.5,
+        xtick = \empty, % No specific ticks, just grid lines
+        ytick = \empty, % No specific ticks, just grid lines
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 8.5cm, height = 7cm,
+        tick label style = {font=\scriptsize},
+        axis line style={-latex} % Arrows for axes
+    ]
+        % Curve f(x) (red in image, using maincolor from template)
+        % Using f(x) = 6*exp(-0.2*x) for visual approximation of the curve
+        \addplot[very thick, maincolor, domain=0:9] {6*exp(-0.2*x)};
+        \node[maincolor, above left] at (axis cs:2.5,4.2) {$y=f(x)$};
+
+        % Secant line through A(3.5, 3) and B(8, 1.2) (blue in image, using secondarycolor)
+        % Line equation: y = -0.4x + 4.4
+        \addplot[very thick, secondarycolor, domain=0:9] {-0.4*x + 4.4};
+
+        % Tangent line at M(5.5, 2) (green in image, using thirdcolor)
+        % Line equation: y = -0.4x + 4.2
+        \addplot[very thick, thirdcolor, domain=0:9] {-0.4*x + 4.2};
+
+        % Points
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {
+            (0,0) % O
+            (0,4.2) % Delta (y-intercept of tangent)
+            (3.5,3) % A (estimated)
+            (5.5,2) % M (estimated)
+            (8,1.2) % B (estimated)
+        };
+
+        % Labels for points
+        \node[below left] at (axis cs:0,0) {O};
+        \node[above left] at (axis cs:0,4.2) {$\Delta$};
+        \node[below left] at (axis cs:3.5,3) {A};
+        \node[below right] at (axis cs:5.5,2) {M};
+        \node[below right] at (axis cs:8,1.2) {B};
+        
+        % Right angle symbol near O
+        \draw[black] (axis cs:0.2,0) -- (axis cs:0.2,0.2) -- (axis cs:0,0.2);
+
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Σημείωση: Παράδειγμα τέτοιας συνάρτησης είναι η $f(x) = e^{-x}$ στο διάστημα $[2, 4]$.
+
+\begin{alist}
+    \item [α.] Αν αποδείξουμε ότι η συνάρτηση $g$ ικανοποιεί τις υποθέσεις του θεωρήματος Rolle στο διάστημα $[\alpha, \beta]$.
+    Από την εκφώνηση, έχουμε ότι $\lambda = \frac{f(\beta) - f(\alpha)}{\beta - \alpha}$, οπότε $f'(\beta) - f'(\alpha) = \lambda(\beta - \alpha)$.
+    Η συνάρτηση $g$ είναι παραγωγίσιμη στο διάστημα $[\alpha, \beta]$, άρα και συνεχής, ενώ
+    \[g(\alpha) = f(\alpha) + \frac{\lambda + f'(\alpha)}{2}\alpha - \frac{\lambda + f'(\alpha)}{2}\alpha = f(\alpha)\]
+    και
+    \[g(\beta) = f(\beta) + \frac{\lambda + f'(\beta)}{2}\beta - \frac{\lambda + f'(\beta)}{2}\beta = f(\beta).\]
+    Δηλαδή $g(\alpha) = g(\beta)$.
+
+    \item [β)] Από το ερώτημα α) προκύπτει ότι υπάρχει $c \in (\alpha, \beta)$ ώστε $g'(c) = 0$.
+    Παρατηρούμε ότι
+    \[g'(x) = \frac{\left[f(x)+\lambda+f'(x)\right]' \cdot x - \left(f(x)+\lambda+f'(x)\right) \cdot x'}{x^2} - \frac{\lambda+f'(x)}{x^2} = \frac{xf'(x) - f(x) - \lambda - f'(x)}{x^2}.\]
+    Επομένως, $g'(c) = 0 \Rightarrow cf'(c) - f(c) - \lambda + f'(c) = 0$. (1)
+
+    \item [γ)] Γνωρίζουμε ότι η εφαπτομένη ευθεία $(\varepsilon)$ της γραφικής παράστασης της $f$ στο $M$ έχει εξίσωση $y - f(c) = f'(c)(x - c)$ δηλαδή $y = f'(c)x + (f(c) - cf'(c))$.
+    Η ευθεία $AB$ έχει εξίσωση $y - f(\alpha) = \lambda(x - \alpha)$ δηλαδή $y = \lambda x + (f(\alpha) - \lambda \alpha)$.
+    Αρκεί να δείξουμε ότι το σημείο τομής αυτών των δύο ευθειών $(\varepsilon)$ και $AB$ βρίσκεται πάνω στον άξονα $y'$.
+    Για να βρούμε την τετμημένη του σημείου τομής των δύο ευθειών, λύνουμε την εξίσωση
+    \[f'(c)x + (f(c) - cf'(c)) = \lambda x + (f(\alpha) - \lambda \alpha),\]
+    άρα
+    \[(f'(c) - \lambda)x = cf'(c) - f(c) + f(\alpha) - \lambda \alpha = 0,\]
+    λόγω της σχέσης (1).
+    Θα αποδείξουμε τώρα ότι $f'(c) \ne \lambda$.
+    Αν είναι $f'(c) = \lambda$ τότε η σχέση (1) γίνεται $\lambda = \frac{f(c) - f(\alpha)}{c - \alpha}$, που σημαίνει ότι η ευθεία $AM$ είναι παράλληλη προς την $AB$, κάτι που θα σήμαινε ότι το $M$ θα ανήκει στην ευθεία $AB$.
+    Αντίφαση.
+    Ώστε $x = 0$, άρα το σημείο τομής των ευθειών $(\varepsilon)$ και $AB$ έχει τετμημένη μηδέν και επομένως βρίσκεται πάνω στον άξονα $y'$.
+
+    \item [δ)] Θέτουμε $u = x^2 + 1$, οπότε $du = 2xdx$, άρα $\frac{1}{2} du = xdx$.
+    Για $x = \sqrt{\alpha - 1}$, παίρνουμε $u = (\sqrt{\alpha - 1})^2 + 1 = \alpha$ και ανάλογα
+    για $x = \sqrt{\beta - 1}$, παίρνουμε $u = (\sqrt{\beta - 1})^2 + 1 = \beta$.
+    Ώστε
+    \[I = \frac{1}{2}\int_{\alpha}^{\beta} \frac{f'(u)}{u} du = \frac{1}{2}\left[\ln(f(u))\right]_{\alpha}^{\beta} = \frac{1}{2}(\ln(f(\beta)) - \ln(f(\alpha))) = \frac{1}{2}\ln\left(\frac{f(\beta)}{f(\alpha)}\right).\]
+    \[\implies I = \frac{1}{2}\ln\left(\frac{1}{2}\right) = \frac{1}{2}(-\ln 2).\]
+\end{alist}

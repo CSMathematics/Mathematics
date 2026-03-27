@@ -1,0 +1,76 @@
+\Askhsh{28532}{4}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις
+    \item 1.3 Μονότονες συναρτήσεις - Αντίστροφη συνάρτηση
+    \item 1.4 Όριο συνάρτησης στο Χο
+    \item 1.5 Ιδιότητες των ορίων
+    \item 1.8 Συνέχεια συνάρτησης
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.7 Τοπικά ακρότατα συνάρτησης.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{7cm} % Adjust number of lines if text is cut off
+\centering
+\usetikzlibrary{decorations.markings} % Needed for arrow on arc
+\begin{tikzpicture}
+    % Define radius R
+    \def\R{1}
+    % Define points O, A, B
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(-\R,0){A}
+    \tkzDefPoint(\R,0){B}
+
+    % Define point P using an illustrative angle for 2*theta, e.g., 60 degrees (so theta = 30 degrees)
+    % P's coordinates are (R*cos(2*theta_degrees), R*sin(2*theta_degrees))
+    \tkzDefPoint(\R*cos(60), \R*sin(60)){P}
+    
+    % Draw the circle
+    \tkzDrawCircle[R](O,\R cm)
+
+    % Draw segments (thin black for reference)
+    \tkzDrawSegment(O,P)
+    \tkzDrawSegment(O,B)
+    \tkzDrawSegment(A,O) % Draw AO implicitly
+
+    % Draw path AP (bold black with arrow)
+    \tkzDrawSegment[line width=1.5pt,black,-stealth](A,P)
+
+    % Draw arc PB with arrow from P to B (clockwise direction on upper semicircle)
+    \draw[line width=1.5pt, black, postaction={decorate}, decoration={markings, mark=at position 0.5 with {\arrow{stealth}}}] (P) arc[radius=\R, start angle=60, end angle=0]; % Arc from P (60 deg) to B (0 deg), clockwise.
+
+    % Draw points
+    \tkzDrawPoints[fill=thirdcolor,size=6pt](A) % Green for A
+    \tkzDrawPoints[fill=secondarycolor,size=6pt](B) % Red for B
+    \tkzDrawPoints[fill=maincolor,size=6pt](P) % Blue for P
+    \tkzDrawPoints[fill=black,size=3pt](O) % Black for O
+
+    % Labels
+    \tkzLabelPoint[left](A){A}
+    \tkzLabelPoint[right](B){B}
+    \tkzLabelPoint[above right](P){P}
+    \tkzLabelPoint[below left](O){O}
+
+    % Distances
+    \tkzLabelSegment[below](O,B){1}
+    \tkzLabelSegment[above left](O,P){1}
+    \tkzLabelSegment[below](A,O){1}
+
+    % Angle
+    \tkzMarkAngle[arc=ll,size=0.8cm,fill=thirdcolor!30](P,A,B) % Angle PAB
+    \tkzLabelAngle[pos=1.1](P,A,B){$\theta$}
+\end{tikzpicture}
+\end{wrapfigure}
+\OnPar{ΘΕΜΑ 4}
+
+Ένας άνδρας βρίσκεται στο σημείο A μιας κυκλικής λίμνης ακτίνας $1\,Km$ και θέλει να φτάσει στο σημείο B της λίμνης ώστε η $AB$ να είναι διάμετρος του κύκλου. Θέλει να τα καταφέρει συνδυάζοντας δύο είδη κινήσεων: να κωπηλατήσει αρχικά με βάρκα κατά μήκος του ευθυγράμμου τμήματος $AP$ έχοντας ταχύτητα $3\,Km/h$ και στη συνέχεια τρέχοντας πάνω στην κυκλική περιφέρεια κατά μήκος του τόξου $PB$ με ταχύτητα $6\,Km/h$.
+
+Έστω ότι η μεταβλητή γωνία $\widehat{PAB}$ είναι $\theta\,rad$.
+
+\begin{alist}
+\item Να αποδείξετε ότι $(AP) = 2\sigma\upsilon\nu\theta$ και ότι ο συνολικός χρόνος που θα χρειαστεί ο άνδρας για να κάνει τη μετάβαση από το A στο B είναι $f(\theta) = \frac{1}{3} \cdot (2\sigma\upsilon\nu\theta + \theta)$, $0 < \theta < \frac{\pi}{2}$. \monades{8}
+\item Να βρείτε την τιμή της γωνίας $\theta$ για την οποία ο συνολικός χρόνος μετάβασης γίνεται μέγιστος. \monades{10}
+\item Να αποδείξετε ότι σύνολο τιμών της συνάρτησης $f(\theta)$ είναι $f\left(\left(0, \frac{\pi}{2}\right)\right) = \left(\frac{\pi}{6}, \frac{\pi+6\sqrt{3}}{18}\right]$. \monades{7}
+\end{alist}
+
+Δίνονται: το μήκος $S$ ενός τόξου που αντιστοιχεί σε επίκεντρη γωνία $x\,rad$ σε κύκλο ακτίνας $R$, είναι $S = x \cdot R$ και ότι (απόσταση) = (χρόνος) x (ταχύτητα).

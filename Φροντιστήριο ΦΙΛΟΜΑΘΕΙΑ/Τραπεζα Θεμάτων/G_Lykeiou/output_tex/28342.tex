@@ -1,0 +1,89 @@
+\Askhsh{28342}{4}
+\begin{ylh}{1}
+    \item 1.8 Συνέχεια συνάρτησης
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.7 Τοπικά ακρότατα συνάρτησης
+    \item 2.9 Ασύμπτωτες - Κανόνες De l’ Hospital.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{7.5cm} % The [20] is the number of lines of text to wrap around. Adjust as needed.
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-0.5, xmax=2.7, % Adjusted xmin/xmax for better fit
+    ymin=-0.2, ymax=3, % Adjusted ymin/ymax
+    xtick=\empty, % Custom labels for x-axis points
+    ytick=\empty, % No y-ticks needed explicitly from image
+    grid=none, % No grid in the image
+    samples=100,
+    width=7cm, height=6cm,
+    tick label style={font=\scriptsize},
+    every axis x label/.style={at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style={at={(current axis.above origin)}, anchor=south},
+    axis line style={-stealth}, % Arrows on axes
+]
+    % Function y = e^x for x < 1
+    \addplot[very thick, black, domain=-0.5:1] {exp(x)};
+    \node[black, below left] at (axis cs:0.2, 1.2) {$y = e^x$};
+
+    % Function y = e/x for x > 1
+    \addplot[very thick, black, domain=1:2.7] {exp(1)/x};
+    \node[black, above right] at (axis cs:1.8, 1.5) {$y = \frac{e}{x}$};
+
+    % Dashed line at x=1
+    \draw[dashed, black] (axis cs:1,0) -- (axis cs:1,exp(1));
+    \node[circle,draw,inner sep=1pt,fill=white, black] at (axis cs:1,exp(1)) {}; % Hollow circle at (1,e)
+
+    % Rectangle ABΓΔ
+    % Use α = 0.4 for drawing as in the image (O is slightly left of A)
+    \pgfmathsetmacro{\alpha_val}{0.4}
+    \pgfmathsetmacro{\xdelta_val}{exp(1-\alpha_val)} % x_Δ = e^(1-α)
+    \pgfmathsetmacro{\y_val}{exp(\alpha_val)} % Height = e^α
+
+    % Coordinates for the rectangle
+    \coordinate (A_pt) at (axis cs:\alpha_val, 0);
+    \coordinate (B_pt) at (axis cs:\alpha_val, \y_val);
+    \coordinate (Gamma_pt) at (axis cs:\xdelta_val, \y_val);
+    \coordinate (Delta_pt) at (axis cs:\xdelta_val, 0);
+
+    % Draw the rectangle
+    \draw[very thick, fill=gray!30] (A_pt) -- (B_pt) -- (Gamma_pt) -- (Delta_pt) -- cycle;
+
+    % Points and labels on the x-axis
+    \fill (axis cs:0,0) circle (1.5pt); % O
+    \node[below] at (axis cs:0,0) {O};
+
+    \fill (A_pt) circle (2pt); % A
+    \node[below right] at (A_pt) {A($\alpha$,0)}; % Adjust position to avoid overlap with O
+
+    \draw (axis cs:1,0) circle (2pt); % 1 (hollow circle)
+    \node[below] at (axis cs:1,0) {1};
+
+    \fill (Delta_pt) circle (2pt); % Δ
+    \node[below] at (Delta_pt) {$\Delta$};
+    
+    % Points and labels for B and Γ
+    \fill (B_pt) circle (2pt);
+    \node[left] at (B_pt) {B};
+    
+    \fill (Gamma_pt) circle (2pt);
+    \node[right] at (Gamma_pt) {$\Gamma$};
+    
+    % x' label on the left of the x-axis
+    \node[below] at (axis cs:-0.5,0) {$x'$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα το ορθογώνιο ΑΒΓΔ έχει τις κορυφές Α και Δ πάνω στον άξονα $x'x$ και τις κορυφές Β και Γ πάνω στις γραφικές παραστάσεις των συναρτήσεων $f(x) = e^x \, , \, x < 1$ και $g(x) = \frac{e}{x} \, , \, x > 1$, αντίστοιχα. Έστω A$(\alpha, 0)$ με $\alpha < 1$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+    \begin{rlist}
+    \item η τετμημένη της κορυφής $\Delta$ είναι $x_\Delta = e^{1-\alpha}$, \monades{6}
+    \item το εμβαδόν του ορθογωνίου ΑΒΓΔ είναι $E(\alpha) = e - \alpha e^\alpha$, $\alpha < 1$. \monades{6}
+    \end{rlist}
+\item Να βρείτε τη μέγιστη τιμή του εμβαδού του ορθογωνίου ΑΒΓΔ. \monades{7}
+\item Να εξετάσετε αν υπάρχουν και πόσες τιμές του $\alpha$, για τις οποίες το εμβαδόν του ορθογωνίου ΑΒΓΔ γίνεται ίσο με 1. \monades{6}
+\end{alist}

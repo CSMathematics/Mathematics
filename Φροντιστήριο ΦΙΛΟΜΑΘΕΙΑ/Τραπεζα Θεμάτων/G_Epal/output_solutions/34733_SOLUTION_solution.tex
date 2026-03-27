@@ -1,0 +1,75 @@
+\lysh{34733}{4}
+\begin{alist}
+\item Το διάγραμμα που κατασκεύασε ο μαθητής είναι λανθασμένο, καθώς η 1η ταινία φαίνεται να έχει σχεδόν διπλάσιο ποσοστό από τη 2η ταινία, όταν το πλήθος των εισιτηρίων που έκοψε καθεμία από αυτές είναι πολύ πιο κοντά αναλογικά.
+\item Το σύνολο των εισιτηρίων των τεσσάρων ταινιών ήταν: $\nu=150+130+70+50 =400$
+Υπολογίζουμε τις σχετικές συχνότητες των τεσσάρων ταινιών και έχουμε:
+\[ f_{1} = \frac{150}{400} = 0,375 \quad f_{2} = \frac{130}{400} = 0,325 \]
+\[ f_{3} = \frac{70}{400} = 0,175 \quad f_{4} = \frac{50}{400} = 0,125 \]
+Οπότε ο πίνακας συμπληρωμένος είναι:
+\begin{center}
+\begin{mytblr}{}
+  Ταινία & Συχνότητα & Σχετική συχνότητα $f_i$ \\
+  Ταινία 1 & 150 & 0,375 \\
+  Ταινία 2 & 130 & 0,325 \\
+  Ταινία 3 & 70 & 0,175 \\
+  Ταινία 4 & 50 & 0,125 \\
+  Σύνολο & 400 & 1 \\
+\end{mytblr}
+\end{center}
+\item Για να κατασκευάσουμε το κυκλικό διάγραμμα θα πρέπει να χωρίσουμε τον κύκλο σε τόξα ανάλογα με τη σχετική συχνότητα καθεμίας από τις ταινίες, εφόσον $\alpha_i = 360^\circ \cdot f_i$.
+
+Στη συνέχεια υπολογίζουμε πόσες μοίρες είναι το τόξο του κάθε τομέα για κάθε ένα από τα κυκλικά τμήματα που θα χωρίσουμε τον κυκλικό δίσκο:
+\[ \alpha_1 = 360^\circ \cdot f_1 = \frac{360 \cdot 37,5}{100} = 135^\circ \quad \alpha_2 = 360^\circ \cdot f_2 = \frac{360 \cdot 32,5}{100} = 117^\circ \]
+\[ \alpha_3 = 360^\circ \cdot f_3 = \frac{360 \cdot 17,5}{100} = 63^\circ \quad \alpha_4 = 360^\circ \cdot f_4 = \frac{360 \cdot 12,5}{100} = 45^\circ. \]
+Οπότε το κυκλικό διάγραμμα θα είναι:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5, every node/.style={font=\small}]
+    % Define radius
+    \def\r{2.5}
+
+    % --- Draw Sectors ---
+    % Sector 4: Ταινία 4 (45°) - green, honeycomb
+    \fill[maincolor!10] (0,0) -- (45:\r) arc (45:90:\r) -- cycle;
+    % Sector 1: Ταινία 1 (135°) - blue, lines
+    \fill[maincolor!30] (0,0) -- (90:\r) arc (90:225:\r) -- cycle;
+    % Sector 2: Ταινία 2 (117°) - light blue, solid
+    \fill[maincolor!50] (0,0) -- (225:\r) arc (225:342:\r) -- cycle;
+    % Sector 3: Ταινία 3 (63°) - red, crosshatch
+    \fill[maincolor!70] (0,0) -- (342:\r) arc (342:405:\r) -- cycle;
+
+    % --- Draw dividing lines ---
+    \draw[thick] (0,0) -- (45:\r);
+    \draw[thick] (0,0) -- (90:\r);
+    \draw[thick] (0,0) -- (225:\r);
+    \draw[thick] (0,0) -- (342:\r);
+    
+    % --- Draw dots on the circumference ---
+    \draw[l3] (0,0) circle (\r);
+
+    
+    % Angle arcs
+    \draw (90:0.6) arc (90:225:0.6);
+    \draw (225:0.6) arc (225:342:0.6);
+    \draw (342:0.6) arc (342:405:0.6);
+    \draw (45:0.6) arc (45:90:0.6);
+    
+    % Angle labels
+    \node at (157.5:1.8) {$\alpha_1=135^\circ$};
+    \node at (283.5:1.8) {$\alpha_2=117^\circ$};
+    \node at (13.5:1.8) {$\alpha_3=63^\circ$};
+    \node at (67.5:1.8) {$\alpha_4=45^\circ$};
+
+    % --- Sector Labels (adjusted to match image) ---
+    \node at (150:3) {Ταινία 1};
+    \node at (270:3) {Ταινία 2};
+    \node at (0:3) {Ταινία 3};
+    \node at (70:3) {Ταινία 4};
+\end{tikzpicture}
+\end{center}
+
+\end{alist}
+\vspace{6mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{6mm}
+

@@ -1,0 +1,72 @@
+\Askhsh{21197}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 11.5. Εμβαδόν κυκλικού τομέα
+\end{ylh}
+\begin{wrapfigure}{r}{5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8, every label/.style={font=\small}]
+        % Ορισμός συντεταγμένων. Έστω ότι η πλευρά 2α=4, άρα α=2.
+        \def\side{4}
+        \def\a{\side/2}
+        
+        % Κορυφές τετραγώνου
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(\side,0){B}
+        \tkzDefPoint(\side,\side){G} % Γ
+        \tkzDefPoint(0,\side){D}    % Δ
+        
+        % Μέσο της ΓΔ
+        \tkzDefMidPoint(G,D) \tkzGetPoint{L} % Λ
+        
+        % Κέντρο ημικυκλίου
+        \tkzDefMidPoint(A,B) \tkzGetPoint{K}
+
+        % Υπολογισμός ακτίνας R = ΑΛ για το τεταρτοκύκλιο
+        \tkzCalcLength(A,L)\tkzGetValue{R}
+        
+        % Σημεία M και N στις προεκτάσεις των ΑΒ και ΑΔ
+        \tkzDefPoint(\R,0){M}
+        \tkzDefPoint(0,\R){N}
+
+        % Σκίαση της περιοχής: τομέας AMN μείον ημικύκλιο
+        \tkzFillSector[color=gray!40](A,M)(N)
+        \tkzDrawArc[semicircle,fill=white,color=black](K,B)(A)
+
+        % Σχεδίαση περιγραμμάτων
+        \tkzDrawPolygon(A,B,G,D)
+        \tkzDrawArc(A,M)(N) % Εξωτερικό τόξο
+        \tkzDrawSegment(A,L) % Ακτίνα ΑΛ
+
+        % Σχεδίαση σημείων
+        \tkzDrawPoints[size=2,fill=black](A,B,G,D,L,M,N)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[above right](G){$\Gamma$}
+        \tkzLabelPoint[above left](D){$\Delta$}
+        \tkzLabelPoint[above, yshift=-1mm](L){$\Lambda$}
+        \tkzLabelPoint[below right, xshift=1mm](M){M}
+        \tkzLabelPoint[above left, yshift=1mm](N){N}
+
+        % Λοιπές ετικέτες
+        \tkzLabelSegment[left, pos=0.5](A,D){$2\alpha$}
+        \tkzText(\a, \a*0.5){10}
+    \end{tikzpicture}
+    \vspace{-1.5em}
+\end{wrapfigure}
+Στο παρακάτω σχήμα το τετράπλευρο ΑΒΓΔ είναι τετράγωνο πλευράς $2\alpha$ και Λ το μέσο της πλευράς του ΓΔ. Έστω ότι το ημικύκλιο, που σχεδιάζεται στο εσωτερικό του τετραγώνου με διάμετρο την πλευρά του ΑΒ, έχει εμβαδόν 10. Τότε:
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item Το εμβαδόν του τετραγώνου ΑΒΓΔ είναι $(\text{ΑΒΓΔ}) = \frac{80}{\pi}$. \monades{6}
+        \item $\text{ΑΛ}^2 = \frac{100}{\pi}$ \monades{6}
+    \end{rlist}
+    \item Με κέντρο το Α και ακτίνα ΑΛ κατασκευάζουμε τεταρτοκύκλιο $A\stackrel{\frown}{\text{MN}}$, και έστω M, N είναι τα σημεία τομής του με τις προεκτάσεις των πλευρών του τετραγώνου ΑΒ, ΑΔ αντίστοιχα. Να υπολογίσετε:
+    \begin{rlist}
+        \item Το εμβαδόν του σκιασμένου χωρίου ΑΒΜΝΑ. \monades{8}
+        \item Τον λόγο του εμβαδού του τεταρτοκυκλίου $A\stackrel{\frown}{\text{MN}}$ προς το εμβαδόν του τετραγώνου ΑΒΓΔ. \monades{5}
+    \end{rlist}
+\end{alist}

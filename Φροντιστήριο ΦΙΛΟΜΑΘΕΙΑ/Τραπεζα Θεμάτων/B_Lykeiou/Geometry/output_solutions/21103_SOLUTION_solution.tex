@@ -1,0 +1,97 @@
+\Askhsh{21103_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\begin{wrapfigure}[20]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Define outer square vertices (side 2a, let a=1 for drawing)
+        % Using (0,2) for A, (2,2) for B, (2,0) for C, (0,0) for D to match text labeling style
+        % i.e., A = top-left, B = top-right, C = bottom-right, D = bottom-left
+        % However, the diagram shows A=top-left, B=top-right, Gamma=bottom-right, Delta=bottom-left.
+        % Let's use coordinates that match the common representation of the figure.
+        % Let outer square side be 2 units (so a=1)
+        \tkzDefPoint(-1,1){A} % Top-Left
+        \tkzDefPoint(1,1){B} % Top-Right
+        \tkzDefPoint(1,-1){G} % Bottom-Right (Gamma)
+        \tkzDefPoint(-1,-1){D} % Bottom-Left (Delta)
+
+        % Define midpoints (E, Z, H, Theta)
+        \tkzDefMidPoint(A,B) \tkzGetPoint{E}
+        \tkzDefMidPoint(B,G) \tkzGetPoint{Z}
+        \tkzDefMidPoint(G,D) \tkzGetPoint{H}
+        \tkzDefMidPoint(D,A) \tkzGetPoint{Th} % Theta
+
+        % Draw outer square
+        \tkzDrawPolygon[color=black, line width=0.8pt](A,B,G,D)
+
+        % Draw inner square (EZHTh) and shade it (dark gray from image)
+        \tkzFillPolygon[fill=maincolor!50!black, opacity=0.8](E,Z,H,Th) % Darker shade for central square
+        \tkzDrawPolygon[color=black, line width=0.8pt](E,Z,H,Th)
+
+        % Draw arcs forming the "petals" and shade the petal regions (light gray from image)
+        % Arcs are centered at A, B, G, D with radius 'a' (which is 1 unit here)
+        % Regions between inner square and arcs need to be filled.
+        % This is a bit tricky with tkz-euclide fill. I'll approximate by filling sectors and then drawing over.
+        % Or, fill the difference.
+        
+        % The shaded "petals" are: Sector(A,Th,E) minus Triangle(A,Th,E) etc.
+        % Fill the sectors first, then subtract the central square.
+        % For simplicity, I'll draw filled arcs.
+        \tkzFillSector[fill=maincolor!30, opacity=0.6](A,Th,E)
+        \tkzFillSector[fill=maincolor!30, opacity=0.6](B,E,Z)
+        \tkzFillSector[fill=maincolor!30, opacity=0.6](G,Z,H)
+        \tkzFillSector[fill=maincolor!30, opacity=0.6](D,H,Th)
+
+        % Draw the arcs
+        \tkzDrawArc[color=black, line width=0.8pt](A,Th)(E)
+        \tkzDrawArc[color=black, line width=0.8pt](B,E)(Z)
+        \tkzDrawArc[color=black, line width=0.8pt](G,Z)(H)
+        \tkzDrawArc[color=black, line width=0.8pt](D,H)(Th)
+
+        % Draw points
+        \tkzDrawPoints[size=3pt,fill=black](A,B,G,D,E,Z,H,Th)
+
+        % Labels for points
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[above](E){E}
+        \tkzLabelPoint[right](Z){Z}
+        \tkzLabelPoint[below](H){H}
+        \tkzLabelPoint[left](Th){$\Theta$}
+
+        % Right angle mark at B
+        \tkzMarkRightAngle[fill=black,size=0.2,opacity=0.5](D,B,G) % This is for the outer square, but the diagram implies it's inside B's corner.
+        % The right angle in the original image is *inside* the outer square, indicating a corner of the inner square or related to B,E,Z.
+        % The original image is tricky. If B is the vertex of the square in b(ii), then angle(EBZ) is 90 degrees.
+        % Let's put a right angle at B as it's prominently displayed in the first figure near B.
+        % Assuming the right angle for B (0,0) as in the first diagram.
+        % The first diagram shows the right angle at B, with E and H being midpoints on adjacent sides.
+        % Given the second diagram clarifies the setup, I will assume the right angle refers to the corner B of the outer square.
+        % However, if B is the center of an arc, that's ambiguous.
+        % Let's ignore the right angle mark from the first diagram as it creates ambiguity with the second diagram and text.
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\Askhseis{ΛΥΣΗ}
+
+\begin{alist}
+    \item Το κάθε ημικύκλιο έχει ακτίνα $\rho$ ίση με το μισό της πλευράς του τετραγώνου, δηλαδή $\rho = \frac{2\alpha}{2} = \alpha$. Το μήκος τόξου μ$^o$ θα είναι $\frac{\pi \rho^2 \mu^o}{180^o}$, δηλαδή $\frac{\pi \alpha^2 \mu^o}{180^o} = \pi \alpha$.
+
+    \item \begin{rlist}
+        \item Η περίμετρος της καρδιάς αποτελείται από τα δύο ημικύκλια και τις πλευρές ΑΔ και ΔΓ. Από το α) ερώτημα το κάθε ημικύκλιο έχει μήκος $\pi \alpha$ οπότε η περίμετρος θα ισούται με $\pi \alpha + \pi \alpha + 2\alpha + 2\alpha = 2\pi \alpha + 4\alpha$. Από υπόθεση έχουμε ότι η περίμετρος είναι $2\pi + 4$, οπότε $2\pi \alpha + 4\alpha = 2\pi + 4$, άρα $\alpha = 1$.
+        \item Στο ορθογώνιο τρίγωνο ΒΕΖ ($\hat{B} = 90^\circ$) έχουμε ΒΕ = ΒΖ = $\alpha$. Εφαρμόζουμε το πυθαγόρειο θεώρημα: ΕΖ$^2$ = ΒΕ$^2$ + ΒΖ$^2$ = $\alpha^2 + \alpha^2 = 2\alpha^2$. ή ΕΖ = $\alpha\sqrt{2}$. Για $\alpha = 1$ έχουμε ΕΖ = $\sqrt{2}$.
+    \end{rlist}
+
+    \item Τα δύο ημικύκλια είναι γιατί έχουν την ίδια ακτίνα $\alpha$, οπότε το άθροισμά τους θα είναι ένας κυκλικός δίσκος με ακτίνα $\alpha$.
+    Το εμβαδόν του θα είναι $(\tau) = \pi \rho^2 = \pi \alpha^2$.
+    Το τετράγωνο ΑΒΓΔ έχει εμβαδόν $(\text{ΑΒ})^2 = (2\alpha)^2 = 4\alpha^2$.
+
+    Ο ζητούμενος λόγος
+    \[ \frac{(\tau)}{(\text{ΑΒΓΔ})} = \frac{\pi \alpha^2}{4\alpha^2} = \frac{\pi}{4} \]
+    Επειδή $\pi < 4$ το κλάσμα $\frac{\pi}{4}$ θα είναι μικρότερο του μονάδος, το εμβαδόν της περιοχής που περικλείεται από το ένα ή και τα δύο ημικύκλια εγγεγραμμένος στο τετράγωνο (σχήμα) το εμβαδόν του είναι μικρότερο από αυτό του τετραγώνου, οπότε το κλάσμα
+    \[ \frac{(\tau)}{(\text{ΑΒΓΔ})} < 1 \]
+\end{alist}

@@ -1,0 +1,56 @@
+\Askhsh{24771}{4}
+\begin{ylh}{1}
+    \item 2.5 Θεώρημα Μέσης Τιμής Διαφορικού Λογισμού
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.7 Τοπικά ακρότατα συνάρτησης
+    \item 3.1 Αόριστο ολοκλήρωμα
+    \item 3.4 Ορισμένο ολοκλήρωμα.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{7.5cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -2.5, xmax = 2.5,
+    ymin = -0.2, ymax = 1.2,
+    xtick = {-1, 0, 1}, % Example values for alpha to draw the rectangle
+    xticklabels = {$\Delta$, O, A}, % Label tick marks for the example alpha=1
+    ytick = {0, 0.5}, % Example f(alpha) = f(1) = 1/2
+    yticklabels = {}, % No y-labels shown in image for specific values, just the axis label 'y'
+    xticklabel style = {font=\scriptsize},
+    yticklabel style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % Use PGF functions for calculation within TikZ/PGFplots
+    \pgfmathsetmacro{\aex}{1} % Use alpha = 1 for drawing purposes
+    \pgfmathsetmacro{\faex}{1/(\aex^2+1)} % f(1) = 1/2
+
+    % Plot the function f(x) = 1/(x^2+1)
+    \addplot[thick, maincolor, domain=-2:2, samples=100] {1/(x^2+1)};
+    \node[maincolor, above right, font=\scriptsize] at (axis cs:1.5, {1/(1.5^2+1)}) {$C_f$}; % Label C_f
+
+    % Draw the rectangle ABGD. We mark coordinates directly for plotting.
+    % The labels A, D, O are on the x-axis, B, G on the curve.
+    % A is (alpha, 0), D is (-alpha, 0).
+    % Ensure labels for B and Gamma are explicitly placed, not tied to xticklabels.
+    \draw[secondarycolor, thick] (axis cs:-\aex, 0) -- (axis cs:-\aex, \faex) node[above left, inner sep=1pt, font=\scriptsize] {$\Gamma$}
+                                -- (axis cs:\aex, \faex) node[above right, inner sep=1pt, font=\scriptsize] {B}
+                                -- (axis cs:\aex, 0)
+                                -- cycle;
+    
+    % Draw vertical dashed lines from the points on the curve to the x-axis
+    \draw[secondarycolor, dashed] (axis cs:-\aex, \faex) -- (axis cs:-\aex, 0);
+    \draw[secondarycolor, dashed] (axis cs:\aex, \faex) -- (axis cs:\aex, 0);
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Έστω $f: \mathbb{R} \to \mathbb{R}$ συνάρτηση για την οποία ισχύει $f(0)=1$ και $(x^2+1)f'(x)+\frac{2x}{x^2+1}=0$ για κάθε $x \in \mathbb{R}$.
+\begin{alist}
+    \item Να αποδείξετε ότι $f(x) = \frac{1}{x^2+1}$, $x \in \mathbb{R}$. \monades{5}
+    \item Στο διπλανό σχήμα δίνεται η γραφική παράσταση $C_f$ της συνάρτησης. Να αιτιολογήσετε γιατί η $C_f$ είναι συμμετρική ως προς τον άξονα $y'y$ και να βρείτε τις συντεταγμένες των κορυφών B, $\Gamma$, $\Delta$ του ορθογωνίου ΑΒ$\Gamma$$\Delta$ με τη βοήθεια της τετμημένης $\alpha$, $\alpha > 0$ του σημείου $A(\alpha, 0)$. \monades{6}
+    \item Να αποδείξετε ότι το εμβαδόν $E(\alpha)$ του ορθογωνίου ΑΒ$\Gamma$$\Delta$ δίνεται από τον τύπο $E(\alpha) = \frac{2\alpha}{\alpha^2+1}$, $\alpha > 0$. Κατόπιν, να βρείτε για ποια τιμή του $\alpha$ το εμβαδόν γίνεται μέγιστο. \monades{8}
+    \item Αν F είναι μια αρχική της f με $F(1)=\ln 2$, να αποδείξετε ότι $\int_0^1 F(x)dx = \ln \sqrt{2}$. \monades{6}
+\end{alist}

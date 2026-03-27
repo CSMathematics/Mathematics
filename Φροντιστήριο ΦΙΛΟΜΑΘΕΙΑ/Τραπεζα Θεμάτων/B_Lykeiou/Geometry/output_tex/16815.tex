@@ -1,0 +1,68 @@
+\Askhsh{16815}{4}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[10]{r}{6cm} % [number of lines] {placement} {width}
+\centering
+\begin{tikzpicture}[scale=0.9] % Adjust scale for overall size
+    % Define points for the trapezoid ABΓΔ with BΓ // AΔ
+    % Let A be at (0,0) for simplicity. AB is the left non-parallel side.
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(0,4){B}
+    \tkzDefPoint(5,4){G} % Gamma
+    \tkzDefPoint(7,0){D} % Delta
+
+    % Z is the midpoint of ΓΔ
+    \tkzDefMidPoint(G,D) \tkzGetPoint{Z}
+
+    % Line from Z parallel to AB. AB is on x=0. So the parallel line is x-coordinate of Z.
+    % Z x-coordinate = (5+7)/2 = 6. So the line is x=6.
+    % K is on AΔ (y=0). So K=(6,0).
+    % Θ is on the extension of BΓ (y=4). So Θ=(6,4).
+    \tkzDefPoint(6,0){K}
+    \tkzDefPoint(6,4){Th} % Theta
+
+    % ZH ⊥ AB. AB is on x=0. Z is (6,2). So H is (0,2).
+    \tkzDefPoint(0,2){H}
+
+    % E is the midpoint of AB (for part d)
+    % A=(0,0), B=(0,4). So E=(0,2).
+    % In this coordinate system, E and H coincide.
+    \tkzDefMidPoint(A,B) \tkzGetPoint{E}
+
+    % Draw the trapezoid ABΓΔ
+    \tkzDrawPolygon(A,B,G,D)
+
+    % Draw the line K-Z-Θ. Diagram shows it as dashed.
+    \tkzDrawSegment[dashed](K,Th)
+
+    % Draw ZH
+    \tkzDrawSegment(Z,H)
+
+    % Mark the right angle at H (ZH ⊥ AB)
+    \tkzMarkRightAngle[fill=thirdcolor!30, size=0.2](Z,H,B)
+
+    % Draw points and label them with specified colors
+    \tkzDrawPoints[color=maincolor, fill=maincolor](A,B,G,D) % A, B, Γ, Δ are blue
+    \tkzDrawPoints(Z,K,Th,E,H) % Z, K, Θ, E, H are black (default)
+
+    % Labels
+    \tkzLabelPoint[below left](A){A}
+    \tkzLabelPoint[above left](B){B}
+    \tkzLabelPoint[above right](G){$\Gamma$}
+    \tkzLabelPoint[below right](D){$\Delta$}
+    \tkzLabelPoint[above right](Th){$\Theta$}
+    \tkzLabelPoint[below](K){K}
+    \tkzLabelPoint[above right](Z){Z}
+    \tkzLabelPoint[left](H){H}
+    \tkzLabelPoint[left](E){E}
+\end{tikzpicture}
+\end{wrapfigure}
+Έστω τραπέζιο ΑΒΓΔ με $B\Gamma // A\Delta$. Από το μέσο Ζ της ΓΔ φέρνουμε παράλληλη προς την ΑΒ που τέμνει την ΑΔ στο Κ και την προέκταση της ΒΓ στο Θ. Επίσης φέρνουμε $ZH \perp AB$.
+\begin{alist}
+\item Να δείξετε ότι $(\text{ΑΒΓΔ}) = (\text{ΑΒΘΚ})$ \monades{6}
+\item Να δείξετε ότι $(\text{ΑΒΓΔ}) = AB \cdot HZ$ \monades{5}
+\item Αν $v$ είναι το ύψος του τραπεζίου ΑΒΓΔ, να δείξετε ότι: $v = \frac{2 \cdot AB \cdot HZ}{A\Delta+B\Gamma}$ \monades{5}
+\item Αν Ε είναι το μέσο του ΑΒ να δείξετε ότι $(\text{ΑΕΚ}) = \frac{1}{4} (\text{ΑΒΓΔ})$ \monades{9}
+\end{alist}

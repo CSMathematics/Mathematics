@@ -1,0 +1,67 @@
+\Askhsh{20869}{2}
+\begin{ylh}{1}
+    \item 2.1. Εξίσωση Ευθείας
+    \item 3.4 Η Υπερβολή.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{7.5cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -3, xmax = 3,
+    ymin = -3, ymax = 3,
+    xtick = {-2,-1,0,1,2},
+    ytick = {-2,-1,0,1,2},
+    grid = both,
+    grid style = {gray!30},
+    samples = 100,
+    width = 7.5cm, height = 7.5cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    axis line style={-stealth}, % Add arrows to axis ends
+]
+    % Hyperbola C: x^2 - y^2 = 1
+    \addplot[very thick, gray, domain=1:3] {sqrt(x^2-1)};
+    \addplot[very thick, gray, domain=1:3] {-sqrt(x^2-1)};
+    \addplot[very thick, gray, domain=-3:-1] {sqrt(x^2-1)};
+    \addplot[very thick, gray, domain=-3:-1] {-sqrt(x^2-1)};
+    \node[gray, above right] at (axis cs:1.5,0.7) {$C$}; % Adjusted position for C
+
+    % Asymptotes: y = x (epsilon_1) and y = -x (epsilon_2 implicitly)
+    \addplot[thin, maincolor, domain=-3:3] {x}; % epsilon_1
+    \addplot[thin, gray, domain=-3:3] {-x}; % epsilon_2 (not labeled in original, but implied)
+    \node[maincolor, above right] at (axis cs:2.5,2.5) {$\varepsilon_1$}; % Label for y=x
+
+    % Tangent zeta at A(1,0): x=1
+    \addplot[thick, secondarycolor, domain=-3:3] coordinates {(1,-3) (1,3)};
+    \node[secondarycolor, right] at (axis cs:1, 2) {$\zeta$}; % Label for x=1
+
+    % Points
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,0)};
+    \node[below left] at (axis cs:0,0) {$O$}; % Origin O
+
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(1,0)};
+    \node[below right] at (axis cs:1,0) {$A$}; % Point A(1,0)
+
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(sqrt(2),0)};
+    \node[below right] at (axis cs:sqrt(2),0) {$E$}; % Focus E
+
+    % Intersection point Gamma of zeta (x=1) and epsilon_1 (y=x) -> Gamma(1,1)
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(1,1)};
+    \node[above left] at (axis cs:1,1) {$\Gamma$}; % Point Gamma(1,1)
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα φαίνονται η υπερβολή $C: x^2 - y^2 = 1$, η εστία της $E$, η εφαπτομένη της $\zeta$ στο σημείο $A(1,0)$ και το σημείο $\Gamma$ στο οποίο αυτή τέμνει την ασύμπτωτη ευθεία $\varepsilon_1$ της υπερβολής.
+\begin{alist}
+\item Να βρείτε τις εστίες $E', E$ και τις ασύμπτωτες $\varepsilon_1, \varepsilon_2$ της υπερβολής. \monades{10}
+\item
+    \begin{rlist}
+    \item Να βρείτε την εξίσωση της εφαπτομένης $\zeta$. \monades{07}
+    \item Να αποδείξετε ότι το σημείο $\Gamma$ έχει συντεταγμένες $(1,1)$. \monades{08}
+    \end{rlist}
+\end{alist}

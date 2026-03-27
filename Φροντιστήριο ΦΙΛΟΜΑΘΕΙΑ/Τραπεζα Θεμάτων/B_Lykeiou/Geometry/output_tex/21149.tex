@@ -1,0 +1,59 @@
+\Askhsh{21149}{4}
+\begin{ylh}{1}
+    \item 9.2. Κύκλος - Τριγωνομετρία
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm} % Adjust number of lines (15) and width (5.5cm) as needed
+    \begin{tikzpicture}[scale=1] % R=2, so actual dimensions are 4cm wide and approx 6.9cm high
+        % Define points (R=2 based on problem statement)
+        \tkzDefPoint(0,0){O} % Center of the circle
+        \tkzDefPoint(-2,0){A} % Point A (at (-R,0))
+        \tkzDefPoint(2,0){B}  % Point B (at (R,0), diameter AB)
+        % Point Gamma: Calculated using R=2 and angle B A G = 30 degrees.
+        % Angle A O Gamma = 2 * Angle A B Gamma = 2 * (90 - 30) = 120 degrees from positive x-axis.
+        % So, Gamma coords are (R*cos(120), R*sin(120))
+        % Or, relative to A as (-2,0), and O as (0,0), Gamma is at (1, sqrt(3))
+        \tkzDefPoint(1,{sqrt(3)}){G} % Point Gamma
+        % Point Delta: on extension of BG, with GD = 6.
+        % Vector BG = G - B = (1-2, sqrt(3)-0) = (-1, sqrt(3)). Length = 2.
+        % Vector GD is 3 times BG (since length is 6). So GD = 3 * (-1, sqrt(3)) = (-3, 3*sqrt(3)).
+        % Delta = G + GD = (1, sqrt(3)) + (-3, 3*sqrt(3)) = (-2, 4*sqrt(3)).
+        \tkzDefPoint(-2,{4*sqrt(3)}){D} % Point Delta
+
+        % Draw the circle
+        \tkzDrawCircle[line width=1pt](O,A) % Draw circle with center O and point A (radius OA = 2)
+
+        % Draw segments inside the circle (solid lines)
+        \tkzDrawSegments[line width=1pt](A,B A,G G,B)
+
+        % Draw segments for Delta (dashed lines)
+        \tkzDrawSegment[line width=0.7pt,dashed,maincolor](G,D) % Extension of BG to D
+        \tkzDrawSegment[line width=0.7pt,dashed,maincolor](A,D) % Line DA
+
+        % Mark points
+        \tkzDrawPoints(A,B,G,O,D)
+
+        % Labels for points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[below right](B){B}
+        \tkzLabelPoint[above right](G){$\Gamma$}
+        \tkzLabelPoint[below](O){O} % Adjusted position for O
+        \tkzLabelPoint[above left](D){$\Delta$}
+
+        % Angle mark and label
+        \tkzMarkAngle[fill=maincolor!20,size=0.8cm,opacity=0.5](G,A,B)
+        \tkzLabelAngle[pos=0.6](G,A,B){$30^\circ$}
+
+        % Segment length labels
+        \tkzLabelSegment[right](G,B){2}
+        \tkzLabelSegment[above](G,D){6}
+    \end{tikzpicture}
+\end{wrapfigure}
+Σε κύκλο κέντρου $\mathrm{O}$ και ακτίνας $\mathrm{R}$ θεωρούμε διάμετρο $\mathrm{AB}$ και σημείο $\Gamma$ του κύκλου τέτοιο ώστε $\mathrm{B}\widehat{\mathrm{A}}\Gamma = 30^\circ$, όπως φαίνεται στο σχήμα. Αν $\mathrm{B}\Gamma = 2$, τότε:
+\begin{alist}
+    \item Να υπολογίσετε: \monades{16}
+    \begin{rlist}
+        \item Την ακτίνα $\mathrm{R}$.
+        \item Το μήκος της πλευράς $\mathrm{A}\Gamma$.
+    \end{rlist}
+    \item Θεωρούμε σημείο $\Delta$ στην προέκταση της $\mathrm{B}\Gamma$ τέτοιο ώστε $\Gamma\Delta = 6$. Να εξετάσετε αν το τμήμα $\Delta\mathrm{A}$ εφάπτεται του κύκλου στο σημείο $\mathrm{A}$. Να αιτιολογήσετε την απάντησή σας. \monades{9}
+\end{alist}

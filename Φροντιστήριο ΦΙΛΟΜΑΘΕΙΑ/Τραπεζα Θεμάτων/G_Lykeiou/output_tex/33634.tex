@@ -1,0 +1,78 @@
+\Askhsh{33634}{4}
+\begin{ylh}{1}
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.8 Κυρτότητα - Σημεία καμπής συνάρτησης
+    \item 3.4 Ορισμένο ολοκλήρωμα
+    \item 3.5 Η συνάρτηση [ορισμένο ολοκλήρωμα της f από α έως χ]
+    \item 3.7 Εμβαδόν επιπέδου χωρίου.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{8cm} % Adjust number of lines and width as needed
+    \centering
+    \begin{tikzpicture}
+    \pgfplotsset{
+        compat=1.18, % Use a recent compatibility mode
+        /pgf/number format/assume math mode=true,
+        /pgf/number format/precision=3,
+        tick label style = {font=\scriptsize},
+    }
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {}, % No explicit label, ticks are sufficient
+        ylabel = {}, % No explicit label, ticks are sufficient
+        xmin = -0.1, xmax = pi/2 + 0.1,
+        ymin = -0.1, ymax = pi/2 + 0.1,
+        xtick = {0, pi/4, pi/2},
+        xticklabels = {$0$, $X_o$, $\pi/2$},
+        ytick = {0, pi/2},
+        yticklabels = {$0$, $\pi/2$},
+        grid = both,
+        grid style = {gray!30},
+        samples = 100,
+        width = 7.5cm, height = 5.5cm, % Adjusted size to fit well
+        clip=false, % Allow labels/nodes outside the axis limits
+    ]
+        % Define the functions
+        \addplot[name path=F, very thick, maincolor, domain=0:pi/2] {pi/2 * sin(deg(x))^2}; % C_f: f(x) = (pi/2)sin^2(x)
+        \addplot[name path=OA, black, thick, domain=0:pi/2] {x}; % Line OA: y=x
+
+        % Plot the vertical line at x=pi/2 (the brown line in the original image)
+        \draw[brown, thick] (axis cs:pi/2, 0) -- (axis cs:pi/2, pi/2);
+
+        % Coordinates for points O, A, K
+        \coordinate (Origin) at (axis cs:0,0);
+        \coordinate (A_point) at (axis cs:pi/2,pi/2);
+        \coordinate (K_point) at (axis cs:pi/4,pi/4); % Intersection point x_0 = pi/4
+
+        % Mark points O, A, K as in the image
+        \node[maincolor, draw, circle, fill=white, inner sep=1pt] at (Origin) {}; % Blue circle for O(0,0)
+        \fill[maincolor] (A_point) circle (1.5pt); \node[maincolor, above right] at (A_point) {A}; % Blue dot for A
+        \fill[black] (K_point) circle (1.5pt); \node[black, above right] at (K_point) {K}; % Black dot for K
+
+        % Dashed line for X_o
+        \draw[dashed, gray] (axis cs:pi/4,0) -- (K_point);
+
+        % Fill regions Omega_1 and Omega_2
+        % Omega_1: between OA (y=x) and F (f(x)) from 0 to x_0 (pi/4)
+        % From the graph, f(x) is below y=x for Omega_1, so fill (OA, F)
+        \addplot[secondarycolor!30] fill between[of=OA and F, soft clip={domain=0:pi/4}];
+        \node[font=\small] at (axis cs:pi/8, 0.1) {$\Omega_1$}; % Adjust position
+
+        % Omega_2: between F (f(x)) and OA (y=x) from x_0 (pi/4) to pi/2
+        % From the graph, f(x) is above y=x for Omega_2, so fill (F, OA)
+        \addplot[secondarycolor!30] fill between[of=F and OA, soft clip={domain=pi/4:pi/2}];
+        \node[font=\small] at (axis cs:3*pi/8, pi/2 - 0.1) {$\Omega_2$}; % Adjust position
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+Έστω $I = \frac{\pi}{2} \int_0^{\frac{\pi}{2}} \sin^2 x dx$ και $J = \frac{\pi}{2} \int_0^{\frac{\pi}{2}} \cos^2 x dx$.
+
+\begin{alist}
+    \item Να αποδείξετε ότι $I+J = \frac{\pi^2}{4}$. \monades{6}
+    \item Με χρήση της αντικατάστασης $u = \frac{\pi}{2} - x$ να αποδείξετε ότι $I=J$ και κατόπιν ότι $I=J=\frac{\pi^2}{8}$. \monades{7}
+    \item Στο παρακάτω σχήμα δίνεται η γραφική παράσταση $C_f$ της συνάρτησης $f(x) = \frac{\pi}{2} \sin^2 x$ στο διάστημα $\left[0, \frac{\pi}{2}\right]$. Η ευθεία $OA$ τέμνει τη $C_f$ στα σημεία $O(0,0)$, $A\left(\frac{\pi}{2}, \frac{\pi}{2}\right)$, $K(x_o, f(x_o))$ και ορίζει με τη $C_f$ τα χωρία $\Omega_1, \Omega_2$. Να αποδείξετε ότι :
+    \begin{rlist}
+        \item το εμβαδόν που περικλείεται μεταξύ της $C_f$, του άξονα $yy'$ και της ευθείας $y=\frac{\pi}{2}$ είναι το $J$. \monades{6}
+        \item τα εμβαδά των χωρίων $\Omega_1, \Omega_2$ είναι ίσα. \monades{6}
+    \end{rlist}
+\end{alist}

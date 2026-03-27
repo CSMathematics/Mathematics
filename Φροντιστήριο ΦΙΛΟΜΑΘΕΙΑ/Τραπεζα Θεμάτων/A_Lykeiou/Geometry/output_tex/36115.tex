@@ -1,0 +1,54 @@
+\Askhsh{36115}{2}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.2. Παραλληλόγραμμα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 36115.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται ισόπλευρο τρίγωνο ΑΒΓ . Στην προέκταση της ΒΓ (προς το μέρος του Γ) θεωρούμε τμήμα ΓΔ=ΒΓ. Φέρουμε τμήμα ΔΕ κάθετο στην ΑΔ στο σημείο της Δ , τέτοιο ώστε ΔΕ=ΒΓ (τα Α και Ε είναι στο ίδιο ημιεπίπεδο ως προς την ΒΔ).
+
+\begin{alist}
+\item Να βρείτε τις γωνίες του τριγώνου ΑΒΔ. \monades{12}
+
+\item Να αποδείξετε ότι το ΑΒΔΕ είναι παραλληλόγραμμο. \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(3,0){C}
+\tkzDefTriangle[equilateral](B,C) \tkzGetPoint{A}
+\tkzDefPoint(6,0){Delta}
+
+\tkzDefLine[orthogonal=through Delta](A,Delta) \tkzGetPoint{perp_dir}
+\tkzDefPointBy[homothety=center Delta ratio 1](perp_dir) \tkzGetPoint{E_trial}
+\tkzDefPointBy[homothety=center Delta ratio 0.577](perp_dir) % Wait, DE=BC=3.
+% perp_dir distance?
+\tkzDefCircle[R](Delta,3) \tkzGetPoint{dummy}
+\tkzInterLC(Delta,perp_dir)(Delta,dummy) \tkzGetPoints{E}{E_dummy}
+
+\draw[l3] (A)--(B)--(Delta)--cycle;
+\draw[l3] (A)--(C);
+\draw[l3] (Delta)--(E);
+\draw[l3] (E)--(A); % Prove it's a parallelogram ABD...E?
+\draw[l3, dashed] (A)--(Delta);
+
+\tkzDrawPoints(A,B,C,Delta,E)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[below](Delta){$\Delta$}
+\tkzLabelPoint[above right](E){$E$}
+
+\tkzMarkRightAngle(A,Delta,E)
+\tkzMarkSegments[mark=s|](B,C C,Gamma A,B A,C Gamma,Delta Delta,E)
+\end{tikzpicture}
+\end{center}
+\end{alist}

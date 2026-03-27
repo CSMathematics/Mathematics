@@ -1,0 +1,65 @@
+\Askhsh{34315}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.15. Εφαπτόμενα τμήματα
+    \item 4.8. Άθροισμα γωνιών κυρτού ν-γώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34315.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται κύκλος κέντρου Ο και ακτίνας 4 cm και εξωτερικό του σημείο Ρ. Έστω ΡΑ, ΡΒ τα εφαπτόμενα τμήματα που φέρονται από το Ρ, τα σημεία επαφής τους A, B με τον κύκλο αντίστοιχα και τέτοια ώστε η γωνία Α$\widehat{Ρ}$Β να ισούται με 60\textsuperscript{0}.
+
+\begin{alist}
+\item Να αποδείξετε ότι το μέτρο της γωνίας Α$\widehat{Ο}$Β είναι ίσο με 120\textsuperscript{0}. \monades{7}
+
+\item Αν ΡΟ η διακεντρική ευθεία του σημείου Ρ, τότε να υπολογίσετε:
+
+\begin{alist}
+\item
+  το μέτρο της γωνίας Α$\widehat{Ρ}$Ο, \monades{9}
+\item
+  το μήκος του τμήματος ΟΡ. \monades{9}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){O}
+% Radius is 4, R is at distance 8.
+\tkzDefPoint(6,0){P} % Let's use P = (-6,0) for left side placement? No, P=Ρ
+% PA and PB are tangents.
+\tkzDefPointBy[rotation=center O angle 60](P) \tkzGetPoint{A_dir} % Wait. Angle AOP = 60.
+% Distance OP = 8. Angle APO = 30. Angle AOP = 60.
+\tkzDefPoint(3, 5.196){A_temp} % 6 * cos60 = 3, 6 * sin60 = 5.196 (if OP=6, radius=3)
+% Let's just use tkz-euclide tangent macro
+\tkzDefPoint(2,0){O_radius}
+\tkzDrawCircle(O,O_radius)
+
+% P is outside. Let's place it on the left at distance 4 from O (radius is 2 in scale)
+\tkzDefPoint(-4,0){P}
+\tkzExtCircularAlley[R](O,2)(P)
+\tkzDefTangent[from=P](O,O_radius) \tkzGetPoints{B}{A} % B is top, A is bottom usually, let's see. A and B are the points.
+
+\draw[l3] (P)--(A);
+\draw[l3] (P)--(B);
+\draw[l3] (O)--(A);
+\draw[l3] (O)--(B);
+\draw[l3, dashed] (O)--(P);
+
+\tkzDrawPoints(O,P,A,B)
+\tkzLabelPoint[right](O){$O$}
+\tkzLabelPoint[left](P){$P$}
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+
+\tkzMarkRightAngle(O,A,P)
+\tkzMarkRightAngle(O,B,P)
+\tkzMarkAngle[size=0.6,mark=none](B,P,A)
+\tkzLabelAngle[pos=1](B,P,A){$60^\circ$}
+\end{tikzpicture}
+\end{center}
+\end{alist}
+\end{alist}

@@ -13,7 +13,7 @@ $ integral x d x $
 Κατανομή Poisson
 $ P(X_t=k)=e^(-λ t) (λ t)^t/k! $
 Άθροισμα γεωμετρικής προόδου
-$ sum_(i=1)^(10)x^i= (x^(10+1)-x)/(x-1) $
+$ sum_(i=1)^(10)x^i= (x^(10-1)-1)/(x-1)=(x^9-1)/(x-1) $
 Τριγωνιμετρικός κύκλος
 #cetz.canvas(length: 3cm, {
   import cetz.draw: *
@@ -90,8 +90,6 @@ $
         & =2x-3
 $
 Παράδειγμα κώδικα
-
-
 #show raw: set text(font: "Liberation Mono", 10pt)
 ```python
 def factorial(n):
@@ -124,3 +122,4 @@ int main() {
     return 0;
 }
 ```
+$ α x+β=0=> x=-β/α $

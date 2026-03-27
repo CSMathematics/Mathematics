@@ -1,0 +1,54 @@
+\Askhsh{18561}{2}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{9cm}
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % Define points based on the problem description
+    % Let B be the origin (0,0) for simplicity.
+    \tkzDefPoint(0,0){B}
+    % Let G be (4,0) (arbitrary x-coordinate for visualization)
+    \tkzDefPoint(4,0){G} % Gamma
+    % D is such that G is the midpoint of BD (since BΓ=ΓΔ and B,Γ,Δ are collinear)
+    \tkzDefPointBy[translation=through B and G](G) \tkzGetPoint{D} % G is midpoint of BD, so BD = 2 BG. D = G + (G-B) = 2G-B
+    % Let A be (3,4) (arbitrary coordinates for visualization)
+    \tkzDefPoint(3,4){A}
+    % E is such that B is the midpoint of AE (since BE=AB and E,B,A are collinear)
+    \tkzDefPointBy[translation=through A and B](B) \tkzGetPoint{E} % B is midpoint of AE, so AB = BE. E = B + (B-A) = 2B-A
+
+    % Z is defined by lines AZ || ED and DZ || EA. This forms parallelogram AEΔZ.
+    % In a parallelogram AEΔZ, vector AZ = vector EΔ, or vector AΔ = vector EZ.
+    % So Z = A + (D - E)
+    % A=(3,4), E=(-3,-4), D=(8,0) (from previous point definitions)
+    % D-E = (8 - (-3), 0 - (-4)) = (11, 4)
+    % Z = (3,4) + (11,4) = (14,8)
+    \tkzDefPoint(14,8){Z}
+
+    % Draw solid segments (sides of triangle ABG and segment AD)
+    \tkzDrawSegments[l3](A,B A,G A,D)
+
+    % Draw dotted segments (extensions)
+    \tkzDrawSegments[dotted](B,G G,D E,B)
+
+    % Draw dashed segments (parallel lines and ED)
+    \tkzDrawSegments[dashed](E,D A,Z D,Z)
+
+    % Draw points
+    \tkzDrawPoints(A,B,G,D,E,Z)
+
+    % Label points
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below](G){$\Gamma$}
+    \tkzLabelPoint[below right](D){$\Delta$}
+    \tkzLabelPoint[below left](E){E}
+    \tkzLabelPoint[above right](Z){Z}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο $AB\Gamma$. Προεκτείνουμε την πλευρά $B\Gamma$ κατά τμήμα $\Gamma\Delta=B\Gamma$ και την πλευρά $AB$ κατά τμήμα $BE=AB$.
+\begin{alist}
+\item Αν $(AB\Gamma)= 25 \text{ m}^2$, να αποδείξετε ότι $(B\Delta E)=50 \text{ m}^2$. \monades{10}
+\item Από την κορυφή $A$ φέρουμε ευθεία παράλληλη στην $E\Delta$ και από την κορυφή $\Delta$ ευθεία παράλληλη στην $EA$ που τέμνονται στο σημείο $Z$. Να αποδείξετε ότι το εμβαδόν του τριγώνου $AZ\Delta$ είναι 4-πλάσιο του εμβαδού του τριγώνου $AB\Gamma$. \monades{15}
+\end{alist}

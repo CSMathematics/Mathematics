@@ -1,0 +1,52 @@
+\lysh{12999}{4}
+
+\begin{alist}
+\item Η ανεξάρτητη μεταβλητή είναι ο χρόνος $t$ και η εξαρτημένη μεταβλητή είναι η ταχύτητα $u$.
+Επειδή ο χρόνος είναι μη αρνητικός, το ευρύτερο δυνατό πεδίο ορισμού της συνάρτησης είναι $t \in [0, +\infty)$.
+
+\item
+\begin{rlist}
+\item Εφόσον το όχημα Α ξεκινά από θέση ηρεμίας, η αρχική του ταχύτητα θα είναι $0 m/sec$, άρα αντιστοιχεί στη συνάρτηση της ταχύτητάς του ως προς το χρόνο η ευθεία $(I)$.
+Αντίστοιχα, εφόσον το όχημα Β ξεκινά με αρχική ταχύτητα $2 m/sec$ αντιστοιχεί στη συνάρτηση της ταχύτητάς του ως προς το χρόνο η ευθεία $(I\!I)$.
+\item Τις χρονικές στιγμές από $3$ έως $4 sec$ το όχημα της γραμμής $(I\!I)$ κινείται ταχύτερα. Τη χρονική στιγμή $t = 4 sec$ τα δύο οχήματα έχουν την ίδια ταχύτητα, ενώ τις χρονικές στιγμές από $4$ έως $5 sec$ το όχημα της γραμμής $(I)$ κινείται ταχύτερα.
+\item Η επιτάχυνση $\alpha$ αποτελεί την κλίση της ευθείας $(I\!I\!I)$, η οποία θα περιγράφει την ταχύτητα ως προς το χρόνο του οχήματος Γ, το οποίο εκτελεί ευθύγραμμη ομαλά επιταχυνόμενη κίνηση με αρχική ταχύτητα $2m/sec$. Για να έχει σε κάθε χρονική στιγμή ταχύτητα μεγαλύτερη από αυτήν του οχήματος Α, θα πρέπει η ευθεία $(I\!I\!I)$ να μην τέμνεται με την ευθεία $(I)$ που περιγράφει την κίνηση του οχήματος Α. Εφόσον αυτή ξεκινά από το σημείο $\Lambda(0,2)$, θα πρέπει η κλίση της να είναι μεγαλύτερη ή ίση με αυτής της ευθείας $(I)$. Στο παρακάτω σχήμα φαίνονται δύο ευθείες: η $(I\!I\!I)$ περιγράφει όχημα που εκτελεί Ευθύγραμμη ομαλά επιταχυνόμενη κίνηση με αρχική ταχύτητα $2 m/sec$ και επιτάχυνση ίση με του οχήματος Α, ενώ η ευθεία $(IV)$ περιγράφει την κίνηση ενός οχήματος με επιτάχυνση μεγαλύτερη από αυτήν του οχήματος Α.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=center,
+    xlabel={$t$ (sec)},
+    ylabel={$u$ (m/sec)},
+    xmin=0, xmax=6,
+    ymin=0, ymax=10,
+    xtick={4},
+    ytick={2},
+    ticklabel style={font=\footnotesize},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south west},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!20},
+    major grid style={line width=.2pt,draw=gray!50},
+    width=10cm,
+    height=8cm
+]
+% Line I (Vehicle A)
+\addplot[domain=0:5.5, thick, maincolor] {x} node[right, pos=1] {($I$)};
+
+% Line II (Vehicle B)
+\addplot[domain=0:5.5, thick, secondarycolor] {0.5*x + 2} node[right, pos=1] {($I\!I$)};
+
+% Line III (Vehicle C)
+\addplot[domain=0:5.5, thick, orange, dashed] {x + 2} node[right, pos=0.8] {($I\!I\!I$)};
+
+% Line IV (Vehicle >A)
+\addplot[domain=0:5, thick, green!70!black, dashed] {1.5*x + 2} node[right, pos=0.8] {($IV$)};
+
+\addplot[mark=*, mark options={fill=black}, nodes near coords={}, only marks] coordinates {(4,4)};
+
+\draw[dashed] (axis cs:4,0) -- (axis cs:4,4);
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Άσκηση 12999}
+\end{center}
+\end{rlist}
+\end{alist}

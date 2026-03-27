@@ -1,0 +1,55 @@
+\Askhsh{31149_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\textbf{ΛΥΣΗ}
+
+\begin{alist}
+    \item Παρατηρούμε ότι για $x > 0$ είναι $1 + \frac{1}{x} > 1 \Leftrightarrow \ln \left(1 + \frac{1}{x}\right) > \ln 1 = 0$, άρα $f(x) = \frac{\ln\left(1+\frac{1}{x}\right)}{x^2} > 0$.
+    Για κάθε $x > 0$ έχουμε
+    \begin{align*}
+        f'(x) &= \left[\frac{\ln\left(1+\frac{1}{x}\right)}{x^2}\right]' \\
+        &= \frac{\left[\ln\left(1+\frac{1}{x}\right)\right]' \cdot x^2 - \ln\left(1+\frac{1}{x}\right)\cdot (x^2)'}{(x^2)^2} \\
+        &= \frac{\left(\frac{1}{1+\frac{1}{x}} \cdot \left(-\frac{1}{x^2}\right)\right) \cdot x^2 - \ln\left(1+\frac{1}{x}\right)\cdot 2x}{x^4} \\
+        &= \frac{\left(\frac{x}{x+1} \cdot \left(-\frac{1}{x^2}\right)\right) \cdot x^2 - \ln\left(1+\frac{1}{x}\right)\cdot 2x}{x^4} \\
+        &= \frac{-\frac{x}{x+1} - 2x \ln\left(1+\frac{1}{x}\right)}{x^4} \\
+        &= -\frac{\frac{1}{x+1} + 2 \ln\left(1+\frac{1}{x}\right)}{x^3}
+    \end{align*}
+    Επειδή $\ln\left(1+\frac{1}{x}\right) = x^2 f(x)$, η παράσταση γίνεται:
+    \[
+        f'(x) = -\frac{\frac{1}{x+1} + 2x^2 f(x)}{x^3}
+    \]
+    Παρατηρούμε ότι ο αριθμητής $\left(\frac{1}{x+1} + 2x^2 f(x)\right)$ και ο παρονομαστής $x^3$ του κλάσματος είναι θετικοί αριθμοί για $x > 0$.
+    Συνεπώς, $f'(x) < 0$, για κάθε $x \in (0, +\infty)$.
+    Ώστε η $f$ είναι γνησίως φθίνουσα στο $(0, +\infty)$. \monades{X}
+
+    \item Η ανίσωση γράφεται ισοδύναμα
+    \[
+        \ln \left(\frac{1+f(x)}{f(x)}\right) > f^2(x) \cdot f(\ln2) \Leftrightarrow \frac{\ln\left(\frac{1}{f(x)}+1\right)}{f^2(x)} > f(\ln2) \Leftrightarrow f(f(x)) > f(\ln2)
+    \]
+    και καθώς η $f$ είναι γνησίως φθίνουσα παίρνουμε $f(x) < \ln2$.
+    Αλλά $f(1) = \frac{\ln\left(1+\frac{1}{1}\right)}{1^2} = \ln2$.
+    Έτσι, η τελευταία ανίσωση γίνεται $f(x) < f(1) \Leftrightarrow x > 1$. \monades{X}
+
+    \item Καθώς $f(x) > 0$ για κάθε $x > 0$, το ζητούμενο εμβαδόν θα είναι $E = \int_{1/2}^{1} f(x)dx$.
+    Θέτουμε $u = 1 + \frac{1}{x}$. Τότε $du = -\frac{1}{x^2}dx$.
+    Για $x = \frac{1}{2}$, παίρνουμε $u = 1 + \frac{1}{1/2} = 1+2 = 3$.
+    Για $x = 1$, παίρνουμε $u = 1 + \frac{1}{1} = 2$.
+    Έτσι, έχουμε:
+    \begin{align*}
+        E &= \int_{3}^{2} \ln u \cdot (-du) \\
+        &= \int_{2}^{3} \ln u \cdot du
+    \end{align*}
+    Εφαρμόζουμε ολοκλήρωση κατά μέρη:
+    \begin{align*}
+        E &= \int_{2}^{3} (u)' \cdot \ln u \cdot du \\
+        &= [u \cdot \ln u]_{2}^{3} - \int_{2}^{3} u \cdot (\ln u)' du \\
+        &= (3\ln3 - 2\ln2) - \int_{2}^{3} u \cdot \frac{1}{u} du \\
+        &= 3\ln3 - 2\ln2 - \int_{2}^{3} 1 \cdot du \\
+        &= \ln(3^3) - \ln(2^2) - [u]_{2}^{3} \\
+        &= \ln27 - \ln4 - (3-2) \\
+        &= \ln \left(\frac{27}{4}\right) - 1 \\
+        &= \ln \left(\frac{27}{4}\right) - \ln e \\
+        &= \ln \left(\frac{27}{4e}\right)
+    \end{align*} \monades{X}
+\end{alist}

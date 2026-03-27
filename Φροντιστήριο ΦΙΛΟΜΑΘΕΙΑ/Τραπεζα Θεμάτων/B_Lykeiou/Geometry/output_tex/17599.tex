@@ -1,0 +1,67 @@
+\Askhsh{17599}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.75, font=\normalsize]
+        % Ορισμός της πλευράς του τετραγώνου (για σχεδίαση)
+        \def\a{4}
+
+        % Ορισμός των κορυφών του τετραγώνου (Α: πάνω-αριστερά, Β: κάτω-αριστερά, Γ: κάτω-δεξιά, Δ: πάνω-δεξιά)
+        \tkzDefPoint(0,\a){A}
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(\a,0){Gamma}
+        \tkzDefPoint(\a,\a){Delta}
+        
+        % Σχεδίαση του περιγράμματος του τετραγώνου
+        \tkzDrawPolygon[line width=0.8pt](A,B,Gamma,Delta)
+
+        % Γέμισμα των περιοχών (η σειρά έχει σημασία για αλληλεπικαλυπτόμενες περιοχές)
+        % 1. Γέμισμα της περιοχής Χ3 (φακοειδής, με τελείες)
+        \begin{scope}
+            % Περιορισμός στο τεταρτοκύκλιο με κέντρο Α
+            \clip (A.center) -- (B.center) arc (270:0:\a) -- (Delta.center) -- cycle;
+            % Περιορισμός στο τεταρτοκύκλιο με κέντρο Γ (η τομή με τον προηγούμενο περιορισμό σχηματίζει τον φακό)
+            \clip (Gamma.center) -- (B.center) arc (180:90:\a) -- (Delta.center) -- cycle;
+            \fill[pattern=dots, pattern color=thirdcolor!50] (0,0) rectangle (\a,\a); % Γέμισμα της περιοχής τομής
+        \end{scope}
+
+        % 2. Γέμισμα της περιοχής Χ2 (ημικύκλιο, με διασταυρούμενες κουκκίδες)
+        \tkzDefMidPoint(B,Gamma) \tkzGetPoint{M} % Μέσο της διαμέτρου ΒΓ για το ημικύκλιο
+        \fill[pattern=crosshatch dots, pattern color=maincolor!50] (B.center) arc (180:0:\a/2) -- (Gamma.center) -- cycle;
+
+        % 3. Γέμισμα της περιοχής Χ1 (δεξιά περιοχή, με τούβλα)
+        % Περιοχή οριζόμενη από Δ-Γ, Γ-Β και το τόξο από Β προς Δ με κέντρο Γ
+        \fill[pattern=bricks, pattern color=secondarycolor!50] (Delta.center) -- (Gamma.center) -- (B.center) arc (180:90:\a) -- cycle;
+
+        % Σχεδίαση των ορίων των τόξων (πάνω από τα γεμίσματα για καθαρές γραμμές)
+        \draw[maincolor, line width=0.8pt] (B) arc (270:0:\a); % Τόξο με κέντρο Α (από Β προς Δ)
+        \draw[maincolor, line width=0.8pt] (B) arc (180:90:\a); % Τόξο με κέντρο Γ (από Β προς Δ)
+        \draw[maincolor, line width=0.8pt] (B) arc (180:0:\a/2); % Ημικύκλιο με διάμετρο ΒΓ
+
+        % Τοποθέτηση σημείων και ετικετών
+        \tkzDrawPoints(A,B,Gamma,Delta)
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](Gamma){$\Gamma$}
+        \tkzLabelPoint[above right](Delta){$\Delta$}
+        \tkzLabelPoint[below=1mm]({\a/2},0){$\alpha$} % Ετικέτα για την πλευρά ΒΓ
+        \tkzLabelPoint[left=1mm](0,{\a/2}){$\alpha$}  % Ετικέτα για την πλευρά ΑΒ
+
+        % Τοποθέτηση ετικετών X1, X2, X3
+        \node at (0.85*\a, 0.15*\a) {$X_1$};
+        \node at (0.15*\a, 0.15*\a) {$X_2$};
+        \node at (0.5*\a, 0.6*\a) {$X_3$};
+    \end{tikzpicture}
+\end{wrapfigure}
+\onoma{\textbf{ΘΕΜΑ 4}}
+
+Σε τετράγωνο ΑΒΓΔ πλευράς $\alpha$ του παρακάτω σχήματος, γράφουμε τεταρτοκύκλιο εσωτερικά του τετραγώνου με κέντρο Α και ακτίνα $\alpha$.
+\begin{alist}
+    \item Αν $X_1$ είναι το χωρίο του τετραγώνου που βρίσκεται εξωτερικά του τεταρτοκυκλίου, να αποδείξετε ότι το εμβαδόν του ισούται με: $(X_1) = \frac{\alpha^2}{4} \cdot (4-\pi)$ \monades{5}
+    \item Με διάμετρο ΑΒ κατασκευάζουμε ημικύκλιο εσωτερικά του τετραγώνου. Αν $X_2$ είναι το χωρίο του ημικυκλίου και $X_3$ το χωρίο του τεταρτοκυκλίου που βρίσκεται εξωτερικά του ημικυκλίου, να υπολογίσετε τα εμβαδά των δύο χωρίων $X_2$ και $X_3$. \monades{11}
+    \item Ποιο από τα χωρία $X_1$ κι $X_2$ έχει το μεγαλύτερο εμβαδόν; Να δικαιολογήσετε την απάντησή σας. \monades{9}
+\end{alist}

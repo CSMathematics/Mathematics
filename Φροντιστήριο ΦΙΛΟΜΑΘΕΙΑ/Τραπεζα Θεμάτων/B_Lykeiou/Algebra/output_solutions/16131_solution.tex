@@ -1,0 +1,40 @@
+\begin{alist}
+\item Η εξίσωση γράφεται $\varepsilon\varphi x = \varepsilon\varphi\dfrac{\pi}{4}$, άρα $x = \lambda\pi + \dfrac{\pi}{4}$, όπου $\lambda \in \mathbb{Z}$. \\
+Για $\lambda = 0$ παίρνουμε $x = \dfrac{\pi}{4}$, δεκτή. \\
+Για $\lambda = 1$ παίρνουμε $x = \pi + \dfrac{\pi}{4} = \dfrac{5\pi}{4}$, δεκτή. \\
+Για $\lambda = 2$ παίρνουμε $x = 2\pi + \dfrac{\pi}{4} > 2\pi$, απορρίπτεται. \\
+Για $\lambda = -1$ παίρνουμε $x = -\pi + \dfrac{\pi}{4} = -\dfrac{3\pi}{4} < 0$, απορρίπτεται. \\
+Επομένως δεν υπάρχουν άλλες λύσεις της εξίσωσης στο διάστημα $(0, 2\pi)$ εκτός από τις $x = \dfrac{\pi}{4}, x = \dfrac{5\pi}{4}$.
+
+\item Γνωρίζουμε ότι η $\varepsilon\varphi\omega$ για μια γωνία $\omega$, είναι η τεταγμένη του σημείου στο οποίο η τελική πλευρά της γωνίας $\omega$ τέμνει τον άξονα των εφαπτομένων (την ευθεία $(\varepsilon)$ του σχήματος). \\
+Οι ημιευθείες ΟΒ και ΟΓ είναι οι τελικές πλευρές των γωνιών $\dfrac{\pi}{4}, \dfrac{5\pi}{4}$ αντίστοιχα και οι οποίες τέμνουν τον άξονα των εφαπτομένων στο σημείο Α του οποίου η τεταγμένη είναι $1$.
+\end{alist}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-1.5, xmax=1.8,
+    ymin=-1.5, ymax=1.8,
+    xtick={1},
+    xticklabels={$1$},
+    ytick={1},
+    yticklabels={$1$},
+    grid=both,
+    grid style={solid, gray!20},
+    thick,
+    width=8cm, height=8cm,
+    samples=100
+]
+\draw[green!60!black, thick] (0,0) circle [radius=1];
+\draw[red!80!white, ultra thick] (1,-1.5) -- (1,1.8) node[left, text=black] {$(\varepsilon)$};
+\draw[black, thick] (-1.5,-1.5) -- (1.5,1.5);
+\draw[blue, thick, ->] (0.4,0) arc[start angle=0, end angle=45, radius=0.4] node[midway, right] {$\dfrac{\pi}{4}$};
+\draw[blue, thick, ->] (0.3,0) arc[start angle=0, end angle=225, radius=0.3] node[above left] {$\dfrac{5\pi}{4}$};
+\addplot[mark=*, fill=black] coordinates {(1, 1)} node[right] {A};
+\addplot[mark=*, fill=gray] coordinates {(0.707, 0.707)} node[above, yshift=2mm] {B};
+\addplot[mark=*, fill=gray] coordinates {(-0.707, -0.707)} node[below] {$\Gamma$};
+\node[below right, text=blue] at (0,0) {O};
+\draw[dashed, thick] (0,1) -- (1,1);
+\end{axis}
+\end{tikzpicture}
+\end{center}

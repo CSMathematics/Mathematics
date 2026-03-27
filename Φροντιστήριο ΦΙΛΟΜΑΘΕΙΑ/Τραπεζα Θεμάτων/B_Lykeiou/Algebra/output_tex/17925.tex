@@ -1,0 +1,39 @@
+% ===================================================================
+%  Αρχείο: 17925_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Στο παρακάτω σχήμα δίνεται τμήμα της γραφικής παράστασης της συνάρτησης $f(x) = \frac{1}{4}x^4 - x^2$, $x \in \mathbb{R}$ και το σημείο $A\left(-1, -\frac{3}{4}\right)$ αυτής.
+
+\begin{center}
+\begin{tikzpicture}[scale=1, >=latex]
+    \draw[very thin, color=gray!30] (-3.5,-1.5) grid (1.5,4.5);
+    \draw[->] (-3.5,0) -- (2,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,5) node[above] {$y$};
+    
+    \foreach \x in {-3,-2,-1,1}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {-1,1,2,3,4}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = 0.25*x^4 - x^2  for x <= 0
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=-2.3:0] plot (\x, {0.25*\x*\x*\x*\x - \x*\x}) node[above left] {$C_f$};
+    
+    % Point A
+    \filldraw (-1,-0.75) circle (1.5pt) node[below left] {$A$};
+    \draw[dashed] (-1,0) -- (-1,-0.75) -- (0,-0.75);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να δείξετε ότι $\alpha = -1$. \monades{6}
+\item Για $\alpha = -1$,
+\begin{rlist}
+\item Να αποδείξετε ότι $f(-x) = f(x)$ για κάθε $x \in \mathbb{R}$. \monades{5}
+\item Να μεταφέρετε στην κόλλα σας το σχήμα και να συμπληρώσετε τη γραφική παράσταση της $f$ για $x > 0$. \monades{6}
+\end{rlist}
+\item Αφού επιβεβαιώσετε ότι $f(\sqrt{3}) = -\frac{3}{4}$, με χρήση του β) ερωτήματος ή με όποιον άλλο τρόπο θέλετε, να βρείτε τα κοινά σημεία της ευθείας $y = -\frac{3}{4}$ με την γραφική παράσταση της $f$. \monades{8}
+\end{alist}

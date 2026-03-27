@@ -1,0 +1,78 @@
+\Askhsh{25257}{4}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.4 Ρυθμός μεταβολής.
+\end{ylh}
+\begin{wrapfigure}{r}{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=2.5, font=\small]
+        % Define coordinates
+        \tkzDefPoint(0,0.8){A}
+        \tkzDefPoint(-0.8,0){B}
+        \tkzDefPoint(0.8,0){E}
+        \tkzDefPoint(-0.8,-1){G} % Gamma
+        \tkzDefPoint(0.8,-1){D}  % Delta
+        \tkzDefPoint(0,0){P}
+        \tkzDefPoint(0,-1){N}
+        
+        % M is on AP, let's place it at y=0.4
+        \tkzDefPoint(0,0.4){M}
+        % K and L are at the same height as M (from similar triangles)
+        \tkzDefPoint(-0.4,0.4){K}
+        \tkzDefPoint(0.4,0.4){L} % Lambda
+        
+        % H, Z for the dashed line
+        \tkzDefPoint(-1.2, 0.8){H}
+        \tkzDefPoint(1.2, 0.8){Z}
+
+        % Fill the background rectangle to simulate glass panes
+        \tkzFillPolygon[blue!10, opacity=0.4](G,B,E,D)
+
+        % Fill the moving screen area (triangle AKL)
+        \tkzFillPolygon[yellow, opacity=0.8](A,K,L)
+        
+        % Draw the window frame
+        \tkzDrawPolygon[line width=1.5pt, brown!80!black](A,B,G,D,E)
+        
+        % Draw the internal dividing lines
+        \tkzDrawSegments[thick](A,N B,E K,L)
+        
+        % Draw the dashed line HZ
+        \tkzDrawLine[dashed, thick, black](H,Z)
+        
+        % Right angle markers
+        \tkzMarkRightAngle[size=0.15, thick](A,P,E)
+        \tkzMarkRightAngle[size=0.15, thick](A,M,L)
+
+        % The big gray arrows
+        \draw[line width=4pt, gray!80, -{Stealth[length=5mm, width=5mm]}] ($(K)+(0.1,-0.1)$) -- ($(K)+(0.1,-0.7)$);
+        \draw[line width=4pt, gray!80, -{Stealth[length=5mm, width=5mm]}] ($(L)+(-0.1,-0.1)$) -- ($(L)+(-0.1,-0.7)$);
+        
+        % Labels for points
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[above left, inner sep=2pt](B){B}
+        \tkzLabelPoint[above right, inner sep=2pt](E){E}
+        \tkzLabelPoint[below left, inner sep=2pt](G){$\Gamma$}
+        \tkzLabelPoint[below right, inner sep=2pt](D){$\Delta$}
+        \tkzLabelPoint[left, inner sep=2pt](P){P}
+        \tkzLabelPoint[below](N){N}
+        \tkzLabelPoint[left, inner sep=2pt](M){M}
+        \tkzLabelPoint[above left, inner sep=2pt](K){K}
+        \tkzLabelPoint[above right, inner sep=2pt](L){$\Lambda$}
+        \tkzLabelPoint[left](H){H}
+        \tkzLabelPoint[right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο διπλανό σχήμα φαίνεται ένα παράθυρο το οποίο αποτελείται από το ορθογώνιο ΒΓΔΕ και το ισοσκελές τρίγωνο ΑΒΕ. Είναι $ΑΡ=0,8\,\text{m}$, $ΒΕ=1,6\,\text{m}$, $ΑΜ = x\,\text{m}$, $ΒΓ=1\,\text{m}$. Το ορατό κάτω μέρος ΚΛ μιας ηλεκτροκίνητης σίτας, κατεβαίνει παράλληλα προς την αρχική της θέση ΗΖ, με σταθερό ρυθμό, ώστε το Μ να διαγράφει το ευθύγραμμο τμήμα ΑΝ (με $ΑΜ \neq 0$). Αν $Ε=Ε(x)$ είναι το εμβαδό του παραθύρου που καλύπτει η σίτα, τότε:
+\begin{alist}
+    \item Να αποδείξετε ότι για το εμβαδό $Ε$, ισχύει
+    \[ E(x) = \begin{cases} x^2 & , \text{ αν } x \in \left(0, \frac{4}{5}\right) \\ \frac{8}{5}x - \frac{16}{25} & , \text{ αν } x \in \left[\frac{4}{5}, \frac{9}{5}\right] \end{cases}, \text{ σε m}^2. \]
+    \monades{08}
+
+    \item Να αποδείξετε ότι ο ρυθμός μεταβολής του εμβαδού $Ε$ ως προς $x$, όταν $x=\frac{4}{5}\,\text{m}$, είναι ίσος με $E'\left(\frac{4}{5}\right)=\frac{8}{5}\,\text{m}^2/\text{m}$.
+    \monades{09}
+
+    \item Να βρείτε το ρυθμό μεταβολής του εμβαδού $Ε$ ως προς τον χρόνο $t$, τη χρονική στιγμή για την οποία ισχύει $x=\frac{4}{5}\,\text{m}$, αν δίνεται επιπλέον ότι $x'(t) = 0,08\,\text{m/s}$ για κάθε $t \ge 0$.
+    \monades{08}
+\end{alist}

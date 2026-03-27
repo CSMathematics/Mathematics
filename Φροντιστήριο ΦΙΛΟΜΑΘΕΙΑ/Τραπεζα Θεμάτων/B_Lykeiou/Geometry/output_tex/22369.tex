@@ -1,0 +1,62 @@
+\Askhsh{22369}{4}
+\begin{ylh}{1}
+    \item 9.4. Γενίκευση του Πυθαγόρειου θεωρήματος
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{7.5cm}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Define the points using the calculated coordinates based on Γ=(0,0)
+    \tkzDefPoint(0,0){G} % Gamma
+    \tkzDefPoint(7,0){B}
+    \pgfmathsetmacro{\Ax}{5/7}
+    \pgfmathsetmacro{\Ay}{20*sqrt(3)/7}
+    \tkzDefPoint(\Ax,\Ay){A}
+
+    % For the rhombus
+    \tkzDefPoint(-5,0){D} % Delta
+    \pgfmathsetmacro{\Ex}{-30/7} % -5 - (5/7) = -35/7 = -5
+    \tkzDefPoint(\Ex,\Ay){E} % E has the same y-coordinate as A for a rhombus
+
+    % Draw the triangle ABΓ (solid lines)
+    \tkzDrawSegments[thick](A,B B,G G,A)
+
+    % Draw the rhombus AΓΔE (ΓΔ, ΔE, EA as dashed lines, AΓ is already solid)
+    \tkzDrawSegments[dashed,secondarycolor](G,D D,E E,A)
+
+    % Mark the angle A
+    \tkzMarkAngle[fill=maincolor!20,size=0.8cm](G,A,B)
+    \tkzLabelAngle[pos=1.1](G,A,B){$60^\circ$}
+
+    % Labels for points
+    \tkzLabelPoint[below left](G){$\Gamma$}
+    \tkzLabelPoint[below right](B){B}
+    \tkzLabelPoint[above](A){A}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[above left](E){E}
+
+    % Side lengths
+    \tkzLabelSegment[above right,pos=0.6](A,B){8}
+    \tkzLabelSegment[below,pos=0.5](G,B){7}
+
+    % Dashed lines extending horizontally as shown in the original image
+    \coordinate (E_left) at (\Ex-1.5,\Ay);
+    \coordinate (A_right) at (\Ax+1.5,\Ay);
+    \coordinate (D_left) at (-6.5,0);
+    \coordinate (G_right) at (1.5,0);
+
+    \tkzDrawSegments[dotted,maincolor](E_left,E A,A_right D_left,D G,G_right)
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο ΑΒΓ με $AB = 8$, $B\Gamma = 7$ και $\hat{A} = 60^\circ$.
+\begin{alist}
+\item Να αποδείξετε ότι $A\Gamma = 3$ ή $A\Gamma = 5$. \monades{6}
+\item Έστω ότι το τρίγωνο ΑΒΓ είναι οξυγώνιο όπως στο παρακάτω σχήμα.
+    \begin{rlist}
+    \item Να αποδείξετε ότι $A\Gamma = 5$. \monades{6}
+    \item Να αποδείξετε ότι το εμβαδόν του τριγώνου είναι $(AB\Gamma) = 10\sqrt{3}$. \monades{6}
+    \item Προεκτείνουμε την ΒΓ κατά τμήμα $\Gamma\Delta = A\Gamma$ και σχηματίζουμε τον ρόμβο AΓΔE.
+    Να βρείτε το εμβαδόν του ρόμβου AΓΔE. \monades{7}
+    \end{rlist}
+\end{alist}

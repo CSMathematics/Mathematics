@@ -1,0 +1,57 @@
+\Askhsh{22389}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Ορισμός σημείων με βάση τις ιδιότητες (π.χ. ΑΓ=4, ΑΒ=3)
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,3){B} % Έστω AB=3
+        \tkzDefPoint(4,0){C} % Έστω ΑΓ=4 (οπότε E είναι το μέσο της ΑΓ)
+
+        % Υπολογισμός σημείων Δ και Ε
+        % Ε είναι το μέσο της ΑΓ
+        \tkzDefMidPoint(A,C) \tkzGetPoint{E}
+        % R = BA = 3. Δ είναι επί της ΒΓ τέτοιο ώστε ΒΔ = R = 3.
+        % ΒΓ = sqrt(4^2+3^2) = 5.
+        % Δ διαιρεί το ΒΓ σε αναλογία 3:(5-3)=3:2 από το Β.
+        \tkzDefPointWith[linear,K=3/5](B,C) \tkzGetPoint{D} % D is 3/5 of the way from B to C
+
+        % Σχεδίαση τριγώνου ΑΒΓ
+        \tkzDrawPolygon(A,B,C)
+        \tkzDrawSegment(D,E)
+
+        % Σχεδίαση τόξων
+        % Κύκλος (B,R) με R=BA. Τόξο από Α προς Δ.
+        \tkzDrawArc[dashed, maincolor](B,A)(D)
+        % Κύκλος (Γ,ρ) με ρ=ΓΔ. Τόξο από Δ προς Ε. (Σημείωση: ρ = ΓΕ = ΑΓ/2)
+        \tkzDrawArc[dashed, maincolor](C,D)(E)
+
+        % Σημεία και ετικέτες
+        \tkzDrawPoints(A,B,C,D,E)
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[above right](D){$\Delta$}
+        \tkzLabelPoint[below](E){E}
+
+        % Σήμανση ορθής γωνίας στο Α
+        \tkzMarkRightAngle[fill=secondarycolor!20](C,A,B)
+
+        % Σήμανση γωνιών στο Β και Γ (όπως στο αρχικό σχήμα)
+        \tkzMarkAngle[fill=secondarycolor!20,size=0.5](C,B,A)
+        \tkzMarkAngle[fill=secondarycolor!20,size=0.5](A,C,B)
+
+        % Σήμανση ίσων τμημάτων ΑΕ και ΕΓ
+        \tkzMarkSegments[mark=s|](A,E E,C)
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ορθογώνιο τρίγωνο ΑΒΓ με $\hat{Α} = 90^\circ$. Με κέντρο το σημείο Β και ακτίνα $R = ΒΑ$ γράφουμε τον κύκλο $(Β, R)$ ο οποίος τέμνει την πλευρά ΒΓ στο σημείο Δ. Με κέντρο το σημείο Γ και ακτίνα $\rho = ΓΔ$ γράφουμε τον κύκλο $(\Gamma, \rho)$ ο οποίος τέμνει την πλευρά ΑΓ στο σημείο Ε. Έστω ότι το Ε είναι το μέσο της ΑΓ.
+\begin{alist}
+\item Να αποδείξετε ότι $\rho = \frac{2}{3}R$. \monades{8}
+\item Έστω $E_1$ το εμβαδόν του τριγώνου ΑΒΓ και $E_2$ το εμβαδόν του κύκλου $(Β, R)$. Να αποδείξετε ότι $\frac{E_2}{E_1} = \frac{3\pi}{2}$. \monades{8}
+\item Έστω $\hat{Β} = \mu^\circ$ και $E_3$ και $E_4$ είναι το εμβαδά των κυκλικών τομέων $\overset{\frown}{ΒΔΑ}$ και $\overset{\frown}{ΓΔΕ}$ αντίστοιχα. Να αποδείξετε ότι $\frac{E_4}{E_3} = \frac{4(90-\mu)}{9\mu}$. \monades{9}
+\end{alist}

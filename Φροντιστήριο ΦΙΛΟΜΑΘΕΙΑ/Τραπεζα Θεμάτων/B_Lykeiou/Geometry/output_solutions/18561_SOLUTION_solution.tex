@@ -1,0 +1,67 @@
+\Askhsh{18561_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\OnPar{ΛΥΣΗ}
+\begin{wrapfigure}[26]{r}{8cm}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Define points
+    \tkzDefPoint(0,0){B}
+    \tkzDefPoint(3,0){C} % Gamma
+    \tkzDefPoint(6,0){D} % Delta
+    \tkzDefPoint(1.5,4){A}
+    \tkzDefPoint(-1.5,-4){E}
+    % Z such that AEZΔ is a parallelogram (vector AE = vector ΔZ).
+    % This means Z = Δ + vector(AE) = Δ + E - A.
+    \tkzDefPointBy[translation=from A to E](D) \tkzGetPoint{Z}
+
+    % Draw solid segments (triangle ABΓ, line ΓZ)
+    \tkzDrawSegment[line width=0.8pt](A,B)
+    \tkzDrawSegment[line width=0.8pt](B,C)
+    \tkzDrawSegment[line width=0.8pt](A,C)
+    \tkzDrawSegment[line width=0.8pt](C,Z)
+
+    % Draw dotted segments (extensions)
+    \tkzDrawSegment[dotted,line width=0.8pt](C,D)
+    \tkzDrawSegment[dotted,line width=0.8pt](B,E)
+
+    % Draw dashed segments (parallelogram AEZΔ sides and diagonals)
+    \tkzDrawSegment[dashed,line width=0.8pt](A,D) % Side ΔA
+    \tkzDrawSegment[dashed,line width=0.8pt](E,D) % Diagonal EΔ
+    \tkzDrawSegment[dashed,line width=0.8pt](D,Z) % Side ZΔ
+    \tkzDrawSegment[dashed,line width=0.8pt](E,Z) % Side EZ
+    \tkzDrawSegment[dashed,line width=0.8pt](A,Z) % Diagonal AZ
+
+    % Draw points
+    \tkzDrawPoints(A,B,C,D,E,Z)
+
+    % Labels for points
+    \tkzLabelPoint[above](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[above right](C){$\Gamma$} % Gamma
+    \tkzLabelPoint[above right](D){$\Delta$} % Delta
+    \tkzLabelPoint[below left](E){E}
+    \tkzLabelPoint[below right](Z){Z}
+
+    % Labels for side lengths
+    \tkzLabelSegment[below](B,C){$\alpha$}
+    \tkzLabelSegment[below](C,D){$\alpha$}
+    \tkzLabelSegment[left](A,B){$\gamma$}
+    \tkzLabelSegment[below left](B,E){$\gamma$}
+
+    % Mark and label angles
+    % Internal angle B
+    \tkzMarkAngle[arc=l,size=0.5cm](A,B,C)
+    % External angle B_ext
+    \tkzMarkAngle[arc=ll,size=0.5cm](E,B,C)
+    \tkzLabelAngle[pos=0.7, xshift=1mm](E,B,C){B\textgreek{εξ}} % Label for external angle
+
+\end{tikzpicture}
+\end{wrapfigure}
+Έστω το τρίγωνο AB$\Gamma$ με $(\text{AB}\Gamma) = 25 \text{ m}^2$ στο οποίο έχουμε προεκτείνει την πλευρά $\alpha = \text{B}\Gamma$ κατά τμήμα $\Gamma\Delta = \alpha$ και την πλευρά $\gamma = \text{AB}$ κατά τμήμα $\text{BE} = \gamma$.
+
+\begin{alist}
+    \item Τα τρίγωνα AB$\Gamma$ και B$\Delta$E έχουν $\hat{B} + \hat{B}_{\varepsilon\xi}=180^\circ$, άρα ο λόγος των εμβαδών τους θα ισούται με το λόγο των γινομένων των πλευρών που περιέχουν τις γωνίες αυτές. Δηλαδή $\frac{(\text{AB}\Gamma)}{(\text{B}\Delta\text{E})} = \frac{\gamma \cdot \alpha}{\gamma \cdot 2\alpha} = \frac{1}{2}$, άρα $(\text{B}\Delta\text{E}) = 2 \cdot (\text{AB}\Gamma)$ ή $(\text{B}\Delta\text{E}) = 50 \text{ m}^2$.
+    \item Στο τρίγωνο AB$\Delta$ το τμήμα A$\Gamma$ είναι διάμεσος που αντιστοιχεί στην πλευρά B$\Delta$, οπότε τα τρίγωνα AB$\Gamma$ και A$\Gamma\Delta$ είναι ισοδύναμα, δηλαδή $(\text{A}\Gamma\Delta) = (\text{AB}\Gamma)$. Η διαγώνιος A$\Delta$ χωρίζει το παραλληλόγραμμο σε δύο ίσα τρίγωνα, τα AZ$\Delta$ και AE$\Delta$, οπότε αυτά είναι ισοδύναμα, δηλαδή $(\text{A}\Delta\text{Z}) = (\text{AE}\Delta)$. Επομένως $(\text{AZ}\Delta) = (\text{AE}\Delta) = (\text{AB}\Gamma) + (\text{A}\Gamma\Delta) + (\text{B}\Delta\text{E}) = 4(\text{AB}\Gamma)$.
+\end{alist}

@@ -1,0 +1,61 @@
+\Askhsh{21839}{4}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define point A at the origin
+        \tkzDefPoint(0,0){A}
+        % Define point B on the x-axis
+        \tkzDefPoint(6,0){B}
+        % Define point E, forming the square ABDE externally (above AB)
+        \tkzDefPoint(0,6){E}
+        % Define point D (Delta) by translation to complete square ABDE
+        \tkzDefPointBy[translation=from A to E](B) \tkzGetPoint{D} % Delta
+
+        % Assume angle A is 30 degrees for drawing purposes, as suggested by part (b)
+        \pgfmathsetmacro{\angleA}{30}
+        % Define point C (Gamma) based on side length AG = 3cm and angle A
+        \pgfmathsetmacro{\xA}{3*cos(\angleA)}
+        \pgfmathsetmacro{\yA}{3*sin(\angleA)}
+        \tkzDefPoint(\xA,\yA){C} % Gamma
+
+        % Define point Z, forming the square AGHZ externally (below AG)
+        % Z is obtained by rotating vector AC 90 degrees clockwise around A
+        \pgfmathsetmacro{\xZ}{3*sin(\angleA)}
+        \pgfmathsetmacro{\yZ}{-3*cos(\angleA)}
+        \tkzDefPoint(\xZ,\yZ){Z}
+
+        % Define point H by translation to complete square AGHZ
+        \tkzDefPointBy[translation=from A to Z](C) \tkzGetPoint{H}
+
+        % Draw the original triangle ABGamma
+        \tkzDrawPolygon(A,B,C)
+        % Draw squares ABDE and AGHZ
+        \tkzDrawPolygon(A,B,D,E)
+        \tkzDrawPolygon(A,C,H,Z)
+        % Draw segment EZ
+        \tkzDrawSegment(E,Z)
+
+        % Label points according to the provided image's relative positions
+        \tkzLabelPoint[above right](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[above left](E){E}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[right](Z){Z}
+        \tkzLabelPoint[right](H){H}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο ΑΒΓ με $\mathrm{AB} = 6 \text{ cm}$ και $\mathrm{A\Gamma} = 3 \text{ cm}$ και $\hat{\mathrm{A}}$ οξεία. Εξωτερικά του τριγώνου με πλευρές τις πλευρές ΑΒ και ΑΓ αντίστοιχα του τριγώνου ΑΒΓ σχηματίζουμε τα τετράγωνα ΑΒΔΕ και ΑΓΗΖ και φέρνουμε την ΕΖ, όπως στο παρακάτω σχήμα.
+\begin{alist}
+    \item Να αποδείξετε ότι τα τρίγωνα ΑΕΖ και ΑΒΓ είναι ισοδύναμα. \monades{10}
+    \item Αν το εμβαδόν του πολυγωνικού χώριου ΕΖΗΓΒΔ είναι $\mathrm{E}_{\mathrm{EZH\Gamma B\Delta}}=54 \text{ cm}^2$:
+    \begin{rlist}
+        \item Να αποδείξετε ότι η γωνία Α του τριγώνου ΑΒΓ είναι $\hat{\mathrm{A}}=30^{\circ}$. \monades{10}
+        \item Να βρείτε το εμβαδόν του τετραγώνου που έχει για πλευρά την πλευρά ΒΓ του τριγώνου ΑΒΓ. \monades{5}
+    \end{rlist}
+\end{alist}

@@ -1,0 +1,67 @@
+\Askhsh{18745}{4}
+\begin{ylh}{1}
+    \item 2.1. Εξίσωση Ευθείας
+    \item 3.1. Ο Κύκλος.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{10.5cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -6.5, xmax = 7.5,
+    ymin = -2.5, ymax = 4.5,
+    xtick = {-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7},
+    ytick = {-2,-1,0,1,2,3,4},
+    grid = both,
+    grid style = {gray!30},
+    width = 10cm, height = 7cm,
+    tick label style = {font=\scriptsize},
+    xlabel style={at={(current axis.right of origin)},anchor=north west},
+    ylabel style={at={(current axis.above origin)},anchor=south},
+    axis equal image, % Ensures uniform scaling
+]
+    % Circles
+    % A: (-2,0), R=3
+    \addplot[very thick, maincolor, samples=100, domain=0:2*pi] ({-2 + 3*cos(deg(x))}, {0 + 3*sin(deg(x))});
+    % B: (0,0), R=2
+    \addplot[very thick, maincolor, samples=100, domain=0:2*pi] ({0 + 2*cos(deg(x))}, {0 + 2*sin(deg(x))});
+    % Gamma: (2,0), R=1
+    \addplot[very thick, maincolor, samples=100, domain=0:2*pi] ({2 + 1*cos(deg(x))}, {0 + 1*sin(deg(x))});
+    % Delta: (3,0), R=0.5
+    \addplot[very thick, maincolor, samples=100, domain=0:2*pi] ({3 + 0.5*cos(deg(x))}, {0 + 0.5*sin(deg(x))});
+
+    % Points
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(-2,0) (0,0) (2,0) (3,0) (4,1)};
+    \node[above right] at (axis cs:-2,0) {A};
+    \node[below left] at (axis cs:0,0) {B};
+    \node[below right] at (axis cs:2,0) {$\Gamma$};
+    \node[below right] at (axis cs:3,0) {$\Delta$};
+    \node[above left] at (axis cs:4,1) {M};
+
+    % Horizontal line (path of centers)
+    \addplot[thick, black] coordinates {(-6.5,0) (7.5,0)};
+
+    % Tangent lines
+    % Line (epsilon_1) from (b)i: y = sqrt(3)/3 * x + (3-4*sqrt(3))/3
+    \addplot[very thick, secondarycolor, domain=-6.5:7.5] {sqrt(3)/3 * x + (3-4*sqrt(3))/3};
+    % Other tangent, passes through M(4,1) with slope -sqrt(3)/3
+    % y - 1 = -sqrt(3)/3 * (x - 4) => y = -sqrt(3)/3 * x + 4*sqrt(3)/3 + 1
+    \addplot[very thick, secondarycolor, domain=-6.5:7.5] {-sqrt(3)/3 * x + (3+4*sqrt(3))/3};
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+\OnPar{ΘΕΜΑ 4}
+
+Επιστήμονες προκειμένου να μελετήσουν υδρόβιο έντομο κατέγραψαν στιγμιότυπα από τους κύκλους με κέντρα τα σημεία Α,Β,Γ,Δ και ακτίνες $3,2,1,\frac{1}{2}$ αντίστοιχα, που σχηματίζονται σε κάθε προσγείωση του στο νερό. Η εικόνα από τις εναέριες λήψεις αποτυπώθηκαν σε σύστημα αξόνων όπως φαίνεται στο σχήμα. Το έντομο κινούμενο ευθύγραμμα περνάει από τα σημεία Α,Β,Γ,Δ για να καταγραφεί την στιγμή που καταλήγει στο σημείο Μ.
+
+\begin{alist}
+    \item Να βρείτε την εξίσωση της πορείας του εντόμου. \monades{4}
+    \item
+    \begin{rlist}
+        \item Να δείξετε ότι η ευθεία $(\varepsilon_1): y = \frac{\sqrt{3}}{3}x + \frac{3-4\sqrt{3}}{3}$ είναι κοινή εφαπτομένη των τεσσάρων κύκλων. \monades{7}
+        \item Να βρείτε την εξίσωση της άλλης κοινής εφαπτομένης. \monades{10}
+    \end{rlist}
+    \item Με βάση το μοτίβο που ακολουθούν οι κινήσεις του εντόμου να βρείτε ότι η τελική θέση του εντόμου είναι το σημείο $M(4,1)$. \monades{4}
+\end{alist}
+Δίνεται ότι $\varepsilon\varphi 150^\circ = -\frac{\sqrt{3}}{3}$.

@@ -1,0 +1,53 @@
+\Askhsh{18559_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία] Τρίγωνα, εμβαδά, Πυθαγόρειο Θεώρημα.
+\end{ylh}
+
+\begin{wrapfigure}[9]{r}{5.5cm} % Adjust [9] for line count if needed.
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Define points based on derived geometry (A is the vertex with the right angle)
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,3){E}
+        \tkzDefPoint(4,0){C}
+        % B is such that E is the midpoint of BC and BE=5.
+        % E = (B+C)/2 => B = 2E - C
+        % B = 2*(0,3) - (4,0) = (0,6) - (4,0) = (-4,6)
+        \tkzDefPoint(-4,6){B}
+        
+        % Draw the triangle ABC
+        \tkzDrawPolygon[thick](A,B,C)
+        
+        % Draw the median AE
+        \tkzDrawSegment[thick](A,E)
+        
+        % Labels for points
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[below](E){E}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](A){A}
+        
+        % Labels for lengths
+        \tkzLabelSegment[below](B,E){5}
+        \tkzLabelSegment[left](A,E){3}
+        \tkzLabelSegment[right](A,C){4}
+        
+        % Marks for equal segments BE and CE (E is midpoint)
+        % For C=(4,0) and E=(0,3), CE = sqrt(4^2+3^2) = 5. So BE=CE=5 is consistent.
+        \tkzMarkSegments[mark=||, pos=0.5](B,E E,C)
+        
+        % Mark the right angle at A (EAG)
+        \tkzMarkRightAngle[fill=maincolor!20,size=0.3](E,A,C)
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\selectlanguage{greek}
+\begin{alist}
+    \item Το τμήμα $BE$ είναι το μισό της πλευράς $B\Gamma$, αφού η $AE$ είναι διάμεσος στην πλευρά $B\Gamma$, άρα $E\Gamma=5$. Στο τρίγωνο $A\Gamma E$ μεγαλύτερη πλευρά του είναι η $\Gamma E$ και θα εξετάσουμε αν το τετράγωνο της μεγαλύτερης πλευράς του ισούται με το άθροισμα των τετραγώνων των άλλων δύο πλευρών του. Δηλαδή αν $\Gamma E^2 = A\Gamma^2 + AE^2 \Leftrightarrow 5^2 = 4^2 + 3^2 \Leftrightarrow 25 = 16+9 \Leftrightarrow 25 = 25$ που ισχύει. Άρα το τρίγωνο $A\Gamma E$ είναι ορθογώνιο με $\widehat{EAG} = 90^{\circ}$, οπότε $AE \perp A\Gamma$. \monades{X}
+    \item 
+    \begin{rlist}
+        \item Γνωρίζουμε ότι η διάμεσος ενός τριγώνου χωρίζει το τρίγωνο σε δύο ισοδύναμα τρίγωνα, άρα $(ABE) = (A\Gamma E)$.
+        \item Το $A\Gamma E$ είναι ορθογώνιο τρίγωνο, άρα το εμβαδό του θα ισούται με το ημιγινόμενο των κάθετων πλευρών του, δηλαδή $(A\Gamma E) = \frac{1}{2} \cdot AE \cdot A\Gamma = \frac{1}{2} \cdot 3 \cdot 4 = 6 \text{ τ.μ.}$
+    \end{rlist}
+    Από το β) i. ερώτημα έχουμε ότι $(ABE)=(A\Gamma E)$, άρα $(AB\Gamma)=2(A\Gamma E)$. Βρήκαμε ότι $(A\Gamma E)=6$, επομένως $(AB\Gamma) = 2 \cdot 6 = 12 \text{ τ.μ.}$ \monades{X}
+\end{alist}

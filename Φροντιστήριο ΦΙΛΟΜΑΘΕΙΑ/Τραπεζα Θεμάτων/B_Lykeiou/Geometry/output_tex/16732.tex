@@ -1,0 +1,53 @@
+\Askhsh{16732}{4}
+\begin{ylh}{1}
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5.5cm} % 9 lines, right-aligned, 5.5cm width
+    \centering
+    \begin{tikzpicture}[scale=0.75]
+        % Define the side length of the square (e.g., s=4 units)
+        \pgfmathsetmacro{\s}{4} 
+
+        % Define points of the square (A top-left, B top-right, Gamma bottom-right, Delta bottom-left)
+        \tkzDefPoint(0,\s){A} % A
+        \tkzDefPoint(\s,\s){B} % B
+        \tkzDefPoint(\s,0){G} % Gamma
+        \tkzDefPoint(0,0){D} % Delta
+
+        % M is the midpoint of AB
+        \tkzDefMidPoint(A,B) \tkzGetPoint{M}
+        
+        % K is the intersection of the lines DM and GB (GammaB).
+        % With D=(0,0) and M=(s/2, s), the line DM is y=2x.
+        % With G=(s,0) and B=(s,s), the line GB is x=s.
+        % Intersection K is (s, 2s).
+        \tkzDefPoint(\s,2*\s){K}
+
+        % Draw the square
+        \tkzDrawPolygon(A,B,G,D)
+        
+        % Draw the line segments DK and GK, which represent the lines DM and GB extended to K.
+        \tkzDrawSegment(D,K)
+        \tkzDrawSegment(G,K)
+
+        % Draw and label points
+        \tkzDrawPoints(A,B,G,D,M,K)
+        
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[above right=0.1cm](M){M}
+        \tkzLabelPoint[above](K){K}
+    \end{tikzpicture}
+\end{wrapfigure}
+Έστω τετράγωνο ΑΒΓΔ και Μ το μέσο της ΑΒ. Οι ευθείες ΔΜ και ΓΒ τέμνονται στο Κ. Να αποδείξετε ότι:
+\begin{alist}
+\item Τα τρίγωνα $MKB$ και $\Delta K\Gamma$ είναι όμοια. \monades{5}
+\item $(MKB) = \frac{1}{4} (\Delta K\Gamma)$. \monades{5}
+\item $(M\Gamma B\Delta) = \frac{3}{4} (AB\Gamma\Delta)$. \monades{10}
+\item Αν $(M\Gamma B\Delta) = 75 \, \text{m}^2$ να υπολογίσετε την πλευρά του τετραγώνου. \monades{5}
+\end{alist}

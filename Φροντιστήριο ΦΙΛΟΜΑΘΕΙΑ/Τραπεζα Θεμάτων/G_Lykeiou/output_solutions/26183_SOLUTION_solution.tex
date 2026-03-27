@@ -1,0 +1,54 @@
+\Askhsh{26183_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+
+\OnPar{ΛΥΣΗ}
+\begin{alist}
+\item Έχουμε $\lim_{x \to 1} f(x) = \lim_{x \to 1} \frac{e^{\varphi(x)} - e^{\pi/4}}{x-1} = \lim_{x \to 1} \frac{e^{\rho u} - e^{\pi/4}}{u}$ με $u = \frac{\pi}{4}$ και $\varphi(x) = \frac{\pi}{4}$.
+\[
+\lim_{x \to 1} (1-4\ln x) = 1-4\ln 1 = 1-4\cdot 0 = 1.
+\]
+\[
+\lim_{x \to 1} \frac{\ln x}{x-1} = 1.
+\]
+Ώστε $\lim_{x \to 1} f(x) = e^{\pi/4} (1) = f(1)$.
+
+Άρα η $f$ είναι συνεχής στο $1$.
+
+Επίσης $\lim_{x \to 1} \frac{f(x)-f(1)}{x-1} = \lim_{x \to 1} \frac{\frac{e^{\varphi(x)}-e^{\pi/4}}{x-1} - e^{\pi/4}}{x-1} = \lim_{x \to 1} \frac{e^{\varphi(x)}-e^{\pi/4} - e^{\pi/4}(x-1)}{(x-1)^2}$
+$\left( \text{απροσδιοριστία } \frac{0}{0} \right)$ και με εφαρμογή του κανόνα De L' Hospital ελέγχουμε αν υπάρχει το $\lim_{x \to 1} \frac{\pi}{4 \cos^2 (\frac{\pi}{4})} = \frac{\pi}{4 (\frac{\sqrt{2}}{2})^2} = \frac{\pi}{2}$.
+γράφεται $\lim_{x \to 1} \frac{\pi}{4 \cos^2 (\frac{\pi}{4})} = \frac{\pi}{2}$.
+
+Τέλος, $\lim_{x \to 1^+} \frac{f(x)-f(1)}{x-1} = \lim_{x \to 1^+} \left[ -4 \frac{\ln x}{x-1} \right] (\text{απροσδιοριστία } \frac{0}{0})$ και με εφαρμογή του κανόνα De L' Hospital ελέγχουμε αν υπάρχει το $\lim_{x \to 1^+} \frac{1/x}{1} = 1$.
+Ώστε $\lim_{x \to 1^+} \frac{f(x)-f(1)}{x-1} = -4$.
+
+Άρα δεν υπάρχει το $\lim_{x \to 1} \frac{f(x)-f(1)}{x-1}$, οπότε η $f$ δεν είναι παραγωγίσιμη στο $1$.
+
+\item Από α) ερώτημα, διαπιστώνουμε ότι $f'(x) = \begin{cases} \frac{\pi}{4 \cos^2 (\frac{\pi x}{4})} & 0 \leq x < 1 \\ \frac{-4}{x^2} (\ln x + 1) & x > 1 \end{cases}$ καθώς
+
+για $0 \leq x < 1$ έχουμε $\left[ \tan \left( \frac{\pi x}{4} \right) \right]' = \frac{1}{4} \cdot \frac{\pi}{\cos^2 (\frac{\pi x}{4})}$, ενώ
+
+για $x > 1$, έχουμε $(1-4\frac{\ln x}{x})' = 0 - 4 \frac{(\ln x)' x - \ln x (x)'}{x^2} = -4 \frac{\frac{1}{x} x - \ln x}{x^2} = -4 \frac{1-\ln x}{x^2}$.
+
+Τα κρίσιμα σημεία μιας συνάρτησης είναι τα εσωτερικά σημεία ενός διαστήματος στα οποία είτε η συνάρτηση δεν είναι παραγωγίσιμη, είτε η παράγωγός της μηδενίζεται.
+Παρατηρούμε ότι $f'(x) > 0$ για κάθε $x \in [0,1)$, ενώ για $x > 1$ είναι $f'(x) = 0 \Leftrightarrow \ln x - 1 = 0 \Leftrightarrow x = e$.
+
+Ώστε η $f$ έχει ακριβώς δύο κρίσιμα σημεία, τα $x_1 = 1$ και $x_2 = e$.
+
+\item Το ζητούμενο εμβαδόν είναι $E = \int_0^1 |f(x)|dx$, αφού η $f$ είναι συνεχής στο $[0,1]$.
+
+Παρατηρούμε ότι για κάθε $x \in [0,1]$ έχουμε $0 \leq \frac{\pi x}{4} \leq \frac{\pi}{4}$ άρα και $\tan 0 \leq \tan \left(\frac{\pi x}{4}\right) \leq \tan \frac{\pi}{4}$,
+αφού η συνάρτηση $\tan x$ είναι γνησίως αύξουσα στο διάστημα $\left[0, \frac{\pi}{4}\right]$.
+
+Επομένως είναι $0 \leq \tan \left(\frac{\pi x}{4}\right) \leq 1$, για κάθε $x \in [0,1]$.
+
+Ώστε $E = \int_0^1 f(x)dx = \int_0^1 \tan \left(\frac{\pi x}{4}\right) dx$. Θέτουμε $u = \frac{\pi x}{4}$, οπότε $du = \frac{\pi}{4}dx$, άρα
+\[
+E = \int_0^{\pi/4} \tan u \frac{4}{\pi} du = \frac{4}{\pi} \int_0^{\pi/4} \frac{\sin u}{\cos u} du = -\frac{4}{\pi} \int_0^{\pi/4} \frac{(\cos u)'}{\cos u} du = -\frac{4}{\pi} [\ln (\cos u)]_0^{\pi/4}, \text{ οπότε}
+\]
+\[
+E = -\frac{4}{\pi} [\ln (\cos \frac{\pi}{4}) - \ln (\cos 0)] = -\frac{4}{\pi} \left[ \ln \left(\frac{\sqrt{2}}{2}\right) - \ln 1 \right] = \frac{1}{\pi} \ln \left(\left(\frac{\sqrt{2}}{2}\right)^{-4}\right) = \frac{1}{\pi} \ln ((2^{-1/2})^{-4}) = \frac{1}{\pi} \ln (2^2) = \frac{\ln 4}{\pi}
+\]
+τετραγωνικές μονάδες.
+\end{alist}

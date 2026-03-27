@@ -1,0 +1,62 @@
+\Askhsh{21192_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5.5cm} % Adjust number of lines and width as needed
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Define R for drawing purposes
+        \def\R{4}
+        % Define points O, A, B
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(0,\R){A} % A is (0,R)
+        \tkzDefPoint(\R,0){B} % B is (R,0)
+        
+        % Define point Gamma based on equilateral triangle OBG
+        % It is at R distance from O and R distance from B, so it's (R*cos(60), R*sin(60))
+        \tkzDefPoint(\R*cos(60),\R*sin(60)){G} % G is (R/2, R*sqrt(3)/2)
+        
+        % Draw segments OA, OB, OG, BG
+        \tkzDrawSegments(O,A O,B O,G B,G)
+        
+        % Draw arcs based on text description (centered at O, radius R)
+        % Arc AG (from A to G, angle from 90 to 60 degrees)
+        % Using tkzDrawArc(center, start point, end point) draws arc from start to end (counter-clockwise by default)
+        \tkzDrawArc[maincolor, line width=1pt](O,A,G) 
+        
+        % Arc BG (from B to G, angle from 0 to 60 degrees)
+        % This is ell_OG, which equals ell_BG.
+        \tkzDrawArc[maincolor, line width=1pt](O,B,G) 
+        
+        % Label points
+        \tkzLabelPoint[below left](O){O}
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below right](B){B}
+        \tkzLabelPoint[above](G){$\Gamma$}
+        
+        % Label R on relevant segments (as per original image and text)
+        \tkzLabelSegment[below](O,B){$R$}
+        \tkzLabelSegment[above left](O,G){$R$} % OΓ is R
+        \tkzLabelSegment[above right](B,G){$R$} % BΓ is R
+        
+        % Draw point markers
+        \tkzDrawPoints(O,A,B,G)
+    \end{tikzpicture}
+\end{wrapfigure}
+ΛΥΣΗ
+
+\begin{alist}
+\item Επειδή $\text{OB} = \text{OΓ} = \text{BΓ} = R$ ως ακτίνες των ίσων κύκλων, επομένως το τρίγωνο $\text{OB}\Gamma$ είναι ισόπλευρο οπότε $\widehat{\text{BΟΓ}} = 60^\circ$.
+Το μήκος $\ell$ τόξου $\mu^\circ$ ενός κύκλου με ακτίνα $R$ είναι $\ell = \frac{\pi \cdot R \cdot \mu}{180}$, άρα το μήκος του τόξου $\text{B}\Gamma$ είναι:
+\[ \ell_{\text{B}\Gamma} = \frac{\pi \cdot R \cdot 60}{180} = \frac{\pi \cdot R}{3} \]
+
+\item Επειδή στο τεταρτοκύκλιο $\text{OAB}$ η γωνία $\widehat{\text{AOB}} = 90^\circ$ έχουμε ότι:
+\[ \widehat{\text{AΟΓ}} = \widehat{\text{AOB}}-\widehat{\text{BΟΓ}} = 90^\circ - 60^\circ = 30^\circ \]
+και το μήκος $\ell_{\text{A}\Gamma}$ του αντίστοιχου τόξου $\text{A}\Gamma$ της γωνίας $\text{AΟΓ} = 30^\circ$ είναι:
+\[ \ell_{\text{A}\Gamma} = \frac{\pi \cdot R \cdot 30^\circ}{180^\circ} = \frac{\pi \cdot R}{6} \]
+
+\item Επειδή το τρίγωνο $\text{OB}\Gamma$ είναι ισόπλευρο, έχει ίσες γωνίες οπότε τα τόξα $\text{O}\Gamma$ και $\text{B}\Gamma$ είναι ίσα, ως αντίστοιχα τόξα των ίσων γωνιών $\widehat{\text{OB}\Gamma}$ και $\widehat{\text{BΟΓ}}$ ίσων κύκλων, συνεπώς από το ($\alpha$) ερώτημα έχουμε:
+\[ \ell_{\text{O}\Gamma} = \ell_{\text{B}\Gamma} = \frac{\pi \cdot R}{3} \]
+Η περίμετρος $T_{\text{OA}\Gamma}$ του μικτογράμμου τριγώνου $\text{OA}\Gamma$ είναι:
+\[ T_{\text{OA}\Gamma} = \text{OA} + \ell_{\text{A}\Gamma} + \ell_{\text{O}\Gamma} = R + \frac{\pi \cdot R}{6} + \frac{\pi \cdot R}{3} = R \cdot \left(1 + \frac{\pi}{6} + \frac{\pi}{3}\right) = R \cdot \left(1 + \frac{\pi}{2}\right) \]
+\end{alist}

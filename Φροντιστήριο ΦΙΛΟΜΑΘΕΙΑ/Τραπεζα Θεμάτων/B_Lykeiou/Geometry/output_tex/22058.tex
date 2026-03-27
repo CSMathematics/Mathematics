@@ -1,0 +1,71 @@
+\Askhsh{22058}{4}
+\begin{ylh}{1}
+    \item 10.2. Εμβαδόν ευθύγραμμου σχήματος - Ισοδύναμα ευθύγραμμα σχήματα
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{7cm}
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+        % Ορισμός σημείων με R=3 για ευκολία σχεδίασης
+        \tkzDefPoint(0,0){Gamma}
+        \tkzDefPoint(-3,0){A}
+        \tkzDefPoint(3,0){B}
+        \tkzDefPoint(-1,0){Delta}
+        \tkzDefPoint(1,0){E}
+        \tkzDefPoint(0,3){H}
+        \tkzDefPoint(0,-3){Z}
+
+        % Κέντρα ημικυκλίων για διευκόλυνση
+        \tkzDefPoint(-2,0){CADeltaup} % Κέντρο ημικυκλίου AΔ
+        \tkzDefPoint(-1,0){CAEup}     % Κέντρο ημικυκλίου AE
+        \tkzDefPoint(2,0){CBEdown}    % Κέντρο ημικυκλίου BE
+        \tkzDefPoint(1,0){CBDdown}    % Κέντρο ημικυκλίου BΔ
+
+        % Σχεδίαση του μεγάλου κύκλου
+        \tkzDrawCircle[maincolor, line width=1.0pt](Gamma,3cm)
+
+        % Σχεδίαση της διαμέτρου AB
+        \tkzDrawSegment[dotted, line width=0.6pt](A,B)
+
+        % Σχεδίαση των ημικυκλίων
+        % Ημικύκλια πάνω από την AB
+        \draw[maincolor, line width=0.8pt] (CADeltaup) arc (180:0:1cm); % Ημικύκλιο AΔ
+        \draw[maincolor, line width=0.8pt] (CAEup) arc (180:0:2cm);     % Ημικύκλιο AE
+
+        % Ημικύκλια κάτω από την AB
+        \draw[maincolor, line width=0.8pt] (CBEdown) arc (0:180:1cm);   % Ημικύκλιο BE
+        \draw[maincolor, line width=0.8pt] (CBDdown) arc (0:180:2cm);   % Ημικύκλιο BΔ
+
+        % Σκίαση της περιοχής ε2
+        % Πάνω τμήμα ε2
+        \fill[secondarycolor!50] (A) arc (180:0:2cm) -- (Delta) arc (0:180:1cm) -- cycle;
+        % Κάτω τμήμα ε2
+        \fill[secondarycolor!50] (B) arc (0:180:2cm) -- (E) arc (180:0:1cm) -- cycle;
+
+        % Σημεία
+        \tkzDrawPoints(A,B,Delta,E,Gamma,H,Z)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoint[left](A){A}
+        \tkzLabelPoint[right](B){B}
+        \tkzLabelPoint[above right](Delta){$\Delta$}
+        \tkzLabelPoint[above left](E){E}
+        \tkzLabelPoint[above right](Gamma){$\Gamma$}
+        \tkzLabelPoint[above right](H){H}
+        \tkzLabelPoint[below right](Z){Z}
+
+        % Ετικέτες περιοχών
+        \node at (-1.5,-1.5) {$\varepsilon_1$};
+        \node at (0,0) {$\varepsilon_2$};
+        \node at (1.5,1.5) {$\varepsilon_3$};
+    \end{tikzpicture}
+\end{wrapfigure}
+\OnPar{ΘΕΜΑ 4}
+
+Θεωρούμε κύκλο με κέντρο $\Gamma$ και ακτίνα $R$. Έστω $AB$ διάμετρος του κύκλου και $\Delta$, $E$ σημεία της τέτοια ώστε $A\Delta = \Delta E = EB$. Σχεδιάζουμε τα ημικύκλια $A\Delta$ και $AE$ πάνω από τη διάμετρο $AB$ και τα ημικύκλια $BE$ και $B\Delta$ κάτω από τη διάμετρο $AB$, όπως φαίνεται στο σχήμα.
+
+\begin{alist}
+\item Να υπολογίσετε τα εμβαδά $\varepsilon_1$ και $\varepsilon_3$ των καμπυλόγραμμων σχημάτων $A\Delta BZ$ και $BEAH$ αντίστοιχα. \monades{12}
+\item Να υπολογίσετε το εμβαδόν $\varepsilon_2$ του γραμμοσκιασμένου καμπυλόγραμμου σχήματος $A\Delta BE$. \monades{08}
+\item Να εξετάσετε αν ο κύκλος χωρίζεται σε τρία ισοδύναμα καμπυλόγραμμα σχήματα. \monades{05}
+\end{alist}

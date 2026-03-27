@@ -1,0 +1,63 @@
+\Askhsh{14885}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 5.6. Εφαρμογές στα τρίγωνα
+    \item 5.11. Ισοσκελές τραπέζιο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 14885.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται το οξυγώνιο και σκαληνό τρίγωνο ΑΒΓ. Προεκτείνουμε το ύψος του ΑΗ κατά τμήμα ΗΔ=ΑΗ και τη διάμεσό του ΑΜ κατά τμήμα ΜΕ=ΑΜ. Να αποδείξετε ότι:\\
+\begin{alist}
+\item ΑΒ = ΓΕ
+\item ΑΒ = ΒΔ \monades{8}
+
+\item Γ$\widehat{Β}$Δ = Β$\widehat{\Gamma}$Ε \monades{8}
+
+\item Εξετάστε αν το τμήμα ΒΔ μπορεί να είναι παράλληλο στο τμήμα ΓΕ. \monades{5}
+
+\item Ποιο είναι το είδος του τετραπλεύρου ΒΓΕΔ; Δικαιολογήστε την απάντησή σας. \monades{4}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(6,0){C}
+\tkzDefPoint(2,4){A} % Scalene triangle A=(2,4)
+
+\tkzDefPointBy[projection=onto B--C](A) \tkzGetPoint{H_temp}
+% Wait, "προεκτείνουμε το ύψος ΑΗ κατά τμήμα ΗΔ=ΑΗ". Let H be intersection with BC.
+\tkzInterLL(A,H_temp)(B,C) \tkzGetPoint{H}
+\tkzDefPointBy[symmetry=center H](A) \tkzGetPoint{D}
+
+\tkzDefMidPoint(B,C) \tkzGetPoint{M}
+\tkzDefPointBy[symmetry=center M](A) \tkzGetPoint{E}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(D);
+\draw[l3] (A)--(E);
+\draw[l3] (B)--(D);
+\draw[l3] (C)--(E);
+\draw[l3, dashed] (D)--(C); % Quad BCED
+\draw[l3, dashed] (D)--(E);
+
+\tkzDrawPoints(A,B,C,H,D,M,E)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below right](C){$\Gamma$}
+\tkzLabelPoint[above right](H){$H$}
+\tkzLabelPoint[below](D){$\Delta$}
+\tkzLabelPoint[below](M){$M$}
+\tkzLabelPoint[below](E){$E$}
+
+\tkzMarkRightAngle(A,H,C)
+\tkzMarkSegments[mark=s|](A,H H,D)
+\tkzMarkSegments[mark=s||](A,M M,E)
+\end{tikzpicture}
+\end{center}
+\end{alist}

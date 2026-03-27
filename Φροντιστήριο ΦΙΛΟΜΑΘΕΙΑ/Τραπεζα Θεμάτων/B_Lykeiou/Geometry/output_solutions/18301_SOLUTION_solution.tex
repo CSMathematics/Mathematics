@@ -1,0 +1,49 @@
+\Askhsh{18301_SOLUTION}{3}
+\begin{ylh}{1}
+    \item [Τρίγωνα - Εμβαδά]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5cm} % Adjust number of lines (15) and width (5cm) as needed
+\begin{tikzpicture}
+    % Ορισμός κορυφών
+    \tkzDefPoint(0,4){A} % Top vertex
+    \tkzDefPoint(-2,0){B} % Bottom-left vertex
+    \tkzDefPoint(2,0){C} % Bottom-right vertex
+
+    % Ορισμός σημείου Δ στην ΑΓ ώστε AΔ/AΓ = 2/5 = 0.4
+    \tkzDefPointWith[linear,K=0.4](A,C) \tkzGetPoint{D}
+    % Ορισμός σημείου Ε στην ΒΓ ώστε BE/BΓ = 1/2 (μέσο)
+    \tkzDefMidPoint(B,C) \tkzGetPoint{E}
+
+    % Σχεδίαση του κύριου τριγώνου
+    \tkzDrawPolygon(A,B,C)
+
+    % Σχεδίαση των εσωτερικών τμημάτων
+    \tkzDrawSegment(D,E)
+    \tkzDrawSegment(A,E)
+    \tkzDrawSegment(B,D)
+
+    % Ετικέτες σημείων
+    \tkzLabelPoint[above](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](C){$\Gamma$}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelPoint[below](E){E}
+
+    % Σχεδίαση σημείων
+    \tkzDrawPoints(A,B,C,D,E)
+\end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Τα τρίγωνα ΑΔΕ και ΑΒΓ έχουν $\Delta\hat{A}E = B\hat{A}\Gamma$ (ως κατακορυφήν), οπότε ο λόγος των εμβαδών τους ισούται με τον λόγο των γινομένων των πλευρών που περιέχουν τις γωνίες αυτές, δηλαδή:
+    \[ \frac{(\text{ΑΔΕ})}{(\text{ΑΒΓ})} = \frac{A\Delta \cdot AE}{AB \cdot A\Gamma} = \frac{2}{5} \cdot \frac{1}{2} = \frac{1}{5} \]
+    \item Εργαζόμενοι ομοίως στο προηγούμενο ερώτημα, έχουμε σε αυτή την περίπτωση:
+    \[ \frac{(\text{ΑΔΕ})}{(\text{ΑΒΓ})} = \frac{A\Delta \cdot \lambda \cdot AE}{AB \cdot \mu \cdot A\Gamma} = \frac{1}{2} \cdot \frac{\lambda}{\mu} \]
+    Επομένως, ο ζητούμενος λόγος είναι ανεξάρτητος από την τιμή του $\lambda$. \monades{X}
+    \item Αφού είναι $(\text{ΑΔΕ}) = (\text{ΑΒΓ})$, τότε από την ισότητα
+    \[ 1 = \frac{(\text{ΑΔΕ})}{(\text{ΑΒΓ})} = \frac{1}{\mu} \]
+    προκύπτει ότι $1 = \frac{1}{\mu}$ ή $\mu = 1$.
+
+    Άρα, τα τρίγωνα ΑΒΓ και ΑΔΕ είναι ισεμβαδικά για $\mu = 1$ και για οποιαδήποτε τιμή του $\lambda$, αφού, όπως αποδείχτηκε στο ερώτημα (β), ο λόγος των εμβαδών των δύο τριγώνων είναι ανεξάρτητος από την τιμή του $\lambda$. Επομένως, υπάρχουν άπειρα ζεύγη τιμών των ακεραίων $\lambda$ και $\mu$, για τα οποία είναι $(\text{ΑΔΕ}) = (\text{ΑΒΓ})$. Τα ζεύγη αυτά είναι της μορφής $\{(\lambda, 1), \lambda \in \mathbb{N}^* \}$.
+
+    Άρα, ο ισχυρισμός του μαθητή είναι σωστός. \monades{X}
+\end{alist}

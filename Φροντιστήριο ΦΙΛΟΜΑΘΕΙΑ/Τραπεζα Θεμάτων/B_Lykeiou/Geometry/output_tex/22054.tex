@@ -1,0 +1,62 @@
+\Askhsh{22054}{3}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.5. Μήκος τόξου
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{5.5cm}
+    \begin{tikzpicture}[scale=1.2]
+        % Define side length and radius
+        \pgfmathsetmacro{\side}{2} % Side length 2a, so 2 units
+        \pgfmathsetmacro{\radius}{1} % Radius a, so 1 unit
+
+        % Define vertices of the square based on the image's labeling
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,\side){B}
+        \tkzDefPoint(\side,\side){C} % Gamma
+        \tkzDefPoint(\side,0){D} % Delta
+
+        % Define midpoints of the sides
+        \tkzDefPoint(0,\radius){E} % Midpoint of AB
+        \tkzDefPoint(\radius,\side){Z} % Midpoint of B\Gamma
+        \tkzDefPoint(\side,\radius){H} % Midpoint of \Gamma\Delta
+        \tkzDefPoint(\radius,0){Th} % Midpoint of \Delta A (Theta)
+
+        % Draw the square boundary
+        \tkzDrawPolygon(A,B,C,D)
+
+        % Draw the shaded region (curvilinear figure)
+        \path[fill=black!70, draw=black, very thick]
+            % Arc from Theta to E, centered at A
+            (Th.center) arc [start angle=0, end angle=90, radius=\radius, center=(A.center)]
+            % Arc from E to Z, centered at B
+            arc [start angle=-90, end angle=0, radius=\radius, center=(B.center)]
+            % Arc from Z to H, centered at Gamma
+            arc [start angle=180, end angle=270, radius=\radius, center=(C.center)]
+            % Arc from H to Theta, centered at Delta
+            arc [start angle=90, end angle=180, radius=\radius, center=(D.center)] -- cycle;
+
+        % Draw points
+        \tkzDrawPoints(A,B,C,D,E,Z,H,Th)
+
+        % Label points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[above right](C){$\Gamma$}
+        \tkzLabelPoint[below right](D){$\Delta$}
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[above](Z){Z}
+        \tkzLabelPoint[right](H){H}
+        \tkzLabelPoint[below](Th){$\Theta$}
+    \end{tikzpicture}
+\end{wrapfigure}
+ΘΕΜΑ 3
+
+Δίνεται τετράγωνο ΑΒΓΔ πλευράς $2\alpha$. Με κέντρα τις κορυφές του τετραγώνου και ακτίνα $\alpha$ σχεδιάζουμε τέσσερις κυκλικούς τομείς στο εσωτερικό του όπως φαίνεται στο σχήμα.
+
+\begin{alist}
+\item Να υπολογίσετε το εμβαδόν κάθε κυκλικού τομέα ως συνάρτηση του $\alpha$. \monades{08}
+\item Να αποδείξετε ότι το εμβαδόν του γραμμοσκιασμένου καμπυλόγραμμου χωρίου είναι:
+\[ E = \alpha^2(4 - \pi) \] \monades{12}
+\item Να υπολογίσετε την περίμετρο του γραμμοσκιασμένου καμπυλόγραμμου χωρίου. \monades{05}
+\end{alist}

@@ -1,0 +1,84 @@
+\Askhsh{16732_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[25]{r}{7cm} % Adjust number of lines and width as needed
+\begin{tikzpicture}[scale=0.8]
+    % Set side length 'a' for convenience
+    \def\side{4} % Let side = 4 units for the drawing
+    \def\heightK{2*\side} % K is at height 2a, B is at height a, so KB = a
+
+    % Define square vertices: Delta(0,0), Gamma(a,0), B(a,a), A(0,a)
+    \tkzDefPoint(0,0){Delta} % Δ
+    \tkzDefPoint(\side,0){Gamma} % Γ
+    \tkzDefPoint(\side,\side){B}
+    \tkzDefPoint(0,\side){A}
+    
+    % Define M as midpoint of AB
+    \tkzDefMidPoint(A,B) \tkzGetPoint{M}
+    
+    % Define K as (side, 2*side) based on the analysis
+    \tkzDefPoint(\side,\heightK){K}
+    
+    % Draw the square
+    \tkzDrawPolygon[line width=0.8pt](A,B,Gamma,Delta)
+    
+    % Draw segments Delta-K and M-K
+    \tkzDrawSegment[line width=0.8pt](Delta,K)
+    \tkzDrawSegment[line width=0.8pt](M,K)
+    
+    % Draw points
+    \tkzDrawPoints[size=2pt,fill=black](A,B,Gamma,Delta,M,K)
+    
+    % Labels for vertices
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[below right](Gamma){$\Gamma$}
+    \tkzLabelPoint[below left](Delta){$\Delta$}
+    \tkzLabelPoint[above](M){M}
+    \tkzLabelPoint[above right](K){K}
+
+    % For gamma) part: Angles M1 and M2
+    % The image shows '1' and '2' as numbers near M, not explicitly marked angle arcs.
+    % We place nodes to match the visual representation.
+    \tkzLabelPoint[below left=2pt and 2pt](M){1} % For M_1
+    \tkzLabelPoint[above right=2pt and 2pt](M){2} % For M_2
+\end{tikzpicture}
+\end{wrapfigure}
+ΛΥΣΗ
+
+\begin{alist}
+    \item [] Τα τρίγωνα $\mathrm{MKB}$ και $\Delta\mathrm{K}\Gamma$ είναι ορθογώνια και έχουν κοινή τη γωνία $\mathrm{K}$. Οπότε έχουν δύο γωνίες τους ίσες μια προς μια, άρα είναι όμοια.
+
+    \item [\textbeta)] Τα όμοια τρίγωνα $\mathrm{MKB}$ και $\Delta\mathrm{K}\Gamma$ έχουν λόγο ομοιότητας $\lambda = \dfrac{\mathrm{MB}}{\Delta\Gamma} = \dfrac{\frac{1}{2}\mathrm{AB}}{\mathrm{AB}} = \dfrac{1}{2}$.
+    Οπότε ο λόγος των εμβαδών τους θα ισούται με το τετράγωνο του λόγου ομοιότητάς τους, δηλαδή:
+    \[
+    \frac{(\mathrm{MKB})}{(\Delta\mathrm{K}\Gamma)} = \lambda^2 = \left(\frac{1}{2}\right)^2 = \frac{1}{4}.
+    \]
+    Συνεπώς $(\mathrm{MKB}) = \frac{1}{4} (\Delta\mathrm{K}\Gamma)$.
+
+    \item [\textgamma)] Τα τρίγωνα $\mathrm{AM}\Delta$ και $\mathrm{MKB}$ είναι ίσα αφού έχουν
+    \begin{itemize}
+        \item $\mathrm{AM} = \mathrm{MB}$, το $\mathrm{M}$ είναι μέσο της $\mathrm{AB}$
+        \item $\widehat{\Delta\mathrm{AM}} = \widehat{\mathrm{MBK}} = 90^\circ$
+        \item $\widehat{\mathrm{M}}_1 = \widehat{\mathrm{M}}_2$, ως κατακορυφήν γωνίες
+    \end{itemize}
+    Άρα, θα είναι και ισεμβαδικά, δηλαδή $(\mathrm{AM}\Delta) = (\mathrm{MKB})$ (1).
+    
+    Για το εμβαδόν του τριγώνου $\Delta\mathrm{K}\Gamma$ έχουμε:
+    \[
+    (\Delta\mathrm{K}\Gamma) = (\Delta\mathrm{MB}\Gamma) + (\mathrm{MKB}) = (\Delta\mathrm{MB}\Gamma) + (\mathrm{AM}\Delta) = (\mathrm{AB}\Gamma\Delta), \quad \text{λόγω της σχέσης (1)}
+    \]
+    Για το εμβαδόν του $\mathrm{MB}\Gamma\Delta$ έχουμε:
+    \[
+    (\mathrm{MB}\Gamma\Delta) = (\Delta\mathrm{K}\Gamma) - (\mathrm{MKB}) = (\Delta\mathrm{K}\Gamma) - \frac{1}{4}(\Delta\mathrm{K}\Gamma), \quad \text{λόγω του \textbeta) ερωτήματος.}
+    \]
+    Άρα $(\mathrm{MB}\Gamma\Delta) = \frac{3}{4}(\Delta\mathrm{K}\Gamma)$.
+
+    \item [\textdelta)] Έστω ότι το τετράγωνο έχει πλευρά $\alpha$. Τότε $(\mathrm{AB}\Gamma\Delta) = \alpha^2$ και $(\mathrm{MB}\Gamma\Delta) = 75$.
+    Από το ερώτημα \textgamma) έχουμε ότι:
+    \[
+    75 = \frac{3}{4} \alpha^2 \quad \text{ή} \quad \alpha^2 = 75 \cdot \frac{4}{3} \quad \text{ή} \quad \alpha^2 = 100.
+    \]
+    Άρα $\alpha = 10 \, \text{m}$.
+\end{alist}

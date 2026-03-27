@@ -1,0 +1,58 @@
+\Askhsh{24703_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[28]{r}{0.5\textwidth} % Adjusted lines for better wrapping
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -0.5, xmax = 2.5,
+    ymin = -2.5, ymax = 1.8, % Adjusted ymax for better fit to image viewport
+    xtick = {1},
+    ytick = {1},
+    grid = none,
+    samples = 100,
+    width = 9cm, height = 7cm, % Adjusted size to fit wrapfigure
+    tick label style = {font=\scriptsize},
+    axis line style = {very thick, black}, % Thicker axes as in image
+    xtick style = {draw=none}, % Hide tick marks, keep labels
+    ytick style = {draw=none}, % Hide tick marks, keep labels
+    xlabel near ticks,
+    ylabel near ticks,
+]
+    % Line y=x
+    \addplot[dashed, gray, domain=-0.5:2.5] {x} node[pos=0.7, above right, xshift=5pt, yshift=5pt, color=black] {$y=x$};
+
+    % Function f(x) = sqrt{1-x} (blue curve)
+    % Domain x <= 1, range y >= 0. Passes through (1,0) and (0,1)
+    \addplot[very thick, maincolor, domain=-1:1] {sqrt(1-x)} node[pos=0.1, above left, xshift=-10pt, yshift=5pt, color=maincolor] {$f(x) = \sqrt{1-x}$};
+
+    % Inverse function f^{-1}(x) = 1-x^2 (red curve)
+    % Domain x >= 0, range y <= 1. Passes through (0,1) and (1,0)
+    \addplot[very thick, secondarycolor, domain=0:2.5] {1-x^2} node[pos=0.9, below right, xshift=10pt, yshift=-5pt, color=secondarycolor] {$f^{-1}(x) = 1-x^2$};
+
+    % Origin with empty blue circle and label 'O'
+    \draw[maincolor, thick] (axis cs:0,0) circle (3pt); % Empty blue circle at origin
+    \node[below left, xshift=-2pt, yshift=-2pt, font=\scriptsize, color=black] at (axis cs:0,0) {O}; % Label O
+
+    % Filled blue circle at (0,1)
+    \fill[maincolor] (axis cs:0,1) circle (2pt); % Filled blue circle at (0,1)
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\noindent \kefalaio{ΛΥΣΗ}
+\begin{alist}
+    \item Έστω $\alpha, \beta \in (-\infty,1]$ με $f(\alpha) = f(\beta) \Rightarrow \sqrt{1-\alpha} = \sqrt{1-\beta} \Rightarrow 1-\alpha = 1-\beta \Rightarrow \alpha = \beta$, οπότε η $f$ είναι "1-1" στο $(-\infty,1]$.
+    \par Γεωμετρικά, αυτό σημαίνει ότι κάθε ευθεία παράλληλη στον άξονα $x'x$ τέμνει την γραφική παράσταση το πολύ σε ένα σημείο, δηλαδή δεν υπάρχουν διαφορετικά σημεία της γραφικής παράστασης με την ίδια τεταγμένη.
+    \par Αφού η $f$ είναι "1-1" θα υπάρχει η συνάρτηση $f^{-1}$.
+    \item Για να βρούμε την αντίστροφη της $f$ θέτουμε $y = f(x)$ και λύνουμε ως προς $x$.
+    \[y = \sqrt{1-x} \geq 0\]
+    και ισοδύναμα παίρνουμε
+    \[y^2 = 1-x \Leftrightarrow x = 1-y^2\]
+    με $x \in (-\infty,1]$ αφού $1-y^2 \leq 1 \Leftrightarrow 0 \leq y^2$, ισχύει.
+    \par Βρήκαμε ότι για κάθε τιμή $y \geq 0$, υπάρχει μοναδικό $x \in (-\infty,1]$ ώστε $y = f(x)$.
+    \par Άρα $f^{-1}(y) = 1-y^2$ με $y \geq 0$, δηλαδή $f^{-1}(x) = 1-x^2$ με $x \geq 0$.
+    \item Λαμβάνοντας υπόψη ότι οι γραφικές παραστάσεις των συναρτήσεων $f$ και $f^{-1}$ είναι συμμετρικές ως προς την ευθεία $y = x$, παίρνουμε το παρακάτω σχήμα.
+\end{alist}

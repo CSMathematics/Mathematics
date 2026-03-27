@@ -1,0 +1,67 @@
+\Askhsh{16102_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[12]{r}{6cm} % Η τιμή 12 είναι ενδεικτική για τον αριθμό γραμμών που καταλαμβάνει το σχήμα
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός σημείων για το παραλληλόγραμμο
+    \tkzDefPoint(0,0){D} % \Delta
+    \tkzDefPoint(1.5,4){A} % A
+    \tkzDefPoint(6,0){C} % \Gamma
+    \tkzDefPoint(7.5,4){B} % B
+    
+    % Ορισμός του σημείου O ως μέσου της διαγωνίου ΔΒ
+    \tkzDefMidPoint(D,B) \tkzGetPoint{O} 
+    
+    % Ορισμός των σημείων E και Z.
+    % Το E είναι στην AB και το Z στην ΔΓ. Τα E, O, Z είναι συγγραμμικά και το O μέσο του EZ.
+    % Από τις συντεταγμένες του O (3.75, 2) και E στην y=4, Z στην y=0:
+    % x_E + x_Z = 2 * 3.75 = 7.5
+    % Επιλέγουμε x_Z = 2.5, άρα x_E = 5.
+    \tkzDefPoint(5,4){E} % E
+    \tkzDefPoint(2.5,0){Z} % Z
+
+    % Σχεδίαση του περιγράμματος του τετραπλεύρου
+    \tkzDrawPolygon(A,B,C,D)
+    
+    % Σχεδίαση της διαγωνίου ΔΒ
+    \tkzDrawSegment(D,B)
+    
+    % Σχεδίαση του τμήματος ΕΖ
+    \tkzDrawSegment(E,Z)
+    
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(A,B,C,D,E,Z,O)
+    
+    % Ετικέτες των σημείων
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[above right](B){B}
+    \tkzLabelPoint[below right](C){$\Gamma$}
+    \tkzLabelPoint[below left](D){$\Delta$}
+    \tkzLabelPoint[above](E){E}
+    \tkzLabelPoint[below](Z){Z}
+    \tkzLabelPoint[left](O){O}
+\end{tikzpicture}
+\end{wrapfigure}
+
+\selectlanguage{greek}
+
+\noindent \textbf{ΛΥΣΗ}
+
+\begin{alist}
+    \item Τα τρίγωνα $\Delta OZ$ και $BOE$ είναι ίσα διότι έχουν:
+    \begin{itemize}
+        \item $\Delta O=BO$ (το $O$ είναι μέσο της $\Delta B$)
+        \item $\Delta \hat{O}Z = B \hat{O}E$ (ως κατακορυφήν)
+        \item $Z \hat{\Delta}O = E \hat{B}O$ (ως εντός εναλλάξ των παραλλήλων $AB$ και $\Gamma \Delta$ τεμνόμενων από τη $B\Delta$)
+    \end{itemize}
+    Επομένως, τα τρίγωνα $\Delta OZ$ και $BOE$ θα είναι ισοδύναμα, δηλαδή $(\Delta OZ) = (BOE)$.
+
+    \item Τα τρίγωνα $A\Delta B$ και $\Gamma B \Delta$ είναι ίσα, οπότε:
+    \[ (A\Delta B) = (\Gamma B \Delta) \]
+    Από το σχήμα έχουμε ότι $(A\Delta B) = (\Delta OEA) + (BOE)$ και $(\Gamma B \Delta) = (B\Gamma ZO) + (\Delta OZ)$.
+    Οπότε, είναι:
+    \[ (\Delta OEA) + (BOE) = (B\Gamma ZO) + (\Delta OZ) \]
+    Αφού $(BOE) = (\Delta OZ)$, τότε είναι $(\Delta OEA) = (B\Gamma ZO)$.
+\end{alist}

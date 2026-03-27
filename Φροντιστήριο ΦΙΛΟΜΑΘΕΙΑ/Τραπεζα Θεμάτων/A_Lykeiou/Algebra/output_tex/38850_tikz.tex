@@ -1,0 +1,48 @@
+% Source - https://tex.stackexchange.com/a/690291
+% Posted by user299596, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-02-28, License - CC BY-SA 4.0
+
+\documentclass{article}
+\usepackage[margin=1cm]{geometry}
+\usepackage{tikz,tkz-euclide}
+\usepackage{tikz-3dplot}
+\newcommand{\DrawSphereInCylinder}[3]{\begin{tikzpicture}[declare function={R=#2;% radius of sphere
+        r=#3;% radius of cylinder
+        theta=#1;% view angle
+    }]
+    \pgfmathsetmacro{\myalpha}{asin(r/R)}
+    \pgfmathsetmacro{\myh}{R*cos(\myalpha)}
+    \pgfmathtruncatemacro{\iflag}{ifthenelse(theta>90-\myalpha,1,0)}
+    \tdplotsetmaincoords{theta}{0}
+    \ifnum\iflag=0\relax
+        \path[ball color=gray] (0,0) circle[radius=R];          
+    \else
+        \pgfmathsetmacro{\myhprime}{\myh*sin(theta)+r*cos(theta)}
+        \pgfmathsetmacro{\mytcrit}{-asin((r*cos(theta)*\myhprime)/(r*r-\myhprime*\myhprime))}
+        \pgfmathsetmacro{\mybeta}{90-atan2(\myhprime+r*cos(theta)*sin(\mytcrit),r*cos(\mytcrit))}
+        \pgfmathsetmacro{\mytcrit}{asin((cos(theta)*\myhprime)/(r*sin(theta)*sin(theta)))}
+        \path[ball color=orange]  (90-\mybeta:R) arc[start angle=90-\mybeta,end angle=-90+\mybeta,radius=R]
+        [tdplot_main_coords] 
+        -- ({r*cos(-\mytcrit)},{-r*sin(\mytcrit)},-\myh)
+        arc[start angle=-\mytcrit,end angle=-180+\mytcrit,radius=r]
+        [tdplot_screen_coords]
+        -- (-90-\mybeta:R) arc[start angle=-90-\mybeta,end angle=-270+\mybeta,radius=R];
+    \fi
+    \begin{scope}[tdplot_main_coords]
+        \ifnum\iflag=0\relax
+            \draw[dashed] (0,0,-\myh) circle[radius=r] (-r,0,\myh) edge (-r,0,-\myh) (r,0,\myh) edge (r,0,-\myh);
+        \else 
+            \draw[dashed] ({r*cos(-\mytcrit)},{-r*sin(\mytcrit)},-\myh)
+            arc[start angle=-\mytcrit,end angle=180+\mytcrit,radius=r]
+            (-r,0,\myh) edge (-r,0,-\myh) (r,0,\myh) edge (r,0,-\myh);
+        \fi    
+        \clip (0,0,\myh) circle[radius=r];
+        \path[left color=orange!50!black,right color=orange,middle color=orange!20] (r/2,0,\myh) circle[radius=1.5*r];
+        \fill[white] (0,0,-\myh) circle[radius=r];  
+    \end{scope}
+    \path (current bounding box.north) node[above]{};
+\end{tikzpicture}}
+\begin{document}
+    \DrawSphereInCylinder{70}{2}{1}
+    \DrawSphereInCylinder{70}{2.5}{1.25}
+\end{document}

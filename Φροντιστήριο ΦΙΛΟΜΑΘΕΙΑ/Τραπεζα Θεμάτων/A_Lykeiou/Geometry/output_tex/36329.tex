@@ -1,0 +1,58 @@
+\Askhsh{36329}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 4.6. Άθροισμα γωνιών τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 36329.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται τρίγωνο ΑΒΓ και ΜΔ, ΝΕ οι μεσοκάθετοι των πλευρών του ΑΒ, ΑΓ αντίστοιχα.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item Αν είναι ΜΔ = ΝΕ, τότε το τρίγωνο ΑΒΓ είναι ισοσκελές. \monades{12}
+
+\item Αν είναι ΑΒ = ΑΓ, τότε ΜΔ = ΝΕ. \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(1.5,3){A}
+\tkzDefMidPoint(A,B) \tkzGetPoint{D}
+\tkzDefMidPoint(A,C) \tkzGetPoint{E}
+
+\tkzDefLine[orthogonal=through D](A,B) \tkzGetPoint{D_perp}
+\tkzDefLine[orthogonal=through E](A,C) \tkzGetPoint{E_perp}
+
+% Let's pick points M, N on these lines.
+\tkzDefPointBy[homothety=center D ratio 1](D_perp) \tkzGetPoint{M}
+\tkzDefPointBy[homothety=center E ratio 1](E_perp) \tkzGetPoint{N}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3, dashed] (D)--(M);
+\draw[l3, dashed] (E)--(N);
+
+\tkzDrawPoints(A,B,C,D,E,M,N)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below right](C){$\Gamma$}
+\tkzLabelPoint[left](D){$\Delta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[above left](M){$M$}
+\tkzLabelPoint[above right](N){$N$}
+
+\tkzMarkRightAngle(M,D,A)
+\tkzMarkRightAngle(N,E,A)
+\tkzMarkSegments[mark=s|](A,D D,B)
+\tkzMarkSegments[mark=s||](A,E E,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

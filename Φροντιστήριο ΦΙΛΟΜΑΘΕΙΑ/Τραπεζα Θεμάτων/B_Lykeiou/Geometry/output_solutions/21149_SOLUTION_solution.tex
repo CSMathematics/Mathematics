@@ -1,0 +1,77 @@
+\Askhsh{21149_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[24]{r}{6.5cm} % Adjust number of lines and width as needed
+\begin{tikzpicture}[scale=1.0]
+    % Define the center of the circle
+    \tkzDefPoint(0,0){O}
+    % Define points A and B (diameter)
+    \tkzDefPoint(-2,0){A} % Radius R=2, so A is at (-R,0)
+    \tkzDefPoint(2,0){B}  % B is at (R,0)
+
+    % Draw the circle
+    \tkzDrawCircle(O,B)
+
+    % Define point Gamma (Γ) such that AΓB = 90 degrees and BΑΓ = 30 degrees.
+    % This places Γ at (1, sqrt(3)).
+    \tkzDefPoint(1,{sqrt(3)}){G} % G for Gamma
+
+    % Define point Delta (Δ)
+    % A is at (-2,0). ΔA is perpendicular to AB. ΔA = 6.
+    % So Δ is at (-2, 6) (assuming it's above A as in the diagram).
+    \tkzDefPoint(-2,6){D} % D for Delta
+
+    % Draw segments
+    \tkzDrawSegments(A,B A,G B,G A,D D,G D,B) % Draw all segments shown
+
+    % Add right angle symbol at A (ΔAB)
+    \tkzMarkRightAngle[fill=maincolor!20](D,A,B)
+
+    % Label points
+    \tkzLabelPoints[below left](A)
+    \tkzLabelPoints[below right](B)
+    \tkzLabelPoints[above right](G){$\Gamma$} % G for Gamma
+    \tkzLabelPoints[above left](D){$\Delta$} % D for Delta
+    \tkzLabelPoint[below](O){O}
+
+    % Label lengths
+    \tkzLabelSegment[above](D,A){6}
+    \tkzLabelSegment[below](O,B){2}
+
+    % Label angle AΓB as 30 degrees (as shown in the original diagram, despite text contradiction)
+    % Place it manually to match the visual.
+    \node at ($(G) + (0.5, -0.2)$) {$30^\circ$};
+
+\end{tikzpicture}
+\end{wrapfigure}
+\OnKef{ΛΥΣΗ}
+
+\begin{alist}
+    \item[α)]
+    \begin{rlist}
+        \item[i.] Η γωνία $\text{B}\hat{\Gamma}\text{A}$ είναι εγγεγραμμένη που βαίνει στο ημικύκλιο $\text{AB}$, οπότε είναι ορθή.
+        Στο ορθογώνιο τρίγωνο $\text{AB}\Gamma$ είναι $\text{B}\hat{\text{A}}\Gamma = 30^\circ$, άρα η απέναντι κάθετη πλευρά της γωνίας $\text{B}\hat{\text{A}}\Gamma$ θα ισούται με το μισό της υποτείνουσας $\text{AB}$, δηλαδή
+        \[ \text{B}\Gamma = \frac{\text{AB}}{2} \text{ ή } 2 = \frac{2\text{R}}{2} \text{ ή } \text{R} = 2 \]
+
+        \item[ii.] Εφαρμόζουμε το Πυθαγόρειο θεώρημα στο ορθογώνιο τρίγωνο $\text{AB}\Gamma$. Έχουμε διαδοχικά:
+        \[ \text{A}\Gamma^2 = \text{AB}^2 - \text{B}\Gamma^2 \]
+        \[ \text{A}\Gamma^2 = 4^2 - 2^2 \]
+        \[ \text{A}\Gamma^2 = 16 - 4 \]
+        \[ \text{A}\Gamma^2 = 12 \]
+        \[ \text{A}\Gamma = \sqrt{12} \]
+    \end{rlist}
+
+    \item[β)] Η γωνία $\text{A}\hat{\Gamma}\Delta$ είναι ορθή ως παραπληρωματική της ορθής γωνίας $\text{B}\hat{\Gamma}\text{A}$. Αρχικά, υπολογίζουμε το μήκος του τμήματος $\Delta\text{A}$. Εφαρμόζουμε το Πυθαγόρειο θεώρημα στο ορθογώνιο τρίγωνο $\text{A}\Gamma\Delta$. Έχουμε διαδοχικά:
+    \[ \Delta\Delta^2 = \text{A}\Gamma^2 + \Delta\Gamma^2 \]
+    \[ \Delta\Delta^2 = \sqrt{12}^2 + 6^2 \]
+    \[ \Delta\Delta^2 = 12 + 36 \]
+    \[ \Delta\Delta^2 = 48 \]
+    \[ \Delta\Delta = \sqrt{48} \]
+
+    Στη συνέχεια, εξετάζουμε αν εφαρμόζεται το αντίστροφο του Πυθαγορείου Θεωρήματος στο τρίγωνο $\text{AB}\Delta$ με μήκη πλευρών $\text{AB} = 4$, $\Delta\text{B} = 8$, $\Delta\text{A} = \sqrt{48}$.
+    Έχουμε:
+    \[ \Delta\text{B}^2 = 8^2 = 64 \]
+    \[ \text{AB}^2 + \Delta\text{A}^2 = 4^2 + \sqrt{48}^2 = 16 + 48 = 64 \]
+    Αφού είναι $\Delta\text{B}^2 = \text{AB}^2 + \Delta\text{A}^2$, συμπεραίνουμε ότι $\text{B}\hat{\text{A}}\Delta = 90^\circ$. Επομένως, το τμήμα $\Delta\text{A}$ εφάπτεται του κύκλου στο σημείο $\text{A}$.
+\end{alist}

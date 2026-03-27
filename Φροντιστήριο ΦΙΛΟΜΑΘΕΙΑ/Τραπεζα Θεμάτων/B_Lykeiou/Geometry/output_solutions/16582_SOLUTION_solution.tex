@@ -1,0 +1,194 @@
+\Askhsh{16582_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6cm} % Adjust lines and width as needed
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Define points
+        \tkzDefPoint(0,6){A}
+        \tkzDefPoint(-4,0){B}
+        \tkzDefPoint(4,0){C}
+        \tkzDefPoint(0,0){N} % N on BC, AN perp BC
+        
+        \tkzDefPoint(-2,3){D} % Midpoint of AB (for lambda = 1/2)
+        \tkzDefPoint(2,3){E}  % Midpoint of AC (for lambda = 1/2)
+        \tkzDefPoint(0,3){P}  % Intersection of AN and DE, foot of altitude from A to DE
+        
+        \tkzDefPoint(-1,3){H} % H on DE
+        \tkzDefPoint(0,3){K}  % K on AN. For HK perp AN and H on DE, K must be P.
+
+        % Draw main triangle
+        \tkzDrawPolygon(A,B,C)
+        
+        % Draw DE
+        \tkzDrawSegment(D,E)
+        
+        % Draw altitude AN
+        \tkzDrawSegment(A,N)
+        
+        % Draw HK (blue)
+        \tkzDrawSegment[line width=1pt, maincolor](H,K)
+        
+        % Draw AP (blue from A to P) - P is part of AN
+        \tkzDrawSegment[line width=1pt, maincolor](A,P)
+        
+        % Mark right angles
+        \tkzMarkRightAngle(A,N,C) % AN perp BC
+        \tkzMarkRightAngle(A,P,E) % AP perp DE
+        \tkzMarkRightAngle(H,K,A) % HK perp AN (since K=P, this is HK perp AP)
+        
+        % Draw points
+        \tkzDrawPoints(A,B,C,D,E,H,K,N,P)
+        
+        % Labels
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[left](H){H}
+        \tkzLabelPoint[above left](K){K} % K is same as P, label separately to match original visual intent
+        \tkzLabelPoint[below](N){N}
+        \tkzLabelPoint[right](P){P} % P is same as K
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item \begin{rlist}
+        \item Εφόσον $\frac{\text{A}\Delta}{\text{AB}} = \frac{\text{AE}}{\text{A}\Gamma}$, τα τρίγωνα ΑΔΕ και ΑΒΓ είναι όμοια, γιατί έχουν δύο πλευρές τους ανάλογες μία προς μία και την περιεχόμενη στις πλευρές αυτές γωνία ίση (είναι η κοινή γωνία $\hat{\text{A}}$). Ο λόγος ομοιότητας τους είναι ο λόγος των ομόλογων πλευρών τους, δηλαδή $\frac{1}{2}$.
+        Επομένως ο λόγος των εμβαδών τους θα είναι ίσος με το τετράγωνο του λόγου ομοιότητας τους, δηλαδή $\left(\frac{\text{A}\Delta}{\text{AB}}\right)^2 = \left(\frac{1}{2}\right)^2 = \frac{1}{4}$. Άρα το εμβαδόν του ΑΔΕ είναι ίσο με το $\frac{1}{4}$ του εμβαδού του ΑΒΓ. \monades{10}
+        \item $\alpha'$ τρόπος: Επειδή καθένας από τους λόγους $\frac{\text{A}\Delta}{\text{AB}}$ και $\frac{\text{AE}}{\text{A}\Gamma}$ είναι ίσος με $\frac{1}{2}$, τα Δ και Ε είναι μέσα των πλευρών ΑΒ και ΑΓ, αντίστοιχα, του τριγώνου ΑΒΓ. Άρα η ΔΕ είναι παράλληλη με τη ΒΓ.
+
+        Σχεδιάζουμε τα ύψη:
+        \begin{itemize}
+            \item ΑΝ του ΑΒΓ από την κορυφή Α και
+            \item ΗΚ του ΔΕΔ από την κορυφή Η.
+        \end{itemize}
+        Ονομάζουμε P το σημείο που το ΑΝ τέμνει το ΔΕ. Τότε το AP είναι κάθετο στη ΔΕ, αφού το ΑΝ είναι κάθετο στη ΒΓ η οποία είναι παράλληλη στο ΔΕ. Άρα το AP είναι ύψος του τριγώνου ΑΔΕ από την κορυφή Α.
+        Λόγω ομοιότητας των τριγώνων ΑΔΕ και ΑΒΓ τα ύψη που αντιστοιχούν σε ομόλογες πλευρές είναι ανάλογα με το λόγο ομοιότητας $\frac{1}{2}$, δηλαδή τον λόγο ομοιότητας των τριγώνων.
+        Άρα $\frac{\text{AP}}{\text{AN}} = \frac{1}{2}$ ή $\text{AP} = \frac{1}{2}\text{AN}$. Επομένως $\text{PN} = \frac{1}{2}\text{AN}$.
+        Όμως $\text{HK} = \text{PN}$, ως ευθύγραμμα τμήματα που είναι κάθετα στις παράλληλες ευθείες ΔΕ και ΒΓ, στις οποίες βρίσκονται τα άκρα τους. Άρα $\text{HK} = \text{AP}$.
+        Επομένως τα τρίγωνα ΑΔΕ και ΗΕΔ έχουν κοινή βάση τη ΔΕ και ίσα ύψη, τα ΑP και ΗΚ, άρα έχουν ίσα εμβαδά. Δηλαδή $(\text{A}\Delta\text{E}) = (\text{HED})$.
+        Το εμβαδόν του ΑΔΗΕ είναι ίσο με $(\text{A}\Delta\text{E}) + (\text{HED}) = 2(\text{A}\Delta\text{E})$.
+        Όμως από το ερώτημα α) i) $(\text{A}\Delta\text{E}) = \frac{(\text{AB}\Gamma)}{4}$. Άρα $(\text{A}\Delta\text{H}\text{E}) = 2 \cdot \frac{(\text{AB}\Gamma)}{4} = \frac{(\text{AB}\Gamma)}{2}$.
+        Δηλαδή το εμβαδόν του ΑΔΗΕ είναι το μισό του εμβαδού του ΑΒΓ. \monades{15}
+    \end{rlist}
+    \item \begin{rlist}
+        \item β' τρόπος: Σχεδιάζουμε το ευθύγραμμο τμήμα ΑΗ.
+        \begin{wrapfigure}[15]{r}{6cm} % Adjust lines and width as needed
+            \centering
+            \begin{tikzpicture}[scale=0.7]
+                % Define points
+                \tkzDefPoint(0,6){A}
+                \tkzDefPoint(-4,0){B}
+                \tkzDefPoint(4,0){C}
+                \tkzDefPoint(0,0){N} % N on BC, AN perp BC
+                
+                \tkzDefPoint(-2,3){D} % Midpoint of AB
+                \tkzDefPoint(2,3){E}  % Midpoint of AC
+                \tkzDefPoint(0,3){P}  % Intersection of AN and DE, foot of altitude from A to DE
+                
+                \tkzDefPoint(-1,3){H} % H on DE
+                \tkzDefPoint(0,3){K}  % K on AN. For HK perp AN and H on DE, K must be P.
+        
+                % Draw main triangle
+                \tkzDrawPolygon(A,B,C)
+                
+                % Draw DE
+                \tkzDrawSegment(D,E)
+                
+                % Draw altitude AN
+                \tkzDrawSegment(A,N)
+                
+                % Draw HK (blue)
+                \tkzDrawSegment[line width=1pt, maincolor](H,K)
+                
+                % Draw AP (blue from A to P) - P is part of AN
+                \tkzDrawSegment[line width=1pt, maincolor](A,P)
+
+                % Draw AH (red)
+                \tkzDrawSegment[line width=1pt, secondarycolor](A,H)
+                
+                % Draw points
+                \tkzDrawPoints(A,B,C,D,E,H,K,N,P)
+                
+                % Labels
+                \tkzLabelPoint[above](A){A}
+                \tkzLabelPoint[below left](B){B}
+                \tkzLabelPoint[below right](C){$\Gamma$}
+                \tkzLabelPoint[left](D){$\Delta$}
+                \tkzLabelPoint[right](E){E}
+                \tkzLabelPoint[left](H){H}
+                \tkzLabelPoint[left=2pt,above](K){K} % K is same as P, label separately to match original visual intent
+                \tkzLabelPoint[below](N){N}
+                \tkzLabelPoint[right](P){P} % P is same as K
+                
+                % Angle labels (A_1, A_2 not explicitly marked in source diagram, only mentioned in text)
+                % \tkzMarkAngle[arc=ll,size=0.3cm,fill=gray!20](D,A,H) \tkzLabelAngle[pos=0.5](D,A,H){$1$} % A_1
+                % \tkzMarkAngle[arc=ll,size=0.3cm,fill=gray!20](H,A,E) \tkzLabelAngle[pos=0.5](H,A,E){$2$} % A_2
+            \end{tikzpicture}
+        \end{wrapfigure}
+        Τα τρίγωνα ΑΗΔ και ΑΗΒ έχουν κοινή γωνία την $\hat{\text{A}}_1$, επομένως ο λόγος των εμβαδών τους είναι ίσος με το λόγο των γινομένων των πλευρών που περιέχουν τη γωνία $\hat{\text{A}}_1$.
+        Δηλαδή $\frac{(\text{AHD})}{(\text{AHB})} = \frac{\text{A}\Delta \cdot \text{AH}}{\text{AB} \cdot \text{AH}} = \frac{\text{A}\Delta}{\text{AB}} = \frac{1}{2}$ ή $(\text{AHD}) = \frac{1}{2} (\text{AHB})$.
+        Με όμοιο συλλογισμό και κοινή γωνία την $\hat{\text{A}}_2$, για τα τρίγωνα ΑΗΕ και ΑΗΓ έχουμε ότι:
+        \[ \frac{(\text{AHE})}{(\text{AH}\Gamma)} = \frac{\text{AE} \cdot \text{AH}}{\text{A}\Gamma \cdot \text{AH}} = \frac{\text{AE}}{\text{A}\Gamma} = \frac{1}{2} \text{ ή } (\text{AHE}) = \frac{1}{2} (\text{AH}\Gamma) \]
+        Επομένως $(\text{A}\Delta\text{H}\text{E}) = (\text{AHD}) + (\text{AHE}) = \frac{1}{2} \cdot (\text{AHB}) + \frac{1}{2} \cdot (\text{AH}\Gamma) = \frac{1}{2} \cdot [(\text{AHB}) + (\text{AH}\Gamma)] = \frac{1}{2} \cdot (\text{AB}\Gamma)$. \monades{10}
+    \end{rlist}
+    \item β) Αν είναι $\frac{\text{A}\Delta}{\text{AB}} = \frac{\text{AE}}{\text{A}\Gamma} = \lambda$, τότε $0 < \lambda < 1$, γιατί το ΑΔ < ΑΒ.
+    \begin{wrapfigure}[15]{r}{6cm} % Adjust lines and width as needed
+        \centering
+        \begin{tikzpicture}[scale=0.7]
+            % Define points
+            \tkzDefPoint(0,6){A}
+            \tkzDefPoint(-4,0){B}
+            \tkzDefPoint(4,0){C}
+            \tkzDefPoint(0,0){N} % N on BC, AN perp BC
+            
+            % D, E, P, H, K depend on lambda
+            \tkzDefPoint(-4*\lambda, 6-6*\lambda){D} % D at lambda ratio on AB
+            \tkzDefPoint(4*\lambda, 6-6*\lambda){E}  % E at lambda ratio on AC
+            \tkzDefPoint(0, 6-6*\lambda){P}  % Intersection of AN and DE
+            
+            \tkzDefPoint(-1, 6-6*\lambda){H} % H on DE
+            \tkzDefPoint(0, 6-6*\lambda){K}  % K on AN. For HK perp AN and H on DE, K must be P.
+    
+            % Draw main triangle
+            \tkzDrawPolygon(A,B,C)
+            
+            % Draw DE
+            \tkzDrawSegment(D,E)
+            
+            % Draw altitude AN
+            \tkzDrawSegment(A,N)
+            
+            % Draw HK (blue)
+            \tkzDrawSegment[line width=1pt, maincolor](H,K)
+            
+            % Draw AP (blue from A to P) - P is part of AN
+            \tkzDrawSegment[line width=1pt, maincolor](A,P)
+
+            % Draw AH (red)
+            \tkzDrawSegment[line width=1pt, secondarycolor](A,H)
+            
+            % Draw points
+            \tkzDrawPoints(A,B,C,D,E,H,K,N,P)
+            
+            % Labels
+            \tkzLabelPoint[above](A){A}
+            \tkzLabelPoint[below left](B){B}
+            \tkzLabelPoint[below right](C){$\Gamma$}
+            \tkzLabelPoint[left](D){$\Delta$}
+            \tkzLabelPoint[right](E){E}
+            \tkzLabelPoint[left](H){H}
+            \tkzLabelPoint[left=2pt,above](K){K} % K is same as P, label separately to match original visual intent
+            \tkzLabelPoint[below](N){N}
+            \tkzLabelPoint[right](P){P} % P is same as K
+        \end{tikzpicture}
+    \end{wrapfigure}
+    Σχεδιάζουμε το ευθύγραμμο τμήμα ΑΗ.
+    Τα τρίγωνα ΑΗΔ και ΑΗΒ έχουν κοινή γωνία την $\hat{\text{A}}_1$, επομένως ο λόγος των εμβαδών τους είναι ίσος με το λόγο των γινομένων των πλευρών που περιέχουν τη γωνία $\hat{\text{A}}_1$.
+    Δηλαδή $\frac{(\text{AHD})}{(\text{AHB})} = \frac{\text{A}\Delta \cdot \text{AH}}{\text{AB} \cdot \text{AH}} = \frac{\text{A}\Delta}{\text{AB}} = \lambda$ ή $(\text{AHD}) = \lambda \cdot (\text{AHB})$.
+    Με όμοιο συλλογισμό, για τα τρίγωνα ΑΗΕ και ΑΗΓ έχουμε ότι:
+    \[ \frac{(\text{AHE})}{(\text{AH}\Gamma)} = \frac{\text{AE} \cdot \text{AH}}{\text{A}\Gamma \cdot \text{AH}} = \frac{\text{AE}}{\text{A}\Gamma} = \lambda \text{ ή } (\text{AHE}) = \lambda \cdot (\text{AH}\Gamma) \]
+    Επομένως $(\text{A}\Delta\text{H}\text{E}) = (\text{AHD}) + (\text{AHE}) = \lambda \cdot (\text{AHB}) + \lambda \cdot (\text{AH}\Gamma) = \lambda \cdot [(\text{AHB}) + (\text{AH}\Gamma)] = \lambda \cdot (\text{AB}\Gamma)$. \monades{15}
+\end{alist}

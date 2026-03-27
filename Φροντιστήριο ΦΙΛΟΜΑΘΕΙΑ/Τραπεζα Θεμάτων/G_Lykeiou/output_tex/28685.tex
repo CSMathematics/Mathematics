@@ -1,0 +1,70 @@
+\Askhsh{28685}{4}
+\begin{ylh}{1}
+    \item 1.8 Συνέχεια συνάρτησης
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.4 Ρυθμός μεταβολής.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{7.5cm} % The number of lines to wrap (18) is an estimate.
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=2.5,
+    ymin=-0.5, ymax=exp(2.3)+0.5,
+    xtick={\empty}, ytick={\empty},
+    enlargelimits={abs=0.2cm},
+    axis line style={-stealth},
+    every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+    every axis y label/.style={at={(current axis.above origin)}, anchor=south},
+    clip=false
+]
+    % Plot y = e^x
+    \addplot[maincolor, dashed, thick, domain=-1:0, samples=50] {exp(x)};
+    \addplot[maincolor, thick, domain=0:2.3, samples=50] {exp(x)};
+
+    % Label for the curve
+    \node[maincolor, above right, xshift=5pt] at (axis cs:1.8, exp(1.8)) {$y=e^x$};
+
+    % Define a generic x for drawing the triangle and points (e.g., at x=1.5)
+    \pgfmathsetmacro{\currentx}{1.5}
+    \coordinate (M_pt) at (axis cs:\currentx, exp(\currentx));
+    \coordinate (A_pt) at (axis cs:\currentx, 0);
+    \coordinate (O_pt) at (axis cs:0, 0);
+    \coordinate (N_pt) at (axis cs:0, 1);
+
+    % Draw the shaded triangle OAM
+    \fill[secondarycolor!30, opacity=0.8] (O_pt) -- (A_pt) -- (M_pt) -- cycle;
+    \draw[secondarycolor, thick] (O_pt) -- (A_pt) -- (M_pt) -- cycle;
+
+    % Right angle symbol at A
+    \draw[black] (A_pt) -- ($ (A_pt) + (-0.15,0) $) -- ($ (A_pt) + (-0.15,0.15) $) -- ($ (A_pt) + (0,0.15) $) -- cycle;
+
+    % Draw points
+    \fill[black] (O_pt) circle (1.5pt);
+    \fill[black] (N_pt) circle (1.5pt);
+    \fill[black] (A_pt) circle (1.5pt);
+    \fill[black] (M_pt) circle (1.5pt);
+
+    % Labels for points
+    \node[below left] at (O_pt) {$O$};
+    \node[above left] at (N_pt) {$N(0,1)$};
+    \node[below right] at (A_pt) {$A(x,0)$};
+    \node[above right] at (M_pt) {$M(x,y)$};
+
+    % Arrow indicating movement (secondarycolor for the red arrow in the image)
+    % Starting just before M_pt and pointing slightly past it along the curve
+    \pgfmathsetmacro{\arrowstartx_val}{\currentx - 0.2}
+    \draw[->, thick, secondarycolor] (axis cs:\arrowstartx_val, exp(\arrowstartx_val)) -- (M_pt);
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+α) Να αποδείξετε ότι η εξίσωση $e^x + xe^x = 3e^2, x \in (0, +\infty)$ έχει μοναδική ρίζα την $x = 2$. \monades{08}
+
+β) Ένα κινητό Μ ξεκινά από το σημείο $N(0,1)$ και κινείται κατά μήκος της καμπύλης $y = e^x, x \ge 0$ έτσι ώστε η τετμημένη του να αυξάνεται με ρυθμό $2cm/sec$.
+\begin{rlist}
+\item Να αποδείξετε ότι το εμβαδόν $E$ του τριγώνου OAM, όπου $O(0,0), A(x,0)$ και $M(x,y)$ είναι $E(x) = \frac{1}{2}xe^x, x \ge 0$. \monades{07}
+\item Να βρείτε τη θέση του κινητού, τη χρονική στιγμή $t_0$, κατά την οποία ο ρυθμός μεταβολής του εμβαδού $E$ είναι $3e^2 cm^2/sec$. \monades{10}
+\end{rlist}

@@ -1,0 +1,54 @@
+\Askhsh{18371}{4}
+\begin{ylh}{1}
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{5cm}
+\begin{tikzpicture}[scale=0.8]
+    % Ορισμός κορυφών του τριγώνου ΑΒΓ
+    \tkzDefPoint(0,0){B}
+    \tkzDefPoint(6,0){C} % Γ
+    \tkzDefPoint(3,5){A}
+    
+    % Ορισμός του Δ ως μέσου της ΑΓ
+    \tkzDefMidPoint(A,C) \tkzGetPoint{D} % Δ
+    
+    % Υπολογισμός σημείου Ε: ΔΕ παράλληλη στην ΒΓ και ΔΕ = ΑΒ/2
+    % Το D έχει συντεταγμένες ((3+6)/2, (5+0)/2) = (4.5, 2.5)
+    % Το Ε θα έχει y-συντεταγμένη ίση με του D (2.5)
+    % Μήκος ΑΒ = sqrt((3-0)^2 + (5-0)^2) = sqrt(9+25) = sqrt(34)
+    % Μήκος ΔΕ = sqrt(34)/2
+    % Η x-συντεταγμένη του Ε θα είναι D.x + ΔΕ = 4.5 + sqrt(34)/2
+    \tkzDefPoint(4.5 + \pgfmathparse{sqrt(34)/2}\pgfmathresult, 2.5){E}
+
+    % Σχεδίαση του τριγώνου ΑΒΓ
+    \tkzDrawPolygon(A,B,C)
+    
+    % Σχεδίαση του τμήματος ΔΕ
+    \tkzDrawSegment(D,E)
+    
+    % Σχεδίαση του τμήματος ΕΓ με διακεκομμένη γραμμή
+    \tkzDrawSegment[dashed](E,C)
+    
+    % Σχεδίαση των σημείων
+    \tkzDrawPoints(A,B,C,D,E)
+    
+    % Ετικέτες των σημείων
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[below right](C){$\Gamma$}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelPoint[above right](E){E}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο ΑΒΓ και Δ μέσο της ΑΓ. Από το Δ φέρουμε ΔΕ παράλληλη στην ΒΓ και ίση με το μισό της ΑΒ όπως στο σχήμα.
+
+\begin{alist}
+\item
+    \begin{rlist}
+    \item Να αποδείξετε ότι: $\frac{(\Delta E \Gamma)}{(\Alpha \Beta \Gamma)} = \frac{\Delta E}{2 \Beta \Gamma}$. \monades{10}
+    \item Αν το ΔΕΓΒ είναι παραλληλόγραμμο, τότε να αποδείξετε ότι $(\Delta E \Gamma) = (\Alpha \Beta \Delta)$. \monades{10}
+    \end{rlist}
+\item Σε ένα τεστ που χρειάστηκε από τους μαθητές να βρεθεί ο λόγος $\frac{(\Delta E \Gamma)}{(\Alpha \Beta \Gamma)}$ ένας μαθητής έγραφε: «Παρατηρώ ότι τα τρίγωνα ΑΒΓ και ΔΕΓ έχουν $\hat{\Delta} = \hat{\Gamma}$, ως εντός εναλλάξ των παραλλήλων ΔΕ και ΒΓ που τέμνονται από την ΔΓ και δύο πλευρές τους ανάλογες, αφού $\frac{\Delta \Gamma}{\Alpha \Gamma} = \frac{\Delta E}{\Alpha \Beta} = \frac{1}{2}$. Επειδή έχουν δύο πλευρές ανάλογες μία προς μία και τις γωνίες τους $\hat{\Delta}, \hat{\Gamma}$ ίσες, τα τρίγωνα θα είναι όμοια. Επομένως, ο λόγος των εμβαδών τους θα ισούται με το τετράγωνο του λόγου ομοιότητάς τους. $\frac{(\Delta E \Gamma)}{(\Alpha \Beta \Gamma)} = \left(\frac{\Delta E}{\Alpha \Beta}\right)^2 = \left(\frac{1}{2}\right)^2 = \frac{1}{4}$.» Ο καθηγητής του του είπε ότι έχει κάνει ένα σημαντικό λάθος. Μπορείτε να εντοπίσετε σε ποιο σημείο ο συλλογισμός του μαθητή είναι λανθασμένος; \monades{05}
+\end{alist}

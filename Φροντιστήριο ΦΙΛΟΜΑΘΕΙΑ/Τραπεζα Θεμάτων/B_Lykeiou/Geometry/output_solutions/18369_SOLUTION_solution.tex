@@ -1,0 +1,80 @@
+\Askhsh{18369_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6.5cm} % Adjust number of lines based on figure height
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Define points for A=72, B=36, C=72 triangle with D on BC, AD bisector of A
+        % Let B=(0,0), C=(3,0) (so BC = 3)
+        \tkzDefPoint(0,0){B_point}
+        \tkzDefPoint(3,0){C_point} % BC = 3
+        \tkzDefPoint(1,0){D_point} % D on BC, BD=1, DC=2
+        
+        % Calculate A_point such that B=36, C=72, A=72
+        % Angle B is 36 degrees from BC to BA
+        \tkzDefPointBy[rotation=center B_point angle 36](C_point) \tkzGetPoint{temp_A_B}
+        % Angle C is 72 degrees from CB to CA
+        \tkzDefPointBy[rotation=center C_point angle -72](B_point) \tkzGetPoint{temp_A_C}
+        % Intersection gives A
+        \tkzInterLL(B_point,temp_A_B)(C_point,temp_A_C) \tkzGetPoint{A_point}
+        
+        % Draw segments
+        \tkzDrawSegments(A_point,B_point A_point,C_point B_point,C_point A_point,D_point)
+        
+        % Labels for points
+        \tkzLabelPoint[above](A_point){A}
+        \tkzLabelPoint[below left](B_point){B}
+        \tkzLabelPoint[below right](C_point){$\Gamma$}
+        \tkzLabelPoint[below](D_point){$\Delta$}
+        
+        % Angle labels as in diagram (A=72 split, C=72, ADeltaC=72)
+        \tkzMarkAngle[arc=ll,size=0.6cm,fill=maincolor!20](B_point,A_point,D_point)
+        \tkzLabelAngle[pos=0.8](B_point,A_point,D_point){$36^\circ$}
+        
+        \tkzMarkAngle[arc=ll,size=0.6cm,fill=maincolor!20](D_point,A_point,C_point)
+        \tkzLabelAngle[pos=0.8](D_point,A_point,C_point){$36^\circ$}
+        
+        \tkzMarkAngle[arc=ll,size=0.6cm,fill=maincolor!20](A_point,C_point,B_point)
+        \tkzLabelAngle[pos=0.8](A_point,C_point,B_point){$72^\circ$}
+        
+        \tkzMarkAngle[arc=ll,size=0.6cm,fill=maincolor!20](C_point,D_point,A_point)
+        \tkzLabelAngle[pos=0.8](C_point,D_point,A_point){$72^\circ$}
+        
+        % Segment lengths as in diagram (1 on BD, 2 on DC)
+        \tkzLabelSegment[pos=0.5,below](B_point,D_point){1}
+        \tkzLabelSegment[pos=0.5,below](D_point,C_point){2}
+        
+    \end{tikzpicture}
+\end{wrapfigure}
+\λύση
+α) Στο ισοσκελές τρίγωνο ΑΒΓ είναι ΑΒ = ΑΓ, οπότε $\widehat{B} = \widehat{\Gamma}$. Όμως $\widehat{A} + \widehat{B} + \widehat{\Gamma} = 180^\circ$, άρα $36^\circ + 2\widehat{B} = 180^\circ$ και τελικά $\widehat{B} = \widehat{\Gamma} = \frac{180^\circ - 36^\circ}{2} = 72^\circ$.
+
+Η ΒΔ είναι διχοτόμος της γωνίας $\widehat{B}$ , οπότε $\widehat{B_1} = \widehat{B_2} = \frac{72^\circ}{2} = 36^\circ$ (1).
+
+$\widehat{A} = 36^\circ$. $\widehat{\Delta_1} = 36^\circ + 36^\circ = 72^\circ$, σαν εξωτερική γωνία του ΑΒΔ, επομένως το τρίγωνο ΒΔΓ είναι ισοσκελές με ΒΔ = ΒΓ (3).
+
+\begin{rlist}
+\item Τα τρίγωνα ΒΔΓ και ΑΒΓ έχουν:
+    \begin{enumerate}
+    \item[$\bullet$] $\widehat{\Gamma}$ κοινή γωνία,
+    \item[$\bullet$] $\widehat{A} = \widehat{B_2} = \frac{\widehat{B}}{2} = 36^\circ$, από (1).
+    \end{enumerate}
+Επομένως είναι όμοια, διότι έχουν δύο γωνίες τους ίσες μία προς μία.
+\item Οι ομόλογες πλευρές των όμοιων τριγώνων του προηγούμενου ερωτήματος φαίνονται στον παρακάτω πίνακα.
+\[
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    \text{Ίσες γωνίες} & $\widehat{\Gamma} = \widehat{\Gamma}$ & $\widehat{B_2} = \widehat{A}$ & $\widehat{\Delta_1} = \widehat{B}$ \\
+    \hline
+    \text{Απέναντι πλευρά στο τρίγωνο ΒΔΓ} & ΒΔ & ΔΓ & ΒΓ \\
+    \text{Απέναντι πλευρά στο τρίγωνο ΑΒΓ} & ΑΒ & ΒΓ & ΑΓ \\
+    \hline
+\end{tabular}
+\]
+Επομένως οι λόγοι θα είναι $\frac{\text{ΒΔ}}{\text{ΑΒ}} = \frac{\text{ΔΓ}}{\text{ΒΓ}} = \frac{\text{ΒΓ}}{\text{ΑΓ}}$.
+\end{rlist}
+
+β) Τα τρίγωνα ΑΒΔ και ΔΒΓ έχουν τις γωνίες $\widehat{\Delta_1}, \widehat{\Delta_2}$ παραπληρωματικές. Ο λόγος των εμβαδών των τριγώνων θα ισούται με το λόγο των γινομένων των πλευρών που περιέχουν αυτές τις γωνίες, δηλαδή $\frac{(\text{ΑΒΔ})}{(\text{ΔΒΓ})} = \frac{\text{ΑΔ} \cdot \text{ΒΔ}}{\text{ΔΓ} \cdot \text{ΒΔ}} = \frac{\text{ΑΔ}}{\text{ΔΓ}}$.
+
+Όμως $\frac{(\text{ΑΒΔ})}{(\text{ΔΒΓ})} = 3$, οπότε $\frac{\text{ΑΔ}}{\text{ΔΓ}} = 3$ ή $\text{ΑΔ} = 3\text{ΔΓ}$. Το Δ θα χωρίζει το ΑΓ σε δύο τμήματα ΑΔ και ΔΓ με λόγο $3:1$.

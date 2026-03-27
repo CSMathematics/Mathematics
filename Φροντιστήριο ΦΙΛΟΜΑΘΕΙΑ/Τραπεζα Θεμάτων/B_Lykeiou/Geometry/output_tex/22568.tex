@@ -1,0 +1,61 @@
+\Askhsh{22568}{4}
+\begin{ylh}{1}
+    \item 8.1. Όμοια ευθύγραμμα σχήματα
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου.
+\end{ylh}
+\begin{wrapfigure}[11]{r}{6.5cm}
+    \begin{tikzpicture}[scale=0.65]
+        % Define points: L (Lambda), K, D (Delta)
+        \tkzDefPoint(0,0){L} % Lambda at origin
+        \tkzDefPoint(10,0){K} % K at (10,0) (since LK=R=10)
+        \tkzDefPoint(-10,0){D} % Delta at (-10,0) (since L is center, Delta on circle, and D,L,K are collinear)
+
+        % Draw the circles
+        \tkzDrawCircle[line width=0.8pt](L,K) % Circle (L,R) where R=LK=10
+        \tkzDrawCircle[R,line width=0.8pt](K,6cm) % Circle (K,rho) where rho=6
+
+        % Define Gamma on circle (K,rho) and draw KG
+        % Choose an angle (e.g., 120 degrees counter-clockwise from positive x-axis relative to K)
+        % This places G at (10 + 6*cos(120), 6*sin(120)) = (10 - 3, 3*sqrt(3)) = (7, 3*sqrt(3))
+        \tkzDefPoint(7, {3*sqrt(3)}){G} % G for Gamma
+        \tkzDrawSegment[line width=0.8pt](K,G)
+
+        % Draw the tangent line ABG
+        % It's perpendicular to KG at G
+        \tkzDefLine[orthogonal through G by K](K,G)
+        \tkzGetPoint{tg1} % Point on the orthogonal line
+        \tkzInterLC(L,K)(G,tg1) \tkzGetPoints{A}{B} % Intersect with Circle (L,R) to get A and B
+
+        % Draw the tangent line extended and the line D-L-K
+        \tkzDrawLine[add=0.5 and 0.5, line width=0.8pt](A,B)
+        \tkzDrawSegment[line width=0.8pt](D,K) % Line D-L-K
+
+        % Draw dashed segments
+        \tkzDrawSegments[dashed,maincolor](K,A K,B A,D B,D)
+
+        % Mark right angle at Gamma
+        \tkzMarkRightAngle[size=0.3](K,G,A)
+
+        % Draw points
+        \tkzDrawPoints(L,K,D,G,A,B)
+
+        % Label points
+        \tkzLabelPoint[below left](L){$\Lambda$}
+        \tkzLabelPoint[below right](K){K}
+        \tkzLabelPoint[left](D){$\Delta$}
+        \tkzLabelPoint[above left](G){$\Gamma$}
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below](B){B}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται κύκλος με κέντρο το σημείο $\Lambda$ και ακτίνα $R=10$, ο οποίος διέρχεται από το κέντρο ενός άλλου κύκλου με κέντρο το σημείο $K$ και ακτίνα $\rho=6$. Η εφαπτομένη του κύκλου $(K,\rho)$ στο σημείο $\Gamma$ τέμνει τον κύκλο $(\Lambda,R)$ στα σημεία $A$ και $B$. Η προέκταση της $K\Lambda$ προς το $\Lambda$ τέμνει τον κύκλο $(\Lambda,R)$ στο σημείο $\Delta$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+    \begin{rlist}
+    \item Τα τρίγωνα $K\Gamma B$ και $KA\Delta$ είναι όμοια. \monades{8}
+    \item $KA \cdot KB = 120$. \monades{9}
+    \end{rlist}
+\item Αν είναι $KB=15$, να βρείτε το εμβαδόν του τριγώνου $A\Gamma K$. \monades{8}
+\end{alist}

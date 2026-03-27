@@ -1,0 +1,56 @@
+\Askhsh{34440}{4}
+\begin{ylh}{1}
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.4 Ρυθμός μεταβολής
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.7 Τοπικά ακρότατα συνάρτησης.
+\end{ylh}
+\begin{wrapfigure}[13]{r}{6cm} % Adjust number of lines wrapped and width as needed
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -0.5, xmax = 3.5,
+    ymin = -0.5, ymax = 3.5,
+    xtick = {0,1,2,3},
+    ytick = {0,1,2,3},
+    grid = both,
+    grid style = {gray!30},
+    samples = 100,
+    width = 5.5cm, height = 5.5cm, % Adjust width/height for better fit in wrapfigure
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % Shaded triangle OAB (for the case in the figure, which implies x=2, y=2)
+    \addplot[fill=maincolor!30, draw=none] coordinates {(0,0) (2,0) (0,2) -- cycle};
+
+    % Line (epsilon) for the case in the figure (x=2, y=2) -> Y = -X + 2
+    \addplot[very thick, maincolor, domain=0:2.1] {2-x}; % Plotting Y = 2-X from x=0 to x=2
+    \node[below right, maincolor] at (axis cs:2.1,-0.1) {$(\varepsilon)$}; % Label for epsilon
+
+    % Points
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,0)};
+    \node[below left] at (axis cs:0,0) {O};
+
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(1,1)};
+    \node[above right] at (axis cs:1,1) {M(1,1)};
+
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(2,0)};
+    \node[below right] at (axis cs:2,0) {A(x,0)};
+
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,2)};
+    \node[above left] at (axis cs:0,2) {B(0,y)};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Σε ορθοκανονικό σύστημα συντεταγμένων με αρχή των αξόνων το \(\mathrm{O}(0,0)\), δίνεται το σημείο \(\mathrm{M}(1,1)\). Μια ευθεία \((\varepsilon)\) που διέρχεται από το \(\mathrm{M}\) τέμνει τους θετικούς ημιάξονες \(\mathrm{Ox}\) και \(\mathrm{Oy}\) στα σημεία \(\mathrm{A}(x,0)\), \(x>0\) και \(\mathrm{B}(0,y)\), \(y>0\) αντιστοίχως, όπως φαίνεται και στο παρακάτω σχήμα.
+
+\begin{alist}
+\item Για \(x \in (1, +\infty)\) να αποδείξετε ότι το εμβαδόν του τριγώνου \(\mathrm{OAB}\) συνάρτηση του \(x\) δίνεται από τον τύπο:
+    \[ E(x) = \frac{x^2}{2(x-1)} \] \monades{7}
+\item Να αποδείξετε ότι για \(x=2\) το εμβαδόν του τριγώνου \(\mathrm{OAB}\) παίρνει την ελάχιστη τιμή, η οποία και να βρεθεί. \monades{7}
+\item Να βρείτε την εφαπτομένη \((\zeta)\) της γραφικής παράστασης της \(E\), στο σημείο \((3,E(3))\) και τα σημεία \(\Gamma, \Delta\) στα οποία αυτή τέμνει τους άξονες \(x'x\) και \(y'y\) αντιστοίχως. \monades{5}
+\item Ένα σημείο \(K(x,y)\) κινείται πάνω στην ευθεία \((\zeta)\), και η τεταγμένη του αυξάνεται με ρυθμό μεταβολής \(3\) μονάδες/sec. Να βρείτε το ρυθμό μεταβολής της τετμημένης του. \monades{6}
+\end{alist}

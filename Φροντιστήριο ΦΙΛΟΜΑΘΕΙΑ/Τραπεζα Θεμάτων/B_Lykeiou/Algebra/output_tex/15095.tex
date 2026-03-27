@@ -1,0 +1,55 @@
+% ===================================================================
+%  Αρχείο: 15095_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Οι εξισώσεις των γραμμών που αποτελούν την περίμετρο μιας επίπεδης μεμβράνης όπως φαίνεται κάτω από ένα μικροσκόπιο, είναι:
+\begin{equation*}x = 0,\ \ \ \ \ y = x^{2} - \pi x,\ \ \ \ \ y = \frac{1}{2} + \eta\mu x\ \ \ \text{και}\ \ \ x = 3\end{equation*}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=latex]
+    \draw[very thin, color=gray!30] (-0.5,-3) grid (3.5,2);
+    \draw[->] (-0.5,0) -- (3.5,0) node[right] {$x$};
+    \draw[->] (0,-3) -- (0,2) node[above] {$y$};
+    
+    \foreach \x in {1,2,3}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {-2,-1,1}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % pi mark
+    \draw (3.14159,2pt) -- (3.14159,-2pt) node[below, font=\small] {$\pi$};
+    
+    % f(x) = x^2 - pi*x on [0, pi]
+    \draw[very thick, color=blue!70!black, samples=100, domain=0:pi] plot (\x, {\x*\x - pi*\x}) node[below] {$C_f$};
+    
+    % Point K (pi/2, -pi^2/4 approx -2.467)
+    \filldraw (1.57, -2.467) circle (1.5pt) node[below] {$K$};
+    
+    % g(x) = 0.5 + sin(x) (to be added by student, but let's show both context)
+    % \draw[thick, color=red!70!black, samples=100, domain=0:pi] plot (\x, {0.5 + sin(deg(\x))}) node[above] {$C_g$};
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Γνωρίζουμε ότι η γραφική παράσταση της συνάρτησης $f(x) = x^{2} - \pi x,\text{   }x \in \lbrack 0,\pi\rbrack$ είναι το τμήμα της παραβολής που φαίνεται στο παραπάνω σχήμα, η οποία παρουσιάζει ελάχιστο στο σημείο $Κ\left( \frac{\pi}{2}, - \frac{\pi^{2}}{4} \right)$.
+
+Να κάνετε την γραφική παράσταση της συνάρτησης $g(x) = \frac{1}{2} + \eta\mu x,$ $x \in \lbrack 0,\pi\rbrack$ στο ίδιο σύστημα αξόνων.
+
+\monades{5}
+
+\item Με τη βοήθεια των γραφικών παραστάσεων ή με οποιονδήποτε άλλο τρόπο, να βρείτε τα ακρότατα των δύο συναρτήσεων και τα διαστήματα μονοτονίας τους.
+
+\monades{8}
+
+\item Να βρείτε την μέγιστη κατακόρυφη απόσταση μεταξύ των γραφικών παραστάσεων των δύο συναρτήσεων.
+
+\monades{8}
+
+\item Να βρείτε τις ελάχιστες διαστάσεις του ορθογώνιου πλακιδίου.
+
+\monades{4}
+\end{alist}

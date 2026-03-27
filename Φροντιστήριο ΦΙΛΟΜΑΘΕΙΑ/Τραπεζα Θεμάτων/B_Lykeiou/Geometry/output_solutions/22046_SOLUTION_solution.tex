@@ -1,0 +1,53 @@
+\Askhsh{22046_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [ΛΥΣΗ]
+\end{ylh}
+\begin{wrapfigure}{r}{5cm}
+\centering
+\begin{tikzpicture}[scale=2]
+    % Define points O, B, Gamma (Cg) from which everything is constructed
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(2,0){B}
+    \tkzDefPoint(1,0){Cg}
+
+    % Point A is at the intersection of two circles:
+    % C1: center O, radius 1 (the main circle)
+    % C2: center at midpoint of OB (which is Cg), radius 1 (circle on which angle OAB=90)
+    \tkzInterCC(O,Cg)(Cg,B) \tkzGetPoints{A}{A'}
+
+    % Fill the shaded region ABΓ. The path is B->Γ, arc Γ->A, line A->B.
+    % The angle of Γ is 0 degrees, angle of A is 60 degrees.
+    \path[fill=gray!40] (B) -- (Cg) arc (0:60:1) -- cycle;
+
+    % Draw the main circle and segments
+    \tkzDrawCircle(O,Cg)
+    \tkzDrawSegments[very thick](O,A A,B O,B)
+
+    % Add markings
+    \tkzMarkSegment[mark=|, size=2pt, thick](O,A)
+    \tkzMarkSegment[mark=|, size=2pt, thick](O,Cg)
+    \tkzMarkSegment[mark=|, size=2pt, thick](Cg,B)
+    \tkzMarkRightAngle[size=0.2](O,A,B)
+
+    % Draw the points
+    \tkzDrawPoints(O,A,B,Cg)
+
+    % Add labels
+    \tkzLabelPoint[left](O){O}
+    \tkzLabelPoint[above](A){A}
+    \tkzLabelPoint[right](B){B}
+    \tkzLabelPoint[below](Cg){$\Gamma$}
+    \node[above right, xshift=-2mm, yshift=-2mm] at (O) {R=1};
+\end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Γνωρίζουμε ότι η εφαπτομένη του κύκλου σε κάθε σημείο του είναι κάθετη στην ακτίνα που καταλήγει στο σημείο επαφής, οπότε $ΒΑ \perp ΟΑ$. Άρα, η γωνία $O\hat{A}B$ είναι ορθή.
+    Στο ορθογώνιο τρίγωνο $OAB$ η κάθετη πλευρά $OA$ ισούται με το μισό της υποτείνουσας $OB$, οπότε η απέναντι γωνία της $O\hat{B}A$ ισούται με $30^\circ$.
+    \item Με εφαρμογή του Πυθαγόρειου θεωρήματος στο ορθογώνιο τρίγωνο $OAB$ έχουμε:
+    \[ AB^2 = OB^2 - OA^2 = 2^2 - 1^2 = 3 \]
+    Άρα, $AB = \sqrt{3}$.
+    \item Στο ορθογώνιο τρίγωνο $OAB$ είναι $A\hat{O}B = 90^\circ - 30^\circ = 60^\circ$. Έτσι, το μήκος του τόξου $\widehat{A\Gamma}$ είναι:
+    \[ \ell_{\widehat{A\Gamma}} = \frac{\pi R 60^\circ}{180^\circ} = \frac{\pi}{3} \]
+    Οπότε, η περίμετρος του γραμμοσκιασμένου μικτόγραμμου χωρίου $ΑΒΓ$ είναι:
+    \[ L = (AB) + (ΒΓ) + \ell_{\widehat{A\Gamma}} = \sqrt{3}+1+\frac{\pi}{3} \]
+\end{alist}

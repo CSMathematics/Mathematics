@@ -1,0 +1,54 @@
+\Askhsh{23197_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Συναρτήσεις, Παράγωγοι, Μονοτονία, Ακρότατα, Γραφική παράσταση]
+\end{ylh}
+\begin{wrapfigure}[19]{r}{7cm}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xmin = -2, xmax = 4,
+            ymin = -1.5, ymax = 4.5,
+            xtick = {-2,-1,0,1,2,3,4},
+            ytick = {-1,0,1,2,3,4},
+            grid = none, % No grid in the original image
+            xlabel = {}, ylabel = {}, % No explicit labels x, y
+            axis equal, % To ensure the parabola looks proportional
+            domain = -2.2:4.2, % Extend domain slightly for the curve to go off the edge
+            samples = 100,
+            width = 7cm, height = 6cm,
+            tick label style = {font=\scriptsize},
+            % Removed default label positioning, as no labels are used for x,y axes.
+        ]
+            % Plot the function f(x) = x(x-2) = x^2 - 2x
+            \addplot[very thick, black] {x^2 - 2*x};
+            \node[above right, font=\scriptsize] at (axis cs:3.5,3.5) {$C_f$};
+
+            % Dashed vertical line at x=1
+            \draw[dashed, gray] (axis cs:1, -1.5) -- (axis cs:1, 4.5);
+            % Dashed horizontal line at y=-1
+            \draw[dashed, gray] (axis cs:-2.2, -1) -- (axis cs:4.2, -1);
+        \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+\kefalaio{ΛΥΣΗ}
+\begin{alist}
+    \item Ο τύπος της συνάρτησης γράφεται $f(x)=x(x-2)$, οπότε με $\alpha=0$ και $\beta=2$ παίρνουμε $f(\alpha)=f(0)=0$ και $f(\beta)=f(2)=0$.
+    Η συνάρτηση δεν αντιστρέφεται αφού υπάρχουν διαφορετικοί αριθμοί $\alpha$, $\beta$ ώστε $f(\alpha)=f(\beta)$, οπότε δεν είναι «1-1». \monades{X}
+    \item Η συνάρτηση είναι παραγωγίσιμη στο $\mathbb{R}$ με $f'(x)=2x-2=2(x-1)$.
+    Το πρόσημο της παραγώγου είναι το ίδιο με το πρόσημο του παράγοντα $(x-1)$ και φαίνεται στον επόμενο πίνακα.
+    \[
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        $\mathbf{x}$ & $-\mathbf{\infty}$ & $\mathbf{1}$ & $+\mathbf{\infty}$ \\
+        \hline
+        $\mathbf{f'(x)}$ & $-$ & $\mathbf{0}$ & $+$ \\
+        \hline
+        $\mathbf{f(x)}$ & \tikz[scale=0.7]{\draw[->] (0.2,0.8) -- (0.8,0.2);} & \raisebox{-0.5ex}{\text{\tiny $-1$}} & \tikz[scale=0.7]{\draw[->] (0.2,0.2) -- (0.8,0.8);} \\
+        \hline
+    \end{tabular}
+    \]
+    Από τον πίνακα συμπεραίνουμε ότι η $f$ είναι γνησίως φθίνουσα στο διάστημα $(-\infty, 1]$ και γνησίως αύξουσα στο διάστημα $[1, +\infty)$. Παρουσιάζει ολικό ελάχιστο για $x=1$.
+    Η ελάχιστη τιμή της $f$ είναι ίση με $f(1)=1-2=-1$. \monades{X}
+    \item Από τα προηγούμενα ερωτήματα συμπεραίνουμε ότι η γραφική παράσταση της $f$, που είναι η παραβολή του διπλανού σχήματος, τέμνει τον $x'x$ στο σημείο $(2, 0)$, στην αρχή $O$ και παρουσιάζει ολικό ελάχιστο για $x=1$, το $f(1)=-1$. \monades{X}
+\end{alist}

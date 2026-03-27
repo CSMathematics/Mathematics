@@ -1,0 +1,57 @@
+\Askhsh{36172}{2}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.6. Άθροισμα γωνιών τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 36172.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται τραπέζιο ΑΒΓΔ με ΑΒ // ΓΔ και ΒΔ = ΒΓ. Αν $\Delta\widehat{Β}\Gamma = 110^{ο}$ και $Α\widehat{\Delta}Β = 25^{ο}$ να υπολογίσετε:
+
+\begin{alist}
+\item τη γωνία $\widehat{\Gamma}$, \monades{11}
+
+\item τη γωνία $\widehat{Α}$. \monades{14}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){Delta}
+\tkzDefPoint(5,0){C}
+\tkzDefPointBy[rotation=center Delta angle 35](C) \tkzGetPoint{B_dir}
+\tkzDefCircle[R](Delta,5) \tkzGetPoint{dummy}
+\tkzInterLC(Delta,B_dir)(Delta,dummy) \tkzGetPoints{B_dummy}{B} % BD=BC? Wait.
+% If BD=BC and CD=5, then tri BCD is isosceles.
+% Base CD=5. Angles at C and D are 35.
+% B is intersection of lines from C and D at 35.
+\tkzDefPointBy[rotation=center Delta angle 35](C) \tkzGetPoint{BD_line}
+\tkzDefPointBy[rotation=center C angle -35](Delta) \tkzGetPoint{BC_line}
+\tkzInterLL(Delta,BD_line)(C,BC_line) \tkzGetPoint{B}
+
+\tkzDefLine[parallel=through B](Delta,C) \tkzGetPoint{AB_line}
+\tkzDefPointBy[rotation=center Delta angle 60](C) \tkzGetPoint{AD_line} % Total D = 35+25=60.
+\tkzInterLL(B,AB_line)(Delta,AD_line) \tkzGetPoint{A}
+
+\draw[l3] (A)--(B)--(C)--(Delta)--cycle;
+\draw[l3] (B)--(Delta);
+
+\tkzDrawPoints(A,B,C,Delta)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[right](C){$\Gamma$}
+\tkzLabelPoint[below](Delta){$\Delta$}
+
+\tkzMarkAngle[size=0.6,mark=none](C,B,Delta)
+\tkzLabelAngle[pos=0.9](C,B,Delta){$110^\circ$}
+\tkzMarkAngle[size=0.8,mark=none](A,Delta,B)
+\tkzLabelAngle[pos=1.2](A,Delta,B){$25^\circ$}
+\tkzMarkSegments[mark=s|](Delta,B B,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

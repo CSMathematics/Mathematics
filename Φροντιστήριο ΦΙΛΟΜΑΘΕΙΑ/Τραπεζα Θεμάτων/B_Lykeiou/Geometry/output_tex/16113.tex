@@ -1,0 +1,64 @@
+\Askhsh{16113}{2}
+\begin{ylh}{1}
+    \item 8.2. Κριτήρια ομοιότητας.
+\end{ylh}
+\begin{wrapfigure}[9]{r}{7cm}
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Ορισμός του σημείου E ως αρχή των αξόνων
+        \tkzDefPoint(0,0){E}
+
+        % Ορισμός σημείου κατεύθυνσης για τη διαγώνιο ΑΓ (με μήκος sqrt(1^2 + 2^2) = sqrt(5))
+        \tkzDefPoint(-1,2){dirAC}
+        \tkzCalcLength[E,dirAC]\tkzGetLength{lenDirAC}
+
+        % Ορισμός του σημείου Α (απόσταση 6 από το Ε, στην κατεύθυνση του dirAC)
+        \tkzDefPointBy[homothety=center E ratio 6/\lenDirAC](dirAC) \tkzGetPoint{A}
+        % Ορισμός του σημείου Γ (απόσταση 15 από το Ε, στην αντίθετη κατεύθυνση από το dirAC)
+        \tkzDefPointBy[homothety=center E ratio -15/\lenDirAC](dirAC) \tkzGetPoint{G} % Using G for Gamma
+
+        % Ορισμός σημείου κατεύθυνσης για τη διαγώνιο ΒΔ (με μήκος sqrt(2^2 + 1^2) = sqrt(5))
+        \tkzDefPoint(2,1){dirBD}
+        \tkzCalcLength[E,dirBD]\tkzGetLength{lenDirBD}
+
+        % Σημείωση: Από την ομοιότητα των τριγώνων, γνωρίζουμε BE/DE = AE/GE = 6/15 = 2/5.
+        % Δεδομένου ότι ΔE = 10, τότε BE = (2/5) * 10 = 4.
+        % Ορισμός του σημείου Β (απόσταση 4 από το Ε, στην κατεύθυνση του dirBD)
+        \tkzDefPointBy[homothety=center E ratio 4/\lenDirBD](dirBD) \tkzGetPoint{B}
+        % Ορισμός του σημείου Δ (απόσταση 10 από το Ε, στην αντίθετη κατεύθυνση από το dirBD)
+        \tkzDefPointBy[homothety=center E ratio -10/\lenDirBD](dirBD) \tkzGetPoint{D}
+
+        % Σχεδίαση των πλευρών του τραπεζίου
+        \tkzDrawSegment(A,B)
+        \tkzDrawSegment(B,G)
+        \tkzDrawSegment(G,D)
+        \tkzDrawSegment(D,A)
+
+        % Σχεδίαση των διαγωνίων
+        \tkzDrawSegment(A,G)
+        \tkzDrawSegment(B,D)
+
+        % Σχεδίαση των σημείων
+        \tkzDrawPoints(A,B,G,D,E)
+
+        % Ετικέτες των σημείων
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[above right](E){E}
+
+        % Ετικέτες των γνωστών μηκών
+        \tkzLabelSegment[left](A,E){6}
+        \tkzLabelSegment[above](A,B){8}
+        \tkzLabelSegment[right](G,E){15}
+        \tkzLabelSegment[below left](D,E){10}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται το τραπέζιο $\mathrm{AB\Gamma\Delta}$ με $\mathrm{AB \parallel \Delta\Gamma}$, $\mathrm{E}$ σημείο τομής των διαγωνίων, $\mathrm{AE = 6}$, $\mathrm{AB = 8}$, $\mathrm{\Gamma E = 15}$ και $\mathrm{\Delta E = 10}$.
+
+\begin{alist}
+    \item Να αποδείξετε ότι τα τρίγωνα $\mathrm{AEB}$ και $\mathrm{\Gamma E \Delta}$ είναι όμοια. \monades{09}
+    \item Να γράψετε την αναλογία των ομόλογων πλευρών τους. \monades{09}
+    \item Να υπολογίσετε τα τμήματα $\mathrm{BE}$ και $\mathrm{\Gamma \Delta}$. \monades{07}
+\end{alist}

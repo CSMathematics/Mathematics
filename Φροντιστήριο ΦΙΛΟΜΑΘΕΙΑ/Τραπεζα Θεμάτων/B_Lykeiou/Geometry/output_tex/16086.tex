@@ -1,0 +1,79 @@
+\Askhsh{16086}{2}
+\begin{ylh}{1}
+    \item 7.7. Θεώρημα του Θαλή
+    \item 8.2. Κριτήρια ομοιότητας.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{8cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define the intersection point O
+        \tkzDefPoint(0,0){O}
+
+        % Define arbitrary reference points for the two transversals
+        % Make ref_A visually align with A in the diagram (bottom right-ish)
+        \tkzDefPoint(4,-3){ref_A}
+        % Make ref_B visually align with B in the diagram (bottom left-ish)
+        \tkzDefPoint(-3,-2){ref_B}
+        
+        % Calculate the lengths of the reference segments from O
+        \tkzCalcLength[sqrt](O,ref_A) \tkzGetLength{len_ref_A}
+        \tkzCalcLength[sqrt](O,ref_B) \tkzGetLength{len_ref_B}
+
+        % Define points on the transversals using homothety from O
+        % Transversal A-O-Z (Right transversal in diagram)
+        % OA = 12
+        \tkzDefPointBy[homothety=center O ratio 12/\tkzUseMath{len_ref_A}](ref_A){A}
+        % OΔ = 3 (Δ is between O and Z)
+        \tkzDefPointBy[homothety=center O ratio 3/\tkzUseMath{len_ref_A}](ref_A){Delta}
+        % OZ (calculated in thoughts as 11, E is above G, Z is above D)
+        \tkzDefPointBy[homothety=center O ratio 11/\tkzUseMath{len_ref_A}](ref_A){Z}
+
+        % Transversal B-O-E (Left transversal in diagram)
+        % OB = 6
+        \tkzDefPointBy[homothety=center O ratio 6/\tkzUseMath{len_ref_B}](ref_B){B}
+        % OΓ (calculated in thoughts as 1.5. Γ is between O and E)
+        \tkzDefPointBy[homothety=center O ratio 1.5/\tkzUseMath{len_ref_B}](ref_B){Gamma}
+        % OE (calculated in thoughts as 1.5 + 4 = 5.5)
+        \tkzDefPointBy[homothety=center O ratio 5.5/\tkzUseMath{len_ref_B}](ref_B){E}
+
+        % Draw the two transversals
+        \tkzDrawLine[add=0.5 and 0.5, color=black](A,Z)
+        \tkzDrawLine[add=0.5 and 0.5, color=black](B,E)
+
+        % Draw the parallel lines epsilon_1, epsilon_2, epsilon_3
+        \tkzDrawLine[add=0.5 and 0.5, color=black](E,Z) % Epsilon 1
+        \tkzDrawLine[add=0.5 and 0.5, color=black](Gamma,Delta) % Epsilon 2
+        \tkzDrawLine[add=0.5 and 0.5, color=black](A,B) % Epsilon 3
+
+        % Draw points
+        \tkzDrawPoints(A,B,Gamma,Delta,E,O,Z)
+
+        % Label points
+        \tkzLabelPoint[below](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[above left](Gamma){$\Gamma$}
+        \tkzLabelPoint[above right](Delta){$\Delta$}
+        \tkzLabelPoint[above left](E){E}
+        \tkzLabelPoint[below left](O){O} % Label O slightly shifted for clarity
+        \tkzLabelPoint[above right](Z){Z}
+
+        % Label segments with given lengths
+        \tkzLabelSegment[right, pos=0.5](E,Gamma){4}
+        \tkzLabelSegment[below right, pos=0.5](O,Delta){3}
+        \tkzLabelSegment[below, pos=0.5](O,A){12}
+        \tkzLabelSegment[below, pos=0.5](O,B){6}
+
+        % Label parallel lines
+        \tkzLabelLine[pos=1.1, left](E,Z){$\varepsilon_1$}
+        \tkzLabelLine[pos=1.1, left](Gamma,Delta){$\varepsilon_2$}
+        \tkzLabelLine[pos=1.1, left](A,B){$\varepsilon_3$}
+    \end{tikzpicture}
+\end{wrapfigure}
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα οι ευθείες $\varepsilon_1$, $\varepsilon_2$ και $\varepsilon_3$ είναι παράλληλες. Δίνονται ότι $\Gamma E = 4$, $\mathrm{O}\Delta = 3$, $\mathrm{OA} = 12$, $\mathrm{OB} = 6$.
+\begin{alist}
+\item Να υπολογίσετε τα τμήματα $\mathrm{O}\Gamma$ και $\Delta \mathrm{Z}$.  \monades{10}
+\item Να αποδείξετε ότι τα τρίγωνα $\mathrm{OEZ}$ και $\mathrm{OBA}$ είναι όμοια.  \monades{09}
+\item Αν $\mathrm{O}\Gamma = 1.5$ και $\Delta \mathrm{Z} = 8$, να υπολογίσετε τον λόγο $\frac{EZ}{AB}$.  \monades{06}
+\end{alist}

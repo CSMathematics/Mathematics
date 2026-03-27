@@ -1,0 +1,47 @@
+% ===================================================================
+%  Αρχείο: 15787_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση μιας συνάρτησης $h(t)$ που εκφράζει το ύψος ενός αντικειμένου από το έδαφος (σε km) ως προς το χρόνο t (σε min).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, >=latex]
+    \draw[very thin, color=gray!30] (-1,-0.5) grid (11,4.5);
+    \draw[->] (-1,0) -- (11.5,0) node[right] {$t$ (min)};
+    \draw[->] (0,-0.5) -- (0,5) node[above] {$h$ (km)};
+    
+    \foreach \x in {1,2,3,4,5,6,7,8,9,10}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {1,2,3,4}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % Parabolic arc h(t) = -0.16(t-5)^2 + 4
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=0:10] plot (\x, {-0.16*(\x-5)*(\x-5) + 4});
+    
+    % Peak
+    \draw[dashed] (5,0) -- (5,4) -- (0,4);
+    \filldraw (5,4) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να βρείτε το πεδίο ορισμού και το σύνολο τιμών της συνάρτησης $h$.
+
+\monades{6}
+
+\item Ποιο είναι το μέγιστο ύψος που φτάνει το αντικείμενο και ποια χρονική στιγμή το επιτυγχάνει;
+
+\monades{5}
+
+\item Να βρείτε τον τύπο της συνάρτησης $h(t)$, αν γνωρίζετε ότι είναι της μορφής $h(t) = \alpha(t-5)^2 + 4$.
+
+\monades{7}
+
+\item Να βρείτε τις χρονικές στιγμές κατά τις οποίες το αντικείμενο βρίσκεται σε ύψος $3\ km$.
+
+\monades{7}
+\end{alist}

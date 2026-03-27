@@ -1,0 +1,71 @@
+\Askhsh{18098}{2}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % Define points for the square's vertices
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,4){B}
+        \tkzDefPoint(4,4){Gamma} % Using Gamma for Γ
+        \tkzDefPoint(4,0){Delta} % Using Delta for Δ
+
+        % Define midpoints of the sides
+        \tkzDefPoint(0,2){E}
+        \tkzDefPoint(2,4){Z}
+        \tkzDefPoint(4,2){H}
+        \tkzDefPoint(2,0){Theta} % Using Theta for Θ
+
+        % Fill the whole square first (as if it's all shaded)
+        \fill[black!70] (A) rectangle (Gamma);
+
+        % Then fill the four corner sectors in white to create the "unshaded" effect
+        % Sector at A (bottom-left): Arc from Theta(2,0) to E(0,2). Angles 0 to 90.
+        \fill[white] (A) -- (Theta) arc (0:90:2) -- (E) -- cycle;
+        % Sector at B (top-left): Arc from E(0,2) to Z(2,4). Angles 270 to 0.
+        \fill[white] (B) -- (E) arc (270:0:2) -- (Z) -- cycle;
+        % Sector at Gamma (top-right): Arc from Z(2,4) to H(4,2). Angles 180 to 270.
+        \fill[white] (Gamma) -- (Z) arc (180:270:2) -- (H) -- cycle;
+        % Sector at Delta (bottom-right): Arc from H(4,2) to Theta(2,0). Angles 90 to 180.
+        \fill[white] (Delta) -- (H) arc (90:180:2) -- (Theta) -- cycle;
+
+        % Draw the boundary of the square
+        \tkzDrawPolygon(A,B,Gamma,Delta)
+
+        % Draw the points
+        \tkzDrawPoints(A,B,Gamma,Delta,E,Z,H,Theta)
+
+        % Add labels for lengths
+        \tkzLabelSegment[left](A,E){2}
+        \tkzLabelSegment[left](E,B){2}
+        \tkzLabelSegment[above](B,Z){2}
+        \tkzLabelSegment[above](Z,Gamma){2}
+        \tkzLabelSegment[right](Gamma,H){2}
+        \tkzLabelSegment[right](H,Delta){2}
+        \tkzLabelSegment[below](Delta,Theta){2}
+        \tkzLabelSegment[below](Theta,A){2}
+
+        % Add labels for vertices
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[above right](Gamma){$\Gamma$}
+        \tkzLabelPoint[below right](Delta){$\Delta$}
+
+        % Add labels for midpoints
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[above](Z){Z}
+        \tkzLabelPoint[right](H){H}
+        \tkzLabelPoint[below](Theta){$\Theta$}
+
+        % Add right angle mark at B
+        \tkzMarkRightAngle(Gamma,B,A)
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τετράγωνο ΑΒΓΔ πλευράς $\alpha = 4$. Με κέντρα τις κορυφές του τετραγώνου και ακτίνα $\rho = 2$ σχεδιάζουμε τέσσερις κυκλικούς τομείς στο εσωτερικό του, όπως φαίνεται στο σχήμα.
+\begin{alist}
+    \item Να υπολογίσετε το εμβαδόν κάθε κυκλικού τομέα. \monades{13}
+    \item Να αποδείξετε ότι το εμβαδόν του γραμμοσκιασμένου χωρίου είναι
+    \[ \text{Ε} = 4(4 - \pi) \] \monades{12}
+\end{alist}

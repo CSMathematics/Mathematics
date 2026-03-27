@@ -1,0 +1,55 @@
+\Askhsh{22244}{1}
+\begin{ylh}
+    \item Γεωμετρία
+\end{ylh}
+
+Ένας τετράγωνος κήπος ΑΒΓΔ έχει πλευρά 10m.
+
+\begin{alist}
+    \item Για την άρδευση του κήπου τοποθετούνται μηχανισμοί ποτίσματος στις απέναντι κορυφές Α και Γ. Ο κάθε μηχανισμός ποτίζει έναν κυκλικό τομέα γωνίας $90^\circ$ και ακτίνας 10m.
+    \begin{rlist}
+        \item Να βρείτε το εμβαδόν της επιφάνειας του κήπου που ποτίζει ο κάθε μηχανισμός. \monades{5}
+        \item Αν οι δύο μηχανισμοί ποτίζουν ολόκληρο τον κήπο, να βρείτε το εμβαδόν της επιφάνειας του κήπου που ποτίζεται και από τους δύο μηχανισμούς. \monades{7}
+    \end{rlist}
+    
+    \item Για την άρδευση του κήπου τοποθετούνται τέσσερις μηχανισμοί ποτίσματος στις κορυφές Α, Β, Γ και Δ. Ο κάθε μηχανισμός ποτίζει έναν κυκλικό τομέα γωνίας $90^\circ$ και ακτίνας 5m, όπως φαίνεται στο παρακάτω σχήμα.
+    
+    \begin{wrapfigure}{r}{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        \usetikzlibrary{patterns}
+        % Ορισμός κορυφών τετραγώνου
+        \tkzDefPoint(0,0){D}
+        \tkzDefPoint(5,0){C}
+        \tkzDefPoint(5,5){B}
+        \tkzDefPoint(0,5){A}
+        
+        % Χρήση scope και clip για να περιοριστεί η σχεδίαση εντός του τετραγώνου
+        \begin{scope}
+            \tkzClipPolygon(A,B,C,D)
+            % Ορίζουμε μια διαδρομή που είναι η ένωση των τεσσάρων κύκλων και τη γεμίζουμε.
+            % Η ακτίνα είναι η μισή πλευρά (5/2 = 2.5).
+            \path[pattern=crosshatch, pattern color=maincolor!60] 
+                (A) circle (2.5)
+                (B) circle (2.5)
+                (C) circle (2.5)
+                (D) circle (2.5);
+        \end{scope}
+        
+        % Σχεδίαση του περιγράμματος του τετραγώνου
+        \tkzDrawPolygon[thick](A,B,C,D)
+        
+        % Ετικέτες στις κορυφές
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[above right](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+    \end{tikzpicture}
+    \end{wrapfigure}
+    
+    \begin{rlist}
+        \item Να βρείτε το εμβαδόν της επιφάνειας του κήπου που ποτίζει ο κάθε μηχανισμός. \monades{5}
+        \item Να βρείτε το εμβαδόν της επιφάνειας του κήπου που δεν ποτίζεται. \monades{8}
+    \end{rlist}
+    
+\end{alist}

@@ -1,0 +1,62 @@
+\Askhsh{34420}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34420.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται ισοσκελές τρίγωνο ΑΒΓ (ΑΒ=ΑΓ). Φέρουμε, εκτός του τριγώνου, τις ημιευθείες Αx και Αy τέτοιες ώστε $Ax \perp AB$ και $Ay \perp AC$, όπως στο σχήμα που ακολουθεί. Στις Αx και Αy θεωρούμε τα σημεία Δ και Ε αντίστοιχα, ώστε ΑΔ=ΑΕ.
+
+\begin{alist}
+\item Να αποδείξετε ότι ΒΔ=ΓΕ. \monades{12}
+
+\item Αν Μ και Ν είναι τα μέσα των τμημάτων ΒΔ και ΓΕ αντίστοιχα , να αποδείξετε ότι το τρίγωνο ΑΜΝ είναι ισοσκελές \monades{13}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefTriangle[two angles = 70 and 70](B,C) \tkzGetPoint{A}
+
+% Ax perp AB
+\tkzDefLine[orthogonal=through A](A,B) \tkzGetPoint{x_dir}
+\tkzDefPointBy[homothety=center A ratio 0.8](x_dir) \tkzGetPoint{D}
+
+% Ay perp AC
+\tkzDefLine[orthogonal=through A](A,C) \tkzGetPoint{y_dir}
+\tkzDefPointBy[homothety=center A ratio -0.8](y_dir) \tkzGetPoint{E}
+
+\tkzDefMidPoint(B,D) \tkzGetPoint{M}
+\tkzDefMidPoint(C,E) \tkzGetPoint{N}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(D);
+\draw[l3] (A)--(E);
+\draw[l3] (B)--(D);
+\draw[l3] (C)--(E);
+\draw[l3, dashed] (A)--(M);
+\draw[l3, dashed] (A)--(N);
+
+\tkzDrawPoints(A,B,C,D,E,M,N)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[left](D){$\Delta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[left](M){$M$}
+\tkzLabelPoint[right](N){$N$}
+
+\tkzMarkRightAngle(B,A,D)
+\tkzMarkRightAngle(E,A,C)
+\tkzMarkSegments[mark=s|](A,D A,E)
+\tkzMarkSegments[mark=s||](A,B A,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

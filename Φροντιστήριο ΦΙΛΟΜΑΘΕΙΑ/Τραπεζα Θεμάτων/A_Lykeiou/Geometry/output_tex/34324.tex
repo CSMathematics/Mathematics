@@ -1,0 +1,70 @@
+\Askhsh{34324}{4}
+\begin{ylh}{1}
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 3.14. Σχετικές θέσεις ευθείας και κύκλου
+    \item 3.15. Εφαπτόμενα τμήματα
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου
+    \item 5.10. Τραπέζιο
+    \item 5.11. Ισοσκελές τραπέζιο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34324.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται κύκλος κέντρου Ο και ακτίνας ρ. Από σημείο Α εξωτερικό του κύκλου θεωρούμε τις εφαπτόμενες του κύκλου που εφάπτονται σε αυτόν στα σημεία Β, Γ και τέτοιες ώστε, η γωνία $Β\widehat{Α}\Gamma$ που σχηματίζουν τα εφαπτόμενα τμήματα ΑΒ και ΑΓ να είναι $60^{ο}$. Έστω ότι η ευθεία ΑΟ τέμνει τον κύκλο στο σημείο Δ και η εφαπτόμενη του κύκλου στο Δ τέμνει τα τμήματα ΑΒ και ΑΓ στα σημεία Ζ και Ε αντίστοιχα.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item ΟΑ=2ρ, \monades{6}
+
+\item το τρίγωνο ΑΖΕ είναι ισόπλευρο, \monades{5}
+
+\item ΑΖ = 2ΖΒ, \monades{7}
+
+\item το τετράπλευρο ΕΖΒΓ είναι ισοσκελές τραπέζιο. \monades{7}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(4,0){A}
+\tkzDefPoint(2,0){D} % Point D is on OA, radius is 2 since OA=2R and angle is 30.
+\tkzDrawCircle(O,D)
+
+\tkzDefTangent[from=A](O,D) \tkzGetPoints{B}{C}
+
+% Tangent at D
+\tkzDefLine[orthogonal=through D](O,A) \tkzGetPoint{tangent_D_dir}
+\tkzInterLL(D,tangent_D_dir)(A,B) \tkzGetPoint{Z}
+\tkzInterLL(D,tangent_D_dir)(A,C) \tkzGetPoint{E}
+
+\draw[l3] (A)--(O);
+\draw[l3] (A)--(B);
+\draw[l3] (A)--(C);
+\draw[l3] (Z)--(E);
+\draw[l3] (O)--(B);
+\draw[l3] (O)--(C);
+\draw[l3, dashed] (B)--(C);
+
+\tkzDrawPoints(O,A,B,C,D,Z,E)
+\tkzLabelPoint[left](O){$O$}
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[above](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[above right](D){$\Delta$}
+\tkzLabelPoint[above right](Z){$Z$}
+\tkzLabelPoint[below right](E){$E$}
+
+\tkzMarkRightAngle(O,B,A)
+\tkzMarkRightAngle(O,C,A)
+\tkzMarkRightAngle(A,D,Z)
+\tkzMarkAngle[size=0.6,mark=none](C,A,B)
+\tkzLabelAngle[pos=1](C,A,B){$60^\circ$}
+\end{tikzpicture}
+\end{center}
+\end{alist}

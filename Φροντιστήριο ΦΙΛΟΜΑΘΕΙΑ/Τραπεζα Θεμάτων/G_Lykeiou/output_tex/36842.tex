@@ -1,0 +1,113 @@
+\Askhsh{36842}{2}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.5 Θεώρημα Μέσης Τιμής Διαφορικού Λογισμού.
+\end{ylh}
+Στο παρακάτω σχήμα δίνονται οι γραφικές παραστάσεις 3 παραγωγίσιμων συναρτήσεων των $f, g$ και $h$, οι οποίες εφάπτονται του άξονα $x'x$ στο σημείο του $A(6,0)$.
+
+\begin{wrapfigure}[55]{r}{0.55\textwidth} % Adjusted lines to encompass the three figures
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = 2, xmax = 7.5,
+        ymin = 0, ymax = 2.5,
+        xtick = {3,4,5,6,7},
+        ytick = {1,2},
+        tick label style = {font=\scriptsize},
+        width = 8cm, height = 4cm,
+        xlabel={}, ylabel={},
+        clip=false % Allow nodes outside axis limits
+    ]
+        % Cf: f(x) = (4/27)*(x-6)^2*(x-1.5)
+        \addplot[thick, maincolor, domain=3:7, samples=100] {(4/27)*(x-6)^2*(x-1.5)};
+        \node[maincolor, above right] at (axis cs:4,1.5) {$C_f$};
+
+        % Endpoints for Cf
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {
+            (3, {(4/27)*(3-6)^2*(3-1.5)})
+            (7, {(4/27)*(7-6)^2*(7-1.5)})
+        };
+
+        % Dotted lines for Cf
+        \draw[dashed] (axis cs:3,0) -- (axis cs:3,{(4/27)*(3-6)^2*(3-1.5)});
+        \draw[dashed] (axis cs:7,0) -- (axis cs:7,{(4/27)*(7-6)^2*(7-1.5)});
+        
+        \node[above] at (axis cs:6,0) {$A$};
+    \end{axis}
+    \end{tikzpicture}
+
+    \vspace{0.5cm} % Space between graphs
+
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = 2, xmax = 7.5,
+        ymin = -2.5, ymax = 0.5,
+        xtick = {3,4,5,6,7},
+        ytick = {-1,-2},
+        tick label style = {font=\scriptsize},
+        width = 8cm, height = 4cm,
+        xlabel={}, ylabel={},
+        clip=false % Allow nodes outside axis limits
+    ]
+        % Cg: g(x) = -2.2*(x-6)^2
+        \addplot[thick, maincolor, domain=5:7, samples=100] {-2.2*(x-6)^2};
+        \node[maincolor, below left] at (axis cs:5.5,-1) {$C_g$};
+
+        % Endpoints for Cg
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {
+            (5, {-2.2*(5-6)^2})
+            (7, {-2.2*(7-6)^2})
+        };
+
+        % Dotted lines for Cg
+        \draw[dashed] (axis cs:5,0) -- (axis cs:5,{-2.2*(5-6)^2});
+        \draw[dashed] (axis cs:7,0) -- (axis cs:7,{-2.2*(7-6)^2});
+
+        \node[above] at (axis cs:6,0) {$A$};
+    \end{axis}
+    \end{tikzpicture}
+
+    \vspace{0.5cm} % Space between graphs
+
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = 2, xmax = 7.5,
+        ymin = -2.5, ymax = 2.5,
+        xtick = {3,4,5,6,7},
+        ytick = {-2,-1,1,2},
+        tick label style = {font=\scriptsize},
+        width = 8cm, height = 4cm,
+        xlabel={}, ylabel={},
+        clip=false % Allow nodes outside axis limits
+    ]
+        % Ch: h(x) = 2.2*(x-6)^3
+        \addplot[thick, maincolor, domain=5:7, samples=100] {2.2*(x-6)^3};
+        \node[maincolor, left] at (axis cs:5.5,1) {$C_h$};
+
+        % Endpoints for Ch
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {
+            (5, {2.2*(5-6)^3})
+            (7, {2.2*(7-6)^3})
+        };
+
+        % Dotted lines for Ch
+        \draw[dashed] (axis cs:5,0) -- (axis cs:5,{2.2*(5-6)^3});
+        \draw[dashed] (axis cs:7,0) -- (axis cs:7,{2.2*(7-6)^3});
+
+        \node[above] at (axis cs:6,0) {$A$};
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+\begin{alist}
+\item Να βρείτε το πεδίο ορισμού κάθε μιας από τις συναρτήσεις $f, g$ και $h$. \monades{06}
+\item Να εξετάσετε για ποια ή ποιες από τις παραπάνω συναρτήσεις:
+    \begin{rlist}
+    \item Ισχύουν οι προϋποθέσεις του θεωρήματος Rolle στο πεδίο ορισμού τους. \monades{10}
+    \item Υπάρχει μία τουλάχιστον ρίζα της παραγώγου της. \monades{09}
+    \end{rlist}
+\end{alist}

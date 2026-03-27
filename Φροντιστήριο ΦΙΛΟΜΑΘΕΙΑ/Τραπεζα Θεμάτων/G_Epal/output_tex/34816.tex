@@ -1,0 +1,81 @@
+\Askhsh{34816}{4}
+\begin{ylh}{1}
+    \item 2.2 Παρουσίαση Στατιστικών Δεδομένων
+\end{ylh}
+\begin{center}
+    \vspace{-1em}
+    \centering
+    \begin{tikzpicture}[scale=1.1, font=\small]
+        \def\r{2.5}
+        \tkzDefPoint(0,0){O}
+
+        % Define colors
+        \colorlet{colorA}{secondarycolor!30}
+        \colorlet{colorB}{maincolor!20}
+        \colorlet{colorC}{secondarycolor!20}
+        \colorlet{colorD}{maincolor!50}
+        \colorlet{colorE}{secondarycolor!50}
+
+        % Define angles based on calculations from the problem statement
+        % A' (25% -> 90deg), B' (135deg), C' (200 emp -> 60deg), D' (12.5% -> 45deg), E' (100 emp -> 30deg)
+        % Order to match image: D', A', B', E', C'
+        \def\angleDstart{0}   \def\angleDend{45}
+        \def\angleAstart{45}  \def\angleAend{135}
+        \def\angleBstart{135} \def\angleBend{270}
+        \def\angleEstart{270} \def\angleEend{300}
+        \def\angleCstart{300} \def\angleCend{360}
+
+        % Draw and fill sectors
+        \path[fill=colorD, draw=black] (O) -- (\angleDstart:\r) arc(\angleDstart:\angleDend:\r) -- cycle;
+        \path[fill=colorA, draw=black] (O) -- (\angleAstart:\r) arc(\angleAstart:\angleAend:\r) -- cycle;
+        \path[fill=colorB, draw=black] (O) -- (\angleBstart:\r) arc(\angleBstart:\angleBend:\r) -- cycle;
+        \path[fill=colorE, draw=black] (O) -- (\angleEstart:\r) arc(\angleEstart:\angleEend:\r) -- cycle;
+        \path[fill=colorC, draw=black] (O) -- (\angleCstart:\r) arc(\angleCstart:\angleCend:\r) -- cycle;
+
+        % Define points on perimeter for labels
+        \tkzDefPoint(90:\r){pA}
+        \tkzDefPoint(330:\r){pC}
+        \tkzDefPoint(22.5:\r){pD}
+        \tkzDefPoint(285:\r){pE}
+
+        % Draw labels and connecting lines
+        \draw (pA) -- ++(90:0.4) node[above]{Κατηγορία Α'};
+        \draw (pD) -- ++(22.5:0.4) node[right]{Κατηγορία Δ'};
+        \draw (pC) -- ++(330:0.4) node[right]{Κατηγορία Γ'};
+        \draw (pE) -- ++(285:0.4) node[right]{Κατηγορία Ε'};
+
+        % Label inside for B'
+        \node[align=center] at (202.5:1.2) {$135^\circ$ \\ Κατηγορία Β'};
+
+        % Dots on sector boundaries
+        \foreach \angle in {\angleDstart, \angleAstart, \angleBstart, \angleEstart, \angleCstart} {
+             \tkzDrawPoint[size=3, fill=black](\angle:\r)
+        }
+    \end{tikzpicture}
+\end{center}
+Στο παρακάτω κυκλικό διάγραμμα παριστάνεται το μορφωτικό επίπεδο των 1200 εργαζομένων μιας επιχείρησης χωρισμένο σε πέντε κατηγορίες.
+
+\begin{itemize}
+    \item[Α'] Κατηγορία: Απόφοιτοι Γυμνασίου
+    \item[Β'] Κατηγορία: Απόφοιτοι Λυκείου
+    \item[Γ'] Κατηγορία: Πτυχιούχοι Ανώτατης Εκπαίδευσης
+    \item[Δ'] Κατηγορία: Κάτοχοι Μεταπτυχιακού Τίτλου
+    \item[Ε'] Κατηγορία: Κάτοχοι Διδακτορικού Τίτλου
+\end{itemize}
+
+Κάθε εργαζόμενος ανήκει σε μία μόνο από τις κατηγορίες αυτές.
+
+Στις κατηγορίες Α' και Δ' ανήκει το 25\% και το 12,5\% των εργαζομένων αντίστοιχα.
+Η γωνία του κυκλικού τομέα που αντιστοιχεί στους εργαζόμενους της Β' κατηγορίας είναι $135^\circ$.
+Τέλος οι εργαζόμενοι της Γ' κατηγορίας είναι διπλάσιοι από τους εργαζόμενους της Ε' κατηγορίας.
+
+\begin{alist}
+    \item Να αποδειχθεί ότι οι εργαζόμενοι στην κατηγορία Β' είναι 450. \monades{4}
+    \item Να υπολογίσετε τον αριθμό των εργαζομένων σε κάθε κατηγορία. \monades{8}
+    \item
+    \begin{rlist}
+        \item Να μετατρέψετε το κυκλικό διάγραμμα σε ραβδόγραμμα συχνοτήτων. \monades{9}
+        \item Εάν συνταξιοδοτηθούν όλοι οι εργαζόμενοι της κατηγορίας Γ' τι ποσοστό των εργαζομένων της εταιρείας θα αντιπροσωπεύουν πλέον οι εργαζόμενοι της κατηγορίας Ε'; \monades{4}
+    \end{rlist}
+\end{alist}
+

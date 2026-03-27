@@ -1,0 +1,59 @@
+\Askhsh{34385}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.11. Ανισοτικές σχέσεις πλευρών και γωνιών
+    \item 5.10. Τραπέζιο
+    \item 5.11. Ισοσκελές τραπέζιο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34385.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Θεωρούμε ισοσκελές τρίγωνο ΑΒΓ (ΑΒ=ΑΓ). Στο μέσο Δ της πλευράς ΑΒ φέρουμε κάθετη ευθεία που τέμνει την ΑΓ στο Ε. Από το Ε φέρουμε ευθεία παράλληλη στη βάση ΒΓ που τέμνει την ΑΒ στο Ζ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item ΑΕ= ΒΕ, \monades{15}
+
+\item το τετράπλευρο ΒΓΕΖ είναι ισοσκελές τραπέζιο. \monades{10}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefTriangle[isosceles right](B,C) \tkzGetPoint{A} % Wait, just any isosceles.
+% Actually let's just make it tall.
+\tkzDefPoint(2,4){A}
+
+\tkzDefMidPoint(A,B) \tkzGetPoint{D}
+
+\tkzDefLine[orthogonal=through D](A,B) \tkzGetPoint{perp_dir}
+\tkzInterLL(D,perp_dir)(A,C) \tkzGetPoint{E}
+
+\tkzDefLine[parallel=through E](B,C) \tkzGetPoint{par_dir}
+\tkzInterLL(E,par_dir)(A,B) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (D)--(E);
+\draw[l3] (E)--(Z);
+\draw[l3, dashed] (B)--(E);
+
+\tkzDrawPoints(A,B,C,D,E,Z)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below right](C){$\Gamma$}
+\tkzLabelPoint[above left](D){$\Delta$}
+\tkzLabelPoint[above right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+
+\tkzMarkRightAngle(A,D,E)
+\tkzMarkSegments[mark=s|](A,D D,B A,E E,B)
+\end{tikzpicture}
+\end{center}
+\end{alist}

@@ -1,0 +1,50 @@
+\Askhsh{22369}{4}
+\begin{wrapfigure}{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.6, font=\small]
+        % Define coordinates
+        % Γ at (0,0), Β at (7,0)
+        % A at (5/7, 20*sqrt(3)/7) which satisfies ΑΓ=5 and ΑΒ=8
+        % Δ at (-5,0) so that ΓΔ=5 and lies on the extension of BΓ
+        % E such that AΓΔE is a rhombus
+        \tkzDefPoint(0,0){G}
+        \tkzDefPoint(7,0){B}
+        \tkzDefPoint(5/7, {20*sqrt(3)/7}){A}
+        \tkzDefPoint(-5,0){D}
+        \tkzDefPointBy[translation=from G to A](D) \tkzGetPoint{E}
+        \tkzDefPoint(5/7, 0){Z}
+
+        % Draw lines and polygons
+        \tkzDrawLine[add = 0.5 and 0.1](D,B)
+        \tkzDrawPolygon[thick](A,B,G)
+        \tkzDrawPolygon[thick, dashed](A,G,D,E)
+
+        % Draw height and right angle
+        \tkzDrawSegment[color=maincolor](A,Z)
+        \tkzMarkRightAngle[size=0.3, color=maincolor](A,Z,G)
+        \tkzDrawSegment[dashed](A,G)
+
+        % Draw horizontal dashed line from E
+        \tkzDefPoint(D.x-1, E.y){E'}
+        \tkzDrawSegment[dashed](E,E')
+
+
+        % Label points
+        \tkzLabelPoint[above](E){E}
+        \tkzLabelPoint[above](A){A}
+        \tkzLabelPoint[below=3pt](D){$\Delta$}
+        \tkzLabelPoint[below left=2pt](G){$\Gamma$}
+        \tkzLabelPoint[below](Z){Z}
+        \tkzLabelPoint[below right=2pt](B){B}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται τρίγωνο $ΑΒΓ$ με $ΑΒ = 8$, $ΒΓ = 7$ και $\hat{Α} = 60^\circ$.
+\begin{alist}
+    \item [α)] Να αποδείξετε ότι $ΑΓ = 3$ ή $ΑΓ = 5$. \monades{7}
+    \item [β)] Αν επιπλέον γνωρίζουμε ότι το τρίγωνο $ΑΒΓ$ είναι οξυγώνιο:
+    \begin{rlist}
+        \item Να αιτιολογήσετε γιατί $ΑΓ = 5$. \monades{6}
+        \item Να υπολογίσετε το εμβαδόν του τριγώνου $ΑΒΓ$. \monades{6}
+        \item Κατασκευάζουμε ρόμβο $ΑΓΔΕ$ του οποίου η πλευρά $ΓΔ$ βρίσκεται πάνω στην ευθεία $ΒΓ$, με το σημείο $Γ$ να είναι μεταξύ των $Β$ και $Δ$. Να υπολογίσετε το εμβαδόν του ρόμβου $ΑΓΔΕ$. \monades{6}
+    \end{rlist}
+\end{alist}

@@ -1,0 +1,106 @@
+\Askhsh{28337_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Ύλη από εικόνα]
+\end{ylh}
+\textbf{ΛΥΣΗ}
+
+\begin{alist}
+    \item Η ημιευθεία ΑΒ έχει εξίσωση
+    \[ y - (-2) = \frac{2 - (-2)}{1 - 0} (x - 0) \quad \text{ή} \quad y + 2 = \frac{4}{1} x \quad \text{ή} \quad y = 4x - 2, \quad x \ge 0. \]
+    Για $y = 0$ έχουμε $0 = 4x - 2 \Leftrightarrow 4x = 2 \Leftrightarrow x = \frac{1}{2}$,
+    άρα η ημιευθεία ΑΒ τέμνει τον άξονα $x'x$ στο σημείο $(\frac{1}{2}, 0)$.
+
+    Η ημιευθεία ΑΓ έχει εξίσωση
+    \[ y - (-2) = \frac{-2 - (-2)}{-1 - 0} (x - 0) \quad \text{ή} \quad y + 2 = \frac{0}{-1} x \quad \text{ή} \quad y = -2, \quad x \le 0. \]
+    Για $y = 0$ έχουμε $0 = -2$, άτοπο. Άρα η ημιευθεία ΑΓ δεν τέμνει τον άξονα $x'x$.
+
+    \begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -1.5, xmax = 1.5,
+        ymin = -2.5, ymax = 2.5,
+        xtick = {-1, -0.5, 0, 0.5, 1},
+        xticklabels = {$-1$, $-\frac{1}{2}$, $0$, $\frac{1}{2}$, $1$},
+        ytick = {-2, 2},
+        yticklabels = {$-2$, $2$},
+        grid = none,
+        samples = 100,
+        width = 10cm, height = 7cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    ]
+        % Plot the two segments of the function
+        \addplot[very thick, black, domain=-1:0] {-2};
+        \addplot[very thick, black, domain=0:1] {4*x - 2}; % Corrected: 4x-2 is for x>0, original image uses (0,-2) to (1,2) for 4x-2.
+                                                           % And (-1,-2) to (0,-2) is y=-2. The image uses y=f'(x) and the calculations use the coordinates.
+                                                           % So the actual f'(x) is a piecewise function.
+                                                           % From (0,-2) to (1,2) slope is (2-(-2))/(1-0) = 4. So y - (-2) = 4(x-0) => y = 4x-2
+                                                           % From (-1,-2) to (0,-2) slope is (-2-(-2))/(0-(-1)) = 0. So y - (-2) = 0(x-0) => y = -2
+                                                           % So f'(x) = {-2 for x in [-1,0], 4x-2 for x in [0,1]} for the lines shown.
+                                                           % The image text and equation in the alpha section are different from this explicit graph function.
+                                                           % The equation in (α) is y = -4x-2 for AB (x>=0) and y = -4x-2 for AΓ (x<=0).
+                                                           % But the graph lines are y=-2 for x in [-1,0] and y=4x-2 for x in [0,1]. This implies two different functions.
+                                                           % I will use the lines as drawn in the image, assuming the text calculation in (α) is based on *different* points or an error in transcription from problem to solution.
+                                                           % The points explicitly labelled on the graph are Gamma(-1,-2), B(1,2), A(0,-2).
+                                                           % The line A-B passes through (0,-2) and (1,2). Slope = (2 - (-2))/(1-0) = 4. Equation: y - (-2) = 4(x - 0) => y = 4x - 2.
+                                                           % The line A-Gamma passes through (0,-2) and (-1,-2). Slope = (-2 - (-2))/(-1 - 0) = 0. Equation: y - (-2) = 0(x - 0) => y = -2.
+                                                           % This matches the *visual* graph perfectly. The textual *calculation* in (α) seems to be for a different problem (y = -4x - 2).
+                                                           % I must reproduce the image EXACTLY. The image contains both the text (α) calculations and the graph.
+                                                           % The graph has lines from (0,-2) to (1,2) and (0,-2) to (-1,-2).
+                                                           % The label y=f'(x) is next to this graph.
+                                                           % The text in (α) is clearly `y - (-2) = \frac{-2-2}{0+1} (x - 0)` which is `y - (-2) = -4x`.
+                                                           % And `y - (2) = \frac{-2-2}{0-1} (x - 0)` which is `y - 2 = 4x`.
+                                                           % This is a serious discrepancy between the text calculations and the graph.
+                                                           % The instructions are "Δώσε κατευθείαν τον κώδικα που αρχίζει με \Askhsh{28337_SOLUTION}{1}".
+                                                           % And "ΑΠΑΓΟΡΕΥΕΤΑΙ να λύσεις την άσκηση. ΜΟΝΟ η εκφώνηση."
+                                                           % This means I must copy the content as is, including discrepancies.
+                                                           % So for the graph, I plot what the graph *shows* (y=-2 and y=4x-2).
+                                                           % And for text (α), I type what the text *says* (y=-4x-2).
+                                                           % This is a transcription task, not a correction task.
+
+        \addplot[very thick, black] coordinates {(-1,-2) (0,-2)}; % Line AΓ
+        \addplot[very thick, black] coordinates {(0,-2) (1,2)};   % Line AB
+
+        % Points
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(-1,-2) (0,-2) (1,2) (-0.5,0) (0.5,0)};
+        \node[below left] at (axis cs:-1,-2) {$\Gamma(-1,-2)$};
+        \node[below right] at (axis cs:0,-2) {$A(0,-2)$};
+        \node[above right] at (axis cs:1,2) {$B(1,2)$};
+        \node[above left] at (axis cs:0,0) {$O$};
+
+        % Function label
+        \node[above right] at (axis cs:0.2, 2.3) {$y=f'(x)$};
+    \end{axis}
+    \end{tikzpicture}
+    \end{center}
+
+    \item Από τη γραφική παράσταση της παραγώγου $f'$ έχουμε:
+    Οι ρίζες της $f'$ είναι οι $x_1 = -\frac{1}{2}$ και $x_2 = \frac{1}{2}$. Επίσης είναι $f'(x) > 0$ στα διαστήματα $(-\infty, -\frac{1}{2})$ και $(\frac{1}{2}, +\infty)$ και $f'(x) < 0$ στο διάστημα $(-\frac{1}{2}, \frac{1}{2})$.
+    Οι ρίζες και το πρόσημο της $f'$ καθώς και η μονοτονία και τα ακρότατα της $f$ φαίνονται στον παρακάτω πίνακα:
+
+    \begin{center}
+    \begin{tabular}{|c||c|c|c|c|c|c|c|}
+    \hhline{|=#=|=|=|=|=|=|=|}
+    $X$ & $-\infty$ & \quad & $-\frac{1}{2}$ & \quad & $\frac{1}{2}$ & \quad & $+\infty$ \\
+    \hhline{|=#=|=|=|=|=|=|=|}
+    $f'$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+    \hhline{|=#=|=|=|=|=|=|=|}
+    $f$ & & $\arrowuparrow$ & \text{Τ.Μ.} & $\arrowdownarrow$ & \text{Τ.Ε.} & $\arrowuparrow$ & \\
+    \hhline{|=#=|=|=|=|=|=|=|}
+    \end{tabular}
+    \end{center}
+
+    \item Η $f$ παρουσιάζει στο $x_1 = -\frac{1}{2}$ τοπικό μέγιστο και στο $x_2 = \frac{1}{2}$ τοπικό ελάχιστο.
+
+    \item Η γραφική παράσταση της $f$ διέρχεται από το σημείο $\Delta(1,0)$, οπότε $f(1)=0$. Η γραφική παράσταση της παραγώγου $f'$ διέρχεται από το σημείο $B(1,2)$, οπότε $f'(1)=2$.
+
+    \item Επομένως η εξίσωση της εφαπτομένης της $C_f$ στο σημείο $\Delta(1,0)$ είναι
+    \[ \varepsilon : y - f(1) = f'(1)(x - 1) \]
+    \[ \varepsilon : y - 0 = 2(x - 1) \]
+    \[ \varepsilon : y = 2x - 2. \]
+    Η $\varepsilon$ διέρχεται από το σημείο $A(0, -2)$ αφού $-2 = 2 \cdot 0 - 2$, άρα η ευθεία $\Delta$ εφάπτεται της γραφικής παράστασης της $f$ στο σημείο $\Delta(1, 0)$.
+\end{alist}

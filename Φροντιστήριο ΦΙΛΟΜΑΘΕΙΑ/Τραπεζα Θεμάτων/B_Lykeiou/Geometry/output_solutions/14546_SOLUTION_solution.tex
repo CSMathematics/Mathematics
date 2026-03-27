@@ -1,0 +1,57 @@
+\Askhsh{14546_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία, Τρίγωνα, Ομοιότητα]
+\end{ylh}
+\begin{wrapfigure}[18]{r}{5cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Define points
+    % Let Gamma be at the origin (0,0)
+    \tkzDefPoint(0,0){G} % Gamma
+
+    % Define A,B,D,E to match the visual and textual properties (AΓ=BΓ, ΔΓ=EΓ, A-Γ-E collinear, B-Γ-Δ collinear)
+    % A is in top-left, B in bottom-left, D in top-right, E in bottom-right
+    % AΓ = BΓ (e.g., A=(-3,2), B=(-2,-3) -> AΓ = sqrt(13), BΓ = sqrt(13))
+    % Let A and B be equidistant from G
+    \tkzDefPoint(-3,2){A}
+    \tkzDefPoint(-2,-3){B}
+
+    % Let Δ and E be equidistant from G, and collinear with B-G and A-G respectively
+    % D must be collinear with B and G, and in top-right
+    % E must be collinear with A and G, and in bottom-right
+    % To maintain ΔΓ = EΓ, the ratio of distances from G for D and E must be the same
+    % If A = (-3,2), then E is k*(3,-2). If B = (-2,-3), then D is k*(2,3).
+    % Let k=2 for example (so ΔΓ = 2*BΓ, EΓ = 2*AΓ, thus ΔΓ=EΓ).
+    \tkzDefPoint(4,6){D} % Delta (collinear with B,G)
+    \tkzDefPoint(6,-4){E} % Epsilon (collinear with A,G)
+
+    % Draw segments forming the triangles
+    \tkzDrawSegments(A,B D,E) % Bases
+    \tkzDrawSegments(A,G G,B G,D G,E) % Sides from Gamma
+
+    % Add tick marks for isosceles triangles
+    \tkzMarkSegments[mark=s|](A,G G,B) % AΓ = BΓ
+    \tkzMarkSegments[mark=ss|](D,G G,E) % ΔΓ = EΓ
+
+    % Label points
+    \tkzLabelPoint[above left](A){A}
+    \tkzLabelPoint[below left](B){B}
+    \tkzLabelPoint[above right](D){$\Delta$}
+    \tkzLabelPoint[below right](E){E}
+    \tkzLabelPoint[below left](G){$\Gamma$}
+
+    % Draw points (filled circles)
+    \tkzDrawPoints(A,B,G,D,E)
+\end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+\item [α.] Τα τρίγωνα $\text{ΓΑΒ}$ και $\text{ΓΕΔ}$ είναι ισοσκελή με βάσεις $\text{ΑΒ}$ και $\text{ΔΕ}$ αντίστοιχα και έχουν τις γωνίες στην κορυφή τους ίσες αφού, $\widehat{\text{ΑΓΒ}} = \widehat{\text{ΔΓΕ}}$, ως κατακορυφήν. Έτσι $\widehat{\text{Α}} = \widehat{\text{Β}} = \frac{180^\circ - \widehat{\text{ΑΓΒ}}}{2} = \frac{180^\circ - \widehat{\text{ΔΓΕ}}}{2} = \widehat{\text{Ε}} = \widehat{\text{Δ}}$. Οπότε τα τρίγωνα έχουν τις γωνίες τους ίσες μία προς μία, άρα είναι όμοια.
+\item [β.]
+    \begin{rlist}
+    \item [i.] Ομόλογες είναι οι πλευρές που είναι απέναντι από τις ίσες γωνίες στα δύο τρίγωνα. Οπότε οι λόγοι των ομόλογων πλευρών είναι :
+    \[ \frac{\text{AB}}{\text{ΔΕ}} \text{, ως απέναντι από τις ίσες γωνίες } \widehat{\text{ΑΓΒ}} \text{ και } \widehat{\text{ΔΓΕ}} \]
+    \[ \frac{\text{ΒΓ}}{\text{ΓΔ}} \text{, } \frac{\text{ΑΓ}}{\text{ΓΕ}} \text{, ως απέναντι από τις ίσες γωνίες } \widehat{\text{A}} \text{, } \widehat{\text{E}} \text{ και } \widehat{\text{B}} \text{, } \widehat{\text{Δ}} \text{ αντίστοιχα.} \]
+    Αφού τα τρίγωνα $\text{ΓΑΒ}$ και $\text{ΓΕΔ}$ είναι όμοια οι λόγοι των ομόλογων πλευρών του είναι ίσοι δηλαδή, ισχύει $\frac{\text{AB}}{\text{ΔΕ}} = \frac{\text{ΒΓ}}{\text{ΓΔ}} = \frac{\text{ΑΓ}}{\text{ΓΕ}}$.
+    \item [ii.] Από το προηγούμενο ερώτημα ισχύει $\frac{\text{ΑΓ}}{\text{ΓΕ}} = \frac{\text{ΑΒ}}{\text{ΔΕ}} = \frac{2 \cdot \text{ΔΕ}}{\text{ΔΕ}} = 2$. Δηλαδή ισχύει $\frac{\text{ΑΓ}}{\text{ΓΕ}} = 2$ ή $\text{ΑΓ} = 2 \cdot \text{ΓΕ}$. Οπότε η πλευρά $\text{ΑΓ}$ του τριγώνου $\text{ΑΒΓ}$ είναι διπλάσια από την πλευρά $\text{ΓΕ}$ του τριγώνου $\text{ΓΔΕ}$.
+    \end{rlist}
+\end{alist}

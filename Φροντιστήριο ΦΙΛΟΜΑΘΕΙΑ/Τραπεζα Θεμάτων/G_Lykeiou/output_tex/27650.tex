@@ -1,0 +1,68 @@
+\Askhsh{27650}{4}
+\begin{ylh}{1}
+    \item 1.8 Συνέχεια συνάρτησης
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.2 Παραγωγίσιμες συναρτήσεις - Παράγωγος συνάρτηση
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.7 Τοπικά ακρότατα συνάρτησης.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{8.5cm}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin = -2, xmax = 6,
+        ymin = -3, ymax = 5,
+        xtick = {-2,-1,0,1,2,3,4,5,6},
+        ytick = {-3,-2,-1,0,1,2,3,4,5},
+        samples = 100,
+        width = 8cm, height = 7cm,
+        tick label style = {font=\scriptsize},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    ]
+        % The curve Cf: y = lnx
+        \addplot[very thick, thirdcolor, domain=0.01:6] {ln(x)};
+        \node[thirdcolor, above left] at (axis cs:4.5, {ln(4.5)}) {$C_f$};
+
+        % Points A and B
+        \coordinate (A) at (axis cs:0,1);
+        \coordinate (B) at (axis cs:1,3);
+        \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,1) (1,3)};
+        \node[maincolor, above right] at (A) {A};
+        \node[maincolor, above right] at (B) {B};
+
+        % Generic point M on Cf
+        % Using x_M = 0.4 for illustration purposes as in the image
+        \pgfmathsetmacro{\xM}{0.4}
+        \pgfmathsetmacro{\yM}{ln(\xM)}
+        \coordinate (M) at (axis cs:\xM,\yM);
+        \node[maincolor, below right] at (M) {M};
+
+        % Tangent line epsilon at M
+        % Slope f'(x) = 1/x. At M(x_M, y_M), slope is 1/x_M.
+        % Equation: y - y_M = (1/x_M) * (x - x_M)
+        \pgfmathsetmacro{\slopeM}{1/\xM}
+        \addplot[dotted, black, domain=0.01:3.5] {\slopeM*(x-\xM) + \yM};
+        \node[black, above right] at (axis cs:3.2, {\slopeM*(3.2-\xM) + \yM}) {$\epsilon$};
+
+        % Shaded triangle ABM
+        \fill[maincolor, opacity=0.4] (A) -- (B) -- (M) -- cycle;
+
+    \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+Δίνεται η συνάρτηση $f(x) = \ln x, x > 0$ και τα σημεία $A(0,1)$ και $B(1,3)$.
+
+\begin{alist}
+\item
+    \begin{rlist}
+    \item Να βρείτε σημείο $M_0$ της $C_f$ τέτοιο, ώστε η εφαπτομένη να είναι παράλληλη προς την ευθεία $AB$. \monades{06}
+    \item Να βρείτε την εξίσωση της εφαπτομένης στο $M_0$. \monades{02}
+    \end{rlist}
+\item Έστω $E(x) = \frac{1}{2}(2x + 1 - \ln x), x > 0$ η συνάρτηση που εκφράζει το εμβαδόν του τριγώνου $ABM$, όπου $M$ ένα τυχαίο σημείο της γραφικής παράστασης της $f$. Να αποδείξετε ότι το εμβαδόν του τριγώνου γίνεται ελάχιστο όταν το σημείο $M$ ταυτίζεται με το $M_0$ του α) ερωτήματος. \monades{10}
+\item Να αποδείξετε ότι υπάρχει μοναδικό σημείο $M_1$ της $C_f$ με τετμημένη $x_1 \in (1,2)$ τέτοιο, ώστε το τρίγωνο $ABM_1$ να είναι ορθογώνιο στην κορυφή $A$. \monades{07}
+\end{alist}

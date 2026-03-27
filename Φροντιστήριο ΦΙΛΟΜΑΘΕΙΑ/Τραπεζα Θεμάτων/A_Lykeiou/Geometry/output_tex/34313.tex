@@ -1,0 +1,61 @@
+\Askhsh{34313}{2}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 3.14. Σχετικές θέσεις ευθείας και κύκλου
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.9. Μια ιδιότητα του ορθογώνιου τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34313.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται κύκλος (Ο,R) διαμέτρου ΑΒ, και χορδή του ΑΓ τέτοια ώστε Β$\widehat{Α}$Γ = 30\textsuperscript{0}. Στο σημείο Γ του κύκλου φέρουμε εφαπτομένη, η οποία τέμνει την προέκταση της διαμέτρου ΑΒ (προς το Β) σε σημείο Δ.
+
+\begin{alist}
+\item Να αποδείξετε ότι το τρίγωνο ΓΟΔ είναι ορθογώνιο και να υπολογίσετε το μέτρο της γωνίας του Γ$\widehat{Ο}$Δ. \monades{9}
+
+\item Να υπολογίσετε το μέτρο της γωνίας $\widehat{\omega}$. \monades{8}
+
+\item Να αποδείξετε ότι ΟΔ = $2R$. \monades{8}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(-2,0){A}
+\tkzDefPoint(2,0){B}
+\tkzDrawCircle(O,A)
+
+% BAC = 30. A is (-2,0), B is (2,0). AC makes 30 deg with AB.
+% C is on circle. Angle BOC = 2*BAC = 60 degrees.
+% So C = (2*cos(120), 2*sin(120)) = (-1, 1.732)
+\tkzDefPointBy[rotation=center O angle -120](A) \tkzGetPoint{C}
+
+% Tangent at C
+\tkzDefLine[orthogonal=through C](O,C) \tkzGetPoint{tangent_dir}
+\tkzInterLL(C,tangent_dir)(A,B) \tkzGetPoint{D}
+
+\draw[l3] (A)--(D);
+\draw[l3] (A)--(C);
+\draw[l3] (O)--(C);
+\draw[l3] (C)--(D);
+
+\tkzDrawPoints(O,A,B,C,D)
+\tkzLabelPoint[below](O){$O$}
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[below right](B){$B$}
+\tkzLabelPoint[above](C){$\Gamma$}
+\tkzLabelPoint[right](D){$\Delta$}
+
+\tkzMarkRightAngle(O,C,D)
+\tkzMarkAngle[size=0.5,mark=none](B,A,C)
+\tkzLabelAngle[pos=0.8](B,A,C){$30^\circ$}
+\tkzMarkAngle[size=0.5,mark=none](C,D,O)
+\tkzLabelAngle[pos=0.8](C,D,O){$\omega$}
+\end{tikzpicture}
+\end{center}
+\end{alist}

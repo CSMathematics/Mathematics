@@ -1,0 +1,66 @@
+\Askhsh{21121}{2}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.7. Εμβαδόν κυκλικού τομέα και κυκλικού τμήματος.
+\end{ylh}
+\begin{wrapfigure}[22]{r}{8cm} % Adjust number of lines and width as needed
+    \centering
+    \begin{tikzpicture}[scale=0.55] % Adjusted scale to fit the figure nicely
+        % Define points A, B, C based on the properties of a right triangle
+        % with hypotenuse 13 and altitude to hypotenuse 6.
+        % We know legs 'b' and 'c' satisfy b*c = 13*6 = 78 and b^2+c^2 = 13^2 = 169.
+        % This yields b=3*sqrt(13) and c=2*sqrt(13) (or vice versa).
+        % Let A be the origin (0,0) for the right angle.
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(3*sqrt(13),0){B} % x-coordinate for B
+        \tkzDefPoint(0,2*sqrt(13)){C} % y-coordinate for C (named Gamma)
+
+        % Define D as the projection of A onto line B-C (foot of the altitude)
+        \tkzDefPointBy[projection=onto line B--C](A) \tkzGetPoint{D}
+
+        % Define E on AB such that AE = radius (AD = 6)
+        % K = (radius) / (length of AB) = 6 / (3*sqrt(13))
+        \tkzDefPointWith[linear, K=6/(3*sqrt(13))](A,B) \tkzGetPoint{E}
+        % Define Z on AC such that AZ = radius (AD = 6)
+        % K = (radius) / (length of AC) = 6 / (2*sqrt(13))
+        \tkzDefPointWith[linear, K=6/(2*sqrt(13))](A,C) \tkzGetPoint{Z}
+        
+        % Draw the triangle ABC
+        \tkzDrawPolygon[thick](A,B,C)
+        
+        % Draw the altitude AD
+        \tkzDrawSegment[thick](A,D)
+
+        % Mark the right angles at A and D
+        \tkzMarkRightAngle[fill=maincolor!30,size=0.3](C,A,B) % Right angle at A
+        \tkzMarkRightAngle[fill=maincolor!30,size=0.3](A,D,B) % Right angle at D (A-D-B or A-D-C is fine)
+        
+        % Fill the entire triangle with a light shade
+        \tkzFillPolygon[fill=secondarycolor!30](A,B,C)
+        % Fill the circular sector AEZ with white to "unshade" it
+        \tkzFillSector[fill=white](A,E,Z)
+
+        % Draw the circular arc E Z (centered at A with radius AD=AE=AZ=6)
+        \tkzDrawArc[thick](A,E,Z) % Arc from E to Z, centered at A. D is on this arc.
+
+        % Draw the points
+        \tkzDrawPoints(A,B,C,D,E,Z)
+
+        % Label the points
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below](D){$\Delta$}
+        \tkzLabelPoint[below left](E){E}
+        \tkzLabelPoint[above right](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα, το ορθογώνιο τρίγωνο $AB\Gamma$ έχει υποτείνουσα $B\Gamma = 13$ και αντίστοιχο ύψος $A\Delta = 6$. Με κέντρο το $A$ και ακτίνα $A\Delta$ γράφουμε κύκλο, ο οποίος τέμνει τις πλευρές $AB$ και $A\Gamma$ του τριγώνου $AB\Gamma$, στα σημεία $E$ και $Z$ αντίστοιχα.
+\begin{alist}
+    \item Να υπολογίσετε το εμβαδόν του τριγώνου $AB\Gamma$. \monades{8}
+    \item Να υπολογίσετε τα εμβαδά:
+    \begin{rlist}
+        \item του κυκλικού τομέα $A\overset{\frown}{E\Delta Z}$, \monades{9}
+        \item του σκιασμένου χωρίου που είναι εσωτερικά του τριγώνου $AB\Gamma$ και εξωτερικά του κύκλου, όπως φαίνεται και στο παρακάτω σχήμα. \monades{8}
+    \end{rlist}
+\end{alist}

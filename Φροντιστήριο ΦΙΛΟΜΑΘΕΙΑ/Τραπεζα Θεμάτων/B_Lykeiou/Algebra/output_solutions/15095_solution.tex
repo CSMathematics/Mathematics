@@ -1,0 +1,64 @@
+\begin{alist}
+\item
+\begin{rlist}
+\item Η γραφική παράσταση της $y = g(x) = \dfrac{1}{2} + \eta\mu x$, με $x \in [0, \pi]$ προκύπτει από
+κατακόρυφη μετατόπιση της γραφικής παράστασης της $\varphi(x) = \eta\mu x$, με $x \in [0, \pi]$
+κατά $\dfrac{1}{2}$ μονάδες προς τα πάνω.
+
+Επομένως, είναι:
+\begin{center}
+\begin{tikzpicture}[x=1.5cm,y=1.2cm]
+% Axes
+\draw[->] (-0.5, 0) -- (2.5, 0) node[above left, font=\scriptsize] {$x$};
+\draw[->] (0, -3.5) -- (0, 3) node[below right, font=\scriptsize] {$y$};
+
+% Ticks
+\foreach \y in {-3, -2, -1, 1, 2} {
+    \draw (2pt, \y) -- (-2pt, \y) node[left, font=\scriptsize] {\y};
+}
+\node[below right, font=\scriptsize] at (0,0) {0};
+
+\node[below=2pt, right=1pt, font=\scriptsize] at (3.14159, 0) {$\pi$};
+\draw (3.14159, 2pt) -- (3.14159, -2pt);
+
+% pi/2 tick
+\node[below, font=\scriptsize] at (1.57, 0) {$\pi/2$};
+\draw (1.57, 2pt) -- (1.57, -2pt);
+
+% Red curve: y = 1/2 + sin(x)
+\draw[red, thick, domain=0:3.14159, samples=100] plot (\x, {0.5 + sin(\x r)});
+\node[red, font=\small, right] at (0.3, 2) {$y = 1/2 + \eta\mu x$};
+
+% Blue curve: y = x^2 - pi*x
+\draw[blue, thick, domain=0:3.14159, samples=100] plot (\x, {\x*\x - 3.14159*\x});
+\node[blue, font=\small, right] at (0.5, -2.8) {$y = x^2 - \pi x$};
+
+% Connection line
+\draw[cyan, thick] (1.57, -2.467) -- (1.57, 1.5);
+\filldraw[blue] (1.57, -2.467) circle (1.5pt) node[below, font=\scriptsize] {$\text{K}$};
+\filldraw[red] (1.57, 1.5) circle (1.5pt) node[above, font=\scriptsize] {$\Lambda$};
+
+% Vertical green lines
+\draw[green!60!black, thick] (0, 0) -- (0, -1.5);
+\node[green!60!black, left] at (0, -0.6) {$x = 0$};
+
+\draw[green!60!black, thick] (3.14159, 2) -- (3.14159, -2.5);
+\node[green!60!black, right] at (3.14159, -0.8) {$x = \pi$};
+\end{tikzpicture}
+\end{center}
+
+\item Γνωρίζουμε ότι η $f$ παρουσιάζει ελάχιστο στο σημείο $K\left(\dfrac{\pi}{2}, -\dfrac{\pi^2}{4}\right)$.
+
+Από την γραφική παράσταση φαίνεται ότι:
+
+Η $f$ είναι γνησίως φθίνουσα στο διάστημα $\left[0, \dfrac{\pi}{2}\right]$, γνησίως αύξουσα στο διάστημα
+$\left[\dfrac{\pi}{2}, \pi\right]$ και τέμνει τον άξονα $x'x$ στα σημεία $O(0, 0)$ και $A(\pi, 0)$.
+
+Στα σημεία αυτά η $f$ παρουσιάζει την μέγιστη τιμή της, που είναι το 0.
+
+Η $g$ είναι γνησίως αύξουσα στο διάστημα $\left[0, \dfrac{\pi}{2}\right]$, γνησίως φθίνουσα στο διάστημα
+$\left[\dfrac{\pi}{2}, \pi\right]$ και παρουσιάζει μέγιστο στο σημείο $\Lambda\left(\dfrac{\pi}{2}, \dfrac{3}{2}\right)$.
+
+Επιπλέον, είναι $g(0) = g(\pi) = \dfrac{1}{2}$.
+\end{rlist}
+\end{alist}

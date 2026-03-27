@@ -1,0 +1,56 @@
+\Askhsh{37082}{4}
+\begin{ylh}{1}
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.6. Εφαρμογές στα τρίγωνα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 37082.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Σε τρίγωνο $ΑΒ\Gamma$ ισχύει $\widehat{Α} + \widehat{\Gamma} = 2\widehat{Β}$ και έστω $Α\Delta$ ύψος και $BE$ διχοτόμος του τριγώνου που τέμνονται στο $Z$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+\begin{alist}
+\item $\widehat{Β} = 60^{\circ}$ και $AZ = BZ$, \monades{10}
+\item $A\Delta = \frac{3}{2}BZ$ \monades{8}
+\end{alist}
+\item Αν είναι γνωστό ότι το τρίγωνο $AZE$ είναι ισόπλευρο, να υπολογίσετε τις άλλες γωνίες του τριγώνου $ΑΒ\Gamma$. \monades{7}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(5,0){C}
+\tkzDefPointBy[rotation=center B angle 60](C) \tkzGetPoint{B_ray}
+\tkzDefPointBy[rotation=center C angle -50](B) \tkzGetPoint{C_ray}
+\tkzInterLL(B,B_ray)(C,C_ray) \tkzGetPoint{A}
+
+\tkzDefPointBy[projection=onto B--C](A) \tkzGetPoint{Delta}
+\tkzDefLine[bisector](A,B,C) \tkzGetPoint{BE_dir}
+\tkzInterLL(B,BE_dir)(A,C) \tkzGetPoint{E}
+\tkzInterLL(A,Delta)(B,E) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(Delta);
+\draw[l3] (B)--(E);
+
+\tkzDrawPoints(A,B,C,Delta,E,Z)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[below](Delta){$\Delta$}
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[below left](Z){$Z$}
+
+\tkzMarkRightAngle(A,Delta,C)
+\tkzMarkAngle[size=0.6,mark=s|](C,B,E)
+\tkzMarkAngle[size=0.7,mark=s|](E,B,A)
+\tkzMarkAngle[size=0.5](A,B,C)
+\tkzLabelAngle[pos=0.8](A,B,C){$60^{\circ}$}
+\tkzMarkSegments[mark=s||](A,Z B,Z)
+\end{tikzpicture}
+\end{center}
+\end{alist}

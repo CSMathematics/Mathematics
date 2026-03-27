@@ -1,0 +1,49 @@
+\Askhsh{29784}{2}
+\begin{ylh}{1}
+    \item 9.4. Γενίκευση του Πυθαγόρειου θεωρήματος
+    \item 10.1. Πολυγωνικά χωρία
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{7cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(5,0){B}
+        % Define D using polar coordinates relative to A for angle DAB = 120 degrees and AD = 3
+        \tkzDefPointWith[polar=3:120](A){D}
+        
+        % To define G such that angle DBG = 120 degrees and BG = 8:
+        % Rotate point D around B by -120 degrees (clockwise) to find the direction for BG.
+        \tkzDefPointBy[rotation=center B angle -120](D) \tkzGetPoint{P_rotated}
+        % G is on the line BP_rotated at distance 8 from B.
+        \tkzDefPointWith[euclidian,K=8](B,P_rotated){G}
+        
+        % Draw the quadrilateral and the diagonal BD
+        \tkzDrawSegments(A,B B,G G,D D,A B,D)
+        
+        % Label points
+        \tkzLabelPoint[below](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[right](G){$\Gamma$}
+        \tkzLabelPoint[above left](D){$\Delta$}
+        
+        % Label side lengths
+        \tkzLabelSegment[below](A,B){5}
+        \tkzLabelSegment[left](A,D){3}
+        \tkzLabelSegment[right](B,G){8}
+        
+        % Mark and label angles
+        \tkzMarkAngle[arc,size=0.8cm,fill=gray!30](B,A,D)
+        \tkzLabelAngle[pos=1.1](B,A,D){$120^\circ$}
+        
+        \tkzMarkAngle[arc,size=0.8cm,fill=gray!30](D,B,G)
+        \tkzLabelAngle[pos=1.1](D,B,G){$120^\circ$}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Στο τετράπλευρο του παρακάτω σχήματος έχουμε για τις πλευρές $AB=5$, $B\Gamma=8$, $A\Delta=3$ και για τις γωνίες $\Delta\widehat{A}B = 120^\circ$ όπως και $\Delta\widehat{B}\Gamma = 120^\circ$.
+\begin{alist}
+    \item Να δείξετε ότι το μήκος της $B\Delta$ είναι 7 μονάδες. \monades{8}
+    \item Να υπολογίσετε το μήκος της $\Gamma\Delta$. \monades{8}
+    \item Να υπολογίσετε το εμβαδόν του τριγώνου $\Gamma B \Delta$. \monades{9}
+\end{alist}

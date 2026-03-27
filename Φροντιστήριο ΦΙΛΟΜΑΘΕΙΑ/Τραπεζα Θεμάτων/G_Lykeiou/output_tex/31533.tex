@@ -1,0 +1,75 @@
+\Askhsh{31533}{4}
+\begin{ylh}{1}
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.8 Κυρτότητα - Σημεία καμπής συνάρτησης
+    \item 2.9 Ασύμπτωτες - Κανόνες De l’ Hospital
+    \item 3.5 Η συνάρτηση [ορισμένο ολοκλήρωμα της f από α έως χ]
+    \item 3.7 Εμβαδόν επιπέδου χωρίου.
+\end{ylh}
+\begin{wrapfigure}[20]{r}{0.5\textwidth}
+\centering
+\begin{tikzpicture}
+\pgfmathsetmacro{\alpha_coord}{3} % Value of alpha for plotting, matching the image example
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -2.5, xmax = \alpha_coord+0.5,
+    ymin = -0.5, ymax = 4.5,
+    xtick = {-2,-1,0,1,2,3},
+    ytick = {0,1,2,3,4},
+    grid = both,
+    grid style = {gray!30},
+    samples = 100,
+    width = 8cm, height = 8cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % Define the rectangle vertices for drawing
+    \coordinate (A_point) at (1,0);
+    \coordinate (B_point) at (\alpha_coord,0);
+    \coordinate (Gamma_point) at (\alpha_coord,4);
+    \coordinate (Delta_point) at (1,4);
+
+    % Draw the rectangle
+    \draw[thick, black] (A_point) -- (B_point) -- (Gamma_point) -- (Delta_point) -- cycle;
+
+    % Add points A, B, Gamma, Delta as solid dots as in the image
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(1,0) (\alpha_coord,0) (\alpha_coord,4) (1,4)};
+
+    % Plot the function f(x) = 4 - 4/x^2 (dotted line)
+    \addplot[thick, dotted, maincolor, domain=-2.5:-1.01] {4 - 4/(x^2)};
+    \addplot[thick, dotted, maincolor, domain=1.01:\alpha_coord] {4 - 4/(x^2)};
+
+    % Labels for the rectangle vertices
+    \node[below left] at (A_point) {A};
+    \node[below right] at (B_point) {B};
+    \node[above right] at (Gamma_point) {$\Gamma$};
+    \node[above left] at (Delta_point) {$\Delta$};
+
+    % Labels for the regions and curve
+    \node[above right, xshift=-2mm, yshift=-2mm] at (axis cs:{(\alpha_coord+1)/2}, 3.5) {$\Omega_1$};
+    \node[below right, xshift=-2mm, yshift=2mm] at (axis cs:{(\alpha_coord+1)/2}, 1.5) {$\Omega_2$};
+    \node[right] at (axis cs:\alpha_coord,2) {$x=\alpha$};
+    % Label C_f outside the rectangle, similar to the image
+    \node[above right, xshift=2mm, yshift=0mm] at (Gamma_point) {$C_f$};
+\end{axis}
+\end{tikzpicture}
+\caption*{Γραφική παράσταση της $f(x)$ και το ορθογώνιο ΑΒΓΔ} % Optional caption to match context
+\end{wrapfigure}
+
+\OnKef{ΘΕΜΑ 4}
+
+Δίνεται η συνάρτηση $f(x)=4-\frac{4}{x^2}, x \neq 0$.
+
+\begin{alist}
+\item Να την μελετήσετε ως προς τη μονοτονία, την κυρτότητα και να βρείτε την οριζόντια ασύμπτωτη της γραφικής παράστασης $C_f$ της $f$. \monades{9}
+\item Αν οι εφαπτόμενες της $C_f$ στα σημεία $A(x_1, f(x_1))$, $B(x_2, f(x_2))$ είναι κάθετες, να αποδείξετε ότι $x_1 x_2 = -4$. \monades{6}
+\item Στο παρακάτω σχήμα φαίνεται η γραφική παράσταση της $f$ (διακεκομμένη γραμμή) και το ορθογώνιο ΑΒΓΔ που ορίζεται από τον άξονα $x'x$ και τις ευθείες $x=1, x=\alpha, \alpha > 1$ και $y=4$. Η $C_f$ χωρίζει το ορθογώνιο σε δύο χωρία $\Omega_1, \Omega_2$.
+    \begin{rlist}
+    \item Να υπολογίσετε, συναρτήσει του $\alpha$, τα εμβαδά $E(\Omega_1), E(\Omega_2)$ των χωρίων. \monades{5}
+    \item Να βρείτε για ποια τιμή του $\alpha$ ισχύει $E(\Omega_1) = E(\Omega_2)$. \monades{5}
+    \end{rlist}
+\end{alist}

@@ -1,0 +1,56 @@
+\Askhsh{21075}{2}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα.
+\end{ylh}
+\begin{wrapfigure}[12]{r}{5cm} % Εκτίμηση γραμμών: ύψος σχήματος περίπου 4.8cm, δηλαδή περίπου 12 γραμμές.
+    \centering
+    \begin{tikzpicture}[scale=0.6] % Κλιμάκωση για να χωρέσει εντός πλάτους 5cm. Οριζόντια διάμετρος 8 μονάδες * 0.6 = 4.8cm.
+        % Ορισμός του κέντρου O
+        \tkzDefPoint(0,0){O_center} 
+        
+        % Ορισμός ακτίνας (χρησιμοποιούμε r=4 για το σχέδιο, όπως στην ερώτηση β)
+        \def\radius{4}
+        
+        % Σχεδίαση του κύκλου
+        \tkzDrawCircle[R](O_center,\radius cm)
+        
+        % Ορισμός των κορυφών του εγγεγραμμένου τετραγώνου
+        % A: δεξιά, B: πάνω, C: αριστερά (Γάμα), D: κάτω (Δέλτα)
+        \tkzDefPoint(\radius,0){A}
+        \tkzDefPoint(0,\radius){B}
+        \tkzDefPoint(-\radius,0){C}
+        \tkzDefPoint(0,-\radius){D}
+        
+        % Σχεδίαση του τετραγώνου και σκίαση
+        \tkzFillPolygon[color=gray!20](A,B,C,D)
+        \tkzDrawPolygon(A,B,C,D)
+        
+        % Σχεδίαση των τμημάτων από το O_center προς τις κορυφές A, B, C, D
+        \tkzDrawSegments(O_center,A O_center,B O_center,C O_center,D)
+        
+        % Σχεδίαση σημείων για τις κορυφές και το κέντρο
+        \tkzDrawPoints(A,B,C,D)
+        \tkzDrawPoint(O_center) % Σχεδιάζει μια μαύρη κουκκίδα για το κέντρο
+        
+        % Ετικέτες
+        \tkzLabelPoint[above right=1pt](A){A} 
+        \tkzLabelPoint[above left=1pt](B){B}
+        \tkzLabelPoint[below left=1pt](C){$\Gamma$}
+        \tkzLabelPoint[below right=1pt](D){$\Delta$}
+        
+        % Τοποθέτηση της ετικέτας 'O' ως κείμενο, ελαφρώς μετατοπισμένη από την κεντρική κουκκίδα
+        \node at ($(O_center)+(0.25,0.25)$) {O};
+    \end{tikzpicture}
+\end{wrapfigure}
+\Askhseis{ΘΕΜΑ 2}
+
+Δίνεται κύκλος με κέντρο $O$, ακτίνα $\rho$ και εμβαδόν ίσο με $16\pi$.
+\begin{alist}
+    \item Να υπολογίσετε την ακτίνα $\rho$ του κύκλου. \monades{07}
+    \item Αν η ακτίνα $\rho$ του κύκλου είναι $4$ να υπολογίσετε:
+    \begin{rlist}
+        \item Την πλευρά του εγγεγραμμένου τετραγώνου στον κύκλο. \monades{09}
+        \item Το εμβαδόν του χωρίου που περικλείεται ανάμεσα στο τετράγωνο και στον κύκλο. \monades{09}
+    \end{rlist}
+\end{alist}

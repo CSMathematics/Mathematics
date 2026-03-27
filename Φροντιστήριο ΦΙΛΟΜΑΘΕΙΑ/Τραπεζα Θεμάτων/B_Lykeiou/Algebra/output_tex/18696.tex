@@ -1,0 +1,44 @@
+% ===================================================================
+%  Αρχείο: 18696_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Στο σχήμα φαίνονται οι γραφικές παραστάσεις των συναρτήσεων $f(x) = x^{3} + 3x^{2} - 4\ $και $g(x) = 4x - 4$ με $x\epsilon\mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5, >=latex]
+    \draw[very thin, color=gray!30, step=2] (-5,-20) grid (3,8);
+    \draw[->] (-5,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-21) -- (0,9) node[above] {$y$};
+    
+    \foreach \x in {-4,-2,2}
+        \draw (\x,5pt) -- (\x,-5pt) node[below, font=\small] {\x};
+    \foreach \y in {-20,-16,-12,-8,-4,4,8}
+        \draw (5pt,\y) -- (-5pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = x^3 + 3x^2 - 4
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=-4.2:1.8] plot (\x, {\x*\x*\x + 3*\x*\x - 4}) node[above left] {$C_f$};
+    
+    % g(x) = 4x - 4
+    \draw[very thick, color=red!70!black, domain=-4.2:2.8] plot (\x, {4*\x - 4}) node[below right] {$C_g$};
+    
+    % Intersections
+    \filldraw (-4,-20) circle (3pt);
+    \filldraw (0,-4) circle (3pt);
+    \filldraw (1,0) circle (3pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Από τη γραφική παράσταση της $f$, να βρείτε τα διαστήματα μονοτονίας της.
+\monades{8}
+
+\item Να λύσετε γραφικά και αλγεβρικά την εξίσωση $f(x) = g(x).$
+\monades{10}
+
+\item Να βρείτε αλγεβρικά τις τιμές του $x$ για τις οποίες η γραφική παράσταση της συνάρτησης $g$ είναι κάτω από τη γραφική παράσταση της συνάρτησης $f.$
+\monades{7}
+\end{alist}

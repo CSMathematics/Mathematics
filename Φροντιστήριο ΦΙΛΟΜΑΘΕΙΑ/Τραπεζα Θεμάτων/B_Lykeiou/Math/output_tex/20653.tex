@@ -1,0 +1,56 @@
+\Askhsh{20653}{4}
+\begin{ylh}{1}
+    \item 3.4 Η Υπερβολή.
+\end{ylh}
+\begin{wrapfigure}[24]{r}{8cm} % Adjust wrapfigure lines and width as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x'$,
+    ylabel=$y'$,
+    xmin=-900, xmax=900,
+    ymin=-300, ymax=300,
+    xtick={-689, 0, 689}, % M1, O, M2 from problem data
+    ytick=\empty, % No specific y-ticks shown in original image
+    xlabel style={at={(current axis.right of origin)}, anchor=north west},
+    ylabel style={at={(current axis.above origin)}, anchor=south east},
+    grid=none,
+    hide obscured y ticks=false,
+    width=8cm, height=6cm,
+    tick label style = {font=\scriptsize},
+    xmajorgrids=false,
+    ymajorgrids=false
+]
+    % Hyperbola branches
+    % The equation is x^2/a^2 - y^2/b^2 = 1, so y = +/- b * sqrt(x^2/a^2 - 1)
+    % a = 680, b = 111
+    \addplot[thick, maincolor, domain=680:850, samples=100] {111 * sqrt(x^2/680^2 - 1)};
+    \addplot[thick, maincolor, domain=680:850, samples=100] {-111 * sqrt(x^2/680^2 - 1)};
+    \addplot[thick, maincolor, domain=-850:-680, samples=100] {111 * sqrt(x^2/680^2 - 1)};
+    \addplot[thick, maincolor, domain=-850:-680, samples=100] {-111 * sqrt(x^2/680^2 - 1)};
+
+    % Points and labels
+    % M1 is a focus (-c, 0)
+    \node[label={below:$M_1$}, secondarycolor] at (axis cs:-689,0) {$\bullet$};
+    % O is the origin
+    \node[label={below:$O$}, black] at (axis cs:0,0) {$\bullet$};
+    % M2 is a focus (c, 0)
+    \node[label={below:$M_2$}, secondarycolor] at (axis cs:689,0) {$\bullet$};
+    
+    % Point P (choose a point on the right branch for visualization, e.g., x=800, y=69)
+    \coordinate (P) at (axis cs:800, 69);
+    \node[label={above right:$P$}, secondarycolor] at (P) {$\bullet$};
+    
+    % Dashed lines from P to M1 and M2
+    \addplot[dashed, gray] coordinates {(axis cs:-689,0) (P)};
+    \addplot[dashed, gray] coordinates {(axis cs:689,0) (P)};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Κατά τη διάρκεια μιας επιχείρησης εντοπισμού ενός αγνοούμενου σε μια αχανή δασώδη επίπεδη περιοχή, δύο παρατηρητές $M_1$ και $M_2$ βρίσκονται σε διαφορετικά σημεία. Ο αγνοούμενος εκτοξεύει φωτοβολίδες που διαθέτει και οι δύο παρατηρητές σημειώνουν τις χρονικές στιγμές που ακούνε τον ήχο της εκπυρσοκρότησης του όπλου. Είναι γνωστό ότι ο παρατηρητής $M_1$ ακούει σε όλες τις εκρήξεις τον ήχο με διαφορά $4 \ sec$ αργότερα από τον παρατηρητή $M_2$.
+\begin{alist}
+    \item Αν ονομάσουμε $P$ την θέση του αγνοούμενου, να αποδείξετε ότι $(PM_1) - (PM_2) = 1360 \ m$. Θεωρούμε ότι η ταχύτητα διάδοσης του ήχου είναι $340 \ m/sec$. \monades{8}
+    \item Να αποδείξετε ότι η θέση $P$ του αγνοούμενου ανήκει σε έναν κλάδο υπερβολής με εστίες τα σημεία $M_1$ και $M_2$. \monades{8}
+    \item Αν γνωρίζουμε ότι η απόσταση $(M_1 M_2)$ είναι $1378 \ m$, να αποδείξετε ότι αυτή η υπερβολή έχει εξίσωση $\dfrac{x^2}{680^2} - \dfrac{y^2}{111^2} = 1$, θεωρώντας ως άξονα $x'x$ την ευθεία $M_1 M_2$ και κέντρο της υπερβολής την αρχή των αξόνων. Δίνεται ότι $37^2 = 1369$. \monades{9}
+\end{alist}

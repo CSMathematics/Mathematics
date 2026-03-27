@@ -1,0 +1,75 @@
+\lysh{34835}{4}
+
+\begin{center}
+\begin{tikzpicture}
+% Coordinates for the main rectangle
+\coordinate (A) at (0,3);
+\coordinate (B) at (0,0);
+\coordinate (Gamma) at (6,0); % Use 6 for width for good aspect ratio
+\coordinate (Delta) at (6,3); % Use 3 for height
+
+% Internal division points (assuming 3 equal segments horizontally)
+\coordinate (E) at (2,0);
+\coordinate (O) at (4,0);
+\coordinate (Z) at (2,3);
+\coordinate (H) at (4,3);
+
+% Draw the main rectangle
+\draw (A) -- (B) -- (Gamma) -- (Delta) -- cycle;
+
+% Draw the internal vertical lines
+\draw (E) -- (Z);
+\draw (O) -- (H);
+
+% Label points
+\node[above left] at (A) {A};
+\node[above] at (Z) {Z};
+\node[above] at (H) {H};
+\node[above right] at (Delta) {$\Delta$};
+
+\node[below left] at (B) {B};
+\node[below] at (E) {E};
+\node[below] at (O) {O};
+\node[below right] at (Gamma) {$\Gamma$};
+
+% Label total width 'x' and total height 'y'
+\node at ($(B)!0.5!(Gamma)$) [below] {$x$};
+\node at ($(A)!0.5!(B)$) [left] {$y$};
+\end{tikzpicture}
+\end{center}
+\begin{alist}
+\item Αν $\mathrm{A}\Delta = \mathrm{B}\Gamma = x > 0$ και $\mathrm{AB} = \mathrm{ZE} = \mathrm{H}\Theta = \Delta\Gamma = y > 0$. Έχουμε:
+\[ 2x + 4y = 200 \implies 2x = 200 - 4y \implies x = 100 - 2y \]
+Είναι $y > 0$. Επίσης $x > 0 \implies 100 - 2y > 0 \implies 100 > 2y \implies y < 50$.
+Είναι:
+\[ y > 0 \implies 100 - x > 0 \implies x < 100 \]
+Επομένως, το συνολικό εμβαδόν του ορθογωνίου $\mathrm{AB}\Gamma\Delta$, συναρτήσει του $x$, είναι:
+\[ E(x) = x \cdot \frac{100-x}{2} = \frac{100x - x^2}{2}, \quad 0 < x < 100 \]
+\item Η συνάρτηση $E(x)$ είναι παραγωγίσιμη για $x \in (0, 100)$ με:
+\[ E'(x) = \left(\frac{100x - x^2}{2}\right)' = \frac{1}{2} (100 - 2x) = 50 - x \]
+$E'(x) = 0 \implies 50 - x = 0 \implies x = 50$
+$E'(x) > 0 \implies 50 - x > 0 \implies x < 50$
+$E'(x) < 0 \implies 50 - x < 0 \implies x > 50$
+
+Τα πρόσημα της παραγώγου της συνάρτησης $E(x)$ φαίνονται στον ακόλουθο πίνακα:
+\begin{center}
+\begin{tikzpicture}
+\tikzset{arrow style/.style={maincolor,>->,>=latex'}}
+\tikzset{t style/.style = {style = dashed}}
+\tikzset{z style/.style = {fill=white,inner sep=.2mm}}
+\tkzTabInit[color,lgt=2,espcl=2.4,colorC = maincolor!50,colorL = maincolor!30,colorV = maincolor!50]%
+{$x$ / .8,$E'(x)$ /.8,$E(x)$/0.8}%
+{$0$,$50$,$100$}%
+\tkzTabLine{,+,z,-,}
+\tkzTabVar{0,+/ , 1250, - /, 0}
+\end{tikzpicture}
+\end{center}
+Για τη συνάρτηση $E$ ισχύουν $E'(x) > 0$ στο $(0,50)$ και $E'(x) < 0$ στο $(50,100)$. Επομένως, η συνάρτηση $E$ παρουσιάζει μέγιστο για $x=50$. Τότε είναι:
+\[ y = \frac{100-50}{2} = \frac{50}{2} = 25 \]
+\item Το μέγιστο εμβαδόν του ορθογωνίου $\mathrm{AB}\Gamma\Delta$ ισούται με:
+\[ E(50) = \frac{100 \cdot 50 - 50^2}{2} = \frac{5000 - 2500}{2} = \frac{2500}{2} = 1250 \text{ m}^2 \]
+\end{alist}
+\vspace{6mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{6mm}
+

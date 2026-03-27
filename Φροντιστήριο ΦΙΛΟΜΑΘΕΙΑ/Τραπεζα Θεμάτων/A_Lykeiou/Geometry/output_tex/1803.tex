@@ -1,0 +1,63 @@
+\Askhsh{1803}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.6. Εφαρμογές στα τρίγωνα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 1803.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4~
+
+Δίνεται τρίγωνο ΑΒΓ με ΒΓ = 2ΑΓ. Έστω ΑΜ διάμεσος του ΑΒΓ και Κ, Λ τα μέσα των ΜΓ και ΑΒ αντίστοιχα.
+
+Να αποδείξετε~ ότι:
+
+\begin{alist}
+\item Μ$\widehat{Α}$Γ = A$\widehat{Μ}\Gamma$ \monades{7}~
+
+\item ΜΛ = ΜΚ. \monades{9}~
+
+\item Η ΑΜ είναι~διχοτόμος της γωνίας~ΛΜΚ~. \monades{9}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){C}
+\tkzDefPoint(6,0){B}
+\tkzDefPoint(1.5,2.5){A} % Just an estimate to make it look decent.
+
+% BC = 2 AC. AC = 3 if scale allows.
+% Let's construct it more carefully:
+\tkzDefPoint(0,0){C}
+\tkzDefPoint(3,0){A}
+% B is at distance 6 from C. Angle at C can be anything.
+\tkzDefPointBy[rotation=center C angle 60](A) \tkzGetPoint{B_dir}
+\tkzDefPointOnLine[pos=2](C,B_dir) \tkzGetPoint{B}
+
+\tkzDefMidPoint(B,C) \tkzGetPoint{M}
+\tkzDefMidPoint(M,C) \tkzGetPoint{K}
+\tkzDefMidPoint(A,B) \tkzGetPoint{L}
+
+\draw[l3] (A)--(B)--(C)--cycle;
+\draw[l3] (A)--(M);
+\draw[l3] (M)--(L);
+\draw[l3] (A)--(K); % Not explicitly asked but often in these diagrams
+
+\tkzDrawPoints(A,B,C,M,K,L)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[below](M){$M$}
+\tkzLabelPoint[below](K){$K$}
+\tkzLabelPoint[above left](L){$\Lambda$}
+
+\tkzMarkSegments[mark=s|](C,K K,M)
+\tkzMarkSegments[mark=s|](M,B) % BC=2AC => CM=MB=AC
+\tkzMarkSegments[mark=s|](A,C)
+\tkzMarkSegments[mark=s||](A,L L,B)
+\end{tikzpicture}
+\end{center}
+\end{alist}

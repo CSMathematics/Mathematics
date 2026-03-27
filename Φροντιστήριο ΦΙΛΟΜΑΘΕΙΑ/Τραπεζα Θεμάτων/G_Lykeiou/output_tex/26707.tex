@@ -1,0 +1,47 @@
+\Askhsh{26707}{2}
+\begin{ylh}{1}
+    \item 2.6 Συνέπειες του Θεωρήματος Μέσης Τιμής
+    \item 2.7 Τοπικά ακρότατα συνάρτησης.
+\end{ylh}
+\begin{wrapfigure}[22]{r}{8cm} % Adjust number of lines and width as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xmin = -1, xmax = 5.5,
+    ymin = -3, ymax = 3.5,
+    xtick = {-1,0,1,2,3,4,5},
+    ytick = {-3,-2,-1,0,1,2,3},
+    grid = both,
+    grid style = {gray!30},
+    width = 8cm, height = 6cm,
+    tick label style = {font=\scriptsize},
+    axis background/.style={fill=white},
+]
+    % f'(x) is a quadratic for a 3rd degree polynomial f(x)
+    % It passes through (0,-2), (3,0), and (5,3)
+    % Using f'(x) = ax^2 + bx + c:
+    % c = -2
+    % 9a + 3b - 2 = 0 => 9a + 3b = 2
+    % 25a + 5b - 2 = 3 => 25a + 5b = 5 => 5a + b = 1 => b = 1 - 5a
+    % 9a + 3(1 - 5a) = 2
+    % 9a + 3 - 15a = 2
+    % -6a = -1 => a = 1/6
+    % b = 1 - 5/6 = 1/6
+    % So, f'(x) = (1/6)x^2 + (1/6)x - 2
+    \addplot[very thick, maincolor, domain=0:5, samples=100] {(1/6)*x^2 + (1/6)*x - 2};
+
+    % Label C_f'
+    \node[maincolor, below right] at (axis cs:3.5, 0.625) {$C_{f'}$};
+
+    % Plot the specific points shown (start, x-intercept, end)
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,-2) (3,0) (5,3)};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της παραγώγου $f'$ μιας πολυωνυμικής συνάρτησης $f$ τρίτου βαθμού η οποία είναι ορισμένη στο κλειστό διάστημα $[0,5]$.
+\begin{alist}
+\item Ποιες είναι οι ρίζες της εξίσωσης $f'(x) = 0$; \monades{06}
+\item Να αποδείξετε ότι η $f$ είναι γνησίως φθίνουσα στο $[0,3]$ και γνησίως αύξουσα στο $[3,5]$. \monades{10}
+\item Να βρείτε το είδος ακροτάτου που παρουσιάζει η $f$ στο $x_o = 3$. Να αιτιολογήσετε την απάντησή σας. \monades{09}
+\end{alist}

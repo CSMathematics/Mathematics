@@ -1,0 +1,38 @@
+% ===================================================================
+%  Αρχείο: 15269_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Δίνεται η συνάρτηση $f(x) = \left(\frac{1}{2}\right)^{|x|}$
+\begin{alist}
+\item Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της $f$. Με βάση το σχήμα:
+\begin{rlist}
+\item Να βρείτε το πεδίο ορισμού και το σύνολο τιμών της $f$. \monades{6}
+\item Να βρείτε τις ρίζες και το πρόσημο της συνάρτησης. \monades{6}
+\end{rlist}
+
+\begin{center}
+\begin{tikzpicture}[scale=1, >=latex]
+    \draw[very thin, color=gray!30] (-4.5,-0.5) grid (4.5,2.5);
+    \draw[->] (-4.5,0) -- (4.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+    
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {1,2}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = (1/2)^|x|
+    \draw[very thick, color=blue!70!black, samples=100, domain=0:4.5] plot (\x, {pow(0.5, \x)});
+    \draw[very thick, color=blue!70!black, samples=100, domain=-4.5:0] plot (\x, {pow(0.5, -\x)});
+    
+    % Peak
+    \filldraw (0,1) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+\item Να αποδείξετε ότι η συνάρτηση $f$ είναι άρτια. \monades{13}
+\end{alist}

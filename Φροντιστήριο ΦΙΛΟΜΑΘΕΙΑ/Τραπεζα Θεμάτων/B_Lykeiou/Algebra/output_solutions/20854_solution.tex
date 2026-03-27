@@ -1,0 +1,39 @@
+\begin{alist}
+\item Η συνάρτηση $f$ είναι άρτια, διότι: \\
+Για κάθε $x \in \mathbb{R}$, το $-x \in \mathbb{R}$ και ισχύει ότι $f(-x) = e^{|-x|} = e^{|x|} = f(x)$.
+
+\item Αρκεί να αποδείξουμε ότι $f(x) \ge f(0)$ για κάθε $x \in \mathbb{R}$. Ισοδύναμα έχουμε ότι
+\[e^{|x|} \ge e^0 \overset{e^x \uparrow}{\Longleftrightarrow} |x| \ge 0,\]
+η οποία ισχύει για κάθε $x \in \mathbb{R}$. Η ισότητα ισχύει μόνο όταν $x = 0$. \\
+Επομένως, η $f$ παρουσιάζει ελάχιστο στο $x=0$ και η ελάχιστη τιμή της είναι η $f(0) = 1$.
+
+\item Αν $x \ge 0$, τότε $|x| = x$ και $f(x) = e^x$. \\
+Αν $x < 0$, τότε $|x| = -x$ και $f(x) = e^{-x}$. \\
+Έτσι προκύπτει η δίκλαδη συνάρτηση $f(x) = \begin{cases} e^{-x}, & x < 0 \\ e^x, & x \ge 0 \end{cases}$, η οποία σύμφωνα με το ερώτημα $\alpha)$ είναι άρτια. Οπότε είναι συμμετρική ως προς τον άξονα $y'y$. \\
+Επομένως, αποτελείται από την γραφική παράσταση της $h(x) = e^x$, $x \ge 0$ και την συμμετρική της $h$ ως προς τον άξονα $y'y$ για $x < 0$. \\
+Επιπλέον, από το ερώτημα $\beta)$ γνωρίζουμε ότι η $f$ παρουσιάζει ελάχιστο στο $x=0$ και η ελάχιστη τιμή της είναι η $f(0) = 1$. \\
+Επομένως η γραφική παράσταση της $f$ δίνεται από το παρακάτω σχήμα:
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-3.5, xmax=3.5,
+    ymin=-0.5, ymax=6.5,
+    xtick={-3,-2,-1,0,1,2,3},
+    ytick={1,2,3,4,5,6},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!30},
+    major grid style={line width=.2pt,draw=gray!50},
+    thick,
+    width=9cm, height=10cm,
+    samples=100
+]
+\addplot[domain=0:1.85, black!70, ultra thick] {exp(x)} node[pos=0.8, right, black] {\large $C_f$};
+\addplot[domain=-1.85:0, black!70, ultra thick] {exp(-x)};
+\addplot[domain=-3.5:0, dashed, ultra thick, black!60] {exp(x)};
+
+\fill[black] (axis cs:0, 1) circle (2.5pt);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{alist}

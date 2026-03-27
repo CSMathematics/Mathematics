@@ -1,0 +1,70 @@
+\Askhsh{34326}{4}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.4. 3ο Κριτήριο ισότητας τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 5.2. Παραλληλόγραμμα
+    \item 5.3. Ορθογώνιο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34326.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Έστω κύκλος κέντρου Ο και ΑΓ μια διάμετρός του. Θεωρούμε δυο ίσες χορδές ΑΔ, ΒΓ και χορδές ΔΓ, ΑΒ τέτοιες ώστε να είναι κάθετες στις ΑΔ, ΒΓ αντίστοιχα. Έστω Κ και Λ τα μέσα των χορδών ΔΓ και ΒΓ αντίστοιχα.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item οι χορδές ΑΒ και ΔΓ είναι παράλληλες, \monades{7}
+
+\item το τετράπλευρο ΑΒΓΔ είναι ορθογώνιο παραλληλόγραμμο, \monades{7}
+
+\item η ΒΔ είναι διάμετρος του κύκλου, \monades{6}
+
+\item το τετράπλευρο ΟΚΓΛ είναι ορθογώνιο. \monades{5}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(-3,0){A}
+\tkzDefPoint(3,0){C}
+\tkzDrawCircle(O,A)
+
+% AD = BC. ABCD is a rectangle inscribed in circle.
+% Let's put B at (-1.5, -2.598) and D at (1.5, 2.598).
+% Wait, A is (-3,0), C is (3,0). AC is diameter.
+% If D is on the top semicircle, angle ADC = 90.
+\tkzDefPointBy[rotation=center O angle 120](C) \tkzGetPoint{D}
+% B is diametrically opposite to D? No, AC is diameter.
+% For AD=BC, ABCD is an isosceles trapezoid or rectangle. Since angle is 90, it's a rectangle.
+\tkzDefPointBy[symmetry=center O](D) \tkzGetPoint{B}
+
+\tkzDefMidPoint(D,C) \tkzGetPoint{K}
+\tkzDefMidPoint(B,C) \tkzGetPoint{L}
+
+\draw[l3] (A)--(B)--(C)--(D)--cycle;
+\draw[l3] (A)--(C);
+\draw[l3] (B)--(D);
+\draw[l3] (O)--(K);
+\draw[l3] (O)--(L);
+\draw[l3] (K)--(C)--(L);
+
+\tkzDrawPoints(O,A,B,C,D,K,L)
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[right](C){$\Gamma$}
+\tkzLabelPoint[above](D){$\Delta$}
+\tkzLabelPoint[below](O){$O$}
+\tkzLabelPoint[above right](K){$K$}
+\tkzLabelPoint[below right](L){$\Lambda$}
+
+\tkzMarkRightAngle(A,D,C)
+\tkzMarkRightAngle(A,B,C)
+\end{tikzpicture}
+\end{center}
+\end{alist}

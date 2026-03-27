@@ -1,0 +1,72 @@
+\Askhsh{18370}{4}
+\begin{ylh}{1}
+    \item 8.2. Κριτήρια ομοιότητας
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[18]{r}{6cm} % Adjust number of lines and width as needed for proper text wrapping
+\centering
+\begin{tikzpicture}[scale=0.75] % Adjust scale for clarity and fit
+
+    % Define radius symbol for calculations within tikz-euclide
+    \pgfmathsetmacro{\R}{1} % Using R=1 for internal calculations, the geometry scales appropriately
+
+    % Define points A, O, B on the x-axis (diameter)
+    \tkzDefPoint{-\R}{0}{A} % A is at (-R, 0)
+    \tkzDefPoint{0}{0}{O}  % O is at (0, 0)
+    \tkzDefPoint{\R}{0}{B}  % B is at (R, 0)
+
+    % Define point M. For the drawing, we use the specific case from part (a) where BM = 2R.
+    % This implies M is at (3R, 0).
+    \tkzDefPoint{3*\R}{0}{M} % M is at (3R, 0)
+
+    % Calculate coordinates for G (point of tangency)
+    % In triangle OGM, angle OGM = 90 degrees.
+    % Using power of a point or similar triangles, or coordinates:
+    % x_G = R^2 / OM = R^2 / (3R) = R/3
+    % y_G = sqrt(R^2 - x_G^2) = sqrt(R^2 - (R/3)^2) = sqrt(8R^2/9) = 2*sqrt(2)*R/3
+    \tkzDefPoint{\R/3}{2*sqrt(2)*\R/3}{G}
+    
+    % Calculate coordinates for D (intersection of line MG and tangent at A)
+    % The tangent at A is the vertical line x = -R.
+    % The line MG passes through M(3R,0) and G(R/3, 2*sqrt(2)*R/3).
+    % The slope of MG is (2*sqrt(2)*R/3 - 0) / (R/3 - 3R) = (2*sqrt(2)*R/3) / (-8R/3) = -sqrt(2)/4.
+    % Equation of line MG: y - 0 = (-sqrt(2)/4) * (x - 3R)
+    % Substitute x = -R for point D: y_D = (-sqrt(2)/4) * (-R - 3R) = (-sqrt(2)/4) * (-4R) = sqrt(2)*R.
+    \tkzDefPoint{-\R}{sqrt(2)*\R}{D}
+
+    % Draw the semicircle (upper half)
+    \tkzDrawArc[thick](O,B)(A) % Arc from B to A, centered at O
+
+    % Draw the line segment AM (the diameter extended)
+    \tkzDrawSegment[thick](A,M)
+    
+    % Draw the tangent segment MG
+    \tkzDrawSegment[thick](M,G)
+    
+    % Draw the tangent at A (vertical line) extending to D
+    \tkzDrawLine[add=0.5 and 0.5, thick](A,D) % Extend AD slightly beyond A and D
+    
+    % Draw segment OG (radius to the point of tangency), typically shown in diagrams
+    \tkzDrawSegment[maincolor, thick](O,G)
+    
+    % Draw points with black fill
+    \tkzDrawPoints[fill=black](A,O,B,M,G,D)
+    
+    % Label points in Greek
+    \tkzLabelPoint[below](A){A}
+    \tkzLabelPoint[below left](O){O}
+    \tkzLabelPoint[below](B){B}
+    \tkzLabelPoint[below](M){M}
+    \tkzLabelPoint[above right](G){$\Gamma$} % Gamma
+    \tkzLabelPoint[above left](D){$\Delta$} % Delta
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται ημικύκλιο κέντρου $O$ και διαμέτρου $AB = 2\rho$. Στην προέκταση του $AB$ προς το $B$, θεωρούμε σημείο $M$. Από το $M$ φέρουμε το εφαπτόμενο τμήμα $M\Gamma$ στο ημικύκλιο. Αν η εφαπτόμενη του ημικυκλίου στο σημείο $A$ τέμνει την προέκταση της $M\Gamma$ στο $\Delta$ τότε:
+\begin{alist}
+    \item Αν $BM = 2\rho$ να αποδείξετε ότι $M\Gamma = 2\sqrt{2}\rho$. \monades{09}
+    \item \begin{rlist}
+        \item Να αποδείξετε ότι $\frac{MO}{M\Gamma} = \frac{M\Delta}{MA}$. \monades{09}
+        \item Αν για το $M$ ισχύει ότι $BM = \lambda \cdot \rho$, όπου $\lambda$ θετικός αριθμός, να εξετάσετε αν υπάρχει τιμή του $\lambda$, τέτοια ώστε $(\mathrm{A}\Delta M) = 9(\mathrm{M}O\Gamma)$. \monades{07}
+    \end{rlist}
+\end{alist}

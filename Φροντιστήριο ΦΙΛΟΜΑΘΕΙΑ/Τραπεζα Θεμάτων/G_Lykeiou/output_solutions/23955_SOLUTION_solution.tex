@@ -1,0 +1,77 @@
+\Askhsh{23955_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Διαφορικός Λογισμός, Ολοκληρωτικός Λογισμός, Γραφική Παράσταση Συνάρτησης, Εμβαδόν]
+\end{ylh}
+\begin{alist}
+    \item [Α] Αρχικά, θα χρειαστούμε την παράγωγο συνάρτησης:
+    \[ f'(x) = \frac{(1)'(1+x^2)^2 - (1+x^2)(2(1+x^2)2x)}{(1+x^2)^4} = \frac{-2x}{(1+x^2)^2} \]
+    οπότε $f'(1) = \frac{-2}{(1+1)^2} = -\frac{1}{2}$. Η τεταγμένη του σημείου $\Delta$ είναι $f(1) = \frac{1}{1+1^2} = \frac{1}{2}$, οπότε η εφαπτομένη της γραφικής παράστασης της συνάρτησης $f(x)$ στο $\Delta$ έχει εξίσωση $y - f(1) = f'(1)(x - 1)$, ήτοι $y - \frac{1}{2} = -\frac{1}{2}(x - 1)$, άρα $y = -\frac{1}{2}x + 1$, εξίσωση η οποία επαληθεύεται από το ζεύγος $(x, y) = (0,1)$ δηλαδή από τις συντεταγμένες του σημείου $\Gamma(0,1)$, αφού η τεταγμένη του σημείου $\Gamma$ είναι $f'(0) = 1$. \monades{X}
+    \item [Β] Αρκεί να αποδείξουμε ότι για κάθε $x \in [0,1]$ ισχύει $\frac{1}{1+x^2} \ge -\frac{x}{2} + 1$, σχέση που ισοδύναμα γράφεται:
+    $2 - x(1+x^2)^2 + 2(1+x^2) \ge 0 \Leftrightarrow 2 + (x-2)(1+x^2)^2 \ge 0 \Leftrightarrow x(1+x^2)^2 - 2(1+x^2) - 2 \le 0$,
+    που ισχύει. Η ισότητα ισχύει μόνο για $x=0$ και $x=2$. \monades{X}
+    \item [Γ] Παρατηρούμε ότι η συνάρτηση $f(x)$ είναι άρτια, αφού για κάθε $x \in \mathbb{R}$ είναι
+    $ -x \in \mathbb{R}$, ενώ $f(-x) = \frac{1}{1+(-x)^2} = \frac{1}{1+x^2} = f(x)$, άρα η γραφική παράσταση είναι συμμετρική ως προς τον άξονα $y'$.
+    \vspace{0.5\baselineskip}
+
+    Το ολοκλήρωμα $I = \int_{-1}^{1} f(x) \,dx$ εκφράζει το εμβαδόν του χωρίου που ορίζεται από την γραφική παράσταση της συνάρτησης $f$, τον άξονα $x'x$ και τις ευθείες με εξισώσεις $x = -1$ και $x = 1$, αφού $f(x) > 0$ για κάθε $x \in [-1,1]$.
+    \vspace{0.5\baselineskip}
+
+    Λόγω συμμετρίας μπορούμε να ισχυριστούμε ότι $I = 2 \int_{0}^{1} f(x) \,dx$.
+    \vspace{0.5\baselineskip}
+
+    Εναλλακτικά, παρατηρούμε ότι $I = \int_{-1}^{0} f(x) \,dx + \int_{0}^{1} f(x) \,dx$.
+    \vspace{0.5\baselineskip}
+
+    Έστω $J = \int_{-1}^{0} f(x) \,dx$. Θέτουμε $u = -x \Rightarrow du = -dx$, οπότε
+    \[ J = \int_{1}^{0} f(-u) \,(-du) = \int_{0}^{1} f(-u) \,du = \int_{0}^{1} f(u) \,du. \]
+    \vspace{0.5\baselineskip}
+
+    Έτσι, έχουμε $I = 2 \int_{0}^{1} f(x) \,dx = \frac{\pi}{2}$.
+    \vspace{0.5\baselineskip}
+
+    Καθώς οι συναρτήσεις $f(x)$ και $g(x) = -\frac{x}{2} + 1$ είναι ίσες στο διάστημα $[0,1]$, αφού π.χ. $f\PARENS{\frac{1}{2}} = \frac{4}{5} \ne g\PARENS{\frac{1}{2}} = \frac{3}{4}$ από β) ερώτημα παίρνουμε:
+    \[ \int_{0}^{1} \PARENS{f(x) - \PARENS{-\frac{x}{2} + 1}} \,dx = \int_{0}^{1} \left[ \frac{1}{1+x^2} - \left(-\frac{x}{2} + 1\right) \right] \,dx = \frac{3}{4}. \]
+    \vspace{0.5\baselineskip}
+
+    Άρα $2 \int_{0}^{1} f(x) \,dx > \frac{3}{2} \Leftrightarrow \int_{-1}^{1} f(x) \,dx > \frac{3}{2}$.
+    \vspace{0.5\baselineskip}
+    \begin{wrapfigure}[18]{r}{7cm} % Adjust number of lines (estimated 18) and width as needed
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel near ticks,
+            ylabel near ticks,
+            xmin=-1.5, xmax=1.5,
+            ymin=-0.1, ymax=1.2,
+            xtick={-1,0,1},
+            ytick={0,0.5,1},
+            axis equal image,
+            xlabel = {},
+            ylabel = {},
+            yticklabels={,,},
+            xticklabels={,,},
+        ]
+            \addplot[thick, maincolor, domain=-1.2:1.2, samples=100] {1/(1+x^2)};
+            \node[maincolor, right] at (axis cs:0.2, 0.7) {$f(x)$};
+
+            \addplot[thick, secondarycolor, domain=-1.2:1.2] {-0.5*x + 1};
+
+            \draw[dashed, gray] (axis cs:-1, -0.1) -- (axis cs:-1, 1.2) node[above left] {$x=-1$};
+            \draw[dashed, gray] (axis cs:1, -0.1) -- (axis cs:1, 1.2) node[above right] {$x=1$};
+
+            \node[below] at (axis cs:-1, 0) {A};
+            \node[below] at (axis cs:0, 0) {O};
+            \node[below] at (axis cs:1, 0) {B};
+
+            \node[maincolor, left] at (axis cs:-1, 0.5) {E};
+            \node[maincolor, right] at (axis cs:1, 0.5) {$\Delta$};
+            \node[secondarycolor, above right] at (axis cs:0, 1) {$\Gamma$};
+
+            \draw[fill=black] (axis cs:0,0) rectangle (axis cs:0.05, 0.05);
+
+        \end{axis}
+        \end{tikzpicture}
+    \end{wrapfigure}
+    Εναλλακτικά, το $\int_{0}^{1} f(x) \,dx$ ισούται με το εμβαδόν του χωρίου που περικλείεται από την γραφική παράσταση της συνάρτησης $f$, τον άξονα $x'x$ και τις ευθείες με εξισώσεις $x = 0$ και $x = 1$, αφού $f(x) > 0$ για κάθε $x \in [0,1]$ και είναι μεγαλύτερο από το εμβαδόν του τραπεζίου $OB\Delta\Gamma$ για το οποίο ισχύει $\text{Εμβαδόν}(OB\Delta\Gamma) = \frac{(O\Gamma+\Delta B)\cdot O\Delta}{2} = \frac{(1+\frac{1}{2})\cdot 1}{2} = \frac{3}{4}$. \monades{X}
+\end{alist}

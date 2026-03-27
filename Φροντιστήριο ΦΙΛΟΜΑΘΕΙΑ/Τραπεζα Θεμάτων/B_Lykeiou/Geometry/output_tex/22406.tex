@@ -1,0 +1,48 @@
+\Askhsh{22406}{4}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου
+    \item 10.5. Λόγος εμβαδών όμοιων τριγώνων - πολυγώνων.
+\end{ylh}
+\begin{wrapfigure}[13]{r}{5.5cm} % 13 lines and 5.5cm width
+    \centering
+    \begin{tikzpicture}[scale=1.2]
+        % Ορισμός σημείων για ένα γενικό τρίγωνο ΑΒΓ
+        \tkzDefPoint(0,0){B}
+        \tkzDefPoint(5,0){C}
+        \tkzDefPoint(1.5,4){A}
+
+        % Ορισμός του σημείου Δ πάνω στην ΑΓ, με βάση τον λόγο AD/DC = AB/BC (Angle Bisector Theorem)
+        % Δεδομένου ότι ΒΓ = 2ΑΒ, τότε ΑΔ/ΔΓ = ΑΒ/ΒΓ = ΑΒ/(2ΑΒ) = 1/2. Άρα, ΔΓ = 2ΑΔ.
+        % Αυτό σημαίνει ότι το Δ χωρίζει την ΑΓ σε λόγο 1:2 (ΑΔ:ΔΓ).
+        \tkzDefPointWith[linear,K=1/3](A,C) \tkzGetPoint{D}
+
+        % Σχεδίαση των πλευρών του τριγώνου ΑΒΓ
+        \tkzDrawSegments(A,B B,C C,A)
+        % Σχεδίαση της διχοτόμου ΒΔ
+        \tkzDrawSegment(B,D)
+
+        % Σήμανση των ίσων γωνιών στη Β (ΒΔ είναι διχοτόμος)
+        \tkzMarkAngle[arc,size=0.6cm,color=maincolor,mark=||](A,B,D)
+        \tkzMarkAngle[arc,size=0.6cm,color=maincolor,mark=||](D,B,C)
+
+        % Σήμανση των σημείων
+        \tkzDrawPoints(A,B,C,D)
+
+        % Ετικέτες των σημείων
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[above right](D){$\Delta$}
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα η ΒΔ είναι διχοτόμος του τριγώνου ΑΒΓ και επίσης είναι $\text{B}\Gamma = 2\text{AB}$.
+\begin{alist}
+    \item Να αποδείξετε ότι το εμβαδόν του τριγώνου $\Delta\text{B}\Gamma$ είναι διπλάσιο του εμβαδού του τριγώνου $\text{AB}\Delta$. \monades{6}
+    \item Να χωρίσετε το τρίγωνο ΑΒΓ σε τρία ισοδύναμα τρίγωνα. \monades{6}
+    \item Έστω ότι $\text{AB} = 12$ και $\eta\mu \text{B} = \frac{3}{4}$.
+    \begin{rlist}
+        \item Να αποδείξετε ότι το εμβαδόν του τριγώνου ΑΒΓ είναι $108$. \monades{7}
+        \item Να βρείτε τα εμβαδά των τριγώνων $\Delta\text{B}\Gamma$ και $\text{AB}\Delta$. \monades{6}
+    \end{rlist}
+\end{alist}

@@ -1,0 +1,76 @@
+\Askhsh{33577}{4}
+\begin{ylh}{1}
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.3 Κανόνες παραγώγισης
+    \item 2.4 Ρυθμός μεταβολής
+\end{ylh}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-2em}
+\centering
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    axis lines=middle,
+    xmin=-5.5, xmax=5.5,
+    ymin=-1, ymax=4,
+    xtick=\empty, ytick=\empty,
+    xlabel=$x$,
+    every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+    ylabel={},
+    clip=false
+]
+    % Function and hill area
+    \addplot[fill=thirdcolor!70, draw=none, domain=0:5.2] {sqrt(x)} \closedcycle;
+    \addplot[thick, maincolor, domain=0:5.2, samples=100] {sqrt(x)} node[pos=0.9, anchor=south west, font=\small] {$y = f(x)$};
+
+    % Coordinates
+    \pgfmathsetmacro{\xp}{1.5}
+    \coordinate (P) at (axis cs:{\xp}, {sqrt(\xp)});
+    \coordinate (Sigma) at (axis cs:{-\xp}, 0);
+    \coordinate (O) at (axis cs:0,0);
+    \coordinate (B) at (axis cs:-4,0);
+
+    % Tangent line
+    \addplot[gray, thick, domain=-3.5:4] gnuplot { (x - \xp)/(2*sqrt(\xp)) + sqrt(\xp) };
+
+    % Points and labels
+    \fill (P) circle (1.5pt) node[above left] {$P$};
+    \fill (Sigma) circle (1.5pt) node[above] {$\Sigma$};
+    \fill (O) circle (1.5pt) node[below right] {$O$};
+    \fill (B) circle (1.5pt) node[above] {$B$};
+    
+    % Shadow segment (red)
+    \draw[red, ultra thick] (Sigma) -- (O);
+
+    % Labels
+    \node at (axis cs:3, 1) {Λόφος};
+    \node at (axis cs:-3, -0.5) {Ανατολικά};
+    \node at (axis cs:3.5, -0.5) {Δυτικά};
+    \node at (axis cs:-5.2, 0.2) {$x'$};
+    \node at (axis cs:-2, 1.3) {($\varepsilon$)};
+    \node at (axis cs:-0.75, 0.25) {$\omega$};
+
+    % Farmhouse drawing
+    \begin{scope}[shift={(B)}, scale=0.3]
+        \filldraw[fill=cyan!30, draw=black, thick] (-0.5,0) rectangle (0.5,0.8);
+        \filldraw[fill=brown!60, draw=black, thick] (-0.7,0.8) -- (0,1.3) -- (0.7,0.8) -- cycle;
+    \end{scope}
+
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα έχουμε ένα ορθογώνιο σύστημα συντεταγμένων, στο οποίο απεικονίζεται μια αγροικία στην θέση $B$ του αρνητικού ημιάξονα $Ox'$. Δυτικά της αγροικίας, κατά μήκος του θετικού ημιάξονα $Ox$, υπάρχει ένας λόφος, το ύψος του οποίου δίνεται από τη συνάρτηση $f(x) = \sqrt{x}$ για $x \geq 0$. Όλες οι συντεταγμένες μετρούνται σε μέτρα.
+
+Καθώς ο ήλιος αρχίζει να δύει, ο λόφος ρίχνει στην πεδιάδα την σκιά του $Ο\Sigma$, η οποία και μεγαλώνει με την πάροδο του χρόνου $t$, όπως φαίνεται στο σχήμα.
+
+Θεωρούμε $t = 0$ τη στιγμή που ο ήλιος ρίχνει κάθετα τις ακτίνες του στο σημείο $O$ του λόφου, ενώ στη συνέχεια κινούμενος προς τα δυτικά, αρχίζει να δημιουργείται η σκιά.
+
+Ας είναι $\hat{\omega} = P\widehat{\Sigma}O$.
+
+\begin{alist}
+\item Αν το σημείο $P$ έχει συντεταγμένες $P(x_P, y_P)$, να αποδείξετε ότι η τετμημένη του σημείου $\Sigma$ είναι $x_\Sigma = -x_P$. \monades{8}
+
+\item Να αποδείξετε ότι κάθε χρονική στιγμή $t > 0$ ισχύει $\text{εφ}(\omega(t)) = \frac{1}{2}(x_P(t))^{-\frac{1}{2}}$. \monades{7}
+
+\item Να βρείτε πόσο γρήγορα μεγαλώνει η σκιά $(Ο\Sigma)$ τη χρονική στιγμή $t_0$ κατά την οποία οι ακτίνες του ήλιου σχηματίζουν γωνία $\omega = \frac{\pi}{6}$ με τον οριζόντιο άξονα, ενώ αυτή τη χρονική στιγμή $t_0$ η γωνία $\omega$ μειώνεται με ρυθμό $\frac{1}{16}\,\text{rad}$ ανά λεπτό. \monades{10}
+\end{alist}
+Δίνεται ότι $\frac{1}{\text{συν}^2\omega} = 1 + \text{εφ}^2\omega$.

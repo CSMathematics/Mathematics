@@ -1,0 +1,56 @@
+\Askhsh{17347}{2}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 10.4. Άλλοι τύποι για το εμβαδόν τριγώνου.
+\end{ylh}
+\begin{wrapfigure}[7]{r}{5.5cm} % Adjusted lines for better fit
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        % Define points using calculated coordinates based on problem description
+        % A: top vertex of ABΓ. B: bottom-left. Γ: bottom-right.
+        % AΔΕ is equilateral, Δ on AB.
+        % ABΓ side 10. AΔΕ side 6.
+        % Let Γ be (5,0), B be (-5,0), A be (0, 5*sqrt(3))
+        % Δ is on AB such that AΔ=6.
+        % AΔ = (Δ_x - A_x, Δ_y - A_y)
+        % Vector AB = B - A = (-5 - 0, 0 - 5*sqrt(3)) = (-5, -5*sqrt(3))
+        % Δ = A + (6/10) * AB = (0, 5*sqrt(3)) + (3/5) * (-5, -5*sqrt(3))
+        % Δ = (0, 5*sqrt(3)) + (-3, -3*sqrt(3)) = (-3, 2*sqrt(3))
+        % E is such that AΔE is equilateral. E is "to the left" of AΔ relative to A.
+        % Rotate vector AΔ=(-3,-3*sqrt(3)) by 60 degrees counter-clockwise to get AE.
+        % (x', y') = (x*cos(60) - y*sin(60), x*sin(60) + y*cos(60))
+        % x' = -3*(1/2) - (-3*sqrt(3))*(sqrt(3)/2) = -3/2 + 9/2 = 6/2 = 3
+        % y' = -3*(sqrt(3)/2) + (-3*sqrt(3))*(1/2) = -3*sqrt(3)/2 - 3*sqrt(3)/2 = -6*sqrt(3)/2 = -3*sqrt(3)
+        % AE = (3, -3*sqrt(3))
+        % E = A + AE = (0, 5*sqrt(3)) + (3, -3*sqrt(3)) = (3, 2*sqrt(3))
+
+        \tkzDefPoint(0, {5*sqrt(3)}){A}
+        \tkzDefPoint(-5, 0){B}
+        \tkzDefPoint(5, 0){C} % Using C for Γ (Gamma)
+        \tkzDefPoint(-3, {2*sqrt(3)}){D} % Using D for Δ (Delta)
+        \tkzDefPoint(3, {2*sqrt(3)}){E}
+
+        % Draw the polygons
+        \tkzDrawPolygon(A,B,C) % Triangle ABΓ
+        \tkzDrawPolygon(A,D,E) % Triangle AΔE
+
+        % Draw the dashed segment ΔΓ
+        \tkzDrawSegment[dashed](D,C)
+
+        % Label the points
+        \tkzLabelPoint[above right](A){A}
+        \tkzLabelPoint[below left](B){B}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[above left](E){E}
+
+        % Draw the points (optional, but good for visual clarity)
+        \tkzDrawPoints(A,B,C,D,E)
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα το τρίγωνο ΑΒΓ είναι ισόπλευρο πλευράς $10$ και το τρίγωνο ΑΔΕ είναι ισόπλευρο πλευράς $6$.
+\begin{alist}
+\item Να αποδείξετε ότι $(\text{ΑΓΔ}) = 15\sqrt{3}$. \monades{12}
+\item Να υπολογίσετε το εμβαδόν του τετραπλεύρου ΑΓΔΕ. \monades{13}
+\end{alist}
+Δίνεται ότι $\eta\mu60^\circ = \frac{\sqrt{3}}{2}$.

@@ -1,0 +1,54 @@
+\Askhsh{22066}{4}
+\begin{ylh}{2}
+    \item 1.5. Εσωτερικό Γινόμενο Διανυσμάτων
+    \item 3.1. Ο Κύκλος.
+\end{ylh}
+\begin{wrapfigure}[7]{r}{5.5cm} % 7 lines of text wrap, right alignment, 5.5cm width
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % Ορισμός της αρχής των αξόνων
+    \tkzDefPoint(0,0){O}
+
+    % Ορισμός των σημείων A και B
+    % Για οπτικοποίηση, επιλέγουμε μια τυχαία γωνία για το A, π.χ. 30 μοίρες.
+    % Η ακτίνα για το A είναι 1.
+    % Η ακτίνα για το B είναι sqrt(2).
+    % Η γωνία για το B είναι η γωνία του A συν pi/4 (45 μοίρες).
+    \tkzDefPointWith[polar](1,30){A}
+    \tkzDefPointWith[polar](sqrt(2),30+45){B} % γωνία του B είναι 30 + 45 = 75 μοίρες
+
+    % Σχεδίαση των κύκλων (διακεκομμένες γραμμές)
+    \tkzDrawCircle[dotted](O,A) % Κύκλος για το A (ακτίνα 1)
+    \tkzDrawCircle[dotted](O,B) % Κύκλος για το B (ακτίνα sqrt(2))
+
+    % Σχεδίαση των αξόνων
+    \tkzDrawX[<->]
+    \tkzDrawY[<->]
+
+    % Σχεδίαση των διανυσμάτων OA, OB, AB
+    \tkzDrawSegment[vector,line width=1pt,maincolor](O,A)
+    \tkzDrawSegment[vector,line width=1pt,maincolor](O,B)
+    \tkzDrawSegment[vector,line width=1pt,black](A,B)
+
+    % Σήμανση της ορθής γωνίας στο A
+    \tkzMarkRightAngle[fill=thirdcolor!30,size=0.25](O,A,B)
+
+    % Σήμανση της γωνίας ω
+    \tkzMarkAngle[arc=ll,size=0.5cm,fill=thirdcolor!30,opacity=0.5](A,O,B)
+    \tkzLabelAngle[pos=0.7](A,O,B){$\omega$}
+
+    % Σχεδίαση σημείων και ετικετών
+    \tkzDrawPoints[fill=black](O,A,B)
+    \tkzLabelPoint[below left](O){O}
+    \tkzLabelPoint[above right](A){A}
+    \tkzLabelPoint[above right](B){B}
+\end{tikzpicture}
+\end{wrapfigure}
+
+Θεωρούμε το σημείο $A = (\sigma\upsilon\nu\theta, \eta\mu\theta)$ και το σημείο $B = (\sigma\upsilon\nu\theta - \eta\mu\theta, \eta\mu\theta + \sigma\upsilon\nu\theta)$, όπου $\theta \in [0, 2\pi)$.
+
+\begin{alist}
+\item Να αποδείξετε ότι τα σημεία $A$ και $B$ ανήκουν σε δύο κύκλους με κέντρο την αρχή των αξόνων $O(0,0)$. Να βρείτε τις ακτίνες των δύο κύκλων. \monades{8}
+\item Να αποδείξετε ότι: $\overrightarrow{OA} \perp \overrightarrow{AB}$. \monades{8}
+\item Να βρείτε το μέτρο της γωνίας $\omega$ μεταξύ των διανυσμάτων $\overrightarrow{OA}$ και $\overrightarrow{OB}$. \monades{9}
+\end{alist}

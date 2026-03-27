@@ -1,0 +1,78 @@
+\Askhsh{14566}{4}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 5.2. Παραλληλόγραμμα
+    \item 5.6. Εφαρμογές στα τρίγωνα.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 14566.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται τετράπλευρο ΑΒΓΔ με $\widehat{\Delta} = \widehat{Β\ } = 90^{0}.\ \ $ Αν τα σημεία Ε, Ζ, Μ είναι τα μέσα των ΑΒ, ΓΔ, και ΑΓ αντιστοίχως και το ΜΚ είναι κάθετο στην ΒΔ, να αποδείξετε ότι :
+
+\begin{alist}
+\item Το τρίγωνο ΒΜΔ είναι ισοσκελές (μον. 5) και το Κ είναι το μέσο του ΒΔ (μον. 2)
+
+\monades{7}
+
+\begin{alist}
+\item
+  $ΕΚ = \frac{Α\Delta}{2}$. \monades{6}
+\item
+  ΜΖ=ΕΚ. \monades{6}
+
+\item Το τετράπλευρο ΚΕΜΖ είναι παραλληλόγραμμο. \monades{6}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(0,4){A}
+\tkzDefPoint(6,0){C}
+\tkzDefPoint(2,6){D} % make angle D = 90
+
+% We need angle D = 90. Let D = (x,y). Vector AD=(x, y-4), CD=(x-6, y).
+% AD dot CD = x(x-6) + y(y-4) = 0 => x^2 - 6x + y^2 - 4y = 0.
+% Let D=(2,4). x^2-6x=-8. y^2-4y=0. Sum is -8. No.
+% Let D=(3, 5). x^2-6x=-9, y^2-4y=5. Sum = -4.
+% Let D=(2, 4.8). Too complex. Let's just define orthogonal from A to CD?
+% No, angle D = 90 and angle B = 90. This means ABCD is inscribed in a circle with diameter AC.
+% Center of circle is M, midpoint of AC. So M is (3,2).
+% Circle radius is sqrt(3^2+2^2) = sqrt(13) ~ 3.6
+% A = (0,4), C = (6,0). B = (0,0) is on circle! Since angle B=90.
+% We can just pick D on the circle. Let M be (3,2). Radius is sqrt(13).
+\tkzDefMidPoint(A,C) \tkzGetPoint{M}
+\tkzDefPoint(4.66, 5.58){D} % Approximate point on circle. Or just:
+\tkzDefPointBy[rotation=center M angle -70](A) \tkzGetPoint{D} % rotate A around M to get D on circle!
+
+\tkzDefMidPoint(A,B) \tkzGetPoint{E}
+\tkzDefMidPoint(C,D) \tkzGetPoint{Z}
+
+\tkzDefPointBy[projection=onto B--D](M) \tkzGetPoint{K}
+
+\draw[l3] (A)--(B)--(C)--(D)--cycle;
+\draw[l3] (A)--(C);
+\draw[l3] (B)--(D);
+\draw[l3] (M)--(K);
+\draw[l3, dashed] (K)--(E)--(M)--(Z)--cycle;
+
+\tkzDrawPoints(A,B,C,D,M,E,Z,K)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below right](C){$\Gamma$}
+\tkzLabelPoint[above right](D){$\Delta$}
+\tkzLabelPoint[above right](M){$M$}
+\tkzLabelPoint[left](E){$E$}
+\tkzLabelPoint[right](Z){$Z$}
+\tkzLabelPoint[below](K){$K$}
+
+\tkzMarkRightAngle(C,B,A)
+\tkzMarkRightAngle(A,D,C)
+\tkzMarkRightAngle(M,K,B)
+\end{tikzpicture}
+\end{center}
+\end{alist}
+\end{alist}

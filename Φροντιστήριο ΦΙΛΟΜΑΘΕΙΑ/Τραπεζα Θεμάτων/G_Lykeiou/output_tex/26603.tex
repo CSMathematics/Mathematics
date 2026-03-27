@@ -1,0 +1,55 @@
+\Askhsh{26603}{2}
+\begin{ylh}{1}
+    \item 1.2 Συναρτήσεις.
+\end{ylh}
+\begin{wrapfigure}[24]{r}{8.5cm} % Adjust number of lines [24] and width {8.5cm} as needed
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -6, xmax = 4,
+    ymin = -1, ymax = 11,
+    xtick = {-6,-5,-4,-3,-2,-1,0,1,2,3},
+    ytick = {-1,0,1,2,3,4,5,6,7,8,9,10,11},
+    grid = both,
+    grid style = {gray!30},
+    width = 8cm, height = 7cm, % Adjusted size for wrapfigure
+    tick label style = {font=\scriptsize},
+    % Removed custom label positioning for x and y axes, let pgfplots default
+]
+    % Function segments
+    \addplot[very thick, black, domain=-5:0, samples=2] {-2*x};
+    \addplot[very thick, black, domain=0:3, samples=2] {(5/3)*x};
+
+    % Points (Note: O(0,0) is part of the axis, but also a point on the graph. We explicitly plot other points.)
+    \addplot[only marks, mark=*, mark size=2pt, black] coordinates {(-5,10)}; % A
+    % O(0,0) is implicitly marked by node, no separate addplot needed if not a specific point
+    \addplot[only marks, mark=*, mark size=2pt, black] coordinates {(2, 10/3)}; % Gamma
+    \addplot[only marks, mark=o, mark options={draw=black, fill=white, scale=0.8}, mark size=2pt] coordinates {(3,5)}; % Open circle at (3,5)
+
+    % Labels for points
+    \node[above left] at (axis cs:-5,10) {$A$};
+    \node[below left] at (axis cs:-5,0) {$\Delta$};
+    \node[below right] at (axis cs:0,0) {$O$};
+    \node[above right] at (axis cs:0,10) {$B$};
+    \node[above right] at (axis cs:2, 10/3) {$\Gamma$};
+
+    % Dashed lines
+    \draw[dashed, gray] (axis cs:-5,0) -- (axis cs:-5,10); % From Delta to A
+    \draw[dashed, gray] (axis cs:-5,10) -- (axis cs:0,10); % From A to B
+
+    \draw[dashed, gray] (axis cs:2,0) -- (axis cs:2, 10/3); % From x=2 to Gamma
+    \draw[dashed, gray] (axis cs:3,0) -- (axis cs:3,5);   % From x=3 to open circle
+
+    \coordinate (O_node) at (0,0);
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο σχήμα δίνεται η γραφική παράσταση μιας συνάρτησης $f$.
+\begin{alist}
+\item Να βρείτε το πεδίο ορισμού και το σύνολο τιμών της συνάρτησης $f$. \monades{10}
+\item Να προσδιορίσετε τον τύπο της συνάρτησης $f$. \monades{10}
+\item Ποιες είναι οι συντεταγμένες του σημείου $\Gamma$; \monades{5}
+\end{alist}

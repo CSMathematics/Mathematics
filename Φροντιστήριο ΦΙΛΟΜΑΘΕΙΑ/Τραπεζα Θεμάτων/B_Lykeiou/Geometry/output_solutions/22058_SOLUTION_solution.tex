@@ -1,0 +1,64 @@
+\Askhsh{22058}{1}
+\begin{ylh}{1}
+    \item[Εμβαδόν κυκλικών σχημάτων]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
+        % Ορισμός συντεταγμένων
+        \tkzDefPoint(0,0){O}
+        \tkzDefPoint(-3,0){A}
+        \tkzDefPoint(3,0){B}
+        \tkzDefPoint(-1,0){D}
+        \tkzDefPoint(1,0){E}
+
+        % Κέντρα ημικυκλίων
+        \tkzDefMidPoint(A,E)\tkzGetPoint{M_AE}
+        \tkzDefMidPoint(D,B)\tkzGetPoint{M_DB}
+
+        % Σκίαση του εσωτερικού σχήματος ε2
+        % Η διαδρομή είναι: A -> (τόξο AE) -> E -> (ευθ. τμήμα EB) -> B -> (τόξο BΔ) -> Δ -> (ευθ. τμήμα ΔA) -> A (κλείσιμο)
+        \path[fill=maincolor!30] (A) arc (180:0:2) -- (B) arc (0:-180:2) -- cycle;
+
+        % Σχεδίαση κύκλου και καμπυλών
+        \tkzDrawCircle[thick](O,A)
+        \tkzDrawArc[thick](M_AE,A)(E)
+        \tkzDrawArc[thick](M_DB,B)(D)
+
+        % Σχεδίαση διαμέτρου
+        \tkzDrawSegment[dashed](A,B)
+
+        % Σημεία
+        \tkzDrawPoints[size=2, fill=black](A,B,D,E)
+
+        % Ετικέτες σημείων
+        \tkzLabelPoint[left](A){A}
+        \tkzLabelPoint[right](B){B}
+        \tkzLabelPoint[below=2pt](D){$\Delta$}
+        \tkzLabelPoint[below=2pt](E){E}
+
+        % Διακοσμητικές ετικέτες
+        \tkzDefPoint(0,1){Gamma} \tkzLabelPoint[above right](Gamma){$\Gamma$}
+        \tkzDefPointOnPath[pos=0.5,
+            every path/.style={
+                /utils/exec=\tikzset{trip style/.style={}},
+                shorten >= 0pt,
+                shorten <= 0pt
+            }
+        ](O,B) \tkzGetPoint{pB}
+        \tkzDefPoint(0,3){p H} \tkzLabelPoint[above,yshift=-2pt](p H){H}
+        \tkzDefPoint(0,-3){p Z} \tkzLabelPoint[below,yshift=2pt](p Z){Z}
+
+
+        % Ετικέτες εμβαδών
+        \node at (0, 2) {$\varepsilon_1$};
+        \node at (0, 0) {$\varepsilon_2$};
+        \node at (0, -2) {$\varepsilon_3$};
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο διπλανό σχήμα, δίνεται κύκλος διαμέτρου $AB=2R$. Στη διάμετρο $AB$ θεωρούμε τα σημεία $\Delta, E$ έτσι, ώστε $A\Delta = \Delta E = EB$. Η καμπύλη $A\Gamma E$ είναι το άνω ημικύκλιο με διάμετρο $AE$ και η καμπύλη $B\Gamma \Delta$ είναι το κάτω ημικύκλιο με διάμετρο $B\Delta$. Οι δύο αυτές καμπύλες χωρίζουν τον αρχικό κύκλο σε τρία χωρία $\varepsilon_1, \varepsilon_2$ (το σκιασμένο) και $\varepsilon_3$.
+
+\begin{alist}
+    \item Να αποδείξετε ότι τα χωρία $\varepsilon_1$ και $\varepsilon_3$ είναι ισεμβαδικά, με εμβαδόν $E_1 = E_3 = \frac{\pi R^2}{3}$. \monades{13}
+    \item Να αποδείξετε ότι το εμβαδόν του σκιασμένου χωρίου $\varepsilon_2$ είναι $E_2 = \frac{\pi R^2}{3}$. \monades{12}
+\end{alist}

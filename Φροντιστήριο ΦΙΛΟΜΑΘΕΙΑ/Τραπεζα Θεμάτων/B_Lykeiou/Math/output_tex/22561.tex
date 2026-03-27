@@ -1,0 +1,62 @@
+\Askhsh{22561}{2}
+\begin{ylh}{1}
+    \item 2.1. Εξίσωση Ευθείας
+    \item 3.4 Η Υπερβολή.
+\end{ylh}
+\begin{wrapfigure}[15]{r}{8cm}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -7, xmax = 7,
+    ymin = -7, ymax = 7,
+    axis equal image,
+    xtick = {-6,-3,0,3,6},
+    ytick = {-6,-3,0,3,6},
+    grid = none,
+    samples = 100,
+    width = 7.5cm, height = 7.5cm,
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+]
+    % Hyperbola C: x^2 - y^2 = 9
+    \addplot[very thick, maincolor, domain=3:7, samples=200] {sqrt(x^2 - 9)};
+    \addplot[very thick, maincolor, domain=3:7, samples=200] {-sqrt(x^2 - 9)};
+    \addplot[very thick, maincolor, domain=-7:-3, samples=200] {sqrt(x^2 - 9)};
+    \addplot[very thick, maincolor, domain=-7:-3, samples=200] {-sqrt(x^2 - 9)};
+    \node[maincolor, above right] at (axis cs:5.5,4.5) {$C$}; % Label near M(5,4) as in the image
+
+    % Asymptote delta_1: y = x
+    \addplot[dotted, thick, secondarycolor, domain=-7:7] {x};
+    \node[secondarycolor, below left] at (axis cs:-4.5,-4.5) {$\delta_1$};
+
+    % Asymptote delta_2: y = -x
+    \addplot[dotted, thick, secondarycolor, domain=-7:7] {-x};
+    \node[secondarycolor, above left] at (axis cs:-4.5,4.5) {$\delta_2$};
+
+    % Tangent epsilon: y = (5/4)x - 9/4
+    \addplot[very thick, thirdcolor, domain=-2:7] {(5/4)*x - 9/4};
+    \node[thirdcolor, below right] at (axis cs:1.8,0.5) {$\epsilon$};
+
+    % Point M(5,4)
+    \addplot[only marks, mark=*, mark size=2pt, black] coordinates {(5,4)};
+    \node[above right] at (axis cs:5,4) {$M(5,4)$};
+
+    % Origin O
+    \node[above left] at (axis cs:0.1,0.1) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα η υπερβολή $C$ έχει εξίσωση $x^2 - y^2 = 9$, οι ευθείες $\delta_1$ και $\delta_2$ είναι οι ασύμπτωτες της $C$ και η $\epsilon$ είναι η εφαπτομένη της $C$ στο σημείο της $M(5,4)$.
+
+\begin{alist}
+\item Να αποδείξετε ότι:
+    \begin{rlist}
+    \item Οι εξισώσεις των ασυμπτώτων είναι $\delta_1: y = x$ και $\delta_2: y = -x$. \monades{8}
+    \item Η εξίσωση της εφαπτομένης στο $M$ είναι $\epsilon: 5x - 4y = 9$. \monades{8}
+    \end{rlist}
+\item Να βρείτε τις συντεταγμένες του σημείου τομής των ευθειών $\epsilon$ και $\delta_1$ καθώς και τις συντεταγμένες του σημείου τομής των ευθειών $\epsilon$ και $\delta_2$. \monades{9}
+\end{alist}

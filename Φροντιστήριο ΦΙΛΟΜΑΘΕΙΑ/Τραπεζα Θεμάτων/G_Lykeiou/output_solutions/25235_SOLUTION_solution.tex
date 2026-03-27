@@ -1,0 +1,70 @@
+\Askhsh{25235_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Διαφορικός λογισμός, Ολοκληρωτικός λογισμός, Συνέχεια συνάρτησης, Εφαπτομένη, Εμβαδόν, Κυρτότητα, Όρια]
+\end{ylh}
+\begin{wrapfigure}[15]{r}{7cm}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = {$x$},
+            ylabel = {$y$},
+            xmin = -0.5, xmax = 5.5,
+            ymin = -2, ymax = 2,
+            xtick = {},
+            ytick = {},
+            domain = 1.5708 : 4.7124,
+            samples = 100,
+            width = 7cm, height = 7cm,
+            tick label style = {font=\scriptsize},
+            every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+            every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+            clip = false,
+            axis line style={-stealth, very thick, black},
+        ]
+            % Curve f(x) = cos(x)
+            \addplot[very thick, maincolor, domain=1.5708:4.7124] {cos(deg(x))};
+
+            % Line epsilon_1: y = -x + pi/2
+            \addplot[very thick, secondarycolor, domain=0:2.5] {-x + 1.5708};
+            \node[secondarycolor, above left] at (axis cs:0.4, 1.1708) {$(\varepsilon_1)$};
+
+            % Line epsilon_2: y = x - 3pi/2
+            \addplot[very thick, secondarycolor, domain=2:5] {x - 4.7124};
+            \node[secondarycolor, above right] at (axis cs:4.5, -0.2124) {$(\varepsilon_2)$};
+
+            % Points A, B, Gamma
+            \coordinate (A_point) at (axis cs:1.5708, 0);
+            \coordinate (B_point) at (axis cs:4.7124, 0);
+            \coordinate (Gamma_point) at (axis cs:3.1416, -1.5708);
+
+            % Draw points
+            \fill (A_point) circle (2pt) node[below] {$A$};
+            \fill (B_point) circle (2pt) node[below] {$B$};
+            \fill (Gamma_point) circle (2pt) node[below left] {$\Gamma$};
+
+            % Origin
+            \node[below left] at (axis cs:0,0) {$O$};
+
+            % Right angle at Origin
+            \draw[black, thick] (axis cs:0,0) rectangle (axis cs:0.2,0.2);
+        \end{axis}
+    \end{tikzpicture}
+\end{wrapfigure}
+\Askhseis{ΕΚΦΩΝΗΣΗ}
+Δίνεται συνάρτηση $f$ της οποίας η πρώτη παράγωγος είναι $f'(x) = -\eta\mu x$.
+Για αυτή τη συνάρτηση ισχύουν: $f'({\frac{\pi}{2}}) = -1$, $f'({\frac{3\pi}{2}}) = 1$, $f({\frac{\pi}{2}}) = 0$ και $f({\frac{3\pi}{2}}) = 0$.
+
+\begin{alist}
+    \item Να βρείτε τις εξισώσεις των εφαπτομένων $(\varepsilon_1)$ και $(\varepsilon_2)$ της γραφικής παράστασης της $f$ στα σημεία $A({\frac{\pi}{2}}, f({\frac{\pi}{2}}))$ και $B({\frac{3\pi}{2}}, f({\frac{3\pi}{2}}))$ αντίστοιχα.
+    Στη συνέχεια, να βρείτε το σημείο τομής $\Gamma$ των $(\varepsilon_1)$ και $(\varepsilon_2)$ και να υπολογίσετε το εμβαδόν του τριγώνου $AB\Gamma$.
+    Τέλος, να υπολογίσετε το εμβαδόν του χωρίου που περικλείεται από την γραφική παράσταση της $f$ και τις εφαπτομένες $(\varepsilon_1)$ και $(\varepsilon_2)$.
+    \monades{1}
+
+    \item Να παρατηρήσετε ότι $f''(x) = -\sigma\upsilon\nu x > 0$ για κάθε $x \in ({\frac{\pi}{2}}, {\frac{3\pi}{2}})$. Από αυτό και τη συνέχεια της $f'(x)$ στο $R$, να συμπεράνετε ότι η $f'(x)$ είναι γνησίως αύξουσα στο $[{\frac{\pi}{2}}, {\frac{3\pi}{2}}]$, και η $f$ είναι κυρτή στο $[{\frac{\pi}{2}}, {\frac{3\pi}{2}}]$.
+    Να εξηγήσετε γιατί η γραφική παράσταση της $f$ θα βρίσκεται πάνω από την εφαπτομένη σε οποιοδήποτε σημείο της γραφικής παράστασης με εξαίρεση το σημείο επαφής τους.
+    Δίνεται επίσης ότι $f(x) + x - {\frac{\pi}{2}} > 0$ για τιμές του $x$ κοντά στο ${\frac{\pi}{2}}$ από δεξιά.
+    Να υπολογίσετε το όριο:
+    \[ \lim_{x \to {\frac{\pi}{2}}^+} {\frac{f(x) + x - {\frac{\pi}{2}}}{(f(x) + x - {\frac{\pi}{2}})^2}} \]
+    \monades{1}
+\end{alist}

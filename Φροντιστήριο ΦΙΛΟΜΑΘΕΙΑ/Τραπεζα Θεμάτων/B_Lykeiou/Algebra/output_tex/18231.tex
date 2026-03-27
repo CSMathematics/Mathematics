@@ -1,0 +1,47 @@
+% ===================================================================
+%  Αρχείο: 18231_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Έστω $f: [-1, +\infty) \to \mathbb{R}$ μια συνάρτηση της οποίας η γραφική παράσταση $C_f$ φαίνεται στο διπλανό σχήμα.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5, >=latex]
+    \draw[very thin, color=gray!30] (-1.5,-1.5) grid (3.5,1.5);
+    \draw[->] (-1.5,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,2) node[above] {$y$};
+    
+    \foreach \x in {-1,1,2,3}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
+    \foreach \y in {-1,1}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % f(x) = sqrt(1-x^2) for [-1,0]
+    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=-1:0] plot (\x, {sqrt(1 - \x*\x)});
+    
+    % f(x) = 1-x for x > 0
+    \draw[very thick, color=blue!70!black, domain=0:2.5] plot (\x, {1 - \x}) node[above right] {$C_f$};
+    
+    % Key points
+    \filldraw (-1,0) circle (1.5pt);
+    \filldraw (0,1) circle (1.5pt);
+    \filldraw (2,-1) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{alist}
+\item Να βρείτε τη μονοτονία και τη μέγιστη τιμή της.
+\monades{5}
+
+\item Να συγκρίνετε τους αριθμούς $f\left(-\frac{3}{5}\right), f\left(-\frac{5}{9}\right)$.
+\monades{7}
+
+\item Αν ο τύπος της συνάρτησης είναι $f(x) = \begin{cases} \sqrt{1 - x^2}, & -1 \leq x \leq 0 \\ 1 - x, & x > 0 \end{cases}$, να βρείτε τους αριθμούς $f(\sigma\upsilon\nu 120^\circ), f(\eta\mu 120^\circ)$.
+\monades{8}
+
+\item Να σχεδιάσετε τη γραφική παράσταση της συνάρτησης $g(x) = f(x - 2), x \geq 1$.
+\monades{5}
+\end{alist}

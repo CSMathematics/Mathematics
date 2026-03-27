@@ -1,0 +1,111 @@
+\Askhsh{21193}{4}
+\begin{ylh}{1}
+    \item 11.5. Μήκος τόξου.
+\end{ylh}
+\begin{wrapfigure}[24]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \def\R{0.6} % Ακτίνα
+
+        % Ορισμός κέντρων κύκλων (κορυφές τριγώνου ΑΒΓ)
+        \tkzDefPoint(0,3){A}
+        \tkzDefPoint(5,3){Gamma}
+        \tkzDefPoint(2.5,0){B}
+
+        % Σχεδίαση τριγώνου που συνδέει τα κέντρα (πλευρές α, β, γ)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](A,Gamma)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](Gamma,B)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](B,A)
+
+        % Ετικέτες για τα μήκη των πλευρών
+        \tkzLabelSegment[above, pos=0.5](A,Gamma){$\beta$}
+        \tkzLabelSegment[right, pos=0.5](Gamma,B){$\alpha$}
+        \tkzLabelSegment[left, pos=0.5](B,A){$\gamma$}
+
+        % Σχεδίαση των κύκλων
+        \tkzDrawCircle[R](A,\R cm)
+        \tkzDrawCircle[R](Gamma,\R cm)
+        \tkzDrawCircle[R](B,\R cm)
+
+        % Ετικέτες για τα κέντρα
+        \tkzDrawPoints(A,B,Gamma)
+        \tkzLabelPoint[above left](A){A}
+        \tkzLabelPoint[below](B){B}
+        \tkzLabelPoint[above right](Gamma){$\Gamma$}
+
+        % Ορισμός σημείων εφαπτόμενης για τα τμήματα του ιμάντα
+        % Τμήμα ΛM (παράλληλο προς AΓ) - προς τα πάνω
+        \tkzDefPointBy[translation=from A to Gamma](A) \tkzGetPoint{vAG}
+        \tkzDefPointBy[rotation=center A angle 90](vAG) \tkzGetPoint{vAGperp} % Αντιωρολογιακή περιστροφή για "πάνω"
+        \tkzDefPointWith[linear, K=\R](A,vAGperp) \tkzGetPoint{Lambda}
+        \tkzDefPointWith[linear, K=\R](Gamma,vAGperp) \tkzGetPoint{Mu}
+
+        % Τμήμα NP (παράλληλο προς ΓB) - προς τα κάτω-δεξιά
+        \tkzDefPointBy[translation=from Gamma to B](Gamma) \tkzGetPoint{vGB}
+        \tkzDefPointBy[rotation=center Gamma angle -90](vGB) \tkzGetPoint{vGBperp} % Ωρολογιακή περιστροφή για "κάτω-δεξιά"
+        \tkzDefPointWith[linear, K=\R](Gamma,vGBperp) \tkzGetPoint{Nu}
+        \tkzDefPointWith[linear, K=\R](B,vGBperp) \tkzGetPoint{Rho}
+
+        % Τμήμα ΣK (παράλληλο προς BA) - προς τα κάτω-αριστερά
+        \tkzDefPointBy[translation=from B to A](B) \tkzGetPoint{vBA}
+        \tkzDefPointBy[rotation=center B angle -90](vBA) \tkzGetPoint{vBAperp} % Ωρολογιακή περιστροφή για "κάτω-αριστερά"
+        \tkzDefPointWith[linear, K=\R](B,vBAperp) \tkzGetPoint{Sigma}
+        \tkzDefPointWith[linear, K=\R](A,vBAperp) \tkzGetPoint{Kappa}
+
+        % Σχεδίαση των ευθύγραμμων τμημάτων του ιμάντα
+        \tkzDrawSegment[line width=2pt, color=maincolor](Lambda,Mu)
+        \tkzDrawSegment[line width=2pt, color=maincolor](Nu,Rho)
+        \tkzDrawSegment[line width=2pt, color=maincolor](Sigma,Kappa)
+
+        % Σχεδίαση ακτίνων προς τα σημεία εφαπτόμενης (λεπτές γραμμές)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](A,Lambda)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](Gamma,Mu)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](Gamma,Nu)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](B,Rho)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](B,Sigma)
+        \tkzDrawSegment[line width=0.5pt, color=secondarycolor](A,Kappa)
+
+        % Σχεδίαση και επισήμανση των σημείων εφαπτόμενης
+        \tkzDrawPoints(Lambda,Mu,Nu,Rho,Sigma,Kappa)
+        \tkzLabelPoint[above](Lambda){$\Lambda$}
+        \tkzLabelPoint[above](Mu){M}
+        \tkzLabelPoint[below right](Nu){N}
+        \tkzLabelPoint[below](Rho){P}
+        \tkzLabelPoint[below left](Sigma){$\Sigma$}
+        \tkzLabelPoint[left](Kappa){K}
+
+        % Σημείωση και επισήμανση των γωνιών ω, θ, φ (KÂΛ, ΣBΡ, MΓN)
+        % Γωνία KÂΛ = ω (γύρω από το A)
+        \tkzMarkAngle[fill=gray!30, opacity=0.8, size=0.5, arc=l, delta=10](Kappa,A,Lambda)
+        \tkzLabelAngle[pos=0.8](Kappa,A,Lambda){$\omega$}
+
+        % Γωνία ΣBΡ = θ (γύρω από το B)
+        \tkzMarkAngle[fill=gray!30, opacity=0.8, size=0.5, arc=l, delta=10](Sigma,B,Rho)
+        \tkzLabelAngle[pos=0.8](Sigma,B,Rho){$\theta$}
+
+        % Γωνία MΓN = φ (γύρω από το Γ)
+        \tkzMarkAngle[fill=gray!30, opacity=0.8, size=0.5, arc=l, delta=10](Mu,Gamma,Nu)
+        \tkzLabelAngle[pos=0.8](Mu,Gamma,Nu){$\varphi$}
+
+        % Σχεδίαση των καμπυλόγραμμων τμημάτων του ιμάντα (τόξα)
+        % \tkzDrawArc(Center, StartPoint)(EndPoint) σχεδιάζει αντιωρολογιακά.
+        % Τόξο από K προς Λ γύρω από A (από κάτω-αριστερά προς πάνω-αριστερά, αντιωρολογιακά)
+        \tkzDrawArc[line width=2pt, color=maincolor](A,Kappa)(Lambda)
+        % Τόξο από M προς N γύρω από Γ (από πάνω-δεξιά προς κάτω-δεξιά, αντιωρολογιακά)
+        \tkzDrawArc[line width=2pt, color=maincolor](Gamma,Mu)(Nu)
+        % Τόξο από P προς Σ γύρω από B (από κάτω-δεξιά προς κάτω-αριστερά, αντιωρολογιακά)
+        \tkzDrawArc[line width=2pt, color=maincolor](B,Rho)(Sigma)
+
+    \end{tikzpicture}
+\end{wrapfigure}
+Στο παρακάτω σχήμα τρεις κυκλικοί τροχοί με ίσες ακτίνες μήκους R, έχουν τα κέντρα τους στις κορυφές τριγώνου ΑΒΓ με πλευρές $\alpha$, $\beta$ και $\gamma$. Ένας τεντωμένος ιμάντας μήκους L συνδέει τους τρεις ίσους τροχούς όπως στο σχήμα και εφάπτεται σε αυτούς στα σημεία Κ, Λ, Μ, Ν, Ρ, Σ.
+
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item Το τετράπλευρο ΑΛΜΓ είναι ορθογώνιο. \monades{4}
+        \item Η κυρτή γωνία $\mathrm{K\hat{A}\Lambda}$ και η γωνία $\hat{\mathrm{A}}$ του τριγώνου ΑΒΓ είναι παραπληρωματικές. \monades{4}
+    \end{rlist}
+    \item Αν $\mathrm{K\hat{A}\Lambda} = \hat{\omega}$, $\mathrm{\Sigma\hat{B}P} = \hat{\theta}$, $\mathrm{M\hat{\Gamma}N} = \hat{\varphi}$, να αποδείξετε ότι $\hat{\omega} + \hat{\theta} + \hat{\varphi} = 360^\circ$. \monades{8}
+    \item Να αποδείξετε ότι το μήκος του ιμάντα L είναι $\mathrm{L = 2(\tau + \pi R)}$ όπου $\tau$ είναι η ημιπερίμετρος του τριγώνου ΑΒΓ. \monades{9}
+\end{alist}

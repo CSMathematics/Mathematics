@@ -1,0 +1,53 @@
+\Askhsh{22310}{2}
+\begin{ylh}{1}
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.4. Προσέγγιση του μήκους του κύκλου με κανονικά πολύγωνα
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα.
+\end{ylh}
+\begin{wrapfigure}[12]{r}{9cm} % Προσαρμογή του [height] για να χωρέσει το σχήμα
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Ορισμός σημείων
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(8,0){B}
+        \tkzDefPointWith[linear,K=0.5](A,B) \tkzGetPoint{M} % Κέντρο ημικυκλίου
+        
+        % Σχεδίαση ημικυκλίου
+        \tkzDrawArc[maincolor,very thick](M,A)(B) % Από A προς B, με κέντρο M
+        
+        % Σχεδίαση του ορθογωνίου. Για το σχήμα, ας υποθέσουμε ένα ύψος, π.χ., 4.
+        % Στο β.i. θα βρεθεί το ακριβές ύψος.
+        \tkzDefPoint(0,-4){D} % \Delta
+        \tkzDefPoint(8,-4){C} % \Gamma
+        
+        \tkzDrawSegment[maincolor,very thick](A,D)
+        \tkzDrawSegment[maincolor,very thick](D,C)
+        \tkzDrawSegment[maincolor,very thick](C,B)
+        
+        % Σχεδίαση της διαμέτρου ΑΒ (διακεκομμένη)
+        \tkzDrawSegment[dashed](A,B)
+        
+        % Σημεία και ετικέτες
+        \tkzDrawPoints(A,B,D,C)
+        \tkzLabelPoint[left](A){A}
+        \tkzLabelPoint[right](B){B}
+        \tkzLabelPoint[below left](D){$\Delta$}
+        \tkzLabelPoint[below right](C){$\Gamma$}
+        
+        % Ετικέτα Σ
+        \node[above=0.3cm] at (M) {($\Sigma$)};
+    \end{tikzpicture}
+\end{wrapfigure}
+Το παρακάτω σχήμα ($\Sigma$) αποτελείται από το ημικύκλιο διαμέτρου ΑΒ και το ορθογώνιο ΑΒΓΔ. Το ημικύκλιο και το ορθογώνιο έχουν ίσα εμβαδά. Δίνεται $ΑΒ = 8 \text{ cm}$.
+\begin{alist}
+    \item Να αποδείξετε ότι:
+    \begin{rlist}
+        \item το εμβαδόν του ημικυκλίου είναι $E = 8\pi \text{ cm}^2$, \monades{8}
+        \item το μήκος του ημικυκλίου είναι $L = 4\pi \text{ cm}$. \monades{8}
+    \end{rlist}
+    \item Να βρείτε:
+    \begin{rlist}
+        \item το μήκος της πλευράς ΑΔ του ορθογωνίου, \monades{5}
+        \item την περίμετρο του σχήματος ($\Sigma$). \monades{4}
+    \end{rlist}
+\end{alist}

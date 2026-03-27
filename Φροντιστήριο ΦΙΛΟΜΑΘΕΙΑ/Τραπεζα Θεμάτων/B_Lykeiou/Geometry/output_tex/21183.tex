@@ -1,0 +1,68 @@
+\Askhsh{21183}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 9.4. Γενίκευση του Πυθαγόρειου θεωρήματος
+\end{ylh}
+\begin{wrapfigure}[15]{r}{6cm}
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % Define side lengths
+        \pgfmathsetmacro{\sidelarge}{sqrt(2)}
+        \pgfmathsetmacro{\sidesmall}{1}
+
+        % Define points for square ABΓΔ
+        % A at origin (0,0)
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(\sidelarge,0){B}
+        \tkzDefPoint(\sidelarge,\sidelarge){G} % G for Gamma
+        \tkzDefPoint(0,\sidelarge){D} % D for Delta
+
+        % Define points for square ΔEZH
+        % D is (0, \sidelarge)
+        % E is on DG (side of ABΓΔ), DE = 1 (side of ΔEZH)
+        \tkzDefPoint(\sidesmall,\sidelarge){E}
+        % H is above D, DH = 1 (side of ΔEZH)
+        \tkzDefPoint(0,\sidelarge+\sidesmall){H}
+        % Z is above E, EZ = 1 (side of ΔEZH)
+        \tkzDefPoint(\sidesmall,\sidelarge+\sidesmall){Z}
+
+        % Draw squares
+        \tkzDrawPolygon[line width=0.8pt](A,B,G,D)
+        \tkzDrawPolygon[line width=0.8pt](D,E,Z,H)
+
+        % Draw segments AZ and ΓZ
+        \tkzDrawSegment[line width=0.8pt](A,Z)
+        \tkzDrawSegment[line width=0.8pt](G,Z)
+
+        % Mark right angles as shown in the original image
+        \tkzMarkRightAngle(B,A,D) % Angle at A of square ABΓΔ
+        \tkzMarkRightAngle(A,B,G) % Angle at B of square ABΓΔ
+        \tkzMarkRightAngle(Z,E,D) % Angle at E of square ΔEZH
+        \tkzMarkRightAngle(Z,H,D) % Angle at H of square ΔEZH
+        
+        % Mark angle ω
+        \tkzMarkAngle[fill=gray!30](A,Z,G)
+        \tkzLabelAngle[pos=0.5](A,Z,G){$\omega$}
+
+        % Label points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[below right](B){B}
+        \tkzLabelPoint[above right](G){$\Gamma$}
+        \tkzLabelPoint[above left](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[above](Z){Z}
+        \tkzLabelPoint[above left](H){H}
+
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Στο παρακάτω σχήμα το τετράγωνο ΑΒΓΔ έχει πλευρά $\sqrt{2}$ και το τετράγωνο ΔΕΖΗ έχει πλευρά $1$.
+\begin{alist}
+    \item Να αποδείξετε ότι ΑΓ = 2. \monades{6}
+    \item Να αποδείξετε ότι
+    \begin{rlist}
+        \item $AZ^2 = 4 + 2\sqrt{2}$. \monades{7}
+        \item $\Gamma Z^2 = 4 - 2\sqrt{2}$. \monades{7}
+    \end{rlist}
+    \item Να υπολογίσετε σε μοίρες το μέτρο της γωνίας $\hat{A\text{Z}\Gamma} = \hat{\omega}$. \monades{5}
+\end{alist}

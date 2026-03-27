@@ -1,0 +1,61 @@
+\Askhsh{14884}{2}
+\begin{ylh}{1}
+    \item 3.2. 1ο Κριτήριο ισότητας τριγώνων
+    \item 4.2. Τέμνουσα δύο ευθειών - Ευκλείδειο αίτημα
+    \item 4.6. Άθροισμα γωνιών τριγώνου.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 14884.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 2
+
+ΑΒΕ και ΑΔΖ.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item Τα τρίγωνα ΑΕΖ και ΑΒΔ είναι ίσα. \monades{13}
+
+\item Το τμήμα ΔΖ είναι παράλληλο στο ΒΕ. \monades{12}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPointBy[rotation=center A angle 120](B) \tkzGetPoint{D_dir}
+\tkzDefPointOnLine[pos=0.7](A,D_dir) \tkzGetPoint{D} % AD < AB for visual clarity
+
+% Equilateral ABE exterior to ABD. A=0, B=4. E should be below
+\tkzDefPointBy[rotation=center B angle -60](A) \tkzGetPoint{E}
+
+% Equilateral ADZ exterior to ABD.
+\tkzDefPointBy[rotation=center A angle -60](D) \tkzGetPoint{Z}
+% Wait, "exterior". ABE is on side AB. Order is A-B-E. For ABE to be equilateral and exterior:
+\tkzDefTriangle[equilateral](A,B) \tkzGetPoint{E_1}
+\tkzDefTriangle[equilateral](B,A) \tkzGetPoint{E_2}
+% D is above AB. So exterior ABE is E_2 (below AB).
+\tkzDefPointBy[rotation=center A angle -60](B) \tkzGetPoint{E}
+
+% For ADZ, D is at 120 degrees from B (y>0). Triangle ADZ should be exterior, so Z must be further left/down.
+\tkzDefPointBy[rotation=center D angle -60](A) \tkzGetPoint{Z}
+
+\draw[l3] (A)--(B)--(D)--cycle;
+\draw[l3] (A)--(B)--(E)--cycle;
+\draw[l3] (A)--(D)--(Z)--cycle;
+\draw[l3, dashed] (A)--(E);
+\draw[l3, dashed] (A)--(Z);
+\draw[l3, dashed] (D)--(Z);
+\draw[l3, dashed] (B)--(E);
+% Wait, triangle matches the definition of ADZ equilateral, ABE equilateral.
+\tkzDrawPoints(A,B,D,E,Z)
+\tkzLabelPoint[below](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzLabelPoint[above](D){$\Delta$}
+\tkzLabelPoint[below right](E){$E$}
+\tkzLabelPoint[left](Z){$Z$}
+\end{tikzpicture}
+\end{center}
+\end{alist}

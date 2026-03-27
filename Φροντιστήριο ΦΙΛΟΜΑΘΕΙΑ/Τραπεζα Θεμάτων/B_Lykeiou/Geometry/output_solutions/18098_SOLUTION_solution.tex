@@ -1,0 +1,67 @@
+\Askhsh{18098_SOLUTION}{1}
+\begin{ylh}{1}
+    \item [Γεωμετρία, Εμβαδά]
+\end{ylh}
+\begin{wrapfigure}[20]{r}{6.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Define corner points of the square (A bottom-left, B top-left, C top-right, D bottom-right)
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(0,4){B}
+        \tkzDefPoint(4,4){C}
+        \tkzDefPoint(4,0){D}
+
+        % Define midpoints on the sides
+        \tkzDefPoint(0,2){E}
+        \tkzDefPoint(2,4){Z}
+        \tkzDefPoint(4,2){H}
+        \tkzDefPoint(2,0){Theta}
+
+        % Fill the entire square
+        \fill[maincolor!70] (A.center) rectangle (C.center);
+
+        % Fill the four corner sectors in white to create the shaded central region
+        \tkzFillSector[fill=white](A,Theta,E)
+        \tkzFillSector[fill=white](B,E,Z)
+        \tkzFillSector[fill=white](C,Z,H)
+        \tkzFillSector[fill=white](D,H,Theta)
+
+        % Draw the perimeter of the square
+        \tkzDrawPolygon(A,B,C,D)
+
+        % Draw points
+        \tkzDrawPoints(A,B,C,D,E,Z,H,Theta)
+
+        % Label points
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above left](B){B}
+        \tkzLabelPoint[above right](C){$\Gamma$}
+        \tkzLabelPoint[below right](D){$\Delta$}
+
+        \tkzLabelPoint[left](E){E}
+        \tkzLabelPoint[above](Z){Z}
+        \tkzLabelPoint[right](H){H}
+        \tkzLabelPoint[below](Theta){$\Theta$}
+
+        % Label segment lengths
+        \tkzLabelSegment[left](A,E){2}
+        \tkzLabelSegment[left](E,B){2}
+        \tkzLabelSegment[above](B,Z){2}
+        \tkzLabelSegment[above](Z,C){2}
+        \tkzLabelSegment[right](C,H){2}
+        \tkzLabelSegment[right](H,D){2}
+        \tkzLabelSegment[below](D,Theta){2}
+        \tkzLabelSegment[below](Theta,A){2}
+
+        % Mark right angle at B
+        \tkzMarkRightAngle(C,B,A)
+    \end{tikzpicture}
+\end{wrapfigure}
+\begin{alist}
+    \item Τα τόξα $\Theta$E, EZ, ZH, H$\Theta$ είναι τόξα ίσων κύκλων ακτίνας $\rho = 2$ και αντιστοιχούν σε ίσες επίκεντρες γωνίες $90^\circ$. Επομένως, οι κυκλικοί τομείς A$\Theta$E, BEZ, $\Gamma$ZH, $\Delta$H$\Theta$ έχουν καθένας εμβαδόν ίσο με
+    \[ (\widehat{A\Theta E}) = (\widehat{BEZ}) = (\widehat{\Gamma ZH}) = (\widehat{\Delta H \Theta}) = \frac{\pi\rho^2 90^\circ}{360^\circ} = \frac{\pi \cdot 2^2 \cdot 90^\circ}{360^\circ} = \pi \]
+    \item Το εμβαδόν του τετραγώνου είναι
+    \[ E_\tau = \alpha^2 = 4^2 = 16 \]
+    Οπότε, το εμβαδόν του γραμμοσκιασμένου χωρίου είναι:
+    \[ E = E_\tau - 4(\widehat{A\Theta E}) = 16 - 4\pi = 4(4 - \pi) \]
+\end{alist}

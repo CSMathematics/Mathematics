@@ -1,0 +1,65 @@
+\Askhsh{21103}{4}
+\begin{ylh}{1}
+    \item 9.2. Το Πυθαγόρειο θεώρημα
+    \item 10.3. Εμβαδόν βασικών ευθύγραμμων σχημάτων
+    \item 11.5. Μήκος τόξου
+    \item 11.6. Προσέγγιση του εμβαδού κύκλου με κανονικά πολύγωνα.
+\end{ylh}
+\begin{wrapfigure}[7]{r}{5.5cm}
+    \begin{tikzpicture}[scale=1]
+        % Ορισμός κορυφών τετραγώνου ΑΒΓΔ πλευράς 2\alpha.
+        % Για τη σχεδίαση, θεωρούμε \alpha=1, οπότε η πλευρά είναι 2.
+        % Το τετράγωνο είναι περιστραμμένο, με B στην κορυφή.
+        % Αν η πλευρά είναι $s=2\alpha$, τότε η απόσταση από το κέντρο του τετραγώνου σε κάθε κορυφή είναι $s/\sqrt{2} = 2\alpha/\sqrt{2} = \alpha\sqrt{2}$.
+        % Τοποθετούμε το κέντρο του τετραγώνου στην αρχή των αξόνων $(0,0)$.
+        % Οπότε, με $\alpha=1$ για τη σχεδίαση:
+        \tkzDefPoint(0, {sqrt(2)}){B}
+        \tkzDefPoint({-sqrt(2)}, 0){A}
+        \tkzDefPoint({sqrt(2)}, 0){G} % Γ
+        \tkzDefPoint(0, {-sqrt(2)}){D} % Δ
+        
+        % Ορισμός των κέντρων E και Z των ημικυκλίων
+        % E είναι το μέσο της ΒΓ
+        \tkzDefMidPoint(B,G) \tkzGetPoint{E}
+        % Z είναι το μέσο της ΒΑ
+        \tkzDefMidPoint(B,A) \tkzGetPoint{Z}
+        
+        % Σχεδίαση του τετραγώνου
+        \tkzDrawPolygon[fill=maincolor!10, draw=maincolor, line width=1pt](A,B,G,D)
+        
+        % Σχεδίαση των δύο εξωτερικών ημικυκλίων
+        % Η ακτίνα κάθε ημικυκλίου είναι \alpha. Για τη σχεδίαση, η ακτίνα είναι 1cm.
+        % Ημικύκλιο με διάμετρο ΒΓ, κέντρο Ε, ακτίνα \alpha. Το τόξο πηγαίνει από Γ προς Β.
+        \tkzDrawArc[R,fill=gray!50, draw=maincolor, line width=1pt](E,G,B){1cm}
+        % Ημικύκλιο με διάμετρο ΒΑ, κέντρο Ζ, ακτίνα \alpha. Το τόξο πηγαίνει από Α προς Β.
+        \tkzDrawArc[R,fill=gray!50, draw=maincolor, line width=1pt](Z,A,B){1cm}
+        
+        % Σχεδίαση της διακεκομμένης γραμμής που ενώνει τα κέντρα Ε και Ζ
+        \tkzDrawSegment[dashed](E,Z)
+        
+        % Σήμανση της ορθής γωνίας στο Β
+        \tkzMarkRightAngle[size=0.3](A,B,G)
+        
+        % Σημεία (μαύρες κουκκίδες)
+        \tkzDrawPoints[fill=black](A,B,G,D,E,Z)
+        
+        % Ετικέτες σημείων
+        \tkzLabelPoint[below left](A){A}
+        \tkzLabelPoint[above](B){B}
+        \tkzLabelPoint[below right](G){$\Gamma$}
+        \tkzLabelPoint[below](D){$\Delta$}
+        \tkzLabelPoint[right](E){E}
+        \tkzLabelPoint[left](Z){Z}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+Δίνεται τετράγωνο $\mathrm{A}\mathrm{B}\Gamma\Delta$ πλευράς $2\alpha$ και με διαμέτρους τις $\mathrm{B}\Gamma$ και $\mathrm{B}\mathrm{A}$ φτιάχνουμε εξωτερικά του τετραγώνου ημικύκλια, όπως φαίνεται στο σχήμα.
+\begin{alist}
+\item Να αποδείξετε ότι το μήκος κάθε ημικυκλίου ισούται με $\pi\cdot\alpha$. \monades{07}
+\item
+    \begin{rlist}
+    \item Αν η περίμετρος της καρδιάς είναι $2\pi+4$, να υπολογίσετε το $\alpha$. \monades{06}
+    \item Αν $\alpha = 1$ να βρείτε το μήκος του τμήματος που ενώνει τα κέντρα των δύο ημικυκλίων. \monades{06}
+    \end{rlist}
+\item Αν $(\tau)$ είναι το άθροισμα των εμβαδών των δύο ημικυκλίων να συγκρίνετε τον λόγο $\frac{(\tau)}{(\mathrm{A}\mathrm{B}\Gamma\Delta)}$ με την μονάδα. Να αιτιολογήσετε την απάντησή σας. \monades{06}
+\end{alist}

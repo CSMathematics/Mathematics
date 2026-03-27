@@ -1,0 +1,66 @@
+\Askhsh{34336}{4}
+\begin{ylh}{1}
+    \item 3.1. Είδη και στοιχεία τριγώνων
+    \item 3.6. Κριτήρια ισότητας ορθογώνιων τριγώνων
+    \item 4.6. Άθροισμα γωνιών τριγώνου
+    \item 5.3. Ορθογώνιο
+    \item 5.4. Ρόμβος
+    \item 5.5. Τετράγωνο.
+\end{ylh}
+% ===================================================================
+%  Αρχείο: 34336.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py
+% ===================================================================
+
+ΘΕΜΑ 4
+
+Δίνεται το τετράγωνο ΑΒΓΔ. Προεκτείνουμε την πλευρά ΑΒ προς το Β κατά τμήμα ΒΖ και την πλευρά ΒΓ προς το Γ κατά τμήμα ΓΜ = ΑΖ. Θεωρούμε σημείο Ε τέτοιο, ώστε το τετράπλευρο ΔΜΕΖ να είναι παραλληλόγραμμο.
+
+Να αποδείξετε ότι:
+
+\begin{alist}
+\item τα τρίγωνα ΑΔΖ και ΓΔΜ είναι ίσα και οι γωνίες Α$\widehat{\Delta}$Ζ και Γ$\widehat{\Delta}$Μ είναι ίσες, \monades{9}
+
+\item το τετράπλευρο ΔΜΕΖ είναι τετράγωνο, \monades{9}
+
+\item οι γωνίες Β$\widehat{Ζ}$Ε και Ε$\widehat{Μ}$Β είναι παραπληρωματικές. \monades{7}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\tkzDefPoint(0,4){A}
+\tkzDefPoint(0,0){B}
+\tkzDefPoint(4,0){C}
+\tkzDefPoint(4,4){D}
+
+% Extend AB towards B by BZ
+\tkzDefPointOnLine[pos=1.4](A,B) \tkzGetPoint{Z}
+\tkzCalcLength(B,Z) \tkzGetLength{rBZ}
+\tkzCalcLength(A,Z) \tkzGetLength{rAZ}
+
+% Extend BC towards C by CM = AZ
+\tkzDefPointOnLine[pos=1+\rAZ/tkzLength(B,C)](B,C) \tkzGetPoint{M}
+
+% E is such that DMEZ is a parallelogram. 
+% So Vector(ZE) = Vector(MD). E = Z + D - M
+\tkzDefPointBy[translation=from M to D](Z) \tkzGetPoint{E}
+
+\draw[l3] (A)--(B)--(C)--(D)--cycle;
+\draw[l3] (B)--(Z);
+\draw[l3] (C)--(M);
+\draw[l3] (D)--(M)--(E)--(Z)--cycle; % DMEZ
+
+\tkzDrawPoints(A,B,C,D,Z,M,E)
+\tkzLabelPoint[above left](A){$A$}
+\tkzLabelPoint[below left](B){$B$}
+\tkzLabelPoint[below](C){$\Gamma$}
+\tkzLabelPoint[above](D){$\Delta$}
+\tkzLabelPoint[below](Z){$Z$}
+\tkzLabelPoint[right](M){$M$}
+\tkzLabelPoint[below right](E){$E$}
+
+\tkzMarkRightAngle(A,B,C)
+\tkzMarkSegments[mark=s||](A,Z C,M)
+\end{tikzpicture}
+\end{center}
+\end{alist}

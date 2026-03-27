@@ -1,0 +1,54 @@
+% ===================================================================
+%  Αρχείο: 14983_tikz.tex (Fragment)
+%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
+% ===================================================================
+
+ΘΕΜΑ 2
+
+Στο παρακάτω σχήμα δίζεται η γραφική παράσταση της συνάρτησης $g(x) = \frac{1}{3}x^{2}$, $x \in R$ και η γραφική παράσταση της συνάρτησης $f(x)$ η οποία προκύπτει από μία οριζόντια μετατόπιση της $g(x)$ κατά 3 μονάδες προς τα δεξιά και μετά κατά μία μονάδα προς τα πάνω.
+
+\begin{alist}
+\item Να επιλέξετε την σωστή απάντηση όσον αφορά τον τύπο της $f(x)$.
+
+(I) $f(x) = g(x\  + \ 3) + 1$. (II) $f(x) = g(x\  + 3) - 1$. (III) $f(x) = g(x\  - \ 3) + 1$.
+
+(IV) $f(x) = g(x\  - \ 3) - 1$.
+
+\monades{9}
+
+\item Να βρείτε την ελάχιστη τιμή της συνάρτησης $f(x)$ και την θέση ελαχίστου.
+
+\monades{8}
+
+\item Να γράψετε τα διαστήματα στα οποία η συνάρτηση $f(x)$ είναι γνησίως αύξουσα ή γνησίως φθίνουσα.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5, >=latex]
+    \draw[very thin, color=green!40] (-10.5,-1.5) grid (20.5,13.5);
+    \draw[->, thick] (-10.5,0) -- (20.5,0) node[right] {$x$};
+    \draw[->, thick] (0,-1.5) -- (0,13.5) node[above] {$y$};
+    
+    \foreach \x in {-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}
+        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\tiny] {\x};
+    \foreach \y in {-1,1,2,...,13}
+        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\tiny] {\y};
+    \node[below left, font=\small] at (0,0) {$0$};
+    
+    % g(x) = 1/3 * x^2
+    \draw[very thick, color=red!80, samples=100, domain=-6.2:6.2] plot (\x, {0.3333*\x*\x}) node[left] {$g(x)$};
+    
+    % f(x) = 1/3 * (x-3)^2 + 1
+    \draw[very thick, color=blue!80, samples=100, domain=-3.2:9.2] plot (\x, {0.3333*(\x-3)*(\x-3) + 1}) node[above left] {$f(x)$};
+    
+    % Shift arrows
+    \draw[->, thick, black] (0,0) -- (3,0);
+    \draw[->, thick, black] (3,0) -- (3,1);
+    \filldraw[fill=magenta] (0,0) circle (3pt) node[below left, color=black] {$A$};
+    \filldraw[fill=green!70!black] (3,1) circle (3pt) node[above left, color=black] {$B$};
+    
+    \node at (-7.5,1) {$x'$};
+\end{tikzpicture}
+\end{center}
+
+\monades{8}
+\end{alist}

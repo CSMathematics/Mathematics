@@ -1,0 +1,57 @@
+\Askhsh{36787}{4}
+\begin{ylh}{1}
+    \item 2.1 Η έννοια της παραγώγου
+    \item 2.4 Ρυθμός μεταβολής.
+\end{ylh}
+\begin{wrapfigure}[19]{r}{7.5cm} % Adjust number of lines and width as needed
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -1.5, xmax = 1.0, % Adjusted limits to match the visual extent
+    ymin = -0.7, ymax = 0.7,
+    xtick = \empty, % Remove specific ticks to make it cleaner
+    ytick = \empty,
+    width = 7cm, height = 5cm,
+    axis line style={-}, % Ensure arrows on axis lines
+    tick label style = {font=\scriptsize},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+    clip=false, % Allow nodes/arrows outside axis box
+]
+    % Plot the function f(x) = x^3 + (1/4)*x
+    \addplot[very thick, maincolor, domain=-1.5:1.0, samples=100] {x^3 + 0.25*x} node[below left, maincolor, xshift=-0.5em, yshift=-0.5em] {$y=f(x)$};
+
+    % Origin O
+    \node[black, below right] at (axis cs:0,0) {O};
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,0)};
+
+    % Point B(0, 1/4)
+    \addplot[only marks, mark=*, mark size=1.5pt, secondarycolor] coordinates {(0,0.25)};
+    \node[above right, secondarycolor] at (axis cs:0,0.25) {$B\left(0, \frac{1}{4}\right)$};
+
+    % Point A_0(-1/2, -1/4) - Calculated based on B being on the tangent
+    \addplot[only marks, mark=*, mark size=1.5pt, secondarycolor] coordinates {(-0.5,-0.25)};
+    \node[below left, secondarycolor] at (axis cs:-0.5,-0.25) {$A_0$};
+
+    % Dashed line from A_0 to B
+    \draw[dashed, thick, black!60] (axis cs:-0.5,-0.25) -- (axis cs:0,0.25);
+
+    % Tangent line segment from A_0 with red arrow
+    % The tangent at A_0(-0.5, -0.25) is y = x + 1/4.
+    % Draw a short segment from A_0 in the direction of the tangent (towards B).
+    \draw[->, very thick, secondarycolor, shorten >=1pt] (axis cs:-0.5,-0.25) -- (axis cs:-0.2,0.05); % Example point along tangent
+\end{axis}
+\end{tikzpicture}
+\end{wrapfigure}
+Δίνεται η συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ με $f(x) = x^3 + \frac{1}{4}x$.
+
+\begin{alist}
+\item Να αποδείξετε ότι η εφαπτομένη της γραφικής παράστασης της $f$ στο σημείο $A(\alpha, f(\alpha))$ έχει εξίσωση $y = \left(3\alpha^2 + \frac{1}{4}\right)x - 2\alpha^3$. \monades{8}
+\item Ένα αυτοκίνητο κινείται τη νύχτα, κατά μήκος ενός επίπεδου δρόμου. Θεωρήστε το αυτοκίνητο ως σημείο στο επίπεδο $Oxy$ και τη γραφική παράσταση της συνάρτησης $f$, ως τον δρόμο που αυτό κινείται, όπως φαίνεται στο παρακάτω σχήμα. Σε μια συγκεκριμένη χρονική στιγμή $t_0$, που το αυτοκίνητο βρίσκεται στο σημείο $A_0$, οι προβολείς του φωτίζουν μια πινακίδα που βρίσκεται στο σημείο $B\left(0, \frac{1}{4}\right)$.
+\begin{rlist}
+\item Να βρείτε τις συντεταγμένες του σημείου $A_0$. \monades{8}
+\item Αν ο ρυθμός μεταβολής της τετμημένης του αυτοκινήτου την χρονική στιγμή $t_0$, είναι $2$, να βρείτε τον ρυθμό μεταβολής της τεταγμένης του αυτοκινήτου, την χρονική στιγμή $t_0$. \monades{9}
+\end{rlist}
+\end{alist}
