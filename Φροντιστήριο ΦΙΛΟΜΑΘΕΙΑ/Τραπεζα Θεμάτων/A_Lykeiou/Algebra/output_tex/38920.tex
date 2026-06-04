@@ -1,4 +1,3 @@
-% --- Άσκηση 38920 (38920.tex) ---
 \Askhsh{38920}{4}
 \begin{ylh}{2}
     \item 2.2. Διάταξη Πραγματικών Αριθμών
@@ -29,3 +28,69 @@
 \begin{center}
 \begin{tikzpicture}[scale=0.6,
     font=\sffamily,
+    % Define the arrow style used for both H and 3,5 m
+    dimenarrow/.style={<->, >=Latex, draw=arrowblue, fill=arrowblue, thick}
+]
+
+    % --- Parameters ---
+    \def\w{2.2}    % width of the block's front face
+    \def\h{4.8}    % height of the block's front face
+    \def\dx{0.9}   % depth (x-offset for 3D effect)
+    \def\dy{0.6}   % depth (y-offset for 3D effect)
+    
+    \def\groundY{\h+\dy} % Y-coordinate for the ground line (aligns with top-back edge)
+    \def\waterY{-1.5}    % Y-coordinate for the water table line
+    
+    \def\leftX{-7}       % Leftmost extent of the dashed lines
+    \def\rightX{13}      % Rightmost extent of the dashed lines
+
+    % --- Colors ---
+    % Approximated from the provided image
+    \definecolor{frontblue}{RGB}{84, 130, 190} 
+    \definecolor{topblue}{RGB}{124, 164, 210}
+    \definecolor{sideblue}{RGB}{62, 102, 154}
+    \definecolor{borderblue}{RGB}{28, 48, 72}
+    \definecolor{arrowblue}{RGB}{80, 130, 190}
+
+    % --- Dashed Lines & Labels ---
+    % Drawn first so the block can overlap the top line appropriately
+    
+    % Top dashed line (έδαφος / Ground)
+    \draw[thick, dashed] (\leftX, \groundY) -- (\rightX, \groundY) 
+        node[pos=0.75, fill=white, inner sep=3pt, text=black] {έδαφος};
+        
+    % Bottom dashed line (υδροφόρος ορίζοντας / Water table)
+    \draw[thick, dashed] (\leftX, \waterY) -- (\rightX, \waterY) 
+        node[pos=0.75, fill=white, inner sep=3pt, text=black] {υδροφόρος ορίζοντας};
+
+    % --- 3D Block ---
+    \begin{scope}[line join=round, line width=2pt, draw=borderblue]
+        % Front Face
+        \draw[fill=frontblue] (0,0) -- (\w,0) -- (\w,\h) -- (0,\h) -- cycle;
+        
+        % Top Face
+        \draw[fill=topblue] (0,\h) -- (\dx,\groundY) -- (\w+\dx,\groundY) -- (\w,\h) -- cycle;
+        
+        % Right Side Face
+        \draw[fill=sideblue] (\w,0) -- (\w+\dx,\dy) -- (\w+\dx,\groundY) -- (\w,\h) -- cycle;
+    \end{scope}
+
+    % --- Dimension Arrows ---
+    % H arrow (aligned with the bottom of the front face to the ground line)
+    \draw[dimenarrow] (\w+\dx+0.3, 0) -- (\w+\dx+0.3, \groundY) 
+        node[midway, right, text=black, xshift=2pt] {H};
+
+    % 3.5 m arrow (from water table to ground line)
+    \draw[dimenarrow] (\rightX-1, \waterY) -- (\rightX-1, \groundY) 
+        node[midway, right, text=black, xshift=2pt] {3,5 m};
+
+\end{tikzpicture}\captionof{figure}{Άσκηση 38920}
+\end{center}
+Ποιες είναι οι δυνατές τιμές του βάθους $H$ της δεξαμενής που ικανοποιούν αυτή τη συνθήκη;\monades{5}
+\item Να υπολογίσετε τις δυνατές τιμές του βάθους $H$ της δεξαμενής, οι οποίες ικανοποιούν ταυτόχρονα και τις δύο παραπάνω συνθήκες που θέτει ο μηχανικός.\monades{5}
+\item Αν για τις διαστάσεις $L,\ H$ και $W$ ισχύουν οι ακόλουθοι περιορισμοί: $4 \leq L \leq 6\ ,$ $2 \leq H \leq 3$ και $6 \leq W \leq 7$, ποιες είναι οι δυνατές τιμές της χωρητικότητας της δεξαμενής;
+\monades{5}
+
+{\footnotesize Το παραπάνω θέμα αναπτύχθηκε στο πλαίσιο του έργου: «Ανάπτυξη Δοκιμασιών Αξιολόγησης Δεξιοτήτων Εγγραμματισμού στα μαθήματα της Νεοελληνικής Γλώσσας και Λογοτεχνίας, της Άλγεβρας, της Φυσικής και της Χημείας Α' Λυκείου Γενικού Λυκείου» Ανάδοχος: «Ειδικός Λογαριασμός Κονδυλίων Έρευνας (Ε.Λ.Κ.Ε) Πανεπιστημίου Ιωαννίνων» ΑΔΑΜ: 25SYMV016348911 2025-02-20.}
+\end{alist}
+

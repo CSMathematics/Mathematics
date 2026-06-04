@@ -1,60 +1,36 @@
-% ===================================================================
-%  Αρχείο: 20824.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py
-% ===================================================================
-
-ΘΕΜΑ 2
-
+\Askhsh{20824}{2}
+\begin{ylh}{1}
+\item 3.1 Τριγωνομετρικοί Αριθμοί Γωνίας
+\item 3.2 Βασικές Τριγωνομετρικές Ταυτότητες
+\end{ylh}
 Στον παρακάτω τριγωνομετρικό κύκλο δίνεται γωνία $A\overset{\hat{}}{O}M = \omega$, $\frac{\pi}{2} < \omega < \pi$ και το σημείο $M\left(x, \frac{1}{2}\right)$.
-
-
 % TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
-
-\begin{tikzpicture}[scale=2]
-    % Grid
-    \draw[help lines, step=0.5, gray!30] (-1.5,-1.5) grid (1.5,1.5);
-    
-    % Unit Circle
-    \draw[thick] (0,0) circle (1);
-    
-    % Axes
-    \draw[->, thick] (-1.5,0) -- (1.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    
-    % Point M(x, 1/2) in 2nd quadrant
-    % sin(omega) = 1/2 => omega = 150 degrees (5pi/6)
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
+    xmin = -1.2, xmax = 1.2, ymin = -1.2, ymax = 1.2,
+    xtick = {-1,1}, ytick = {-1,1},
+    grid = both, grid style = {gray!30},
+    samples = 150, width = 7cm, height = 7cm,
+    tick label style = {font=\small},
+]
+    \addplot[thick, black, domain=0:2*pi] ({cos(deg(x))}, {sin(deg(x))});
     \def\angle{150}
-    \coordinate (O) at (0,0);
-    \coordinate (M) at ({cos(\angle)}, {sin(\angle)});
-    
-    % Draw terminal side
-    \draw[thick, red] (O) -- (M);
-    \filldraw[blue] (M) circle (1.5pt) node[above left, black] {$M(x, \frac{1}{2})$};
-    
-    % Projection to y-axis
-    \draw[dashed] (M) -- (0, 0.5) node[right] {$\frac{1}{2}$};
-    \draw[dashed] (M) -- ({cos(\angle)}, 0) node[below] {$x$};
-
-    % Angle omega
-    \draw[->, thick, green!60!black] (0.3,0) arc (0:\angle:0.3);
-    \node at (-0.2, 0.4) {$\omega$};
-    
-    % Origin
-    \node[below right] at (0,0) {$O$};
-
+    \addplot[very thick, secondarycolor] coordinates {(0,0) ({cos(\angle)}, {sin(\angle)})};
+    \filldraw[maincolor] (axis cs:{cos(\angle)}, {sin(\angle)}) circle (1.5pt) node[above left, black] {$M(x, \frac{1}{2})$};
+    \draw[dashed] (axis cs:{cos(\angle)}, {sin(\angle)}) -- (axis cs:0, 0.5) node[right] {$\frac{1}{2}$};
+    \draw[dashed] (axis cs:{cos(\angle)}, {sin(\angle)}) -- (axis cs:{cos(\angle)}, 0) node[below] {$x$};
+    \addplot[->, thick, maincolor!60!black, domain=0:\angle] ({0.3*cos(x)}, {0.3*sin(x)});
+    \node at (axis cs:-0.2, 0.4) {$\omega$};
+\end{axis}
 \end{tikzpicture}
-
 % % \caption{Σχήμα 1}
 \end{center}
-
-
 \begin{alist}
-\item Να βρείτε το $\eta\mu\omega$. Με ποιον τριγωνομετρικό αριθμό της γωνίας $\omega$ ισούται η τετμημένη $x$ του σημείου $M$;
-
+\item Να βρείτε το $\hm \omega$. Με ποιον τριγωνομετρικό αριθμό της γωνίας $\omega$ ισούται η τετμημένη $x$ του σημείου $M$;
 \monades{12}
-
-\item Να δείξετε ότι $\sigma\upsilon\nu\omega = -\frac{\sqrt{3}}{2}$.
-
+\item Να δείξετε ότι $\syn \omega = -\frac{\sqrt{3}}{2}$.
 \monades{13}
 \end{alist}
+

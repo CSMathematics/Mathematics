@@ -1,0 +1,83 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_25 ===========
+\begin{thema}{Β}
+Δίνεται η συνάρτηση $f(x) = \dfrac{\ln x}{x^2}$.
+
+\begin{erwthma}
+
+% -------------------------------------------------------
+% α) Πεδίο ορισμού και ασύμπτωτες
+% -------------------------------------------------------
+\item Η $f$ ορίζεται για $x>0$, άρα $D_f=(0,+\infty)$.
+
+\textit{Κατακόρυφη:} Αναζητούμε στο άκρο $x=0$ του πεδίου ορισμού:
+\[
+\lim_{x\to0^+}\frac{\ln x}{x^2}=\frac{-\infty}{0^+}=-\infty.
+\]
+Η ευθεία $x=0$ είναι \textbf{κατακόρυφη ασύμπτωτη}.
+
+\textit{Οριζόντια στο $+\infty$:}
+\[
+\lim_{x\to+\infty}\frac{\ln x}{x^2}\dlh{\frac{+\infty}{+\infty}}\lim_{x\to+\infty}\frac{\frac{1}{x}}{2x}=\lim_{x\to+\infty}\frac{1}{2x^2}=0.
+\]
+Η ευθεία $y=0$ είναι \textbf{οριζόντια ασύμπτωτη} στο $+\infty$ και δεν υπάρχει πλάγια ασύμπτωτη.
+
+% -------------------------------------------------------
+% β) Μονοτονία και ολικό ακρότατο
+% -------------------------------------------------------
+\item Η $f$ είναι παραγωγίσιμη στο $(0,+\infty)$ ως πηλίκο παραγωγίσιμων συναρτήσεων:
+\[
+f'(x)=\frac{(\ln x)'\cdot x^2-\ln x\cdot(x^2)'}{x^4}=\frac{\dfrac{1}{x}\cdot x^2-2x\ln x}{x^4}=\frac{x-2x\ln x}{x^4}=\frac{x(1-2\ln x)}{x^4}=\frac{1-2\ln x}{x^3}.
+\]
+Επειδή $x^3>0$ για $x>0$, το πρόσημο της $f'$ εξαρτάται από $1-2\ln x$:
+\begin{itemize}
+    \item $f'(x)=0 \Leftrightarrow 1-2\ln x=0 \Leftrightarrow \ln x=\dfrac{1}{2} \Leftrightarrow x=e^{1/2}=\sqrt{e}$
+    \item $f'(x)>0 \Leftrightarrow \ln x<\dfrac{1}{2} \Leftrightarrow 0<x<\sqrt{e}$
+    \item $f'(x)<0 \Leftrightarrow x>\sqrt{e}$
+\end{itemize}
+Στον παρακάτω πίνακα φαίνεται το πρόσημο της $f'$ και η μονοτονία της $f$:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = red7,colorL = red9,colorV = red7]%
+{$x$ / .8,$f'(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$\sqrt{e}$,$+\infty$}%
+\tkzTabLine{ d, +, z, -, }
+\tkzTabVar{D-/,+/{\tiny TM},-/}
+\end{tikzpicture}
+\end{center}
+Η $f$ είναι γνησίως αύξουσα στο $(0,\sqrt{e}]$ και γνησίως φθίνουσα στο $[\sqrt{e},+\infty)$.
+Στο $x=\sqrt{e}$ παρουσιάζει \textbf{ολικό μέγιστο}:
+\[
+f(\sqrt{e})=\frac{\ln\sqrt{e}}{(\sqrt{e})^2}=\frac{\frac{1}{2}}{e}=\frac{1}{2e}.
+\]
+
+% -------------------------------------------------------
+% γ) Απόδειξη ανισότητας ln x ≤ x²/(2e)
+% -------------------------------------------------------
+\item Από το ερώτημα (β), η $f$ έχει ολικό μέγιστο $\dfrac{1}{2e}$ στο $x=\sqrt{e}$, δηλαδή για κάθε $x>0$:
+\[
+f(x)\leq\frac{1}{2e} \Leftrightarrow \frac{\ln x}{x^2}\leq\frac{1}{2e} \Leftrightarrow \ln x\leq\frac{x^2}{2e}.\]
+
+% -------------------------------------------------------
+% δ) Εμβαδόν χωρίου
+% -------------------------------------------------------
+\item Εξετάζουμε το πρόσημο της $f$ στο $[1,e]$.
+
+Επειδή $\ln x\geq0$ για $x\geq1$ και $x^2>0$, ισχύει $f(x)\geq0$ σε ολόκληρο το $[1,e]$.
+
+Άρα:
+\[
+E=\int_1^e\frac{\ln x}{x^2}\,\d x.
+\]
+Εφαρμόζουμε ολοκλήρωση κατά παράγοντες:
+\[
+E=\int_1^e\ln{x}\left( -\frac{1}{x}\right)'=\left[-\frac{\ln x}{x}\right]_1^e+\int_1^e\frac{1}{x}\cdot\frac{1}{x}\,\d x
+=-\frac{\ln e}{e}+\frac{\ln 1}{1}+\int_1^e\frac{1}{x^2}\,\d x
+=-\frac{1}{e}+0+\left[-\frac{1}{x}\right]_1^e.
+\]
+\[
+=-\frac{1}{e}+\left(-\frac{1}{e}+1\right)=-\frac{2}{e}+1=1-\frac{2}{e}\ \text{τ.μ.}
+\]
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_25 ===========

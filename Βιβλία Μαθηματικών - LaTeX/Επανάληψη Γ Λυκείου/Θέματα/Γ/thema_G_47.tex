@@ -1,0 +1,93 @@
+\begin{thema}{Γ}
+Σε έναν φανοστάτη ύψους $H = 6$ \si{m} πλησιάζει ένας άνθρωπος ύψους $h = 2$ \si{m} με σταθερή ταχύτητα $u = 1.5$ \si{m/s} επί ευθύγραμμου οριζόντιου δρόμου. 
+\begin{center}
+\begin{tikzpicture}[scale=1.2, font=\sffamily]
+
+    % ==========================================
+    % Παράμετροι Σχήματος
+    % ==========================================
+    \def\H{6.0}   % Ύψος φανοστάτη
+    \def\h{2.0}   % Ύψος ανθρώπου
+    % Για το σχήμα επιλέγουμε μια απόσταση x=4. 
+    % Με όμοια τρίγωνα το μήκος της σκιάς s είναι: s/2 = (4+s)/6 => 6s = 8 + 2s => 4s = 8 => s = 2
+    \def\x{4.0}   % Απόσταση ανθρώπου από φανοστάτη
+    \def\s{2.0}   % Μήκος σκιάς
+
+    % ==========================================
+    % Συντεταγμένες
+    % ==========================================
+    \coordinate (L_base) at (0, 0);                 % Βάση Φανοστάτη
+    \coordinate (L_top)  at (0, \H);                % Λάμπα
+    
+    \coordinate (M_base) at (\x, 0);                % Βάση Ανθρώπου
+    \coordinate (M_top)  at (\x, \h);               % Κεφάλι Ανθρώπου
+    
+    \coordinate (S_tip)  at (\x + \s, 0);           % Άκρη Σκιάς (x+s)
+
+    % ==========================================
+    % 1. Σχεδίαση Εδάφους & Αντικειμένων
+    % ==========================================
+    % Έδαφος
+    \draw[thick, fill=gray!20] (-1, -0.3) rectangle (\x + \s + 2, 0);
+    \draw[very thick] (-1, 0) -- (\x + \s + 2, 0);
+
+    % Φανοστάτης (Στύλος και Λάμπα)
+    \draw[line width=4pt, gray!80!black] (L_base) -- (L_top);
+    \fill[secondcolor!80!secondcolor] (L_top) circle (0.15);
+    \filldraw[fill=secondcolor!20, draw=secondcolor!50!secondcolor, thick, opacity=0.7] (L_top) circle (0.4); % Λάμψη
+
+    % Άνθρωπος (Αναπαράσταση με χοντρή γραμμή)
+    \draw[line width=3pt, \xrwma!70!black] (M_base) -- (M_top);
+    \filldraw[\xrwma!70!black] (\x, \h-0.15) circle (0.15); % Κεφάλι
+
+    % Σκιά (Ημι-διαφανής μαύρη γραμμή στο έδαφος)
+    \draw[line width=4pt, black, opacity=0.3] (M_base) -- (S_tip);
+
+    % ==========================================
+    % 2. Φωτεινή Ακτίνα
+    % ==========================================
+    \draw[dashed, thick, secondcolor] (L_top) -- (M_top) -- (S_tip);
+
+    % ==========================================
+    % 3. Ετικέτες, Διαστάσεις και Ταχύτητα
+    % ==========================================
+    
+    % Ταχύτητα (Διάνυσμα υ)
+    \draw[->, >=latex, ultra thick, secondcolor] (\x, \h/2) -- (\x-1.5, \h/2) node[above] {$u = 1.5$ \si{m/s}};
+
+    % Ύψος Φανοστάτη (H)
+    \draw[<->, >=latex] (-0.6, 0) -- (-0.6, \H) node[midway, left] {$H = 6$ \si{m}};
+    \draw[dashed, gray] (L_base) -- (-0.8, 0);
+    \draw[dashed, gray] (L_top) -- (-0.8, \H);
+
+    % Ύψος Ανθρώπου (h)
+    \draw[<->, >=latex] (\x + 0.5, 0) -- (\x + 0.5, \h) node[midway, right] {$h = 2$ \si{m}};
+
+    % Απόσταση (x)
+    \draw[<->, >=latex] (0, -0.6) -- (\x, -0.6) node[midway, below] {$x$};
+    \draw[dashed, gray] (L_base) -- (0, -0.8);
+    \draw[dashed, gray] (M_base) -- (\x, -0.8);
+
+    % Μήκος Σκιάς (s)
+    \draw[<->, >=latex] (\x, -0.6) -- (\x + \s, -0.6) node[midway, below] {$s$};
+    \draw[dashed, gray] (S_tip) -- (\x + \s, -0.8);
+
+    % Συνολική Απόσταση (y = x + s)
+    \draw[<->, >=latex, \xrwma!70!black] (0, -1.2) -- (\x + \s, -1.2) node[midway, below] {$y = x + s$};
+    \draw[dashed, \xrwma!70!black] (0, -0.8) -- (0, -1.4);
+    \draw[dashed, \xrwma!70!black] (\x + \s, -0.8) -- (\x + \s, -1.4);
+
+    % Κουκκίδες Σημείων
+    \filldraw[black] (L_base) circle (1.5pt) node[above right] {$O$};
+    \filldraw[black] (M_base) circle (1.5pt) node[above right] {$A$};
+    \filldraw[black] (S_tip) circle (1.5pt) node[above right] {$\Gamma$};
+
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Αν τη χρονική στιγμή $t$ ο άνθρωπος απέχει απόσταση $x(t)$ από τον φανοστάτη, να εκφράσετε το μήκος της σκιάς του $s(t)$ συναρτήσει του $x(t)$.
+  \item Αποδείξτε ότι η άκρη της σκιάς του ανθρώπου κινείται με σταθερή ταχύτητα ως προς τη βάση του φανοστάτη. 
+  \item Έστω $\theta(t)$ η γωνία που σχηματίζει η οπτική ακτίνα από την κορυφή του φανοστάτη στο κεφάλι του ανθρώπου με την κορυφή του φανοστάτη. Εκφράστε την $\ef\theta$ συναρτήσει του $x$.
+  \item Βρείτε το ρυθμό μεταβολής της γωνίας $\theta$ τη χρονική στιγμή που ο άνθρωπος απέχει $4$ m από τον φανοστάτη.
+\end{erwthma}
+\end{thema}

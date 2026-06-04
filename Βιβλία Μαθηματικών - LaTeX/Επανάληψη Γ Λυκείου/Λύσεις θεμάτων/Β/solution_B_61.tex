@@ -1,0 +1,46 @@
+\begin{thema}{Β}
+Δίνονται οι συναρτήσεις $f(x) = \ln x$ (με $x>0$) και $g(x) = a x^2 + \beta$ (με $x \in \mathbb{R}$). 
+\begin{erwthma}
+\item Για να δέχονται κοινή εφαπτομένη στο $x_0=1$, πρέπει να ικανοποιούνται δύο συνθήκες: το κοινό σημείο, και η κοινή κλίση εφαπτομένης.
+Οι συναρτήσεις είναι παραγωγίσιμες: $f'(x) = \frac{1}{x}$ και $g'(x) = 2ax$.
+1. $f(1) = g(1) \Leftrightarrow \ln 1 = a(1)^2 + \beta \Leftrightarrow 0 = a + \beta \Leftrightarrow \beta = -a$ (1).
+2. $f'(1) = g'(1) \Leftrightarrow \frac{1}{1} = 2a(1) \Leftrightarrow 1 = 2a \Leftrightarrow a = \frac{1}{2}$.
+Αντικαθιστώντας στη συνθήκη (1) προκύπτει $\beta = -\frac{1}{2}$.
+Άρα $a=\frac{1}{2}$ και $\beta=-\frac{1}{2}$.
+
+\item Αντικαθιστούμε τα $a, \beta$: $g(x) = \frac{1}{2}x^2 - \frac{1}{2}$.
+Η συνάρτηση $h$ δίνεται από τον τύπο $h(x) = f(x) - g(x) = \ln x - \frac{1}{2}x^2 + \frac{1}{2}$ για $x>0$.
+Η παράγωγός της είναι:
+\[ h'(x) = \frac{1}{x} - x = \frac{1-x^2}{x} = \frac{(1-x)(1+x)}{x} \]
+Επειδή $x>0$, το $(1+x)$ είναι πάντα θετικό, και το $x > 0$. Το πρόσημο καθορίζεται από το $1-x$.
+- Για $x \in (0, 1)$, $1-x > 0 \Rightarrow h'(x) > 0$. Άρα γνησίως αύξουσα στο $(0, 1]$.
+- Για $x \in (1, +\infty)$, $1-x < 0 \Rightarrow h'(x) < 0$. Άρα γνησίως φθίνουσα στο $[1, +\infty)$.
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = red7,colorL = red9,colorV = red7]%
+{$x$ / .8,$h'(x)$ /0.8,$h(x)$/0.8}%
+{$0$,$1$,$+\infty$}%
+\tkzTabLine{ d, +, z, -, }
+\tkzTabLine{ d, \nearrow, t, \searrow, }
+\end{tikzpicture}
+\end{center}
+Παρουσιάζει ολικό μέγιστο στο $x=1$ με τιμή $h(1) = \ln 1 - \frac{1}{2}(1^2) + \frac{1}{2} = 0 - \frac{1}{2} + \frac{1}{2} = 0$.
+
+\item Από τη μελέτη του ερωτήματος 2, διαπιστώσαμε ότι η μέγιστη τιμή της συνάρτησης $h(x)$ είναι το 0. 
+Αυτό σημαίνει ότι για κάθε $x > 0$ ισχύει:
+\[ h(x) \le h(1) \Leftrightarrow h(x) \le 0 \]
+Αντικαθιστούμε τον τύπο της $h(x)$:
+\[ \ln x - \frac{1}{2}x^2 + \frac{1}{2} \le 0 \Leftrightarrow \ln x \le \frac{1}{2}x^2 - \frac{1}{2} \Leftrightarrow \ln x \le \frac{x^2-1}{2} \]
+Η σχέση ισχύει για κάθε $x > 0$.
+
+\item Το εμβαδόν του χωρίου μεταξύ της $C_h$, του $x'x$ και των $x=1, x=e$ δίνεται από το ολοκλήρωμα $\int_1^e |h(x)|dx$.
+Στο διάστημα $[1, e]$ (και γενικά στο $\mathbb{R}_+$), ισχύει $h(x) \le 0$. Συνεπώς $|h(x)| = -h(x)$.
+\[ E = \int_1^e -h(x) dx = \int_1^e \left( \frac{1}{2}x^2 - \frac{1}{2} - \ln x \right) dx = \frac{1}{2}\int_1^e x^2 dx - \frac{1}{2}\int_1^e 1 dx - \int_1^e \ln x dx \]
+Υπολογίζουμε ένα-ένα:
+1) $\int_1^e \frac{1}{2}x^2 dx = \frac{1}{2} \left[ \frac{x^3}{3} \right]_1^e = \frac{e^3-1}{6}$
+2) $\int_1^e \frac{1}{2} dx = \frac{1}{2} (e-1)$
+3) $\int_1^e \ln x dx = \int_1^e (x)' \ln x dx = [x \ln x]_1^e - \int_1^e x \frac{1}{x} dx = e \ln e - 0 - \int_1^e 1 dx = e - (e-1) = 1$
+Προσθέτοντας:
+\[ E = \frac{e^3-1}{6} - \frac{e-1}{2} - 1 = \frac{e^3-1}{6} - \frac{3e-3}{6} - \frac{6}{6} = \frac{e^3 - 1 - 3e + 3 - 6}{6} = \frac{e^3 - 3e - 4}{6} \text{ τ.μ.} \]
+\end{erwthma}
+\end{thema}

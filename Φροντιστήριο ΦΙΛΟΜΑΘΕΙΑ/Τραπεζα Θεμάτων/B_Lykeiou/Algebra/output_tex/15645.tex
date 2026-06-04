@@ -1,47 +1,31 @@
-% ===================================================================
-%  Αρχείο: 15645_tikz.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
-% ===================================================================
-
-ΘΕΜΑ 2
-
+\Askhsh{15645}{2}
+\begin{ylh}{1}
+\item 2.1 Μονοτονία-Ακρότατα-Συμμετρίες Συνάρτησης
+\end{ylh}
 Αντικείμενο κινείται κατακόρυφα. Tο παρακάτω σχήμα αναπαριστά το ύψος $h$ του αντικειμένου από το έδαφος για κάθε χρονική στιγμή $t$. Να βρείτε:
-
 \begin{center}
-\begin{tikzpicture}[scale=1, >=latex]
-    \draw[very thin, color=gray!30] (-0.5,-0.5) grid (6.5,2.5);
-    \draw[->] (-0.5,0) -- (7,0) node[right] {$t$ (min)};
-    \draw[->] (0,-0.5) -- (0,3) node[above] {$h$ (m)};
-    
-    \foreach \x in {1,2,3,4,5,6}
-        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
-    \foreach \y in {1,2}
-        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
-    \node[below left, font=\small] at (0,0) {$0$};
-    
-    % Parabolic arc h(t) = -2/9 * (t-3)^2 + 2
-    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=0:6] plot (\x, {-2/9*(\x-3)*(\x-3) + 2});
-    
-    % Max point (3,2)
-    \draw[dashed] (3,0) -- (3,2) -- (0,2);
-    \filldraw (3,2) circle (1.5pt);
-    
-    % Height 1 indicator
-    \draw[dashed, red] (0,1) -- (6,1);
-    \node[red, right] at (6,1) {$h=1$};
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle, xlabel = {$t$ (\text{min})}, ylabel = {$h$ (\text{m})},
+    xmin = -0.5, xmax = 7, ymin = -0.5, ymax = 3,
+    xtick = {1,2,3,4,5,6}, ytick = {1,2},
+    grid = both, grid style = {gray!30},
+    samples = 150, width = 10cm, height = 7cm,
+    tick label style = {font=\small},
+]
+    \addplot[very thick, maincolor, domain=0:6] {-2/9*(x-3)^2 + 2};
+    \draw[dashed] (axis cs:3,0) -- (axis cs:3,2) -- (axis cs:0,2);
+    \filldraw (axis cs:3,2) circle (1.5pt);
+    \draw[dashed, secondarycolor] (axis cs:0,1) -- (axis cs:6,1) node[right, pos=1] {$h=1$};
+\end{axis}
 \end{tikzpicture}
 \end{center}
-
 \begin{alist}
 \item Ποιες χρονικές στιγμές το αντικείμενο απέχει 1m από το έδαφος.
-
 \monades{5}
-
 \item Ποια είναι η μέγιστη απόσταση του αντικειμένου από το έδαφος και ποια χρονική στιγμή την επιτυγχάνει.
-
 \monades{10}
-
 \item Ποιο χρονικό διάστημα το αντικείμενο απομακρύνεται από το έδαφος.
-
 \monades{10}
 \end{alist}
+

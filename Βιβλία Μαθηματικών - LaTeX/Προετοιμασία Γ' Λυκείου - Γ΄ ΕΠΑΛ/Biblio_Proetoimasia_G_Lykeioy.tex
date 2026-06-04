@@ -1,26 +1,30 @@
 \documentclass[twoside,11pt,a4paper]{book}
-\usepackage[table]{xcolor}
 \usepackage[amsbb,mtpfrak,zswash,mtpcal]{mtpro2}
 \usepackage[no-math,cm-default]{fontspec}
 \usepackage{xgreek}
 \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
 \setmainfont[Mapping=tex-text,Numbers=Lining,Scale=1.0,BoldFont={Minion Pro Bold}]{Minion Pro}
 \defaultfontfeatures{Ligatures=TeX}
-\font\kefalaio="Minion Pro Bold" at 36pt
-\font\ArKef="Minion Pro Bold Italic" at 72pt
-\font\OnKef="Minion Pro" at 20pt
-\font\OnPar="Minion Pro Bold" at 18pt
-\newfontfamily\scfont{GFS Artemisia}
+\font\kefalaio="Nimbus Roman Bold" at 36pt
+\font\ArKef="Century Gothic Bold" at 72pt
+\font\OnKef="Century Gothic" at 20pt
+\font\OnPar="Century Gothic Bold" at 18pt
+\font\onoma="Century Gothic Bold" at 14pt
+\font\onomaaskpar="Century Gothic Bold" at 20pt
+\newfontfamily\scfont{Minion Pro}
+\usepackage{fontawesome5}
+%\newfontfamily{\FA}{fontawesome.otf}
 \usepackage[inner=2.00cm, outer=1.50cm, top=3.00cm, bottom=2.00cm %,paperwidth=17cm,paperheight=24cm
 ]{geometry}
 \usepackage{amsmath}
 \usepackage[amsbb,mtpfrak,zswash,mtpcal]{mtpro2}
-\usepackage{makeidx,eurosym,array}
-\usepackage{longtable,xcolor,varwidth}
+\usepackage{makeidx,eurosym}
+\usepackage[usenames,dvipsnames,cmyk,table,x11names]{xcolor}
+\usepackage{longtable,varwidth,tcolorbox}
 \usepackage{float}
-%\usepackage{subfig}
-\def\xrwma{cyan}
-\def\xrwmath{cyan!70!black}
+\usepackage{subfig}
+\def\xrwma{cyan!70!black}
+\def\xrwmath{black}
 \usepackage{etoolbox}
 \makeatletter
 \newif\ifLT@nocaption
@@ -34,10 +38,9 @@
 \makeatother
 \makeindex
 \usepackage{tikz,pgfplots}
-\usepackage{tkz-euclide,tkz-fct}
+\usepackage{tkz-euclide}
 \usetikzlibrary{fadings}
 \usepackage{wrap-rl}
-\usetkzobj{all}
 \usepackage{calc}
 \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
 \usepackage{cleveref}
@@ -72,9 +75,9 @@
 \fancyhead{} %
 \renewcommand{\headrulewidth}{0pt}}
 
-\newcounter{thewrhma}[chapter]
-\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
-\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%\newcounter{thewrhma}[chapter]
+%\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+%\newcommand{\Thewrhma}[1]{\refstepcounter{thewrhma}{\textbf{\textcolor{\xrwmath}{{\large Θεώρημα\hspace{2mm}\thethewrhma\;}:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
 
 \newcounter{porisma}[chapter]
 \renewcommand{\theporisma}{\thechapter.\arabic{porisma}}\newcommand{\Porisma}[1]{\refstepcounter{porisma}\textcolor{black}{\textbf{ΠΟΡΙΣΜΑ\hspace{2mm}\theporisma\hspace{1mm} \MakeUppercase{#1}}}\\}{}
@@ -83,12 +86,8 @@
 \renewcommand{\theprotasi}{\thechapter.\arabic{protasi}}\newcommand{\Protasi}[1]{\refstepcounter{protasi}\textcolor{black}{\textbf{ΠΡΟΤΑΣΗ\hspace{2mm}\theprotasi\hspace{1mm} \MakeUppercase{#1}}}\\}{}
 
 
-\newcounter{orismos}[chapter]
-\renewcommand{\theorismos}{\arabic{orismos}}   
-\newcommand{\Orismos}[1]{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\thechapter.\theorismos\;}:\;}}}}\hspace{1mm} \MakeUppercase{\textbf{#1}\\}}{}
 \usepackage{venndiagram,mathimatika,tkz-tab,gensymb}
 \usepackage{tikzpagenodes}
-\usetkzobj{all}
 %--------- tkz-tab Πίνακες --------
 \makeatletter
 \xpatchcmd{\tkzTabLine}
@@ -110,10 +109,10 @@
 %\node[inner sep=0pt] at ($(current page.north) +			(0cm,-1.38in)$) {\includegraphics[width=17cm]{Kefalaio}};
 \node[anchor=west,xshift=.1\paperwidth,yshift=.14\paperheight,rectangle]
 {{\color{white}\fontsize{30}{20}\textbf{\textcolor{black}{\contour{white}{ΚΕΦΑΛΑΙΟ}}}}};
-\node[anchor=west,xshift=.09\paperwidth,yshift=.08\paperheight,rectangle] {\fontsize{24}{20} {\color{black}{{\textcolor{black}{\contour{white}{\sc##1}}}}}};
+\node[anchor=west,xshift=.09\paperwidth,yshift=.08\paperheight,rectangle] {\fontsize{24}{20} {\color{black}{\textcolor{black}{\sc##1}}}};
 %\fill[fill=black] (12.2,2) rectangle (14.8,4.7);
-\node[anchor=west,xshift=.74\paperwidth,yshift=.11\paperheight,rectangle]
-{{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{white}{\contour{black}{\thechapter}}}}}};
+\node[anchor=west,xshift=.74\paperwidth,yshift=0.1\paperheight,rectangle]
+{\color{white}\fontsize{80}{20}\textbf{\textit{\textcolor{black}{\thechapter}}}};
 \end{tikzpicture}
 };
 \end{tikzpicture}
@@ -189,7 +188,9 @@
 \end{tikzpicture}}%
 \@starttoc{toc}}
 \makeatother
+
 \usepackage[contents={},scale=1,opacity=1,color=black,angle=0]{background}
+
 \newcommand\blfootnote[1]{%
 \begingroup
 \renewcommand\thefootnote{}\footnote{#1}%
@@ -230,6 +231,15 @@
 \end{center}}
 \usepackage[labelfont={footnotesize,it,bf},font={footnotesize},skip=5pt]{caption}
 
+
+\newcommand{\thewria}{\begin{center}
+\vspace{-3mm}{\large \textbf{\textcolor{black}{ΘΕΩΡΙΑ}}}\\\vspace{-2mm}
+\begin{tikzpicture}
+\shade[left color=white, right color=black!80!black,] (-3cm,0) rectangle (0,.2mm);
+\shade[left color=black!80!black, right color=white,] (0,0) rectangle (3cm,.2mm);   
+\end{tikzpicture}
+\end{center}}
+
 %-------- ΠΙΝΑΚΕΣ ---------
 \usepackage{booktabs}
 %----------------------
@@ -264,37 +274,26 @@
 
 \usepackage{caption}
 
-
 \tikzstyle{pl}=[line width=0.3mm]
 \tikzstyle{plm}=[line width=0.4mm]
-%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
-\newcounter{paradeigma}[section]
-\renewcommand{\theparadeigma}{\bf\thechapter.\arabic{paradeigma}}   
-\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{black}{\textbf{{\large Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
-%-----------------------------------
-
-%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
-\newcommand{\lysh}{{\textbf{ΛΥΣΗ}}}
-%------------------------------------
+%%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+%\newcounter{paradeigma}[section]
+%\renewcommand{\theparadeigma}{\bf\thechapter.\arabic{paradeigma}}   
+%\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{black}{\textbf{{\large Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}}} \MakeUppercase{\textbf{#1}}\\}{}
+%%-----------------------------------
+%
+%%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+%\newcommand{\lysh}{{\textbf{ΛΥΣΗ}}}
+%%------------------------------------
 
 %------ ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ ΤΙΤΛΟΣ ---------
 \newcommand{\Lymena}{\begin{center}
 \begin{tikzpicture}
-\path[left color=black,right color=black,middle color=black!30!white] (-9cm,-.6cm) rectangle (8.5cm,.6cm);
-\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}}};  
+\path[left color=black!40!white,right color=black!40!white,middle color=black!10!white] (-9cm,-.6cm) rectangle (8.5cm,.6cm);
+\node at (-.25cm,0) {\Large \textcolor{black}{\textbf{ΛΥΜΕΝΑ ΠΑΡΑΔΕΙΓΜΑΤΑ}}};  
 \end{tikzpicture}
 \end{center}}
 %--------------------------------------
-
-%------ ΘΕΩΡΙΑ ΤΙΤΛΟΣ ---------
-\newcommand{\Thewria}{\begin{center}
-\begin{tikzpicture}
-\path[left color=black,right color=black,middle color=black!30!white] (-9cm,-.6cm) rectangle (8.5cm,.6cm);
-\node at (-.25cm,0) {\Large \textcolor{white}{\textbf{ΘΕΩΡΙΑ}}};  
-\end{tikzpicture}
-\end{center}}
-%--------------------------------------
-
 
 %--------- ΑΛΥΤΕΣ ΑΣΚΗΣΕΙΣ ΤΙΤΛΟΣ ----------
 \newcommand{\Alyta}{\begin{center}
@@ -308,46 +307,49 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,theorems,breakable}
 %---------- ΜΕΘΟΔΟΣ --------------
-\newcounter{Methodos}[section]
-\renewcommand{\theMethodos}{\arabic{Methodos}}
+\newcounter{Methodos}[chapter]
+\renewcommand{\theMethodos}{\thechapter.\arabic{Methodos}}
 \newenvironment{Methodos}[2][\linewidth]
 {\refstepcounter{Methodos}
 \begin{tcolorbox}[breakable,
 enhanced standard,
-boxrule=0.7pt,titlerule=-.2pt,fuzzy shadow={1.5mm}{-1.5mm}{0mm}{.35mm}{black!70!white},
+boxrule=0.7pt,titlerule=-.2pt,drop fuzzy shadow southeast=black!50,
 width=\linewidth,
 title style={color=white},
 overlay unbroken and first={
-\path[left color=cyan!70!black,right color=cyan,draw=black]
-([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+\path[left color=cyan!80!black,right color=cyan!50!white,draw=black]
+([yshift=-\pgflinewidth+0.2pt,xshift=.2pt]frame.north west) to ([yshift=-5pt,xshift=-.5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth+0.2pt]frame.north east) -- cycle;
 },
 fonttitle=\bfseries,
 before=\par\medskip\noindent,
 after=\par\medskip,
 toptitle=3pt,
 top=11pt,topsep at break=-5pt,
-colback=white,title={\large Μέθοδος \thechapter.\theMethodos} : {\textcolor{black}{#1}}]}
+colback=white,title={\large Μέθοδος \theMethodos} : {\textcolor{black}{\MakeUppercase{\onoma#1}}}]}
 {\end{tcolorbox}}
 %------------------------------------------
 %-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
-\newcounter{parathrhsh}[section]
+\newcounter{parathrhsh}[chapter]
 \renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
-\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{Παρατήρηση\hspace{2mm}\theparathrhsh}}}{}
+\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\faLightbulb\ \ \ \textbf{Παρατήρηση\hspace{2mm}\thechapter.\theparathrhsh}}}{}
 
 %----------- ΠΑΡΑΤΗΡΗΣΗ------------------
 \newenvironment{parat}[1]
 {\begin{tcolorbox}[title=\Parathrhsh,
-enhanced,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+breakable,
+enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
 {black!50!white},
-colback=cyan!5!white,
+colback=yellow!5!white,
 boxrule=0.1pt,
-colframe=\xrwma,
+colframe=yellow!70!black,
 fonttitle=\bfseries,width=#1]}
 {\end{tcolorbox}}
 %-----------------------------------------
+%-----------------------------------------
+%---------------------------------------
 %---------- ΛΙΣΤΕΣ ----------------------
 \newlist{bhma}{enumerate}{3}
-\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},itemsep=0mm,leftmargin=0cm,itemindent=1.7cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+\setlist[bhma]{label=\bf\textit{\arabic*\textsuperscript{o}\;Βήμα :},leftmargin=3mm,itemindent=1.8cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
 \newlist{rlist}{enumerate}{3}
 \setlist[rlist]{itemsep=0mm,label=\roman*.}
 
@@ -367,6 +369,7 @@ fonttitle=\bfseries,width=#1]}
 %\begin{bhma}[leftmargin=.7cm]
 \newcommand{\tss}[1]{\textsuperscript{#1}}
 \newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\newcommand{\tssLb}[1]{\MakeLowercase{\textsuperscript{\textbf{#1}}}}
 %------------------------------------------
 \setlength{\parindent}{0pt}
 \setlist[itemize]{itemsep=0mm}
@@ -410,12 +413,62 @@ fonttitle=\bfseries,width=#1]}
 }
 \makeatother
 
+%----------- ΟΡΙΣΜΟΣ------------------
+\newcounter{orismos}[chapter]
+\renewcommand{\theorismos}{\thechapter.\arabic{orismos}}   
+\newcommand{\Orismos}{\refstepcounter{orismos}{\textbf{\textbf{\textcolor{\xrwma}{{\large Ορισμός\hspace{2mm}\theorismos}}}}}\hspace{1mm}}{}
+%------------------------------------
+\newenvironment{orismos}[1]
+{\begin{tcolorbox}[title=\Orismos\ \ :\ \  {\textcolor{black}{\MakeUppercase{\onoma#1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=\xrwma]}
+{\end{tcolorbox}}
+%-----------------------------------------
 
+%----------- ΘΕΩΡΗΜΑ------------------
+\newcounter{thewrhma}[chapter]
+\renewcommand{\thethewrhma}{\thechapter.\arabic{thewrhma}} 
+\newcommand{\Thewrhma}{\refstepcounter{thewrhma}{\textbf{\textcolor{olivedrab}{{\large Θεώρημα\hspace{2mm}\thethewrhma}}\hspace{1mm}}}}{}
 
-\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
-\tikzset{square arrow/.style={to path={-- ++(0,-.25) -| (\tikztotarget)}}}
+\newenvironment{thewrhma}[1]
+{\begin{tcolorbox}[title=\Thewrhma\ \ :\ \  {\textcolor{black}{\MakeUppercase{\onoma#1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{olivedrab},leftrule=2mm,sharp corners,coltitle=black]}
+{\end{tcolorbox}}
+%-----------------------------------------
 
+%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
+\newcounter{paradeigma}[chapter]
+\renewcommand{\theparadeigma}{\bf\thechapter.\arabic{paradeigma}}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\textcolor{magenta!80!black}{\textbf{{\large \onoma{\faPlay\ \ Παράδειγμα\hspace{2mm}\theparadeigma}\;:\;}\hspace{1mm}}} {\onoma{#1}}\\}{}
+%-----------------------------------
 
+%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
+\newcommand{\lysh}{\textcolor{cyan!80!black}{\onoma{\faCheck\ ΛΥΣΗ}}}
+%------------------------------------
+
+%-------- ΠΡΟΣΟΧΗ -----------------
+\newcounter{prosoxi}[chapter]
+\renewcommand{\theprosoxi}{\arabic{prosoxi}}  
+\newcommand{\Prosoxi}[1]{\refstepcounter{prosoxi}{\faExclamationTriangle\ \ \ \textbf{Προσοχή\hspace{2mm}\thechapter.\theprosoxi}}}{}
+
+%----------- ΠΡΟΣΟΧΗ------------------
+\newenvironment{prosoxi}[1]
+{\begin{tcolorbox}[title=\Prosoxi,
+breakable,
+enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
+{black!50!white},
+colback=red!5!white,
+boxrule=0.1pt,
+colframe=red!80!black,
+fonttitle=\bfseries,width=#1]}
+{\end{tcolorbox}}
+%-----------------------------------------
+\usepackage{lipsum}
 
 
 
@@ -427,17 +480,15 @@ fonttitle=\bfseries,width=#1]}
 \newgeometry{left=2.5cm,top=2.5cm} %defines the geometry for the titlepage
 \pagecolor{white}
 \begin{center}
-\begin{tabular}{cc}
-Αλέξανδρος Πολίτης & Σπύρος Φρόνιμος\\Μαθηματικός & Μαθηματικός
-\end{tabular}
+Σπύρος Φρόνιμος\\Μαθηματικός
 \end{center}
 \noindent
 \par
 \noindent
 \mbox{}\\\\
 \begin{center}
-\textbf{\fontsize{20}{40}\selectfont{ΕΠΑΝΑΛΗΨΗ ΣΤΑ ΜΑΘΗΜΑΤΙΚΑ}}\par\mbox{}\\\vspace{-3mm}
-\textbf{\fontsize{20}{40}\selectfont{ΓΙΑ ΤΗ Γ΄ ΛΥΚΕΙΟΥ}}\par\mbox{}\\
+\textbf{{\huge ΕΠΑΝΑΛΗΨΗ ΣΤΑ ΜΑΘΗΜΑΤΙΚΑ}}\par\mbox{}\\\vspace{-3mm}
+\textbf{{\LARGE ΓΙΑ ΤΗ Γ΄ ΛΥΚΕΙΟΥ}}\par\mbox{}\\
 \vspace{-4mm}
 \rule{12cm}{0.1mm}\\
 \vspace{3mm}
@@ -459,7 +510,7 @@ fonttitle=\bfseries,width=#1]}
 \color{black}
 \begin{center}
 {\large{ΕΚΔΟΣΕΙΣ \_\_\_\_\_}\\
-\large{ΚΕΡΚΥΡΑ 2018}}
+\large{ΚΕΡΚΥΡΑ }}
 \vskip\baselineskip
 \end{center}
 \hbox{ % Horizontal box
@@ -469,7 +520,6 @@ fonttitle=\bfseries,width=#1]}
 \parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
 
 {\textbf{Επανάληψη στα μαθηματικά}\\\textbf{για τη Γ΄ Λυκείου}\\\\\noindent 
-\textbf{Αλέξανδρος Πολίτης - Μαθηματικός}\\
 \textbf{Σπύρος Φρόνιμος - Μαθηματικός}\\
 e-mail : spyrosfronimos@gmail.com\\[0.5\baselineskip]
 Σελίδες : ...\\
@@ -487,7 +537,7 @@ ISBN : ...\\
 \newpage
 \mbox{}\\\\\\\\\\\\
 \hspace*{0.75\textwidth}
-\textit{{\large Αφιέρωση.}}
+\textit{{\large Στη γυναίκα μου.}}
 \newpage
 \mbox{}
 \newpage
@@ -499,11 +549,12 @@ ISBN : ...\\
 \end{titlepage}
 \restoregeometry % restores the geometry
 \tableofcontents
+\newcolumntype{K}{>{\centering\arraybackslash}m{7.75cm} }
 \chapter*{Πίνακας Συμβόλων}
 \addtocontents{toc}{{\sc{\large Πίνακας Συμβόλων}}\dotfill\thepage\\\\}
 {\par\centering
 
-\begin{tabularx}{\textwidth}{c>{\centering}m{3.1cm}|>{\centering\arraybackslash}m{11.75cm}}
+\begin{tabularx}{\textwidth}{c>{\centering}m{3.1cm}K}
 \hline\rule[-2ex]{0pt}{5.5ex}\textbf{Σύμβολο} & \textbf{Όνομα} & \textbf{Περιγραφή}\\
 \hhline{===}\rule[-2ex]{0pt}{8.5ex}
 $ \neq $ & Διάφορο & Εκφράζει ότι δύο στοιχεία είναι διαφορετικά μεταξύ τους.\\
@@ -541,7 +592,7 @@ $ \sqrt{\;\;} $ & Τετραγωνική ρίζα & Βλ. \textbf{Ορισμό .
 \newpage
 \noindent
 {\par\centering
-\begin{tabularx}{\textwidth}{c|>{\centering}m{3.1cm}|>{\centering\arraybackslash}m{11.75cm}}
+\begin{tabularx}{\textwidth}{c|>{\centering}m{3.1cm}|>{\centering\arraybackslash}m{7.75cm}}
 \hline\rule[-2ex]{0pt}{5.5ex}\textbf{Σύμβολο} & \textbf{Όνομα} & \textbf{Περιγραφή}\\
 \hhline{===}\rule[-2ex]{0pt}{8.5ex}
 $ \sqrt[\nu]{\;\;} $ & ν-οστή ρίζα & Βλ. \textbf{Ορισμό ...} \\
@@ -564,15 +615,21 @@ $ \bot $ & Κάθετο & \\
 \end{tabularx}
 \par}
 \mainmatter
-\part{Άλγεβρα}
+
+%\part{Άλγεβρα}
+%\pagestyle{fancy}
+%%\input{Pr_Arithmoi.tex}
+%\input{Eksiswseis.tex}
+%
+%\part{Γεωμετρία}
+%\backmatter
+%\pagestyle{empty}
+%\listoffigures
+%\listoftables
+
+\part{Διαγώνισμα}
 \pagestyle{fancy}
-%\input{Pr_Arithmoi.tex}
 \input{Eksiswseis.tex}
-\part{Γεωμετρία}
-\backmatter
-\pagestyle{empty}
-\listoffigures
-\listoftables
 \end{document}
 
 

@@ -1,0 +1,32 @@
+\begin{thema}{Β}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση μιας συνάρτησης $f$ ορισμένης στο $\mathbb{R}$, η οποία παρουσιάζει πλάγια ασύμπτωτη $y = \frac{1}{2}x$ στο $+\infty$ και οριζόντια ασύμπτωτη $y = -1$ στο $-\infty$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+  \draw[help lines, gray!30] (-6,-3) grid (8,5);
+  \draw[-latex] (-6.3,0) -- (8.3,0) node[right] {$x$};
+  \draw[-latex] (0,-3.3) -- (0,5.3) node[above] {$y$};
+  \foreach \x in {-5,-4,-3,-2,-1,1,2,3,4,5,6,7}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\tiny] {$\x$};
+  \foreach \y in {-2,-1,1,2,3,4}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  % asymptotes
+  \draw[dashed, red!60!black] (-6,-1) -- (0,-1) node[above left,font=\footnotesize] {$y=-1$};
+  \draw[dashed, red!60!black] (0,0) -- (8,4) node[right,font=\footnotesize] {$y=\frac{x}{2}$};
+  % curve
+  \draw[very thick, blue!70!black, domain=-6:8, samples=100, smooth]
+    plot (\x, {0.5*\x - 1/(1+exp(-\x)) + 0.5 - 0.5*\x*(1/(1+exp(-\x+2)))  + 0.5*\x*(1/(1+exp(-\x+2)))  });
+  % simplified: just draw approximate
+  \draw[very thick, blue!70!black, smooth, tension=0.4]
+    plot coordinates {(-6,-0.95) (-4,-0.9) (-2,-0.5) (0,0) (2,0.8) (4,1.8) (6,2.9) (8,3.95)};
+  \filldraw[blue!70!black] (0,0) circle (2pt) node[above left,font=\footnotesize] {$O$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+  \item Να βρείτε τα $\displaystyle\lim_{x \to -\infty} f(x)$ και $\displaystyle\lim_{x \to +\infty} \frac{f(x)}{x}$.
+  \item Ποιες είναι οι ασύμπτωτες της $C_f$; Να τις αιτιολογήσετε.
+  \item Η $f$ τέμνει τον $x'x$ πόσες φορές; Να αιτιολογήσετε.
+  \item Από τη γραφική, μπορείτε να συμπεράνετε αν η $f$ είναι γνησίως αύξουσα σε όλο το $\mathbb{R}$;
+\end{erwthma}
+\end{thema}

@@ -1,29 +1,81 @@
-\documentclass[a4paper,11pt,twoside]{article}
+\documentclass[11pt,twoside,openright]{book}
+
+% ==============================================================================
+% 1. ΓΛΩΣΣΑ, ΓΡΑΜΜΑΤΟΣΕΙΡΕΣ ΚΑΙ ΚΩΔΙΚΟΠΟΙΗΣΗ
+% ==============================================================================
 \usepackage[utf8]{inputenc}
-\usepackage{xparse}
+\usepackage[T1]{fontenc}
 \usepackage[english,greek]{babel}
 \usepackage{alphabeta}
 \usepackage{nimbusserif}
-\usepackage[T1]{fontenc}
-\usepackage[outer=1.50cm, inner=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
-\usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype}
-\usetikzlibrary{arrows.meta}
-\usepackage[most]{tcolorbox}
-\usetikzlibrary{tikzmark}
+\usepackage{microtype,ifthen}
+\usepackage{soul}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+\newcommand{\en}[1]{{\selectlanguage{english}#1\selectlanguage{greek}}}
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
+\AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
+
+
+% ==============================================================================
+% 2. ΣΤΗΣΙΜΟ ΣΕΛΙΔΑΣ (GEOMETRY & FANCYHDR)
+% ==============================================================================
+\usepackage[
+    paperwidth=21.6cm,      % Το μέγεθος χαρτιού του PDF (Καθαρό + 3mm Bleed γύρω γύρω)
+    paperheight=30.3cm,
+    layoutwidth=21.0cm,     % Το τελικό (κομμένο) μέγεθος του βιβλίου
+    layoutheight=29.7cm,
+    layoutvoffset=3mm,      % Κεντράρισμα του καθαρού μεγέθους κάθετα
+    layouthoffset=3mm,      % Κεντράρισμα του καθαρού μεγέθους οριζόντια
+    outer=1.00cm,           % Τα περιθώρια μέσα στο καθαρό μέγεθος
+    inner=1.00cm,
+    top=2.00cm,
+    bottom=2.00cm,
+    bindingoffset=5mm
+]{geometry}
+
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\setlength{\parindent}{0pt}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{maincolor!80!black}\hrule height \headrulewidth \vspace{2pt}}
+\renewcommand{\chaptermark}[1]{\markboth{\large Κεφ. \thechapter\ -\ #1}{\large Κεφάλαιο \thechapter\ -\ #1}}
+\renewcommand{\sectionmark}[1]{\markright{\large \thesection\ -\ #1}}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[C]{
+    \tikz[baseline=(char.base)]\node[anchor=north, shape=circle, fill=maincolor, inner sep=2.5pt, minimum size=8mm, text=white, font=\large\bfseries\fontfamily{maksf}\selectfont] (char) {\thepage};
+  }
+}
+
+\fancyhead[LE]{\textcolor{maincolor}{\large\scshape\kerkissans{\textbf{\colorbox{maincolor}{\textcolor{white}{\thepage}}\ $\lvert$ \rightmark}}}}
+\fancyhead[RE]{\textcolor{black}{\large\scshape\kerkissans{\textbf{\leftmark}}}}
+\fancyhead[LO]{\textcolor{black}{\large\scshape\kerkissans{\textbf{\leftmark}}}}
+\fancyhead[RO]{\textcolor{maincolor}{\large\scshape\kerkissans{\textbf{\rightmark\ $\lvert$\ \colorbox{maincolor}{\textcolor{white}{\thepage}} }}}}
+
+
+% ==============================================================================
+% 3. ΜΑΘΗΜΑΤΙΚΑ, ΣΥΜΒΟΛΑ & ΜΟΝΑΔΕΣ
+% ==============================================================================
+\usepackage{xparse}
+
+\usepackage{gensymb}
+\usepackage{siunitx}
+\usepackage{eurosym,polynomial}
+\DeclareRobustCommand{\officialeuro}{%
+  \ifmmode\expandafter\text\fi
+  {\fontencoding{U}\fontfamily{eurosym}\selectfont e}}
+
 \let\myBbbk\Bbbk
 \let\Bbbk\relax
 \usepackage[curlybraces,amsbb,mtphrb]{mtpro2}
-\usepackage[explicit]{titlesec}
-\usepackage{soul}
-\newcommand{\eng}{\selectlanguage{english}}
-\newcommand{\gr}{\selectlanguage{greek}}
-\usepackage{mathimatika}
-%\usepackage[usenames,dvipsnames,cmyk,table,x11names]{xcolor}
-\def\xrwma{red!80!black}
-\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
-\definecolor{doc}{cmyk}{1,0.455,0,0.569}
-\definecolor{orange}{HTML}{ff7300}
-
+\usepackage{mathimatika,numprint}
+\newcommand{\dint}{\displaystyle\int}
+\allowdisplaybreaks
 \newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
 \DeclareMathSizes{6}{6}{3.8}{2.7}
 \DeclareMathSizes{8}{8}{5.1}{3.6}
@@ -45,7 +97,120 @@
 \fontdimen13\textfont2=4.5pt}
 }
 \makeatother}
+
+
+% ==============================================================================
+% 4. ΧΡΩΜΑΤΑ, ΓΡΑΦΙΚΑ (TIKZ / PGFPLOTS) & ΕΙΚΟΝΙΔΙΑ
+% ==============================================================================
+%\usepackage[usenames,dvipsnames,cmyk,table,x11names]{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{xcolor-material}
+\definecolor{orange}{HTML}{ff7300}
+\definecolor{titlecolor}{HTML}{cd0f00}
+\definecolor{check}{HTML}{8bdd28}
+\definecolor{error}{HTML}{ee1313}
+\definecolor{maincolor}{HTML}{1e96ff}
+\definecolor{secondcolor}{RGB}{210,20,210}
+\definecolor{thirdcolor}{RGB}{110,195,7}
+\definecolor{propDark}{RGB}{84, 73, 192}    % deep purple header
+\definecolor{propLight}{RGB}{238, 237, 254}  % lavender body bg
+\definecolor{propAccent}{RGB}{127, 119, 221} % accent bar
+\def\xrwma{maincolor}
+
+
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tkz-euclide}
+\usepackage{tkz-tab}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{tikzmark}
+\usepgfplotslibrary{fillbetween}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzset{labelbox/.style args={#1}{align=center,draw=#1,fill=#1!30!white,rectangle,rounded corners=1,font=\tiny\linespread{0.8}\selectfont}}
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+
+\pgfmathdeclarefunction{gauss}{2}{%
+\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex,anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={maincolor!80!black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+
+% ==============================================================================
+% 5. ΠΙΝΑΚΕΣ, ΛΙΣΤΕΣ & ΠΕΡΙΤΥΛΙΓΜΑ ΚΕΙΜΕΝΟΥ (WRAPFIG)
+% ==============================================================================
+\usepackage{etoolbox}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{tabularray}
+\usepackage{caption}
+\usepackage{capt-of}
+\usepackage{enumitem}
+\usepackage{moreenum}
+\setlist[itemize,1]{label=\textcolor{maincolor}{\faCaretRight}}
+\usepackage{tasks}
 \usepackage{wrapfig}
+\usepackage{eqparbox,tasks}
+
+\captionsetup[table]{skip=5pt}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+
+\UseTblrLibrary{counter}
+\DeclareTblrTemplate{caption}{nocaptemplate}{}
+\DeclareTblrTemplate{capcont}{nocaptemplate}{}
+\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
+\NewTblrTheme{mytabletheme}{
+  \SetTblrTemplate{caption}{nocaptemplate}{}
+  \SetTblrTemplate{capcont}{nocaptemplate}{}
+  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+}
+
+\NewTblrEnviron{mytblr}
+\SetTblrStyle{firsthead}{font=\bfseries}
+\SetTblrStyle{firstfoot}{fg=maincolor!70!black}
+\SetTblrOuter[mytblr]{theme=mytabletheme}
+\SetTblrInner[mytblr]{
+rowspec={t{7mm}},columns = {c},
+  width = 0.85\linewidth,
+  row{odd} = {bg=maincolor!20!white,fg=black,ht=8mm},
+ row{even} = {bg=maincolor!70!white,fg=black,ht=8mm},
+hlines={white},vlines={white},
+row{1} = {bg=maincolor!70!black, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
+  hline{2} = {.7mm}, % midrule  
+}
+\SetTblrOuter[longtblr]{theme=mytabletheme}
+
+\NewTblrEnviron{myhtblr}
+\SetTblrOuter[myhtblr]{theme=mytabletheme}
+\SetTblrInner[myhtblr]{
+    hlines = {1pt,white},
+	vlines = {0.5pt,white},
+	column{odd} = {maincolor!40,c},
+	column{even} = {maincolor!10,c},
+	column{1} = {maincolor,c,fg={white}}
+}
+
 \newenvironment{WrapText1}[3][r]
 {\wrapfigure[#2]{#1}{#3}}
 {\endwrapfigure}
@@ -53,6 +218,7 @@
 \newenvironment{WrapText2}[3][l]
 {\wrapfigure[#2]{#1}{#3}}
 {\endwrapfigure}
+
 \newcommand{\wrapr}[6]{
 \begin{minipage}{\linewidth}\mbox{}\\
 \vspace{#1}
@@ -66,39 +232,97 @@
 \begin{WrapText2}{#2}{#3}
 \vspace{#4}#5\end{WrapText2}#6
 \end{minipage}}
-\usepackage{etoolbox,hhline,moreenum}
-\usepackage{caption} 
-\captionsetup[table]{skip=5pt}
-\makeatletter
-\newif\ifLT@nocaption
-\preto\longtable{\LT@nocaptiontrue}
-\appto\endlongtable{%
-\ifLT@nocaption
-\addtocounter{table}{\m@ne}%
-\fi}
-\preto\LT@caption{%
-\noalign{\global\LT@nocaptionfalse}}
-\makeatother
 
 \newlist{alist}{enumerate}{1}
 \setlist[alist]{label=\let\textdexiakeraia\relax\alph*.}
-\UseTblrLibrary{counter}
 
-\pgfmathdeclarefunction{gauss}{2}{%
-\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+\newcommand\themanum{A}
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\kerkissans{\large{\textcolor{black}{\themanum.\arabic*}}}},itemsep=0mm,leftmargin=0.8cm}
+
+\newlist{bhma}{enumerate}{3}
+\setlist[bhma]{label=\bf{\textcolor{maincolor!80!black}{\kerkissans{\arabic*\textsuperscript{o}\ :}}},leftmargin=0.9cm,itemindent=0cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
+
+\newlist{tropos}{enumerate}{3}
+\setlist[tropos]{label=\bf{\textcolor{black}{\kerkissans{\arabic*\textsuperscript{oς} Τρόπος\ :}}},leftmargin=0cm,itemsep=0mm,itemindent=2.1cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
+
+\newlist{periptwsh}{enumerate}{3}
+\setlist[periptwsh]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Περίπτωση :},leftmargin=0cm,itemsep=0mm,itemindent=2.8cm,ref=\bf{\arabic*\textsuperscript{oς}\;Περίπτωση}}
+
+
+% ==============================================================================
+% 6. ΣΤΥΛ ΕΠΙΚΕΦΑΛΙΔΩΝ (CHAPTER, SECTION κ.λπ.)
+% ==============================================================================
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+
+% ==============================================================================
+% ΜΟΡΦΟΠΟΙΗΣΗ ΠΙΝΑΚΑ ΠΕΡΙΕΧΟΜΕΝΩΝ (TOC)
+% ==============================================================================
+\contentsmargin{0cm}
+
+\titlecontents{part}[0pc]
+{\addvspace{15pt}\centering\Large\bfseries\fontfamily{maksf}\selectfont\color{maincolor!80!black}}%
+{}%
+{}%
+{}%
+[\addvspace{5pt}]
+
+\titlecontents{chapter}[0pc]
+{\addvspace{12pt}\large\bfseries\fontfamily{maksf}\selectfont\color{maincolor!80!black}}%
+{\contentslabel[\thecontentslabel]{0pc}\hspace{2em}}%
+{}%
+{\color{maincolor!80!black}\hfill\contentspage}%
+[\addvspace{2pt}\color{maincolor!20}\titlerule\addvspace{2pt}]
+
+\titlecontents{section}[2em]
+{\addvspace{3pt}\normalsize\fontfamily{maksf}\selectfont\color{black}}%
+{\contentslabel[\thecontentslabel]{2em}}%
+{}%
+{\color{black!30}\titlerule*[0.5pc]{.}\color{black}\contentspage}%
+[]
+
+\titlecontents{subsection}[4.5em]
+{\addvspace{1pt}\small\fontfamily{maksf}\selectfont\color{black!70}}%
+{\contentslabel[\thecontentslabel]{2.5em}}%
+{}%
+{\color{black!30}\titlerule*[0.5pc]{.}\color{black!70}\contentspage}%
+[]
+
+% ΔΙΟΡΘΩΣΗ: Νέες εντολές για τη διαχείριση της εικόνας του κεφαλαίου
+\newcommand{\chapterimagefile}{cover.png} % Ορίζουμε μια προεπιλεγμένη εικόνα
+\newcommand{\setchapterimage}[1]{\renewcommand{\chapterimagefile}{#1}} % Εντολή για την αλλαγή της εικόνας
+\newcommand*\chapterlabel{}
+
+\newcommand{\fancychapter}{%
+\titleformat{\chapter}
+{\normalfont\huge }
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north, inner sep=0pt, name=headerimage,outer sep=0pt] at (current page.north) {
+        \includegraphics[width=\paperwidth, trim={0 0pt 0 0}, clip]{\chapterimagefile}
+    };
+    \node[
+        name=chnumber,fill=secondcolor!50!black, opacity=0.7,text=white,anchor=north west,outer sep=0pt,
+        rotate=90,font=\sffamily\bfseries,minimum height=2.4cm,minimum width=4cm,inner sep=20pt,text depth=-1.5cm,text height=0.8cm,
+    ] at (headerimage.south west) {\kerkissans{\hspace{1cm}Κεφάλαιο {\Huge \thechapter}} };
+    \node[
+        name=chtitle,anchor=north west,fill=maincolor!50!black,outer sep=0pt,
+        minimum width=\paperwidth-2cm,
+        minimum height=2.5cm,text=white,font=\sffamily\bfseries
+    ] at (chnumber.south west) {\kerkissans{
+\begin{minipage}{\paperwidth-4cm}
+##1
+\end{minipage}
+}};
+\fill[propDark!50!black,anchor=north] (headerimage.south west) rectangle (chtitle.south west);
+    \fill[cyan,anchor=north] (chtitle.north west) rectangle ($(chtitle.north east)+(0,3mm)$);
+\end{tikzpicture}
+\vspace{9cm}
 }
-\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
-xlabel style={at={(current axis.right of origin)},xshift=1.5ex,anchor=center},
-ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
-\pgfkeys{/pgfplots/grafikh parastash/.style={red!80!black,line width=.4mm,samples=200}}
-\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
-\tikzstyle{pl}=[line width=0.3mm]
-\tikzstyle{plm}=[line width=0.4mm]
-
-\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
-\AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
-
-\definecolor{titlecolor}{HTML}{cd0f00}
+\titlespacing*{\chapter}{0pt}{20pt}{0pt}
+}
+\apptocmd{\mainmatter}{\fancychapter}{}{}
 
 \newbox\TitleUnderlineTestBox
 \newcommand*\TitleUnderline[1]
@@ -111,7 +335,7 @@ ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
 }
 \newcommand*\SectionNumberBox[1]
 {%
-\colorbox{red!80!black}
+\colorbox{maincolor!80!black}
 {%
 \makebox[2em][c]
 {%
@@ -122,244 +346,296 @@ ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
 }%
 \TitleUnderline{\ \ \ }%
 }
+
 \titleformat{\section}[hang]
-{\Large\fontfamily{maksf}\selectfont}%
-{\colorbox{\xrwma}{%
-\raisebox{0pt}[13pt][3pt]{\makebox[80pt]{% height, width
-\color{white}{\kerkissans{\textbf{\thesection ο Κεφάλαιο}}}}%
-}}}%
-{0pt}%
-{\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ \textbf{#1}\ }}}
+{\Large\bfseries\fontfamily{maksf}\selectfont}
+{\begin{tikzpicture}[baseline=(char.base)]
+    \node[anchor=base, shape=rectangle, fill=maincolor, rounded corners=3pt, inner sep=5pt, text=white] (char) {Ενότητα \thesection};
+\end{tikzpicture}}
+{1em}
+{\color{maincolor!80!black}\bmath{#1}}
+[\vspace{1mm}{\color{maincolor!20}\titlerule[1.5pt]}]
 
 \titleformat{\subsection}[hang]
-{\large\bfseries\fontfamily{maksf}\selectfont}%
-{\colorbox{red!80!black}{%
-\raisebox{0pt}[13pt][3pt]{\makebox[30pt]{% height, width
-\color{white}{\kerkissans{\textbf{\thesubsection}}}}%
-}}}%
-{0pt}%
-{
-%\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ 
-\ \textbf{#1}\ }
-%}}
+{\large\bfseries\fontfamily{maksf}\selectfont}
+{\begin{tikzpicture}[baseline=(char.base)]
+    \node[anchor=base, shape=rectangle, fill=maincolor!70!black, inner sep=5pt, text=white] (char) {\thesubsection};
+\end{tikzpicture}}
+{0.5em}
+{\color{black!90}#1}
 
 \makeatletter
 \@addtoreset{section}{part}
 \makeatother
 
 \titleformat{\part}[display]
-{\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{red!80!black}{ \kerkissans{ #1}}}
+{\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{maincolor!80!black}{ \kerkissans{ #1}}}
 \titlespacing*{\part} 
 {0pt}{0pt}{0pt}
 
-\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
-\definecolor{bblue}{HTML}{4F81BD}
-\definecolor{rred}{HTML}{C0504D}
-\definecolor{ggreen}{HTML}{9BBB59}
-\definecolor{ppurple}{HTML}{9F4C7C}
+\titleformat{\paragraph}
+{\normalfont\large}%
+{}{0em}%
+{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut{{\textcolor{maincolor!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}}\strut}}}[\vskip -.2\baselineskip{}]
 
 
-\pgfdeclarelayer{background}
-\pgfdeclarelayer{foreground}
-\pgfsetlayers{background,main,foreground}
+% ==============================================================================
+% 7. ΚΟΥΤΙΑ & ΠΕΡΙΒΑΛΛΟΝΤΑ TCOLORBOX
+% ==============================================================================
+\usepackage[most]{tcolorbox}
 
-\newcommand{\pie}[4][]{
-\begin{scope}[#1]
-\pgfmathsetmacro{\curA}{90}
-\pgfmathsetmacro{\r}{1}
-\def\c{(0,0)}
-\node[pie title] at (90:1.3) {#2};
-\foreach \v/\s/\l in{#3}{
-\pgfmathsetmacro{\deltaA}{\v/#4*360}
-\pgfmathsetmacro{\nextA}{\curA + \deltaA}
-\pgfmathsetmacro{\midA}{(\curA+\nextA)/2}
+% Μετρητές και Εντολές Επικεφαλίδων για τα Περιβάλλοντα
+\newcommand{\Parathrhsh}[1]{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση}}}{}
 
-\path[slice,\s] \c
--- +(\curA:\r)
-arc (\curA:\nextA:\r)
--- cycle;
-\pgfmathsetmacro{\d}{max((\deltaA * -(.5/50) + 1) , .5)}
+\newcounter{thema}[section]
+\renewcommand{\thethema}{\arabic{thema}}   
+\newcommand{\Thema}{\refstepcounter{thema}{\textbf{\textcolor{\xrwma}{\faPenSquare\ \  \large \kerkissans{\textbf{{\thethema}ο\hspace{2mm}Θέμα}}}}}\hspace{0mm}}{}
 
-\begin{pgfonlayer}{foreground}
-\path \c -- node[pos=\d,pie values,values of \s]{$\l$} +(\midA:\r);
-\end{pgfonlayer}
+\newcounter{askhsh}[section]
+\renewcommand{\theaskhsh}{\thechapter.\arabic{askhsh}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}{\textbf{\textcolor{\xrwma}{\faPenSquare\ \  \large \kerkissans{\textbf{Άσκηση\hspace{2mm}\theaskhsh}}}}}\hspace{1mm}}{}
 
-\global\let\curA\nextA
-}
-\end{scope}
-}
+\newcounter{problhma}[section]
+\renewcommand{\theproblhma}{\thechapter.\arabic{problhma}}   
+\newcommand{\Problhma}{\refstepcounter{problhma}{\textbf{\textcolor{\xrwma}{\faPen\ \  \large \kerkissans{\textbf{Πρόβλημα\hspace{2mm}\theproblhma}}}}}\hspace{1mm}}{}
 
-\newcommand{\legend}[2][]{
-\begin{scope}[#1]
-\path
-\foreach \n/\s in {#2}
-{
-++(0,-10pt) node[\s,legend box] {} +(5pt,0) node[legend label] {\n}
-}
-;
-\end{scope}
-}
-\definecolor{a}{cmyk}{0,1,1,0.05}
-\definecolor{b}{cmyk}{0,.8,.8,.15}
-\definecolor{c}{cmyk}{0,.8,.8,.0}
-\definecolor{d}{cmyk}{0,.7,.7,0}
-\definecolor{e}{cmyk}{0,.5,.5,0}
+\newcounter{paradeigma}[section]
+\renewcommand{\theparadeigma}{\kerkissans{\arabic{paradeigma}}}   
+\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\kerkissans{\bmath{\textcolor{secondcolor!80!black}{\faPlay\large \ \ Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}  #1}}\\}{}
 
-\pgfplotsset{every axis/.append style={
-x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\newcommand{\Prosoxi}[1]{\faExclamationTriangle\ \ \ \textbf{\kerkissans{Προσοχή}}}{}
 
-\fancyhf{}
-\newcommand{\myleftmark}{\leftmark}
-\renewcommand{\myleftmark}{{\large Τυπολόγιο}}
-\renewcommand{\headrulewidth}{1pt}
-\renewcommand{\sectionmark}[1]{\markboth{\large Κεφάλαιο \thesection\ -\ #1}{} }
+\newcounter{Thewrhmabox}[section]
+\renewcommand{\theThewrhmabox}{\arabic{Thewrhmabox}}
 
-\makeatletter% so we can use macros with @ in their names
-\ifthenelse{\boolean{@twoside}}{%
-%\fancyhead[LE,RO]{%
-%\begin{tikzpicture}[overlay, remember picture]%
-%    \fill[\xrwma] (current page.north west) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north west)+(0,-.5in)$) -- cycle;
-%    \node[anchor=north west, text=white, font=\Large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
-%\fill[black] (current page.north east) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north east)+(0,-.5in)$) -- cycle;
-%\node[anchor=north east, text=white, font=\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark}}};
-%\end{tikzpicture}
-%}
-\fancyhead[LE]{
-\begin{tikzpicture}[overlay, remember picture]%
-%    \fill[black] (current page.north west) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north west)+(0,-.5in)$) -- cycle;
-    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\thepage\ $\lvert$ \leftmark}}};
-%\fill[\xrwma] (current page.north east) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north east)+(0,-.5in)$) -- cycle;
-\node[anchor=north east, text=black, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
-\end{tikzpicture}
-}%
-\fancyhead[RO]{
-\begin{tikzpicture}[overlay, remember picture]%
-%    \fill[\xrwma] (current page.north west) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north west)+(0,-.5in)$) -- cycle;
-    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
-%\fill[black] (current page.north east) -- (current page.north)-- ($(current page.north)+(9mm,-.5in)$)-- ($(current page.north east)+(0,-.5in)$) -- cycle;
-\node[anchor=north east, text=black, font=\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark\ $ \lvert $\ \thepage}}};
-\end{tikzpicture}
-}%
-}
-\makeatother
+\newcounter{orismos}[section]
+\renewcommand{\theorismos}{\arabic{orismos}}
+\newcommand{\orism}{\refstepcounter{orismos}{\bf\kerkissans{\textcolor{\xrwma}{\faBook\ \ \large{Ορισμός}\hspace{2mm}\theorismos}}}\hspace{1mm}}{}
 
-%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
-\newcounter{parathrhsh}[section]
-\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
-\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση\hspace{2mm}\theparathrhsh}}}}{}
+\newcounter{idiothta}[section]
+\renewcommand{\theidiothta}{\arabic{idiothta}}
+\newcommand{\idiothta}[1]{\refstepcounter{idiothta}{\bf\kerkissans{\textcolor{\xrwma}{\faPlay\ \ \ \large{Ιδιότητα}\hspace{2mm}\theidiothta\ :\ }}}\hspace{1mm}{\bf\kerkissans{#1}}\\}{}
 
-\newcommand{\tss}[1]{\textsuperscript{#1}}
-\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\newcounter{protashxa}[section]
+\renewcommand{\theprotashxa}{\arabic{protashxa}}
+\newcommand{\protashxa}[1]{\refstepcounter{protashxa}{\colorbox{secondcolor}{%
+\raisebox{0pt}[10pt][3pt]{\makebox[70pt]{% height, width
+\color{white}{\faEdit\ \kerkissans{Πρόταση \theprotashxa}}}}%
+}\ \ \kerkissans{#1}\\[2mm]}}
 
-%----------- ΠΑΡΑΤΗΡΗΣΗ------------------
+% Περιβάλλοντα (Environments)
 \newenvironment{parat}[1]
 {\begin{tcolorbox}[toptitle=1mm,
 bottomtitle=1mm,title=\Parathrhsh,
 breakable,
 enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
 {black!50!white},
-colback=red!5!white,
+colback=yellow!5!white,
 boxrule=0.1pt,
-colframe=red!80!black,
+colframe=yellow!80!black,
 fonttitle=\bfseries,width=#1]}
 {\end{tcolorbox}}
-%-----------------------------------------
 
-%----------- ΑΣΚΗΣΗ ------------------
-\newcommand\thema{A}
+\newenvironment{thema}[1]
+{\begin{tcolorbox}[title=\Thema\kerkissans{\textbf{\large{  \textcolor{\xrwma}{#1}}}},breakable,
+enhanced standard,titlerule=0pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=0mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,leftrule=0mm,sharp corners,coltitle=black]
+\renewcommand{\themanum}{#1}}
+{\end{tcolorbox}}
 
-\newcounter{askhsh}[section]
-\renewcommand{\theaskhsh}{\arabic{askhsh}}   
-\newcommand{\Askhsh}{\refstepcounter{askhsh}{\textbf{\textcolor{\xrwma}{\faPenSquare\ \  \large \kerkissans{\textbf{\theaskhshο\hspace{2mm}Θέμα}}}}}\hspace{0mm}}{}
-
-\newlist{erwthma}{enumerate}{3}
-\setlist[erwthma]{label=\bf{\kerkissans{\large{\textcolor{\xrwma}{\thema.\arabic*}}}},itemsep=0mm,leftmargin=0.8cm}
-%------------------------------------
 \newenvironment{askhsh}[1]
-{\begin{tcolorbox}[title=\Askhsh\kerkissans{\textbf{\large{  #1}}},breakable,
+{\begin{tcolorbox}[title=\Askhsh\ \ :\ \  {\textcolor{black}{\kerkissans{\bmath{#1}}}},breakable,
 enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
 colback=white,left=2mm,top=1mm,bottom=0mm,
 boxrule=0pt,
-colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=\xrwma]
-\renewcommand{\thema}{#1}}
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=\xrwma]}
 {\end{tcolorbox}}
-%-----------------------------------------
 
-%------- ΣΤΥΛ ΠΑΡΑΔΕΙΓΜΑΤΟΣ -------
-\newcounter{paradeigma}[section]
-\renewcommand{\theparadeigma}{\kerkissans{\arabic{paradeigma}}}   
-\newcommand{\Paradeigma}[1]{\refstepcounter{paradeigma}\kerkissans{\bmath{\textcolor{red!80!black}{\faPlay\large \ \ Παράδειγμα\hspace{2mm}\theparadeigma\;:\;}\hspace{1mm}  #1}}\\}{}
-%-----------------------------------
+\newenvironment{problhma}[1]
+{\begin{tcolorbox}[title=\Problhma\kerkissans{\textbf{\large{  #1}}},breakable,
+enhanced standard,titlerule=0pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=0mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,leftrule=0mm,sharp corners,coltitle=black]
+\renewcommand{\themanum}{#1}}
+{\end{tcolorbox}}
 
-%------- ΣΤΥΛ ΛΥΣΗΣ ------------------
-\newcommand{\lysh}{\textcolor{\xrwma}{\kerkissans{\noindent\faCheck\ \textbf{ΛΥΣΗ}}}\\}
-%------------------------------------
-
-%-------- ΠΡΟΣΟΧΗ -----------------
-\newcounter{prosoxi}[section]
-\renewcommand{\theprosoxi}{\arabic{prosoxi}}  
-\newcommand{\Prosoxi}[1]{\refstepcounter{prosoxi}{\faExclamationTriangle\ \ \ \textbf{Προσοχή\hspace{2mm}\thesection.\theprosoxi}}}{}
-
-%----------- ΠΡΟΣΟΧΗ------------------
 \newenvironment{prosoxi}[1]
 {\begin{tcolorbox}[title=\Prosoxi,
 breakable,
 enhanced standard,lifted shadow={1mm}{-2mm}{3mm}{0.3mm}%
 {black!50!white},
-colback=red!5!white,
+colback=maincolor!5!white,
 boxrule=0.1pt,
 colframe=red!80!black,
 fonttitle=\bfseries,width=#1]}
 {\end{tcolorbox}}
-%-----------------------------------------
 
-\DeclareTblrTemplate{caption}{nocaptemplate}{}
-\DeclareTblrTemplate{capcont}{nocaptemplate}{}
-\DeclareTblrTemplate{contfoot}{nocaptemplate}{}
-\NewTblrTheme{mytabletheme}{
-  \SetTblrTemplate{caption}{nocaptemplate}{}
-  \SetTblrTemplate{capcont}{nocaptemplate}{}
-  \SetTblrTemplate{contfoot}{nocaptemplate}{}
+\newenvironment{Thewrhmabox}[2][\linewidth]
+{\refstepcounter{Thewrhmabox}
+\begin{tcolorbox}[breakable,
+enhanced standard,
+boxrule=0.7pt,titlerule=-.2pt,
+width=\linewidth,
+title style={color=white},
+overlay unbroken and first={
+\path[left color=\xrwma,right color=\xrwma!70!white]
+([yshift=-\pgflinewidth]frame.north west) to ([yshift=-5pt]title.south west)[rounded corners=2pt] -- ([xshift=-#2-15pt,yshift=-5pt]title.south east) to[rounded corners=2pt] ([xshift=-#2,yshift=-\pgflinewidth]frame.north east) -- cycle;
+},
+fonttitle=\bfseries,
+before=\par\medskip\noindent,
+after=\par\medskip,
+toptitle=3pt,
+top=11pt,topsep at break=-5pt,
+colback=white,title={\kerkissans{\faStop\ \ \large Θεώρημα \theThewrhmabox}} : {\textcolor{white}{\kerkissans{#1}}}]}
+{\end{tcolorbox}}
+
+\newenvironment{Orismosbox}[1]
+{\begin{tcolorbox}[title=\orism:\ \  {\bf{\large\kerkissans{#1}}},
+breakable,
+enhanced standard,
+titlerule=-.2pt,
+toprule=0pt, 
+rightrule=0pt, 
+bottomrule=0pt,
+colback=white,
+opacityfill=0,
+left=2mm,
+top=1mm,
+bottom=0mm,
+boxrule=0pt,
+colframe=white,
+borderline west={1.5mm}{0pt}{\xrwma},
+leftrule=2mm,
+sharp corners,
+coltitle=black]}
+{\end{tcolorbox}}
+
+\newcounter{protashma}[section]
+\renewcommand{\theprotashma}{\arabic{protashma}}
+\newcommand{\protashma}{\refstepcounter{protashma}{\bf\kerkissans{\textcolor{white}{\faCheckSquare\ \ \large{Πρόταση}\hspace{2mm}\theprotashma}}}\hspace{1mm}}{}
+
+
+\newenvironment{Protashmabox}[1]
+{\begin{tcolorbox}[title=\protashma\textcolor{white}{:\ \  {\bf{\large\kerkissans{#1}}}},
+breakable,
+enhanced standard,
+    sharp corners = all,
+    boxrule = 0pt,
+    frame hidden,
+    % Header
+    attach boxed title to top left = {yshift = 0pt, xshift = 0pt},
+    boxed title style = {
+      sharp corners,
+      colback  = propDark,
+      colframe = propDark,
+      top = 6pt, bottom = 6pt,
+      left = 12pt, right = 12pt,
+    },
+    coltitle = white,
+    fonttitle = \bfseries\small,
+    % Body
+    colback  = propLight,
+    colframe = propLight,
+    top = 10pt, bottom = 10pt,
+    left = 14pt, right = 14pt,
+    % Αριστερή accent γραμμή
+    borderline west = {3pt}{0pt}{propAccent},]}
+{\end{tcolorbox}}
+
+\newcounter{protash}[section]
+\renewcommand{\theprotash}{\arabic{protash}}
+\newcommand{\protash}[1]{\refstepcounter{protash}{\bf\kerkissans{\textcolor{\xrwma}{\faBookmark\hspace{2mm}\LARGE{\theprotash\hspace{2mm}#1}}\\}}\hspace{1mm}}{}
+
+
+% ==============================================================================
+% 8. ΔΙΑΦΟΡΕΣ ΒΟΗΘΗΤΙΚΕΣ ΕΝΤΟΛΕΣ (MACROS)
+% ==============================================================================
+\newcommand{\lysh}{\textcolor{secondcolor}{\kerkissans{\noindent\faCheck\ \textbf{ΛΥΣΗ}}}\\}
+\newcommand{\bhmata}{\textcolor{maincolor!80!black}{\kerkissans{{\large \textbf{Βήματα}\\\vspace{-7mm}}}}}
+\newcommand{\tropoi}{\textcolor{maincolor!80!black}{\kerkissans{{\large \textbf{Τρόποι}\\\vspace{-7mm}}}}}
+\newcommand{\apanthsh}{{\kerkissans{\textbf{ΑΠΑΝΤΗΣΗ}}}\\}
+\newcommand{\apodeixi}{{\kerkissans{\textbf{ΑΠΟΔΕΙΞΗ}}}\\}
+
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+\newcommand{\tssL}[1]{\MakeLowercase{\textsuperscript{#1}}}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\dlh}[1]{\xlongequal[\text{\eng{DLH}}]{#1}}
+\newcommand{\theor}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=\xrwma,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{1}}};}\ {\kerkissans{ Θεώρημα: #1\\}}}
+
+\newcommand{\antistr}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=orange!90!black,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{2}}};}\ {\kerkissans{ Αντίστροφο: #1\\}}}
+
+\newcommand{\aath}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=\xrwma,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{3}}};}\ {\kerkissans{ Αντιθετοαντίστροφο του 1: #1\\}}}
+
+\newcommand{\aaa}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=orange!90!black,inner sep=2pt] (char) {\textcolor{white}{\kerkissans{4}}};}\ {\kerkissans{ Αντιθετοαντίστροφο του 2: #1\\}}}
+
+\newcommand{\true}{\textcolor{check}{\faCheck}{\kerkissans{\ \ Αληθές}}}
+\newcommand{\false}{\textcolor{error}{\faTimes}{\kerkissans{\ \ Ψευδές}}}
+
+% ==============================================================================
+% 9. ΒΙΒΛΙΟΓΡΑΦΙΑ (BIBLATEX / BIBER)
+\usepackage{csquotes}
+% ==============================================================================
+\usepackage[backend=biber,style=nature,language=greek]{biblatex}
+\addbibresource{bibliografia.bib}
+% Εμφάνιση αρκτικόλεξων σε λατινικά χαρακτήρες (συμβατό με όλες τις εκδόσεις biblatex)
+\DeclareFieldFormat{isbn}{\eng{ISBN}\addcolon\space\nolinkurl{#1}}
+\DeclareFieldFormat{issn}{\eng{ISSN}\addcolon\space#1}
+\DeclareFieldFormat{doi}{DOI\addcolon\space\nolinkurl{#1}}
+
+\usepackage[colorlinks=true,
+            linkcolor=maincolor!80!black,
+            urlcolor=maincolor,
+            citecolor=blue,
+            bookmarks=true,
+            bookmarksopen=true]{hyperref}
+\usepackage{bookmark}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\Quadradic}{m m}{
+\fp_set:Nn \a {\clist_item:nn {#1}{1}}
+\fp_set:Nn \b {\clist_item:nn {#1}{2}}
+\fp_set:Nn \c {\clist_item:nn {#1}{3}}
+
+\fp_compare:nNnTF {\a} < {0} {\tl_set:Nn \A {(\fp_use:N\a)}} {\tl_set:Nn \A {\fp_use:N\a}}
+\fp_compare:nNnTF {\b} < {0} {\tl_set:Nn \B {(\fp_use:N\b)}} {\tl_set:Nn \B {\fp_use:N\b}}
+\fp_compare:nNnTF {\c} < {0} {\tl_set:Nn \C {(\fp_use:N\c)}} {\tl_set:Nn \C {\fp_use:N\c}}
+
+Η~εξίσωση~$\polynomial[reciprocal,var=#2]{#1}=0$~έχει~$a=\fp_use:N\a,\beta=\fp_use:N\b$~και~$\gamma=\fp_use:N\c$.~Η~διακρίνουσα~είναι~
+\fp_set:Nn \D {\fp_eval:n {\b**2-4*\a*\c}} 
+\[\Delta=\B^2-4\cdot\A\cdot\C=\fp_use:N \D\]
+
+\tl_new:N \sol
+\fp_compare:nNnTF {\D} > {0}
+{\tl_set:Nn \sol
+	{Η~εξίσωση~έχει~2~λύσεις~οι~οποίες~είναι
+	\begin{gather*}
+	#2_{1,2}=\frac{-\beta\pm\sqrt{\Delta}}{2a}=\frac{-\B\pm\sqrt{\fp_use:N \D}}{2\cdot \A}=\frac{\fp_eval:n {-\b}\pm\fp_eval:n {sqrt(\D)}}{\fp_eval:n {2*\a}}\\
+	#2_1=\frac{\fp_eval:n {-\b}+\fp_eval:n {sqrt(\D)}}{\fp_eval:n {2*\a}}=\frac{\fp_eval:n {-\b+sqrt(\D)}}{\fp_eval:n {2*\a}}=\fp_eval:n {(-\b+sqrt(\D))/(2*\a)}\text{~~και~~}#2_2=\frac{\fp_eval:n {-\b}-\fp_eval:n {sqrt(\D)}}{\fp_eval:n {2*\a}}=\frac{\fp_eval:n {-\b-sqrt(\D)}}{\fp_eval:n {2*\a}}=\fp_eval:n {(-\b-sqrt(\D))/(2*\a)}
+	\end{gather*}
+	}
 }
-
-\NewTblrEnviron{mytblr}
-\SetTblrStyle{firsthead}{font=\bfseries}
-\SetTblrStyle{firstfoot}{fg=red2}
-\SetTblrOuter[mytblr]{theme=mytabletheme}
-\SetTblrInner[mytblr]{
-rowspec={t{7mm}},columns = {c},
-  width = 0.85\linewidth,
-  row{odd} = {bg=red9,fg=black,ht=8mm},
- row{even} = {bg=red7,fg=black,ht=8mm},
-hlines={white},vlines={white},
-row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
-  hline{2} = {.7mm}, % midrule  
+{\fp_compare:nNnTF {\D} = {0} 
+	{\tl_set:Nn \sol {Η~εξίσωση~έχει~1~διπλή~λύση~την:\[x=\frac{-\beta}{2a}=-\frac{\fp_use:N \b}{2\cdot \A}=\fp_eval:n {-\b/(2*\a)}\]}}
+	{άρα~η~εξίσωση~είναι~αδύνατη.}
 }
+\tl_use:N \sol
+}
+\ExplSyntaxOff
 
-\DeclareRobustCommand{\officialeuro}{%
-  \ifmmode\expandafter\text\fi
-  {\fontencoding{U}\fontfamily{eurosym}\selectfont e}}
 
-\titleformat{\paragraph}
-{\normalfont\large}%
-{}{0em}%
-{{\color{black}\titlerule[0pt]}\vskip-.2\baselineskip{\parbox[t]{\dimexpr\textwidth-2\fboxsep\relax}{\raggedright\strut{{\textcolor{red!80!black}{\faSquare\ \ \kerkissans{\bmath{#1}}}}}\strut}}}[\vskip -.2\baselineskip{}]
-\setlength{\parindent}{0pt}
-
-\newcommand{\bhmata}{\textcolor{red!80!black}{\kerkissans{{\large \textbf{Βήματα}\\\vspace{-7mm}}}}}
-\newlist{bhma}{enumerate}{3}
-\setlist[bhma]{label=\bf{\textcolor{red!80!black}{\kerkissans{\arabic*\textsuperscript{o}\ :}}},leftmargin=0.9cm,itemindent=0cm,ref=\bf{\arabic*\textsuperscript{o}\;Βήμα}}
-
-\newcommand{\tropoi}{\textcolor{red!80!black}{\kerkissans{{\large \textbf{Τρόποι}\\\vspace{-7mm}}}}}
-\newlist{tropos}{enumerate}{3}
-\setlist[tropos]{label=\bf{\textcolor{black}{\kerkissans{\arabic*\textsuperscript{oς} Τρόπος\ :}}},leftmargin=0cm,itemsep=0mm,itemindent=2.1cm,ref=\bf{\arabic*\textsuperscript{oς}\;Τρόπος}}
-\newcommand{\en}[1]{{\selectlanguage{english}#1\selectlanguage{greek}}}
-\newlist{periptwsh}{enumerate}{3}
-\setlist[periptwsh]{label=\bf\textit{\arabic*\textsuperscript{oς}\;Περίπτωση :},leftmargin=0cm,itemsep=0mm,itemindent=2.8cm,ref=\bf{\arabic*\textsuperscript{oς}\;Περίπτωση}}
 
 \begin{document}
 \NineColors{saturation=high}
-\pagestyle{plain}
+\pagestyle{empty}
 \begin{center}
 \includegraphics[width=0.4\linewidth]{/usr/local/texlive/texmf-local/tex/latex/local/frontisthrio/Logo.jpg}\\
 \vspace{-1mm}
@@ -402,110 +678,113 @@ row{1} = {bg=red4, fg=white, font=\bfseries\fontfamily{maksf}},rowhead = 1,
 \newpage
 \null
 \newpage
+\pdfbookmark[0]{Περιεχόμενα}{toc}
+\begin{tikzpicture}[remember picture, overlay]
+    % Κεντρικό banner (κορυφή)
+    \fill[propDark] (current page.north west) -- ($(current page.north west)+(0,-4.5cm)$) .. controls ($(current page.north west)+(10cm,-4.5cm)$) and ($(current page.north east)+(-8cm,-2.5cm)$) .. ($(current page.north east)+(0,-3cm)$) -- (current page.north east) -- cycle;
+    
+    % Διακοσμητικό σχήμα (κόκκινο)
+    \fill[maincolor!80!black, opacity=0.8] (current page.north west) -- ($(current page.north west)+(0,-3cm)$) .. controls ($(current page.north west)+(8cm,-5cm)$) and ($(current page.north east)+(-6cm,-1cm)$) .. ($(current page.north east)+(0,-2cm)$) -- (current page.north east) -- cycle;
+
+    % Κύκλοι διακόσμησης
+    \fill[white, opacity=0.15] ($(current page.north east)+(-4cm,-1.5cm)$) circle (2.5cm);
+    \fill[white, opacity=0.15] ($(current page.north east)+(-1.5cm,-3cm)$) circle (1.5cm);
+    
+    % Κάτω διακοσμητικά σχήματα
+    \fill[propDark!20] (current page.south west) -- ($(current page.south west)+(0,4cm)$) .. controls ($(current page.south west)+(6cm,4cm)$) and ($(current page.south east)+(-6cm,1.5cm)$) .. ($(current page.south east)+(0,2.5cm)$) -- (current page.south east) -- cycle;
+    \fill[maincolor!20] (current page.south west) -- ($(current page.south west)+(0,2.5cm)$) .. controls ($(current page.south west)+(5cm,1.5cm)$) and ($(current page.south east)+(-5cm,3cm)$) .. ($(current page.south east)+(0,1cm)$) -- (current page.south east) -- cycle;
+
+    % Τίτλος
+    \node[anchor=north west, text=white, font=\Huge\bfseries\fontfamily{maksf}\selectfont, inner sep=0pt] at ($(current page.north west)+(2cm,-2cm)$) {Πίνακας Περιεχομένων};
+    \node[anchor=north west, text=white!90, font=\large\fontfamily{maksf}\selectfont, inner sep=0pt] at ($(current page.north west)+(2.2cm,-3.2cm)$) {Δομή και ενότητες του βιβλίου};
+\end{tikzpicture}
+\vspace*{2cm}
+\makeatletter
+\@starttoc{toc}
+\makeatother
+\mainmatter
 \pagestyle{fancy}
 \pagenumbering{arabic}
 
+%\newpage
+%\chapter{Επανάληψη από την Α' και Β' Λυκείου}
+%\input{Proapaitoumena_G_Lykeioy.tex}
+%\newpage
+%\chapter{Θεωρία}
+%\input{orismoi}
+%\newpage
+%\input{thewrhmata}
+%\newpage
+%\input{idiothtes}
+%\newpage
+%\input{protaseis_xwris_apod}
+%\newpage
+%\input{protaseis_apodeiksi}
+%\newpage
+%\input{antiparadeigmata}
+%\newpage
+%\input{swsto-lathos}
+%\input{pinakes}
+%\newpage
+%\chapter{Βασικές ασκήσεις}
+%\input{methodoi_oria}
+%\newpage
+%\input{methodoi_diaforikos}
+%\newpage
+%\input{methodoi_oloklhrwmata}
+%\newpage
+%\chapter{Προβλήματα και Εφαρμογές} %να μπουν αργότερα;
+%\input{provlimata} %να μπουν αργότερα;
+%\newpage
+%\chapter{Συχνά λάθη και παγίδες}
+%\input{lathi_pagides}
+%\chapter{Ερωτήσεις Θεωρίας}
+%\input{Epanalipsi_G_Lykeioy_250_Smart_Sosto_Lathos}
+%\newpage
+%\input{Epanalipsi_G_Lykeioy_80_Pollaplis}
+\chapter{Επαναληπτικά Θέματα}
+\input{themata_A}
+%\newpage
+%\input{themata_B}
+%\newpage
+%\input{themata_C}
+%\newpage
+%\input{themata_D}
+%\newpage
+%\chapter{Ολοκληρωμένα Διαγωνίσματα Προσομοίωσης}
+%\input{diagwnismata_prosomoiwsis}
+%\newpage
+%\section*{Λύσεις Θεμάτων}
+%\setcounter{thema}{0}
+%\renewenvironment{thema}[1]
+%{\begin{tcolorbox}[title=\kerkissans{\textbf{\large{\refstepcounter{thema}\thethema{ο} Θέμα #1 - \lysh}}},breakable,
+%enhanced standard,titlerule=0pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+%colback=white,left=0mm,top=1mm,bottom=0mm,
+%boxrule=0pt,
+%colframe=white,leftrule=0mm,sharp corners,coltitle=black]
+%\renewcommand{\themanum}{#1}}
+%{\end{tcolorbox}}
+%\input{./Λύσεις θεμάτων/Β/solution_B_45.tex}
+%\input{./Λύσεις διαγωνισμάτων/solution_diag_01}
+%\input{./Λύσεις διαγωνισμάτων/solution_diag_02}
+%\input{./Λύσεις διαγωνισμάτων/solution_diag_03}
+
+
+
+\backmatter
+\pagestyle{empty}
+% Επαναφορά απλού τίτλου κεφαλαίου για την βιβλιογραφία (χωρίς TikZ overlay από το fancychapter)
+\titleformat{\chapter}
+  {\normalfont\Huge\bfseries\fontfamily{maksf}\selectfont\color{maincolor!80!black}}
+  {}{0pt}{#1}
+  [\vspace{2mm}{\color{maincolor!20}\titlerule[1.5pt]}]
+\titlespacing*{\chapter}{0pt}{20pt}{20pt}
+\defbibheading{plainbiblio}[\bibname]{%
+  \chapter*{#1}%
+  \addcontentsline{toc}{chapter}{#1}%
+  \markboth{#1}{#1}%
+}
+\nocite{*}
 \newpage
-\renewcommand{\myleftmark}{\large Τυπολόγιο}
-\begin{center}
-\part{Επαναληπτικά Θέματα Β}
-\end{center}
-\section{Όρια - Συνέχεια}
-\begin{askhsh}{B}
-Δίνεται η συνάρτηση $f(x)=\dfrac{x}{e^x}$.
-\begin{erwthma}
-\item Να μελετήσετε την $f$ ως προς τη μονοτονία και τα ακρότατα και να βρεθεί το σύνολο τιμών της.
-\item Μελετήστε την $f$ ως προς την κυρτότητα και τα σημεία καμπής.
-\item Να βρεθεί η εξίσωση της εφαπτομένης της $C_f$ στο σημείο $A(0,f(0))$.
-\item Να βρεθεί το εμβαδόν του χωρίου που περικλείεται από την $C_f$ τον άξονα $x'x$ τον άξονα $y'y$ και την ευθεία $x=\ln{9}$.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{B}
-Δίνονται οι συναρτήσεις $f(x)=\ln{\left(1+\frac{1}{x}\right)}$ και $g(x)=e^x$.
-\begin{erwthma}
-\item Να ορίσετε τη συνάρτηση $h=f\circ g$.
-\end{erwthma}
-Αν $h(x)=\ln\left(1+\frac{1}{e^x}\right)$ με $x\in\mathbb{R}$:
-\begin{erwthma}[resume]
-\item δείξτε ότι η $h$ αντιστρέφεται και ότι $h^{-1}(x)=-\ln{\left(e^x-1\right)}\ ,\ x>0$.
-\item βρείτε τις ασύμπτωτες των γραφικών παραστάσεων των συναρτήσεων $h$ και $h^{-1}$.
-\item βρείτε την εξίσωση της εφαπτομένης της $C_h$ η οποία είναι παράλληλη με την ευθεία $\zeta: y=-\frac{x}{2}+1$.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{B}
-Δίνεται η συνάρτηση $f(x)=\dfrac{2x}{x^2+1}$.
-\begin{erwthma}
-\item Να μελετήσετε την $f$ ως προς τη μονοτονία και τα ακρότατα.
-\item Μελετήστε την $f$ ως προς την κυρτότητα και τα σημεία καμπής.
-\item Να βρεθούν οι ασύμπτωτες της $C_f$ και να χαράξετε τη γραφική της παράσταση.
-\item Να βρεθεί το εμβαδόν του χωρίου που περικλείεται από την $C_f$ τον άξονα $x'x$ και τις ευθείες $x=-1,x=2$.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{B}
-Δίνεται η συνάρτηση $f:(0,+\infty)\to\mathbb{R}$ με τύπο $f(x)=\sqrt{x}-\ln{x}$.
-\begin{erwthma}
-\item Να μελετήσετε την $f$ ως προς τη μονοτονία και τα ακρότατα.
-\item Μελετήστε την $f$ ως προς την κυρτότητα.
-\item Να βρεθεί η εξίσωση της εφαπτομένης $\varepsilon$ της $C_f$ στο σημείο $A(1,f(1))$.
-\item Αν $\varepsilon: y=-\frac{x}{2}+\frac{3}{2}$ είναι η εξίσωση της εφαπτομένης στο $A$, να δείξετε ότι ισχύει $2\sqrt{x}+x-3\geq\ln{x}$ για κάθε $x>0$.
-\item Υπολογίστε το όριο $\lim\limits_{x\to0^+}{(xf(x))}$.
-\item Να βρεθεί το εμβαδόν του χωρίου που περικλείεται από την $C_f$ την ευθεία $\varepsilon$ και την ευθεία $x=3$.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{Β}
-Δίνονται οι συναρτήσεις $f:(0,+\infty)\to\mathbb{R}$ με $f(x)=x\ln{x}-x$ και $g:\mathbb{R}\to\mathbb{R}$ με $g(x)=e^x$.
-\begin{erwthma}
-\item Να ορίσετε τη συνάρτηση $h=f\circ g$.
-\end{erwthma}
-Αν $h(x)=e^x(x-1)\ ,\ x\in\mathbb{R}$:
-\begin{erwthma}[resume]
-\item μελετήστε την $h$ ως προς τη μονοτονία και τα ακρότατα.
-\item να μελετήσετε την $h$ ως προς την κυρτότητα και τα σημεία καμπής.
-\item να βρεθεί το εμβαδόν του χωρίου που περικλείεται από την $C_f$, τον άξονα $x'x$ και την ευθεία $x=-2$.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{Β}
-Δίνονται οι συναρτήσεις $g:(1,+\infty)\to\mathbb{R}$ με τύπο $g(x)=\ln{\left(x-\frac{1}{x}\right)}$ και $h:\mathbb{R}\to\mathbb{R}$ με $h(x)=e^x$.
-\begin{erwthma}
-\item Να αποδείξετε ότι η συνάρτηση $f=h\circ g$ έχει πεδίο ορισμού $D_f=(1,+\infty)$ και τύπο $f(x)=x-\frac{1}{x}$.
-\item Εξετάστε αν οι συναρτήσεις $f$ και $k$ με $k(x)=x-\frac{1}{x}$ είναι ίσες. Σε περίπτωση που δεν είναι ίσες, να βρείτε το ευρύτερο υποσύνολο του $\mathbb{R}$ στο οποίο ισχύει $f(x)=k(x)$.
-\item Δείξτε ότι η $f$ είναι αντιστρέψιμη και βρείτε την $f^{-1}$.
-\item Αν $f^{-1}(x)=\frac{x+\sqrt{x^2+4}}{2}\ ,\ x>0$ να υπολογίσετε το όριο
-\[ \lim_{x\to+\infty}{\frac{f^{-1}(x)}{x}} \]
-\end{erwthma}
-\end{askhsh}
-\part{Επαναληπτικά Θέματα Γ}
-\begin{askhsh}{Γ}
-Δίνεται συνάρτηση $f:(0,+\infty)\to\mathbb{R}$ για την οποία ισχύει
-\[ x^2f'(x)+xf(x)=1\ , \ x>0 \]
-Να δείξετε ότι:
-\begin{erwthma}
-\item ο τύπος της $f$ είναι $f(x)=\frac{\ln{x}}{x}$ για κάθε $ x>0$.
-\item υπάρχει τουλάχιστον ένα $x_0\in(0,1)$ τέτοιο ώστε $1-\ln{x_0}=2x_0^2$.
-\item ισχύει $e\ln{x}\leq x$ για κάθε $x>0$.
-\item Ένα σημείο $M$ κινείται πάνω στη γραφική παράσταση της $f$ του οποίου η τετμημένη αυξάνεται με ρυθμό $2\mu/s$. Τη στιγμή που το σημείο $M$ βρίσκεται στη θέση $A(e,f(e))$ να βρείτε το ρυθμό με τον οποίο μεταβάλλεται η τεταγμένη του.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{Γ}
-Δίνεται παραγωγίσιμη συνάρτηση $f:\mathbb{R}\to\mathbb{R}$ με τύπο
-\[ f(x)=\begin{cdcases}
-x^2+a & ,x\geq0\\xe^x-x+\beta & ,x<0
-\end{cdcases} \]
-\begin{erwthma}
-\item Να δείξετε ότι $a=\beta=-1$.
-\item Να υπολογίσετε το όριο \[ \lim_{x\to-\infty}{\frac{f(x)}{xf'(x)}} \]
-\item Μελετήστε την $f$ ως προς την κυρτότητα και τα σημεία καμπής.
-\item Να βρείτε την εξίσωση της εφαπτομένης της $C_f$ η οποία είναι κάθετη στην ευθεία $\zeta:y=x+1$.
-\end{erwthma}
-\end{askhsh}
-\begin{askhsh}{Γ}
-Δίνεται η συνάρτηση $f:(0,+\infty)\to\mathbb{R}$ με τύπο $f(x)=x^{-ax}$ η οποία παρουσιάζει ακρότατο στη θέση $x=\frac{1}{e}$.
-\begin{erwthma}
-\item Να δείξετε ότι $a=1$.
-\item Προσδιορίστε το είδος και την τιμή του ακρότατου και δείξτε ότι $ex\ln{x}+1\geq 0$ για κάθε $x\in(0,+\infty)$.
-\item Να υπολογίσετε το όριο
-\[ \lim\limits_{x\to+\infty}{\left(f(x)\cdot\hm{x}\right)} \]
-\item Ένα σημείο $M$ ξεκινά από την αρχή των αξόνων και κινείται πάνω στη γραφική παράσταση της $f$ έτσι ώστε η τετμημένη του να αυξάνεται με ρυθμό $3\mu/\si{s}$. Να βρείτε το ρυθμό μεταβολής της τεταγμένης του $M$ τη χρονική στιγμή που αυτό διέρχεται από το $A\left(e,f(e)\right)$.
-\end{erwthma}
-\end{askhsh}
+\printbibliography[heading=plainbiblio, title={Βιβλιογραφία}]
 \end{document}

@@ -101,7 +101,7 @@
 % ===================================================================
 %  6. ΓΡΑΦΙΚΑ & ΣΧΗΜΑΤΑ
 % ===================================================================
-\usepackage{graphicx,tikz,pgfplots,tkz-euclide,tkz-tab}
+\usepackage{graphicx,tikz,pgfplots,tkz-euclide,tkz-tab,subcaption}
 \usetikzlibrary{shadows,calc,fadings,patterns}
 \pgfplotsset{compat=newest}
 \tkzSetUpPoint[size=2.8,fill=white]
@@ -1651,7 +1651,7 @@ $P(x) = -2x^3 + 4x^2 + 2(x^3 - 1) + 9$ και $Q(x) = \alpha x^2 + 7$, $\alpha \
 \item 3.3 Αναγωγή στο 1o Τεταρτημόριο
 \end{ylh}
 Στο παρακάτω σχήμα δίνεται ο τριγωνομετρικός κύκλος και μια γωνία $\theta$ που η τελική της πλευρά τέμνει τον κύκλο στο σημείο $P$. 
-Η άλλη γωνία είναι η προέκταση...
+Η άλλη γωνία είναι η προέκταση.
 \begin{center}
 \begin{tikzpicture}[scale=2, >=latex]
     \draw[thick] (0,0) circle (1);
@@ -1801,14 +1801,14 @@ $P(x) = -2x^3 + 4x^2 + 2(x^3 - 1) + 9$ και $Q(x) = \alpha x^2 + 7$, $\alpha \
 \begin{axis}[
     axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
     xmin = -2.7, xmax = 2.7, ymin = -10.5, ymax = 9.5,
-    xtick = {-2,2}, ytick = {-10,-8,-6,-4,-2, 2,4,6,8},
+    xtick = {-2,-1,1,2}, ytick = {-10,-8,-6,-4,-2, 2,4,6,8},
     grid = both, grid style = {gray!30},
     samples = 150, width = 8cm, height = 10cm,
     tick label style = {font=\small},
 ]
     \addplot[very thick, maincolor, domain=0:2.55] {x^3 - 8};
-    \filldraw (axis cs:0,-8) circle (3pt);
-    \filldraw (axis cs:2,0) circle (3pt);
+    \filldraw (axis cs:0,-8) circle (1.5pt);
+    \filldraw (axis cs:2,0) circle (1.5pt);
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -1845,7 +1845,7 @@ $P(x) = -2x^3 + 4x^2 + 2(x^3 - 1) + 9$ και $Q(x) = \alpha x^2 + 7$, $\alpha \
     legend style={at={(0.05,0.95)},anchor=north west, font=\small}
 ]
     % f(x) = 2^x (Green)
-    \addplot[very thick, forestgreen!70!black, domain=-4:3] {2^x} node[right, pos=0.9] {$f(x)$};
+    \addplot[very thick, maincolor!50!secondarycolor, domain=-4:3] {2^x} node[right, pos=0.9] {$f(x)$};
     
     % h(x) = 2^x + 1 (Blue) - Vertical shift +1
     \addplot[very thick, maincolor, domain=-4:2.8] {2^x + 1} node[above, pos=0.8] {$h(x)$};
@@ -1859,7 +1859,7 @@ $P(x) = -2x^3 + 4x^2 + 2(x^3 - 1) + 9$ και $Q(x) = \alpha x^2 + 7$, $\alpha \
     \filldraw (axis cs:0,2) circle (1.5pt);
 
     % Horizontal move indicator (f to g)
-    \draw[<->, >=latex, dashed, thick, red!50!black] (axis cs:0,1) -- (axis cs:2,1) node[midway, above] {$2$};
+    \draw[<->, >=latex, dashed, thick] (axis cs:0,1) -- (axis cs:2,1) node[midway, above] {$2$};
     \filldraw (axis cs:2,1) circle (1.5pt);
 
 \end{axis}
@@ -2066,7 +2066,7 @@ ii) Να αποδείξετε ότι οι γραφικές παραστάσει�
     \draw[->, thick, fill=gray!30] (0.5,0) arc (0:30:0.5);
     \node at (15:0.7) {$\varphi$};
     % Angle omega (obtuse)
-    \draw[->, thick, fill=gray!10] (180:0.8) arc (180:30:0.8);
+    \draw[->, thick, fill=maincolor!10] (0,0) -- (180:0.8) arc (180:30:0.8) -- cycle;
     \node at (105:1) {$\omega$};
 \end{tikzpicture}
 \end{center}
@@ -2220,6 +2220,7 @@ ii) Να αποδείξετε ότι οι γραφικές παραστάσει�
 Σε μια συνεστίαση μεταξύ συγγενών παρευρίσκονται οι γονείς με τα παιδιά τους. Στο τραπέζι υπάρχουν 5 παιδιά επιπλέον από τους γονείς. Κάθε γονιός πλήρωσε 12€ και κάθε παιδί τα μισά. Ο συνολικός λογαριασμός ήταν 300€.
 \begin{alist}
 \item Αν x το πλήθος των γονιών και y το πλήθος των παιδιών, να διαλέξετε από τις παρακάτω επιλογές, ένα σύστημα δύο εξισώσεων με δύο αγνώστους που εκφράζει τα δεδομένα του παραπάνω προβλήματος.
+\begin{center}
 Α. \(\left\{ \begin{array}{r}
 x + y + 5 = 0\ \  \\
 \ 12x + 6y = \ 300
@@ -2234,6 +2235,7 @@ y = x + 5\ \  \\
 y = x + 5\ \  \\
 \ 6x + 12y = \ 300
 \end{array} \right.\ \)
+\end{center}
 \monades{10}
 \item Από τη λύση του συστήματος που επιλέξατε στο α) ερώτημα να βρείτε πόσοι γονείς και πόσα παιδιά υπήρχαν στο τραπέζι.
 \monades{15}
@@ -2617,19 +2619,17 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
 \item 3.1 Τριγωνομετρικοί Αριθμοί Γωνίας
 \end{ylh}
 \begin{alist}
-\item Να αποδείξετε οτι $\ef  500{^\circ} = \ef  140{^\circ}$.
+\item Να αποδείξετε ότι $\ef  500{^\circ} = \ef  140{^\circ}$.
 \monades{10}
 \item
-\end{alist}
-\begin{alist}
+\begin{rlist}
 \item
   Να βρείτε το πρόσημο του τριγωνομετρικού αριθμού $\ef  500{^\circ}$
 \monades{05}
-\end{alist}
-\begin{alist}
 \item
   Να βρείτε το πρόσημο της παράστασης $Α = \ef  500{^\circ} \cdot \hm  250{^\circ} \cdot \syn  300{^\circ}$.
 \monades{10}
+\end{rlist}
 \end{alist}
 % --- Άσκηση 19903 (19903.tex) ---
 \Askhsh{19903}{2}
@@ -2641,8 +2641,7 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
 \begin{alist}
 \item Να δείξετε ότι $\alpha = 3$.
 \monades{10}
-\item Να λύσετε την εξίσωση
-\begin{equation*}9{\cdot 2}^{x} = 4{\cdot \alpha}^{x}.\end{equation*}
+\item Να λύσετε την εξίσωση $9{\cdot 2}^{x} = 4{\cdot \alpha}^{x}.$
 \monades{15}
 \end{alist}
 % --- Άσκηση 19908 (19908.tex) ---
@@ -2652,7 +2651,7 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
 \item 5.2 Λογάριθμοι
 \item 5.3 Λογαριθμική συνάρτηση
 \end{ylh}
-Δίνεται η συνάρτηση $f(x) = \ln\frac{1 - x}{x}$.
+Δίνεται η συνάρτηση $f(x) = \ln\dfrac{1 - x}{x}$.
 \begin{alist}
 \item Να βρείτε το πεδίο ορισμού της $f$.
 \monades{13}
@@ -2724,7 +2723,7 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
     samples = 150, width = 10cm, height = 7cm,
     tick label style = {font=\small},
 ]
-    \addplot[very thick, maincolor, dashed, domain=-2.1:2.1] {x^2 + 1} node[above right, pos=1] {$C_f$};
+    \addplot[very thick, maincolor, domain=-2.1:2.1] {x^2 + 1} node[above right, pos=1] {$C_f$};
     \addplot[very thick, secondarycolor, domain=-0.1:4.1] {(x-2)^2 + 1} node[above left, pos=1] {$C_g$};
     \filldraw (axis cs:0,1) circle (1.5pt);
     \filldraw (axis cs:2,1) circle (1.5pt);
@@ -2747,7 +2746,7 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
 \item 5.2 Λογάριθμοι
 \item 5.3 Λογαριθμική συνάρτηση
 \end{ylh}
-Δίνεται η συνάρτηση $f(x) = logx$, $x > 0$.
+Δίνεται η συνάρτηση $f(x) = \log x$, $x > 0$.
 \begin{alist}
 \item Να υπολογίσετε τους αριθμούς $f(100)$, $f\left( \sqrt{10} \right)$
 \monades{12}
@@ -2767,6 +2766,7 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
 \monades{6}
 \item $10^\beta - 10^\alpha = 10 \cdot (\beta + \alpha)$ .
 \monades{12}
+
 Δίνεται ότι $e \simeq 2,71$.
 \end{alist}
 % --- Άσκηση 20711 (20711.tex) ---
@@ -2894,7 +2894,7 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
     \addplot[thick, black, domain=0:2*pi] ({cos(deg(x))}, {sin(deg(x))});
     \def\angle{150}
     \addplot[very thick, secondarycolor] coordinates {(0,0) ({cos(\angle)}, {sin(\angle)})};
-    \filldraw[maincolor] (axis cs:{cos(\angle)}, {sin(\angle)}) circle (1.5pt) node[above left, black] {$M(x, \frac{1}{2})$};
+    \filldraw[maincolor] (axis cs:{cos(\angle)}, {sin(\angle)}) circle (1.5pt) node[above, black] {$M(x, \frac{1}{2})$};
     \draw[dashed] (axis cs:{cos(\angle)}, {sin(\angle)}) -- (axis cs:0, 0.5) node[right] {$\frac{1}{2}$};
     \draw[dashed] (axis cs:{cos(\angle)}, {sin(\angle)}) -- (axis cs:{cos(\angle)}, 0) node[below] {$x$};
     \addplot[->, thick, maincolor!60!black, domain=0:\angle] ({0.3*cos(x)}, {0.3*sin(x)});
@@ -2916,11 +2916,11 @@ $A = \syn (\pi - \theta)\syn (-\theta) - \hm (\pi - \theta)\hm (-\theta)$.
 \item 5.3 Λογαριθμική συνάρτηση
 \end{ylh}
 Δίνονται οι παραστάσεις:
-\begin{equation*}Α = 2\log 6 - \log 12\ \ \text{και}\ \ Β = \log 5 + \log 2\end{equation*}
+\begin{equation*}A = 2\log 6 - \log 12\ \ \text{και}\ \ Β = \log 5 + \log 2\end{equation*}
 \begin{alist}
-\item Να αποδείξετε ότι $Α = \log 3$ και $Β = 1$.
+\item Να αποδείξετε ότι $A = \log 3$ και $B = 1$.
 \monades{12}
-\item Να αποδείξετε ότι $Α < Β$.
+\item Να αποδείξετε ότι $A < B$.
 \monades{05}
 \item Να λύσετε την ανίσωση $\log x < 1$.
 \monades{08}
@@ -2966,9 +2966,9 @@ $g(x) = \ln x,\ \ x > 0$.
 \begin{ylh}{1}
 \item 5.1 Εκθετική συνάρτηση
 \end{ylh}
-Δίνεται η συνάρτηση $f(x) = \left( \frac{1}{2} \right)^{x}$.
+Δίνεται η συνάρτηση $f(x) = \left( \dfrac{1}{2} \right)^{x}$.
 \begin{alist}
-\item Να λύσετε την εξίσωση $\left( \frac{1}{2} \right)^{x} = \frac{1}{8}$ .
+\item Να λύσετε την εξίσωση $\left( \dfrac{1}{2} \right)^{x} = \dfrac{1}{8}$ .
 \monades{12}
 Στο παρακάτω σχήμα φαίνεται η γραφική παράσταση της $f$ και της ευθείας $\varepsilon:y = \frac{1}{8}$ .
 % TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
@@ -2982,7 +2982,7 @@ $g(x) = \ln x,\ \ x > 0$.
     samples = 150, width = 10cm, height = 7cm,
     tick label style = {font=\small},
 ]
-    \addplot[ultra thick, maincolor, domain=-2.5:4.5] {0.5^x} node[right, pos=0.9] {$C_f$};
+    \addplot[ultra thick, maincolor, domain=-2.5:4.5] {0.5^x} node[above, pos=0.9] {$C_f$};
     \def\k{0.125}
     \addplot[thick, secondarycolor, domain=-3.5:5.5] {\k} node[right, pos=1] {$\varepsilon$};
     \filldraw[black] (axis cs:3,\k) circle (2pt) node[above] {$A$};
@@ -3005,17 +3005,14 @@ $g(x) = \ln x,\ \ x > 0$.
 \item Να αποδείξετε οτι η εξίσωση $f(x) = 0$ δεν έχει ακέραιες ρίζες.
 \monades{12}
 \item Στο παρακάτω σχήμα φαίνεται η γραφική παράσταση της συνάρτησης $f$.
-\end{alist}
-\begin{alist}
+
+\begin{rlist}
 \item
   Να δικαιολογήσετε ότι η εξίσωση $f(x) = 0$ έχει μία ρίζα.
 \monades{04}
-\end{alist}
-\begin{alist}
 \item
   Να αποδείξετε ότι η ρίζα αυτή βρίσκεται στο διάστημα $(0,1)$.
 \monades{09}
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
@@ -3034,6 +3031,7 @@ $g(x) = \ln x,\ \ x > 0$.
 \end{tikzpicture}
 % % \caption{Σχήμα 1}
 \end{center}
+\end{rlist}
 \end{alist}
 % --- Άσκηση 20867 (20867.tex) ---
 \Askhsh{20867}{2}
@@ -3063,11 +3061,11 @@ $g(x) = \ln x,\ \ x > 0$.
     tick label style = {font=\small},
 ]
     \addplot[ultra thick, maincolor, domain=0:6.28] {cos(2*deg(x))};
-    \filldraw (axis cs:0,1) circle (2.5pt);
-    \filldraw (axis cs:6.28,1) circle (2.5pt);
-    \filldraw (axis cs:3.14,1) circle (2.5pt);
-    \filldraw (axis cs:1.57,-1) circle (2.5pt);
-    \filldraw (axis cs:4.71,-1) circle (2.5pt);
+    \filldraw (axis cs:0,1) circle (1.5pt);
+    \filldraw (axis cs:6.28,1) circle (1.5pt);
+    \filldraw (axis cs:3.14,1) circle (1.5pt);
+    \filldraw (axis cs:1.57,-1) circle (1.5pt);
+    \filldraw (axis cs:4.71,-1) circle (1.5pt);
 \end{axis}
 \end{tikzpicture}
 % % \caption{Σχήμα 1}
@@ -3095,7 +3093,7 @@ $g(x) = \ln x,\ \ x > 0$.
 \item 3.2 Βασικές Τριγωνομετρικές Ταυτότητες
 \item 3.3 Αναγωγή στο 1o Τεταρτημόριο
 \end{ylh}
-Στο παρακάτω σχήμα δίνεται γωνία $\chi\widehat{Ο}\zeta = \omega$ με $\pi < \omega <$ $\frac{3\pi}{2}$.
+Στο παρακάτω σχήμα δίνεται γωνία $x\widehat{O}M = \omega$ με $\pi < \omega <$ $\frac{3\pi}{2}$.
 \begin{alist}
 \item Να αιτιολογήσετε ότι $\syn \omega = -$ $\frac{1}{3}$.
 \monades{07}
@@ -3137,19 +3135,14 @@ $g(x) = \ln x,\ \ x > 0$.
 \begin{tikzpicture}
 \begin{axis}[
     axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
-    xmin = -2.5, xmax = 5.5, ymin = -1.5, ymax = 6.5,
-    xtick = {-2,-1,1,2,3,4,5}, ytick = {1,2,3,4,5,6},
+    xmin = -4.5, xmax = 3.5, ymin = -1.5, ymax = 6.5,
+    xtick = {-4,-3,-2,-1,1,2,3}, ytick = {1,2,3,4,5,6},
     grid = both, grid style = {gray!30},
     samples = 150, width = 10cm, height = 7cm,
     tick label style = {font=\small},
 ]
     \addplot[very thick, maincolor, domain=-2:2.5] {2^x};
-%    \foreach \t/\r in {0/1, 1/2, 2/4} {
-%        \filldraw[black] (axis cs:\t,\r) circle (2.5pt);
-%        \draw[dashed] (axis cs:\t,\r) -- (axis cs:\t,0) node[below] {$\t$};
-%        \draw[dashed] (axis cs:\t,\r) -- (axis cs:0,\r) node[left] {$\r$};
-%    }
-    \node[above left] at (axis cs:2.5,5.6) {$f(x)=2^x$};
+
 \end{axis}
 \end{tikzpicture}
 % % \caption{Σχήμα 1}
@@ -3157,33 +3150,13 @@ $g(x) = \ln x,\ \ x > 0$.
 \begin{alist}
 \item
 \begin{rlist}
-\item Με βάση την γραφική της παράσταση, να συμπληρώσετε τον παρακάτω πίνακα τιμών της συνάρτησης $f$ .
-\begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1067}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1786}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1786}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1787}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1787}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1787}}@{}}
-\noalign{}
-\begin{minipage}[b]{\linewidth}\centering
-$x$
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
--1
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-0
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-1
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-2
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-3
-\end{minipage} \\
-\noalign{}
-\noalign{}
-\endlastfoot
+\item Με βάση την γραφική της παράσταση, να συμπληρώσετε τον παρακάτω πίνακα τιμών της συνάρτησης $f$.
+\begin{center}
+\begin{myhtblr}
+$x$ & -1 & 0 & 1 & 2 & 3\\
 $f(x)$ & & & & & \\
-\end{longtable}
+\end{myhtblr}
+\end{center}
 \monades{10}
 \item Να βρείτε τον τύπο της εκθετικής συνάρτησης $f$.
 \monades{7}
@@ -3240,68 +3213,102 @@ ii) να συγκρίνετε τους αριθμούς $\alpha^{\sqrt{2}},{\ a}
 \endlastfoot
 % TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
-    % Grid
-    \draw[very thin, lightgray!30] (-3,-4) grid (3,4);
-    % Axes
-    \draw[->, thick] (-3.5,0) -- (3.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-4.5) -- (0,4.5) node[above] {$y$};
-    % Cubic function y = x^3 - 3x
-    \draw[ultra thick, maincolor, domain=-2.3:2.3, samples=100] plot (\x, {\x^3 - 3*\x});
-    % Extremes
-    \filldraw[secondarycolor] (-1,2) circle (2.5pt) node[above left, black] {$(-1,2)$};
-    \filldraw[secondarycolor] (1,-2) circle (2.5pt) node[below right, black] {$(1,-2)$};
-    % Origin
-    \node[below left] at (0,0) {$0$};
-    % Common labels
-    \foreach \x in {-2,-1,1,2} \node[below, font=\scriptsize] at (\x,0) {$\x$};
-    \foreach \y in {-3,-1,1,3} \node[left, font=\scriptsize] at (0,\y) {$\y$};
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -3, xmax = 3,
+        ymin = -4, ymax = 4,
+        xtick = {-3,-2,-1,1,2,3},
+        ytick = {-3,-2,-1,1,2,3},
+        xticklabels = {\empty, -2, -1, 1, 2, \empty}, % Κρύβουμε τις ακραίες ετικέτες 
+        yticklabels = { -3, -2, -1, 1, 2, 3},
+        grid = major,
+        grid style = {very thin, lightgray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        tick label style = {font=\scriptsize},
+        width = 7cm, height = 9cm, % Προσομοίωση του scale=0.8
+    ]
+        % Cubic function y = x^3 - 3x
+        \addplot[ultra thick, maincolor, domain=-2.1:2.1, samples=100] {x^3 - 3*x};
+        
+        % Extremes
+        \filldraw[secondarycolor] (axis cs:-1,2) circle (2.5pt) node[above left, black] {$(-1,2)$};
+        \filldraw[secondarycolor] (axis cs:1,-2) circle (2.5pt) node[below right, black] {$(1,-2)$};
+        
+        % Origin
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
-% % \caption{Σχήμα 1}
+% \caption{Σχήμα 1}
 \end{center}
  & 
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
-    % Grid
-    \draw[very thin, lightgray!30] (-3,-4) grid (3,4);
-    % Axes
-    \draw[->, thick] (-3.5,0) -- (3.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-4.5) -- (0,4.5) node[above] {$y$};
-    % Cubic function y = x^3 - 3x
-    \draw[ultra thick, maincolor, domain=-2.3:2.3, samples=100] plot (\x, {\x^3 - 3*\x});
-    % Extremes
-    \filldraw[secondarycolor] (-1,2) circle (2.5pt) node[above left, black] {$(-1,2)$};
-    \filldraw[secondarycolor] (1,-2) circle (2.5pt) node[below right, black] {$(1,-2)$};
-    % Origin
-    \node[below left] at (0,0) {$0$};
-    % Common labels
-    \foreach \x in {-2,-1,1,2} \node[below, font=\scriptsize] at (\x,0) {$\x$};
-    \foreach \y in {-3,-1,1,3} \node[left, font=\scriptsize] at (0,\y) {$\y$};
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -3, xmax = 3,
+        ymin = -4, ymax = 4,
+        xtick = {-3,-2,-1,1,2,3},
+        ytick = {-3,-2,-1,1,2,3},
+        xticklabels = {\empty, -2, -1, 1, 2, \empty},
+        yticklabels = {\empty, -3, -2, -1, 1, 2, 3, \empty},
+        grid = major,
+        grid style = {very thin, lightgray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        tick label style = {font=\scriptsize},
+        width = 7cm, height = 9cm,
+    ]
+        % Cubic function y = x^3 - 3x
+        \addplot[ultra thick, maincolor, domain=-2.1:2.1, samples=100] {x^3 - 3*x};
+        
+        % Extremes
+        \filldraw[secondarycolor] (axis cs:-1,2) circle (2.5pt) node[above left, black] {$(-1,2)$};
+        \filldraw[secondarycolor] (axis cs:1,-2) circle (2.5pt) node[below right, black] {$(1,-2)$};
+        
+        % Origin
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
-% % \caption{Σχήμα 2}
+% \caption{Σχήμα 2}
 \end{center}
  & 
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
-    % Grid
-    \draw[very thin, lightgray!30] (-3,-4) grid (3,4);
-    % Axes
-    \draw[->, thick] (-3.5,0) -- (3.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-4.5) -- (0,4.5) node[above] {$y$};
-    % Cubic function y = x^3 - 3x
-    \draw[ultra thick, maincolor, domain=-2.3:2.3, samples=100] plot (\x, {\x^3 - 3*\x});
-    % Extremes
-    \filldraw[secondarycolor] (-1,2) circle (2.5pt) node[above left, black] {$(-1,2)$};
-    \filldraw[secondarycolor] (1,-2) circle (2.5pt) node[below right, black] {$(1,-2)$};
-    % Origin
-    \node[below left] at (0,0) {$0$};
-    % Common labels
-    \foreach \x in {-2,-1,1,2} \node[below, font=\scriptsize] at (\x,0) {$\x$};
-    \foreach \y in {-3,-1,1,3} \node[left, font=\scriptsize] at (0,\y) {$\y$};
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -3, xmax = 3,
+        ymin = -4, ymax = 4,
+        xtick = {-3,-2,-1,1,2,3},
+        ytick = {-3,-2,-1,1,2,3},
+        xticklabels = {\empty, -2, -1, 1, 2, \empty},
+        yticklabels = {\empty, -3, -2, -1, 1, 2, 3, \empty},
+        grid = major,
+        grid style = {very thin, lightgray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        tick label style = {font=\scriptsize},
+        width = 7cm, height = 9cm,
+    ]
+        % Cubic function y = x^3 - 3x (Το domain εδώ είναι ελαφρώς μεγαλύτερο)
+        \addplot[ultra thick, maincolor, domain=-2.1:2.1, samples=100] {x^3 - 3*x};
+        
+        % Extremes
+        \filldraw[secondarycolor] (axis cs:-1,2) circle (2.5pt) node[above left, black] {$(-1,2)$};
+        \filldraw[secondarycolor] (axis cs:1,-2) circle (2.5pt) node[below right, black] {$(1,-2)$};
+        
+        % Origin
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
-% % \caption{Σχήμα 3}
+% \caption{Σχήμα 3}
 \end{center}
  \\
 Γραφική παράσταση (α) & Γραφική παράσταση (β) & Γραφική παράσταση (γ) \\
@@ -3338,7 +3345,7 @@ $\log(x + 1) = - \log 2 - \log(1 - x)\text{  }(1).$
 \item 3.3 Αναγωγή στο 1o Τεταρτημόριο
 \item 3.4 Οι τριγωνομετρικές συναρτήσεις
 \end{ylh}
-Δίνεται η παράσταση $A = \frac{\hm (180^{\circ} - 20^{\circ}) \cdot \syn (-3x)}{\syn (90^{\circ} - 20^{\circ})}$.
+Δίνεται η παράσταση $A = \dfrac{\hm (180^{\circ} - 20^{\circ}) \cdot \syn (-3x)}{\syn (90^{\circ} - 20^{\circ})}$.
 \begin{alist}
 \item Να δείξετε ότι $A = \syn  3x$.
 \monades{13}
@@ -3352,11 +3359,11 @@ $\log(x + 1) = - \log 2 - \log(1 - x)\text{  }(1).$
 \item 3.2 Βασικές Τριγωνομετρικές Ταυτότητες
 \item 3.3 Αναγωγή στο 1o Τεταρτημόριο
 \end{ylh}
-Δίνεται ότι $\hm \theta = \frac{\hm \frac{2\pi}{3} - \syn \frac{\pi}{3}}{\syn ^2\frac{\pi}{4}}$.
+Δίνεται ότι $\hm \theta = \dfrac{\hm \frac{2\pi}{3} - \syn \frac{\pi}{3}}{\syn ^2\frac{\pi}{4}}$.
 \begin{alist}
 \item Να δείξετε ότι:
 \begin{rlist}
-\item $\hm \frac{2\pi}{3} = \frac{\sqrt{3}}{2}$.
+\item $\hm \dfrac{2\pi}{3} = \dfrac{\sqrt{3}}{2}$.
 \monades{5}
 \item $\hm \theta = \sqrt{3} - 1$.
 \monades{7}
@@ -3458,19 +3465,37 @@ $\ln x + \ln(x + 6) = \ln 7$.
 \end{ylh}
 % TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
-    % Grid
-    \draw[help lines, gray!30] (-3,0) grid (3,6);
-    % Axes
-    \draw[->, thick] (-3.5,0) -- (3.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-0.5) -- (0,6.5) node[above] {$y$};
-    % Original Parabola C_f: y = x^2
-    \draw[ultra thick, maincolor, domain=-2.4:2.4, samples=100] plot (\x, {\x^2}) node[right] {$C_f$};
-    % Shifted Parabola C_phi: y = x^2 + 1
-    \draw[thick, secondarycolor, dashed, domain=-2.2:2.2, samples=100] plot (\x, {\x^2+1}) node[above] {$C_\varphi$};
-    % Labels
-    \node[below left] at (0,0) {$0$};
-    \filldraw (0,1) circle (2pt) node[right] {$1$};
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xmin = -3.5, xmax = 3.5,
+        ymin = -0.5, ymax = 6.5,
+        % Ορίζουμε πού θέλουμε γραμμές πλέγματος
+        xtick = {-3,-2,-1,1,2,3},
+        ytick = {1,2,3,4,5,6},
+        grid = major,
+        grid style = {help lines, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        % Ρυθμίζουμε το πλάτος και το ύψος για να προσομοιώσουμε το scale=0.8
+        width=8.5cm, height=9cm 
+    ]
+        
+        % Original Parabola C_f: y = x^2
+        \addplot[ultra thick, maincolor, domain=-2.4:2.4, samples=100] {x^2} 
+            node[right] {$C_f$};
+            
+        % Shifted Parabola C_phi: y = x^2 + 1
+        \addplot[thick, secondarycolor, domain=-2.2:2.2, samples=100] {x^2+1} 
+            node[above] {$C_\varphi$};
+            
+        % Labels & Points
+        \node[below left] at (axis cs:0,0) {$0$};
+        \filldraw (axis cs:0,1) circle (1.5pt) node[right, xshift=2pt] {};
+        
+    \end{axis}
 \end{tikzpicture}
 % % \caption{Σχήμα 1}
 \end{center}
@@ -3533,6 +3558,7 @@ $\ln x + \ln(x + 6) = \ln 7$.
 \item $A = \frac{7}{6}$.
 \monades{12}
 \item $0 < \ln A < 1$.
+
 \monades{13}
 Δίνεται $e \simeq 2.71$.
 \end{alist}
@@ -3725,95 +3751,132 @@ $\ln x + \ln(x + 6) = \ln 7$.
 \monades{8}
 \item Να υπολογίσετε το $f(0)$ και το $f(\frac{1}{4})$ .
 \monades{8}
-\item Μία από τις παρακάτω τέσσερεις καμπύλες αντιστοιχεί στη γραφική παράσταση της συνάρτησης $f$. Ποια είναι αυτή; Να αιτιολογήσετε την απάντησή σας.
+\item Μία από τις παρακάτω τέσσερις καμπύλες αντιστοιχεί στη γραφική παράσταση της συνάρτησης $f$. Ποια είναι αυτή; Να αιτιολογήσετε την απάντησή σας.
 \monades{9}
-\begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5078}}
-  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4922}}@{}}
-\noalign{}
-\begin{minipage}[b]{\linewidth}\centering
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
-\begin{center}
-\begin{tikzpicture}[scale=1]
-    % Grid
-    \draw[help lines, gray!30] (0,-1) grid (4,1);
-    % Axes
-    \draw[->, thick] (-0.5,0) -- (4.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    % Function y = sin(pi*x)
-    \draw[ultra thick, maincolor, domain=0:4.2, samples=150] plot (\x, {sin(\x*180)});
-    % Labels
-    \node[below left] at (0,0) {$0$};
-    \foreach \x in {1,2,3,4} \node[below right] at (\x,0) {$\x$};
-    \draw (0.1, 1) -- (-0.1, 1) node[left] {$1$};
-    \draw (0.1, -1) -- (-0.1, -1) node[left] {$-1$};
-\end{tikzpicture}
-% % \caption{Σχήμα 1}
-\end{center}
-(i)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
-\begin{center}
-\begin{tikzpicture}[scale=1]
-    % Grid
-    \draw[help lines, gray!30] (0,-1) grid (4,1);
-    % Axes
-    \draw[->, thick] (-0.5,0) -- (4.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    % Function y = cos(2*pi*x)
-    \draw[ultra thick, maincolor, domain=0:4.2, samples=150] plot (\x, {cos(2*\x*180)});
-    % Labels
-    \node[below left] at (0,0) {$0$};
-    \foreach \x in {1,2,3,4} \node[below right] at (\x,0) {$\x$};
-    \draw (0.1, 1) -- (-0.1, 1) node[left] {$1$};
-    \draw (0.1, -1) -- (-0.1, -1) node[left] {$-1$};
-\end{tikzpicture}
-% % \caption{Σχήμα 2}
-\end{center}
-(ii)
-\end{minipage} \\
-\noalign{}
-\noalign{}
-\endlastfoot
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
-\begin{center}
-\begin{tikzpicture}[scale=1]
-    % Grid
-    \draw[help lines, gray!30] (0,-1) grid[xstep=0.5, ystep=1] (2,1);
-    % Axes
-    \draw[->, thick] (-0.5,0) -- (2.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    % Function y = sin(2*pi*x)
-    \draw[ultra thick, maincolor, domain=0:2.1, samples=150] plot (\x, {sin(2*\x*180)});
-    % Labels
-    \node[below left] at (0,0) {$0$};
-    \foreach \x in {0.5, 1, 1.5, 2} \draw (\x, 0.1) -- (\x, -0.1) node[below] {$\x$};
-    \draw (0.1, 1) -- (-0.1, 1) node[left] {$1$};
-    \draw (0.1, -1) -- (-0.1, -1) node[left] {$-1$};
-\end{tikzpicture}
-% % \caption{Σχήμα 3}
-\end{center}
-(iii) & 
-% TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
-\begin{center}
-\begin{tikzpicture}[scale=1.5]
-    % Grid
-    \draw[help lines, gray!30] (0,-1) grid[xstep=0.25, ystep=1] (1,1);
-    % Axes
-    \draw[->, thick] (-0.2,0) -- (1.2,0) node[right] {$x$};
-    \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    % Function y = sin(4*pi*x)
-    \draw[ultra thick, maincolor, domain=0:1.05, samples=150] plot (\x, {sin(4*\x*180)});
-    % Labels
-    \node[below left] at (0,0) {$0$};
-    \foreach \x in {0.25, 0.5, 0.75, 1} \draw (\x, 0.05) -- (\x, -0.05) node[below] {$\x$};
-    \draw (0.05, 1) -- (-0.05, 1) node[left] {$1$};
-    \draw (0.05, -1) -- (-0.05, -1) node[left] {$-1$};
-\end{tikzpicture}
-% % \caption{Σχήμα 4}
-\end{center}
-(iv) \\
-\end{longtable}
+\begin{figure}[h]
+    \centering
+    
+    % --- Σχήμα (i) ---
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+        ymin = -1.6, ymax = 1.6,
+        grid = major,
+        grid style = {help lines, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = \linewidth, % Παίρνει όλο το πλάτος του subfigure
+        height = 5cm,       % Σταθερό ύψος για ΟΛΑ τα γραφήματα
+        tick label style = {font=\scriptsize},
+        samples = 150,
+                xmin = -0.5, xmax = 4.5,
+                xtick = {1,2,3,4},
+                ytick = {-1,1},
+                domain = 0:4.2
+            ]
+                % y = sin(pi * x)
+                \addplot[ultra thick, maincolor] {sin(180*x)};
+                \node[below left] at (axis cs:0,0) {$0$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{subfigure}
+    \hfill
+    % --- Σχήμα (ii) ---
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+        ymin = -1.6, ymax = 1.6,
+        grid = major,
+        grid style = {help lines, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = \linewidth, % Παίρνει όλο το πλάτος του subfigure
+        height = 5cm,       % Σταθερό ύψος για ΟΛΑ τα γραφήματα
+        tick label style = {font=\scriptsize},
+        samples = 150,
+                xmin = -0.5, xmax = 4.5,
+                xtick = {1,2,3,4},
+                ytick = {-1,1},
+                domain = 0:4.2
+            ]
+                % y = cos(2*pi * x)
+                \addplot[ultra thick, maincolor] {cos(360*x)};
+                \node[below left] at (axis cs:0,0) {$0$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{subfigure}
+    
+    \vspace{0.5cm} % Κενό ανάμεσα στις γραμμές
+    
+    % --- Σχήμα (iii) ---
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+        ymin = -1.6, ymax = 1.6,
+        grid = major,
+        grid style = {help lines, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = \linewidth, % Παίρνει όλο το πλάτος του subfigure
+        height = 5cm,       % Σταθερό ύψος για ΟΛΑ τα γραφήματα
+        tick label style = {font=\scriptsize},
+        samples = 150,
+                xmin = -0.3, xmax = 2.4,
+                xtick = {0.5, 1, 1.5, 2},
+                ytick = {-1,1},
+                domain = 0:2.1
+            ]
+                % y = sin(2*pi * x)
+                \addplot[ultra thick, maincolor] {sin(360*x)};
+                \node[below left] at (axis cs:0,0) {$0$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{subfigure}
+    \hfill
+    % --- Σχήμα (iv) ---
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+        ymin = -1.6, ymax = 1.6,
+        grid = major,
+        grid style = {help lines, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = \linewidth, % Παίρνει όλο το πλάτος του subfigure
+        height = 5cm,       % Σταθερό ύψος για ΟΛΑ τα γραφήματα
+        tick label style = {font=\scriptsize},
+        samples = 150,
+                xmin = -0.15, xmax = 1.2,
+                xtick = {0.25, 0.5, 0.75, 1},
+                xticklabels = {$0.25$, $0.5$, $0.75$, $1$},
+                ytick = {-1,1},
+                domain = 0:1.05
+            ]
+                % y = sin(4*pi * x)
+                \addplot[ultra thick, maincolor] {sin(720*x)};
+                \node[below left] at (axis cs:0,0) {$0$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{subfigure}
+
+    \captionof{figure}{Άσκηση 22003}
+\end{figure}
 \end{alist}
 % --- Άσκηση 22007 (22007.tex) ---
 \Askhsh{22007}{2}
@@ -3828,7 +3891,7 @@ $\ln x + \ln(x + 6) = \ln 7$.
     \draw[->, thick] (-2,0) -- (5.5,0) node[right] {$x$};
     \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$y$};
     % Function y = cos(x)
-    \draw[ultra thick, maincolor, domain=-1.57:4.71, samples=150] plot (\x, {cos(\x r)}) node[right] {$y = \syn  x$};
+    \draw[ultra thick, maincolor, domain=-1.57:4.71, samples=150] plot (\x, {cos(\x r)}) node[below right] {$y = \syn  x$};
     % Labels
     \node[below left] at (0,0) {$O$};
     \draw (-1.57, 0.1) -- (-1.57, -0.1) node[below] {$\alpha$};
@@ -3946,39 +4009,78 @@ $f(x) = -3\syn  2x$ & & & & & \\
 \begin{alist}
 \item Από τις παρακάτω γραφικές παραστάσεις μόνο μία μπορεί να είναι η γραφική παράσταση της $f$. Να βρείτε ποια είναι αιτιολογώντας την απάντησή σας.
 \monades{8}
+% Ορισμός κοινού στυλ για ομοιόμορφα μεγέθη γραφημάτων
+\pgfplotsset{
+    my mini plot/.style={
+        axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        xticklabel=\empty, % Κρύβει τους αριθμούς
+        yticklabel=\empty, % Κρύβει τους αριθμούς
+        tick style={draw=none}, % Κρύβει τα μικρά σημαδάκια (ticks) πάνω στους άξονες
+        width = 6.5cm,  % Σταθερό πλάτος για ΟΛΑ
+        height = 6.5cm, % Σταθερό ύψος για ΟΛΑ
+        samples = 100
+    }
+}
+
 \begin{longtable}[]{@{}cc@{}}
 Σχήμα α & Σχήμα β \\
-\begin{tikzpicture}[scale=0.8, >=latex]
-    \draw[very thin, color=gray!30] (-1.5,-1.5) grid (1.5,1.5);
-    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
-    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    \draw[very thick, color=secondarycolor, samples=100, domain=-1:1] plot (\x, {\x*\x});
-    \node[below left, font=\tiny] at (0,0) {$0$};
+
+\begin{tikzpicture}
+    \begin{axis}[
+        my mini plot,
+        xmin=-1.5, xmax=1.5,
+        ymin=-1.5, ymax=1.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, secondarycolor, domain=-1:1] {x^2};
+        \node[below left, font=\tiny] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
  & 
-\begin{tikzpicture}[scale=0.8, >=latex]
-    \draw[very thin, color=gray!30] (-1.5,-1.5) grid (1.5,1.5);
-    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
-    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    \draw[very thick, color=maincolor!60!black, samples=100, domain=-1:1] plot (\x, {-\x*\x*\x});
-    \node[below left, font=\tiny] at (0,0) {$0$};
+\begin{tikzpicture}
+    \begin{axis}[
+        my mini plot,
+        xmin=-1.5, xmax=1.5,
+        ymin=-1.5, ymax=1.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, maincolor!60!black, domain=-1:1] {-x^3};
+        \node[below left, font=\tiny] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
  \\
+ 
 Σχήμα γ & Σχήμα δ \\
-\begin{tikzpicture}[scale=0.8, >=latex]
-    \draw[very thin, color=gray!30] (-1.5,-1.5) grid (1.5,1.5);
-    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
-    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    \draw[very thick, color=maincolor, samples=100, domain=-1:1] plot (\x, {\x*\x*\x});
-    \node[below left, font=\tiny] at (0,0) {$0$};
+
+\begin{tikzpicture}
+    \begin{axis}[
+        my mini plot,
+        xmin=-1.5, xmax=1.5,
+        ymin=-1.5, ymax=1.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, maincolor, domain=-1:1] {x^3};
+        \node[below left, font=\tiny] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
  & 
-\begin{tikzpicture}[scale=0.4, >=latex]
-    \draw[very thin, color=gray!30] (-2.5,-8.5) grid (2.5,8.5);
-    \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
-    \draw[->] (0,-8.5) -- (0,8.5) node[above] {$y$};
-    \draw[very thick, color=secondarycolor, samples=100, domain=-2:2] plot (\x, {-\x*\x*\x});
-    \node[below left, font=\tiny] at (0,0) {$0$};
+\begin{tikzpicture}
+    \begin{axis}[
+        my mini plot,
+        xmin=-2.5, xmax=2.5,
+        ymin=-8.5, ymax=8.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, secondarycolor, domain=-2:2] {-x^3};
+        \node[below left, font=\tiny] at (axis cs:0,0) {$0$};
+    \end{axis}
 \end{tikzpicture}
 \end{longtable}
 \item Να σχεδιάσετε τη γραφική παράσταση της συνάρτησης $g(x) = f(x) + 2$
@@ -7559,8 +7661,10 @@ column{1} = {maincolor,c,fg={white}}}
 \item $P(\log 20) < 0$.
 \monades{6}
 \end{alist}
+
 \chapter{Λύσεις Ασκήσεων}
 \section{Θέμα 2ο}
+% --- Λύση 14971 (14971.tex) ---
 \lysh{14971}{2}
 \begin{alist}
 \item Η συνάρτηση δε θα μπορούσε να είναι σταθερή, αφού $f(1) = 1 \neq 3 = f(3)$.
@@ -7569,6 +7673,8 @@ column{1} = {maincolor,c,fg={white}}}
 Επίσης, θα είναι συμμετρική ως προς την αρχή των αξόνων.
 Μία τέτοια συνάρτηση είναι η $f(x) = x$, της οποίας η γραφική παράσταση φαίνεται στο σχήμα.
 \end{alist}
+
+% --- Λύση 14972 (14972.tex) ---
 \lysh{14972}{2}
 \begin{alist}
 \item Οι γραφικές παραστάσεις των $g$ και $f$ προκύπτουν από δύο διαδοχικές μετατοπίσεις της γραφικής παράστασης της $\varphi$:
@@ -7603,6 +7709,8 @@ column{1} = {maincolor,c,fg={white}}}
 \item Η συνάρτηση $f$ παρουσιάζει στη θέση $x_0 = 2$, ολικό ελάχιστο το $f(2) = 1$.
 \end{rlist}
 \end{alist}
+
+% --- Λύση 14976 (14976.tex) ---
 \lysh{14976}{2}
 \begin{alist}
 \item Η $C_1$ δεν αποτελεί γραφική παράσταση συνάρτησης άρτιας ή περιττής, αφού ορίζεται μόνο για θετικούς αριθμούς.
@@ -7613,6 +7721,7 @@ column{1} = {maincolor,c,fg={white}}}
 \item Αν η $C_2$ είναι άρτια, τότε $f(-2) = f(2) = 2$, άρα $k = 2$.
 Αν η $C_4$ είναι περιττή, τότε $f(-2) = -f(2) = -2$, άρα $k = -2$.
 \end{alist}
+% --- Λύση 14977 (14977.tex) ---
 \lysh{14977}{2}
 \begin{alist}
 \item Το ημίτονο μίας γωνίας με μία πλευρά την ημιευθεία Ox και δεύτερη πλευρά που τέμνει στο σημείο Α του κύκλου, βρίσκεται από την προβολή του σημείου Α στον άξονα y'y.
@@ -7656,6 +7765,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 14981 (14981.tex) ---
 \lysh{14981}{2}
 \begin{alist}
 \item Είναι $P(-2) = (-2)^3 - (-2) + 6 = -8 + 2 + 6 = 0$.
@@ -7666,6 +7776,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{center}
 Άρα $P(x) = (x + 2)(1x^2 - 2x + 3)$. Παρατηρούμε τώρα, ότι η διακρίνουσα του τριωνύμου $x^2 - 2x + 3$ είναι $\varDelta = (-2)^2 - 4 \cdot 1 \cdot 3 = -8 < 0$, άρα δεν αναλύεται σε γινόμενο.
 \end{alist}
+% --- Λύση 14983 (14983.tex) ---
 \lysh{14983}{2}
 \begin{alist}
 \item Σωστή απάντηση είναι η (III), με βάση την παράγραφο 2.2.
@@ -7712,6 +7823,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15009 (15009.tex) ---
 \lysh{15009}{2}
 \begin{alist}
 \item Η συνάρτηση είναι της μορφής $f(x) = \rho \syn  x$, $x \in \mathbb{R}$ με $\rho = -3 < 0$, οπότε η ελάχιστη τιμή της είναι ίση με $-3$ και η μέγιστη τιμή της είναι ίση με $3$.
@@ -7732,6 +7844,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15011 (15011.tex) ---
 \lysh{15011}{2}
 \begin{alist}
 \item
@@ -7744,6 +7857,7 @@ column{1} = {maincolor,c,fg={white}}}
 \[\begin{cases} y = 15 - x \\ -30x = 480 - 750 \end{cases} \Leftrightarrow \begin{cases} y = 15 - x \\ x = 9 \end{cases} \Leftrightarrow \begin{cases} y = 6 \\ x = 9 \end{cases}.\]
 Σύμφωνα με την εκφώνηση $x = 9$ είναι τα χαρτονομίσματα των $20$\euro{} και $y = 6$ τα χαρτονομίσματα των $50$\euro{}.
 \end{alist}
+% --- Λύση 15012 (15012.tex) ---
 \lysh{15012}{2}
 \begin{alist}
 \item Σύμφωνα με την ταυτότητα της διαίρεσης είναι:
@@ -7752,6 +7866,7 @@ column{1} = {maincolor,c,fg={white}}}
 Τελικά $P(x) = x^3 - 3x^2 + 2x - 2$.
 \item Ο αριθμός $x = 3$ είναι ρίζα του πολυωνύμου $P(x)$, αν η διαίρεσή του με το $x - 3$ έχει υπόλοιπο $0$, που δεν συμβαίνει εδώ, αφού $P(3) = 4$, άρα το $x = 3$ δεν είναι ρίζα του πολυωνύμου.
 \end{alist}
+% --- Λύση 15016 (15016.tex) ---
 \lysh{15016}{2}
 \begin{alist}
 \item Το ζεύγος $(0, 4)$ επαληθεύει μόνο την εξίσωση $3x + 2y = 8$ και όχι την εξίσωση $2x - y = 3$, οπότε δεν αποτελεί λύση του συστήματος.
@@ -7763,6 +7878,7 @@ column{1} = {maincolor,c,fg={white}}}
 \[\begin{cases} 3x + 2y = 8 \\ 2x - y = 3 \end{cases},\]
 δηλαδή το ζεύγος $(2, 1)$.
 \end{alist}
+% --- Λύση 15017 (15017.tex) ---
 \lysh{15017}{2}
 \begin{alist}
 \item Αφού η συνάρτηση $f$ με πεδίο ορισμού το διάστημα $(\alpha, 3)$ είναι άρτια, θα πρέπει για κάθε $x \in (\alpha, 3)$ και $-x \in (\alpha, 3)$. Αυτό ισχύει αν και μόνο αν $\alpha = -3$.
@@ -7794,6 +7910,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15018 (15018.tex) ---
 \lysh{15018}{2}
 \begin{alist}
 \item Αφού η συνάρτηση $f$ με πεδίο ορισμού το διάστημα $(\alpha, 6)$ είναι περιττή, θα πρέπει για κάθε $x \in (\alpha, 6)$ και $-x \in (\alpha, 6)$. Αυτό ισχύει αν και μόνο αν $\alpha = -6$.
@@ -7818,18 +7935,21 @@ column{1} = {maincolor,c,fg={white}}}
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15019 (15019.tex) ---
 \lysh{15019}{2}
 \begin{alist}
 \item Είναι $f(-1) \ne f(1)$ οπότε η $f$ δεν είναι άρτια.
 \item Επίσης $f(-1) \ne -f(1)$ οπότε η $f$ δεν είναι περιττή.
 \item Είναι $f(1) < f(-1)$, που σημαίνει ότι η συνάρτηση $f$ δεν είναι γνησίως αύξουσα, αφού αν ήταν, θα έπρεπε $f(-1) < f(1)$, που δεν ισχύει.
 \end{alist}
+% --- Λύση 15024 (15024.tex) ---
 \lysh{15024}{2}
 \begin{alist}
 \item Παρατηρούμε ότι η γραφική παράσταση της συνάρτησης $f$ έχει άξονα συμμετρίας τον $yy'$, που σημαίνει ότι είναι άρτια.
 \item Η συνάρτηση $f$ είναι γνησίως αύξουσα στο $[-2, 0]$ και στο $[2, 4]$ και γνησίως φθίνουσα στο $[-4, -2]$ και στο $[0, 2]$.
 \item Η $f$ παρουσιάζει ελάχιστο το $3$ και οι θέσεις ελαχίστου είναι το $-2$ και το $2$.
 \end{alist}
+% --- Λύση 15036 (15036.tex) ---
 \lysh{15036}{2}
 \begin{alist}
 \item 
@@ -7839,6 +7959,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{rlist}
 \item $f(x) = -3 \Leftrightarrow 3\syn  2x = -3 \Leftrightarrow \syn  2x = -1 \Leftrightarrow 2x = 2\kappa\pi \pm \pi \Leftrightarrow x = \kappa\pi \pm \dfrac{\pi}{2}, \quad \kappa \in \mathbb{Z}$.
 \end{alist}
+% --- Λύση 15040 (15040.tex) ---
 \lysh{15040}{2}
 \begin{alist}
 \item Με $x = 1$ έχουμε:
@@ -7853,6 +7974,7 @@ column{1} = {maincolor,c,fg={white}}}
 \item Από το ερώτημα β) έχουμε:
 \[x^3 - 7x + 6 = 0 \Leftrightarrow (x - 1)(x^2 + x - 6) = 0 \Leftrightarrow x = 1 \text{ ή } x = 2 \text{ ή } x = -3\]
 \end{alist}
+% --- Λύση 15046 (15046.tex) ---
 \lysh{15046}{2}
 \begin{alist}
 \item Ο αριθμός A περιέχεται στο διάστημα $(0, \pi)$ και επειδή ισχύει $\syn \text{A} < 0$, έχουμε $\dfrac{\pi}{2} < \text{A} < \pi$.
@@ -7861,6 +7983,7 @@ column{1} = {maincolor,c,fg={white}}}
 \[\hm ^2\text{A} = 1 - \dfrac{9}{25} = \dfrac{16}{25}\]
 Επιπλέον, αφού $\dfrac{\pi}{2} < \text{A} < \pi$, έχουμε $\hm \text{A} > 0$, οπότε $\hm \text{A} = \dfrac{4}{5}$.
 \end{alist}
+% --- Λύση 15047 (15047.tex) ---
 \lysh{15047}{2}
 \begin{alist}
 \item Επειδή $P(1) = 1^4 - 1^3 - 5 \cdot 1^2 + 7 \cdot 1 - 2 = 1 - 1 - 5 + 7 - 2 = 0$, ο αριθμός 1 είναι ρίζα του πολυωνύμου.
@@ -7873,6 +7996,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{itemize}
 Επομένως οι ακέραιες ρίζες του πολυωνύμου είναι οι αριθμοί 1 και 2.
 \end{alist}
+% --- Λύση 15079 (15079.tex) ---
 \lysh{15079}{2}
 \begin{alist}
 \item Το συνημίτονο μιας γωνίας σχεδιασμένης στον τριγωνομετρικό κύκλο είναι η τετμημένη του σημείου τομής της τελικής πλευράς της με τον κύκλο. Επειδή η τετμημένη του σημείου A είναι $0,6 = \dfrac{3}{5}$, έχουμε $\syn \omega = \dfrac{3}{5}$.
@@ -7882,6 +8006,7 @@ column{1} = {maincolor,c,fg={white}}}
 \item Το συνημίτονο της γωνίας $\hat{\varphi}$ είναι η τετμημένη του σημείου $\Gamma$, δηλαδή $\syn \varphi = -\dfrac{3}{5}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15091 (15091.tex) ---
 \lysh{15091}{2}
 \begin{alist}
 \item Καθώς η συνάρτηση είναι της μορφής $g(x) = \rho \cdot \hm (\omega x)$ με $\rho = \sqrt{2}, \omega = 1$, θα έχουμε:
@@ -7891,6 +8016,7 @@ column{1} = {maincolor,c,fg={white}}}
 \end{rlist}
 \item $f(2025\pi) = \sqrt{2} \cdot \syn (2 \cdot 1012 \cdot \pi + \pi) = \sqrt{2} \cdot \syn \pi = -\sqrt{2}$.
 \end{alist}
+% --- Λύση 15092 (15092.tex) ---
 \lysh{15092}{2}
 \begin{alist}
 \item Από το σχήμα παρατηρούμε ότι $\syn \theta = 0,8 = \dfrac{4}{5}$.
@@ -7920,6 +8046,7 @@ $\left(\dfrac{3}{5}\right)^2 + \syn ^2\theta = 1$, άρα $\syn ^2\theta = 1 - \
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15096 (15096.tex) ---
 \lysh{15096}{2}
 \begin{alist}
 \item Είναι:
@@ -7939,12 +8066,14 @@ $0$ &
 Άρα το πηλίκο της διαίρεσης των δύο πολυωνύμων είναι το $\pi(x) = 2x - 1$ και το υπόλοιπο είναι 0.\\
 Επομένως ισχύει: $P(x) = (x^2 + x - 1) \cdot (2x - 1)$.
 \end{alist}
+% --- Λύση 15112 (15112.tex) ---
 \lysh{15112}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ είναι περιττή, γιατί η γραφική της παράσταση είναι συμμετρική ως προς την αρχή των αξόνων $(0,0)$.
 \item Η συνάρτηση $f$ για $x \in (-2, -1]$ και $x \in [1, 2)$ είναι γνησίως αύξουσα.
 \item Για $x = -1$ η $f$ παίρνει τη μέγιστη τιμή της $f(-1) = 2$ και για $x = 1$ η $f$ παίρνει την ελάχιστη τιμή της $f(1) = -2$.
 \end{alist}
+% --- Λύση 15113 (15113.tex) ---
 \lysh{15113}{2}
 \begin{alist}
 \item Έχουμε:
@@ -7957,16 +8086,19 @@ P(x) &= 4x^2 + 7.
 Συνεπώς το πολυώνυμο $P(x)$ είναι $2^{ou}$ βαθμού.
 \item Για να είναι τα πολυώνυμα $P(x)$ και $Q(x)$ ίσα, πρέπει να είναι ίδιου βαθμού και να έχουν τους αντίστοιχους συντελεστές ίσους. Άρα πρέπει $\alpha = 4$.
 \end{alist}
+% --- Λύση 15114 (15114.tex) ---
 \lysh{15114}{2}
 \begin{alist}
 \item Η γραφική παράσταση της $f$ διέρχεται από το $A(1,2)$ και θα μπορούσε να διέρχεται και από το σημείο $B(2,9)$, διότι η $f$ έχει πεδίο ορισμού και σύνολο τιμών το $\mathbb{R}$, είναι γνησίως αύξουσα και ισχύει $1 < 2 \Rightarrow f(1) < f(2)$, αφού $f(1)=2$ και $f(2)=9$.
 \item Η γραφική παράσταση της $f$ θα μπορούσε να είναι η i. διότι ενώ όλες διέρχονται από το σημείο $(1,2)$, η i. είναι γραφική παράσταση γνησίως αύξουσας συνάρτησης.
 \end{alist}
+% --- Λύση 15115 (15115.tex) ---
 \lysh{15115}{2}
 \begin{alist}
 \item Η γραφική παράσταση της $f$ διέρχεται από το $A(-1,3)$ και δεν θα μπορούσε να διέρχεται και από το σημείο $B(2,5)$, διότι η $f$ έχει πεδίο ορισμού και σύνολο τιμών το $\mathbb{R}$, είναι όμως γνησίως φθίνουσα και θα έπρεπε να ισχύει $-1 < 2 \Rightarrow f(-1) > f(2)$. Όμως $f(-1)=3$ και $f(2)=5$.
 \item Η γραφική παράσταση της $f$ θα μπορούσε να είναι η ii. διότι ενώ όλες διέρχονται από το σημείο $(-1,3)$, η ii. είναι γραφική παράσταση γνησίως φθίνουσας συνάρτησης.
 \end{alist}
+% --- Λύση 15172 (15172.tex) ---
 \lysh{15172}{2}
 \begin{alist}
 \item 
@@ -8005,6 +8137,7 @@ $4\hm  x$ & $0$ & $4$ & $0$ & $-4$ & $0$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15175 (15175.tex) ---
 \lysh{15175}{2}
 \begin{alist}
 \item Είναι $P(1) = 1^3 - 1^2 + 1 - 1 = 0$, άρα το 1 είναι μία ρίζα του πολυωνύμου.
@@ -8020,6 +8153,7 @@ $4\hm  x$ & $0$ & $4$ & $0$ & $-4$ & $0$ \\
 \item Είναι λοιπόν
 \[P(x) = 0 \Leftrightarrow (x - 1)(x^2 + 1) = 0 \xLeftrightarrow{x^2+1\ne0} x = 1.\]
 \end{alist}
+% --- Λύση 15176 (15176.tex) ---
 \lysh{15176}{2}
 \begin{alist}
 \item Είναι $P(1) = 1^3 - 2 \cdot 1^2 + 3 \cdot 1 - 2 = 0$, άρα το 1 είναι μία ρίζα του πολυωνύμου. \\
@@ -8043,6 +8177,7 @@ colorV = maincolor!40]%
 \end{center}
 Ως εκ τούτου, είναι: $P(x) > 0 \Leftrightarrow x > 1$.
 \end{alist}
+% --- Λύση 15185 (15185.tex) ---
 \lysh{15185}{2}
 \begin{alist}
 \item Το συνημίτονο της γωνίας $\omega$ είναι όσο και η τετμημένη του σημείου $B$ του τριγωνομετρικού κύκλου. Άρα, $\syn \omega = -\dfrac{3}{5}$.
@@ -8054,6 +8189,7 @@ colorV = maincolor!40]%
 \end{align*}
 Από το σχήμα φαίνεται ότι $\dfrac{\pi}{2} < \omega < \pi$ οπότε $\hm \omega > 0$. Άρα, $\hm \omega = \dfrac{4}{5}$.
 \end{alist}
+% --- Λύση 15191 (15191.tex) ---
 \lysh{15191}{2}
 \begin{alist}
 \item Δύο γωνίες σχεδιασμένες στον τριγωνομετρικό κύκλο είναι αντίθετες όταν έχουν τα σημεία τομής της τελικής τους πλευράς με τον τριγωνομετρικό κύκλο συμμετρικά ως προς τον άξονα $x'x$. Άρα η γωνία $-\hat{\omega}$ είναι όπως φαίνεται με διακεκομμένη γραμμή στο παρακάτω σχήμα.
@@ -8085,6 +8221,7 @@ colorV = maincolor!40]%
 \end{center}
 \item Το ημίτονο γωνίας σχεδιασμένης στον τριγωνομετρικό κύκλο είναι η τεταγμένη του σημείου τομής της τελικής πλευράς της γωνίας με το κύκλο, οπότε έχουμε, λόγω συμμετρίας $\hm (-\omega) = -0,4$.
 \end{alist}
+% --- Λύση 15192 (15192.tex) ---
 \lysh{15192}{2}
 \begin{alist}
 \item Το συνημίτονο μιας γωνίας σχεδιασμένης στον τριγωνομετρικό κύκλο είναι η τετμημένη του σημείου τομής της τελικής πλευράς της με τον κύκλο. Οπότε είναι $\syn \omega = -0,6 = -\dfrac{3}{5}$.
@@ -8120,6 +8257,7 @@ colorV = maincolor!40]%
 \[\hm \omega = -\frac{4}{5} \quad (1).\]
 \end{rlist}
 \end{alist}
+% --- Λύση 15193 (15193.tex) ---
 \lysh{15193}{2}
 \begin{alist}
 \item Οι γωνίες που έχουν συνημίτονο $-0,8$ έχουν τελική πλευρά στο δεύτερο ή στο τρίτο τεταρτημόριο, η οποία τέμνει τον τριγωνομετρικό κύκλο σε σημεία με τετμημένη $-0,8$. Άρα οι ζητούμενες γωνίες $\hat{\phi}$ και $\hat{\theta}$ είναι όπως φαίνονται στο παρακάτω σχήμα, με την τελική τους πλευρά να είναι με διακεκομμένη γραμμή.
@@ -8158,6 +8296,7 @@ colorV = maincolor!40]%
 \end{center}
 \item Δύο γωνίες σχεδιασμένες στον τριγωνομετρικό κύκλο έχουν αντίθετα συνημίτονα, αν τα σημεία τομής της τελικής τους πλευράς με τον τριγωνομετρικό κύκλο είναι συμμετρικά ως προς τον άξονα $y'y$ ή ως προς την αρχή $O$ των αξόνων. Οπότε οι δύο γωνίες είναι παραπληρωματικές, δηλαδή $\phi = \pi - \omega$ ή διαφέρουν κατά $\pi$, οπότε $\theta = \pi + \omega$.
 \end{alist}
+% --- Λύση 15246 (15246.tex) ---
 \lysh{15246}{2}
 \begin{alist}
 \item Παραγοντοποιούμε το $P(x)$ και έχουμε
@@ -8177,6 +8316,7 @@ colorV = maincolor!40]%
 \end{center}
 Συνεπώς η ανίσωση $P(x) \ge 0$ αληθεύει για κάθε $x \in [1, +\infty) \cup \{-1\}$.
 \end{alist}
+% --- Λύση 15247 (15247.tex) ---
 \lysh{15247}{2}
 \begin{alist}
 \item Παραγοντοποιούμε το $P(x)$ και έχουμε
@@ -8196,6 +8336,7 @@ colorV = maincolor!40]%
 \end{center}
 Συνεπώς η ανίσωση $P(x) \ge 0$ αληθεύει για κάθε $x \in \left[\dfrac{1}{2}, +\infty\right)$.
 \end{alist}
+% --- Λύση 15248 (15248.tex) ---
 \lysh{15248}{2}
 \begin{alist}
 \item Από την ταυτότητα της διαίρεσης έχουμε
@@ -8213,6 +8354,7 @@ colorV = maincolor!40]%
 Τελικά $x = 1 \text{ (διπλή ρίζα) ή } x = -\dfrac{3}{2}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15266 (15266.tex) ---
 \lysh{15266}{2}
 \begin{alist}
 \item Η τελική πλευρά της γωνίας $\theta$ είναι η $OP$ και το σημείο $P$ έχει τετμημένη $x = \dfrac{3}{5}$. Άρα \[\syn \theta = \frac{3}{5}.\]
@@ -8221,6 +8363,7 @@ colorV = maincolor!40]%
 \item Επειδή η $O\Sigma$ είναι συμμετρική της $OP$ ως προς τον άξονα $x'x$, το σημείο $\Sigma$ έχει ίδια τετμημένη με το $P$ και αντίθετη τεταγμένη. \\
 Άρα, $\syn (-\theta) = \syn \theta = \dfrac{3}{5}$ και $\hm (-\theta) = -\hm \theta = -\dfrac{4}{5}$
 \end{alist}
+% --- Λύση 15267 (15267.tex) ---
 \lysh{15267}{2}
 \begin{alist}
 \item Από τις ιδιότητες των λογαρίθμων έχουμε:
@@ -8229,6 +8372,7 @@ colorV = maincolor!40]%
 \item Η εξίσωση ορίζεται για κάθε $x \in \mathbb{R}$, αφού $x^2 + 1 > 0$. Έτσι με $x \in \mathbb{R}$ και με τη βοήθεια του ερωτήματος α) η εξίσωση γράφεται:
 \[\log(x^2 + 1) = \log 5 \Leftrightarrow x^2 + 1 = 5 \Leftrightarrow x^2 = 4 \Leftrightarrow x = 2 \text{ ή } x = -2\]
 \end{alist}
+% --- Λύση 15269 (15269.tex) ---
 \lysh{15269}{2}
 \begin{alist}
 \item Η γραφική παράσταση της $f$ αποτελείται από την $y = e^x$ για $x < 0$ και την $y = e^{-x}$ για $x \ge 0$ οπότε ο τύπος της είναι ο πρώτος από τους δοσμένους τύπους.
@@ -8290,6 +8434,7 @@ colorV = maincolor!40]%
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15270 (15270.tex) ---
 \lysh{15270}{2}
 \begin{alist}
 \item Από το σχήμα της εκφώνησης προκύπτει ότι η $f$ είναι γνησίως φθίνουσα στο πεδίο ορισμού της. Επίσης, η μέγιστη τιμή της είναι ίση με 1 και επιτυγχάνεται όταν $x = 0$.
@@ -8312,6 +8457,7 @@ colorV = maincolor!40]%
 \end{itemize}
 Επομένως η εξίσωση $f(x) = 2x$ έχει μοναδική λύση την $x = \dfrac{1}{4}$ και το μοναδικό κοινό σημείο της $C_f$ με την ευθεία είναι το $A\left(\dfrac{1}{4}, \dfrac{1}{2}\right)$.
 \end{alist}
+% --- Λύση 15349 (15349.tex) ---
 \lysh{15349}{2}
 \begin{alist}
 \item Για κάθε $x \in \mathbb{R}$ έχουμε $-x \in \mathbb{R}$ και από το σχήμα παρατηρούμε πως η $C_f$ έχει άξονα συμμετρίας τον $y'y$. Άρα, η συνάρτηση $f$ είναι άρτια.
@@ -8342,6 +8488,7 @@ colorV = maincolor!40]%
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15372 (15372.tex) ---
 \lysh{15372}{2}
 \begin{alist}
 \item Γνωρίζουμε ότι η συνάρτηση είναι άρτια για κάθε $x \in \mathbb{R}$ επομένως, έχει άξονα συμμετρίας τον $y'y$. Το κομμάτι της συνάρτησης που λείπει είναι το συμμετρικό ως προς τον άξονα $y'y$. Σύμφωνα με τα παραπάνω προκύπτει η παρακάτω γραφική παράσταση της συνάρτησης $f$
@@ -8375,6 +8522,7 @@ colorV = maincolor!40]%
 \item Από τη γραφική παράσταση της συνάρτησης $f$ βλέπουμε ότι έχει ελάχιστη τιμή το $-8$ για $x=0$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15393 (15393.tex) ---
 \lysh{15393}{2}
 \begin{alist}
 \item Παρατηρούμε ότι η γραφική παράσταση της $g(x)$ προέκυψε από μία οριζόντια μετατόπιση της γραφικής παράστασης της $f(x)$ κατά 2 μονάδες προς τα δεξιά. \\
@@ -8404,6 +8552,7 @@ g(x) &= f(x - 2)\text{, άρα } g(x) = 2^{x - 2} = \frac{2^x}{2^2} = \frac{1}{4
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15437 (15437.tex) ---
 \lysh{15437}{2}
 \begin{alist}
 \item Πρέπει και αρκεί $2x - 3 \ge 0 \Leftrightarrow x \ge \dfrac{3}{2}$. \\
@@ -8416,6 +8565,7 @@ g(x) &= f(x - 2)\text{, άρα } g(x) = 2^{x - 2} = \frac{2^x}{2^2} = \frac{1}{4
 \item είναι γνησίως αύξουσα στο διάστημα $[2, +\infty)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15617 (15617.tex) ---
 \lysh{15617}{2}
 \begin{alist}
 \item Ισχύει ότι
@@ -8470,6 +8620,7 @@ g(x) &= f(x - 2)\text{, άρα } g(x) = 2^{x - 2} = \frac{2^x}{2^2} = \frac{1}{4
 \end{center}
 \end{rlist}
 \end{alist}
+% --- Λύση 15618 (15618.tex) ---
 \lysh{15618}{2}
 \begin{alist}
 \item Στο πολυώνυμο μπορούμε να εξάγουμε κοινό παράγοντα το $x$ και έχουμε:
@@ -8481,6 +8632,7 @@ P(x) = 2x^3 + x^2 - x = 0 &\Leftrightarrow x(2x^2 + x - 1) = 0 \\
 &\Leftrightarrow x = 0 \text{ ή } x = \frac{1}{2} \text{ ή } x = -1.
 \end{align*}
 \end{alist}
+% --- Λύση 15642 (15642.tex) ---
 \lysh{15642}{2}
 \begin{alist}
 \item Ένα πολυώνυμο $P(x)$ έχει παράγοντα το $x - \rho$ αν και μόνο αν $P(\rho) = 0$. Έχουμε
@@ -8492,6 +8644,7 @@ P(x) = 2x^3 + x^2 - x = 0 &\Leftrightarrow x(2x^2 + x - 1) = 0 \\
 \item Αφού $P(0) = -3 \ne 0$, το $x$ δεν είναι παράγοντας του πολυωνύμου $P(x)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15643 (15643.tex) ---
 \lysh{15643}{2}
 \begin{alist}
 \item
@@ -8519,6 +8672,7 @@ $0$ &
 \textbf{Εναλλακτική λύση} \\
 Είναι $(x - 3)(2x - 1) = 2x^2 - 7x + 3$. Εκτελούμε τη διαίρεση.
 \end{alist}
+% --- Λύση 15644 (15644.tex) ---
 \lysh{15644}{2}
 \begin{alist}
 \item Είναι $f(x) = \syn  x \Rightarrow f(0) = \syn  0 \Rightarrow f(0) = 1$. Άρα η $C_1$ είναι η γραφική παράσταση της συνάρτησης $f$. \\
@@ -8526,12 +8680,14 @@ $0$ &
 \item Οι λύσεις της εξίσωσης είναι οι τετμημένες των σημείων τομής των γραφικών παραστάσεων των δύο συναρτήσεων. \\
 Όπως φαίνεται στο παρακάτω σχήμα τα σημεία τομής των γραφικών παραστάσεων είναι τα $A$ και $B$, με τετμημένες $x_1 = \dfrac{\pi}{4}$ και $x_2 = \dfrac{5\pi}{4}$.
 \end{alist}
+% --- Λύση 15645 (15645.tex) ---
 \lysh{15645}{2}
 \begin{alist}
 \item Το αντικείμενο απέχει από το έδαφος $1 \, m$ όταν το σημείο της γραφικής παράστασης έχει τεταγμένη $1$, δηλαδή τις χρονικές στιγμές $1 \min$ και $5 \min$.
 \item Σύμφωνα με το σχήμα η μέγιστη απομάκρυνση είναι $2 \, m$. Σε αυτή την θέση το κινητό βρίσκεται τη χρονική στιγμή $t = 3 \min$.
 \item Σύμφωνα με το σχήμα το αντικείμενο απομακρύνεται από το έδαφος το χρονικό διάστημα $[0, 3]$.
 \end{alist}
+% --- Λύση 15652 (15652.tex) ---
 \lysh{15652}{2}
 \begin{alist}
 \item Έχουμε ισοδύναμα
@@ -8546,6 +8702,7 @@ $0$ &
 \item Όπως φαίνεται από το σχήμα, η γωνία $\omega$ είναι παραπληρωματική της γωνίας $\varphi$, οπότε
 \[\hm \omega = \hm \varphi = \frac{3}{5} \text{ και } \syn \omega = -\syn \varphi = -\frac{4}{5}.\]
 \end{alist}
+% --- Λύση 15653 (15653.tex) ---
 \lysh{15653}{2}
 \begin{alist}
 \item
@@ -8569,6 +8726,7 @@ x^3 + x^2 + 2x + 2 &= (x + 1)(x^2 + 2).
 \item Έχουμε ισοδύναμα: 
 \[P(x) < 0 \Leftrightarrow (x+1)(x^2 + 2) < 0 \overset{x^2+2>0}{\Leftrightarrow} x + 1 < 0 \Leftrightarrow x < -1.\]
 \end{alist}
+% --- Λύση 15654 (15654.tex) ---
 \lysh{15654}{2}
 \begin{alist}
 \item Παρατηρούμε ότι $P(2) = 2^3 - 7 \cdot 2 + 6 = 8 - 14 + 6 = 0$, οπότε το 2 είναι ρίζα του $P(x)$ και το $x-2$ είναι παράγοντας του $P(x)$.
@@ -8593,6 +8751,7 @@ P(x) = 0 &\Leftrightarrow \\
 \end{align*}
 Άρα οι λύσεις της εξίσωσης είναι $x = 1, x = 2, x = -3$.
 \end{alist}
+% --- Λύση 15674 (15674.tex) ---
 \lysh{15674}{2}
 \begin{alist}
 \item Η διαίρεση $P(x) : (x-1)$ φαίνεται στο παρακάτω σχήμα.
@@ -8622,6 +8781,7 @@ x < 1
 \end{align*}
 Τελικά η ανίσωση $P(x) < 3$ αληθεύει για κάθε $x \in (-\infty, 1)$.
 \end{alist}
+% --- Λύση 15675 (15675.tex) ---
 \lysh{15675}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για όλες τις πραγματικές τιμές του $x$ για τις οποίες ισχύει
@@ -8637,6 +8797,7 @@ e^x - 1 = 1 &\Leftrightarrow e^x = 2 \Leftrightarrow x = \ln 2
 \end{align*}
 Η λύση $\ln 2$ είναι δεκτή αφού $\ln 2 > \ln 1 \Leftrightarrow \ln 2 > 0$.
 \end{alist}
+% --- Λύση 15687 (15687.tex) ---
 \lysh{15687}{2}
 \begin{alist}
 \item Από τις ιδιότητες των λογαρίθμων, έχουμε:
@@ -8644,6 +8805,7 @@ e^x - 1 = 1 &\Leftrightarrow e^x = 2 \Leftrightarrow x = \ln 2
 \item Η παράσταση $A$ με $3\alpha = 16\beta$, γράφεται:
 \[A = \log_4\frac{16\beta}{\beta} = \log_4 16 = \log_4 4^2 = 2\log_4 4 = 2.\]
 \end{alist}
+% --- Λύση 15695 (15695.tex) ---
 \lysh{15695}{2}
 \begin{alist}
 \item Η διαίρεση φαίνεται στο παρακάτω σχήμα:
@@ -8671,6 +8833,7 @@ x(x - 1)(x + 1) + 3(x + 1) &= 0 \Leftrightarrow \\
 (x + 1)(x^2 - x + 3) &= 0
 \end{align*}
 \end{alist}
+% --- Λύση 15808 (15808.tex) ---
 \lysh{15808}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για όλες τις πραγματικές τιμές του $x$ για τις οποίες ισχύει:
@@ -8708,6 +8871,7 @@ x &= -1.
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15816 (15816.tex) ---
 \lysh{15816}{2}
 \begin{alist}
 \item Είναι $\alpha + \gamma = \ln 2 + \ln 8 = \ln(2\cdot 8) = \ln 16 = \ln 4^2 = 2\ln 4 = 2\beta$.
@@ -8718,11 +8882,13 @@ x &= -1.
 Γενικά αν $\alpha, \beta, \gamma$ είναι με αυτή τη σειρά θετικοί διαδοχικοί όροι γεωμετρικής προόδου, τότε οι αριθμοί $\ln\alpha, \ln\beta, \ln\gamma$ είναι με αυτή τη σειρά διαδοχικοί όροι αριθμητικής προόδου.
 
 \vspace{4mm}
+% --- Λύση 15817 (15817.tex) ---
 \lysh{15817}{2}
 \begin{alist}
 \item Είναι $1 < 2 < 3 \Leftrightarrow \ln 1 < \ln 2 < \ln 3 \Leftrightarrow 0 < \alpha < \beta$.
 \item Είναι $\beta - \alpha = \ln 3 - \ln 2 = \ln\dfrac{3}{2} < \ln e = 1$, οπότε πράγματι $\beta - \alpha < 1$.
 \end{alist}
+% --- Λύση 15849 (15849.tex) ---
 \lysh{15849}{2}
 \begin{alist}
 \item Στο τραπέζι υπάρχουν $5$ παιδιά επιπλέον από τους γονείς, τότε η εξίσωση που προκύπτει είναι $y = x + 5$ (1). \\
@@ -8736,6 +8902,7 @@ x &= -1.
 και το $y$ προκύπτει αν στην (1) αντικαταστήσουμε το $x$, δηλαδή $y = 15 + 5 = 20$. \\
 Άρα, οι γονείς ήταν $15$ και τα παιδιά $20$.
 \end{alist}
+% --- Λύση 15969 (15969.tex) ---
 \lysh{15969}{2}
 \begin{alist}
 \item Είναι: $\syn (13\pi + x) = \syn (6 \cdot 2\pi + \pi + x) = \syn (\pi + x) = -\syn  x$.
@@ -8744,6 +8911,7 @@ x &= -1.
 \item Λύνουμε την εξίσωση 
 \[f(x) = -2 \Leftrightarrow -4\syn  x = -2 \Leftrightarrow \syn  x = \frac{1}{2} \Leftrightarrow \syn  x = \syn \frac{\pi}{3} \Leftrightarrow x = 2\kappa\pi \pm \frac{\pi}{3}, \kappa \in \mathbb{Z}.\]
 \end{alist}
+% --- Λύση 15989 (15989.tex) ---
 \lysh{15989}{2}
 \begin{alist}
 \item Εφόσον το πολυώνυμο $P(x)$ έχει ακέραιους συντελεστές, οι πιθανές ακέραιες ρίζες του θα είναι οι διαιρέτες του σταθερού όρου $4$, δηλαδή οι αριθμοί $\pm 1, \pm 2, \pm 4$. \\
@@ -8776,6 +8944,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 Οπότε οι ρίζες του πολυωνύμου είναι $x=2$, $x=\sqrt{2}$, $x=-\sqrt{2}$. \\
 Συνεπώς, η εξίσωση έχει μοναδική ακέραια ρίζα την $x=2$.
 \end{alist}
+% --- Λύση 15999 (15999.tex) ---
 \lysh{15999}{2}
 \begin{alist}
 \item Είναι γνωστό ότι $\syn \left(\dfrac{\pi}{2} - \theta\right) = \hm \theta$ και $\hm (-\theta) = -\hm \theta$, οπότε έχουμε:
@@ -8786,6 +8955,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 Αλλά $\theta \in \left(\dfrac{3\pi}{2}, 2\pi\right)$, οπότε $\hm \theta < 0$, άρα:
 \[\hm \theta = -\sqrt{\frac{25}{169}} = -\frac{5}{13}\]
 \end{alist}
+% --- Λύση 16000 (16000.tex) ---
 \lysh{16000}{2}
 \begin{alist}
 \item Αν υποθέσουμε ότι υπάρχει τέτοια γωνία, τότε από την ταυτότητα $\hm ^2\theta + \syn ^2\theta = 1$ θα έχουμε:
@@ -8795,6 +8965,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 \[\hm ^2\theta = 1 - \syn ^2\theta = 1 - \frac{1}{4} = \frac{3}{4}\]
 και επειδή $\theta \in \left(\dfrac{3\pi}{2}, 2\pi\right)$, έχουμε $\hm \theta < 0$, οπότε $\hm \theta = -\dfrac{\sqrt{3}}{2}$.
 \end{alist}
+% --- Λύση 16129 (16129.tex) ---
 \lysh{16129}{2}
 \begin{alist}
 \item Παρατηρούμε ότι όλα τα σημεία της γραφικής παράστασης έχουν τετμημένες $x$ από $-3$ έως $3$. Άρα το πεδίο ορισμού της $f$ είναι το διάστημα $\Delta = [-3, 3]$.
@@ -8827,6 +8998,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 16131 (16131.tex) ---
 \lysh{16131}{2}
 \begin{alist}
 \item Η εξίσωση γράφεται $\ef  x = \ef \dfrac{\pi}{4}$, άρα $x = \lambda\pi + \dfrac{\pi}{4}$, όπου $\lambda \in \mathbb{Z}$. \\
@@ -8867,6 +9039,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 16298 (16298.tex) ---
 \lysh{16298}{2}
 
 \wrapr{-5mm}{12}{6cm}{-5mm}{
@@ -8904,6 +9077,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 \end{alist}
 }
 
+% --- Λύση 17241 (17241.tex) ---
 \lysh{17241}{2}
 \begin{alist}
 \item 
@@ -8918,6 +9092,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 \item Το τριώνυμο $x^2 - x + 2$ έχει διακρίνουσα $\Delta = (-1)^2 - 4\cdot 1\cdot 2 = 1 - 8 = -7 < 0$ οπότε $x^2 - x + 2 > 0$ για κάθε $x \in \mathbb{R}$. Άρα,
 \[P(x) < 0 \Leftrightarrow (x + 1)(x^2 - x + 2) < 0 \Leftrightarrow x + 1 < 0 \Leftrightarrow x < -1.\]
 \end{alist}
+% --- Λύση 17318 (17318.tex) ---
 \lysh{17318}{2}
 \begin{alist}
 \item Είναι $f(3) = \ln(3^2 - 2\cdot 3 + 3) = \ln 6$.
@@ -8928,6 +9103,7 @@ x^3-2x^2-2x+4=0 &\Leftrightarrow x^2(x-2)-2(x-2)=0 \\
 \[x_{1,2} = \frac{2 \pm 2\sqrt{2}}{2} = \frac{2(1 \pm \sqrt{2})}{2} = 1 \pm \sqrt{2}.\]
 Άρα: $x_1 = 1 + \sqrt{2}$ και $x_2 = 1 - \sqrt{2}$.
 \end{alist}
+% --- Λύση 17793 (17793.tex) ---
 \lysh{17793}{2}
 \begin{alist}
 \item Για τα τόξα $\wideparen{\text{AB}}$, $\wideparen{\text{A}\Gamma}$ και $\wideparen{\text{A}\Delta}$ έχουμε: \\
@@ -8959,6 +9135,7 @@ $\wideparen{\text{AB}} = 1 < \dfrac{\pi}{2}$, άρα το σημείο Β βρί
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 17933 (17933.tex) ---
 \lysh{17933}{2}
 \begin{alist}
 \item Στον παρακάτω τριγωνομετρικό κύκλο έχουμε $\wideparen{\text{AOZ}} = \theta$, η τελική πλευρά της $3\pi+\theta$ είναι η $\text{O}\Gamma$ και η τελική πλευρά της $4\pi-\theta$ είναι η $\text{O}\Delta$.
@@ -8999,6 +9176,7 @@ $\wideparen{\text{AB}} = 1 < \dfrac{\pi}{2}$, άρα το σημείο Β βρί
 \[\hm (3\pi+\theta) = -0{,}4 \quad \text{και} \quad \hm (4\pi-\theta) = -0{,}4.\]
 \end{rlist}
 \end{alist}
+% --- Λύση 17936 (17936.tex) ---
 \lysh{17936}{2}
 \begin{alist}
 \item Στον παρακάτω τριγωνομετρικό κύκλο έχουμε $\wideparen{\text{AOZ}} = \theta$, η τελική πλευρά της $3\pi+\theta$ είναι η $\text{O}\Gamma$ και η τελική πλευρά της $\dfrac{\pi}{2}+\theta$ είναι η $\text{OB}$.
@@ -9039,6 +9217,7 @@ $\wideparen{\text{AB}} = 1 < \dfrac{\pi}{2}$, άρα το σημείο Β βρί
 \[\syn (3\pi+\theta) = -0{,}4 \quad \text{και} \quad \hm \left(\frac{\pi}{2}+\theta\right) = 0{,}4.\]
 \end{rlist}
 \end{alist}
+% --- Λύση 18229 (18229.tex) ---
 \lysh{18229}{2}
 \begin{alist}
 \item Από την βασική τριγωνομετρική ταυτότητα $\hm ^2\theta + \syn ^2\theta = 1$ έχουμε
@@ -9054,6 +9233,7 @@ $\wideparen{\text{AB}} = 1 < \dfrac{\pi}{2}$, άρα το σημείο Β βρί
 &= \frac{5}{9} - \frac{4}{9} = \frac{1}{9}.
 \end{align*}
 \end{alist}
+% --- Λύση 18230 (18230.tex) ---
 \lysh{18230}{2}
 \begin{alist}
 \item Το πολυώνυμο έχει παράγοντα το $(x-2)$, μόνο όταν $\text{P}(2) = 0$. \\
@@ -9072,6 +9252,7 @@ $\wideparen{\text{AB}} = 1 < \dfrac{\pi}{2}$, άρα το σημείο Β βρί
 \[\text{P}(x) = 0 \Leftrightarrow (2x+1)(x-2)(x+2) = 0 \Leftrightarrow x = -\frac{1}{2} \text{ ή } x = 2 \text{ ή } x = -2.\]
 Επομένως η εξίσωση έχει ρίζες τους αριθμούς $-\dfrac{1}{2}, 2$ και $-2$.
 \end{alist}
+% --- Λύση 18431 (18431.tex) ---
 \lysh{18431}{2}
 \begin{alist}
 \item Για $k = 2$, το σύστημα γίνεται $\begin{cases} 3x + y = 11 \\ 6x + 2y = 8 \end{cases}$ και διαιρώντας κάθε όρο της δεύτερης εξίσωσης με το 2 παίρνουμε $\begin{cases} 3x + y = 11 \\ 3x + y = 4 \end{cases}$ οπότε το σύστημα είναι αδύνατο.
@@ -9080,6 +9261,7 @@ $\wideparen{\text{AB}} = 1 < \dfrac{\pi}{2}$, άρα το σημείο Β βρί
 Τότε από την πρώτη εξίσωση παίρνουμε $3(-1) + y = 11$, οπότε $-3 + y = 11 \Leftrightarrow y = 14$. \\
 Άρα το σύστημα έχει μοναδική λύση το ζεύγος $(x, y) = (-1, 14)$.
 \end{alist}
+% --- Λύση 18583 (18583.tex) ---
 \lysh{18583}{2}
 \begin{alist}
 \item 
@@ -9103,6 +9285,7 @@ P(x) &= 0 \Leftrightarrow \\
 x &= \frac{1}{2} \text{ ή } x = 2 \text{ ή } x = -2.
 \end{align*}
 \end{alist}
+% --- Λύση 18866 (18866.tex) ---
 \lysh{18866}{2}
 \begin{alist}
 \item $2^x - 1 = 0 \Leftrightarrow 2^x = 1 \Leftrightarrow 2^x = 2^0 \Leftrightarrow x = 0$.
@@ -9133,6 +9316,7 @@ x &= \frac{1}{2} \text{ ή } x = 2 \text{ ή } x = -2.
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 18868 (18868.tex) ---
 \lysh{18868}{2}
 \begin{alist}
 \item Είναι γνωστό ότι $\ef (\kappa \cdot 360^\circ + \omega) = \ef \omega$ για κάθε ακέραιο $\kappa$. \\
@@ -9148,6 +9332,7 @@ x &= \frac{1}{2} \text{ ή } x = 2 \text{ ή } x = -2.
 Επομένως $\text{A} > 0$.
 \end{rlist}
 \end{alist}
+% --- Λύση 19903 (19903.tex) ---
 \lysh{19903}{2}
 \begin{alist}
 \item Ισχύει ότι:
@@ -9164,6 +9349,7 @@ x &= \frac{1}{2} \text{ ή } x = 2 \text{ ή } x = -2.
 \left(\frac{2}{3}\right)^x &= \left(\frac{2}{3}\right)^2 \Leftrightarrow x = 2.
 \end{align*}
 \end{alist}
+% --- Λύση 19908 (19908.tex) ---
 \lysh{19908}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για τις τιμές του $x$ για τις οποίες $x \ne 0$ και $\dfrac{1-x}{x} > 0$ ή ισοδύναμα $(1-x)x > 0$. Ο πίνακας προσήμων του τριωνύμου $P(x) = (1-x)x$ είναι ο ακόλουθος:
@@ -9189,6 +9375,7 @@ x &= \frac{1}{2}
 \end{align*}
 Η λύση $x = \dfrac{1}{2}$ γίνεται δεκτή διότι ανήκει στο πεδίο ορισμού της $f$.
 \end{alist}
+% --- Λύση 20635 (20635.tex) ---
 \lysh{20635}{2}
 \begin{alist}
 \item Η συνάρτηση ορίζεται μόνο όταν ισχύει $x + 1 > 0$. Είναι: $x + 1 > 0 \Leftrightarrow x > -1$. \\
@@ -9200,6 +9387,7 @@ x &= \frac{1}{2}
 \[f(x) = 2 \Leftrightarrow \ln(x + 1) = 2 \Leftrightarrow x + 1 = e^2 \Leftrightarrow x = e^2 - 1\]
 που είναι αποδεκτή αφού περιέχεται στο διάστημα $\text{A} = (-1, +\infty)$.
 \end{alist}
+% --- Λύση 20640 (20640.tex) ---
 \lysh{20640}{2}
 \begin{alist}
 \item Είναι:
@@ -9215,6 +9403,7 @@ x &= \frac{1}{2}
 Άρα το πολυώνυμο $R_2(x)$ έχει ρίζα τον αριθμό 1.
 \end{rlist}
 \end{alist}
+% --- Λύση 20663 (20663.tex) ---
 \lysh{20663}{2}
 \begin{alist}
 \item Έχουμε:
@@ -9232,6 +9421,7 @@ x &= \frac{1}{2}
 \end{align*}
 Τελικά, το υπόλοιπο της διαίρεσης $P(x) : (x-2)$ είναι ίσο με $2022$.
 \end{alist}
+% --- Λύση 20671 (20671.tex) ---
 \lysh{20671}{2}
 \begin{alist}
 \item 
@@ -9245,6 +9435,7 @@ x &= \frac{1}{2}
 \item Σύμφωνα με το $\beta\text{i)}$, ο τύπος της $g$ είναι $g(x) = f(x-2) = (x-2)^2 + 1 = x^2 - 4x + 5$.
 \end{rlist}
 \end{alist}
+% --- Λύση 20692 (20692.tex) ---
 \lysh{20692}{2}
 \begin{alist}
 \item $f(100) = \log 100 = 2$ διότι η βάση του λογαρίθμου είναι το $10$, άρα από τον ορισμό έχουμε $10^2 = 100$.
@@ -9256,12 +9447,14 @@ x &= \frac{1}{2}
 \end{align*}
 Ώστε $x^2 - 1 = 2 \Leftrightarrow x^2 = 3$. Αλλά $x > 1$, οπότε $x = \sqrt{3}$. (η λύση $x = -\sqrt{3}$ απορρίπτεται).
 \end{alist}
+% --- Λύση 20710 (20710.tex) ---
 \lysh{20710}{2}
 \begin{alist}
 \item Είναι $\beta + \alpha = \log 20 + \log 50 = \log(20 \cdot 50) = \log 1000 = \log 10^3 = 3$.
 \item Είναι $\beta + \alpha = 3 > e \Rightarrow \ln(\alpha + \beta) > \ln e \Rightarrow \ln(\alpha + \beta) > 1$.
 \item Είναι $10^\beta - 10^\alpha = 10^{\log 50} - 10^{\log 20} = 50 - 20 = 30 = 10 \cdot (\beta + \alpha)$.
 \end{alist}
+% --- Λύση 20711 (20711.tex) ---
 \lysh{20711}{2}
 \begin{alist}
 \item Είναι $1 < 3 < 4 \Leftrightarrow \log 1 < \log 3 < \log 4 \Leftrightarrow 0 < \alpha < \beta$.
@@ -9271,6 +9464,7 @@ x &= \frac{1}{2}
 \item Είναι $0 < \alpha < \beta \Rightarrow \dfrac{\alpha}{\beta} < 1 \Rightarrow \ln\dfrac{\alpha}{\beta} < \ln 1 \Rightarrow \ln\dfrac{\alpha}{\beta} < 0$.
 \end{rlist}
 \end{alist}
+% --- Λύση 20725 (20725.tex) ---
 \lysh{20725}{2}
 \begin{alist}
 \item Οι συναρτήσεις $f$ και $g$ ως λογαριθμικές ορίζονται για $x > 0$ και $x + 2 > 0 \Leftrightarrow x > -2$ αντίστοιχα. Επομένως, πεδίο ορισμού της συνάρτησης $f$ είναι το $D_f = (0, +\infty)$ και πεδίο ορισμού της συνάρτησης $g$ είναι το $D_g = (-2, +\infty)$.
@@ -9282,6 +9476,7 @@ x &= \frac{1}{2}
 Η εξίσωση $\log(x + 2) = 2\log x$ ισοδύναμα γράφεται $\log(x + 2) = \log x^2$. Συνεπώς, $x + 2 = x^2 \Leftrightarrow x^2 - x - 2 = 0$. Το τριώνυμο έχει λύσεις $-1$ και $2$. Μόνο η $x=2$ είναι δεκτή.
 \end{rlist}
 \end{alist}
+% --- Λύση 20727 (20727.tex) ---
 \lysh{20727}{2}
 \begin{alist}
 \item Οι συναρτήσεις $f$ και $g$ ως λογαριθμικές ορίζονται για $x > 0$ και $x - 1 > 0 \Leftrightarrow x > 1$ αντίστοιχα. \\
@@ -9294,6 +9489,7 @@ x &= \frac{1}{2}
 Η λύση γίνεται δεκτή διότι $e + 1 > 1$.
 \end{rlist}
 \end{alist}
+% --- Λύση 20729 (20729.tex) ---
 \lysh{20729}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ ως λογαριθμική ορίζεται για $x - 1 > 0$, δηλαδή για $x > 1$. \\
@@ -9327,6 +9523,7 @@ x &= \frac{1}{2}
 \end{center}
 \vspace{-5mm}
 \end{alist}
+% --- Λύση 20730 (20730.tex) ---
 \lysh{20730}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ ως λογαριθμική ορίζεται για $1 - x > 0$ τότε $x < 1$. \\
@@ -9342,6 +9539,7 @@ x &= \frac{1}{2}
 \end{align*}
 Οι δύο λύσεις που βρήκαμε είναι δεκτές, διότι $x_1 = -1 < 1$ και $x_2 = 0 < 1$.
 \end{alist}
+% --- Λύση 20761 (20761.tex) ---
 \lysh{20761}{2}
 \begin{alist}
 \item Για κάθε γωνία $\omega$, αν είναι $\mu$ το μέτρο της σε μοίρες και $\alpha$ το μέτρο της σε ακτίνια, ισχύει ότι $\dfrac{\alpha}{\pi} = \dfrac{\mu}{180^\circ}$, επομένως για τη γωνία $\omega$ έχουμε
@@ -9363,6 +9561,7 @@ x &= \frac{1}{2}
 \syf \left(\frac{-25\pi}{4}\right) &= \syf \left(-\frac{\pi}{4}\right) = -\syf \frac{\pi}{4} = -1
 \end{align*}
 \end{alist}
+% --- Λύση 20817 (20817.tex) ---
 \lysh{20817}{2}
 \begin{alist}
 \item Από την τριγωνομετρική ταυτότητα $\hm ^2\omega + \syn ^2\omega = 1$ έχουμε ισοδύναμα:
@@ -9377,6 +9576,7 @@ x &= \frac{1}{2}
 \item Έχουμε $\syn \omega = -\frac{4}{5}$ και $\hm \omega = -\frac{3}{5}$, οπότε $\ef \omega = \dfrac{-\frac{3}{5}}{-\frac{4}{5}} = \frac{3}{4}$. Συνεπώς η τιμή της παράστασης $\text{A}$ είναι:
 \[\text{A} = \frac{\hm \omega + \syn \omega}{1 + \ef \omega} = \frac{-\frac{3}{5} - \frac{4}{5}}{1 + \frac{3}{4}} = \frac{-\frac{7}{5}}{\frac{7}{4}} = -\frac{4}{5}.\]
 \end{alist}
+% --- Λύση 20824 (20824.tex) ---
 \lysh{20824}{2}
 \begin{alist}
 \item Το σημείο $\text{M}\left(x, \frac{1}{2}\right)$ είναι σημείο τομής της τελικής πλευράς της γωνίας $\omega$ με τον τριγωνομετρικό κύκλο, άρα η τετμημένη του ισούται με το $\syn \omega$ και η τεταγμένη του με το $\hm \omega$. Οπότε $x = \syn \omega$ και $\hm \omega = \frac{1}{2}$
@@ -9416,6 +9616,7 @@ x &= \frac{1}{2}
 \end{align*}
 Από το $\alpha)$ ερώτημα η τετμημένη $x$ του σημείου $\text{M}$ ισούται με το $\syn \omega$ και $x < 0$. Άρα και $\syn \omega < 0$, οπότε $\syn \omega = -\frac{\sqrt{3}}{2}$.
 \end{alist}
+% --- Λύση 20851 (20851.tex) ---
 \lysh{20851}{2}
 \begin{alist}
 \item Χρησιμοποιώντας ιδιότητες λογαρίθμων, έχουμε:
@@ -9428,6 +9629,7 @@ x &= \frac{1}{2}
 \[\log x < 1 \Leftrightarrow \log x < \log 10 \overset{\log x \text{ γν.\ αύξουσα}}{\Longleftrightarrow} x < 10.\]
 Επομένως, είναι $0 < x < 10$.
 \end{alist}
+% --- Λύση 20853 (20853.tex) ---
 \lysh{20853}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για εκείνα μόνο τα $x$ για τα οποία ισχύει: $x - 1 > 0 \Leftrightarrow x > 1$ \\
@@ -9461,6 +9663,7 @@ x &= \frac{1}{2}
 Είναι λοιπόν: $f(x) < 0 \Leftrightarrow \ln(x-1) < 0 \Leftrightarrow \ln(x-1) < \ln 1 \overset{\ln x \uparrow}{\Longleftrightarrow} x-1 < 1 \Leftrightarrow x < 2$. \\
 Επομένως, η γραφική παράσταση της συνάρτησης $f$ βρίσκεται κάτω από τον άξονα $x'x$ όταν $x \in (1,2)$.
 \end{alist}
+% --- Λύση 20855 (20855.tex) ---
 \lysh{20855}{2}
 \begin{alist}
 \item Είναι: $\left(\dfrac{1}{2}\right)^x = \dfrac{1}{8} \Leftrightarrow \left(\dfrac{1}{2}\right)^x = \left(\dfrac{1}{2}\right)^3 \Leftrightarrow x = 3$
@@ -9474,6 +9677,7 @@ x &= \frac{1}{2}
 Ισοδύναμα έχουμε: $\left(\dfrac{1}{2}\right)^x < \dfrac{1}{8} \Leftrightarrow \left(\dfrac{1}{2}\right)^x < \left(\dfrac{1}{2}\right)^3 \Leftrightarrow x > 3$. \\
 \textbf{2ος τρόπος:} Από το σχήμα φαίνεται, ότι η γραφική παράσταση της συνάρτησης $f$ βρίσκεται κάτω από την ευθεία $\varepsilon$, όταν $x > x_A \Leftrightarrow x > 3$.
 \end{alist}
+% --- Λύση 20856 (20856.tex) ---
 \lysh{20856}{2}
 \begin{alist}
 \item Οι πιθανές ακέραιες ρίζες της εξίσωσης βρίσκονται στους διαιρέτες του $-1$ και είναι οι αριθμοί $\pm 1$. \\
@@ -9486,6 +9690,7 @@ x &= \frac{1}{2}
 Επομένως, σύμφωνα με το θεώρημα που προσδιορίζει τη ρίζα μιας πολυωνυμικής συνάρτησης με προσέγγιση, υπάρχει μία τουλάχιστον ρίζα της εξίσωσης $f(x) = 0$ μεταξύ των αριθμών $0$ και $1$.
 \end{rlist}
 \end{alist}
+% --- Λύση 20867 (20867.tex) ---
 \lysh{20867}{2}
 \begin{alist}
 \item Η τιμή της παράστασης για $x = 0$ είναι: $A = \syn ^2 0 - \hm ^2 0 = 1 - 0 = 1$.
@@ -9517,6 +9722,7 @@ x &= \frac{1}{2}
 \end{center}
 παρατηρούμε ότι $1 - 2\hm ^2 x = 1$ για $x = \pi$, αφού $0 < x < 2\pi$. Άρα η λύση της εξίσωσης $A = 1$, για $0 < x < 2\pi$, είναι $x = \pi$.
 \end{alist}
+% --- Λύση 20941 (20941.tex) ---
 \lysh{20941}{2}
 \begin{alist}
 \item Έχουμε:
@@ -9531,6 +9737,7 @@ x &= \frac{1}{2}
 \item Η ταυτότητα της διαίρεσης $P(x) : (x + 2)$ γράφεται
 \[P(x) = (x^2 + 1)(x + 2) + 1.\]
 \end{alist}
+% --- Λύση 20942 (20942.tex) ---
 \lysh{20942}{2}
 \begin{alist}
 \item Το σημείο $\text{M}$ είναι η τομή της τελικής πλευράς $\text{ΟZ}$ της γωνίας $\omega$ με τον τριγωνομετρικό κύκλο, επομένως $\text{M}(\syn \omega, \hm \omega)$ με $\syn \omega = -\dfrac{1}{3}$.
@@ -9542,6 +9749,7 @@ x &= \frac{1}{2}
 \item Έχουμε:
 \[\hm (\pi - \omega) = \hm \omega = -\frac{2\sqrt{2}}{3}, \quad \syn (\pi - \omega) = -\syn \omega = \frac{1}{3}.\]
 \end{alist}
+% --- Λύση 21091 (21091.tex) ---
 \lysh{21091}{2}
 \begin{alist}
 \item 
@@ -9557,11 +9765,13 @@ $f(x)$ & $\frac{1}{2}$ & $1$ & $2$ & $4$ & $8$ \\
 \end{rlist}
 \item Έχουμε $f(x) = 32$, δηλαδή $2^x = 32$, οπότε $2^x = 2^5$ και τελικά $x = 5$.
 \end{alist}
+% --- Λύση 21161 (21161.tex) ---
 \lysh{21161}{2}
 \begin{alist}
 \item Ένα ακτίνιο είναι το τόξο ενός κύκλου ακτίνας $\rho$ που έχει μήκος ίσο με την ακτίνα του κύκλου $\rho$. Εφόσον το μήκος του τόξου $\text{AB}$ είναι ίσο με δύο ακτίνες του κύκλου η αντίστοιχη επίκεντρη γωνία θα είναι ίση με $2$ ακτίνια.
 \item Είναι γνωστό ότι $2\pi$ ακτίνια είναι η γωνία η οποία είναι ίση με $360$ μοίρες, άρα η γωνία $\omega$ που είναι $2$ ακτίνια θα αντιστοιχεί σε $\dfrac{360}{\pi}$ μοίρες.
 \end{alist}
+% --- Λύση 21163 (21163.tex) ---
 \lysh{21163}{2}
 \begin{alist}
 \item Εφόσον το σημείο $\text{A}$ ανήκει στη γραφική παράσταση της συνάρτησης $f(x) = \alpha^x$ οι συντεταγμένες του θα ικανοποιούν τον τύπο της και επειδή $0 < \alpha < 1$, θα ισχύει ότι
@@ -9573,12 +9783,14 @@ $f(x)$ & $\frac{1}{2}$ & $1$ & $2$ & $4$ & $8$ \\
 \[f(\sqrt{2}) > f(\sqrt{3}) \Rightarrow \alpha^{\sqrt{2}} > \alpha^{\sqrt{3}}.\]
 \end{rlist}
 \end{alist}
+% --- Λύση 21164 (21164.tex) ---
 \lysh{21164}{2}
 \begin{alist}
 \item Εφόσον η συνάρτηση $f$ είναι περιττή θα έχει κέντρο συμμετρίας την αρχή των αξόνων και ένα ακόμα σημείο που θα ανήκει στη γραφική της παράσταση θα είναι το συμμετρικό του $\text{A}$ ως προς την αρχή των αξόνων, δηλαδή το $\text{A}'(2, -8)$.
 \item Εφόσον η συνάρτηση είναι γνησίως μονότονη και τα σημεία $\text{A}', \text{A}$ ανήκουν σε αυτήν θα ισχύει $x_{A'} = 2 > -2 = x_A$ και $y_{A'} = f(x_{A'}) = -8 < 8 = f(x_A) = y_A$, δηλαδή ισχύει ότι $x_{A'} > x_A \Rightarrow f(x_{A'}) < f(x_A)$ και η συνάρτηση είναι γνησίως μονότονη, άρα θα είναι γνησίως φθίνουσα.
 \item Η γραφική παράσταση $(\alpha)$ είναι γνησίως αύξουσα και η $(\gamma)$ είναι σταθερή. Μόνο η $(\beta)$ αντιστοιχεί σε γνησίως φθίνουσα και περιττή. Άρα η γραφική παράσταση $(\beta)$ μπορεί να είναι της συνάρτησης $f$.
 \end{alist}
+% --- Λύση 21174 (21174.tex) ---
 \lysh{21174}{2}
 \begin{alist}
 \item Για να ορίζεται η εξίσωση $(1)$ πρέπει να είναι $x + 1 > 0$ και $1 - x > 0$. \\
@@ -9595,6 +9807,7 @@ x^2 &= \frac{1}{2} \Leftrightarrow \\
 x &= \pm\frac{1}{\sqrt{2}} = \pm\frac{\sqrt{2}}{2} \in (-1, 1), \text{ δεκτές και οι δύο λύσεις.}
 \end{align*}
 \end{alist}
+% --- Λύση 21227 (21227.tex) ---
 \lysh{21227}{2}
 \begin{alist}
 \item Έχουμε 
@@ -9640,6 +9853,7 @@ $y$ & $2$ & $-3$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 21235 (21235.tex) ---
 \lysh{21235}{2}
 \begin{alist}
 \item Έχουμε, με αναγωγή στο $1^\circ$ τεταρτημόριο, ότι
@@ -9653,6 +9867,7 @@ $y$ & $2$ & $-3$ \\
 \item Η συνάρτηση $f(x) = \rho\syn \omega x$ με $\rho, \omega > 0$ έχει μέγιστη τιμή $\rho$ και περίοδο $T = \dfrac{2\pi}{\omega}$. \\
 Οπότε η $f(x) = \syn  3x$ έχει μέγιστη τιμή $1$ και περίοδο $T = \dfrac{2\pi}{3}$.
 \end{alist}
+% --- Λύση 21237 (21237.tex) ---
 \lysh{21237}{2}
 \begin{alist}
 \item 
@@ -9662,6 +9877,7 @@ $y$ & $2$ & $-3$ \\
 \end{rlist}
 \item Έχουμε $\syn  \theta = \pm \sqrt{1 - \hm ^2 \theta} = \pm \sqrt{1 - \left( \sqrt{3} - 1 \right)^2} = \pm \sqrt{2\sqrt{3} - 3} = \sqrt{2\sqrt{3} - 3}$, δεδομένου ότι αν μια γωνία ανήκει στο 1ο τεταρτημόριο το συνημίτονό της είναι θετικός αριθμός.
 \end{alist}
+% --- Λύση 21449 (21449.tex) ---
 \lysh{21449}{2}
 \begin{alist}
 \item Η συνάρτηση ορίζεται για τους πραγματικούς αριθμούς $x$ για τους οποίους ισχύει $x + 1 > 0 \Leftrightarrow x > -1$. Άρα το πεδίο ορισμού της συνάρτησης $f$ είναι το $A = (-1, +\infty)$.
@@ -9691,6 +9907,7 @@ $y$ & $2$ & $-3$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 21450 (21450.tex) ---
 \lysh{21450}{2}
 \begin{alist}
 \item Ισχύει $x^2 + 4 > 0$ για κάθε πραγματικό αριθμό $x$, οπότε το πεδίο ορισμού της συνάρτησης $f$ είναι το $A_f = \mathbb{R}$. Η συνάρτηση $g$ ορίζεται για τους πραγματικούς αριθμούς $x$ για τους οποίους ισχύει $x > 0$. Άρα το πεδίο ορισμού της συνάρτησης $g$ είναι το $A_g = (0, +\infty)$.
@@ -9706,6 +9923,7 @@ x^2 - 4x + 4 &= 0 \Leftrightarrow \\
 x &= 2 > 0 \text{, δεκτή.}
 \end{align*}
 \end{alist}
+% --- Λύση 21451 (21451.tex) ---
 \lysh{21451}{2}
 \begin{alist}
 \item Η γραφική παράσταση της συνάρτησης $g(x) = 3^x + 1$ προκύπτει από κατακόρυφη μετατόπιση της γραφικής παράστασης της $f$ κατά $1$ μονάδα προς τα πάνω, ενώ η γραφική παράσταση της συνάρτησης $h(x) = 3^x - 1$ προκύπτει από κατακόρυφη μετατόπιση της γραφικής παράστασης της $f$ κατά $1$ μονάδα προς τα κάτω. Στο παρακάτω σχήμα φαίνονται οι γραφικές παραστάσεις των τριών συναρτήσεων.
@@ -9738,6 +9956,7 @@ x &= 2 > 0 \text{, δεκτή.}
 \item Η γραφική παράσταση της $f(x) = 3^x$ έχει ασύμπτωτη την ευθεία $y=0$ (τον αρνητικό ημιάξονα των $x$). Η κατακόρυφη μετατόπιση της $f$ κατά $1$ μονάδα προς τα πάνω θα μετατοπίσει και την ασύμπτωτη ευθεία κατά μία μονάδα προς τα πάνω. Άρα η γραφική παράσταση της $g$ έχει ασύμπτωτη την ευθεία με εξίσωση $y=1$. \\
 Ομοίως, η κατακόρυφη μετατόπιση της $f$ κατά $1$ μονάδα προς τα κάτω θα μετατοπίσει και την ασύμπτωτη ευθεία κατά μία μονάδα προς τα κάτω. Άρα η γραφική παράσταση της $h$ έχει ασύμπτωτη την ευθεία με εξίσωση $y=-1$.
 \end{alist}
+% --- Λύση 21472 (21472.tex) ---
 \lysh{21472}{2}
 \begin{alist}
 \item Γνωρίζουμε ότι για $\alpha > 0$, $\alpha \neq 1$ και $x_1, x_2 > 0$ ισχύει η ισοδυναμία: $\log_\alpha x_1 = \log_\alpha x_2 \Leftrightarrow x_1 = x_2$. \\
@@ -9753,6 +9972,7 @@ x &= 1\text{, που είναι δεκτή γιατί } x > 0.
 \[\ln(x + 1) > \ln(2x) \Leftrightarrow x + 1 > 2x \Leftrightarrow x < 1\]
 Επειδή $x > 0$, η ανίσωση αληθεύει για $0 < x < 1$.
 \end{alist}
+% --- Λύση 21473 (21473.tex) ---
 \lysh{21473}{2}
 \begin{alist}
 \item Η παράσταση $A$ ορίζεται για τις τιμές του πραγματικού αριθμού $x$ για τις οποίες ισχύει:
@@ -9769,6 +9989,7 @@ x^2 + 6x - 7 &= 0 \Leftrightarrow \\
 $x = 1 > 0$, που είναι δεκτή ή $x = -7$ (απορρίπτεται). \\
 Τελικά η λύση της εξίσωσης είναι $x = 1$.
 \end{alist}
+% --- Λύση 21673 (21673.tex) ---
 \lysh{21673}{2}
 \begin{alist}
 \item Αν μετατοπίσουμε τη $C_f$ μια μονάδα προς τα πάνω, τότε ο τύπος που αντιστοιχεί στη γραφική παράσταση που προκύπτει $\varphi(x) = x^2 + 1, x \in \mathbb{R}$.
@@ -9792,6 +10013,7 @@ $x = 1 > 0$, που είναι δεκτή ή $x = -7$ (απορρίπτεται)
 \end{center}
 \item Από το παραπάνω σχήμα προκύπτει ότι η $\varphi(x)$ είναι γνησίως φθίνουσα στο διάστημα $(-\infty, 0]$, γνησίως αύξουσα στο διάστημα $[0, +\infty)$ και παρουσιάζει ελάχιστο για $x = 0$. Η ελάχιστη τιμή της είναι ίση με $\varphi(0) = 1$.
 \end{alist}
+% --- Λύση 21675 (21675.tex) ---
 \lysh{21675}{2}
 \begin{alist}
 \item Είναι:
@@ -9805,6 +10027,7 @@ x^2 &= 4 \Leftrightarrow x = -2\text{ ή } x = 2.
 \end{align*}
 Άρα η εξίσωση έχει ρίζες τους αριθμούς $-2$ και $2$.
 \end{alist}
+% --- Λύση 21676 (21676.tex) ---
 \lysh{21676}{2}
 \begin{alist}
 \item Από τις ιδιότητες των λογαρίθμων έχουμε:
@@ -9822,6 +10045,7 @@ A &= \ln e - \ln 5 - (\ln 4 - \ln e) \\
 &= 1{,}609 + 2 \cdot 1{,}386 = 4{,}381.
 \end{align*}
 \end{alist}
+% --- Λύση 21858 (21858.tex) ---
 \lysh{21858}{2}
 \begin{alist}
 \item Είναι
@@ -9829,16 +10053,19 @@ A &= \ln e - \ln 5 - (\ln 4 - \ln e) \\
 \item Είναι $e^\lambda = A \Leftrightarrow e^\lambda = 2 \Leftrightarrow \lambda = \ln 2$.
 \item Είναι $2 < e \Leftrightarrow \ln 2 < \ln e \Leftrightarrow \lambda < 1 \Leftrightarrow \ln \lambda < \ln 1 \Leftrightarrow \ln \lambda < 0$.
 \end{alist}
+% --- Λύση 21952 (21952.tex) ---
 \lysh{21952}{2}
 \begin{alist}
 \item Είναι $A = \ln\sqrt{e} + \log\sqrt[3]{100} = \ln e^{\frac{1}{2}} + \log 10^{\frac{2}{3}} = \frac{1}{2} + \frac{2}{3} = \frac{7}{6}$.
 \item Είναι $1 < \dfrac{7}{6} < e \Leftrightarrow \ln 1 < \ln\dfrac{7}{6} < \ln e \Leftrightarrow 0 < \ln A < 1$.
 \end{alist}
+% --- Λύση 21953 (21953.tex) ---
 \lysh{21953}{2}
 \begin{alist}
 \item Είναι $A = e^{\ln 2} + 10^{2\log\sqrt{5}} = e^{\ln 2} + 10^{\log(\sqrt{5})^2} = e^{\ln 2} + 10^{\log 5} = 2 + 5 = 7$.
 \item Είναι $1 < 7 < 10 \Leftrightarrow \log 1 < \log 7 < \log 10 \Leftrightarrow 0 < \log A < 1$.
 \end{alist}
+% --- Λύση 21954 (21954.tex) ---
 \lysh{21954}{2}
 \begin{alist}
 \item 
@@ -9851,6 +10078,7 @@ A &= \ln e - \ln 5 - (\ln 4 - \ln e) \\
 \item Η εξίσωση $\log(x^2 + 1) = A$ ορίζεται για κάθε $x \in \mathbb{R}$, αφού $x^2 \ge 0 \Leftrightarrow x^2 + 1 \ge 1 > 0$ για κάθε $x \in \mathbb{R}$ και ισοδύναμα έχουμε:
 \[\log(x^2 + 1) = A \Leftrightarrow \log(x^2 + 1) = 1 \Leftrightarrow x^2 + 1 = 10 \Leftrightarrow x^2 = 9 \Leftrightarrow x = \pm 3.\]
 \end{alist}
+% --- Λύση 21956 (21956.tex) ---
 \lysh{21956}{2}
 \begin{alist}
 \item Είναι
@@ -9865,6 +10093,7 @@ x = \ln(e + 1)
 \end{align*}
 που είναι δεκτή αφού $\ln(e + 1) > \ln 1 \Leftrightarrow \ln(e + 1) > 0$.
 \end{alist}
+% --- Λύση 21993 (21993.tex) ---
 \lysh{21993}{2}
 \begin{alist}
 \item Παρατηρούμε ότι $f(1) = 2^1 = 2$, οπότε το σημείο $\text{A}(1,2)$ είναι σημείο της γραφικής παράστασης της συνάρτησης $f$. Επίσης, και $g(1) = 3^1 = 3$, οπότε το σημείο $\text{B}(1,3)$ είναι σημείο της γραφικής παράστασης της συνάρτησης $g$. Άρα, η γραφική παράσταση της συνάρτησης $f$ αντιστοιχεί στην καμπύλη $C_2$ και η γραφική παράσταση της συνάρτησης $g$ αντιστοιχεί στην καμπύλη $C_1$.
@@ -9907,6 +10136,7 @@ x = \ln(e + 1)
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 21994 (21994.tex) ---
 \lysh{21994}{2}
 \begin{alist}
 \item Η αρχική ποσότητα του ραδιενεργού υλικού είναι το υψόμετρο του σημείου της γραφικής παράστασης που αντιστοιχεί στο $t=0$, δηλαδή η τεταγμένη του σημείου $\text{A}$. Οπότε, η αρχική ποσότητα του υλικού είναι $6$ (γραμμάρια).
@@ -9937,6 +10167,7 @@ x = \ln(e + 1)
 \item Η ημιζωή του ραδιενεργού υλικού είναι η τιμή του χρόνου $t$ κατά την οποία η ποσότητα του υλικού μειώνεται στο ήμισυ της αρχικής, δηλαδή γίνεται $3$ γραμμάρια. Είναι συνεπώς, η τετμημένη του σημείου $\text{B}$, δηλαδή $t=2$.
 \item Το υψόμετρο της καμπύλης γίνεται μικρότερο του $1$ στο χρονικό διάστημα $(5,6)$, δηλαδή κατά τη διάρκεια της $6^{\eta\varsigma}$ ημέρας. Άρα, κατά τη διάρκεια της $6^{\eta\varsigma}$ ημέρας θα έχει απομείνει ποσότητα ραδιενεργού υλικού μικρότερη από $1\text{gr}$.
 \end{alist}
+% --- Λύση 21995 (21995.tex) ---
 \lysh{21995}{2}
 \begin{alist}
 \item Ζητάμε πόσες και ποιες λύσεις έχει η εξίσωση $\hm  x = 1$ στο διάστημα $[-2\pi, 2\pi]$. \\
@@ -9965,6 +10196,7 @@ x = \ln(e + 1)
 \item Ζητάμε πόσες και ποιες λύσεις έχει η εξίσωση $\hm  x = -2$ στο διάστημα $[-2\pi, 2\pi]$. \\
 Όμως, γνωρίζουμε ότι $-1 \le \hm  x \le 1$, για κάθε $x \in \mathbb{R}$. Οπότε, η εξίσωση $\hm  x = -2$ είναι αδύνατη, δηλαδή η εξίσωση $\hm  x = -2$ στο διάστημα $[-2\pi, 2\pi]$ δεν έχει καμία λύση.
 \end{alist}
+% --- Λύση 21997 (21997.tex) ---
 \lysh{21997}{2}
 \begin{alist}
 \item Γνωρίζουμε ότι ο βαθμός του γινομένου (μη μηδενικών) πολυωνύμων είναι ίσος με το άθροισμα των βαθμών των πολυωνύμων αυτών. Επομένως, ο βαθμός του πολυωνύμου $P(x) = (x - 1)(x - 2)(x - 3)$ είναι ίσος με $3$, καθώς το $P(x)$ είναι γινόμενο τριών πολυωνύμων βαθμού $1$.
@@ -9977,6 +10209,7 @@ x = \ln(e + 1)
 \[P(x) = (x - 2) \cdot (x - 1)(x - 3) + 0\]
 αρκεί για να βγει αμέσως το συμπέρασμα ότι $\pi(x) = (x - 1)(x - 3)$ και $v(x) = 0$.
 \end{alist}
+% --- Λύση 21998 (21998.tex) ---
 \lysh{21998}{2}
 \begin{alist}
 \item Γνωρίζουμε ότι ο βαθμός του γινομένου δύο μη μηδενικών πολυωνύμων είναι ίσος με το άθροισμα των βαθμών των πολυωνύμων αυτών. \\
@@ -9986,6 +10219,7 @@ x = \ln(e + 1)
 \[P(x) = 0 \Leftrightarrow (x - 2) \cdot (x^6 + 1) = 0 \xLeftrightarrow{x^6 + 1 > 0} x - 2 = 0 \Leftrightarrow x = 2.\]
 Άρα, το πολυώνυμο $P(x)$ έχει μοναδική ρίζα τον αριθμό $2$.
 \end{alist}
+% --- Λύση 22002 (22002.tex) ---
 \lysh{22002}{2}
 Αναγωγή στο $1^o$ τεταρτημόριο:
 \begin{alist}
@@ -9993,6 +10227,7 @@ x = \ln(e + 1)
 \item $\syn  108^\circ = \syn (90^\circ + 18^\circ) = -\hm  18^\circ = \dfrac{1 - \sqrt{5}}{4}$.
 \item $\hm  162^\circ = \hm (180^\circ - 18^\circ) = \hm  18^\circ = \dfrac{\sqrt{5} - 1}{4}$.
 \end{alist}
+% --- Λύση 22003 (22003.tex) ---
 \lysh{22003}{2}
 \begin{alist}
 \item Η συνάρτηση $\hm  x$ είναι περιοδική με περίοδο $2\pi$, οπότε για κάθε $x \in \mathbb{R}$ έχουμε:
@@ -10006,6 +10241,7 @@ $f\left(\dfrac{1}{4}\right) = \hm \left(2\pi \cdot \dfrac{1}{4}\right) = \hm \le
 Η καμπύλη (iii) δεν είναι η ζητούμενη, καθώς αντιστοιχεί σε συνάρτηση με $f\left(\dfrac{1}{4}\right) = -1$, ενώ για την ζητούμενη είναι $f\left(\dfrac{1}{4}\right) = 1$ (από το $\beta$) ερώτημα). \\
 Άρα, η καμπύλη που αντιστοιχεί στη γραφική παράσταση της συνάρτησης $f$ είναι η καμπύλη (iv).
 \end{alist}
+% --- Λύση 22007 (22007.tex) ---
 \lysh{22007}{2}
 Γνωρίζουμε ότι η γραφική παράσταση της συνάρτησης $\syn  x$ έχει ως εξής:
 \begin{center}
@@ -10048,6 +10284,7 @@ $f\left(\dfrac{1}{4}\right) = \hm \left(2\pi \cdot \dfrac{1}{4}\right) = \hm \le
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 31568 (31568.tex) ---
 \lysh{31568}{2}
 \begin{alist}
 \item Η συνάρτηση $f(x) = \dfrac{1}{2}\syn  2x$ είναι της μορφής $f(x) = \rho\syn (\omega x)$, $\rho, \omega > 0$ με $\rho = \dfrac{1}{2}$ και $\omega = 2$. Άρα η μέγιστη τιμή της συνάρτησης είναι $\dfrac{1}{2}$ και η ελάχιστη τιμή της είναι $-\dfrac{1}{2}$. \\
@@ -10085,6 +10322,7 @@ $f(x)$ & $\frac{1}{2}$ & 0 & $-\frac{1}{2}$ & 0 & $\frac{1}{2}$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 31569 (31569.tex) ---
 \lysh{31569}{2}
 \begin{alist}
 \item Η συνάρτηση $f(x) = -3\syn  2x$ είναι της μορφής $f(x) = \rho\syn (\omega x)$, με $\rho = -3$ και $\omega = 2$. Άρα η περίοδος της $f$ είναι $T = \dfrac{2\pi}{\omega} = \dfrac{2\pi}{2} = \pi$, η μέγιστη τιμή της είναι $3$ και η ελάχιστη είναι $-3$.
@@ -10121,6 +10359,7 @@ $f(x) = -3\syn  2x$ & $-3$ & 0 & 3 & 0 & $-3$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 31570 (31570.tex) ---
 \lysh{31570}{2}
 \begin{alist}
 \item Για να προσδιορίσουμε αλγεβρικά το κοινό σημείο $\text{M}$ των ευθειών $\varepsilon_1: 2x + y = 6$ και $\varepsilon_2: x - 2y = -2$, θα λύσουμε το σύστημα (επιλέγουμε τη μέθοδο των αντίθετων συντελεστών):
@@ -10130,6 +10369,7 @@ $f(x) = -3\syn  2x$ & $-3$ & 0 & 3 & 0 & $-3$ \\
 Άρα το ζητούμενο σημείο είναι το $\text{M}(2, 2)$.
 \item Παρατηρούμε ότι οι συντεταγμένες του σημείου $\text{M}$ επαληθεύουν την εξίσωση της ευθείας $\varepsilon_3: 3x + y = 8$, αφού $3 \cdot 2 + 2 = 8$. Άρα η ευθεία $(\varepsilon_3)$ διέρχεται από το $\text{M}(2, 2)$.
 \end{alist}
+% --- Λύση 32674 (32674.tex) ---
 \lysh{32674}{2}
 \begin{alist}
 \item Ο τύπος της συνάρτησης $f$ διαδοχικά γράφεται:
@@ -10159,6 +10399,7 @@ f(x) &= x^2 - 4x + 5 = \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 32675 (32675.tex) ---
 \lysh{32675}{2}
 \begin{alist}
 \item Γνωρίζουμε ότι μια συνάρτηση της μορφής $g(x) = 2\hm  x$ έχει ελάχιστη τιμή $-2$ και μέγιστη $2$. Άρα, η συνάρτηση $f(x) = 2\hm  x + 1$ έχει ελάχιστη τιμή $-2 + 1 = -1$ και μέγιστη $2 + 1 = 3$.
@@ -10173,6 +10414,7 @@ x = \frac{\pi}{2} &\text{ ή } x = \pi - \frac{\pi}{2} = \frac{\pi}{2}.
 \end{alist}
 \newpage
 \section{Θέμα 3ο}
+% --- Λύση 15023 (15023.tex) ---
 \lysh{15023}{3}
 \begin{alist}
 \item Στο σχήμα α η γραφική παράσταση έχει άξονα συμμετρίας τον $yy'$ οπότε είναι άρτια και όχι περιττή, οπότε δεν είναι. Στο σχήμα γ η συνάρτηση είναι γνησίως αύξουσα οπότε δεν είναι. Στο σχήμα δ η συνάρτηση είναι μεν περιττή και γνησίως φθίνουσα, αλλά έχει πεδίο ορισμού το $[-2, 2]$ και όχι το $[-1, 1]$, οπότε δεν είναι.
@@ -10209,6 +10451,7 @@ x = \frac{\pi}{2} &\text{ ή } x = \pi - \frac{\pi}{2} = \frac{\pi}{2}.
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15391 (15391.tex) ---
 \lysh{15391}{3}
 \begin{alist}
 \item Τα σημεία Α και Β αντιστοιχούν στις λύσεις της εξίσωσης $\hm  x = \syn  x$ για $x \in [0, 2\pi]$. \\
@@ -10220,6 +10463,7 @@ x = \frac{\pi}{2} &\text{ ή } x = \pi - \frac{\pi}{2} = \frac{\pi}{2}.
 \item Ανάλογα, είναι $\dfrac{3\pi}{2} < \dfrac{5\pi}{3} = \dfrac{10\pi}{6} < \dfrac{11\pi}{6} < 2\pi$ και αφού η $f(x) = \hm  x$ είναι γνησίως αύξουσα στο διάστημα $\left[\dfrac{3\pi}{2}, 2\pi\right]$, άρα $\hm \dfrac{5\pi}{3} < \hm \dfrac{11\pi}{6}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15392 (15392.tex) ---
 \lysh{15392}{3}
 \begin{alist}
 \item Το σημείο Α έχει τετμημένη μηδέν και τεταγμένη $f(0) = 2^0 = 1$, έτσι είναι $A(0,1)$. \\
@@ -10234,6 +10478,7 @@ f(x) = g(x) &\Leftrightarrow 2^x = 5^{1-x} \\
 Έτσι $10^x = 5$ άρα $x = \log 5$.
 \item Είναι $x_B - x_{\Sigma} = 2 - \log 5 = \log(10^2) - \log 5 = \log\left(\dfrac{100}{5}\right) = \log 20$.
 \end{alist}
+% --- Λύση 15676 (15676.tex) ---
 \lysh{15676}{3}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για όλες τις πραγματικές τιμές του $x$ για τις οποίες ισχύει
@@ -10264,6 +10509,7 @@ x < \ln 2
 \end{align*}
 Όμως πρέπει εξ αρχής $x > 0$, οπότε τελικά η γραφική παράσταση της $f$ είναι κάτω από τον $x'x$ όταν $0 < x < \ln 2$.
 \end{alist}
+% --- Λύση 15789 (15789.tex) ---
 \lysh{15789}{3}
 \begin{alist}
 \item
@@ -10312,6 +10558,7 @@ x = 2\kappa\pi + \pi - x + \dfrac{\pi}{2}
 \end{alist}
 \newpage
 \section{Θέμα 4ο}
+% --- Λύση 14294 (14294.tex) ---
 \lysh{14294}{4}
 \begin{alist}
 \item Αφού η παραβολή διέρχεται από το σημείο $\varGamma(0, -2)$, ισχύει ότι
@@ -10333,6 +10580,7 @@ x = 2\kappa\pi + \pi - x + \dfrac{\pi}{2}
 \[x^2 + 2x + 1 = 0 \Leftrightarrow (x + 1)^2 = 0 \Leftrightarrow x = -1.\]
 Επίσης, $g(-1) = 3$. Άρα, η γραφική παράσταση της συνάρτησης $h$ και η ευθεία $g$ έχουν ένα μόνο κοινό σημείο το $(-1, 3)$.
 \end{alist}
+% --- Λύση 14955 (14955.tex) ---
 \lysh{14955}{4}
 \begin{alist}
 \item Ζητάμε τον αριθμό $T(2) = 2^3 - 10 \cdot 2^2 + 31 \cdot 2 - 30 = 8 - 40 + 62 - 30 = 0$.
@@ -10358,6 +10606,7 @@ colorV = maincolor!40]%
 \end{center}
 Διαπιστώνουμε ότι παγετώνες θα υπάρχουν στον πλανήτη τα δύο πρώτα εκατομμύρια χρόνια και την χρονική περίοδο από τρία έως πέντε εκατομμύρια χρόνια.
 \end{alist}
+% --- Λύση 14973 (14973.tex) ---
 \lysh{14973}{4}
 \begin{alist}
 \item Η συνάρτηση $\varphi$ έχει πεδίο ορισμού το $\mathbb{R}$, επομένως για κάθε $x \in \mathbb{R}$ το $-x \in \mathbb{R}$.
@@ -10381,6 +10630,7 @@ colorV = maincolor!40]%
 Επομένως $f(x) = 3(x - 1)^2 + 5$, $x \in \mathbb{R}$.
 Η γραφική παράσταση της $f$ προκύπτει από δύο διαδοχικές μετατοπίσεις της γραφικής παράστασης της $\varphi$, μιας οριζόντιας κατά 1 μονάδα προς τα δεξιά και μιας κατακόρυφης κατά 5 μονάδες προς τα πάνω. Έτσι, είναι:
 \end{alist}
+% --- Λύση 14975 (14975.tex) ---
 \lysh{14975}{4}
 \begin{alist}
 \item Η τριγωνομετρική συνάρτηση $f(x) = \rho \cdot \hm (\omega x)$, όπου $\rho, \omega > 0$ έχει μέγιστη τιμή $\rho$, ελάχιστη τιμή $-\rho$ και περίοδο $T = \dfrac{2\pi}{\omega}$.
@@ -10418,6 +10668,7 @@ $y(t)$ & $1$ & $1{,}2$ & $1$ & $0{,}8$ & $1$ \\
 \end{center}
 \item Ζητάμε ουσιαστικά να βρούμε ποια χρονική στιγμή $t \in [0, 2]$, είναι $y(t) = 1{,}1$.
 \end{alist}
+% --- Λύση 15003 (15003.tex) ---
 \lysh{15003}{4}
 \begin{alist}
 \item
@@ -10441,6 +10692,7 @@ $y(t)$ & $1$ & $1{,}2$ & $1$ & $0{,}8$ & $1$ \\
 \[-\dfrac{5}{12} \le \kappa \le 1 - \dfrac{5}{12} \Leftrightarrow -\dfrac{5}{12} \le \kappa \le \dfrac{7}{12} \overset{\kappa \in \mathbb{Z}}{\implies} \kappa = 0.\]
 Άρα, $x = \dfrac{\pi}{12}$ ή $x = \dfrac{5\pi}{12}$.
 \end{alist}
+% --- Λύση 15005 (15005.tex) ---
 \lysh{15005}{4}
 \begin{alist}
 \item Το πεδίο ορισμού της συνάρτησης $f$ είναι το $\mathbb{R}$, οπότε αν $x \in \mathbb{R}$ τότε και $-x \in \mathbb{R}$.
@@ -10483,6 +10735,7 @@ $y(t)$ & $1$ & $1{,}2$ & $1$ & $0{,}8$ & $1$ \\
 \end{center}
 \item Από τη γραφική παράσταση προκύπτει ότι η $f$ είναι γνησίως φθίνουσα σε καθένα από τα διαστήματα $(-\infty, -1]$ και $[0, 1]$ και γνησίως αύξουσα σε καθένα από τα διαστήματα $[-1, 0]$ και $[1, +\infty)$.
 \end{alist}
+% --- Λύση 15014 (15014.tex) ---
 \lysh{15014}{4}
 \begin{alist}
 \item Για την συνάρτηση $f(x) = \alpha \cdot \hm \beta x$ με $\alpha$ θετικό ακέραιο μέγιστη τιμή είναι το $\alpha$, άρα $\alpha = 2$.
@@ -10501,6 +10754,7 @@ i) $0 \le \dfrac{\kappa\pi}{4} + \dfrac{\pi}{48} \le \dfrac{\pi}{2} \Leftrightar
 $-\dfrac{1}{48} \le \dfrac{\kappa}{4} \le \dfrac{1}{2} - \dfrac{1}{48} \Leftrightarrow -\dfrac{1}{48} \le \dfrac{\kappa}{4} \le \dfrac{23}{48} \Leftrightarrow -\dfrac{4}{48} \le \kappa \le \dfrac{4 \cdot 23}{48} \Leftrightarrow -\dfrac{1}{12} \le \kappa \le \dfrac{23}{12}.$
 Αφού $\kappa \in \mathbb{Z}$, είναι $\kappa = 0$ ή $\kappa = 1$ δηλαδή δεκτές είναι οι γωνίες $x = \dfrac{\pi}{48}\,\text{rad}$ ή $x = \dfrac{\pi}{4} + \dfrac{\pi}{48} = \dfrac{13\pi}{48}\,\text{rad}$.
 \end{alist}
+% --- Λύση 15015 (15015.tex) ---
 \lysh{15015}{4}
 \begin{alist}
 \item Έχουμε $P(x) = 0 \Leftrightarrow x^3 - x^2 - 2x = 0 \Leftrightarrow x(x^2 - x - 2) = 0$. Οπότε $x = 0$ ή $x^2 - x - 2 = 0$ που έχει $\varDelta = 9$ και ρίζες $x = -1$ και $x = 2$. Τελικά ρίζες της εξίσωσης $P(x) = 0$ είναι οι $x = 0$, $x = -1$ και $x = 2$.
@@ -10531,6 +10785,7 @@ colorV = maincolor!40]%
 \end{rlist}
 Τελικά $x \in \left(\dfrac{1}{e}, 1\right) \cup (e^2, +\infty)$.
 \end{alist}
+% --- Λύση 15021 (15021.tex) ---
 \lysh{15021}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για κάθε πραγματική τιμή του $x$ για την οποία ισχύει $x \ne 0$.
@@ -10541,6 +10796,7 @@ colorV = maincolor!40]%
 \item Είναι $\ln\dfrac{1}{2} = \ln 1 - \ln 2 = -\ln 2$ και αφού $f$ περιττή είναι $f\left(\ln\dfrac{1}{2}\right) = f(-\ln 2) = -f(\ln 2)$, δηλαδή $f(\ln 2) + f\left(\ln\dfrac{1}{2}\right) = 0$.
 \item Για κάθε $\theta \in \mathbb{R}$ είναι $\hm (\pi + \theta) = -\hm \theta$ και αφού $f$ περιττή είναι $f(\hm (\pi + \theta)) = f(-\hm \theta) = -f(\hm \theta)$, δηλαδή $f(\hm \theta) + f(\hm (\pi + \theta)) = 0$.
 \end{alist}
+% --- Λύση 15022 (15022.tex) ---
 \lysh{15022}{4}
 \begin{alist}
 \item Αφού $-2 < -1$ και $f$ γνησίως φθίνουσα στο διάστημα $[-3, 0]$ είναι $f(-2) > f(-1)$.
@@ -10571,6 +10827,7 @@ colorV = maincolor!40]%
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15025 (15025.tex) ---
 \lysh{15025}{4}
 \begin{alist}
 \item Για τη γωνία $\theta = \text{A}\hat{\text{O}}\text{M}$ γνωρίζουμε ότι $\dfrac{\pi}{2} < \theta < \pi$ και $\hm \theta = \dfrac{4}{5}$. Από τη τριγωνομετρική ταυτότητα $\hm ^2\theta + \syn ^2\theta = 1$ έχουμε ότι:
@@ -10585,6 +10842,7 @@ colorV = maincolor!40]%
 Εναλλακτικά, βρίσκουμε το σημείο $N$ του κύκλου με τεταγμένη $\hm \phi = \dfrac{3}{5}$ και τετμημένη $\syn \phi < 0$ και διαπιστώνουμε το σημείο $N$ είναι πιο αριστερά και κάτω από το σημείο $M$ δηλαδή $\text{A}\hat{\text{O}}\text{M} < \text{A}\hat{\text{O}}\text{N}$ οπότε $\theta < \phi$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15026 (15026.tex) ---
 \lysh{15026}{4}
 \begin{alist}
 \item Η περίοδος της συνάρτησης $f$ είναι $T = \dfrac{2\pi}{\dfrac{\pi}{2}} = 4$.
@@ -10603,6 +10861,7 @@ colorV = maincolor!40]%
 \[4\hm ^2\left(\dfrac{\pi x}{2}\right) + 4\syn ^2\left(\dfrac{\pi x}{2}\right) = 4\left(\hm ^2\left(\dfrac{\pi x}{2}\right) + \syn ^2\left(\dfrac{\pi x}{2}\right)\right) = 4 \cdot 1 = 4\]
 δηλαδή $(f(x) - 1)^2 + (f(1 - x) - 1)^2 = 4$, για κάθε $x \in \mathbb{R}$.
 \end{alist}
+% --- Λύση 15037 (15037.tex) ---
 \lysh{15037}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται μόνο για $x + 3 \ge 0$, δηλαδή για $x \ge -3$.
@@ -10629,6 +10888,7 @@ $\sqrt{x + 3} = 3x - 1$ υψώνουμε και τα δυο μέλη στο τε
 \item Αλγεβρικά η ανίσωση λύνεται: % it's cut off, looking at the image there's no more content to transcribe here as that is the end of the text in the image. We just include what is present.
 \end{rlist}
 \end{alist}
+% --- Λύση 15049 (15049.tex) ---
 \lysh{15049}{4}
 \begin{alist}
 \item Επειδή $\hm \left(\dfrac{\pi}{2} - x\right) = \syn  x$ και $\hm (\pi + x) = -\hm  x$, έχουμε: $f(x) = \syn  x - \hm  x,\: x \in \mathbb{R}$.
@@ -10643,6 +10903,7 @@ $\sqrt{x + 3} = 3x - 1$ υψώνουμε και τα δυο μέλη στο τε
 Άρα δυο κοινά σημεία της $C_f$ με τον $x'x$ είναι τα $\left(\dfrac{\pi}{4}, 0\right)$ και $\left(\dfrac{5\pi}{4}, 0\right)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15050 (15050.tex) ---
 \lysh{15050}{4}
 \begin{alist}
 \item Η συνάρτηση είναι της μορφής $f(x) = \rho\syn  x, \rho > 0$ με $\rho = 2$, οπότε η ελάχιστη τιμή της είναι ίση με $-2$ και η μέγιστη τιμή της είναι ίση με $2$.
@@ -10677,6 +10938,7 @@ $2\syn  x$ & $2$ & $0$ & $-2$ & $0$ & $2$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15060 (15060.tex) ---
 \lysh{15060}{2}
 \begin{alist}
 \item Η τεταγμένη του σημείου $M$ είναι ίση με $\dfrac{1}{2}$, οπότε $\hm \theta = \dfrac{1}{2}$.
@@ -10686,6 +10948,7 @@ $2\syn  x$ & $2$ & $0$ & $-2$ & $0$ & $2$ \\
 \item Ισχύει $\hm \theta = \dfrac{1}{2} = \hm \dfrac{\pi}{6}$ και $\dfrac{\pi}{2} < \theta < \pi$, οπότε η γωνία $\theta$ είναι η παραπληρωματική της γωνίας $\dfrac{\pi}{6}$, δηλαδή
 \[\theta = \pi - \dfrac{\pi}{6} = \dfrac{5\pi}{6}.\]
 \end{alist}
+% --- Λύση 15062 (15062.tex) ---
 \lysh{15062}{4}
 \begin{alist}
 \item Από το σχήμα είναι φανερό ότι η γραφική της παράσταση προκύπτει από επανάληψη του τμήματος της που αντιστοιχεί στο διάστημα $[0, \pi]$, οπότε η περίοδος της $f$ είναι $T = \pi$.
@@ -10694,6 +10957,7 @@ $2\syn  x$ & $2$ & $0$ & $-2$ & $0$ & $2$ \\
 \item Είναι: $g(x) = x^4 - 2x^2 + 5 = (x^2 - 1)^2 + 4 \ge 4$ και η ισότητα $g(x) = 4$ ισχύει όταν $x^2 = 1$ δηλαδή όταν $x = -1$ ή $x = 1$. Άρα ο αριθμός 4 είναι η ελάχιστη τιμή της $g$.
 \item Επειδή για κάθε $x \in \mathbb{R}$ ισχύει $f(x) \le 3$ και $g(x) \ge 4$, η εξίσωση $f(x) = g(x)$ είναι αδύνατη. Άρα οι γραφικές παραστάσεις των $f, g$ δεν έχουν κοινό σημείο.
 \end{alist}
+% --- Λύση 15066 (15066.tex) ---
 \lysh{15066}{4}
 \begin{alist}
 \item 
@@ -10725,6 +10989,7 @@ $2\syn  x$ & $2$ & $0$ & $-2$ & $0$ & $2$ \\
 \[P(x) = 0 \Leftrightarrow x = 2 \text{ ή } x = \dfrac{1}{2}.\]
 \item Επειδή για κάθε $x \in \mathbb{R}$ ισχύει $x^2 + 1 > 0$, το πρόσημο του πολυωνύμου είναι ίδιο με το πρόσημο του τριωνύμου $(x - 2)(2x - 1)$. Έτσι έχουμε τον παρακάτω πίνακα προσήμων.
 \end{alist}
+% --- Λύση 15093 (15093.tex) ---
 \lysh{15093}{4}
 \begin{alist}
 \item Καθώς υπάρχουν λογάριθμοι μόνο θετικών αριθμών, απαιτούμε $10^x - 1 > 0$, άρα
@@ -10736,6 +11001,7 @@ $2\syn  x$ & $2$ & $0$ & $-2$ & $0$ & $2$ \\
 Τελικά $10^x = \dfrac{\sqrt{5} + 1}{2} \Leftrightarrow x = \log\left(\dfrac{\sqrt{5} + 1}{2}\right)$.
 Άρα το ζητούμενο σημείο είναι το $\left(\log\left(\dfrac{\sqrt{5} + 1}{2}\right), -\log\left(\dfrac{\sqrt{5} + 1}{2}\right)\right)$.
 \end{alist}
+% --- Λύση 15094 (15094.tex) ---
 \lysh{15094}{4}
 \begin{alist}
 \item $S(0) = 0$ (το κινητό βρίσκεται στην αφετηρία) και $S(2) = 2 \cdot 8 - 6 \cdot 4 + 20 = 12 \text{ μέτρα}$.
@@ -10756,6 +11022,7 @@ $S(t) = 2t^3 - 6t^2 + 10t = 2t(t^2 - 3t + 5) \ge 0$,
 Η (II) παίρνει και αρνητικές τιμές.
 Η (III) είναι μη αρνητική και γνησίως αύξουσα παντού, ως εκ τούτου αποτελεί την ενδεδειγμένη απάντηση.
 \end{alist}
+% --- Λύση 15095 (15095.tex) ---
 \lysh{15095}{4}
 \begin{alist}
 \item
@@ -10806,6 +11073,7 @@ $\left[\dfrac{\pi}{2}, \pi\right]$ και παρουσιάζει μέγιστο 
 Επιπλέον, είναι $g(0) = g(\pi) = \dfrac{1}{2}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15116 (15116.tex) ---
 \lysh{15116}{2}
 \begin{alist}
 \item Η συνάρτηση $f$ είναι άρτια, οπότε η γραφική της παράσταση θα είναι συμμετρική ως προς τον $y'y$ άξονα. Στο παρακάτω σχήμα είναι χαραγμένα και τα υπόλοιπα τμήματα με διακεκομμένη γραμμή.
@@ -10838,6 +11106,7 @@ $\left[\dfrac{\pi}{2}, \pi\right]$ και παρουσιάζει μέγιστο 
 \[\min f(x) = f(-1) = f(1) = 0.\]
 \end{rlist}
 \end{alist}
+% --- Λύση 15174 (15174.tex) ---
 \lysh{15174}{4}
 \begin{alist}
 \item Η διαίρεση του πολυωνύμου $P(x)$ με το πολυώνυμο $\delta(x)$ :
@@ -10873,6 +11142,7 @@ $(\alpha + 22)x - 24$ &
 \[P(x) = 0 \Leftrightarrow (x - 1)(x + 2)(x^2 + 2) = 0 \xLeftrightarrow{x^2+2\ne0} x = 1 \text{ ή } x = -2.\]
 \end{rlist}
 \end{alist}
+% --- Λύση 15187 (15187.tex) ---
 \lysh{15187}{2}
 \begin{alist}
 \item Θέτουμε $\hm \omega = x$ και η εξίσωση γράφεται:
@@ -10901,6 +11171,7 @@ $(\alpha + 22)x - 24$ &
 \[\Gamma\left(-\frac{4}{5}, \frac{3}{5}\right), \Delta\left(-\frac{4}{5}, -\frac{3}{5}\right).\]
 \end{rlist}
 \end{alist}
+% --- Λύση 15250 (15250.tex) ---
 \lysh{15250}{4}
 \begin{alist}
 \item Η διαίρεση $P(x) : (x^2 - 4)$ φαίνεται παρακάτω
@@ -10936,6 +11207,7 @@ colorV = maincolor!40]%
 Συνεπώς η ζητούμενη ανίσωση αληθεύει για κάθε $x \in (-\infty, -2) \cup (1, 2)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15251 (15251.tex) ---
 \lysh{15251}{4}
 \begin{alist}
 \item Αφού το πολυώνυμο $P(x)$ έχει παράγοντα το $x - 1$, θα ισχύει ότι $P(1) = 0$. \\
@@ -10972,6 +11244,7 @@ colorV = maincolor!40]%
 \item Είναι $\ln 2 < \ln e \Leftrightarrow \ln 2 < 1$ οπότε αφού δείξαμε παραπάνω ότι $P(x) < 0$ για κάθε $x \in (-\infty, 1) \cup \left(\dfrac{3}{2}, 2\right)$, είναι $P(\ln 2) < 0$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15287 (15287.tex) ---
 \lysh{15287}{4}
 \begin{alist}
 \item Η συνάρτηση $f(x) = \rho\hm (\omega x)$ με $\rho > 0$, έχει μέγιστη τιμή $\rho$. Με βάση το σχήμα η συνάρτηση έχει μέγιστη τιμή 3, άρα $\rho = 3$. Επίσης η περίοδος της συνάρτησης είναι $\pi$, οπότε $\pi = \dfrac{2\pi}{\omega} \Leftrightarrow \omega = 2$. Άρα $f(x) = 3\hm (2x)$.
@@ -10985,6 +11258,7 @@ colorV = maincolor!40]%
 \end{itemize}
 Άρα η εξίσωση $3\hm (2x) - \dfrac{12}{\pi}x = 0$ έχει λύσεις τις $x = 0$, $x = \dfrac{\pi}{4}$ και $x = -\dfrac{\pi}{4}$.
 \end{alist}
+% --- Λύση 15288 (15288.tex) ---
 \lysh{15288}{4}
 \begin{alist}
 \item Η περίοδος της συνάρτησης είναι $T = \dfrac{2\pi}{3}$, η μέγιστη τιμή της είναι $\max f(x) = 2 + 1 = 3$, και η ελάχιστη τιμή της είναι $\min f(x) = -2 + 1 = -1$.
@@ -11011,6 +11285,7 @@ f(x) &= g(x) \Leftrightarrow \\
 Επειδή $x \in [0, \pi)$, για $\kappa = 0$ στον πρώτο τύπο λύσεων προκύπτει $x = 0$ και στον δεύτερο τύπο λύσεων προκύπτει $x = \dfrac{\pi}{2}$ (που προκύπτει και από τον πρώτο τύπο για $\kappa=1$).
 \end{rlist}
 \end{alist}
+% --- Λύση 15347 (15347.tex) ---
 \lysh{15347}{4}
 \begin{alist}
 \item Είναι: $\syn (\pi - x) = -\syn  x$ και $\hm \left(\dfrac{\pi}{2} + x\right) = \hm \left(\dfrac{\pi}{2} - (-x)\right) = \syn (-x) = \syn  x$. \\
@@ -11032,6 +11307,7 @@ f(x) = g(x) &\Leftrightarrow 2\syn ^2 x - 3\syn  x + 2 = 2\hm ^2 x + 9\syn  x - 
 \end{align*}
 Αφού η παραπάνω εξίσωση είναι αδύνατη, δεν υπάρχουν σημεία τομής των δύο γραφικών παραστάσεων.
 \end{alist}
+% --- Λύση 15377 (15377.tex) ---
 \lysh{15377}{4}
 \begin{alist}
 \item Ο όγκος της κυβικής δεξαμενής A υπολογίζεται από τον τύπο του όγκου κύβου, δηλαδή $V_A(x) = x^3$ και ο όγκος της δεξαμενής Β, από τον τύπο του όγκου ορθογωνίου παραλληλεπιπέδου, $V_B(x) = (x + 1) \cdot x^2$. \\
@@ -11054,6 +11330,7 @@ x^3 + x^2 = 36 &\Leftrightarrow x^3 + x^2 - 36 = 0 \Leftrightarrow (x - 3)(x^2 +
 Άρα οι λύσεις της ανίσωσης (1) είναι $x \ge 3$. \\
 Επομένως, η μικρότερη τιμή που μπορεί να πάρει το $x$ είναι το $3$, που είναι και η ζητούμενη ακμή.
 \end{alist}
+% --- Λύση 15422 (15422.tex) ---
 \lysh{15422}{4}
 \begin{alist}
 \item Είναι: $f(x) = \alpha\syn \left(\dfrac{\pi}{2} - 2x\right) - 2\hm (\pi + 2x) = \alpha\hm  2x + 2\hm  2x = (\alpha + 2)\hm  2x$.
@@ -11103,6 +11380,7 @@ f(x) = g(x) &\Leftrightarrow 4\hm  2x = 5 - \syn ^2 2x \\
 \end{align*}
 Αφού η παραπάνω εξίσωση είναι αδύνατη, δεν υπάρχουν σημεία τομής των δύο γραφικών παραστάσεων.
 \end{alist}
+% --- Λύση 15431 (15431.tex) ---
 \lysh{15431}{4}
 \begin{alist}
 \item
@@ -11137,6 +11415,7 @@ P(2) = -1 &\Leftrightarrow 2 \cdot 2^3 + \alpha \cdot 2^2 + \beta \cdot 2 - 5 = 
 \[P(x) < 0 \Leftrightarrow 2(x-1)^2\left(x-\frac{5}{2}\right) < 0.\]
 Λόγω του ότι $2(x-1)^2 > 0$ για $x \ne 1$, η ανίσωση αληθεύει όταν $x-\dfrac{5}{2} < 0 \Leftrightarrow x < \dfrac{5}{2}$. Επομένως $x \in (-\infty, 1) \cup \left(1, \dfrac{5}{2}\right)$.
 \end{alist}
+% --- Λύση 15436 (15436.tex) ---
 \lysh{15436}{4}
 \begin{alist}
 \item Είναι $BA = 2$, $MA = x$, $MK = 4-x$. \\
@@ -11167,6 +11446,7 @@ t(x) = \frac{4}{3} &\Leftrightarrow \frac{\sqrt{4+x^2}}{3} + \frac{4-x}{5} = \fr
 Η λύση είναι δεκτή, διότι $\dfrac{3}{2} \in [0,4]$. \\
 Επομένως ο κολυμβητής θα βγει στην ακτή σε απόσταση $1,5 \, km$ από το σημείο $A$.
 \end{alist}
+% --- Λύση 15474 (15474.tex) ---
 \lysh{15474}{4}
 \begin{alist}
 \item Έχουμε: $P(x) = e^{\ln e}x^3 + 4x^2 \ln\sqrt{e} + 2 = ex^3 + 4x^2 \ln e^{\frac{1}{2}} + 2 = ex^3 + 4x^2 \cdot \frac{1}{2}\ln e + 2 = ex^3 + 2x^2 + 2$.
@@ -11196,6 +11476,7 @@ colorV = maincolor!40]%
 \item Παρατηρούμε ότι το $P(e) - e^2 - 4$ είναι η τιμή του $P(x) - (ex + 4)$ για $x = e$. \\
 Σύμφωνα με το προηγούμενο ερώτημα θα έχουμε $P(e) - e^2 - 4 > 0$, αφού $e > 1$.
 \end{alist}
+% --- Λύση 15591 (15591.tex) ---
 \lysh{15591}{4}
 \begin{alist}
 \item Για να ορίζεται η εκθετική συνάρτηση πρέπει η βάση
@@ -11214,6 +11495,7 @@ f(x) + f(x+1) = 14 &\Leftrightarrow 6^x + 6^{x+1} = 14 \\
 &\Leftrightarrow x = \log_6 2.
 \end{align*}
 \end{alist}
+% --- Λύση 15677 (15677.tex) ---
 \lysh{15677}{4}
 \begin{alist}
 \item Η διαίρεση $P(x) : Q(x)$ φαίνεται στο παρακάτω σχήμα.
@@ -11251,6 +11533,7 @@ $14x + 28$ &
 και επειδή $x^2 + 5 \ne 0$ για κάθε $x \in \mathbb{R}$, έχουμε ότι $x^2 - 2x - 6 = 0$ δηλαδή $x = \dfrac{2 \pm \sqrt{28}}{2} = \dfrac{2 \pm 2\sqrt{7}}{2} = 1 \pm \sqrt{7}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15678 (15678.tex) ---
 \lysh{15678}{4}
 \begin{alist}
 \item Το $P(x) = -x^3 - 4x^2 - x + 6$ έχει άθροισμα συντελεστών ίσο με το 0, οπότε έχει ρίζα το 1. \\
@@ -11281,6 +11564,7 @@ colorV = maincolor!40]%
 Επίσης για $0 < x < 1$ έχουμε ότι $\ln x < 0 < P(x)$ που σημαίνει ότι η εξίσωση $P(x) = \ln x$ δεν έχει ρίζα στο $(0, 1)$. \\
 Τέλος $P(1) = \ln 1 = 0$ που σημαίνει ότι η εξίσωση $P(x) = \ln x$ έχει μοναδική λύση την $x = 1$.
 \end{alist}
+% --- Λύση 15679 (15679.tex) ---
 \lysh{15679}{4}
 \begin{alist}
 \item Η ανίσωση $\dfrac{\omega^2 - 1}{\omega - 3} > 0$ με $\omega \ne 3$ είναι ισοδύναμη με την $(\omega^2 - 1)(\omega - 3) > 0$. \\
@@ -11314,6 +11598,7 @@ x = \ln\frac{1}{3}
 \end{align*}
 και επειδή $\dfrac{1}{3} < 1 \Leftrightarrow \ln\dfrac{1}{3} < 0$ η λύση $x = \ln\dfrac{1}{3}$ είναι δεκτή.
 \end{alist}
+% --- Λύση 15688 (15688.tex) ---
 \lysh{15688}{4}
 \begin{alist}
 \item Η συνάρτηση ορίζεται μόνο όταν $e^x - 1 > 0$. Είναι:
@@ -11338,6 +11623,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \[x + \alpha > x \Rightarrow e^{x + \alpha} > e^x \Rightarrow e^{x + \alpha} - e^x > 0.\]
 Επομένως, αν $\alpha > 0$ τότε η γραφική παράσταση της $f$ δεν έχει κοινά σημεία με την ευθεία $y = x + \alpha$.
 \end{alist}
+% --- Λύση 15689 (15689.tex) ---
 \lysh{15689}{4}
 \begin{alist}
 \item Η $f$ είναι άρτια, οπότε η γραφική της παράσταση είναι συμμετρική ως προς τον άξονα $y'y$. Θεωρώντας το συμμετρικό του δοσμένου σχήματος ως προς τον $y'y$ προκύπτει η γραφική παράσταση του διπλανού σχήματος στο οποίο φαίνεται η γραφική παράσταση της $f$ για όλες τις τιμές του $x$.
@@ -11373,6 +11659,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \textbf{Εναλλακτική αντιμετώπιση του γ) i.} \\
 Η ανισοτική σχέση ανάμεσα στα $\hm \theta$ και $\syn \theta$ στο διάστημα $\left(\dfrac{\pi}{4}, \dfrac{\pi}{2}\right)$ μπορούσε να προκύψει επίσης και από τον τριγωνομετρικό κύκλο ή τις γραφικές παραστάσεις των αντίστοιχων συναρτήσεων.
 \end{alist}
+% --- Λύση 15690 (15690.tex) ---
 \lysh{15690}{4}
 \begin{alist}
 \item Το πεδίο ορισμού της συνάρτησης είναι το $A = \mathbb{R} - \{0\}$. \\
@@ -11406,6 +11693,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \[f(x) < 2 \Leftrightarrow \frac{1}{2}\ln x^2 < 2 \Leftrightarrow \ln x^2 < 4 \Leftrightarrow x^2 < e^4 \Leftrightarrow |x| < e^2 \Leftrightarrow -e^2 < x < e^2\]
 Άρα, η γραφική παράσταση της $f$ είναι κάτω από την ευθεία $y=2$ για κάθε $x \in (-e^2, 0) \cup (0, e^2)$.
 \end{alist}
+% --- Λύση 15694 (15694.tex) ---
 \lysh{15694}{4}
 \begin{alist}
 \item Θέλουμε να είναι $m - M < 0 \Leftrightarrow 5 \cdot \log\left(\dfrac{d}{10}\right) < 0 \Leftrightarrow \log\left(\dfrac{d}{10}\right) < 0 \Leftrightarrow \log\left(\dfrac{d}{10}\right) < \log 1$ \\
@@ -11415,6 +11703,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \item Με χρήση της παραπάνω σχέσης, έχουμε
 \[d = 10^{\frac{5+0{,}46+5{,}14}{5}} = 10^{\frac{10{,}6}{5}} = 10^{\frac{53}{25}} = \sqrt[25]{10^{53}} \cong 131 \text{ parsec}.\]
 \end{alist}
+% --- Λύση 15787 (15787.tex) ---
 \lysh{15787}{4}
 \begin{alist}
 \item Σύμφωνα με το σχήμα:
@@ -11452,6 +11741,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \item Το μέγιστο ύψος που ανεβαίνει το μετεωρολογικό όργανο είναι $5\text{ km}$ και συνέβη επίσης όταν $t=5\text{ min}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15788 (15788.tex) ---
 \lysh{15788}{4}
 \begin{alist}
 \item Το πεδίο ορισμού συνάρτησης σχεδιασμένης σε σύστημα αξόνων είναι η προβολή της γραφικής παράστασης στον άξονα $x'x$. Οπότε είναι $D_g = [\pi, 3\pi]$. \\
@@ -11462,6 +11752,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \item Έχουμε $g(x) = f(x - \pi) + 1$, δηλαδή $g(x) = \hm (x - \pi) + 1$ με πεδίο ορισμού το διάστημα $[\pi, 3\pi]$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15790 (15790.tex) ---
 \lysh{15790}{4}
 \begin{alist}
 \item Οι συναρτήσεις $f$ και $g$ έχουν πεδίο ορισμού το $\mathbb{R}$, άρα έχουμε $x \in \mathbb{R} \Rightarrow -x \in \mathbb{R}$. \\
@@ -11496,6 +11787,7 @@ f(x) = x - 1 &\Leftrightarrow \ln(e^x - 1) = x - 1 \Leftrightarrow \ln(e^x - 1) 
 \item Γραφικά, λύση της ανίσωσης $f(x) < g(x)$ είναι οι τιμές του $x$ για τις οποίες η γραφική παράσταση της $g$ είναι πάνω από την γραφική παράσταση της $f$. Οπότε η ανίσωση αληθεύει για $x \in (-2, 2)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15821 (15821.tex) ---
 \lysh{15821}{4}
 \begin{alist}
 \item Αν υπήρχε γωνία $x$ τέτοια ώστε $\hm  x = \syn  x = 0$, τότε από τη βασική τριγωνομετρική ταυτότητα $\hm ^2x + \syn ^2x = 1$ θα είχαμε $0 + 0 = 1$, το οποίο είναι άτοπο. Συνεπώς δεν υπάρχει γωνία $x$ τέτοια ώστε $\hm  x = \syn  x = 0$.
@@ -11545,6 +11837,7 @@ $g(x) = 3\cdot\syn  x$ & $3$ & $0$ & $-3$ & $0$ & $3$ \\
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 15822 (15822.tex) ---
 \lysh{15822}{4}
 \begin{alist}
 \item Είναι $P(x) = \alpha x^3 + \beta x^2 + x = x(\alpha x^2 + \beta x + 1)$, οπότε έχει μία ρίζα τη $x = 0$. Συνεπώς οι άλλες δύο ακέραιες ρίζες, θα είναι ρίζες του τριωνύμου $\alpha x^2 + \beta x + 1$, που επειδή έχει ακέραιους συντελεστές, θα πρέπει οι δύο αυτές ακέραιες ρίζες να είναι διαιρέτες του σταθερού όρου, δηλαδή του $1$. Δεδομένου ότι οι μόνοι διαιρέτες του $1$ είναι το $1$ και το $-1$, συμπεραίνουμε ότι οι άλλες δύο ακέραιες ρίζες είναι το $1$ και το $-1$. \\
@@ -11571,6 +11864,7 @@ colorV = maincolor!40]%
 \item Είναι $\log\sqrt{10} = \log 10^{\frac{1}{2}} = \dfrac{1}{2}\cdot\log 10 = \dfrac{1}{2}\cdot 1 = \dfrac{1}{2}$, οπότε $P(\log\sqrt{10}) = P\left(\dfrac{1}{2}\right) > 0$, αφού όπως δείξαμε παραπάνω $P(x) > 0$ για $x \in (0, 1)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15823 (15823.tex) ---
 \lysh{15823}{4}
 \begin{alist}
 \item Από την ταυτότητα της διαίρεσης έχουμε $P(x) = (4x^2 - 1)(3x - 2) + 1$, οπότε η ζητούμενη εξίσωση γίνεται ισοδύναμα
@@ -11585,6 +11879,7 @@ colorV = maincolor!40]%
 \item Είναι $P(x) = (4x^2 - 1)(3x - 2) + 1$, οπότε $P(-1) = (4(-1)^2 - 1)(3(-1) - 2) + 1 = -14$ και $P(0) = (-1)(-2) + 1 = 3$. \\
 Αφού οι τιμές $P(-1)$, $P(0)$ είναι ετερόσημες, η εξίσωση $P(x) = 0$ έχει μία τουλάχιστον ρίζα στο $(-1, 0)$.
 \end{alist}
+% --- Λύση 15960 (15960.tex) ---
 \lysh{15960}{4}
 \begin{alist}
 \item Το πεδίο ορισμού της συνάρτησης $f$ είναι το σύνολο των πραγματικών αριθμών $\mathbb{R}$. \\
@@ -11601,6 +11896,7 @@ colorV = maincolor!40]%
 Άρα $x \in (-1, 1)$. Επομένως η γραφική παράσταση της συνάρτησης $f$ βρίσκεται κάτω από τον άξονα $x'x$ για $x \in (-1, 1)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 15992 (15992.tex) ---
 \lysh{15992}{4}
 \begin{alist}
 \item Το $\rho$ καθορίζει τη μέγιστη τιμή της συνάρτησης $f$, που είναι ίση με $\rho$ και την ελάχιστη τιμή της, που είναι ίση με $-\rho$. Άρα $\rho = 2$. \\
@@ -11653,6 +11949,7 @@ $g(x) = \hm (2x)$ & $0$ & $1$ & $0$ & $-1$ & $0$ \\
 \end{center}
 \end{rlist}
 \end{alist}
+% --- Λύση 16001 (16001.tex) ---
 \lysh{16001}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται μόνο όταν $x > 0$ και $x\ln x \ge 0$, δηλαδή μόνο όταν $x \ge 1$, οπότε $A_f = [1, +\infty)$. Ομοίως η $g$ ορίζεται μόνο όταν $x > 0$ και $\ln x \ge 0$, δηλαδή μόνο όταν $x \ge 1$, οπότε $A_g = [1, +\infty)$.
@@ -11669,6 +11966,7 @@ $g(x) = \hm (2x)$ & $0$ & $1$ & $0$ & $-1$ & $0$ \\
 \textbf{Επισήμανση.} \\
 Στο πλαίσιο μιας αλγεβρικής λύσης θα μπορούσαμε να αναζητήσουμε ρίζες στο διάστημα $[1, +\infty)$, να διαπιστώσουμε ότι ο αριθμός $1$ είναι η μία ρίζα της και να αποδείξουμε ότι αν $x > 1$ έχουμε $f(x) > f(1)$, δηλαδή $f(x) > 0$ και $1 - x < 0$, οπότε η εξίσωση δεν έχει ρίζα μεγαλύτερη από τη μονάδα.
 
+% --- Λύση 17919 (17919.tex) ---
 \lysh{17919}{4}
 \begin{alist}
 \item Η ευθεία $\text{AB}$ έχει εξίσωση της μορφής $(\varepsilon): y = \alpha x + \beta$. Το σημείο $\text{A}\left(1, -\dfrac{3}{4}\right)$ είναι σημείο της $(\varepsilon)$, άρα:
@@ -11707,6 +12005,7 @@ $g(x) = \hm (2x)$ & $0$ & $1$ & $0$ & $-1$ & $0$ \\
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 17925 (17925.tex) ---
 \lysh{17925}{4}
 \begin{alist}
 \item Όπως φαίνεται στο σχήμα, η γραφική παράσταση της $f$ τέμνει τον $x'x$ άξονα στο $(-2,0)$, οπότε έχουμε ισοδύναμα:
@@ -11747,6 +12046,7 @@ f(-2) &= 0 \Leftrightarrow \\
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 17941 (17941.tex) ---
 \lysh{17941}{4}
 \begin{alist}
 \item Για να έχει νόημα η εξίσωση (1) πρέπει οι παραστάσεις στις ρίζες να είναι μη αρνητικές. \\
@@ -11774,6 +12074,7 @@ x &= 0.
 \item Για $\alpha \neq 2\sqrt{2}$ η εξίσωση (1) έχει ρίζα την $x = \rho$, άρα θα ισχύει ότι $g(\rho) = \alpha$. Όμως η συνάρτηση $g$ είναι άρτια, οπότε θα ισχύει ότι $g(-\rho) = g(\rho) = \alpha$, οπότε και η $x = -\rho$ θα είναι ρίζα της εξίσωσης (1).
 \end{rlist}
 \end{alist}
+% --- Λύση 17943 (17943.tex) ---
 \lysh{17943}{4}
 \begin{alist}
 \item 
@@ -11809,6 +12110,7 @@ $0$ &
 \end{center}
 Οπότε η εξίσωση (1) γράφεται: $(x-15)(x^2+16x+240) = 0$.
 \end{alist}
+% --- Λύση 18110 (18110.tex) ---
 \lysh{18110}{4}
 \begin{alist}
 \item 
@@ -11848,6 +12150,7 @@ f(-\ln 2) &= \sqrt{-\ln 2\cdot(e^{-\ln 2}-1)} = \sqrt{-\ln 2\cdot\left(e^{\ln \f
 \item Επειδή ισχύει $-\ln 2 < 0$ και $f(-\ln 2) > f(0)$ συμπεραίνουμε ότι η συνάρτηση $f$ δεν είναι γνησίως αύξουσα στο $\mathbb{R}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 18111 (18111.tex) ---
 \lysh{18111}{4}
 \begin{alist}
 \item 
@@ -11883,6 +12186,7 @@ f(-\ln 2) &= \sqrt{-\ln 2\cdot(e^{-\ln 2}-1)} = \sqrt{-\ln 2\cdot\left(e^{\ln \f
 Άρα τα ζητούμενα σημεία είναι $(0, 0), (1, 0), (-1, 0)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 18221 (18221.tex) ---
 \lysh{18221}{4}
 \begin{alist}
 \item 
@@ -11911,6 +12215,7 @@ f(-\ln 2) &= \sqrt{-\ln 2\cdot(e^{-\ln 2}-1)} = \sqrt{-\ln 2\cdot\left(e^{\ln \f
 \end{center}
 \item Για κάθε $\alpha \in (0, \sqrt{3})$ είναι $\text{E} \le 4 \overset{(\alpha)}{\Leftrightarrow} f(\alpha) \le f(1)$ άρα το εμβαδό έχει μέγιστη τιμή $4$ τετραγωνικές μονάδες στη θέση $\alpha = 1$.
 \end{alist}
+% --- Λύση 18231 (18231.tex) ---
 \lysh{18231}{4}
 \begin{alist}
 \item Από τη γραφική παράσταση της $f$ συμπεραίνουμε ότι αυτή είναι γνησίως αύξουσα στο διάστημα $[-1, 0]$ και γνησίως φθίνουσα στο $[0, +\infty)$. Επιπλέον η $f$ παρουσιάζει ολικό μέγιστο για $x = 0$. Η μέγιστη τιμή της είναι ίση με $f(0) = 1$.
@@ -11949,6 +12254,7 @@ f(-\ln 2) &= \sqrt{-\ln 2\cdot(e^{-\ln 2}-1)} = \sqrt{-\ln 2\cdot\left(e^{\ln \f
 \end{axis}
 \end{tikzpicture}
 \end{center}
+% --- Λύση 18234 (18234.tex) ---
 \lysh{18234}{4}
 \begin{alist}
 \item Από την γνωστή ανισότητα $-1 \le \hm  x \le 1$ προκύπτει ότι $-2 \le 2\hm  x \le 2$, οπότε $-3 \le 2\hm  x - 1 \le 1$, δηλαδή $-3 \le f(x) \le 1$. Επιπλέον στο διάστημα $[0, 2\pi]$ η ισότητα $f(x) = -3$ ισχύει όταν $\hm  x = -1$ δηλαδή $x = \dfrac{3\pi}{2}$, ενώ η $f(x) = 1$ ισχύει όταν $\hm  x = 1$ δηλαδή $x = \dfrac{\pi}{2}$. \\
@@ -11993,6 +12299,7 @@ $f(x)=2\hm{x}-1$ & $-1$ & $1$ & $-1$ & $-3$ & $-1$ \\[3pt]
 \end{center}
 \item Από την ισότητα $f(\alpha) = f\left(\dfrac{\pi}{2} - \alpha\right)$, έχουμε:
 \end{alist}
+% --- Λύση 18235 (18235.tex) ---
 \lysh{18235}{4}
 \begin{alist}
 \item Ισχύει:
@@ -12033,6 +12340,7 @@ f(x) = \frac{1}{2} &\Leftrightarrow |e^x - 1| = \frac{1}{2} \Leftrightarrow e^x 
 &\Leftrightarrow e^x = \frac{3}{2} \text{ ή } e^x = \frac{1}{2} \Leftrightarrow x = \ln\frac{3}{2} \text{ ή } x = \ln\frac{1}{2}
 \end{align*}
 \end{alist}
+% --- Λύση 18429 (18429.tex) ---
 \lysh{18429}{4}
 \begin{alist}
 \item Είναι $D = 10 \cdot \log\left(\dfrac{100}{10^{-12}}\right) = 10 \cdot \log(10^2 \cdot 10^{12}) = 10 \cdot \log(10^{14}) = 10 \cdot 14 = 140\text{ dB}$.
@@ -12042,6 +12350,7 @@ f(x) = \frac{1}{2} &\Leftrightarrow |e^x - 1| = \frac{1}{2} \Leftrightarrow e^x 
 \item Έχουμε 
 \[120 = 10 \cdot \log\left(\frac{I}{10^{-12}}\right) \Leftrightarrow 12 = \log(I \cdot 10^{12}) \Leftrightarrow 10^{12} = I \cdot 10^{12} \Leftrightarrow I = 1\text{ w/m}^2.\]
 \end{alist}
+% --- Λύση 18434 (18434.tex) ---
 \lysh{18434}{4}
 \begin{alist}
 \item Αν υπάρχει τέτοιο βάθος, θα έχουμε $I = 0 = I_0 \cdot e^{-\lambda h}$, άρα $e^{-\lambda h} = 0$, το οποίο δεν είναι αποδεκτό, αφού είναι $e^x > 0$, για κάθε $x \in \mathbb{R}$.
@@ -12052,6 +12361,7 @@ f(x) = \frac{1}{2} &\Leftrightarrow |e^x - 1| = \frac{1}{2} \Leftrightarrow e^x 
 Έτσι, παίρνουμε $e^{-10\lambda} = \dfrac{1}{2} = 2^{-1} \Leftrightarrow \left(e^{-\lambda}\right)^{10} = 2^{-1} \Leftrightarrow e^{-\lambda} = \sqrt[10]{2^{-1}} = 2^{-\frac{1}{10}}$. \\
 Ώστε $I = I_0 \cdot e^{-\lambda h} = I_0 \cdot \left(e^{-\lambda}\right)^h = I_0 \cdot \left(2^{-\frac{1}{10}}\right)^h = I_0 \cdot 2^{-\frac{h}{10}}$.
 \end{alist}
+% --- Λύση 18437 (18437.tex) ---
 \lysh{18437}{4}
 \begin{alist}
 \item Το ύψος $(OK)$ είναι η τεταγμένη του σημείου στο οποίο τέμνει τον άξονα $y'y$ η γραφική παράσταση της συνάρτησης, δηλαδή ο αριθμός:
@@ -12071,6 +12381,7 @@ f(x) = \frac{1}{2} &\Leftrightarrow |e^x - 1| = \frac{1}{2} \Leftrightarrow e^x 
 Έτσι, $x = 96 m$, οπότε $A(96, 0)$.
 \item Το σημείο $B$ θα έχει τετμημένη $-96$, άρα θα είναι $(AB) = 96\cdot 2 = 192 m = (OK)$.
 \end{alist}
+% --- Λύση 18693 (18693.tex) ---
 \lysh{18693}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ με $f(x) = \left(\dfrac{2-\lambda}{4}\right)^x$ είναι εκθετική και ορίζεται στο $\mathbb{R}$ όταν η βάση είναι θετική και διάφορη της μονάδας. Δηλαδή, (i) $\dfrac{2-\lambda}{4} > 0$ ή ισοδύναμα $\lambda < 2$ και (ii) $\dfrac{2-\lambda}{4} \neq 1$ ή ισοδύναμα $\lambda \neq -2$. Άρα, $\lambda \in (-\infty, -2) \cup (-2, 2)$.
@@ -12110,6 +12421,7 @@ $y$ & $2$ & $1$ & $\dfrac{1}{2}$ \\
 Άρα, $\dfrac{3}{2}\left(\dfrac{1}{2}\right)^x = 6 \Leftrightarrow \left(\dfrac{1}{2}\right)^x = 4 \Leftrightarrow 2^{-x} = 2^2$ συνεπώς $x = -2$.
 \end{rlist}
 \end{alist}
+% --- Λύση 18696 (18696.tex) ---
 \lysh{18696}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για κάθε $x \in \mathbb{R}$. Τα διαστήματα μονοτονίας της συνάρτησης $f$ έχουν ως εξής:
@@ -12139,6 +12451,7 @@ $y$ & $2$ & $1$ & $\dfrac{1}{2}$ \\
 Από το σχήμα παρατηρούμε πως οι γραφικές παραστάσεις τέμνονται στα σημεία $(-4, -20)$, $(0, -4)$ και $(1, 0)$ δηλαδή στα σημεία με τετμημένες $-4, 0$ και $1$.
 Άρα, η εξίσωση έχει λύσεις τους αριθμούς $-4, 0$ και $1$.
 \end{alist}
+% --- Λύση 18713 (18713.tex) ---
 \lysh{18713}{4}
 \begin{alist}
 \item Από τα δεδομένα έχουμε:
@@ -12169,6 +12482,7 @@ P(\syn  x) &= 0.
 Οπότε από το βii) ερώτημα έχουμε $\syn  x = \dfrac{1}{2}$ και επειδή $x \in (0, 2\pi)$,
 \[x = \frac{\pi}{3}, \quad x = 2\pi - \frac{\pi}{3} = \frac{5\pi}{3}.\]
 \end{alist}
+% --- Λύση 18863 (18863.tex) ---
 \lysh{18863}{4}
 \begin{alist}
 \item Έχουμε  
@@ -12187,6 +12501,7 @@ P(\syn  x) &= 0.
 Επομένως οι γραφικές παραστάσεις των συναρτήσεων, στο ίδιο σύστημα συντεταγμένων, είναι οι ακόλουθες:
 \end{rlist}
 \end{alist}
+% --- Λύση 18865 (18865.tex) ---
 \lysh{18865}{4}
 \begin{alist}
 \item Αφού το πεδίο ορισμού της συνάρτησης $f$ είναι το σύνολο όλων των πραγματικών αριθμών, για τους οποίους το $f(x)$ έχει νόημα, είναι:
@@ -12225,6 +12540,7 @@ P(\syn  x) &= 0.
 \end{center}
 \item Υπάρχουν δύο περιπτώσεις, όπως φαίνεται στο παρακάτω σχήμα:
 \end{alist}
+% --- Λύση 20642 (20642.tex) ---
 \lysh{20642}{4}
 \begin{alist}
 \item Η $f$ είναι περιττή και $f(-1) = 2$. Αλλά, $f(-1) = -f(1)$ δηλαδή $f(1) = -f(-1)$, οπότε έχουμε $f(1) = -2$. \\
@@ -12267,6 +12583,7 @@ h(x) &= f(x+2) + 1 = -2(x+2)^3 + 1 \\
 &= -2x^3 - 12x^2 - 24x - 15
 \end{align*}
 \end{alist}
+% --- Λύση 20645 (20645.tex) ---
 \lysh{20645}{4}
 \begin{alist}
 \item Από την ισότητα $f(x) = g\left(x - \dfrac{\pi}{4}\right)$ συμπεραίνουμε ότι η γραφική παράσταση της $f$ προκύπτει από τη γραφική παράσταση της $g$, αν την μετατοπίσουμε κατά $\dfrac{\pi}{4}$ μονάδες προς τα δεξιά.
@@ -12302,6 +12619,7 @@ h(x) &= f(x+2) + 1 = -2(x+2)^3 + 1 \\
 &\Leftrightarrow \begin{cases} x - \dfrac{\pi}{4} = 2\kappa\pi + \dfrac{3\pi}{4} \\ \text{ή} \\ x - \dfrac{\pi}{4} = 2\kappa\pi - \dfrac{3\pi}{4} \end{cases} \Leftrightarrow \begin{cases} x = 2\kappa\pi + \pi \\ \text{ή} \qquad \mu\varepsilon\ \kappa \in \mathbb{Z} \\ x = 2\kappa\pi - \dfrac{\pi}{2} \end{cases}
 \end{align*}
 \end{alist}
+% --- Λύση 20647 (20647.tex) ---
 \lysh{20647}{4}
 \begin{alist}
 \item Αν υποθέσουμε ότι το πολυώνυμο έχει ακέραιους συντελεστές, τότε κάθε ακέραια ρίζα του θα είναι διαιρέτης του σταθερού όρου του. Ο σταθερός όρος του όμως είναι ίσος με 3 και ο αριθμός 2 που είναι ρίζα του πολυωνύμου δεν είναι διαιρέτης του 3. Άρα το πολυώνυμο δεν έχει όλους τους συντελεστές του ακέραιους, οπότε υπάρχει ένας τουλάχιστον συντελεστής του που δεν είναι ακέραιος.
@@ -12334,6 +12652,7 @@ $P(x)$ & $+$ \hspace{0.5cm} $0$ \hspace{0.5cm} $-$ & $0$ \hspace{0.5cm} $+$ & $0
 \end{tabular}
 \end{center}
 \end{alist}
+% --- Λύση 20657 (20657.tex) ---
 \lysh{20657}{4}
 \begin{alist}
 \item Με βάση τα δεδομένα του προβλήματος έχουμε
@@ -12350,6 +12669,7 @@ $P(x)$ & $+$ \hspace{0.5cm} $0$ \hspace{0.5cm} $-$ & $0$ \hspace{0.5cm} $+$ & $0
 &= 30 + 70 \cdot 0,001156 = 30 + 0,08092 \cong 30,08^\circ\text{C}.
 \end{align*}
 \end{alist}
+% --- Λύση 20669 (20669.tex) ---
 \lysh{20669}{4}
 \begin{alist}
 \item 
@@ -12386,6 +12706,7 @@ g(-x) + g(x) &= \ln\left(\sqrt{x^2+1}-x\right) + \ln\left(\sqrt{(-x)^2+1}-(-x)\r
 \item Για κάθε $x \in \mathbb{R}$ είναι:
 \end{rlist}
 \end{alist}
+% --- Λύση 20689 (20689.tex) ---
 \lysh{20689}{4}
 \begin{alist}
 \item Η ανίσωση ορίζεται για κάθε $x \in \mathbb{R}$ με $x \ne -1$. \\
@@ -12410,6 +12731,7 @@ g(-x) + g(x) &= \ln\left(\sqrt{x^2+1}-x\right) + \ln\left(\sqrt{(-x)^2+1}-(-x)\r
 \end{itemize}
 \end{rlist}
 \end{alist}
+% --- Λύση 20712 (20712.tex) ---
 \lysh{20712}{4}
 \begin{alist}
 \item Γραφικά η υψομετρική διαφορά ανάμεσα στην υψηλότερη πλημμυρίδα και τη χαμηλότερη άμπωτη, εκφράζεται με τη διαφορά του ελαχίστου $-3$ της συνάρτησης $f$, από το μέγιστό της $3$. Συνεπώς η ζητούμενη υψομετρική διαφορά είναι $6$ μέτρα.
@@ -12424,6 +12746,7 @@ f(t) = \frac{3}{2} &\Leftrightarrow 3 \cdot \hm \left(\frac{\pi}{6} \cdot t\righ
 Επειδή $0 \le t \le 24$, έχουμε τελικά ότι οι ζητούμενες ώρες είναι $1, 5, 13, 17$. \\
 Σχόλιο: Αυτό επιβεβαιώνεται και γραφικά από τις τετμημένες των σημείων τομής της γραφικής παράστασης της $f$, με την ευθεία $y = \dfrac{3}{2}$.
 \end{alist}
+% --- Λύση 20713 (20713.tex) ---
 \lysh{20713}{4}
 \begin{alist}
 \item Αφού $\text{Z}\Gamma = x$ και $\text{B}\Gamma = 2$ έχουμε ότι $\text{BZ} = 2 - x$. Από το Πυθαγόρειο θεώρημα στο $\text{EBZ}$ έχουμε: $\text{EZ}^2 = \text{BZ}^2 + \text{EB}^2 = (2-x)^2 + x^2$ οπότε $\text{EZ} = \sqrt{(2-x)^2+x^2}$. Τέλος αφού το τμήμα $\text{Z}\Gamma = x$ είναι μέρος της πλευράς $\text{B}\Gamma = 2$, έχουμε ότι $0 < x < 2$.
@@ -12439,6 +12762,7 @@ f(t) = \frac{3}{2} &\Leftrightarrow 3 \cdot \hm \left(\frac{\pi}{6} \cdot t\righ
 οπότε η ζητούμενη συνάρτηση είναι $E(x) = 2(x-1)^2 + 2$ με πεδίο ορισμού το $(0, 2)$ αφού όπως δείξαμε παραπάνω είναι $0 < x < 2$.
 \item Η γραφική παράσταση της $E(x)$ θα προκύψει από τη γραφική παράσταση της $g(x) = 2x^2$, με μια οριζόντια μετατόπιση $1$ μονάδα δεξιά και στη συνέχεια με μία κατακόρυφη μετατόπιση $2$ μονάδων προς τα πάνω. Η γραφική παράσταση της $E(x)$ στο $(0, 2)$ φαίνεται στο παρακάτω σχήμα.
 \end{alist}
+% --- Λύση 20715 (20715.tex) ---
 \lysh{20715}{4}
 \begin{alist}
 \item Η περίμετρος του ορθογωνίου, ισούται αφενός με $2x+2y$ και αφετέρου με $20\text{ m}$ που είναι το μήκος του συρματοπλέγματος με το οποίο κατασκευάστηκε. Συνεπώς είναι $2x+2y = 20 \Leftrightarrow x+y = 10 \Leftrightarrow y = 10-x$. Επίσης πρέπει $x>0$ και $y>0 \Leftrightarrow 10-x>0 \Leftrightarrow x<10$ ως μήκη πλευρών, οπότε συναληθεύοντας έχουμε τελικά ότι $0<x<10$.
@@ -12472,6 +12796,7 @@ E(x) &= 10x - x^2 = \\
 \end{center}
 Από τη γραφική παράσταση συμπεραίνουμε ότι το εμβαδόν του ορθογωνίου γίνεται μέγιστο όταν $x = 5$. Μάλιστα η μέγιστη τιμή του είναι $25\text{ m}^2$.
 \end{alist}
+% --- Λύση 20731 (20731.tex) ---
 \lysh{20731}{4}
 \begin{alist}
 \item Το $x-1$ είναι παράγοντας του πολυωνύμου $P(x)$, διότι το $1$ είναι ρίζα του πολυωνύμου, αφού $\text{P}(1) = 1 + 6 \cdot 1 - 7 = 0$.
@@ -12489,6 +12814,7 @@ P(x) &= x^4 + 6x^2 - 7 = x^4 + 7x^2 - x^2 - 7 = x^2(x^2 + 7) - (x^2 + 7) = \\
 Επομένως, $x = 2\kappa\pi$ ή $2\kappa\pi + \pi$ ή $2\kappa\pi + \dfrac{\pi}{2}$ με $\kappa \in \mathbb{Z}$.
 \end{rlist}
 \end{alist}
+% --- Λύση 20747 (20747.tex) ---
 \lysh{20747}{4}
 \begin{alist}
 \item 
@@ -12507,6 +12833,7 @@ $\ef \omega = \dfrac{\hm \omega}{\syn \omega} = \dfrac{\dfrac{1}{2}}{\dfrac{\sqr
 Επομένως οι γραφικές τους παραστάσεις δεν έχουν κανένα κοινό σημείο όπως φαίνεται και στο παρακάτω σχήμα.
 \end{rlist}
 \end{alist}
+% --- Λύση 20752 (20752.tex) ---
 \lysh{20752}{4}
 \begin{alist}
 \item Επειδή για το σημείο $M$ του τριγωνομετρικού κύκλου οι συντεταγμένες του είναι $M(\syn \omega, \hm \omega)$ για την αντίστοιχη γωνία $\omega$ που έχει τελική πλευρά OM, είναι φανερό ότι έχει άδικο ο Φίλιππος καθώς δεν υπάρχει γωνία $\omega$ με $\hm \omega = 1$ και $\syn \omega = 1$ καθώς τότε θα είχαμε $\hm ^2\omega + \syn ^2\omega = 1^2 + 1^2 = 1+1 = 2$, που είναι αδύνατο καθώς γνωρίζουμε ότι για κάθε γωνία $\omega$, ισχύει $\hm ^2\omega + \syn ^2\omega = 1$.
@@ -12526,6 +12853,7 @@ $\ef \omega = \dfrac{\hm \omega}{\syn \omega} = \dfrac{\dfrac{1}{2}}{\dfrac{\sqr
 \item Για τις τιμές που βρήκαμε στο προηγούμενο ερώτημα η συνάρτηση $f$ γίνεται $f(x) = 5\cdot 0,8x^3 - 10\cdot 0,6x^2 + 5x - 3 = 4x^3 - 6x^2 + 5x - 3$. Ζητάμε τις λύσεις της ανίσωσης $f(x) < 0 \Leftrightarrow 4x^3 - 6x^2 + 5x - 3 < 0$. Με τη βοήθεια του σχήματος Horner βρίσκουμε ότι $4x^3 - 6x^2 + 5x - 3 = (x-1)(4x^2 - 2x + 3)$. \\
 Επομένως, λύνουμε την ανίσωση $(x-1)(4x^2 - 2x + 3) < 0 \Leftrightarrow x-1 < 0 \Leftrightarrow x < 1$, αφού $4x^2 - 2x + 3 > 0$ για κάθε πραγματικό αριθμό $x$ καθώς εύκολα αποδεικνύεται ότι η διακρίνουσά του είναι αρνητική και δεν έχει ρίζες. Επομένως η γραφική παράσταση της συνάρτησης $f$ βρίσκεται κάτω από τον άξονα $x'x$ όταν $x<1$, δηλαδή στο διάστημα $(-\infty, 1)$.
 \end{alist}
+% --- Λύση 20759 (20759.tex) ---
 \lysh{20759}{4}
 \begin{alist}
 \item Από τα δεδομένα έχουμε ότι $(OAM) = \dfrac{4}{6} \Leftrightarrow \dfrac{(OA)\cdot(AM)}{2} = \dfrac{1\cdot(AM)}{2} = \dfrac{4}{6} \Leftrightarrow (AM) = \dfrac{4}{3}$ \\
@@ -12539,6 +12867,7 @@ $\ef \omega = \dfrac{\hm \omega}{\syn \omega} = \dfrac{\dfrac{1}{2}}{\dfrac{\sqr
 \[\hm  x = 1 \Leftrightarrow \hm  x = \hm \frac{\pi}{2} \Leftrightarrow x = 2\kappa\pi + \frac{\pi}{2}, \quad \kappa \in \mathbb{Z}\]
 Επομένως τα ζητούμενα σημεία τομής είναι όλα τα σημεία της μορφής $\left(2\kappa\pi + \dfrac{\pi}{2}, 0\right), \, \kappa \in \mathbb{Z}$
 \end{alist}
+% --- Λύση 20845 (20845.tex) ---
 \lysh{20845}{4}
 \begin{alist}
 \item Είναι:
@@ -12570,6 +12899,7 @@ e^x = 2 &\Leftrightarrow e^x = e^{\ln 2} \Leftrightarrow x = \ln 2,
 Από την ισοδυναμία $e^{2x} > 2e^x \Leftrightarrow x > \ln 2$, προκύπτει ότι η καμπύλη $C_1$ είναι η γραφική παράσταση της συνάρτησης $k(x) = e^{2x}$, ενώ η $C_2$ απεικονίζει γραφικά τη συνάρτηση $\varphi(x) = 2e^x$.
 \end{rlist}
 \end{alist}
+% --- Λύση 20847 (20847.tex) ---
 \lysh{20847}{4}
 \begin{alist}
 \item Από τον πίνακα φαίνεται ότι $D = 10$. Άρα έχουμε:
@@ -12585,6 +12915,7 @@ D' &= 10 \cdot \log(10^{12} \cdot 2I) = 10 \cdot [\log(2 \cdot 10^{12} \cdot I)]
 \end{align*}
 Επομένως, η ένταση του ήχου θα αυξηθεί κατά $3$ ντεσιμπέλ.
 \end{alist}
+% --- Λύση 20854 (20854.tex) ---
 \lysh{20854}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ είναι άρτια, διότι: \\
@@ -12622,6 +12953,7 @@ D' &= 10 \cdot \log(10^{12} \cdot 2I) = 10 \cdot [\log(2 \cdot 10^{12} \cdot I)]
 \end{tikzpicture}
 \end{center}
 \end{alist}
+% --- Λύση 20857 (20857.tex) ---
 \lysh{20857}{4}
 \begin{alist}
 \item Το πολυώνυμο έχει παράγοντα το $x - 3$ αν και μόνο αν $P(3) = 0$. \\
@@ -12647,6 +12979,7 @@ x &\in (-\infty, 1) \cup (1, 3).
 \[P(\lambda) < 0 \overset{\gamma)}{\Longleftrightarrow} \begin{cases} \lambda < 3 \\ \lambda \ne 1 \end{cases} \Leftrightarrow \begin{cases} \ln\kappa < 3 \\ \ln\kappa \ne 1 \end{cases} \Leftrightarrow \begin{cases} \ln\kappa < \ln e^3 \\ \ln\kappa \ne \ln e \end{cases} \overset{\ln x \uparrow}{\Longleftrightarrow} \begin{cases} \kappa < e^3 \\ \kappa \ne e \end{cases}.\]
 Επομένως, είναι: $\kappa \in (0, e) \cup (e, e^3)$.
 \end{alist}
+% --- Λύση 20859 (20859.tex) ---
 \lysh{20859}{4}
 \begin{alist}
 \item Έστω $x^3 - 4x^2 + x + 6 = 0$. Η εξίσωση έχει πιθανές ακέραιες ρίζες τις $\pm 1, \pm 2, \pm 3, \pm 6$. \\
@@ -12671,6 +13004,7 @@ $1 \in A, \, -2 \in A, \, -3 \in A$ αλλά το $-1$, το $2$ και το $3$
 \item Η γραφική παράσταση της $f$ προκύπτει από μία οριζόντια μετατόπιση της γραφικής παράστασης της συνάρτησης $g(x) = \dfrac{1}{x}$ κατά $2$ μονάδες δεξιά.
 \end{rlist}
 \end{alist}
+% --- Λύση 20870 (20870.tex) ---
 \lysh{20870}{4}
 \begin{alist}
 \item Το διάστημα ανάμεσα στο πρώτο μέγιστο βάθος και στο πρώτο ελάχιστο βάθος είναι $6$ ώρες, που είναι η μισή περίοδος. Κατά συνέπεια η περίοδος είναι $T = 2 \cdot 6 = 12$ ώρες και
@@ -12715,6 +13049,7 @@ $1 \in A, \, -2 \in A, \, -3 \in A$ αλλά το $-1$, το $2$ και το $3$
 \[y = 1,6 \cdot \hm \left(\frac{\pi}{6}\cdot 12\right) + 4,2 = 1,6 \cdot \hm (2\pi) + 4,2 = 1,6 \cdot 0 + 4,2 = 4,2.\]
 \end{rlist}
 \end{alist}
+% --- Λύση 20943 (20943.tex) ---
 \lysh{20943}{4}
 \begin{alist}
 \item Έχουμε: $\hm (\pi - x) = \hm  x$, $\hm (\pi + x) = -\hm  x$, $\syn (-x) = \syn  x$, επομένως:
@@ -12737,6 +13072,7 @@ B &= \frac{\hm  x}{1 + \syn  x} + \frac{1 + \syn  x}{\hm  x} = \frac{\hm ^2 x + 
 Η $\omega = 1$ απορρίπτεται λόγω του περιορισμού ενώ η εξίσωση $\omega^2 + \omega + 2 = 0$ έχει διακρίνουσα $\Delta = -7$, οπότε είναι αδύνατη. \\
 Επομένως, δεν υπάρχουν τιμές του $x$ τέτοιες, ώστε $A = B$.
 \end{alist}
+% --- Λύση 21155 (21155.tex) ---
 \lysh{21155}{4}
 \begin{alist}
 \item Έχουμε $P(x) = x^3 + 2x^2 + x + 2 = x^2(x + 2) + (x + 2) = (x + 2)(x^2 + 1)$. \\
@@ -12751,6 +13087,7 @@ $P(0) \cdot P(-1) < 0$, σύμφωνα με το Θεώρημα σελ. $145$ τ
 Αν ο μαθητής Β επιλέξει έναν αριθμό στη θέση του $b$, τότε αρκεί ο μαθητής Α να επιλέξει έναν μικρότερο αυτού στη θέση του $\alpha$.
 \item Αν ένα πολυώνυμο με ακέραιους συντελεστές έχει ακέραια ρίζα, τότε αυτή θα είναι διαιρέτης του σταθερού όρου. Αλλά στο $P(x)$ ο σταθερός όρος είναι το $2022$ το οποίο όμως δεν είναι πολλαπλάσιο του $13$, αφού $\dfrac{2022}{13} = 155 + \dfrac{7}{13}$. Έτσι, αποκλείεται το $13$ να είναι ρίζα του πολυωνύμου $P(x)$.
 \end{alist}
+% --- Λύση 21240 (21240.tex) ---
 \lysh{21240}{4}
 \begin{alist}
 \item Από το θεώρημα ακέραιων ριζών πιθανές ακέραιες ρίζες είναι οι αριθμοί $\pm 1, \pm 2$. Με δοκιμή βρίσκουμε $P(1) = 0$, άρα το $1$ είναι ρίζα του πολυωνύμου. Με το σχήμα Horner θα παραγοντοποιήσουμε το πολυώνυμο ώστε να βρούμε τις υπόλοιπες ρίζες.
@@ -12780,6 +13117,7 @@ colorV = maincolor!40]%
 Η $(1)$ είναι αδύνατη, αφού $\dfrac{5}{x^2+1} > 0$. \\
 Η $(2)$ γίνεται: $1 < \dfrac{5}{x^2+1} \Leftrightarrow x^2+1 < 5 \Leftrightarrow x^2 < 4 \Leftrightarrow |x| < 2 \Leftrightarrow -2 < x < 2$.
 \end{alist}
+% --- Λύση 21244 (21244.tex) ---
 \lysh{21244}{4}
 \begin{alist}
 \item Η συνάρτηση $f(x) = \rho \cdot \syn \omega x$, με $\rho, \omega > 0$: \\
@@ -12822,6 +13160,7 @@ f(x) = 2A &\Leftrightarrow 2\syn  4x = -2 \Leftrightarrow \syn  4x = -1 \Leftrig
 \end{minipage}
 \end{center}
 \end{alist}
+% --- Λύση 21444 (21444.tex) ---
 \lysh{21444}{4}
 \begin{alist}
 \item Οι λύσεις τις εξίσωσης $f(x) = g(x)$ είναι οι τετμημένες των κοινών σημείων των γραφικών παραστάσεων των συναρτήσεων $f$ και $g$. Έχουμε:
@@ -12848,6 +13187,7 @@ f(x) > g(x) &\Leftrightarrow \\
 \end{align*}
 που ισχύει για κάθε για κάθε πραγματικό αριθμό $y \neq \dfrac{1}{2}$, δηλαδή για κάθε πραγματικό αριθμό $x$ για τον οποίο ισχύει: $2^x \neq \dfrac{1}{2} \Leftrightarrow 2^x \neq 2^{-1} \Leftrightarrow x \neq -1$.
 \end{alist}
+% --- Λύση 21445 (21445.tex) ---
 \lysh{21445}{4}
 \begin{alist}
 \item Πρέπει
@@ -12884,6 +13224,7 @@ f(x) &> \log 3 - \log 7 \Leftrightarrow \\
 Άρα η ανίσωση $(1)$ αληθεύει για $y < -\dfrac{11}{7}$ ή $y > 2$, δηλαδή $2^x < -\dfrac{11}{7}$ (που είναι αδύνατη) ή $2^x > 2 \Leftrightarrow 2^x > 2^1 \Leftrightarrow x > 1$. \\
 Πρέπει και $x > 0$, οπότε τελικά αληθεύει για $x > 1$.
 \end{alist}
+% --- Λύση 21446 (21446.tex) ---
 \lysh{21446}{4}
 \begin{alist}
 \item Η συνάρτηση ορίζεται για τους πραγματικούς αριθμούς $x$ για τους οποίους ισχύει $e^x - 2 > 0$. \\
@@ -12913,6 +13254,7 @@ y^2 - 2y - 8 &\ge 0 \quad (1).
 Από το β) ερώτημα γνωρίζουμε ότι το τριώνυμο $y^2 - 2y - 8$ έχει ρίζες $y = 4$ και $y = -2$. Άρα η ανίσωση $(1)$ αληθεύει για $y \le -2$ ή $y \ge 4$, δηλαδή $e^x \le -2$ (που είναι αδύνατη) ή $e^x \ge 4 \Leftrightarrow \ln e^x \ge \ln 4 \Leftrightarrow x \ge \ln 4$. \\
 Πρέπει και $x > \ln 2$, οπότε τελικά η ανίσωση $f(x) + x \ge 3\ln 2$ αληθεύει για $x \ge \ln 4$.
 \end{alist}
+% --- Λύση 21447 (21447.tex) ---
 \lysh{21447}{4}
 \begin{alist}
 \item Ο αριθμός των βακτηρίων όταν ξεκίνησε το πείραμα ήταν $P(0) = 200\cdot e^{c\cdot 0} = 200$ βακτήρια.
@@ -12932,6 +13274,7 @@ y^2 - 2y - 8 &\ge 0 \quad (1).
 \end{align*}
 Άρα το ζητούμενο χρονικό διάστημα (σε ώρες) είναι $4{,}6 < t < 9{,}2$.
 \end{alist}
+% --- Λύση 21448 (21448.tex) ---
 \lysh{21448}{4}
 \begin{alist}
 \item Στο πλαίσιο του προβλήματος η σταθερά $q_0$ παριστάνει τη δόση του φαρμάκου που πήρε ο ασθενής (την ποσότητα του φαρμάκου στον οργανισμό τη χρονική στιγμή $t = 0$). \\
@@ -12968,6 +13311,7 @@ $f(t)$ & $400$ & $200$ & $100$ & $50$ & $25$ & $12{,}5$ & $6{,}25$ \\
 \end{center}
 \end{rlist}
 \end{alist}
+% --- Λύση 21470 (21470.tex) ---
 \lysh{21470}{4}
 \begin{alist}
 \item Γνωρίζουμε ότι μετά από δύο χρόνια έχει απομείνει το $\dfrac{1}{3}$ της αρχικής ποσότητας, δηλαδή:
@@ -12991,6 +13335,7 @@ Q(t) &= \frac{1}{81} \Leftrightarrow \\
 \end{align*}
 Συνεπώς μετά από $12$ χρόνια η ποσότητα που θα έχει απομείνει θα είναι $\dfrac{1}{81}$ κιλά.
 \end{alist}
+% --- Λύση 21471 (21471.tex) ---
 \lysh{21471}{4}
 \begin{alist}
 \item Η γραφική παράσταση της συνάρτησης $f$ διέρχεται από τα σημεία $\text{A}(1,3)$ και $\text{B}(2,13)$, οπότε:
@@ -13015,6 +13360,7 @@ y^2 - 5y + 4 &< 0 \quad (1).
 \[1 < 2^x < 4 \Leftrightarrow 2^0 < 2^x < 2^2 \Leftrightarrow 0 < x < 2.\]
 Τελικά η ανίσωση $f(x) > 4^x - 3$ αληθεύει για $x \in (0,2)$.
 \end{alist}
+% --- Λύση 21474 (21474.tex) ---
 \lysh{21474}{4}
 \begin{alist}
 \item Η ποσότητα του υγρού στο δοχείο στο τέλος της $1^{\eta\varsigma}$ εβδομάδας είναι:
@@ -13035,6 +13381,7 @@ t &> \frac{0{,}3}{0{,}07} \Leftrightarrow t > \frac{30}{7} \Leftrightarrow t > 4
 \end{align*}
 Άρα μετά από $4\dfrac{2}{7}$ εβδομάδες ($4$ εβδομάδες και $2$ ημέρες) ο όγκος του υγρού που υπάρχει στο δοχείο είναι μικρότερος από το μισό της αρχικής του τιμής.
 \end{alist}
+% --- Λύση 21674 (21674.tex) ---
 \lysh{21674}{4}
 \begin{alist}
 \item Η συνάρτηση $f$ ορίζεται για εκείνα μόνο τα $x$ για τα οποία ισχύει $10^x - 2 > 0 \Leftrightarrow 10^x > 2 \Leftrightarrow x > \log 2$. Άρα το πεδίο ορισμού της συνάρτησης $f$ είναι το $A = (\log 2, +\infty)$.
@@ -13057,6 +13404,7 @@ t &> \frac{0{,}3}{0{,}07} \Leftrightarrow t > \frac{30}{7} \Leftrightarrow t > 4
 Ώστε οι γραφικές παραστάσεις των συναρτήσεων $f$ και $g$ έχουν ένα κοινό σημείο, το $(\log 3, 0)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 21677 (21677.tex) ---
 \lysh{21677}{4}
 \begin{alist}
 \item Με $Q=40$, $c=-0{,}7$, ο τύπος που δόθηκε γράφεται $P(t) = 40 + 60e^{-0{,}7t}$, οπότε με $t=0$ παίρνουμε
@@ -13096,6 +13444,7 @@ P(t) &= 50 \Leftrightarrow \\
 \end{center}
 \item Η γραφική παράσταση της δοσμένης συνάρτησης προκύπτει αν μετακινήσουμε προς τα πάνω $40$ μονάδες τη γραφική παράσταση της $f(t) = 60e^{-0{,}7t}$ που είναι ολόκληρη πάνω από
 \end{alist}
+% --- Λύση 21678 (21678.tex) ---
 \lysh{21678}{4}
 \begin{alist}
 \item Είναι:
@@ -13122,6 +13471,7 @@ e^{-\frac{\ln 2}{5730}t} &= \frac{1}{4} \Leftrightarrow \\
 \end{align*}
 οπότε το οστό εκτιμάται ότι είναι ηλικίας $11.460$ χρόνων.
 \end{alist}
+% --- Λύση 21679 (21679.tex) ---
 \lysh{21679}{4}
 \begin{alist}
 \item Είναι:
@@ -13142,6 +13492,7 @@ e^{-10\kappa} &= 0{,}75 \Leftrightarrow \\
 \item Η γραφική παράσταση της συνάρτησης $T(t) = 25 + 48e^{-0{,}3t}$, όπως φαίνεται και στο δοσμένο σχήμα είναι γνησίως φθίνουσα και από το ερώτημα γ) ισχύει $T(40) = 39{,}4$, οπότε αν $T(t_0) = 40$, τότε $T(t_0) > T(40)$ και λόγω της μονοτονίας της συνάρτησης παίρνουμε $t_0 < 40$. \\
 Επομένως, πριν περάσουν $40$ λεπτά, η θερμοκρασία του ροφήματος έχει ήδη πέσει κάτω από τους $40 ^\circ\text{C}$ και ο καταναλωτής του ροφήματος έχει την αίσθηση ότι το ρόφημα δεν είναι πλέον ζεστό.
 \end{alist}
+% --- Λύση 21680 (21680.tex) ---
 \lysh{21680}{4}
 \begin{alist}
 \item Από τον τύπο της συνάρτησης σε συνδυασμό με τις ιδιότητες των λογαρίθμων, έχουμε:
@@ -13183,6 +13534,7 @@ colorV = maincolor!40]%
 Από την τελευταία γραμμή του πίνακα συμπεραίνουμε ότι η γραφική παράσταση της $f$ είναι κάτω από την ευθεία $(\varepsilon)$ για κάθε $x \in (1, e^2)$.
 \end{rlist}
 \end{alist}
+% --- Λύση 21854 (21854.tex) ---
 \lysh{21854}{4}
 \begin{alist}
 \item 
@@ -13206,6 +13558,7 @@ column{1} = {maincolor,c,fg={white}}}
 \[Q(t+2) = 8 \cdot 2^{-\frac{t+2}{2}} = 8 \cdot 2^{-\frac{t}{2}-1} = 8 \cdot 2^{-\frac{t}{2}} \cdot 2^{-1} = \frac{Q(t)}{2}.\]
 Άρα, μετά από δύο ημέρες, η ποσότητα του υγρού στο δοχείο μειώνεται στο μισό. Αντίστοιχα, μετά από δύο ημέρες εξατμίζεται η μισή ποσότητα του υγρού.
 \end{alist}
+% --- Λύση 21950 (21950.tex) ---
 \lysh{21950}{4}
 \begin{alist}
 \item Το τριώνυμο $\omega^2 + 4\omega - 12$ έχει ρίζες τις $\omega = 2$ και $\omega = -6$. Για $\omega \neq 2$ και $\omega \neq -6$ έχουμε ισοδύναμα
@@ -13231,6 +13584,7 @@ e^{2x}(e^x - 1) - 4(e^x - 1) &= 0 \Leftrightarrow \\
 \end{align*}
 Συνεπώς θα πρέπει $e^x - 1 = 0 \Leftrightarrow e^x = 1 \Leftrightarrow x = 0$ που είναι δεκτή ή $e^x - 2 = 0 \Leftrightarrow e^x = 2 \Leftrightarrow x = \ln 2$ που απορρίπτεται ή $e^x + 2 = 0 \Leftrightarrow e^x = -2$ που είναι αδύνατη.
 \end{alist}
+% --- Λύση 22013 (22013.tex) ---
 \lysh{22013}{4}
 \begin{alist}
 \item Η ποσότητα $x^4 + 1$ είναι αυστηρά θετική, μάλιστα $x^4 + 1 \ge 0 + 1 = 1$ για κάθε $x \in \mathbb{R}$. \\
@@ -13249,6 +13603,7 @@ x^4 + 1 = x^4 + (\alpha + \beta)x^3 + (\alpha\beta + 2)x^2 + (\alpha + \beta)x +
 \[x^4 + 1 = (x^2 + \sqrt{2}x + 1) \cdot (x^2 - \sqrt{2}x + 1),\]
 αλλά δεν έχει πραγματικές ρίζες.
 \end{alist}
+% --- Λύση 25463 (25463.tex) ---
 \lysh{25463}{4}
 \begin{alist}
 \item $\text{A}(0, 2) \in C_f \Rightarrow f(0) = 2 \Rightarrow \beta = 2$ και \\
@@ -13263,6 +13618,7 @@ $f(x) = 5 \Leftrightarrow 2\sqrt{\ln(x + 1)} + \ln(x + 1) + 2 = 5 \Leftrightarro
 Για $\omega = \omega_1$, έχουμε \\
 $(2) \Leftrightarrow \sqrt{\ln(x + 1)} = 1 \Leftrightarrow \ln(x + 1) = 1 \Leftrightarrow x + 1 = e \Leftrightarrow x = e - 1$.
 \end{alist}
+% --- Λύση 32677 (32677.tex) ---
 \lysh{32677}{4}
 \begin{alist}
 \item Ο τύπος της συνάρτησης $f$ διαδοχικά γράφεται:
@@ -13304,6 +13660,7 @@ f(x) &= -x^2 + 2x + 1 = \\
 Από τη γραφική παράσταση προκύπτει ότι για $\kappa < 2$, υπάρχουν δύο σημεία τομής. Άρα, η εξίσωση έχει δύο ρίζες.
 \end{rlist}
 \end{alist}
+% --- Λύση 37475 (37475.tex) ---
 \lysh{37475}{4}
 \begin{alist}
 \item Είναι $P(1) = 2 \cdot 1^3 - 1^2 - 2 \cdot 1 + 1 = 2 - 1 - 2 + 1 = 0$ που σημαίνει ότι το $P(x)$ έχει παράγοντα το $x - 1$. Το σχήμα Horner για τη διαίρεση $P(x) : (x - 1)$ φαίνεται παρακάτω:
@@ -13329,6 +13686,7 @@ colorV = maincolor!40]%
 \[\syn  0 > \syn \theta > \syn \frac{\pi}{3} \Rightarrow 1 > \syn \theta > \frac{1}{2}.\]
 \item Αφού $P(x) < 0$ για κάθε $x \in (-\infty, -1) \cup \left(\dfrac{1}{2}, 1\right)$ και $\dfrac{1}{2} < \syn \theta < 1$ συμπεραίνουμε ότι $P(\syn \theta) < 0$.
 \end{alist}
+% --- Λύση 37476 (37476.tex) ---
 \lysh{37476}{4}
 \begin{alist}
 \item Είναι $P(1) = 1^3 - 2 \cdot 1^2 - 1 + 2 = 1 - 2 - 1 + 2 = 0$ που σημαίνει ότι το $P(x)$ έχει παράγοντα το $x - 1$. Το σχήμα Horner για τη διαίρεση $P(x) : (x - 1)$ φαίνεται παρακάτω:

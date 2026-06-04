@@ -1,0 +1,206 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[LGR, T1]{fontenc}
+\usepackage[greek,english]{babel}
+\usepackage{amsmath,nimbusserif}
+\usepackage{geometry,multicol}
+\geometry{a4paper, margin=2.5cm}
+\usepackage[amsbb]{mtpro2}
+
+\newcommand{\eng}[1]{\selectlanguage{english}#1\selectlanguage{greek}}
+
+\title{\textbf{Απειροστικός Λογισμός: Σειρές}\\ \large{Βασική Θεωρία, Κριτήρια Σύγκλισης και Βασικές Σειρές}}
+
+
+\begin{document}
+\selectlanguage{greek}
+\maketitle
+
+\section*{Εισαγωγή στη Θεωρία των Σειρών}
+
+Για να μελετήσουμε αν το άθροισμα άπειρων όρων δίνει έναν πεπερασμένο αριθμό (δηλαδή αν η σειρά \textbf{συγκλίνει}), ορίζουμε την ακολουθία των \textbf{Μερικών Αθροισμάτων} $S_n$:
+\[ S_n = a_1 + a_2 + a_3 + \dots + a_n = \displaystyle\sum_{k=1}^{n} a_k \]
+Μια σειρά λέμε ότι συγκλίνει στο άθροισμα $S$, αν και μόνο αν το όριο της ακολουθίας των μερικών της αθροισμάτων υπάρχει και είναι πραγματικός αριθμός:
+\[ \lim\limits_{n \to \infty} S_n = S \]
+Αν το όριο είναι $\pm \infty$ ή δεν υπάρχει, η σειρά \textbf{αποκλίνει}.
+
+\hrulefill
+
+\section*{Μέρος Α: Κριτήρια Σύγκλισης}
+Το σημαντικότερο βήμα στην επίλυση είναι η \textbf{σωστή διάγνωση} της μορφής του γενικού όρου $a_n$.
+
+\subsection*{1. Κριτήριο Απόκλισης ($n$-οστού όρου)}
+\textbf{Θεώρημα:} Αν $\lim\limits_{n \to \infty} a_n \neq 0$ ή δεν υπάρχει, η σειρά $\sum a_n$ αποκλίνει. Το αντίστροφο δεν ισχύει. (Αν κάνει 0, συνεχίζουμε με άλλο κριτήριο).
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Πρώτος έλεγχος. Ιδανικό για ρητές συναρτήσεις όπου ο βαθμός αριθμητή $\geq$ παρονομαστή.
+
+\vspace{0.2cm}
+\noindent \textbf{Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{3n^2}{5n^2+1}$ \\
+\textbf{Σκέψη:} $\lim\limits_{n \to \infty} \dfrac{3n^2}{5n^2+1} = \dfrac{3}{5} \neq 0$. Άρα, αποκλίνει αμέσως.
+
+\subsection*{2. Κριτήριο του Λόγου (\eng{d'Alembert})}
+\textbf{Θεώρημα:} Υπολογίζουμε $L = \lim\limits_{n \to \infty} \left| \dfrac{a_{n+1}}{a_n} \right|$. Αν $L < 1$ συγκλίνει, αν $L > 1$ αποκλίνει.
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Όταν βλέπουμε \textbf{παραγοντικά ($n!$)} ή \textbf{εκθετικές}.
+
+\vspace{0.2cm}
+\noindent \textbf{Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{2^n}{n!}$ \\
+\textbf{Σκέψη:} $\lim\limits_{n \to \infty} \left( \dfrac{2^{n+1}}{(n+1)!} \cdot \dfrac{n!}{2^n} \right) = \lim\limits_{n \to \infty} \dfrac{2}{n+1} = 0 < 1$. Άρα, συγκλίνει.
+
+\subsection*{3. Κριτήριο της Ρίζας (\eng{Cauchy})}
+\textbf{Θεώρημα:} Υπολογίζουμε $L = \lim\limits_{n \to \infty} \sqrt[n]{|a_n|}$. Αν $L < 1$ συγκλίνει, αν $L > 1$ αποκλίνει.
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Όταν \textbf{ολόκληρος} ο όρος είναι σε δύναμη $n$.
+
+\vspace{0.2cm}
+\noindent \textbf{Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \left( \dfrac{5n+1}{3n+2} \right)^n$ \\
+\textbf{Σκέψη:} $\lim\limits_{n \to \infty} \sqrt[n]{\left( \dfrac{5n+1}{3n+2} \right)^n} = \lim\limits_{n \to \infty} \dfrac{5n+1}{3n+2} = \dfrac{5}{3} > 1$. Άρα, αποκλίνει.
+
+\subsection*{4α. Απλό Κριτήριο Σύγκρισης}
+\textbf{Θεώρημα:} Έστω $\sum a_n$ και $\sum b_n$ δύο σειρές με μη αρνητικούς όρους. Αν για σχεδόν όλα τα $n$ ισχύει $0 \leq a_n \leq b_n$, τότε:
+\begin{itemize}
+    \item Αν η $\sum b_n$ συγκλίνει $\implies \sum a_n$ συγκλίνει.
+    \item Αν η $\sum a_n$ αποκλίνει $\implies \sum b_n$ αποκλίνει.
+\end{itemize}
+\textbf{Πότε χρησιμοποιείται:} Το κριτήριο αυτό είναι εξαιρετικά χρήσιμο όταν μπορούμε να «φράξουμε» τον γενικό όρο με απλούστερες σειρές (π.χ. $p$-σειρές ή γεωμετρικές).\\
+\textbf{Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2 + 5}$\\
+\textbf{Σκέψη:} Για τη σειρά $\sum \frac{1}{n^2 + 5}$, ισχύει $\frac{1}{n^2 + 5} < \frac{1}{n^2}$. Επειδή η $\displaystyle\sum_{n=1}^{\infty}  \frac{1}{n^2}$ συγκλίνει ($p$-σειρά με $p=2>1$), τότε και η $\displaystyle\sum_{n=1}^{\infty}  \frac{1}{n^2 + 5}$ συγκλίνει.
+\subsection*{4β. Κριτήριο Οριακής Σύγκρισης}
+\textbf{Θεώρημα:} Συγκρίνουμε $a_n$ με γνωστή $b_n$. Αν $\lim\limits_{n \to \infty} \dfrac{a_n}{b_n}=l\ ,\  l\in (0, \infty)$, συμπεριφέρονται όμοια.
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Σε αλγεβρικές παραστάσεις (πολυώνυμα, ρίζες) \textbf{χωρίς} παραγοντικά/εκθετικά.
+
+\vspace{0.2cm}
+\noindent \textbf{Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{3n+5}{\sqrt{n^5+1}}$ \\
+\textbf{Σκέψη:} Κρατάμε μέγιστες δυνάμεις: $b_n = \dfrac{n}{\sqrt{n^5}} = \dfrac{1}{n^{3/2}}$ (συγκλίνει, $p=1.5>1$). \\
+$\lim\limits_{n \to \infty} \dfrac{a_n}{b_n} = 3 \in (0, \infty)$. Άρα, συγκλίνει.
+
+\subsection*{5. Κριτήριο του Ολοκληρώματος}
+\textbf{Θεώρημα:} Αν $f(x)$ θετική, συνεχής, φθίνουσα, η $\sum f(n)$ συγκλίνει $\Leftrightarrow \displaystyle\displaystyle\int_{1}^{\infty} f(x) dx$ συγκλίνει.
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Όταν η συνάρτηση ολοκληρώνεται εύκολα.
+
+\vspace{0.2cm}
+\noindent \textbf{Παράδειγμα:} $\displaystyle\sum_{n=2}^{\infty} \dfrac{1}{n \ln n}$ \\
+\textbf{Σκέψη:} $\displaystyle\int_{2}^{\infty} \dfrac{1}{x \ln x} \, dx =\int_{2}^{\infty}{\frac{\frac{1}{x}}{\ln{x}}\, dx}= \lim\limits_{t \to \infty} \Big[ \ln(\ln x) \Big]_2^t = \infty$. Άρα, αποκλίνει.
+
+\subsection*{6. Κριτήριο Εναλλασσουσών (\eng{Leibniz})}
+\textbf{Θεώρημα:} Αν $a_n = (-1)^n b_n$, συγκλίνει αν η $b_n$ είναι φθίνουσα και $\lim b_n = 0$.
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Όταν υπάρχει $(-1)^n$ ή $\cos(n\pi)$.
+
+\vspace{0.2cm}
+\noindent \textbf{Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{(-1)^n}{\sqrt{n}}$ \\
+\textbf{Σκέψη:} $b_n = \dfrac{1}{\sqrt{n}}$ η οποία φθίνει και πάει στο $0$. Άρα, συγκλίνει.
+\subsection*{7. Τηλεσκοπικές Σειρές (Μέθοδος Μερικών Αθροισμάτων)}
+\textbf{Ορισμός / Μέθοδος:} Μια σειρά ονομάζεται τηλεσκοπική όταν ο γενικός της όρος μπορεί να γραφτεί ως διαφορά όρων μιας άλλης ακολουθίας, π.χ. $a_n = b_n - b_{n+1}$. Γράφοντας το $n$-οστό μερικό άθροισμα $S_n$, οι ενδιάμεσοι όροι αλληλοαναιρούνται (διαγράφονται) και μένουν μόνο οι ακραίοι. Η σύγκλιση ελέγχεται υπολογίζοντας απευθείας το $\lim\limits_{n \to \infty} S_n$.
+
+\vspace{0.2cm}
+\noindent \textbf{Πότε χρησιμοποιείται:} Όταν ο παρονομαστής είναι γινόμενο παραγόντων (π.χ. πολυώνυμο που παραγοντοποιείται). Το «κλειδί» είναι η \textbf{ανάλυση σε απλά κλάσματα} ή η χρήση ιδιοτήτων λογαρίθμων (π.χ. $\ln\left(\dfrac{n}{n+1}\right) = \ln n - \ln(n+1)$).
+
+\vspace{0.2cm}
+\noindent \textbf{Αναλυτικό Παράδειγμα:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{1}{n(n+1)}$ \\
+\textbf{Τρόπος Σκέψης:} Βλέποντας γινόμενο στον παρονομαστή, αναλύουμε σε απλά κλάσματα:
+\[ a_n = \frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1} \]
+Γράφουμε αναλυτικά το $n$-οστό μερικό άθροισμα $S_n$:
+\begin{align*}
+S_n &= a_1 + a_2 + a_3 + \dots + a_n \\
+S_n &= \left( 1 - \frac{1}{2} \right) + \left( \frac{1}{2} - \frac{1}{3} \right) + \left( \frac{1}{3} - \frac{1}{4} \right) + \dots + \left( \frac{1}{n} - \frac{1}{n+1} \right)
+\end{align*}
+Παρατηρούμε ότι όλοι οι ενδιάμεσοι όροι διαγράφονται (τηλεσκοπική ιδιότητα). Μας μένει:
+\[ S_n = 1 - \frac{1}{n+1} \]
+Τέλος, παίρνουμε το όριο του $S_n$ καθώς το $n \to \infty$:
+\[ \lim_{n \to \infty} S_n = \lim_{n \to \infty} \left( 1 - \frac{1}{n+1} \right) = 1 - 0 = 1 \]
+Άρα η σειρά συγκλίνει, και μάλιστα το άθροισμά της είναι $1$.
+\hrulefill
+
+\section*{Μέρος Β: Γνωστές Σειρές \& Η Συμπεριφορά τους}
+Αυτές είναι οι βασικές σειρές που πρέπει να γνωρίζετε απ' έξω, καθώς αποτελούν το μέτρο σύγκρισης για τις περισσότερες ασκήσεις.
+
+\begin{itemize}
+    \item \textbf{Γεωμετρική Σειρά:} $\displaystyle\sum_{n=0}^{\infty} \lambda^n$
+    \begin{itemize}
+        \item Συγκλίνει αν $|\lambda| < 1$. Το άθροισμά της είναι $S = \dfrac{1}{1-\lambda}$.
+        \item Αποκλίνει αν $|\lambda| \geq 1$.
+        \item \textit{Παράδειγμα:} Η $\displaystyle\sum \left(\frac{1}{2}\right)^n$ συγκλίνει. Η $\displaystyle\sum \left(\frac{3}{2}\right)^n$ αποκλίνει.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{$p$-Σειρά (ή Υπεραρμονική):} $\displaystyle\sum_{n=1}^{\infty} \dfrac{1}{n^p}$
+    \begin{itemize}
+        \item Συγκλίνει αν $p > 1$.
+        \item Αποκλίνει αν $p \leq 1$.
+        \item \textit{Παράδειγμα:} Η $\sum \dfrac{1}{n^2}$ συγκλίνει. Η $\sum \dfrac{1}{\sqrt{n}}$ (όπου $p=1/2$) αποκλίνει.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item \textbf{Αρμονική Σειρά:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{1}{n}$
+    \begin{itemize}
+        \item \textbf{Αποκλίνει.} Αποτελεί την πιο κλασική "παγίδα", καθώς ενώ ο γενικός όρος πάει στο $0$, το άθροισμα τείνει στο άπειρο. Είναι ειδική περίπτωση της $p$-σειράς (με $p=1$).
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item \textbf{Εναλλασσόμενη Αρμονική Σειρά:} $\displaystyle\sum_{n=1}^{\infty} \dfrac{(-1)^{n+1}}{n}$
+    \begin{itemize}
+        \item \textbf{Συγκλίνει} (βάσει του κριτηρίου \eng{Leibniz}). Αν και η απλή αρμονική αποκλίνει, η εναλλαγή προσήμων "φρενάρει" το άθροισμα, το οποίο ισούται με $\ln 2$. Λέμε ότι συγκλίνει \textit{υπό συνθήκη}.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item \textbf{Εκθετική Σειρά (\eng{Maclaurin} του $e^x$ για $x=1$):} $\displaystyle\sum_{n=0}^{\infty} \dfrac{1}{n!}$
+    \begin{itemize}
+        \item \textbf{Συγκλίνει} και μάλιστα ορίζει τον αριθμό του Euler: $\displaystyle\sum_{n=0}^{\infty} \dfrac{1}{n!} = e \approx 2.718...$
+    \end{itemize}
+\end{itemize}
+\newpage
+\section*{Άσκηση 1}
+Να εξεταστεί η σύγκλιση ή η απόκλιση των παρακάτω σειρών χρησιμοποιώντας το καταλληλότερο κριτήριο.
+\begin{multicols}{3}
+\begin{enumerate}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{7n^3 - 2n}{4n^3 + 5}$ 
+%\quad \textit{(Υπόδειξη: Ελέγξτε πρώτα το όριο του $n$-οστού όρου)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{3^n \cdot n!}{(2n)!}$ 
+%\quad \textit{(Υπόδειξη: Κριτήριο του Λόγου, ιδανικό για παραγοντικά)}
+\item $\displaystyle\sum_{n=1}^{\infty} \left( \frac{2n+1}{5n-3} \right)^{n}$ %\quad \textit{(Υπόδειξη: Κριτήριο της Ρίζας, αφού όλος ο όρος είναι σε δύναμη $n$)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{4n+3}{\sqrt{n^7+2n^2+1}}$ 
+%\quad \textit{(Υπόδειξη: Κριτήριο Οριακής Σύγκρισης με κατάλληλη $p$-σειρά)}
+\item $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n \sqrt{\ln n}}$ 
+%\quad \textit{(Υπόδειξη: Κριτήριο του Ολοκληρώματος, η συνάρτηση ολοκληρώνεται εύκολα)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n \ln n}{n}$ 
+%\quad \textit{(Υπόδειξη: Κριτήριο Εναλλασσουσών - Leibniz)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2+5n+6}$ 
+%\quad \textit{(Υπόδειξη: Τηλεσκοπική Σειρά - Παραγοντοποιήστε και αναλύστε σε απλά κλάσματα)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{2^{2n}}{5^{n-1}}$ 
+%\quad \textit{(Υπόδειξη: Φέρτε τη στη μορφή Γεωμετρικής Σειράς)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{\sin^2(n)}{n^3}$ 
+%\quad \textit{(Υπόδειξη: Απλό Κριτήριο Σύγκρισης, αξιοποιώντας το φράγμα του ημιτόνου)}
+\item $\displaystyle\sum_{n=1}^{\infty} \frac{n^n}{e^n \cdot n!}$ 
+%\quad \textit{(Υπόδειξη: Κριτήριο του Λόγου - Προσοχή στο γνωστό όριο $\lim(1+1/n)^n = e$)}
+\end{enumerate}
+\end{multicols}
+\vspace{0.5cm}
+\hrulefill
+
+\section*{Άσκηση 2}
+Εξετάστε ως προς τη σύγκλιση ή την απόκλιση τις παρακάτω σειρές.
+\begin{multicols}{3}
+\begin{enumerate}
+    \item $\displaystyle\sum_{n=1}^{\infty} \frac{n^2 + 4}{n^4 + 3n^2 + 1}$
+    \item $\displaystyle\sum_{n=1}^{\infty} \frac{10^n}{n!}$
+    \item $\displaystyle\sum_{n=1}^{\infty} \left( \frac{n}{3n+1} \right)^n$
+    \item $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n (\ln n)^2}$
+    \item $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{\sqrt{n+3}}$
+    \item $\displaystyle\sum_{n=1}^{\infty} \sin\left( \frac{1}{n^2} \right)$
+    \item $\displaystyle\sum_{n=1}^{\infty} \frac{1}{(2n-1)(2n+1)}$
+    \item $\displaystyle\sum_{n=1}^{\infty} \frac{n!}{100^n}$
+    \item $\displaystyle\sum_{n=1}^{\infty} \ln\left( 1 + \frac{1}{n} \right)$
+    \item $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n n^2}{n^2 + 1}$
+\end{enumerate}
+\end{multicols}
+\end{document}

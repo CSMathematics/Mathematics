@@ -1,4 +1,3 @@
-% --- Άσκηση 12834 (12834.tex) ---
 \Askhsh{12834}{4}
 \begin{ylh}{2}
     \item 2.1. Οι Πράξεις και οι Ιδιότητές τους
@@ -11,3 +10,48 @@
 Στο παρακάτω σχήμα έχουμε το τραπέζιο $AB\varGamma\varGamma$ ώστε $AB=2, A\varDelta=4, \varGamma\varDelta=6$, ενώ η $A\varDelta$ είναι κάθετη στην $AB$ και επίσης κάθετη στην $\varGamma\varDelta$. Το σημείο $E$ μπορεί να πάρει οποιαδήποτε θέση επί του ευθύγραμμου τμήματος $B\varGamma$ και ονομάζουμε $x$ την απόσταση του $E$ από την $\varGamma\varDelta$.
 \begin{center}
 \begin{tikzpicture}[scale=0.8, thick]
+    % Κορυφές τραπεζίου
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (2,0);
+    \coordinate (D) at (0,4);
+    \coordinate (C) at (6,4);
+
+    % Σχεδίαση τραπεζίου
+    \draw[maincolor, very thick] (A) -- (B) -- (C) -- (D) -- cycle;
+
+    % Σημείο Ε πάνω στο ΒΓ (ενδεικτικά)
+    \coordinate (E) at ($(B)!0.4!(C)$);
+    \draw[dashed, secondarycolor] (A) -- (E) -- (D);
+
+    % Ετικέτες κορυφών
+    \node[below left]  at (A) {A};
+    \node[below right] at (B) {B};
+    \node[above right] at (C) {$\Gamma$};
+    \node[above left]  at (D) {$\Delta$};
+    \node[right]       at (E) {E};
+
+    % Μέτρα πλευρών
+    \node[below, maincolor] at ($(A)!0.5!(B)$) {$2$};
+    \node[left,  maincolor] at ($(A)!0.5!(D)$) {$4$};
+    \node[above, maincolor] at ($(D)!0.5!(C)$) {$6$};
+
+    % Απόσταση x
+    \draw[<->, secondarycolor, thick] (E) -- (E |- C) node[midway, right] {\(x\)};
+
+    % Ορθή γωνία
+    \draw (0.3,0) -- (0.3,0.3) -- (0,0.3);
+    \draw (0,3.7) -- (0.3,3.7) -- (0.3,4);
+\end{tikzpicture}\captionof{figure}{Άσκηση 12834}
+\end{center}
+\begin{alist}
+\item Να αποδείξετε ότι το εμβαδόν του τριγώνου $AE\varDelta$ δίνεται από τη συνάρτηση
+$f(x) = - 2x + 12$. Ποιο είναι το πεδίο ορισμού αυτής της συνάρτησης;
+
+\monades{10}
+\item Να σχεδιάσετε τη γραφική παράσταση της συνάρτησης $f(x).$
+
+\monades{7}
+\item Να υπολογίσετε το άθροισμα $\Sigma = f\left( \dfrac{1}{16} \right) + f\left( \dfrac{2}{16} \right) + f\left( \dfrac{3}{16} \right) + f\left( \dfrac{4}{16} \right)\ldots + f\left(\dfrac{64}{16}\right).$
+\monades{8}
+\end{alist}
+

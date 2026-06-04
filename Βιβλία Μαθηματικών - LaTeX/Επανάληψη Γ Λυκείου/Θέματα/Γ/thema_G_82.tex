@@ -1,0 +1,37 @@
+\begin{thema}{Γ}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της \textbf{παραγώγου} $f'$ μιας συνεχούς και παραγωγίσιμης συνάρτησης $f$ ορισμένης στο $[0, 6]$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+  % grid
+  \draw[help lines, gray!30] (-1,-5) grid (7,4);
+  % axes
+  \draw[-latex] (-1.3,0) -- (7.3,0) node[right] {$x$};
+  \draw[-latex] (0,-5.3) -- (0,4.3) node[above] {$y$};
+  % ticks
+  \foreach \x in {1,2,3,4,5,6}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-4,-3,-2,-1,1,2,3}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  % parabola f'(x) = (x-1)(x-5) = x^2-6x+5
+  \draw[very thick, secondcolor, domain=0:6, samples=60] plot (\x, {(\x-1)*(\x-5)});
+  % shade areas
+  \fill[secondcolor!15, opacity=0.5, domain=0:1, samples=30] (0,0) -- plot (\x, {(\x-1)*(\x-5)}) -- (1,0) -- cycle;
+  \fill[secondcolor!10, opacity=0.5, domain=1:5, samples=60] (1,0) -- plot (\x, {(\x-1)*(\x-5)}) -- (5,0) -- cycle;
+  \fill[secondcolor!15, opacity=0.5, domain=5:6, samples=30] (5,0) -- plot (\x, {(\x-1)*(\x-5)}) -- (6,0) -- cycle;
+  % key points
+  \filldraw[secondcolor] (1,0) circle (2.5pt) node[above,font=\footnotesize] {$1$};
+  \filldraw[secondcolor] (5,0) circle (2.5pt) node[above,font=\footnotesize] {$5$};
+  \filldraw[secondcolor] (3,-4) circle (2.5pt) node[below right,font=\footnotesize] {$(3,-4)$};
+  % label
+  \node[secondcolor] at (5.5,3) {$C_{f'}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+  \item Να μελετήσετε τη μονοτονία της $f$ στο $[0, 6]$ και να βρείτε τα ακρότατά της.
+  \item Να βρείτε τις θέσεις τυχόν σημείων καμπής της $f$.
+  \item Χρησιμοποιώντας το σχήμα, να συγκρίνετε τις τιμές $f(5)$ και $f(0)$.
+  \item Ποια είναι η κλίση της εφαπτομένης της $C_f$ στο σημείο με τετμημένη $x_0 = 3$; Αν $f(3) = 1$, γράψτε την εξίσωσή της.
+\end{erwthma}
+\end{thema}

@@ -1,0 +1,206 @@
+*   Role: Professional Mathematics Teacher.
+    *   Task: Solve a specific LaTeX exercise.
+    *   Constraints:
+        *   Strict formatting (thema, erwthma, item, etc.).
+        *   No indefinite integrals.
+        *   No 2nd derivative test for extrema.
+        *   No differential equations (wait, the exercise *is* a differential equation $f'(x) - f(x) = e^x$, but the prompt says "Differential equations" are out of syllabus. Let's look closer at the instructions: "ΜΗΝ ΓΡΑΦΕΙΣ... [some examples]". Actually, the "Restrictions" section says "Διαφορικές εξισώσεις" (Differential equations) are out of syllabus. However, the exercise *explicitly asks* to prove that $f(x) = x e^x$ satisfies $f'(x) - f(x) = e^x$. This is a "verification" (checking if a function satisfies an equation), not "solving" a differential equation. I will treat it as a verification task, not a general differential equation solving process).
+        *   No MVT for integrals.
+        *   No variable limits of integration.
+        *   Specific commands: `\eng{...}`, `\textbf{...}`, `\hm`, `\syn`, `\ef`, `\syf` (though trig functions might not be used here), `\d x`, `\lim`, `\xlongequal`.
+        *   PGFplots and tkz-tab if needed (not explicitly needed for these calculations unless I need a table for curvature).
+
+    *   Thema: Γ
+    *   Function: $f(x) = x e^x$ (given to prove).
+    *   Relationship: $f'(x) - f(x) = e^x$ and $f(0) = 0$.
+
+    *   *Question 1:* Prove $f(x) = x e^x$ satisfies $f'(x) - f(x) = e^x$ and $f(0) = 0$.
+        *   Check $f(0)$: $0 \cdot e^0 = 0 \cdot 1 = 0$.
+        *   Derivative $f'(x)$: Use product rule on $x e^x$. $f'(x) = 1 \cdot e^x + x \cdot e^x = (1+x)e^x$.
+        *   Difference $f'(x) - f(x) = (1+x)e^x - x e^x = e^x + x e^x - x e^x = e^x$.
+        *   Conclusion: Verified.
+
+    *   *Question 2:* Concavity and Inflection Point.
+        *   Need $f''(x)$.
+        *   $f'(x) = (1+x)e^x$.
+        *   $f''(x) = 1 \cdot e^x + (1+x)e^x = (2+x)e^x$.
+        *   Curvature (convex/concave):
+            *   $f''(x) > 0 \Leftrightarrow (2+x)e^x > 0 \Leftrightarrow x > -2$ ($\textbf{κοίλη}$).
+            *   $f''(x) < 0 \Leftrightarrow (2+x)e^x < 0 \Leftrightarrow x < -2$ ($\textbf{κυρτή}$).
+        *   "Στρέφει τα κοίλα άνω" means concave up (κοίλη), so $x \in (-2, +\infty)$.
+        *   Inflection point (Σημείο καμπής): Where $f''(x) = 0$ and sign changes. $x = -2$.
+        *   Coordinate: $f(-2) = -2 e^{-2}$. Point $(-2, -2/e^2)$.
+
+    *   *Question 3:* Empty in the prompt. I will ignore it or skip it.
+
+    *   *Question 4:* Limit $\lim_{x \to 0} \frac{f(x) - \hm x}{x^2}$?
+        *   Wait, looking at the exercise text: `\dfrac{f(x) - \hm x}{x^2}`. `\hm` is the command for $\hm$ (cosine in Greek). But $f(x) = x e^x$. The limit is $\lim_{x \to 0} \frac{x e^x - \cos x}{x^2}$.
+        *   Let's check the limit: $\frac{0 \cdot 1 - 1}{0} = -1/0 = -\infty$. This seems strange.
+        *   Wait, maybe `\hm` was a typo in the prompt and meant something else? Or maybe it's $f(x) - x$ or $f(x) - \sin x$?
+        *   Let's re-read: `\dfrac{f(x) - \hm x}{x^2}`. $f(x) = x e^x$.
+        *   At $x=0$, $f(0) - \cos(0) = 0 - 1 = -1$. Limit is $\lim_{x \to 0} \frac{-1}{x^2} = -\infty$.
+        *   Is it possible that the problem meant $\lim_{x \to 0} \frac{f(x) - x}{x^2}$?
+            *   $\lim_{x \to 0} \frac{x e^x - x}{x^2} = \lim_{x \to 0} \frac{x(e^x - 1)}{x^2} = \lim_{x \to 0} \frac{e^x - 1}{x}$.
+            *   This is a standard limit = 1.
+        *   What about $\lim_{x \to 0} \frac{f(x) - \syn x}{x^2}$ (where $\syn$ is $\sin$)?
+            *   $\lim_{x \to 0} \frac{x e^x - \sin x}{x^2}$.
+            *   Using L'Hopital: $\lim_{x \to 0} \frac{(1+x)e^x - \cos x}{2x} = \frac{1-1}{0} = \frac{0}{0}$.
+            *   L'Hopital again: $\lim_{x \to 0} \frac{e^x + (1+x)e^x + \sin x}{2} = \frac{1+1+0}{2} = 1$.
+        *   Wait, looking at the LaTeX provided in the prompt: `\dfrac{f(x) - \hm x}{x^2}`. $\hm$ is defined as $\cos$ in the guide. Let's assume the user wants me to solve it exactly as written, even if the limit is $-\infty$.
+        *   BUT, usually, in these textbook problems, there's a $0/0$ form. If $f(x) = x e^x$ and the term is $\hm x$ ($\cos x$), the limit is clearly $-\infty$.
+        *   Let me double-check the "formatting guidelines" again. The guidelines provide examples like $\ln(1+1/x)$, which is typical for a a high school exam (Γ Λυκείου).
+        *   Is it possible that $f(x)$ in the limit is different? No, the exercise says "the function $f(x) = x e^x$".
+        *   Could `\hm` be a typo for $x$? The characters 'h' and 'm' aren't near 'x'.
+        *   Could `\hm` be a typo for $f(x)$'s linear approximation? $f(x) \approx x(1+x) = x + x^2$.
+        *   Let's look at the provided "Exercise Text" block: `\dfrac{f(x) - \hm x}{x^2}`.
+        *   Wait! I noticed something. In the "Restrictions/Example" part of the prompt, it mentioned: "Part 3: Prove $\lim_{x \to +\infty} [x \ln(1 + 1/x)] = 1$." but that's for a different exercise ($\ln x$). The exercise I'm solving now is about $f'(x)-f(x)=e^x$.
+        *   Let's reconsider $\hm x$. In Greek mathematics textbooks, $\hm$ is $\cos$. $\cos(0)=1$. $f(0)=0$. The numerator is $0 - 1 = -1$. The denominator is $x^2 \to 0^+$. The limit is $-\infty$.
+        *   Let's double-check the possibility of a typo in the user's exercise text. If the user wrote $\hm x$ but meant $\syn x$ (which is $\sin x$ in the guide), then it's $0/0$ and the limit is 1. If they meant $x$, the limit is 1.
+        *   However, as a "Professional Teacher", I must solve what is written. But I should check if $\hm$ might mean something else. In some contexts, $\hm$ might be a shorthand for a function, but the guide says `\hm`, `\syn`, `\ef`, `\syf` are trig functions.
+        *   Let's try L'Hopital if it's $0/0$. If it's not $0/0$, I just evaluate it.
+        *   Wait, let's re-read the limit: $\lim_{x \to 0} \frac{f(x) - \hm x}{x^2}$.
+        *   $f(x) = x e^x$. $\hm x = \cos x$.
+        *   At $x=0$: $f(0) = 0$. $\cos(0) = 1$.
+        *   Limit = $\lim_{x \to 0} \frac{0 - 1}{0^+} = -\infty$.
+        *   Is it possible the function $f(x)$ was meant to be $f(x) = \cos x + \dots$? No, the first part says $f(x) = x e^x$.
+        *   Is it possible the limit was $\lim_{x \to 0} \frac{f(x) - \syn x}{x^2}$? $\syn(0)=0$. $0-0=0$.
+        *   Let's assume the text is correct as written: $\hm x$. I will state the evaluation clearly.
+
+    *   *Wait*, I just noticed something in the prompt's provided "Exercise Text". It's possible the `\hm` is a typo for something else entirely, or a custom command. But based on the `FORMATTING_GUIDE.md`, `\hm` is definitely the cosine function.
+    *   Wait, look at the "Example" section provided in the prompt (the part that says "Role: Professional... Constraint..."). That section describes a *completely different* problem (the $\ln x$ one). It seems the user pasted their prompt template and replaced the "Exercise Text" but kept the "Guidelines" which include an example of a *different* problem. I should ignore the "Example" part and focus on the "Exercise Text".
+
+    *   Thema Γ, erwthma, items.
+    *   Part 1: $f(x) = x e^x \implies f(0)=0$ and $f'(x)=(x+1)e^x \implies f'(x)-f(x) = e^x$.
+    *   Part 2: $f''(x) = (x+2)e^x$. $f''(x) > 0 \iff x > -2$ (κοίλη), $f''(x) < 0 \iff x < -2$ (κυρτή). Inflection point: $x=-2, f(-2)=-2e^{-2}$.
+    *   Part 4 (there is no part 3): $\lim_{x \to 0} \frac{x e^x - \cos x}{x^2} = \frac{0-1}{0^+} = -\infty$.
+
+    *   *Wait*, I have a suspicion. Could `\hm x` be a typo for something that makes the limit $0/0$?
+        *   If $f(x) = x e^x$, and we want $\lim \frac{f(x) - g(x)}{x^2}$, $g(x)$ must have $g(0)=0$ and $g'(0)=f'(0)=1$.
+        *   $f(0)=0$. $f'(0)=1$.
+        *   If $g(x) = \syn x$, $g(0)=0$ and $g'(0)=1$. Then $\lim \frac{x e^x - \sin x}{x^2}$ is a $0/0$ form.
+        *   If $g(x) = x$, $g(0)=0$ and $g'(0)=1$. Then $\lim \frac{x e^x - x}{x^2}$ is a $0/0$ form.
+        *   $\hm x$ (cosine) has $\hm(0)=1$. This is a very "ugly" limit for a high school problem.
+        *   However, I must follow the text. But let me look at the Greek characters. $\hm$ is $\cos$. $\syn$ is $\sin$.
+        *   Could the user have meant $f'(x)$ instead of $f(x)$? $\lim \frac{f'(x) - \hm x}{x^2} = \lim \frac{(x+1)e^x - \cos x}{x^2}$.
+        *   At $x=0$: $(0+1)e^0 - \cos 0 = 1 - 1 = 0$.
+        *   Now it's $0/0$!
+        *   $\lim_{x \to 0} \frac{(x+1)e^x - \cos x}{x^2}$.
+        *   L'Hopital 1: $\lim_{x \to 0} \frac{e^x + (x+1)e^x + \syn x}{2x} = \lim_{x \to 0} \frac{(x+2)e^x + \syn x}{2x}$.
+        *   At $x=0$: $(2(1) + 0) / 0 = 2/0 \to \infty$.
+        *   Still not a nice number.
+
+    *   Let's assume the text $\lim_{x \to 0} \frac{f(x) - \hm x}{x^2}$ is actually $\lim_{x \to 0} \frac{f(x) - \syn x}{x^2}$ or $\lim_{x \to 0} \frac{f(x) - x}{x^2}$.
+    *   Actually, looking at common Greek exam problems, $f(x) - x$ is very common.
+    *   BUT, if the prompt says `\hm x`, and I am a "Professional Teacher", I should probably point out the limit is $-\infty$ or assume a typo.
+    *   Actually, let me re-read the limit one more time. $f(x) = x e^x$. $f(x) - \hm x$ at $x=0$ is $0 - 1 = -1$.
+    *   Is there any other interpretation of `\hm`? In some very specific contexts, it could be a custom function, but the guide says `\hm` is cosine.
+    *   I will solve it as written. $\lim_{x \to 0} \frac{x e^x - \cos x}{x^2}$. Since $x e^x - \cos x \to -1$ and $x^2 \to 0^+$, the limit is $-\infty$.
+
+    *   Wait, I just noticed Part 3 is empty in the prompt's "Exercise Text" block.
+    *   $\item$ (empty)
+    *   $\item$ (Part 4)
+    *   I will simply omit the empty item.
+
+    *   *Wait!* Let me think about the limit again. $\lim_{x \to 0} \frac{f(x) - \hm x}{x^2}$. What if $f(x)$ was different? No, $f(x) = x e^x$.
+    *   What if the limit was $\lim_{x \to 0} \frac{f(x) - \syn x}{x^2}$?
+        $f(x) - \syn x = (x + x^2 + \dots) - (x - x^3/6 + \dots) = x^2 + \dots$
+        $\lim \frac{x^2}{x^2} = 1$.
+        This is a *perfect* high school problem.
+    *   What if the limit was $\lim_{x \to 0} \frac{f(x) - x}{x^2}$?
+        $f(x) - x = (x + x^2 + \dots) - x = x^2 + \dots$
+        $\lim \frac{x^2}{x^2} = 1$.
+        This is also a *perfect* high school problem.
+    *   $\hm x$ (cosine) makes the limit $-\infty$.
+    *   I'll stick to the provided text but I'll be very explicit. If I'm a "professional teacher" and I see a likely typo, I might solve the "correct" version, but the instructions say "Solve the following LaTeX exercise".
+    *   Actually, let me search for this problem online. $f'(x) - f(x) = e^x, f(0)=0$ is a standard textbook problem. Usually, the limit is $\lim_{x \to 0} \frac{f(x) - x}{x^2} = 1$.
+    *   The symbol `\hm` is used for $\cos$. $\syn$ for $\sin$.
+    *   Is it possible the user meant $\syn x$? In Greek, $\sigma \upsilon \nu$ (syn) is $\sin$ and $\eta \mu$ (hm) is $\cos$.
+    *   Wait! $\eta \mu$ (hm) is $\sin$ and $\sigma \upsilon \nu$ (syn) is $\cos$!
+    *   Let me re-verify Greek trig notation:
+        $\eta \mu(x) = \sin(x)$
+        $\sigma \upsilon \nu(x) = \cos(x)$
+        $\tau \nu(x) = \tan(x)$
+    *   **CRITICAL ERROR IN MY PREVIOUS THOUGHT:** I was using English logic. In Greek:
+        `\hm` $\to \eta \mu \to \sin$
+        `\syn` $\to \sigma \upsilon \nu \to \cos$
+    *   Let's check the guide again: `\hm`, `\syn`, `\ef`, `\syf`.
+    *   If `\hm` is $\sin$, then $\lim_{x \to 0} \frac{x e^x - \sin x}{x^2}$ is $0/0$.
+    *   Calculation:
+        $f(x) = x e^x$.
+        $\lim_{x \to 0} \frac{x e^x - \sin x}{x^2}$
+        L'Hopital 1: $\lim_{x \to 0} \frac{(1+x)e^x - \cos x}{2x} = \frac{1-1}{0} = 0/0$.
+        L'Hopital 2: $\lim_{x \to 0} \frac{e^x + (1+x)e^x + \sin x}{2} = \frac{1 + 1 + 0}{2} = 1$.
+    *   YES! This is it. `\hm` is $\sin$ (ημίτονο).
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   Item 1: $f(x)=xe^x$, check $f(0)=0$ and $f'(x)-f(x)=e^x$.
+    *   Item 2: $f''(x)=(x+2)e^x$, $x > -2$ κοίλη, $x < -2$ κυρτή, inflection point $(-2, -2e^{-2})$.
+    *   Item 4 (indexed as 3rd item): Limit $\lim_{x \to 0} \frac{x e^x - \sin x}{x^2} = 1$.
+
+    *   Wait, the exercise has 4 items in the `erwthma` environment, but item 3 is empty. I'll just provide the solutions for 1, 2, and 4. I will number them as they appear: 1, 2, and the last one.
+
+    *   Item 1:
+        $f(x) = x e^x \implies f(0) = 0 \cdot e^0 = 0$.
+        $f'(x) = (1 \cdot e^x + x \cdot e^x) = (x+1)e^x$.
+        $f'(x) - f(x) = (x+1)e^x - x e^x = e^x$.
+    *   Item 2:
+        $f''(x) = (1 \cdot e^x + (x+1) \cdot e^x) = (x+2)e^x$.
+        $f''(x) = 0 \Leftrightarrow x = -2$.
+        $f''(x) > 0 \Leftrightarrow x > -2 \implies \textbf{κοίλη}$.
+        $f''(x) < 0 \Leftrightarrow x < -2 \implies \textbf{κυρτή}$.
+        Inflection point: $x = -2, f(-2) = -2 e^{-2}$.
+    *   Item 4:
+        $\lim_{x \to 0} \frac{x e^x - \sin x}{x^2}$ (using $\hm$ for $\sin$).
+        Form $0/0$.
+        $\xlongequal{\eng{L'Hopital}} \lim_{x \to 0} \frac{(x+1)e^x - \cos x}{2x}$ (Form $0/0$).
+        $\xlongequal{\eng{L'Hopital}} \lim_{x \to 0} \frac{(x+2)e^x + \sin x}{2} = \frac{2 \cdot 1 + 0}{2} = 1$.
+
+    *   Use `\begin{align*}` for the limit and derivatives.
+    *   Use `\textbf{...}` and `\eng{...}` as requested.
+    *   No indefinite integrals (none used).
+    *   No 2nd derivative test for extrema (none used).
+    *   No differential equation solving (only verification).
+%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Για τη συνάρτηση $f(x) = x e^x$ έχουμε:
+\[ f(0) = 0 \cdot e^0 = 0 \]
+Η παράγωγος της συνάρτησης, με εφαρμογή του κανόνα του γινομένου, είναι:
+\[ f'(x) = (x)' e^x + x (e^x)' = e^x + x e^x = (x+1)e^x \]
+Επομένως, η σχέση διαφορικής μορφής επαληθεύεται καθώς:
+\[ f'(x) - f(x) = (x+1)e^x - x e^x = x e^x + e^x - x e^x = e^x \]
+Άρα η συνάρτηση $f(x) = x e^x$ ικανοποιεί ταυτοτικά την εξίσωση και τον αρχικό φερικό όρο.
+
+\item Για τον προσδιορισμό της κυρτότητας και των σημείων καμπής, υπολογίζουμε τη δεύτερη παράγωγο της $f$:
+\[ f''(x) = \frac{d}{dx} [(x+1)e^x] = 1 \cdot e^x + (x+1)e^x = (x+2)e^x \]
+Εξετάζουμε το πρόσημο της $f''(x)$:
+\begin{itemize}
+    \item $f''(x) = 0 \Leftrightarrow x+2 = 0 \Leftrightarrow x = -2$
+    \item $f''(x) > 0 \Leftrightarrow x > -2$
+    \item $f''(x) < 0 \Leftrightarrow x < -2$
+\end{itemize}
+Συνεπώς, η συνάρτηση στρέφει τα κοίλα άνω ($\textbf{κοίλη}$) στο διάστημα $(-2, +\infty)$. 
+Το μοναδικό σημείο καμπής βρίσκεται στη θέση $x = -2$ και η συντεταγμένη $y$ είναι:
+\[ f(-2) = -2 e^{-2} = -\frac{2}{e^2} \]
+Άρα το σημείο καμπής είναι το $K(-2, -2/e^2)$.
+
+\item \textit{(Το ερώτημα είναι κενό)}
+
+\item Ζητείται ο υπολογισμός του ορίου:
+\[ L = \lim_{x \to 0} \frac{f(x) - \hm x}{x^2} = \lim_{x \to 0} \frac{x e^x - \hm x}{x^2} \]
+Για $x=0$, το όριο είναι της μορφής $\frac{0 - 0}{0} = \frac{0}{0}$, επομένως εφαρμόζουμε τον κανόνα του \eng{L'Hôpital}:
+\[ L \xlongequal{\eng{L'Hopital}} \lim_{x \to 0} \frac{(x+1)e^x - \syn x}{2x} \]
+Για $x=0$, το όριο παραμένει της μορφής $\frac{1 - 0}{0} = \frac{1}{0}$... \textbf{Διόρθωση:} 
+Επανεξετάζοντας τη συνάρτηση $\syn x$ (συνημίτονο) για $x=0$, έχουμε $\syn 0 = 1$.
+\[ L = \lim_{x \to 0} \frac{(x+1)e^x - \syn x}{2x} = \frac{(0+1)e^0 - 1}{0} = \frac{1-1}{0} = \frac{0}{0} \]
+Εφαρμόζουμε ξανά τον κανόνα του \eng{L'Hôpital}:
+\[ L \xlongequal{\eng{L'Hopital}} \lim_{x \to 0} \frac{e^x + (x+1)e^x - \hm x}{2} = \lim_{x \to 0} \frac{(x+2)e^x - \hm x}{2} \]
+Αντικαθιστώντας $x=0$:
+\[ L = \frac{(0+2)e^0 - \hm 0}{2} = \frac{2 \cdot 1 - 0}{2} = \frac{2}{2} = 1 \]
+Άρα το όριο είναι $1$.
+\end{erwthma}
+\end{thema}
+
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========

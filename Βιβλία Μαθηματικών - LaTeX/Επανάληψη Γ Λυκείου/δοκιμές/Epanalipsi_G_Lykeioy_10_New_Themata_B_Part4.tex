@@ -1,0 +1,541 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xparse}
+\usepackage[english,greek]{babel}
+\usepackage{alphabeta}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[outer=1.50cm, inner=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype}
+\usetikzlibrary{arrows.meta}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{tikzmark}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[curlybraces,amsbb,mtphrb]{mtpro2}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\newcommand{\eng}{\selectlanguage{english}}
+\newcommand{\gr}{\selectlanguage{greek}}
+\usepackage{mathimatika}
+\def\xrwma{red!80!black}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{orange}{HTML}{ff7300}
+
+\newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\newcommand{\subsup}{
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt}
+}
+\makeatother}
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+\usepackage{etoolbox,hhline,moreenum}
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+
+\newlist{alist}{enumerate}{1}
+\setlist[alist]{label=\let\textdexiakeraia\relax\alph*.}
+\UseTblrLibrary{counter}
+
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex,anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={red!80!black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
+\AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
+
+\definecolor{titlecolor}{HTML}{cd0f00}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+{%
+\bgroup
+\setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+\setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+\ul{#1}%
+\egroup
+}
+\newcommand*\SectionNumberBox[1]
+{%
+\colorbox{red!80!black}
+{%
+\makebox[2em][c]
+{%
+\color{white}%
+\strut
+\csname the#1\endcsname
+}%
+}%
+\TitleUnderline{\ \ \ }%
+}
+\titleformat{\section}[hang]
+{\Large\fontfamily{maksf}\selectfont}%
+{\colorbox{\xrwma}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[80pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesection ο Κεφάλαιο}}}}%
+}}}%
+{0pt}%
+{\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ \textbf{#1}\ }}}
+
+\titleformat{\subsection}[hang]
+{\large\bfseries\fontfamily{maksf}\selectfont}%
+{\colorbox{red!80!black}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[30pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesubsection}}}}%
+}}}%
+{0pt}%
+{
+\ \textbf{#1}\ }
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\titleformat{\part}[display]
+{\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{red!80!black}{ \kerkissans{ #1}}}
+\titlespacing*{\part} 
+{0pt}{0pt}{0pt}
+
+\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+
+\fancyhf{}
+\newcommand{\myleftmark}{\leftmark}
+\renewcommand{\myleftmark}{{\large Τυπολόγιο}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\sectionmark}[1]{\markboth{\large Κεφάλαιο \thesection\ -\ #1}{} }
+
+\makeatletter
+\ifthenelse{\boolean{@twoside}}{%
+\fancyhead[LE]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\thepage\ $\lvert$ \leftmark}}};
+\node[anchor=north east, text=black, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\end{tikzpicture}
+}%
+\fancyhead[RO]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\node[anchor=north east, text=black, font=\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark\ $ \lvert $\ \thepage}}};
+\end{tikzpicture}
+}%
+}
+\makeatother
+
+%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
+\newcounter{parathrhsh}[section]
+\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
+\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση\hspace{2mm}\theparathrhsh}}}}{}
+
+%----------- ΑΣΚΗΣΗ ------------------
+\newcommand\thema{A}
+
+\newcounter{askhsh}[section]
+\renewcommand{\theaskhsh}{\arabic{askhsh}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}{\textbf{\textcolor{black}{\faPenSquare\ \  \large \kerkissans{\textbf{\theaskhshο\hspace{2mm}Θέμα}}}}}\hspace{0mm}}{}
+
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\kerkissans{\large{\textcolor{\xrwma}{\thema.\arabic*}}}},itemsep=0mm,leftmargin=0.8cm}
+%------------------------------------
+\newenvironment{askhsh}[1]
+{\begin{tcolorbox}[title=\Askhsh\kerkissans{\textbf{\large{  #1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=black]
+\renewcommand{\thema}{#1}}
+{\end{tcolorbox}}
+
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\NineColors{saturation=high}
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+\renewcommand{\myleftmark}{\large Τυπολόγιο}
+\begin{center}
+\part{Επιπλέον Επαναληπτικά Θέματα Β (Μέρος 4ο) - Ανάγνωση Γραφικών Παραστάσεων}
+\end{center}
+
+\begin{askhsh}{B}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση μιας συνάρτησης $f$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {-3,-2,-1,1,2,3,4},
+        ytick = {-2,-1,1,2,3,4,5},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 8cm, height = 7cm, samples = 100,
+        xmin=-3.5, xmax=4.5, ymin=-2.5, ymax=6,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=1.15:4.5] {2 + 1/(x-1)};
+        \addplot[very thick, \xrwma, domain=-3.5:0.85] {2 + 1/(x-1)};
+        \addplot[dashed, thick] coordinates {(1,-2.5) (1,6)};
+        \addplot[dashed, thick] coordinates {(-3.5,2) (4.5,2)};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+Παρατηρώντας τη γραφική παράσταση της $C_f$:
+\begin{erwthma}
+  \item Να βρείτε το πεδίο ορισμού της συνάρτησης $f$ και να υπολογίσετε τα όρια $\lim\limits_{x \to 1^-} f(x)$, $\lim\limits_{x \to 1^+} f(x)$, $\lim\limits_{x \to -\infty} f(x)$ και $\lim\limits_{x \to +\infty} f(x)$.
+  \item Με βάση τα προηγούμενα όρια, να γράψετε τις εξισώσεις των ασύμπτωτων της γραφικής παράστασης της $f$.
+  \item Να λύσετε με τη βοήθεια του σχήματος την εξίσωση $f(x)=2$ και την ανίσωση $f(x) > 2$.
+  \item Να μελετήσετε την $f$ ως προς τη μονοτονία στα διαστήματα του πεδίου ορισμού της.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Η παρακάτω γραφική παράσταση ανήκει στην \textbf{{παράγωγο}} $f'$ μιας συνάρτησης $f$, η οποία είναι παραγωγίσιμη στο $\mathbb{R}$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {-2,-1,1,2,3,4,5},
+        ytick = {-4,-3,-2,-1,1,2,3},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 8cm, height = 7cm, samples = 100,
+        xmin=-2.5, xmax=4.5, ymin=-4.5, ymax=4,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=-1.5:3.5] {x^2 - 2*x - 3};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+Αξιοποιώντας προσεκτικά τη γραφική παράσταση της $f'$:
+\begin{erwthma}
+  \item Να μελετήσετε τη συνάρτηση $f$ ως προς τη μονοτονία.
+  \item Να βρείτε τις θέσεις και το είδος των τοπικών ακροτάτων της $f$.
+  \item Να μελετήσετε τη συνάρτηση $f$ ως προς την κυρτότητα και τα σημεία καμπής.
+  \item Αν επιπλέον γνωρίζετε ότι $f(0) = 2$, να βρείτε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο της με τετμημένη $x_0=0$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Στο σχήμα δίνεται η γραφική παράσταση της \textbf{{δεύτερης παραγώγου}} $f''$ μιας συνάρτησης $f$, παραγωγίσιμης δύο φορές στο $\mathbb{R}$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {-2,-1,1,2,3,4},
+        ytick = {-3,-2,-1,1,2,3},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 8cm, height = 5cm, samples = 100,
+        xmin=-2.5, xmax=4.5, ymin=-3.5, ymax=3.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=-1.5:3.5] {x - 1};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Να μελετήσετε την $f$ ως προς την κυρτότητα και να βρείτε το σημείο καμπής της $C_f$.
+  \item Αν είναι γνωστό ότι η $f$ παρουσιάζει τοπικό ακρότατο στη θέση $x_1=0$, να βρείτε αν πρόκειται για τοπικό μέγιστο ή τοπικό ελάχιστο, αιτιολογώντας την απάντησή σας.
+  \item Με βάση το προηγούμενο ερώτημα και αν γνωρίζετε ότι $f'(2)=0$, να υπολογίσετε το ολοκλήρωμα $\displaystyle\int_0^2 f''(x)dx$ χωρίς να βρείτε τον τύπο της $f''(x)$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της \textbf{{παραγώγου}} $f'$ μιας συνεχούς συνάρτησης $f:[0, 4] \to \mathbb{R}$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {1,2,3,4},
+        ytick = {-1,1,2,3},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 7cm, height = 5cm, samples = 100,
+        xmin=-0.5, xmax=4.5, ymin=-1.5, ymax=3.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=0:2] {x};
+        \addplot[very thick, \xrwma, domain=2:4] {4-x};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Να μελετήσετε την $f$ ως προς τη μονοτονία στο $[0, 4]$.
+  \item Να βρείτε τα ακρότατα της $f$.
+  \item Η συνάρτηση $f$ έχει σημεία καμπής? Δικαιολογήστε την απάντησή σας.
+  \item Να υπολογίσετε το ολοκλήρωμα $\displaystyle\int_0^4 f'(x)dx$ γεωμετρικά. Τι εκφράζει αυτό το αποτέλεσμα για τις τιμές της $f$;
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Δίνεται η γραφική παράσταση της συνάρτησης $f$. Σε ένα σημείο της $M(0, 1)$ έχει σχεδιαστεί η εφαπτομένη ευθεία $(\epsilon)$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {-2,-1,1,2,3},
+        ytick = {-1,1,2,3,4},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 8cm, height = 6cm, samples = 100,
+        xmin=-2.5, xmax=3.5, ymin=-1.5, ymax=5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=-2:2] {exp(x)};
+        \addplot[orange, thick, domain=-1:3] {x+1};
+        \filldraw[black] (0,1) circle (1.5pt) node[anchor=north west] {$M(0,1)$};
+        \filldraw[black] (-1,0) circle (1.5pt) node[anchor=south east] {$A(-1,0)$};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Διαβάζοντας το σχήμα, να βρείτε την εξίσωση της εφαπτομένης $(\epsilon)$.
+  \item Να βρείτε τις τιμές $f(0)$ και $f'(0)$.
+  \item Να υπολογίσετε το όριο $\lim\limits_{x \to 0} \dfrac{f(x)-1}{x}$. Στη συνέχεια επιβεβαιώστε το εφαρμόζοντας τον κανόνα \eng{De L'Hospital}.
+  \item Παρατηρώντας τη γεωμετρική σχέση μεταξύ της $C_f$ και της $(\epsilon)$, να συμπεράνετε το πρόσημο της δεύτερης παραγώγου της $f$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Στο ίδιο σύστημα συντεταγμένων δίνονται οι γραφικές παραστάσεις δύο συναρτήσεων $f$και $g$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {1,2,3},
+        ytick = {1,2,3},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 6cm, height = 6cm, samples = 100,
+        xmin=-0.5, xmax=2.5, ymin=-0.5, ymax=2.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=0:2.2] {sqrt(x)} node[pos=0.8,below] {$C_f$};
+        \addplot[very thick, \xrwma!50!yellow, domain=-0.5:1.6] {x^2} node[pos=0.8,right]{$C_g$};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Να βρείτε τις τετμημένες των σημείων τομής των $C_f$ και $C_g$ και να λύσετε γραφικά την ανίσωση $f(x) > g(x)$.
+  \item Να γράψετε, το ορισμένο ολοκλήρωμα που εκφράζει το εμβαδόν του χωρίου που περικλείεται από τις γραφικές παραστάσεις των $f$ και $g$.
+  \item Γνωρίζοντας ότι οι τύποι των συναρτήσεων είναι $f(x) = \sqrt{x}$ και $g(x) = x^2$ για $x \ge 0$, να υπολογίσετε το εμβαδόν του παραπάνω χωρίου.
+  \item Έστω η συνάρτηση διαφοράς $h(x) = f(x) - g(x)$. Να αποδείξετε ότι η μέγιστη κατακόρυφη απόσταση μεταξύ των δύο γραφικών παραστάσεων στο διάστημα $(0, 1)$ είναι μικρότερη από $\frac{1}{2}$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Δίνεται η γραφική παράσταση της συνάρτησης $f:[0, 3] \to \mathbb{R}$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {1,2,3},
+        ytick = {1,2,3},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 6cm, height = 6cm, samples = 100,
+        xmin=-0.5, xmax=3.5, ymin=-0.5, ymax=3.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=0:1] {x^2};
+        \addplot[very thick, \xrwma, domain=1:3] {x};
+        \node[below left] at (axis cs:0,0) {$0$};
+        \filldraw[\xrwma] (axis cs:3,3) circle (1.5pt);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Από τη γραφική παράσταση, να βρείτε το σύνολο τιμών της συνάρτησης, τα ολικά της ακρότατα και να αιτιολογήσετε γεωμετρικά αν είναι παραγωγίσιμη ή όχι στο σημείο $x_0=1$.
+  \item Αν δίνεται πλέον ότι ο τύπος της συνάρτησης είναι $f(x) = \begin{cases} x^2, & 0 \le x \le 1 \\ x, & 1 < x \le 3 \end{cases}$, να επιβεβαιώσετε αναλυτικά την απάντηση που δώσατε στο προηγούμενο ερώτημα για την παραγωγισιμότητα στο $1$.
+  \item Υπολογίστε το ολοκλήρωμα $\displaystyle\int_0^2 f(x)dx$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Δίνεται η γραφική παράσταση της συνάρτησης $f(x) = \left| x-2 \right| - 1$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {-1,1,2,3,4},
+        ytick = {-1,1,2},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 8cm, height = 5cm, samples = 100,
+        xmin=-0.5, xmax=4.5, ymin=-1.5, ymax=2.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=0:4] {abs(x-2)-1};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Βρείτε τα ακρότατα της συνάρτησης και τις ρίζες της εξίσωσης $f(x)=0$.
+  \item Γράψτε τη συνάρτηση χωρίς την απόλυτη τιμή και βρείτε την παράγωγό της όπου αυτή ορίζεται.
+  \item Υπάρχει σημείο στο οποίο η $f$ δεν είναι παραγωγίσιμη?
+  \item Υπολογίστε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$ και τον άξονα $x'x$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Δίνεται η γραφική παράσταση μιας συνάρτησης $f$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {-1,1,2,3},
+        ytick = {-3,-2,-1,1,2},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 7cm, height = 6cm, samples = 100,
+        xmin=-1.5, xmax=3.5, ymin=-3.5, ymax=2.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=-2:3.5] {x^3 - 3*x^2 + 1};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Βρείτε το πρόσημο της συνάρτησης $f'$ και να εξηγήστε γιατί η εξίσωση $f'(x)=0$ έχει τουλάχιστον δύο ρίζες.
+  \item Γνωρίζοντας ότι η $f$ είναι πολυωνυμική εξετάστε αν η συνάρτηση $f'$ ικανοποιεί τις υποθέσεις του θεωρήματος \eng{Rolle} στο διάστημα $[0,2]$
+  \item Δικαιολογήστε γιατί υπάρχει τουλάχιστον ένα $\xi \in (0, 2)$ τέτοιο ώστε η εφαπτομένη της $C_f$ να είναι παράλληλη στην ευθεία που διέρχεται από τα σημεία $A(1, 1)$ και $B(-2, 7)$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{B}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση της \textbf{{παραγώγου}} $f'$ μιας συνεχούς συνάρτησης $f(x)$ ορισμένης στο $(0, +\infty)$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[axis lines = middle,
+        axis line style = {->, >=latex},
+        grid = major,
+        grid style = {very thin, gray!30},
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xtick = {1,2,3,4},
+        ytick = {1,2,3,4,5},
+        every axis x label/.style = {at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style = {at={(current axis.above origin)}, anchor=south},
+        width = 8cm, height = 6cm, samples = 100,
+        xmin=-0.5, xmax=4.5, ymin=-0.5, ymax=5.5,
+        xtick distance=1, ytick distance=1
+    ]
+        \addplot[very thick, \xrwma, domain=0.2:4] {1/x};
+        \node[below left] at (axis cs:0,0) {$0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Παρατηρώντας ότι στο σχήμα η $f'(x) = \dfrac{1}{x}$, σχεδιάστε συμπεράσματα για τη μονοτονία και την κυρτότητα της $f(x)$ (αιτιολογώντας από το σχήμα).
+  \item Να βρείτε, αν γνωρίζουμε ότι $f(1)=0$, τον τύπο της συνάρτησης $f$.
+  \item Να αποδείξετε ότι ισχύει $f(x) \le x-1$ για κάθε $x > 0$. Πώς αποδεικνύεται η ίδια ανισότητα αξιοποιώντας άμεσα ένα θεώρημα στη συνάρτηση $h(x) = f(x) - x + 1$;
+  \item Υπολογίστε το όριο $\lim\limits_{x \to 0^+} (x f(x))$.
+\end{erwthma}
+\end{askhsh}
+
+\end{document}

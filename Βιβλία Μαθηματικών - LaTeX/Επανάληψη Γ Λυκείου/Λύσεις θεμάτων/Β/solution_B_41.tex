@@ -1,0 +1,28 @@
+\begin{thema}{Β}
+Δίνονται οι συναρτήσεις $f(x) = \ln(x^2+1)$ και $g(x) = x$, με πεδίο ορισμού το $\mathbb{R}$.
+\begin{erwthma}
+\item Η συνάρτηση ορίζεται ως $h(x) = f(x) - g(x) = \ln(x^2+1) - x$ με $A_h = \mathbb{R}$.
+Ζητείται να δειχθεί ότι $\lim_{x\to0} \frac{h(x)}{x^2} = 1$. Ωστόσο, υπάρχει ένα προφανές τυπογραφικό λάθος στην εκφώνηση του αντίστοιχου διαγωνίσματος, διότι:
+\[ \lim_{x\to0} \frac{h(x)}{x^2} = \lim_{x\to0} \frac{\ln(x^2+1) - x}{x^2} \xlongequal[\text{DLH}]{\frac{0}{0}} \lim_{x\to0} \frac{\frac{2x}{x^2+1} - 1}{2x} = \lim_{x\to0} \frac{2x - x^2 - 1}{2x(x^2+1)} = \frac{-1}{0} \]
+Το οποίο οδηγεί στο $\pm\infty$. Το σωστό όριο που ισούται με 1 είναι αυτό του κλάσματος $\frac{f(x)}{x^2}$ (ή δηλαδή $\frac{h(x)+g(x)}{x^2}$), το οποίο και θα αποδείξουμε:
+\[ \lim_{x \to 0} \frac{f(x)}{x^2} = \lim_{x \to 0} \frac{\ln(x^2+1)}{x^2} \xlongequal[\text{DLH}]{\frac{0}{0}} \lim_{x \to 0} \frac{\frac{2x}{x^2+1}}{2x} = \lim_{x \to 0} \frac{1}{x^2+1} = \frac{1}{1+0} = 1 \]
+
+\item Θέλουμε να αποδείξουμε ότι $\ln(x^2+1) \le x \Leftrightarrow \ln(x^2+1) - x \le 0 \Leftrightarrow h(x) \le 0$.
+Η $h'(x)$ ισούται με:
+\[ h'(x) = \frac{2x}{x^2+1} - 1 = \frac{2x - (x^2+1)}{x^2+1} = \frac{-x^2+2x-1}{x^2+1} = -\frac{(x-1)^2}{x^2+1} \]
+Είναι προφανές ότι $(x-1)^2 \ge 0$ και $x^2+1 > 0$, επομένως $h'(x) \le 0$ για κάθε $x \in \mathbb{R}$. Η $h$ μηδενίζεται ως προς την παράγωγό της μόνο στο μεμονωμένο σημείο $x=1$. Επομένως, σε όλο το $\mathbb{R}$ η $h$ είναι γνησίως φθίνουσα.
+Έτσι, για κάθε $x \ge 0 \Rightarrow h(x) \le h(0) \Rightarrow h(x) \le \ln(1)-0 \Rightarrow h(x) \le 0$.
+Η ισότητα ισχύει προφανώς μόνο όταν $x = 0$.
+
+\item Όπως αποδείξαμε στο προηγούμενο ερώτημα, $h'(x) = -\frac{(x-1)^2}{x^2+1} \le 0$ για κάθε $x \in \mathbb{R}$ με την ισότητα να ισχύει μόνο στο μεμονωμένο σημείο $x=1$. Κατά συνέπεια, η συνεχής συνάρτηση $h(x)$ είναι γνησίως φθίνουσα σε όλο το $\mathbb{R}$.
+
+\item Αναζητούμε την πλάγια ασύμπτωτη της μορφής $y = \lambda x + \beta$ στο $+\infty$:
+\[ \lambda = \lim_{x\to+\infty} \frac{h(x)}{x} = \lim_{x\to+\infty} \left( \frac{\ln(x^2+1)}{x} - 1 \right) \]
+Το όριο $\lim_{x\to+\infty} \frac{\ln(x^2+1)}{x}$ υπολογίζεται με De L' Hospital:
+\[ \lim_{x\to+\infty} \frac{\ln(x^2+1)}{x} \xlongequal{\text{DLH}} \lim_{x\to+\infty} \frac{\frac{2x}{x^2+1}}{1} = \lim_{x\to+\infty} \frac{2x}{x^2+1} = 0 \]
+Άρα $\lambda = 0 - 1 = -1$.
+Στη συνέχεια υπολογίζουμε το $\beta$:
+\[ \beta = \lim_{x\to+\infty} (h(x) - \lambda x) = \lim_{x\to+\infty} (\ln(x^2+1) - x - (-x)) = \lim_{x\to+\infty} \ln(x^2+1) = +\infty \]
+Επειδή το $\beta$ ειναι $+\infty$ και όχι πραγματικός αριθμός, συμπεραίνουμε πως \textbf{δεν υπάρχει} πλάγια (ή οριζόντια) ασύμπτωτη στο $+\infty$.
+\end{erwthma}
+\end{thema}

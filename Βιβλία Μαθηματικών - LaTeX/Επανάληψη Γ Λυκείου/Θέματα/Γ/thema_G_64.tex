@@ -1,0 +1,80 @@
+\begin{thema}{Γ}
+Ένα ταχύπλοο βρίσκεται στο νερό στο σημείο $A$ το οποίο απέχει κατακόρυφη απόσταση $3$ χλμ από την ευθύγραμμη ακτή (έστω σημείο προβολής $O$). Ο οδηγός θέλει να φτάσει σε ένα παραθαλάσσιο χωριό $B$ που βρίσκεται στην ακτή και απέχει $4$ χλμ από το $O$. Η ταχύτητά του στη θάλασσα είναι $15$ χλμ/ώρα και αν τρέξει στην παραλία μπορεί να κινηθεί με $25$ χλμ/ώρα.
+\begin{center}
+\begin{tikzpicture}[scale=1.5, font=\sffamily]
+
+    % --- Παράμετροι Σχήματος ---
+    % yA = 3 km (απόσταση από ακτή)
+    % xB = 4 km (απόσταση από Ο)
+    % xM = x km (απόσταση Ο-Μ, μεταβλητή)
+    \def\yA{3.0}   % y συντεταγμένη του A
+    \def\xB{4.0}   % x συντεταγμένη του B
+    \def\xM{2.5}   % x συντεταγμένη του M (αντιπροσωπευτική τιμή για το σχήμα)
+
+    % --- Συντεταγμένες ---
+    \coordinate (O) at (0, 0);                 % Προβολή του A (0,0)
+    \coordinate (A) at (0, \yA);                % Ταχύπλοο (0,3)
+    \coordinate (B) at (\xB, 0);                % Χωριό (4,0)
+    \coordinate (M) at (\xM, 0);                % Σημείο αποβίβασης (x,0)
+
+    % --- Σχεδίαση Φόντου ---
+    % Θάλασσα
+    \fill[\xrwma!15] (-1, 0) rectangle (\xB+1, \yA+1);
+    % Παραλία / Ακτή
+    \fill[secondcolor!15] (-1, -1) rectangle (\xB+1, 0);
+
+    % --- Σχεδίαση Εδάφους & Αντικειμένων ---
+    % Ευθύγραμμη Ακτή
+    \draw[ultra thick, black] (-1, 0) -- (\xB+1, 0);
+
+    % Διακεκομμένη γραμμή προβολής (AO)
+    \draw[dashed, thin, gray] (A) -- (O);
+    % Σημείο κάθετης γωνίας στο O
+    \draw (0.3, 0) -- (0.3, 0.3) -- (0, 0.3);
+
+    % Πορεία Ταχύπλοου (AM, στο νερό)
+    \draw[line width=2pt, \xrwma] (A) -- (M);
+    % Πορεία Οδηγού (MB, στην ακτή)
+    \draw[line width=2pt, secondcolor] (M) -- (B);
+
+    % --- Σημειώσεις ---
+    % Επεξηγηματικό κείμενο για θάλασσα και παραλία
+    \node[color=black, font=\bfseries\small] at (2, \yA+0.5) {Θάλασσα};
+    \node[color=secondcolor, font=\bfseries\small] at (2, -0.5) {Παραλία};
+
+    % --- Ετικέτες, Διαστάσεις και Ταχύτητα ---
+    % Διάσταση 3 km (AO)
+    \draw[<->, >=latex] (-0.3, 0) -- (-0.3, \yA) node[midway, left] {3 \si{km}};
+    \draw[dashed, gray] (O) -- (-0.8, 0);
+    \draw[dashed, gray] (A) -- (-0.8, \yA);
+
+    % Διάσταση 4 km (OB)
+    \draw[<->, >=latex] (0, -0.6) -- (\xB, -0.6) node[midway, below] {4 \si{km}};
+    \draw[dashed, gray] (O) -- (0, -0.8);
+    \draw[dashed, gray] (B) -- (\xB, -0.8);
+
+    % Διάσταση x km (OM)
+    \draw[<->, >=latex] (0, -0.3) -- (\xM, -0.3) node[midway, below] {$x$ \si{km}};
+    \draw[dashed, gray] (M) -- (\xM, -0.5);
+
+    % Ενδεικτική ετικέτα για την ταχύτητα στο νερό (v_w = 15 km/h)
+    \draw[->, >=latex, \xrwma,yshift=2mm] ($([yshift=2mm]A)!0.5!([yshift=2mm]M)$) -- ++(0.4, -0.45) node[right, font=\small] {$\mathbf{v}_w = 15 \si{ km/h}$};
+
+    % Ενδεικτική ετικέτα για την ταχύτητα στην ακτή (v_b = 25 km/h)
+    \draw[->, >=latex, secondcolor] ($([yshift=7mm]M)!0.5!(B)$) -- ++(1.0, 0) node[right, font=\small] {$\mathbf{v}_b = 25 \si{ km/h}$};
+
+    % Κουκκίδες Σημείων
+    \filldraw (O) circle (1.5pt) node[below left] {$O$};
+    \filldraw (A) circle (1.5pt) node[above left] {$A$};
+    \filldraw (B) circle (1.5pt) node[above right] {$B$};
+    \filldraw (M) circle (1.5pt) node[below] {$M$};
+
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Έστω ότι αποβιβάζεται στο σημείο $M$ της ακτής σε απόσταση $x$ από το $O$. Να εκφράσετε τον συνολικό χρόνο $T(x)$ της διαδρομής $AMB$ συναρτήσει του $x \in [0, 4]$.
+  \item Να βρείτε την παράγωγο $T'(x)$ και να λύσετε την εξίσωση $T'(x)=0$.
+  \item Ποια είναι η βέλτιστη απόσταση $x$ για να ελαχιστοποιηθεί ο χρόνος ταξιδιού? 
+  \item Υπολογίστε το χρόνο σε περίπτωση απευθείας μετάβασης με σκάφος στο $B$ και επιβεβαιώστε ότι υπολείπεται της βέλτιστης.
+\end{erwthma}
+\end{thema}

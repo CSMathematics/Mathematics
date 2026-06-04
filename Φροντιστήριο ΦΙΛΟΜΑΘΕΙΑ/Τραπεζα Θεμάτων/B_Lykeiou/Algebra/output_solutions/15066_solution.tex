@@ -1,3 +1,4 @@
+\lysh{15066}{4}
 \begin{alist}
 \item 
 \begin{rlist}
@@ -9,33 +10,23 @@
 \[P\left(\dfrac{1}{\rho}\right) = \dfrac{2}{\rho^4} - \dfrac{5}{\rho^3} + \dfrac{4}{\rho^2} - \dfrac{5}{\rho} + 2 = \dfrac{1}{\rho^4}(2 - 5\rho + 4\rho^2 - 5\rho^3 + 2\rho^4) = 0\]
 λόγω της (1).
 \end{rlist}
-
 \item Επειδή οι μοναδικοί θετικοί ακέραιοι αριθμοί που μπορεί να είναι ρίζες του είναι οι θετικοί διαιρέτες του 2, με $x = 2$ έχουμε:
 \[P(2) = 2 \cdot 16 - 5 \cdot 8 + 4 \cdot 4 - 5 \cdot 2 + 2 = 50 - 50 = 0\]
 οπότε ο αριθμός 2 είναι θετική ακέραια ρίζα του πολυωνύμου.
-
 \item Η εξίσωση $P(x) = 0$ έχει ρίζα τον αριθμό $2$ και λόγω του ερωτήματος α) έχει ρίζα και τον αριθμό $\dfrac{1}{2}$.
 Έτσι, με τη βοήθεια του σχήματος Horner έχουμε:
 \begin{center}
-\begin{tabular}{c|c|c|c|c|c}
-2 & -5 & 4 & -5 & 2 & 2 \\ \hline
-\cellcolor{gray!50} & 4 & -2 & 4 & -2 & \multicolumn{1}{c}{} \\ \hline
-2 & -1 & 2 & -1 & 0 & \multicolumn{1}{c}{}
-\end{tabular}
+\Horner{2,-5,4,-5,2}{2}
 \end{center}
 \[P(x) = (x - 2)(2x^3 - x^2 + 2x - 1)\]
 και αν επαναλάβουμε τη διαδικασία για το πολυώνυμο $2x^3 - x^2 + 2x - 1$ με το $\dfrac{1}{2}$
 \begin{center}
-\begin{tabular}{c|c|c|c|c}
-2 & -1 & 2 & -1 & $\dfrac{1}{2}$ \\ \hline
-\cellcolor{gray!50} & 1 & 0 & 1 & \multicolumn{1}{c}{} \\ \hline
-2 & 0 & 2 & 0 & \multicolumn{1}{c}{}
-\end{tabular}
+\Horner{2,-1,2,-1}{0.5}
 \end{center}
 συμπεραίνουμε ότι
 \[P(x) = (x - 2)\left(x - \dfrac{1}{2}\right)(2x^2 + 2) = (x - 2)(2x - 1)(x^2 + 1)\]
 οπότε
 \[P(x) = 0 \Leftrightarrow x = 2 \text{ ή } x = \dfrac{1}{2}.\]
-
 \item Επειδή για κάθε $x \in \mathbb{R}$ ισχύει $x^2 + 1 > 0$, το πρόσημο του πολυωνύμου είναι ίδιο με το πρόσημο του τριωνύμου $(x - 2)(2x - 1)$. Έτσι έχουμε τον παρακάτω πίνακα προσήμων.
 \end{alist}
+

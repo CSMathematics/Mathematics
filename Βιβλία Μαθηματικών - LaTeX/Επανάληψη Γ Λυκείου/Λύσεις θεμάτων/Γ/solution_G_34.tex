@@ -1,0 +1,110 @@
+*   Professional Mathematics teacher.
+    *   Context: $\Gamma$ Lyceum (Greece).
+    *   Input exercise: A piecewise function $f(x)$ involving $x \ln x$.
+    *   Tasks:
+        1.  Limit as $x \to 0^+$ and continuity at $x=0$.
+        2.  Differentiability at $x=0$ and tangent behavior.
+        3.  Limit as $x \to 0^+$ of $f(x) f'(x)$.
+        4.  Definite integral from $1/e$ to $1$ of $f(x)$.
+
+    *   Environment: `\begin{thema}{Γ}` ... `\end{thema}`.
+    *   Questions environment: `\begin{erwthma}` ... `\end{erwthma}`.
+    *   Items: `\item` for each part.
+    *   Inline math: `$ ... $`.
+    *   Display math: `\[ ... \]`.
+    *   Multi-line calculations: `\begin{align*} ... \end{align*}`.
+    *   Terminology: `\eng{...}` for technical terms (e.g., `\eng{L'Hôpital}`).
+    *   Emphasis: `\textbf{...}`.
+    *   No indefinite integrals: use definite integrals with brackets.
+    *   No 2nd derivative test for extrema.
+    *   No differential equations.
+    *   No MVT for integrals.
+    *   No differentiation of integrals with variable limits.
+    *   Differentials: `\d x`.
+    *   Comments: `%=========== ΛΥΣΗ - ... ===========` at start and end.
+
+    *   **Part 1: $\lim_{x \to 0^+} x \ln x$ and continuity.**
+        *   Form: $0 \cdot (-\infty)$. Rewrite as $\frac{\ln x}{1/x}$.
+        *   Apply \eng{L'Hôpital}: $\lim_{x \to 0^+} \frac{1/x}{-1/x^2} = \lim_{x \to 0^+} (-x) = 0$.
+        *   $f(0) = 0$.
+        *   Since $\lim_{x \to 0^+} f(x) = f(0)$, the function is \textbf{συνεχής} at $x=0$.
+
+    *   **Part 2: Differentiability at $x=0$.**
+        *   Definition of derivative: $f'(0) = \lim_{h \to 0^+} \frac{f(h) - f(0)}{h}$.
+        *   $\frac{f(h) - f(0)}{h} = \frac{h \ln h - 0}{h} = \ln h$.
+        *   $\lim_{h \to 0^+} \ln h = -\infty$.
+        *   Since the limit is not a finite real number, $f$ is \textbf{όχι παραγωγίσιμη} at $x=0$.
+        *   Tangent: As $x \to 0^+$, the slope tends to $-\infty$. The tangent is a \textbf{κατακόρυφη ευθεία} (vertical line) $x=0$ (the $y$-axis).
+
+    *   **Part 3: $\lim_{x \to 0^+} [f(x) f'(x)]$.**
+        *   $f(x) = x \ln x$.
+        *   $f'(x) = \ln x + x \cdot \frac{1}{x} = \ln x + 1$ for $x > 0$.
+        *   Expression: $f(x) f'(x) = (x \ln x)(\ln x + 1) = x (\ln x)^2 + x \ln x$.
+        *   Limit of $x \ln x$ is $0$ (from Part 1).
+        *   Limit of $x (\ln x)^2$: Rewrite as $\frac{(\ln x)^2}{1/x}$.
+        *   \eng{L'Hôpital}: $\lim_{x \to 0^+} \frac{2 \ln x \cdot (1/x)}{-1/x^2} = \lim_{x \to 0^+} (-2x \ln x) = -2 \cdot 0 = 0$.
+        *   Total limit: $0 + 0 = 0$.
+
+    *   **Part 4: $\int_{1/e}^1 x \ln x \d x$.**
+        *   Use Integration by Parts (not explicitly forbidden, just "no indefinite integrals").
+        *   Let $u = \ln x \Rightarrow du = \frac{1}{x} \d x$.
+        *   Let $dv = x \d x \Rightarrow v = \frac{1}{2}x^2$.
+        *   $\int_{1/e}^1 x \ln x \d x = \left[ \frac{1}{2}x^2 \ln x \right]_{1/e}^1 - \int_{1/e}^1 \frac{1}{2}x^2 \cdot \frac{1}{x} \d x$.
+        *   $= \left[ \frac{1}{2}x^2 \ln x \right]_{1/e}^1 - \frac{1}{2} \int_{1/e}^1 x \d x$.
+        *   $= \left[ \frac{1}{2}x^2 \ln x - \frac{1}{4}x^2 \right]_{1/e}^1$.
+        *   Calculation at $1$: $\frac{1}{2}(1)^2 \ln 1 - \frac{1}{4}(1)^2 = 0 - \frac{1}{4} = -\frac{1}{4}$.
+        *   Calculation at $1/e$: $\frac{1}{2}(1/e)^2 \ln(1/e) - \frac{1}{4}(1/e)^2 = \frac{1}{2e^2}(-1) - \frac{1}{4e^2} = -\frac{1}{2e^2} - \frac{1}{4e^2} = -\frac{3}{4e^2}$.
+        *   Result: $-\frac{1}{4} - (-\frac{3}{4e^2}) = \frac{3}{4e^2} - \frac{1}{4} = \frac{3-e^2}{4e^2}$.
+
+    *   Check environments: `thema`, `erwthma`.
+    *   Check terminology: `\eng{L'Hôpital}`.
+    *   Check display math: `\[ ... \]` and `\begin{align*}`.
+    *   Check integral syntax: `\dint` (or `\int`), `\d x`, brackets.
+    *   Check bold: `\textbf{συνεχής}`, `\textbf{όχι παραγωγίσιμη}`.
+%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Για το όριο $\lim_{x\to 0^+} (x \ln x)$, παρατηρούμε ότι έχουμε την απροσδιόριστη μορφή $0 \cdot (-\infty)$. Το γράφουμε στη μορφή $\frac{\ln x}{1/x}$ για να εφαρμόσουμε τον κανόνα του \eng{L'Hôpital}:
+\[
+\lim_{x\to 0^+} (x \ln x) = \lim_{x\to 0^+} \frac{\ln x}{\frac{1}{x}} \xlongequal{\eng{L'Hôpital}} \lim_{x\to 0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x\to 0^+} (-x) = 0
+\]
+Δεδομένου ότι $f(0) = 0$ και $\lim_{x\to 0^+} f(x) = 0$, η συνάρτηση $f$ είναι \textbf{συνεχής} στο $x=0$.
+
+\item Για την παραγωγισιμότητα της $f$ στο $0$, εξετάζουμε το όριο του πηλίκου:
+\[
+f'(0) = \lim_{h \to 0^+} \frac{f(h) - f(0)}{h} = \lim_{h \to 0^+} \frac{h \ln h - 0}{h} = \lim_{h \to 0^+} \ln h = -\infty
+\]
+Επειδή το όριο δεν είναι πραγματικός αριθμός, η συνάρτηση $f$ είναι \textbf{όχι παραγωγίσιμη} στο $0$.
+Όσον αφορά την εφαπτομένη, καθώς $x \to 0^+$, η κλίση της εφαπτομένης τείνει στο $-\infty$. Επομένως, η εφαπτομένη της γραφικής παράστασης στο σημείο $(0,0)$ είναι η \textbf{κατακόρυφη ευθεία} $x=0$ (ο άξονας $y'y$).
+
+\item Για $x > 0$, η παράγωγος της $f$ είναι:
+\[
+f'(x) = (x)' \ln x + x (\ln x)' = 1 \cdot \ln x + x \cdot \frac{1}{x} = \ln x + 1
+\]
+Εξετάζουμε το όριο:
+\[
+\lim_{x \to 0^+} [ f(x) \cdot f'(x) ] = \lim_{x \to 0^+} [ (x \ln x)(\ln x + 1) ] = \lim_{x \to 0^+} [ x(\ln x)^2 + x \ln x ]
+\]
+Γνωρίζουμε από το (α) ότι $\lim_{x \to 0^+} x \ln x = 0$. Για το όριο $\lim_{x \to 0^+} x(\ln x)^2$, χρησιμοποιούμε ξανά τον κανόνα του \eng{L'Hôpital}:
+\[
+\lim_{x \to 0^+} x(\ln x)^2 = \lim_{x \to 0^+} \frac{(\ln x)^2}{\frac{1}{x}} \xlongequal{\eng{L'Hôpital}} \lim_{x \to 0^+} \frac{2 \ln x \cdot \frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0^+} (-2x \ln x) = -2 \cdot 0 = 0
+\]
+Άρα:
+\[
+\lim_{x \to 0^+} [ f(x) \cdot f'(x) ] = 0 + 0 = 0
+\]
+
+\item Υπολογίζουμε το ορισμένο ολοκλήρωμα $\int_{1/e}^1 x \ln x \d x$ με τη μέθοδο της ολοκλήρωσης κατά μέρη. 
+Θέτουμε $u = \ln x \Rightarrow \d u = \frac{1}{x} \d x$ και $\d v = x \d x \Rightarrow v = \frac{1}{2}x^2$.
+\begin{align*}
+\int_{1/e}^1 x \ln x \d x &= \left[ \frac{1}{2}x^2 \ln x \right]_{1/e}^1 - \int_{1/e}^1 \frac{1}{2}x^2 \cdot \frac{1}{x} \d x \\
+&= \left[ \frac{1}{2}x^2 \ln x \right]_{1/e}^1 - \frac{1}{2} \int_{1/e}^1 x \d x \\
+&= \left[ \frac{1}{2}x^2 \ln x - \frac{1}{4}x^2 \right]_{1/e}^1 \\
+&= \left( \frac{1}{2}(1)^2 \ln 1 - \frac{1}{4}(1)^2 \right) - \left( \frac{1}{2}\left(\frac{1}{e}\right)^2 \ln \frac{1}{e} - \frac{1}{4}\left(\frac{1}{e}\right)^2 \right) \\
+&= \left( 0 - \frac{1}{4} \right) - \left( \frac{1}{2e^2}(-1) - \frac{1}{4e^2} \right) \\
+&= -\frac{1}{4} - \left( -\frac{1}{2e^2} - \frac{1}{4e^2} \right) \\
+&= -\frac{1}{4} + \frac{3}{4e^2} = \frac{3-e^2}{4e^2}
+\end{align*}
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========

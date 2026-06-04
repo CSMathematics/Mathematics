@@ -1,0 +1,60 @@
+%=========== ΛΥΣΗ ΘΕΜΑΤΟΣ Γ.97 ===========
+\begin{thema}{Γ}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+  \draw[help lines, gray!30] (-2,-4) grid (6,4);
+  \draw[-latex] (-2.3,0) -- (6.3,0) node[right] {$x$};
+  \draw[-latex] (0,-4.3) -- (0,4.3) node[above] {$y$};
+  \foreach \x in {-1,1,2,3,4,5} \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-3,-2,-1,1,2,3} \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  
+  \draw[dashed, red!50, very thick] (2,-4) -- (2,4);
+  \node[red!50,font=\footnotesize, fill=white, inner sep=1pt] at (2.5,3.5) {$x=2$};
+  
+  \draw[very thick, blue!70!black, smooth, tension=0.5]
+    plot coordinates {(-1,-1) (0,0) (0.5,0.5) (1,1.5) (1.5,3) (1.8,4)};
+  \draw[very thick, blue!70!black, smooth, tension=0.5]
+    plot coordinates {(2.2,-4) (2.5,-3) (3,-1) (4,0) (5,0.5)};
+    
+  \filldraw[blue!70!black] (0,0) circle (2pt);
+  \filldraw[blue!70!black] (4,0) circle (2pt);
+  \filldraw[orange!80!black] (3,-1) circle (2pt) node[below,font=\footnotesize] {$(3,-1)$};
+  \filldraw[orange!80!black] (5,0.5) circle (2pt) node[right,font=\footnotesize] {$(5,0.5)$};
+  \node[blue!70!black, fill=white, inner sep=1pt] at (5,2) {$C_f$};
+  
+  % Asymptote arrows
+  \draw[-latex, purple!70!black, thick] (1, 3.5) node[left, fill=white, inner sep=1pt] {$\lim_{x\to 2^-} = +\infty$} -- (1.7, 4);
+  \draw[-latex, purple!70!black, thick] (3, -3.5) node[right, fill=white, inner sep=1pt] {$\lim_{x\to 2^+} = -\infty$} -- (2.3, -4);
+  
+  % Bolzano interval
+  \draw[dashed, green!60!black, thick] (3, -1) -- (5, -1) -- (5, 0.5) node[pos=0.5, right, fill=white, inner sep=1pt] {$\text{Bolzano } [3,5]$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item Εξάγουμε τα όρια της $f$ εκατέρωθεν της εκκρεμούς ασύμπτωτης $x=2$ από τη γραφική απεικόνιση:
+- Πλησιάζοντας το 2 από \textbf{αριστερά} ($x \to 2^-$), ο αριστερός κλάδος της καμπύλης ανυψώνεται διαρκώς χωρίς φραγμό προς τα θετικά:
+\[ \lim_{x\to 2^-} f(x) = \mathbf{+\infty} \]
+- Πλησιάζοντας το 2 από \textbf{δεξιά} ($x \to 2^+$), ο δεξιός κλάδος της καμπύλης ξεπηδά από τον κάτω ανοιχτό χώρο και ανεβαίνει προς την τιμή -3:
+\[ \lim_{x\to 2^+} f(x) = \mathbf{-\infty} \]
+
+\item Εξετάζουμε τη \textbf{συνέχεια}:
+- Στο $\mathbf{x = 0}$: Η καμπύλη είναι ομαλή και ενωμένη περνώντας από την οπτική αρχή των αξόνων $(0,0)$. Το όριο ταυτίζεται με την τιμή $\lim_{x\to 0} f(x) = f(0) = 0$. Επομένως, \textbf{ΝΑΙ, είναι συνεχής} στο $x=0$.
+- Στο $\mathbf{x = 2}$: Το σημείο αυτό δεν ανήκει καν στο πεδίο ορισμού, αποτελεί κατακόρυφη ασύμπτωτη με εκατέρωθεν άπειρα όρια. Επομένως \textbf{ΟΧΙ, δεν είναι συνεχής} στο $x=2$ (ουσιώδης ασυνέχεια 2ου είδους).
+
+\item Εφαρμογή του Θεωρήματος Μέσης Τιμής στο $[0, 4]$:
+- Η πρώτη και θεμελιωδέστερη προϋπόθεση του Θ.Μ.Τ. είναι η συνεχής συμπεριφορά της συνάρτησης σε \textbf{ολόκληρο} το κλειστό διάστημα.
+- Το σημείο $x = 2$ \textbf{εμπεριέχεται} κεντρικά στο $[0, 4]$.
+- Εφόσον η συνάρτηση εμφάνισε βίαιη διάσπαση/ασυνέχεια στο $x=2$, καταρρίπτονται οι αναγκαίες συνθήκες.
+Άρα \textbf{ΔΕΝ} μπορεί να εφαρμοστεί το Θεώρημα Μέσης Τιμής στο διάστημα $[0, 4]$.
+
+\item Εφαρμογή του Θεωρήματος \eng{Bolzano} στο $[3, 5]$:
+- Η $f$ είναι \textbf{συνεχής} σε ολόκληρο το κλειστό διάστημα $[3, 5]$ (αφού το $2 \notin [3, 5]$).
+- Στο αριστερό άκρο έχουμε $f(3) = -1 < 0$.
+- Στο δεξί άκρο έχουμε $f(5) = 0{,}5 > 0$.
+Από τη στιγμή που $f(3) \cdot f(5) < 0$ (ετερόσημες τιμές), ικανοποιούνται πλήρως οι προϋποθέσεις του Θεωρήματος \eng{Bolzano}.
+Συμπεραίνουμε ότι υπάρχει τουλάχιστον ένα $\xi \in (3, 5)$ τέτοιο ώστε $f(\xi) = 0$. (Η Γ.Π. επαληθεύει απολύτως την πρόβλεψη αυτή μαρτυρώντας τη \textbf{ρίζα $\boldsymbol{x = 4}$}).
+\end{erwthma}
+\end{thema}

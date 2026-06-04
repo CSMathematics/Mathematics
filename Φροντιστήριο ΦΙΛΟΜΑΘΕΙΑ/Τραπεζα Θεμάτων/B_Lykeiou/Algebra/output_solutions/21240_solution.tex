@@ -1,21 +1,17 @@
+\lysh{21240}{4}
 \begin{alist}
 \item Από το θεώρημα ακέραιων ριζών πιθανές ακέραιες ρίζες είναι οι αριθμοί $\pm 1, \pm 2$. Με δοκιμή βρίσκουμε $P(1) = 0$, άρα το $1$ είναι ρίζα του πολυωνύμου. Με το σχήμα Horner θα παραγοντοποιήσουμε το πολυώνυμο ώστε να βρούμε τις υπόλοιπες ρίζες.
-
 \begin{center}
-\begin{polyhorner}
-3 & 4 & -5 & -2 & | 1 \cr
- & 3 & 7 & 2 \cr\midrule
-3 & 7 & 2 & \bottomright{0}
-\end{polyhorner}
+\Horner{3,4,-5,2}{1}
 \end{center}
-
 Οπότε:
 \[P(x) = 0 \Leftrightarrow (x-1)(3x^2+7x+2) = 0 \Leftrightarrow x-1=0 \text{ ή } 3x^2+7x+2=0 \Leftrightarrow x=1, \, x=-2, \, x=-\frac{1}{3}.\]
-
 \item Συμπληρώνουμε το σχετικό πίνακα προσήμου.
 \begin{center}
 \begin{tikzpicture}
-\tkzTabInit[lgt=3.5,espcl=1.5]
+\tkzTabInit[color,lgt=3,espcl=2,colorC = maincolor!40,
+colorL = maincolor!20,
+colorV = maincolor!40]%
   {$x$ / 1 , $x-1$ / 1, $3x^2+7x+2$ / 1, $P(x)$ / 1}
   {$-\infty$, $-2$, $-\frac{1}{3}$, $1$, $+\infty$}
 \tkzTabLine{, -, t, -, t, -, z, +, }
@@ -24,7 +20,6 @@
 \end{tikzpicture}
 \end{center}
 Επομένως $P(x) > 0 \Leftrightarrow x \in \left(-2, -\dfrac{1}{3}\right) \cup (1, +\infty)$.
-
 \item Η δοθείσα ανίσωση είναι ισοδύναμη με $P\left(\dfrac{5}{x^2+1}\right) > 0, x \in \mathbb{R}$. Επομένως από το β) ερώτημα πρέπει 
 \[-2 < \frac{5}{x^2+1} < -\frac{1}{3} \quad (1)\]
 \[\text{ή } 1 < \frac{5}{x^2+1}. \quad (2)\]
@@ -32,3 +27,4 @@
 Η $(1)$ είναι αδύνατη, αφού $\dfrac{5}{x^2+1} > 0$. \\
 Η $(2)$ γίνεται: $1 < \dfrac{5}{x^2+1} \Leftrightarrow x^2+1 < 5 \Leftrightarrow x^2 < 4 \Leftrightarrow |x| < 2 \Leftrightarrow -2 < x < 2$.
 \end{alist}
+

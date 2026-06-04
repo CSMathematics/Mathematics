@@ -1,0 +1,64 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_110 ===========
+\begin{thema}{Β}
+Στο παρακάτω αναβαθμισμένο σχήμα (γράφημα $f'$) τονίζεται η αλλαγή προσήμου στο $x=2$ και η εφαπτόμενη (χωρίς αλλαγή) στο $x=4$.
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+  \draw[help lines, gray!30] (-1,-3) grid (6,4);
+  \draw[-latex] (-1.3,0) -- (6.3,0) node[right] {$x$};
+  \draw[-latex] (0,-3.3) -- (0,4.3) node[above] {$y = f'(x)$};
+  \foreach \x in {1,2,3,4,5}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-2,-1,1,2,3}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  \draw[very thick, red!70!black, smooth, tension=0.5]
+    plot coordinates {(0,2) (1,2.5) (2,0) (3,-2) (4,0) (4.5,-0.5) (5,-1.5)};
+  
+  % Πρόσημα
+  \node[anchor=south, color=green!50!black, font=\bfseries] at (1, 1.5) {$f'>0$};
+  \node[anchor=north, color=red, font=\bfseries] at (3, -2.5) {$f'<0$};
+  \node[anchor=north, color=red, font=\bfseries] at (5, -1.8) {$f'<0$};
+  
+  % x=2: αλλαγή προσήμου
+  \filldraw[red!70!black] (2,0) circle (2pt);
+  \node[anchor=south, color=blue, font=\footnotesize\bfseries] at (2, 0.2) {Αλλαγή $(+)\to(-)$};
+  \node[anchor=north, color=blue, font=\footnotesize] at (2, -0.2) {$\Rightarrow$ Τοπ. Μέγιστο $f$};
+  
+  % x=4: εφαπτόμενη, χωρίς αλλαγή
+  \filldraw[red!70!black] (4,0) circle (2pt);
+  \node[anchor=south west, color=orange, font=\footnotesize\bfseries] at (4.1, 0.15) {Εφάπτεται μόνο};
+  \node[anchor=north west, color=orange, font=\footnotesize] at (4.1, -0.1) {$(-)\to(-)$: κανένα ακρότ.};
+  
+  \node[red!70!black] at (5,2) {$C_{f'}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item Η μονοτονία εξαρτάται αποκλειστικά από τα πρόσημα:
+\begin{itemize}
+    \item Στο $[0, 2]$: $f'(x) > 0$ $\Rightarrow$ η $f$ \textbf{γνησίως αύξουσα}.
+    \item Στο $[2, 5]$: $f'(x) \le 0$ (μηδέν μόνο στο $x=4$, αλλιώς αρνητική) $\Rightarrow$ η $f$ \textbf{γνησίως φθίνουσα}.
+\end{itemize}
+Ακρότατα: Μόνο στο $x = 2$ η $f'$ αλλάζει πρόσημο $(+) \to (-)$, οπότε εκεί η $f$ παρουσιάζει \textbf{τοπικό (και ολικό) μέγιστο}. 
+Στο $x = 4$: $f'(4) = 0$ αλλά $f'$ παραμένει αρνητική πριν και μετά $\Rightarrow$ \textbf{κανένα ακρότατο}.
+
+\item Τα σημεία καμπής εντοπίζονται εκεί όπου αλλάζει η μονοτονία της $f'$ (σημεία ακροτάτων της $f'$). Από τη γραφική:
+\begin{itemize}
+    \item Στο $(0, 2)$, η $f'$ ανεβαίνει ελαφρά και μετά πέφτει. Φαίνεται να υπάρχει τοπικό μέγιστο $f'$ γύρω στο $x \approx 1$ $\Rightarrow$ \textbf{σημείο καμπής} $f$ στο $x \approx 1$.
+    \item Στο $(2, 5)$, η $f'$ πέφτει μέχρι κάποιο ελάχιστο ($x \approx 3$) και μετά ανεβαίνει μέχρι $x=4$, πριν ξαναπέσει. Έτσι, $f'$ έχει τοπικό ελάχιστο γύρω στο $x \approx 3$ $\Rightarrow$ \textbf{σημείο καμπής} $f$ στο $x \approx 3$.
+    \item Μετά, $f'$ ανεβαίνει στο $4$ (τοπικό μέγιστο) $\Rightarrow$ \textbf{σημείο καμπής} $f$ στο $x = 4$.
+\end{itemize}
+Η $f$ παρουσιάζει \textbf{3 σημεία καμπής} (κατά προσέγγιση στα $x \approx 1$, $x \approx 3$, $x = 4$).
+
+\item Δίνεται $f(0) = 3$. Ζητάμε αν $f(2) > 3$ ή $f(2) < 3$. Εφαρμόζοντας ΘΘΛ:
+\[ f(2) - f(0) = \int_0^2 f'(x)\,\mathrm{d}x \]
+Στο $[0, 2]$, η $f'(x) > 0$ (εκτός ίσως στο $x=2$ ακριβώς). Οπότε:
+\[ \int_0^2 f'(x)\,\mathrm{d}x > 0 \Rightarrow f(2) - 3 > 0 \Rightarrow \mathbf{f(2) > 3} \]
+
+\item Δίνεται $f(4) = -1$ και $f'(4) = 0$. Η εξίσωση εφαπτομένης στο $x_0 = 4$:
+\[ y - f(4) = f'(4)(x - 4) \Leftrightarrow y - (-1) = 0 \cdot (x-4) \Leftrightarrow y = -1 \]
+Η εφαπτομένη είναι η \textbf{οριζόντια ευθεία $y = -1$}.
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_110 ===========

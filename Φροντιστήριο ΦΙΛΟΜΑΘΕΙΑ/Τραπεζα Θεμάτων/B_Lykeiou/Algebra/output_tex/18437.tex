@@ -1,32 +1,49 @@
-% ===================================================================
-%  Αρχείο: 18437.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py
-% ===================================================================
-
-ΘΕΜΑ 4
-
+\Askhsh{18437}{4}
+\begin{ylh}{1}
+\item 5.1 Εκθετική συνάρτηση
+\item 5.2 Λογάριθμοι
+\end{ylh}
 Ένα από τα επιβλητικότερα μνημεία του κόσμου είναι η αψίδα Gateway Arch στην πόλη Saint-Louis των Η.Π.Α. Θεωρώντας κατάλληλο σύστημα συντεταγμένων, όπως στο παρακάτω σχήμα, η πρόσοψη της αψίδας προσεγγίζεται από τη γραφική παράσταση της συνάρτησης:
 
+\begin{center}
+\begin{tikzpicture} % Scale down significantly to use actual values
+\begin{axis}[
+    axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
+    xmin = -150, xmax = 150, ymin = -50, ymax = 250,
+    xtick = {-100, 100}, ytick = {100, 200},
+    axis line style={->},
+    grid = none, 
+    samples = 150, width = 12cm, height = 8cm,
+    tick label style = {font=\small}
+]
+    % f(x) = -192 * (exp(x/100) + exp(-x/100)) + 576
+    \addplot[very thick, color=maincolor, domain=-100:100] {-192 * (exp(x/100) + exp(-x/100)) + 576} node[above right, pos=0.8] {$f(x)$};
+    
+    % Intersection points
+    % K at (0, 192)
+    \filldraw (axis cs:0, 192) circle (2pt) node[below right, secondarycolor] {$K$};
+    
+    % A at (96, 0) approx
+    \filldraw (axis cs:96.24, 0) circle (2pt) node[below right, secondarycolor] {$A$};
+    
+    % B at (-96, 0) approx
+    \filldraw (axis cs:-96.24, 0) circle (2pt) node[below left, secondarycolor] {$B$};
+    
+    \node[below left] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
 $f(x) = - 192\left( e^{\frac{x}{100}} + e^{- \ \frac{x}{100}} \right) + 576$,
-
 με $f(x) \geq 0$, όπου οι αριθμοί $x,\ f(x)$ μετρούνται σε μέτρα $(m)$.
-
 (Η γραφική παράσταση μιας τέτοιας συνάρτησης λέγεται αλυσοειδής καμπύλη).
-
 \begin{alist}
 \item Να αποδείξετε ότι το μέγιστο ύψος ΟΚ της αψίδας είναι $192\ m$.
-
 \monades{7}
-
 \item Να βρείτε την τετμημένη του σημείου Α στο οποίο η καμπύλη τέμνει τον θετικό ημιάξονα $Οx$. Δίνεται ότι $\ln\left( \frac{3 + \sqrt{5}}{2} \right) \cong 0,96$.
-
 \monades{13}
-
 \item Αν γνωρίζουμε ότι τα σημεία Α και Β έχουν αντίθετες τετμημένες, να αποδείξετε ότι το πλάτος ΑΒ της αψίδας είναι ίσο με το μέγιστο ύψος της ΟΚ.
-
 \monades{5}
-
 x
-
 y
 \end{alist}
+

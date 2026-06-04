@@ -1,0 +1,80 @@
+%=========== ΛΥΣΗ - 92ο ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+  \draw[help lines, gray!30] (-2,-3) grid (6,3);
+  \draw[-latex] (-2.3,0) -- (6.3,0) node[right] {$x$};
+  \draw[-latex] (0,-3.3) -- (0,3.3) node[above] {$y$};
+  \foreach \x in {-1,1,2,3,4,5} \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-2,-1,1,2} \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  
+  \fill[orange!12, opacity=0.5, domain=-1:1, samples=30] (-1,0) -- plot (\x, {(\x-1)*(\x-4)}) -- (1,0) -- cycle;
+  \fill[red!10, opacity=0.5, domain=1:4, samples=40] (1,0) -- plot (\x, {(\x-1)*(\x-4)}) -- (4,0) -- cycle;
+  \fill[orange!12, opacity=0.5, domain=4:5, samples=20] (4,0) -- plot (\x, {(\x-1)*(\x-4)}) -- (5,0) -- cycle;
+  
+  \draw[very thick, red!70!black, domain=-1:5, samples=60] plot (\x, {(\x-1)*(\x-4)});
+  
+  \filldraw[red!70!black] (1,0) circle (2pt) node[above left,font=\footnotesize] {$1$};
+  \filldraw[red!70!black] (4,0) circle (2pt) node[above right,font=\footnotesize] {$4$};
+  \filldraw[red!70!black] (2.5,-2.25) circle (2pt) node[below,font=\footnotesize, fill=white, inner sep=1pt] {$(2{,}5;\;-2{,}25)$};
+  \node[red!70!black, fill=white, inner sep=1pt] at (5,2) {$C_{f'}$};
+  
+  % Annotations
+  \node[green!50!black, fill=white, inner sep=1pt] at (0, 1.5) {$f'(x) > 0 \ (f \uparrow)$};
+  \node[green!50!black, fill=white, inner sep=1pt] at (4.5, 1.5) {$f'(x) > 0 \ (f \uparrow)$};
+  \node[red!80!black, fill=white, inner sep=1pt] at (2.5, -1) {$f'(x) < 0 \ (f \downarrow)$};
+  
+  \draw[-latex, magenta, thick] (2.5,-3.2) node[below, align=center, fill=white, inner sep=1pt] {$\text{Ελάχιστο } f' \Rightarrow \text{Σημείο Καμπής της } f$} -- (2.5,-2.4);
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+\item Από τη γραφική παράσταση $C_{f'}$ παρατηρούμε ότι:
+\begin{itemize}
+    \item $f'(x) > 0 \Leftrightarrow x \in [-1, 1) \cup (4, 5]$
+    \item $f'(x) < 0 \Leftrightarrow x \in (1, 4)$
+    \item $f'(x) = 0 \Leftrightarrow x = 1$ ή $x = 4$
+\end{itemize}
+Συνεπώς:
+\begin{itemize}
+    \item Η $f$ είναι \textbf{γνησίως αύξουσα} στα διαστήματα $[-1, 1]$ και $[4, 5]$.
+    \item Η $f$ είναι \textbf{γνησίως φθίνουσα} στο διάστημα $[1, 4]$.
+    \item Η $f$ παρουσιάζει \textbf{τοπικό μέγιστο} στο $x = 1$ και \textbf{τοπικό ελάχιστο} στο $x = 4$.
+\end{itemize}
+
+\item Η γραφική παράσταση $C_f$ παρουσιάζει σημείο καμπής εκεί που η παράγωγός της, $f'$, παρουσιάζει ακρότατο. 
+Από το σχήμα, η $f'$ είναι παραβολή με κορυφή στο σημείο $(2{,}5, -2{,}25)$. 
+Επομένως, η $f'$ έχει τοποπικό ελάχιστο στο $x = 2{,}5$.
+Συνεπώς, η $C_f$ παρουσιάζει \textbf{σημείο καμπής} στο $x = 2{,}5$.
+
+\item Από το θεμελιώδες θεώρημα του ολοκληρωτικού λογισμού έχουμε:
+\[ f(4) - f(1) = \int_{1}^{4} f'(x) \d x \]
+Γνωρίζουμε ότι $f(1) = 4$, οπότε:
+\[ f(4) = 4 + \int_{1}^{4} f'(x) \d x \]
+Για $x \in (1, 4)$, ισχύει $f'(x) < 0$. Το ολοκλήρωμα $\int_{1}^{4} f'(x) \d x$ αντιπροσωπεύει το πρόσημο του εμβαδού που περικλείεται από την $C_{f'}$, τον άξονα $x'$ και τις κάθετες $x=1, x=4$. Επειδή η $C_{f'}$ βρίσκεται κάτω από τον άξονα $x'$ στο διάστημα $(1, 4)$, ισχύει:
+\[ \int_{1}^{4} f'(x) \d x < 0 \]
+Άρα:
+\[ f(4) = 4 + (\text{αρνητικός αριθμός}) < 4 \]
+
+\item Η εξίσωση της εφαπτομένης της $C_f$ στο σημείο $x_0 = 2{,}5$ δίνεται από τον τύπο:
+\[ y - f(x_0) = f'(x_0)(x - x_0) \]
+Από τα δεδομένα και το σχήμα έχουμε:
+\begin{itemize}
+    \item $f(2{,}5) = 1$
+    \item $f'(2{,}5) = -2{,}25 = -\frac{9}{4}$
+\end{itemize}
+Αντικαθιστώντας, η εξίσωση είναι:
+\begin{align*}
+    y - 1 &= -\frac{9}{4}(x - 2{,}5) \\
+    y - 1 &= -\frac{9}{4}x + \frac{9 \cdot 2{,}5}{4} \\
+    y &= -2{,}25x + \frac{22{,}5}{4} + 1 \\
+    y &= -2{,}25x + 5{,}625 + 1 \\
+    y &= -2{,}25x + 6{,}625
+\end{align*}
+Ή σε κλασματική μορφή:
+\[ y = -\frac{9}{4}x + \frac{53}{8} \]
+\end{itemize}
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 92ο ΘΕΜΑ Γ ===========

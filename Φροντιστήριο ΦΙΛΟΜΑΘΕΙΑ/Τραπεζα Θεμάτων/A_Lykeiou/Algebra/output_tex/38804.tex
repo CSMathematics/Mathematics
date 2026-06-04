@@ -1,4 +1,3 @@
-% --- Άσκηση 38804 (38804.tex) ---
 \Askhsh{38804}{4}
 \begin{ylh}{2}
     \item 4.2. Ανισώσεις 2ου Βαθμού
@@ -13,3 +12,70 @@
 
 \begin{center}
 \begin{tikzpicture}[scale=0.55]
+    % Σχήμα 1: 3×3 τρύπα 1×1 → 8 τετ.
+    \begin{scope}[shift={(0,0)}]
+    \foreach \x in {0,1,2} {
+        \foreach \y in {0,1,2} {
+            \pgfmathtruncatemacro{\ishole}{(\x==1 && \y==1) ? 1 : 0}
+            \ifnum\ishole=0
+                \fill[maincolor!50] (\x,\y) rectangle (\x+1,\y+1);
+                \draw[thick] (\x,\y) rectangle (\x+1,\y+1);
+            \fi
+        }
+    }
+    \node[below] at (1.5,-0.5) {\small 1\textsuperscript{ο}};
+    \end{scope}
+
+    % Σχήμα 2: 4×4 τρύπα 2×2 → 12 τετ.
+    \begin{scope}[shift={(5,0)}]
+    \foreach \x in {0,...,3} {
+        \foreach \y in {0,...,3} {
+            \pgfmathtruncatemacro{\ishole}{(\x>=1 && \x<=2 && \y>=1 && \y<=2) ? 1 : 0}
+            \ifnum\ishole=0
+                \fill[maincolor!50] (\x,\y) rectangle (\x+1,\y+1);
+                \draw[thick] (\x,\y) rectangle (\x+1,\y+1);
+            \fi
+        }
+    }
+    \node[below] at (2,-0.5) {\small 2\textsuperscript{ο}};
+    \end{scope}
+
+    % Σχήμα 3: 5×5 τρύπα 3×3 → 16 τετ.
+    \begin{scope}[shift={(11,0)}]
+    \foreach \x in {0,...,4} {
+        \foreach \y in {0,...,4} {
+            \pgfmathtruncatemacro{\ishole}{(\x>=1 && \x<=3 && \y>=1 && \y<=3) ? 1 : 0}
+            \ifnum\ishole=0
+                \fill[maincolor!50] (\x,\y) rectangle (\x+1,\y+1);
+                \draw[thick] (\x,\y) rectangle (\x+1,\y+1);
+            \fi
+        }
+    }
+    \node[below] at (2.5,-0.5) {\small 3\textsuperscript{ο}};
+    \end{scope}
+\end{tikzpicture}\captionof{figure}{Άσκηση 38804}
+\end{center}
+
+\begin{alist}
+\item
+
+\begin{rlist}
+\item Από πόσα πλεγμένα τετραγωνάκια αποτελείται το δέκατο σχήμα στη σειρά; Να αιτιολογήσετε την απάντησή σας.
+\monades{4}
+\item Η «τρύπα» στη μέση του δέκατου σχήματος σε πόσα τετραγωνάκια αντιστοιχεί; Να αιτιολογήσετε την απάντησή σας.
+\monades{3}
+\end{rlist}
+\item Από πόσα πλεγμένα τετραγωνάκια αποτελείται το $\nu$-οστό σχήμα στη σειρά; Να εξηγήσετε τη σκέψη σας.
+\monades{4}
+\item Ο Αντρέας σκέφτηκε να φτιάξει μια ομάδα σχημάτων του μοτίβου, την οποία θα επαναλαμβάνει για να πλέξει την κουβέρτα.
+
+\begin{rlist}
+\item Να υπολογίσετε πόσα σχήματα του μοτίβου θα πρέπει να φτιάξει, ώστε τα τετραγωνάκια που θα πλέξει να είναι μεταξύ $500$ και $600$.
+\monades{8}
+\item Ο Αντρέας αποφάσισε να φτιάξει τα 10 πρώτα σχήματα του μοτίβου και, για να καλύψει όσο το δυνατόν περισσότερα κενά στην κουβέρτα, αποφάσισε να πλέξει $7$ τέτοιες δεκάδες και επιπλέον κάποια μεμονωμένα σχήματα. Πόσα περίπου κουβάρια μαλλί θα πρέπει να αγοράσει, για να φτιάξει την κουβέρτα; Να αιτιολογήσετε την απάντησή σας.
+\monades{6}
+
+Δίνονται: $\sqrt{616} \cong 24{,}8$ και $\sqrt{516} \cong 22{,}7$.
+\end{rlist}
+\end{alist}
+

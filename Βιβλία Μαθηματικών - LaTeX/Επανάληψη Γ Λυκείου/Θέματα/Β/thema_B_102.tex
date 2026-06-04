@@ -1,0 +1,34 @@
+\begin{thema}{Β}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση $C_f$ μιας συνάρτησης $f$ ορισμένης στο $\mathbb{R} - \{1\}$.
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  % grid
+  \draw[help lines, gray!30] (-3,-3) grid (7,5);
+  % axes
+  \draw[-latex] (-3.3,0) -- (7.3,0) node[right] {$x$};
+  \draw[-latex] (0,-3.3) -- (0,5.3) node[above] {$y$};
+  % ticks
+  \foreach \x in {-2,-1,2,3,4,5,6}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-2,-1,1,2,3,4}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  % asymptotes
+  \draw[dashed, red!60!black] (1,-3.3) -- (1,5.3) node[above,font=\footnotesize] {$x=1$};
+  \draw[dashed, red!60!black] (-3.3,2) -- (7.3,2) node[right,font=\footnotesize] {$y=2$};
+  % left branch
+  \draw[very thick, blue!70!black, domain=-3:0.75, samples=80] plot (\x, {2 + 1/(\x-1)});
+  % right branch
+  \draw[very thick, blue!70!black, domain=1.25:7, samples=80] plot (\x, {2 + 1/(\x-1)});
+  % points
+  \filldraw[blue!70!black] (0,1) circle (2pt) node[below left] {$(0,1)$};
+  \filldraw[blue!70!black] (2,3) circle (2pt) node[above left] {$(2,3)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+  \item Να υπολογίσετε τα όρια $\displaystyle\lim_{x \to 1^-} f(x)$, $\displaystyle\lim_{x \to 1^+} f(x)$ και $\displaystyle\lim_{x \to +\infty} f(x)$.
+  \item Να προσδιορίσετε τις ασύμπτωτες (κατακόρυφες, οριζόντιες) της γραφικής παράστασης.
+  \item Να μελετήσετε τη μονοτονία της $f$ σε κάθε κλάδο.
+  \item Να εξετάσετε αν η $f$ είναι συνεχής στα σημεία $x_0 = 0$ και $x_0 = 1$. Να αιτιολογήσετε.
+\end{erwthma}
+\end{thema}

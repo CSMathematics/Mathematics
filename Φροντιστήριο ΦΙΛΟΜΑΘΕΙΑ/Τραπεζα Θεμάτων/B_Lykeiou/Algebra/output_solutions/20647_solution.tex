@@ -1,23 +1,18 @@
+\lysh{20647}{4}
 \begin{alist}
 \item Αν υποθέσουμε ότι το πολυώνυμο έχει ακέραιους συντελεστές, τότε κάθε ακέραια ρίζα του θα είναι διαιρέτης του σταθερού όρου του. Ο σταθερός όρος του όμως είναι ίσος με 3 και ο αριθμός 2 που είναι ρίζα του πολυωνύμου δεν είναι διαιρέτης του 3. Άρα το πολυώνυμο δεν έχει όλους τους συντελεστές του ακέραιους, οπότε υπάρχει ένας τουλάχιστον συντελεστής του που δεν είναι ακέραιος.
-
 \item Με την επιπλέον πληροφορία ότι $P(1) = 0$ έχουμε:
 \begin{align*}
 \begin{cases} P(2) = 0 \\ P(1) = 0 \end{cases} &\Leftrightarrow \begin{cases} 8\alpha + 4\beta - 2\beta + 3 = 0 \\ \alpha + \beta - \beta + 3 = 0 \end{cases} \\
 &\Leftrightarrow \begin{cases} \alpha = -3 \\ 2\beta = 21 \end{cases} \Leftrightarrow \begin{cases} \alpha = -3 \\ \beta = \dfrac{21}{2} \end{cases}
 \end{align*}
-
 \item Με $\alpha = -3$ και $\beta = \dfrac{21}{2}$ έχουμε $P(x) = -3x^3 + \dfrac{21}{2}x^2 - \dfrac{21}{2}x + 3$. \\
 Αρχικά θα βρούμε τις ρίζες του πολυωνύμου. \\
 Είναι: 
 \[P(x) = 0 \Leftrightarrow -3x^3 + \frac{21}{2}x^2 - \frac{21}{2}x + 3 = 0 \Leftrightarrow -6x^3 + 21x^2 - 21x + 6 = 0\]
 Είναι όμως γνωστό ότι $P(1) = 0$, οπότε με τη βοήθεια του διπλανού σχήματος Horner έχουμε:
 \begin{center}
-\begin{tabular}{rrrr|c}
-$-6$ & $21$ & $-21$ & $6$ & $1$ \\ \cline{1-4}
-    & $-6$ & $15$ & $-6$ & \\ \cline{1-4}
-$-6$ & $15$ & $-6$ & $0$ &
-\end{tabular}
+\Horner{6,21,-21,6}{1}
 \end{center}
 \begin{align*}
 P(x) = 0 &\Leftrightarrow (x-1)(-6x^2 + 15x - 6) = 0 \\
@@ -27,12 +22,12 @@ P(x) = 0 &\Leftrightarrow (x-1)(-6x^2 + 15x - 6) = 0 \\
 Έχουμε λοιπόν: 
 \[P(x) \le 0 \Leftrightarrow -6(x-1)(x-2)\left(x-\frac{1}{2}\right) \le 0\]
 και όταν $x>2$ όλοι οι παράγοντες του πολυωνύμου είναι θετικοί, οπότε αυτό είναι ομόσημο του $-6$, δηλαδή αρνητικό. Σε καθένα από τα προηγούμενα διαστήματα αλλάζει πρόσημο ακριβώς ένας όρος του γινομένου, οπότε προκύπτει ο παρακάτω πίνακας προσήμων του πολυωνύμου.
-
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-$x$ & $-\infty \hspace{2cm} \dfrac{1}{2}$ & $1$ & $2$ & $+\infty$ \\ \hline
-$P(x)$ & $+$ \hspace{0.5cm} $0$ \hspace{0.5cm} $-$ & $0$ \hspace{0.5cm} $+$ & $0$ \hspace{0.5cm} $-$ \\ \hline
+
+$x$ & $-\infty \hspace{2cm} \dfrac{1}{2}$ & $1$ & $2$ & $+\infty$ \\ 
+$P(x)$ & $+$ \hspace{0.5cm} $0$ \hspace{0.5cm} $-$ & $0$ \hspace{0.5cm} $+$ & $0$ \hspace{0.5cm} $-$ \\ 
 \end{tabular}
 \end{center}
 \end{alist}
+

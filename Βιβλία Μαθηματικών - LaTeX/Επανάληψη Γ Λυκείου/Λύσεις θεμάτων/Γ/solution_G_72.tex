@@ -1,0 +1,194 @@
+*   Function: $f: \mathbb{R} \to \mathbb{R}$ differentiable.
+    *   Condition: $f'(x) \cdot e^{f(x)} = 2x$.
+    *   Initial condition: $f(0) = 0$.
+    *   Part 1: Show $f(x) = \ln(x^2 + 1)$.
+    *   Part 2: Study convexity and inflection points.
+    *   Part 3: Prove $\ln(x^2 + 1) < x$ for $x > 0$ (implied, since for $x \le 0$ it's obviously true if $x$ is negative enough, but $x^2+1 \ge 1 \Rightarrow \ln(x^2+1) \ge 0$, so for $x \le 0$, the inequality $\ln(x^2+1) < x$ is generally false. I should check the range for part 3. Actually, the prompt asks to prove $\ln(x^2+1) < x$. This is only true for $x > 0$ or a specific interval. Let's re-evaluate: $g(x) = x - \ln(x^2+1)$. $g'(x) = 1 - \frac{2x}{x^2+1} = \frac{x^2-2x+1}{x^2+1} = \frac{(x-1)^2}{x^2+1} \ge 0$. $g$ is non-decreasing. $g(0) = 0 - \ln(1) = 0$. For $x > 0$, $g(x) > g(0) = 0$, so $x > \ln(x^2+1)$. For $x < 0$, $g(x) < g(0) = 0$, so $x < \ln(x^2+1)$. The problem likely assumes $x > 0$ for part 3, or maybe just for a specific range. Given the context of $\Gamma$ Lyceum, usually, it's $x > 0$).
+    *   Part 4: Area bounded by the tangent at $x=0$, $C_f$, and $x=1$.
+
+    *   **Part 1: Proving $f(x) = \ln(x^2 + 1)$**
+        *   Given $f'(x) e^{f(x)} = 2x$.
+        *   Notice that the left side is the derivative of $e^{f(x)}$ with respect to $x$: $\frac{d}{dx}(e^{f(x)}) = f'(x)e^{f(x)}$.
+        *   So, $\frac{d}{dx}(e^{f(x)}) = 2x$.
+        *   Integrating both sides from $0$ to $x$ (using definite integrals since indefinite integrals are forbidden):
+            $\int_0^x \frac{d}{dt}(e^{f(t)}) dt = \int_0^x 2t dt$.
+            $e^{f(x)} - e^{f(0)} = [t^2]_0^x = x^2$.
+        *   Since $f(0) = 0$, $e^{f(0)} = e^0 = 1$.
+        *   $e^{f(x)} - 1 = x^2 \Rightarrow e^{f(x)} = x^2 + 1$.
+        *   Taking the natural logarithm: $f(x) = \ln(x^2 + 1)$.
+
+    *   **Part 2: Convexity and Inflection Points**
+        *   $f(x) = \ln(x^2 + 1)$.
+        *   $f'(x) = \frac{2x}{x^2 + 1}$.
+        *   $f''(x) = \frac{2(x^2 + 1) - 2x(2x)}{(x^2 + 1)^2} = \frac{2x^2 + 2 - 4x^2}{(x^2 + 1)^2} = \frac{2 - 2x^2}{(x^2 + 1)^2} = \frac{2(1-x)(1+x)}{(x^2 + 1)^2}$.
+        *   Analysis of $f''(x)$:
+            *   $f''(x) = 0 \Leftrightarrow 1-x^2 = 0 \Leftrightarrow x = \pm 1$.
+            *   $f''(x) > 0 \Leftrightarrow 1-x^2 > 0 \Leftrightarrow x \in (-1, 1)$.
+            *   $f''(x) < 0 \Leftrightarrow 1-x^2 < 0 \Leftrightarrow x \in (-\infty, -1) \cup (1, +\infty)$.
+        *   Conclusion:
+            *   $f$ is $\textbf{κοίλη}$ on $(-1, 1)$.
+            *   $f$ is $\textbf{κυρτή}$ on $(-\infty, -1)$ and $(1, +\infty)$.
+            *   Inflection points: $(-1, \ln 2)$ and $(1, \ln 2)$.
+        *   Add the `tkz-tab` table for $f''(x)$.
+
+    *   **Part 3: $\ln(x^2+1) < x$**
+        *   Assume $x > 0$ (since for $x \le 0$, $\ln(x^2+1) \ge 0$ while $x \le 0$, so the inequality is reversed).
+        *   Define $g(x) = x - \ln(x^2+1)$ for $x \in [0, +\infty)$.
+        *   $g'(x) = 1 - \frac{2x}{x^2+1} = \frac{x^2+1-2x}{x^2+1} = \frac{(x-1)^2}{x^2+1}$.
+        *   Since $(x-1)^2 \ge 0$ and $x^2+1 > 0$, $g'(x) \ge 0$ for all $x \in [0, +\infty)$.
+        *   $g'(x) = 0$ only at $x=1$.
+        *   Thus, $g$ is $\textbf{γνησίως αύξουσα}$ on $[0, +\infty)$.
+        *   Since $g(0) = 0 - \ln(1) = 0$, then for $x > 0$, $g(x) > g(0) = 0$.
+        *   $x - \ln(x^2+1) > 0 \Rightarrow \ln(x^2+1) < x$.
+
+    *   **Part 4: Area Calculation**
+        *   Tangent at $x=0$:
+            *   Point: $(0, f(0)) = (0, 0)$.
+            *   Slope: $f'(0) = \frac{2(0)}{0^2+1} = 0$.
+            *   Equation: $y - 0 = 0(x - 0) \Rightarrow y = 0$ (the x-axis).
+        *   Region bounded by $y=0$, $f(x) = \ln(x^2+1)$, and $x=1$.
+        *   For $x \in [0, 1]$, $f(x) \ge 0$.
+        *   Area $E = \int_0^1 (f(x) - 0) dx = \int_0^1 \ln(x^2+1) dx$.
+        *   Integration by parts: $\int u dv = uv - \int v du$.
+            *   $u = \ln(x^2+1) \Rightarrow du = \frac{2x}{x^2+1} dx$.
+            *   $dv = dx \Rightarrow v = x$.
+        *   $E = [x \ln(x^2+1)]_0^1 - \int_0^1 \frac{2x^2}{x^2+1} dx$.
+        *   Evaluate the first part: $1 \cdot \ln(2) - 0 \cdot \ln(1) = \ln 2$.
+        *   Evaluate the integral:
+            $\int_0^1 \frac{2x^2}{x^2+1} dx = 2 \int_0^1 \frac{x^2+1-1}{x^2+1} dx = 2 \int_0^1 (1 - \frac{1}{x^2+1}) dx$.
+            $= 2 [x - \arctan x]_0^1 = 2(1 - \arctan 1) - 2(0 - \arctan 0) = 2(1 - \frac{\pi}{4}) = 2 - \frac{\pi}{2}$.
+        *   Total Area: $E = \ln 2 - (2 - \frac{\pi}{2}) = \ln 2 + \frac{\pi}{2} - 2$.
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item`
+    *   `\eng{...}` for terms (if applicable, e.g., `\eng{Lagrange}` if used, but not needed here. I'll use `\textbf{...}`).
+    *   `\begin{align*}` for the integral.
+    *   `\d x` for differentials.
+    *   `tkz-tab` for $f''(x)$.
+    *   No indefinite integrals. Use definite integral brackets.
+    *   Check if any forbidden concepts were used. (No 2nd derivative test for extrema, no differential equations solution methods - just the fundamental theorem of calculus/definite integrals).
+    *   Ensure $f''(x)$ table colors: `colorC = red7`, `colorL = red9`, `colorV = red7`.
+    *   Ensure $x$ axis limits for part 3 and 4 are correct.
+
+    *   $f'(x) = \frac{2x}{x^2+1}$.
+    *   $f''(x) = \frac{2(1-x^2)}{(x^2+1)^2}$.
+    *   Roots of $f''(x)$ are $x = -1$ and $x = 1$.
+    *   Sign of $f''(x)$:
+        *   $x < -1 \Rightarrow f''(x) < 0$ (κυρτή)
+        *   $-1 < x < 1 \Rightarrow f''(x) > 0$ (κοίλη)
+        *   $x > 1 \Rightarrow f''(x) < 0$ (κυρτή)
+    *   Points of inflection: $(-1, \ln 2)$ and $(1, \ln 2)$.
+
+    *   Tangent $y = 0$.
+    *   Curve $y = \ln(x^2+1)$.
+    *   Line $x = 1$.
+    *   Area $E = \int_0^1 \ln(x^2+1) \d x$.
+    *   $\int_0^1 \ln(x^2+1) \d x = [x \ln(x^2+1)]_0^1 - \int_0^1 \frac{2x^2}{x^2+1} \d x$.
+    *   $[x \ln(x^2+1)]_0^1 = 1 \cdot \ln 2 - 0 \cdot 0 = \ln 2$.
+    *   $\int_0^1 \frac{2x^2}{x^2+1} \d x = 2 \int_0^1 (1 - \frac{1}{x^2+1}) \d x = 2 [x - \arctan x]_0^1 = 2(1 - \frac{\pi}{4}) = 2 - \frac{\pi}{2}$.
+    *   $E = \ln 2 - (2 - \frac{\pi}{2}) = \ln 2 + \frac{\pi}{2} - 2$.
+
+    *   Wait, the prompt says "Prove $\ln(x^2+1) < x$". This is definitely only for $x > 0$. I will explicitly state $x > 0$ in the solution for clarity, as otherwise, the statement is false.
+
+    *   $\textbf{κοίλη}$ (concave/convex depending on Greek terminology; $\text{concave down} = \text{κοίλη}$ in Greek high school math).
+    *   $\textbf{κυρτή}$ (convex).
+    *   $\textbf{γνησίως αύξουσα}$ (strictly increasing).
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item` for each part.
+    *   `\[ ... \]` for math.
+    *   `\begin{align*}` for integration.
+    *   `\d x`.
+    *   `tkz-tab` in `center`.
+
+    *   Check for indefinite integrals: I'll use $[...]_a^b$.
+    *   Check for $\arctan$: This is part of the standard curriculum ($\int \frac{1}{x^2+1} dx$).
+    *   Verify the tangent: $f'(0) = 0, f(0) = 0 \Rightarrow y = 0(x-0)+0 \Rightarrow y=0$. Correct.
+
+    Let's refine the $f''(x)$ table.
+    `\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1cm, $f''(x)$ / 1cm, $f(x)$ / 1cm}{$-\infty$, $-1$, $1$, $+\infty$}`
+    `\tkzTabLine{, -, z, +, z, -, }`
+    `\tkzTabVar{ / , \searrow, t, \nearrow, t, \searrow / }`
+    Wait, the $f(x)$ row in `tkz-tab` should show monotonicity based on $f'(x)$, not $f''(x)$.
+    The question asks for convexity, so the table should focus on $f''(x)$.
+    Actually, it's better to have a table with $f'(x)$ and $f''(x)$.
+    But for convexity, usually $f''(x)$ is the key.
+    $f'(x) = 2x/(x^2+1)$. $f'(x) = 0 \iff x = 0$.
+    $x < 0 \Rightarrow f'(x) < 0$. $x > 0 \Rightarrow f'(x) > 0$.
+    So for $f(x)$ in `tkz-tab`:
+    $\searrow$ from $-\infty$ to $0$, then $\nearrow$ from $0$ to $+\infty$.
+    For $f''(x)$:
+    $-$ until $-1$, then $+$ until $1$, then $-$ until $+\infty$.
+
+    Final check on the integration by parts:
+    $u = \ln(x^2+1) \Rightarrow u' = \frac{2x}{x^2+1}$.
+    $v' = 1 \Rightarrow v = x$.
+    $\int_0^1 \ln(x^2+1) dx = [x \ln(x^2+1)]_0^1 - \int_0^1 \frac{2x^2}{x^2+1} dx$.
+    Yes, it's correct.
+%=========== ΛΥΣΗ - Το ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Από τη συνθήκη $f'(x) \cdot e^{f(x)} = 2x$, παρατηρούμε ότι το αριστερό μέλος αποτελεί την παράγωγο της συνάρτησης $e^{f(x)}$ ως προς $x$, καθώς:
+\[ \frac{d}{dx}(e^{f(x)}) = f'(x) \cdot e^{f(x)} \]
+Συνεπώς, έχουμε $\frac{d}{dx}(e^{f(x)}) = 2x$. Ολοκληρώνοντας τα δύο μέλη στο διάστημα $[0, x]$, προκύπτει:
+\[ \int_0^x \frac{d}{dt}(e^{f(t)}) \d t = \int_0^x 2t \d t \]
+\[ \left[ e^{f(t)} \right]_0^x = \left[ t^2 \right]_0^x \]
+\[ e^{f(x)} - e^{f(0)} = x^2 - 0^2 \]
+Δεδομένου ότι $f(0) = 0$, έχουμε $e^{f(0)} = e^0 = 1$, άρα:
+\[ e^{f(x)} - 1 = x^2 \Rightarrow e^{f(x)} = x^2 + 1 \]
+Εφόσον $x^2+1 > 0$ για κάθε $x \in \mathbb{R}$, μπορούμε να εφαρμόσουμε τη συνάρτηση $\ln$ και τα δύο μέλη:
+\[ f(x) = \ln(x^2 + 1) \]
+
+\item Για τη μελέτη της κυρτότητας και των σημείων καμπής, υπολογίζουμε τη δεύτερη παράγωγο της $f$.
+Αρχικά, η πρώτη παράγωγος είναι:
+\[ f'(x) = \frac{2x}{x^2+1} \]
+Η δεύτερη παράγωγος είναι:
+\[ f''(x) = \frac{2(x^2+1) - 2x(2x)}{(x^2+1)^2} = \frac{2x^2+2-4x^2}{(x^2+1)^2} = \frac{2-2x^2}{(x^2+1)^2} = \frac{2(1-x)(1+x)}{(x^2+1)^2} \]
+Αναλύουμε το πρόσημο της $f''(x)$:
+\begin{itemize}
+    \item $f''(x) = 0 \Leftrightarrow 1-x^2 = 0 \Leftrightarrow x = \pm 1$.
+    \item $f''(x) > 0 \Leftrightarrow 1-x^2 > 0 \Leftrightarrow x \in (-1, 1)$.
+    \item $f''(x) < 0 \Leftrightarrow 1-x^2 < 0 \Leftrightarrow x \in (-\infty, -1) \cup (1, +\infty)$.
+\end{itemize}
+Επομένως:
+\begin{itemize}
+    \item Η $f$ είναι $\textbf{κοίλη}$ στο διάστημα $(-1, 1)$.
+    \item Η $f$ είναι $\textbf{κυρτή}$ στα διαστήματα $(-\infty, -1)$ και $(1, +\infty)$.
+    \item Τα σημεία καμπής είναι τα $(-1, \ln 2)$ και $(1, \ln 2)$.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1cm, $f''(x)$ / 1cm, $f(x)$ / 1cm}{$-\infty$, $-1$, $0$, $1$, $+\infty$}
+\tkzTabLine{, -, z, +, z, -, }
+\tkzTabVar{ / , \searrow, t, \nearrow, t, \searrow / }
+\end{tikzpicture}
+\end{center}
+
+\item Για $x > 0$, ορίζουμε τη συνάρτηση $g(x) = x - \ln(x^2+1)$ στο διάστημα $[0, +\infty)$.
+Η παράγωγος της $g$ είναι:
+\[ g'(x) = 1 - \frac{2x}{x^2+1} = \frac{x^2+1-2x}{x^2+1} = \frac{(x-1)^2}{x^2+1} \]
+Παρατηρούμε ότι $(x-1)^2 \ge 0$ και $x^2+1 > 0$ για κάθε $x \in [0, +\infty)$, άρα $g'(x) \ge 0$.
+Επειδή $g'(x) = 0$ μόνο για $x=1$, η συνάρτηση $g$ είναι $\textbf{γνησίως αύξουσα}$ στο $[0, +\infty)$.
+Εφόσον $g(0) = 0 - \ln(1) = 0$, τότε για κάθε $x > 0$ ισχύει $g(x) > g(0)$, δηλαδή:
+\[ x - \ln(x^2+1) > 0 \Rightarrow \ln(x^2+1) < x \]
+
+\item Η εφαπτομένη της $C_f$ στο σημείο $x=0$ έχει εξίσωση:
+\[ y - f(0) = f'(0)(x-0) \Rightarrow y - 0 = \frac{2(0)}{0^2+1}(x-0) \Rightarrow y = 0 \]
+Το χωρίο περικλείεται από την ευθεία $y=0$, την $C_f$ και την ευθεία $x=1$. Για $x \in [0, 1]$, ισχύει $f(x) \ge 0$. Το εμβαδόν $E$ είναι:
+\[ E = \int_0^1 \ln(x^2+1) \d x \]
+Εφαρμόζοντας ολοκλήρωση κατά części με $u = \ln(x^2+1) \Rightarrow \d u = \frac{2x}{x^2+1} \d x$ και $\d v = \d x \Rightarrow v = x$:
+\begin{align*}
+E &= \left[ x \ln(x^2+1) \right]_0^1 - \int_0^1 \frac{2x^2}{x^2+1} \d x \\
+&= (1 \cdot \ln 2 - 0 \cdot \ln 1) - 2 \int_0^1 \frac{x^2+1-1}{x^2+1} \d x \\
+&= \ln 2 - 2 \int_0^1 \left( 1 - \frac{1}{x^2+1} \right) \d x \\
+&= \ln 2 - 2 \left[ x - \arctan x \right]_0^1 \\
+&= \ln 2 - 2 \left( (1 - \arctan 1) - (0 - \arctan 0) \right) \\
+&= \ln 2 - 2 \left( 1 - \frac{\pi}{4} \right) \\
+&= \ln 2 - 2 + \frac{\pi}{2}
+\end{align*}
+Άρα το εμβαδόν είναι $E = \ln 2 + \frac{\pi}{2} - 2$ τ.μ.
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - Το ΘΕΜΑ Γ ===========

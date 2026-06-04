@@ -1,4 +1,3 @@
-% --- Άσκηση 13168 (13168.tex) ---
 \Askhsh{13168}{4}
 \begin{ylh}{2}
     \item 2.2. Διάταξη Πραγματικών Αριθμών
@@ -28,3 +27,42 @@
     every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
     every axis y label/.style = {at={(current axis.above origin)}, anchor=south east},
 ]
+    % Παράδειγμα με λ = 1: f(x) = x² + 2x - 1
+    \addplot[very thick, maincolor, domain=-4.5:2.5] {x^2 + 2*x - 1};
+
+    % Σημείο (0,-1) — τομή με y-άξονα
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(0,-1)};
+    \node[right] at (axis cs:0.2,-1) {$(0,-1)$};
+
+    % Κορυφή (-λ, -λ²-1): για λ=1 → (-1,-2)
+    \addplot[only marks, mark=*, mark size=1.5pt, secondarycolor] coordinates {(-1,-2)};
+    \node[secondarycolor, below] at (axis cs:-1,-2) {$(-\lambda, -\lambda^2-1)$};
+
+    % Σημεία τομής με x-άξονα: A και B
+    % x² + 2x - 1 = 0 → x = -1 ± √2 ≈ -2.41, 0.41
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(-2.414,0) (0.414,0)};
+    \node[above left]  at (axis cs:-2.414,0) {$A$};
+    \node[above right] at (axis cs:0.414,0)  {$B$};
+
+    % Ευθεία y = -λ² - 1 (για λ=1 → y=-2)
+    \addplot[dashed, secondarycolor, domain=-4.5:2.5] {-2};
+    \node[secondarycolor, right] at (axis cs:1.5,-1.5) {\small $y = -\lambda^2 - 1$};
+
+    % Ετικέτα
+    \node[maincolor, right] at (axis cs:2,3) {$C_f$};
+\end{axis}
+\end{tikzpicture}\captionof{figure}{Άσκηση 13168}
+\end{center}
+\begin{alist}
+\item Να αποδείξετε ότι:
+\begin{rlist}
+\item $\gamma = - 1$. \monades{5}
+\item
+  η γραφική παράσταση της $f$ δεν είναι κάτω από την ευθεία $y = - \lambda^{2} - 1$ για κάθε $\lambda\mathbb{\in R}$. \monades{7}
+\end{rlist}
+\item Να αποδείξετε ότι για κάθε $\lambda\mathbb{\in R}$ η γραφική παράσταση της $f$ τέμνει τον άξονα $x'x$ σε δύο σημεία $A$ και $B$ με συντεταγμένες $A\left( - \lambda - \sqrt{\lambda^{2} + 1},0 \right)$ και $B\left( - \lambda + \sqrt{\lambda^{2} + 1},0 \right)\ $.
+\monades{7}
+\item Να αποδείξετε ότι η απόσταση των $A$ και $B$ είναι μεγαλύτερη ή ίση του 2 για κάθε $\lambda\mathbb{\in R}$.
+\monades{6}
+\end{alist}
+

@@ -1,0 +1,77 @@
+\begin{thema}{Γ}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση $C_f$ μιας
+\textbf{συνεχούς} και \textbf{μη αρνητικής} συνάρτησης $f$,
+παραγωγίσιμης στο $(0,4)$, ορισμένης στο $[0,4]$.
+Γνωρίζουμε ότι $f'(2)=2$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  % πλέγμα
+  \draw[help lines, gray!30] (-0.5,-0.5) grid (5,5);
+  % άξονες
+  \draw[-latex] (-0.7,0) -- (5.3,0) node[right] {$x$};
+  \draw[-latex] (0,-0.7) -- (0,5.3) node[above] {$y$};
+  % υποδιαιρέσεις
+  \foreach \x in {1,2,3,4}
+    \draw (\x,0.08) -- (\x,-0.08) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {1,2,3,4}
+    \draw (0.08,\y) -- (-0.08,\y) node[left,font=\footnotesize] {$\y$};
+  % χορδή AΔ: y = x
+  \draw[gray!85, thick] (0,0) -- (4,4);
+  \node[gray!85, font=\footnotesize] at (1.15,1.5) {$A\varDelta$};
+  % S-καμπύλη: f < x στο (0,2), f > x στο (2,4)
+  % κλίση ~2 στο K(2,2)
+  \draw[very thick, maincolor, smooth, tension=0.6]
+    plot coordinates {
+      (0,0)
+      (0.5,0.04)
+      (1,0.25)
+      (1.5,0.85)
+      (2,2)
+      (2.5,3.15)
+      (3,3.75)
+      (3.5,3.95)
+      (4,4)
+    };
+  % σκίαση κάτω από καμπύλη (ίδια coordinates)
+  \fill[maincolor!15, opacity=0.6, smooth, tension=0.6]
+    (0,0)
+    -- plot coordinates {
+         (0,0)(0.5,0.04)(1,0.25)(1.5,0.85)
+         (2,2)(2.5,3.15)(3,3.75)(3.5,3.95)(4,4)
+       }
+    -- (4,0) -- cycle;
+  % εφαπτομένη (ε) στο K: y = 2x-2, κλίση 2
+  % x=1 -> y=0,  x=3 -> y=4
+  \draw[secondcolor!70!black, thick] (1.3,0) -- (2.7,4)
+    node[left, font=\footnotesize, secondcolor!70!black] {$(\varepsilon)$};
+  % σημεία
+  \filldraw[maincolor] (2,2) circle (2.5pt)
+    node[left=4pt, font=\small] {$K(2,2)$};
+  \filldraw[maincolor] (0,0) circle (2pt)
+    node[below left, font=\small] {$A$};
+  \filldraw[maincolor] (4,4) circle (2pt)
+    node[above right, font=\small] {$\Delta$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+  \item Να μελετήσετε {γραφικά} την κυρτότητα της $f$ στο
+    $[0,4]$ και να δικαιολογήσετε ότι το $K(2,2)$ είναι
+    {σημείο καμπής} της $C_f$.
+  \item Να γράψετε την εξίσωση της εφαπτομένης $(\varepsilon)$ της
+    $C_f$ στο $K(2,2)$. Στη συνέχεια να δείξετε ότι υπάρχει $c\in(0,4)$ τέτοιο
+    ώστε $f'(c)=1$.
+  \item Αιτιολογήστε τις ανισότητες:
+      $\dint_0^2 f(x)\,\d x > 0 \text{ και }\dint_2^4 f(x)\,\d x < 8.$
+  \item Χρησιμοποιώντας τη θέση της $C_f$ σχετικά με τη
+    {χορδή $A\Delta$}, να αποδείξετε ότι:
+    \[
+      \int_0^2 f(x)\,\d x < 2
+      \qquad\text{και}\qquad
+      \int_2^4 f(x)\,\d x > 6,
+    \]
+
+\end{erwthma}
+\end{thema}

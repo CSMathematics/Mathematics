@@ -1,0 +1,37 @@
+\begin{thema}{Γ}
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση $C_f$ μιας δύο φορές παραγωγίσιμης συνάρτησης $f$ ορισμένης στο $[-1, 5]$. Στο σημείο $A(2, 3)$ η εφαπτομένη $(\varepsilon)$ έχει κλίση $-1$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  % grid
+  \draw[help lines, gray!30] (-2,-2) grid (6,5);
+  % axes
+  \draw[-latex] (-2.3,0) -- (6.3,0) node[right] {$x$};
+  \draw[-latex] (0,-2.3) -- (0,5.3) node[above] {$y$};
+  % ticks
+  \foreach \x in {-1,1,2,3,4,5}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-1,1,2,3,4}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  % curve (a smooth bell-like shape)
+  \draw[very thick, maincolor, smooth, tension=0.6]
+    plot coordinates {(-1,-1) (0,0) (1,2.5) (2,3) (3,1) (4,0) (5,-1.5)};
+  % tangent line at A(2,3)
+  \draw[secondcolor!60!black, thick] (0.5,4.5) -- (5.5,-0.5) node[right,font=\footnotesize] {$(\varepsilon)$};
+  % shaded area
+  \fill[blue!15, opacity=0.5, smooth, tension=0.6]
+    plot coordinates {(0,0) (1,2.5) (2,3) (3,1) (4,0)} -- cycle;
+  % points
+  \filldraw[maincolor] (2,3) circle (2pt) node[above right] {$A(2,3)$};
+  \filldraw[maincolor] (0,0) circle (2pt);
+  \filldraw[maincolor] (4,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+  \item Να γράψετε την εξίσωση της εφαπτομένης $(\varepsilon)$ της $C_f$ στο σημείο $A(2, 3)$.
+  \item Να εξετάσετε αν υπάρχει $\xi \in (0, 4)$ τέτοιο ώστε $f'(\xi) = 0$. Να αιτιολογήσετε.
+  \item Να μελετήσετε γραφικά την κυρτότητα της $f$ και να εκτιμήσετε τη θέση ενός σημείου καμπής.
+  \item Από το σχήμα, να εκτιμήσετε αν ισχύει $\dint_0^4 f(x) \d x > 4$ ή $\dint_0^4 f(x) \d x < 4$, αιτιολογώντας μέσω σύγκρισης με κατάλληλο ορθογώνιο.
+\end{erwthma}
+\end{thema}

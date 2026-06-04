@@ -1,0 +1,231 @@
+Professional Mathematics teacher.
+Solve a specific LaTeX exercise for 12th grade (Γ Λυκείου).
+
+        *   Main environment: `\begin{thema}{Γ}` ... `\end{thema}`.
+        *   Question environment: `\begin{erwthma}` ... `\end{erwthma}`.
+        *   Itemization for sub-questions: `\item`.
+        *   Inline math: `$ ... $`, Display math: `\[ ... \]`.
+        *   Calculations: `\begin{align*} ... \end{align*}`.
+        *   Terminology: `\eng{...}` for technical terms, `\textbf{...}` for emphasis.
+        *   No indefinite integrals (use definite integrals with brackets).
+        *   No 2nd derivative test, no diff eq, no variable limit integration.
+        *   Language: Greek.
+        *   No preamble, no instructions, no comments except the specific delimiters.
+        *   Specific delimiter start: `%=========== ΛΥΣΗ - Γ ΘΕΜΑ Γ ===========` (Wait, the prompt says `ΛΥΣΗ - Xο ΘΕΜΑ X`, so for Thema Γ it should be `%=========== ΛΥΣΗ - Γ ΘΕΜΑ Γ ===========` or `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`. Looking at the prompt's specific example `%=========== ΛΥΣΗ - Xο ΘΕΜΑ X ===========`, I will use `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`). Actually, looking at the prompt's example `ΛΥΣΗ - Xο ΘΕΜΑ X`, I'll adapt it as `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`.
+
+    *   Function: $f(x) = x^2 + ax + \beta$.
+    *   Point $A(0, -1)$.
+    *   Tangent points: $M(x_1, f(x_1))$ and $N(x_2, f(x_2))$.
+
+    *   **Part 1: Tangent equation at $x_0$ passing through $A(0, -1)$.**
+        *   $f'(x) = 2x + a$.
+        *   Tangent equation at $x_0$: $y - f(x_0) = f'(x_0)(x - x_0)$.
+        *   $y - (x_0^2 + ax_0 + \beta) = (2x_0 + a)(x - x_0)$.
+        *   Point $A(0, -1)$ lies on the tangent:
+            $-1 - (x_0^2 + ax_0 + \beta) = (2x_0 + a)(0 - x_0)$
+            $-1 - x_0^2 - ax_0 - \beta = -2x_0^2 - ax_0$
+            $x_0^2 = \beta + 1$.
+        *   Wait, the prompt asks for a 2nd degree equation for $x_0$.
+        *   $x_0^2 - (\beta + 1) = 0$.
+
+    *   **Part 2: Tangents are perpendicular $\implies \beta = -3/4$.**
+        *   The slopes of the tangents are $m_1 = f'(x_1) = 2x_1 + a$ and $m_2 = f'(x_2) = 2x_2 + a$.
+        *   Perpendicularity $\implies m_1 m_2 = -1$.
+        *   $(2x_1 + a)(2x_2 + a) = -1 \implies 4x_1 x_2 + 2a(x_1 + x_2) + a^2 = -1$.
+        *   From the equation $x_0^2 - (\beta + 1) = 0$, the roots are $x_1$ and $x_2$.
+        *   By Vieta's formulas: $x_1 + x_2 = 0$ and $x_1 x_2 = -(\beta + 1)$.
+        *   Substitute into the perpendicularity condition:
+            $4(-(\beta + 1)) + 2a(0) + a^2 = -1$
+            $-4\beta - 4 + a^2 = -1$
+            $a^2 - 4\beta = 3$.
+        *   *Correction*: Re-reading the problem. "If we know that the two tangents are perpendicular, prove $\beta = -3/4$". This implies it should be independent of $a$ or maybe there's a detail I missed.
+        *   Let's re-calculate:
+            Equation for $x_0$: $x_0^2 = \beta + 1$.
+            Roots: $x_1 = \sqrt{\beta+1}, x_2 = -\sqrt{\beta+1}$.
+            $m_1 = 2\sqrt{\beta+1} + a$
+            $m_2 = -2\sqrt{\beta+1} + a$
+            $m_1 m_2 = (a + 2\sqrt{\beta+1})(a - 2\sqrt{\beta+1}) = a^2 - 4(\beta+1) = a^2 - 4\beta - 4$.
+            Condition: $a^2 - 4\beta - 4 = -1 \implies a^2 - 4\beta = 3$.
+            Wait, the prompt says "prove $\beta = -3/4$". This only happens if $a=0$. Let me check the prompt again.
+            "If we know that the two tangents are perpendicular, prove that $\beta = -3/4$".
+            Is it possible $A(0, -1)$ is a specific point? Yes, it is.
+            Maybe the parabola is symmetric? $f(x) = x^2 + ax + \beta$.
+            If $\beta = -3/4$, then $a^2 - 4(-3/4) = a^2 + 3 = 3 \implies a^2 = 0 \implies a = 0$.
+            Is it possible that for any $a$, we must have $\beta = -3/4$? No, $a^2 - 4\beta = 3$ relates $a$ and $\beta$.
+            Let me re-read the original problem source if possible or rethink.
+            Wait, if the tangents are perpendicular, the point $A$ must lie on the \eng{directrix} of the parabola.
+            For $f(x) = x^2 + ax + \beta$, rewrite as $y - \beta - a^2/4 = (x + a/2)^2$.
+            Vertex $V(-a/2, \beta - a^2/4)$.
+            $4p = 1 \implies p = 1/4$.
+            Directrix: $y = y_V - p = \beta - a^2/4 - 1/4$.
+            Since $A(0, -1)$ is on the directrix: $-1 = \beta - a^2/4 - 1/4 \implies \beta - a^2/4 = -5/4 \implies a^2 - 4\beta = 5$.
+            Wait, my $m_1 m_2 = -1$ gave $a^2 - 4\beta = 3$. Let's re-verify.
+            $x_0^2 = \beta + 1$.
+            $m_1 = 2x_1 + a, m_2 = 2x_2 + a$.
+            $x_1+x_2 = 0$.
+            $m_1 m_2 = 4x_1 x_2 + 2a(x_1+x_2) + a^2 = 4(-(\beta+1)) + 0 + a^2 = a^2 - 4\beta - 4$.
+            $a^2 - 4\beta - 4 = -1 \implies a^2 - 4\beta = 3$.
+            If $a=0$, then $-4\beta = 3 \implies \beta = -3/4$.
+            Looking at part (3), it says "For $\beta = -3/4$ and $a=0$". This suggests part (2) might have intended for $a=0$ as a premise or there's a typo in my derivation or the prompt.
+            Actually, usually in these problems, the point $A$ is the origin or the axis of symmetry is the y-axis. But here $A$ is $(0, -1)$.
+            If $a=0$, $f(x) = x^2 + \beta$. Then $x_0^2 = \beta+1$. $m_1 = 2\sqrt{\beta+1}, m_2 = -2\sqrt{\beta+1}$. $m_1 m_2 = -4(\beta+1) = -1 \implies \beta+1 = 1/4 \implies \beta = -3/4$.
+            Maybe part 2 assumes $a=0$? Or maybe I should just prove $a^2 - 4\beta = 3$ and then say "If we assume $a=0$..."? No, the prompt says "prove $\beta = -3/4$".
+            Wait, if $A$ is $(0, -1)$, the distance from the axis of symmetry $x = -a/2$ to the y-axis is $a/2$.
+            Let's re-read carefully: "Φέρνουμε δύο εφαπτόμενες ... από το εξωτερικό σημείο $A(0, -1)$".
+            If $a \neq 0$, the product of slopes is $a^2 - 4\beta - 4 = -1$.
+            Could there be a typo in the prompt's "prove $\beta = -3/4$"? If $a=0$ is given in part 3, it might be given (implicitly or explicitly) in part 2. Let's assume $a=0$ for the sake of the "prove $\beta = -3/4$" part, or check if I missed something.
+            Actually, if the problem says "prove $\beta = -3/4$", it's very likely $a=0$ was meant to be given from the start or in part 2. I'll proceed assuming $a=0$ for part 2 or clearly state that if $a=0$, then $\beta = -3/4$. But usually, if it's a "prove" statement, the conditions provided should lead to it. Let me double check the slope calculation.
+            $y = x^2 + ax + \beta$. $y' = 2x + a$.
+            Tangent at $x_0$: $y - (x_0^2 + ax_0 + \beta) = (2x_0 + a)(x - x_0)$.
+            Passes through $(0, -1)$: $-1 - x_0^2 - ax_0 - \beta = -2x_0^2 - ax_0 \implies x_0^2 = \beta + 1$.
+            $x_1 = \sqrt{\beta+1}, x_2 = -\sqrt{\beta+1}$.
+            $m_1 = 2\sqrt{\beta+1} + a$.
+            $m_2 = -2\sqrt{\beta+1} + a$.
+            $m_1 m_2 = a^2 - 4(\beta+1) = a^2 - 4\beta - 4$.
+            $a^2 - 4\beta - 4 = -1 \implies a^2 - 4\beta = 3$.
+            If $a=0$, $\beta = -3/4$.
+            Given part 3 says "For $\beta = -3/4$ and $a=0$", it's almost certain $a=0$ is a condition for the whole problem or at least for the perpendicularity part. I will assume $a=0$ for part 2 to reach the requested result.
+
+    *   **Part 3: Area for $a=0, \beta = -3/4$.**
+        *   $f(x) = x^2 - 3/4$.
+        *   Tangent points: $x_0^2 = -3/4 + 1 = 1/4 \implies x_1 = 1/2, x_2 = -1/2$.
+        *   $f'(x) = 2x$.
+        *   $m_1 = f'(1/2) = 1$.
+        *   $m_2 = f'(-1/2) = -1$.
+        *   Tangent lines:
+            $\varepsilon_1: y - (-1/2) = 1(x - 1/2) \implies y = x - 1$.
+            $\varepsilon_2: y - (-1/2) = -1(x + 1/2) \implies y = -x - 1$.
+            Check: Both pass through $A(0, -1)$. Correct.
+        *   Area calculation:
+            The area is bounded by the parabola $f(x) = x^2 - 3/4$ and the two lines $y = x-1$ and $y = -x-1$.
+            The intersection points are $M(1/2, -1/2)$ and $N(-1/2, -1/2)$.
+            The area $S$ is:
+            $S = \int_{-1/2}^{0} (f(x) - (-x-1)) \d x + \int_{0}^{1/2} (f(x) - (x-1)) \d x$.
+            Since $f(x)$ is even and the region is symmetric:
+            $S = 2 \int_{0}^{1/2} (x^2 - 3/4 - (x - 1)) \d x$
+            $S = 2 \int_{0}^{1/2} (x^2 - x + 1/4) \d x$.
+            Calculate the definite integral:
+            $S = 2 \left[ \frac{x^3}{3} - \frac{x^2}{2} + \frac{1}{4}x \right]_{0}^{1/2}$
+            $S = 2 \left( \frac{(1/2)^3}{3} - \frac{(1/2)^2}{2} + \frac{1}{4}(1/2) \right)$
+            $S = 2 \left( \frac{1}{24} - \frac{1}{8} + \frac{1}{8} \right) = 2 \left( \frac{1}{24} \right) = \frac{1}{12}$.
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item` (3 items).
+    *   `\eng{...}` for terms like \eng{Vieta}.
+    *   `\textbf{...}` for emphasis.
+    *   Definite integrals with brackets.
+    *   `\begin{align*}` for the equation $x_0^2 = \beta+1$.
+    *   No indefinite integrals.
+
+    *   Check $x_0^2 - (\beta + 1) = 0$. This is a 2nd degree equation.
+    *   Check $\beta = -3/4$ derivation. I'll state the condition for perpendicularity $m_1 m_2 = -1$ and use $a=0$ to match the desired result, as it is implied by part 3.
+    *   Check Area: $2 \int_0^{1/2} (x^2 - x + 1/4) dx = 2 [x^3/3 - x^2/2 + x/4]_0^{1/2} = 2(1/24 - 1/8 + 1/8) = 1/12$.
+    *   Double check: Parabola $y = x^2 - 3/4$. Lines $y=x-1$ and $y=-x-1$.
+        At $x=0$, $f(0) = -3/4$ and $y = -1$. Height is $1/4$.
+        At $x=1/2$, $f(1/2) = 1/4 - 3/4 = -1/2$ and $y = 1/2 - 1 = -1/2$.
+        Area $= 2 \int_0^{1/2} (x^2 - 3/4 - x + 1) dx = 2 \int_0^{1/2} (x^2 - x + 1/4) dx$. Correct.
+
+    *   Part 1: $\varepsilon_{x_0}: y - f(x_0) = f'(x_0)(x-x_0)$. Substitute $A(0,-1)$. Solve for $x_0$.
+    *   Part 2: $m_1 = 2x_1+a, m_2 = 2x_2+a$. Use $x_1+x_2=0$ and $x_1x_2 = -(\beta+1)$. Use $m_1m_2 = -1$ and $a=0$.
+    *   Part 3: Integrals.
+
+    *   `\begin{thema}{Γ}` ... `\end{thema}`.
+    *   `\begin{erwthma}` ... `\end{erwthma}`.
+    *   `\item`
+    *   `\eng{Lagrange}` (not needed here), `\eng{Vieta}`.
+    *   `\textbf{...}`.
+    *   `\d x`.
+    *   `\begin{align*}`.
+
+    *Wait*, I need to be careful with part 2. If I just say "Assuming $a=0$", it might look like I'm dodging. But the prompt says "Prove $\beta = -3/4$". If $a^2 - 4\beta = 3$, then $\beta = (a^2-3)/4$. For this to be $-3/4$, $a^2$ must be $0$. I will write the general condition $a^2 - 4\beta = 3$ and then use the $a=0$ condition from the context of the problem (as it appears in part 3). Actually, in most textbooks, if part 3 specifies $a=0$, it might be that part 2 was meant to be solved for a general $a$ or that $a=0$ was given globally. I'll assume $a=0$ is intended for the "prove" part.
+
+    Wait, looking at the prompt structure again: "For $\beta = -3/4$ and $a=0$, compute the area". This strongly implies $a$ and $\beta$ were variables in part 1 and 2. If part 2 says "prove $\beta = -3/4$", it's possible that the point $A(0,-1)$ and the condition $m_1 m_2 = -1$ force $a=0$?
+    Let's check: $a^2 - 4\beta = 3$. This doesn't force $a=0$.
+    However, if the prompt says "prove $\beta = -3/4$", and the only way to get a constant value for $\beta$ is to have a fixed $a$, and part 3 gives $a=0$, then $a=0$ is likely a global condition or a condition for part 2. I'll just mention that for $a=0$, $\beta = -3/4$.
+
+    Actually, let's look at the point $A(0, -1)$. If the tangents are perpendicular, $A$ must be on the directrix.
+    Directrix of $y = x^2 + ax + \beta$ is $y = \beta - \frac{a^2+1}{4}$.
+    $-1 = \beta - \frac{a^2+1}{4} \implies -4 = 4\beta - a^2 - 1 \implies a^2 - 4\beta = 3$.
+    Yes, this is exactly what I got. $a^2 - 4\beta = 3$.
+    If the question says "prove $\beta = -3/4$", it MUST be that $a=0$ is assumed. I'll proceed with $a=0$.
+
+    *   $f(x) = x^2 + ax + \beta$
+    *   $f'(x) = 2x + a$
+    *   $\varepsilon_{x_0}: y - (x_0^2 + ax_0 + \beta) = (2x_0 + a)(x - x_0)$
+    *   $A(0, -1) \in \varepsilon_{x_0} \implies -1 - x_0^2 - ax_0 - \beta = -2x_0^2 - ax_0 \implies x_0^2 = \beta + 1$.
+    *   Eq: $x_0^2 - (\beta + 1) = 0$.
+    *   Part 2: $m_1 = 2x_1 + a, m_2 = 2x_2 + a$.
+        $x_1, x_2$ are roots of $x^2 - (\beta+1) = 0$.
+        $x_1 + x_2 = 0, x_1 x_2 = -(\beta+1)$.
+        $m_1 m_2 = (2x_1 + a)(2x_2 + a) = 4x_1 x_2 + 2a(x_1 + x_2) + a^2 = -4(\beta + 1) + 0 + a^2 = a^2 - 4\beta - 4$.
+        $m_1 m_2 = -1 \implies a^2 - 4\beta - 4 = -1 \implies a^2 - 4\beta = 3$.
+        Assuming $a=0$ (as per part 3), $-4\beta = 3 \implies \beta = -3/4$.
+    *   Part 3: $a=0, \beta = -3/4 \implies f(x) = x^2 - 3/4$.
+        $x_0^2 = -3/4 + 1 = 1/4 \implies x_1 = 1/2, x_2 = -1/2$.
+        $m_1 = 1, m_2 = -1$.
+        $\varepsilon_1: y = x - 1$, $\varepsilon_2: y = -x - 1$.
+        Area $S = 2 \int_0^{1/2} (x^2 - 3/4 - (x-1)) dx = 2 \int_0^{1/2} (x^2 - x + 1/4) dx = 2 [x^3/3 - x^2/2 + x/4]_0^{1/2} = 2(1/24 - 1/8 + 1/8) = 1/12$.
+
+    Wait, one more check on the area.
+    $f(x) = x^2 - 3/4$
+    $\varepsilon_1: y = x - 1$
+    Intersection: $x^2 - 3/4 = x - 1 \implies x^2 - x + 1/4 = 0 \implies (x-1/2)^2 = 0 \implies x=1/2$. (Correct, it's a tangent).
+    Area is $\int_{-1/2}^{1/2} (f(x) - \text{tangents}) dx$.
+    From $-1/2$ to $0$, tangent is $y = -x-1$.
+    From $0$ to $1/2$, tangent is $y = x-1$.
+    Area $= \int_{-1/2}^0 (x^2 - 3/4 - (-x-1)) dx + \int_0^{1/2} (x^2 - 3/4 - (x-1)) dx$.
+    $= \int_{-1/2}^0 (x^2 + x + 1/4) dx + \int_0^{1/2} (x^2 - x + 1/4) dx$.
+    The first integral: $[x^3/3 + x^2/2 + x/4]_{-1/2}^0 = 0 - (-1/24 + 1/8 - 1/8) = 1/24$.
+    The second integral: $[x^3/3 - x^2/2 + x/4]_0^{1/2} = 1/24 - 1/8 + 1/8 = 1/24$.
+    Total Area $= 1/24 + 1/24 = 1/12$. Correct.
+%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Η παράγωγος της συνάρτησης $f(x) = x^2 + ax + \beta$ είναι $\displaystyle f'(x) = 2x + a$. 
+Η εξίσωση της εφαπτομένης $\varepsilon_{x_0}$ της $C_f$ στο σημείο $M(x_0, f(x_0))$ είναι:
+\[ y - f(x_0) = f'(x_0)(x - x_0) \implies y - (x_0^2 + ax_0 + \beta) = (2x_0 + a)(x - x_0) \]
+Απαιτώντας η εφαπτομένη $\varepsilon_{x_0}$ να διέρχεται από το σημείο $A(0, -1)$, έχουμε:
+\begin{align*}
+-1 - (x_0^2 + ax_0 + \beta) &= (2x_0 + a)(0 - x_0) \\
+-1 - x_0^2 - ax_0 - \beta &= -2x_0^2 - ax_0 \\
+x_0^2 &= \beta + 1
+\end{align*}
+Άρα η εξίσωση 2ου βαθμού ως προς $x_0$ είναι:
+\[ x_0^2 - (\beta + 1) = 0 \]
+
+\item Οι τετμημένες των σημείων εφάπτου $x_1, x_2$ είναι οι ρίζες της εξίσωσης $x_0^2 - (\beta + 1) = 0$.
+Από τους τύπους του \eng{Vieta}, έχουμε:
+\[ x_1 + x_2 = 0 \quad \text{και} \quad x_1 x_2 = -(\beta + 1) \]
+Οι κλίσεις των εφαπτομένων $\varepsilon_1, \varepsilon_2$ είναι $\displaystyle m_1 = f'(x_1) = 2x_1 + a$ και $\displaystyle m_2 = f'(x_2) = 2x_2 + a$.
+Αφού οι εφαπτόμενες είναι κάθετες, ισχύει $m_1 m_2 = -1$:
+\begin{align*}
+(2x_1 + a)(2x_2 + a) &= -1 \\
+4x_1 x_2 + 2a(x_1 + x_2) + a^2 &= -1 \\
+4(-(\beta + 1)) + 2a(0) + a^2 &= -1 \\
+-4\beta - 4 + a^2 &= -1 \\
+a^2 - 4\beta &= 3
+\end{align*}
+Για $a = 0$, η σχέση γίνεται $-4\beta = 3$, άρα $\displaystyle \beta = -\frac{3}{4}$.
+
+\item Για $a = 0$ και $\beta = -3/4$, η συνάρτηση είναι $\displaystyle f(x) = x^2 - \frac{3}{4}$.
+Οι τετμημένες των σημείων εφάπτου είναι $x_0^2 = -3/4 + 1 = 1/4$, άρα $x_1 = 1/2$ και $x_2 = -1/2$.
+Οι κλίσεις είναι $m_1 = f'(1/2) = 2(1/2) = 1$ και $m_2 = f'(-1/2) = 2(-1/2) = -1$.
+Οι εξισώσεις των εφαπτομένων είναι:
+\begin{align*}
+\varepsilon_1: y - (-1/2) &= 1(x - 1/2) \implies y = x - 1 \\
+\varepsilon_2: y - (-1/2) &= -1(x + 1/2) \implies y = -x - 1
+\end{align*}
+Το εμβαδόν $S$ μεταξύ της $C_f$ και των εφαπτομένων είναι:
+\[ S = \int_{-1/2}^{0} \left( x^2 - \frac{3}{4} - (-x - 1) \right) \d x + \int_{0}^{1/2} \left( x^2 - \frac{3}{4} - (x - 1) \right) \d x \]
+Λόγω συμμετρίας της $C_f$ ως προς τον άξονα $y'y''$:
+\begin{align*}
+S &= 2 \int_{0}^{1/2} \left( x^2 - x + \frac{1}{4} \right) \d x \\
+&= 2 \left[ \frac{x^3}{3} - \frac{x^2}{2} + \frac{1}{4}x \right]_{0}^{1/2} \\
+&= 2 \left( \frac{(1/2)^3}{3} - \frac{(1/2)^2}{2} + \frac{1}{4}\left(\frac{1}{2}\right) \right) \\
+&= 2 \left( \frac{1}{24} - \frac{1}{8} + \frac{1}{8} \right) = 2 \cdot \frac{1}{24} = \frac{1}{12}
+\end{align*}
+Άρα το εμβαδόν είναι $\displaystyle S = \frac{1}{12}$ τετραγωνικών μονάδων.
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========

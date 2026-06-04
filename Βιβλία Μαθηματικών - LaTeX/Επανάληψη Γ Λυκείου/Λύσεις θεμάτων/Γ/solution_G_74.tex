@@ -1,0 +1,56 @@
+%=========== ΛΥΣΗ ΘΕΜΑΤΟΣ Γ.74 ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+
+\item Δίνεται η διαφορική εξίσωση $x f'(x) + 2 f(x) = x \ln x$ στο $[1, +\infty)$.
+Μετασχηματίζουμε την εξίσωση ώστε να αναγνωριστεί ο κανόνας παραγώγισης γινομένου. Πολλαπλασιάζουμε κάθε μέλος με $x$:
+\begin{align*}
+x^2 f'(x) + 2x f(x) &= x^2 \ln x \\
+(x^2)' f(x) + x^2 f'(x) &= x^2 \ln x \\
+\left( x^2 f(x) \right)' &= x^2 \ln x
+\end{align*}
+Ολοκληρώνουμε και τα δύο μέλη (εφαρμόζοντας ολοκλήρωση κατά παράγοντες στο δεξί μέλος):
+\begin{align*}
+x^2 f(x) &= \int x^2 \ln x\,\d x + c = \int \left( \frac{x^3}{3} \right)' \ln x\,\d x + c \\
+&= \frac{x^3}{3} \ln x - \int \frac{x^3}{3} \cdot \frac{1}{x}\,\d x + c \\
+&= \frac{x^3}{3} \ln x - \frac{1}{3} \int x^2\,\d x + c \\
+&= \frac{x^3}{3} \ln x - \frac{x^3}{9} + c
+\end{align*}
+Για να βρούμε τη σταθερά $c$, χρησιμοποιούμε την αρχική τιμή $f(1) = -\frac{1}{9}$:
+\[ 1^2 \cdot \left( -\frac{1}{9} \right) = \frac{1^3}{3}\ln 1 - \frac{1^3}{9} + c \Rightarrow -\frac{1}{9} = 0 - \frac{1}{9} + c \Rightarrow c = 0 \]
+Άρα $x^2 f(x) = \frac{x^3}{3} \ln x - \frac{x^3}{9}$. 
+Διαιρώντας με το $x^2 \neq 0$:
+\[ \mathbf{f(x) = \frac{x}{3}\ln x - \frac{x}{9}} \]
+
+\item Ζητείται η εφαπτομένη στο $x_0 = e$.
+Το σημείο επαφής έχει τεταγμένη:
+\[ f(e) = \frac{e}{3}\ln e - \frac{e}{9} = \frac{e}{3} - \frac{e}{9} = \frac{3e}{9} - \frac{e}{9} = \frac{2e}{9} \]
+Η κλίση βρίσκεται από την παράγωγο. Παραγωγίζουμε τον τύπο:
+\[ f'(x) = \left( \frac{x}{3}\ln x - \frac{x}{9} \right)' = \frac{1}{3}\ln x + \frac{x}{3}\cdot\frac{1}{x} - \frac{1}{9} = \frac{1}{3}\ln x + \frac{1}{3} - \frac{1}{9} = \frac{1}{3}\ln x + \frac{2}{9} \]
+Στο σημείο $e$:
+\[ \lambda = f'(e) = \frac{1}{3}\ln e + \frac{2}{9} = \frac{1}{3} + \frac{2}{9} = \frac{3}{9} + \frac{2}{9} = \frac{5}{9} \]
+Η εξίσωση της εφαπτομένης ευθείας $\varepsilon$ δίνεται:
+\begin{align*}
+y - \frac{2e}{9} &= \frac{5}{9}(x - e) \\
+y &= \frac{5}{9}x - \frac{5e}{9} + \frac{2e}{9} = \boldsymbol{\frac{5}{9}x - \frac{e}{3}}
+\end{align*}
+
+\item Για την εύρεση του ορίου στο $+\infty$:
+\[ \lim_{x\to +\infty} \frac{f(x)}{x} = \lim_{x\to +\infty} \frac{\frac{x}{3}\ln x - \frac{x}{9}}{x} = \lim_{x\to +\infty} \left( \frac{1}{3}\ln x - \frac{1}{9} \right) \]
+Δεδομένου ότι το $\lim_{x\to +\infty} \ln x = +\infty$, προκύπτει ξεκάθαρα:
+\[ \lim_{x\to +\infty} \frac{f(x)}{x} = \frac{1}{3}(+\infty) - \frac{1}{9} = \boldsymbol{+\infty} \]
+
+\item Μελέτη της ανισότητας $\ln(x+1) - \ln x < \frac{1}{x}$ στο $x \ge 1$.
+Εφαρμόζουμε το \textbf{Θεώρημα Μέσης Τιμής} για την ανεξάρτητη συνάρτηση $g(t) = \ln t$ στο κλειστό διάστημα $[x, x+1]$:
+Η $g$ είναι συνεχής στο $[x, x+1]$ και παραγωγίσιμη στο $(x, x+1)$ με $g'(t) = \frac{1}{t}$.
+Άρα, υπάρχει $\xi \in (x, x+1)$ τέτοιο ώστε:
+\[ g'(\xi) = \frac{g(x+1) - g(x)}{(x+1) - x} = \frac{\ln(x+1) - \ln x}{1} = \ln(x+1) - \ln x \]
+Όμως, γνωρίζουμε ότι η παράγωγος είναι $g'(\xi) = \frac{1}{\xi}$.
+Από την ανισότητα των ορίων του $\xi$:
+\[ \xi > x \xRightarrow{\text{αντιστρέφουμε}} \frac{1}{\xi} < \frac{1}{x} \]
+Αντικαθιστούμε τα μέλη:
+\[ \mathbf{\ln(x+1) - \ln x < \frac{1}{x}} \]
+Η ζητούμενη ταυτότητα αποδείχθηκε αυστηρά.
+
+\end{erwthma}
+\end{thema}

@@ -1,0 +1,75 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_111 ===========
+\begin{thema}{Β}
+Στο παρακάτω αναβαθμισμένο σχήμα τονίζονται τα κρίσιμα σημεία τομής, οι κλίσεις κλάδων, καθώς και οι τιμές που χρειάζονται για τη σύνθεση.
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+  \draw[help lines, gray!30] (-3,-2) grid (5,6);
+  \draw[-latex] (-3.3,0) -- (5.3,0) node[right] {$x$};
+  \draw[-latex] (0,-2.3) -- (0,6.3) node[above] {$y$};
+  \foreach \x in {-2,-1,1,2,3,4}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-1,1,2,3,4,5}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  
+  % f
+  \draw[very thick, blue!70!black] (-2,1) -- (0,3) -- (2,1) -- (4,4);
+  \node[blue!70!black] at (-1.5,2.5) {$C_f$};
+  % g
+  \draw[very thick, orange!50!black] (-2,0) -- (0,2) -- (2,0) -- (4,2);
+  \node[orange!50!black] at (3.5,0.5) {$C_g$};
+  % h = f+g
+  \draw[very thick, green!50!black, dashed] (-2,1) -- (0,5) -- (2,1) -- (4,6);
+  \node[green!50!black] at (3.5,5) {$C_h$};
+  
+  % Σημεία
+  \filldraw[blue!70!black] (0,3) circle (2pt) node[above left, font=\footnotesize] {$f(0)=3$};
+  \filldraw[blue!70!black] (2,1) circle (2pt) node[below right, font=\footnotesize] {$f(2)=1$};
+  \filldraw[orange!50!black] (0,2) circle (2pt) node[right, font=\footnotesize] {$g(0)=2$};
+  \filldraw[orange!50!black] (2,0) circle (2pt) node[below, font=\footnotesize] {$g(2)=0$};
+  
+  % h points
+  \filldraw[green!50!black] (0,5) circle (2pt) node[above right, font=\footnotesize] {$h(0)=5$};
+  \filldraw[green!50!black] (2,1) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item Υπολογίζουμε τις συνθέσεις χρησιμοποιώντας τις τιμές από τη γραφική:
+\begin{itemize}
+    \item $(f \circ g)(0) = f(g(0)) = f(2) = 1$.
+    \item $(f \circ g)(2) = f(g(2)) = f(0) = 3$.
+    \item $(g \circ f)(0) = g(f(0)) = g(3) = 1$.
+    (Για τον υπολογισμό $g(3)$: στο τμήμα $[2, 4]$ η $g$ έχει κλίση $\frac{2-0}{4-2} = 1$ και περνά $(2,0)$, οπότε $g(x) = x - 2$, αρα $g(3) = 1$.)
+\end{itemize}
+
+\item Η σύνθεση $(f \circ g)(x) = f(g(x))$ ορίζεται όταν $g(x)$ ανήκει στο πεδίο ορισμού της $f$, δηλαδή στο $[-2, 4]$.
+Το σύνολο τιμών της $g$ στο $[-2, 4]$ είναι $g([-2, 4]) = [0, 2]$ (ελάχιστη τιμή $0$ στα $x=-2, 2$ και μέγιστη τιμή $2$ στα $x=0, 4$). 
+Εφόσον $[0, 2] \subseteq [-2, 4]$, η σύνθεση $(f \circ g)$ ορίζεται \textbf{για κάθε $x \in [-2, 4]$}, δηλαδή $\varDelta_{f \circ g} = [-2, 4]$.
+
+\item Εφαρμόζουμε τον κανόνα αλυσίδας: $(f \circ g)'(x) = f'(g(x)) \cdot g'(x)$.
+Στο $x = 0$:
+\begin{itemize}
+    \item $g(0) = 2$: η κλίση $f'(2)$ προκύπτει από τον κλάδο $[2, 4]$: $f'(2) = \frac{4-1}{4-2} = \frac{3}{2}$.
+    \item $g'(0)$: Στο $x=0$ αλλάζει κλάδος η $g$. Η αριστερή κλίση ($[-2,0]$) $= 1$, η δεξιά κλίση ($[0, 2]$) $= -1$. Αυτές είναι διαφορετικές, οπότε η $g$ \textbf{δεν είναι παραγωγίσιμη} στο $0$!
+\end{itemize}
+Αυστηρά, εφόσον η $g$ δεν είναι παραγωγίσιμη στο $0$, η $(f \circ g)'(0)$ \textbf{δεν ορίζεται}.
+
+Αν ωστόσο η εκφώνηση εννοεί τον "μονόπλευρο" υπολογισμό, τότε:
+\begin{itemize}
+    \item Από αριστερά ($g'_-(0) = 1$): $(f \circ g)'_-(0) = f'(2) \cdot 1 = \frac{3}{2}$.
+    \item Από δεξιά ($g'_+(0) = -1$): $(f \circ g)'_+(0) = f'(2) \cdot (-1) = -\frac{3}{2}$.
+\end{itemize}
+
+\item Η $h(x) = f(x) + g(x)$:
+\begin{itemize}
+    \item $h(0) = f(0) + g(0) = 3 + 2 = 5$.
+    \item $h(2) = f(2) + g(2) = 1 + 0 = 1$.
+\end{itemize}
+Στο $[0, 2]$: $f(x) = -x + 3$ (κλίση $-1$) και $g(x) = -x + 2$ (κλίση $-1$), οπότε:
+\[ h(x) = (-x + 3) + (-x + 2) = -2x + 5 \]
+Πρόκειται για \textbf{ευθύγραμμη} γραφική παράσταση στο $[0, 2]$ με κλίση $= -2$, ξεκινώντας $(0, 5)$ και καταλήγοντας $(2, 1)$. Στο σχήμα, η $C_h$ σχεδιάστηκε διακεκομμένα (πράσινα) ανάμεσα στις δύο αρχικές.
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_111 ===========

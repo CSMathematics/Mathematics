@@ -1,0 +1,69 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_118 ===========
+\begin{thema}{Β}
+Στο σχήμα η γαλάζια σκιασμένη περιοχή ($E_1 = 5$) αντιστοιχεί στο εμβαδόν "πάνω" από τη $C_f$ μέχρι $y=3$, ενώ η κίτρινη ($E_2$) κάτω από τη $C_f$ μέχρι $y=0$.
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+  \draw[help lines, gray!30] (-1,-1) grid (5,4);
+  \draw[-latex] (-1.3,0) -- (5.3,0) node[right] {$x$};
+  \draw[-latex] (0,-1.3) -- (0,4.3) node[above] {$y$};
+  \foreach \x in {1,2,3,4}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {1,2,3}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  
+  % Σκίαση E2 (κάτω)
+  \fill[cyan!15, opacity=0.5, smooth, tension=0.5]
+    (0,0) -- plot coordinates {(0,0) (1,0.5) (2,1.2) (3,2.2) (4,3)} -- (4,0) -- cycle;
+  
+  % Σκίαση E1 (πάνω)
+  \fill[yellow!25, opacity=0.5, smooth, tension=0.5]
+    plot coordinates {(0,0) (1,0.5) (2,1.2) (3,2.2) (4,3)} -- (4,3) -- (0,3) -- (0,0) -- cycle;
+  
+  % Καμπύλη
+  \draw[very thick, blue!70!black, smooth, tension=0.5]
+    plot coordinates {(0,0) (1,0.5) (2,1.2) (3,2.2) (4,3)};
+  
+  \draw[dashed] (4,0) -- (4,3) -- (0,3);
+  
+  \node at (2,0.4) {$E_2$};
+  \node at (1,2.5) {$E_1 = 5$};
+  
+  \filldraw[blue!70!black] (0,0) circle (2pt) node[below left, font=\footnotesize] {$O$};
+  \filldraw[blue!70!black] (4,3) circle (2pt) node[above right,font=\footnotesize] {$(4,3)$};
+  \node[blue!70!black] at (3,0.8) {$C_f$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item Το ορθογώνιο $[0, 4] \times [0, 3]$ έχει εμβαδόν $4 \cdot 3 = 12$. Αυτό χωρίζεται σε δύο κομμάτια από τη $C_f$:
+\begin{itemize}
+    \item $E_1 = 5$ (πάνω από $C_f$)
+    \item $E_2 = \int_0^4 f(x)\,\mathrm{d}x$ (κάτω από $C_f$)
+\end{itemize}
+Εφόσον $E_1 + E_2 = 12$:
+\[ E_2 = \int_0^4 f(x)\,\mathrm{d}x = 12 - 5 = \mathbf{7} \]
+
+\item Το $\int_0^3 f^{-1}(y)\,\mathrm{d}y$ αντιστοιχεί στο εμβαδόν μεταξύ $C_{f^{-1}}$ και του $y$-άξονα, δηλαδή η "οριζόντια" ανάγνωση της $C_f$. Αυτό ισούται ακριβώς με $E_1$!
+Πιο αναλυτικά: Αν η $f$ αυξάνεται από $f(0)=0$ ώς $f(4)=3$, τότε:
+\[ \int_0^3 f^{-1}(y)\,\mathrm{d}y = E_1 = \mathbf{5} \]
+\textit{Γεωμετρική ερμηνεία: Η ολοκλήρωση ως προς $y$ (κατακόρυφα) μετράει τα "οριζόντια φέτα" μεταξύ $C_f$ και $y$-άξονα, που είναι ακριβώς η περιοχή $E_1$.}
+
+\item Η ταυτότητα $\int_0^4 f(x)\,\mathrm{d}x + \int_0^3 f^{-1}(y)\,\mathrm{d}y = 4 \cdot 3$ είναι γνωστή ως \textbf{σχέση εμβαδών αντίστροφης συνάρτησης}. Ισχύει γιατί:
+\begin{itemize}
+    \item Η πρώτη ολοκλήρωση ($E_2$) μετράει το εμβαδόν \textbf{κάτω} από τη $C_f$ (ολοκλήρωση ως προς $x$).
+    \item Η δεύτερη ολοκλήρωση ($E_1$) μετράει το εμβαδόν \textbf{αριστερά} της $C_f$ (ολοκλήρωση ως προς $y$).
+    \item Μαζί, $E_1 + E_2$ συμπληρώνουν ακριβώς το ορθογώνιο $[0, b] \times [0, f(b)]$.
+\end{itemize}
+Γενική σχέση: $\int_0^b f(x)\,\mathrm{d}x + \int_0^{f(b)} f^{-1}(y)\,\mathrm{d}y = b \cdot f(b)$.
+
+\item Αν $\int_0^4 f(x)\,\mathrm{d}x = 4$, τότε η \textbf{μέση τιμή} της $f$ στο $[0, 4]$ θα ήταν:
+\[ \bar{f} = \frac{1}{b-a}\int_a^b f(x)\,\mathrm{d}x = \frac{1}{4-0} \cdot 4 = 1 \]
+Αυτό θα σήμαινε ότι η μέση τιμή (μέσος όρος) της $f$ στο $[0, 4]$ ισούται με $\mathbf{1}$.
+\textit{Γεωμετρικά: Θα σήμαινε ότι η σταθερή "ισοδύναμη" συνάρτηση $g(x) = 1$ καλύπτει ίδιο εμβαδόν ($4 \cdot 1 = 4$) με τη $C_f$ στο $[0, 4]$.}
+
+\textit{Σημείωση: Αφού στην πραγματικότητα $\int_0^4 f = 7$ (ερ. α), η πραγματική μέση τιμή είναι $7/4 = 1{,}75$.}
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_118 ===========

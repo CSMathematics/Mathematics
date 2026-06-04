@@ -1,33 +1,28 @@
-% ===================================================================
-%  Αρχείο: 15808_tikz.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
-% ===================================================================
-
-ΘΕΜΑ 2
-
+\Askhsh{15808}{2}
+\begin{ylh}{1}
+\item 2.2 Κατακόρυφη-Οριζόντια Μετατόπιση Καμπύλης
+\item 5.2 Λογάριθμοι
+\item 5.3 Λογαριθμική συνάρτηση
+\end{ylh}
 Δίνεται η συνάρτηση $f(x) = \ln(x + 2)$.
-
 \begin{alist}
 \item Να βρείτε το πεδίο ορισμού της $f$. \monades{7}
 \item Να βρείτε το σημείο τομής της γραφικής παράστασης της $f$ με τον άξονα $x'x$. \monades{8}
-
 \begin{center}
-\begin{tikzpicture}[scale=1, >=latex]
-    \draw[very thin, color=gray!30] (-1.5,-3.5) grid (7.5,3.5);
-    \draw[->] (-1.5,0) -- (8,0) node[right] {$x$};
-    \draw[->] (0,-3.5) -- (0,4) node[above] {$y$};
-    
-    \foreach \x in {1,2,3,4,5,6,7}
-        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
-    \foreach \y in {-3,-2,-1,1,2,3}
-        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
-    \node[below left, font=\small] at (0,0) {$0$};
-    
-    % g(x) = ln(x)
-    \draw[very thick, color=blue!70!black, samples=100, smooth, domain=0.04:7.5] plot (\x, {ln(\x)}) node[above left] {$g$};
-    \filldraw (1,0) circle (1.5pt);
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
+    xmin = -1.5, xmax = 7.5, ymin = -3.5, ymax = 3.5,
+    xtick = {1,2,3,4,5,6,7}, ytick = {-3,-2,-1,1,2,3},
+    grid = both, grid style = {gray!30},
+    samples = 150, width = 10cm, height = 7cm,
+    tick label style = {font=\small},
+]
+    \addplot[very thick, maincolor, domain=0.04:7.5] {ln(x)} node[above left, pos=0.8] {$g$};
+    \filldraw (axis cs:1,0) circle (1.5pt);
+\end{axis}
 \end{tikzpicture}
 \end{center}
-
 \item Να μεταφέρετε στην κόλλα σας το σχήμα και να χαράξετε τη γραφική παράσταση της $f(x) = \ln(x + 2)$ μετατοπίζοντας κατάλληλα την γραφική παράσταση της $g$. \monades{10}
 \end{alist}
+

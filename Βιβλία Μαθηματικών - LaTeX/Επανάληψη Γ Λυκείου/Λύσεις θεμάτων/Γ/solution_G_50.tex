@@ -1,0 +1,130 @@
+*   Input: A specific LaTeX mathematics exercise (Theme $\Gamma$) and a set of strict formatting guidelines.
+    *   Output: ONLY the LaTeX code for the solution, following the `\begin{thema}`, `\begin{erwthma}`, `\item`, etc. structure.
+    *   Content:
+        *   $f(x)$ is continuous on $\mathbb{R}$, $f(0) = 2$.
+        *   $f'(x) = \frac{|x|}{x} e^{|x|}$ for $x \neq 0$.
+        *   Part 1: Prove $f(x) = e^{|x|} + 1$.
+        *   Part 2: Check differentiability at $x=0$ using the definition.
+        *   Part 3: Study monotonicity and extrema.
+        *   Part 4: Calculate $\lim_{x \to -\infty} x^2 f(x)$.
+
+    *   For $x > 0$, $f'(x) = \frac{x}{x} e^x = e^x$.
+        Integrating from 0 to $x$: $f(x) - f(0) = \int_0^x e^t dt = [e^t]_0^x = e^x - 1$.
+        Since $f(0) = 2$, $f(x) = e^x - 1 + 2 = e^x + 1$.
+    *   For $x < 0$, $f'(x) = \frac{-x}{x} e^{-x} = -e^{-x}$.
+        Integrating from $x$ to 0: $f(0) - f(x) = \int_x^0 -e^{-t} dt = [e^{-t}]_x^0 = e^0 - e^{-x} = 1 - e^{-x}$.
+        $2 - f(x) = 1 - e^{-x} \Rightarrow f(x) = 2 - 1 + e^{-x} = e^{-x} + 1$.
+    *   Combined: $f(x) = e^{|x|} + 1$.
+    *   Check continuity at $x=0$: $f(0)=2$, $\lim_{x \to 0} (e^{|x|} + 1) = 1+1=2$. Continuous.
+
+    *   Definition: $f'(0) = \lim_{h \to 0} \frac{f(h) - f(0)}{h}$.
+    *   Right limit: $\lim_{h \to 0^+} \frac{e^h + 1 - 2}{h} = \lim_{h \to 0^+} \frac{e^h - 1}{h} = 1$ (fundamental limit).
+    *   Left limit: $\lim_{h \to 0^-} \frac{e^{-h} + 1 - 2}{h} = \lim_{h \to 0^-} \frac{e^{-h} - 1}{h}$. Let $u = -h \to 0^+$.
+        $\lim_{u \to 0^+} \frac{e^u - 1}{-u} = -1$.
+    *   Since $1 \neq -1$, the limit does not exist. Not differentiable at $x=0$.
+
+    *   For $x > 0$, $f'(x) = e^x > 0 \Rightarrow$ strictly increasing.
+    *   For $x < 0$, $f'(x) = -e^{-x} < 0 \Rightarrow$ strictly decreasing.
+    *   At $x=0$, there is a minimum. $f(0) = 2$.
+    *   Use `tkz-tab` as requested.
+
+    *   $\lim_{x \to -\infty} x^2 (e^{-x} + 1)$.
+    *   $x^2 e^{-x} + x^2$.
+    *   As $x \to -\infty$, let $u = -x \to +\infty$.
+    *   $(-u)^2 e^u + (-u)^2 = u^2 e^u + u^2$.
+    *   Both terms $\to +\infty$.
+    *   Wait, let me re-read: $\lim_{x \to -\infty} x^2 f(x)$.
+    *   $f(x) = e^{-x} + 1$.
+    *   $x^2 e^{-x} + x^2$. Since $x \to -\infty$, $-x \to \infty$, so $e^{-x} \to \infty$.
+    *   The result is $+\infty$.
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item`
+    *   `\eng{...}` (if needed), `\textbf{...}`.
+    *   `\[ ... \]` for math.
+    *   `\begin{align*}` for steps.
+    *   `\d x` for differentials.
+    *   Definite integrals instead of indefinite.
+    *   `tkz-tab` table.
+
+    *   Part 1: Use definite integrals for the proof.
+        For $x > 0$: $\int_0^x f'(t) \d t = f(x) - f(0)$.
+        For $x < 0$: $\int_x^0 f'(t) \d t = f(0) - f(x)$.
+    *   Part 2: Limit from left and right.
+    *   Part 3: Monotonicity table.
+    *   Part 4: Limit calculation.
+
+    *   $\lim_{x \to -\infty} x^2 e^{-x} = \lim_{u \to \infty} u^2 e^u = \infty$.
+    *   $\lim_{x \to -\infty} x^2 = \infty$.
+    *   Sum is $\infty$.
+
+    *   `\begin{thema}{Γ}` ✅
+    *   `\begin{erwthma}` ✅
+    *   `\item` ✅
+    *   No indefinite integrals ✅ (Use $[ ... ]_a^b$)
+    *   No 2nd derivative test ✅
+    *   `\d x` used ✅
+    *   `tkz-tab` colors: `colorC = red7`, `colorL = red9`, `colorV = red7`. ✅
+    *   Labels $x$, $f'(x)$, $f(x)$. ✅
+
+    *   $x > 0: f'(x) = e^x > 0 \rightarrow$ $\nearrow$
+    *   $x < 0: f'(x) = -e^{-x} < 0 \rightarrow$ $\searrow$
+    *   $x = 0$: $f'(x)$ changes sign from negative to positive. Minimum at $(0, 2)$.
+
+    *   For $x > 0$:
+        \[ \int_{0}^{x} f'(t) \, \d t = \int_{0}^{x} e^{t} \, \d t = [e^{t}]_{0}^{x} = e^{x} - 1 \]
+        Since $f(x) - f(0) = \int_{0}^{x} f'(t) \, \d t$, then $f(x) - 2 = e^{x} - 1 \implies f(x) = e^{x} + 1$.
+    *   For $x < 0$:
+        \[ \int_{x}^{0} f'(t) \, \d t = \int_{x}^{0} -e^{-t} \, \d t = [e^{-t}]_{x}^{0} = e^{0} - e^{-x} = 1 - e^{-x} \]
+        Since $f(0) - f(x) = \int_{x}^{0} f'(t) \, \d t$, then $2 - f(x) = 1 - e^{-x} \implies f(x) = e^{-x} + 1$.
+    *   Combining: $f(x) = e^{|x|} + 1$.
+
+    *Self-correction on notation:* Ensure `\d t` or `\d x` is used consistently.
+%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Για $x > 0$, έχουμε $f'(x) = \dfrac{x}{x} e^x = e^x$. Από το θεώρημα του ολοκληρωτικού λογισμού, καθώς η $f$ είναι συνεχής στο $[0, x]$ και παραγωγίσιμη στο $(0, x)$, ισχύει:
+\[ f(x) - f(0) = \int_{0}^{x} f'(t) \, \d t = \int_{0}^{x} e^t \, \d t = \left[ e^t \right]_{0}^{x} = e^x - 1 \]
+Δεδομένου ότι $f(0) = 2$, έχουμε:
+\[ f(x) - 2 = e^x - 1 \implies f(x) = e^x + 1 \]
+Για $x < 0$, έχουμε $f'(x) = \dfrac{-x}{x} e^{-x} = -e^{-x}$. Ομοίως, ισχύει:
+\[ f(0) - f(x) = \int_{x}^{0} f'(t) \, \d t = \int_{x}^{0} -e^{-t} \, \d t = \left[ e^{-t} \right]_{x}^{0} = e^0 - e^{-x} = 1 - e^{-x} \]
+Άρα:
+\[ 2 - f(x) = 1 - e^{-x} \implies f(x) = e^{-x} + 1 \]
+Συνδυάζοντας τα δύο παραπάνω και το γεγονός ότι $f(0)=2$, ο τύπος της συνάρτησης είναι:
+\[ f(x) = e^{|x|} + 1 \]
+
+\item Εξετάζουμε την παραγωγισιμότητα στο $x_0=0$ με τον ορισμό:
+\[ f'(0) = \lim_{h \to 0} \frac{f(h) - f(0)}{h} = \lim_{h \to 0} \frac{e^{|h|} + 1 - 2}{h} = \lim_{h \to 0} \frac{e^{|h|} - 1}{h} \]
+Υπολογίζουμε τα όρια δεξιά και αριστερά:
+\begin{itemize}
+    \item $\lim_{h \to 0^+} \frac{e^h - 1}{h} = 1$
+    \item $\lim_{h \to 0^-} \frac{e^{-h} - 1}{h} = \lim_{u \to 0^+} \frac{e^u - 1}{-u} = -1$ (θετώντας $u = -h$)
+\end{itemize}
+Επειδή τα όρια δεξιά και αριστερά είναι διαφορετικά, η συνάρτηση $f$ \textbf{δεν είναι παραγωγίσιμη} στο $x_0=0$.
+
+\item Για τη μελέτη της μονοτονίας εξετάζουμε το πρόσημο της $f'(x)$ για $x \ne 0$:
+\begin{itemize}
+    \item $f'(x) = 0 \Leftrightarrow e^{|x|} = 0$ (αδύνατο)
+    \item $f'(x) > 0 \Leftrightarrow \dfrac{|x|}{x} e^{|x|} > 0 \Leftrightarrow \dfrac{|x|}{x} > 0 \Leftrightarrow x > 0$
+    \item $f'(x) < 0 \Leftrightarrow \dfrac{|x|}{x} e^{|x|} < 0 \Leftrightarrow \dfrac{|x|}{x} < 0 \Leftrightarrow x < 0$
+\end{itemize}
+Άρα η $f$ είναι \textbf{γνησίως φθίνουσα} στο $(-\infty, 0)$ και \textbf{γνησίως αύξουσα} στο $(0, +\infty)$.
+Στο $x=0$ η συνάρτηση παρουσιάζει \textbf{απολυτό ελάχιστο} με τιμή $f(0)=2$.
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$/1cm, $f'(x)$/1cm, $f(x)$/1cm}{$-\infty$, $0$, $+\infty$}
+\tkzTabLine{, -, z, +, }
+\tkzTabVar{+/$\infty$, -/2, +/$\infty$}
+\end{tikzpicture}
+\end{center}
+
+\item Υπολογίζουμε το όριο για $x \to -\infty$. Για $x < 0$ ισχύει $f(x) = e^{-x} + 1$:
+\[ \lim_{x \to -\infty} x^2 \cdot f(x) = \lim_{x \to -\infty} x^2 (e^{-x} + 1) = \lim_{x \to -\infty} (x^2 e^{-x} + x^2) \]
+Θέτοντας $u = -x \to +\infty$:
+\[ \lim_{u \to +\infty} ((-u)^2 e^u + (-u)^2) = \lim_{u \to +\infty} (u^2 e^u + u^2) = +\infty \]
+Επομένως, $\lim\limits_{x \to -\infty} x^2 \cdot f(x) = +\infty$.
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========

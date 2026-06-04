@@ -1,0 +1,77 @@
+\begin{thema}{Γ}
+Ένας κώνος είναι εγγεγραμμένος σε μια σφαίρα σταθερής ακτίνας $R=3$. Έστω $x$ η απόσταση του κέντρου της σφαίρας από τη βάση του κώνου, με $x \in (0, 3)$. 
+\begin{center}
+\begin{tikzpicture}
+    % ==========================================
+    % Ορισμός Παραμέτρων 
+    % ==========================================
+    \def\R{3}       % Ακτίνα σφαίρας R=3
+    \def\d{1}       % Απόσταση x 
+    \def\r{2.828}   % Ακτίνα βάσης
+    \def\yell{0.25} % Προοπτική ελλείψεων 
+
+    % ==========================================
+    % 1. Σχεδιασμός Σφαίρας (με Radial Shading)
+    % ==========================================
+    \shadedraw[shading=radial, inner color=white, outer color=gray!30, draw=gray!80, thick] (0,0) circle (\R);
+    
+    % Προαιρετικά: Προσθέτουμε ένα "γυάλισμα" 
+    \fill[white, opacity=0.3] (-0.3*\R, 0.4*\R) ellipse ({0.2*\R} and {0.15*\R});
+
+    % Ισημερινός σφαίρας 
+    \draw[dashed, color=gray!60] (\R,0) arc (0:180:{\R} and {\R*\yell});
+    \draw[color=gray!60] (-\R,0) arc (180:360:{\R} and {\R*\yell});
+
+    % ==========================================
+    % 2. Σχεδιασμός Βάσης Κώνου 
+    % ==========================================
+    \coordinate (K) at (0, -\d);
+    
+    \shadedraw[dashed, thick, color=\xrwma!60!black, 
+               top color=\xrwma!10, bottom color=\xrwma!20, fill opacity=0.6] 
+        (\r, -\d) arc (0:180:{\r} and {\r*\yell})
+        arc (180:360:{\r} and {\r*\yell});
+
+    % ==========================================
+    % 3. Σχεδιασμός Πλευρών Κώνου (με Linear Shading)
+    % ==========================================
+    \coordinate (V) at (0, \R);               
+    \coordinate (Left) at (-\r, -\d);         
+    \coordinate (Right) at (\r, -\d);         
+    
+    % Shading πλευρών
+    \shadedraw[thick, color=\xrwma!60!black,
+               left color=\xrwma!60, right color=\xrwma!60, middle color=white!80!\xrwma, fill opacity=0.8] 
+               (V) -- (Left) arc (180:360:{\r} and {-\r*\yell}) -- cycle;
+
+    % ==========================================
+    % 4. Γεωμετρικά Στοιχεία & Ετικέτες
+    % ==========================================
+    \coordinate (O) at (0, 0);                
+    \coordinate (A) at (\r, -\d);             
+    
+    % Κατακόρυφος άξονας
+    \draw[dashed, thick] (V) -- (O);
+    \draw[thick, secondcolor] (O) -- (K) node[midway, left] {$x$};
+    
+    % Ακτίνα βάσης κώνου (ρ)
+    \draw[dashed, thick, \xrwma!60!black] (K) -- (A) node[midway, below] {$\rho$};
+    
+    % Ακτίνα σφαίρας (R)
+    \draw[thick, \xrwma!50!black] (O) -- (A) node[midway, above] {$R=3$};
+
+    % Σημεία
+    \filldraw (O) circle (1pt) node[left] {$O$};
+    \filldraw (K) circle (1pt) node[below left] {$K$};
+    \filldraw (V) circle (1pt) node[above] {$V$};
+    \filldraw (A) circle (1pt) node[right] {$A$};
+
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Να αποδείξετε ότι η ακτίνα $\rho$ της βάσης του κώνου δίνεται από τη σχέση $\rho^2 = 9 - x^2$.
+  \item Αποδείξτε ότι ο όγκος του κώνου συναρτήσει του $x$ δίνεται από τον τύπο $V(x) = \dfrac{\pi}{3}(9-x^2)(3+x)$.
+  \item Να βρείτε την τιμή του $x$ για την οποία ο όγκος του κώνου μεγιστοποιείται, καθώς και τις διαστάσεις (ύψος και ακτίνα) του μέγιστου κώνου.
+  \item Αν το $x$ αυξάνεται με ρυθμό $0.5 \si{cm/s}$, να βρείτε το ρυθμό μεταβολής του όγκου $V(x)$ τη χρονική στιγμή που το ύψος του κώνου είναι $4\si{cm}$.
+\end{erwthma}
+\end{thema}

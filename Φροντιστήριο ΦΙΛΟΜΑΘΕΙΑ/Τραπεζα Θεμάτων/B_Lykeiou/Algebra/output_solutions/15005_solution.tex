@@ -1,37 +1,29 @@
+\lysh{15005}{4}
 \begin{alist}
 \item Το πεδίο ορισμού της συνάρτησης $f$ είναι το $\mathbb{R}$, οπότε αν $x \in \mathbb{R}$ τότε και $-x \in \mathbb{R}$.
 Επίσης είναι: $f(-x) = (-x)^6 - 3(-x)^2 + 2 = x^6 - 3x^2 + 2 = f(x)$.
 Άρα, η $f$ είναι άρτια.
-
 \item Οι τετμημένες των σημείων τομής της γραφικής παράστασης της συνάρτησης $f$ με τον άξονα $x'x$ είναι οι λύσεις της εξίσωσης: $f(x) = 0 \Leftrightarrow x^6 - 3x^2 + 2 = 0$.
 Θέτουμε $x^2 = y$ και η εξίσωση γίνεται
 \[y^3 - 3y + 2 = 0 \quad (1).\]
 Οι πιθανές ακέραιες ρίζες της εξίσωσης (1) είναι οι διαιρέτες του 2, δηλαδή οι $\pm 1, \pm 2$. Για $\rho = 1$, κάνοντας τη διαίρεση με τη βοήθεια του σχήματος Horner, έχουμε:
-
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-1 & 0 & $-3$ & 2 & \multicolumn{1}{c|}{$\rho = 1$} \\ \cline{1-4}
-\cellcolor{gray!50} & 1 & 1 & $-2$ & \multicolumn{1}{c}{} \\ \cline{1-4}
-1 & 1 & $-2$ & 0 & \multicolumn{1}{c}{} \\ \cline{1-4}
-\end{tabular}
+\Horner{1,0,-3,2}{1}
 \end{center}
-
 Οπότε, το 1 είναι ρίζα και η εξίσωση (1) γίνεται:
 \[(y - 1)(y^2 + y - 2) = 0 \Leftrightarrow\]
 \[y - 1 = 0 \Leftrightarrow y = 1 \text{ ή } y^2 + y - 2 = 0.\]
 Η εξίσωση $y^2 + y - 2 = 0$ έχει ρίζες τις $y_1 = -2$ και $y_2 = 1$.
 Οπότε, $x^2 = -2$, αδύνατη ή $x^2 = 1 \Leftrightarrow x = 1$ ή $x = -1$.
 Άρα τα σημεία τομής της γραφικής παράστασης της συνάρτησης $f$ με τον άξονα $x'x$ είναι: $A(-1, 0)$ και $B(1, 0)$.
-
 \item Επειδή η $f$ είναι άρτια, η γραφική της παράσταση είναι συμμετρική ως προς τον άξονα $y'y$, οπότε έχει την ακόλουθη μορφή:
 \begin{center}
 \begin{tikzpicture}[x=1.5cm,y=1cm,scale=0.9]
-\draw[step=0.5cm,gray!30,very thin] (-1.9,-1.9) grid (1.9,4.5);
+\draw[step=0.5cm,gray!30,very thin] (-1.9,-0.5) grid (1.9,2.5);
 \foreach \x/\xtext in {-1/-1, 0/0, 1/1} {
   \draw (\x, 1pt) -- (\x, -1pt) node[anchor=north] {\scriptsize \xtext};
 }
-\foreach \y/\ytext in {-1/-1, 1/1, 2/2, 3/3, 4/4} {
+\foreach \y/\ytext in {-1/-1, 1/1, 2/2} {
   \draw (1pt, \y) -- (-1pt, \y);
   \ifnum\y=2
     \node[anchor=east] at (0, \y) {\scriptsize \ytext};
@@ -42,11 +34,10 @@
   \fi
 }
 \draw[->] (-1.9,0) -- (1.9,0) node[above] {$x$};
-\draw[->] (0,-1.9) -- (0,4.5) node[right] {$y$};
-
+\draw[->] (0,-0.5) -- (0,2.5) node[right] {$y$};
 \draw[black!80, thick, domain=-1.35:1.35, samples=100] plot (\x,{\x*\x*\x*\x*\x*\x - 3*\x*\x + 2});
 \end{tikzpicture}
 \end{center}
-
 \item Από τη γραφική παράσταση προκύπτει ότι η $f$ είναι γνησίως φθίνουσα σε καθένα από τα διαστήματα $(-\infty, -1]$ και $[0, 1]$ και γνησίως αύξουσα σε καθένα από τα διαστήματα $[-1, 0]$ και $[1, +\infty)$.
 \end{alist}
+

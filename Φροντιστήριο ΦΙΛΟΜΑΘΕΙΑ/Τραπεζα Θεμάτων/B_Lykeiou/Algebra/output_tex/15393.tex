@@ -1,22 +1,49 @@
-% ===================================================================
-%  Αρχείο: 15393.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py
-% ===================================================================
-
-ΘΕΜΑ 2
-
+\Askhsh{15393}{2}
+\begin{ylh}{1}
+\item 2.2 Κατακόρυφη-Οριζόντια Μετατόπιση Καμπύλης
+\item 5.1 Εκθετική συνάρτηση
+\item 5.3 Λογαριθμική συνάρτηση
+\end{ylh}
 Στο παρακάτω σχήμα δίνονται οι γραφικές παραστάσεις των συναρτήσεων $f(x) = 2^{x}$, $x \in R$ και δύο άλλων συναρτήσεων $g(x)$ και $h(x)$, $x \in R$ που προέκυψαν από μετατοπίσεις της γραφικής παράστασης της $f(x)$.
 
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
+    xmin = -4.2, xmax = 5.2, ymin = -0.5, ymax = 8.5,
+    xtick = {-4,-3,-2,-1,1,2,3,4,5}, ytick = {1,2,3,4,5,6,7,8},
+    grid = both, grid style = {gray!20},
+    samples = 100, width = 10cm, height = 8cm,
+    tick label style = {font=\small},
+    legend style={at={(0.05,0.95)},anchor=north west, font=\small}
+]
+    % f(x) = 2^x (Green)
+    \addplot[very thick, forestgreen!70!black, domain=-4:3] {2^x} node[right, pos=0.9] {$f(x)$};
+    
+    % h(x) = 2^x + 1 (Blue) - Vertical shift +1
+    \addplot[very thick, maincolor, domain=-4:2.8] {2^x + 1} node[above, pos=0.8] {$h(x)$};
+    
+    % g(x) = 2^(x-2) (Red) - Horizontal shift +2
+    \addplot[very thick, secondarycolor, domain=-4:4.8] {2^(x-2)} node[below right, pos=0.9] {$g(x)$};
+    
+    % Vertical move indicator (f to h)
+    \draw[<->, >=latex, dashed, thick, blue!50!black] (axis cs:0,1) -- (axis cs:0,2) node[midway, left] {$1$};
+    \filldraw (axis cs:0,1) circle (1.5pt);
+    \filldraw (axis cs:0,2) circle (1.5pt);
+
+    % Horizontal move indicator (f to g)
+    \draw[<->, >=latex, dashed, thick, red!50!black] (axis cs:0,1) -- (axis cs:2,1) node[midway, above] {$2$};
+    \filldraw (axis cs:2,1) circle (1.5pt);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
 \begin{alist}
 \item Να εξηγήσετε με τι είδους μετατοπίσεις προέκυψαν οι γραφικές παραστάσεις των $g(x)$ και $h(x)$ από την γραφική παράσταση της $f(x)$ .
-
 \monades{8}
-
 \item Να γράψετε τους τύπους των συναρτήσεων $g(x)$ και $h(x)$.
-
 \monades{8}
-
 \item Να βρείτε την τετμημένη του σημείου Α της γραφικής παράστασης της $f$ του οποίου η τεταγμένη είναι 16.
-
 \monades{9}
 \end{alist}
+

@@ -1,0 +1,102 @@
+Professional Mathematics teacher (Grade 12 / Γ Λυκείου).
+LaTeX.
+A specific formatting guide (`\begin{thema}`, `\begin{erwthma}`, `\item`, `\eng{...}`, `\textbf{...}`, `\hm` for $\sin$, `\[ ... \]`, `\begin{align*}`, etc.).
+
+        *   $f(x) = x - \sin x$ on $[0, +\infty)$.
+        *   1) Monotony.
+        *   2) Prove $f(x) \ge 0$ for $x \ge 0$.
+        *   3) $\lim_{x \to 0} h(x)$ where $h(x) = \frac{f(x)}{x^3}$.
+        *   4) $\lim_{x \to 0} \frac{x^2 - \sin^2 x}{x \cdot f(x)}$.
+
+    *   *Part 1: Monotony*
+        *   $f(x) = x - \sin x$
+        *   $f'(x) = 1 - \cos x$.
+        *   Since $-1 \le \cos x \le 1$ for all $x \in \mathbb{R}$, then $f'(x) \ge 0$ for all $x \in [0, +\infty)$.
+        *   $f'(x) = 0 \iff \cos x = 1 \iff x = 2k\pi, k \in \mathbb{N}_0$.
+        *   Since $f'(x) \ge 0$ and $f'(x)=0$ only at isolated points, $f$ is $\textbf{γνησίως αύξουσα}$ on $[0, +\infty)$.
+
+    *   *Part 2: $f(x) \ge 0$*
+        *   Since $f$ is strictly increasing on $[0, +\infty)$, for all $x \ge 0$, $f(x) \ge f(0)$.
+        *   $f(0) = 0 - \sin 0 = 0$.
+        *   Therefore, $f(x) \ge 0$ for all $x \ge 0$.
+
+    *   *Part 3: $\lim_{x \to 0} h(x)$*
+        *   $h(x) = \frac{x - \sin x}{x^3}$.
+        *   As $x \to 0$, the form is $\frac{0}{0}$.
+        *   Use L'Hôpital's rule ($\xlongequal$):
+            $\lim_{x \to 0} \frac{x - \sin x}{x^3} \xlongequal{L'H} \lim_{x \to 0} \frac{1 - \cos x}{3x^2}$.
+        *   Still $\frac{0}{0}$. Apply L'Hôpital again:
+            $\lim_{x \to 0} \frac{1 - \cos x}{3x^2} \xlongequal{L'H} \lim_{x \to 0} \frac{\sin x}{6x}$.
+        *   We know $\lim_{x \to 0} \frac{\sin x}{x} = 1$.
+        *   So, $\lim_{x \to 0} h(x) = \frac{1}{6} \cdot 1 = \frac{1}{6}$.
+
+    *   *Part 4: $\lim_{x \to 0} \frac{x^2 - \sin^2 x}{x \cdot f(x)}$*
+        *   Expression: $\frac{x^2 - \sin^2 x}{x(x - \sin x)}$.
+        *   Numerator is a difference of squares: $x^2 - \sin^2 x = (x - \sin x)(x + \sin x)$.
+        *   The limit becomes: $\lim_{x \to 0} \frac{(x - \sin x)(x + \sin x)}{x(x - \sin x)}$.
+        *   For $x \neq 0$, we can cancel $(x - \sin x)$ (since $x - \sin x = 0 \iff x=0$ for small $x$).
+        *   $\lim_{x \to 0} \frac{x + \sin x}{x} = \lim_{x \to 0} (1 + \frac{\sin x}{x}) = 1 + 1 = 2$.
+
+    *   Use `\begin{thema}{Γ}`.
+    *   Use `\begin{erwthma}`.
+    *   Use `\item` for each part.
+    *   Use `\hm` instead of `\sin`.
+    *   Use `\xlongequal` for L'Hôpital steps.
+    *   Use `\textbf{...}` and `\eng{...}`.
+    *   Use `\[ ... \]` and `\begin{align*}`.
+    *   Check formatting: `belh ar, aks_on` etc are for TikZ, but no graph is needed here.
+    *   Ensure no indefinite integrals or restricted methods are used.
+
+    *   $f(x) = x - \hm x$.
+    *   $f'(x) = 1 - \cos x$. $\cos x \le 1 \implies f'(x) \ge 0$.
+    *   $f(0) = 0$. Since increasing, $f(x) \ge 0$.
+    *   $\lim \frac{x - \hm x}{x^3} \xrightarrow{L'H} \frac{1 - \cos x}{3x^2} \xrightarrow{L'H} \frac{\sin x}{6x} \to 1/6$.
+    *   $\lim \frac{x^2 - \hm^2 x}{x(x - \hm x)} = \lim \frac{(x - \hm x)(x + \hm x)}{x(x - \hm x)} = \lim \frac{x + \hm x}{x} = 1 + 1 = 2$.
+
+    *   No preamble.
+    *   Start with `%=========== ΛΥΣΗ - Xο ΘΕΜΑ Γ ===========`.
+    *   End with `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - Χο ΘΕΜΑ Γ ===========`.
+    *   Strict LaTeX syntax.
+%=========== ΛΥΣΗ - Xο ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Η συνάρτηση $f$ είναι συνεχής στο $[0, +\infty)$ και παραγώγιμη στο $(0, +\infty)$ με παράγωγο:
+\[ f'(x) = 1 - \cos x \]
+Γνωρίζουμε ότι για κάθε $x \in \mathbb{R}$, ισχύει $-1 \le \cos x \le 1$.
+Επομένως, για κάθε $x \ge 0$, έχουμε:
+\[ f'(x) = 1 - \cos x \ge 0 \]
+Η εξίσωση $f'(x) = 0$ ισχύει αν και μόνο αν $\cos x = 1$, δηλαδή για $x = 2k\pi, k \in \mathbb{N}_0$.
+Επειδή η παράγωγος είναι μη αρνητική και μηδενίζεται μόνο σε μεμονωμένα σημεία, η συνάρτηση $f$ είναι \textbf{γνησίως αύξουσα} στο $[0, +\infty)$.
+
+\item Επειδή η $f$ είναι \textbf{γνησίως αύξουσα} στο $[0, +\infty)$, για κάθε $x \ge 0$ ισχύει:
+\[ f(x) \ge f(0) \]
+Υπολογίζοντας την τιμή της συνάρτησης στο $0$:
+\[ f(0) = 0 - \hm 0 = 0 \]
+Άρα, για κάθε $x \ge 0$, ισχύει $f(x) \ge 0$.
+
+\item Για $x > 0$, η συνάρτηση $h(x) = \dfrac{x - \hm x}{x^3}$ παρουσιάζει στην τιμή $x=0$ απροσδιοριστία της μορφής $\frac{0}{0}$.
+Εφαρμόζοντας το θεώρημα \eng{L'Hôpital} δύο φορές:
+\begin{align*}
+\lim_{x \to 0} h(x) = \lim_{x \to 0} \frac{x - \hm x}{x^3} &\xlongequal{\eng{L'Hôpital}} \lim_{x \to 0} \frac{1 - \cos x}{3x^2} \\
+&\xlongequal{\eng{L'Hôpital}} \lim_{x \to 0} \frac{\sin x}{6x} \\
+&= \frac{1}{6} \lim_{x \to 0} \frac{\sin x}{x} = \frac{1}{6} \cdot 1 = \frac{1}{6}
+\end{align*}
+Άρα, $\lim\limits_{x \to 0} h(x) = \dfrac{1}{6}$.
+
+\item Το ζητούμενο όριο είναι:
+\[ L = \lim_{x \to 0} \frac{x^2 - \hm^2 x}{x \cdot f(x)} \]
+Παρατηρούμε ότι ο αριθμητής είναι διαφορά τετραγώνων:
+\[ x^2 - \hm^2 x = (x - \hm x)(x + \hm x) \]
+Επομένως, η έκφραση γίνεται:
+\[ \frac{x^2 - \hm^2 x}{x(x - \hm x)} = \frac{(x - \hm x)(x + \hm x)}{x(x - \hm x)} \]
+Για $x \neq 0$, ισχύει $x - \hm x \neq 0$, οπότε μπορούμε να απλοποιήσουμε το $(x - \hm x)$:
+\begin{align*}
+L &= \lim_{x \to 0} \frac{x + \hm x}{x} \\
+&= \lim_{x \to 0} \left( \frac{x}{x} + \frac{\hm x}{x} \right) \\
+&= \lim_{x \to 0} \left( 1 + \frac{\hm x}{x} \right) \\
+&= 1 + 1 = 2
+\end{align*}
+Άρα, $\lim\limits_{x \to 0} \dfrac{x^2 - \hm^2 x}{x \cdot f(x)} = 2$.
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - Χο ΘΕΜΑ Γ ===========

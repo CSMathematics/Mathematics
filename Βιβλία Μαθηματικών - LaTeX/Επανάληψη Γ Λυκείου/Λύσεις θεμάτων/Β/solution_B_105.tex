@@ -1,0 +1,61 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_105 ===========
+\begin{thema}{Β}
+Στο παρακάτω αναβαθμισμένο σχήμα τονίζονται οπτικά η πλάγια ασύμπτωτη, η οριζόντια ασύμπτωτη, και η μονοτονική πορεία της καμπύλης.
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+  \draw[help lines, gray!30] (-6,-3) grid (8,5);
+  \draw[-latex] (-6.3,0) -- (8.3,0) node[right] {$x$};
+  \draw[-latex] (0,-3.3) -- (0,5.3) node[above] {$y$};
+  \foreach \x in {-5,-4,-3,-2,-1,1,2,3,4,5,6,7}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\tiny] {$\x$};
+  \foreach \y in {-2,-1,1,2,3,4}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  
+  % asymptotes
+  \draw[dashed, red!60!black, thick] (-6,-1) -- (0,-1);
+  \node[anchor=south, color=red, font=\footnotesize\bfseries] at (-3, -1) {Οριζ. Ασύμπτ. $y=-1$};
+  \draw[dashed, blue!60!black, thick] (0,0) -- (8,4);
+  \node[anchor=south east, color=blue, font=\footnotesize\bfseries] at (7, 3.5) {Πλάγια Ασύμπτ. $y = \frac{x}{2}$};
+  
+  % curve
+  \draw[very thick, blue!70!black, smooth, tension=0.4]
+    plot coordinates {(-6,-0.95) (-4,-0.9) (-2,-0.5) (0,0) (2,0.8) (4,1.8) (6,2.9) (8,3.95)};
+  \filldraw[blue!70!black] (0,0) circle (2pt) node[above left,font=\footnotesize] {$O(0,0)$};
+  
+  % Monotonicity
+  \node[anchor=south, color=green!50!black, font=\footnotesize\bfseries] at (3, 1) {$\nearrow$ Αύξουσα};
+  \node[anchor=south, color=green!50!black, font=\footnotesize\bfseries] at (-3, -0.3) {$\nearrow$ Αύξουσα};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item Εξετάζουμε τα όρια:
+\begin{itemize}
+    \item $\lim\limits_{x \to -\infty} f(x)$: Από τη γραφική παράσταση, καθώς $x \to -\infty$ η καμπύλη προσεγγίζει ασυμπτωτικά τη γραμμή $y = -1$. Οπότε:
+    \[ \lim\limits_{x \to -\infty} f(x) = -1 \]
+    \item $\lim\limits_{x \to +\infty} \frac{f(x)}{x}$: Εφόσον η $C_f$ στο $+\infty$ πλησιάζει την πλάγια ασύμπτωτη $y = \frac{x}{2}$, ισχύει $f(x) \approx \frac{x}{2}$ για μεγάλα $x$. Διαιρώντας με $x$:
+    \[ \lim_{x \to +\infty} \frac{f(x)}{x} = \lim_{x \to +\infty} \frac{x/2}{x} = \frac{1}{2} \]
+\end{itemize}
+
+\item Ασύμπτωτες:
+\begin{itemize}
+    \item \textbf{Οριζόντια ασύμπτωτη $y = -1$ στο $-\infty$:} Η ύπαρξή της δικαιολογείται εξ ορισμού, αφού $\lim\limits_{x \to -\infty} f(x) = -1$ (πεπερασμένο). Η γραφική παράσταση πλησιάζει τη σταθερή ευθεία $y=-1$.
+    \item \textbf{Πλάγια ασύμπτωτη $y = \frac{x}{2}$ στο $+\infty$:} Εξ ορισμού, μια ευθεία $y = \alpha x + \beta$ αποτελεί πλάγια ασύμπτωτη αν $\alpha = \lim\limits_{x\to+\infty}\frac{f(x)}{x}$ και $\beta = \lim\limits_{x\to+\infty}\left(f(x) - \alpha x\right)$. Ήδη δείξαμε $\alpha = 1/2$, και δεδομένου ότι η καμπύλη ταυτίζεται ασυμπτωτικά με $y = x/2$, συμπεραίνουμε $\beta = 0$.
+\end{itemize}
+Δεν υπάρχουν κατακόρυφες ασύμπτωτες, αφού η $f$ ορίζεται σε όλο το $\mathbb{R}$.
+
+\item Από τη γραφική παράσταση, η $f$ τέμνει τον $x'x$ μόνο στην αρχή των αξόνων $O(0, 0)$. Αυτό αιτιολογείται ως εξής:
+\begin{itemize}
+    \item Στο $-\infty$, η $f$ πλησιάζει την τιμή $-1 < 0$, δηλαδή είναι αρνητική.
+    \item Καθώς $x$ αυξάνεται, η $f$ μεταβαίνει στο $f(0) = 0$ (τέμνει τον $x'x$).
+    \item Μετά το $0$, η $f$ ανεβαίνει και πλησιάζει τη γραμμή $y = x/2 > 0$, χωρίς να ξαναπέφτει στο μηδέν.
+\end{itemize}
+Η $f$ τέμνει τον $x'x$ \textbf{ακριβώς μία φορά}, στο $x = 0$.
+
+\item Η γραφική παράσταση φαίνεται να ανεβαίνει \textbf{μονότονα} σε ολόκληρο τον $\mathbb{R}$: από $-1$ (στο $-\infty$) μέχρι $+\infty$ (στο $+\infty$), χωρίς κανένα τοπικό μέγιστο ή ελάχιστο. Η πορεία είναι σταθερά ανοδική, χωρίς αλλαγές κατεύθυνσης.
+Συνεπώς, \textbf{ναι}, μπορούμε να συμπεράνουμε από τη γραφική ότι η $f$ είναι \textbf{γνησίως αύξουσα σε ολόκληρο το $\mathbb{R}$}.
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_105 ===========

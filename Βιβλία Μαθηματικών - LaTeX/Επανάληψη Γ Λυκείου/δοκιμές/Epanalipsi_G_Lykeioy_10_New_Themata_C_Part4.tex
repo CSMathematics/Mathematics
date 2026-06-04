@@ -1,0 +1,319 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xparse}
+\usepackage[english,greek]{babel}
+\usepackage{alphabeta}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[outer=1.50cm, inner=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype}
+\usetikzlibrary{arrows.meta}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{tikzmark}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[curlybraces,amsbb,mtphrb]{mtpro2}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\newcommand{\eng}{\selectlanguage{english}}
+\newcommand{\gr}{\selectlanguage{greek}}
+\usepackage{mathimatika}
+\def\xrwma{red!80!black}
+\definecolor{steelblue}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{orange}{HTML}{ff7300}
+
+\newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\newcommand{\subsup}{
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt}
+}
+\makeatother}
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+\usepackage{etoolbox,hhline,moreenum}
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+
+\newlist{alist}{enumerate}{1}
+\setlist[alist]{label=\let\textdexiakeraia\relax\alph*.}
+\UseTblrLibrary{counter}
+
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex,anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={red!80!black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
+\AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
+
+\definecolor{titlecolor}{HTML}{cd0f00}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+{%
+\bgroup
+\setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+\setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+\ul{#1}%
+\egroup
+}
+\newcommand*\SectionNumberBox[1]
+{%
+\colorbox{red!80!black}
+{%
+\makebox[2em][c]
+{%
+\color{white}%
+\strut
+\csname the#1\endcsname
+}%
+}%
+\TitleUnderline{\ \ \ }%
+}
+\titleformat{\section}[hang]
+{\Large\fontfamily{maksf}\selectfont}%
+{\colorbox{\xrwma}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[80pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesection ο Κεφάλαιο}}}}%
+}}}%
+{0pt}%
+{\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ \textbf{#1}\ }}}
+
+\titleformat{\subsection}[hang]
+{\large\bfseries\fontfamily{maksf}\selectfont}%
+{\colorbox{red!80!black}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[30pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesubsection}}}}%
+}}}%
+{0pt}%
+{
+\ \textbf{#1}\ }
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\titleformat{\part}[display]
+{\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{red!80!black}{ \kerkissans{ #1}}}
+\titlespacing*{\part} 
+{0pt}{0pt}{0pt}
+
+\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\pgfplotsset{compat=1.18}
+
+\fancyhf{}
+\newcommand{\myleftmark}{\leftmark}
+\renewcommand{\myleftmark}{{\large Τυπολόγιο}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\sectionmark}[1]{\markboth{\large Κεφάλαιο \thesection\ -\ #1}{} }
+
+\makeatletter
+\ifthenelse{\boolean{@twoside}}{%
+\fancyhead[LE]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\thepage\ $\lvert$ \leftmark}}};
+\node[anchor=north east, text=black, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\end{tikzpicture}
+}%
+\fancyhead[RO]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\node[anchor=north east, text=black, font=\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark\ $ \lvert $\ \thepage}}};
+\end{tikzpicture}
+}%
+}
+\makeatother
+
+%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
+\newcounter{parathrhsh}[section]
+\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
+\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση\hspace{2mm}\theparathrhsh}}}}{}
+
+\newcommand\thema{Γ}
+
+\newcounter{askhsh}[section]
+\renewcommand{\theaskhsh}{\arabic{askhsh}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}{\textbf{\textcolor{black}{\faPenSquare\ \  \large \kerkissans{\textbf{\theaskhshο\hspace{2mm}Θέμα}}}}}\hspace{0mm}}{}
+
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\kerkissans{\large{\textcolor{\xrwma}{\thema.\arabic*}}}},itemsep=0mm,leftmargin=0.8cm}
+%------------------------------------
+\newenvironment{askhsh}[1]
+{\begin{tcolorbox}[title=\Askhsh\kerkissans{\textbf{\large{  #1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=black]
+\renewcommand{\thema}{#1}}
+{\end{tcolorbox}}
+
+\begin{document}
+\NineColors{saturation=high}
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+\renewcommand{\myleftmark}{\large Τυπολόγιο}
+\begin{center}
+\part{Επαναληπτικά Θέματα Γ - Μέρος 4ο (Εύρεση f, Θ.Μ.Τ. \& Ανισότητες)}
+\end{center}
+
+\begin{askhsh}{Γ}
+Μια συνεχής συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ ικανοποιεί τη σχέση $f^2(x) - 2x f(x) = 1$ για κάθε $x \in \mathbb{R}$, με αρχική συνθήκη $f(0) = 1$.
+\begin{erwthma}
+  \item Να αποδείξετε ότι ο τύπος της συνάρτησης είναι $f(x) = x + \sqrt{x^2+1}$.
+  \item Να αποδείξετε ότι ισχύει η ταυτότητα $f(x) \cdot f(-x) = 1$ για κάθε πραγματικό αριθμό $x$ και να συμπεράνετε ότι $f(x) > 0$.
+  \item Να αποδείξετε ότι η συνάρτηση είναι γνησίως αύξουσα στο $\mathbb{R}$.
+  \item Να αποδείξτε την ανισότητα $f(x+1) - f(x) < f'(x+1)$ για κάθε $x \in \mathbb{R}$. 
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται η παραγωγίσιμη συνάρτηση $f: \mathbb{R} \to \mathbb{R}$, η οποία ικανοποιεί τη συνθήκη $f'(x) \cdot e^{f(x)} = 2x$ για κάθε $x \in \mathbb{R}$, ενώ $f(0) = 0$.
+\begin{erwthma}
+  \item Να δείξετε ότι $f(x)=\ln\left(x^2+1\right)$.
+  \item Να μελετήσετε την $f(x)$ ως προς την κυρτότητα και τα σημεία καμπής.
+  \item Να αποδείξετε ότι ισχύει $\ln(x^2+1) < x$.
+  \item Να υπολογίσετε το εμβαδόν του χωρίου που περικλείεται από την εφαπτομένη της $C_f$ στο σημείο $x=0$, την $C_f$ και την ευθεία $x=1$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνάρτηση $f:(0,+\infty)\to\mathbb{R}$, δύο φορές παραγωγίσιμη ικανοποιεί την εξίσωση $x f'(x) - 2f(x) = x^3 e^x$ για κάθε $x > 0$, με $f(1) = e$.
+\begin{erwthma}
+  \item Αποδείξτε ότι $f(x) = x^2 e^x$.
+  \item Εξετάστε τη συνάρτηση ως προς την μονοτονία και τα ακρότατα. Στη συνέχεια εξηγήστε γιατί η συνάρτηση είναι κυρτή στο πεδίο της.
+  \item Έστω ένα τυχαίο $x > 0$. Εφαρμόζοντας το Θεώρημα Μέσης Τιμής στα δύο διαδοχικά διαστήματα $[x, x+1]$ και $[x+1, x+2]$, να δείξετε ότι $f(x+2) + f(x) > 2f(x+1)$.
+  \item Με βάση την εξίσωση της εφαπτομένης ευθείας στο σημείο με τετμημένη $x_0 = 1$, αποδείξτε την ανισότητα $x^2 e^{x-1} \ge 3x - 2$ για $x > 0$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνάρτηση ικανοποιεί την εξίσωση $x f'(x) + 2 f(x) = x \ln x$ με $x \ge 1$, καθώς και τη σχέση $f(1) = -\dfrac{1}{9}$.
+\begin{erwthma}
+  \item Να αποδείξετε ότι $f(x) = \dfrac{x}{3}\ln x - \dfrac{x}{9}$.
+  \item Να βρείτε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο με τετμημένη $x=e$.
+  \item Να υπολογίσετε το όριο $\lim\limits_{x \to +\infty} \dfrac{f(x)}{x}$.
+  \item Να αποδείξετε την ανισότητα $\ln(x+1) - \ln x < \dfrac{1}{x}$, για $x \ge 1$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Έστω ότι για κάθε $x > 1$ ισχύει $f(x) \cdot f'(x) = \dfrac{\ln x}{x}$ με $f(e) = 1$ και γνωρίζουμε ότι $f(x) > 0$. 
+\begin{erwthma}
+  \item Να βρείτε, ότι η συνάρτηση είναι η $f(x) = \ln x$ για τα $x \in (1, +\infty)$.
+  \item Να μελετήσετε ως προς τη μονοτονία τη συνάρτηση $\varphi(x) = \dfrac{\ln x}{x}$.
+  \item Να συγκρίνετε τους αριθμούς $e^\pi$ και $\pi^e$. 
+  \item Να αποδείξετε ότι εμβαδόν του χωρίου μεταξύ της $C_f$, του άξονα $x'x$ και της ευθείας $x=e$ ισούται με 1 τ.μ.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται η παραγωγίσιμη συνάρτηση $f(x)$ με $f(x) > 1$ για κάθε $x \ge 0$. Η $f$ ικανοποιεί τη σχέση $f'(x) = f(x) \ln(f(x))$, με $f(0) = e$.
+\begin{erwthma}
+  \item Να δείξετε ότι $\big(\ln(\ln f(x))\big)' = 1$ και $f(x) = e^{e^x}$.
+  \item Να αποδείξετε ότι η $f(x)$ έχει αντίστροφη (έστω $g(x)$).
+  \item Εφαρμόζοντας το Θεώρημα Μέσης Τιμής, να δείξετε ότι για κάθε $x \ge 0$ ισχύει $e^{e^{x+1}} - e^{e^x} > e^{x+e^x}$.
+  \item Να υπολογίσετε το εμβαδόν του χωρίου μεταξύ της $C_{g^{-1}}$, του άξονα $x'x$ και των κατακόρυφων $x=e, x=e^e$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνεχής στο $\mathbb{R}$ συνάρτηση $f$ ικανοποιεί την εξίσωση $f^2(x) - 4f(x) = x^2 - 4$ για κάθε $x\in\mathbb{R}$, ενώ $f(0)=2$ και $f(x) \ge 2$.
+\begin{erwthma}
+  \item Να βρείτε, τον τύπο της $f(x)$.
+  \item Να αποδείξετε ότι η $f(x)$ είναι παραγωγίσιμη στο $x_0=0$.
+  \item Να εντοπίσετε γεωμετρικά το σημείο της $C_f$ (με $x > 0$) που ελαχιστοποιεί την απόσταση αυτού από την αρχή των αξόνων $O(0,0)$.
+  \item Εφαρμόζεται το Θεώρημα Rolle για την $f(x)$ στο διάστημα $[-1, 1]$; Αιτιολογήστε πλήρως με βάση τις προϋποθέσεις του. 
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Γνωρίζουμε την αλγεβρική ισότητα $(x^2+1) f'(x) + 2x f(x) = 2x$ που ικανοποιεί πλήρως μια $f : \mathbb{R} \to \mathbb{R}$ με αρχική τιμή $f(0) = 0$.
+\begin{erwthma}
+  \item Αναγνωρίζοντας την κοινή συνιστώσα παραγώγισης, παρουσιάστε τον τύπο της συνάρτησης: $f(x) = \dfrac{x^2}{x^2+1}$.
+  \item Μελετήστε την ακρότατη συμπεριφορά της εν λόγω συνάρτησης, δικαιολογώντας γιατί δεν υπερβαίνει ποτέ τη μονάδα. Σε ποια ασύμπτωτη τείνει η απόκρισή της στο άπειρο;
+  \item Εφαρμόστε το Θεώρημα Μέσης Τιμής στο διάστημα $[0, x]$ με $x>0$ για να συναγάγετε μαθηματικά ότι η ευθεία $y=x$ υπερτερεί της καμπύλης για θετικά $x$.
+  \item Να αποδείξετε ότι η εξίσωση $f(x) = k$ διαθέτει πάντοτε ακριβώς δύο πραγματικές και μάλιστα συμμετρικές ρίζες για οποιαδήποτε επιλογή του παραμέτρου $k \in (0, 1)$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Για κάθε $x > 1$ ισχύει $(x-1) f'(x) - f(x) = (x-1)^2 e^x$, όπου η συνάρτηση είναι παραγωγίσιμη, ενώ στο σημείο 2 λαμβάνει την τιμή $f(2) = e^2$.
+\begin{erwthma}
+  \item Διαιρώντας με το $(x-1)^2$, αποδείξτε ότι ο τύπος συνάρτησης είναι ο $f(x) = (x-1)e^x$ προκειμένου να ικανοποιούνται τα δεδομένα.
+  \item Να προσδιορίσετε τη μονοτονία και να τεκμηριώσετε γιατί το ελάχιστο $y=0$ επιτυγχάνεται μόνο στο (νοητό) κλειστό άνω άκρο $x=1$. Ποιο είναι το σύνολο τιμών της αν διευρύνουμε το πεδίο στο $[1, +\infty)$;
+  \item Με αυστηρή χρήση του Θεωρήματος Μέσης Τιμής Διαφορικού Λογισμού στο διάστημα $[x, x+1]$ με $x > 1$, να αποδείξετε την ανισότητα  $x e^{x+1} - (x-1)e^x > x e^x$.
+  \item Να βρείτε το εμβαδόν μεταξύ της καμπύλης $C_f$, της εφαπτομένης της στο $x=2$ (σημείο 2), και της κατακόρυφης $x=1$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ διατηρεί τη σχέση διαφορικής μορφής $f'(x) - f(x) = e^x$ σε πλήρη συνέπεια και $f(0) = 0$.
+\begin{erwthma}
+  \item Να αποδείξετε πως η εξίσωση περιγράφει ταυτοτικά τη συνάρτηση $f(x) = x e^x$.
+  \item Να εντοπίσετε τις θέσεις όπου η συνάρτηση στρέφει τα κοίλα άνω. Σε ποιο σημείο βρίσκεται το μοναδικό σημείο καμπής;
+  \item Αποδείξτε ότι η $f(x)$ είναι Lipschitz με σταθερά $L=3$ στο κλειστό διάστημα $[0, 1]$. Δηλαδή αποδείξτε πρώτα ότι η παράγωγός της δεν υπερβαίνει το 3, και συνδέστε το αποτέλεσμα με το Θεώρημα Μέσης Τιμής ώστε να καταλήξετε στο $|f(a)-f(b)| \le 3|a-b|$ για κάθε $a,b \in [0, 1]$.
+  \item Αξιολογήστε το όριο $\lim\limits_{x \to 0} \dfrac{f(x) - \sin x}{x^2}$.
+\end{erwthma}
+\end{askhsh}
+
+\end{document}

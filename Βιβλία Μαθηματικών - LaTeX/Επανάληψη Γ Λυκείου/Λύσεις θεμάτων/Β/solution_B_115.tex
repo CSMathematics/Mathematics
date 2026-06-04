@@ -1,0 +1,57 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_115 ===========
+\begin{thema}{Β}
+Στο παρακάτω αναβαθμισμένο σχήμα σχεδιάστηκε η $C_{f^{-1}}$ (κόκκινη) ως αντικατοπτρισμός της $C_f$ (μπλε) μέσω $y=x$.
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  \draw[help lines, gray!30] (-2,-2) grid (5,5);
+  \draw[-latex] (-2.3,0) -- (5.3,0) node[right] {$x$};
+  \draw[-latex] (0,-2.3) -- (0,5.3) node[above] {$y$};
+  \foreach \x in {-1,1,2,3,4}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-1,1,2,3,4}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  \draw[dashed, gray!60] (-2,-2) -- (4,4);
+  \node[gray!60,font=\footnotesize] at (3.5,4) {$y=x$};
+  
+  % f
+  \draw[very thick, blue!70!black] (0,3) -- (1,2) -- (2,1) -- (3,0) -- (4,-1);
+  \node[blue!70!black] at (1,3) {$C_f$};
+  \filldraw[blue!70!black] (0,3) circle (2pt) node[above right, font=\footnotesize] {$(0,3)$};
+  \filldraw[blue!70!black] (3,0) circle (2pt) node[below, font=\footnotesize] {$(3,0)$};
+  \filldraw[blue!70!black] (4,-1) circle (2pt) node[below right, font=\footnotesize] {$(4,-1)$};
+  
+  % f^{-1} (αντικατοπτρισμός)
+  \draw[very thick, red!70!black, dashed] (3,0) -- (2,1) -- (1,2) -- (0,3) -- (-1,4);
+  \node[red!70!black] at (-1,3) {$C_{f^{-1}}$};
+  \filldraw[red!70!black] (3,0) circle (2pt);
+  \filldraw[red!70!black] (0,3) circle (2pt);
+  \filldraw[red!70!black] (-1,4) circle (2pt) node[left, font=\footnotesize] {$(-1,4)$};
+  
+  % Σχόλιο μονοτονίας
+  \node[anchor=south, color=blue, font=\footnotesize\bfseries] at (2, -0.5) {$f$: Φθίνουσα};
+  \node[anchor=south, color=red, font=\footnotesize\bfseries] at (-0.5, 2) {$f^{-1}$: Φθίνουσα};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item Η $f$ είναι \textbf{γνησίως φθίνουσα} (δίνεται). Μια γνησίως μονότονη συνάρτηση είναι υποχρεωτικά \textbf{1-1}: αν $x_1 < x_2$, τότε $f(x_1) > f(x_2)$, οπότε $f(x_1) \ne f(x_2)$. 
+Επιπλέον, ο $f$ ορίζεται στο κλειστό $[0, 4]$, είναι συνεχής, και λαμβάνει κάθε ενδιάμεση τιμή μεταξύ $f(4) = -1$ και $f(0) = 3$, δηλαδή $f([0,4]) = [-1, 3]$.
+Αφού 1-1, η $f$ \textbf{αντιστρέφεται} και $f^{-1}: [-1, 3] \to [0, 4]$.
+
+Το πεδίο ορισμού της $f^{-1}$ είναι το \textbf{σύνολο τιμών} της $f$: $\varDelta_{f^{-1}} = [-1, 3]$.
+
+\item Αντιστρέφοντας τα ζεύγη:
+\begin{itemize}
+    \item $f(4) = -1 \Rightarrow f^{-1}(-1) = 4$.
+    \item $f(3) = 0 \Rightarrow f^{-1}(0) = 3$.
+    \item $f(1) = 2 \Rightarrow f^{-1}(2) = 1$.
+\end{itemize}
+
+\item Η $f^{-1}$ κληρονομεί \textbf{τον ίδιο τύπο μονοτονίας} με την $f$. Εφόσον η $f$ είναι γνησίως φθίνουσα, η $f^{-1}$ είναι επίσης \textbf{γνησίως φθίνουσα}.
+
+Απόδειξη: Έστω $y_1 < y_2$ στο $[-1, 3]$. Τότε υπάρχουν $x_1 = f^{-1}(y_1)$ και $x_2 = f^{-1}(y_2)$ με $f(x_1) = y_1$ και $f(x_2) = y_2$. Αν υποθέταμε $x_1 \le x_2$, τότε η φθίνουσα $f$ θα έδινε $f(x_1) \ge f(x_2)$, δηλαδή $y_1 \ge y_2$, άτοπο. Άρα $x_1 > x_2$, δηλαδή $f^{-1}(y_1) > f^{-1}(y_2)$: η $f^{-1}$ \textbf{φθίνουσα}.
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_115 ===========

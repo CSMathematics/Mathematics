@@ -1,0 +1,153 @@
+Professional Mathematics teacher, expert in LaTeX.
+Solve a specific exercise ($h(x) = x^2 \ln(1 + 1/x) - x$ for $x > 0$).
+
+        *   `\begin{thema}{Γ}` ... `\end{thema}`
+        *   `\begin{erwthma}` ... `\end{erwthma}`
+        *   `\item` for sub-questions.
+        *   Inline math `$ ... $`, Display math `\[ ... \]`.
+        *   `\begin{align*}` for multi-line calculations.
+        *   `\eng{...}` for English terms (e.g., `\eng{L'Hôpital}`, `\eng{Squeeze}`).
+        *   `\textbf{...}` for critical terms.
+        *   No indefinite integrals, no 2nd derivative test for extrema, no differential equations, etc.
+        *   Specific comments for start and end of solution.
+        *   No preamble, no repetition of the question text.
+
+    *   Function: $h(x) = x^2 \ln(1 + \frac{1}{x}) - x, x > 0$.
+    *   **Part 1: $\lim_{x \to +\infty} h(x)$.**
+        *   The user's prompt asks to "calculate the limit" in Part 1, and then "prove it's -1/2" in Part 2. This is a bit repetitive in the exercise text provided, but I must treat them as separate items.
+        *   Let $t = 1/x$. As $x \to +\infty, t \to 0^+$.
+        *   $h(x) = \frac{1}{t^2} \ln(1+t) - \frac{1}{t} = \frac{\ln(1+t) - t}{t^2}$.
+        *   This is a $0/0$ form.
+        *   Using L'Hôpital's Rule ($\eng{L'Hôpital}$):
+            $\lim_{t \to 0^+} \frac{\frac{1}{1+t} - 1}{2t} = \lim_{t \to 0^+} \frac{\frac{1 - (1+t)}{1+t}}{2t} = \lim_{t \to 0^+} \frac{-t}{2t(1+t)} = \lim_{t \to 0^+} \frac{-1}{2(1+t)} = -\frac{1}{2}$.
+    *   **Part 2: Prove $\lim_{x \to +\infty} h(x) = -1/2$.**
+        *   Since Part 1 asked to calculate it, Part 2 is effectively the proof. I will provide the detailed steps using the Taylor expansion logic (though Taylor is often taught via L'Hôpital in the Greek curriculum for these specific limits, or using the limit $\lim_{u \to 0} \frac{\ln(1+u)-u}{u^2} = -1/2$). I'll stick to L'Hôpital since it's standard. Wait, if Part 1 asks to calculate and Part 2 asks to prove, maybe Part 1 is an intuitive approach or just the statement, and Part 2 is the formal proof. I will perform the calculation in Part 1 and formalize/summarize in Part 2, or use a different method like the inequality approach from the prompt's provided "guidelines" (even though those guidelines were for a different exercise, the logic $\ln(1+1/x) \approx 1/x - 1/(2x^2)$ is key).
+        *   Let's refine:
+            *   Item 1: Standard limit calculation.
+            *   Item 2: The "proof" part. Since it's the same limit, I'll present the L'Hôpital steps clearly here.
+    *   **Part 3: $\lim_{x \to 0^+} h(x)$.**
+        *   $h(x) = x^2 \ln(1 + \frac{1}{x}) - x$.
+        *   As $x \to 0^+$, $x^2 \to 0$ and $\ln(1 + 1/x) \to +\infty$.
+        *   Form $0 \cdot \infty$. Rewrite as $\frac{\ln(1+1/x)}{1/x^2} - x$.
+        *   Limit of $\frac{\ln(1+1/x)}{1/x^2}$:
+            Let $t = 1/x \to +\infty$.
+            $\lim_{t \to +\infty} \frac{\ln(1+t)}{t^2} = 0$ (since $\ln(1+t)$ grows slower than $t^2$).
+        *   So, $\lim_{x \to 0^+} h(x) = 0 - 0 = 0$.
+    *   **Part 4: Show $h(x) < 0$ for $x > 0$.**
+        *   Let $f(t) = \ln(1+t) - t + \frac{1}{2}t^2$ for $t > 0$.
+        *   Wait, looking at $h(x) = x^2[\ln(1+1/x) - 1/x]$.
+        *   Let $g(t) = \ln(1+t) - t$ for $t > 0$.
+        *   $g'(t) = \frac{1}{1+t} - 1 = \frac{1 - 1 - t}{1+t} = \frac{-t}{1+t}$.
+        *   Since $t > 0$, $g'(t) < 0$.
+        *   $g(0) = \ln(1) - 0 = 0$.
+        *   Since $g$ is \textbf{γνησίως φθίνουσα} on $(0, +\infty)$ and $g(0)=0$, then $g(t) < 0$ for all $t > 0$.
+        *   Substitute $t = 1/x$ (where $x > 0 \Rightarrow t > 0$):
+            $\ln(1+1/x) - 1/x < 0$.
+        *   Multiply by $x^2 > 0$:
+            $x^2 \ln(1+1/x) - x < 0$.
+        *   Thus, $h(x) < 0$ for all $x > 0$.
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item`
+    *   L'Hôpital: `\eng{L'Hôpital}`.
+    *   `\begin{align*}` for the limit.
+    *   `\textbf{γνησίως φθίνουσα}`.
+    *   Check $\lim_{x \to +\infty} h(x)$:
+        $h(x) = \frac{\ln(1+1/x) - 1/x}{(1/x)^2}$.
+        Let $t=1/x$. $\lim_{t \to 0^+} \frac{\ln(1+t)-t}{t^2} = \lim_{t \to 0^+} \frac{\frac{1}{1+t}-1}{2t} = \lim_{t \to 0^+} \frac{-t}{2t(1+t)} = -1/2$.
+
+    *   Part 1: Calculation of limit.
+    *   Part 2: "Prove" - I will use the L'Hôpital method here as the formal proof. For Part 1, I'll state the limit result. Or, better, since the exercise is structured this way, maybe Part 1 is a "find it" and Part 2 is "justify it". I will put the logic in Part 2 and the result in Part 1.
+    *   Part 3: Limit at $0^+$.
+    *   Part 4: Negative sign.
+
+    *   *Correction on Part 1/2:* In many Greek textbooks, if a problem asks to "calculate" and then "prove", it might imply using different methods or just a step-by-step buildup. I'll provide the substitution and the L'Hôpital rule in Part 2. In Part 1, I'll show the transition to $t=1/x$.
+
+    *   *Double Check Part 3:* $h(x) = x^2 \ln(1 + 1/x) - x$.
+        As $x \to 0^+$, $x \ln(1 + 1/x) \to 0$ (since $x \ln x \to 0$ is a known limit).
+        $x^2 \ln(1 + 1/x) = x \cdot [x \ln(1 + 1/x)] \approx x \cdot [x \ln(1/x)] = -x^2 \ln x \to 0$.
+        So $0 - 0 = 0$. Correct.
+
+    *   *Double Check Part 4:* $h(x) = x^2 (\ln(1+1/x) - 1/x)$.
+        $f(t) = \ln(1+t) - t$ for $t>0$. $f'(t) = \frac{1}{1+t} - 1 = \frac{-t}{1+t} < 0$.
+        Since $f(0)=0$ and $f$ is strictly decreasing, $f(t) < 0$ for $t>0$.
+        Since $1/x > 0$, $\ln(1+1/x) - 1/x < 0$.
+        $x^2 > 0 \Rightarrow h(x) < 0$. Correct.
+
+    *   No preamble? Yes.
+    *   No question text? Yes.
+    *   No indefinite integrals? Yes.
+    *   No 2nd derivative test? Yes.
+    *   Correct tags? Yes.
+    *   `\eng{L'Hôpital}`, `\textbf{...}`? Yes.
+    *   `\begin{align*}`? Yes.
+
+    *   $\lim_{x \to \infty} h(x)$:
+        Let $t = 1/x$. Then $x = 1/t$.
+        $h(x) = \frac{1}{t^2} \ln(1+t) - \frac{1}{t} = \frac{\ln(1+t)-t}{t^2}$.
+        $\lim_{t \to 0^+} \frac{\ln(1+t)-t}{t^2} \xrightarrow{\eng{L'Hôpital}} \lim_{t \to 0^+} \frac{\frac{1}{1+t}-1}{2t} = \lim_{t \to 0^+} \frac{-t}{2t(1+t)} = -1/2$.
+
+    *   $\lim_{x \to 0^+} h(x)$:
+        $h(x) = x^2 \ln\left(\frac{x+1}{x}\right) - x = x^2 \ln(x+1) - x^2 \ln x - x$.
+        $\lim_{x \to 0^+} x^2 \ln(x+1) = 0 \cdot 0 = 0$.
+        $\lim_{x \to 0^+} x^2 \ln x = 0$ (standard limit).
+        $\lim_{x \to 0^+} x = 0$.
+        Sum = 0.
+
+    *   Actually, Part 1 and 2 in the prompt's provided text are:
+        1. "Υπολογίσετε το όριο" (Calculate the limit).
+        2. "Αποδείξετε ότι το όριο είναι -1/2" (Prove that the limit is -1/2).
+        This is slightly redundant. I will treat Part 1 as the "substitution and identification of the form" and Part 2 as the "execution of the limit via L'Hôpital".
+
+    *   Wait, let's look at the phrasing again.
+        Item 1: Calculate the limit at $+\infty$.
+        Item 2: Prove $\lim h(x) = -1/2$.
+        Maybe Item 1 expects a "rough" calculation or the result, and Item 2 expects the rigorous proof. Or maybe the user just wants the solution. I'll do the full derivation in Part 2 and just the setup/result in Part 1.
+
+    *   *Self-Correction on Part 3:* To be more rigorous for a 12th grader:
+        $\lim_{x \to 0^+} x^2 \ln(1 + 1/x) = \lim_{x \to 0^+} x^2 \ln(\frac{x+1}{x}) = \lim_{x \to 0^+} [x^2 \ln(x+1) - x^2 \ln x]$.
+        $\lim_{x \to 0^+} x^2 \ln(x+1) = 0 \cdot 0 = 0$.
+        $\lim_{x \to 0^+} x^2 \ln x = 0$ (as $\lim_{u \to 0^+} u^k \ln u = 0$ for $k>0$).
+        So $\lim_{x \to 0^+} h(x) = 0 - 0 - 0 = 0$.
+%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Για το όριο $\lim\limits_{x \to +\infty} h(x)$, θέτουμε $t = \dfrac{1}{x}$. Όταν $x \to +\infty$, τότε $t \to 0^+$.
+Η συνάρτηση $h(x)$ γίνεται:
+\[ h(x) = \frac{1}{t^2} \ln(1+t) - \frac{1}{t} = \frac{\ln(1+t) - t}{t^2} \]
+Το όριο είναι της μορφής $\frac{0}{0}$.
+
+\item Για την απόδειξη του ορίου, εφαρμόζουμε τον κανόνα του $\eng{L'Hôpital}$:
+\[ \lim_{t \to 0^+} \frac{\ln(1+t) - t}{t^2} \xlongequal{\eng{L'Hôpital}} \lim_{t \to 0^+} \frac{\dfrac{1}{1+t} - 1}{2t} \]
+Απλοποιούμε το κλάσμα στον αριθμητή:
+\[ \begin{align*} \lim_{t \to 0^+} \frac{\dfrac{1 - (1+t)}{1+t}}{2t} &= \lim_{t \to 0^+} \frac{-t}{2t(1+t)} \\ &= \lim_{t \to 0^+} \frac{-1}{2(1+t)} \\ &= -\frac{1}{2} \end{align*} \]
+Άρα, $\lim\limits_{x \to +\infty} h(x) = -\dfrac{1}{2}$.
+
+\item Για το όριο στο $0^+$, έχουμε:
+\[ \lim_{x \to 0^+} h(x) = \lim_{x \to 0^+} \left[ x^2 \ln\left(1 + \frac{1}{x}\right) - x \right] \]
+Αναλύουμε τον λογάριθμο:
+\[ \ln\left(1 + \frac{1}{x}\right) = \ln\left(\frac{x+1}{x}\right) = \ln(x+1) - \ln x \]
+Έτσι, το όριο γίνεται:
+\[ \lim_{x \to 0^+} \left[ x^2 \ln(x+1) - x^2 \ln x - x \right] \]
+Γνωρίζουμε ότι:
+\begin{itemize}
+    \item $\lim\limits_{x \to 0^+} x^2 \ln(x+1) = 0 \cdot \ln(1) = 0$.
+    \item $\lim\limits_{x \to 0^+} x^2 \ln x = 0$ (από το γνωστό όριο $\lim\limits_{u \to 0^+} u^k \ln u = 0$ για $k > 0$).
+    \item $\lim\limits_{x \to 0^+} x = 0$.
+\end{itemize}
+Συνεπώς, $\lim\limits_{x \to 0^+} h(x) = 0 - 0 - 0 = 0$.
+
+\item Θεωρούμε τη συνάρτηση $g(t) = \ln(1+t) - t$ για $t > 0$.
+Η συνάρτηση $g$ είναι \textbf{συνεχώς} και \textbf{παραγωγήσιμη} στο $(0, +\infty)$ με παράγωγο:
+\[ g'(t) = \frac{1}{1+t} - 1 = \frac{1 - (1+t)}{1+t} = \frac{-t}{1+t} \]
+Επειδή $t > 0$, έχουμε $g'(t) < 0$, άρα η $g$ είναι \textbf{γνησίως φθίνουσα} στο $(0, +\infty)$.
+Εφόσον $\lim\limits_{t \to 0^+} g(t) = \ln(1) - 0 = 0$ και η συνάρτηση φθίνει, τότε για κάθε $t > 0$ ισχύει $g(t) < 0$.
+Θέτοντας $t = \dfrac{1}{x}$ (αφού $x > 0 \Rightarrow t > 0$), έχουμε:
+\[ \ln\left(1 + \frac{1}{x}\right) - \frac{1}{x} < 0 \]
+Πολλαπλασιάζοντας με τον αριθμό $x^2 > 0$, προκύπτει:
+\[ x^2 \left[ \ln\left(1 + \frac{1}{x}\right) - \frac{1}{x} \right] < 0 \implies x^2 \ln\left(1 + \frac{1}{x}\right) - x < 0 \]
+Άρα, $h(x) < 0$ για κάθε $x > 0$.
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========

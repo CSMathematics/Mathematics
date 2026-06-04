@@ -1,56 +1,34 @@
-% ===================================================================
-%  Αρχείο: 20855.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py
-% ===================================================================
-
-ΘΕΜΑ 2
-
+\Askhsh{20855}{2}
+\begin{ylh}{1}
+\item 5.1 Εκθετική συνάρτηση
+\end{ylh}
 Δίνεται η συνάρτηση $f(x) = \left( \frac{1}{2} \right)^{x}$.
-
 \begin{alist}
 \item Να λύσετε την εξίσωση $\left( \frac{1}{2} \right)^{x} = \frac{1}{8}$ .
-
 \monades{12}
-
 Στο παρακάτω σχήμα φαίνεται η γραφική παράσταση της $f$ και της ευθείας $\varepsilon:y = \frac{1}{8}$ .
-
-
 % TODO: Μετατροπή σχήματος σε TikZ/PGFPlots
 \begin{center}
-
-\begin{tikzpicture}[scale=1]
-    % Grid
-    \draw[very thin, lightgray] (-3,-1) grid (5,6);
-    
-    % Axes
-    \draw[->, thick] (-3.5,0) -- (5.5,0) node[right] {$x$};
-    \draw[->, thick] (0,-1.5) -- (0,6.5) node[above] {$y$};
-    
-    % Decreasing exponential curve y = (1/2)^x
-    \draw[ultra thick, blue, domain=-2.5:4.5, samples=100] plot (\x, {0.5^(\x)}) node[right] {$C_f$};
-    
-    % Horizontal line y = k
-    \def\k{0.125} % Example k
-    \draw[thick, red] (-3, \k) -- (5, \k) node[right] {$\varepsilon$};
-    
-    % Intersection point A
-    % If k = 0.5^3 = 0.125, x=3
-    \filldraw[black] (3,\k) circle (2pt) node[above] {$A$};
-    
-    % Origin
-    \node[below left] at (0,0) {$O$};
-
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle, xlabel = {$x$}, ylabel = {$y$},
+    xmin = -3.5, xmax = 5.5, ymin = -1.5, ymax = 6.5,
+    xtick = {-3,-2,-1,1,2,3,4,5}, ytick = {1,2,3,4,5,6},
+    grid = both, grid style = {gray!30},
+    samples = 150, width = 10cm, height = 7cm,
+    tick label style = {font=\small},
+]
+    \addplot[ultra thick, maincolor, domain=-2.5:4.5] {0.5^x} node[right, pos=0.9] {$C_f$};
+    \def\k{0.125}
+    \addplot[thick, secondarycolor, domain=-3.5:5.5] {\k} node[right, pos=1] {$\varepsilon$};
+    \filldraw[black] (axis cs:3,\k) circle (2pt) node[above] {$A$};
+\end{axis}
 \end{tikzpicture}
-
 % % \caption{Σχήμα 1}
 \end{center}
-
-
 \item Να βρείτε το σημείο τομής της γραφικής παράστασης της συνάρτησης $f$ με την ευθεία $\varepsilon$.
-
 \monades{05}
-
 \item Να βρείτε για ποιές τιμές του $x$ η γραφική παράσταση της συνάρτησης $f$ βρίσκεται κάτω από την ευθεία $\varepsilon$.
-
 \monades{08}
 \end{alist}
+

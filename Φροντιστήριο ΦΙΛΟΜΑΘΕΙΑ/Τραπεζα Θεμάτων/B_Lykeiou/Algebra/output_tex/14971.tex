@@ -1,43 +1,39 @@
-% ===================================================================
-%  Αρχείο: 14971_tikz.tex (Fragment)
-%  Αυτόματη μετατροπή μέσω doc2latex.py & TikZ conversion
-% ===================================================================
-
-ΘΕΜΑ 2
-
+\Askhsh{14971}{2}
+\begin{ylh}{1}
+\item 2.1 Μονοτονία-Ακρότατα-Συμμετρίες Συνάρτησης
+\end{ylh}
 Δίνονται τα σημεία του επιπέδου $Α(1,1),Β(3,3).$
-
 \begin{alist}
 \item Να αιτιολογήσετε ποιες από τις επόμενες ιδιότητες θα μπορούσε και ποιες δε θα μπορούσε να έχει μία συνάρτηση $f$, που ορίζεται σε όλους τους πραγματικούς αριθμούς και της οποίας η γραφική παράσταση διέρχεται από τα Α και Β.
-
 i) είναι σταθερή συνάρτηση ii) είναι γνησίως φθίνουσα συνάρτηση
-
 \monades{12}
-
 \item Να συμπληρώσετε την παρακάτω γραφική παράσταση μίας συνάρτησης f, η οποία διέρχεται από τα Α,Β και είναι περιττή.
-
 \begin{center}
-\begin{tikzpicture}[scale=0.8, >=latex]
-    \draw[very thin, color=gray!30] (-4.5,-4.5) grid (4.5,4.5);
-    \draw[->] (-4.5,0) -- (4.5,0) node[right] {$x$};
-    \draw[->] (0,-4.5) -- (0,4.5) node[above] {$y$};
-    
-    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
-        \draw (\x,2pt) -- (\x,-2pt) node[below, font=\small] {\x};
-    \foreach \y in {-4,-3,-2,-1,1,2,3,4}
-        \draw (2pt,\y) -- (-2pt,\y) node[left, font=\small] {\y};
-    \node[below left, font=\small] at (0,0) {$0$};
-    
-    % Odd function passing through A(1,1) and B(3,3)
-    % A simple choice is y=x
-    \draw[very thick, color=blue!70!black] (-3.5,-3.5) -- (3.5,3.5) node[right] {$f$};
-    
-    \filldraw (1,1) circle (2pt) node[below right] {$A$};
-    \filldraw (3,3) circle (2pt) node[below right] {$B$};
-    \filldraw (-1,-1) circle (2pt) node[above left] {$A'$};
-    \filldraw (-3,-3) circle (2pt) node[above left] {$B'$};
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin = -4.5, xmax = 4.5,
+    ymin = -4.5, ymax = 4.5,
+    xtick = {-4,-3,-2,-1,1,2,3,4},
+    ytick = {-4,-3,-2,-1,1,2,3,4},
+    grid = both,
+    grid style = {gray!30},
+    samples = 150,
+    width = 10cm, height = 7cm,
+    tick label style = {font=\small},
+    every axis x label/.style = {at={(current axis.right of origin)}, anchor=north west},
+    every axis y label/.style = {at={(current axis.above origin)}, anchor=south east},
+]
+    \addplot[very thick, maincolor, domain=-3.5:3.5] {x} node[right, pos=1] {$f$};
+    \addplot[only marks, mark=*, mark size=2pt] coordinates {(1,1)} node[below right] {$A$};
+    \addplot[only marks, mark=*, mark size=2pt] coordinates {(3,3)} node[below right] {$B$};
+    \addplot[only marks, mark=*, mark size=2pt] coordinates {(-1,-1)} node[above left] {$A'$};
+    \addplot[only marks, mark=*, mark size=2pt] coordinates {(-3,-3)} node[above left] {$B'$};
+\end{axis}
 \end{tikzpicture}
 \end{center}
-
 \monades{13}
 \end{alist}
+

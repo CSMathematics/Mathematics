@@ -1,0 +1,198 @@
+*   Function: $f(x) = e^x - ax$ where $a \in \mathbb{R}$.
+    *   Part 1: Find $a$ such that $\lim_{x \to 0} \frac{f(x)-1}{x} = 2$.
+    *   Part 2: For $a=1$, find $\lim_{x \to 0} \frac{f(x)-1}{x^2}$.
+    *   Part 3: For $a=1$, prove $f(x) > 0$ for all $x \in \mathbb{R}$.
+    *   Part 4: Find $\lim_{x \to +\infty} [\frac{f(x)}{e^x} \ln x]$.
+
+    *   $\frac{f(x)-1}{x} = \frac{e^x - ax - 1}{x}$.
+    *   As $x \to 0$, the numerator $e^0 - a(0) - 1 = 0$ and the denominator is $0$. (0/0 form).
+    *   Limit: $\lim_{x \to 0} \frac{e^x - 1 - ax}{x} = \lim_{x \to 0} \left( \frac{e^x - 1}{x} - a \right)$.
+    *   Since $\lim_{x \to 0} \frac{e^x - 1}{x} = 1$ (fundamental limit), we have $1 - a = 2 \implies a = -1$.
+
+    *   $f(x) = e^x - x$.
+    *   $\lim_{x \to 0} \frac{f(x)-1}{x^2} = \lim_{x \to 0} \frac{e^x - x - 1}{x^2}$.
+    *   0/0 form.
+    *   Use L'Hôpital ($\xlongequal$):
+        $\lim_{x \to 0} \frac{e^x - 1}{2x} = \frac{1}{2} \lim_{x \to 0} \frac{e^x - 1}{x} = \frac{1}{2} \cdot 1 = \frac{1}{2}$.
+
+    *   $f(x) = e^x - x$.
+    *   $f'(x) = e^x - 1$.
+    *   Analyze $f'(x)$:
+        *   $f'(x) = 0 \Leftrightarrow e^x = 1 \Leftrightarrow x = 0$.
+        *   $f'(x) > 0 \Leftrightarrow e^x > 1 \Leftrightarrow x > 0$.
+        *   $f'(x) < 0 \Leftrightarrow e^x < 1 \Leftrightarrow x < 0$.
+    *   Therefore, $f$ is \textbf{γνησίως φθίνουσα} on $(-\infty, 0)$ and \textbf{γνησίως αύξουσα} on $(0, +\infty)$.
+    *   The global minimum is at $x=0$.
+    *   $f(0) = e^0 - 0 = 1$.
+    *   Since the minimum value is $1 > 0$, then $f(x) \geq 1 > 0$ for all $x \in \mathbb{R}$.
+
+    *   $f(x) = e^x - x$ (since the context "above function" usually refers to the one in Part 2 and 3, but let's double-check. Part 2 says "For $a=1$... Part 3: "For the above function").
+    *   Expression: $\frac{f(x)}{e^x} \ln x = \frac{e^x - x}{e^x} \ln x = (1 - \frac{x}{e^x}) \ln x$.
+    *   As $x \to +\infty$:
+        *   $\frac{x}{e^x} \to 0$ (fundamental limit or L'Hôpital).
+        *   $\ln x \to +\infty$.
+    *   So we have $(1 - 0) \cdot (+\infty) = +\infty$.
+
+    *   Environment: `\begin{thema}{Γ}`, `\begin{erwthma}`, `\item`.
+    *   Math: `\[ ... \]` for main steps, `\begin{align*}` for multi-line.
+    *   Terms: `\eng{L'Hôpital}`, `\textbf{γνησίως αύξουσα}`, etc.
+    *   Pgfplots/tkz-tab: Not needed for these specific questions unless I decide to add a table for monotonicity. The guide asks for `tkz-tab` for derivatives.
+
+    *   Part 1: $f(x) = e^x - ax$. $\frac{e^x - ax - 1}{x} = \frac{e^x - 1}{x} - a \to 1 - a$. Set $1-a=2 \implies a=-1$.
+    *   Part 2: $f(x) = e^x - x$. $\lim_{x \to 0} \frac{e^x - x - 1}{x^2}$. $\xlongequal \lim_{x \to 0} \frac{e^x - 1}{2x} = 1/2$.
+    *   Part 3: $f'(x) = e^x - 1$. Min at $x=0, f(0)=1$.
+    *   Part 4: $\frac{e^x-x}{e^x} \ln x = (1 - \frac{x}{e^x}) \ln x \to (1-0) \cdot \infty = \infty$.
+
+    *   $\xlongequal$ for L'Hôpital.
+    *   `\eng{L'Hôpital}`.
+    *   `\textbf{γνησίως φθίνουσα}`.
+    *   `\textbf{γνησίως αύξουσα}`.
+    *   `\begin{itemize}` for root/sign analysis.
+
+    *   Start with `%=========== ΛΥΣΗ - 3ο ΘΕΜΑ Γ ===========` (The prompt says "Xο ΘΕΜΑ Γ", I'll use "3ο" if it's the 3rd, but since the prompt says "Xο", I'll just write "ΘΕΜΑ Γ" as the prompt template suggests). Let's use `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`.
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item` (calculations)
+    *   `\end{erwthma}`
+    *   `\end{thema}`
+
+    Wait, for Part 3, the guide specifically asks for `tkz-tab` for monotonicity analysis. I should include it.
+
+    `\begin{center}`
+    `\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1cm, $f'(x)$ / 1cm, $f(x)$ / 1cm}{$-\infty$, $0$, $+\infty$}`
+    `\tkzTabLine{, -, z, +, }`
+    `\tkzTabVar{ - / $-\infty$, t / $1$, + / $+\infty$ }`
+    `\end{center}`
+
+    Actually, $f(x) = e^x - x$. As $x \to -\infty$, $e^x \to 0$ and $-x \to +\infty$, so $f(x) \to +\infty$.
+    Let's correct the table.
+    `\tkzTabVar{ + / $+\infty$, t / $1$, + / $+\infty$ }`
+
+    Wait, $\lim_{x \to +\infty} (e^x - x) = \lim_{x \to +\infty} e^x(1 - x e^{-x}) = \infty \cdot (1 - 0) = +\infty$.
+    $\lim_{x \to -\infty} (e^x - x) = 0 - (-\infty) = +\infty$.
+
+    *   Part 1: $\lim_{x \to 0} \frac{e^x - ax - 1}{x} = 2 \implies 1 - a = 2 \implies a = -1$.
+    *   Part 2: $\lim_{x \to 0} \frac{e^x - x - 1}{x^2}$. Using `\eng{L'Hôpital}`: $\lim_{x \to 0} \frac{e^x - 1}{2x} = 1/2$.
+    *   Part 3: $f'(x) = e^x - 1$. $f'(x)=0 \iff x=0$. Sign analysis. Min at $f(0)=1$.
+    *   Part 4: $\lim_{x \to +\infty} (1 - \frac{x}{e^x}) \ln x = (1 - 0) \cdot \infty = \infty$.
+
+    *   No indefinite integrals.
+    *   No 2nd deriv test.
+    *   L'Hôpital usage: $\xlongequal$.
+    *   $\eng{L'Hôpital}$, $\eng{L'Hôpital}$.
+
+    Actually, the prompt provides an example `\xlongequal` usage for L'Hôpital steps.
+    Let's format Part 2:
+    \[
+    \lim_{x \to 0} \frac{e^x - x - 1}{x^2} \xlongequal{\eng{L'Hôpital}} \lim_{x \to 0} \frac{e^x - 1}{2x} = \frac{1}{2} \lim_{x \to 0} \frac{e^x - 1}{x} = \frac{1}{2} \cdot 1 = \frac{1}{2}
+    \]
+
+    Wait, Part 1 is just a basic limit. $\frac{e^x-1}{x} - a \to 1-a$.
+
+    Part 3 table coordinates:
+    `\tkzTabInit` labels $x$, $f'(x)$, $f(x)$.
+    `\tkzTabLine` with `-, z, +`.
+    `\tkzTabVar` with `+, t, +`.
+
+    Correct.
+
+    One detail: $f(x) = e^x - ax$.
+    Part 1 asks for $a$. Result: $a = -1$.
+    Part 2 says "For $a=1$". (Wait, is it a typo in the exercise? "Για $a=1$" but Part 1 result is $a=-1$. It doesn't matter, I follow the prompt's instructions for each part).
+    Part 2: $a=1 \implies f(x) = e^x - x$.
+    Part 3: "For the above function" $\implies a=1$.
+    Part 4: "Find the limit" $\implies$ likely refers to $a=1$ as well.
+
+    Final check on Part 4 limit: $\lim_{x \to +\infty} \frac{e^x-x}{e^x} \ln x = \lim_{x \to +\infty} (1 - \frac{x}{e^x}) \ln x$.
+    $\lim_{x \to +\infty} \frac{x}{e^x} = 0$.
+    $\lim_{x \to +\infty} \ln x = +\infty$.
+    Result: $+\infty$.
+
+    Wait, is it possible $a$ should be something else in Part 4? "Να βρείτε το όριο...". Usually, this implies the function defined in the previous parts ($a=1$).
+
+    Let's write the LaTeX.
+
+    Part 1:
+    $\frac{f(x)-1}{x} = \frac{e^x - ax - 1}{x} = \frac{e^x - 1}{x} - a$.
+    $\lim_{x \to 0} (\frac{e^x - 1}{x} - a) = 1 - a$.
+    $1 - a = 2 \implies a = -1$.
+
+    Part 2:
+    $f(x) = e^x - x$.
+    $\lim_{x \to 0} \frac{e^x - x - 1}{x^2}$.
+    $\xlongequal{\eng{L'Hôpital}} \lim_{x \to 0} \frac{e^x - 1}{2x} = \frac{1}{2}$.
+
+    Part 3:
+    $f'(x) = e^x - 1$.
+    $f'(x) = 0 \iff x = 0$.
+    $f'(x) > 0 \iff x > 0$.
+    $f'(x) < 0 \iff x < 0$.
+    $f(0) = 1$.
+    Table.
+    Since $f(0)=1$ is the absolute minimum, $f(x) \ge 1 > 0$.
+
+    Part 4:
+    $\frac{f(x)}{e^x} \ln x = \frac{e^x - x}{e^x} \ln x = (1 - \frac{x}{e^x}) \ln x$.
+    $\lim_{x \to +\infty} \frac{x}{e^x} = 0$ (standard limit).
+    $\lim_{x \to +\infty} \ln x = +\infty$.
+    Product $\to 1 \cdot (+\infty) = +\infty$.
+%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Για τη συνάρτηση $f(x) = e^x - ax$, το ζητούμενο όριο είναι:
+\[
+\lim_{x \to 0} \frac{f(x) - 1}{x} = \lim_{x \to 0} \frac{e^x - ax - 1}{x} = \lim_{x \to 0} \left( \frac{e^x - 1}{x} - \frac{ax}{x} \right)
+\]
+Γνωρίζουμε ότι το βασικό όριο είναι $\lim\limits_{x \to 0} \frac{e^x - 1}{x} = 1$, επομένως:
+\[
+\lim_{x \to 0} \left( \frac{e^x - 1}{x} - a \right) = 1 - a
+\]
+Για να ισχύει η συνθήκη $1 - a = 2$, πρέπει:
+\[
+a = -1
+\]
+
+\item Για $a = 1$, η συνάρτηση είναι $f(x) = e^x - x$. Το όριο είναι της μορφής $\frac{0}{0}$:
+\[
+\lim_{x \to 0} \frac{f(x) - 1}{x^2} = \lim_{x \to 0} \frac{e^x - x - 1}{x^2} \xlongequal{\eng{L'Hôpital}} \lim_{x \to 0} \frac{e^x - 1}{2x}
+\]
+Χρησιμοποιώντας ξανά το βασικό όριο $\lim\limits_{x \to 0} \frac{e^x - 1}{x} = 1$, έχουμε:
+\[
+\lim_{x \to 0} \frac{e^x - 1}{2x} = \frac{1}{2} \cdot \lim_{x \to 0} \frac{e^x - 1}{x} = \frac{1}{2} \cdot 1 = \frac{1}{2}
+\]
+
+\item Για $f(x) = e^x - x$, η συνάρτηση είναι $\textbf{συνεχώς παραγωγίσιμη}$ στο $\mathbb{R}$ με παράγωγο:
+\[
+f'(x) = e^x - 1
+\]
+Μελετάμε το πρόσημο της $f'(x)$:
+\begin{itemize}
+    \item $f'(x) = 0 \Leftrightarrow e^x = 1 \Leftrightarrow x = 0$
+    \item $f'(x) > 0 \Leftrightarrow e^x > 1 \Leftrightarrow x > 0$
+    \item $f'(x) < 0 \Leftrightarrow e^x < 1 \Leftrightarrow x < 0$
+\end{itemize}
+Συνεπώς, η $f$ είναι $\textbf{γνησίως φθίνουσα}$ στο $(-\infty, 0)$ και $\textbf{γνησίως αύξουσα}$ στο $(0, +\infty)$.
+Ο πίνακας παραγωγίσιμης είναι:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1cm, $f'(x)$ / 1cm, $f(x)$ / 1cm}{$-\infty$, $0$, $+\infty$}
+\tkzTabLine{, -, z, +, }
+\tkzTabVar{ + / $+\infty$, t / $1$, + / $+\infty$ }
+\end{tikzpicture}
+\end{center}
+Από τον πίνακα προκύπτει ότι η συνάρτηση παρουσιάζει $\textbf{ολικό ελάχιστο}$ στο $x = 0$ με τιμή $f(0) = e^0 - 0 = 1$.
+Εφόσον $\min f(x) = 1 > 0$, τότε $f(x) > 0$ για κάθε $x \in \mathbb{R}$.
+
+\item Το ζητούμενο όριο είναι:
+\[
+\lim_{x \to +\infty} \left[ \frac{f(x)}{e^x} \cdot \ln x \right] = \lim_{x \to +\infty} \left[ \frac{e^x - x}{e^x} \cdot \ln x \right] = \lim_{x \to +\infty} \left[ \left( 1 - \frac{x}{e^x} \right) \cdot \ln x \right]
+\]
+Γνωρίζουμε ότι $\lim\limits_{x \to +\infty} \frac{x}{e^x} = 0$ και $\lim\limits_{x \to +\infty} \ln x = +\infty$.
+Επομένως:
+\[
+\lim_{x \to +\infty} \left[ \left( 1 - \frac{x}{e^x} \right) \cdot \ln x \right] = (1 - 0) \cdot (+\infty) = +\infty
+\]
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========

@@ -1,0 +1,68 @@
+\begin{thema}{Γ}
+Στο σχήμα δίνεται η $C_f$ μιας συνεχούς και γνησίως αύξουσας συνάρτησης $f:[0, +\infty)\to\mathbb{R}$ με $f(0)=0$, $f(1)=2$, $f(3)=3$, $f(6) = 4$, και οριζόντια ασύμπτωτη την ευθεία $y = 5$ στο $+\infty$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=11cm, height=7.5cm,
+    axis lines=middle,
+    xmin=-0.5, xmax=9.5,
+    ymin=-0.5, ymax=5.8,
+    xtick={1,2,3,4,5,6,7,8,9},
+    ytick={1,2,3,4,5},
+    xlabel={$x$},
+    ylabel={$y$},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!20},
+    major grid style={line width=.2pt, draw=gray!40},
+    enlargelimits=false,
+    ticklabel style={font=\footnotesize},
+    samples=100
+]
+
+% Asymptote
+\addplot[domain=-0.5:9.5, dashed, secondcolor!50, thick] {5} node[above right, pos=0.8, font=\footnotesize] {$y=5$};
+
+% Curve
+\addplot[very thick, maincolor, smooth, tension=0.5] coordinates {
+    (0, 0)
+    (0.2, 0.8)
+    (0.5, 1.4)
+    (0.8, 1.8)
+    (1, 2)
+    (1.5, 2.35)
+    (2, 2.63)
+    (3, 3)
+    (4, 3.35)
+    (5, 3.68)
+    (6, 4)
+    (7, 4.30)
+    (8, 4.55)
+    (9, 4.75)
+    (11, 4.95)
+};
+
+% Points
+\addplot[mark=*, maincolor, only marks, mark size=1.5pt] coordinates {(0,0) (1,2) (3,3) (6,4)};
+
+% Labels for points
+\node[maincolor, above left, font=\footnotesize] at (axis cs:1,2) {$(1,2)$};
+\node[maincolor, above left, font=\footnotesize] at (axis cs:3,3) {$(3,3)$};
+\node[maincolor, below right, font=\footnotesize] at (axis cs:6,4) {$(6,4)$};
+
+% Label for function
+\node[maincolor] at (axis cs:5, 3.2) {$C_f$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+  \item Να υπολογίσετε το όριο:
+  \[ \lim\limits_{x \to +\infty} \frac{x f(x) - x^2 \hm\left(\dfrac{1}{x}\right)}{x + 1} \]
+  \item Αν η $f$ είναι παραγωγίσιμη, να αποδείξετε ότι υπάρχει ένα τουλάχιστον $\xi \in (0, 3)$ στο οποίο η εφαπτομένη της $C_f$ σχηματίζει γωνία $45^\circ$ με τον άξονα $x'x$.
+  \item Αν γνωρίζετε ότι η $f$ είναι κοίλη στο $[0, 3]$, να αποδείξετε ότι $\dint_0^3 f(x)\,\d x > \dfrac{9}{2}$ και στη συνέχεια ότι:
+  \[ \dint_0^3 f^{-1}(x)\,\d x < \dint_0^3 f(x)\,\d x \]
+  \item Να αποδείξετε ότι η εξίσωση $f(x) + f(x^3) = 6$ έχει ακριβώς μία ρίζα στο διάστημα $(1, 6)$.
+\end{erwthma}
+\end{thema}

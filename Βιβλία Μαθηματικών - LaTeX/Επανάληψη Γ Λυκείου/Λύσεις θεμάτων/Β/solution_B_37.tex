@@ -1,0 +1,49 @@
+\begin{thema}{Β}
+Δίνεται η συνάρτηση $f(x) = x \ln x$ με πεδίο ορισμού $(0, +\infty)$.
+\begin{erwthma}
+\item Το πλευρικό όριο αναφορικά στο 0 υπολογίζεται ως έξης:
+\[ \lim_{x\to0^+} f(x) = \lim_{x\to0^+} (x \ln x) = \lim_{x\to0^+} \frac{\ln x}{1/x} \xlongequal[\text{DLH}]{\frac{-\infty}{+\infty}} \lim_{x\to0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x\to0^+} (-x) = 0 \]
+Επειδή το όριο είναι πραγματικός αριθμός, η γραφική παράσταση δεν έχει κατακόρυφη ασύμπτωτη στον άξονα $y'y$ (στο $x=0$).
+
+\item Η $f$ είναι δύο φορές παραγωγίσιμη στο $(0, +\infty)$ με:
+\[ f'(x) = x' \ln x + x (\ln x)' = \ln x + 1 \]
+Εξισώνοντας την παράγωγο με μηδέν: $f'(x) = 0 \Leftrightarrow \ln x = -1 \Leftrightarrow x = e^{-1} = \frac{1}{e}$.
+Είναι $f'(x) > 0 \Leftrightarrow \ln x > -1 \Leftrightarrow x > \frac{1}{e}$ και αντίστοιχα $f'(x) < 0 \Leftrightarrow 0 < x < \frac{1}{e}$.
+Στον παρακάτω πίνακα φαίνεται το πρόσημο της $f'$ και η μονοτονία της $f$:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = red7,colorL = red9,colorV = red7]%
+{$x$ / .8,$f'(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$1/e$,$+\infty$}%
+\tkzTabLine{ d, -, z, +, }
+\tkzTabLine{ d, \searrow, t, \nearrow, }
+\end{tikzpicture}
+\end{center}
+Παρουσιάζει ολικό ελάχιστο στο $x = \frac{1}{e}$ με τιμή $f(1/e) = \frac{1}{e} \ln(1/e) = -\frac{1}{e}$.
+Η δεύτερη παράγωγος είναι $f''(x) = (\ln x + 1)' = \frac{1}{x}$.
+Αφού $x > 0$, είναι $f''(x) > 0$ για κάθε $x \in D_f$.
+Στον παρακάτω πίνακα φαίνεται το πρόσημο της $f''$ και η κυρτότητα της $f$:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = red7,colorL = red9,colorV = red7]%
+{$x$ / .8,$f''(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$+\infty$}%
+\tkzTabLine{ d, +, }
+\tkzTabLine{ d, \rotatebox[origin= c]{180}{$\curvearrowleft$}, }
+\end{tikzpicture}
+\end{center}
+Η συνάρτηση είναι αποκλειστικά κυρτή σε όλο το πεδίο της και δεν έχει σημεία καμπής.
+
+\item Εφαρμόζουμε το Θεώρημα Μέσης Τιμής (Θ.Μ.Τ.) για τη συνάρτηση $f$ στο διάστημα $[1, e]$:
+- Η $f$ είναι συνεχής στο $[1, e]$.
+- Η $f$ είναι παραγωγίσιμη στο $(1, e)$.
+Άρα υπάρχει τουλάχιστον ένα $\xi \in (1, e)$ τέτοιο ώστε:
+\[ f'(\xi) = \frac{f(e) - f(1)}{e - 1} = \frac{e\ln e - 1\ln 1}{e - 1} = \frac{e\cdot 1 - 0}{e-1} = \frac{e}{e-1} \]
+Το ζητούμενο αποδείχθηκε.
+
+\item Στο διάστημα $[1, e]$, αφού $x \ge 1$ ισχύει $\ln x \ge 0$, άρα $f(x) \ge 0$. Το εμβαδόν ισούται με:
+\[ E = \int_1^e x \ln x dx = \int_1^e \left(\frac{x^2}{2}\right)' \ln x dx = \left[ \frac{x^2}{2} \ln x \right]_1^e - \int_1^e \frac{x^2}{2} \cdot \frac{1}{x} dx \]
+\[ = \frac{e^2}{2} \ln e - 0 - \frac{1}{2} \int_1^e x dx = \frac{e^2}{2} - \frac{1}{2} \left[ \frac{x^2}{2} \right]_1^e = \frac{e^2}{2} - \frac{1}{2} \left( \frac{e^2}{2} - \frac{1}{2} \right) = \frac{e^2}{2} - \frac{e^2}{4} + \frac{1}{4} \]
+\[ = \frac{2e^2 - e^2 + 1}{4} = \frac{e^2+1}{4} \]
+\end{erwthma}
+\end{thema}

@@ -1,0 +1,710 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xparse}
+\usepackage[english,greek]{babel}
+\usepackage{alphabeta}
+\usepackage{nimbusserif}
+\usepackage[T1]{fontenc}
+\usepackage[outer=1.50cm, inner=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{multicol,longtable,multirow,hhline,enumitem,tikz,pgfplots,tkz-euclide,tkz-tab,capt-of,fontawesome5,gensymb,tabularray,fancyhdr,etoolbox,eurosym,xcolor-material,siunitx,eqparbox,microtype}
+\usetikzlibrary{arrows.meta}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{tikzmark}
+\let\myBbbk\Bbbk
+\let\Bbbk\relax
+\usepackage[curlybraces,amsbb,mtphrb]{mtpro2}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\newcommand{\eng}{\selectlanguage{english}}
+\newcommand{\gr}{\selectlanguage{greek}}
+\usepackage{mathimatika}
+\def\xrwma{red!80!black}
+\definecolor{steel\xrwma}{cmyk}{.7,.278,0,.294}
+\definecolor{doc}{cmyk}{1,0.455,0,0.569}
+\definecolor{orange}{HTML}{ff7300}
+
+\newcommand{\ekthetesdeiktes}{\DeclareMathSizes{10.95}{10.95}{7}{5}
+\DeclareMathSizes{6}{6}{3.8}{2.7}
+\DeclareMathSizes{8}{8}{5.1}{3.6}
+\DeclareMathSizes{9}{9}{5.8}{4.1}
+\DeclareMathSizes{10}{10}{6.4}{4.5}
+\DeclareMathSizes{12}{12}{7.7}{5.5}
+\DeclareMathSizes{14.4}{14.4}{9.2}{6.5}
+\DeclareMathSizes{17.28}{17.28}{11}{7.9}
+\DeclareMathSizes{20.74}{20.74}{13.3}{9.4}
+\DeclareMathSizes{24.88}{24.88}{16}{11.3}
+
+\makeatletter
+\newcommand{\subsup}{
+\AtBeginDocument{
+\check@mathfonts
+\fontdimen16\textfont2=2.5pt
+\fontdimen17\textfont2=2.5pt
+\fontdimen14\textfont2=4.5pt
+\fontdimen13\textfont2=4.5pt}
+}
+\makeatother}
+\usepackage{wrapfig}
+\newenvironment{WrapText1}[3][r]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+
+\newenvironment{WrapText2}[3][l]
+{\wrapfigure[#2]{#1}{#3}}
+{\endwrapfigure}
+\newcommand{\wrapr}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText1}{#2}{#3}
+\vspace{#4}#5\end{WrapText1}#6
+\end{minipage}}
+
+\newcommand{\wrapl}[6]{
+\begin{minipage}{\linewidth}\mbox{}\\
+\vspace{#1}
+\begin{WrapText2}{#2}{#3}
+\vspace{#4}#5\end{WrapText2}#6
+\end{minipage}}
+\usepackage{etoolbox,hhline,moreenum}
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+\makeatletter
+\newif\ifLT@nocaption
+\preto\longtable{\LT@nocaptiontrue}
+\appto\endlongtable{%
+\ifLT@nocaption
+\addtocounter{table}{\m@ne}%
+\fi}
+\preto\LT@caption{%
+\noalign{\global\LT@nocaptionfalse}}
+\makeatother
+
+\newlist{alist}{enumerate}{1}
+\setlist[alist]{label=\let\textdexiakeraia\relax\alph*.}
+\UseTblrLibrary{counter}
+
+\pgfkeys{/pgfplots/aks_on/.style={axis lines=center,
+xlabel style={at={(current axis.right of origin)},xshift=1.5ex,anchor=center},
+ylabel style={at={(current axis.above origin)},yshift=1.5ex, anchor=center}}}
+\pgfkeys{/pgfplots/grafikh parastash/.style={red!80!black,line width=.4mm,samples=200}}
+\pgfkeys{/pgfplots/belh ar/.style={tick label style={font=\scriptsize},axis line style={-latex}}}
+\tikzstyle{pl}=[line width=0.3mm]
+\tikzstyle{plm}=[line width=0.4mm]
+
+\newcommand{\kerkissans}[1]{{\fontfamily{maksf}\selectfont {#1}}}
+\AtBeginDocument{\renewcommand{\textstigma}{\textsigma\texttau}}
+
+\definecolor{titlecolor}{HTML}{cd0f00}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+{%
+\bgroup
+\setbox\TitleUnderlineTestBox\hbox{\colorbox{title\xrwma}\strut}%
+\setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+\ul{#1}%
+\egroup
+}
+\newcommand*\SectionNumberBox[1]
+{%
+\colorbox{red!80!black}
+{%
+\makebox[2em][c]
+{%
+\color{white}%
+\strut
+\csname the#1\endcsname
+}%
+}%
+\TitleUnderline{\ \ \ }%
+}
+\titleformat{\section}[hang]
+{\Large\fontfamily{maksf}\selectfont}%
+{\colorbox{\xrwma}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[80pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesection ο Κεφάλαιο}}}}%
+}}}%
+{0pt}%
+{\colorbox{black}{\raisebox{0pt}[13pt][3pt]{\color{white}\ \textbf{#1}\ }}}
+
+\titleformat{\subsection}[hang]
+{\large\bfseries\fontfamily{maksf}\selectfont}%
+{\colorbox{red!80!black}{%
+\raisebox{0pt}[13pt][3pt]{\makebox[30pt]{% height, width
+\color{white}{\kerkissans{\textbf{\thesubsection}}}}%
+}}}%
+{0pt}%
+{
+\ \textbf{#1}\ }
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\titleformat{\part}[display]
+{\normalfont\huge\filcenter\bfseries}{}{-30pt}{\Huge \textcolor{red!80!black}{ \kerkissans{ #1}}}
+\titlespacing*{\part} 
+{0pt}{0pt}{0pt}
+
+\setlist[enumerate]{itemsep=0mm,label=\textcolor{\xrwma}{\textbf{\thesection.\arabic*}}}
+\definecolor{b\xrwma}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\pgfplotsset{every axis/.append style={
+x tick label style={/pgf/number format/.cd, 1000 sep={.}}}}
+\pgfplotsset{compat=1.18}
+
+\fancyhf{}
+\newcommand{\myleftmark}{\leftmark}
+\renewcommand{\myleftmark}{{\large Τυπολόγιο}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\sectionmark}[1]{\markboth{\large Κεφάλαιο \thesection\ -\ #1}{} }
+
+\makeatletter
+\ifthenelse{\boolean{@twoside}}{%
+\fancyhead[LE]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(10mm,5mm)$) {\kerkissans{\textbf{\thepage\ $\lvert$ \leftmark}}};
+\node[anchor=north east, text=black, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\end{tikzpicture}
+}%
+\fancyhead[RO]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north west, text=red4, font=\large\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north west)+(15mm,5mm)$) {\kerkissans{\textbf{\myleftmark}}};
+\node[anchor=north east, text=black, font=\scshape, minimum size=1in, inner xsep=5mm] at ($(current page.north east)+(-10mm,5mm)$) {\kerkissans{\textbf{\leftmark\ $ \lvert $\ \thepage}}};
+\end{tikzpicture}
+}%
+}
+\makeatother
+\usetikzlibrary{calc, arrows.meta, decorations.pathreplacing}
+%-------- ΠΑΡΑΤΗΡΗΣΕΙΣ -----------------
+\newcounter{parathrhsh}[section]
+\renewcommand{\theparathrhsh}{\arabic{parathrhsh}}  
+\newcommand{\Parathrhsh}[1]{\refstepcounter{parathrhsh}{\textbf{\textcolor{white}{\faLightbulb}\ \ -\ \ \kerkissans{Παρατήρηση\hspace{2mm}\theparathrhsh}}}}{}
+
+%----------- ΑΣΚΗΣΗ Γ ------------------
+\newcommand\thema{Γ}
+
+\newcounter{askhsh}[section]
+\renewcommand{\theaskhsh}{\arabic{askhsh}}   
+\newcommand{\Askhsh}{\refstepcounter{askhsh}{\textbf{\textcolor{black}{\faPenSquare\ \  \large \kerkissans{\textbf{\theaskhshο\hspace{2mm}Θέμα}}}}}\hspace{0mm}}{}
+
+\newlist{erwthma}{enumerate}{3}
+\setlist[erwthma]{label=\bf{\kerkissans{\large{\textcolor{\xrwma}{\thema.\arabic*}}}},itemsep=0mm,leftmargin=0.8cm}
+%------------------------------------
+\newenvironment{askhsh}[1]
+{\begin{tcolorbox}[title=\Askhsh\kerkissans{\textbf{\large{  #1}}},breakable,
+enhanced standard,titlerule=-.2pt,toprule=0pt, rightrule=0pt, bottomrule=0pt,
+colback=white,left=2mm,top=1mm,bottom=0mm,
+boxrule=0pt,
+colframe=white,borderline west={1.5mm}{0pt}{\xrwma},leftrule=2mm,sharp corners,coltitle=black]
+\renewcommand{\thema}{#1}}
+{\end{tcolorbox}}
+\newcommand{\dint}{\displaystyle\int}
+
+\begin{document}
+\NineColors{saturation=high}
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+\renewcommand{\myleftmark}{\large Τυπολόγιο}
+\begin{center}
+\part{Επαναληπτικά Θέματα Γ - Μέρος 3ο (Τελικό)}
+\end{center}
+
+\begin{askhsh}{Γ}
+Ένας κώνος είναι εγγεγραμμένος σε μια σφαίρα σταθερής ακτίνας $R=3$. Έστω $x$ η απόσταση του κέντρου της σφαίρας από τη βάση του κώνου, με $x \in (0, 3)$. 
+\begin{center}
+\begin{tikzpicture}
+    % ==========================================
+    % Ορισμός Παραμέτρων 
+    % ==========================================
+    \def\R{3}       % Ακτίνα σφαίρας R=3
+    \def\d{1}       % Απόσταση x 
+    \def\r{2.828}   % Ακτίνα βάσης
+    \def\yell{0.25} % Προοπτική ελλείψεων 
+
+    % ==========================================
+    % 1. Σχεδιασμός Σφαίρας (με Radial Shading)
+    % ==========================================
+    \shadedraw[shading=radial, inner color=white, outer color=gray!30, draw=gray!80, thick] (0,0) circle (\R);
+    
+    % Προαιρετικά: Προσθέτουμε ένα "γυάλισμα" 
+    \fill[white, opacity=0.3] (-0.3*\R, 0.4*\R) ellipse ({0.2*\R} and {0.15*\R});
+
+    % Ισημερινός σφαίρας 
+    \draw[dashed, color=gray!60] (\R,0) arc (0:180:{\R} and {\R*\yell});
+    \draw[color=gray!60] (-\R,0) arc (180:360:{\R} and {\R*\yell});
+
+    % ==========================================
+    % 2. Σχεδιασμός Βάσης Κώνου 
+    % ==========================================
+    \coordinate (K) at (0, -\d);
+    
+    \shadedraw[dashed, thick, color=\xrwma!60!black, 
+               top color=\xrwma!10, bottom color=\xrwma!20, fill opacity=0.6] 
+        (\r, -\d) arc (0:180:{\r} and {\r*\yell})
+        arc (180:360:{\r} and {\r*\yell});
+
+    % ==========================================
+    % 3. Σχεδιασμός Πλευρών Κώνου (με Linear Shading)
+    % ==========================================
+    \coordinate (V) at (0, \R);               
+    \coordinate (Left) at (-\r, -\d);         
+    \coordinate (Right) at (\r, -\d);         
+    
+    % Shading πλευρών
+    \shadedraw[thick, color=\xrwma!60!black,
+               left color=\xrwma!60, right color=\xrwma!60, middle color=white!80!\xrwma, fill opacity=0.8] 
+               (V) -- (Left) arc (180:360:{\r} and {-\r*\yell}) -- cycle;
+
+    % ==========================================
+    % 4. Γεωμετρικά Στοιχεία & Ετικέτες
+    % ==========================================
+    \coordinate (O) at (0, 0);                
+    \coordinate (A) at (\r, -\d);             
+    
+    % Κατακόρυφος άξονας
+    \draw[dashed, thick] (V) -- (O);
+    \draw[thick, red] (O) -- (K) node[midway, left] {$x$};
+    
+    % Ακτίνα βάσης κώνου (ρ)
+    \draw[dashed, thick, \xrwma!60!black] (K) -- (A) node[midway, below] {$\rho$};
+    
+    % Ακτίνα σφαίρας (R)
+    \draw[thick, \xrwma!50!black] (O) -- (A) node[midway, above] {$R=3$};
+
+    % Σημεία
+    \filldraw (O) circle (1pt) node[left] {$O$};
+    \filldraw (K) circle (1pt) node[below left] {$K$};
+    \filldraw (V) circle (1pt) node[above] {$V$};
+    \filldraw (A) circle (1pt) node[right] {$A$};
+
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Να αποδείξετε ότι η ακτίνα $\rho$ της βάσης του κώνου δίνεται από τη σχέση $\rho^2 = 9 - x^2$.
+  \item Αποδείξτε ότι ο όγκος του κώνου συναρτήσει του $x$ δίνεται από τον τύπο $V(x) = \dfrac{\pi}{3}(9-x^2)(3+x)$.
+  \item Να βρείτε την τιμή του $x$ για την οποία ο όγκος του κώνου μεγιστοποιείται, καθώς και τις διαστάσεις (ύψος και ακτίνα) του μέγιστου κώνου.
+  \item Αν το $x$ αυξάνεται με ρυθμό $0.5 \si{cm/s}$, να βρείτε το ρυθμό μεταβολής του όγκου $V(x)$ τη χρονική στιγμή που το ύψος του κώνου είναι $4\si{cm}$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Θεωρούμε τη συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ η οποία για κάθε $x \in \mathbb{R}$ ικανοποιεί τη σχέση \[f^3(x) + 3f^2(x)\hm x + 3f(x)\hm^2 x = x^3 - \hm^3 x.\]
+\begin{erwthma}
+  \item Να αποδείξετε ότι $f(x) = x - \hm x$.
+  \item Να αποδείξετε ότι για κάθε $x > 0$ ισχύει $f(x) > 0$.
+  \item Να μελετήσετε την $f(x)$ ως προς την κυρτότητα στο διάστημα $[0, \pi]$.
+  \item Να υπολογίσετε το εμβαδόν του χωρίου που περικλείεται από τη γραφική παράσταση της $f$, τον άξονα των τετμημένων και την κατακόρυφη ευθεία $x = \pi/2$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται η συνάρτηση $f(x) = e^{x-1} + x^2 - 2$ για κάθε $x \in \mathbb{R}$.
+\begin{erwthma}
+  \item Να αποδείξετε ότι η $f$ είναι κυρτή στο $\mathbb{R}$.
+  \item Να βρείτε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο της με τετμημένη $x_0 = 1$.
+  \item Αποδείξτε ότι $f(x) \ge 3x - 3$ για κάθε $x \in \mathbb{R}$.
+  \item Ολοκληρώνοντας την κατάλληλη ανισότητα, αποδείξτε ότι $\dint_0^2 e^{x-1} dx < 2$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Σε έναν φανοστάτη ύψους $H = 6$ m πλησιάζει ένας άνθρωπος ύψους $h = 2$ m με σταθερή ταχύτητα $u = 1.5$ m/s επί ευθύγραμμου οριζόντιου δρόμου. 
+\begin{center}
+\begin{tikzpicture}[scale=1.2, font=\sffamily]
+
+    % ==========================================
+    % Παράμετροι Σχήματος
+    % ==========================================
+    \def\H{6.0}   % Ύψος φανοστάτη
+    \def\h{2.0}   % Ύψος ανθρώπου
+    % Για το σχήμα επιλέγουμε μια απόσταση x=4. 
+    % Με όμοια τρίγωνα το μήκος της σκιάς s είναι: s/2 = (4+s)/6 => 6s = 8 + 2s => 4s = 8 => s = 2
+    \def\x{4.0}   % Απόσταση ανθρώπου από φανοστάτη
+    \def\s{2.0}   % Μήκος σκιάς
+
+    % ==========================================
+    % Συντεταγμένες
+    % ==========================================
+    \coordinate (L_base) at (0, 0);                 % Βάση Φανοστάτη
+    \coordinate (L_top)  at (0, \H);                % Λάμπα
+    
+    \coordinate (M_base) at (\x, 0);                % Βάση Ανθρώπου
+    \coordinate (M_top)  at (\x, \h);               % Κεφάλι Ανθρώπου
+    
+    \coordinate (S_tip)  at (\x + \s, 0);           % Άκρη Σκιάς (x+s)
+
+    % ==========================================
+    % 1. Σχεδίαση Εδάφους & Αντικειμένων
+    % ==========================================
+    % Έδαφος
+    \draw[thick, fill=gray!20] (-1, -0.3) rectangle (\x + \s + 2, 0);
+    \draw[very thick] (-1, 0) -- (\x + \s + 2, 0);
+
+    % Φανοστάτης (Στύλος και Λάμπα)
+    \draw[line width=4pt, gray!80!black] (L_base) -- (L_top);
+    \fill[yellow!80!orange] (L_top) circle (0.15);
+    \filldraw[fill=yellow!20, draw=yellow!50!orange, thick, opacity=0.7] (L_top) circle (0.4); % Λάμψη
+
+    % Άνθρωπος (Αναπαράσταση με χοντρή γραμμή)
+    \draw[line width=3pt, \xrwma!70!black] (M_base) -- (M_top);
+    \filldraw[\xrwma!70!black] (\x, \h-0.15) circle (0.15); % Κεφάλι
+
+    % Σκιά (Ημι-διαφανής μαύρη γραμμή στο έδαφος)
+    \draw[line width=4pt, black, opacity=0.3] (M_base) -- (S_tip);
+
+    % ==========================================
+    % 2. Φωτεινή Ακτίνα
+    % ==========================================
+    \draw[dashed, thick, orange] (L_top) -- (M_top) -- (S_tip);
+
+    % ==========================================
+    % 3. Ετικέτες, Διαστάσεις και Ταχύτητα
+    % ==========================================
+    
+    % Ταχύτητα (Διάνυσμα υ)
+    \draw[->, >=Stealth, ultra thick, red] (\x, \h/2) -- (\x+1.5, \h/2) node[above] {$u = 1.5$ m/s};
+
+    % Ύψος Φανοστάτη (H)
+    \draw[<->, >=Stealth] (-0.6, 0) -- (-0.6, \H) node[midway, left] {$H = 6$ m};
+    \draw[dashed, gray] (L_base) -- (-0.8, 0);
+    \draw[dashed, gray] (L_top) -- (-0.8, \H);
+
+    % Ύψος Ανθρώπου (h)
+    \draw[<->, >=Stealth] (\x - 0.5, 0) -- (\x - 0.5, \h) node[midway, left] {$h = 2$ m};
+
+    % Απόσταση (x)
+    \draw[<->, >=Stealth] (0, -0.6) -- (\x, -0.6) node[midway, below] {$x$};
+    \draw[dashed, gray] (L_base) -- (0, -0.8);
+    \draw[dashed, gray] (M_base) -- (\x, -0.8);
+
+    % Μήκος Σκιάς (s)
+    \draw[<->, >=Stealth] (\x, -0.6) -- (\x + \s, -0.6) node[midway, below] {$s$};
+    \draw[dashed, gray] (S_tip) -- (\x + \s, -0.8);
+
+    % Συνολική Απόσταση (y = x + s)
+    \draw[<->, >=Stealth, \xrwma!70!black] (0, -1.2) -- (\x + \s, -1.2) node[midway, below] {$y = x + s$};
+    \draw[dashed, \xrwma!70!black] (0, -0.8) -- (0, -1.4);
+    \draw[dashed, \xrwma!70!black] (\x + \s, -0.8) -- (\x + \s, -1.4);
+
+    % Κουκκίδες Σημείων
+    \filldraw[black] (L_base) circle (1.5pt) node[above right] {$O$};
+    \filldraw[black] (M_base) circle (1.5pt) node[above right] {$A$};
+    \filldraw[black] (S_tip) circle (1.5pt) node[above right] {$\Gamma$};
+
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Αν τη χρονική στιγμή $t$ ο άνθρωπος απέχει απόσταση $x(t)$ από τον φανοστάτη, να εκφράσετε το μήκος της σκιάς του $s(t)$ συναρτήσει του $x(t)$.
+  \item Αποδείξτε ότι η άκρη της σκιάς του ανθρώπου κινείται με σταθερή ταχύτητα ως προς τη βάση του φανοστάτη. 
+  \item Έστω $\theta(t)$ η γωνία που σχηματίζει η οπτική ακτίνα από την κορυφή του φανοστάτη στο κεφάλι του ανθρώπου με την κορυφή του φανοστάτη. Εκφράστε την $\tan\theta$ συναρτήσει του $x$.
+  \item Βρείτε το ρυθμό μεταβολής της γωνίας $\theta$ τη χρονική στιγμή που ο άνθρωπος απέχει $4$ m από τον φανοστάτη.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Γνωρίζουμε για τη συνάρτηση $f(x)$ ότι είναι δύο φορές παραγωγίσιμη στο $\mathbb{R}$ με $f(0) = 0$ και $f'(0) = 0$. Η γραφική παράσταση της δεύτερης παραγώγου $f''(x)$ αποτελείται από δύο ημιευθείες: από το $-\infty$ μέχρι το $x=2$ είναι $y = 1$, ενώ από το $x=2$ έως το $+\infty$ ταυτίζεται με τον άξονα $x'x$.
+\begin{erwthma}
+  \item Να γράψετε τον τύπο της δεύτερης παραγώγου $f''(x)$ και να βρείτε το ολοκλήρωμα $\int_0^x f''(t)dt$ για κάθε $x \in \mathbb{R}$.
+  \item Να βρείτε τον τύπο της πρώτης παραγώγου $f'(x)$ σε όλο το $\mathbb{R}$. Πού παρουσιάζει ελάχιστο;
+  \item Να βρείτε τον τύπο της $f(x)$. Είναι συνεχής στο $x=2$; 
+  \item Να μελετήσετε την $f(x)$ ως προς τη μονοτονία και να εντοπίσετε τα τοπικά ακρότατα, αν υπάρχουν.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται η παραβολή $C_f: f(x) = x^2 + a x + \beta, a, \beta \in \mathbb{R}$. Φέρνουμε δύο εφαπτόμενες $\varepsilon_1,\varepsilon_2$ την $C_f$ από το εξωτερικό σημείο $A(0, -1)$, οι οποίες εφάπτονται της $f$ στα σημεία $M(x_1, f(x_1))$ και $N(x_2, f(x_2))$.
+\begin{erwthma}
+  \item Να εκφράσετε την εξίσωση της εφαπτομένης της $C_f$ σε ένα τυχαίο σημείο με τετμημένη $x_0$ και, απαιτώντας να διέρχεται από το $A(0,-1)$, να βρείτε μια εξίσωση 2ου βαθμού για το $x_0$.
+  \item Αν γνωρίζουμε ότι οι δύο εφαπτόμενες είναι κάθετες μεταξύ τους, αποδείξτε ότι $\beta = -\dfrac{3}{4}$.
+  \item Για $\beta = -3/4$ και $a = 0$, υπολογίστε το εμβαδόν μεταξύ των εφαπτομένων και της $C_f$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνεχής συνάρτηση $f(x)$ ορίζεται στο $\mathbb{R}$ και $f(0)=2$. Γνωρίζουμε ότι η παράγωγός της ικανοποιεί τη σχέση $f'(x) = \dfrac{|x|}{x} e^{|x|}$ για κάθε $x \ne 0$.
+\begin{erwthma}
+  \item Να δείξετε ότι ο τύπος της $f$ είναι $f(x)=e^{|x|}+1$.
+  \item Εξετάστε με χρήση του ορισμού αν η συνάρτηση είναι παραγωγίσιμη στο σημείο $x_0=0$.
+  \item Να μελετήσετε τη μονοτονία και τα ακρότατα της συναρτήσεως.
+  \item Υπολογίστε το όριο $\lim\limits_{x \to -\infty} x^2 \cdot f(x)$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Θεωρούμε τη συνάρτηση $h(x) = x^2 \ln\left(1 + \dfrac{1}{x}\right) - x$ με $x > 0$.
+\begin{erwthma}
+  \item Να υπολογίσετε το όριο της συνάρτησης στο $+\infty$. 
+  \item Να αποδείξετε ότι $\lim\limits_{x \to +\infty} h(x) = -\dfrac{1}{2}$.
+  \item Να βρείτε το $\lim\limits_{x \to 0^+} h(x)$.
+  \item Δείξτε ότι η συνάρτηση διατηρεί σταθερό αρνητικό πρόσημο για κάθε $x > 0$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Έστω η γνησίως αύξουσα συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ τέτοια ώστε $f(1) = 2$ και $f(2) = 3$. 
+\begin{erwthma}
+  \item Να εξηγήσετε γιατί η $f$ αντιστρέφεται και να βρείτε τις αντίστοιχες τιμές $f^{-1}(2)$ και $f^{-1}(3)$.
+  \item Να λύσετε την εξίσωση $f^{-1}\big(f(x^2)-1\big) = 1$.
+  \item Να λύσετε την ανίσωση $f\big(f^{-1}(2x) - 1\big) > 3$.
+  \item Αν η γραφική παράσταση της $f$ διέρχεται από το σημείο $(0,0)$, να υπολογίσετε το ολοκλήρωμα $\dint_0^3 f^{-1}(y)dy$ εάν γνωρίζετε ότι $\dint_0^2 f(x)dx = 4$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Διαθέτουμε ένα σύρμα συνολικού μήκους $10$ μέτρων. Κόβουμε το σύρμα σε δύο επιμέρους τμήματα ώστε με το ένα να κατασκευάσουμε ένα τετράγωνο και με το άλλο ένα ισόπλευρο τρίγωνο. Έστω $x$ η περίμετρος του τετραγώνου.
+\begin{erwthma}
+  \item Να εκφράσετε την πλευρά του τετραγώνου και την πλευρά του ισόπλευρου τριγώνου συναρτήσει του $x \in (0, 10)$.
+  \item Αποδείξτε ότι το συνολικό εμβαδόν των δύο σχημάτων δίνεται από τη συνάρτηση $E(x) = \dfrac{x^2}{16} + \dfrac{\sqrt{3}(10-x)^2}{36}$.
+  \item Για ποια τιμή του $x$ επιτυγχάνεται το ελάχιστο δυνατό συνολικό εμβαδόν? Υπολογίστε τον λόγο της πλευράς του τετραγώνου προς την πλευρά του τριγώνου σε αυτήν περίπτωση.
+  \item Πως θα κόψουμε το σύρμα για να αποκτήσουμε το μέγιστο δυνατό εμβαδόν?
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Έστω η παραγωγίσιμη συνάρτηση $f: [0, 2] \to \mathbb{R}$ με την ιδιότητα $f(0)=0, f(1)=1$ και $f(2)=2$.
+\begin{erwthma}
+  \item Να αποδείξετε ότι υπάρχουν $\xi_1 \in (0, 1)$ και $\xi_2 \in (1, 2)$ τέτοια ώστε $f'(\xi_1) = 1$ και $f'(\xi_2) = 1$.
+  \item Αν η συνάρτηση είναι δύο φορές παραγωγίσιμη, δείξτε ότι έχει σημείο καμπής.
+  \item Υποθέτοντας ότι $f''(x) > 0$ για $x \in (0,1)$ και $f''(x) < 0$ για $x \in (1,2)$ βρείτε σε ποιο σημείο μεγιστοποιείται ο ρυθμός μεταβολής της $f$.
+  \item Βρείτε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο $A(1,f(1))$ και αποδείξτε ότι $f(x) > x$ για κάθε $x \in (0, 1)$ και $f(x) < x$ για κάθε $x \in (1, 2)$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Θεωρούμε την εξίσωση $e^x + x = 2$.
+\begin{erwthma}
+  \item Δείξτε ότι υπάρχει μια ρίζα $x_0$ της εξίσωσης στο διάστημα $(0, 1)$.
+  \item Αποδείξτε ότι αυτή η ρίζα είναι μοναδική σε όλο το $\mathbb{R}$.
+  \item Να μελετήσετε το πρόσημο της συνάρτησης $f(x)=e^x+x-2$.
+  \item Να υπολογίσετε το ολοκλήρωμα $I(x_0)=\dint_0^{x_0} f(x) dx$ ως συνάρτηση του $x_0$ και στη συνέχεια δείξτε ότι η συνάρτηση $I(x_0)$ έχει ολικό ελάχιστο.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται η πολυωνυμική συνάρτηση $f(x) = x^3 - 3\lambda x^2 + 12x$ (με $\lambda \in \mathbb{R}$). 
+\begin{erwthma}
+  \item Να βρείτε τις τιμές του πραγματικού αριθμού $\lambda$ ώστε η συνάρτηση να είναι γνησίως αύξουσα στο $\mathbb{R}$.
+  \item Να αποδείξετε ότι για $\lambda = 2$ η γραφική παράσταση της $f$ έχει ένα σημείο καμπής. 
+  \item Με βάση τη συμμετρία ως προς το σημείο καμπής, να υπολογίσετε γεωμετρικά το $\int_0^4 f(x)dx$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνάρτηση $f$ ικανοποιεί τις προϋποθέσεις $f(0) = 0, f'(0) = 1$ και $\lim\limits_{x \to 0} \dfrac{f(x) - \hm x}{x^3} = -\dfrac{1}{6}$.
+\begin{erwthma}
+  \item Να αποδείξετε ότι $f''(0) = 0$.
+  \item Να αποδείξετε ότι $f'''(0) = -2$.
+  \item Γράψτε την εξίσωση της εφαπτομένης της $C_f$ στο $x=0$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται το χωρίο $\Omega$ που ορίζεται από την παραβολή $y = x^2$ και τον άξονα $x'x$ με $x \in [0, 4]$.
+\begin{erwthma}
+  \item Να υπολογίσετε το συνολικό εμβαδόν του χωρίου $\Omega$.
+  \item Η ευθεία $y = a x$ (με $a > 0$) διαιρεί το παραπάνω χωρίο σε δύο ισεμβαδικά μέρη $E_1, E_2$. Να εκφράσετε το εμβαδόν του πάνω μέρους συναρτήσει του $a$.
+  \item Να βρείτε την τιμή της κλίσης $a$ που διχοτομεί το ολικό εμβαδόν $E$. 
+  \item Να βρείτε το ρυθμό μεταβολής του εμβαδού του άνω χωρίου $E(a)$ αν η κλίση $a$ αυξάνεται με $1\ μον/sec$ τη στιγμή που $a=2$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Έστω η εξίσωση $f(x) e^{f(x)} = x, x \ge 0, f(x) \ge 0$.
+\begin{erwthma}
+  \item Παραγωγίζοντας και τα δύο μέλη ως προς $x$, να εκφράσετε την παράγωγο $f'(x)$ συναρτήσει του $f(x)$.
+  \item Δείξτε ότι η συνάρτηση $f(x)$ είναι γνησίως αύξουσα στο διάστημα $[0, +\infty)$.
+  \item Υπολογίστε την τιμή $f(0)$ και την τιμή $f(e)$. 
+  \item Να βρείτε την εξίσωση εφαπτομένης της $C_f$ στο σημείο με τετμημένη $x_0 = e$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνονται οι συναρτήσεις $f(x) = a \ln x$ και $g(x) = e^x - \beta$, με $x > 0$. Έστω ότι έχουν κοινή εφαπτομένη σε κοινό σημείο με $x_0 = 1$.
+\begin{erwthma}
+  \item Να προσδιορίσετε τις παραμέτρους $a$ και $\beta$. ($a = e, \beta = e$).
+  \item Γράψτε την εξίσωση αυτής της κοινής εφαπτομένης ευθείας $\varepsilon$.
+  \item Αποδείξτε ότι η $\varepsilon$ δεν τέμνει καμία από τις δύο καμπύλες σε άλλο σημείο πέραν του $x=1$.
+  \item Βρείτε το εμβαδόν του χωρίου μεταξύ της $C_g$, της $\varepsilon$ και των αξόνων.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Ένα κινητό σημείο $M$ βρίσκεται αρχικά στην αρχή των αξόνων $O(0,0)$ και αρχίζει να κινείται κατά μήκος του θετικού ημιάξονα $Ox$ με σταθερή ταχύτητα $v_M = 3\si{m/s}$. Ταυτόχρονα, ένα δεύτερο σημείο $N$ ξεκινά να κινείται στον θετικό ημιάξονα $Oy$ ξεκινώντας από το $y_0 = 10$, επίσης με σταθερή ταχύτητα, απομακρυνόμενο προς το $+\infty$ ($v_N = 4\si{m/s}$). 
+\begin{erwthma}
+  \item Να εκφράσετε τις συντεταγμένες των σημείων $M(t), N(t)$ ως συναρτήσεις του χρόνου $t$.
+  \item Εκφράστε την απόσταση $d(t) = (MN)$ μεταξύ των κινητών σημείων συναρτήσει του χρόνου $t$.
+  \item Ποιος είναι ο ρυθμός μεταβολής της απόστασης $d(t)$ όταν $t = 2$ δευτερόλεπτα?
+  \item Υπάρχει χρονική στιγμή κατά την οποία η απόσταση των δύο σημείων να γίνεται ελάχιστη?
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Για μια συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ δίνεται ότι ικανοποιεί την ανισότητα $f(x) - f(y) \ge e^x - e^y$ για κάθε $x \ge y$. 
+\begin{erwthma}
+  \item Να αποδείξετε ότι η συνάρτηση $g(x) = f(x) - e^x$ είναι αύξουσα στο $\mathbb{R}$.
+  \item Αν επίσης γνωρίζουμε ότι η $f$ είναι παραγωγίσιμη, να αποδείξετε ότι $f'(x) \ge e^x$.
+  \item Δείξτε ότι $f(x) - f(0) \ge e^x - 1$.
+  \item Αν $f(0) = 1$, υπολογίστε το όριο $\lim\limits_{x \to +\infty} \dfrac{f(x)}{x}$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Η συνάρτηση $f(x) = \dfrac{x^2+x+1}{x}$ ορίζεται στο $(0, +\infty)$.
+\begin{erwthma}
+  \item Να βρείτε, την πλάγια ασύμπτωτη $(\delta)$ της $C_f$ στο $+\infty$. 
+  \item Να βρείτε την κατακόρυφη ασύμπτωτη $(\varepsilon)$ της $C_f$.
+  \item 
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Ένα ταχύπλοο βρίσκεται στο νερό στο σημείο $A$ το οποίο απέχει κατακόρυφη απόσταση $3$ χλμ από την ευθύγραμμη ακτή (έστω σημείο προβολής $O$). Ο οδηγός θέλει να φτάσει σε ένα παραθαλάσσιο χωριό $B$ που βρίσκεται στην ακτή και απέχει $4$ χλμ από το $O$. Η ταχύτητά του στη θάλασσα είναι $15$ χλμ/ώρα και αν τρέξει στην παραλία μπορεί να κινηθεί με $25$ χλμ/ώρα.
+\begin{center}
+\begin{tikzpicture}[scale=1.5, font=\sffamily]
+
+    % --- Παράμετροι Σχήματος ---
+    % yA = 3 km (απόσταση από ακτή)
+    % xB = 4 km (απόσταση από Ο)
+    % xM = x km (απόσταση Ο-Μ, μεταβλητή)
+    \def\yA{3.0}   % y συντεταγμένη του A
+    \def\xB{4.0}   % x συντεταγμένη του B
+    \def\xM{2.5}   % x συντεταγμένη του M (αντιπροσωπευτική τιμή για το σχήμα)
+
+    % --- Συντεταγμένες ---
+    \coordinate (O) at (0, 0);                 % Προβολή του A (0,0)
+    \coordinate (A) at (0, \yA);                % Ταχύπλοο (0,3)
+    \coordinate (B) at (\xB, 0);                % Χωριό (4,0)
+    \coordinate (M) at (\xM, 0);                % Σημείο αποβίβασης (x,0)
+
+    % --- Σχεδίαση Φόντου ---
+    % Θάλασσα
+    \fill[\xrwma!15] (-1, 0) rectangle (\xB+1, \yA+1);
+    % Παραλία / Ακτή
+    \fill[yellow!15] (-1, -1) rectangle (\xB+1, 0);
+
+    % --- Σχεδίαση Εδάφους & Αντικειμένων ---
+    % Ευθύγραμμη Ακτή
+    \draw[ultra thick, black] (-1, 0) -- (\xB+1, 0);
+
+    % Διακεκομμένη γραμμή προβολής (AO)
+    \draw[dashed, thin, gray] (A) -- (O);
+    % Σημείο κάθετης γωνίας στο O
+    \draw (0.3, 0) -- (0.3, 0.3) -- (0, 0.3);
+
+    % Πορεία Ταχύπλοου (AM, στο νερό)
+    \draw[line width=2pt, \xrwma] (A) -- (M);
+    % Πορεία Οδηγού (MB, στην ακτή)
+    \draw[line width=2pt, red!70!black] (M) -- (B);
+
+    % --- Σημειώσεις ---
+    % Επεξηγηματικό κείμενο για θάλασσα και παραλία
+    \node[color=black, font=\bfseries\small] at (2, \yA+0.5) {Θάλασσα};
+    \node[color=orange, font=\bfseries\small] at (2, -0.5) {Παραλία};
+
+    % --- Ετικέτες, Διαστάσεις και Ταχύτητα ---
+    % Διάσταση 3 km (AO)
+    \draw[<->, >=Stealth] (-0.3, 0) -- (-0.3, \yA) node[midway, left] {3 \si{km}};
+    \draw[dashed, gray] (O) -- (-0.8, 0);
+    \draw[dashed, gray] (A) -- (-0.8, \yA);
+
+    % Διάσταση 4 km (OB)
+    \draw[<->, >=Stealth] (0, -0.6) -- (\xB, -0.6) node[midway, below] {4 \si{km}};
+    \draw[dashed, gray] (O) -- (0, -0.8);
+    \draw[dashed, gray] (B) -- (\xB, -0.8);
+
+    % Διάσταση x km (OM)
+    \draw[<->, >=Stealth] (0, -0.3) -- (\xM, -0.3) node[midway, below] {$x$ \si{km}};
+    \draw[dashed, gray] (M) -- (\xM, -0.5);
+
+    % Ενδεικτική ετικέτα για την ταχύτητα στο νερό (v_w = 15 km/h)
+    \draw[->, >=Stealth, \xrwma] ($(A)!0.5!(M)$) -- ++(0.7, -0.3) node[below, font=\small] {$\mathbf{v}_w = 15 \si{ km/h}$};
+
+    % Ενδεικτική ετικέτα για την ταχύτητα στην ακτή (v_b = 25 km/h)
+    \draw[->, >=Stealth, red!70!black] ($(M)!0.5!(B)$) -- ++(1.0, 0.0) node[right, font=\small] {$\mathbf{v}_b = 25 \si{ km/h}$};
+
+    % Κουκκίδες Σημείων
+    \filldraw (O) circle (1.5pt) node[below left] {$O$};
+    \filldraw (A) circle (1.5pt) node[above left] {$A$};
+    \filldraw (B) circle (1.5pt) node[above right] {$B$};
+    \filldraw (M) circle (1.5pt) node[below] {$M$};
+
+\end{tikzpicture}
+\end{center}
+\begin{erwthma}
+  \item Έστω ότι αποβιβάζεται στο σημείο $M$ της ακτής σε απόσταση $x$ από το $O$. Να εκφράσετε τον συνολικό χρόνο $T(x)$ της διαδρομής $AMB$ συναρτήσει του $x \in [0, 4]$.
+  \item Να βρείτε την παράγωγο $T'(x)$ και να λύσετε την εξίσωση $T'(x)=0$.
+  \item Ποια είναι η βέλτιστη απόσταση $x$ για να ελαχιστοποιηθεί ο χρόνος ταξιδιού? 
+  \item Υπολογίστε το χρόνο σε περίπτωση απευθείας μετάβασης με σκάφος στο $B$ και επιβεβαιώστε ότι υπολείπεται της βέλτιστης.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Δίνεται η συνάρτηση $f(x) = e^x + x - 1$.
+\begin{erwthma}
+  \item Αποδείξτε ότι η συνάρτηση έχει αντίστροφη, $f^{-1}$. Ποιο είναι το πεδίο ορισμού και σύνολο τιμών της $f^{-1}$;
+  \item Γνωρίζοντας ότι $f(0)=0$ και $f(1)=e$, υπολογίστε τις τιμές $f^{-1}(0)$ και $f^{-1}(e)$.
+  \item Να θέσετε τον μετασχηματισμό αντικατάστασης $y = f(x)$ στο ολοκλήρωμα $\dint_0^e f^{-1}(y)dy$ και να το εκφράσετε μέσω της $f(x)$.
+  \item Να υπολογίσετε την ακριβή αριθμητική τιμή αυτού του εμβαδού χρησιμοποιώντας τα αποτελέσματα του ολοκληρώματος.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Θεωρούμε την εξίσωση $e^x = a x$ όπου $a > e$.
+\begin{erwthma}
+  \item Να δείξετε ότι η συνάρτηση $g(x) = \dfrac{e^x}{x}$ για $x>0$ παρουσιάζει ελάχιστο στο σημείο $x=1$. Ποια είναι η ελάχιστη τιμή?
+  \item Αποδείξτε ότι η ευθεία $y = a x$ τέμνει την καμπύλη $y = e^x$ σε ακριβώς δύο σημεία στο πρώτο τεταρτημόριο. 
+  \item Για $a \le e$ πόσες λύσεις μπορεί να έχει η εξίσωση? Διαχωρίστε κατάλληλα τις περιπτώσεις $a=e, 0 < a < e$ και $a \le 0$.
+  \item Αυξάνοντας το $a$ στο $+\infty$, ποια είναι η οριακή θέση των δύο ριζών $x_1$ και $x_2$?
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Θεωρούμε τη συνάρτηση $f(x) = \dfrac{\ln x}{x^2}$ για $x > 0$.
+\begin{erwthma}
+  \item Μελετήστε την $f$ ως προς τα ακρότατα και αποδείξτε ότι λαμβάνει μέγιστη τιμή για $x = \sqrt{e}$.
+  \item Να βρείτε αν έχει σημείο καμπής.
+  \item Να υπολογίσετε το ορισμένο ολοκλήρωμα $E(a)=\dint_1^a f(x) dx \ \ (a > 1)$ εφαρμόζοντας ολοκλήρωση κατά παράγοντες. 
+  \item Υπολογίστε το όριο $\lim\limits_{a \to +\infty}E(a)$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Μια συνάρτηση έχει τον τύπο $f(x) = x^3 - 3a^2 x + 2a^3$, όπου $a > 0$.
+\begin{erwthma}
+  \item Να βρείτε τα ακρότατα της $f$.
+  \item Να δείξετε ότι το $a$ είναι διπλή ρίζα της $f$.
+  \item Να βρείτε το τοπικό μέγιστο της $f$ ως συνάρτηση του $a$ και να υπολογίσετε την ελάχιστη τιμή του.
+  \item Υπολογίστε το εμβαδόν μεταξύ της $f(x)$ και του άξονα $x'x$ συναρτήσει του $a$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Έστω η κυβική $f(x) = x^3 - 6x^2 + 9x$.
+\begin{erwthma}
+  \item Φέρνουμε την εφαπτομένη της $C_f$ στο σημείο με $x_1 = 1$. Αποδείξτε ότι η εφαπτομένη αυτή τέμνει ξανά την καμπύλη της $f$ στο σημείο με $x_2 = 4$.
+  \item Υπολογίστε το εμβαδόν που περικλείεται από το γράφημα και την εφαπτομένη?
+  \item Να υπολογίσετε το σημείο καμπής $K$ της $f(x)$ και να αποδείξετε ότι η απόσταση $x_k - x_1$ είναι το 1/3 της συνολικής διαφοράς $x_2 - x_1$.
+  \item Υπολογίστε το όριο $\lim\limits_{h \to 0} \dfrac{f(1+3h) - f(1-h)}{h}$.
+\end{erwthma}
+\end{askhsh}
+
+\begin{askhsh}{Γ}
+Έστω συνεχής συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ με $\lim\limits_{x \to -\infty} f(x) = -\infty$, $\lim\limits_{x \to +\infty} \dfrac{f(x)}{x} = 2$ και $\lim\limits_{x \to +\infty} (f(x) - 2x) = 3$. Επιπλέον η $C_f$ τέμνει τον άξονα $x'x$ ακριβώς μια φορά στο $x_0 = -1$.
+\begin{erwthma}
+  \item Να βρείτε, εάν υπάρχει, την ασύμπτωτη της $f(x)$ στο $+\infty$. 
+  \item Με βάση το δοσμένο όριο πηλίκου, υπολογίστε το $\lim\limits_{x \to +\infty} \dfrac{f^2(x) - x^2}{x^2 + f(x)}$.
+  \item Εξετάστε το πρόσημο της συνάρτησης αξιοποιώντας το όριο στο $-\infty$ και το όριο στο $+\infty$.
+  \item Να βρείτε το όριο της σύνθεσης $\lim\limits_{x \to -\infty} \ln(|f(x)|) \cdot e^{f(x)}$ και $\lim\limits_{x \to 0} \dfrac{1}{f(x)}$ αν η ρίζα είναι $x_0=-1$. 
+\end{erwthma}
+\end{askhsh}
+
+\end{document}

@@ -1,0 +1,69 @@
+%=========== ΛΥΣΗ - ΘΕΜΑ Β_120 ===========
+\begin{thema}{Β}
+Στο παρακάτω αναβαθμισμένο σχήμα σημειώνονται οι ρίζες, τα ακρότατα, και τα γεωμετρικά σχήματα (τρίγωνα) για τον υπολογισμό ολοκληρώματος.
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+  \draw[help lines, gray!30] (-4,-2) grid (5,4);
+  \draw[-latex] (-4.3,0) -- (5.3,0) node[right] {$x$};
+  \draw[-latex] (0,-2.3) -- (0,4.3) node[above] {$y$};
+  \foreach \x in {-3,-2,-1,1,2,3,4}
+    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
+  \foreach \y in {-1,1,2,3}
+    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
+  
+  % Σκιάσεις
+  \fill[red!10] (-3,-1) -- (-2,0) -- (-3,0) -- cycle;
+  \fill[green!10] (-2,0) -- (1,3) -- (4,0) -- cycle;
+  
+  % Γραφική
+  \draw[very thick, blue!70!black] (-3,-1) -- (1,3) -- (4,0);
+  \filldraw[blue!70!black] (-3,-1) circle (2pt) node[below left,font=\footnotesize] {$(-3,-1)$};
+  \filldraw[blue!70!black] (1,3) circle (2pt) node[above,font=\footnotesize] {$(1,3)$};
+  \filldraw[blue!70!black] (4,0) circle (2pt) node[below right,font=\footnotesize] {$(4,0)$};
+  
+  % Ρίζες
+  \filldraw[red] (-2,0) circle (3pt) node[above, font=\footnotesize, color=red] {$(-2,0)$};
+  \filldraw[red] (4,0) circle (3pt);
+  
+  % Ακρότατα
+  \node[anchor=south west, color=green!50!black, font=\footnotesize\bfseries] at (1.1, 3.1) {Ολ. Μέγιστο};
+  \node[anchor=north east, color=red!70!black, font=\footnotesize\bfseries] at (-2.9, -1.1) {Ολ. Ελάχιστο};
+  
+  % Εμβαδά
+  \node[color=red!60!black, font=\footnotesize] at (-2.7, -0.3) {$E_-$};
+  \node[color=green!50!black, font=\footnotesize] at (1, 1) {$E_+$};
+\end{tikzpicture}
+\end{center}
+
+\begin{erwthma}
+
+\item 
+\begin{itemize}
+    \item \textbf{Πεδίο ορισμού:} $\varDelta_f = [-3, 4]$ (η συνάρτηση ορίζεται σε αυτό το κλειστό διάστημα).
+    \item \textbf{Σύνολο τιμών:} Η ελάχιστη τιμή είναι $f(-3) = -1$ (κάτω αριστερό άκρο) και η μέγιστη $f(1) = 3$ (κορυφή). Εφόσον τμηματικά γραμμική, λαμβάνει κάθε ενδιάμεση τιμή. Άρα $f([-3,4]) = [-1, 3]$.
+\end{itemize}
+
+\item Οι ρίζες ($f(x) = 0$) βρίσκονται στα σημεία τομής με τον $x'x$:
+\begin{itemize}
+    \item Τμήμα $[-3, 1]$: κλίση $= \frac{3-(-1)}{1-(-3)} = 1$. Εξίσωση: $y + 1 = 1(x + 3) \Rightarrow y = x + 2$. Ρίζα: $x+2=0 \Rightarrow x = -2$.
+    \item Τμήμα $[1, 4]$: κλίση $= \frac{0-3}{4-1} = -1$. Εξίσωση: $y - 3 = -1(x-1) \Rightarrow y = -x + 4$. Ρίζα: $-x+4 = 0 \Rightarrow x = 4$.
+\end{itemize}
+Ρίζες: $x = -2$ και $x = 4$.
+
+\item 
+\begin{itemize}
+    \item \textbf{$f$ 1-1?} Όχι! Η $f$ δεν είναι 1-1, αφού παίρνει ίδιες τιμές σε διαφορετικά σημεία. Για παράδειγμα, $f(-3) = -1$ και $f(3) = 1$, αλλά πιο χαρακτηριστικά: $f(0) = 2$ και $f(2) = 2$ (η $f$ αυξάνεται ως τη κορυφή και μετά φθίνει, οπότε τιμές κάτω από 3 λαμβάνονται δύο φορές).
+    \item \textbf{Ολικό μέγιστο:} $f(1) = 3$ (κορυφή).
+    \item \textbf{Ολικό ελάχιστο:} $f(-3) = -1$ (αριστερό άκρο).
+\end{itemize}
+
+\item Σπάμε στα τμήματα ανάλογα με το πρόσημο:
+\begin{itemize}
+    \item $[-3, -2]$: $f(x) < 0$. Τρίγωνο βάσης $1$ και ύψους $1$: $E_- = \frac{1}{2}\cdot 1 \cdot 1 = \frac{1}{2}$. (Μετράει αρνητικά στο ολοκλήρωμα.)
+    \item $[-2, 4]$: $f(x) \ge 0$. Τρίγωνο με βάση $4 - (-2) = 6$ και ύψος $3$ (κορυφή): $E_+ = \frac{1}{2} \cdot 6 \cdot 3 = 9$.
+\end{itemize}
+\[ \int_{-3}^{4} f(x)\,\mathrm{d}x = -E_- + E_+ = -\frac{1}{2} + 9 = \frac{17}{2} \]
+
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_120 ===========

@@ -1,0 +1,121 @@
+Professional Mathematics Teacher.
+Solve a specific LaTeX exercise (Thema Γ).
+Strict adherence to `FORMATTING_GUIDE.md`.
+
+        *   Environment: `\begin{thema}{Γ} ... \end{thema}`.
+        *   Question environment: `\begin{erwthma} ... \end{erwthma}`.
+        *   Enumeration: `\item`.
+        *   Math: `$...$` for inline, `\[ ... \]` for display.
+        *   Align: `\begin{align*}` for multi-line calculations.
+        *   Terminology: `\eng{...}` for English terms, `\textbf{...}` for emphasis.
+        *   Trig: `\hm`, `\syn`, etc. (not applicable here).
+        *   Differentials: `\d x`.
+        *   Graphing: `pgfplots` (if needed, but this exercise asks for graphical estimation/analysis based on a provided plot).
+        *   Constraints: No indefinite integrals, no 2nd derivative test for extrema, no differential equations, etc.
+
+    *   Function $f$ defined on $[-1, 5]$.
+    *   Point $A(2, 3)$ is on $C_f$.
+    *   Tangent $(\varepsilon)$ at $A$ has slope $-1$ ($\alpha = 135^\circ$).
+    *   Intersects $x$-axis at $x=0$ and $x=4$.
+    *   Question 1: Equation of the tangent $(\varepsilon)$.
+    *   Question 2: Existence of $\xi \in (0, 4)$ such that $f'(\xi) = 0$.
+    *   Question 3: Graphical study of concavity and estimation of an inflection point.
+    *   Question 4: Estimate whether $\int_0^4 f(x) dx > 4$ or $< 4$ by comparing with a rectangle.
+
+    *   **Part 1: Tangent Equation.**
+        *   Point $A(2, 3)$, slope $m = -1$.
+        *   Equation: $y - y_0 = m(x - x_0) \implies y - 3 = -1(x - 2)$.
+        *   $y = -x + 2 + 3 \implies y = -x + 5$.
+
+    *   **Part 2: Existence of $\xi$ such that $f'(\xi) = 0$.**
+        *   $f(0) = 0$ and $f(4) = 0$.
+        *   $f$ is continuous on $[0, 4]$ and differentiable on $(0, 4)$ (given twice differentiable).
+        *   By Rolle's Theorem (\eng{Rolle}), $\exists \xi \in (0, 4)$ such that $f'(\xi) = 0$.
+
+    *   **Part 3: Concavity.**
+        *   Looking at the graph:
+            *   From $x=0$ to approximately $x=1$, the curve is concave up ($\cup$ shape, though it starts flat). Wait, look closer at the prompt's curve: "smooth bell-like shape".
+            *   Actually, looking at the coordinates `(-1,-1) (0,0) (1,2.5) (2,3) (3,2.5) (4,0) (5,-1.5)`, the curve looks concave down overall on $[0, 4]$.
+            *   Wait, let's analyze the slopes. $f(0)=0, f(2)=3, f(4)=0$.
+            *   The slope is positive on $(0, 2)$ and negative on $(2, 4)$.
+            *   The slope is decreasing.
+            *   Let's check the graph image description again: "smooth bell-like shape".
+            *   Usually, a bell shape is concave down around the peak.
+            *   However, the graph starts at $(-1, -1)$ and goes to $(0, 0)$.
+            *   Between $x=0$ and $x=1$, it looks like it's curving upwards (concave up) to reach the steep climb to $(1, 2.5)$.
+            *   Around $x=2$, it's clearly concave down.
+            *   Between $x=3$ and $x=4$, it might be concave up again.
+            *   Actually, let's look at the typical "bell" shape. It's concave up at the tails and concave down in the middle.
+            *   Point of inflection $\approx 1$ and $\approx 3$.
+            *   Let's be precise based on visual: The curve is \textbf{κυρτή} (concave down) near $x=2$. It's \textbf{κοίλη} (concave up) near $x=0$ and $x=4$.
+            *   So, an inflection point should be around $x \approx 1$ or $x \approx 3$.
+
+    *   **Part 4: Integral $\int_0^4 f(x) dx$.**
+        *   The shaded area is under the curve from $x=0$ to $x=4$.
+        *   We need to compare it with a rectangle.
+        *   The rectangle with base $[0, 4]$ and height $H=1$ has area 4.
+        *   Looking at the graph, the peak is at $y=3$. The "width" of the part above $y=1$ is quite large.
+        *   The curve stays above $y=1$ for most of the interval $[0.5, 3.5]$.
+        *   The rectangle with base $[0, 4]$ and height $y=1$ has area 4.
+        *   Since $f(x)$ is significantly above $y=1$ for a large portion of the interval $[0, 4]$ and only slightly below $y=1$ near the endpoints, the area is likely $> 4$.
+        *   Alternatively, consider the rectangle with base $[0, 4]$ and height $y=1$.
+        *   $f(x) > 1$ for $x \in (x_1, x_2)$ where $x_1 \approx 0.5$ and $x_2 \approx 3.5$.
+        *   Wait, simpler: The maximum is $f(2)=3$.
+        *   Compare with a rectangle of height $y=1$ and width 4.
+        *   Visual check: The area above $y=1$ is much larger than the area below $y=1$ (between the curve and the x-axis) on the sides.
+        *   Actually, let's use the coordinates: $(0,0), (1,2.5), (2,3), (3,2.5), (4,0)$.
+        *   A trapezoidal approximation: Area $\approx \frac{1}{2}(0+2.5)\cdot 1 + \frac{1}{2}(2.5+3)\cdot 1 + \frac{1}{2}(3+2.5)\cdot 1 + \frac{1}{2}(2.5+0)\cdot 1 = 1.25 + 2.75 + 2.75 + 1.25 = 8$.
+        *   Clearly $8 > 4$.
+        *   So, $\int_0^4 f(x) dx > 4$.
+        *   Justification: The rectangle with base $[0, 4]$ and height $y=1$ has area 4. Since the curve is above $y=1$ for most of the interval, the area is greater than 4.
+
+    *   Thema $\Gamma$.
+    *   Erwthma environment.
+    *   `\eng{Rolle}`.
+    *   `\textbf{κυρτή}`, `\textbf{κοίλη}`, `\textbf{σημείο καμπής}`.
+    *   $\d x$ for the integral.
+    *   No indefinite integrals.
+
+    *   Item 1: $y - 3 = -1(x - 2) \implies y = -x + 5$.
+    *   Item 2: Use Rolle's Theorem on $[0, 4]$.
+    *   Item 3: Graphical analysis. Concave up near endpoints, concave down near peak. Inflection points at $x \approx 1$ and $x \approx 3$.
+    *   Item 4: Comparison with rectangle $R = [0, 4] \times [0, 1]$. Area of $R$ is 4. Since $f(x) > 1$ for most of the interval, $\int_0^4 f(x) \d x > 4$.
+
+    *   `\begin{thema}{Γ}`
+    *   `\begin{erwthma}`
+    *   `\item` ...
+    *   `\end{erwthma}`
+    *   `\end{thema}`
+    *   `\eng{Rolle}`
+    *   `\[ ... \]`
+    *   `\d x
+`
+%=========== ΛΥΣΗ - Γο ΘΕΜΑ Γ ===========
+
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Η εφαπτομένη $(\varepsilon)$ διέρχεται από το σημείο $A(2, 3)$ και έχει κλίση $\lambda = -1$. Η εξίσωσή της είναι:
+\[ y - 3 = -1(x - 2) \implies y - 3 = -x + 2 \implies y = -x + 5 \]
+
+\item Η συνάρτηση $f$ είναι δύο φορές παραγωγίσιμη στο $[-1, 5]$, άρα είναι \textbf{συνεχώς} και \textbf{παραγωγήσιμη} στο διάστημα $[0, 4] \subset [-1, 5]$.
+Από τα δεδομένα της εκφώνησης, έχουμε $f(0) = 0$ και $f(4) = 0$.
+Σύμφωνα με το θεωρήμα \eng{Rolle}, εφόσον $f(0) = f(4)$, υπάρχει τουλάχιστον μία τιμή $\xi \in (0, 4)$ τέτοια ώστε:
+\[ f'(\xi) = 0 \]
+
+\item Παρατηρώντας τη γραφική παράσταση $C_f$:
+\begin{itemize}
+    \item Στο διάστημα $(0, 1)$ και στο διάστημα $(3, 4)$, η γραφική παράσταση είναι \textbf{κοίλη} (το σχήμα της είναι $\cup$).
+    \item Στο διάστημα $(1, 3)$, η γραφική παράσταση είναι \textbf{κυρτή} (το σχήμα της είναι $\cap$), με το μέγιστο να βρίσκεται στο σημείο $A(2,3)$.
+\end{itemize}
+Επομένως, η συνάρτηση αλλάζει κυρτότητα γύρω από τα σημεία $x \approx 1$ και $x \approx 3$. Εκτιμούμε ότι η $f$ έχει \textbf{σημεία καμπής} στα $x \approx 1$ και $x \approx 3$.
+
+\item Θεωρούμε το ορθογώνιο $\mathcal{O}$ με βάση το τμήμα $[0, 4]$ στον άξονα $Ox$ και ύψος $h=1$. Το εμβαδόν του ορθογωνίου είναι:
+\[ E_{\mathcal{O}} = 4 \cdot 1 = 4 \]
+Παρατηρούμε ότι για το μεγαλύτερο μέρος του διαστήματος $[0, 4]$, η τιμή της συνάρτησης $f(x)$ είναι μεγαλύτερη από $1$ (συγκεκριμένα για $x \in (x_1, x_2)$ όπου $x_1 \approx 0,5$ και $x_2 \approx 3,5$). 
+Το εμβαδόν της σκιασμένης περιοχής, το οποίο ισούται με το ορισμένο ολοκλήρωμα $\int_0^4 f(x) \d x$, είναι εμφανώς μεγαλύτερο από το εμβαδόν του ορθογωνίου $\mathcal{O}$ καθώς η περιοχή που βρίσκεται πάνω από την ευθεία $y=1$ είναι πολύ μεγαλύτερη από τις περιοχές που βρίσκονται κάτω από αυτήν (στα άκρα του διαστήματος).
+Συνεπώς, ισχύει:
+\[ \int_0^4 f(x) \d x > 4 \]
+\end{erwthma}
+\end{thema}
+
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - Γο ΘΕΜΑ Γ ===========

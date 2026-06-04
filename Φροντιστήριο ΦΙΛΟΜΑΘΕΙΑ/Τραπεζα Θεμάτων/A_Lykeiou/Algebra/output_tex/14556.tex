@@ -1,4 +1,3 @@
-% --- Άσκηση 14556 (14556.tex) ---
 \Askhsh{14556}{4}
 \begin{ylh}{2}
     \item 2.1. Οι Πράξεις και οι Ιδιότητές τους
@@ -7,6 +6,69 @@
     \item 6.3. Η Συνάρτηση $f(x)=ax+\beta$
 \end{ylh}
 Στο παρακάτω σχήμα έχει σχεδιασθεί σε ένα ορθοκανονικό σύστημα αξόνων η γραφική παράσταση της συνάρτησης $y = f(x) = ax + \beta$, όπου $a\ ,\ \beta$ σταθεροί μη μηδενικοί πραγματικοί αριθμοί και $x \in R$. Θεωρούμε τα σημεία Α και Β της γραφικής παράστασης της συνάρτησης $f(x)$, των οποίων οι προβολές στους άξονες $x΄x, y΄y$ είναι τα σημεία Η,Δ και Κ,Ε αντίστοιχα. Γνωρίζουμε ότι τα ευθύγραμμα τμήματα ΗΚ και ΔΕ έχουν μήκη 6 και 9 αντίστοιχα.
+\begin{center}
+\begin{tikzpicture}[scale=0.5] % Κλίμακα 0.5 για να χωράει όμορφα στο έγγραφο (φτάνουμε στο y=12)
+
+    % 1. Ορισμός των σημείων με βάση τα ακριβή μαθηματικά δεδομένα: y = -1.5x + 9
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(6,0){M}
+    \tkzDefPoint(4,0){K}
+    \tkzDefPoint(-2,0){H}
+    \tkzDefPoint(4,3){B}
+    \tkzDefPoint(0,3){E}
+    \tkzDefPoint(-2,12){A}
+    \tkzDefPoint(0,12){D} % Σημείο \Delta
+
+    % Άκρα για τους άξονες
+    \tkzDefPoint(-4,0){X_min}
+    \tkzDefPoint(9,0){X_max}
+    \tkzDefPoint(0,-2){Y_min}
+    \tkzDefPoint(0,14){Y_max}
+
+    % --- ΣΧΕΔΙΑΣΗ ---
+
+    % Έγχρωμα τμήματα πάνω στους άξονες (πράσινο HK και μπλε O\Delta)
+    \draw[l3] (H) -- (K);
+    \draw[l3] (O) -- (D);
+
+    % Η ευθεία f(x) με κόκκινο χρώμα (την προεκτείνουμε ελαφρώς στα άκρα)
+    \tkzDrawLine[very thick, color=maincolor!60, add=0.15 and 0.15](A,M)
+
+    % Διακεκομμένες γραμμές προβολών
+    \tkzDrawSegments[very thick, dashed, black!80](A,D A,H B,E B,K)
+
+    % --- ΣΗΜΑΝΣΗ ΓΩΝΙΩΝ ---
+    % Ροζ ορθές γωνίες (όπως στο πρωτότυπο)
+    \tkzMarkRightAngle[size=0.6, fill=maincolor!20, draw=maincolor](A,D,O)
+    \tkzMarkRightAngle[size=0.6, fill=maincolor!20, draw=maincolor](A,H,O)
+    \tkzMarkRightAngle[size=0.6, fill=maincolor!20, draw=maincolor](B,E,O)
+    \tkzMarkRightAngle[size=0.6, fill=maincolor!20, draw=maincolor](B,K,O)
+    
+    % Ορθή γωνία στο Ο (στο 2ο τεταρτημόριο, ανάμεσα στα Η και Ε)
+    \tkzMarkRightAngle[size=0.6, fill=maincolor!20, draw=maincolor](H,O,E)
+
+    % --- ΣΗΜΕΙΑ ΚΑΙ ΕΤΙΚΕΤΕΣ ---
+    % Κουκκίδες
+    \tkzDrawPoints(A,D,E,B,H,O,K,M)
+
+    % Ονόματα σημείων
+    \tkzLabelPoint[left=2pt](A){\small A}
+    \tkzLabelPoint[right=2pt](D){\small $\Delta$}
+    \tkzLabelPoint[left=2pt](E){\small E}
+    \tkzLabelPoint[above right=1pt](B){\small B}
+    \tkzLabelPoint[below](H){\small H}
+    \tkzLabelPoint[below right](O){\small O}
+    \tkzLabelPoint[below](K){\small K}
+    \tkzLabelPoint[above right](M){\small M}
+
+    % Σχεδίαση αξόνων
+    \draw[-latex] (X_min) -- (X_max);
+    \draw[-latex] (Y_min) -- (Y_max);
+    % Ετικέτα εξίσωσης f(x)
+    \node[right] at (1.5, 4.5) {${y = f(x) = \alpha x + \beta}$};
+
+\end{tikzpicture}\captionof{figure}{Άσκηση 14556}
+\end{center}
 \begin{alist}
 \item Να αποδείξετε ότι $a = - \dfrac{3}{2}$
 \monades{9}
@@ -14,3 +76,4 @@
 \monades{7}
 \item Υποθέτουμε ότι το ευθύγραμμο τμήμα ΟΚ έχει μήκος 4. Να βρείτε την εξίσωση της ευθείας (δ) η οποία διέρχεται από το σημείο Ε και είναι παράλληλη προς την γραφική παράσταση της συνάρτησης $f(x)$.\monades{9}
 \end{alist}
+
