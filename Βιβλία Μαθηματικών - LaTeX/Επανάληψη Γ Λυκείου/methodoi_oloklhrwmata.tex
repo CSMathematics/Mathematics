@@ -10,7 +10,25 @@
     \item Εφαρμόζουμε το Θεμελιώδες Θεώρημα του Ολοκληρωτικού Λογισμού: \[\dint_a^\beta f(x)\d x = [F(x)]_a^\beta = F(\beta) - F(a)\]
 \end{bhma}
 \end{askhsh}
-
+Για το 1ο βήμα της μεθόδου θα χρειαστούμε τον παρακάτω πίνακα με τις παράγουσες των βασικών συναρτήσεων:
+\begin{center}
+\begin{mytblr}{cell{1}{3}={secondcolor!90!black},cell{even[2-Z]}{3} = {secondcolor!70!white},cell{odd[3-Z]}{3} = {secondcolor!30!white},column{3}={8.7cm},row{2-Z} = {10.7mm}}
+Συνάρτηση & Παράγουσα & Ορισμένο ολοκλήρωμα\\
+$c$ & $cx$ & $\displaystyle\int_{a}^{\beta}{c\mathrm{d}x}=[cx]_{a}^{\beta}=c(\beta-a)$\\
+$x$ & $\dfrac{x^2}{2}$ & $\displaystyle\int_{a}^{\beta}{x\mathrm{d}x}=\left[\dfrac{x^2}{2}\right]_{a}^{\beta}=\dfrac{\beta^2}{2}-\dfrac{a^2}{2}$  \\
+$x^{\nu}$ & $\dfrac{x^{\nu+1}}{\nu+1}$ & $\displaystyle\int_{a}^{\beta}{x^{\nu}\mathrm{d}x}=\left[\dfrac{x^{\nu+1}}{\nu+1}\right]_{a}^{\beta}=\dfrac{\beta^{\nu+1}}{\nu+1}-\dfrac{a^{\nu+1}}{\nu+1}$\\
+$\dfrac{1}{2\sqrt{x}}$ & $\sqrt{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{2\sqrt{x}}\mathrm{d}x}=\left[\sqrt{x}\right]_{a}^{\beta}=\sqrt{\beta}-\sqrt{a}$ \\
+$\sqrt[\nu]{x^{\mu}}$ & $\dfrac{x^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}$ & $\displaystyle\int_{a}^{\beta}{\sqrt[\nu]{x^{\nu}}\mathrm{d}x}=\left[\dfrac{x^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}\right]_{a}^{\beta}=\dfrac{\beta^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}-\dfrac{a^{\frac{\mu}{\nu}+1}}{\frac{\mu}{\nu}+1}$ \\
+$\dfrac{1}{x^2}$ & $-\dfrac{1}{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{x^2}\mathrm{d}x}=\left[-\dfrac{1}{x}\right]_{a}^{\beta}=-\dfrac{1}{\beta}+\dfrac{1}{a}$ \\
+$\hm{x}$ & $-\syn{x}$ & $\displaystyle\int_{a}^{\beta}{\hm{x}\mathrm{d}x}=\left[-\syn{x}\right]_{a}^{\beta}=-\syn{\beta}+\syn{a}$ \\
+$\syn{x}$ & $\hm{x}$ & $\displaystyle\int_{a}^{\beta}{\syn{x}\mathrm{d}x}=\left[\hm{x}\right]_{a}^{\beta}=\hm{\beta}-\hm{a}$  \\
+$\dfrac{1}{\syn^2{x}}$ & $\ef{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{\syn^2{x}}\mathrm{d}x}=\left[\ef{x}\right]_{a}^{\beta}=\ef{\beta}-\ef{a}$\\
+$\dfrac{1}{\hm^2{x}}$ & $-\syf{x}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{\hm^2{x}}\mathrm{d}x}=\left[-\syf{x}\right]_{a}^{\beta}=-\syf{\beta}+\syf{a}$\\
+$e^x$ & $e^x$ & $\displaystyle\int_{a}^{\beta}{e^x\mathrm{d}x}=\left[e^{x}\right]_{a}^{\beta}=e^{\beta}-e^{a}$ \\
+$a^x$ & $\dfrac{a^x}{\ln{a}}$ & $\displaystyle\int_{a}^{\beta}{{\mu}^x\mathrm{d}x}=\left[\frac{{\mu}^x}{\ln{\mu}}\right]_{a}^{\beta}=\frac{{\mu}^{\beta}}{\ln{\mu}}-\frac{\mu^{a}}{\ln{\mu}}$  \\
+$\dfrac{1}{x}$ & $\ln{|x|}$ & $\displaystyle\int_{a}^{\beta}{\frac{1}{x}\mathrm{d}x}=\left[\ln{|x|}\right]_{a}^{\beta}=\ln|\beta|-\ln{|a|}$
+\end{mytblr}
+\end{center}
 \Paradeigma{Απλά ολοκληρώματα}
 \bmath{Να υπολογιστεί το ολοκλήρωμα $I = \dint_1^2 \left( 3x^2 - \dfrac{4}{x^2} + \dfrac{2}{x} - e^x \right) \d x$.}
 
@@ -20,6 +38,56 @@
 I &= \dint_1^2 \left( 3x^2 - \frac{4}{x^2} + \frac{2}{x} - e^x \right) \d x=\\&= 3 \left[\frac{x^3}{3} - 4 \frac{x^{-1}}{-1}+ 2 \ln|x|-e^x\right]_1^2=\left[\frac{x^3}{3} +\frac{4}{x}+ 2 \ln{x}-e^x\right]_1^2=\\&=\left(2^3+\frac{4}{2}+2\ln{2}-e^2\right)-\left(1^3+\frac{4}{1}+2\ln{1}-e^1\right)=5+2\ln{2}-e^2+e
 \end{align*}
 
+Ομοίως εργαζόμαστε και για τον υπολογισμό ολοκληρωμάτων που περιέχουν σύνθετες συναρτήσεις, οι παράγουσες των οποίων βρίσκονται στον παρακάτω πίνακα:
+\begin{center}
+\begin{mytblr}{row{2-Z} = {10.7mm},cell{1}{2,4}={secondcolor!90!black},cell{even[2-Z]}{2,4} = {secondcolor!70!white},cell{odd[3-Z]}{2,4} = {secondcolor!30!white}}
+Συνάρτηση & Παράγουσα & Συνάρτηση & Παράγουσα \\
+$f^{\nu}(x)\cdot f'(x)$ & $\dfrac{f^{\nu+1}(x)}{\nu+1}$&
+$\dfrac{f'(x)}{2\sqrt{f(x)}}$ & $\sqrt{f(x)}$\\
+$\dfrac{f'(x)}{f^2(x)}$ & $-\dfrac{1}{f(x)}$&
+$\hm{f(x)}\cdot f'(x)$ & $-\syn{f(x)}$\\
+$\syn{f(x)}\cdot f'(x)$ & $\hm{f(x)}$&
+$\dfrac{f'(x)}{\syn^2{f(x)}}$ & $\ef{f(x)}$\\
+$\dfrac{f'(x)}{\hm^2{f(x)}}$ & $-\syf{f(x)}$&
+$e^{f(x)}\cdot f'(x)$ & $e^{f(x)}$\\
+$a^{f(x)}\cdot f'(x)$ & $\dfrac{a^{f(x)}}{\ln{a}}$&
+$\dfrac{f'(x)}{f(x)}$ & $\ln{f(x)}$
+\end{mytblr}
+\end{center}
+\Paradeigma{Ολοκληρώματα σύνθετων συναρτήσεων}
+\bmath{Να υπολογιστούν τα ολοκληρώματα:
+\begin{multicols}{2}
+\begin{alist}
+\item $I = \dint_0^1 (x^2+1)^3 \cdot 2x \, \d x$
+\item $I = \dint_1^e \dfrac{3x^2+1}{x^3+x} \, \d x$
+\item $I = \dint_0^1 (2x+1)e^{x^2+x} \, \d x$
+\item $I = \dint_0^{\frac{\pi}{4}} \dfrac{\hm{x}}{\syn^2{x}} \, \d x$
+\end{alist}
+\end{multicols}
+}
+\lysh\vspace{-3mm}
+\begin{alist}
+\item Παρατηρούμε ότι ο παράγοντας $2x$ είναι η παράγωγος της βάσης της δύναμης $x^2+1$, οπότε το ολοκλήρωμα είναι της μορφής $f^3(x)\cdot f'(x)$, με παράγουσα $\dfrac{f^4(x)}{4}$:
+\begin{align*}
+I &= \dint_0^1 (x^2+1)^3 \cdot 2x \, \d x = \left[\frac{(x^2+1)^4}{4}\right]_0^1 = \frac{(1+1)^4}{4} - \frac{(0+1)^4}{4} = \frac{16}{4} - \frac{1}{4} = \frac{15}{4}
+\end{align*}
+
+\item Παρατηρούμε ότι ο αριθμητής $3x^2+1$ είναι η παράγωγος του παρονομαστή $f(x)=x^3+x$, οπότε το ολοκλήρωμα είναι της μορφής $\dfrac{f'(x)}{f(x)}$, με παράγουσα $\ln|f(x)|$:
+\begin{align*}
+I &= \dint_1^e \frac{3x^2+1}{x^3+x} \, \d x = \left[\ln|x^3+x|\right]_1^e = \ln(e^3+e) - \ln(1+1) = \ln\bigl(e(e^2+1)\bigr) - \ln 2 \\
+&= 1 + \ln(e^2+1) - \ln 2 = 1 + \ln\!\left(\frac{e^2+1}{2}\right)
+\end{align*}
+
+\item Βλέπουμε όπως και πριν ότι ο παράγοντας $2x+1$ είναι η παράγωγος του εκθέτη $x^2+x$, οπότε το ολοκλήρωμα είναι της μορφής $e^{f(x)}\cdot f'(x)$, με παράγουσα $e^{f(x)}$:
+\begin{align*}
+I &= \dint_0^1 (2x+1)e^{x^2+x} \, \d x = \left[e^{x^2+x}\right]_0^1 = e^{1+1} - e^{0+0} = e^2 - 1
+\end{align*}
+
+\item Έχουμε ότι $\dfrac{\hm{x}}{\syn^2{x}}=-\dfrac{(\syn{x})'}{\syn^2{x}}$, οπότε το ολοκλήρωμα είναι της μορφής $-\dfrac{f'(x)}{f^2(x)}$, με παράγουσα $\dfrac{1}{f(x)}$:
+\begin{align*}
+I &= \dint_0^{\frac{\pi}{4}} \frac{\hm{x}}{\syn^2{x}} \, \d x = \left[\dfrac{1}{\syn{x}}\right]_0^{\frac{\pi}{4}} = \frac{1}{\syn{\frac{\pi}{4}}}-\frac{1}{\syn{0}}=\sqrt{2}-1
+\end{align*}
+\end{alist}
 
 %--------------------------------------------------
 \subsection{Παραγοντική ολοκλήρωση}
@@ -162,8 +230,7 @@ I &= \dint_1^2 x(x-1)^4 \, \d x = \dint_0^1 (u+1)u^4 \, \d u \\
 άρα έχουμε:
 \begin{align*}
 I &= \dint_0^{\frac{\pi}{2}} \frac{1}{(1+\hm{x})^2} \cdot \syn{x} \, \d x = \dint_1^2 \frac{1}{u^2} \, \d u \\
-&= \dint_1^2 u^{-2} \, \d u = \left[ \frac{u^{-1}}{-1} \right]_1^2 = \left[ -\frac{1}{u} \right]_1^2 \\
-&= \left( -\frac{1}{2} \right) - \left( -\frac{1}{1} \right) = 1 - \frac{1}{2} = \frac{1}{2}
+&= \dint_1^2 u^{-2} \, \d u = \left[ \frac{u^{-1}}{-1} \right]_1^2 = \left[ -\frac{1}{u} \right]_1^2 = \left( -\frac{1}{2} \right) - \left( -\frac{1}{1} \right) = 1 - \frac{1}{2} = \frac{1}{2}
 \end{align*}
 
 \Paradeigma{Διάφορα ολοκληρώματα}
@@ -320,7 +387,7 @@ I_4 &= \dint_1^2 2 \frac{2x + 1}{x^2 + x + 1} \, \d x = 2 \left[ \ln|x^2 + x + 1
 \end{itemize}
 \end{bhma}
 \begin{center}
-\bmath{Αν αντί για $C_f$ και $x'x$ ψάχνουμε εμβαδόν μεταξύ $C_f$ και $C_g$ τότε ακολουθούμε τα ίδια βήματα γι τη συνάρτηση $h(x)=f(x)-g(x)$.}
+\bmath{Αν αντί για εμβαδόν μεταξύ $C_f$ και $x'x$ ψάχνουμε εμβαδόν μεταξύ $C_f$ και $C_g$ τότε ακολουθούμε τα ίδια βήματα για τη συνάρτηση $h(x)=f(x)-g(x)$.}
 \end{center}
 \end{askhsh}
 
