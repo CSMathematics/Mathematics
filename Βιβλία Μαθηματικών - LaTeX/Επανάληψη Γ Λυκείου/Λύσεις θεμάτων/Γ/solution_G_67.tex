@@ -1,172 +1,88 @@
-*   Function: $f(x) = \frac{\ln x}{x^2}$ for $x > 0$.
-    *   Part 1: Extrema and proving maximum at $x = \sqrt{e}$.
-    *   Part 2: Points of inflection (concavity).
-    *   Part 3: Definite integral $E(a) = \int_1^a f(x) dx$ for $a > 1$ using integration by parts.
-    *   Part 4: Limit $\lim_{a \to +\infty} E(a)$.
-
-    *   Environment: `\begin{thema}{Γ}`.
-    *   Questions environment: `\begin{erwthma}`.
-    *   Items for sub-questions: `\item`.
-    *   Inline math: `$ ... $`.
-    *   Display math: `\[ ... \]`.
-    *   Calculations: `\begin{align*}`.
-    *   English terms: `\eng{...}`.
-    *   Emphasis: `\textbf{...}`.
-    *   Derivatives/Signs: `\begin{itemize}` (for $f'(x)=0, >0, <0$).
-    *   Tables: `tkz-tab` (though for this problem, maybe just sign analysis if not strictly requested, but the guide asks for them). Let's check if a table is needed for extrema/inflection. Usually, yes.
-    *   Integration: Definite integrals only (no indefinite integrals).
-    *   Differentials: `\d x`.
-
-    *   **Part 1: Extrema**
-        *   $f(x) = \frac{\ln x}{x^2}$.
-        *   $f'(x) = \frac{(1/x)x^2 - (\ln x)(2x)}{(x^2)^2} = \frac{x - 2x \ln x}{x^4} = \frac{1 - 2 \ln x}{x^3}$.
-        *   $f'(x) = 0 \Leftrightarrow 1 - 2 \ln x = 0 \Leftrightarrow \ln x = 1/2 \Leftrightarrow x = e^{1/2} = \sqrt{e}$.
-        *   Sign of $f'(x)$:
-            *   $f'(x) > 0 \Leftrightarrow 1 - 2 \ln x > 0 \Leftrightarrow \ln x < 1/2 \Leftrightarrow 0 < x < \sqrt{e}$.
-            *   $f'(x) < 0 \Leftrightarrow 1 - 2 \ln x < 0 \Leftrightarrow \ln x > 1/2 \Leftrightarrow x > \sqrt{e}$.
-        *   Conclusion: $f$ is strictly increasing on $(0, \sqrt{e}]$ and strictly decreasing on $[\sqrt{e}, +\infty)$. Thus, $x = \sqrt{e}$ is a global maximum.
-
-    *   **Part 2: Points of Inflection**
-        *   $f'(x) = \frac{1 - 2 \ln x}{x^3}$.
-        *   $f''(x) = \frac{(-2/x)x^3 - (1 - 2 \ln x)(3x^2)}{(x^3)^2} = \frac{-2x^2 - 3x^2 + 6x^2 \ln x}{x^6} = \frac{-5x^2 + 6x^2 \ln x}{x^6} = \frac{6 \ln x - 5}{x^4}$.
-        *   $f''(x) = 0 \Leftrightarrow 6 \ln x - 5 = 0 \Leftrightarrow \ln x = 5/6 \Leftrightarrow x = e^{5/6}$.
-        *   Sign of $f''(x)$:
-            *   $f''(x) > 0 \Leftrightarrow 6 \ln x - 5 > 0 \Leftrightarrow x > e^{5/6}$.
-            *   $f''(x) < 0 \Leftrightarrow 6 \ln x - 5 < 0 \Leftrightarrow 0 < x < e^{5/6}$.
-        *   Since $f''(x)$ changes sign at $x = e^{5/6}$, it is a point of inflection.
-
-    *   **Part 3: Definite Integral $E(a)$**
-        *   $E(a) = \int_1^a \frac{\ln x}{x^2} \d x$.
-        *   Integration by parts: $\int u dv = uv - \int v du$.
-        *   Let $u = \ln x \Rightarrow du = \frac{1}{x} \d x$.
-        *   Let $dv = \frac{1}{x^2} \d x \Rightarrow v = -\frac{1}{x}$.
-        *   $E(a) = \left[ -\frac{\ln x}{x} \right]_1^a - \int_1^a \left( -\frac{1}{x} \right) \frac{1}{x} \d x$.
-        *   $E(a) = \left( -\frac{\ln a}{a} - (-\frac{\ln 1}{1}) \right) + \int_1^a \frac{1}{x^2} \d x$.
-        *   $E(a) = -\frac{\ln a}{a} + \left[ -\frac{1}{x} \right]_1^a = -\frac{\ln a}{a} + \left( -\frac{1}{a} - (-1) \right) = 1 - \frac{\ln a + 1}{a}$.
-
-    *   **Part 4: Limit**
-        *   $\lim_{a \to +\infty} E(a) = \lim_{a \to +\infty} \left( 1 - \frac{\ln a + 1}{a} \right)$.
-        *   $\lim_{a \to +\infty} \frac{\ln a + 1}{a} = \lim_{a \to +\infty} \frac{\ln a}{a} + \lim_{a \to +\infty} \frac{1}{a} = 0 + 0 = 0$. (Using growth rates or L'Hôpital).
-        *   Therefore, $\lim_{a \to +\infty} E(a) = 1 - 0 = 1$.
-
-    *   Check if `tkz-tab` is required. The guide says "All tables must be inside `\begin{center}`". I'll include them for both the first and second derivative to be thorough and follow the style guide's "Analytical approach".
-
-    *   Wait, $f'(x) = 0 \Leftrightarrow \dots$ logic should be in `itemize`.
-
-    *   Correct LaTeX commands: `\d x`, `\eng{...}`, `\textbf{...}`.
-    *   No indefinite integrals. I used $\left[ ... \right]_1^a$.
-
-    *   $f'(x) = \frac{1-2\ln x}{x^3}$.
-    *   $f''(x) = \frac{6\ln x - 5}{x^4}$.
-    *   $E(a) = 1 - \frac{1+\ln a}{a}$.
-    *   Limit = 1.
-    *   $x = \sqrt{e}$ is max.
-    *   $x = e^{5/6}$ is inflection.
-
-    *   $\int_1^a \frac{\ln x}{x^2} dx$
-    *   $u = \ln x \implies du = 1/x dx$
-    *   $dv = x^{-2} dx \implies v = -x^{-1}$
-    *   $\int u dv = [uv] - \int v du$
-    *   $E(a) = [-\frac{\ln x}{x}]_1^a - \int_1^a (- \frac{1}{x} \cdot \frac{1}{x}) dx = [-\frac{\ln x}{x}]_1^a + \int_1^a \frac{1}{x^2} dx = [-\frac{\ln x}{x} - \frac{1}{x}]_1^a = [-\frac{\ln x + 1}{x}]_1^a = -\frac{\ln a + 1}{a} - (-\frac{0+1}{1}) = 1 - \frac{\ln a + 1}{a}$. Correct.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\eng{...}` for technical terms like "Integration by parts" (if needed) or "L'Hôpital".
-    *   `\textbf{...}` for "γνησίως αύξουσα", "μέγιστη τιμή", etc.
-    *   `\begin{align*}` for integral steps.
-    *   `tkz-tab` for sign changes.
-
-    *Refining Part 1 logic:*
-    $f'(x) = \frac{1-2\ln x}{x^3}$.
-    $f'(x) = 0 \Leftrightarrow \ln x = 1/2 \Leftrightarrow x = \sqrt{e}$.
-    $f'(x) > 0 \Leftrightarrow \ln x < 1/2 \Leftrightarrow x < \sqrt{e}$.
-    $f'(x) < 0 \Leftrightarrow \ln x > 1/2 \Leftrightarrow x > \sqrt{e}$.
-    Thus $f$ is $\textbf{γνησίως αύξουσα}$ on $(0, \sqrt{e}]$ and $\textbf{γνησίως φθίνουσα}$ on $[\sqrt{e}, +\infty)$.
-
-    *Refining Part 2 logic:*
-    $f''(x) = \frac{6\ln x - 5}{x^4}$.
-    $f''(x) = 0 \Leftrightarrow \ln x = 5/6 \Leftrightarrow x = e^{5/6}$.
-    $f''(x) < 0$ for $x \in (0, e^{5/6})$.
-    $f''(x) > 0$ for $x \in (e^{5/6}, +\infty)$.
-    Change of sign $\implies$ point of inflection at $x = e^{5/6}$.
-
-    *Integration by parts:* $\eng{Integration by parts}$ is not a theorem name usually listed as $\eng{...}$ but the guide says "technical terms". I'll use it for clarity or just stick to the Greek "ολοκληρώσε κατά παράγοντες". Wait, the guide gives `\eng{DLH}`, `\eng{Fermat}`. I will use `\eng{Integration by parts}` or `\eng{L'Hôpital}` if I use it for the limit. Actually, for $\lim_{a \to \infty} \frac{\ln a}{a}$, it's a standard limit, but I can mention $\eng{L'Hôpital}$ if I want.
-
-    *Final Check on Integral:*
-    $E(a) = \int_1^a \frac{\ln x}{x^2} dx$
-    $u = \ln x \Rightarrow du = \frac{1}{x} dx$
-    $dv = \frac{1}{x^2} dx \Rightarrow v = -\frac{1}{x}$
-    $E(a) = [-\frac{\ln x}{x}]_1^a - \int_1^a (-\frac{1}{x} \cdot \frac{1}{x}) dx = -\frac{\ln a}{a} + \int_1^a \frac{1}{x^2} dx = -\frac{\ln a}{a} + [-\frac{1}{x}]_1^a = -\frac{\ln a}{a} - \frac{1}{a} + 1 = 1 - \frac{\ln a + 1}{a}$.
-
-    Everything seems solid.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\begin{itemize}` for roots/signs.
-    *   `\begin{align*}` for integral.
-    *   `\begin{center} \tkzTabInit ... \end{center}`.
-    *   `\d x`.
-    *   No indefinite integrals.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 67ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Η συνάρτηση $f$ είναι συνεχής και παραγωγίσιμη στο $D_f = (0, +\infty)$. Η παράγωγός της είναι:
-\[ f'(x) = \frac{\left(\dfrac{1}{x}\right) \cdot x^2 - (\ln x) \cdot 2x}{(x^2)^2} = \frac{x - 2x \ln x}{x^4} = \frac{1 - 2 \ln x}{x^3} \]
-Για τον προσδιορισμό των ακροτάτων μελετάμε το πρόσημο της $f'(x)$ για $x > 0$:
-\begin{itemize}
-    \item $f'(x) = 0 \Leftrightarrow 1 - 2 \ln x = 0 \Leftrightarrow \ln x = \frac{1}{2} \Leftrightarrow x = e^{1/2} = \sqrt{e}$
-    \item $f'(x) > 0 \Leftrightarrow 1 - 2 \ln x > 0 \Leftrightarrow \ln x < \frac{1}{2} \Leftrightarrow 0 < x < \sqrt{e}$
-    \item $f'(x) < 0 \Leftrightarrow 1 - 2 \ln x < 0 \Leftrightarrow \ln x > \frac{1}{2} \Leftrightarrow x > \sqrt{e}$
-\end{itemize}
-Συνεπώς, η $f$ είναι $\textbf{γνησίως αύξουσα}$ στο $(0, \sqrt{e}]$ και $\textbf{γνησίως φθίνουσα}$ στο $[\sqrt{e}, +\infty)$. Άρα η συνάρτηση παρουσιάζει \textbf{ολικό μέγιστο} για $x = \sqrt{e}$.
-
-\begin{center}
-\begin{tikzpicture}
-\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1.2cm, $f'(x)$ / 1.2cm, $f(x)$ / 1.2cm}
-{0, $\sqrt{e}$, $+\infty$}
-\tkzTabLine{, +, z, -, }
-\tkzTabVar{-, /$\frac{1}{2e}$, +, }
-\end{tikzpicture}
-\end{center}
-
-\item Για τον προσδιορισμό των σημείων καμπής υπολογίζουμε τη δεύτερη παράγωγο:
-\[ f''(x) = \left( \frac{1 - 2 \ln x}{x^3} \right)' = \frac{\left( -\frac{2}{x} \right) \cdot x^3 - (1 - 2 \ln x) \cdot 3x^2}{(x^3)^2} = \frac{-2x^2 - 3x^2 + 6x^2 \ln x}{x^6} = \frac{6 \ln x - 5}{x^4} \]
-Μελετάμε το πρόσημο της $f''(x)$ για $x > 0$:
-\begin{itemize}
-    \item $f''(x) = 0 \Leftrightarrow 6 \ln x - 5 = 0 \Leftrightarrow \ln x = \frac{5}{6} \Leftrightarrow x = e^{5/6}$
-    \item $f''(x) > 0 \Leftrightarrow 6 \ln x - 5 > 0 \Leftrightarrow x > e^{5/6}$
-    \item $f''(x) < 0 \Leftrightarrow 6 \ln x - 5 < 0 \Leftrightarrow 0 < x < e^{5/6}$
-\end{itemize}
-Επειδή η $f''(x)$ αλλάζει πρόσημο στο $x = e^{5/6}$, η συνάρτηση παρουσιάζει \textbf{σημείο καμπής} στο σημείο $(e^{5/6}, f(e^{5/6}))$.
-
-\begin{center}
-\begin{tikzpicture}
-\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1.2cm, $f''(x)$ / 1.2cm, $f(x)$ / 1.2cm}
-{0, $e^{5/6}$, $+\infty$}
-\tkzTabLine{, -, z, +, }
-\tkzTabVar{-, / , +, } 
-\tkzTabVar{ \rotatebox[origin= c]{180}{$\curvearrowleft$}, / , \curvearrowright }
-\end{tikzpicture}
-\end{center}
-
-\item Υπολογίζουμε το ορισμένο ολοκλήρωμα $E(a) = \int_{1}^{a} \frac{\ln x}{x^2} \d x$ εφαρμόζοντας \eng{Integration by parts}. 
-Θέτουμε $u = \ln x \Rightarrow \d u = \frac{1}{x} \d x$ και $\d v = \frac{1}{x^2} \d x \Rightarrow v = -\frac{1}{x}$.
+\item Η $f$ είναι παραγωγίσιμη στο $(0,+\infty)$ και
 \begin{align*}
-E(a) &= \left[ -\frac{\ln x}{x} \right]_1^a - \int_{1}^{a} \left( -\frac{1}{x} \right) \frac{1}{x} \d x \\
-&= \left( -\frac{\ln a}{a} - \left( -\frac{\ln 1}{1} \right) \right) + \int_{1}^{a} \frac{1}{x^2} \d x \\
-&= -\frac{\ln a}{a} + \left[ -\frac{1}{x} \right]_1^a \\
-&= -\frac{\ln a}{a} + \left( -\frac{1}{a} - (-1) \right) \\
-&= 1 - \frac{\ln a + 1}{a}
+f'(x)
+&=\left(\frac{\ln x}{x^2}\right)'\\
+&=\frac{(\ln x)'x^2-\ln x(x^2)'}{x^4}\\
+&=\frac{x-2x\ln x}{x^4}\\
+&=\frac{1-2\ln x}{x^3}
+\end{align*}
+Επειδή $x^3>0$ για κάθε $x>0$, το πρόσημο της $f'$ καθορίζεται από το $1-2\ln x$.
+Έχουμε:
+\begin{itemize}
+\item $f'(x)=0\Leftrightarrow 1-2\ln x=0\Leftrightarrow \ln x=\dfrac{1}{2}\Leftrightarrow x=\sqrt{e}$
+\item $f'(x)>0\Leftrightarrow 0<x<\sqrt{e}$
+\item $f'(x)<0\Leftrightarrow x>\sqrt{e}$
+\end{itemize}
+Άρα η $f$ είναι γνησίως αύξουσα στο $(0,\sqrt{e}]$ και γνησίως φθίνουσα στο $[\sqrt{e},+\infty)$.
+
+Επομένως η $f$ παρουσιάζει ολικό μέγιστο για
+\[x=\sqrt{e}\]
+με μέγιστη τιμή
+\[f(\sqrt{e})=\frac{\ln\sqrt{e}}{(\sqrt{e})^2}=\frac{\frac{1}{2}}{e}=\frac{1}{2e}\]
+
+\item Υπολογίζουμε τη δεύτερη παράγωγο:
+\begin{align*}
+f''(x)
+&=\left(\frac{1-2\ln x}{x^3}\right)'\\
+&=\frac{\left(1-2\ln x\right)'x^3-\left(1-2\ln x\right)(x^3)'}{x^6}\\
+&=\frac{-2x^2-3x^2(1-2\ln x)}{x^6}\\
+&=\frac{6\ln x-5}{x^4}
+\end{align*}
+Επειδή $x^4>0$ για κάθε $x>0$, το πρόσημο της $f''$ καθορίζεται από το $6\ln x-5$.
+Έχουμε:
+\begin{itemize}
+\item $f''(x)=0\Leftrightarrow 6\ln x-5=0\Leftrightarrow x=e^{\frac{5}{6}}$
+\item $f''(x)<0\Leftrightarrow 0<x<e^{\frac{5}{6}}$
+\item $f''(x)>0\Leftrightarrow x>e^{\frac{5}{6}}$
+\end{itemize}
+Άρα η $f$ είναι κοίλη στο $\left(0,e^{\frac{5}{6}}\right]$ και κυρτή στο $\left[e^{\frac{5}{6}},+\infty\right)$.
+
+Επειδή η $f''$ αλλάζει πρόσημο στο $x=e^{\frac{5}{6}}$, η $C_f$ έχει σημείο καμπής το
+\[
+K\left(e^{\frac{5}{6}},f\left(e^{\frac{5}{6}}\right)\right)
+\]
+όπου
+\[
+f\left(e^{\frac{5}{6}}\right)
+=\frac{\ln e^{\frac{5}{6}}}{\left(e^{\frac{5}{6}}\right)^2}
+=\frac{\frac{5}{6}}{e^{\frac{5}{3}}}
+=\frac{5}{6e^{\frac{5}{3}}}
+\]
+Άρα
+\[
+K\left(e^{\frac{5}{6}},\frac{5}{6e^{\frac{5}{3}}}\right)
+\]
+
+\item Για $a>1$ έχουμε
+\[E(a)=\dint_1^a \frac{\ln x}{x^2}\d x\]
+Εφαρμόζουμε ολοκλήρωση κατά παράγοντες με
+\[u=\ln x\quad \text{και}\quad \d v=\frac{1}{x^2}\d x\]
+οπότε
+\[\d u=\frac{1}{x}\d x\quad \text{και}\quad v=-\frac{1}{x}\]
+Άρα
+\begin{align*}
+E(a)
+&=\left[-\frac{\ln x}{x}\right]_1^a-\dint_1^a\left(-\frac{1}{x}\right)\frac{1}{x}\d x\\
+&=-\frac{\ln a}{a}+\dint_1^a\frac{1}{x^2}\d x\\
+&=-\frac{\ln a}{a}+\left[-\frac{1}{x}\right]_1^a\\
+&=-\frac{\ln a}{a}-\frac{1}{a}+1\\
+&=1-\frac{\ln a+1}{a}
 \end{align*}
 
-\item Υπολογίζουμε το όριο:
-\[ \lim_{a \to +\infty} E(a) = \lim_{a \to +\infty} \left( 1 - \frac{\ln a + 1}{a} \right) \]
-Γνωρίζουμε ότι $\lim_{a \to +\infty} \frac{\ln a}{a} = 0$ (ή εφαρμόζοντας τον κανόνα $\eng{L'Hôpital}$), επομένως:
-\[ \lim_{a \to +\infty} \frac{\ln a + 1}{a} = \lim_{a \to +\infty} \frac{\ln a}{a} + \lim_{a \to +\infty} \frac{1}{a} = 0 + 0 = 0 \]
-Άρα:
-\[ \lim_{a \to +\infty} E(a) = 1 - 0 = 1 \]
+\item Από το προηγούμενο ερώτημα
+\[E(a)=1-\frac{\ln a+1}{a}\]
+Άρα
+\begin{align*}
+\lim\limits_{a\to+\infty}E(a)
+&=\lim\limits_{a\to+\infty}\left(1-\frac{\ln a+1}{a}\right)\\
+&=1-\lim\limits_{a\to+\infty}\frac{\ln a+1}{a}\\
+&=1
+\end{align*}
+διότι
+\[\lim\limits_{a\to+\infty}\frac{\ln a}{a}=0\quad \text{και}\quad \lim\limits_{a\to+\infty}\frac{1}{a}=0\]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 67ο ΘΕΜΑ Γ ===========

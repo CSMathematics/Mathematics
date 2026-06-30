@@ -1,5 +1,5 @@
 \begin{thema}{Δ}
-Στο σχήμα δίνονται η $C_f$ (μπλε) μιας γνησίως αύξουσας $f:[0, 4]\to[0, 3]$ και η $C_g$ (πράσινη) μιας γνησίως αύξουσας $g:[0, 3]\to[0, 4]$, ώστε $g = f^{-1}$. Γνωστά: $f(0)=0$, $f(1)=1$, $f(2)=2$, $f(4)=3$ και $g(0)=0$, $g(1)=1$, $g(2)=2$, $g(3)=4$.
+Στο σχήμα δίνονται η $C_f$ (μπλε) μιας συνεχούς και γνησίως αύξουσας $f:[0, 4]\to[0, 3]$ και η $C_g$ (πράσινη) της αντίστροφής της $g=f^{-1}:[0,3]\to[0,4]$. Υποθέτουμε ότι η $g$ είναι συνεχής στο $[0,3]$ και ότι οι $f$ και $g$ είναι δύο φορές παραγωγίσιμες στα εσωτερικά των πεδίων ορισμού τους. Γνωστά: $f(0)=0$, $f(1)=1$, $f(2)=2$, $f(4)=3$ και $g(0)=0$, $g(1)=1$, $g(2)=2$, $g(3)=4$.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
@@ -12,30 +12,30 @@
     \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
   \draw[dashed, gray!50] (-1,-1) -- (4,4);
   % f: concave, below diagonal
-  \draw[very thick, blue!70!black, smooth, tension=0.4]
+  \draw[very thick, maincolor, smooth, tension=0.4]
     plot coordinates {(0,0) (0.5,0.6) (1,1) (1.5,1.4) (2,2) (3,2.6) (4,3)};
-  \node[blue!70!black] at (3.5,1.5) {$C_f$};
+  \node[maincolor] at (3.5,1.5) {$C_f$};
   % g = f^{-1}: convex, above diagonal
-  \draw[very thick, orange!50!black, smooth, tension=0.4]
+  \draw[very thick, secondcolor!50!black, smooth, tension=0.4]
     plot coordinates {(0,0) (0.6,0.5) (1,1) (1.4,1.5) (2,2) (2.6,3) (3,4)};
-  \node[orange!50!black] at (1,2.5) {$C_g$};
+  \node[secondcolor!50!black] at (1,2.5) {$C_g$};
   % shaded between
   \fill[yellow!12, opacity=0.5, smooth, tension=0.4]
     plot coordinates {(0,0) (0.5,0.6) (1,1) (1.5,1.4) (2,2) (2.6,3) (3,4)}
     -- (3,3) -- plot[smooth, tension=0.4] coordinates {(3,3) (4,3)} -- (4,3)
     -- (4,0) -- cycle;
-  \filldraw[blue!70!black] (0,0) circle (2pt);
-  \filldraw[blue!70!black] (1,1) circle (2pt);
-  \filldraw[blue!70!black] (2,2) circle (2pt);
-  \filldraw[blue!70!black] (4,3) circle (2pt) node[right,font=\footnotesize] {$(4,3)$};
-  \filldraw[orange!50!black] (3,4) circle (2pt) node[above,font=\footnotesize] {$(3,4)$};
+  \filldraw[maincolor] (0,0) circle (2pt);
+  \filldraw[maincolor] (1,1) circle (2pt);
+  \filldraw[maincolor] (2,2) circle (2pt);
+  \filldraw[maincolor] (4,3) circle (2pt) node[right,font=\footnotesize] {$(4,3)$};
+  \filldraw[secondcolor!50!black] (3,4) circle (2pt) node[above,font=\footnotesize] {$(3,4)$};
 \end{tikzpicture}
 \end{center}
 
 \begin{erwthma}
-  \item Εφαρμόστε Θ.Μ.Τ. στη $f$ στο $[0, 4]$ και στη $g$ στο $[0, 3]$. Υπάρχουν $\xi_f, \xi_g$ ώστε $f'(\xi_f) = \frac{3}{4}$ και $g'(\xi_g) = \frac{4}{3}$. Δείξτε ότι $f'(\xi_f) \cdot g'(\xi_g) = 1$.
-  \item Υπολογίστε $\dint_0^4 f(x)\,dx + \dint_0^3 g(y)\,dy$. Τι ισούται; 
-  \item Θεωρήστε $h(x) = f(x) + g(x) - 2x$ στο $[0, 3]$. Δείξτε ότι $h(0)=h(1)=h(2)=0$ και εφαρμόστε επαναληπτικά Rolle για να δείξετε ότι η $h''$ μηδενίζεται σε κάποιο $\xi \in (0, 2)$. 
-  \item Αν η $f$ είναι κοίλη (κυρτή άνω) στο $[0, 4]$, δείξτε ότι $\dint_0^4 f(x)\,dx \leq \frac{f(0)+f(4)}{2} \cdot 4 = 6$ και χρησιμοποιήστε τη σχέση ολοκληρωμάτων για να δείξετε ότι $\dint_0^3 g(y)\,dy \geq 6$.
+  \item Να αποδείξετε ότι υπάρχουν $\xi_1 \in (0, 4)$ και $\xi_2 \in (0, 3)$ τέτοια, ώστε $f'(\xi_1) \cdot g'(\xi_2) = 1$.
+  \item Να αποδείξετε ότι $\dint_0^4 f(x)\,dx + \dint_0^3 g(x)\,dx = 12$.
+  \item Να αποδείξετε ότι υπάρχει $\xi \in (0, 2)$ τέτοιο, ώστε $f''(\xi) + g''(\xi) = 0$.
+  \item Αν η $f$ είναι κοίλη, να αποδείξετε ότι $\dint_0^4 f(x)\,dx > 6$ και, στη συνέχεια, ότι $\dint_0^3 g(x)\,dx < 6$.
 \end{erwthma}
 \end{thema}

@@ -1,160 +1,56 @@
-*   Task: Solve a specific LaTeX math exercise based on strict formatting guidelines.
-    *   Topic: Optimization problem involving a wire of length 10m cut into a square and an equilateral triangle.
-    *   Formatting rules:
-        *   `\begin{thema}{Γ}` ... `\end{thema}`
-        *   `\begin{erwthma}` ... `\end{erwthma}`
-        *   `\item` for sub-questions.
-        *   Inline math `$ ... $`, Display math `\[ ... \]`.
-        *   `\begin{align*}` for multi-line calculations.
-        *   No indefinite integrals, no 2nd derivative test, etc.
-        *   Specific terminology: `\eng{...}`, `\textbf{...}`.
-        *   No problem statement, just the solution.
-        *   Comments at start and end: `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========` and `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========`.
-
-    *   Wire length = 10.
-    *   Square perimeter = $x$.
-    *   Triangle perimeter = $10 - x$.
-    *   $x \in (0, 10)$.
-
-    *   **Question 1: Side lengths.**
-        *   Square side $a = x/4$.
-        *   Triangle side $b = (10-x)/3$.
-
-    *   **Question 2: Area function $E(x)$.**
-        *   $Area_{square} = a^2 = (x/4)^2 = x^2/16$.
-        *   $Area_{triangle} = \frac{\sqrt{3}}{4} b^2 = \frac{\sqrt{3}}{4} \left(\frac{10-x}{3}\right)^2 = \frac{\sqrt{3}}{4} \cdot \frac{(10-x)^2}{9} = \frac{\sqrt{3}(10-x)^2}{36}$.
-        *   Total Area $E(x) = \frac{x^2}{16} + \frac{\sqrt{3}(10-x)^2}{36}$.
-
-    *   **Question 3: Minimum area and ratio.**
-        *   $E(x) = \frac{1}{16}x^2 + \frac{\sqrt{3}}{36}(10-x)^2$.
-        *   $E'(x) = \frac{2x}{16} + \frac{\sqrt{3}}{36} \cdot 2(10-x)(-1) = \frac{x}{8} - \frac{\sqrt{3}(10-x)}{18}$.
-        *   Find roots: $E'(x) = 0 \Rightarrow \frac{x}{8} = \frac{\sqrt{3}(10-x)}{18}$.
-        *   $18x = 8\sqrt{3}(10-x) \Rightarrow 18x = 80\sqrt{3} - 8\sqrt{3}x \Rightarrow (18 + 8\sqrt{3})x = 80\sqrt{3}$.
-        *   $x = \frac{80\sqrt{3}}{18 + 8\sqrt{3}} = \frac{40\sqrt{3}}{9 + 4\sqrt{3}}$.
-        *   Check monotonicity:
-            *   $E'(x) > 0 \Leftrightarrow \frac{x}{8} > \frac{\sqrt{3}(10-x)}{18} \Leftrightarrow (18 + 8\sqrt{3})x > 80\sqrt{3} \Leftrightarrow x > \frac{40\sqrt{3}}{9+4\sqrt{3}}$.
-            *   $E'(x) < 0 \Leftrightarrow x < \frac{40\sqrt{3}}{9+4\sqrt{3}}$.
-        *   So, $E$ has a minimum at $x_0 = \frac{40\sqrt{3}}{9+4\sqrt{3}}$.
-        *   Ratio of sides $a/b$:
-            *   $a = x/4$
-            *   $b = (10-x)/3$
-            *   $a/b = \frac{3x}{4(10-x)}$.
-            *   From $E'(x)=0$, we have $\frac{x}{8} = \frac{\sqrt{3}(10-x)}{18} \Rightarrow \frac{x}{10-x} = \frac{8\sqrt{3}}{18} = \frac{4\sqrt{3}}{9}$.
-            *   $a/b = \frac{3}{4} \cdot \frac{4\sqrt{3}}{9} = \frac{\sqrt{3}}{3} = \frac{1}{\sqrt{3}}$.
-
-    *   **Question 4: Maximum area.**
-        *   The function $E(x)$ is a parabola opening upwards.
-        *   The maximum on a closed interval $[0, 10]$ (considering boundaries) must occur at the endpoints.
-        *   $E(0) = \frac{\sqrt{3}(10)^2}{36} = \frac{100\sqrt{3}}{36} = \frac{25\sqrt{3}}{9} \approx \frac{25 \cdot 1.732}{9} \approx 4.81$.
-        *   $E(10) = \frac{10^2}{16} + 0 = \frac{100}{16} = 6.25$.
-        *   Since $6.25 > 4.81$, the maximum occurs at $x=10$.
-        *   This means the wire is used entirely for the square (no triangle).
-
-    *   $\begin{thema}{Γ}$ and $\begin{erwthma}$ envs.
-    *   `\item` for each part.
-    *   $\textbf{γνησίως φθίνουσα}$, $\textbf{γνησίως αύξουσα}$.
-    *   $\eng{...}$ for terms? (Not many technical terms here, maybe "$\eng{maximum}$" or "$\eng{minimum}$" but usually Greek is fine unless specifically asked for the English name of a theorem. I'll use it for the a-priori optimization terms if needed, though the guide says "technical terms". I'll stick to Greek for basic calc).
-    *   $\begin{align*}$ for the derivative and root solving.
-    *   Display math for the function and results.
-
-    *   Part 1: $a = \frac{x}{4}$, $b = \frac{10-x}{3}$.
-    *   Part 2: $E(x) = \frac{x^2}{16} + \frac{\sqrt{3}}{4} \cdot \left(\frac{10-x}{3}\right)^2 = \frac{x^2}{16} + \frac{\sqrt{3}(10-x)^2}{36}$.
-    *   Part 3:
-        $E'(x) = \frac{x}{8} - \frac{\sqrt{3}(10-x)}{18}$.
-        $E'(x) = 0 \Rightarrow 9x - 4\sqrt{3}(10-x) = 0 \Rightarrow (9 + 4\sqrt{3})x = 40\sqrt{3} \Rightarrow x = \frac{40\sqrt{3}}{9+4\sqrt{3}}$.
-        Ratio $a/b$: $a = x/4, b = (10-x)/3$.
-        $a/b = \frac{3x}{4(10-x)}$.
-        From $E'(x)=0$: $\frac{x}{10-x} = \frac{4\sqrt{3}}{9}$.
-        $a/b = \frac{3}{4} \cdot \frac{4\sqrt{3}}{9} = \frac{\sqrt{3}}{3} = \frac{1}{\sqrt{3}}$.
-    *   Part 4:
-        Check $E(0)$ vs $E(10)$.
-        $E(0) = \frac{100\sqrt{3}}{36} = \frac{25\sqrt{3}}{9} \approx 4.81$.
-        $E(10) = \frac{100}{16} = 6.25$.
-        Max at $x=10$.
-
-    *   Ensure no `\int` issues (not applicable here).
-    *   Ensure `\begin{align*}` is used.
-    *   Ensure `\textbf` for monotonicity.
-    *   Ensure no problem text.
-
-    *Correction on Ratio:*
-    $\frac{x}{10-x} = \frac{4\sqrt{3}}{9}$.
-    $a = x/4$, $b = (10-x)/3$.
-    $\frac{a}{b} = \frac{x/4}{(10-x)/3} = \frac{3x}{4(10-x)} = \frac{3}{4} \cdot \frac{4\sqrt{3}}{9} = \frac{3\sqrt{3}}{9} = \frac{\sqrt{3}}{3}$.
-
-    *Wait, let's re-calculate the derivative*
-    $E(x) = \frac{1}{16}x^2 + \frac{\sqrt{3}}{36}(10-x)^2$
-    $E'(x) = \frac{2x}{16} + \frac{\sqrt{3}}{36} \cdot 2(10-x) \cdot (-1) = \frac{x}{8} - \frac{\sqrt{3}(10-x)}{18}$
-    $E'(x) = \frac{9x - 4\sqrt{3}(10-x)}{72} = \frac{(9+4\sqrt{3})x - 40\sqrt{3}}{72}$
-    $x_0 = \frac{40\sqrt{3}}{9+4\sqrt{3}}$.
-    Since the coefficient of $x^2$ is positive, it's a minimum.
-    Monotonicity:
-    $E'(x) < 0$ for $x \in (0, x_0) \Rightarrow \textbf{γνησίως φθίνουσα}$.
-    $E'(x) > 0$ for $x \in (x_0, 10) \Rightarrow \textbf{γνησίως αύξουσα}$.
-
-    Maximum:
-    $E(0) = \frac{100\sqrt{3}}{36} = \frac{25\sqrt{3}}{9} \approx 4.811$
-    $E(10) = \frac{100}{16} = 6.25$
-    $E(10) > E(0)$.
-    So the maximum is at $x=10$.
-
-    *Refining ratio calculation for the LaTeX:*
-    $a = \frac{x}{4}, b = \frac{10-x}{3}$
-    $\frac{a}{b} = \frac{3x}{4(10-x)}$
-    From $E'(x)=0$: $\frac{x}{8} = \frac{\sqrt{3}(10-x)}{18} \Rightarrow \frac{x}{10-x} = \frac{8\sqrt{3}}{18} = \frac{4\sqrt{3}}{9}$.
-    $\frac{a}{b} = \frac{3}{4} \cdot \frac{4\sqrt{3}}{9} = \frac{\sqrt{3}}{3}$.
-
-    Let's double check if $\frac{\sqrt{3}}{3}$ can be simplified or written as $1/\sqrt{3}$. Either is fine. I'll use $\frac{\sqrt{3}}{3}$.
-
-    One final check on constraints: No a-priori indefinite integrals, no 2nd derivative test. I will use the first derivative and the sign of the leading coefficient of the quadratic (or just the sign of $E'(x)$) to determine the minimum.
-
-    *Wait, let's check the function again:*
-    $E(x) = \frac{1}{16}x^2 + \frac{\sqrt{3}}{36}(10-x)^2$
-    $E(x) = (\frac{1}{16} + \frac{\sqrt{3}}{36})x^2 - \frac{20\sqrt{3}}{36}x + \frac{100\sqrt{3}}{36}$
-    This is a quadratic function with a positive coefficient of $x^2$, so the vertex is a minimum.
-
-    Wait, the question asks "Πως θα κόψουμε το σύρμα για να αποκτήσουμε το μέγιστο δυνατό εμβαδόν?".
-    Since $x=10$ gives the maximum, it means the square takes the whole 10m, and the triangle's perimeter is 0.
-    Technically $x \in (0,10)$ is the domain given in part 1, but for the maximum, we consider the closure $[0,10]$.
-
-    Let's format the final LaTeX.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
-
+%=========== ΛΥΣΗ - 53ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-  \item Η πλευρά του τετραγώνου $a$ και η πλευρά του ισόπλευρου τριγώνου $b$ εκφράζονται συναρτήσει της περιμέτρου του τετραγώνου $x$ ως εξής:
-  \[ a = \frac{x}{4}, \quad b = \frac{10-x}{3} \]
+\item Έστω $a$ η πλευρά του τετραγώνου και $b$ η πλευρά του ισόπλευρου τριγώνου.
+Αφού $x$ είναι η περίμετρος του τετραγώνου, έχουμε
+\[4a=x\Rightarrow a=\frac{x}{4}\]
+Το υπόλοιπο σύρμα έχει μήκος $10-x$ και αποτελεί την περίμετρο του ισόπλευρου τριγώνου, άρα
+\[3b=10-x\Rightarrow b=\frac{10-x}{3}\]
+Επειδή κατασκευάζονται και τα δύο σχήματα, είναι
+\[0<x<10\]
 
-  \item Το εμβαδόν του τετραγώνου είναι $E_{\text{τετ}} = a^2 = \left(\frac{x}{4}\right)^2 = \frac{x^2}{16}$.
-  Το εμβαδόν του ισόπλευρου τριγώνου είναι $E_{\text{τρι}} = \frac{\sqrt{3}}{4}b^2 = \frac{\sqrt{3}}{4}\left(\frac{10-x}{3}\right)^2 = \frac{\sqrt{3}(10-x)^2}{36}$.
-  Συνεπώς, το συνολικό εμβαδόν $E(x)$ είναι:
-  \[ E(x) = \frac{x^2}{16} + \frac{\sqrt{3}(10-x)^2}{36} \]
+\item Το εμβαδόν του τετραγώνου είναι
+\[E_1=a^2=\left(\frac{x}{4}\right)^2=\frac{x^2}{16}\]
+Το εμβαδόν του ισόπλευρου τριγώνου είναι
+\[E_2=\frac{\sqrt{3}}{4}b^2=\frac{\sqrt{3}}{4}\left(\frac{10-x}{3}\right)^2=\frac{\sqrt{3}(10-x)^2}{36}\]
+Άρα το συνολικό εμβαδόν των δύο σχημάτων είναι
+\[E(x)=E_1+E_2=\frac{x^2}{16}+\frac{\sqrt{3}(10-x)^2}{36}\ ,\ 0<x<10\]
 
-  \item Η συνάρτηση $E(x)$ είναι πολυωνυμική, άρα $\textbf{συνεχώς}$ και $\textbf{παραγωγήσιμη}$ στο $(0, 10)$. Η παράγωγός της είναι:
-  \[ E'(x) = \frac{2x}{16} + \frac{\sqrt{3}}{36} \cdot 2(10-x) \cdot (-1) = \frac{x}{8} - \frac{\sqrt{3}(10-x)}{18} \]
-  Για τον προσδιορισμό των ακροτάτων, λύνουμε την εξίσωση $E'(x) = 0$:
-  \begin{align*}
-    \frac{x}{8} &= \frac{\sqrt{3}(10-x)}{18} \\
-    18x &= 8\sqrt{3}(10-x) \\
-    18x &= 80\sqrt{3} - 8\sqrt{3}x \\
-    (18 + 8\sqrt{3})x &= 80\sqrt{3} \\
-    x &= \frac{80\sqrt{3}}{18 + 8\sqrt{3}} = \frac{40\sqrt{3}}{9 + 4\sqrt{3}}
-  \end{align*}
-  Επειδή η $E(x)$ είναι μια δευτεροβάθμια συνάρτηση με θετικό συντελεστή του $x^2$, το σημείο $x_0 = \frac{40\sqrt{3}}{9 + 4\sqrt{3}}$ είναι το σημείο του ελάχιστου.
-  
-  Για τον υπολογισμό του λόγου των πλευρών $\frac{a}{b}$ στην περίπτωση του ελάχιστου, έχουμε από την $E'(x)=0$:
-  \[ \frac{x}{8} = \frac{\sqrt{3}(10-x)}{18} \Rightarrow \frac{x}{10-x} = \frac{8\sqrt{3}}{18} = \frac{4\sqrt{3}}{9} \]
-  Ο λόγος των πλευρών είναι:
-  \[ \frac{a}{b} = \frac{x/4}{(10-x)/3} = \frac{3x}{4(10-x)} = \frac{3}{4} \cdot \frac{x}{10-x} = \frac{3}{4} \cdot \frac{4\sqrt{3}}{9} = \frac{\sqrt{3}}{3} \]
+\item Η $E$ είναι παραγωγίσιμη στο $(0,10)$ με
+\[E'(x)=\frac{x}{8}-\frac{\sqrt{3}(10-x)}{18}\]
+Βρίσκουμε τη ρίζα της $E'$:
+\begin{align*}
+E'(x)=0
+&\Leftrightarrow \frac{x}{8}=\frac{\sqrt{3}(10-x)}{18}\\
+&\Leftrightarrow 18x=8\sqrt{3}(10-x)\\
+&\Leftrightarrow (18+8\sqrt{3})x=80\sqrt{3}\\
+&\Leftrightarrow x=\frac{40\sqrt{3}}{9+4\sqrt{3}}
+\end{align*}
+Επιπλέον
+\[E''(x)=\frac{1}{8}+\frac{\sqrt{3}}{18}>0\]
+οπότε η $E$ είναι κυρτή στο $(0,10)$. Άρα το ελάχιστο συνολικό εμβαδόν επιτυγχάνεται για
+\[x_0=\frac{40\sqrt{3}}{9+4\sqrt{3}}\]
 
-  \item Για τον προσδιορισμό του μέγιστου εμβαδόνου στο κλειστό διάστημα $[0, 10]$, εξετάζουμε τις τιμές της συνάρτησης στα άκρα:
-  \begin{itemize}
-    \item Για $x=0$ (μόνο τρίγωνο): $E(0) = \frac{\sqrt{3} \cdot 10^2}{36} = \frac{25\sqrt{3}}{9} \approx 4,81\text{ m}^2$.
-    \item Για $x=10$ (μόνο τετράγωνο): $E(10) = \frac{10^2}{16} = 6,25\text{ m}^2$.
-  \end{itemize}
-  Επειδή $E(10) > E(0)$, το μέγιστο εμβαδόν επιτυγχάνεται για $x=10$. 
-  Άρα, για να αποκτήσουμε το μέγιστο δυνατό εμβαδόν, δεν κόβουμε το σύρμα και το χρησιμοποιούμε εξ ολοκλήρου για την κατασκευή του τετραγώνου.
+Για τον λόγο της πλευράς του τετραγώνου προς την πλευρά του τριγώνου, από τη σχέση $E'(x_0)=0$ έχουμε
+\[\frac{x_0}{8}=\frac{\sqrt{3}(10-x_0)}{18}\Rightarrow \frac{x_0}{10-x_0}=\frac{4\sqrt{3}}{9}\]
+Άρα
+\[\frac{a}{b}=\frac{\frac{x_0}{4}}{\frac{10-x_0}{3}}=\frac{3x_0}{4(10-x_0)}=\frac{3}{4}\cdot\frac{4\sqrt{3}}{9}=\frac{\sqrt{3}}{3}\]
+
+\item Εφόσον ζητείται να κοπεί το σύρμα σε δύο τμήματα, πρέπει
+\[0<x<10\]
+Η $E$ είναι κυρτή στο $(0,10)$, άρα δεν παρουσιάζει μέγιστο σε εσωτερικό σημείο.
+Για να δούμε προς ποιο άκρο μεγαλώνει περισσότερο το εμβαδόν, εξετάζουμε τη συνεχή επέκταση της $E$ στο $[0,10]$:
+\[E(0)=\frac{\sqrt{3}\cdot 10^2}{36}=\frac{25\sqrt{3}}{9}\]
+και
+\[E(10)=\frac{10^2}{16}=\frac{25}{4}\]
+Επειδή
+\[\frac{25}{4}>\frac{25\sqrt{3}}{9}\]
+το μεγαλύτερο δυνατό άνω φράγμα του εμβαδού είναι
+\[\frac{25}{4}\]
+και προσεγγίζεται όταν $x\to 10^-$, δηλαδή όταν δίνουμε σχεδόν όλο το σύρμα στο τετράγωνο και ένα πολύ μικρό τμήμα στο τρίγωνο.
+
+Άρα, αν απαιτείται να κατασκευαστούν και τα δύο σχήματα, μέγιστο εμβαδόν δεν επιτυγχάνεται.
+Αν επιτρέπεται εκφυλισμένη περίπτωση, τότε παίρνουμε $x=10$, δηλαδή χρησιμοποιούμε όλο το σύρμα για το τετράγωνο.
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 53ο ΘΕΜΑ Γ ===========

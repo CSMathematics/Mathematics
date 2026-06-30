@@ -1,181 +1,75 @@
-*   Target: LaTeX solution for a specific math problem.
-    *   Problem: $f: \mathbb{R} \to \mathbb{R}$ continuous, $f(x) = e^x + 2 \int_0^1 f(t) dt$.
-    *   Question 1: Prove $\int_0^1 f(t) dt = 1-e$ and find $f(x)$.
-    *   Question 2: Limit $\lim_{x \to 0} \frac{f(x)-f(0)}{x}$.
-    *   Question 3: Limit $\lim_{x \to +\infty} \frac{f(x)}{f(x+1)}$.
-    *   Question 4: Limit $\lim_{x \to +\infty} f(\frac{\ln x}{x})$.
-
-    *   Start with `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`.
-    *   Environment: `\begin{thema}{Γ}`, `\begin{erwthma}`, `\item`.
-    *   End with `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========`.
-    *   Inline math: `$ ... $`, Display math: `\[ ... \]`.
-    *   Multi-line calculations: `\begin{align*} ... \end{align*}`.
-    *   Specific terms: `\eng{...}`, `\textbf{...}`.
-    *   Differentials: `\d x`.
-    *   No indefinite integrals (use definite integrals).
-    *   No preamble.
-    *   No exercise text repetition.
-
-    *   *Part 1:*
-        Let $I = \int_0^1 f(t) dt$.
-        Then $f(x) = e^x + 2I$.
-        Integrate $f(x)$ from 0 to 1:
-        $\int_0^1 f(x) dx = \int_0^1 (e^x + 2I) dx$
-        $I = [e^x]_0^1 + [2Ix]_0^1$
-        $I = (e^1 - e^0) + 2I(1-0)$
-        $I = e - 1 + 2I$
-        $-I = e - 1 \Rightarrow I = 1 - e$.
-        Formula: $f(x) = e^x + 2(1-e)$.
-
-    *   *Part 2:*
-        $\lim_{x \to 0} \frac{f(x)-f(0)}{x}$ is the definition of $f'(0)$.
-        $f(x) = e^x + 2 - 2e$.
-        $f'(x) = e^x$.
-        $f'(0) = e^0 = 1$.
-        Alternatively, use the limit:
-        $\lim_{x \to 0} \frac{e^x + 2 - 2e - (e^0 + 2 - 2e)}{x} = \lim_{x \to 0} \frac{e^x - 1}{x} = 1$.
-
-    *   *Part 3:*
-        $\lim_{x \to +\infty} \frac{f(x)}{f(x+1)} = \lim_{x \to +\infty} \frac{e^x + 2 - 2e}{e^{x+1} + 2 - 2e}$.
-        Divide numerator and denominator by $e^x$:
-        $= \lim_{x \to +\infty} \frac{1 + (2-2e)e^{-x}}{e + (2-2e)e^{-x}} = \frac{1 + 0}{e + 0} = \frac{1}{e}$.
-
-    *   *Part 4:*
-        $\lim_{x \to +\infty} f(\frac{\ln x}{x}) = \lim_{x \to +\infty} \left( e^{\frac{\ln x}{x}} + 2 - 2e \right)$.
-        We know $\lim_{x \to +\infty} \frac{\ln x}{x} = 0$.
-        Since the exponential function is continuous:
-        $\lim_{x \to +\infty} e^{\frac{\ln x}{x}} = e^0 = 1$.
-        So, the limit is $1 + 2 - 2e = 3 - 2e$.
-
-    *   Use `\begin{thema}{Γ}` and `\begin{erwthma}`.
-    *   Use `\d t` and `\d x`.
-    *   Ensure `\textbf{...}` is used for key phrases like "συνεχώς" or "παραγώγιμη".
-    *   Ensure `\eng{...}` is used for technical terms if applicable (though here it's simple).
-
-    *   $\int_0^1 f(t) \d t = 1 - e$. Correct.
-    *   $f(x) = e^x + 2 - 2e$. Correct.
-    *   $f'(0) = 1$. Correct.
-    *   $\frac{1}{e}$. Correct.
-    *   $3 - 2e$. Correct.
-
-    *   Wait, the prompt mentions not using indefinite integrals.
-    *   Calculation of $I$: $\int_0^1 f(t) \d t = \int_0^1 (e^t + 2I) \d t = [e^t + 2It]_0^1 = (e + 2I) - (1 + 0) = e + 2I - 1$.
-    *   $I = e + 2I - 1 \Rightarrow I = 1 - e$. Matches.
-    *   $f(x) = e^x + 2(1-e)$. Matches.
-    *   Part 2: Limit is $f'(0)$. Since $f(x)$ is the sum of $e^x$ and a constant, it is $\textbf{παραγωγήσιμη}$ on $\mathbb{R}$.
-    *   Part 4: Use $\lim_{x \to +\infty} \frac{\ln x}{x} = 0$.
-
-    *   No preamble.
-    *   `\begin{thema}{Γ}` ... `\end{thema}`.
-    *   `\begin{erwthma}` ... `\end{erwthma}`.
-    *   `\item` for each part.
-    *   `\d t`, `\d x`.
-    *   `\begin{align*}` for steps.
-    *   `\eng{...}` for technical terms if any (e.g., the limit definition).
-
-    *Check for terminology:* "Definition of derivative" $\to$ $\eng{derivative}$.
-    Actually, for Part 2, I can just say "αποκλίνει από τον ορισμό της παραγώγου" or just calculate it. The guide suggests `\eng{...}` for theorem names. Let's use `\eng{derivative}` or similar if needed, but standard calculations usually suffice. Let's check the requested style.
-    "Αγγλικοί Όροι: Χρήση της εντολής \eng{...} για ονόματα θεωρημάτων ή τεχνικούς όρους".
-
-    Part 2: $\lim_{x \to 0} \frac{f(x)-f(0)}{x} = f'(0)$. This is the $\eng{definition}$ of the derivative.
-
-    Let's refine the limit for Part 4.
-    $\lim_{x \to +\infty} \frac{\ln x}{x}$. This is a standard limit. I will state it.
-
-    *Refining the LaTeX syntax for the integral:*
-    $\int_0^1 f(t) \d t$ is used.
-
-    *Refining the `align*` blocks:*
-    For $I$:
-    \begin{align*}
-    I &= \int_0^1 (e^t + 2I) \d t \\
-    &= [e^t + 2It]_0^1 \\
-    &= (e + 2I) - (1 + 0) \\
-    &= e + 2I - 1
-    \end{align*}
-    Then $I = e + 2I - 1 \implies I = 1 - e$.
-
-    *Refining the `align*` block for Part 3:*
-    \begin{align*}
-    \lim_{x \to +\infty} \frac{e^x + 2 - 2e}{e^{x+1} + 2 - 2e} &= \lim_{x \to +\infty} \frac{e^x (1 + (2-2e)e^{-x})}{e^x (e + (2-2e)e^{-x})} \\
-    &= \lim_{x \to +\infty} \frac{1 + (2-2e)e^{-x}}{e + (2-2e)e^{-x}} \\
-    &= \frac{1 + 0}{e + 0} = \frac{1}{e}
-    \end{align*}
-
-    *Final structure check:*
-    %=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
-    \begin{thema}{Γ}
-    \begin{erwthma}
-    \item ...
-    \item ...
-    \item ...
-    \item ...
-    \end{erwthma}
-    \end{thema}
-    %=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
-
-    Wait, the exercise text says $f(x) = e^x + 2\dint_0^1 f(t)dt$.
-    Let $C = \int_0^1 f(t) \d t$.
-    $f(x) = e^x + 2C$.
-    $\int_0^1 f(x) \d x = \int_0^1 (e^x + 2C) \d x = [e^x + 2Cx]_0^1 = (e + 2C) - (1 + 0) = e + 2C - 1$.
-    Since $\int_0^1 f(x) \d x = C$, we have:
-    $C = e + 2C - 1 \implies C = 1 - e$.
-    Then $f(x) = e^x + 2(1-e) = e^x + 2 - 2e$.
-
-    Part 2: $\lim_{x \to 0} \frac{f(x)-f(0)}{x} = f'(0)$.
-    $f'(x) = e^x \implies f'(0) = 1$.
-
-    Part 3: $\lim_{x \to +\infty} \frac{e^x + 2 - 2e}{e^{x+1} + 2 - 2e} = \frac{1}{e}$.
-
-    Part 4: $\lim_{x \to +\infty} f(\frac{\ln x}{x}) = f(0) = e^0 + 2 - 2e = 1 + 2 - 2e = 3 - 2e$.
-    Wait, is $f$ continuous at 0? Yes, $f$ is defined on $\mathbb{R}$ and is a sum of $e^x$ and a constant, so it's continuous everywhere.
-    $\lim_{x \to +\infty} \frac{\ln x}{x} = 0$.
-    Since $f$ is $\textbf{συνεχώς}$ at $x=0$:
-    $\lim_{x \to +\infty} f(\frac{\ln x}{x}) = f(0) = 3 - 2e$.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
-
+%=========== ΛΥΣΗ - 25ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Έστω $I = \int_0^1 f(t) \d t$. Από τη σχέση της εκφώνησης έχουμε:
+\item Το ορισμένο ολοκλήρωμα $\int_0^1 f(t) \d t$ είναι ένας πραγματικός αριθμός. Έστω:
+\[ I = \int_0^1 f(t) \d t \]
+Αντικαθιστώντας στη δοσμένη σχέση, παίρνουμε τον τύπο της συνάρτησης συναρτήσει της σταθεράς $I$:
 \[ f(x) = e^x + 2I \]
-Ολοκληρώνοντας τη συνάρτηση $f(x)$ στο διάστημα $[0, 1]$, έχουμε:
+Ολοκληρώνουμε και τα δύο μέλη της παραπάνω σχέσης στο διάστημα $[0, 1]$ ως προς $x$:
 \begin{align*}
 \int_0^1 f(x) \d x &= \int_0^1 (e^x + 2I) \d x \\
-I &= [e^x + 2Ix]_0^1 \\
+I &= \left[ e^x + 2Ix \right]_0^1 \\
 I &= (e^1 + 2I \cdot 1) - (e^0 + 2I \cdot 0) \\
-I &= e + 2I - 1
+I &= e + 2I - 1 \\
+I - 2I &= e - 1 \\
+-I &= e - 1 \implies I = 1 - e
 \end{align*}
-Λύνοντας ως προς $I$, προκύπτει:
-\[ I = 1 - e \]
-Στη συνέχεια, αντικαθιστώντας την τιμή του $I$ στον τύπο της $f(x)$, βρίσκουμε:
-\[ f(x) = e^x + 2(1-e) = e^x + 2 - 2e \]
+Αντικαθιστώντας την τιμή της σταθεράς $I$ στον αρχικό τύπο, προκύπτει ο ζητούμενος τύπος της συνάρτησης:
+\[ f(x) = e^x + 2(1 - e) \implies \boldsymbol{f(x) = e^x + 2 - 2e} \]
 
-\item Το ζητούμενο όριο είναι ο ορισμός της παραγώγου της $f$ στο $x=0$, δηλαδή $\eng{derivative}$:
-\[ \lim_{x \to 0} \frac{f(x) - f(0)}{x} = f'(0) \]
-Η συνάρτηση $f(x) = e^x + 2 - 2e$ είναι $\textbf{παραγωγήσιμη}$ στο $\mathbb{R}$ με παράγωγο:
-\[ f'(x) = e^x \]
-Άρα:
-\[ f'(0) = e^0 = 1 \]
-Επομένως, $\lim_{x \to 0} \frac{f(x) - f(0)}{x} = 1$.
-
-\item Υπολογίζουμε το όριο:
+\item Το σημείο επαφής έχει τετμημένη $x_0 = 1$. Υπολογίζουμε την τεταγμένη του:
+\[ f(1) = e^1 + 2 - 2e = 2 - e \]
+Άρα το σημείο είναι το $A(1, 2-e)$.
+Η συνάρτηση $f$ είναι παραγωγίσιμη με $f'(x) = e^x$, οπότε η κλίση της εφαπτομένης ($\varepsilon$) στο $x_0=1$ είναι:
+\[ \lambda = f'(1) = e^1 = e \]
+Η εξίσωση της εφαπτομένης είναι:
 \begin{align*}
-\lim_{x \to +\infty} \frac{f(x)}{f(x+1)} &= \lim_{x \to +\infty} \frac{e^x + 2 - 2e}{e^{x+1} + 2 - 2e} \\
-&= \lim_{x \to +\infty} \frac{e^x \left( 1 + \frac{2-2e}{e^x} \right)}{e^x \left( e + \frac{2-2e}{e^x} \right)} \\
-&= \lim_{x \to +\infty} \frac{1 + (2-2e)e^{-x}}{e + (2-2e)e^{-x}} \\
-&= \frac{1 + 0}{e + 0} = \frac{1}{e}
+y - f(1) &= f'(1)(x - 1) \\
+y - (2 - e) &= e(x - 1) \\
+y - 2 + e &= ex - e \\
+\boldsymbol{y} &\boldsymbol{= ex - 2e + 2} \quad (\varepsilon)
 \end{align*}
 
-\item Γνωρίζουμε ότι $\lim_{x \to +\infty} \frac{\ln x}{x} = 0$.
-Επειδή η συνάρτηση $f$ είναι $\textbf{συνεχώς}$ στο $\mathbb{R}$ (ως άθροισμα εκθελικής και σταθεράς), ισχύει:
+Μελετάμε την κυρτότητα της $f$. Έχουμε $f''(x) = (e^x)' = e^x > 0$ για κάθε $x \in \mathbb{R}$.
+Άρα η συνάρτηση $f$ είναι \textbf{κυρτή} σε όλο το $\mathbb{R}$.
+Εφόσον η $f$ είναι κυρτή, η γραφική της παράσταση βρίσκεται πάνω από κάθε εφαπτομένη της (με εξαίρεση το σημείο επαφής).
+Χρησιμοποιώντας την εφαπτομένη στο $x_0 = 1$, ισχύει για κάθε $x \in \mathbb{R}$:
 \begin{align*}
-\lim_{x \to +\infty} f\left( \frac{\ln x}{x} \right) &= f\left( \lim_{x \to +\infty} \frac{\ln x}{x} \right) \\
-&= f(0) \\
-&= e^0 + 2 - 2e \\
-&= 1 + 2 - 2e \\
-&= 3 - 2e
+f(x) &\ge y_{\varepsilon} \\
+e^x + 2 - 2e &\ge ex - 2e + 2 \\
+e^x &\ge ex
+\end{align*}
+Επειδή $e > 0$, διαιρούμε και τα δύο μέλη με το $e$ ($e^1$):
+\[ \frac{e^x}{e} \ge \frac{ex}{e} \implies \boldsymbol{e^{x-1} \ge x} \]
+Η ισότητα ισχύει μόνο για $x = 1$.
+
+\item Θεωρούμε τη συνάρτηση $g(x) = f(x) - x = e^x + 2 - 2e - x$, η οποία είναι συνεχής στο διάστημα $[1, 2]$.
+Υπολογίζουμε τις τιμές της στα άκρα:
+\begin{itemize}
+    \item $g(1) = e^1 + 2 - 2e - 1 = 1 - e < 0$ (αφού $e \approx 2.71 > 1$)
+    \item $g(2) = e^2 + 2 - 2e - 2 = e(e - 2) > 0$ (αφού $e > 2$)
+\end{itemize}
+Επειδή $g(1) \cdot g(2) < 0$, σύμφωνα με το \textbf{Θεώρημα \eng{Bolzano}}, η εξίσωση $g(x) = 0 \Leftrightarrow f(x) = x$ έχει τουλάχιστον μία ρίζα στο διάστημα $(1, 2)$.
+
+Για να ελέγξουμε τη μοναδικότητα, παραγωγίζουμε την $g(x)$:
+\[ g'(x) = e^x - 1 \]
+Για κάθε $x \in (1, 2)$ ισχύει: $x > 1 > 0 \implies e^x > e^0 \implies e^x > 1 \implies e^x - 1 > 0$.
+Άρα $g'(x) > 0$ στο $(1, 2)$, γεγονός που σημαίνει ότι η $g$ είναι \textbf{γνησίως αύξουσα} στο εν λόγω διάστημα. 
+Λόγω της γνήσιας μονοτονίας, η ρίζα που εξασφαλίζει το θεώρημα Bolzano είναι \textbf{μοναδική}.
+
+\item Ζητείται το εμβαδόν του χωρίου μεταξύ της $C_f$, της εφαπτομένης ($\varepsilon$) και του άξονα $y'y$ ($x=0$). 
+Το σημείο επαφής είναι στο $x=1$. Επομένως, το χωρίο εκτείνεται στο διάστημα $[0, 1]$.
+Από το ερώτημα (β), λόγω της κυρτότητας γνωρίζουμε ότι $f(x) \ge y_{\varepsilon} \Leftrightarrow f(x) - y_{\varepsilon} \ge 0$.
+Άρα το εμβαδόν είναι:
+\begin{align*}
+E &= \int_0^1 (f(x) - y_{\varepsilon}) \d x \\
+&= \int_0^1 \left( (e^x + 2 - 2e) - (ex - 2e + 2) \right) \d x \\
+&= \int_0^1 (e^x - ex) \d x \\
+&= \left[ e^x - e \frac{x^2}{2} \right]_0^1 \\
+&= \left( e^1 - \frac{e \cdot 1^2}{2} \right) - \left( e^0 - \frac{e \cdot 0}{2} \right) \\
+&= e - \frac{e}{2} - 1 \\
+&= \boldsymbol{\frac{e-2}{2} \ \text{τ.μ.}}
 \end{align*}
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 25ο ΘΕΜΑ Γ ===========

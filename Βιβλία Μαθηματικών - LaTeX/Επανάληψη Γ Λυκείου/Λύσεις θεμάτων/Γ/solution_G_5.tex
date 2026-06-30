@@ -1,0 +1,58 @@
+%=========== ΛΥΣΗ - 5ο ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Για κάθε $x\geq 0$ ισχύει:
+\[f''(x)=\left(\frac{1}{x^2+1}\right)'=-\dfrac{(x^2+1)'}{(x^2+1)^2}=-\frac{2x}{(x^2+1)^2}\]
+Βρίσκουμε ρίζες και πρόσημα της $f''$:
+\begin{itemize}
+\item $f''(x)=0\Leftrightarrow x=0$
+\item $f''(x)<0\Leftrightarrow x>0$
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8,$f''(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$+\infty$}%
+\tkzTabLine{z, -,}
+\tkzTabLine{,\curvearrowright,}
+\end{tikzpicture}
+\end{center}
+Βλέπουμε ότι η $f$ είναι \textbf{κοίλη} στο $(0,+\infty)$. Στο $x=0$ έχουμε $f''(0)=0$, αλλά δεν υπάρχει αλλαγή κυρτότητας (η $f$ δεν ορίζεται αριστερά του $0$), άρα δεν υπάρχει σημείο καμπής.
+
+Η εφαπτομένη της $C_f$ στο σημείο $A(0,f(0))=A(0,0)$ έχει συντελεστή διεύθυνσης $f'(0)=\dfrac{1}{0+1}=1$, οπότε η εξίσωσή της είναι:
+\[y-0=1\cdot(x-0)\Leftrightarrow y=x\]
+
+\item Θεωρούμε τη συνάρτηση $g(x)=x-f(x)$ για $x\geq 0$. Έχουμε $g(0)=0-0=0$ και:
+\[g'(x)=1-f'(x)=1-\frac{1}{x^2+1}=\frac{x^2}{x^2+1}\geq 0\]
+Άρα η $g$ είναι \textbf{γνησίως αύξουσα} στο $[0,+\infty)$ (για $x>0$, $g'>0$), οπότε για κάθε $x\geq 0$:
+\[g(x)\geq g(0)=0\Leftrightarrow x-f(x)\geq 0\Leftrightarrow f(x)\leq x\]
+
+Για το όριο, η μορφή είναι $\dfrac{0}{0}$ (αφού $f(0)=0$). Εφαρμόζουμε τον κανόνα \eng{DLH}:
+\[
+\lim_{x\to 0^+}\frac{f(x)-x}{x^2}
+\xlongequal[\text{\eng{DLH}}]{\frac{0}{0}}
+\lim_{x\to 0^+}\frac{f'(x)-1}{2x}
+=\lim_{x\to 0^+}\frac{\dfrac{1}{x^2+1}-1}{2x}
+=\lim_{x\to 0^+}\frac{\dfrac{-x^2}{x^2+1}}{2x}
+=\lim_{x\to 0^+}\frac{-x}{2(x^2+1)}=\frac{0}{2}=0
+\]
+
+\item Εφαρμόζουμε το Θεώρημα Μέσης Τιμής στη συνάρτηση $f$ στο διάστημα $[x,x+1]$, για $x>0$. Επειδή η $f$ είναι συνεχής στο $[x,x+1]$ και παραγωγίσιμη στο $(x,x+1)$, υπάρχει $c\in(x,x+1)$ τέτοιο ώστε:
+\[\frac{f(x+1)-f(x)}{\cdot(x+1-x)}=f'(c)=\frac{1}{c^2+1}\]
+Επειδή $f''(t)<0$ για $t>0$, η $f'$ είναι \textbf{γνησίως φθίνουσα} στο $(0,+\infty)$. Αφού $c\in(x,x+1)$, ισχύει $c>x>0$, άρα:
+\[f'(c)<f'(x)=\frac{1}{x^2+1}\]
+Επομένως:
+\[f(x+1)-f(x)=f'(c)<\frac{1}{x^2+1}\]
+
+\item Θεωρούμε τη συνάρτηση $h(x)=f(x)-x+1$ για $x>0$. Έχουμε:
+\[h'(x)=f'(x)-1=\frac{1}{x^2+1}-1=\frac{-x^2}{x^2+1}<0\]
+άρα η $h$ είναι \textbf{γνησίως φθίνουσα} στο $(0,+\infty)$.
+
+\textbf{Ύπαρξη ρίζας:} Έχουμε $h(0)=f(0)-0+1=1>0$. Για $x\geq 1$ ισχύει $h'(x)=\dfrac{-x^2}{x^2+1}\leq-\dfrac{1}{2}$, άρα από το ΘΜΤ σε $[1,x]$ για $x>1$:
+\[h(x)-h(1)\leq -\frac{1}{2}(x-1)\Rightarrow h(x)\leq h(1)-\frac{1}{2}(x-1)\xrightarrow{x\to+\infty}-\infty\]
+Επομένως $\lim\limits_{x\to+\infty}h(x)=-\infty$. Υπάρχει λοιπόν $N>0$ ώστε $h(N)<0$. Η $h$ είναι συνεχής στο $[0,N]$ και $h(0)>0$, $h(N)<0$. Από το Θεώρημα \eng{Bolzano}, υπάρχει τουλάχιστον ένα $x_0\in(0,N)\subset(0,+\infty)$ τέτοιο ώστε $h(x_0)=0$, δηλαδή $f(x_0)=x_0-1$.
+
+\textbf{Μοναδικότητα ρίζας:} Επειδή η $h$ είναι \textbf{γνησίως φθίνουσα} στο $(0,+\infty)$, μηδενίζεται το πολύ μία φορά. Επομένως η εξίσωση $f(x)=x-1$ έχει \textbf{ακριβώς μία} ρίζα στο $(0,+\infty)$.
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 5ο ΘΕΜΑ Γ ===========

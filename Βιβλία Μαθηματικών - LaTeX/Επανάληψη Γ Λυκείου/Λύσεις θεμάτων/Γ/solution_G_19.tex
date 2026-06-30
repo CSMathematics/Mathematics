@@ -1,88 +1,74 @@
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
-
+%=========== ΛΥΣΗ - 19ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item 
-Η συνάρτηση $f(x) = \dfrac{\ln x}{x}$ είναι παραγωγίσιμη στο $D_f = (0, +\infty)$ και η παράγωγός της είναι:
-\[
-f'(x) = \frac{\frac{1}{x} \cdot x - \ln x \cdot 1}{x^2} = \frac{1 - \ln x}{x^2}
-\]
-Για τον προσδιορισμό της μονοτονίας της $f$ εξετάζουμε το πρόσημο της $f'(x)$:
+\item Η συνάρτηση $f(x) = \frac{\ln x}{x}$ έχει πεδίο ορισμού το $(0, +\infty)$. Είναι παραγωγίσιμη ως πηλίκο παραγωγίσιμων συναρτήσεων, με:
+\[ f'(x) = \frac{(\ln x)' x - \ln x (x)'}{x^2} = \frac{\frac{1}{x} \cdot x - \ln x}{x^2} = \frac{1 - \ln x}{x^2} \]
+Το πρόσημο της παραγώγου εξαρτάται μόνο από τον αριθμητή, αφού $x^2 > 0$ για $x > 0$:
 \begin{itemize}
     \item $f'(x) = 0 \Leftrightarrow 1 - \ln x = 0 \Leftrightarrow \ln x = 1 \Leftrightarrow x = e$
     \item $f'(x) > 0 \Leftrightarrow 1 - \ln x > 0 \Leftrightarrow \ln x < 1 \Leftrightarrow 0 < x < e$
     \item $f'(x) < 0 \Leftrightarrow 1 - \ln x < 0 \Leftrightarrow \ln x > 1 \Leftrightarrow x > e$
 \end{itemize}
-Συνεπώς, η $f$ είναι \textbf{γνησίως αύξουσα} στο $(0, e]$ και \textbf{γνησίως φθίνουσα} στο $[e, +\infty)$.
-Για $x = e$, η συνάρτηση παρουσιάζει \textbf{ολικό μέγιστο} με τιμή:
-\[
-f(e) = \frac{\ln e}{e} = \frac{1}{e}
-\]
 \begin{center}
 \begin{tikzpicture}
-\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1cm, $f'(x)$ / 1cm, $f(x)$ / 2cm}{0, $e$, $+\infty$}
-\tkzTabLine{, +, z, -, }
-\tkzTabVar{ / , / $\frac{1}{e}$, / }
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8, $f'(x)$ / 0.8, $f(x)$ / 1.5}
+{ $0$, $e$, $+\infty$ }
+\tkzTabLine{ d, +, z, -,  }
+\tkzTabVar{ D-/, +/$\frac{1}{e}$, -/ }
 \end{tikzpicture}
 \end{center}
+Από τον πίνακα διαπιστώνουμε ότι η $f$ είναι \textbf{γνησίως αύξουσα} στο $(0, e]$ και \textbf{γνησίως φθίνουσα} στο $[e, +\infty)$.
+Παρουσιάζει \textbf{ολικό μέγιστο} στη θέση $x_0 = e$, με τιμή:
+\[ f(e) = \frac{\ln e}{e} = \frac{1}{e} \]
 
-\item 
-Θέλουμε να συγκρίνουμε τους αριθμούς $e^\pi$ και $\pi^e$. Επειδή $e, \pi > 0$, μπορούμε να συγκρίνουμε τους λογάριθμους τους:
-\[
-\ln(e^\pi) = \pi \ln e = \pi \quad \text{και} \quad \ln(\pi^e) = e \ln \pi
-\]
-Συγκρίνουμε τους αριθμούς $\pi$ και $e \ln \pi$ διαιρώντας και τους δύο με το γινόμενο $e\pi > 0$:
-\[
-\frac{\pi}{e\pi} = \frac{1}{e} \quad \text{και} \quad \frac{e \ln \pi}{e\pi} = \frac{\ln \pi}{\pi}
-\]
-Από το ερώτημα (α) γνωρίζουμε ότι η συνάρτηση $f(x) = \dfrac{\ln x}{x}$ έχει ολικό μέγιστο στο $x = e$. 
-Επειδή $\pi \neq e$, ισχύει:
-\[
-f(\pi) < f(e) \Rightarrow \frac{\ln \pi}{\pi} < \frac{1}{e}
-\]
-Πολλαπλασιάζοντας με $e\pi > 0$, έχουμε:
-\[
-e \ln \pi < \pi \Rightarrow \ln(\pi^e) < \ln(e^\pi)
-\]
-Επειδή η συνάρτηση $\ln x$ είναι \textbf{γνησίως αύξουσα}, εξ follows ότι:
-\[
-\pi^e < e^\pi
-\]
+\item Γνωρίζουμε ότι ο αριθμός $e \approx 2.71$ και το $\pi \approx 3.14$, συνεπώς $e < \pi$.
+Αφού $e < \pi$, και τα δύο νούμερα ανήκουν στο διάστημα $[e, +\infty)$ όπου η συνάρτηση $f$ είναι \textbf{γνησίως φθίνουσα}. Επομένως, αντιστρέφεται η φορά της ανισότητας:
+\[ e < \pi \overset{f \searrow}{\implies} f(e) > f(\pi) \]
+Αντικαθιστώντας τον τύπο της $f$:
+\[ \frac{\ln e}{e} > \frac{\ln \pi}{\pi} \implies \frac{1}{e} > \frac{\ln \pi}{\pi} \]
+Επειδή τα $e$ και $\pi$ είναι θετικοί αριθμοί, πολλαπλασιάζουμε χιαστί χωρίς να αλλάξει η φορά:
+\[ \pi > e \ln \pi \implies \pi \ln e > e \ln \pi \implies \ln(e^\pi) > \ln(\pi^e) \implies e^\pi > \pi^e \]
 
-\item 
-Υπολογίζουμε τη δεύτερη παράγωγο της $f$:
-\[
-f''(x) = \left( \frac{1 - \ln x}{x^2} \right)' = \frac{-\frac{1}{x} \cdot x^2 - (1 - \ln x) \cdot 2x}{x^4} = \frac{-x - 2x + 2x \ln x}{x^4} = \frac{-3 + 2 \ln x}{x^3}
-\]
-Εξετάζουμε το πρόσημο της $f''(x)$ για $x > 0$:
+\item Υπολογίζουμε τη δεύτερη παράγωγο της $f$:
+\begin{align*}
+f''(x) &= \left( \frac{1 - \ln x}{x^2} \right)' = \frac{(1 - \ln x)' x^2 - (1 - \ln x)(x^2)'}{(x^2)^2} \\
+&= \frac{-\frac{1}{x} \cdot x^2 - (1 - \ln x) \cdot 2x}{x^4} = \frac{-x - 2x + 2x \ln x}{x^4} \\
+&= \frac{x(-3 + 2 \ln x)}{x^4} = \frac{2\ln x - 3}{x^3}
+\end{align*}
+Το πρόσημο της $f''(x)$ εξαρτάται μόνο από τον αριθμητή, αφού $x^3 > 0$:
 \begin{itemize}
-    \item $f''(x) = 0 \Leftrightarrow -3 + 2 \ln x = 0 \Leftrightarrow \ln x = \frac{3}{2} \Leftrightarrow x = e^{3/2}$
-    \item $f''(x) > 0 \Leftrightarrow 2 \ln x > 3 \Leftrightarrow \ln x > \frac{3}{2} \Leftrightarrow x > e^{3/2}$
-    \item $f''(x) < 0 \Leftrightarrow 2 \ln x < 3 \Leftrightarrow \ln x < \frac{3}{2} \Leftrightarrow 0 < x < e^{3/2}$
+    \item $f''(x) = 0 \Leftrightarrow 2\ln x = 3 \Leftrightarrow \ln x = \frac{3}{2} \Leftrightarrow x = e^{\frac{3}{2}} = e\sqrt{e}$
+    \item $f''(x) > 0 \Leftrightarrow 2\ln x > 3 \Leftrightarrow x > e^{\frac{3}{2}}$
+    \item $f''(x) < 0 \Leftrightarrow 2\ln x < 3 \Leftrightarrow 0 < x < e^{\frac{3}{2}}$
 \end{itemize}
-Άρα, η $C_f$ στρέφει τα \textbf{κοίλα άνω} στο $(0, e^{3/2})$ και τα \textbf{κοίλα κάτω} στο $(e^{3/2}, +\infty)$.
-Το μοναδικό \textbf{σημείο καμπής} είναι το $K(e^{3/2}, f(e^{3/2}))$, όπου:
-\[
-f(e^{3/2}) = \frac{\ln e^{3/2}}{e^{3/2}} = \frac{3/2}{e^{3/2}} = \frac{3}{2e^{3/2}}
-\]
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8, $f''(x)$ / 0.8, $f(x)$ / 1.5}
+{ $0$, $e^{\frac{3}{2}}$, $+\infty$ }
+\tkzTabLine{ d, -, z, +,  }
+\tkzTabVar{ D+/  , -/ $f(e^{\frac{3}{2}})$, +/  }
+\end{tikzpicture}
+\end{center}
+Συνεπώς, η $C_f$ είναι \textbf{κοίλη} στο $(0, e^{\frac{3}{2}}]$ και \textbf{κυρτή} στο $[e^{\frac{3}{2}}, +\infty)$.
+Το μοναδικό \textbf{σημείο καμπής} είναι το $K(e^{\frac{3}{2}}, f(e^{\frac{3}{2}}))$, όπου:
+\[ f(e^{\frac{3}{2}}) = \frac{\ln e^{\frac{3}{2}}}{e^{\frac{3}{2}}} = \frac{\frac{3}{2}}{e\sqrt{e}} = \frac{3}{2e\sqrt{e}} \]
 
-\item 
-Έστω $F(x)$ μια αρχική της $f(x)$. Για το όριο $\lim\limits_{x \to +\infty} \dfrac{F(x)}{x^2}$, παρατηρούμε ότι καθώς $x \to +\infty$, το $x^2 \to +\infty$. 
-Επίσης, $F(x) = \int \frac{\ln x}{x} \d x = \frac{1}{2}(\ln x)^2 + C$, οπότε $F(x) \to +\infty$.
-Εφαρμόζοντας τον κανόνα του \eng{L'Hôpital}:
-\[
-\lim_{x \to +\infty} \frac{F(x)}{x^2} \xlongequal{\eng{L'Hôpital}} \lim_{x \to +\infty} \frac{F'(x)}{2x} = \lim_{x \to +\infty} \frac{f(x)}{2x}
-\]
-Αντικαθιστώντας την $f(x)$:
-\[
-\lim_{x \to +\infty} \frac{\frac{\ln x}{x}}{2x} = \lim_{x \to +\infty} \frac{\ln x}{2x^2}
-\]
-Εφαρμόζοντας ξανά τον κανόνα του \eng{L'Hôpital}:
-\[
-\lim_{x \to +\infty} \frac{\ln x}{2x^2} \xlongequal{\eng{L'Hôpital}} \lim_{x \to +\infty} \frac{\frac{1}{x}}{4x} = \lim_{x \to +\infty} \frac{1}{4x^2} = 0
-\]
-Άρα, $\lim\limits_{x \to +\infty} \dfrac{F(x)}{x^2} = 0$.
+\item Έστω $F$ μια αρχική της $f$ στο $(0, +\infty)$. Τότε, εξ ορισμού ισχύει $F'(x) = f(x)$.
+Παρατηρούμε ότι $\left( \frac{1}{2}\ln^2 x \right)' = \frac{1}{2} \cdot 2\ln x \cdot \frac{1}{x} = \frac{\ln x}{x} = f(x)$.
+Άρα η γενική μορφή της $F(x)$ είναι:
+\[ F(x) = \frac{1}{2}\ln^2 x + c, \quad c \in \mathbb{R} \]
+Καθώς το $x \to +\infty$, η ποσότητα $\ln x \to +\infty$, άρα και το $\ln^2 x \to +\infty$.
+Επομένως, $\lim_{x \to +\infty} F(x) = +\infty$. Το ζητούμενο όριο έχει τη μορφή:
+\[ \lim_{x \to +\infty} \frac{F(x)}{x^2} \quad \left( \text{Μορφή } \frac{+\infty}{+\infty} \right) \]
+Εφαρμόζουμε τον κανόνα \eng{De L'Hospital}:
+\[ \lim_{x \to +\infty} \frac{F(x)}{x^2} \xlongequal[\text{\eng{DLH}}]{\frac{+\infty}{+\infty}} \lim_{x \to +\infty} \frac{F'(x)}{(x^2)'} = \lim_{x \to +\infty} \frac{f(x)}{2x} \]
+Αντικαθιστούμε την $f(x)$:
+\[ \lim_{x \to +\infty} \frac{\frac{\ln x}{x}}{2x} = \lim_{x \to +\infty} \frac{\ln x}{2x^2} \quad \left( \text{Μορφή } \frac{+\infty}{+\infty} \right) \]
+Εφαρμόζουμε ξανά τον κανόνα \eng{De L'Hospital}:
+\[ \lim_{x \to +\infty} \frac{\ln x}{2x^2} \xlongequal[\text{\eng{DLH}}]{\frac{+\infty}{+\infty}} \lim_{x \to +\infty} \frac{(\ln x)'}{(2x^2)'} = \lim_{x \to +\infty} \frac{\frac{1}{x}}{4x} = \lim_{x \to +\infty} \frac{1}{4x^2} = 0 \]
+Άρα, το όριο ισούται με $\boldsymbol{0}$.
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 19ο ΘΕΜΑ Γ ===========

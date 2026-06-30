@@ -1,129 +1,53 @@
-*   Professional Mathematics teacher for Γ Λυκείου (12th grade).
-    *   Task: Solve a specific LaTeX exercise about moving points $M$ and $N$.
-    *   Constraint: Strict formatting guidelines (Thema environment, Erwthma environment, itemization, alignment, specific LaTeX commands).
-    *   Specific exercise:
-        *   $M$ starts at $O(0,0)$, moves on $Ox$ with $v_M = 3 \text{ m/s}$.
-        *   $N$ starts at $y_0 = 10$ on $Oy$, moves away from origin with $v_N = 4 \text{ m/s}$.
-        *   Q1: $M(t)$ and $N(t)$ coordinates.
-        *   Q2: Distance $d(t) = MN$.
-        *   Q3: Rate of change of $d(t)$ at $t=2$.
-        *   Q4: Existence of minimum distance.
-
-    *   $M$ starts at $(0,0)$, speed $3$ on $Ox$. So $x_M(t) = 3t$, $y_M(t) = 0$. $M(t) = (3t, 0)$.
-    *   $N$ starts at $(0, 10)$, speed $4$ on $Oy$ (away from origin). So $x_N(t) = 0$, $y_N(t) = 10 + 4t$. $N(t) = (0, 10 + 4t)$.
-
-    *   $d(t) = \sqrt{(x_N - x_M)^2 + (y_N - y_M)^2}$
-    *   $d(t) = \sqrt{(0 - 3t)^2 + (10 + 4t - 0)^2}$
-    *   $d(t) = \sqrt{9t^2 + (10 + 4t)^2}$
-    *   $d(t) = \sqrt{9t^2 + 100 + 80t + 16t^2}$
-    *   $d(t) = \sqrt{25t^2 + 80t + 100} = 5\sqrt{t^2 + 3.2t + 4}$.
-
-    *   Rate of change is $d'(t)$.
-    *   $d(t) = (25t^2 + 80t + 100)^{1/2}$.
-    *   $d'(t) = \frac{1}{2}(25t^2 + 80t + 100)^{-1/2} \cdot (50t + 80)$.
-    *   $d'(t) = \frac{25t + 40}{\sqrt{25t^2 + 80t + 100}}$.
-    *   At $t=2$:
-        *   $d(2) = \sqrt{25(4) + 80(2) + 100} = \sqrt{100 + 160 + 100} = \sqrt{360} = 6\sqrt{10}$.
-        *   $d'(2) = \frac{25(2) + 40}{\sqrt{360}} = \frac{90}{6\sqrt{10}} = \frac{15}{\sqrt{10}} = \frac{15\sqrt{10}}{10} = 1.5\sqrt{10} \text{ m/s}$.
-
-    *   To find the minimum, look for $d'(t) = 0$.
-    *   $d'(t) = \frac{25t + 40}{\sqrt{25t^2 + 80t + 100}}$.
-    *   $d'(t) = 0 \Rightarrow 25t + 40 = 0 \Rightarrow t = -40/25 = -1.6$.
-    *   Since $t \ge 0$ (the movement starts at $t=0$), $d'(t)$ is always positive for $t \ge 0$ ($25t + 40 > 0$).
-    *   Therefore, $d(t)$ is \textbf{γνησίως αύξουσα} for $t \in [0, +\infty)$.
-    *   The minimum distance occurs at the starting point $t=0$.
-    *   Minimum distance $d(0) = \sqrt{100} = 10 \text{ m}$.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\begin{align*}` for calculations.
-    *   `\textbf{...}` for emphasis.
-    *   `\eng{...}` for technical terms (though not many here, maybe "minimum" or just standard Greek).
-    *   `\[ ... \]` for key results.
-
-    *   Check: $x_M = 3t, y_M = 0$. $x_N = 0, y_N = 10+4t$. Correct.
-    *   Check: $d(t) = \sqrt{9t^2 + (10+4t)^2} = \sqrt{25t^2 + 80t + 100}$. Correct.
-    *   Check: $d'(t) = \frac{50t + 80}{2\sqrt{25t^2 + 80t + 100}} = \frac{25t + 40}{\sqrt{25t^2 + 80t + 100}}$. Correct.
-    *   Check: $t=2 \Rightarrow d'(2) = \frac{50+40}{\sqrt{100+160+100}} = \frac{90}{\sqrt{360}} = \frac{90}{6\sqrt{10}} = \frac{15}{\sqrt{10}} = 1.5\sqrt{10}$. Correct.
-    *   Check: Min distance. $d'(t) > 0$ for $t \ge 0$. Minimum at $t=0$. Correct.
-
-    *   The prompt asks for a professional math teacher's response in LaTeX.
-    *   Ensure use of `\begin{thema}{Γ}` and `\begin{erwthma}`.
-    *   Use `\textbf{γνησίως αύξουσα}`.
-    *   Use `\begin{align*}` for $d'(t)$ computation.
-    *   Units: m/s.
-
-    *Self-Correction during drafting:* The problem says "Υπάρχει χρονική στιγμή κατά την οποία η απόσταση των δύο σημείων να γίνεται ελάχιστη;". Since $d(t)$ is strictly increasing for $t \ge 0$, the "minimum" is at the boundary $t=0$. I should state that for $t \ge 0$, the function is strictly increasing, so the minimum occurs at $t=0$.
-
-    *Wait, let's re-read the prompt for "forbidden" items:*
-    - No indefinite integrals. (N/A here)
-    - No 2nd derivative test for extrema. (I'll use the sign of the 1st derivative). (N/A here)
-    - No differential equations. (N/A)
-    - No MVT for integrals. (N/A)
-
-    *Let's double check the distance calculation again.*
-    $M(t) = (3t, 0)$
-    $N(t) = (0, 10 + 4t)$
-    $d^2(t) = (3t)^2 + (10+4t)^2 = 9t^2 + 100 + 80t + 16t^2 = 25t^2 + 80t + 100$.
-    $d(t) = \sqrt{25t^2 + 80t + 100}$. Correct.
-
-    *Rate of change at $t=2$:*
-    $d'(t) = \frac{50t + 80}{2\sqrt{25t^2 + 80t + 100}} = \frac{25t + 40}{\sqrt{25t^2 + 80t + 100}}$.
-    $d'(2) = \frac{50 + 40}{\sqrt{100 + 160 + 100}} = \frac{90}{\sqrt{360}} = \frac{90}{6\sqrt{10}} = \frac{15}{\sqrt{10}} = \frac{3\sqrt{10}}{2} = 1,5\sqrt{10} \approx 4,74 \text{ m/s}$.
-
-    *Minimum distance:*
-    Since $t \ge 0$, $25t + 40 > 0$ and $\sqrt{25t^2 + 80t + 100} > 0$.
-    So $d'(t) > 0$ for all $t \in [0, +\infty)$.
-    The function $d(t)$ is \textbf{γνησίως αύξουσα} on $[0, +\infty)$.
-    The minimum occurs at the left endpoint $t=0$.
-
-    *Formatting check:*
-    - `\begin{thema}{Γ}`
-    - `\begin{erwthma}`
-    - `\item`
-    - `\begin{align*}`
-    - `\[ ... \]`
-
-    Let's write.
-%=========== ΛΥΣΗ - {ΘΕΜΑ Γ} ===========
-
+%=========== ΛΥΣΗ - 61ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Το σημείο $M$ κινείται στον ημιάξονα $Ox$ με σταθερή ταχύτητα $v_M = 3\si{m/s}$ ξεκινώντας από το $O(0,0)$, άρα η θέση του είναι:
-\[ M(t) = (3t, 0) \]
-Το σημείο $N$ κινείται στον ημιάξονα $Oy$ με σταθερή ταχύτητα $v_N = 4\si{m/s}$ ξεκινώντας από το $y_0 = 10$ και απομακρυνόμενο από την αρχή των αξόνων, άρα η θέση του είναι:
-\[ N(t) = (0, 10 + 4t) \]
-για $t \geq 0$.
+\item Έστω $t\geq 0$ ο χρόνος σε δευτερόλεπτα.
+Το σημείο $M$ κινείται στον θετικό ημιάξονα $Ox$ με σταθερή ταχύτητα $3\si{m/s}$ και ξεκινά από το $O(0,0)$.
+Άρα
+\[M(t)=(3t,0)\]
+Το σημείο $N$ κινείται στον θετικό ημιάξονα $Oy$, ξεκινά από το σημείο $(0,10)$ και απομακρύνεται με σταθερή ταχύτητα $4\si{m/s}$.
+Άρα
+\[N(t)=(0,10+4t)\]
 
-\item Η απόσταση $d(t)$ μεταξύ των σημείων $M$ και $N$ δίνεται από τον τύπο της απόστασης δύο σημείων στο επίπεδο:
+\item Η απόσταση των σημείων $M(t)$ και $N(t)$ είναι
 \begin{align*}
-d(t) &= \sqrt{(x_N - x_M)^2 + (y_N - y_M)^2} \\
-&= \sqrt{(0 - 3t)^2 + (10 + 4t - 0)^2} \\
-&= \sqrt{9t^2 + (100 + 80t + 16t^2)} \\
-&= \sqrt{25t^2 + 80t + 100}
+d(t)&=\sqrt{(0-3t)^2+(10+4t-0)^2}\\
+&=\sqrt{9t^2+(10+4t)^2}\\
+&=\sqrt{9t^2+100+80t+16t^2}\\
+&=\sqrt{25t^2+80t+100}
 \end{align*}
+Επομένως
+\[d(t)=\sqrt{25t^2+80t+100}\ ,\ t\geq 0\]
 
-\item Ο ρυθμός μεταβολής της απόστασης $d(t)$ είναι η παράγωγος της συνάρτησης $d(t)$ ως προς τον χρόνο $t$. 
-Έχοντας $d(t) = (25t^2 + 80t + 100)^{1/2}$, η παράγωγος είναι:
+\item Για $t\geq 0$ έχουμε
+\[d(t)=(25t^2+80t+100)^{\frac{1}{2}}\]
+οπότε
 \begin{align*}
-d'(t) &= \frac{1}{2}(25t^2 + 80t + 100)^{-1/2} \cdot (50t + 80) \\
-&= \frac{50t + 80}{2\sqrt{25t^2 + 80t + 100}} \\
-&= \frac{25t + 40}{\sqrt{25t^2 + 80t + 100}}
+d'(t)&=\frac{1}{2}(25t^2+80t+100)^{-\frac{1}{2}}(50t+80)\\
+&=\frac{25t+40}{\sqrt{25t^2+80t+100}}
 \end{align*}
-Για $t = 2\si{s}$, ο ρυθμός μεταβολής είναι:
-\[ d'(2) = \frac{25(2) + 40}{\sqrt{25(2)^2 + 80(2) + 100}} = \frac{50 + 40}{\sqrt{100 + 160 + 100}} = \frac{90}{\sqrt{360}} \]
-\[ d'(2) = \frac{90}{6\sqrt{10}} = \frac{15}{\sqrt{10}} = \frac{15\sqrt{10}}{10} = 1,5\sqrt{10}\si{m/s} \]
+Για $t=2$ παίρνουμε
+\begin{align*}
+d'(2)&=\frac{25\cdot2+40}{\sqrt{25\cdot2^2+80\cdot2+100}}\\
+&=\frac{90}{\sqrt{360}}\\
+&=\frac{90}{6\sqrt{10}}\\
+&=\frac{15}{\sqrt{10}}\\
+&=\frac{3\sqrt{10}}{2}\si{m/s}
+\end{align*}
+Άρα τη χρονική στιγμή $t=2\si{s}$ η απόσταση αυξάνεται με ρυθμό
+\[\frac{3\sqrt{10}}{2}\si{m/s}\]
 
-\item Για να εξετάσουμε αν υπάρχει χρονική στιγμή ελάχιστης απόστασης, μελετάμε το πρόσημο της $d'(t)$ για $t \geq 0$:
-\begin{itemize}
-    \item Ο αριθμητής $25t + 40$ είναι πάντα θετικός για κάθε $t \geq 0$.
-    \item Ο παρονομαστής $\sqrt{25t^2 + 80t + 100}$ είναι πάντα θετικός για κάθε $t \geq 0$.
-\end{itemize}
-Συνεπώς, $d'(t) > 0$ για κάθε $t \in [0, +\infty)$, γεγονός που σημαίνει ότι η συνάρτηση $d(t)$ είναι \textbf{γνησίως αύξουσα} στο διάστημα ορισμού της. 
-Άρα, η ελάχιστη απόσταση επιτυγχάνεται στη χρονική στιγμή $t = 0$, όπου:
-\[ d(0) = \sqrt{100} = 10\si{m} \]
+\item Για $t\geq 0$ είναι
+\[25t+40>0\]
+και
+\[\sqrt{25t^2+80t+100}>0\]
+άρα
+\[d'(t)>0\ ,\ t\geq 0\]
+Επομένως η $d$ είναι \textbf{γνησίως αύξουσα} στο $[0,+\infty)$.
+Άρα η ελάχιστη απόσταση επιτυγχάνεται στην αρχική χρονική στιγμή
+\[t=0\]
+και είναι
+\[d(0)=\sqrt{100}=10\si{m}\]
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - {ΘΕΜΑ Γ} ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 61ο ΘΕΜΑ Γ ===========

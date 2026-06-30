@@ -1,43 +1,78 @@
-#set page(paper: "a4",margin: (x: 2cm, y: 2cm),)
-#set text(font: "Minion Pro",lang: "el",size: 11pt)
-#show math.equation: set text(font: "STIX Two Math")
+// 1. ΠΡΩΤΑ ΟΙ ΡΥΘΜΙΣΕΙΣ (Στην κορυφή του εγγράφου)
+#set page(
+  paper: "a4", 
+  margin: 2.5cm, 
+  // Χρησιμοποιούμε το ..total για να μην κρασάρει το outline
+  numbering: (current, ..total) => {
+    let remaining-args = total.pos()
+    if remaining-args.len() > 0 {
+      [Σελίδα #current από #remaining-args.at(0)]
+    } else {
+      [#current] // Αν το outline ζητήσει μόνο 1 όρισμα, δείξε απλά τον αριθμό
+    }
+  }
+)
 
-// --- Header Setup ---
-#grid(columns: (1.5fr, 1fr),align(left)[ΦΡΟΝΤΙΣΤΗΡΙΟ ΜΕΣΗΣ ΕΚΠΑΙΔΕΥΣΗΣ 
-
-ΦΙΛΟΜΑΘΕΙΑ
-
-Ιακώβου Πολυλά 24, Πεζόδρομος
-
-Τηλ: 26610 20144 - 693 232 7283],align(right)[ΦΥΛΛΑΔΙΟ ΑΣΚΗΣΕΩΝ
-
-22 Οκτωβρίου 2024
-
-FB: Φροντιστήριο Φιλομάθεια])#line(length: 100%, stroke: 1pt)#align(center)[#text(size: 14pt, weight: "bold")[Άλγεβρα - Α΄ Λυκείου]
-
-#text(size: 12pt, weight: "bold")[Ανισώσεις 1ου βαθμού]]#v(1em)// --- Section 1: Theory ---
-Ερωτήσεις Θεωρίας
-
-#strong[Απαντήστε στις παρακάτω ερωτήσεις:]
-#enum(numbering: "α.")[Τι ονομάζουμε ανίσωση 1ου βαθμού;][Πότε μια ανίσωση ονομάζεται αδύνατη;][Πότε μια ανίσωση ονομάζεται αόριστη;]
-#strong[Να χαρακτηριστούν οι παρακάτω προτάσεις ως σωστές (Σ) ή λανθασμένες (Λ):]
-#enum(numbering: "i.")[Η ανίσωση $a x + beta > 0$ με $a > 0$ έχει λύση την $x > -b a$.][Η ανίσωση $a x + beta > 0$ με $a = 0$ και $beta > 0$ είναι αόριστη.][Η ανίσωση $0x < beta$ με $beta > 0$ είναι αδύνατη.][Η ανίσωση $0x < beta$ με $beta < 0$ είναι αδύνατη.][Η ανίσωση $0x > beta$ με $beta = 0$ είναι αόριστη.][Η ανίσωση $0x >= beta$ με $beta = 0$ είναι αόριστη.][Η ανίσωση $0x > beta$ με $beta > 0$ είναι αδύνατη.][Η ανίσωση $0x <= beta$ με $beta = 0$ είναι αδύνατη.][Η ανίσωση $0x < -beta$ με $beta > 0$ είναι αόριστη.][Η ανίσωση $0x >= -beta$ με $beta = 0$ είναι αόριστη.]#line(length: 100%, stroke: 0.5pt + gray)// --- Section 2: Exercises ---
-== Απλές Ανισώσεις
-
-#strong[Να λυθούν οι ανισώσεις και να παρασταθούν γραφικά οι λύσεις:]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$2x - 3 > 7 - 3x$][$4x + 5 < 2 - x + 8$][$3x - 2 <= 4 - 2x + 8$],enum(numbering:"1a.")[ // Continuing numbering manually for column 2
-$-x - 4 >= 7 - 3x + 2$][$7x - 3 + x < 2x + 9 + 5x$][$-3x + 8 > 4 - 5x + 12$])#strong[Να λυθούν οι ανισώσεις και να παρασταθούν γραφικά οι λύσεις:]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$2(x - 1) + 3 > 4 - x$][$2x - 3(4 - x) < 9 + 4x$][$4(3 - x) + 2(3x - 1) < 3x + 2 - (x - 1)$],enum(numbering: "a.")[$3(2x + 3) - 5 > 5(x - 4) + 12$][$-2 - 3(4 - 3x) + 5x <= 3 - (7 - 2x)$][$2 - (3x - 4) + x >= 3(2x + 3) - 12 - (x - 2)$])#strong[Να λυθούν οι ανισώσεις (Κλασματικές) και να παρασταθούν γραφικά:]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$x/2 + (x+1)/3 > 1$][$(2x-1)/3 - (x-2)/4 < 1/6$][$x/5 + (3x-2)/3 <= (x-1)/15$][$(4x-3)/3 - (3-2x)/4 >= 1 + (5x)/12$],enum(numbering: "a.")[$2x - (3x-2)/5 + (x-1)/15 <= 1/3 - (2-3x)/15$][$(-2-x)/4 + (4x-5)/8 < 3x - 1 - (7-4x)/4$][$(1 - x/2)/3 > 2$][$((x-1)/3 + (x-2)/4)/2 - (2x-1)/6 > x/12$])#strong[Να λυθούν οι ανισώσεις:]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$3x - 2 < x + 4 + 2x$][$4x - 3 + x >= 2x - 3 + 2x$][$2(x - 3) + 1 < -3x + 5(x - 2)$],enum(numbering: "a.")[$4x - (3 + 2x) > 5(x - 2) + 3(2 - x) + 1$][$5 - (x - 2) + 3x <= 3(2 + x) - x - 1$][$(2x-3)/4 - x/2 > 1$][$(3x-4)/5 - (x-3)/3 >= (x-1)/15 + (x-4)/5$])// --- Section 3: Common Solutions ---
-== Κοινές Λύσεις Ανισώσεων
-
-#strong[Να λυθούν οι ανισώσεις, να βρεθούν οι κοινές λύσεις και να γραφτούν με μορφή διαστήματος:]
-#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$4x - 3 < 3x < 2 - 5x$][$3 - 2x <= x + 1 < 4x - 5$][$3(1 - x + 2) < 4x <= 2(x + 2) + 3$],
-enum(numbering: "a.")[$5(2x - 1) - 4 <= 7(3 - x) <= 4(2 - x) + 3x$][$3 - (3x - 4) < 2(x - 2) + 4(3 - x) < 7 - (x - 3)$][$(x-1)/2 < x/3 + 1 <= (2x-1)/2 - 1/3$])
-
-#strong[Να βρεθούν οι κοινές λύσεις των συστημάτων ανισώσεων:]
-#enum(numbering: "α.")[$3x - 1 > 5$ και $4x - 3 < 9$][$4 - 3x < 2$ και $2x + 5 <= 7$][$2(x - 3) + 5 > x - 1$ και $3 - (x - 4) <= 5 - 2x$][$4(x - 2) + 3(5 - x) >= 4x - 3 + 2(x - 1)$ και $5(2 - x) + 3(x + 1) < 4 - (x - 7)$][$(x+5)/12 + 1 >= x/4$ και $(2x+3)/4 + (x-1)/3 > 1$]// --- Section 4: Absolute Values ---
-== Ανισώσεις με Απόλυτες Τιμές
-
-#grid(columns: (1fr, 1fr),gutter: 2em,[+ #strong[Να λυθούν οι απλές ανισώσεις:]
-#enum(numbering: "α.")[$|x| < 4$][$|x| > 5$][$|x - 1| < 2$][$|x + 2| > 3$][$|2x - 1| <= 5$][$|3x + 4| >= 8$][$|1 - x| < 2$][$|3 - 4x| >= 5$]],[+ #strong[Να λυθούν οι ανισώσεις (με πράξεις):]#enum(numbering: "α.")[$|2x + 1| - 3 < 0$][$|1 - 3x| + 2 > 4$][$|3x + 4| - 5 <= 0$][$7 - |2x - 5| >= 0$]])#strong[Να λυθούν οι ανισώσεις (Ειδικές περιπτώσεις):]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$|x| < -2$][$|4x| > -1$][$|x - 3| <= 0$][$|2x - 4| >= 0$])#strong[Να λυθούν οι εξισώσεις με απόλυτα:]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$|x - 3| = x + 2$][$|4x - 1| = 2x - 5$][$|2x - 3| = 4 - 7x$][$|x/2 - 1| = (x+3)/4$])
-#strong[Να βρεθούν οι κοινές λύσεις (Διπλές ανισώσεις):]#grid(columns: (1fr, 1fr),gutter: 1em,enum(numbering: "α.")[$2 <= |x| <= 3$][$3 <= |x - 1| <= 7$][$4 <= |2x - 4| <= 8$],
-enum(numbering: "α.")[$1 < |x + 5| <= 5$][$2 <= |2 - 3x| < 7$])#strong[Να βρεθούν οι κοινές λύσεις (Συστήματα):]#enum(numbering: "α.")[$2(|x| + 2) $ // (Το υπόλοιπο της άσκησης δεν φαινόταν καθαρά στο απόσπασμα)
+#show heading.where(level: 1): it => block(width: 100%)[
+  #set text(fill: rgb("1c3d5a"))
+  #line(length: 100%, stroke: 1pt + rgb("#2c699e")) // Η γραμμή από πάνω
+  #it // Εδώ τυπώνεται ο ίδιος ο τίτλος
+  #v(0.1em) // Μια μικρή κάθετη απόσταση
+  #line(length: 100%, stroke: 1pt + rgb("1c3d5a")) // Η γραμμή από κάτω
 ]
+#show heading.where(level: 2): set text(fill: orange)
+#set text(font: "Minion Pro", lang: "el", size: 12pt)
+#show math.equation: set text(font: "STIX Two Math")
+#show link: set text(red)
+#let title = [Δοκιμαστική εργασία]
+
+
+// 2. ΜΕΤΑ ΤΟ ΠΕΡΙΕΧΟΜΕΝΟ
+#outline()
+
+#pagebreak() // Προαιρετικό: Αλλαγή σελίδας μετά τον πίνακα
+
+
+= Η καθημερινότητά μου
+== Πρωινές Συνήθειες
+- *Καφές*
+- Περπάτημα
+- Ποδήλατο
+$ E=m c^2 $
+$ u_"avg"=d/t $
+// #pagebreak()
+
+#table(
+  columns: (auto, 1fr , 1fr),  
+  [*Προιόν*], [*Ποσότητα*], [*Τιμή*],
+  [Γάλα], [18],[2.00],
+  [Αυγά],[35],[1.34]
+)
+
+#figure(
+    image("maldives-island.jpg"),
+    caption: [Κείμενο]
+) <eikona1>
+
+#link("https://typst.app/docs/reference/model/outline/")
+
+Δείτε την εικόνα στο @eikona1 και στο @iliopoulou2009symvoli
+
+Αυτή είναι *#title*
+#pagebreak()
+
+#let note(body) = block(
+  fill: rgb("f0f0f0"),
+  inset: 10pt,
+  radius: 4pt,
+  stroke: 0.5pt + gray,
+  width: 100%,
+  body
+)
+
+// Χρήση:
+#note([
+  *Προσοχή:* Μην ξεχάσετε να αποθηκεύσετε τις αλλαγές πριν τη μεταγλώττιση!
+])
+
+#bibliography("bibliografia.bib")

@@ -1,0 +1,69 @@
+%=========== ΛΥΣΗ - 3ο ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Γράφουμε $f(x)=x^{-x^a}=e^{-x^a\ln x}$ για $x>0$. Παραγωγίζουμε με τον κανόνα της αλυσίδας:
+\[
+f'(x) = e^{-x^a\ln x}\cdot\left(-x^a\ln x\right)' = x^{-x^a}\cdot\left(-ax^{a-1}\ln x - x^{a-1}\right) = -x^{-x^a}\cdot x^{a-1}(a\ln x+1)
+\]
+Επειδή η $f$ είναι παραγωγίσιμη στο $(0,+\infty)$ και παρουσιάζει ακρότατο στο $x=\dfrac{1}{e}$, σύμφωνα με το Θεώρημα \eng{Fermat} ισχύει $f'\!\left(\dfrac{1}{e}\right)=0$. Τώρα, για κάθε $x>0$ είναι $x^{-x^a}>0$ και $x^{a-1}>0$, άρα ο μοναδικός παράγοντας που μπορεί να μηδενίσει την $f'$ είναι ο $(a\ln x+1)$:
+\[
+a\ln\frac{1}{e}+1=0 \Leftrightarrow -a+1=0 \Leftrightarrow a=1
+\]
+
+\item Για $a=1$ έχουμε $f(x)=x^{-x}$ και $f'(x)=-x^{-x}(\ln x+1)$. Επειδή $x^{-x}>0$ για κάθε $x>0$, το πρόσημο της $f'$ ταυτίζεται με το πρόσημο του $-(\ln x+1)$:
+\begin{itemize}
+\item $f'(x)=0\Leftrightarrow \ln x+1=0\Leftrightarrow x=\dfrac{1}{e}$
+\item $f'(x)>0\Leftrightarrow \ln x+1<0\Leftrightarrow 0<x<\dfrac{1}{e}$
+\item $f'(x)<0\Leftrightarrow \ln x+1>0\Leftrightarrow x>\dfrac{1}{e}$
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8,$f'(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$\frac{1}{e}$,$+\infty$}%
+\tkzTabLine{d, +, z, -, }
+\tkzTabLine{d, \nearrow,t ,\searrow,}
+\end{tikzpicture}
+\end{center}
+Η $f$ είναι \textbf{γνησίως αύξουσα} στο $\left(0,\frac{1}{e}\right]$ και \textbf{γνησίως φθίνουσα} στο $\left[\frac{1}{e},+\infty\right)$, άρα παρουσιάζει \textbf{ολικό μέγιστο} στη θέση $x=\dfrac{1}{e}$ με τιμή:
+\[f\!\left(\frac{1}{e}\right)=\left(\frac{1}{e}\right)^{-1/e}=e^{1/e}\]
+
+Για την ανισότητα, θεωρούμε τη συνάρτηση $h(x)=ex\ln x+1$, $x>0$. Για κάθε $x>0$ είναι:
+\[h'(x)=e(\ln x+1)\]
+Βρίσκουμε ρίζες και πρόσημα της $h'$:
+\begin{itemize}
+\item $h'(x)=0\Leftrightarrow \ln x+1=0\Leftrightarrow x=\dfrac{1}{e}$
+\item $h'(x)<0\Leftrightarrow \ln x+1<0\Leftrightarrow 0<x<\dfrac{1}{e}$
+\item $h'(x)>0\Leftrightarrow \ln x+1>0\Leftrightarrow x>\dfrac{1}{e}$
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8,$h'(x)$ /0.8,$h(x)$/0.8}%
+{$0$,$\frac{1}{e}$,$+\infty$}%
+\tkzTabLine{d, -, z, +, }
+\tkzTabLine{d, \searrow,t ,\nearrow,}
+\end{tikzpicture}
+\end{center}
+Η $h$ παρουσιάζει ολικό ελάχιστο στο $x=\dfrac{1}{e}$ με τιμή:
+\[h\!\left(\frac{1}{e}\right)=e\cdot\frac{1}{e}\cdot\ln\frac{1}{e}+1=1\cdot(-1)+1=0\]
+Άρα για κάθε $x>0$ ισχύει $h(x)\geq h\!\left(\dfrac{1}{e}\right)=0$, δηλαδή:
+\[ex\ln x+1\geq 0\]
+
+\item Για $x>0$ είναι:
+\[f(x)\cdot\ln x = x^{-x}\cdot\ln x = \frac{\ln x}{x^x}=\frac{\ln x}{e^{x\ln x}}\]
+Για $x\geq e$ ισχύει $\ln x\geq 1$, άρα $x\ln x\geq x$, οπότε $e^{x\ln x}\geq e^x$. Επομένως για $x\geq e$:
+\[0<\frac{\ln x}{x^x}\leq\frac{\ln x}{e^x}\]
+Από κανόνα \eng{DLH}: $\lim\limits_{x\to+\infty}\dfrac{\ln x}{e^x}=\lim\limits_{x\to+\infty}\dfrac{1/x}{e^x}=0$. Επομένως, από το Θεώρημα Παρεμβολής:
+\[\lim_{x\to+\infty}\left(f(x)\cdot\ln x\right)=0\]
+
+\item Έστω $x(t)$ η τετμημένη και $y(t)$ η τεταγμένη του κινητού $M$ τη χρονική στιγμή $t$. Γνωρίζουμε ότι $y(t)=f(x(t))$. Παραγωγίζοντας ως προς $t$ με τον κανόνα της αλυσίδας:
+\[y'(t)=f'(x(t))\cdot x'(t)\]
+Έστω $t_0$ η χρονική στιγμή που το $M$ διέρχεται από το $A\!\left(e,f(e)\right)$, οπότε $x(t_0)=e$ και $x'(t_0)=3\,\mu/\si{s}$. Υπολογίζουμε:
+\[f'(e)=-e^{-e}(\ln e+1)=-e^{-e}\cdot 2=-\frac{2}{e^e}\]
+Τη χρονική στιγμή $t_0$:
+\[y'(t_0)=f'(e)\cdot x'(t_0)=-\frac{2}{e^e}\cdot 3=-\frac{6}{e^e}\,\mu/\si{s}\]
+Το αρνητικό πρόσημο δηλώνει ότι η τεταγμένη του $M$ \textbf{μειώνεται} εκείνη τη στιγμή (αναμενόμενο, αφού $e>\frac{1}{e}$ και η $f$ είναι φθίνουσα).
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 3ο ΘΕΜΑ Γ ===========

@@ -1,30 +1,30 @@
 \begin{thema}{Β}
-Στο σχήμα δίνεται η γραφική παράσταση μιας συνάρτησης $f$ ορισμένης στο $[-4, 4]$, η οποία είναι \textbf{περιττή}. Επίσης $f(1) = 2$ και $f(2) = 3$.
+Στο παρακάτω σχήμα δίνεται η γραφική παράσταση $C_f$ μιας παραγωγίσιμης συνάρτησης $f$ με πεδίο ορισμού το διάστημα $[-2, 2]$.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.7]
-  \draw[help lines, gray!30] (-5,-4) grid (5,4);
-  \draw[-latex] (-5.3,0) -- (5.3,0) node[right] {$x$};
-  \draw[-latex] (0,-4.3) -- (0,4.3) node[above] {$y$};
-  \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+\begin{tikzpicture}[scale=1]
+  \draw[help lines, gray!30] (-2.5,-2.5) grid (2.5,2.5);
+  \draw[-latex] (-2.8,0) -- (2.8,0) node[right] {$x$};
+  \draw[-latex] (0,-2.8) -- (0,2.8) node[above] {$y$};
+  \foreach \x in {-2,-1,1,2}
     \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
-  \foreach \y in {-3,-2,-1,1,2,3}
+  \foreach \y in {-2,-1,1,2}
     \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
-  % odd function: smooth curve through origin
-  \draw[very thick, blue!70!black, smooth, tension=0.5]
-    plot coordinates {(0,0) (1,2) (2,3) (3,3.2) (4,3.5)};
-  \filldraw[blue!70!black] (1,2) circle (2pt) node[above left,font=\footnotesize] {$(1,2)$};
-  \filldraw[blue!70!black] (2,3) circle (2pt) node[above left,font=\footnotesize] {$(2,3)$};
-  \filldraw[blue!70!black] (-1,-2) circle (2pt);
-  \filldraw[blue!70!black] (-2,-3) circle (2pt);
-  \filldraw[blue!70!black] (0,0) circle (2pt);
+  % curve
+  \draw[very thick, maincolor!70!black, smooth, samples=100, domain=-2:2] plot (\x, {\x^3 - 3*\x});
+  % points
+  \filldraw[maincolor!70!black] (-1,2) circle (2pt) node[above] {$A(-1,2)$};
+  \filldraw[maincolor!70!black] (1,-2) circle (2pt) node[below] {$B(1,-2)$};
+  \filldraw[maincolor!70!black] (0,0) circle (2pt) node[below left] {$O$};
+  \node[below right,font=\footnotesize] at (1.732,0) {$\rho_2$};
+  \node[above left,font=\footnotesize] at (-1.732,0) {$\rho_1$};
 \end{tikzpicture}
 \end{center}
 
 \begin{erwthma}
-  \item Συμπληρώστε την γραφική παράσταση και υπολογίστε τις τιμές $f(-2)$ και $f(0)$.
-  \item Αν η $f$ είναι γνησίως αύξουσα στο $[0, 4]$, είναι γνησίως αύξουσα και στο $[-4, 0]$?
-  \item Να υπολογίσετε το $\dint_{-2}^{2} f(x) dx$ αιτιολογώντας την απάντησή σας.
-  \item 
+  \item Με βάση το σχήμα, να προσδιορίσετε τα διαστήματα στα οποία η συνάρτηση $f$ είναι κυρτή ή κοίλη, καθώς και τις συντεταγμένες του σημείου καμπής της.
+  \item Να αποδείξετε ότι υπάρχει τουλάχιστον ένα $\xi \in (0, 2)$ τέτοιο ώστε η εφαπτομένη της $C_f$ στο σημείο $M(\xi, f(\xi))$ να είναι παράλληλη στην ευθεία $y = x$.
+  \item Χρησιμοποιώντας αποκλειστικά το σχήμα, να αποδείξετε ότι $\dint_{0}^{1} f(x) \, dx > -2$.
+  \item Να βρείτε το πλήθος των ριζών της εξίσωσης $f(f(x)) = 0$ στο διάστημα $[-2, 2]$.
 \end{erwthma}
 \end{thema}

@@ -1,42 +1,47 @@
 \begin{thema}{Δ}
-Στο παρακάτω σχήμα δίνονται \textbf{ταυτόχρονα} οι γραφικές παραστάσεις δύο συναρτήσεων: μιας μπλε καμπύλης και μιας κόκκινης καμπύλης στο $[-1, 4]$. Μία από αυτές είναι η $f$ και η άλλη η $f'$.
+Στο παρακάτω σχήμα δίνονται \textbf{ταυτόχρονα} οι γραφικές παραστάσεις των συναρτήσεων
+\[
+p(x)=-x^2+4x-1
+\quad\text{και}\quad
+q(x)=-2x+4,\qquad x\in[-1,4].
+\]
+Η μία από αυτές είναι η $f$ και η άλλη η $f'$.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.85]
+\begin{tikzpicture}[scale=0.65]
   % grid
-  \draw[help lines, gray!30] (-2,-3) grid (5,5);
+  \draw[help lines, gray!30] (-2,-7) grid (5,7);
   % axes
   \draw[-latex] (-2.3,0) -- (5.3,0) node[right] {$x$};
-  \draw[-latex] (0,-3.3) -- (0,5.3) node[above] {$y$};
+  \draw[-latex] (0,-7.3) -- (0,7.3) node[above] {$y$};
   % ticks
   \foreach \x in {-1,1,2,3,4}
     \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
-  \foreach \y in {-2,-1,1,2,3,4}
+  \foreach \y in {-6,-4,-2,2,4,6}
     \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
-  % Blue curve: f(x) = x^3/3 - 2x + 3 (local max near x=-... wait, domain [-1,4])
-  % Let's use: f(x) = -x^2 + 4x - 1 (parabola, max at x=2, f(2)=3)
-  \draw[very thick, blue!70!black, domain=-.4:4, samples=60] plot (\x, {-(\x)*(\x) + 4*(\x) - 1});
-  % Red curve: f'(x) = -2x + 4
-  \draw[very thick, red!70!black, domain=-.4:3.2, samples=60] plot (\x, {-2*(\x) + 4});
+  % Blue curve: p(x) = -x^2 + 4x - 1
+  \draw[very thick, maincolor, domain=-1:4, samples=80] plot (\x, {-(\x)*(\x) + 4*(\x) - 1});
+  % Purple line: q(x) = -2x + 4
+  \draw[very thick, secondcolor, domain=-1:4, samples=2] plot (\x, {-2*(\x) + 4});
   % shaded area between them from 1 to 3
   \fill[yellow!20, opacity=0.5, domain=1:3, samples=40]
     (1,{-(1)*(1)+4*(1)-1}) -- plot (\x, {-(\x)*(\x)+4*(\x)-1}) -- (3,{-(3)*(3)+4*(3)-1})
     -- plot[domain=3:1] (\x, {-2*(\x)+4}) -- cycle;
   % labels
-  \node[blue!70!black] at (3.5,4) {μπλε};
-  \node[red!70!black] at (3.5,-1.5) {κόκκινη};
+  \node[maincolor,fill=white,inner sep=1pt] at (3.5,3.8) {$C_p$};
+  \node[secondcolor,fill=white,inner sep=1pt] at (3.5,-2.5) {$C_q$};
   % key points
-  \filldraw[blue!70!black] (2,3) circle (2pt) node[above right,font=\footnotesize] {$(2,3)$};
-  \filldraw[red!70!black] (2,0) circle (2pt) node[below right,font=\footnotesize] {$(2,0)$};
-  \filldraw[blue!70!black] (0,-1) circle (2pt);
-  \filldraw[red!70!black] (0,4) circle (2pt);
+  \filldraw[maincolor] (2,3) circle (2pt) node[above right,font=\footnotesize] {$(2,3)$};
+  \filldraw[secondcolor] (2,0) circle (2pt) node[below right,font=\footnotesize] {$(2,0)$};
+  \filldraw[maincolor] (0,-1) circle (2pt);
+  \filldraw[secondcolor] (0,4) circle (2pt);
 \end{tikzpicture}
 \end{center}
 
 \begin{erwthma}
-  \item Να εξηγήσετε τεκμηριωμένα ποια καμπύλη αντιστοιχεί στη $f$ και ποια στην $f'$. (Υπόδειξη: παρατηρήστε τις μηδενικές τιμές και τα ακρότατα.)
+  \item Να εξηγήσετε τεκμηριωμένα ποια καμπύλη αντιστοιχεί στη $f$ και ποια στην $f'$. (Υπόδειξη: παρατηρήστε τη σχέση των τύπων τους, καθώς και τις μηδενικές τιμές και τα ακρότατα.)
   \item Να γράψετε την εξίσωση της εφαπτομένης της $C_f$ στο σημείο με τετμημένη $x_0 = 0$, χρησιμοποιώντας τιμές που διαβάζετε από το γράφημα.
   \item Να υπολογίσετε γεωμετρικά ή αλγεβρικά το εμβαδόν του σκιασμένου (κίτρινου) χωρίου μεταξύ $C_f$ και $C_{f'}$ στο $[1, 3]$.
-  \item Αν $g(x) = f(x) - f'(x)$, να αποδείξετε ότι η εξίσωση $g(x) = 0$ έχει ακριβώς δύο ρίζες στο $[-1, 4]$.
+  \item Αν $g(x) = f(x) - f'(x)$, να αποδείξετε ότι η εξίσωση $g(x) = 0$ έχει \textbf{ακριβώς μία} ρίζα στο $(-1, 4)$. (Υπόδειξη: Θεώρημα Bolzano για ύπαρξη, μονοτονία $g$ για μοναδικότητα.)
 \end{erwthma}
 \end{thema}

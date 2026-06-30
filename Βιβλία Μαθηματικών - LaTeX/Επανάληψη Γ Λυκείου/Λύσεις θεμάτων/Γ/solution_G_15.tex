@@ -1,88 +1,39 @@
-*   Function: $f: \mathbb{R} \to \mathbb{R}$ satisfying $f(x+y) = f(x) + f(y)$ (Cauchy functional equation).
-    *   Condition: $f$ is differentiable at $x_0 = 0$ with $f'(0) = 2$.
-    *   Task 1: Prove $f(0) = 0$.
-    *   Task 2: Definition of $f'(0)$ using limits.
-    *   Task 3: Show $f'(x) = 2$ for all $x \in \mathbb{R}$.
-    *   Task 4: Find the formula for $f(x)$.
-
-    *   Must use `\begin{thema}{Γ}` ... `\end{thema}`.
-    *   Must use `\begin{erwthma}` ... `\end{erwthma}`.
-    *   Must use `\item` for each sub-question.
-    *   Inline math `$ ... $`, display math `\[ ... \]`.
-    *   Align environment for calculations `\begin{align*} ... \end{align*}`.
-    *   Specific terminology commands: `\eng{...}`, `\textbf{...}`.
-    *   No indefinite integrals (not applicable here).
-    *   No 2nd derivative test (not applicable here).
-    *   No differential equations (the problem leads to $f'(x)=2$, but we solve it by integration using a definite integral or basic antiderivative logic—actually, for $\Gamma$ Lyceum, we usually show that $f(x) = f(0) + \int_0^x f'(t) dt$).
-    *   No preamble.
-    *   Start with `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`.
-    *   End with `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========`.
-
-    *   *Part 1:* To prove $f(0)=0$, set $x=0, y=0$ in $f(x+y) = f(x) + f(y)$.
-        $f(0+0) = f(0) + f(0) \Rightarrow f(0) = 2f(0) \Rightarrow f(0) = 0$.
-
-    *   *Part 2:* Definition of $f'(0)$.
-        $f'(0) = \lim_{h \to 0} \frac{f(0+h) - f(0)}{h} = \lim_{h \to 0} \frac{f(h)}{h}$.
-
-    *   *Part 3:* Show $f'(x) = 2$ for all $x$.
-        $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$.
-        Using the functional equation: $f(x+h) = f(x) + f(h)$.
-        So, $f'(x) = \lim_{h \to 0} \frac{f(x) + f(h) - f(x)}{h} = \lim_{h \to 0} \frac{f(h)}{h}$.
-        From part 2, this limit is $f'(0) = 2$.
-        Thus, $f'(x) = 2$ for all $x \in \mathbb{R}$.
-
-    *   *Part 4:* Find $f(x)$.
-        Since $f'(x) = 2$ for all $x$, $f$ is a linear function of the form $f(x) = 2x + c$.
-        Using $f(0) = 0$, we get $0 = 2(0) + c \Rightarrow c = 0$.
-        So $f(x) = 2x$.
-        Alternatively, using definite integrals (following the guide's preference):
-        For any $x \in \mathbb{R}$, we have $f(x) - f(0) = \int_0^x f'(t) \d t$.
-        $f(x) - 0 = \int_0^x 2 \d t = [2t]_0^x = 2x - 0 = 2x$.
-
-    *   Check if $\eng{...}$ is needed. Maybe for "definition of derivative" or similar, though the prompt mentions it for theorems. I'll use it for "definition" if appropriate, or just stick to standard terminology.
-    *   Ensure `\textbf{...}` for key terms.
-    *   Check the formatting guidelines again.
-
-    *   $\begin{thema}{Γ}$
-    *   $\begin{erwthma}$
-    *   $\item$ (Part 1) ...
-    *   $\item$ (Part 2) ...
-    *   $\item$ (Part 3) ...
-    *   $\item$ (Part 4) ...
-    *   $\end{erwthma}$
-    *   $\end{thema}$
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
-
+%=========== ΛΥΣΗ - 15ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-    \item Θέτοντας $x=0$ και $y=0$ στη σχέση $f(x+y) = f(x) + f(y)$, έχουμε:
-    \[ f(0+0) = f(0) + f(0) \implies f(0) = 2f(0) \implies f(0) = 0 \]
+  \item 
+  Στη δοσμένη σχέση $f(x+y) = f(x) + f(y)$ θέτουμε $x=0$ και $y=0$:
+  \[ f(0+0) = f(0) + f(0) \implies f(0) = 2f(0) \implies f(0) = 0 \]
+  Εφόσον η συνάρτηση είναι παραγωγίσιμη στο $x_0=0$ με $f'(0)=2$, από τον ορισμό της παραγώγου με τη βοήθεια ορίου έχουμε:
+  \[ f'(0) = \lim_{h \to 0} \frac{f(0+h) - f(0)}{h}=\lim_{h \to 0} \frac{f(h)}{h} = 2 \]
+  \item 
+  Για να εξετάσουμε την παραγωγισιμότητα της $f$ σε ένα τυχαίο σημείο $x \in \mathbb{R}$, υπολογίζουμε το όριο:
+  \[ \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \]
+  Από τη δοσμένη σχέση, ισχύει $f(x+h) = f(x) + f(h)$. Αντικαθιστούμε στον αριθμητή:
+  \[ \lim_{h \to 0} \frac{f(x) + f(h) - f(x)}{h} = \lim_{h \to 0} \frac{f(h)}{h} \]
+  Από το πρώτο ερώτημα, το όριο αυτό υπάρχει και ισούται με 2.
+  Επομένως, η $f$ είναι παραγωγίσιμη σε όλο το $\mathbb{R}$ με:
+  \[ f'(x) = 2 \text{ για κάθε } x \in \mathbb{R} \]
+  
+  Για την εύρεση του τύπου της συνάρτησης, αξιοποιούμε τις συνέπειες του Θεωρήματος Μέσης Τιμής:
+  \[ f'(x) = 2 \implies f'(x) = (2x)' \implies f(x) = 2x + c, \text{ όπου } c \in \mathbb{R} \text{ σταθερά.} \]
+  Για να προσδιορίσουμε τη σταθερά $c$, χρησιμοποιούμε την τιμή $f(0) = 0$:
+  \[ f(0) = 2(0) + c \implies 0 = 0 + c \implies c = 0 \]
+  Άρα ο τύπος της συνάρτησης είναι $\boldsymbol{f(x) = 2x}$ για κάθε $x \in \mathbb{R}$.
 
-    \item Από τον \textbf{ορισμό} της παραγώγου στο σημείο $x_0=0$, έχουμε:
-    \[ f'(0) = \lim_{h \to 0} \frac{f(0+h) - f(0)}{h} \]
-    Εφόσον $f(0) = 0$, η έκφραση απλοποιείται σε:
-    \[ f'(0) = \lim_{h \to 0} \frac{f(h)}{h} = 2 \]
-
-    \item Για κάθε $x \in \mathbb{R}$, η παραγώγος $f'(x)$ ορίζεται ως:
-    \[ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \]
-    Χρησιμοποιώντας τη σχέση $f(x+h) = f(x) + f(h)$, η παραπάνω έκφραση γίνεται:
-    \[ f'(x) = \lim_{h \to 0} \frac{f(x) + f(h) - f(x)}{h} = \lim_{h \to 0} \frac{f(h)}{h} \]
-    Από το ερώτημα (β), γνωρίζουμε ότι $\lim_{h \to 0} \frac{f(h)}{h} = f'(0) = 2$.
-    Άρα, για κάθε $x \in \mathbb{R}$:
-    \[ f'(x) = 2 \]
-
-    \item Εφόσον $f'(x) = 2$ για κάθε $x \in \mathbb{R}$, η συνάρτηση $f$ είναι \textbf{γνησίως αύξουσα} και η παραγώγος της είναι σταθερή.
-    Για οποιοδήποτε $x \in \mathbb{R}$, χρησιμοποιώντας το \eng{Fundamental Theorem of Calculus} (Θεμελιώδες Θεώρημα του Απειροστικού Λογισμού), έχουμε:
-    \[ f(x) - f(0) = \int_{0}^{x} f'(t) \d t \]
-    Αντικαθιστώντας $f(0) = 0$ και $f'(t) = 2$:
-    \begin{align*}
-        f(x) - 0 &= \int_{0}^{x} 2 \d t \\
-        f(x) &= [2t]_{0}^{x} \\
-        f(x) &= 2x - 2(0) \\
-        f(x) &= 2x
-    \end{align*}
-    Άρα, ο τύπος της συνάρτησης είναι $f(x) = 2x$.
+  \item 
+  Επειδή $f'(x) = 2 > 0$ για κάθε $x \in \mathbb{R}$, η συνάρτηση $f$ είναι γνησίως αύξουσα, άρα είναι συνάρτηση 1-1 (\eng{«ένα προς ένα»}) και επομένως αντιστρέφεται.
+  Για να βρούμε τον τύπο της αντίστροφης $f^{-1}$, λύνουμε την εξίσωση $y = f(x)$ ως προς $x$:
+  \[ y = 2x \Leftrightarrow x = \frac{y}{2} \]
+  Εναλλάσσοντας τις μεταβλητές, προκύπτει ο τύπος της αντίστροφης:
+  \[ f^{-1}(x) = \frac{x}{2}, \quad x \in \mathbb{R} \]
+  Το ζητούμενο εμβαδόν $E$ περικλείεται από τις $C_f, C_{f^{-1}}$ και τις κατακόρυφες ευθείες $x=2$ και $x=4$.
+  Βρίσκουμε τη διαφορά των δύο συναρτήσεων:
+  \[ f(x) - f^{-1}(x) = 2x - \frac{x}{2} = \frac{3x}{2} \]
+  Για $x \in [2, 4]$, ισχύει $\dfrac{3x}{2} > 0$, οπότε η $C_f$ βρίσκεται "πάνω" από τη $C_{f^{-1}}$. Το εμβαδόν υπολογίζεται από το ολοκλήρωμα:
+  \[ E = \int_{2}^{4} \left| f(x) - f^{-1}(x) \right| \d x = \int_{2}^{4} \frac{3x}{2} \d x \]
+  Υπολογίζουμε το ορισμένο ολοκλήρωμα:
+  \[ E = \left[ \frac{3x^2}{4} \right]_{2}^{4} = \frac{3(4^2)}{4} - \frac{3(2^2)}{4} = \frac{48}{4} - \frac{12}{4} = 12 - 3 = \boldsymbol{9 \text{ τ.μ.}} \]
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 15ο ΘΕΜΑ Γ ===========

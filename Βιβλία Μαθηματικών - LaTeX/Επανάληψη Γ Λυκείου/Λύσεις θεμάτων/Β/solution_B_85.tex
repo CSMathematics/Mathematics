@@ -1,50 +1,81 @@
-%=========== ΛΥΣΗ - ΘΕΜΑ Β_85 ===========
+%=========== ΛΥΣΗ - 85ο ΘΕΜΑ Β ===========
+
 \begin{thema}{Β}
-Έστω η συνάρτηση $f(x) = -x^2+4$ με $x \ge 0$. Μια τυχαία εφαπτομένη της γραφικής της παράστασης στο σημείο $M(x_0, f(x_0))$ με $x_0 \in (0, 2)$ τέμνει τους θετικούς ημιάξονες $Ox$ και $Oy$ στα σημεία $A$ και $B$ αντίστοιχα.
+Στο παρακάτω σχήμα φαίνεται ενδεικτικά η κατασκευή για $x_0=1$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle, axis line style={->, >=latex},
+        grid=major, grid style={very thin, gray!25},
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-0.25, xmax=3.1, ymin=-0.35, ymax=5.7,
+        xtick={1,2,2.5,3}, xticklabels={$1$,$2$,$\frac{5}{2}$,$3$},
+        ytick={1,2,3,4,5}, width=9cm, height=7cm, samples=100,
+        every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+        every axis y label/.style={at={(current axis.above origin)}, anchor=south}
+    ]
+        \fill[blue!10] (axis cs:0,0) -- (axis cs:2.5,0) -- (axis cs:0,5) -- cycle;
+        \addplot[very thick, \xrwma, domain=0:2.05] {-x^2+4} node[pos=0.18, above right] {$C_f$};
+        \addplot[very thick, black, domain=0:2.5] {-2*x+5} node[pos=0.55, above right] {$\varepsilon$};
+        \addplot[dashed, thick] coordinates {(1,0) (1,3)};
+        \addplot[dashed, thick] coordinates {(0,3) (1,3)};
+        \addplot[mark=*, mark options={fill=black, scale=1.15}] coordinates {(0,0) (2.5,0) (0,5)};
+        \addplot[mark=*, mark options={fill=red, scale=1.2}] coordinates {(1,3)};
+        \node[below left] at (axis cs:0,0) {$O$};
+        \node[above right, red] at (axis cs:1,3) {$M$};
+        \node[below] at (axis cs:2.5,0) {$A$};
+        \node[left] at (axis cs:0,5) {$B$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
 
 \begin{erwthma}
+\item Είναι $f(x)=-x^2+4$, άρα $f'(x)=-2x$. Στο $M(x_0,f(x_0))=\left(x_0,-x_0^2+4\right)$ η εφαπτομένη έχει εξίσωση
+\[
+y-(-x_0^2+4)=-2x_0(x-x_0)\Leftrightarrow \varepsilon:\ y=-2x_0x+x_0^2+4.
+\]
+Για $x=0$ βρίσκουμε $B(0,x_0^2+4)$, ενώ για $y=0$ βρίσκουμε
+\[
+-2x_0x+x_0^2+4=0\Leftrightarrow x=\frac{x_0^2+4}{2x_0},
+\]
+οπότε $A\left(\dfrac{x_0^2+4}{2x_0},0\right)$.
 
-\item Η $f(x)$ είναι παραγωγίσιμη με $f'(x) = -2x$. 
-Η εφαπτομένη $(\varepsilon)$ στο σημείο $M(x_0, f(x_0))$ έχει συντελεστή διεύθυνσης $\lambda = f'(x_0) = -2x_0$ και η εξίσωσή της είναι:
-\[ y - f(x_0) = f'(x_0)(x - x_0) \Leftrightarrow y - (-x_0^2 + 4) = -2x_0 (x - x_0) \]
-\[ y = -2x_0 x + 2x_0^2 - x_0^2 + 4 \Leftrightarrow (\varepsilon): \quad y = -2x_0 x + x_0^2 + 4 \]
+\item Το τρίγωνο $OAB$ είναι ορθογώνιο στο $O$ και
+\[
+OA=\frac{x_0^2+4}{2x_0},\quad OB=x_0^2+4.
+\]
+Άρα
+\[
+E(x_0)=\frac12\cdot OA\cdot OB
+=\frac12\cdot\frac{x_0^2+4}{2x_0}\cdot(x_0^2+4)
+=\frac{(x_0^2+4)^2}{4x_0}.
+\]
 
-Βρίσκουμε τα σημεία τομής της εφαπτομένης με τους άξονες:
-\begin{itemize}
-    \item \textbf{Τομή με τον άξονα $Oy$ ($x=0$):}  Για $x=0$, έχουμε $y = x_0^2 + 4$. 
-    Άρα τέμνει τον θετικό ημιάξονα $Oy$ στο σημείο $B\left(0, x_0^2 + 4\right)$.
-    \item \textbf{Τομή με τον άξονα $Ox$ ($y=0$):} Για $y=0$, λύνοντας την εξίσωση εντοπίζουμε:
-    \[ 0 = -2x_0 x + x_0^2 + 4 \Leftrightarrow 2x_0 x = x_0^2 + 4 \Leftrightarrow x = \frac{x_0^2 + 4}{2x_0} \]
-    Άρα τέμνει τον θετικό ημιάξονα $Ox$ στο σημείο $A\left(\frac{x_0^2 + 4}{2x_0}, 0\right)$.
-\end{itemize}
+\item Θέτουμε $x$ στη θέση του $x_0$ και μελετάμε
+\[
+E(x)=\frac{(x^2+4)^2}{4x}=\frac{x^3}{4}+2x+\frac4x,\quad x\in(0,2).
+\]
+Έχουμε
+\[
+E'(x)=\frac{3x^2}{4}+2-\frac{4}{x^2}
+=\frac{3x^4+8x^2-16}{4x^2}
+=\frac{(x^2+4)(3x^2-4)}{4x^2}.
+\]
+Η παραγοντοποίηση γίνεται επειδή $(x^2+4)(3x^2-4)=3x^4+8x^2-16$. Στο $(0,2)$ έχουμε $x^2+4>0$ και $4x^2>0$, άρα το πρόσημο του $E'$ είναι το πρόσημο του $3x^2-4$. Επομένως
+\[
+E'(x)=0\Leftrightarrow x=\frac{2}{\sqrt3}=\frac{2\sqrt3}{3}.
+\]
+Η $E$ είναι φθίνουσα στο $\left(0,\frac{2}{\sqrt3}\right]$ και αύξουσα στο $\left[\frac{2}{\sqrt3},2\right)$, οπότε το ελάχιστο προκύπτει για $x_0=\dfrac{2\sqrt3}{3}$.
 
-\item Το τρίγωνο $OAB$ είναι ορθογώνιο στην αρχή των αξόνων $O(0,0)$. Τα μήκη των κάθετων πλευρών του ταυτίζονται με τις θετικές συντεταγμένες των σημείων $A$ και $B$:
-\[ (OA) = x_A = \frac{x_0^2 + 4}{2x_0} \quad \text{και} \quad (OB) = y_B = x_0^2 + 4 \]
-Το εμβαδόν του ορθογωνίου τριγώνου, συναρτήσει του $x_0$, είναι:
-\[ E(x_0) = \frac{1}{2} (OA) (OB) = \frac{1}{2} \cdot \frac{x_0^2 + 4}{2x_0} \cdot (x_0^2 + 4) = \frac{(x_0^2+4)^2}{4x_0} \]
-Το ζητούμενο αποδείχθηκε.
-
-\item Θέλουμε να βρούμε το $x_0 \in (0, 2)$ που ελαχιστοποιεί τη συνάρτηση εμβαδού $E(t) = \frac{(t^2+4)^2}{4t}$ για $t \in (0, 2)$.
-Παραγωγίζουμε χρησιμοποιώντας τον κανόνα του πηλίκου:
-\[ E'(t) = \frac{ \left((t^2+4)^2\right)' (4t) - (t^2+4)^2 (4t)' }{(4t)^2} = \frac{ 2(t^2+4)(2t)(4t) - 4(t^2+4)^2 }{16t^2} \]
-\[ E'(t) = \frac{ 16t^2(t^2+4) - 4(t^2+4)^2 }{16t^2} = \frac{4(t^2+4) \left[ 4t^2 - (t^2+4) \right]}{16t^2} = \frac{4(t^2+4)(3t^2 - 4)}{16t^2} = \frac{(t^2+4)(3t^2 - 4)}{4t^2} \]
-
-Για να βρούμε τα ακρότατα, θέτουμε $E'(t) = 0$:
-\[ E'(t) = 0 \Leftrightarrow 3t^2 - 4 = 0 \Leftrightarrow t^2 = \frac{4}{3} \stackrel{t>0}{\Leftrightarrow} t = \frac{2}{\sqrt{3}} = \frac{2\sqrt{3}}{3} \]
-Εξετάζουμε εάν η ρίζα ανήκει στο $(0, 2)$: προφανώς $2/\sqrt{3} < 2$ αφού $\sqrt{3} > 1$. Οπότε το κρίσιμο σημείο είναι το $x_0 = \frac{2\sqrt{3}}{3}$.
-
-Ελέγχουμε το πρόσημο της παραγώγου:
-\begin{itemize}
-    \item Αν $0 < t < \frac{2\sqrt{3}}{3}$, τότε $3t^2 < 4 \Leftrightarrow 3t^2 - 4 < 0$, άρα $E'(t) < 0$. Συνεπώς η $E(t)$ είναι γνησίως φθίνουσα στο $\left(0, \frac{2\sqrt{3}}{3}\right]$.
-    \item Αν $\frac{2\sqrt{3}}{3} < t < 2$, τότε $3t^2 - 4 > 0$, άρα $E'(t) > 0$. Συνεπώς η $E(t)$ είναι γνησίως αύξουσα στο $\left[\frac{2\sqrt{3}}{3}, 2\right)$.
-\end{itemize}
-Συμπεραίνουμε πως η συνάρτηση παρουσιάζει ελάχιστο (το οποίο είναι και ολικό στο $(0, 2)$) για τη θέση $x_0 = \frac{2\sqrt{3}}{3}$. 
-
-\item Για να βρούμε το αντίστοιχο ελάχιστο εμβαδόν, αντικαθιστούμε την τιμή $x_0 = \frac{2}{\sqrt{3}}$ στον τύπο της $E$:
-\[ E_{\min} = E\left(\frac{2}{\sqrt{3}}\right) = \frac{\left( \left(\frac{2}{\sqrt{3}}\right)^2 + 4 \right)^2}{4 \cdot \frac{2}{\sqrt{3}}} = \frac{\left( \frac{4}{3} + 4 \right)^2}{\frac{8}{\sqrt{3}}} = \frac{\left( \frac{16}{3} \right)^2}{\frac{8}{\sqrt{3}}} \]
-Εκτελούμε τις πράξεις:
-\[ E_{\min} = \frac{\frac{256}{9}}{\frac{8}{\sqrt{3}}} = \frac{256\sqrt{3}}{72} = \frac{32\sqrt{3}}{9} \quad \text{τ.μ.} \]
-
+\item
+\[
+E_{\min}=E\left(\frac{2}{\sqrt3}\right)
+=\frac{\left(\frac43+4\right)^2}{4\cdot\frac{2}{\sqrt3}}
+=\frac{\left(\frac{16}{3}\right)^2}{\frac{8}{\sqrt3}}
+=\frac{32\sqrt3}{9}.
+\]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_85 ===========
+
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 85ο ΘΕΜΑ Β ===========

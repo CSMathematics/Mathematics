@@ -1,128 +1,61 @@
-*   Function: $f(x) = x^3 - 3x + 1$.
-    *   Part 1: Find local extrema points $x_1, x_2$ and determine monotonicity.
-    *   Part 2: Prove $f(x) = 0$ has exactly three real roots $\rho_1 \in (-\infty, x_1)$, $\rho_2 \in (x_1, x_2)$, $\rho_3 \in (x_2, +\infty)$.
-    *   Part 3: Find the inflection point and the equation of the tangent line at that point.
-    *   Part 4: Calculate the definite integral $\int_{-1}^1 f(x) dx$.
-
-    *   `\begin{thema}{Γ}` ... `\end{thema}`.
-    *   `\begin{erwthma}` ... `\end{erwthma}`.
-    *   `\item` for sub-questions.
-    *   `\[ ... \]` for display math, `\begin{align*}` for multi-line calculations.
-    *   `\textbf{...}` for emphasis (e.g., **γνησίως αύξουσα**).
-    *   `\eng{...}` for technical terms (e.g., `\eng{Bolzano}`).
-    *   No indefinite integrals; use definite integrals with brackets.
-    *   Specific colors for tables (`tkz-tab`): `colorC = red7`, `colorL = red9`, `colorV = red7`.
-    *   No preamble.
-
-    *   **Part 1: Extrema and Monotonicity**
-        *   $f(x) = x^3 - 3x + 1$
-        *   $f'(x) = 3x^2 - 3$
-        *   $f'(x) = 0 \Rightarrow 3(x^2 - 1) = 0 \Rightarrow x = \pm 1$.
-        *   So $x_1 = -1$ and $x_2 = 1$.
-        *   Sign of $f'(x)$:
-            *   $f'(x) > 0$ for $x \in (-\infty, -1) \cup (1, +\infty) \Rightarrow \textbf{γνησίως αύξουσα}$.
-            *   $f'(x) < 0$ for $x \in (-1, 1) \Rightarrow \textbf{γνησίως φθίνουσα}$.
-        *   Table needed.
-
-    *   **Part 2: Number of Roots**
-        *   Check values at critical points and limits:
-            *   $\lim_{x \to -\infty} f(x) = -\infty$.
-            *   $f(-1) = (-1)^3 - 3(-1) + 1 = -1 + 3 + 1 = 3$.
-            *   $f(1) = 1^3 - 3(1) + 1 = 1 - 3 + 1 = -1$.
-            *   $\lim_{x \to +\infty} f(x) = +\infty$.
-        *   By `\eng{Bolzano}` theorem:
-            *   Interval $(-\infty, -1)$: $f$ changes sign from $-\infty$ to $3 \Rightarrow \exists \rho_1$.
-            *   Interval $(-1, 1)$: $f$ changes sign from $3$ to $-1 \Rightarrow \exists \rho_2$.
-            *   Interval $(1, +\infty)$: $f$ changes sign from $-1$ to $+\infty \Rightarrow \exists \rho_3$.
-        *   Since the function is strictly monotonic on these intervals, each root is unique.
-
-    *   **Part 3: Inflection Point and Tangent**
-        *   $f'(x) = 3x^2 - 3$.
-        *   $f''(x) = 6x$.
-        *   $f''(x) = 0 \Rightarrow x = 0$.
-        *   Inflection point $K(0, f(0)) \Rightarrow f(0) = 1 \Rightarrow K(0, 1)$.
-        *   Slope of tangent at $x=0$: $f'(0) = 3(0)^2 - 3 = -3$.
-        *   Equation: $y - 1 = -3(x - 0) \Rightarrow y = -3x + 1$.
-
-    *   **Part 4: Integral**
-        *   $\int_{-1}^1 (x^3 - 3x + 1) dx$.
-        *   $= \left[ \frac{x^4}{4} - \frac{3x^2}{2} + x \right]_{-1}^1$.
-        *   Upper limit: $\frac{1}{4} - \frac{3}{2} + 1 = \frac{1-6+4}{4} = -\frac{1}{4}$.
-        *   Lower limit: $\frac{(-1)^4}{4} - \frac{3(-1)^2}{2} + (-1) = \frac{1}{4} - \frac{3}{2} - 1 = \frac{1-6-4}{4} = -\frac{9}{4}$.
-        *   Result: $-\frac{1}{4} - (-\frac{9}{4}) = \frac{8}{4} = 2$.
-        *   *Alternative approach: odd function part.* $\int_{-1}^1 (x^3 - 3x) dx = 0$ because they are odd functions. Thus $\int_{-1}^1 f(x) dx = \int_{-1}^1 1 dx = [x]_{-1}^1 = 1 - (-1) = 2$. I will use the standard integration method to be clear and safe, or maybe the odd function property if it's elegant, but usually, the standard definite integral evaluation is expected in these exams. I'll stick to the standard definite integral.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\begin{itemize}` for root/derivative analysis.
-    *   `\begin{align*}` for the integral.
-    *   `\begin{center}` + `\tkzTabInit` etc. for the table.
-    *   `\eng{Bolzano}`.
-    *   Check that no prohibited concepts (like indefinite integrals $\int f(x) dx = F(x) + C$) are used. Use brackets for definite integrals.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
-
+%=========== ΛΥΣΗ - 11ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
   \item 
-  Η συνάρτηση $f$ είναι πολυωνυμική, άρα είναι συνεχής και παραγωγίσιμη στο $\mathbb{R}$.
-  Η παράγωγός της είναι:
-  \[ f'(x) = 3x^2 - 3 \]
-  Για τον προσδιορισμό των σημείων ακροτάτου, λύνουμε την εξίσωση $f'(x) = 0$:
-  \[ 3x^2 - 3 = 0 \Leftrightarrow 3(x^2 - 1) = 0 \Leftrightarrow x = \pm 1 \]
-  Άρα τα σημεία των τοπικών ακροτάτων είναι τα $x_1 = -1$ και $x_2 = 1$.
-  
-  Για τη μελέτη της μονοτονίας, εξετάζουμε το πρόσημο της $f'(x)$:
-  \begin{itemize}
-    \item $f'(x) > 0 \Leftrightarrow 3(x^2 - 1) > 0 \Leftrightarrow x \in (-\infty, -1) \cup (1, +\infty)$
-    \item $f'(x) < 0 \Leftrightarrow 3(x^2 - 1) < 0 \Leftrightarrow x \in (-1, 1)$
-    \item $f'(x) = 0 \Leftrightarrow x = \pm 1$
-  \end{itemize}
-  Συνεπώς, η συνάρτηση $f$ είναι \textbf{γνησίως αύξουσα} στο $(-\infty, -1)$ και στο $(1, +\infty)$ και \textbf{γνησίως φθίνουσα} στο $(-1, 1)$.
-  
+  Η συνάρτηση $f(x) = x^3 - 3x + 1$ είναι παραγωγίσιμη στο $\mathbb{R}$ με:
+  \[ f'(x) = 3x^2 - 3 = 3(x^2 - 1) \]
+  Οι ρίζες της παραγώγου είναι:
+  \[ f'(x) = 0 \Leftrightarrow x^2 - 1 = 0 \Leftrightarrow x = -1 \text{ ή } x = 1 \]
+  Το πρόσημο της $f'$ (τριώνυμο με θετικό συντελεστή στο $x^2$) είναι αρνητικό εντός των ριζών και θετικό εκτός:
   \begin{center}
   \begin{tikzpicture}
-    \tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1.2, $f'(x)$ / 1.2, $f(x)$ / 2.2}
+    \tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+    {$x$ / .8, $f'(x)$ / 0.8, $f(x)$ / 1.5}
     { $-\infty$, $-1$, $1$, $+\infty$ }
     \tkzTabLine{ , +, z, -, z, +, }
-    \tkzTabVar{ $-\infty$, $\nearrow$, $3$, $\searrow$, $-1$, $\nearrow$, $+\infty$ }
+    \tkzTabVar{ -/,+/,-/,+/}
   \end{tikzpicture}
   \end{center}
+  Η συνάρτηση $f$ είναι \textbf{γνησίως αύξουσα} στα διαστήματα $(-\infty, -1]$ και $[1, +\infty)$, ενώ είναι \textbf{γνησίως φθίνουσα} στο $[-1, 1]$.
+  Παρουσιάζει:
+  \begin{itemize}
+    \item Τοπικό μέγιστο για $x_1 = -1$, με τιμή $f(-1) = (-1)^3 - 3(-1) + 1 = 3$.
+    \item Τοπικό ελάχιστο για $x_2 = 1$, με τιμή $f(1) = 1^3 - 3(1) + 1 = -1$.
+  \end{itemize}
 
   \item 
-  Από τον πίνακα παραγωγίσιμης και τα όρια της συνάρτησης:
-  \[ \lim_{x \to -\infty} f(x) = -\infty, \quad f(-1) = 3, \quad f(1) = -1, \quad \lim_{x \to +\infty} f(x) = +\infty \]
-  
+  Για να βρούμε το πλήθος των ριζών της εξίσωσης $f(x) = 0$, βρίσκουμε το σύνολο τιμών της $f$ σε κάθε διάστημα μονοτονίας:
   \begin{itemize}
-    \item Στο διάστημα $(-\infty, -1)$, η $f$ είναι συνεχής και αλλάζει πρόσημο από το $-\infty$ στο $3$. Επομένως, από το θεώρημα \eng{Bolzano}, υπάρχει τουλάχιστον μία ρίζα $\rho_1 \in (-\infty, -1)$. Επειδή η $f$ είναι \textbf{γνησίως αύξουσα} στο διάστημα αυτό, η $\rho_1$ είναι μοναδική.
-    \item Στο διάστημα $(-1, 1)$, η $f$ είναι συνεχής και αλλάζει πρόσημο από το $3$ στο $-1$. Επομένως, από το θεώρημα \eng{Bolzano}, υπάρχει τουλάχιστον μία ρίζα $\rho_2 \in (-1, 1)$. Επειδή η $f$ είναι \textbf{γνησίως φθίνουσα} στο διάστημα αυτό, η $\rho_2$ είναι μοναδική.
-    \item Στο διάστημα $(1, +\infty)$, η $f$ είναι συνεχής και αλλάζει πρόσημο από το $-1$ στο $+\infty$. Επομένως, από το θεώρημα \eng{Bolzano}, υπάρχει τουλάχιστον μία ρίζα $\rho_3 \in (1, +\infty)$. Επειδή η $f$ είναι \textbf{γνησίως αύξουσα} στο διάστημα αυτό, η $\rho_3$ είναι μοναδική.
+    \item Έστω $\Delta_1 = (-\infty, -1]$. Η $f$ είναι συνεχής και γνησίως αύξουσα στο $\Delta_1$, άρα το σύνολο τιμών της είναι $f(\Delta_1) = \left( \lim\limits_{x \to -\infty} f(x), f(-1) \right] = (-\infty, 3]$. 
+    Επειδή το $0 \in f(\Delta_1)$, η εξίσωση $f(x)=0$ έχει ρίζα στο $\Delta_1$, η οποία είναι \textbf{μοναδική} (έστω $\rho_1 \in (-\infty, -1)$) λόγω της γνήσιας μονοτονίας.
+    \item Έστω $\Delta_2 = [-1, 1]$. Η $f$ είναι συνεχής και γνησίως φθίνουσα, άρα $f(\Delta_2) = \left[ f(1), f(-1) \right] = [-1, 3]$.
+    Επειδή το $0 \in f(\Delta_2)$, υπάρχει \textbf{μοναδική} ρίζα $\rho_2 \in (-1, 1)$.
+    \item Έστω $\Delta_3 = [1, +\infty)$. Η $f$ είναι συνεχής και γνησίως αύξουσα, άρα $f(\Delta_3) = \left[ f(1), \lim\limits_{x \to +\infty} f(x) \right) = [-1, +\infty)$.
+    Επειδή το $0 \in f(\Delta_3)$, υπάρχει \textbf{μοναδική} ρίζα $\rho_3 \in (1, +\infty)$.
   \end{itemize}
-  Άρα η εξίσωση $f(x) = 0$ έχει ακριβώς τρεις πραγματικές ρίζες $\rho_1 \in (-\infty, x_1), \rho_2 \in (x_1, x_2)$ και $\rho_3 \in (x_2, +\infty)$.
+  Άρα η εξίσωση $f(x) = 0$ έχει ακριβώς τρεις πραγματικές ρίζες $\rho_1 < x_1 < \rho_2 < x_2 < \rho_3$.
 
   \item 
   Υπολογίζουμε τη δεύτερη παράγωγο της $f$:
   \[ f''(x) = (3x^2 - 3)' = 6x \]
-  Το σημείο καμπής προκύπτει όταν $f''(x) = 0$:
-  \[ 6x = 0 \Leftrightarrow x = 0 \]
-  Για $x=0$, έχουμε $f(0) = 0^3 - 3(0) + 1 = 1$. Άρα το σημείο καμπής είναι το $K(0, 1)$.
+  Ρίζες και πρόσημο της $f''$:
+  \[ f''(x) = 0 \Leftrightarrow 6x = 0 \Leftrightarrow x = 0 \]
+  \[ f''(x) > 0 \Leftrightarrow x > 0 \quad \text{και} \quad f''(x) < 0 \Leftrightarrow x < 0 \]
+  Επειδή η $f''$ αλλάζει πρόσημο εκατέρωθεν του $0$, το σημείο με τετμημένη $0$ είναι \textbf{σημείο καμπής}. Η τεταγμένη του είναι $f(0) = 1$, άρα το σημείο καμπής είναι το $K(0, 1)$.
   
-  Η κλίση της εφαπτομένης στο σημείο $K$ είναι:
-  \[ f'(0) = 3(0)^2 - 3 = -3 \]
-  Η εξίσωση της εφαπτομένης είναι:
-  \[ y - 1 = -3(x - 0) \Leftrightarrow y = -3x + 1 \]
+  Η κλίση της εφαπτομένης $\varepsilon$ στο σημείο $K$ είναι:
+  \[ \lambda = f'(0) = 3(0)^2 - 3 = -3 \]
+  Η εξίσωση της εφαπτομένης $\varepsilon$ στο $K(0,1)$ είναι:
+  \[ y - f(0) = f'(0)(x - 0) \Leftrightarrow y - 1 = -3x \Leftrightarrow y = -3x + 1 \]
 
   \item 
-  Υπολογίζουμε το ορισμένο ολοκλήρωμα:
-  \begin{align*}
-  \int_{-1}^1 f(x) \d x &= \int_{-1}^1 (x^3 - 3x + 1) \d x \\
-  &= \left[ \frac{x^4}{4} - \frac{3x^2}{2} + x \right]_{-1}^1 \\
-  &= \left( \frac{1}{4} - \frac{3}{2} + 1 \right) - \left( \frac{(-1)^4}{4} - \frac{3(-1)^2}{2} + (-1) \right) \\
-  &= \left( \frac{1-6+4}{4} \right) - \left( \frac{1-6-4}{4} \right) \\
-  &= \left( -\frac{1}{4} \right) - \left( -\frac{9}{4} \right) \\
-  &= \frac{8}{4} = 2
-  \end{align*}
+  Το ζητούμενο εμβαδόν $E$ περικλείεται από τη γραφική παράσταση $C_f$, την εφαπτομένη $\varepsilon$: $y = -3x+1$ και την κατακόρυφη ευθεία $x = 1$. 
+  Το άλλο όριο ολοκλήρωσης προκύπτει από το σημείο επαφής των δύο καμπυλών (καθώς και τομής τους), το οποίο είναι το $x=0$.
+  Βρίσκουμε τη διαφορά τους:
+  \[ f(x) - y = (x^3 - 3x + 1) - (-3x + 1) = x^3 \]
+  Για $x \in [0, 1]$ ισχύει $x^3 \ge 0$, άρα η $C_f$ βρίσκεται πάνω από την εφαπτομένη $\varepsilon$. 
+  Το εμβαδόν του χωρίου είναι:
+  \[ E = \int_0^1 |f(x) - y| \d x = \int_0^1 x^3 \d x = \left[ \frac{x^4}{4} \right]_0^1 = \frac{1^4}{4} - 0 = \frac{1}{4} \text{ τ.μ.} \]
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 11ο ΘΕΜΑ Γ ===========

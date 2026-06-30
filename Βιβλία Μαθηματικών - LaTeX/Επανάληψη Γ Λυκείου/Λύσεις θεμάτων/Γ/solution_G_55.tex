@@ -1,159 +1,71 @@
-*   Exercise: Solve a problem involving the equation $e^x + x = 2$.
-    *   Part 1: Show existence of a root $x_0 \in (0, 1)$.
-    *   Part 2: Show uniqueness of $x_0$ in $\mathbb{R}$.
-    *   Part 3: Study the sign of $f(x) = e^x + x - 2$.
-    *   Part 4: Calculate $I(x_0) = \int_0^{x_0} f(x) dx$ and show it has a global minimum.
-
-    *   `\begin{thema}{Γ}` ... `\end{thema}`
-    *   `\begin{erwthma}` ... `\end{erwthma}`
-    *   `\item` for sub-questions.
-    *   `$ ... $` for inline math, `\[ ... \]` for display math.
-    *   `\begin{align*}` for calculations.
-    *   `\eng{...}` for technical terms.
-    *   `\textbf{...}` for emphasis.
-    *   `\d x` for differential.
-    *   No indefinite integrals (use definite integrals).
-    *   No 2nd derivative test for extrema.
-    *   No differential equations.
-    *   No variable limits of integration.
-
-    *   *Part 1 (Existence of root $x_0 \in (0, 1)$):*
-        Define $f(x) = e^x + x - 2$.
-        $f$ is continuous on $\mathbb{R}$.
-        $f(0) = e^0 + 0 - 2 = 1 - 2 = -1 < 0$.
-        $f(1) = e^1 + 1 - 2 = e - 1 > 0$.
-        Since $f(0) \cdot f(1) < 0$, by the Intermediate Value Theorem (\eng{Bolzano}), there exists $x_0 \in (0, 1)$ such that $f(x_0) = 0$.
-
-    *   *Part 2 (Uniqueness of root):*
-        Calculate $f'(x)$.
-        $f'(x) = e^x + 1$.
-        Since $e^x > 0$ for all $x \in \mathbb{R}$, then $f'(x) > 1 > 0$ for all $x \in \mathbb{R}$.
-        Thus, $f$ is \textbf{γνησίως αύξουσα} on $\mathbb{R}$.
-        A strictly monotonic function can have at most one root. Therefore, $x_0$ is unique.
-
-    *   *Part 3 (Sign of $f(x)$):*
-        Since $f$ is strictly increasing and $f(x_0) = 0$:
-        $f(x) < 0$ for $x < x_0$.
-        $f(x) > 0$ for $x > x_0$.
-        (Optional: use a table or simply state based on monotonicity).
-
-    *   *Part 4 ($I(x_0)$ and global minimum):*
-        $I(x_0) = \int_0^{x_0} (e^x + x - 2) \d x$.
-        Calculation:
-        \[ I(x_0) = [e^x + \frac{x^2}{2} - 2x]_0^{x_0} = (e^{x_0} + \frac{x_0^2}{2} - 2x_0) - (e^0 + 0 - 0) = e^{x_0} + \frac{x_0^2}{2} - 2x_0 - 1 \]
-        Since $x_0$ is a root, $e^{x_0} + x_0 = 2 \Rightarrow e^{x_0} = 2 - x_0$.
-        Substitute $e^{x_0}$:
-        \[ I(x_0) = (2 - x_0) + \frac{x_0^2}{2} - 2x_0 - 1 = \frac{x_0^2}{2} - 3x_0 + 1 \]
-        Wait, the question says "as a function of $x_0$". Usually, this means $I(t) = \int_0^t f(x) dx$ and we want to show $I(t)$ has a minimum at $t=x_0$.
-        Looking closely at the wording: "υπολογίσετε το ολοκλήρωμα $I(x_0)=\int_0^{x_0} f(x) dx$ ως συνάρτηση του $x_0$". This is slightly ambiguous. Does it mean treat $x_0$ as a variable $t$?
-        Let's define $G(t) = \int_0^t f(x) dx$.
-        $G'(t) = f(t)$ (by Fundamental Theorem of Calculus).
-        $G'(t) = 0 \Leftrightarrow f(t) = 0 \Leftrightarrow t = x_0$.
-        $G'(t) < 0$ for $t < x_0$ and $G'(t) > 0$ for $t > x_0$.
-        Therefore, $G(t)$ has a global minimum at $t = x_0$.
-        The request says "δείξτε ότι η συνάρτηση $I(x_0)$ έχει ολικό ελάχιστο". This phrasing suggests that $I$ is a function of the variable $x_0$. I will use the variable $x_0$ as the independent variable or introduce $t$ for clarity.
-        Let's assume the function is $I(t) = \int_0^t f(x) dx$.
-
-    *   Use `\begin{thema}{Γ}`.
-    *   Use `\begin{erwthma}`.
-    *   Use `\item`.
-    *   Apply `\eng{Bolzano}` for the IVT.
-    *   Ensure `\d x` is used.
-    *   Ensure no indefinite integrals are used.
-
-    *Self-Correction on Part 4:*
-    If I calculate $I(x_0)$ using the root property $e^{x_0} + x_0 = 2$, it becomes a value (or a expression in $x_0$). But the question asks to show that the *function* $I(x_0)$ has a minimum. This implies we should treat $x_0$ as the independent variable (let's call it $t$ for a moment to avoid confusion, but write it as $x_0$ as per the prompt).
-    Let $I(z) = \int_0^z f(x) dx$.
-    Then $I'(z) = f(z)$.
-    $I'(z) = 0 \Rightarrow e^z + z - 2 = 0 \Rightarrow z = x_0$.
-    Since $f(z) < 0$ for $z < x_0$ and $f(z) > 0$ for $z > x_0$, $I(z)$ has a global minimum at $z=x_0$.
-
-    Wait, I must be careful about "definite integrals" rule. I can't use $\int f(x) dx = F(x) + C$. I must use $[F(x)]_a^b$.
-
-    *Drafting the final LaTeX:*
-    Part 1:
-    $\textbf{Ορισμός:}$ $f(x) = e^x + x - 2$.
-    $f$ is continuous on $[0, 1]$.
-    $f(0) = -1 < 0$ and $f(1) = e - 1 > 0$.
-    By \eng{Bolzano}, $\exists x_0 \in (0, 1)$ such that $f(x_0) = 0$.
-
-    Part 2:
-    $f'(x) = e^x + 1$.
-    $f'(x) > 0$ for all $x \in \mathbb{R}$.
-    $\textbf{γνησίως αύξουσα}$. Root is unique.
-
-    Part 3:
-    $f'(x) > 0$, $f(x_0) = 0$.
-    $x < x_0 \Rightarrow f(x) < f(x_0) = 0$.
-    $x > x_0 \Rightarrow f(x) > f(x_0) = 0$.
-
-    Part 4:
-    $I(t) = \int_0^t (e^x + x - 2) \d x = [e^x + \frac{x^2}{2} - 2x]_0^t = e^t + \frac{t^2}{2} - 2t - 1$.
-    $I'(t) = f(t) = e^t + t - 2$.
-    $I'(t) = 0 \Leftrightarrow t = x_0$.
-    Sign of $I'(t)$ is same as $f(t)$.
-    $I'(t) < 0$ for $t < x_0$ and $I'(t) > 0$ for $t > x_0$.
-    Therefore, $I(t)$ has a global minimum at $t = x_0$.
-
-    *Double check guidelines:*
-    - No 2nd derivative test? Check.
-    - No indefinite integrals? Check (using $[...]_0^t$).
-    - No variable limit differentiation? Wait, the guidelines say: "Ολοκληρώματα με Μεταβλητά Άκρα: Δεν χρησιμοποιείται η διαφοροποίηση ολοκληρωμάτων της μορφής $\int_{a}^{g(x)} f(t) dt$".
-    This means I cannot use $I'(t) = f(t)$ directly via the theorem. I must calculate the integral first, then differentiate the result.
-
-    Let's re-verify: $I(t) = e^t + \frac{t^2}{2} - 2t - 1$.
-    Then $I'(t) = e^t + t - 2$.
-    This is the same as $f(t)$. This way I avoid the forbidden "differentiation of integrals with variable limits" theorem.
-
-    *Formatting check:*
-    - `\begin{thema}{Γ}`
-    - `\begin{erwthma}`
-    - `\item`
-    - `\eng{Bolzano}`
-    - `\textbf{γνησίως αύξουσα}`
-    - `\d x`
-    - `\begin{align*}` for the integral.
-%=========== ΛΥΣΗ - 1ο ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 55ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Ορίζουμε τη συνάρτηση $f: \mathbb{R} \to \mathbb{R}$ με $f(x) = e^x + x - 2$.
-Η συνάρτηση $f$ είναι συνεχής στο $\mathbb{R}$ ως άθροισμα συνεχών συναρτήσεων, άρα και στο διάστημα $[0, 1]$.
-Υπολογίζουμε τις τιμές της συνάρτησης στα άκρα του διαστήματος:
-\[ f(0) = e^0 + 0 - 2 = 1 - 2 = -1 < 0 \]
-\[ f(1) = e^1 + 1 - 2 = e - 1 > 0 \]
-Επειδή $f(0) \cdot f(1) < 0$, από το θεώρημα \eng{Bolzano} προκύπτει ότι υπάρχει τουλάχιστον μία ρίζα $x_0 \in (0, 1)$ τέτοια ώστε $f(x_0) = 0$, δηλαδή $e^{x_0} + x_0 = 2$.
+\item Θεωρούμε τη συνάρτηση
+\[f(x)=e^x+x-2\ ,\ x\in\mathbb{R}\]
+Η $f$ είναι συνεχής στο $[0,1]$ ως άθροισμα συνεχών συναρτήσεων.
+Έχουμε
+\[f(0)=e^0+0-2=-1<0\]
+και
+\[f(1)=e+1-2=e-1>0\]
+Άρα
+\[f(0)f(1)<0\]
+Επομένως, από το θεώρημα \eng{Bolzano}, υπάρχει τουλάχιστον μία ρίζα $x_0\in(0,1)$ τέτοια ώστε
+\[f(x_0)=0\]
+δηλαδή
+\[e^{x_0}+x_0=2\]
 
-\item Υπολογίζουμε την παράγωγο της $f(x)$:
-\[ f'(x) = (e^x)' + (x)' - (2)' = e^x + 1 \]
-Επειδή $e^x > 0$ για κάθε $x \in \mathbb{R}$, προκύπτει ότι $f'(x) > 1 > 0$ για κάθε $x \in \mathbb{R}$.
-Συνεπώς, η $f$ είναι \textbf{γνησίως αύξουσα} σε όλο το $\mathbb{R}$.
-Μια γνησίως μονότονη συνάρτηση μπορεί να έχει το πολύ μία ρίζα, επομένως η ρίζα $x_0$ είναι μοναδική σε όλο το $\mathbb{R}$.
+\item Η $f$ είναι παραγωγίσιμη στο $\mathbb{R}$ με
+\[f'(x)=e^x+1>0\ ,\ x\in\mathbb{R}\]
+Άρα η $f$ είναι \textbf{γνησίως αύξουσα} στο $\mathbb{R}$.
+Επομένως η εξίσωση $f(x)=0$, δηλαδή η εξίσωση
+\[e^x+x=2\]
+έχει το πολύ μία ρίζα στο $\mathbb{R}$.
+Αφού από το Γ1 γνωρίζουμε ότι έχει τουλάχιστον μία ρίζα $x_0\in(0,1)$, η ρίζα αυτή είναι μοναδική στο $\mathbb{R}$.
 
-\item Εφόσον η $f$ είναι \textbf{γνησίως αύξουσα} στο $\mathbb{R}$ και $f(x_0) = 0$, έχουμε:
+\item Από το προηγούμενο ερώτημα η $f$ είναι γνησίως αύξουσα στο $\mathbb{R}$ και
+\[f(x_0)=0\]
+Άρα
 \begin{itemize}
-    \item Για $x < x_0 \Rightarrow f(x) < f(x_0) \Rightarrow f(x) < 0$.
-    \item Για $x > x_0 \Rightarrow f(x) > f(x_0) \Rightarrow f(x) > 0$.
+\item για $x<x_0$ είναι $f(x)<f(x_0)=0$
+\item για $x=x_0$ είναι $f(x)=0$
+\item για $x>x_0$ είναι $f(x)>f(x_0)=0$
 \end{itemize}
-Άρα το πρόσημο της $f(x)$ είναι αρνητικό για $x \in (-\infty, x_0)$ και θετικό για $x \in (x_0, +\infty)$.
+Επομένως
+\[f(x)<0\ ,\ x\in(-\infty,x_0)\]
+και
+\[f(x)>0\ ,\ x\in(x_0,+\infty)\]
 
-\item Θεωρούμε τη συνάρτηση $I(t) = \int_0^t f(x) \d x$ (χρησιμοποιούμε τη μεταβλητή $t$ για την αποφυγή σύγχυσης με τη σταθερά $x_0$).
-Υπολογίζουμε το ορισμένο ολοκλήρωμα:
+\item Η δοσμένη συνάρτηση είναι
+\[F(x)=e^x+\frac{x^2}{2}-2x\ ,\ x\in\mathbb{R}\]
+Παρατηρούμε ότι
+\[F'(x)=e^x+x-2=f(x)\]
+Από το Γ3 έχουμε
+\begin{itemize}
+\item $F'(x)<0$ για $x<x_0$
+\item $F'(x)=0$ για $x=x_0$
+\item $F'(x)>0$ για $x>x_0$
+\end{itemize}
+Άρα η $F$ είναι γνησίως φθίνουσα στο $(-\infty,x_0]$ και γνησίως αύξουσα στο $[x_0,+\infty)$.
+Επομένως η $F$ παρουσιάζει ολικό ελάχιστο στη θέση $x_0$.
+
+Επειδή
+\[F'(x)=f(x)\]
+έχουμε
 \begin{align*}
-I(t) &= \int_0^t (e^x + x - 2) \d x \\
-&= \left[ e^x + \frac{x^2}{2} - 2x \right]_0^t \\
-&= \left( e^t + \frac{t^2}{2} - 2t \right) - (e^0 + 0 - 0) \\
-&= e^t + \frac{t^2}{2} - 2t - 1
+\dint_0^{x_0} f(x)\d x&=F(x_0)-F(0)\\
+&=\left(e^{x_0}+\frac{x_0^2}{2}-2x_0\right)-1
 \end{align*}
-Για τη μελέτη των ακροτάτων της $I(t)$, υπολογίζουμε την παράγωγό της:
-\[ I'(t) = (e^t)' + \left( \frac{t^2}{2} \right)' - (2t)' - (1)' = e^t + t - 2 \]
-Παρατηρούμε ότι $I'(t) = f(t)$.
-Από την ανάλυση του ερωτήματος 3 γνωρίζουμε ότι:
-\begin{itemize}
-    \item $I'(t) = 0 \Leftrightarrow t = x_0$.
-    \item $I'(t) < 0$ για $t < x_0$.
-    \item $I'(t) > 0$ για $t > x_0$.
-\end{itemize}
-Εφόσον η $I(t)$ είναι \textbf{γνησίως φθίνουσα} στο $(-\infty, x_0)$ και \textbf{γνησίως αύξουσα} στο $(x_0, +\infty)$, η συνάρτηση $I$ παρουσιάζει ολικό ελάχιστο στο σημείο $t = x_0$.
+Από τη σχέση $e^{x_0}+x_0=2$ προκύπτει
+\[e^{x_0}=2-x_0\]
+Άρα
+\begin{align*}
+\dint_0^{x_0} f(x)\d x
+&=2-x_0+\frac{x_0^2}{2}-2x_0-1\\
+&=\frac{x_0^2}{2}-3x_0+1
+\end{align*}
+Επομένως
+\[\dint_0^{x_0} f(x)\d x=\frac{x_0^2}{2}-3x_0+1\]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 1ο ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 55ο ΘΕΜΑ Γ ===========

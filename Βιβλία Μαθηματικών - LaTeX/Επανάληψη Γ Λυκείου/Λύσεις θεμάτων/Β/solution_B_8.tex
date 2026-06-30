@@ -1,0 +1,69 @@
+%=========== ΛΥΣΗ - 8ο ΘΕΜΑ Β ===========
+\begin{thema}{Β}
+Δίνεται η συνάρτηση $f(x) = \dfrac{\ln x}{x}$ με $x \in (0, +\infty)$.
+
+\begin{erwthma}
+\item Η συνάρτηση $f$ είναι παραγωγίσιμη στο $(0, +\infty)$ με παράγωγο:
+\[ f'(x) = \left( \dfrac{\ln x}{x} \right)' = \dfrac{(\ln x)' x - \ln x \cdot (x)'}{x^2} = \dfrac{\dfrac{1}{x}x - \ln x}{x^2} = \dfrac{1 - \ln x}{x^2} \]
+Για τις ρίζες και το πρόσημο της $f'$ έχουμε:
+\begin{itemize}
+    \item $f'(x) = 0 \Leftrightarrow 1 - \ln x = 0 \Leftrightarrow \ln x = 1 \Leftrightarrow x = e$
+    \item $f'(x) > 0 \Leftrightarrow \dfrac{1 - \ln x}{x^2} > 0 \stackrel{x^2>0}{\Leftrightarrow} 1 - \ln x > 0 \Leftrightarrow \ln x < 1 \Leftrightarrow x < e$
+    \item $f'(x) < 0 \Leftrightarrow x > e$
+\end{itemize}
+Στον παρακάτω πίνακα φαίνεται το πρόσημο της $f'$ και η μονοτονία της $f$:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = red7,colorL = red9,colorV = red7]%
+{$x$ / .8,$f'(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$e$,$+\infty$}%
+\tkzTabLine{ d, +, z, -, }
+\tkzTabVar{-/,+/,-/}
+\end{tikzpicture}
+\end{center}
+Συνεπώς η $f$ είναι γνησίως αύξουσα στο $(0, e]$ και γνησίως φθίνουσα στο $[e, +\infty)$.
+Η συνάρτηση $f$ παρουσιάζει τοπικό και ολικό μέγιστο για $x = e$, με τιμή $f(e) = \dfrac{\ln e}{e} = \dfrac{1}{e}$. Δεν παρουσιάζει τοπικό ελάχιστο.
+
+\item Η $f'$ είναι παραγωγίσιμη στο $(0, +\infty)$ με δεύτερη παράγωγο:
+\[ f''(x) = \left( \dfrac{1-\ln x}{x^2} \right)' = \dfrac{(1-\ln x)'x^2 - (1-\ln x)(x^2)'}{(x^2)^2} = \dfrac{-\dfrac{1}{x}x^2 - (1-\ln x)2x}{x^4} \]
+\[ = \dfrac{-x - 2x + 2x\ln x}{x^4} = \dfrac{x(-3 + 2\ln x)}{x^4} = \dfrac{2\ln x - 3}{x^3} \]
+Για τις ρίζες και το πρόσημο της $f''$:
+\begin{itemize}
+    \item $f''(x) = 0 \Leftrightarrow 2\ln x - 3 = 0 \Leftrightarrow \ln x = \dfrac{3}{2} \Leftrightarrow x = e^{3/2} = e\sqrt{e}$
+    \item $f''(x) > 0 \Leftrightarrow \dfrac{2\ln x - 3}{x^3} > 0 \stackrel{x>0}{\Leftrightarrow} 2\ln x > 3 \Leftrightarrow x > e^{3/2}$
+    \item $f''(x) < 0 \Leftrightarrow 0 < x < e^{3/2}$
+\end{itemize}
+Στον παρακάτω πίνακα φαίνεται το πρόσημο της $f''$ και η κυρτότητα της $f$:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = red7,colorL = red9,colorV = red7]%
+{$x$ / .8,$f''(x)$ /0.8,$f(x)$/0.8}%
+{$0$,$e^{3/2}$,$+\infty$}%
+\tkzTabLine{ d, -, z, +, }
+\tkzTabLine{ d, \curvearrowright, t, \rotatebox[origin= c]{180}{$\curvearrowleft$}, }
+\end{tikzpicture}
+\end{center}
+Άρα η $f$ είναι κοίλη στο $(0, e^{3/2}]$ και κυρτή στο $[e^{3/2}, +\infty)$. Το σημείο καμπής είναι το:
+\[ A\left( e^{3/2}, f(e^{3/2}) \right) = A\left( e\sqrt{e}, \dfrac{\dfrac{3}{2}}{e^{3/2}} \right) = A\left( e\sqrt{e}, \dfrac{3}{2e\sqrt{e}} \right) \]
+
+\item Βρίσκουμε τις ασύμπτωτες της $C_f$:
+\textbf{Κατακόρυφη:} Στο άκρο του πεδίου ορισμού $x_0 = 0$, ελέγχουμε το όριο:
+\[ \lim_{x\to0^+} f(x) = \lim_{x\to0^+} \left( \dfrac{1}{x} \cdot \ln x \right) = (+\infty) \cdot (-\infty) = -\infty \]
+Άρα η ευθεία $x = 0$ (ο άξονας $y'y$) είναι κατακόρυφη ασύμπτωτη της $C_f$.
+\textbf{Οριζόντια:} Στο $+\infty$, ελέγχουμε το όριο:
+\[ \lim_{x\to+\infty} f(x) = \lim_{x\to+\infty} \dfrac{\ln x}{x} \dlh{\frac{+\infty}{+\infty}} \lim_{x\to+\infty} \dfrac{\frac{1}{x}}{1} = \lim_{x\to+\infty} \dfrac{1}{x} = 0 \]
+Άρα η ευθεία $y = 0$ (ο άξονας $x'x$) είναι οριζόντια ασύμπτωτη της $C_f$ στο $+\infty$. Η $C_f$ δεν έχει πλάγια ασύμπτωτη στο $+\infty$.
+
+\item Στο διάστημα $[1, e]$, η συνάρτηση είναι $f(x) = \dfrac{\ln x}{x} \ge 0$ (αφού $\ln x \ge 0$ για $x \ge 1$ και $x>0$). Το εμβαδόν ισούται με:
+\[ E = \int_1^e |f(x)| \d x = \int_1^e \dfrac{\ln x}{x} \d x \]
+Θέτουμε $u = \ln x \Rightarrow \d u = \dfrac{1}{x} \d x$.
+Τα όρια ολοκλήρωσης γίνονται:
+\begin{itemize}
+\item Για $x = 1 \Rightarrow u = \ln 1 = 0$
+\item Για $x = e \Rightarrow u = \ln e = 1$
+\end{itemize}
+Τότε:
+\[ E = \int_0^1 u \d u = \left[ \dfrac{u^2}{2} \right]_0^1 = \dfrac{1^2}{2} - \dfrac{0^2}{2} = \dfrac{1}{2} \]
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 8ο ΘΕΜΑ Β ===========

@@ -1,157 +1,76 @@
-Professional Mathematics teacher.
-Solve a LaTeX exercise (Thema $\Gamma$) involving a cone inscribed in a sphere.
-
-        *   Environment: `\begin{thema}{Γ} ... \end{thema}`.
-        *   Questions environment: `\begin{erwthma} ... \end{erwthma}`.
-        *   Items: `\item` for each part.
-        *   Inline Math: `$ ... $`.
-        *   Display Math: `\[ ... \]`.
-        *   Calculations: `\begin{align*}`.
-        *   Terminology: `\eng{...}` for technical terms, `\textbf{...}` for emphasis.
-        *   No indefinite integrals (not applicable here), no 2nd derivative test (use 1st derivative/monotonicity), etc.
-        *   Differentials: `\d x`.
-        *   Specific comments: `%=========== ΛΥΣΗ - Xο ΘΕΜΑ Γ ===========` and `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - Χο ΘΕΜΑ Γ ===========`.
-        *   No preamble, no exercise text, no comments inside the solution except those specified.
-
-    *   Sphere radius $R = 3$.
-    *   Distance of sphere center $O$ to cone base $K$ is $x \in (0, 3)$.
-    *   $\rho$ is the radius of the cone base.
-    *   The cone's vertex $V$ is at the top of the sphere.
-
-    *   **Part 1: Prove $\rho^2 = 9 - x^2$.**
-        *   Look at $\triangle OKA$ (right triangle).
-        *   $OA$ is the radius of the sphere ($R=3$).
-        *   $OK$ is the distance $x$.
-        *   $KA$ is the radius of the cone base $\rho$.
-        *   By Pythagoras: $OK^2 + KA^2 = OA^2 \Rightarrow x^2 + \rho^2 = 3^2 \Rightarrow \rho^2 = 9 - x^2$.
-
-    *   **Part 2: Volume $V(x) = \frac{\pi}{3}(9-x^2)(3+x)$.**
-        *   Volume of a cone: $V = \frac{1}{3}\pi \rho^2 h$.
-        *   Height $h$ of the cone: The distance from vertex $V$ to base $K$. $V$ is at the top of the sphere, $O$ is the center, $K$ is below $O$.
-        *   $h = VO + OK = R + x = 3 + x$.
-        *   Substitute $\rho^2 = 9 - x^2$ and $h = 3 + x$:
-        *   $V(x) = \frac{1}{3}\pi (9 - x^2)(3 + x)$.
-
-    *   **Part 3: Maximize $V(x)$ for $x \in (0, 3)$.**
-        *   $V(x) = \frac{\pi}{3}(27 + 9x - 3x^2 - x^3)$.
-        *   $V'(x) = \frac{\pi}{3}(9 - 6x - 3x^2)$.
-        *   Set $V'(x) = 0$: $9 - 6x - 3x^2 = 0 \Rightarrow 3 - 2x - x^2 = 0$.
-        *   Roots: $x = \frac{2 \pm \sqrt{4 + 12}}{-2} = \frac{2 \pm 4}{-2}$.
-        *   $x_1 = \frac{6}{-2} = -3$ (outside domain), $x_2 = \frac{-2}{-2} = 1$.
-        *   Since $x \in (0, 3)$, the only critical point is $x = 1$.
-        *   Sign of $V'(x)$:
-            *   $V'(x) > 0$ for $x \in (0, 1)$.
-            *   $V'(x) < 0$ for $x \in (1, 3)$.
-        *   Thus, $x = 1$ is the global maximum.
-        *   Dimensions:
-            *   Height $h = 3 + 1 = 4\text{ cm}$.
-            *   Radius $\rho = \sqrt{9 - 1^2} = \sqrt{8} = 2\sqrt{2}\text{ cm}$.
-
-    *   **Part 4: Rate of change of $V(x)$ when $h=4$.**
-        *   Given $\frac{dx}{dt} = 0.5\text{ cm/s}$.
-        *   Find $\frac{dV}{dt}$ when $h = 4$.
-        *   $h = 3 + x \Rightarrow 4 = 3 + x \Rightarrow x = 1$.
-        *   By chain rule: $\frac{dV}{dt} = \frac{dV}{dx} \cdot \frac{dx}{dt}$.
-        *   $V'(x) = \frac{\pi}{3}(9 - 6x - 3x^2)$.
-        *   At $x = 1$, $V'(1) = \frac{\pi}{3}(9 - 6 - 3) = 0$.
-        *   $\frac{dV}{dt} = 0 \cdot 0.5 = 0\text{ cm}^3\text{/s}$.
-        *   *Wait, let me double check.* If $x=1$ is the maximum, the derivative $V'(x)$ is indeed 0. So the rate of change of volume at the moment it's maximum is zero. This makes physical sense.
-
-    *   Check all symbols ($\rho, \pi, V(x), x$).
-    *   Ensure `\begin{thema}{Γ}`, `\begin{erwthma}`, `\item`, `\begin{align*}`, `\eng{...}`, `\textbf{...}` are used.
-    *   Check for "Forbidden" items: No indefinite integrals (none here), no 2nd derivative test (used monotonicity).
-    *   Use `\d t` or `\d x` for derivatives in the rate of change part? Actually, for $\frac{dV}{dt}$, I'll use $\frac{\d V}{\d t}$.
-
-    *   Part 1: Use Pythagoras in $\triangle OKA$.
-    *   Part 2: Use formula $V = \frac{1}{3}\pi \rho^2 h$.
-    *   Part 3: Derivative, roots, monotonicity, dimensions.
-    *   Part 4: Chain rule, calculation.
-
-    *   $V(x) = \frac{\pi}{3}(9-x^2)(3+x)$
-    *   $V'(x) = \frac{\pi}{3} [ (-2x)(3+x) + (9-x^2)(1) ]$
-    *   $V'(x) = \frac{\pi}{3} [ -6x - 2x^2 + 9 - x^2 ] = \frac{\pi}{3} [ -3x^2 - 6x + 9 ]$
-    *   $V'(x) = \pi [ -x^2 - 2x + 3 ]$
-    *   Roots: $x^2 + 2x - 3 = 0 \Rightarrow (x+3)(x-1) = 0$.
-    *   $x = 1$ or $x = -3$.
-    *   Since $x \in (0, 3)$, $x=1$.
-    *   $V'(x)$ is a downward parabola, positive between $-3$ and $1$, negative outside.
-    *   On $(0, 1)$, $V'(x) > 0$ $\rightarrow$ $\textbf{γνησίως αύξουσα}$.
-    *   On $(1, 3)$, $V'(x) < 0$ $\rightarrow$ $\textbf{γνησίως φθίνουσα}$.
-    *   Max at $x=1$.
-    *   $h = 3+1=4$.
-    *   $\rho^2 = 9-1=8 \Rightarrow \rho = 2\sqrt{2}$.
-
-    *   Part 4: $\frac{\d V}{\d t} = \frac{\d V}{\d x} \frac{\d x}{\d t}$.
-    *   At $h=4$, $x=1$.
-    *   $V'(1) = \pi(-1-2+3) = 0$.
-    *   $\frac{\d V}{\d t} = 0 \cdot 0.5 = 0$.
-
-    *   `\begin{thema}{Γ}`: OK.
-    *   `\begin{erwthma}`: OK.
-    *   `\item`: OK.
-    *   `\eng{Pythagoras}`, `\eng{Chain Rule}` (if needed, though just showing the logic is enough).
-    *   `\textbf{γνησίως αύξουσα}`, `\textbf{γνησίως φθίνουσα}`, `\textbf{μέγιστο}`.
-    *   `\begin{align*}` for algebra.
-    *   `\[ ... \]` for final expressions.
-    *   `\d x`, `\d t`.
-
-    *   Wait, $x$ is the distance from center to base. If $x \in (0,3)$, the base is below the center. Height is $R+x = 3+x$. Correct.
-    *   Pythagoras $\rho^2 + x^2 = R^2 = 9 \Rightarrow \rho^2 = 9-x^2$. Correct.
-    *   Volume $V = \frac{1}{3}\pi \rho^2 h = \frac{1}{3}\pi (9-x^2)(3+x)$. Correct.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item ...`
-    *   `\end{erwthma}`
-    *   `\end{thema}`
-    *   Surrounding comments.
-%=========== ΛΥΣΗ - Xο ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 44ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Θεωρούμε το ορθογώνιο τρίγωνο $OKA$ που σχηματίζεται από το κέντρο της σφαίρας $O$, το κέντρο της βάσης του κώνου $K$ και ένα σημείο $A$ στην περιφέρεια της βάσης του κώνου.
-Η υποτένουσα $OA$ είναι η ακτίνα της σφαίρας, άρα $OA = R = 3$.
-Η πλευρά $OK$ είναι η απόσταση του κέντρου της σφαίρας από τη βάση, άρα $OK = x$.
-Η πλευρά $KA$ είναι η ακτίνα της βάσης του κώνου, άρα $KA = \rho$.
-Εφαρμόζοντας το \eng{Pythagoras} στο $\triangle OKA$, έχουμε:
-\[ OK^2 + KA^2 = OA^2 \Rightarrow x^2 + \rho^2 = 3^2 \Rightarrow \rho^2 = 9 - x^2 \]
+\item Έστω $O$ το κέντρο της σφαίρας, $K$ το κέντρο της βάσης του κώνου και $A$ ένα σημείο της περιφέρειας της βάσης.
+Τότε το τρίγωνο $OKA$ είναι ορθογώνιο στο $K$, αφού η $OK$ είναι κάθετη στο επίπεδο της βάσης του κώνου, ενώ η $KA$ ανήκει στο επίπεδο αυτό.
 
-\item Το ύψος $h$ του κώνου είναι η απόσταση από την κορυφή $V$ έως τη βάση $K$. Επειδή η κορυφή $V$ βρίσκεται στην επιφάνεια της σφαίρας και η βάση βρίσκεται σε απόσταση $x$ από το κέντρο $O$ (προς την αντίθετη κατεύθυνση από την κορυφή), το ύψος είναι:
-\[ h = VO + OK = R + x = 3 + x \]
-Ο όγκος του κώνου δίνεται από τον τύπο $V = \dfrac{1}{3}\pi \rho^2 h$. Αντικαθιστώντας τις σχέσεις $\rho^2 = 9 - x^2$ και $h = 3 + x$, λαμβάνουμε:
-\[ V(x) = \frac{\pi}{3}(9 - x^2)(3 + x) \]
-
-\item Για να βρούμε το μέγιστο του όγκου, μελετάμε τη συνάρτηση $V(x)$ στο διάστημα $(0, 3)$.
-Αρχικά, αναπτύσσουμε την έκφραση του όγκου:
-\[ V(x) = \frac{\pi}{3}(27 + 9x - 3x^2 - x^3) \]
-Υπολογίζουμε την παράγωγο της $V(x)$:
-\[ V'(x) = \frac{\pi}{3}(9 - 6x - 3x^2) = \pi(3 - 2x - x^2) \]
-Εξετάζουμε το πρόσημο της $V'(x)$ λύνοντας την εξίσωση $V'(x) = 0$:
-\[ -x^2 - 2x + 3 = 0 \Leftrightarrow x^2 + 2x - 3 = 0 \]
-Οι ρίζες της δευτεροβάθμιας εξίσωσης είναι:
-\[ x_{1,2} = \frac{-2 \pm \sqrt{4 - 4(1)(-3)}}{2} = \frac{-2 \pm 4}{2} \Rightarrow x_1 = 1, \quad x_2 = -3 \]
-Επειδή $x \in (0, 3)$, η μοναδική κρίσιμη τιμή είναι το $x = 1$.
-Αναλύουμε το πρόσημο της $V'(x)$:
+Έχουμε:
 \begin{itemize}
-    \item $V'(x) > 0 \Leftrightarrow -3 < x < 1$, άρα για $x \in (0, 1)$ η $V(x)$ είναι \textbf{γνησίως αύξουσα}.
-    \item $V'(x) < 0 \Leftrightarrow x > 1$ ή $x < -3$, άρα για $x \in (1, 3)$ η $V(x)$ είναι \textbf{γνησίως φθίνουσα}.
+\item $OA=R=3$, ως ακτίνα της σφαίρας
+\item $OK=x$, από τον ορισμό του $x$
+\item $KA=\rho$, ως ακτίνα της βάσης του κώνου
 \end{itemize}
-Συνεπώς, η συνάρτηση $V(x)$ παρουσιάζει \textbf{ολικό μέγιστο} για $x = 1$.
-Οι διαστάσεις του μέγιστου κώνου είναι:
-\begin{align*}
-    \text{Ύψος: } h &= 3 + 1 = 4\si{cm} \\
-    \text{Ακτίνα: } \rho &= \sqrt{9 - 1^2} = \sqrt{8} = 2\sqrt{2}\si{cm}
-\end{align*}
+Από το Πυθαγόρειο Θεώρημα στο ορθογώνιο τρίγωνο $OKA$ προκύπτει
+\[OK^2+KA^2=OA^2\Rightarrow x^2+\rho^2=3^2\Rightarrow \rho^2=9-x^2\]
 
-\item Έστω $x(t)$ η απόσταση του κέντρου της σφαίρας από τη βάση ως συνάρτηση του χρόνου $t$.
-Δίνεται ότι $\dfrac{\d x}{\d t} = 0.5\si{cm/s}$.
-Ζητείται ο ρυθμός μεταβολής του όγκου $\dfrac{\d V}{\d t}$ τη χρονική στιγμή που $h = 4\si{cm}$.
-Από τη σχέση $h = 3 + x$, αν $h = 4$ τότε $x = 1$.
-Χρησιμοποιώντας τον κανόνα της αλυσίδας (\eng{Chain Rule}):
-\[ \frac{\d V}{\d t} = \frac{\d V}{\d x} \cdot \frac{\d x}{\d t} = V'(x) \cdot \frac{\d x}{\d t} \]
-Για $x = 1$, έχουμε από το προηγούμενο ερώτημα ότι $V'(1) = 0$.
-Επομένως:
-\[ \frac{\d V}{\d t} = 0 \cdot 0.5 = 0\si{cm^3/s} \]
-Ο ρυθμός μεταβολής του όγκου τη χρονική στιγμή αυτή είναι μηδέν, καθώς ο όγκος παρουσιάζει μέγιστο.
+\item Το ύψος $h$ του κώνου είναι η απόσταση της κορυφής του από το επίπεδο της βάσης.
+Αφού η κορυφή του κώνου βρίσκεται στο ανώτερο σημείο της σφαίρας και η βάση του βρίσκεται κάτω από το κέντρο $O$ σε απόσταση $x$, είναι
+\[h=3+x\]
+Ο όγκος του κώνου δίνεται από τον τύπο
+\[V=\frac{1}{3}\pi\rho^2h\]
+Άρα, χρησιμοποιώντας το προηγούμενο ερώτημα και τη σχέση $h=3+x$, έχουμε
+\[V(x)=\frac{\pi}{3}(9-x^2)(3+x)\ ,\ x\in(0,3)\]
+
+\item Για κάθε $x\in(0,3)$ είναι
+\begin{align*}
+V(x)&=\frac{\pi}{3}(9-x^2)(3+x)\\
+&=\frac{\pi}{3}(27+9x-3x^2-x^3)
+\end{align*}
+οπότε
+\[V'(x)=\frac{\pi}{3}(9-6x-3x^2)=\pi(3-2x-x^2)\]
+Βρίσκουμε ρίζες και πρόσημα της $V'$ στο $(0,3)$:
+\begin{align*}
+V'(x)=0
+&\Leftrightarrow 3-2x-x^2=0\\
+&\Leftrightarrow x^2+2x-3=0\\
+&\Leftrightarrow (x-1)(x+3)=0\\
+&\Leftrightarrow x=1 \text{ ή } x=-3
+\end{align*}
+Επειδή $x\in(0,3)$, δεκτή είναι μόνο η ρίζα $x=1$.
+Επιπλέον
+\begin{itemize}
+\item $V'(x)>0\Leftrightarrow 3-2x-x^2>0\Leftrightarrow -3<x<1$, άρα $V'(x)>0$ για $x\in(0,1)$
+\item $V'(x)<0\Leftrightarrow 3-2x-x^2<0\Leftrightarrow x<-3$ ή $x>1$, άρα $V'(x)<0$ για $x\in(1,3)$
+\end{itemize}
+Στον παρακάτω πίνακα βλέπουμε τα πρόσημα της $V'$ και τη μονοτονία της $V$:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8,$V'(x)$ /0.8,$V(x)$/0.8}%
+{$0$,$1$,$3$}%
+\tkzTabLine{ , +, z, -, }
+\tkzTabLine{ , \nearrow,t ,\searrow,}
+\end{tikzpicture}
+\end{center}
+Επομένως ο όγκος του κώνου μεγιστοποιείται για
+\[x=1\]
+Για $x=1$ έχουμε
+\[h=3+1=4\si{cm}\]
+και
+\[\rho^2=9-1^2=8\Rightarrow \rho=2\sqrt{2}\si{cm}\]
+Άρα ο μέγιστος κώνος έχει ύψος $4\si{cm}$ και ακτίνα βάσης $2\sqrt{2}\si{cm}$.
+
+\item Έστω $x(t)$ η απόσταση του κέντρου της σφαίρας από τη βάση του κώνου τη χρονική στιγμή $t$.
+Αφού το $x$ αυξάνεται με ρυθμό $0.5\si{cm/s}$, έχουμε
+\[x'(t)=0.5\si{cm/s}\]
+Αν $t_0$ είναι η χρονική στιγμή κατά την οποία το ύψος του κώνου είναι $4\si{cm}$, τότε
+\[h=3+x(t_0)=4\Rightarrow x(t_0)=1\]
+Θέτουμε $W(t)=V(x(t))$, όπου $W(t)$ είναι ο όγκος του κώνου τη χρονική στιγμή $t$.
+Με τον κανόνα της αλυσίδας έχουμε
+\[W'(t)=V'(x(t))\cdot x'(t)\]
+Άρα
+\[W'(t_0)=V'(1)\cdot x'(t_0)=0\cdot 0.5=0\si{cm^3/s}\]
+Επομένως τη χρονική στιγμή που το ύψος του κώνου είναι $4\si{cm}$, ο ρυθμός μεταβολής του όγκου είναι $0\si{cm^3/s}$.
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - Χο ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 44ο ΘΕΜΑ Γ ===========

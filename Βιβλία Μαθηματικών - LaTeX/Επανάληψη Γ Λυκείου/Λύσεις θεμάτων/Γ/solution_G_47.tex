@@ -1,113 +1,60 @@
-*   Professional Mathematics teacher.
-    *   Exercise: A person (height $h=2$m) walks towards a lamppost (height $H=6$m) at a constant speed $u=1.5$ m/s.
-    *   Requirement: Solve the provided LaTeX exercise following strict formatting guidelines.
-
-    *   $H = 6$ m (Lamppost height).
-    *   $h = 2$ m (Person height).
-    *   $u = 1.5$ m/s (Person's speed). Note: The prompt says "approaches" (πλησιάζει), so $\frac{dx}{dt} = -u = -1.5$ m/s (assuming $x$ is the distance from the lamppost).
-    *   $x(t)$ is the distance from the lamppost to the person.
-    *   $s(t)$ is the length of the shadow.
-
-    *   *Part 1: Express $s(t)$ in terms of $x(t)$.*
-        Using similar triangles (Person-Shadow triangle and Lamppost-Whole triangle):
-        $\frac{s}{h} = \frac{x+s}{H} \implies sH = h(x+s) \implies s(H-h) = hx \implies s = \frac{h}{H-h} x$.
-        Substitute values: $s = \frac{2}{6-2} x = \frac{2}{4} x = \frac{1}{2} x$.
-
-    *   *Part 2: Prove the tip of the shadow moves with constant velocity relative to the base.*
-        The position of the tip of the shadow relative to the base is $y(t) = x(t) + s(t)$.
-        $y = x + \frac{1}{2} x = \frac{3}{2} x$.
-        The velocity of the tip is $v_{tip} = \frac{dy}{dt} = \frac{3}{2} \frac{dx}{dt}$.
-        Since $u = 1.5$ is the speed of the person, and they are moving *towards* the lamp, $\frac{dx}{dt} = -1.5$ m/s.
-        $v_{tip} = \frac{3}{2} (-1.5) = -2.25$ m/s.
-        Since $\frac{dx}{dt}$ is constant, $v_{tip}$ is constant.
-
-    *   *Part 3: Express $\sin \theta$ (or $\ef \theta$) in terms of $x$.*
-        The angle $\theta$ is between the vertical pole and the ray.
-        In the right triangle formed by the lamppost height $H$ and the distance $x$:
-        $\tan \theta = \frac{x}{H}$.
-        $\ef \theta = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{x^2 + H^2}}$.
-        Substitute $H=6$: $\ef \theta = \frac{x}{\sqrt{x^2 + 36}}$.
-
-    *   *Part 4: Rate of change of $\theta$ when $x = 4$ m.*
-        We need $\frac{d\theta}{dt}$ at $x=4$.
-        From $\tan \theta = \frac{x}{6}$, differentiate with respect to $t$:
-        $\sec^2 \theta \cdot \frac{d\theta}{dt} = \frac{1}{6} \frac{dx}{dt}$.
-        $\frac{dx}{dt} = -1.5$ m/s.
-        When $x=4$, $\tan \theta = \frac{4}{6} = \frac{2}{3}$.
-        $\sec^2 \theta = 1 + \tan^2 \theta = 1 + (\frac{2}{3})^2 = 1 + \frac{4}{9} = \frac{13}{9}$.
-        Substitute:
-        $\frac{13}{9} \cdot \frac{d\theta}{dt} = \frac{1}{6} (-1.5)$.
-        $\frac{d\theta}{dt} = \frac{9}{13} \cdot \frac{-1.5}{6} = \frac{9}{13} \cdot \frac{-1}{4} = -\frac{9}{52}$ rad/s.
-
-    *   Environment: `\begin{thema}{Γ}` and `\begin{erwthma}`.
-    *   `\item` for each part.
-    *   `\[ ... \]` for calculations.
-    *   `\begin{align*}` for multi-line steps.
-    *   `\eng{...}` for technical terms (e.g., `\eng{tangent}`). Wait, "tangent" is just a function, maybe not needed, but "Squeeze" or "Lagrange" were examples. Here maybe not needed unless referring to a specific theorem.
-    *   `\textbf{...}` for emphasis.
-    *   Greek trig: `\ef` for $\sin$.
-    *   Differentials: `\d t` etc. (though the prompt says `\d x` for integrals, I should apply it to differentials generally if appropriate, though for derivatives $\frac{dx}{dt}$ is standard).
-
-    *   Check similar triangles again: $\frac{s}{2} = \frac{x+s}{6} \implies 6s = 2x + 2s \implies 4s = 2x \implies s = 0.5x$. Correct.
-    *   Shadow tip: $y = x + 0.5x = 1.5x$. Velocity $\frac{dy}{dt} = 1.5 \frac{dx}{dt} = 1.5(-1.5) = -2.25$. Correct.
-    *   Angle $\theta$: Opposite is $x$, Adjacent is $H=6$. $\tan \theta = x/6$. $\sin \theta = x/\sqrt{x^2+36}$. Correct.
-    *   Derivative: $\frac{d}{dt}(\tan \theta) = \sec^2 \theta \frac{d\theta}{dt}$. $\frac{d}{dt}(x/6) = \frac{1}{6} \frac{dx}{dt}$.
-    *   Values at $x=4$: $\tan \theta = 4/6 = 2/3$. $\sec^2 \theta = 13/9$. $\frac{dx}{dt} = -1.5$.
-    *   Calculation: $\frac{d\theta}{dt} = \frac{1}{6} \cdot (-1.5) \cdot \frac{9}{13} = \frac{-1.5 \cdot 1.5}{13} = \frac{-2.25}{13} = -\frac{9/4}{13} = -\frac{9}{52}$. Correct.
-
-    *   Start: `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`
-    *   End: `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========`
-    *   Ensure no preamble.
-    *   Use `\textbf{...}` for keywords.
-    *   Use `\ef` for $\sin$.
-
-    *   $x$ is distance from lamp. Person is approaching $\implies x$ is decreasing $\implies \frac{dx}{dt} = -1.5$.
-    *   $s = 0.5x$.
-    *   $y = 1.5x$.
-    *   $\tan \theta = x/6$.
-    *   $\ef \theta = x / \sqrt{x^2+36}$.
-    *   $d\theta/dt = -9/52$.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 47ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-    \item Από τη σχέση των \textbf{όμοιων τριγώνων} που σχηματίζονται από τον άνθρωπο και τη σκιά του με τον φανοστάτη, έχουμε:
-    \[ \frac{s(t)}{h} = \frac{x(t) + s(t)}{H} \]
-    Αντικαθιστώντας τις τιμές $H = 6$ και $h = 2$:
-    \begin{align*}
-        \frac{s(t)}{2} &= \frac{x(t) + s(t)}{6} \\
-        6s(t) &= 2(x(t) + s(t)) \\
-        6s(t) &= 2x(t) + 2s(t) \\
-        4s(t) &= 2x(t) \\
-        s(t) &= \frac{1}{2}x(t)
-    \end{align*}
+\item Έστω $x(t)$ η απόσταση του ανθρώπου από τη βάση του φανοστάτη και $s(t)$ το μήκος της σκιάς του τη χρονική στιγμή $t$.
 
-    \item Η απόσταση της άκρης της σκιάς από τη βάση του φανοστάτη είναι η $y(t) = x(t) + s(t)$.
-    Από το προηγούμενο ερώτημα, $s(t) = \frac{1}{2}x(t)$, οπότε:
-    \[ y(t) = x(t) + \frac{1}{2}x(t) = \frac{3}{2}x(t) \]
-    Η ταχύτητα της άκρης της σκιάς ως προς τη βάση του φανοστάτη είναι η παραγώγιστη της $y(t)$ ως προς το χρόνο $t$:
-    \[ v_{tip} = \frac{dy}{dt} = \frac{3}{2} \frac{dx}{dt} \]
-    Εφόσον ο άνθρωπος πλησιάζει τον φανοστάτη με \textbf{σταθερή ταχύτητα} $u = 1.5$ m/s, έχουμε $\frac{dx}{dt} = -1.5$ m/s. 
-    Άρα:
-    \[ v_{tip} = \frac{3}{2} (-1.5) = -2.25 \text{ m/s} \]
-    Επειδή η τιμή της ταχύτητας είναι σταθερή, η άκρη της σκιάς κινείται με \textbf{σταθερή ταχύτητα}.
+Από τα όμοια ορθογώνια τρίγωνα που σχηματίζονται έχουμε
+\[\frac{s(t)}{2}=\frac{x(t)+s(t)}{6}\]
+Άρα
+\begin{align*}
+6s(t)&=2(x(t)+s(t))\\
+6s(t)&=2x(t)+2s(t)\\
+4s(t)&=2x(t)\\
+s(t)&=\frac{x(t)}{2}
+\end{align*}
+Επομένως
+\[s(t)=\frac{x(t)}{2}\]
 
-    \item Στο ορθογώνιο τρίγωνο που σχηματίζεται από τον φανοστάτη, την απόσταση $x$ και την οπτική ακτίνα, έχουμε $\ef \theta$ ως λόγο της απέναντι κάθετης προς την υποτείνουσα:
-    \[ \ef \theta = \frac{x}{\sqrt{x^2 + H^2}} \]
-    Για $H = 6$, η έκφραση γίνεται:
-    \[ \ef \theta = \frac{x}{\sqrt{x^2 + 36}} \]
+\item Έστω $y(t)$ η απόσταση της άκρης της σκιάς από τη βάση του φανοστάτη.
+Τότε
+\[y(t)=x(t)+s(t)\]
+και, από το προηγούμενο ερώτημα,
+\[y(t)=x(t)+\frac{x(t)}{2}=\frac{3}{2}x(t)\]
+Επειδή ο άνθρωπος πλησιάζει τον φανοστάτη με σταθερή ταχύτητα $1.5\si{m/s}$, η απόστασή του από τον φανοστάτη μειώνεται με ρυθμό
+\[x'(t)=-1.5\si{m/s}\]
+Παραγωγίζοντας τη σχέση
+\[y(t)=\frac{3}{2}x(t)\]
+ως προς τον χρόνο $t$, προκύπτει
+\[y'(t)=\frac{3}{2}x'(t)=\frac{3}{2}\cdot(-1.5)=-2.25\si{m/s}\]
+Άρα η άκρη της σκιάς κινείται με σταθερή ταχύτητα μέτρου
+\[2.25\si{m/s}\]
+προς τη βάση του φανοστάτη.
 
-    \item Από τη σχέση $\tan \theta = \frac{x}{H} = \frac{x}{6}$, παραγωγίζουμε ως προς το χρόνο $t$:
-    \[ \frac{d}{dt}(\tan \theta) = \frac{d}{dt} \left( \frac{x}{6} \right) \implies \frac{1}{\cos^2 \theta} \cdot \frac{d\theta}{dt} = \frac{1}{6} \frac{dx}{dt} \]
-    Τη χρονική στιγμή που $x = 4$ m, έχουμε:
-    \[ \tan \theta = \frac{4}{6} = \frac{2}{3} \implies \frac{1}{\cos^2 \theta} = 1 + \tan^2 \theta = 1 + \left( \frac{2}{3} \right)^2 = 1 + \frac{4}{9} = \frac{13}{9} \]
-    Αντικαθιστώντας τα $\frac{1}{\cos^2 \theta} = \frac{13}{9}$ και $\frac{dx}{dt} = -1.5$ στην παραγώγιστη σχέση:
-    \begin{align*}
-        \frac{13}{9} \cdot \frac{d\theta}{dt} &= \frac{1}{6} (-1.5) \\
-        \frac{13}{9} \cdot \frac{d\theta}{dt} &= -0.25 \\
-        \frac{d\theta}{dt} &= -0.25 \cdot \frac{9}{13} \\
-        \frac{d\theta}{dt} &= -\frac{1}{4} \cdot \frac{9}{13} = -\frac{9}{52} \text{ rad/s}
-    \end{align*}
-    Ο ρυθμός μεταβολής της γωνίας $\theta$ είναι $-\frac{9}{52}$ rad/s.
+\item Η οπτική ακτίνα από την κορυφή του φανοστάτη προς το κεφάλι του ανθρώπου σχηματίζει με τον κατακόρυφο φανοστάτη ορθογώνιο τρίγωνο.
+Η οριζόντια πλευρά του τριγώνου είναι $x$, ενώ η κατακόρυφη πλευρά είναι
+\[6-2=4\si{m}\]
+Επομένως
+\[\ef\theta=\frac{x}{4}\]
+
+\item Από το προηγούμενο ερώτημα έχουμε
+\[\ef\theta(t)=\frac{x(t)}{4}\]
+Παραγωγίζοντας ως προς τον χρόνο $t$, παίρνουμε
+\[\frac{1}{\syn^2\theta(t)}\theta'(t)=\frac{x'(t)}{4}\]
+Τη χρονική στιγμή $t_0$ κατά την οποία ο άνθρωπος απέχει $4\si{m}$ από τον φανοστάτη, έχουμε
+\[x(t_0)=4\]
+οπότε
+\[\ef\theta(t_0)=\frac{4}{4}=1\]
+Άρα
+\[\frac{1}{\syn^2\theta(t_0)}=1+\ef^2\theta(t_0)=1+1^2=2\]
+Επειδή $x'(t_0)=-1.5\si{m/s}$, από τη σχέση
+\[\frac{1}{\syn^2\theta(t)}\theta'(t)=\frac{x'(t)}{4}\]
+για $t=t_0$ έχουμε
+\begin{align*}
+2\theta'(t_0)&=\frac{-1.5}{4}\\
+2\theta'(t_0)&=-\frac{3}{8}\\
+\theta'(t_0)&=-\frac{3}{16}\si{rad/s}
+\end{align*}
+Επομένως η γωνία $\theta$ μειώνεται με ρυθμό $\dfrac{3}{16}\si{rad/s}$ τη χρονική στιγμή που ο άνθρωπος απέχει $4\si{m}$ από τον φανοστάτη.
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 47ο ΘΕΜΑ Γ ===========

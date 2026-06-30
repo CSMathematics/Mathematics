@@ -1,234 +1,56 @@
-Professional Mathematics Teacher.
-Solve a LaTeX exercise following strict formatting guidelines.
-
-        *   Function $f(x)$ defined on $(0, +\infty)$, differentiable.
-        *   Equation: $x f'(x) - f(x) = x^2 e^x$ for $x > 0$.
-        *   Condition: $f(1) = e$.
-
-        1.  Divide by $x^2$ and prove $f(x) = x e^x$.
-        2.  Roots, sign, asymptotic behavior at $0$ and $+\infty$.
-        3.  Limit $\lim_{x \to 0^+} \frac{f(x) - x}{x^2}$.
-        4.  Equation of the tangent passing through $O(0,0)$.
-
-        *   Wrap in `\begin{thema}{Γ} ... \end{thema}`.
-        *   Questions in `\begin{erwthma} ... \end{erwthma}`.
-        *   Use `\item` for each part.
-        *   Inline math `$ ... $`, display math `\[ ... \]`.
-        *   Use `\begin{align*}` for calculations.
-        *   Terms: `\eng{...}` for English/technical terms, `\textbf{...}` for emphasis.
-        *   Specific constraints: No indefinite integrals, no 2nd derivative test, no diff eqs (though the problem starts with a diff eq, the solution is guided to a specific method), no MVT for integrals, no variable limits.
-        *   Start with `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========` and end with `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========`.
-        *   No preamble. No problem text repeated.
-
-    *   **Part 1: Prove $f(x) = x e^x$.**
-        *   Equation: $x f'(x) - f(x) = x^2 e^x$.
-        *   Divide by $x^2$: $\frac{x f'(x) - f(x)}{x^2} = e^x$.
-        *   Recognize the LHS as the derivative of $\frac{f(x)}{x}$ using the quotient rule: $\left(\frac{f(x)}{x}\right)' = \frac{f'(x) \cdot x - f(x) \cdot 1}{x^2}$.
-        *   So, $\left(\frac{f(x)}{x}\right)' = e^x$.
-        *   Integrating both sides (Definite integral from $1$ to $x$):
-            $\int_1^x \left(\frac{f(t)}{t}\right)' \d t = \int_1^x e^t \d t$
-            $\frac{f(x)}{x} - \frac{f(1)}{1} = e^x - e^1$
-        *   Given $f(1) = e$, then $\frac{f(1)}{1} = e$.
-        *   $\frac{f(x)}{x} - e = e^x - e \Rightarrow \frac{f(x)}{x} = e^x \Rightarrow f(x) = x e^x$.
-
-    *   **Part 2: Roots, Sign, Asymptotics.**
-        *   $f(x) = x e^x$ for $x \in (0, +\infty)$.
-        *   Roots: $x e^x = 0 \Rightarrow x=0$ (not in domain) or $e^x=0$ (impossible). So no roots in $(0, +\infty)$.
-        *   Sign: Since $x > 0$ and $e^x > 0$ for all $x$, $f(x) > 0$ for all $x \in (0, +\infty)$.
-        *   Asymptotics:
-            *   $\lim_{x \to 0^+} x e^x = 0 \cdot e^0 = 0$. (Limit exists, value 0).
-            *   $\lim_{x \to +\infty} x e^x = (+\infty) \cdot (+\infty) = +\infty$. (Diverges).
-
-    *   **Part 3: Limit $\lim_{x \to 0^+} \frac{f(x) - x}{x^2}$.**
-        *   $\lim_{x \to 0^+} \frac{x e^x - x}{x^2} = \lim_{x \to 0^+} \frac{x(e^x - 1)}{x^2} = \lim_{x \to 0^+} \frac{e^x - 1}{x}$.
-        *   Using the fundamental limit $\lim_{h \to 0} \frac{e^h - 1}{h} = 1$ or L'Hôpital:
-        *   $\lim_{x \to 0^+} \frac{e^x - 1}{x} = 1$.
-
-    *   **Part 4: Tangent passing through $O(0,0)$.**
-        *   Let the point of tangency be $x_0 \in (0, +\infty)$.
-        *   $f(x) = x e^x \Rightarrow f'(x) = 1 \cdot e^x + x \cdot e^x = (x+1)e^x$.
-        *   The equation of the tangent at $x_0$ is: $y - f(x_0) = f'(x_0)(x - x_0)$.
-        *   $y - x_0 e^{x_0} = (x_0 + 1)e^{x_0}(x - x_0)$.
-        *   Since it passes through $O(0,0)$, we substitute $x=0, y=0$:
-            $0 - x_0 e^{x_0} = (x_0 + 1)e^{x_0}(0 - x_0)$
-            $-x_0 e^{x_0} = -x_0 (x_0 + 1) e^{x_0}$
-        *   Since $x_0 > 0$ and $e^{x_0} \neq 0$, divide by $-x_0 e^{x_0}$:
-            $1 = x_0 + 1 \Rightarrow x_0 = 0$.
-        *   But the domain is $(0, +\infty)$, so $x_0=0$ is not in the domain.
-        *   Wait, let me re-read. $f(x)$ is defined on $(0, +\infty)$.
-        *   If $x_0 \to 0^+$, the tangent might be a limiting case, but the question asks for "the equation".
-        *   Let's re-check calculations:
-            $y - x_0 e^{x_0} = (x_0+1)e^{x_0} x - (x_0+1)x_0 e^{x_0}$
-            $y = (x_0+1)e^{x_0} x - x_0^2 e^{x_0} - x_0 e^{x_0} + x_0 e^{x_0}$
-            $y = (x_0+1)e^{x_0} x - x_0^2 e^{x_0}$
-            If it passes through $(0,0)$, then $0 = (x_0+1)e^{x_0} \cdot 0 - x_0^2 e^{x_0} \Rightarrow x_0^2 e^{x_0} = 0$.
-            Since $e^{x_0} > 0$, $x_0^2 = 0 \Rightarrow x_0 = 0$.
-            But $x_0 \in (0, +\infty)$.
-        *   Is there any other point?
-        *   Let me re-read the exercise again. $f(x) = x e^x$.
-        *   Tangent: $y = f'(x_0) x + [f(x_0) - x_0 f'(x_0)]$.
-        *   For it to pass through $O(0,0)$, the intercept must be zero: $f(x_0) - x_0 f'(x_0) = 0$.
-        *   $x_0 e^{x_0} - x_0 (x_0 + 1) e^{x_0} = 0$
-        *   $x_0 e^{x_0} [1 - (x_0 + 1)] = 0$
-        *   $x_0 e^{x_0} [-x_0] = 0 \Rightarrow -x_0^2 e^{x_0} = 0 \Rightarrow x_0 = 0$.
-        *   If the function is defined on $(0, +\infty)$, technically there is no such $x_0 \in (0, +\infty)$.
-        *   However, in school problems, often "defined on $(0, +\infty)$" allows checking boundaries or perhaps there's a typo in the problem text given to me, or I should conclude no such tangent exists.
-        *   Let's check if I missed something. "Για μια παραγωγίσιμη συνάρτηση $f(x)$ που ορίζεται στο $(0, +\infty)$".
-        *   If the question asks "Find the equation", and the math says $x_0=0$, and $0 \notin (0, +\infty)$, the answer is "No such tangent exists".
-        *   But wait, looking at the limit in part 3, $\lim_{x \to 0^+} \frac{f(x)-x}{x^2} = 1$. This is about the behavior at $0$.
-        *   Let's re-evaluate. If the domain were $[0, +\infty)$, then $x_0=0$ would be the point of tangency. $f(0)=0, f'(0)=1$. Equation: $y = 1 \cdot x + 0 \Rightarrow y = x$.
-        *   Since the domain is strictly $(0, +\infty)$, I should state that $x_0=0$ is the only solution to the condition, but since $0$ is not in the domain, there is no such tangent.
-        *   HOWEVER, usually in these textbooks, they might consider the extension to the boundary. Let's see. If I write that no tangent exists, it might be technically correct but maybe not what the examiner wants. Let's re-read: "Να βρείτε την εξίσωση της εφαπτομένης... η οποία διέρχεται από την αρχή των αξόνων".
-        *   If I use $x_0=0$ and the function's continuous extension to $[0, \infty)$, I get $y=x$.
-        *   Let's check if I made a mistake in $f'(x)$. $f(x) = x e^x$. $f'(x) = e^x + x e^x = (x+1)e^x$. Correct.
-        *   $f(x_0) - x_0 f'(x_0) = x_0 e^{x_0} - x_0(x_0+1)e^{x_0} = x_0 e^{x_0}(1 - x_0 - 1) = -x_0^2 e^{x_0}$.
-        *   For the tangent to pass through $O$, $-x_0^2 e^{x_0} = 0$. This implies $x_0=0$.
-        *   Since $x_0 \in (0, +\infty)$, this is impossible.
-        *   I will write the derivation clearly and conclude that there is no such tangent in the domain $(0, +\infty)$. But I will double-check if $f(x)$ could be something else.
-        *   Check Part 1 again: $x f'(x) - f(x) = x^2 e^x$.
-        *   Divide by $x^2$: $\frac{x f'(x) - f(x)}{x^2} = e^x$. Correct.
-        *   $\left( \frac{f(x)}{x} \right)' = e^x$. Correct.
-        *   $\frac{f(x)}{x} = e^x + C$.
-        *   $f(1) = e \Rightarrow \frac{e}{1} = e^1 + C \Rightarrow e = e + C \Rightarrow C = 0$.
-        *   $f(x) = x e^x$. Correct.
-
-    *   *Self-Correction on Part 4:* In Greek high school (Γ Λυκείου), if a function is defined on $(0, +\infty)$, we typically do not consider the point $0$ as a point of tangency unless the function is extended. However, I'll present the logic: find $x_0$ such that $f(x_0) - x_0 f'(x_0) = 0$. Then show $x_0=0$ and explain it's not in the domain. Or, I will check if there's any other possible meaning.
-    *   Actually, many teachers would accept $y=x$ as the "limiting" tangent or simply state it doesn't exist. I will state that $x_0=0$ is the only solution and since $0 \notin (0, +\infty)$, no such tangent exists.
-
-    *   *Wait!* Let's re-read the equation $x f'(x) - f(x) = x^2 e^x$.
-        What if $f(x)$ was different? No, the derivation is solid.
-        Let's re-read Part 3: $\lim_{x \to 0^+} \frac{f(x)-x}{x^2} = 1$.
-        This limit suggests $f(x) \approx x + x^2$ near 0.
-        If $f(x) = x e^x$, then $f(x) = x(1 + x + \frac{x^2}{2} + \dots) = x + x^2 + \frac{x^3}{2} + \dots$
-        So $f(x) - x = x^2 + \frac{x^3}{2} + \dots$
-        And $\frac{f(x)-x}{x^2} = 1 + \frac{x}{2} + \dots \to 1$.
-        This confirms $f(x) = x e^x$ is correct.
-        And it confirms that the function "behaves" like $y=x$ at the origin.
-
-    *   Let's assume the problem intended for the domain to be $[0, +\infty)$ or the user wants to see the process. I will write:
-        $x_0 e^{x_0} - x_0(x_0+1)e^{x_0} = 0 \Rightarrow -x_0^2 e^{x_0} = 0 \Rightarrow x_0=0$.
-        Then I'll conclude that since $x_0 \notin (0, +\infty)$, there is no such tangent line.
-
-    *   Thema block $\checkmark$
-    *   Erwthma block $\checkmark$
-    *   `\item` for sub-questions $\checkmark$
-    *   `\begin{align*}` for integrals and limits $\checkmark$
-    *   `\eng{...}` for technical terms $\checkmark$
-    *   `\textbf{...}` for emphasis $\checkmark$
-    *   No indefinite integrals (use $\int_1^x \dots \d t$) $\checkmark$
-    *   `\d x` for differentials $\checkmark$
-
-    *   Part 1: Divide by $x^2 \rightarrow$ recognize quotient derivative $\rightarrow$ definite integral from $1$ to $x \rightarrow$ use $f(1)=e$.
-    *   Part 2: $f(x) = x e^x$. For $x > 0$, $x > 0$ and $e^x > 0$, so $f(x) > 0$. No roots. $\lim_{x \to 0^+} = 0$, $\lim_{x \to +\infty} = +\infty$.
-    *   Part 3: $\frac{x e^x - x}{x^2} = \frac{e^x - 1}{x} \to 1$.
-    *   Part 4: $y - x_0 e^{x_0} = (x_0+1)e^{x_0}(x - x_0)$. Pass through $(0,0) \rightarrow 0 - x_0 e^{x_0} = (x_0+1)e^{x_0}(-x_0) \rightarrow -x_0 e^{x_0} = -x_0^2 e^{x_0} - x_0 e^{x_0} \rightarrow x_0^2 e^{x_0} = 0 \rightarrow x_0 = 0$.
-
-    *Refining Part 1's LaTeX:*
-    \[ \frac{x f'(x) - f(x)}{x^2} = e^x \]
-    \[ \left( \frac{f(x)}{x} \right)' = e^x \]
-    $\int_1^x \left( \frac{f(t)}{t} \right)' \d t = \int_1^x e^t \d t$
-    \[ \frac{f(x)}{x} - \frac{f(1)}{1} = e^x - e \]
-    Since $f(1)=e$:
-    \[ \frac{f(x)}{x} - e = e^x - e \Rightarrow f(x) = x e^x \]
-
-    *Refining Part 2's LaTeX:*
-    $\textbf{Ρίζες και πρόσημο:}$
-    Since $x \in (0, +\infty)$, we have $x > 0$ and $e^x > 0$.
-    Thus, $f(x) = x e^x > 0$ for all $x \in (0, +\infty)$.
-    The function has no roots in its domain.
-    $\textbf{Ασυμπτωτική συμπεριφορά:}$
-    $\lim_{x \to 0^+} x e^x = 0 \cdot e^0 = 0$.
-    $\lim_{x \to +\infty} x e^x = (+\infty) \cdot (+\infty) = +\infty$.
-
-    *Refining Part 3's LaTeX:*
-    \[ \lim_{x \to 0^+} \frac{f(x) - x}{x^2} = \lim_{x \to 0^+} \frac{x e^x - x}{x^2} = \lim_{x \to 0^+} \frac{x(e^x - 1)}{x^2} = \lim_{x \to 0^+} \frac{e^x - 1}{x} \]
-    Using the fundamental limit $\lim_{u \to 0} \frac{e^u - 1}{u} = 1$:
-    \[ \lim_{x \to 0^+} \frac{e^x - 1}{x} = 1 \]
-
-    *Refining Part 4's LaTeX:*
-    Tangent at $x_0$: $y = f'(x_0)(x - x_0) + f(x_0)$.
-    $f'(x) = (x+1)e^x$.
-    \[ y = (x_0 + 1)e^{x_0}(x - x_0) + x_0 e^{x_0} \]
-    Passes through $(0,0) \Rightarrow 0 = (x_0 + 1)e^{x_0}(0 - x_0) + x_0 e^{x_0}$
-    \[ 0 = -x_0^2 e^{x_0} - x_0 e^{x_0} + x_0 e^{x_0} \]
-    \[ -x_0^2 e^{x_0} = 0 \Rightarrow x_0 = 0 \]
-    Since $0 \notin (0, +\infty)$, there is no such tangent line.
-
-    *Wait*, if the problem is from a Greek textbook, sometimes $f(x)$ is considered on $(0, \infty)$ but $0$ is a limit point. If the student is asked "Find the equation", and the only result is $x_0=0$, they usually just write $y=x$. But as a professional teacher, I should be precise. I will mention that the condition $f(x_0) - x_0 f'(x_0) = 0$ leads to $x_0=0$, and since the domain is $(0, \infty)$, we strictly have no such point, but if we consider the limit/extension, it's $y=x$. Actually, I'll just stick to the strict mathematical conclusion based on the domain provided. But wait, let me check common problems like this. Usually, they define the function on $[0, \infty)$. If they said $(0, \infty)$, maybe it's a test of the domain. I will write that the only solution is $x_0=0$, and since $0 \notin (0, \infty)$, there is no such tangent.
-
-    Actually, let's look at Part 3 again. It specifically asks for the limit as $x \to 0^+$. This emphasizes that $0$ is not in the domain. Thus, the conclusion for Part 4 should be consistent: no such $x_0$ exists in the domain.
-
-    *Double check:* $f(x) = x e^x$ on $(0, \infty)$.
-    Is it possible that a tangent at $x_0 > 0$ passes through $(0,0)$?
-    $f(x_0) = x_0 f'(x_0)$
-    $x_0 e^{x_0} = x_0 (x_0 + 1) e^{x_0}$
-    $1 = x_0 + 1$ (since $x_0 e^{x_0} \neq 0$)
-    $x_0 = 0$.
-    No. Definitely no $x_0 \in (0, \infty)$.
-
-    Final structure check:
-    `%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========`
-    `\begin{thema}{Γ}`
-    `\begin{erwthma}`
-    `\item ...`
-    `\end{erwthma}`
-    `\end{thema}`
-    `%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========`
-
-    Wait, the guide says "No indefinite integrals". I will use the Fundamental Theorem of Calculus with a definite integral from 1 to $x$.
-    $\int_1^x \left( \frac{f(t)}{t} \right)' \d t = \left[ \frac{f(t)}{t} \right]_1^x = \frac{f(x)}{x} - \frac{f(1)}{1}$. This is perfect.
-
-    One more thing: `\eng{Lagrange}` or `\eng{Squeeze}` are mentioned in the guide, but not needed here. I will use `\textbf{...}` for emphasis.
-
-    *Actually*, the phrase "διαιρέσετε με $x^2$ και να αποδείξετε" almost explicitly points to the quotient rule for derivatives.
-
-    Ready to write.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 16ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Διαιρώντας ταυτόσημα τη σχέση $x f'(x) - f(x) = x^2 e^x$ με το $x^2$ για $x > 0$, προκύπτει:
-\[ \frac{x f'(x) - f(x)}{x^2} = e^x \]
-Παρατηρούμε ότι το αριστερό μέλος αποτελεί την παράγωγο της συνάρτησης $\frac{f(x)}{x}$, καθώς:
-\[ \left( \frac{f(x)}{x} \right)' = \frac{f'(x) \cdot x - f(x) \cdot 1}{x^2} \]
-Επομένως, έχουμε τη διαφορική σχέση:
-\[ \left( \frac{f(x)}{x} \right)' = e^x \]
-Ολοκληρώνοντας τα δύο μέλη στο διάστημα $[1, x]$ (με $x > 0$), έχουμε:
-\[ \int_1^x \left( \frac{f(t)}{t} \right)' \d t = \int_1^x e^t \d t \]
-\[ \left[ \frac{f(t)}{t} \right]_1^x = \left[ e^t \right]_1^x \]
-\[ \frac{f(x)}{x} - \frac{f(1)}{1} = e^x - e^1 \]
-Δεδομένου ότι $f(1) = e$, η σχέση γίνεται:
-\[ \frac{f(x)}{x} - e = e^x - e \Rightarrow \frac{f(x)}{x} = e^x \Rightarrow f(x) = x e^x \]
+\item Για κάθε $x > 0$, η δοσμένη σχέση διαιρείται με $x^2 \neq 0$:
+\[ \frac{x f'(x) - f(x)}{x^2} = \frac{x^2 e^x}{x^2}\Leftrightarrow \]
+\[ \frac{f'(x) \cdot x - f(x) \cdot (x)'}{x^2} = e^x\Leftrightarrow \]
+\[ \left( \frac{f(x)}{x} \right)' = (e^x)' \]
+Από τις συνέπειες του Θεωρήματος Μέσης Τιμής, προκύπτει ότι:
+\[ \frac{f(x)}{x} = e^x + c, \quad \text{όπου } c \in \mathbb{R} \]
+Για $x = 1$, έχουμε $f(1) = e$, οπότε:
+\[ \frac{f(1)}{1} = e^1 + c \implies e = e + c \implies c = 0 \]
+Άρα, $\dfrac{f(x)}{x} = e^x \implies f(x) = x e^x$ για κάθε $x > 0$.
 
-\item \textbf{Ρίζες και πρόσημο:}
-Η συνάρτηση $f(x) = x e^x$ ορίζεται στο $(0, +\infty)$. Για κάθε $x \in (0, +\infty)$ ισχύει $x > 0$ και $e^x > 0$, επομένως:
-\[ f(x) = x e^x > 0 \]
-Συνεπώς, η $f(x)$ είναι \textbf{θετική} σε όλο το πεδίο ορισμού της και δεν διαθέτει ρίζες στο $(0, +\infty)$.
+\item \textbf{Ρίζες και Πρόσημο:}
+Η συνάρτηση $f(x) = x e^x$ ορίζεται στο $(0, +\infty)$. 
+Επειδή $x > 0$ και $e^x > 0$ για κάθε $x \in (0, +\infty)$, ισχύει:
+\[ f(x) > 0 \text{ για κάθε } x > 0 \]
+Άρα, η $f$ διατηρεί \textbf{θετικό πρόσημο} σε όλο το πεδίο ορισμού της και \textbf{δεν έχει καμία ρίζα}.
 
-\textbf{Ασυμπτωτική συμπεριφορά:}
-Για το $x \to 0^+$, έχουμε:
-\[ \lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} x e^x = 0 \cdot e^0 = 0 \]
-Για το $x \to +\infty$, έχουμε:
-\[ \lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} x e^x = (+\infty) \cdot (+\infty) = +\infty \]
+\textbf{Ασύμπτωτες:}
+\begin{itemize}
+    \item Στο $x_0 = 0$ (δεξιό άκρο του πεδίου ορισμού):
+    Υπολογίζουμε το όριο: $\lim\limits_{x \to 0^+} f(x) = \lim\limits_{x \to 0^+} (x e^x) = 0 \cdot e^0 = 0$.
+    Επειδή το όριο είναι πραγματικός αριθμός, η γραφική παράσταση της $f$ \textbf{δεν έχει κατακόρυφη ασύμπτωτη} στο $0$.
+    \item Στο $+\infty$:
+    Υπολογίζουμε το όριο: $\lim\limits_{x \to +\infty} f(x) = \lim\limits_{x \to +\infty} (x e^x) = (+\infty) \cdot (+\infty) = +\infty$.
+    Άρα, δεν υπάρχει οριζόντια ασύμπτωτη. 
+    Ελέγχουμε για πλάγια ασύμπτωτη $y = \lambda x + \beta$:
+    \[ \lambda = \lim_{x \to +\infty} \frac{f(x)}{x} = \lim_{x \to +\infty} \frac{x e^x}{x} = \lim_{x \to +\infty} e^x = +\infty \]
+    Εφόσον $\lambda \notin \mathbb{R}$, η συνάρτηση \textbf{δεν έχει ούτε πλάγια (ούτε οριζόντια) ασύμπτωτη} στο $+\infty$.
+\end{itemize}
 
-\item Υπολογίζουμε το όριο:
-\[ \lim_{x \to 0^+} \frac{f(x) - x}{x^2} = \lim_{x \to 0^+} \frac{x e^x - x}{x^2} = \lim_{x \to 0^+} \frac{x(e^x - 1)}{x^2} = \lim_{x \to 0^+} \frac{e^x - 1}{x} \]
-Χρησιμοποιώντας το βασικό όριο $\lim_{u \to 0} \frac{e^u - 1}{u} = 1$, προκύπτει:
-\[ \lim_{x \to 0^+} \frac{e^x - 1}{x} = 1 \]
+\item Έχουμε το όριο:
+\[ L = \lim_{x \to 0^+} \frac{f(x) - x}{x^2} = \lim_{x \to 0^+} \frac{x e^x - x}{x^2} = \lim_{x \to 0^+} \frac{x(e^x - 1)}{x^2} = \lim_{x \to 0^+} \frac{e^x - 1}{x} \]
+Η μορφή του νέου ορίου καθώς $x \to 0^+$ είναι $\dfrac{e^0 - 1}{0} = \dfrac{0}{0}$.
+Εφαρμόζοντας τον κανόνα \eng{De L'Hospital}, έχουμε:
+\[ L \xlongequal[\text{\eng{DLH}}]{\frac{0}{0}} \lim_{x \to 0^+} \frac{(e^x - 1)'}{(x)'} = \lim_{x \to 0^+} \frac{e^x}{1} = e^0 = 1 \]
 
-\item Έστω $x_0 \in (0, +\infty)$ το σημείο επαφής της εφαπτομένης. Η παράγωγος της $f(x)$ είναι:
-\[ f'(x) = (x e^x)' = 1 \cdot e^x + x \cdot e^x = (x+1)e^x \]
-Η εξίσωση της εφαπτομένης στο σημείο $(x_0, f(x_0))$ είναι:
-\[ y - f(x_0) = f'(x_0)(x - x_0) \Rightarrow y - x_0 e^{x_0} = (x_0 + 1)e^{x_0}(x - x_0) \]
-Για να διέρχεται η εφαπτομένη από την αρχή των αξόνων $O(0,0)$, πρέπει να ικανοποιείται η σχέση για $x=0$ και $y=0$:
+\item Έστω $M(x_0, f(x_0))$ ένα τυχαίο σημείο της γραφικής παράστασης $C_f$, με $x_0 > 0$.
+Η παράγωγος της $f$ είναι $f'(x) = (x e^x)' = e^x + x e^x = (x+1)e^x$.
+Ο συντελεστής διεύθυνσης της εφαπτομένης στο $M$ είναι $\lambda = f'(x_0) = (x_0+1)e^{x_0}$.
+Η εξίσωση της εφαπτομένης ευθείας $\varepsilon$ είναι:
+\[ y - f(x_0) = f'(x_0)(x - x_0) \implies y - x_0 e^{x_0} = (x_0 + 1)e^{x_0}(x - x_0) \]
+Για να διέρχεται η εφαπτομένη από την αρχή των αξόνων $O(0,0)$, πρέπει οι συντεταγμένες $(x,y)=(0,0)$ να επαληθεύουν την εξίσωσή της:
 \begin{align*}
 0 - x_0 e^{x_0} &= (x_0 + 1)e^{x_0}(0 - x_0) \\
--x_0 e^{x_0} &= -x_0(x_0 + 1)e^{x_0} \\
--x_0 e^{x_0} &= -x_0^2 e^{x_0} - x_0 e^{x_0} \\
-x_0^2 e^{x_0} &= 0
+-x_0 e^{x_0} &= -x_0(x_0 + 1)e^{x_0}
 \end{align*}
-Επειδή $e^{x_0} > 0$ για κάθε $x_0$, η μόνη λύση είναι $x_0 = 0$.
-Ωστόσο, το σημείο $x_0 = 0$ δεν ανήκει στο πεδίο ορισμού της συνάρτησης $(0, +\infty)$.
-Επομένως, δεν υπάρχει εφαπτομένη της $C_f$ που να διέρχεται από την αρχή των αξόνων $O(0,0)$ για $x_0 \in (0, +\infty)$.
+Επειδή $x_0 > 0$, γνωρίζουμε ότι $x_0 \neq 0$ και προφανώς $e^{x_0} \neq 0$. 
+Άρα μπορούμε να διαιρέσουμε και τα δύο μέλη με την ποσότητα $-x_0 e^{x_0}$, λαμβάνοντας:
+\[ 1 = x_0 + 1 \implies x_0 = 0 \]
+Η τιμή αυτή όμως απορρίπτεται, διότι το $0$ δεν ανήκει στο πεδίο ορισμού $(0, +\infty)$ της συνάρτησης.
+Συμπεραίνουμε ότι \textbf{δεν υπάρχει} καμία εφαπτομένη της $C_f$ η οποία να διέρχεται από την αρχή των αξόνων.
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 16ο ΘΕΜΑ Γ ===========

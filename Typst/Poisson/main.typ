@@ -1,7 +1,7 @@
 #set heading(numbering: "1.")
 #show math.equation: set text(font: "STIX Two Math")
 #show heading: set align(center)
-#show heading: set text(font: "Liberation Serif", blue, 20pt)
+#show heading: set text(font: "Century Gothic", blue, 20pt)
 #set text(font: "Minion Pro")
 
 #import "@preview/cetz:0.4.2"
@@ -23,7 +23,7 @@ $ sum_(i=1)^(10)x^i= (x^(10-1)-1)/(x-1)=(x^9-1)/(x-1) $
     stroke: (thickness: 0.4pt, cap: "round"),
     angle: (
       radius: 0.3,
-      label-radius: .24,
+      label-radius: .4,
       fill: green.lighten(80%),
       stroke: (paint: green.darken(50%)),
     ),

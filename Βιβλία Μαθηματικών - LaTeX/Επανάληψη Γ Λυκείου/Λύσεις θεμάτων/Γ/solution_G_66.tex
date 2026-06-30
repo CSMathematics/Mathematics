@@ -1,179 +1,97 @@
-*   Problem Statement: Consider $e^x = ax$ with $a > e$.
-    *   Part 1: $g(x) = \frac{e^x}{x}$ for $x > 0$. Show it has a minimum at $x = 1$. Find the minimum value.
-    *   Part 2: Prove $y = ax$ intersects $y = e^x$ at exactly two points in the first quadrant for $a > e$.
-    *   Part 3: Discuss number of solutions for $a \le e$ (cases: $a = e$, $0 < a < e$, $a \le 0$).
-    *   Part 4: As $a \to +\infty$, find the limiting positions of roots $x_1$ and $x_2$.
-
-    *   Environment: `\begin{thema}{Γ}` ... `\end{thema}`.
-    *   Sub-environment: `\begin{erwthma}` ... `\end{erwthma}`.
-    *   Items: `\item`.
-    *   Math: Inline `$ ... $`, Display `\[ ... \]`, Align `\begin{align*} ... \end{align*}`.
-    *   Terminology: `\eng{...}` for theorems, `\textbf{...}` for emphasis.
-    *   No indefinite integrals, no 2nd derivative test.
-    *   Specific Greek terms/commands: `\hm`, `\syn` (though not needed here).
-
-    *   **Part 1: $g(x) = \frac{e^x}{x}, x > 0$.**
-        *   Derivative: $g'(x) = \frac{e^x \cdot x - e^x \cdot 1}{x^2} = \frac{e^x(x-1)}{x^2}$.
-        *   Analysis:
-            *   $g'(x) = 0 \Leftrightarrow x-1 = 0 \Leftrightarrow x = 1$.
-            *   $g'(x) > 0 \Leftrightarrow x > 1$ (since $e^x > 0, x^2 > 0$).
-            *   $g'(x) < 0 \Leftrightarrow 0 < x < 1$.
-        *   Conclusion: Local/Global minimum at $x = 1$.
-        *   Minimum value: $g(1) = \frac{e^1}{1} = e$.
-
-    *   **Part 2: $e^x = ax$ for $a > e$ in 1st quadrant ($x > 0$).**
-        *   The equation $e^x = ax$ is equivalent to $\frac{e^x}{x} = a$ (since $x > 0$).
-        *   Let $g(x) = \frac{e^x}{x}$.
-        *   From Part 1, $g(x)$ is strictly decreasing on $(0, 1]$ and strictly increasing on $[1, +\infty)$.
-        *   Range: $\min g(x) = e$.
-        *   Limits: $\lim_{x \to 0^+} \frac{e^x}{x} = +\infty$ and $\lim_{x \to +\infty} \frac{e^x}{x} = +\infty$ (via L'Hôpital or growth rates).
-        *   Since $a > e$, the line $y = a$ intersects the graph of $g(x)$ at two distinct points:
-            *   One in $(0, 1)$ because $g$ is continuous and $g(x)$ goes from $+\infty$ to $e$.
-            *   One in $(1, +\infty)$ because $g$ is continuous and $g(x)$ goes from $e$ to $+\infty$.
-        *   Thus, there are exactly two solutions $x_1, x_2$.
-
-    *   **Part 3: $a \le e$.**
-        *   Case $a = e$: The equation is $\frac{e^x}{x} = e$. Since $e$ is the minimum value and is attained only at $x=1$, there is exactly one solution $x=1$.
-        *   Case $0 < a < e$: The minimum value of $g(x)$ is $e$. Since $a < e$, $g(x) = a$ has no solutions for $x > 0$. For $x \le 0$, $e^x > 0$ and $ax \le 0$, so no solutions. Total: 0 solutions.
-        *   Case $a \le 0$: $e^x$ is always positive. $ax \le 0$ for $x > 0$ and $ax \ge 0$ for $x \le 0$.
-            *   If $x > 0$, $e^x > 0$ and $ax \le 0 \implies$ no solutions.
-            *   If $x \le 0$, $e^x > 0$. If $a < 0$, $ax \ge 0$. However, for $x=0$, $e^0=1$ and $a(0)=0$. For $x < 0$, let's check $h(x) = e^x - ax$. $h'(x) = e^x - a$.
-            *   Actually, simpler: For $x \le 0$, if $a < 0$, $ax$ is non-negative. But $e^x$ is between 0 and 1. $e^x - ax = 0 \implies e^x = ax$. Since $e^x > 0$ and for $x \le 0$, if $a \le 0$, $ax \ge 0$.
-            *   Wait: if $a < 0$ and $x < 0$, $ax > 0$. Can $e^x = ax$?
-            *   Let $h(x) = e^x - ax$. For $x \le 0$, $h'(x) = e^x - a$. If $a < 0$, $h'(x) = e^x + |a| > 0$. $h$ is strictly increasing.
-            *   $h(0) = 1 - 0 = 1$. Since $h$ is increasing, $h(x) < 1$ for $x < 0$.
-            *   $\lim_{x \to -\infty} (e^x - ax) = \lim (0 - (-\infty)) = +\infty$ (since $a < 0, x \to -\infty \implies ax \to +\infty$).
-            *   Wait, let's re-evaluate $h(x) = e^x - ax$ for $x \le 0, a < 0$.
-            *   $h'(x) = e^x - a$. Since $a < 0$, $-a > 0$, so $h'(x) = e^x + |a| > 0$.
-            *   $h(0) = 1$. As $x \to -\infty$, $e^x \to 0$ and $-ax \to -\infty$ (because $a<0$ and $x<0$, so $ax > 0$, meaning $-ax < 0$).
-            *   $\lim_{x \to -\infty} (e^x - ax) = 0 - (-\infty \cdot \text{negative}) = -\infty$.
-            *   Since $h$ is continuous, $h(-\infty) = -\infty$ and $h(0) = 1$, by \eng{Bolzano}, there is a solution in $(-\infty, 0)$.
-            *   Let's check again: $e^x = ax$. If $a < 0$, let $a = -k$ ($k > 0$). $e^x = -kx$.
-            *   For $x > 0$: $e^x > 0$ and $-kx < 0 \implies$ no.
-            *   For $x = 0$: $1 = 0 \implies$ no.
-            *   For $x < 0$: $e^x > 0$ and $-kx > 0$.
-            *   Let $\phi(x) = e^x + kx$. $\phi'(x) = e^x + k > 0$.
-            *   $\phi(0) = 1$. $\phi(x) \to -\infty$ as $x \to -\infty$.
-            *   So there is exactly one root for $x < 0$.
-            *   Case $a = 0$: $e^x = 0$, no solution.
-            *   Re-reading Part 3: "Διαχωρίστε κατάλληλα τις περιπτώσεις $a=e, 0 < a < e$ και $a \le 0$".
-            *   Wait, usually these problems focus on the first quadrant. Let's check the wording: "τέμνει την καμπύλη... στο πρώτο τεταρτημόριο" (Part 2). Part 3 doesn't specify the quadrant.
-            *   If $a \le 0$:
-                *   If $a = 0$, no solution.
-                *   If $a < 0$, exactly one solution in $x < 0$.
-
-    *   **Part 4: $a \to +\infty$, limits of $x_1$ and $x_2$.**
-        *   Roots $x_1 \in (0, 1)$ and $x_2 \in (1, +\infty)$.
-        *   Equation: $g(x) = a$.
-        *   For $x_1$: $g(x_1) = \frac{e^{x_1}}{x_1} = a$. As $a \to +\infty$, since $e^{x_1}$ is bounded between $e^0=1$ and $e^1=e$, we must have $x_1 \to 0^+$ to make the fraction go to $+\infty$.
-        *   For $x_2$: $g(x_2) = \frac{e^{x_2}}{x_2} = a$. As $a \to +\infty$, $x_2$ must increase. We know $e^x$ grows much faster than $x$. Thus $x_2 \to +\infty$.
-
-    *   Use `\begin{thema}{Γ}`, `\begin{erwthma}`, `\item`.
-    *   `\textbf{γνησίως φθίνουσα}`, `\textbf{γνησίως αύξουσα}`.
-    *   `\eng{Bolzano}` if used, or just logic.
-    *   `\begin{align*}` for the derivative and limits.
-
-    *   Part 1: $g'(x) = \frac{e^x(x-1)}{x^2}$. $x=1$ is the minimum. $g(1) = e$.
-    *   Part 2: $g(x) = a$. Since $a > e$ and $g$ is continuous, and $\lim_{x \to 0} g = \infty$, $\lim_{x \to \infty} g = \infty$, and $g(1)=e$, there are two roots.
-    *   Part 3:
-        *   $a = e$: One root $x=1$.
-        *   $0 < a < e$: No roots (minimum is $e$).
-        *   $a = 0$: No roots ($e^x=0$ is impossible).
-        *   $a < 0$: One root in $x < 0$. (Verify: $h(x) = e^x - ax$, $h(0)=1, h(-\infty)=-\infty$, $h$ increasing).
-    *   Part 4: $x_1 \to 0$, $x_2 \to \infty$.
-
-    *Self-Correction on Part 3*: Often in these textbooks, "solutions" might be implied as "positive solutions" if the previous part focused on the first quadrant, but since it's a separate question and lists $a \le 0$, I should be thorough. Let's check if $e^x = ax$ for $x < 0, a < 0$.
-    If $x = -t (t > 0)$ and $a = -k (k > 0)$:
-    $e^{-t} = (-k)(-t) \Rightarrow e^{-t} = kt$.
-    Let $\psi(t) = kt - e^{-t}$. $\psi(0) = -1$, $\psi(\infty) = \infty$. One root $t > 0 \Rightarrow x < 0$.
-    So for $a < 0$, one root. For $a = 0$, no root.
-
-    *Refining Part 4*:
-    $x_1 \in (0, 1)$. $a = \frac{e^{x_1}}{x_1}$. As $a \to \infty$, $x_1 \to 0$ because $e^{x_1} \in (1, e)$.
-    $x_2 \in (1, \infty)$. $a = \frac{e^{x_2}}{x_2}$. As $a \to \infty$, $x_2 \to \infty$ because $\frac{e^x}{x} \to \infty$ as $x \to \infty$.
-
-    *   `\textbf{ολίστατο}` for absolute minimum.
-    *   `\eng{Bolzano}` for the existence of the root for $a < 0$.
-    *   Wait, the prompt says $a > e$ initially. Part 3 changes this.
-    *   The formatting guide says `\begin{align*}` for calculations.
-
-    *   No indefinite integrals? Checked.
-    *   No 2nd derivative test? Checked.
-    *   No differential equations? Checked.
-    *   No MVT for integrals? Checked.
-    *   No variable limit integrals? Checked.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item` (Part 1) -> $g'(x) = \dots$, analysis of sign.
-    *   `\item` (Part 2) -> equivalence to $g(x)=a$, using limits and monotonicity.
-    *   `\item` (Part 3) -> cases $a=e$ (1 root), $0 < a < e$ (0 roots), $a=0$ (0 roots), $a<0$ (1 root).
-    *   `\item` (Part 4) -> analysis of $x_1$ and $x_2$.
-
-    Wait, in Part 3, the request is "Διαχωρίστε κατάλληλα τις περιπτώσεις $a=e, 0 < a < e$ και $a \le 0$".
-    For $a \le 0$:
-    - $a=0$: $e^x = 0$ (no solutions).
-    - $a < 0$: $e^x = ax$. Let $h(x) = e^x - ax$. $h'(x) = e^x - a > 0$ since $a < 0$. $\lim_{x \to -\infty} h(x) = -\infty$ (because $-ax \to -\infty$ as $x \to -\infty$ for $a<0$). $h(0) = 1$. By \eng{Bolzano}, there is exactly one solution in $(-\infty, 0)$.
-%=========== ΛΥΣΗ - 4ο ΘΕΜΑ Γ ===========
-
+%=========== ΛΥΣΗ - 66ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Για $x > 0$, η συνάρτηση $g(x) = \dfrac{e^x}{x}$ είναι συνεχής και παραγώγιμη στο $(0, +\infty)$. Η παράγωγός της είναι:
-\[
-g'(x) = \frac{(e^x)' \cdot x - e^x \cdot (x)'}{x^2} = \frac{e^x \cdot x - e^x \cdot 1}{x^2} = \frac{e^x(x-1)}{x^2}
-\]
-Εξετάζουμε το πρόσημο της $g'(x)$:
+\item Για $x>0$ έχουμε
+\[g(x)=\frac{e^x}{x}\]
+Η $g$ είναι παραγωγίσιμη στο $(0,+\infty)$ και
+\[g'(x)=\frac{(e^x)'x-e^x(x)'}{x^2}=\frac{xe^x-e^x}{x^2}=\frac{e^x(x-1)}{x^2}\]
+Επειδή $e^x>0$ και $x^2>0$ για κάθε $x>0$, το πρόσημο της $g'$ καθορίζεται από το $x-1$.
+Έχουμε:
 \begin{itemize}
-    \item $g'(x) = 0 \Leftrightarrow x-1 = 0 \Leftrightarrow x = 1$
-    \item $g'(x) > 0 \Leftrightarrow x-1 > 0 \Leftrightarrow x > 1$
-    \item $g'(x) < 0 \Leftrightarrow x-1 < 0 \Leftrightarrow 0 < x < 1$
+\item $g'(x)=0\Leftrightarrow x=1$
+\item $g'(x)<0\Leftrightarrow 0<x<1$
+\item $g'(x)>0\Leftrightarrow x>1$
 \end{itemize}
-Συνεπώς, η συνάρτηση $g$ είναι \textbf{γνησίως φθίνουσα} στο $(0, 1]$ και \textbf{γνησίως αύξουσα} στο $[1, +\infty)$.
-Άρα, η συνάρτηση $g$ παρουσιάζει \textbf{ολίστατο} στο $x=1$ και η ελάχιστη τιμή της είναι:
-\[
-g(1) = \frac{e^1}{1} = e
-\]
+Άρα η $g$ είναι γνησίως φθίνουσα στο $(0,1]$ και γνησίως αύξουσα στο $[1,+\infty)$.
+Επομένως παρουσιάζει ολικό ελάχιστο στο $x=1$, με ελάχιστη τιμή
+\[g(1)=\frac{e^1}{1}=e\]
 
-\item Η εξίσωση $e^x = ax$ για $x > 0$ είναι ισοδύναμη με την εξίσωση:
-\[
-\frac{e^x}{x} = a \Leftrightarrow g(x) = a
-\]
-Γνωρίζουμε από το προηγούμενο ερώτημα ότι η $g$ έχει ελάχιστο $g(1) = e$.
-Επιπλέον, υπολογίζουμε τα όρια της $g$ στα άκρα του ορισμού της:
+\item Για $x>0$ η εξίσωση
+\[e^x=ax\]
+είναι ισοδύναμη με
+\[\frac{e^x}{x}=a\Leftrightarrow g(x)=a\]
+Από το προηγούμενο ερώτημα γνωρίζουμε ότι η $g$ έχει ελάχιστη τιμή το $e$ στο $x=1$.
+Επίσης
+\[\lim\limits_{x\to 0^+}g(x)=\lim\limits_{x\to 0^+}\frac{e^x}{x}=+\infty\]
+και
+\[\lim\limits_{x\to+\infty}g(x)=\lim\limits_{x\to+\infty}\frac{e^x}{x}=+\infty\]
+
+Έστω $a>e$.
+Στο διάστημα $(0,1]$ η $g$ είναι συνεχής και γνησίως φθίνουσα, με
+\[\lim\limits_{x\to 0^+}g(x)=+\infty\quad \text{και}\quad g(1)=e<a\]
+Άρα υπάρχει μοναδικό $x_1\in(0,1)$ τέτοιο ώστε
+\[g(x_1)=a\]
+
+Στο διάστημα $[1,+\infty)$ η $g$ είναι συνεχής και γνησίως αύξουσα, με
+\[g(1)=e<a\quad \text{και}\quad \lim\limits_{x\to+\infty}g(x)=+\infty\]
+Άρα υπάρχει μοναδικό $x_2\in(1,+\infty)$ τέτοιο ώστε
+\[g(x_2)=a\]
+
+Επομένως, για $a>e$, η εξίσωση $e^x=ax$ έχει ακριβώς δύο λύσεις στο $(0,+\infty)$.
+Άρα η ευθεία $y=ax$ τέμνει την καμπύλη $y=e^x$ σε ακριβώς δύο σημεία στο πρώτο τεταρτημόριο.
+
+\item Για $x>0$ η εξίσωση $e^x=ax$ είναι ισοδύναμη με $g(x)=a$.
+Επειδή, από το πρώτο ερώτημα,
+\[g(x)\geq e\ ,\quad \text{για κάθε }x>0\]
+έχουμε:
+\begin{itemize}
+\item Αν $a=e$, τότε η εξίσωση $g(x)=e$ έχει μοναδική λύση το $x=1$.
+\item Αν $a<e$, τότε η εξίσωση $g(x)=a$ δεν έχει καμία λύση στο $(0,+\infty)$.
+\end{itemize}
+Άρα, για $a\leq e$, η εξίσωση έχει μία λύση στο $(0,+\infty)$ όταν $a=e$, ενώ δεν έχει καμία λύση όταν $a<e$.
+
+\item Έχουμε
+\[g'(x)=\frac{e^x(x-1)}{x^2}\]
+και
 \begin{align*}
-\lim_{x \to 0^+} g(x) &= \lim_{x \to 0^+} \frac{e^x}{x} = \frac{1}{0^+} = +\infty \\
-\lim_{x \to +\infty} g(x) &= \lim_{x \to +\infty} \frac{e^x}{x} = +\infty \quad (\text{αφού } e^x \text{ αυξάνει ταχύτερα από το } x)
+g''(x)
+&=\left(e^x\cdot\frac{x-1}{x^2}\right)'\\
+&=e^x\cdot\frac{x-1}{x^2}+e^x\left(\frac{x-1}{x^2}\right)'\\
+&=e^x\left(\frac{x-1}{x^2}+\frac{2-x}{x^3}\right)\\
+&=e^x\cdot\frac{x(x-1)+2-x}{x^3}\\
+&=e^x\cdot\frac{x^2-2x+2}{x^3}
 \end{align*}
-Δεδομένου ότι $a > e$, η τιμή $a$ ανήκει στο λίμνο της εικόνας της $g$ σε δύο διαφορετικά διαστήματα:
-\begin{itemize}
-    \item Στο διάστημα $(0, 1)$, η $g$ είναι συνεχής και $\text{ελάχιστη τιμή } e < a < \lim_{x \to 0^+} g(x) = +\infty$. Άρα, από το \eng{Bolzano}, υπάρχει μία ρίζα $x_1 \in (0, 1)$.
-    \item Στο διάστημα $(1, +\infty)$, η $g$ είναι συνεχής και $e = g(1) < a < \lim_{x \to +\infty} g(x) = +\infty$. Άρα, από το \eng{Bolzano}, υπάρχει μία ρίζα $x_2 \in (1, +\infty)$.
-\end{itemize}
-Επειδή η $g$ είναι γνησίως μονότονη σε κάθε ένα από αυτά τα διαστήματα, οι ρίζες είναι μοναδικές. Άρα η ευθεία $y=ax$ τέμνει την καμπύλη $y=e^x$ σε ακριβώς δύο σημεία στο πρώτο τεταρτημόριο.
+Άρα
+\[g''(1)=e\]
+Επειδή $g(1)=e$ και $g'(1)=0$, έχουμε απροσδιόριστη μορφή $\dfrac{0}{0}$.
+Εφαρμόζοντας δύο φορές τον κανόνα \eng{De L' Hospital}, παίρνουμε
+\begin{align*}
+\lim\limits_{x\to 1}\frac{g(x)-e}{(x-1)^2}
+&=\lim\limits_{x\to 1}\frac{g'(x)}{2(x-1)}\\
+&=\lim\limits_{x\to 1}\frac{g''(x)}{2}\\
+&=\frac{g''(1)}{2}\\
+&=\frac{e}{2}
+\end{align*}
 
-\item Εξετάζουμε τον αριθμό των λύσεων της εξίσωσης $e^x = ax$:
-\begin{itemize}
-    \item Για $a = e$: Η εξίσωση $\frac{e^x}{x} = e$ έχει μία και μοναδική λύση $x=1$ (το σημείο του ολίστατου).
-    \item Για $0 < a < e$: Εφόσον το ελάχιστο της $g$ είναι $e$, η εξίσωση $g(x) = a$ δεν έχει λύσεις για $x > 0$. Για $x \le 0$, έχουμε $e^x > 0$ και $ax \le 0$, οπότε η εξίσωση δεν έχει λύσεις. Άρα, η εξίσωση έχει \textbf{μηδέν λύσεις}.
-    \item Για $a \le 0$:
-    \begin{itemize}
-        \item Αν $a = 0$, η εξίσωση $e^x = 0$ είναι αδύνατη.
-        \item Αν $a < 0$, θεωρούμε τη συνάρτηση $h(x) = e^x - ax$. Η παράγωγός της είναι $h'(x) = e^x - a$. Επειδή $a < 0$, τότε $h'(x) = e^x + |a| > 0$ για κάθε $x \in \mathbb{R}$, άρα η $h$ είναι \textbf{γνησίως αύξουσα}.
-        Υπολογίζουμε τα όρια:
-        \[
-        \lim_{x \to -\infty} (e^x - ax) = 0 - (-\infty \cdot \text{αρνητικό}) = -\infty, \quad h(0) = e^0 - 0 = 1
-        \]
-        Από το \eng{Bolzano}, υπάρχει μία μοναδική λύση στο $(-\infty, 0)$.
-    \end{itemize}
-\end{itemize}
+\item Από το προηγούμενο ερώτημα έχουμε
+\[g''(x)=e^x\cdot\frac{x^2-2x+2}{x^3}\]
+Για κάθε $x>0$ ισχύει
+\[e^x>0,\quad x^3>0\quad \text{και}\quad x^2-2x+2=(x-1)^2+1>0\]
+Άρα
+\[g''(x)>0\ ,\quad \text{για κάθε }x>0\]
+Επομένως η $g$ είναι κυρτή στο $(0,+\infty)$.
 
-\item Έστω $x_1 \in (0, 1)$ και $x_2 \in (1, +\infty)$ οι δύο ρίζες της εξίσωσης $g(x) = a$.
-\begin{itemize}
-    \item Για τη ρίζα $x_1$: Έχουμε $a = \dfrac{e^{x_1}}{x_1}$. Καθώς $a \to +\infty$, και εφόσον $e^{x_1} \in (1, e)$, πρέπει αναγκαστικά $x_1 \to 0^+$.
-    \item Για τη ρίζα $x_2$: Έχουμε $a = \dfrac{e^{x_2}}{x_2}$. Καθώς $a \to +\infty$, και εφόσον η $g$ είναι γνησίως αύξουσα στο $[1, +\infty)$ με $\lim_{x \to +\infty} g(x) = +\infty$, πρέπει αναγκαστικά $x_2 \to +\infty$.
-\end{itemize}
-Άρα, η οριακή θέση των ριζών είναι $x_1 \to 0$ και $x_2 \to +\infty$.
+Έστω $1<\alpha<\beta$.
+Η $g$ είναι συνεχής στο $[\alpha,\beta]$ και παραγωγίσιμη στο $(\alpha,\beta)$.
+Σύμφωνα με το Θεώρημα Μέσης Τιμής, υπάρχει $\xi\in(\alpha,\beta)$ τέτοιο ώστε
+\[\frac{g(\beta)-g(\alpha)}{\beta-\alpha}=g'(\xi)\]
+Επειδή $g''(x)>0$ στο $(0,+\infty)$, η $g'$ είναι γνησίως αύξουσα στο $(0,+\infty)$.
+Άρα, αφού
+\[\alpha<\xi<\beta\]
+παίρνουμε
+\[g'(\alpha)<g'(\xi)<g'(\beta)\]
+δηλαδή
+\[g'(\alpha)<\frac{g(\beta)-g(\alpha)}{\beta-\alpha}<g'(\beta)\]
 \end{erwthma}
 \end{thema}
-
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 4ο ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 66ο ΘΕΜΑ Γ ===========

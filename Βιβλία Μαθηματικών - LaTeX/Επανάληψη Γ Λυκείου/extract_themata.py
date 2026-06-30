@@ -17,14 +17,14 @@ import os
 
 # ---- Source file ----
 BASE_DIR = "/home/spyros/Μαθηματικά/Βιβλία Μαθηματικών - LaTeX/Επανάληψη Γ Λυκείου"
-FILEPATH = os.path.join(BASE_DIR, "themata_C.tex")
+FILEPATH = os.path.join(BASE_DIR, "themata_A.tex")
 
 # ---- Section definitions ----
 # Each entry: (SECTION_TITLE, THEMA_LETTER, FOLDER_NAME, FILE_PREFIX)
 SECTIONS = [
-    # ("Θέματα Α", "A",  "Α", "thema_A"),   # Latin A
+    ("Θέματα Α", "A",  "Α", "thema_A"),   # Latin A
     # ("Θέματα Β", "Β",  "Β", "thema_B"),   # Latin B
-    ("Θέματα Γ", "Γ",  "Γ", "thema_G"),   # Greek Γ
+    # ("Θέματα Γ", "Γ",  "Γ", "thema_G"),   # Greek Γ
     # ("Θέματα Δ", "Δ",  "Δ", "thema_D"),   # Greek Δ
 ]
 

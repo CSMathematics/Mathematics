@@ -1,0 +1,79 @@
+%=========== ΛΥΣΗ - 2ο ΘΕΜΑ Γ ===========
+\begin{thema}{Γ}
+\begin{erwthma}
+\item Επειδή η $f$ είναι παραγωγίσιμη στο $\mathbb{R}$, είναι και συνεχής στο $\mathbb{R}$, άρα και στο $0$. Η συνέχεια στο $0$ απαιτεί $\lim\limits_{x\to 0^-}f(x)=f(0)$. Υπολογίζουμε:
+\begin{itemize}
+\item $f(0)=0^2+a=a$
+\item $\lim\limits_{x\to 0^-}f(x)=\lim\limits_{x\to 0^-}(xe^x+\beta x-1)=0+0-1=-1$
+\end{itemize}
+Άρα $a=-1$.
+
+Στη συνέχεια, η παραγωγισιμότητα της $f$ στο $0$ απαιτεί ισότητα των πλευρικών παραγώγων:
+\begin{itemize}
+\item $f'(0^+)=\lim\limits_{x\to 0^+}\dfrac{f(x)-f(0)}{x-0}=\lim\limits_{x\to 0^+}\dfrac{(x^2-1)-(-1)}{x}=\lim\limits_{x\to 0^+}\dfrac{x^2}{x}=\lim\limits_{x\to 0^+}x=0$
+\item $f'(0^-)=\lim\limits_{x\to 0^-}\dfrac{f(x)-f(0)}{x-0}=\lim\limits_{x\to 0^-}\dfrac{(xe^x+\beta x-1)-(-1)}{x}=\lim\limits_{x\to 0^-}\dfrac{xe^x+\beta x}{x}=\lim\limits_{x\to 0^-}(e^x+\beta)=1+\beta$
+\end{itemize}
+Από $f'(0^+)=f'(0^-)$ προκύπτει $1+\beta=0$, άρα $\beta=-1$.
+
+Επομένως $a=\beta=-1$ και ο τύπος της $f$ είναι:
+\[ f(x)=\begin{cdcases} x^2-1 & ,x\geq0 \\ xe^x-x-1 & ,x<0 \end{cdcases} \]
+
+\item Για $x\to-\infty$ χρησιμοποιούμε τον κλάδο $x<0$, οπότε $f(x)=xe^x-x-1$ και $f'(x)=(1+x)e^x-1$. Διαιρούμε αριθμητή και παρονομαστή με $x$ (θυμόμαστε ότι $x\ne 0$):
+\[
+\frac{f(x)}{xf'(x)}=\frac{xe^x-x-1}{x\bigl[(1+x)e^x-1\bigr]}=\frac{e^x-1-\dfrac{1}{x}}{(1+x)e^x-1}
+\]
+Καθώς $x\to-\infty$, ισχύει $e^x\to 0$, $xe^x\to 0$ και $\dfrac{1}{x}\to 0$, οπότε:
+\[
+\lim_{x\to-\infty}\frac{f(x)}{xf'(x)}=\frac{0-1-0}{0-1}=\frac{-1}{-1}=1
+\]
+
+\item Υπολογίζουμε τη δεύτερη παράγωγο σε κάθε κλάδο.
+
+\textbf{Για $x>0$:}
+\[f''(x)=2>0\]
+άρα η $f$ είναι \textbf{κυρτή} στο $(0,+\infty)$.
+
+\textbf{Για $x<0$:}
+\[f''(x)=\bigl[(1+x)e^x-1\bigr]'=(e^x+(1+x)e^x)=e^x(x+2)\]
+Επειδή $e^x>0$ για κάθε $x$, το πρόσημο της $f''(x)$ ταυτίζεται με το πρόσημο του $(x+2)$:
+\begin{itemize}
+\item $f''(x)=0\Leftrightarrow x+2=0\Leftrightarrow x=-2$
+\item $f''(x)>0\Leftrightarrow x+2>0\Leftrightarrow x>-2$
+\item $f''(x)<0\Leftrightarrow x+2<0\Leftrightarrow x<-2$
+\end{itemize}
+
+\textbf{Εξέταση στο $x=0$:} Παρατηρούμε ότι $f''(0^+)=2>0$ και $f''(0^-)=e^0\cdot(0+2)=2>0$, άρα \textbf{δεν αλλάζει πρόσημο} η $f''$ στο $0$. Επομένως το $x=0$ \textbf{δεν είναι} σημείο καμπής.
+
+Ο παρακάτω πίνακας συνοψίζει την κυρτότητα σε κάθε διάστημα:
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit[color,lgt=2,espcl=1.5,colorC = maincolor!50!white,colorL = maincolor!20!white,colorV = maincolor!50!white]%
+{$x$ / .8,$f''(x)$ /0.8,$f(x)$/0.8}%
+{$-\infty$,$-2$,$0$,$+\infty$}%
+\tkzTabLine{ , -, z, +,t, + }
+\tkzTabLine{ ,\curvearrowright,t,\rotatebox[origin=c]{180}{$\curvearrowleft$},t,\rotatebox[origin=c]{180}{$\curvearrowleft$}, }
+\end{tikzpicture}
+\end{center}
+Βλέπουμε ότι η $f$ είναι \textbf{κοίλη} στο $(-\infty,-2)$ και \textbf{κυρτή} στο $(-2,0)\cup(0,+\infty)$. Μόνο στο $x=-2$ αλλάζει κυρτότητα, άρα η $C_f$ έχει \textbf{μοναδικό σημείο καμπής} το $M\!\left(-2,f(-2)\right)$.
+
+Υπολογίζουμε την τιμή:
+\[f(-2)=(-2)e^{-2}-(-2)-1=1-2e^{-2}\]
+Άρα το σημείο καμπής είναι το $M\!\left(-2,\ 1-\dfrac{2}{e^2}\right)$.
+
+\item Η ευθεία $\zeta:y=x+1$ έχει συντελεστή διεύθυνσης $\lambda_\zeta=1$. Επειδή η ζητούμενη εφαπτομένη $\varepsilon$ είναι \textbf{κάθετη} στην $\zeta$, ισχύει $\lambda_\varepsilon\cdot\lambda_\zeta=-1$, άρα $\lambda_\varepsilon=-1$.
+
+Ψάχνουμε $x_0$ τέτοιο ώστε $f'(x_0)=-1$.
+
+\textbf{Για $x_0\geq0$:} $f'(x_0)=2x_0=-1\Rightarrow x_0=-\dfrac{1}{2}$, που είναι αδύνατο αφού $x_0\geq0$.
+
+\textbf{Για $x_0<0$:}
+\[f'(x_0)=(1+x_0)e^{x_0}-1=-1\Leftrightarrow(1+x_0)e^{x_0}=0\Leftrightarrow x_0=-1\]
+(αφού $e^{x_0}>0$ πάντα, μηδενίζεται μόνο ο παράγοντας $1+x_0$). \\
+Το σημείο επαφής είναι το $A\!\left(-1,f(-1)\right)$ με:
+\[f(-1)=(-1)e^{-1}-(-1)-1=-\frac{1}{e}\]
+
+Η εξίσωση της ζητούμενης εφαπτομένης $\varepsilon$ στο σημείο $A\!\left(-1,-\dfrac{1}{e}\right)$ με συντελεστή $-1$ είναι:
+\[y-\left(-\frac{1}{e}\right)=-1\cdot(x-(-1))\Leftrightarrow y=-x-1-\frac{1}{e}\]
+\end{erwthma}
+\end{thema}
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 2ο ΘΕΜΑ Γ ===========

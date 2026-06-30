@@ -1,92 +1,70 @@
-Professional Mathematics teacher.
-Solve a specific LaTeX exercise.
-Strict LaTeX formatting based on `FORMATTING_GUIDE.md`.
-`\begin{thema}{Γ}`, `\begin{erwthma}`, `\item`, `\[ ... \]`, `\begin{align*}`, `\eng{...}`, `\textbf{...}`, `\d x`, `\lim_{x \to a} f(x)`.
-No indefinite integrals, no 2nd derivative test for extrema, no differential equations, no MVT for integrals, no differentiation of integrals with variable limits.
-
-        *   $f(x) = x^3 + x, D_f = \mathbb{R}$.
-        *   (i) Monotony and parity (odd).
-        *   (ii) Solve $f(f(x)) = f(2)$.
-        *   (iii) Solve $f(x^2 - 3) + f(2x) < 0$.
-        *   (iv) Calculate $\lim_{x \to 1} \frac{f(x) - f(1)}{x - 1}$.
-
-    *   *Part (i): Monotony and Parity*
-        *   $f(x) = x^3 + x$.
-        *   $f'(x) = 3x^2 + 1$.
-        *   Since $x^2 \ge 0$ for all $x \in \mathbb{R}$, $3x^2 + 1 \ge 1 > 0$.
-        *   Thus, $f$ is $\textbf{γνησίως αύξουσα}$ on $\mathbb{R}$.
-        *   Parity: $f(-x) = (-x)^3 + (-x) = -x^3 - x = -(x^3 + x) = -f(x)$.
-        *   Therefore, $f$ is \textbf{περιττή}.
-
-    *   *Part (ii): $f(f(x)) = f(2)$*
-        *   Since $f$ is strictly increasing, it is injective (1-1).
-        *   $f(f(x)) = f(2) \implies f(x) = 2$.
-        *   $x^3 + x = 2 \implies x^3 + x - 2 = 0$.
-        *   Trial: $x=1 \implies 1+1-2 = 0$.
-        *   Polynomial division: $(x-1)(x^2 + x + 2) = 0$.
-        *   Quadratic $x^2 + x + 2$: Discriminant $\Delta = 1^2 - 4(1)(2) = -7 < 0$.
-        *   Only real solution: $x=1$.
-
-    *   *Part (iii): $f(x^2 - 3) + f(2x) < 0$*
-        *   $f(x^2 - 3) + f(2x) < 0 \implies f(x^2 - 3) < -f(2x)$.
-        *   Since $f$ is odd, $-f(2x) = f(-2x)$.
-        *   So, $f(x^2 - 3) < f(-2x)$.
-        *   Since $f$ is strictly increasing, $x^2 - 3 < -2x$.
-        *   $x^2 + 2x - 3 < 0$.
-        *   Roots of $x^2 + 2x - 3 = 0$: $x = \frac{-2 \pm \sqrt{4 - 4(1)(-3)}}{2} = \frac{-2 \pm \sqrt{16}}{2} = \frac{-2 \pm 4}{2}$.
-        *   $x_1 = 1, x_2 = -3$.
-        *   The inequality $x^2 + 2x - 3 < 0$ holds for $x \in (-3, 1)$.
-
-    *   *Part (iv): $\lim_{x \to 1} \frac{f(x) - f(1)}{x - 1}$*
-        *   This is the definition of the derivative $f'(1)$.
-        *   $f'(x) = 3x^2 + 1$.
-        *   $f'(1) = 3(1)^2 + 1 = 4$.
-        *   Alternatively, calculate: $f(1) = 2$.
-        *   $\lim_{x \to 1} \frac{x^3 + x - 2}{x - 1} = \lim_{x \to 1} \frac{(x-1)(x^2 + x + 2)}{x - 1} = \lim_{x \to 1} (x^2 + x + 2) = 1+1+2 = 4$.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\[ ... \]` and `\begin{align*}`.
-    *   `\textbf{γνησίως αύξουσα}`, `\textbf{περιττή}`.
-    *   No preamble.
-    *   No comments in code.
-    *   Correct delimiters.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 31ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Για τη μονοτονία της $f$, υπολογίζουμε την παράγωγο:
-\[ f'(x) = 3x^2 + 1 \]
-Επειδή $x^2 \geq 0$ για κάθε $x \in \mathbb{R}$, έχουμε $3x^2 + 1 \geq 1 > 0$ για κάθε $x \in \mathbb{R}$.
-Συνεπώς, η $f$ είναι $\textbf{γνησίως αύξουσα}$ στο $\mathbb{R}$.
+\item Το πεδίο ορισμού της $f$ είναι όλο το $\mathbb{R}$, καθώς το υπόρριζο είναι πάντα θετικό ($x^2+1 \ge 1 > 0$).
+Η συνάρτηση $f$ είναι παραγωγίσιμη στο $\mathbb{R}$ ως πηλίκο παραγωγίσιμων συναρτήσεων, με:
+\begin{align*}
+f'(x) &= \left( \frac{x}{\sqrt{x^2+1}} \right)' = \frac{(x)' \sqrt{x^2+1} - x (\sqrt{x^2+1})'}{(\sqrt{x^2+1})^2} \\
+&= \frac{1 \cdot \sqrt{x^2+1} - x \frac{2x}{2\sqrt{x^2+1}}}{x^2+1} \\
+&= \frac{\sqrt{x^2+1} - \frac{x^2}{\sqrt{x^2+1}}}{x^2+1} = \frac{\frac{x^2+1-x^2}{\sqrt{x^2+1}}}{x^2+1} \\
+&= \frac{1}{(x^2+1)\sqrt{x^2+1}} = \frac{1}{(x^2+1)^{\frac{3}{2}}}
+\end{align*}
+Επειδή $x^2+1 > 0$ για κάθε $x \in \mathbb{R}$, ισχύει $f'(x) > 0$ για κάθε πραγματικό αριθμό.
+Επομένως, η συνάρτηση $f$ είναι \textbf{γνησίως αύξουσα} στο $\mathbb{R}$.
 
-Για την περιττότητα της $f$, εξετάζουμε το $f(-x)$ για $x \in \mathbb{R}$:
-\[ f(-x) = (-x)^3 + (-x) = -x^3 - x = -(x^3 + x) = -f(x) \]
-Άρα η $f$ είναι $\textbf{περιττή}$.
+Εφόσον η $f$ είναι συνεχής και γνησίως αύξουσα, το σύνολο τιμών της είναι:
+\[ f(\mathbb{R}) = \left( \lim_{x \to -\infty} f(x), \lim_{x \to +\infty} f(x) \right) \]
+Για $x > 0$, γνωρίζουμε ότι $\sqrt{x^2} = |x| = x$. Άρα:
+\[ \lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \frac{x}{\sqrt{x^2\left(1+\frac{1}{x^2}\right)}} = \lim_{x \to +\infty} \frac{x}{x\sqrt{1+\frac{1}{x^2}}} = \lim_{x \to +\infty} \frac{1}{\sqrt{1+\frac{1}{x^2}}} = \frac{1}{\sqrt{1+0}} = 1 \]
+Αντίστοιχα, για $x < 0$, έχουμε $\sqrt{x^2} = |x| = -x$. Άρα:
+\[ \lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} \frac{x}{\sqrt{x^2\left(1+\frac{1}{x^2}\right)}} = \lim_{x \to -\infty} \frac{x}{-x\sqrt{1+\frac{1}{x^2}}} = \lim_{x \to -\infty} \frac{-1}{\sqrt{1+\frac{1}{x^2}}} = \frac{-1}{\sqrt{1+0}} = -1 \]
+Επομένως, το \textbf{σύνολο τιμών} της $f$ είναι το διάστημα $\boldsymbol{(-1, 1)}$.
 
-\item Επειδή η $f$ είναι $\textbf{γνησίως αύξουσα}$ στο $\mathbb{R}$, είναι $\textbf{단ι-1}$ (αντιστρέψιμη).
-Επομένως:
-\[ f(f(x)) = f(2) \Leftrightarrow f(x) = 2 \]
-\[ \Leftrightarrow x^3 + x - 2 = 0 \]
-Παρατηρούμε ότι για $x=1$ ισχύει $1^3 + 1 - 2 = 0$, οπότε το πολυώνυμο διαιρείται με το $(x-1)$:
-\[ (x-1)(x^2 + x + 2) = 0 \]
-Η εξίσωση $x^2 + x + 2 = 0$ έχει διακρίνουσα $\Delta = 1^2 - 4 \cdot 1 \cdot 2 = -7 < 0$, άρα δεν έχει πραγματικές ρίζες.
-Συνεπώς, η μοναδική λύση της εξίσωσης είναι $x = 1$.
+\item Αφού η συνάρτηση $f$ είναι γνησίως αύξουσα στο $\mathbb{R}$, είναι συνάρτηση \textbf{1-1} (ένα προς ένα). 
+Κατά συνέπεια, \textbf{αντιστρέφεται}.
+Το πεδίο ορισμού της αντίστροφης συνάρτησης είναι το σύνολο τιμών της $f$, δηλαδή το $A_{f^{-1}} = (-1, 1)$.
+Για την εύρεση του τύπου της, λύνουμε την εξίσωση $y = f(x)$ ως προς $x$, για $y \in (-1, 1)$:
+\begin{align*}
+y &= \frac{x}{\sqrt{x^2+1}} \\
+y^2 &= \frac{x^2}{x^2+1} \\
+y^2(x^2+1) &= x^2 \\
+x^2y^2 + y^2 &= x^2 \\
+x^2(1 - y^2) &= y^2
+\end{align*}
+Επειδή $y \in (-1, 1)$, ισχύει $y^2 < 1 \implies 1-y^2 > 0$, άρα μπορούμε να διαιρέσουμε:
+\[ x^2 = \frac{y^2}{1-y^2} \implies |x| = \frac{|y|}{\sqrt{1-y^2}} \]
+Από την αρχική σχέση $y = \frac{x}{\sqrt{x^2+1}}$, βλέπουμε ότι ο παρονομαστής είναι πάντα θετικός, συνεπώς τα $x$ και $y$ είναι \textbf{ομόσημα}. Επομένως, τα απόλυτα αφαιρούνται χωρίς αλλαγή προσήμου:
+\[ x = \frac{y}{\sqrt{1-y^2}} \]
+Άρα ο \textbf{τύπος της αντίστροφης} είναι:
+\[ \boldsymbol{f^{-1}(x) = \frac{x}{\sqrt{1-x^2}}, \quad x \in (-1, 1)} \]
 
-\item Από την περιττότητα της $f$ έχουμε $-f(2x) = f(-2x)$. Η ανίσωση γίνεται:
-\[ f(x^2 - 3) < -f(2x) \Leftrightarrow f(x^2 - 3) < f(-2x) \]
-Επειδή η $f$ είναι $\textbf{γνησίως αύξουσα}$, η ανίσωση είναι ισοδύναμη με:
-\[ x^2 - 3 < -2x \Leftrightarrow x^2 + 2x - 3 < 0 \]
-Λύνουμε την εξίσωση $x^2 + 2x - 3 = 0$:
-\[ \Delta = 2^2 - 4 \cdot 1 \cdot (-3) = 4 + 12 = 16 \]
-\[ x_{1,2} = \frac{-2 \pm 4}{2} \Rightarrow x_1 = 1, \ x_2 = -3 \]
-Το τριώνυμο είναι αρνητικό ανάμεσα στις ρίζες, άρα η λύση της ανίσωσης είναι $x \in (-3, 1)$.
+\item Ζητείται η εφαπτομένη της $C_{f^{-1}}$ στο σημείο με τετμημένη $x_0 = \frac{\sqrt{2}}{2} \in (-1, 1)$.
+Η τεταγμένη του σημείου επαφής είναι:
+\[ f^{-1}\left(\frac{\sqrt{2}}{2}\right) = \frac{\frac{\sqrt{2}}{2}}{\sqrt{1-\left(\frac{\sqrt{2}}{2}\right)^2}} = \frac{\frac{\sqrt{2}}{2}}{\sqrt{1-\frac{1}{2}}} = \frac{\frac{\sqrt{2}}{2}}{\sqrt{\frac{1}{2}}} = \frac{\frac{\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}} = 1 \]
+Παραγωγίζουμε την αντίστροφη συνάρτηση στο $(-1, 1)$:
+\begin{align*}
+(f^{-1})'(x) &= \left( \frac{x}{\sqrt{1-x^2}} \right)' = \frac{1\cdot \sqrt{1-x^2} - x\frac{-2x}{2\sqrt{1-x^2}}}{1-x^2} \\
+&= \frac{\sqrt{1-x^2} + \frac{x^2}{\sqrt{1-x^2}}}{1-x^2} = \frac{\frac{1-x^2+x^2}{\sqrt{1-x^2}}}{1-x^2} = \frac{1}{(1-x^2)^{\frac{3}{2}}}
+\end{align*}
+Υπολογίζουμε την κλίση στο $x_0 = \frac{\sqrt{2}}{2}$:
+\[ \lambda = (f^{-1})'\left(\frac{\sqrt{2}}{2}\right) = \frac{1}{\left(1-\frac{1}{2}\right)^{\frac{3}{2}}} = \frac{1}{\left(\frac{1}{2}\right)^{\frac{3}{2}}} = \frac{1}{\frac{1}{2\sqrt{2}}} = 2\sqrt{2} \]
+Η εξίσωση της εφαπτομένης είναι:
+\[ y - 1 = 2\sqrt{2}\left(x - \frac{\sqrt{2}}{2}\right) \implies y - 1 = 2\sqrt{2}x - 2 \implies \boldsymbol{y = 2\sqrt{2}x - 1} \]
 
-\item Το ζητούμενο όριο είναι ο ορισμός της παραγώγου της $f$ στο σημείο $x=1$:
-\[ \lim_{x \to 1} \frac{f(x) - f(1)}{x - 1} = f'(1) \]
-Από το (α), γνωρίζουμε ότι $f'(x) = 3x^2 + 1$. Άρα:
-\[ f'(1) = 3(1)^2 + 1 = 4 \]
-Επομένως, $\lim\limits_{x \to 1} \dfrac{f(x) - f(1)}{x - 1} = 4$.
+\item Αντικαθιστούμε τον τύπο της αντίστροφης στο ζητούμενο όριο:
+\[ L = \lim_{x \to 0} \frac{f^{-1}(x) - x}{x^3} = \lim_{x \to 0} \frac{\frac{x}{\sqrt{1-x^2}} - x}{x^3} \]
+Βγάζουμε κοινό παράγοντα το $x$ στον αριθμητή:
+\[ L = \lim_{x \to 0} \frac{x \left( \frac{1}{\sqrt{1-x^2}} - 1 \right)}{x^3} = \lim_{x \to 0} \frac{1 - \sqrt{1-x^2}}{x^2 \sqrt{1-x^2}} \]
+Πολλαπλασιάζουμε αριθμητή και παρονομαστή με τη \textbf{συζυγή παράσταση} του αριθμητή ($1 + \sqrt{1-x^2}$):
+\begin{align*}
+L &= \lim_{x \to 0} \frac{(1 - \sqrt{1-x^2})(1 + \sqrt{1-x^2})}{x^2 \sqrt{1-x^2} (1 + \sqrt{1-x^2})} \\
+&= \lim_{x \to 0} \frac{1 - (1-x^2)}{x^2 \sqrt{1-x^2} (1 + \sqrt{1-x^2})} \\
+&= \lim_{x \to 0} \frac{x^2}{x^2 \sqrt{1-x^2} (1 + \sqrt{1-x^2})}
+\end{align*}
+Απλοποιούμε το $x^2$ (αφού $x \to 0$, είναι $x \neq 0$):
+\[ L = \lim_{x \to 0} \frac{1}{\sqrt{1-x^2} (1 + \sqrt{1-x^2})} \]
+Η συνάρτηση είναι πλέον συνεχής στο 0, οπότε αντικαθιστούμε απλά $x = 0$:
+\[ L = \frac{1}{\sqrt{1} (1 + \sqrt{1})} = \frac{1}{1 \cdot 2} = \boldsymbol{\frac{1}{2}} \]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 31ο ΘΕΜΑ Γ ===========

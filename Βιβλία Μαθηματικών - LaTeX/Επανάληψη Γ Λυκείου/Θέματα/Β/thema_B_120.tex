@@ -1,25 +1,29 @@
 \begin{thema}{Β}
-Στο σχήμα δίνεται η γραφική παράσταση $C_f$ μιας συνεχούς $f:[-3, 4]\to\mathbb{R}$.
+Στο σχήμα δίνεται η γραφική παράσταση $C_{f''}$ της \textbf{δεύτερης παραγώγου} μιας δις παραγωγίσιμης συνάρτησης $f:[-3, 3]\to\mathbb{R}$.
+
 \begin{center}
-\begin{tikzpicture}[scale=0.7]
-  \draw[help lines, gray!30] (-4,-2) grid (5,4);
-  \draw[-latex] (-4.3,0) -- (5.3,0) node[right] {$x$};
-  \draw[-latex] (0,-2.3) -- (0,4.3) node[above] {$y$};
-  \foreach \x in {-3,-2,-1,1,2,3,4}
+\begin{tikzpicture}[scale=0.8]
+  \draw[help lines, gray!30] (-4,-3) grid (4,3);
+  \draw[-latex] (-4.3,0) -- (4.3,0) node[right] {$x$};
+  \draw[-latex] (0,-3.3) -- (0,3.3) node[above] {$y$};
+  \foreach \x in {-3,-2,-1,1,2,3}
     \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
-  \foreach \y in {-1,1,2,3}
+  \foreach \y in {-2,-1,1,2}
     \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
-  \draw[very thick, blue!70!black] (-3,-1) -- (1,3) -- (4,0);
-  \filldraw[blue!70!black] (-3,-1) circle (2pt) node[below left,font=\footnotesize] {$(-3,-1)$};
-  \filldraw[blue!70!black] (1,3) circle (2pt) node[above,font=\footnotesize] {$(1,3)$};
-  \filldraw[blue!70!black] (4,0) circle (2pt) node[below right,font=\footnotesize] {$(4,0)$};
+  
+  \draw[very thick, maincolor!70!black, smooth, domain=-3.1:3.1] plot (\x, {-0.5*(\x*\x - 4)});
+  \node[maincolor!70!black] at (1.5, 1.8) {$C_{f''}$};
+  \filldraw[maincolor!70!black] (0,2) circle (2pt) node[above right,font=\footnotesize] {$(0,2)$};
+  \filldraw[maincolor!70!black] (-2,0) circle (2pt);
+  \filldraw[maincolor!70!black] (2,0) circle (2pt);
 \end{tikzpicture}
 \end{center}
 
 \begin{erwthma}
-  \item Ποιο είναι το πεδίο ορισμού και ποιο το σύνολο τιμών της $f$;
-  \item Να βρείτε τις ρίζες της $f$ (τα σημεία τομής με τον $x'x$).
-  \item Η $f$ είναι $1-1$? Ποιο είναι το ολικό μέγιστο και το ολικό ελάχιστο;
-  \item Να υπολογίσετε γεωμετρικά $\dint_{-3}^{4} f(x)\,dx$ σπάζοντας σε τρίγωνα.
+  \item Να μελετήσετε την $f$ ως προς την κυρτότητα και να βρείτε τις τετμημένες των σημείων καμπής της $C_f$.
+  \item Δίνεται ότι το εμβαδόν του χωρίου που περικλείεται από την $C_{f''}$ και τον άξονα $x'x$ είναι ίσο με $\dfrac{16}{3}$. Αν η εφαπτομένη της $C_f$ στο $x=-2$ είναι παράλληλη στην ευθεία $y = -x + 2024$, να βρείτε την κλίση της εφαπτομένης της $C_f$ στο $x=2$.
+  \item Αν γνωρίζετε επιπλέον ότι $f'(0) = 0$, να μελετήσετε την $f$ ως προς τη μονοτονία στο διάστημα $[-2, 2]$ και να προσδιορίσετε το είδος του τοπικού ακροτάτου στο $x=0$.
+  \item Με δεδομένο ότι $f'(0)=0$, να υπολογίσετε το όριο:
+  \[ \lim\limits_{x \to 0} \frac{f'(x)}{x} \]
 \end{erwthma}
 \end{thema}

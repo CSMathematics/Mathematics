@@ -1,65 +1,94 @@
-%=========== ΛΥΣΗ - ΘΕΜΑ Β_102 ===========
+%=========== ΛΥΣΗ - 102ο ΘΕΜΑ Β ===========
+
 \begin{thema}{Β}
-Στο παρακάτω αναβαθμισμένο σχήμα τονίζονται οι ασύμπτωτες, τα σημαντικά σημεία, και η φθίνουσα μονοτονία κάθε κλάδου.
-\begin{center}
-\begin{tikzpicture}[scale=0.8]
-  % grid
-  \draw[help lines, gray!30] (-3,-3) grid (7,5);
-  % axes
-  \draw[-latex] (-3.3,0) -- (7.3,0) node[right] {$x$};
-  \draw[-latex] (0,-3.3) -- (0,5.3) node[above] {$y$};
-  % ticks
-  \foreach \x in {-2,-1,2,3,4,5,6}
-    \draw (\x,0.1) -- (\x,-0.1) node[below,font=\footnotesize] {$\x$};
-  \foreach \y in {-2,-1,1,2,3,4}
-    \draw (0.1,\y) -- (-0.1,\y) node[left,font=\footnotesize] {$\y$};
-  % asymptotes
-  \draw[dashed, red!60!black, thick] (1,-3.3) -- (1,5.3);
-  \node[anchor=south west, color=red, font=\footnotesize\bfseries] at (1.1, 4.5) {Κατακ. Ασύμπτ. $x=1$};
-  \draw[dashed, blue!60!black, thick] (-3.3,2) -- (7.3,2);
-  \node[anchor=south, color=blue, font=\footnotesize\bfseries] at (4, 2.1) {Οριζ. Ασύμπτ. $y=2$};
-  % left branch
-  \draw[very thick, blue!70!black, domain=-3:0.75, samples=80] plot (\x, {2 + 1/(\x-1)});
-  % right branch
-  \draw[very thick, blue!70!black, domain=1.25:7, samples=80] plot (\x, {2 + 1/(\x-1)});
-  % points
-  \filldraw[blue!70!black] (0,1) circle (2pt) node[below left] {$(0,1)$};
-  \filldraw[blue!70!black] (2,3) circle (2pt) node[above left] {$(2,3)$};
-  
-  % Μονοτονία
-  \node[anchor=south, color=orange, font=\footnotesize\bfseries] at (-1.5, 1.5) {$\searrow$ Φθίνουσα};
-  \node[anchor=south, color=orange, font=\footnotesize\bfseries] at (4.5, 2.5) {$\searrow$ Φθίνουσα};
-\end{tikzpicture}
-\end{center}
+Από το σχήμα φαίνεται ότι η $C_f$ έχει κατακόρυφη ασύμπτωτη την ευθεία $x=1$ και οριζόντια ασύμπτωτη την ευθεία $y=2$. Στα επόμενα ερωτήματα χρησιμοποιούμε και τον τύπο
+\[
+f(x)=\frac{2x-1}{x-1}=2+\frac{1}{x-1},\quad x\neq 1.
+\]
 
 \begin{erwthma}
+\item Από το σχήμα η κατακόρυφη ασύμπτωτη είναι η ευθεία $x=1$. Τα αντίστοιχα πλευρικά όρια είναι
+\[
+\lim_{x\to 1^-}f(x)=-\infty
+\quad\text{και}\quad
+\lim_{x\to 1^+}f(x)=+\infty.
+\]
 
-\item Χρησιμοποιούμε τη γραφική παράσταση και τη γνωστή μας θέση των ασύμπτωτων:
-\begin{itemize}
-    \item \textbf{$\lim\limits_{x \to 1^-} f(x)$:} Καθώς $x$ πλησιάζει το $1$ από αριστερά, ο αριστερός κλάδος βυθίζεται. Άρα: $\lim\limits_{x \to 1^-} f(x) = -\infty$.
-    \item \textbf{$\lim\limits_{x \to 1^+} f(x)$:} Καθώς $x$ πλησιάζει το $1$ από δεξιά, ο δεξιός κλάδος εκτοξεύεται. Άρα: $\lim\limits_{x \to 1^+} f(x) = +\infty$.
-    \item \textbf{$\lim\limits_{x \to +\infty} f(x)$:} Ο δεξιός κλάδος πλησιάζει ασυμπτωτικά τη γραμμή $y = 2$ από πάνω. Άρα: $\lim\limits_{x \to +\infty} f(x) = 2$.
-\end{itemize}
+Επίσης, η οριζόντια ασύμπτωτη είναι η ευθεία $y=2$. Τα αντίστοιχα όρια είναι
+\[
+\lim_{x\to -\infty}f(x)=2
+\quad\text{και}\quad
+\lim_{x\to +\infty}f(x)=2.
+\]
 
-\item Οι ασύμπτωτες προκύπτουν κατευθείαν από τα παραπάνω:
-\begin{itemize}
-    \item \textbf{Κατακόρυφη ασύμπτωτη $x = 1$:} Επειδή $\lim\limits_{x \to 1^{\pm}} f(x) = \pm\infty$.
-    \item \textbf{Οριζόντια ασύμπτωτη $y = 2$:} Επειδή $\lim\limits_{x \to +\infty} f(x) = 2$.
-    Παρομοίως, εξετάζοντας τον αριστερό κλάδο: $\lim\limits_{x \to -\infty} f(x) = 2$ (η καμπύλη πλησιάζει τη γραμμή $y=2$ από κάτω). Η ίδια ευθεία είναι ασύμπτωτη και στο $-\infty$.
-\end{itemize}
+\item Το σημείο τομής των ασύμπτωτων είναι το $K(1,2)$. Θα δείξουμε ότι καμία εφαπτομένη της $C_f$ δεν διέρχεται από το $K$.
 
-\item Μελετώντας τη μονοτονία σε κάθε κλάδο:
-\begin{itemize}
-    \item \textbf{Αριστερός κλάδος $(-\infty, 1)$:} Η καμπύλη ξεκινά από τα "χαμηλά" (κοντά στο $y=2$, λίγο κάτω) και, καθώς $x$ αυξάνεται προς το 1, η τεταγμένη μειώνεται δραματικά (προς $-\infty$). Συνεπώς, η $f$ είναι \textbf{γνησίως φθίνουσα} στο $(-\infty, 1)$.
-    \item \textbf{Δεξιός κλάδος $(1, +\infty)$:} Η καμπύλη ξεκινά από πολύ ψηλά ($+\infty$) και, καθώς $x$ αυξάνεται, πέφτει ομαλά πλησιάζοντας ασυμπτωτικά το $y=2$ (από πάνω). Συνεπώς, η $f$ είναι \textbf{γνησίως φθίνουσα} στο $(1, +\infty)$.
-\end{itemize}
+Για κάθε $x\neq 1$ είναι
+\[
+f'(x)=\left(2+\frac{1}{x-1}\right)'=-\frac{1}{(x-1)^2}.
+\]
+Έστω $x_0\neq 1$. Η εφαπτομένη της $C_f$ στο σημείο $M(x_0,f(x_0))$ έχει εξίσωση
+\[
+y-f(x_0)=f'(x_0)(x-x_0).
+\]
+Αν η εφαπτομένη περνούσε από το $K(1,2)$, τότε θα ίσχυε
+\[
+2-f(x_0)=f'(x_0)(1-x_0).
+\]
+Όμως
+\[
+f(x_0)-2=\frac{1}{x_0-1}\Rightarrow 2-f(x_0)=-\frac{1}{x_0-1},
+\]
+ενώ
+\[
+f'(x_0)(1-x_0)
+=-\frac{1}{(x_0-1)^2}(1-x_0)
+=\frac{1}{x_0-1}.
+\]
+Άρα θα έπρεπε
+\[
+-\frac{1}{x_0-1}=\frac{1}{x_0-1},
+\]
+που είναι αδύνατο, αφού $x_0\neq 1$. Επομένως καμία εφαπτομένη της $C_f$ δεν διέρχεται από το σημείο τομής των ασύμπτωτων.
 
-\item Εξετάζουμε τη συνέχεια:
-\begin{itemize}
-    \item \textbf{Στο $x_0 = 0$:} Το σημείο $0$ ανήκει στο πεδίο ορισμού ($0 \ne 1$). Εφόσον η $f$ δίνεται ως ρητή (ή αλγεβρική), ορίζεται με ενιαίο τύπο στο $(-\infty, 1)$. Τόσο η τιμή $f(0) = 1$ υπάρχει, όσο και το $\lim\limits_{x \to 0} f(x) = f(0) = 1$ (αφού δεν υπάρχει κατάτμηση πεδίου ορισμού γύρω στο 0). Συνεπώς, η $f$ \textbf{είναι συνεχής} στο $x_0 = 0$.
-    \item \textbf{Στο $x_0 = 1$:} Η τιμή $x = 1$ \textbf{δεν ανήκει} στο πεδίο ορισμού ($\varDelta_f = \mathbb{R} \setminus \{1\}$). Συνεπώς, δεν τίθεται καν ζήτημα συνέχειας στο $x_0 = 1$: η $f$ \textbf{δεν ορίζεται} εκεί. Η ασυνέχεια στο 1 δεν είναι "αποκαταστάσιμη" (αφού τα πλευρικά όρια είναι $\pm\infty$).
-\end{itemize}
+\item Για $x\neq 1$ έχουμε
+\[
+f(x)-2=\frac{1}{x-1}.
+\]
+Επομένως
+\[
+\frac{1}{f(x)-2}=\frac{1}{\frac{1}{x-1}}=x-1.
+\]
+Άρα
+\[
+\lim_{x\to 1}\frac{1}{f(x)-2}
+=\lim_{x\to 1}(x-1)=0.
+\]
+Συνεπώς το όριο υπάρχει και είναι ίσο με $0$.
 
+\item Για να ορίζεται η $f\circ f$, πρέπει
+\[
+x\in D_f
+\quad\text{και}\quad
+f(x)\in D_f.
+\]
+Επειδή $D_f=\mathbb{R}-\{1\}$, πρέπει $x\neq 1$ και $f(x)\neq 1$.
+
+Λύνουμε:
+\[
+f(x)=1
+\Leftrightarrow
+\frac{2x-1}{x-1}=1
+\Leftrightarrow
+2x-1=x-1
+\Leftrightarrow
+x=0.
+\]
+Άρα πρέπει να εξαιρέσουμε και το $x=0$. Επομένως
+\[
+D_{f\circ f}=\mathbb{R}-\{0,1\}.
+\]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Β_102 ===========
+
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 102ο ΘΕΜΑ Β ===========

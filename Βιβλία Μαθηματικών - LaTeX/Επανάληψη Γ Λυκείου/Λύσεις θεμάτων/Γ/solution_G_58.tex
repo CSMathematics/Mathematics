@@ -1,309 +1,61 @@
-Professional Mathematics teacher.
-Solve a specific LaTeX exercise based on a set of strict formatting guidelines.
-`\begin{thema}{Γ} ... \end{thema}`, `\begin{erwthma} ... \end{erwthma}`, `\item`.
-`$ ... $` for inline, `\[ ... \]` for display. `\begin{align*}` for multi-line.
-`\eng{...}` for English terms, `\textbf{...}` for emphasis.
-$\int \dots \d x$. No indefinite integrals. Use definite integrals with $[...]_a^b$.
-No 2nd derivative test, no differential equations, no variable limit integrals.
-
-    *   Region $\Omega$: bounded by $y = x^2$, $x$-axis, for $x \in [0, 4]$.
-    *   Part 1: Total area of $\Omega$.
-    *   Part 2: Area of upper part $E_1$ created by $y = ax$ ($a > 0$).
-    *   Part 3: Find $a$ such that $E_1 = E_2$ (bisection of total area).
-    *   Part 4: Rate of change of $E(a)$ when $da/dt = 1$ at $a=2$.
-
-    *   **Part 1: Total Area $E$**
-        *   $E = \int_0^4 x^2 \d x = \left[ \frac{x^3}{3} \right]_0^4 = \frac{64}{3} - 0 = \frac{64}{3}$.
-
-    *   **Part 2: Upper Area $E_1$ (as a function of $a$)**
-        *   The upper area $E_1$ is the region between $y=ax$ and $y=x^2$.
-        *   Wait, the region $\Omega$ is bounded by $y=x^2$ and the $x$-axis.
-        *   The line $y=ax$ divides this region.
-        *   Intersection: $x^2 = ax \implies x(x-a) = 0 \implies x=0$ or $x=a$.
-        *   Case 1: $a \ge 4$. The line $y=ax$ is always above $y=x^2$ on $[0, 4]$ (except at $x=0$). So the "upper part" is just the whole $\Omega$? No, that doesn't make sense with "divides the region".
-        *   Case 2: $0 < a < 4$. The line $y=ax$ intersects $y=x^2$ at $x=a$.
-        *   The region $\Omega$ is $0 \le y \le x^2$ for $x \in [0, 4]$.
-        *   The line $y=ax$ splits it.
-        *   The "upper part" $E_1$ is the area *above* the line and *below* the parabola? No, the parabola $y=x^2$ is the boundary. The region $\Omega$ is the area *under* the parabola.
-        *   Wait, "ορίζεται από την παραβολή $y=x^2$ και τον άξονα $x'x$". This means the area is between the curve and the axis.
-        *   Line $y=ax$. For $x \in [0, a]$, $ax \ge x^2$. For $x \in [a, 4]$, $ax < x^2$ (if $a < 4$).
-        *   Wait, if $y=ax$ "divides the region $\Omega$ into two parts", the region $\Omega$ is everything between $y=0$ and $y=x^2$.
-        *   The "upper part" $E_1$ is the part where $y$ is between $ax$ and $x^2$.
-        *   But $y=ax$ is above $x^2$ for $x \in (0, a)$.
-        *   Let's re-read: "Η ευθεία $y = a x$ (με $a > 0$) διαιρεί το παραπάνω χωρίο σε δύο ισεμβαδικά μέρη $E_1, E_2$".
-        *   Usually, this means the part of $\Omega$ that lies *above* the line $y=ax$.
-        *   For $x \in [0, a]$, $ax > x^2$, so there is no part of $\Omega$ above the line.
-        *   For $x \in [a, 4]$, $x^2 > ax$. The area of $\Omega$ above the line is $\int_a^4 (x^2 - ax) \d x$.
-        *   Let's check if $a$ can be $\ge 4$. If $a \ge 4$, the line is always above or equal to $x^2$ on $[0, 4]$. Then $E_1 = 0$. Not possible for bisection.
-        *   So $0 < a < 4$.
-        *   $E_1(a) = \int_a^4 (x^2 - ax) \d x$.
-        *   Calculation:
-            $E_1(a) = \left[ \frac{x^3}{3} - \frac{ax^2}{2} \right]_a^4 = \left( \frac{64}{3} - \frac{a(16)}{2} \right) - \left( \frac{a^3}{3} - \frac{a(a^2)}{2} \right)$
-            $E_1(a) = \frac{64}{3} - 8a - (\frac{a^3}{3} - \frac{a^3}{2}) = \frac{64}{3} - 8a + \frac{a^3}{6}$.
-
-    *   **Part 3: Value of $a$ for bisection**
-        *   $E_1(a) = \frac{1}{2} E = \frac{1}{2} \cdot \frac{64}{3} = \frac{32}{3}$.
-        *   $\frac{64}{3} - 8a + \frac{a^3}{6} = \frac{32}{3}$
-        *   $\frac{a^3}{6} - 8a + \frac{32}{3} = 0$
-        *   Multiply by 6: $a^3 - 48a + 64 = 0$.
-        *   Look for integer roots: $a=4$ gives $64 - 192 + 64 \neq 0$. $a=2$ gives $8 - 96 + 64 \neq 0$. $a=1$ gives $1 - 48 + 64 \neq 0$.
-        *   Wait, let's check $a=4$. $64 - 192 + 64 = -64$.
-        *   Let's check $a^3 - 48a + 64 = 0$.
-        *   Wait, is there a mistake in my $E_1$ definition?
-        *   Region $\Omega$: $0 \le y \le x^2$ for $x \in [0, 4]$.
-        *   Line: $y = ax$.
-        *   $\Omega_{above} = \{ (x,y) \in \Omega : y > ax \}$.
-        *   This is the region where $ax < y \le x^2$.
-        *   This exists only where $x^2 > ax$, i.e., $x > a$.
-        *   So $E_1 = \int_a^4 (x^2 - ax) \d x$. This is correct.
-        *   Let me re-calculate $E_1(a)$:
-            $\int_a^4 x^2 \d x - \int_a^4 ax \d x = [\frac{x^3}{3}]_a^4 - a[\frac{x^2}{2}]_a^4 = (\frac{64}{3} - \frac{a^3}{3}) - a(8 - \frac{a^2}{2}) = \frac{64}{3} - \frac{a^3}{3} - 8a + \frac{a^3}{2} = \frac{64}{3} - 8a + \frac{a^3}{6}$. Correct.
-        *   Equation: $a^3 - 48a + 64 = 0$.
-        *   Let's try $a=1.something$.
-        *   Check $a=4$: $64 - 192 + 64 = -64$.
-        *   Wait, if $a=0$, $E_1 = 64/3$. If $a=4$, $E_1 = 0$.
-        *   $f(a) = a^3 - 48a + 64$.
-        *   $f(0) = 64$.
-        *   $f(1) = 17$.
-        *   $f(2) = 8 - 96 + 64 = -24$.
-        *   Root is between 1 and 2.
-        *   Let's re-read carefully. "Η ευθεία $y = ax$ διαιρεί το παραπάνω χωρίο σε δύο ισεμβαδικά μέρη".
-        *   Maybe the upper part is the one *below* the line?
-        *   If $E_{below} = \frac{32}{3}$:
-            $E_{below} = \int_0^a ax \d x + \int_a^4 ax \d x$ ? No, $y$ is bounded by $x^2$.
-            $E_{below} = \int_0^a x^2 \d x + \int_a^4 ax \d x = [\frac{x^3}{3}]_0^a + [a\frac{x^2}{2}]_a^4 = \frac{a^3}{3} + 8a - \frac{a^3}{2} = 8a - \frac{a^3}{6}$.
-            Set $8a - \frac{a^3}{6} = \frac{32}{3} \implies 48a - a^3 = 64 \implies a^3 - 48a + 64 = 0$. Same equation.
-        *   Is there a typo in the exercise? Let's check the numbers. $y=x^2$ on $[0, 4]$. Area $= 64/3$.
-        *   Maybe it's $y = a$? No, it says $y = ax$.
-        *   Maybe the range is $[0, 3]$? If $x \in [0, 3]$, $E = 27/3 = 9$. $E_1 = \int_a^3 (x^2 - ax) \d x = [x^3/3 - ax^2/2]_a^3 = (9 - 4.5a) - (a^3/3 - a^3/2) = 9 - 4.5a + a^3/6$.
-            $9 - 4.5a + a^3/6 = 4.5 \implies a^3/6 - 4.5a + 4.5 = 0 \implies a^3 - 27a + 27 = 0$. Still not nice.
-        *   Let's re-verify $a^3 - 48a + 64 = 0$.
-        *   Possible roots: $a = -8, -4, -2, -1, 1, 2, 4, 8...$
-        *   Wait, $a=4$ was $64 - 192 + 64 = -64$.
-        *   Wait! $a^3 - 48a + 64 = 0$.
-        *   Is $a=4$ a root? $4^3 = 64$. $48 \times 4 = 192$. $64 - 192 + 64 = -64$. No.
-        *   What if $a$ is something else?
-        *   Let me re-calculate $E_1$ once more.
-        *   $E_{total} = \int_0^4 x^2 \d x = 64/3$.
-        *   $E_1$ (upper part) = Area under $x^2$ minus Area under $ax$ but only where $x^2 > ax$.
-        *   Wait, if the line $y=ax$ is the boundary, the area $\Omega$ is split.
-        *   The part *above* the line $y=ax$ within $\Omega$:
-            Since $y \le x^2$, the part above the line $y=ax$ is the set of points $(x,y)$ such that $ax < y \le x^2$.
-            This requires $ax < x^2 \implies x > a$.
-            So $E_1 = \int_a^4 (x^2 - ax) \d x$. This is what I did.
-        *   Could the "upper part" be the region between $y=ax$ and $y=x^2$ for $x \in [0, a]$? No, because $ax > x^2$ there, so the area $\Omega$ (which is *below* $x^2$) is entirely below the line.
-        *   What if the region $\Omega$ was bounded by $y=x^2$ and the line $x=4$? No, it says "άξονα $x'x$".
-        *   Let me check the equation $a^3 - 48a + 64 = 0$ again.
-        *   Actually, let me re-read: "Η ευθεία $y=ax$ διαιρεί το παραπάνω χωρίο σε δύο ισεμβαδικά μέρη".
-        *   Maybe the area is calculated differently?
-        *   Total Area $E = 64/3$.
-        *   $E_1 = \int_0^a (ax - x^2) \d x$? No, that's the area *above* the parabola and *below* the line. That's not part of $\Omega$.
-        *   What if the region $\Omega$ is the one bounded by $y=x^2, x=0, y=16$? No.
-        *   Let's assume the calculation $E_1(a) = \frac{64}{3} - 8a + \frac{a^3}{6}$ is correct.
-        *   The equation $a^3 - 48a + 64 = 0$ has roots.
-        *   $f(1) = 17$. $f(2) = -24$. Root at $a \approx 1.4$.
-        *   Wait, could the line be $y = a$?
-        *   If $y=a$: $\int_0^{\sqrt{a}} a \d x + \int_{\sqrt{a}}^4 x^2 \d x = a\sqrt{a} + [x^3/3]_{\sqrt{a}}^4 = a^{3/2} + 64/3 - a^{3/2}/3 = 2/3 a^{3/2} + 64/3$.
-            $2/3 a^{3/2} + 64/3 = 32/3 \implies 2/3 a^{3/2} = -32/3$. Impossible.
-        *   If $E_{above} = \int_{\sqrt{a}}^4 (x^2 - a) \d x = 64/3 - a^{3/2}/3 - a(4 - \sqrt{a}) = 64/3 - a^{3/2}/3 - 4a + a^{3/2} = 2/3 a^{3/2} - 4a + 64/3$.
-            $2/3 a^{3/2} - 4a + 64/3 = 32/3 \implies 2 a^{3/2} - 12a + 32 = 0 \implies a^{3/2} - 6a + 16 = 0$.
-            Let $u = \sqrt{a}$, then $u^3 - 6u^2 + 16 = 0$.
-            $u=2 \implies 8 - 24 + 16 = 0$. Yes!
-            So $u=2 \implies a=4$. But then the line is $y=4$, and the area above it is $\int_2^4 (x^2 - 4) \d x = [x^3/3 - 4x]_2^4 = (64/3 - 16) - (8/3 - 8) = 16/3 + 16/3 = 32/3$.
-            This works perfectly. However, the problem says $y=ax$, not $y=a$.
-        *   Let me re-read the exercise text again. "Η ευθεία $y=ax$".
-        *   Is it possible that $a$ is the root of $a^3 - 48a + 64 = 0$?
-        *   Let's re-check $a=4$: $64 - 192 + 64 = -64$. Still no.
-        *   Wait, let's re-calculate $E_1$ if the line is $y=ax$ but the region is different.
-        *   If the region is bounded by $y=x^2, x=4, y=0$.
-        *   Area below $y=ax$ inside $\Omega$:
-            For $x \in [0, a]$, the line is above the parabola, so the area is $\int_0^a x^2 \d x = a^3/3$.
-            For $x \in [a, 4]$, the line is below the parabola, so the area is $\int_a^4 ax \d x = [ax^2/2]_a^4 = 8a - a^3/2$.
-            Total $E_{below} = a^3/3 + 8a - a^3/2 = 8a - a^3/6$.
-            This is exactly the same $E_1$ as before.
-        *   Let me check the equation $a^3 - 48a + 64 = 0$ for roots again.
-            $a=1 \to 17$
-            $a=2 \to -24$
-            $a=3 \to 27 - 144 + 64 = -53$
-            $a=4 \to 64 - 192 + 64 = -64$
-            $a=5 \to 125 - 240 + 64 = -51$
-            $a=6 \to 216 - 288 + 64 = -8$
-            $a=7 \to 343 - 336 + 64 = 71$
-            Root between 6 and 7. But $a$ must be $< 4$.
-        *   Wait, if $a > 4$, the line $y=ax$ is always above $y=x^2$ on $[0, 4]$.
-            Then $E_{below} = \int_0^4 x^2 \d x = 64/3$. $E_{above} = 0$.
-        *   Is it possible the area $\Omega$ is bounded by $y=x^2$ and $y=16$ for $x \in [0, 4]$?
-            Then $E = \int_0^4 (16 - x^2) \d x = [16x - x^3/3]_0^4 = 64 - 64/3 = 128/3$.
-            $E_1$ (part above line $y=ax$) = $\int_0^k (16 - ax) \d x$ ... no.
-        *   Let me look at the problem again. $y=x^2, x \in [0, 4], y=0$.
-            Total Area = $64/3$. Half Area = $32/3$.
-            Maybe I made a calculation error in $E_1(a)$.
-            $E_1(a) = \int_a^4 (x^2 - ax) \d x = [x^3/3 - ax^2/2]_a^4 = (64/3 - 8a) - (a^3/3 - a^3/2) = 64/3 - 8a + a^3/6$.
-            Everything seems correct.
-            Wait! "the upper part".
-            In the region $\Omega$ (under $x^2$), the line $y=ax$ creates two parts.
-            Part A: $0 \le y \le \min(ax, x^2)$.
-            Part B: $\min(ax, x^2) \le y \le x^2$.
-            The "upper part" is Part B.
-            Part B is $y \in [ax, x^2]$ when $x^2 > ax$, and empty when $x^2 \le ax$.
-            $x^2 > ax \iff x > a$.
-            So $E_1 = \int_a^4 (x^2 - ax) \d x$. Correct.
-            What if $a$ is given in the problem as a specific value? No, we need to find $a$.
-            Let me re-read the "bisection" part. $a^3 - 48a + 64 = 0$.
-            Maybe there's a typo in the exercise and it should be $y=x^2, x \in [0, 3]$?
-            If $x \in [0, 3]$, $E = 9$. $E_1 = \int_a^3 (x^2 - ax) \d x = 9 - 4.5a + a^3/6$.
-            $9 - 4.5a + a^3/6 = 4.5 \implies a^3 - 27a + 27 = 0$. Still not nice.
-            What if $x \in [0, 6]$? $E = 6^3/3 = 72$. Half = 36.
-            $E_1 = \int_a^6 (x^2 - ax) \d x = [x^3/3 - ax^2/2]_a^6 = (216/3 - 18a) - (a^3/3 - a^3/2) = 72 - 18a + a^3/6$.
-            $72 - 18a + a^3/6 = 36 \implies a^3/6 - 18a + 36 = 0 \implies a^3 - 108a + 216 = 0$.
-            Root $a=6$ is $216 - 648 + 216 \neq 0$.
-            Root $a=2$ is $8 - 216 + 216 = 8$. Close!
-            What if the total area was something else?
-            Let's double check $a^3 - 48a + 64 = 0$ one more time.
-            Wait, $a=4$ is not a root, but what about $a^3 - 12a + 16 = 0$?
-            $a=2 \to 8 - 24 + 16 = 0$.
-            How could we get $a^3 - 12a + 16 = 0$?
-            $E_1 = a^3/6 - 2a + 8/3$ maybe?
-            $E_1 = \int_a^2 (x^2 - ax) \d x = [x^3/3 - ax^2/2]_a^2 = (8/3 - 2a) - (a^3/3 - a^3/2) = 8/3 - 2a + a^3/6$.
-            If $E_{total} = \int_0^2 x^2 \d x = 8/3$. Half is $4/3$.
-            $8/3 - 2a + a^3/6 = 4/3 \implies a^3/6 - 2a + 4/3 = 0 \implies a^3 - 12a + 8 = 0$. Still not $a=2$.
-            Wait, if the interval was $[0, 4]$ and the area was $64/3$, but the line was $y = ax$ and we wanted the area *between* the line and the parabola *from 0 to a*?
-            $E = \int_0^a (ax - x^2) \d x = [ax^2/2 - x^3/3]_0^a = a^3/2 - a^3/3 = a^3/6$.
-            If $a^3/6 = 32/3 \implies a^3 = 64 \implies a = 4$.
-            This is a very likely interpretation!
-            Let's re-read: "Η ευθεία $y = ax$ διαιρεί το παραπάνω χωρίο σε δύο ισεμβαδικά μέρη".
-            If $a=4$, the line $y=4x$ and the parabola $y=x^2$ intersect at $(0,0)$ and $(4,16)$.
-            The region $\Omega$ is the area under $y=x^2$ from $x=0$ to $x=4$.
-            The line $y=4x$ is *above* the parabola on $(0,4)$.
-            So the line doesn't "divide" the region $\Omega$ (which is the area *below* the parabola).
-            The only way the line $y=ax$ divides the region $\Omega$ is if it passes *through* it.
-            Since $\Omega$ is the region $0 \le y \le x^2$ for $x \in [0, 4]$, and the line is $y=ax$:
-            For the line to divide $\Omega$, there must be some part of $\Omega$ above the line and some part below.
-            $\Omega_{above} = \{ (x,y) : 0 \le x \le 4, ax < y \le x^2 \}$.
-            This is non-empty only if $x^2 > ax$ for some $x \in [0, 4]$, which means $a < 4$.
-            Then $E_{above} = \int_a^4 (x^2 - ax) \d x$.
-            $\Omega_{below} = \{ (x,y) : 0 \le x \le 4, 0 \le y \le \min(ax, x^2) \}$.
-            This is $E_{below} = \int_0^a x^2 \d x + \int_a^4 ax \d x = a^3/3 + [ax^2/2]_a^4 = a^3/3 + 8a - a^3/2 = 8a - a^3/6$.
-            As I found, $E_{above} = E_{below} \implies a^3 - 48a + 64 = 0$.
-            Is it possible that the region $\Omega$ is the area *between* the parabola and the line $y=4x$? No, it says "ορίζεται από την παραβολή $y=x^2$ και τον άξονα $x'x$".
-            Let me re-read the "upper part" again.
-            "Να εκφράσετε το εμβαδόν του πάνω μέρους συναρτήσει του $a$".
-            If the "upper part" is the region *between the line and the parabola*?
-            That would be $E_{upper} = \int_0^a (ax - x^2) \d x = a^3/6$.
-            But this region is NOT part of $\Omega$. $\Omega$ is the region *below* the parabola.
-            Wait, if $\Omega$ is the region bounded by $y=x^2$, the $x$-axis, and $x=4$, then the line $y=ax$ divides it.
-            The area *above* the line $y=ax$ but *inside* $\Omega$ is $E_{above} = \int_a^4 (x^2 - ax) \d x$.
-            The area *below* the line $y=ax$ but *inside* $\Omega$ is $E_{below} = \int_0^a x^2 \d x + \int_a^4 ax \d x$.
-            Maybe there is a typo and the region $\Omega$ is bounded by $y=x^2$, $x=0$, and $y=16$?
-            Then $E = \int_0^4 (16 - x^2) \d x = 128/3$.
-            The line $y=ax$ divides this.
-            The part "above" the line would be the part where $y > ax$.
-            $16 - x^2$ is the upper boundary. $ax$ is the lower boundary.
-            $\int_0^k (16 - x^2 - ax) \d x$ where $ax = 16 - x^2$.
-            This is getting too complicated. Let's stick to the most likely interpretation of the text and just solve the algebra, even if $a$ isn't an integer.
-            But usually, these problems have nice answers.
-            Let me check $a^3 - 48a + 64 = 0$ again.
-            What if $a=4$ was the answer? Then $E_1 = 0$.
-            What if $a=2$? $E_1 = 64/3 - 16 + 8/6 = 64/3 - 16 + 4/3 = 68/3 - 48/3 = 20/3$.
-            $E_{below} = 8(2) - 8/6 = 16 - 4/3 = 44/3$.
-            $20/3 + 44/3 = 64/3$. Correct.
-            So for $a=2$, $E_1 = 20/3$ and $E_2 = 44/3$. Not equal.
-            What if $a=1$? $E_1 = 64/3 - 8 + 1/6 = (128 - 48 + 1)/6 = 81/6 = 13.5$.
-            $E_2 = 8 - 1/6 = 47/6 = 7.83$.
-            Wait, for $a=1$, $E_1 > E_2$. For $a=2$, $E_1 < E_2$.
-            So $a$ is indeed between 1 and 2.
-            Is there any other way to interpret "upper part"?
-            "Να εκφράσετε το εμβαδόν του πάνω μέρους συναρτήσει του $a$".
-            If the region $\Omega$ is bounded by $y=x^2$ and $y=ax$? No, that's not what it says.
-            Let's assume $E_1(a) = \frac{a^3}{6} - 8a + \frac{64}{3}$.
-            For Part 3, I will just state the equation $a^3 - 48a + 64 = 0$ and perhaps approximate or check if I missed a root.
-            Wait! $a^3 - 48a + 64 = 0$.
-            Check $a=1.3...$
-            Let me re-read: "Η ευθεία $y = ax$ (με $a > 0$) διαιρεί το παραπάνω χωρίο σε δύο ισεμβαδικά μέρη $E_1, E_2$".
-            Could the region $\Omega$ be the area *between* the parabola $y=x^2$ and the line $y=4x$?
-            Then $E = \int_0^4 (4x - x^2) \d x = [2x^2 - x^3/3]_0^4 = 32 - 64/3 = 32/3$.
-            Then a line $y=ax$ would divide it?
-            If $a < 4$, the line $y=ax$ is below $y=4x$.
-            The area between $y=ax$ and $y=x^2$ is $\int_0^a (ax - x^2) \d x = a^3/6$.
-            If $a^3/6 = 1/2 (32/3) = 16/3 \implies a^3 = 32 \implies a = \sqrt[3]{32} = 2\sqrt[3]{4}$.
-            Still not "nice".
-
-            Let's go back to the first interpretation. It's the most literal.
-            $E = 64/3$.
-            $E_1(a) = a^3/6 - 8a + 64/3$.
-            $E_1(a) = 32/3 \implies a^3 - 48a + 64 = 0$.
-            Maybe I should check the problem for a typo in the boundary.
-            What if $x \in [0, 2]$? $E = 8/3$. $E_1 = a^3/6 - 2a + 8/3$.
-            $E_1 = 4/3 \implies a^3/6 - 2a + 4/3 = 0 \implies a^3 - 12a + 8 = 0$.
-            Wait, if $x \in [0, 4]$, maybe the line is $y=a$? No, it's $y=ax$.
-            I'll proceed with the $a^3 - 48a + 64 = 0$ result.
-
-    *   **Part 4: Rate of Change**
-        *   $E(a) = \frac{a^3}{6} - 8a + \frac{64}{3}$.
-        *   We want $\frac{dE}{dt} = \frac{dE}{da} \cdot \frac{da}{dt}$.
-        *   $\frac{dE}{da} = \frac{3a^2}{6} - 8 = \frac{a^2}{2} - 8$.
-        *   Given $\frac{da}{dt} = 1$ and $a=2$.
-        *   $\frac{dE}{dt} = (\frac{2^2}{2} - 8) \cdot 1 = (2 - 8) \cdot 1 = -6$.
-        *   The rate of change is $-6\ \text{units}^2/\text{sec}$.
-
-    *   $E_{total} = \int_0^4 x^2 \d x = [x^3/3]_0^4 = 64/3$.
-    *   $E_1(a) = \int_a^4 (x^2 - ax) \d x = [x^3/3 - ax^2/2]_a^4 = (64/3 - 8a) - (a^3/3 - a^3/2) = 64/3 - 8a + a^3/6$.
-    *   $E_1(a) = 32/3 \implies a^3/6 - 8a + 32/3 = 0 \implies a^3 - 48a + 64 = 0$.
-    *   $E'(a) = a^2/2 - 8$.
-    *   For $a=2, da/dt=1 \implies dE/dt = (4/2 - 8)(1) = -6$.
-
-    *   $\begin{thema}{Γ}$
-    *   $\begin{erwthma}$
-    *   $\item$
-    *   `\begin{align*}` for the integration.
-    *   `\d x` for the differential.
-    *   `\textbf{...}` for emphasis.
-    *   $\eng{...}$ for technical terms? "Rate of change" $\to$ "ρυθμός μεταβολής". Not really an English term. Maybe $\eng{Chain Rule}$ for the derivative? The guidelines say for "theorems or technical terms". I'll use it if I mention a theorem.
-
-    *   $E_1$ is the "upper part". In $\Omega$ (which is $0 \le y \le x^2$), the part *above* $y=ax$ is $ax < y \le x^2$.
-    *   This only happens when $x^2 > ax \implies x > a$.
-    *   So the integral is from $a$ to $4$. This is consistent.
-    *   The derivative $dE/da = a^2/2 - 8$.
-    *   At $a=2$, $dE/da = 2 - 8 = -6$.
-    *   Since $da/dt = 1$, $dE/dt = -6$.
-    *   The area $E_1$ decreases as $a$ increases. This makes sense because the line $y=ax$ moves "up", leaving less area between it and the parabola.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item` ...
-    *   No preamble.
-    *   No comments.
-    *   Definite integrals only.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 58ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-    \item Το συνολικό εμβαδόν του χωρίου $\Omega$ είναι:
-    \[ E = \int_{0}^{4} x^2 \d x = \left[ \frac{x^3}{3} \right]_{0}^{4} = \frac{64}{3} - 0 = \frac{64}{3} \text{ τ.μ.} \]
+\item Το χωρίο $\Omega$ βρίσκεται κάτω από την παραβολή $y=x^2$, πάνω από τον άξονα $x'x$ και ανάμεσα στις ευθείες $x=0$ και $x=4$.
+Άρα το συνολικό εμβαδόν του είναι
+\[E=\dint_0^4 x^2\d x=\left[\frac{x^3}{3}\right]_0^4=\frac{64}{3}\]
 
-    \item Η ευθεία $y = ax$ τέμνει την παραβολή $y = x^2$ στο σημείο όπου $x^2 = ax \Leftrightarrow x(x-a) = 0$. Εφόσον $a > 0$, τα σημεία τομής είναι το $O(0,0)$ και το $A(a, a^2)$. 
-    Το χωρίο $\Omega$ ορίζεται για $x \in [0, 4]$ και $0 \le y \le x^2$. Το «πάνω μέρος» $E_1$ είναι το τμήμα του χωρίου $\Omega$ που βρίσκεται πάνω από την ευθεία $y=ax$, δηλαδή όπου $ax < y \le x^2$. Αυτό συμβαίνει για $x \in (a, 4)$ (με την προϋπόθεση $a < 4$).
-    Το εμβαδόν του πάνω μέρους $E_1$ συναρτήσει του $a$ είναι:
-    \begin{align*}
-        E_1(a) &= \int_{a}^{4} (x^2 - ax) \d x \\
-        &= \left[ \frac{x^3}{3} - \frac{ax^2}{2} \right]_{a}^{4} \\
-        &= \left( \frac{64}{3} - \frac{16a}{2} \right) - \left( \frac{a^3}{3} - \frac{a^3}{2} \right) \\
-        &= \frac{64}{3} - 8a - \left( -\frac{a^3}{6} \right) \\
-        &= \frac{a^3}{6} - 8a + \frac{64}{3} \text{ τ.μ.}
-    \end{align*}
+\item Η ευθεία $y=ax$, με $a>0$, τέμνει την παραβολή $y=x^2$ στα σημεία που ικανοποιούν
+\[x^2=ax\Leftrightarrow x(x-a)=0\]
+δηλαδή στα σημεία με τετμημένες
+\[x=0\quad\text{ή}\quad x=a\]
+Για να υπάρχει μη μηδενικό πάνω μέρος μέσα στο δοσμένο χωρίο, παίρνουμε
+\[0<a<4\]
+Στο διάστημα $(a,4)$ η παραβολή βρίσκεται πάνω από την ευθεία $y=ax$.
+Άρα το εμβαδόν του πάνω μέρους είναι
+\begin{align*}
+E_1(a)&=\dint_a^4 (x^2-ax)\d x\\
+&=\left[\frac{x^3}{3}-\frac{ax^2}{2}\right]_a^4\\
+&=\frac{64}{3}-8a-\left(\frac{a^3}{3}-\frac{a^3}{2}\right)\\
+&=\frac{a^3}{6}-8a+\frac{64}{3}\ ,\ 0<a<4
+\end{align*}
 
-    \item Για να διχοτομήσει η ευθεία το συνολικό εμβαδόν $E$, πρέπει $E_1(a) = \frac{1}{2}E = \frac{32}{3}$.
-    \[ \frac{a^3}{6} - 8a + \frac{64}{3} = \frac{32}{3} \Leftrightarrow \frac{a^3}{6} - 8a + \frac{32}{3} = 0 \]
-    Πολλαπλασιάζοντας όλα τα μέλη με $6$, προκύπτει η εξίσωση:
-    \[ a^3 - 48a + 64 = 0 \]
-    Ελέγχοντας πιθανές ρίζες, παρατηρούμε ότι η συνάρτηση $f(a) = a^3 - 48a + 64$ αλλάζει πρόσημο στο διάστημα $(1, 2)$ καθώς $f(1) = 17 > 0$ και $f(2) = 8 - 96 + 64 = -24 < 0$. Η τιμή της κλίσης $a$ είναι η μοναδική ρίζα αυτής της εξίσωσης στο διάστημα $(0, 4)$.
+\item Για να διχοτομεί η ευθεία το συνολικό εμβαδόν, πρέπει
+\[E_1(a)=\frac{E}{2}=\frac{32}{3}\]
+Άρα
+\begin{align*}
+\frac{a^3}{6}-8a+\frac{64}{3}&=\frac{32}{3}\\
+\frac{a^3}{6}-8a+\frac{32}{3}&=0\\
+a^3-48a+64&=0
+\end{align*}
+Θεωρούμε τη συνάρτηση
+\[p(a)=a^3-48a+64\ ,\ a\in(0,4)\]
+Έχουμε
+\[p'(a)=3a^2-48=3(a^2-16)<0\ ,\ 0<a<4\]
+άρα η $p$ είναι γνησίως φθίνουσα στο $(0,4)$.
+Επίσης
+\[p(1)=1-48+64=17>0\]
+και
+\[p(2)=8-96+64=-24<0\]
+Επομένως, από το θεώρημα \eng{Bolzano} και τη γνησία μονοτονία της $p$, υπάρχει μοναδική λύση
+\[a_0\in(1,2)\]
+της εξίσωσης
+\[a^3-48a+64=0\]
+Αυτή είναι η μοναδική κλίση που διχοτομεί το ολικό εμβαδόν.
 
-    \item Ο ρυθμός μεταβολής του εμβαδού $E(a)$ ως προς τον χρόνο $t$ δίνεται από τον κανόνα της αλυσίδας (\eng{Chain Rule}):
-    \[ \frac{dE}{dt} = \frac{dE}{da} \cdot \frac{da}{dt} \]
-    Υπολογίζουμε την παράγωγο του $E_1(a)$ ως προς $a$:
-    \[ \frac{dE_1}{da} = \frac{3a^2}{6} - 8 = \frac{a^2}{2} - 8 \]
-    Για $a = 2$ και $\frac{da}{dt} = 1\ \text{μον}/\text{sec}$, έχουμε:
-    \[ \frac{dE}{dt} = \left( \frac{2^2}{2} - 8 \right) \cdot 1 = (2 - 8) \cdot 1 = -6\ \text{τ.μ.}/\text{sec} \]
-    Άρα, το εμβαδόν του άνω χωρίου μειώνεται με ρυθμό $6\ \text{τ.μ.}/\text{sec}$.
+\item Έστω $a=a(t)$ η κλίση της ευθείας τη χρονική στιγμή $t$.
+Δίνεται ότι
+\[a'(t)=1\]
+Το εμβαδόν του άνω χωρίου είναι
+\[E_1(a)=\frac{a^3}{6}-8a+\frac{64}{3}\]
+οπότε
+\[E_1'(a)=\frac{a^2}{2}-8\]
+Με τον κανόνα της αλυσίδας,
+\[\frac{\d E_1}{\d t}=E_1'(a)\cdot a'(t)\]
+Τη στιγμή που $a=2$ έχουμε
+\[\frac{\d E_1}{\d t}=\left(\frac{2^2}{2}-8\right)\cdot1=-6\]
+Άρα το εμβαδόν του άνω χωρίου μειώνεται με ρυθμό
+\[6\ \text{τετρ. μονάδες}/\sec\]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 58ο ΘΕΜΑ Γ ===========

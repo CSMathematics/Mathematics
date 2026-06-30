@@ -1,83 +1,72 @@
-*   Function: $f(x) = \sqrt{x^2 - 4x + 4}$.
-    *   Question 1: Simplify the formula.
-    *   Question 2: Examine differentiability at $x_0 = 2$.
-    *   Question 3: Compute $\lim_{x \to 2^-} \frac{f(x)}{x^2 - 4}$.
-    *   Question 4: Find the area between $C_f$, x-axis, $x=0$, and $x=4$.
-
-    *   $x^2 - 4x + 4 = (x-2)^2$.
-    *   $f(x) = \sqrt{(x-2)^2} = |x-2|$.
-
-    *   $f(x) = |x-2|$.
-    *   Definition of derivative at $x=2$: $\lim_{h \to 0} \frac{f(2+h) - f(2)}{h}$.
-    *   $f(2) = 0$.
-    *   $f(2+h) = |(2+h)-2| = |h|$.
-    *   Limit becomes $\lim_{h \to 0} \frac{|h|}{h}$.
-    *   Right limit: $\lim_{h \to 0^+} \frac{h}{h} = 1$.
-    *   Left limit: $\lim_{h \to 0^-} \frac{-h}{h} = -1$.
-    *   Since left limit $\neq$ right limit, $f$ is not differentiable at $x=2$.
-
-    *   For $x \to 2^-$, $x < 2$, so $f(x) = |x-2| = -(x-2) = 2-x$.
-    *   $x^2 - 4 = (x-2)(x+2)$.
-    *   Expression: $\frac{2-x}{(x-2)(x+2)} = \frac{-(x-2)}{(x-2)(x+2)} = \frac{-1}{x+2}$.
-    *   Limit: $\lim_{x \to 2^-} \frac{-1}{x+2} = \frac{-1}{2+2} = -\frac{1}{4}$.
-
-    *   Area $E = \int_0^4 |x-2| dx$.
-    *   Split integral at $x=2$:
-        $E = \int_0^2 (2-x) dx + \int_2^4 (x-2) dx$.
-    *   First part: $[2x - \frac{x^2}{2}]_0^2 = (4 - 2) - (0) = 2$.
-    *   Second part: $[\frac{x^2}{2} - 2x]_2^4 = (8 - 8) - (2 - 4) = 0 - (-2) = 2$.
-    *   Total Area: $2 + 2 = 4$.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\[ ... \]` for display math.
-    *   `\begin{align*}` for calculations.
-    *   Use `\textbf{...}` and `\eng{...}`.
-    *   Definite integrals with brackets.
-    *   No indefinite integrals.
-
-    *   $f(x) = \sqrt{(x-2)^2} = |x-2|$.
-    *   Differentiability: Use the limit definition. $\lim_{h \to 0} \frac{|h|}{h}$.
-    *   Limit: $x \to 2^- \implies f(x) = 2-x$. Result $-1/4$.
-    *   Area: $2 \times \text{Area of triangle}$ or sum of two integrals.
-    *   $\int_0^2 (2-x) dx = 2$.
-    *   $\int_2^4 (x-2) dx = 2$.
-    *   Sum $= 4$.
-%=========== ΛΥΣΗ - ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 36ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item Παρατηρούμε ότι η παράσταση κάτω από τη ρίζα είναι ταυτόσημη με το τετράγωνο ενός τρινομήμου:
-\[ x^2 - 4x + 4 = (x-2)^2 \]
-Συνεπώς, η συνάρτηση $f$ απλοποιείται ως εξής:
-\[ f(x) = \sqrt{(x-2)^2} = |x-2| \]
+\item Η συνάρτηση $f(x) = \dfrac{e^x}{x^2+1}$ είναι παραγωγίσιμη στο $\mathbb{R}$ ως πηλίκο παραγωγίσιμων (παρανομαστής πάντα θετικός $x^2+1 \ge 1 > 0$). Η παράγωγός της είναι:
+\[ f'(x) = \frac{e^x(x^2+1) - e^x \cdot 2x}{(x^2+1)^2} = \frac{e^x(x^2 - 2x + 1)}{(x^2+1)^2} = \frac{e^x(x-1)^2}{(x^2+1)^2} \]
+Εφόσον $e^x > 0$, $(x-1)^2 \ge 0$ και $(x^2+1)^2 > 0$, ισχύει $f'(x) \ge 0$ για κάθε $x \in \mathbb{R}$, με $f'(x) = 0$ μόνο για $x = 1$.
+Επομένως, η $f$ είναι \textbf{γνησίως αύξουσα} σε ολόκληρο το $\mathbb{R}$ (μηδένισμα μόνο σε μεμονωμένο σημείο).
 
-\item Για να εξετάσουμε την παραγωγισιμότητα της $f$ στο $x_0 = 2$, εξετάζουμε το όριο του διαφορικού συντελεστή:
-\[ \lim_{h \to 0} \frac{f(2+h) - f(2)}{h} \]
-Γνωρίζουμε ότι $f(2) = |2-2| = 0$ και $f(2+h) = |(2+h)-2| = |h|$. Το όριο γίνεται:
-\[ \lim_{h \to 0} \frac{|h|}{h} \]
-Υπολογίζουμε τα πλευρικά όρια:
+Για το σύνολο τιμών, υπολογίζουμε τα όρια:
+\[ \lim_{x \to -\infty} \frac{e^x}{x^2+1} = \frac{0}{+\infty} = 0^+ \]
+\[ \lim_{x \to +\infty} \frac{e^x}{x^2+1} \xlongequal[\text{\eng{DLH}}]{\frac{+\infty}{+\infty}} \lim_{x \to +\infty} \frac{e^x}{2x} \xlongequal[\text{\eng{DLH}}]{\frac{+\infty}{+\infty}} \lim_{x \to +\infty} \frac{e^x}{2} = +\infty \]
+Άρα το σύνολο τιμών είναι το $\boldsymbol{(0, +\infty)}$.
+
+\item Η εξίσωση $e^x = \lambda(x^2+1)$ για $\lambda > 0$ γράφεται ισοδύναμα:
+\[ \frac{e^x}{x^2+1} = \lambda \iff f(x) = \lambda \]
+Από το ερώτημα (α), η $f$ είναι γνησίως αύξουσα με σύνολο τιμών $(0, +\infty)$.
+Εφόσον $\lambda > 0$, η τιμή $\lambda$ ανήκει στο σύνολο τιμών της $f$.
+Επειδή η $f$ είναι \textbf{γνησίως αύξουσα} (άρα 1-1), η εξίσωση $f(x) = \lambda$ έχει \textbf{ακριβώς μία} πραγματική ρίζα στο $\mathbb{R}$.
+
+\item Θα αποδείξουμε ότι $1 < \int_0^1 f(x)\d x < \dfrac{e}{2}$.
+Για $x \in [0, 1]$, ισχύει:
 \begin{itemize}
-    \item $\lim_{h \to 0^+} \frac{|h|}{h} = \lim_{h \to 0^+} \frac{h}{h} = 1$
-    \item $\lim_{h \to 0^-} \frac{|h|}{h} = \lim_{h \to 0^-} \frac{-h}{h} = -1$
+    \item $x^2 + 1 \le 1 + 1 = 2$ (αφού $x^2 \le 1$), άρα $\dfrac{1}{x^2+1} \ge \dfrac{1}{2}$, οπότε $f(x) = \dfrac{e^x}{x^2+1} \ge \dfrac{e^x}{2}$.
+    \item $x^2 + 1 \ge 1$ (αφού $x^2 \ge 0$), άρα $f(x) = \dfrac{e^x}{x^2+1} \le e^x$.
 \end{itemize}
-Επειδή τα πλευρικά όρια είναι άνισα, το όριο $\lim_{h \to 0} \frac{f(2+h) - f(2)}{h}$ δεν υπάρχει. Άρα, η $f$ \textbf{δεν είναι παραγωγίσιμη} στο σημείο $x_0 = 2$.
+Ολοκληρώνουμε τις ανισότητες στο $[0,1]$:
+\[ \int_0^1 \frac{e^x}{2} \d x \le \int_0^1 f(x) \d x \le \int_0^1 e^x \d x \]
+\[ \frac{1}{2}[e^x]_0^1 \le \int_0^1 f(x) \d x \le [e^x]_0^1 \]
+\[ \frac{e-1}{2} \le \int_0^1 f(x) \d x \le e - 1 \]
+Αυτές οι ανισότητες δεν είναι αρκετά ισχυρές. Χρησιμοποιούμε καλύτερα φράγματα:
+Για $x \in [0,1]$: $e^0 = 1 \le e^x \le e^1 = e$ και $x^2+1 \le 2$.
+\begin{itemize}
+    \item Κάτω φράγμα: $f(x) = \dfrac{e^x}{x^2+1} \ge \dfrac{e^x}{2} \ge \dfrac{1}{2}$. Άρα $\int_0^1 f(x)\d x \ge \int_0^1 \frac{1}{2}\d x = \frac{1}{2}$.
+\end{itemize}
+Χρησιμοποιούμε πιο ισχυρό κάτω φράγμα: για $x \in [0,1]$, $e^x \ge 1 + x \ge 1$ και $x^2 + 1 \le 2$, άρα:
+\[ f(x) = \frac{e^x}{x^2+1} > \frac{e^0}{1^2+1} \cdot \frac{?}{} \]
+Εναλλακτικά, αφού $f$ γνησίως αύξουσα, χρησιμοποιούμε:
+\[ \int_0^1 f(x)\d x > f(0) \cdot 1 = \frac{e^0}{0^2+1} = 1 \]
+*(Αυτό ισχύει επειδή η $f$ αυξάνεται, οπότε $f(x) > f(0) = 1$ για κάθε $x \in (0,1]$).*
 
-\item Για $x \to 2^-$, ισχύει $x < 2$, οπότε $f(x) = |x-2| = -(x-2) = 2-x$. Το όριο είναι:
-\[ \lim_{x \to 2^-} \frac{f(x)}{x^2 - 4} = \lim_{x \to 2^-} \frac{2-x}{(x-2)(x+2)} \]
-\[ \lim_{x \to 2^-} \frac{-(x-2)}{(x-2)(x+2)} = \lim_{x \to 2^-} \frac{-1}{x+2} = \frac{-1}{2+2} = -\frac{1}{4} \]
+Για το άνω φράγμα, αφού $f$ αύξουσα:
+\[ \int_0^1 f(x)\d x < f(1) \cdot 1 = \frac{e^1}{1^2+1} = \frac{e}{2} \]
+Άρα αποδείχθηκε:
+\[ \boldsymbol{1 < \int_0^1 f(x)\d x < \frac{e}{2}} \]
 
-\item Το εμβαδόν $E$ του χωρίου είναι το ορισμένο ολοκλήρωμα της $f$ στο διάστημα $[0, 4]$:
-\[ E = \int_{0}^{4} f(x) \d x = \int_{0}^{4} |x-2| \d x \]
-Λόγω της απόλυτης τιμής, χωρίζουμε το ολοκλήρωμα στο σημείο $x=2$:
-\[ E = \int_{0}^{2} (2-x) \d x + \int_{2}^{4} (x-2) \d x \]
-Υπολογίζουμε τα δύο ολοκληρώματα:
-\begin{align*}
-\int_{0}^{2} (2-x) \d x &= \left[ 2x - \frac{x^2}{2} \right]_{0}^{2} = \left( 4 - \frac{4}{2} \right) - (0 - 0) = 2 \\
-\int_{2}^{4} (x-2) \d x &= \left[ \frac{x^2}{2} - 2x \right]_{2}^{4} = \left( \frac{16}{2} - 8 \right) - \left( \frac{4}{2} - 4 \right) = 0 - (-2) = 2
-\end{align*}
-Άρα, το εμβαδόν είναι:
-\[ E = 2 + 2 = 4 \text{ τ.μ.} \]
+\item Ορίζουμε τη συνάρτηση $h: [0,1] \to \mathbb{R}$ με:
+\[ h(x) = F(x) + f(x) \]
+Η $h$ είναι συνεχής στο $[0,1]$ (ως άθροισμα συνεχών) και παραγωγίσιμη στο $(0,1)$.
+Υπολογίζουμε τις τιμές στα άκρα:
+\[ h(0) = F(0) + f(0) = F(0) + 1 \]
+\[ h(1) = F(1) + f(1) = F(1) + \frac{e}{2} \]
+Η παράγωγος της $h$ είναι:
+\[ h'(x) = F'(x) + f'(x) = f(x) + f'(x) \]
+Η ζητούμενη συνθήκη $h(x_0) = F(1) + 1$ γράφεται:
+\[ F(x_0) + f(x_0) = F(1) + 1 = F(1) + f(0) \]
+Αυτό σημαίνει ότι ψάχνουμε $x_0 \in (0,1)$ τέτοιο ώστε $h(x_0) = h(1) + f(0) - f(1) + f(0)$...
+
+Ορίζουμε αντί αυτού τη βοηθητική συνάρτηση $\phi(x) = F(x) + f(x) - F(1) - 1$.
+Θέλουμε να αποδείξουμε ότι η $\phi$ μηδενίζεται σε κάποιο $x_0 \in (0,1)$.
+\[ \phi(0) = F(0) + f(0) - F(1) - 1 = F(0) + 1 - F(1) - 1 = F(0) - F(1) \]
+\[ \phi(1) = F(1) + f(1) - F(1) - 1 = f(1) - 1 = \frac{e}{2} - 1 > 0 \]
+*(αφού $e > 2$)*
+
+Από το Θεώρημα Μέσης Τιμής: $F(1) - F(0) = \int_0^1 f(x)\d x$.
+Από το (γ), γνωρίζουμε ότι $\int_0^1 f(x)\d x > 1$, άρα $F(1) - F(0) > 1$, δηλαδή $F(0) - F(1) < -1 < 0$.
+Άρα:
+\[ \phi(0) = F(0) - F(1) < 0 \quad \text{και} \quad \phi(1) = \frac{e}{2} - 1 > 0 \]
+Εφόσον η $\phi$ είναι συνεχής στο $[0,1]$ και $\phi(0) \cdot \phi(1) < 0$, από το \textbf{Θεώρημα Bolzano} υπάρχει τουλάχιστον ένα $x_0 \in (0, 1)$ τέτοιο ώστε:
+\[ \phi(x_0) = 0 \implies F(x_0) + f(x_0) = F(1) + 1 \]
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 36ο ΘΕΜΑ Γ ===========

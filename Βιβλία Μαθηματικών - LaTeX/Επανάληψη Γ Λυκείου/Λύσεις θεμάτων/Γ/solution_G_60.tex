@@ -1,164 +1,78 @@
-*   Function $f(x) = a \ln x$, $x > 0$.
-    *   Function $g(x) = e^x - \beta$.
-    *   Common tangent at $x_0 = 1$.
-    *   Tasks:
-        1.  Find parameters $a$ and $\beta$.
-        2.  Find the equation of the common tangent $\varepsilon$.
-        3.  Prove $\varepsilon$ doesn't intersect the curves elsewhere.
-        4.  Calculate the area between $C_g$, $\varepsilon$, and the axes.
-
-    *   Common point at $x_0 = 1 \implies f(1) = g(1)$.
-        $f(1) = a \ln 1 = 0$.
-        $g(1) = e^1 - \beta = e - \beta$.
-        So, $0 = e - \beta \implies \beta = e$.
-    *   Common tangent at $x_0 = 1 \implies f'(1) = g'(1)$.
-        $f'(x) = \frac{a}{x} \implies f'(1) = a$.
-        $g'(x) = e^x \implies g'(1) = e$.
-        So, $a = e$.
-    *   Result: $a = e, \beta = e$.
-
-    *   Point: $P(1, 0)$.
-    *   Slope: $m = e$.
-    *   Equation: $y - 0 = e(x - 1) \implies y = ex - e$.
-
-    *   Curve $C_f$: $f(x) = e \ln x$.
-        Let $h_f(x) = f(x) - (ex - e) = e \ln x - ex + e$.
-        $h_f'(x) = \frac{e}{x} - e = e\left(\frac{1-x}{x}\right)$.
-        $h_f'(x) = 0 \implies x = 1$.
-        Sign of $h_f'(x)$:
-        $x \in (0, 1) \implies h_f'(x) > 0$ (increasing).
-        $x \in (1, +\infty) \implies h_f'(x) < 0$ (decreasing).
-        Max at $x=1$ with $h_f(1) = e(0) - e + e = 0$.
-        So $h_f(x) \le 0$ for all $x > 0$, and $h_f(x) = 0 \iff x = 1$.
-        Thus, $C_f$ is below the tangent (except at $x=1$).
-    *   Curve $C_g$: $g(x) = e^x - e$.
-        Let $h_g(x) = g(x) - (ex - e) = e^x - e - ex + e = e^x - ex$.
-        $h_g'(x) = e^x - e$.
-        $h_g'(x) = 0 \implies x = 1$.
-        Sign of $h_g'(x)$:
-        $x \in (-\infty, 1) \implies h_g'(x) < 0$ (decreasing).
-        $x \in (1, +\infty) \implies h_g'(x) > 0$ (increasing).
-        Min at $x=1$ with $h_g(1) = e - e(1) = 0$.
-        So $h_g(x) \ge 0$ for all $x \in \mathbb{R}$, and $h_g(x) = 0 \iff x = 1$.
-        Thus, $C_g$ is above the tangent (except at $x=1$).
-
-    *   Region: Between $C_g$ ($y = e^x - e$), $\varepsilon$ ($y = ex - e$), and the axes.
-    *   Axes means $x=0$ and $y=0$.
-    *   Let's visualize the region:
-        $C_g$: $y = e^x - e$. At $x=0$, $y = 1-e \approx -1.718$. At $x=1$, $y=0$.
-        $\varepsilon$: $y = ex - e$. At $x=0$, $y = -e \approx -2.718$. At $x=1$, $y=0$.
-        Since $g(x) \ge \varepsilon(x)$, the area is between $C_g$ and $\varepsilon$ from $x=0$ to $x=1$, plus potentially something relative to axes.
-        Wait, "between $C_g$, $\varepsilon$, and the axes".
-        $C_g$ is $y = e^x - e$.
-        $\varepsilon$ is $y = ex - e$.
-        $y$-axis is $x=0$.
-        $x$-axis is $y=0$.
-        Between $x=0$ and $x=1$:
-        $C_g$ goes from $(0, 1-e)$ to $(1,0)$.
-        $\varepsilon$ goes from $(0, -e)$ to $(1,0)$.
-        Both are below the $x$-axis.
-        The area between them is $\int_{0}^{1} (g(x) - \varepsilon(x)) \d x$.
-        $\int_{0}^{1} (e^x - e - (ex - e)) \d x = \int_{0}^{1} (e^x - ex) \d x$.
-        Is this the intended region? "The area of the region between $C_g$, $\varepsilon$, and the axes".
-        Usually, this means the closed region bounded by these boundaries.
-        $x=0$ (y-axis), $y=0$ (x-axis), $y = e^x - e$ ($C_g$), $y = ex - e$ ($\varepsilon$).
-        Wait, $C_g$ and $\varepsilon$ both meet at $(1,0)$.
-        $C_g$ intersects y-axis at $(0, 1-e)$.
-        $\varepsilon$ intersects y-axis at $(0, -e)$.
-        The region is the wedge between $x=0$ (from $1-e$ to $-e$), $C_g$, and $\varepsilon$.
-        Since both curves are below the x-axis for $x \in [0, 1)$, the x-axis doesn't "cut" through the region between them, but it serves as a boundary if the region was above. But here, the region is below $y=0$.
-        Let's check the boundaries again: $C_g, \varepsilon, x=0, y=0$.
-        Actually, the region bounded by $C_g, \varepsilon, x=0$ is already closed.
-        $C_g: y = e^x - e$
-        $\varepsilon: y = ex - e$
-        $x=0$ (y-axis).
-        The vertices are $(0, 1-e), (0, -e), (1, 0)$.
-        Does $y=0$ play a part? $C_g$ and $\varepsilon$ meet at $(1,0)$, which is on the $x$-axis.
-        So the area is simply the integral of the difference from $x=0$ to $x=1$.
-        $S = \int_{0}^{1} (g(x) - \varepsilon(x)) \d x$.
-        $S = \int_{0}^{1} (e^x - e - (ex - e)) \d x = \int_{0}^{1} (e^x - ex) \d x$.
-        $S = [e^x - \frac{e}{2}x^2]_0^1 = (e - \frac{e}{2}) - (1 - 0) = \frac{e}{2} - 1$.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\[ ... \]`
-    *   `\begin{align*}`
-    *   `\eng{Lagrange}` not needed here, but maybe `\textbf{γνησίως}`.
-    *   `\d x` for integrals.
-    *   Definite integrals $[...]_a^b$.
-
-    *   $f(x) = a \ln x \implies f'(x) = a/x$.
-    *   $g(x) = e^x - \beta \implies g'(x) = e^x$.
-    *   At $x=1$:
-        $f(1) = a \ln 1 = 0$.
-        $g(1) = e^1 - \beta = e - \beta$.
-        $f(1) = g(1) \implies e - \beta = 0 \implies \beta = e$.
-        $f'(1) = a/1 = a$.
-        $g'(1) = e^1 = e$.
-        $f'(1) = g'(1) \implies a = e$.
-    *   Tangent $\varepsilon$: $y - 0 = e(x - 1) \implies y = ex - e$.
-    *   Intersection $C_f$: $h_f(x) = e \ln x - (ex - e)$. $h_f'(x) = e/x - e$. $h_f'(x)=0$ at $x=1$. $h_f(1)=0$. Max. $h_f(x) \le 0$.
-    *   Intersection $C_g$: $h_g(x) = e^x - e - (ex - e) = e^x - ex$. $h_g'(x) = e^x - e$. $h_g'(x)=0$ at $x=1$. $h_g(1)=0$. Min. $h_g(x) \ge 0$.
-    *   Area: $\int_0^1 (e^x - ex) \d x = [e^x - \frac{ex^2}{2}]_0^1 = e - \frac{e}{2} - 1 = \frac{e}{2} - 1$.
-
-    *   $a = e, \beta = e$.
-    *   $y = ex - e$.
-    *   Analysis of $h_f(x)$ and $h_g(x)$.
-    *   Integral computation.
-
-    *   $\begin{thema}{Γ}$
-    *   $\begin{erwthma}$
-    *   $\item$ for each part.
-    *   No indefinite integrals.
-    *   No 2nd derivative test (use monotonicity).
-    *   $\d x$ used.
-    *   $\textbf{...}$ for emphasis.
-%=========== ΛΥΣΗ - {ΘΕΜΑ Γ} ===========
+%=========== ΛΥΣΗ - 60ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-    \item Για να έχουν οι συναρτήσεις $f$ και $g$ κοινή εφαπτομένη σε κοινό σημείο για $x_0 = 1$, πρέπει να ισχύουν τα εξής:
-    \begin{itemize}
-        \item $f(1) = g(1)$ (κοινό σημείο)
-        \item $f'(1) = g'(1)$ (κοινή κλίση εφαπτομένης)
-    \end{itemize}
-    Από την πρώτη σχέση έχουμε:
-    \[ a \ln 1 = e^1 - \beta \implies 0 = e - \beta \implies \beta = e \]
-    Υπολογίζουμε τις παραγώγους:
-    \[ f'(x) = \frac{a}{x}, \quad g'(x) = e^x \]
-    Από τη δεύτερη σχέση έχουμε:
-    \[ f'(1) = g'(1) \implies \frac{a}{1} = e^1 \implies a = e \]
-    Άρα, οι παράμετροι είναι $a = e$ και $\beta = e$.
+\item Για να έχουν οι $C_f$ και $C_g$ κοινή εφαπτομένη σε κοινό σημείο με τετμημένη $x_0=1$, πρέπει
+\[f(1)=g(1)\]
+και
+\[f'(1)=g'(1)\]
+Έχουμε
+\[f(1)=a\ln 1=0\]
+και
+\[g(1)=e-\beta\]
+Άρα
+\[0=e-\beta\Rightarrow \beta=e\]
+Επίσης
+\[f'(x)=\frac{a}{x}\]
+και
+\[g'(x)=e^x\]
+Οπότε
+\[f'(1)=g'(1)\Rightarrow a=e\]
+Επομένως
+\[a=e\quad\text{και}\quad \beta=e\]
 
-    \item Η κοινή εφαπτομένη $\varepsilon$ διέρχεται από το σημείο $(1, f(1)) = (1, 0)$ και έχει κλίση $\lambda = f'(1) = e$. Η εξίσωσή της είναι:
-    \[ y - 0 = e(x - 1) \implies y = ex - e \]
+\item Για $a=e$ και $\beta=e$ έχουμε
+\[f(x)=e\ln x\]
+και
+\[g(x)=e^x-e\]
+Το κοινό σημείο επαφής είναι
+\[A(1,0)\]
+και ο συντελεστής διεύθυνσης της κοινής εφαπτομένης είναι
+\[\lambda=f'(1)=e\]
+Άρα η κοινή εφαπτομένη είναι
+\[y-0=e(x-1)\]
+δηλαδή
+\[\varepsilon:y=ex-e\]
 
-    \item Έστω η συνάρτηση $h_f(x) = f(x) - (ex - e) = e \ln x - ex + e$ για $x > 0$.
-    \[ h_f'(x) = \frac{e}{x} - e = e \left( \frac{1-x}{x} \right) \]
-    Εξετάζουμε το πρόσημο της $h_f'(x)$:
-    \begin{itemize}
-        \item $h_f'(x) = 0 \Leftrightarrow x = 1$
-        \item $h_f'(x) > 0 \Leftrightarrow x \in (0, 1) \implies h_f$ \textbf{γνησίως αύξουσα}
-        \item $h_f'(x) < 0 \Leftrightarrow x \in (1, +\infty) \implies h_f$ \textbf{γνησίως φθίνουσα}
-    \end{itemize}
-    Άρα η $h_f(x)$ παρουσιάζει το απόλυτο μέγιστο στο $x=1$ με $h_f(1) = e \ln 1 - e(1) + e = 0$. Συνεπώς, $h_f(x) \leq 0$ για κάθε $x > 0$ και $h_f(x) = 0$ μόνο για $x=1$, οπότε η $\varepsilon$ δεν τέμνει την $C_f$ σε άλλο σημείο.
+\item Για $x>0$ έχουμε
+\[f''(x)=-\frac{e}{x^2}<0\]
+άρα η $f$ είναι \textbf{κοίλη} στο $(0,+\infty)$.
+Επομένως η γραφική της παράσταση βρίσκεται κάτω από κάθε εφαπτομένη της, άρα
+\[f(x)\leq ex-e\ ,\ x>0\]
+δηλαδή
+\[e\ln x\leq ex-e\ ,\ x>0\]
 
-    Έστω η συνάρτηση $h_g(x) = g(x) - (ex - e) = (e^x - e) - (ex - e) = e^x - ex$ για $x \in \mathbb{R}$.
-    \[ h_g'(x) = e^x - e \]
-    Εξετάζουμε το πρόσημο της $h_g'(x)$:
-    \begin{itemize}
-        \item $h_g'(x) = 0 \Leftrightarrow x = 1$
-        \item $h_g'(x) < 0 \Leftrightarrow x \in (-\infty, 1) \implies h_g$ \textbf{γνησίως φθίνουσα}
-        \item $h_g'(x) > 0 \Leftrightarrow x \in (1, +\infty) \implies h_g$ \textbf{γνησίως αύξουσα}
-    \end{itemize}
-    Άρα η $h_g(x)$ παρουσιάζει το απόλυτο ελάχιστο στο $x=1$ με $h_g(1) = e^1 - e(1) = 0$. Συνεπώς, $h_g(x) \geq 0$ για κάθε $x \in \mathbb{R}$ και $h_g(x) = 0$ μόνο για $x=1$, οπότε η $\varepsilon$ δεν τέμνει την $C_g$ σε άλλο σημείο.
+Επίσης
+\[g''(x)=e^x>0\]
+άρα η $g$ είναι \textbf{κυρτή} στο $\mathbb{R}$.
+Επομένως η γραφική της παράσταση βρίσκεται πάνω από κάθε εφαπτομένη της, άρα
+\[ex-e\leq g(x)\ ,\ x>0\]
+δηλαδή
+\[ex-e\leq e^x-e\ ,\ x>0\]
+Συνεπώς
+\[f(x)\leq ex-e\leq g(x)\ ,\ x>0\]
 
-    \item Το χωρίο βρίσκεται μεταξύ της $C_g: y = e^x - e$, της $\varepsilon: y = ex - e$ και των αξόνων. Για $x \in [0, 1]$, έχουμε $g(x) \geq \varepsilon(x)$ και και οι δύο συναρτήσεις είναι $\leq 0$. Το εμβαδόν $S$ είναι:
-    \[ S = \int_{0}^{1} [g(x) - \varepsilon(x)] \d x = \int_{0}^{1} (e^x - e - (ex - e)) \d x \]
-    \[ S = \int_{0}^{1} (e^x - ex) \d x \]
-    \[ S = \left[ e^x - \frac{ex^2}{2} \right]_0^1 \]
-    \[ S = \left( e^1 - \frac{e(1)^2}{2} \right) - \left( e^0 - \frac{e(0)^2}{2} \right) \]
-    \[ S = e - \frac{e}{2} - 1 = \frac{e}{2} - 1 \]
+\item Από το Γ3 έχουμε, για κάθε $x>0$,
+\[e\ln x\leq ex-e\]
+και
+\[ex-e\leq e^x-e\]
+Άρα
+\[e\ln x\leq e^x-e\]
+οπότε
+\[e^x-e\ln x\geq e\ ,\ x>0\]
+
+Θέλουμε να υπολογίσουμε το όριο
+\[\lim\limits_{x\to 1}\frac{e^x-e\ln x-e}{(x-1)^2}\]
+Για $x\to 1$ ο αριθμητής τείνει στο
+\[e-e\ln1-e=0\]
+και ο παρονομαστής στο $0$, άρα έχουμε μορφή $\dfrac{0}{0}$.
+Με δύο εφαρμογές του κανόνα \eng{L'Hôpital}:
+\begin{align*}
+\lim\limits_{x\to 1}\frac{e^x-e\ln x-e}{(x-1)^2}
+&=\lim\limits_{x\to 1}\frac{e^x-\frac{e}{x}}{2(x-1)}\\
+&=\lim\limits_{x\to 1}\frac{e^x+\frac{e}{x^2}}{2}\\
+&=\frac{e+e}{2}\\
+&=e
+\end{align*}
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - {ΘΕΜΑ Γ} ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 60ο ΘΕΜΑ Γ ===========

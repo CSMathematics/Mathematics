@@ -1,173 +1,63 @@
-*   Professional Math Teacher.
-    *   Exercise: A function $f(x)$ defined by a differential equation $f'(x) - f(x) = e^x$ with $f(0)=1$.
-    *   Task:
-        1. Prove $f(x) = (x+1)e^x$.
-        2. Find the unique absolute extremum.
-        3. Check for horizontal asymptote at $-\infty$.
-        4. Calculate $\lim_{x \to +\infty} [f(x+1) - e \cdot f(x)]$.
-    *   Constraint: No differential equations, no indefinite integrals. Wait, the prompt says "Differential equations" are *out of syllabus*. But the exercise is given as a differential equation.
-    *   Looking closer at the "Out of syllabus" list: "Διαφορικές εξισώσεις" (Differential equations).
-    *   However, the exercise *is* a differential equation. Usually, in the Greek syllabus (Γ Λυκείου), such problems are solved by proposing a function and checking if it satisfies the condition, or by using a specific trick like multiplying by $e^{-x}$.
-    *   Let's re-read the prompt's "Out of syllabus" section: "Διαφορικές εξισώσεις" (Differential equations). This means I cannot use general techniques for solving ODEs (like the integrating factor method explicitly labeled as such, or general ODE theory), but I can prove that a given function satisfies the equation.
-    *   Part 1 asks to *prove* $f(x) = (x+1)e^x$. This means I don't have to *solve* the ODE from scratch using ODE methods, but rather verify that the given expression satisfies the given equation and initial condition.
-
-    *   **Part 1: Prove $f(x) = (x+1)e^x$.**
-        *   Given: $f'(x) - f(x) = e^x$ and $f(0)=1$.
-        *   Assume $f(x) = (x+1)e^x$.
-        *   Calculate $f'(x) = 1 \cdot e^x + (x+1) \cdot e^x = (x+2)e^x$.
-        *   Check: $f'(x) - f(x) = (x+2)e^x - (x+1)e^x = e^x(x+2-x-1) = e^x$. (Correct)
-        *   Check initial condition: $f(0) = (0+1)e^0 = 1 \cdot 1 = 1$. (Correct)
-        *   Wait, the exercise asks to *prove* it. In a typical Γ Λυκείου context, if they give the function, you verify it. If they don't, and the ODE is given, you might need to derive it. But the phrasing "Να αποδείξετε ότι $f(x) = (x+1)e^x$" strongly suggests verification. *Correction*: Usually, to prove it's the *only* solution, one would use a helper function $g(x) = f(x) e^{-x}$.
-        *   Let $g(x) = f(x) e^{-x}$.
-        *   $g'(x) = f'(x)e^{-x} + f(x)(-e^{-x}) = e^{-x}(f'(x) - f(x))$.
-        *   Since $f'(x) - f(x) = e^x$, we have $g'(x) = e^{-x} \cdot e^x = 1$.
-        *   Since $g'(x) = 1$, then $g(x) = x + C$.
-        *   Using $f(0)=1$, $g(0) = f(0)e^0 = 1 \cdot 1 = 1$.
-        *   So $0 + C = 1 \Rightarrow C = 1$.
-        *   Thus $g(x) = x+1 \Rightarrow f(x)e^{-x} = x+1 \Rightarrow f(x) = (x+1)e^x$.
-        *   This approach uses the derivative of a product (within syllabus) and the fundamental theorem of calculus/integration of a constant (within syllabus), avoiding "ODE solving techniques" in a formal sense while still being rigorous.
-
-    *   **Part 2: Absolute Extremum.**
-        *   $f(x) = (x+1)e^x$.
-        *   $f'(x) = (x+2)e^x$.
-        *   $f'(x) = 0 \Leftrightarrow x+2 = 0 \Leftrightarrow x = -2$.
-        *   Sign of $f'(x)$:
-            *   $x < -2 \Rightarrow f'(x) < 0$ ($\textbf{γνησίως φθίνουσα}$).
-            *   $x > -2 \Rightarrow f'(x) > 0$ ($\textbf{γνησίως αύξουσα}$).
-        *   Therefore, $f$ has a global minimum at $x = -2$.
-        *   Minimum value: $f(-2) = (-2+1)e^{-2} = -e^{-2} = -1/e^2$.
-        *   Use `tkz-tab` for the table.
-
-    *   **Part 3: Horizontal Asymptote at $-\infty$.**
-        *   Calculate $\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} (x+1)e^x$.
-        *   This is of the form $(-\infty \cdot 0)$.
-        *   Rewrite as $\lim_{x \to -\infty} \frac{x+1}{e^{-x}}$.
-        *   This is of the form $\frac{-\infty}{+\infty}$.
-        *   Apply \eng{L'Hôpital}: $\lim_{x \to -\infty} \frac{1}{-e^{-x}} = \lim_{x \to -\infty} -e^x = 0$.
-        *   Since the limit is a finite number (0), the line $y=0$ (x-axis) is a horizontal asymptote at $-\infty$.
-
-    *   **Part 4: Limit $\lim_{x \to +\infty} [f(x+1) - e \cdot f(x)]$.**
-        *   $f(x+1) = (x+1+1)e^{x+1} = (x+2)e^{x+1} = (x+2)e \cdot e^x$.
-        *   $e \cdot f(x) = e \cdot (x+1)e^x = (x+1)e \cdot e^x$.
-        *   $f(x+1) - e \cdot f(x) = [(x+2)e - (x+1)e] e^x$
-        *   $= [xe + 2e - xe - e] e^x = e \cdot e^x = e^{x+1}$.
-        *   $\lim_{x \to +\infty} e^{x+1} = +\infty$.
-
-    *   `\begin{thema}{Γ}`
-    *   `\begin{erwthma}`
-    *   `\item`
-    *   `\eng{L'Hôpital}` for limits.
-    *   `\textbf{γνησίως φθίνουσα}`, `\textbf{γνησίως αύξουσα}`.
-    *   `\begin{align*}` for calculations.
-    *   `\tkz-tab` for the monotonicity table.
-    *   `\[ ... \]` for final results.
-
-    *   Part 1: Define $g(x) = f(x)e^{-x}$, differentiate, integrate $g'(x)=1$, find $C$, solve for $f(x)$. This is standard for this type of problem in Greek textbooks.
-    *   Part 2: $f'(x) = (x+2)e^x$. Root $x=-2$. Table. Minimum.
-    *   Part 3: Limit $x \to -\infty$ using L'Hôpital.
-    *   Part 4: Substitution and simplification.
-
-    *   Check if any "out of syllabus" items were used.
-    *   No indefinite integrals? $g'(x)=1 \Rightarrow g(x)=x+C$ is a basic antiderivative, usually accepted. Or I can use the definite integral $\int_0^x g'(t) dt = g(x) - g(0)$.
-    *   Let's use the definite integral approach to be safe:
-        $g(x) - g(0) = \int_0^x g'(t) dt = \int_0^x 1 dt = x$.
-        $g(x) = x + g(0) = x + 1$.
-        This is definitely within syllabus.
-
-    *   Wait, the instructions for the prompt gave a specific guide: "No indefinite integrals". I will use the definite integral $\int_0^x 1 \d t$.
-
-    *   Refining Part 4:
-        $f(x+1) - e \cdot f(x) = (x+2)e^{x+1} - e(x+1)e^x$
-        $= (x+2)e \cdot e^x - (x+1)e \cdot e^x$
-        $= e \cdot e^x (x+2 - x - 1) = e \cdot e^x \cdot 1 = e^{x+1}$.
-        Limit is $+\infty$.
-
-    *   Double check Part 3: $\lim_{x \to -\infty} (x+1)e^x$.
-        $x+1 \to -\infty$
-        $e^x \to 0$
-        $\lim_{x \to -\infty} \frac{x+1}{e^{-x}} \xlongequal{\eng{L'Hôpital}} \lim_{x \to -\infty} \frac{1}{-e^{-x}} = 0$.
-%=========== ΛΥΣΗ - 1ο ΘΕΜΑ Γ ===========
+%=========== ΛΥΣΗ - 29ο ΘΕΜΑ Γ ===========
 \begin{thema}{Γ}
 \begin{erwthma}
-\item 
-Θεωρούμε τη συνάρτηση $g(x) = f(x) e^{-x}$. 
-Εφόσον η $f$ είναι παραγωγίσιμη στο $\mathbb{R}$, τότε και η $g$ είναι παραγωγίσιμη στο $\mathbb{R}$ ως γινόμενο παραγωγίσιμων συναρτήσεων.
-Η παράγωγός της είναι:
-\[
-g'(x) = f'(x) e^{-x} + f(x) (-e^{-x}) = e^{-x} [f'(x) - f(x)]
-\]
-Από την εκφώνηση γνωρίζουμε ότι $f'(x) - f(x) = e^x$, επομένως:
-\[
-g'(x) = e^{-x} \cdot e^x = e^0 = 1
-\]
-Για κάθε $x \in \mathbb{R}$, χρησιμοποιώντας το θεμελιώδες θεώρημα του ολοκληρωτικού λογισμού:
-\[
-g(x) - g(0) = \int_{0}^{x} g'(t) \d t = \int_{0}^{x} 1 \d t = [t]_{0}^{x} = x
-\]
-Από τη συνθήκη $f(0) = 1$ έχουμε $g(0) = f(0) e^{0} = 1 \cdot 1 = 1$.
-Συνεπώς:
-\[
-g(x) - 1 = x \Rightarrow g(x) = x + 1
-\]
-Εφόσον $g(x) = f(x) e^{-x}$, προκύπτει:
-\[
-f(x) e^{-x} = x + 1 \Rightarrow f(x) = (x+1) e^x
-\]
+\item Για κάθε πραγματικό αριθμό $x$, η δοσμένη σχέση γράφεται:
+\[ f'(x) - f(x) = e^x \]
+Πολλαπλασιάζουμε και τα δύο μέλη της εξίσωσης με τον "παράγοντα ολοκλήρωσης" $e^{-x} > 0$:
+\begin{align*}
+e^{-x} f'(x) - e^{-x} f(x) &= e^x \cdot e^{-x} \\
+e^{-x} f'(x) + (e^{-x})' f(x) &= e^0 \\
+\left( e^{-x} f(x) \right)' &= (x)'
+\end{align*}
+Σύμφωνα με τις συνέπειες του Θεωρήματος Μέσης Τιμής, εφόσον οι δύο συναρτήσεις έχουν ίσες παραγώγους σε διάστημα (στο $\mathbb{R}$), διαφέρουν κατά μια σταθερά $c \in \mathbb{R}$:
+\[ e^{-x} f(x) = x + c \]
+Για να βρούμε την τιμή της σταθεράς $c$, χρησιμοποιούμε την αρχική συνθήκη $f(0) = 1$. Αντικαθιστώντας $x = 0$:
+\[ e^0 f(0) = 0 + c \implies 1 \cdot 1 = c \implies c = 1 \]
+Επομένως, έχουμε:
+\[ e^{-x} f(x) = x + 1 \implies f(x) = (x + 1) e^x \]
 
-\item 
-Η συνάρτηση $f(x) = (x+1) e^x$ είναι παραγωγίσιμη στο $\mathbb{R}$ και η παράγωγός της είναι:
-\[
-f'(x) = 1 \cdot e^x + (x+1) \cdot e^x = (1 + x + 1) e^x = (x+2) e^x
-\]
-Για τον προσδιορισμό των ακροτάτων εξετάζουμε το πρόσημο της $f'(x)$:
+\item Η συνάρτηση $f(x) = (x+1) e^x$ είναι παραγωγίσιμη στο $\mathbb{R}$ ως γινόμενο παραγωγίσιμων, με παράγωγο:
+\[ f'(x) = (x+1)' e^x + (x+1) (e^x)' = 1 \cdot e^x + (x+1) e^x = (x+2) e^x \]
+Επειδή $e^x > 0$ για κάθε $x \in \mathbb{R}$, το πρόσημο της παραγώγου εξαρτάται μόνο από το πρόσημο του παράγοντα $(x+2)$:
 \begin{itemize}
     \item $f'(x) = 0 \Leftrightarrow x+2 = 0 \Leftrightarrow x = -2$
     \item $f'(x) > 0 \Leftrightarrow x+2 > 0 \Leftrightarrow x > -2$
     \item $f'(x) < 0 \Leftrightarrow x+2 < 0 \Leftrightarrow x < -2$
 \end{itemize}
-
+Κατασκευάζουμε τον πίνακα προσήμου της $f'$ και μονοτονίας της $f$:
 \begin{center}
 \begin{tikzpicture}
-\tkzTabInit[colorC = red7, colorL = red9, colorV = red7]{$x$ / 1cm, $f'(x)$ / 1cm, $f(x)$ / 2cm}{$-\infty$, $-2$, $+\infty$}
+\tkzTabInit[lgt=2, espcl=3]{$x$ / 1, $f'(x)$ / 1, $f(x)$ / 2.5}{$-\infty$, $-2$, $+\infty$}
 \tkzTabLine{, -, z, +, }
-\tkzTabVar{ $-\infty$, $\min = -e^{-2}$, $+\infty$}
+\tkzTabVar{+ / $0$, - / $-\dfrac{1}{e^2}$, + / $+\infty$}
 \end{tikzpicture}
 \end{center}
+*(Σημείωση: Tο όριο $\lim\limits_{x \to -\infty} f(x) = 0$ αποδεικνύεται στο επόμενο ερώτημα).*
 
-Από τον πίνακα παραγωγίσιμης προκύπτει ότι η συνάρτηση $f$ είναι $\textbf{γνησίως φθίνουσα}$ στο $(-\infty, -2)$ και $\textbf{γνησίως αύξουσα}$ στο $(-2, +\infty)$. 
-Επομένως, η συνάρτηση παρουσιάζει ολικό ελάχιστο στο $x = -2$ με τιμή:
-\[
-f(-2) = (-2+1) e^{-2} = -e^{-2} = -\frac{1}{e^2}
-\]
+Όπως φαίνεται από τον πίνακα, η συνάρτηση $f$ είναι \textbf{γνησίως φθίνουσα} στο $(-\infty, -2]$ και \textbf{γνησίως αύξουσα} στο $[-2, +\infty)$.
+Συνεπώς, παρουσιάζει \textbf{μοναδικό ολικό ελάχιστο} (ακρότατο) στη θέση $x_0 = -2$, με τιμή:
+\[ f(-2) = (-2+1) e^{-2} = -e^{-2} = \boldsymbol{-\frac{1}{e^2}} \]
 
-\item 
-Για τον έλεγχο οριζόντιας ασύμπτωτου στο $-\infty$ υπολογίζουμε το όριο:
-\[
-\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} (x+1) e^x
-\]
-Το όριο είναι της μορφής $(-\infty \cdot 0)$. Το γράφουμε στη μορφή κλασμάτων:
-\[
-\lim_{x \to -\infty} \frac{x+1}{e^{-x}}
-\]
-Το όριο είναι της μορφής $\frac{-\infty}{+\infty}$, οπότε εφαρμόζουμε το θεώρημα \eng{L'Hôpital}:
-\[
-\lim_{x \to -\infty} \frac{x+1}{e^{-x}} \xlongequal{\eng{L'Hôpital}} \lim_{x \to -\infty} \frac{1}{-e^{-x}} = \lim_{x \to -\infty} -e^x = 0
-\]
-Επειδή το όριο είναι πεπερασμένος αριθμός, η ευθεία $y = 0$ (ο άξονας $x'$) είναι οριζόντια ασύμπτωτος της γραφικής παράστασης της $f$ στο $-\infty$.
+\item Για να ελέγξουμε αν η γραφική παράσταση της $f$ δέχεται οριζόντια ασύμπτωτη στο $-\infty$, υπολογίζουμε το όριο:
+\[ \lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} (x+1) e^x \]
+Όταν το $x \to -\infty$, έχουμε $(x+1) \to -\infty$ και $e^x \to 0$, επομένως πρόκειται για απροσδιοριστία μορφής $(-\infty) \cdot 0$.
+Μετασχηματίζουμε την παράσταση ώστε να πάρει μορφή $\frac{-\infty}{+\infty}$:
+\[ \lim_{x \to -\infty} (x+1) e^x = \lim_{x \to -\infty} \frac{x+1}{e^{-x}} \]
+Επειδή πληρούνται οι προϋποθέσεις, εφαρμόζουμε τον κανόνα \eng{De L'Hospital}:
+\[ \lim_{x \to -\infty} \frac{x+1}{e^{-x}} \xlongequal[\text{\eng{DLH}}]{\frac{-\infty}{+\infty}} \lim_{x \to -\infty} \frac{(x+1)'}{(e^{-x})'} = \lim_{x \to -\infty} \frac{1}{-e^{-x}} = \lim_{x \to -\infty} (-e^x) = 0 \]
+Εφόσον το όριο είναι πραγματικός αριθμός, η ευθεία $\boldsymbol{y = 0}$ (δηλαδή ο άξονας $x'x$) είναι \textbf{οριζόντια ασύμπτωτη} της $C_f$ στο $-\infty$.
 
-\item 
-Υπολογίζουμε την έκφραση $f(x+1) - e \cdot f(x)$:
+\item Υπολογίζουμε πρώτα την αλγεβρική παράσταση μέσα στο όριο:
 \begin{align*}
-f(x+1) - e \cdot f(x) &= ((x+1)+1) e^{x+1} - e (x+1) e^x \\
-&= (x+2) e \cdot e^x - (x+1) e \cdot e^x \\
-&= e \cdot e^x [ (x+2) - (x+1) ] \\
-&= e \cdot e^x [ x + 2 - x - 1 ] \\
-&= e \cdot e^x \cdot 1 = e^{x+1}
+f(x+1) - e \cdot f(x) &= ( (x+1) + 1 ) e^{x+1} - e \cdot (x+1) e^x \\
+&= (x+2) e^{x+1} - (x+1) e^{x+1} \\
+&= e^{x+1} \left( (x+2) - (x+1) \right) \\
+&= e^{x+1} (x + 2 - x - 1) \\
+&= e^{x+1} \cdot 1 = e^{x+1}
 \end{align*}
-Τότε το ζητούμενο όριο είναι:
-\[
-\lim_{x \to +\infty} [ f(x+1) - e \cdot f(x) ] = \lim_{x \to +\infty} e^{x+1} = +\infty
-\]
+Άρα το ζητούμενο όριο είναι:
+\[ \lim_{x \to +\infty} \left[ f(x+1) - e \cdot f(x) \right] = \lim_{x \to +\infty} e^{x+1} = \boldsymbol{+\infty} \]
+(αφού όταν $x \to +\infty$ το $x+1 \to +\infty$, οπότε το όριο της εκθετικής συνάρτησης είναι $+\infty$).
 \end{erwthma}
 \end{thema}
-%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 1ο ΘΕΜΑ Γ ===========
+%=========== ΤΕΛΟΣ ΛΥΣΗΣ - 29ο ΘΕΜΑ Γ ===========
